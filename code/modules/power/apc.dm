@@ -819,55 +819,13 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, list(
 
 	add_fingerprint(user)
 
+	if(SEND_SIGNAL(user, COMSIG_MOB_APC_ATTACK_HAND, src) & COMPONENT_APC_HANDLED_HAND)
+		return FALSE
+
 	//Human mob special interaction goes here.
 	if(ishuman(user))
-		var/mob/living/carbon/human/grabber = user
-
-		if(grabber.a_intent == INTENT_GRAB)
-
-			// Yautja Bracer Recharge
-			var/obj/item/clothing/gloves/yautja/bracer = grabber.gloves
-			if(istype(bracer))
-				if(grabber.action_busy)
-					return FALSE
-				if(!COOLDOWN_FINISHED(bracer, bracer_recharge))
-					to_chat(user, SPAN_WARNING("It is too soon for [bracer.name] to siphon power again. Wait [COOLDOWN_SECONDSLEFT(bracer, bracer_recharge)] seconds."))
-					return FALSE
-				to_chat(user, SPAN_NOTICE("You rest your bracer against the APC interface and begin to siphon off some of the stored energy."))
-				if(!do_after(grabber, 20, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
-					return FALSE
-
-				if(stat & BROKEN)
-					var/datum/effect_system/spark_spread/spark = new()
-					spark.set_up(3, 1, src)
-					spark.start()
-					to_chat(grabber, SPAN_DANGER("The APC's power currents surge eratically, super-heating your bracer!"))
-					playsound(src.loc, 'sound/effects/sparks2.ogg', 25, 1)
-					grabber.apply_damage(10,0, BURN)
-					return FALSE
-				if(!cell || cell.charge <= 0)
-					to_chat(user, SPAN_WARNING("There is no charge to draw from that APC."))
-					return FALSE
-
-				if(bracer.charge_max <= bracer.charge)
-					to_chat(user, SPAN_WARNING("[bracer.name] is already fully charged."))
-					return FALSE
-
-				var/charge_to_use = min(cell.charge, bracer.charge_max - bracer.charge)
-				if(!(cell.use(charge_to_use)))
-					return FALSE
-				playsound(src.loc, 'sound/effects/sparks2.ogg', 25, 1)
-				bracer.charge += charge_to_use
-				COOLDOWN_START(bracer, bracer_recharge, bracer.charge_cooldown)
-				to_chat(grabber, SPAN_YAUTJABOLD("[icon2html(bracer)] \The <b>[bracer]</b> beep: Power siphon complete. Charge at [bracer.charge]/[bracer.charge_max]."))
-				if(bracer.notification_sound)
-					playsound(bracer.loc, 'sound/items/pred_bracer.ogg', 75, 1)
-				charging = APC_CHARGING
-				set_broken() // Breaks the APC
-
-				return TRUE
-
-		else if(grabber.species.can_shred(grabber))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
 			var/allcut = TRUE
 			for(var/wire = 1; wire < length(get_wire_descriptions()); wire++)
 				if(!isWireCut(wire))
@@ -891,7 +849,6 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, list(
 			else
 				beenhit++
 			return
-
 
 	if(usr == user && opened && (!isRemoteControlling(user)))
 		if(cell)
