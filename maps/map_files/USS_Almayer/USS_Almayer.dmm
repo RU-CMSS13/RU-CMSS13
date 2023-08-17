@@ -58698,14 +58698,9 @@
 	},
 /area/almayer/command/airoom)
 "pTM" = (
-/obj/structure/sign/safety/water{
-	pixel_x = 8;
-	pixel_y = -32
-	},
-/turf/open/floor/almayer{
-	icon_state = "sterile_green_side"
-	},
-/area/almayer/medical/hydroponics)
+/obj/effect/landmark/start/tank_crew,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/living/tankerbunks)
 "pTT" = (
 /obj/structure/platform{
 	dir = 4
@@ -93181,8 +93176,8 @@ cop
 bSv
 onY
 wdf
-cop
-cop
+pTM
+pTM
 bSv
 bzy
 bKh

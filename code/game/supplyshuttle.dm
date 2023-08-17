@@ -1271,12 +1271,13 @@ var/datum/controller/supply/supply_controller = new()
 	desc = "A console for an Automated Storage and Retrieval System. This one is tied to a deep storage unit for vehicles."
 	req_access = list(ACCESS_MARINE_CREWMAN)
 	circuit = /obj/item/circuitboard/computer/supplycomp/vehicle
+
+	var/list/vehicles = list()
+
 	// Can only retrieve one vehicle per round
-	var/spent = TRUE
+	var/spent = FALSE
 	var/tank_unlocked = FALSE
 	var/list/allowed_roles = list(JOB_CREWMAN)
-
-	var/list/vehicles
 
 /datum/vehicle_order
 	var/name = "vehicle order"
@@ -1311,16 +1312,13 @@ var/datum/controller/supply/supply_controller = new()
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc_cmd/decrepit
 
 /obj/structure/machinery/computer/supplycomp/vehicle/Initialize()
-	. = ..()
-
 	vehicles = list(
-		/datum/vehicle_order/apc,
-		/datum/vehicle_order/apc/med,
-		/datum/vehicle_order/apc/cmd,
+		new /datum/vehicle_order/apc,
+		new /datum/vehicle_order/apc/med,
+		new /datum/vehicle_order/apc/cmd,
 	)
 
-	for(var/order as anything in vehicles)
-		new order
+	. = ..()
 
 	if(!VehicleElevatorConsole)
 		VehicleElevatorConsole = src

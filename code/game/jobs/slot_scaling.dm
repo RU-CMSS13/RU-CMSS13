@@ -50,3 +50,6 @@
 
 /proc/working_joe_slot_formula(playercount)
 	return job_slot_formula(playercount,30,1,3,6)
+
+/proc/tank_slot_formula(playercount)
+	return job_slot_formula(playercount,-1,1,0,2)
