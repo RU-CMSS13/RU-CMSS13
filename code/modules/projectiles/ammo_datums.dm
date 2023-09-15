@@ -2643,21 +2643,29 @@
 
 /datum/ammo/xeno/toxin/burst/on_near_target(turf/T, obj/projectile/P)
 	return neuro_flak(T, P, neuro_callback, effect_power, FALSE, 1)
+*/
 
 /datum/ammo/xeno/sticky
 	name = "sticky resin spit"
 	icon_state = "sticky"
+	sound_hit  = "alien_resin_move"
 	ping = null
-	flags_ammo_behavior = AMMO_SKIPS_ALIENS|AMMO_EXPLOSIVE
+	flags_ammo_behavior = AMMO_SKIPS_ALIENS|AMMO_EXPLOSIVE|AMMO_IGNORE_RESIST
 	added_spit_delay = 5
-	spit_cost = 40
+	spit_cost = 50
 
 	shell_speed = AMMO_SPEED_TIER_3
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_4
-	max_range = 32
+	max_range = 10
+
+	var/effect_time = 3.5 SECONDS
+	var/effects_max = 20 SECONDS
+	var/resin_type = /obj/effect/alien/resin/sticky/thin
 
 /datum/ammo/xeno/sticky/on_hit_mob(mob/M,obj/projectile/P)
-	drop_resin(get_turf(P))
+	if(!isxeno(M))
+		M.AdjustSuperslow(min(effect_time/10, effects_max/10))
+		M.visible_message(SPAN_DANGER("[M]'s movements are slowed."))
 
 /datum/ammo/xeno/sticky/on_hit_obj(obj/O,obj/projectile/P)
 	drop_resin(get_turf(P))
@@ -2669,7 +2677,11 @@
 	drop_resin(get_turf(P))
 
 /datum/ammo/xeno/sticky/proc/drop_resin(turf/T)
-	if(T.density)
+	if(T.density || !resin_type)
+		return
+
+	var/obj/effect/alien/weeds/weed = locate() in T
+	if(!weed)
 		return
 
 	for(var/obj/O in T.contents)
@@ -2682,7 +2694,7 @@
 		if(O.density && !(O.flags_atom & ON_BORDER))
 			return
 
-	new /obj/effect/alien/resin/sticky/thin(T) */
+	new resin_type(T)
 
 /datum/ammo/xeno/acid
 	name = "acid spit"
