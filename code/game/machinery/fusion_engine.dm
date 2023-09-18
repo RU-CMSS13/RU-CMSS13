@@ -77,6 +77,8 @@
 
 		add_avail(FUSION_ENGINE_MAX_POWER_GEN * (power_gen_percent / 100) ) //Nope, all good, just add the power
 
+		fusion_cell.fuel_amount = max(0, fusion_cell.fuel_amount - fuel_rate)
+
 		update_icon()
 
 
