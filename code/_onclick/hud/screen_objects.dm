@@ -437,6 +437,13 @@
 	icon = 'icons/mob/hud/human_midnight.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
+/atom/movable/screen/healths/clicked(var/mob/user)
+	if (..())
+		return TRUE
+	var/mob/living/carbon/M = user
+	M.help_shake_act(M)
+	return TRUE
+
 /atom/movable/screen/pull
 	name = "stop pulling"
 	icon = 'icons/mob/hud/human_midnight.dmi'
