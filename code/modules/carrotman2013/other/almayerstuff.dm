@@ -5,7 +5,6 @@
 /datum/authority/branch/evacuation/proc/spawn_sd_effects()
 	set background = 1
 
-	var/effectstage1
 	var/effectstage9
 
 	spawn while(NUKE_EXPLOSION_ACTIVE)
