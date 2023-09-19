@@ -437,7 +437,7 @@
 	icon = 'icons/mob/hud/human_midnight.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-/atom/movable/screen/healths/clicked(var/mob/user)
+/atom/movable/screen/healths/clicked(mob/user)
 	if (..())
 		return TRUE
 	var/mob/living/carbon/M = user
