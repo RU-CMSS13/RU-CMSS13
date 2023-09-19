@@ -440,11 +440,12 @@
 
 /obj/item/tool/weldingtool/simple
 	name = "\improper ME3 hand welder"
-	desc = "A compact, handheld welding torch used by the marines of the United States Colonial Marine Corps for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch."
-	max_fuel = 5
+	desc = "A compact, handheld welding torch used by the marines of the United States Colonial Marine Corps for cutting and welding jobs on the field."
+	max_fuel = 10
+	w_class = SIZE_TINY
 	color = "#cc0000"
 	has_welding_screen = TRUE
-	inherent_traits = list(TRAIT_TOOL_SIMPLE_BLOWTORCH)
+	inherent_traits = list(TRAIT_TOOL_BLOWTORCH)
 
 /*
  * Crowbar
