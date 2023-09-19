@@ -99,7 +99,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 	if(force || (evac_status == EVACUATION_STATUS_STANDING_BY && !(flags_scuttle & FLAGS_EVACUATION_DENY)))
 		evac_time = world.time
 		evac_status = EVACUATION_STATUS_INITIATING
-		ai_announcement("Внимание. Тревога. Всему персоналу немедленно эвакуироваться. У вас есть [round(EVACUATION_ESTIMATE_DEPARTURE/60,1)] минут перед отправлением.", 'sound/AI/evacuate.ogg')
+		marine_announcement("Внимание. Тревога. Всему персоналу немедленно эвакуироваться. У вас есть [round(EVACUATION_ESTIMATE_DEPARTURE/60,1)] минут перед отправлением.", "[MAIN_AI_SYSTEM]", 'sound/AI/evacuate.ogg')
 		xeno_message_all("Волна адреналина прокатывается по обитателям улья. Эти мясные существа пытаются сбежать!")
 
 		for(var/obj/structure/machinery/status_display/SD in machines)
@@ -116,7 +116,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 		evac_time = null
 		evac_status = EVACUATION_STATUS_STANDING_BY
 		deactivate_lifeboats()
-		ai_announcement("Эвакуация была отменена.", 'sound/AI/evacuate_cancelled.ogg')
+		marine_announcement("Эвакуация была отменена.", "[MAIN_AI_SYSTEM]", 'sound/AI/evacuate_cancelled.ogg')
 
 		if(get_security_level() == "red")
 			for(var/obj/structure/machinery/status_display/SD in machines)
@@ -131,7 +131,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 	if(evac_status == EVACUATION_STATUS_INITIATING)
 		evac_status = EVACUATION_STATUS_IN_PROGRESS //Cannot cancel at this point. All shuttles are off.
 		spawn() //One of the few times spawn() is appropriate. No need for a new proc.
-			ai_announcement("ПРЕДУПРЕЖДЕНИЕ: Указ об эвакуации подтвержден. Запуск спасательных шлюпок.", 'sound/AI/evacuation_confirmed.ogg')
+			marine_announcement("ПРЕДУПРЕЖДЕНИЕ: Указ об эвакуации подтвержден. Запуск спасательных шлюпок.", "[MAIN_AI_SYSTEM]", 'sound/AI/evacuation_confirmed.ogg')
 			addtimer(CALLBACK(src, PROC_REF(launch_lifeboats)), 10 SECONDS) // giving some time to board lifeboats
 
 			for(var/obj/docking_port/mobile/crashable/escape_shuttle/shuttle in SSshuttle.mobile)
@@ -147,7 +147,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 			var/obj/docking_port/mobile/crashable/lifeboat/lifeboat2 = SSshuttle.getShuttle(MOBILE_SHUTTLE_LIFEBOAT_STARBOARD)
 			lifeboat2.check_for_survivors()
 			lifesigns += lifeboat2.survivors
-			ai_announcement("ВНИМАНИЕ: Эвакуация завершена. Внешних признаков жизни: [lifesigns ? lifesigns  : "Ноль"].", 'sound/AI/evacuation_complete.ogg')
+			marine_announcement("ВНИМАНИЕ: Эвакуация завершена. Внешних признаков жизни: [lifesigns ? lifesigns  : "Ноль"].", "[MAIN_AI_SYSTEM]", 'sound/AI/evacuation_complete.ogg')
 			evac_status = EVACUATION_STATUS_COMPLETE
 		return TRUE
 
@@ -232,7 +232,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 			if(I.active_state == SELF_DESTRUCT_MACHINE_ACTIVE || (I.active_state == SELF_DESTRUCT_MACHINE_ARMED && override)) I.lock_or_unlock(1)
 		C.lock_or_unlock(1)
 		dest_index = 1
-		ai_announcement("Система аварийного самоуничтожения отключена.", 'sound/AI/selfdestruct_deactivated.ogg')
+		marine_announcement("Система аварийного самоуничтожения отключена.", "Система Самоуничтожения", 'sound/AI/selfdestruct_deactivated.ogg')
 		xeno_message("Мне комфортнее. Устройство очищения отключили!")
 		world << sound(null, repeat = 0, wait = 0, channel = 666)
 		dest_already_armed = 0
@@ -315,11 +315,12 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 			sleep(5)
 			if(SSticker.mode)
 				SSticker.mode.check_win()
+				world << sound('sound/misc/hell_march.ogg')
 
 			if(!SSticker.mode) //Just a safety, just in case a mode isn't running, somehow.
-				to_world(SPAN_ROUNDBODY("Resetting in 30 seconds!"))
+				to_world(SPAN_ROUNDBODY("Перезапуск через 30 секунд!"))
 				sleep(300)
-				log_game("Rebooting due to nuclear detonation.")
+				log_game("Перезагрузка из-за ядерного взрыва.")
 				world.Reboot()
 			return TRUE
 
@@ -441,7 +442,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 			to_chat(usr, SPAN_NOTICE("Да, система должна запустить механизм самоуничтожения."))
 			playsound(src.loc, 'sound/items/rped.ogg', 25, TRUE)
 			sleep(2 SECONDS)
-			ai_announcement("Опасность. Система аварийного самоуничтожения активирована. Обратный отсчет - 20 минут до взрыва корабля.", 'sound/AI/selfdestruct.ogg')
+			marine_announcement("Опасность. Система аварийного самоуничтожения активирована. Обратный отсчет - 20 минут до взрыва корабля.", "Система Самоуничтожения", 'sound/AI/selfdestruct.ogg')
 			xeno_message("Очень дурное предчувствие. Эти создания пытаются запустить механизм очищения!")
 			active_state = SELF_DESTRUCT_MACHINE_ARMED //Arm it here so the process can execute it later.
 			var/obj/structure/machinery/self_destruct/rod/I = EvacuationAuthority.dest_rods[EvacuationAuthority.dest_index]
@@ -465,7 +466,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 				return
 			else
 				to_chat(usr, "<span class='notice'>Система вот-вот запустит механизм самоуничтожения.</span>")
-				ai_announcement("Тревога. Система аварийного самоуничтожения запущена. Обратный отсчет до уничтожения корабля - 10 минут. Обратный отсчет для отключения функции автоматического самоуничтожения - 5 минут.")
+				marine_announcement("Тревога. Система аварийного самоуничтожения запущена. Обратный отсчет до уничтожения корабля - 10 минут. Обратный отсчет для отключения функции автоматического самоуничтожения - 5 минут.", "Система Самоуничтожения")
 				xeno_message("Улей очень сильно беспокоится. Механизм очищения работает во всю!")
 //				world << sound('sound/AI/ARES_Self_Destruct_10m_FULL.ogg', repeat = 0, wait = 0, volume = 70, channel = 666)
 				world << sound('code/modules/carrotman2013/sounds/AI/selfdestruct.ogg', repeat = 0, wait = 0, volume = 53, channel = 666)

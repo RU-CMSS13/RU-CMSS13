@@ -147,9 +147,9 @@
 		marine_announcement(rendered_announce_text, "[MAIN_SHIP_NAME]")
 
 /datum/game_mode/colonialmarines/proc/ares_conclude()
-	ai_silent_announcement("Bioscan complete. No unknown lifeform signature detected.", ".V")
-	ai_silent_announcement("Saving operational report to archive.", ".V")
-	ai_silent_announcement("Commencing final systems scan in 3 minutes.", ".V")
+	ai_silent_announcement("Биосканирование завершено. Неизвестных форм жизни не обнаружено.", ".V")
+	ai_silent_announcement("Сохранение оперативного отчета в архив.", ".V")
+	ai_silent_announcement("Начало окончательного системного сканирования через 3 минуты.", ".V")
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -195,8 +195,8 @@
 
 						round_status_flags |= ROUNDSTATUS_PODDOORS_OPEN
 
-						var/input = "Security lockdown will be lifting in 30 seconds per automated lockdown protocol."
-						var/name = "Automated Security Authority Announcement"
+						var/input = "Режим изоляции будет отключен через 30 секунд, согласно автоматическим протоколам безопасности."
+						var/name = "Уведомление Системы Безопасности"
 						marine_announcement(input, name, 'sound/AI/commandreport.ogg')
 						for(var/i in GLOB.living_xeno_list)
 							var/mob/M = i
