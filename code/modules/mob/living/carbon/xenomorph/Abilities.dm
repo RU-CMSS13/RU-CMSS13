@@ -115,6 +115,12 @@
 
 /datum/action/xeno_action/onclick/screech/use_ability(atom/target)
 	var/mob/living/carbon/xenomorph/queen/xeno = owner
+	var/screech_memes = list('sound/voice/eagle-screech.ogg',
+							'sound/voice/fnaf.ogg',
+							'sound/voice/hee-hee.ogg',
+							'sound/voice/pig.ogg',
+							'sound/voice/victory-screech.ogg',
+							'sound/voice/yaay.ogg')
 
 	if (!istype(xeno))
 		return
@@ -139,7 +145,10 @@
 		if(hugger.stat != DEAD)
 			hugger.die()
 
-	playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
+	if(prob(1))
+		playsound(xeno.loc, pick(xeno.screech_memes), 75, 0, status = 0)
+	else
+		playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
 	xeno.visible_message(SPAN_XENOHIGHDANGER("[xeno] emits an ear-splitting guttural roar!"))
 	xeno.create_shriekwave() //Adds the visual effect. Wom wom wom
 
