@@ -115,12 +115,12 @@
 
 /datum/action/xeno_action/onclick/screech/use_ability(atom/target)
 	var/mob/living/carbon/xenomorph/queen/xeno = owner
-	var/screech_memes = list('sound/voice/eagle-screech.ogg',
-							'sound/voice/fnaf.ogg',
-							'sound/voice/hee-hee.ogg',
-							'sound/voice/pig.ogg',
-							'sound/voice/victory-screech.ogg',
-							'sound/voice/yaay.ogg')
+	var/screech_memes = list('code/modules/carrotman2013/sounds/screeches/eagle-screech.ogg',
+							'code/modules/carrotman2013/sounds/screeches/fnaf.ogg',
+							'code/modules/carrotman2013/sounds/screeches/hee-hee.ogg',
+							'code/modules/carrotman2013/sounds/screeches/pig.ogg',
+							'code/modules/carrotman2013/sounds/screeches/victory-screech.ogg',
+							'code/modules/carrotman2013/sounds/screeches/yaay.ogg')
 
 	if (!istype(xeno))
 		return
