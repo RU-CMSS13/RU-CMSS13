@@ -146,7 +146,7 @@
 			hugger.die()
 
 	if(prob(1))
-		playsound(xeno.loc, pick(xeno.screech_memes), 75, 0, status = 0)
+		playsound(xeno.loc, pick(screech_memes), 75, 0, status = 0)
 	else
 		playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
 	xeno.visible_message(SPAN_XENOHIGHDANGER("[xeno] emits an ear-splitting guttural roar!"))
