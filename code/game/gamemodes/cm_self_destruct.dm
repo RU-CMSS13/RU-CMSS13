@@ -409,6 +409,8 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 
 /obj/structure/machinery/self_destruct/console/attack_alien(mob/living/carbon/xenomorph) //Сука.
 	if(isqueen(xenomorph))
+		if(!do_after(usr, 10 SECONDS, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+			return
 		to_chat(xenomorph, "<span class='warning'>Я взаимодействую с машиной и пытаюсь отключить устройство очищения.</span>")
 		EvacuationAuthority.cancel_self_destruct()
 
@@ -514,6 +516,8 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 			return
 		else switch(active_state)
 			if(SELF_DESTRUCT_MACHINE_ARMED)
+				if(!do_after(usr, 5 SECONDS, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+					return
 				to_chat(X, "<span class='warning'>Я поворачиваю и отпускаю стержень, деактивируя его.</span>")
 				playsound(src, 'sound/machines/switch.ogg', 25, 1)
 				icon_state = "rod_3"
