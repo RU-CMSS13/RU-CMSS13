@@ -7,6 +7,8 @@
 	var/target_ship_section
 	var/hijacked_bypass_aa = FALSE
 	var/final_announcement = FALSE
+	var/ship_killed = FALSE
+	var/messaged = FALSE
 
 /datum/dropship_hijack/almayer/proc/crash_landing()
 	//break APCs
@@ -136,6 +138,7 @@
 	hijacked_bypass_aa = TRUE
 	almayer_aa_cannon.protecting_section = ""
 	almayer_aa_cannon.recharging = TRUE
+	ship_killed = TRUE
 
 
 
@@ -148,6 +151,13 @@
 		return
 
 	if(final_announcement)
+		return
+
+	if(ship_killed == TRUE)
+		if(messaged == FALSE)
+			notify_ghosts(header = "Крушение", message = "Десантный корабль был сбит!", source = crash_site, extra_large = TRUE)
+			messaged = TRUE
+		ship_killed = FALSE
 		return
 
 	shuttle.crashing = TRUE
