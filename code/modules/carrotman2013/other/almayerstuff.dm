@@ -67,7 +67,7 @@
 			S.set_up(15, 0, pick(GLOB.mainship_pipes), null, 400)
 			S.start()
 
-		else if(!NUKE_EXPLOSION_ACTIVE)
+		else if(NUKE_EXPLOSION_INACTIVE)
 			return
 
 		sleep(60)
