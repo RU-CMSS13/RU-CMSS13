@@ -4,7 +4,7 @@
 	icon = 'fray-marines/icons/obj/structures/alien/Buildings.dmi'
 	icon_state = "healer"
 	density = TRUE
-	pixel_x = -16
+	pixel_x = -8
 
 	// var/xeno_tag = null				//see misc.dm
 
@@ -12,13 +12,10 @@
 	maxHealth = 250
 
 	var/list/created_mobs = list()
-	var/max_mobs = 5
-	var/list/spawnable_mobs = list(
-		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
-	)
+	var/max_mobs = XENO_WITHER_FLOWER_MAX_MOBS
 
 	var/last_spawned = 0
-	var/spawn_delay = 10 SECONDS
+	var/spawn_delay = 5 SECONDS
 
 /obj/structure/alien/wither_flower/Initialize()
 	..()
@@ -38,6 +35,7 @@
 		return 1
 
 	var/list/turfs = list()
+	// Поскольку в будущем у ботоксен появится босс, ботоксены будут выкапываться и на корабле. Игровая условность
 	for (var/turf/open/T in range(4, src.loc))
 		turfs += T
 
@@ -46,10 +44,17 @@
 	if (!picked)
 		return 1
 
-	var/picked_mob = pick(spawnable_mobs)
+	var/picked_mob = pick_a_mob()
 	created_mobs += new picked_mob(picked)
+	visible_message(SPAN_XENODANGER("A xenomorph rises from the ground!"))
 	playsound(picked, 'sound/effects/burrowoff.ogg')
 	last_spawned = world.time
 
 
 	return 1
+
+// TODO: Написать эту ебурину нормально, и обозначить весы как надо
+/obj/structure/alien/wither_flower/proc/pick_a_mob()
+	if(prob(10))
+		return /mob/living/simple_animal/hostile/alien/spawnable/tearer
+	return /mob/living/simple_animal/hostile/alien/spawnable/trooper
