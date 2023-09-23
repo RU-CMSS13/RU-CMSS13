@@ -239,6 +239,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 		if(evac_status == EVACUATION_STATUS_STANDING_BY) //the evac has also been cancelled or was never started.
 			set_security_level(SEC_LEVEL_RED, TRUE) //both SD and evac are inactive, lowering the security level.
 		dest_status = NUKE_EXPLOSION_INACTIVE
+		NUKE_EXPLOSION_ACTIVE = 0
 		return TRUE
 
 /datum/authority/branch/evacuation/proc/initiate_self_destruct(override)
