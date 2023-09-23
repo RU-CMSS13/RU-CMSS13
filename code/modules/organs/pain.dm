@@ -41,6 +41,7 @@
 			if(91 to 10000)
 				flash_pain()
 				msg = SPAN_HIGHDANGER("OH GOD! Your [partname] is on fire!")
+				heartpounce()
 	else
 		switch(amount)
 			if(1 to 10)
@@ -51,6 +52,7 @@
 			if(91 to 10000)
 				flash_pain()
 				msg = SPAN_HIGHDANGER("OH GOD! Your [partname] is hurting terribly!")
+				heartpounce()
 	if(msg && (msg != last_pain_message || prob(10)))
 		last_pain_message = msg
 		to_chat(src, msg)
@@ -122,6 +124,7 @@
 		if(I.damage > 2 && prob(2))
 			parent = get_limb(I.parent_limb)
 			custom_pain("You feel a sharp pain in your [parent.display_name]!", 1)
+			heartpounce()
 
 	var/toxDamageMessage = null
 	var/toxMessageProb = 1
@@ -142,6 +145,7 @@
 		if(26 to INFINITY)
 			toxMessageProb = 5
 			toxDamageMessage = "Your body aches all over, it's driving you mad!"
+			heartpounce()
 
 	if(toxDamageMessage && prob(toxMessageProb))
 		custom_pain(toxDamageMessage, toxin_damage >= 35)
