@@ -18,7 +18,7 @@
 	var/spawn_delay = 5 SECONDS
 
 /obj/structure/alien/wither_flower/Initialize()
-	..()
+	. = ..()
 
 	set_light(2, 1, COLOUR_GREEN)
 
