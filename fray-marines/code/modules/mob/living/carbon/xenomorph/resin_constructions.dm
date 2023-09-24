@@ -33,7 +33,7 @@
 	desc = "A hideous plant-like structure, that emits eerie glow. Something is attracted to it..."
 	construction_name = "acid pillar"
 	cost = XENO_RESIN_ACID_GRENADE_COST
-	max_per_xeno = 5
+	max_per_xeno = 3
 
 	build_overlay_icon = /obj/effect/warning/alien/weak
 
