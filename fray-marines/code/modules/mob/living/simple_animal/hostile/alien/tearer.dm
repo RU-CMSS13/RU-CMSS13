@@ -11,6 +11,8 @@
 	pixel_x = -12
 	old_x = -12
 
+	attack_cooldown = 1 SECONDS
+
 /mob/living/simple_animal/hostile/alien/spawnable/tearer/evaluate_special_attack(mob/living/L)
 	var/probability = prob(special_attack_probability)
 
