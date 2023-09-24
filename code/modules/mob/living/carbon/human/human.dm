@@ -242,9 +242,18 @@
 		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [key_name(src)]</font>")
 		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [key_name(M)]</font>")
 		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+
 		var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
 		var/obj/limb/affecting = get_limb(rand_zone(dam_zone))
-		apply_damage(damage, BRUTE, affecting)
+		var/armor_block = getarmor(affecting, ARMOR_MELEE)
+		var/f_damage = armor_damage_reduction(GLOB.marine_melee, damage, armor_block)
+
+		if(f_damage <= 0.34*damage)
+			to_chat(src, SPAN_WARNING("Your armor absorbs the blow!"))
+		else if(f_damage <= 0.67*damage)
+			to_chat(src, SPAN_WARNING("Your armor softens the blow!"))
+
+		apply_damage(f_damage, BRUTE, affecting)
 
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
