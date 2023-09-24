@@ -144,7 +144,8 @@ DEFINES in setup.dm, referenced here.
 		var/obj/item/attachable/attachment = attachments[slot]
 		if (!attachment || !attachment.light_mod)
 			continue
-		attachment.activate_attachment(src, bearer)
+		bearer.SetLuminosity(0, FALSE, src)
+		SetLuminosity(attachment.light_mod)
 		return TRUE
 	return FALSE
 
