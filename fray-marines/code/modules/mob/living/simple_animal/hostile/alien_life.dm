@@ -65,10 +65,14 @@
 						turns_since_move = 0
 
 /mob/living/simple_animal/hostile/alien/spawnable/proc/attack_stance()
-	if(destroy_surroundings)
+	if(destroy_surroundings && can_attack)
+		can_attack = FALSE
+		addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
 		DestroySurroundings()
 	MoveToTarget()
 
 /mob/living/simple_animal/hostile/alien/spawnable/proc/attacking_stance()
-	if(!AttackTarget() && destroy_surroundings)
+	if(!AttackTarget() && destroy_surroundings && can_attack)
+		can_attack = FALSE
+		addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
 		DestroySurroundings()
