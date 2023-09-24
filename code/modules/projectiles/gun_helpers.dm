@@ -136,19 +136,6 @@ DEFINES in setup.dm, referenced here.
 	else
 		..()
 
-/// This function actually turns the lights on the gun off
-/obj/item/weapon/gun/proc/turn_off_light(mob/bearer)
-	if (!(flags_gun_features & GUN_FLASHLIGHT_ON))
-		return FALSE
-	for (var/slot in attachments)
-		var/obj/item/attachable/attachment = attachments[slot]
-		if (!attachment || !attachment.light_mod)
-			continue
-		bearer.SetLuminosity(0, FALSE, src)
-		SetLuminosity(attachment.light_mod)
-		return TRUE
-	return FALSE
-
 /obj/item/weapon/gun/pickup(mob/user)
 	..()
 
