@@ -16263,13 +16263,6 @@
 	icon_state = "plating"
 	},
 /area/almayer/engineering/engine_core)
-"brN" = (
-/obj/structure/bed/chair/comfy/bravo,
-/obj/structure/bed/chair/comfy/alpha,
-/turf/open/floor/almayer{
-	icon_state = "redfull"
-	},
-/area/almayer/living/briefing)
 "brO" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -32347,6 +32340,46 @@
 	icon_state = "plate"
 	},
 /area/almayer/hull/upper_hull/u_m_p)
+"fdz" = (
+/obj/item/clothing/head/helmet/marine/tech{
+	layer = 4.1;
+	pixel_y = 12
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	pixel_x = -2;
+	pixel_y = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	layer = 3.3;
+	pixel_y = 4
+	},
+/obj/structure/bed{
+	can_buckle = 0
+	},
+/obj/structure/bed{
+	buckling_y = 13;
+	layer = 3.5;
+	pixel_y = 13
+	},
+/obj/structure/sign/safety/bathunisex{
+	pixel_x = -16;
+	pixel_y = 8
+	},
+/obj/item/bedsheet/brown{
+	layer = 3.1
+	},
+/obj/item/bedsheet/brown{
+	pixel_y = 13
+	},
+/mob/living/simple_animal/mouse/brown{
+	name = "rat"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
+/area/almayer/living/port_emb)
 "fdA" = (
 /obj/structure/sign/safety/storage{
 	pixel_x = 8;
@@ -34808,6 +34841,33 @@
 	icon_state = "tcomms"
 	},
 /area/almayer/command/airoom)
+"gfD" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/machinery/door_control{
+	dir = 1;
+	id = "researchlockdownext";
+	name = "Window Shutters";
+	pixel_x = -26;
+	pixel_y = 6;
+	req_access_txt = "28"
+	},
+/obj/structure/machinery/door_control{
+	dir = 1;
+	id = "researchlockdownext_door";
+	name = "Door Shutters";
+	pixel_x = -26;
+	pixel_y = 1;
+	req_access_txt = "28"
+	},
+/obj/structure/disposalpipe/junction{
+	dir = 2;
+	icon_state = "pipe-j2"
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "sterile_green_side"
+	},
+/area/almayer/medical/medical_science)
 "gfE" = (
 /obj/structure/machinery/recharge_station,
 /turf/open/floor/plating,
@@ -49685,52 +49745,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hull/upper_hull/u_f_s)
-"mrB" = (
-/obj/structure/disposalpipe/segment,
-/obj/structure/machinery/door_control{
-	dir = 1;
-	id = "researchlockdownext";
-	name = "Window Shutters";
-	pixel_x = -26;
-	pixel_y = 6;
-	req_access_txt = "28"
-	},
-/obj/structure/machinery/door_control{
-	dir = 1;
-	id = "researchlockdownext_door";
-	name = "Door Shutters";
-	pixel_x = -26;
-	pixel_y = 1;
-	req_access_txt = "28"
-	},
-/obj{
-	name = "---Merge conflict marker---"
-	},
-/obj/structure/machinery/door_control{
-	dir = 1;
-	id = "researchlockdownext";
-	name = "Window Shutters";
-	pixel_x = -26;
-	pixel_y = 6;
-	req_access_txt = "28"
-	},
-/obj/structure/machinery/door_control{
-	dir = 1;
-	id = "researchlockdownext_door";
-	name = "Door Shutters";
-	pixel_x = -26;
-	pixel_y = 1;
-	req_access_txt = "28"
-	},
-/obj/structure/disposalpipe/junction{
-	dir = 2;
-	icon_state = "pipe-j2"
-	},
-/turf/open/floor/almayer{
-	dir = 8;
-	icon_state = "sterile_green_side"
-	},
-/area/almayer/medical/medical_science)
 "mrD" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -75451,46 +75465,6 @@
 	icon_state = "plate"
 	},
 /area/almayer/hull/lower_hull/l_m_s)
-"wXB" = (
-/obj/item/clothing/head/helmet/marine/tech{
-	layer = 4.1;
-	pixel_y = 12
-	},
-/obj/structure/window/reinforced{
-	dir = 4;
-	pixel_x = -2;
-	pixel_y = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8;
-	layer = 3.3;
-	pixel_y = 4
-	},
-/obj/structure/bed{
-	can_buckle = 0
-	},
-/obj/structure/bed{
-	buckling_y = 13;
-	layer = 3.5;
-	pixel_y = 13
-	},
-/obj/structure/sign/safety/bathunisex{
-	pixel_x = -16;
-	pixel_y = 8
-	},
-/obj/item/bedsheet/brown{
-	layer = 3.1
-	},
-/obj/item/bedsheet/brown{
-	pixel_y = 13
-	},
-/mob/living/simple_animal/mouse/brown{
-	name = "rat"
-	},
-/turf/open/floor/almayer{
-	icon_state = "plate"
-	},
-/area/almayer/living/port_emb)
 "wXI" = (
 /turf/open/floor/almayer{
 	dir = 1;
@@ -110088,7 +110062,7 @@ aCC
 kXw
 vtm
 emK
-mrB
+gfD
 hPe
 sdu
 btC
@@ -114259,7 +114233,7 @@ buH
 hOR
 buH
 nsY
-wXB
+fdz
 xaZ
 jXd
 eYv
@@ -114644,8 +114618,8 @@ bdd
 bdd
 bDQ
 bgO
-brN
-brN
+boq
+boq
 bgO
 bDP
 bDP
@@ -114847,8 +114821,8 @@ beB
 bdd
 bqZ
 bgO
-brN
-brN
+boq
+boq
 bgO
 bDP
 bDP
