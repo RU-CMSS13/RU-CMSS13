@@ -40,4 +40,4 @@
 	build_path = /obj/structure/alien/wither_flower
 	build_time = 12 SECONDS
 
-	range_between_constructions = 5
+	range_between_constructions = 15
