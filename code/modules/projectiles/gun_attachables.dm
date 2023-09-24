@@ -379,7 +379,6 @@ Defined in conflicts.dm of the #defines folder.
 	icon_state = "ebarrel"
 	attach_icon = "ebarrel_a"
 	hud_offset_mod = -3
-	wield_delay_mod = WIELD_DELAY_FAST
 
 /obj/item/attachable/extended_barrel/New()
 	..()
