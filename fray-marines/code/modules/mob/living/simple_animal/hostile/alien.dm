@@ -10,6 +10,7 @@
 	response_harm = "hits"
 	status_flags = CANSTUN|CANKNOCKDOWN|CANPUSH
 	move_to_delay = XENO_AI_SPEED_TIER_2
+	turns_per_move = 25
 	meat_type = null
 	health = XENO_HEALTH_LESSER_DRONE
 	harm_intent_damage = 5
@@ -32,10 +33,17 @@
 	old_x = -8
 
 	var/special_attack_probability = XENO_AI_SPECIAL_ATTACK_PROBABILITY
+	var/can_attack = TRUE
+	var/attack_cooldown = 1.2 SECONDS
 
 /mob/living/simple_animal/hostile/alien/spawnable/New()
 	. = ..()
 	target_mob = FindTarget()
+
+/mob/living/simple_animal/hostile/alien/spawnable/Initialize()
+	. = ..()
+
+	SSxeno_ai.add_ai(src)
 
 /mob/living/simple_animal/hostile/alien/spawnable/generate_name()
 	change_real_name(src, "\improper[caste_name] (WT-[rand(1, 999)])")
@@ -129,14 +137,19 @@
 	face_atom(target_mob)
 	if(!Adjacent(target_mob))
 		return
-	if(isliving(target_mob))
+	if(isliving(target_mob) && can_attack)
 		var/mob/living/L = target_mob
+		can_attack = FALSE
+		addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
 		if (evaluate_special_attack(L))
 			return L
 		L.attack_animal(src)
 		src.animation_attack_on(L)
 		src.flick_attack_overlay(L, "slash")
 		return L
+
+/mob/living/simple_animal/hostile/alien/spawnable/proc/allow_attack()
+	can_attack = TRUE
 
 /mob/living/simple_animal/hostile/alien/spawnable/proc/evaluate_special_attack(mob/living/L)
 	return FALSE
