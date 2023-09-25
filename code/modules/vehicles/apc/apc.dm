@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(command_apc_list)
 
 	interior_map = /datum/map_template/interior/apc
 
-	passengers_slots = 22
+	passengers_slots = 18
 	xenos_slots = 8
 
 	wall_ram_damage = 120
