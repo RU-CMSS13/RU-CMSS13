@@ -60,7 +60,8 @@
 	siemens_coefficient = 0.7
 	slowdown = SLOWDOWN_ARMOR_MEDIUM
 	allowed = list(
-		/obj/item/weapon/gun/,
+		/obj/item/weapon/gun,
+		/obj/item/prop/prop_gun,
 		/obj/item/tank/emergency_oxygen,
 		/obj/item/device/flashlight,
 		/obj/item/storage/fancy/cigarettes,
@@ -666,7 +667,7 @@
 	unacidable = TRUE
 
 /obj/item/clothing/suit/storage/marine/M40
-	name = "M40 armor"
+	name = "\improper M40 armor"
 	desc = "A custom set of M40 armor designed for use by USCM stormtrooper. Contains thick kevlar shielding."
 	icon_state = "st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGH
@@ -674,6 +675,9 @@
 	flags_armor_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_cold_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_heat_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
+	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
+	specialty = "M40 stormtrooper"
+	unacidable = TRUE
 
 #define FIRE_SHIELD_CD 150
 
