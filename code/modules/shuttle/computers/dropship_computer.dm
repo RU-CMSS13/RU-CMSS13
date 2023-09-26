@@ -160,8 +160,8 @@
 	if(!shuttle.is_hijacked)
 		tgui_interact(user)
 
-/obj/structure/machinery/computer/shuttle/dropship/flight/proc/groundside_alien_action(mob/living/carbon/xenomorph/xeno)
-	if(SSticker.mode.active_lz != src)
+/obj/structure/machinery/computer/shuttle/dropship/flight/proc/groundside_alien_action(mob/living/carbon/xenomorph/xeno, datum/dropship_hijack/hijack)
+	if(SSticker.mode.active_lz != src && hijack.ship_killed == FALSE)
 		to_chat(xeno, SPAN_NOTICE("This terminal is inactive."))
 		return
 
