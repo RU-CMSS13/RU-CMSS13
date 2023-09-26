@@ -98,7 +98,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_marine, list(
 		list("Motion Detector", 15, /obj/item/device/motiondetector, null, VENDOR_ITEM_REGULAR),
 		list("Data Detector", 15, /obj/item/device/motiondetector/intel, null, VENDOR_ITEM_REGULAR),
 		list("Whistle", 5, /obj/item/device/whistle, null, VENDOR_ITEM_REGULAR),
-    list("\improper EZ4 hand welder", 5, /obj/item/tool/weldingtool/simple/marine, null, VENDOR_ITEM_REGULAR),
+		list("\improper EZ4 hand welder", 5, /obj/item/tool/weldingtool/simple/marine, null, VENDOR_ITEM_REGULAR),
 
 		list("HELMET OPTICS", 0, null, null, null),
 		list("Medical Helmet Optic", 15, /obj/item/device/helmet_visor/medical, null, VENDOR_ITEM_REGULAR),
