@@ -650,6 +650,12 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 		var/datum/squad/S = pick_n_take(squads_copy)
 		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root")
 			mixed_squads += S
+		if(length(GLOB.clients) < 80)
+			mixed_squads -= /datum/squad/marine/charlie
+		if(length(GLOB.clients) < 60)
+			mixed_squads -= /datum/squad/marine/bravo
+		if(length(GLOB.clients) < 30)
+			mixed_squads -= /datum/squad/marine/delta
 
 	//Deal with non-standards first.
 	//Non-standards are distributed regardless of squad population.
