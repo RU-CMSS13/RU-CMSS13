@@ -125,7 +125,7 @@
 	minimap_color = MINIMAP_SQUAD_ALPHA
 
 
-/*/datum/squad/marine/bravo
+/datum/squad/marine/bravo
 	name = SQUAD_MARINE_2
 	equipment_color = "#ffc32d"
 	chat_color = "#ffe650"
@@ -147,7 +147,7 @@
 
 	active = FALSE
 	roundstart = FALSE
-	locked = TRUE*/
+	locked = TRUE
 
 
 /datum/squad/marine/delta
