@@ -280,7 +280,7 @@ var/global/list/gear_datums_by_name = list()
 	/datum/gear/helmet_garb/facehuggertoy
 	display_name = "Facehugger plushe"
 	path = /obj/item/prop/helmetgarb/facehuggertoy
-	cost = 1
+	cost = 2
 
 /datum/gear/helmet_garb/lucky_feather
 	display_name = "Lucky feather, red"
