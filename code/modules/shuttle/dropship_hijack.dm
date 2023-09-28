@@ -9,6 +9,7 @@
 	var/final_announcement = FALSE
 	var/ship_killed = FALSE
 	var/messaged = FALSE
+	var/ferry_crashed = FALSE
 
 /datum/dropship_hijack/almayer/proc/crash_landing()
 	//break APCs
@@ -139,6 +140,7 @@
 	almayer_aa_cannon.protecting_section = ""
 	almayer_aa_cannon.recharging = TRUE
 	ship_killed = TRUE
+	ferry_crashed = TRUE
 
 
 

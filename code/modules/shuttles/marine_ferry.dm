@@ -37,6 +37,7 @@
 	// Used during the jump crash to announce if the AA system threw the dropship off course
 	var/true_crash_target_section = null
 
+	var/datum/dropship_hijack/almayer/Alm
 
 //Full documentation 650-700 lines down by the copy for elevators
 /datum/shuttle/ferry/marine/preflight_checks()
@@ -435,6 +436,9 @@
 
 	in_transit_time_left = 0
 
+	if(Alm.ferry_crashed)
+		ferry_crashed = FALSE
+		return
 	if(EvacuationAuthority.dest_status >= NUKE_EXPLOSION_IN_PROGRESS)
 		return FALSE //If a nuke is in progress, don't attempt a landing.
 
