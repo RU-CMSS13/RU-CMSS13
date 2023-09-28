@@ -16,5 +16,5 @@
 	if(heartpouncecooldown > world.time)
 		return
 	else if(heartpouncecooldown < world.time)
-		src << sound('code/modules/carrotman2013/sounds/heartbeat/heartpounce.ogg',volume=40,channel=SOUND_CHANNEL_HEART)
+		src << sound('sound/effects/Heart Beat Short.ogg',volume=90,channel=SOUND_CHANNEL_HEART)
 		heartpouncecooldown = world.time + 15
