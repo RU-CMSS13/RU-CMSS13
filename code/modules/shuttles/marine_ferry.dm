@@ -437,7 +437,7 @@
 	in_transit_time_left = 0
 
 	if(Alm.ferry_crashed)
-		ferry_crashed = FALSE
+		Alm.ferry_crashed = FALSE
 		return
 	if(EvacuationAuthority.dest_status >= NUKE_EXPLOSION_IN_PROGRESS)
 		return FALSE //If a nuke is in progress, don't attempt a landing.
