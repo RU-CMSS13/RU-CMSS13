@@ -277,6 +277,10 @@ var/global/list/gear_datums_by_name = list()
 	display_name = "Helmet netting"
 	path = /obj/item/prop/helmetgarb/netting
 
+	/datum/gear/helmet_garb/facehuggertoy
+	display_name = "Facehugger Toy"
+	path = /obj/item/prop/helmetgarb/facehuggertoy
+
 /datum/gear/helmet_garb/lucky_feather
 	display_name = "Lucky feather, red"
 	path = /obj/item/prop/helmetgarb/lucky_feather

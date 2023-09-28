@@ -21,6 +21,11 @@
 	desc = "Probably combat netting for a helmet. Probably just an extra hairnet that got ordered for the phantom Almayer cooking staff. Probably useless."
 	icon_state = "netting"
 
+/obj/item/prop/helmetgarb/facehuggertoy
+	name = "Facehugger Toy"
+	desc = "Some description"
+	icon_state = "facehuggertoy"
+
 /obj/item/prop/helmetgarb/spent_buckshot
 	name = "spent buckshot"
 	desc = "Three spent rounds of good ol' buckshot. You know they used to paint these green? Strange times."
