@@ -58,9 +58,11 @@
 	},
 /area/shuttle/ert)
 "o" = (
-/obj/effect/landmark/ert_spawns/distress,
+/obj/structure/bed/chair/dropship/passenger{
+	dir = 4
+	},
 /turf/open/shuttle/dropship{
-	icon_state = "rasputin3"
+	icon_state = "rasputin15"
 	},
 /area/shuttle/ert)
 "r" = (
@@ -154,7 +156,6 @@
 /area/shuttle/ert)
 "L" = (
 /obj/structure/bed/chair/dropship/passenger,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/shuttle/dropship{
 	icon_state = "rasputin15"
 	},
@@ -194,7 +195,6 @@
 /obj/structure/bed/chair/dropship/passenger{
 	dir = 8
 	},
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/shuttle/dropship{
 	icon_state = "rasputin15"
 	},
@@ -246,8 +246,8 @@ Y
 l
 I
 v
-H
-H
+o
+o
 H
 v
 M
@@ -260,11 +260,11 @@ u
 z
 E
 J
-o
-o
-o
-o
-o
+b
+b
+b
+b
+b
 N
 v
 v
@@ -290,11 +290,11 @@ K
 W
 i
 Z
-o
-o
-o
-o
-o
+b
+b
+b
+b
+b
 f
 v
 v
