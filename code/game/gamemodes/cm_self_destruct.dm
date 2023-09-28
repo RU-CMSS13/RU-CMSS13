@@ -344,7 +344,7 @@ var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initi
 	spawn while(C && C.loc && C.active_state == SELF_DESTRUCT_MACHINE_ARMED && dest_status == NUKE_EXPLOSION_ACTIVE)
 		if(world.time >= dest_start_time + 5970)
 			initiate_self_destruct()
-			return TRUE
+			return
 		sleep(10)
 
 
