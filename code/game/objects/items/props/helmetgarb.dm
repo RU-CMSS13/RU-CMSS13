@@ -22,8 +22,8 @@
 	icon_state = "netting"
 
 /obj/item/prop/helmetgarb/facehuggertoy
-	name = "Facehugger Toy"
-	desc = "Some description"
+	name = "Facehugger plushe"
+	desc = "A plush toy of murder. D'aaaww she is adorable"
 	icon_state = "facehuggertoy"
 
 /obj/item/prop/helmetgarb/spent_buckshot
