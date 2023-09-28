@@ -596,6 +596,13 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root")
 			mixed_squads += S
 
+//		if(length(GLOB.clients) < 75)
+//			mixed_squads -= /datum/squad/marine/charlie
+//		if(length(GLOB.clients) < 50)
+//			mixed_squads -= /datum/squad/marine/bravo
+		if(length(GLOB.clients) < 25)
+			mixed_squads -= /datum/squad/marine/delta
+
 	var/datum/squad/lowest = pick(mixed_squads)
 
 	var/datum/pref_squad_name
