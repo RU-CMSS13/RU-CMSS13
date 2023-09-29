@@ -5901,7 +5901,7 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/stair_clone/upper)
 "asN" = (
-/obj/structure/bed/chair/comfy/beige{
+/obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
 /turf/open/floor/almayer{
@@ -9772,6 +9772,9 @@
 /obj/item/tool/pen/red{
 	pixel_x = -5
 	},
+/obj/structure/machinery/light{
+	dir = 1
+	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -9815,6 +9818,7 @@
 /obj/structure/closet/secure_closet/personal/cabinet{
 	req_access = null
 	},
+/obj/item/device/megaphone,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -10205,7 +10209,7 @@
 	},
 /area/almayer/medical/morgue)
 "aGY" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair/comfy/beige{
 	dir = 8
 	},
 /turf/open/floor/almayer{
@@ -11075,12 +11079,8 @@
 	},
 /area/almayer/hallways/aft_hallway)
 "aKN" = (
-/obj/structure/machinery/light,
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
-/obj/item/storage/fancy/cigarettes/lady_finger{
-	pixel_y = 5
-	},
 /mob/living/simple_animal/bunny{
 	name = "Dina"
 	},
@@ -11099,6 +11099,10 @@
 	},
 /obj/item/clothing/head/that,
 /obj/item/weapon/gun/shotgun/double/cane,
+/obj/structure/machinery/light,
+/obj/item/storage/fancy/cigarettes/lady_finger{
+	pixel_y = 5
+	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -12993,9 +12997,6 @@
 	},
 /area/almayer/hallways/stern_hallway)
 "aWk" = (
-/obj/structure/machinery/light{
-	dir = 1
-	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -41725,37 +41726,10 @@
 	plane = -6.5;
 	pixel_x = -4
 	},
-/obj/item/tool/kitchen/tray{
-	pixel_y = 9;
-	pixel_x = -4
-	},
-/obj/item/tool/kitchen/utensil/fork{
-	pixel_y = 6;
-	pixel_x = -10
-	},
-/obj/item/tool/kitchen/utensil/fork{
-	pixel_y = 6;
-	pixel_x = -7
-	},
-/obj/item/tool/kitchen/utensil/fork{
-	pixel_y = 6;
-	pixel_x = -4
-	},
-/obj/item/tool/kitchen/utensil/spoon{
-	pixel_x = -1;
-	pixel_y = 6
-	},
-/obj/item/tool/kitchen/utensil/spoon{
-	pixel_x = 2;
-	pixel_y = 6
-	},
-/obj/item/tool/kitchen/utensil/spoon{
-	pixel_x = 5;
-	pixel_y = 6
-	},
 /obj/structure/window/reinforced/toughened{
 	dir = 4
 	},
+/obj/item/device/megaphone,
 /turf/open/floor/almayer{
 	dir = 4;
 	icon_state = "silver"
@@ -44944,7 +44918,7 @@
 "jGH" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/emails{
-	dir = 8;
+	dir = 4;
 	pixel_y = 5
 	},
 /obj/item/prop/tableflag/uscm{
@@ -69916,6 +69890,17 @@
 	icon_state = "dark_sterile"
 	},
 /area/almayer/medical/lower_medical_lobby)
+"tAg" = (
+/obj/structure/machinery/door/firedoor/border_only/almayer,
+/obj/structure/machinery/door/airlock/almayer/command/reinforced{
+	name = "\improper XO's Quarters";
+	req_access = null;
+	req_access_txt = "1"
+	},
+/turf/open/floor/almayer{
+	icon_state = "test_floor4"
+	},
+/area/almayer/command/cichallway)
 "tAh" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/almayer{
@@ -78118,18 +78103,12 @@
 	},
 /area/almayer/command/cic)
 "wIb" = (
-/obj/structure/machinery/door/airlock/almayer/command/reinforced{
-	name = "\improper XO's Quarters";
-	req_access = null;
-	req_access_txt = "1";
-	dir = 1
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_10";
+	pixel_y = 8;
+	layer = 3.5
 	},
-/obj/structure/machinery/door/firedoor/border_only/almayer{
-	dir = 2
-	},
-/turf/open/floor/almayer{
-	icon_state = "test_floor4"
-	},
+/turf/open/floor/almayer,
 /area/almayer/living/numbertwobunks)
 "wIq" = (
 /obj/structure/machinery/landinglight/ds1/delaythree{
@@ -78375,11 +78354,6 @@
 	},
 /area/almayer/living/captain_mess)
 "wOS" = (
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_10";
-	pixel_y = 8;
-	layer = 3.5
-	},
 /turf/open/floor/almayer{
 	dir = 6;
 	icon_state = "silver"
@@ -105227,7 +105201,7 @@ jnX
 dum
 awz
 awz
-awz
+tAg
 awz
 awF
 awF
@@ -105429,8 +105403,8 @@ jnw
 aBq
 pRL
 awF
-aEM
-rvA
+wIb
+gkd
 rvA
 aFo
 awF
@@ -105635,7 +105609,7 @@ awF
 aFg
 asN
 rvA
-aKN
+aqm
 awF
 cbm
 mUh
@@ -106041,7 +106015,7 @@ awF
 aWk
 aGY
 rvA
-aqm
+aKN
 awF
 dOl
 mUh
@@ -106240,8 +106214,8 @@ aiX
 ayT
 amO
 bYe
-wIb
-gkd
+awF
+aEM
 aJI
 rvA
 jmd
