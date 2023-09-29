@@ -72,9 +72,10 @@
 /datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-			return get_sfx("male_cough")
-		else
-			return get_sfx("female_cough")
+		return pick('sound/voice/human_male_cough_1.ogg', 'sound/voice/human_male_cough_2')
+	else
+		return pick('sound/voice/human_female_cough_1.ogg', 'sound/voice/human_female_cough_2.ogg')
+
 
 /datum/emote/living/carbon/human/cry
 	key = "cry"
@@ -114,9 +115,9 @@
 /datum/emote/living/carbon/human/gasp/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-			return get_sfx("male_gasp")
-		else
-			return get_sfx("female_gasp")
+		return pick('sound/voice/human_male_gasp_1.ogg', 'sound/voice/human_male_gasp_2', 'sound/voice/human_male_gasp_3')
+	else
+		return pick('sound/voice/human_female_gasp_1.ogg', 'sound/voice/human_female_gasp_2.ogg')
 
 /datum/emote/living/carbon/human/giggle
 	key = "giggle"
@@ -172,9 +173,9 @@
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-			return get_sfx("male_laugh")
-		else
-			return get_sfx("female_laugh")
+		return pick('sound/voice/human_male_laugh_1.ogg', 'sound/voice/human_male_laugh_2')
+	else
+		return pick('sound/voice/human_female_laugh_1.ogg', 'sound/voice/human_female_laugh_2.ogg')
 
 /datum/emote/living/carbon/human/look
 	key = "look"
