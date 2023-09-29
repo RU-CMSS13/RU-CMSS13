@@ -12,6 +12,19 @@ SUBSYSTEM_DEF(xeno_ai)
 
 	var/ai_kill = FALSE
 
+	var/list/mob_weighted = list(
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/trooper,
+		/mob/living/simple_animal/hostile/alien/spawnable/tearer,
+		/mob/living/simple_animal/hostile/alien/spawnable/tearer,
+		/mob/living/simple_animal/hostile/alien/spawnable/tearer,
+	)
+
 /datum/controller/subsystem/xeno_ai/stat_entry(msg)
 	msg = "P:[length(ai_mobs)]|Eval:[game_evaluation]"
 	return ..()
@@ -45,3 +58,7 @@ SUBSYSTEM_DEF(xeno_ai)
 /datum/controller/subsystem/xeno_ai/proc/remove_ai(mob/living/simple_animal/hostile/alien/spawnable/X)
 	X.mob_flags &= ~AI_CONTROLLED
 	ai_mobs -= X
+
+// Должно возвращать с определённым шансом один из видов. Тупо, надо ещё думать. TODO
+/datum/controller/subsystem/xeno_ai/proc/pick_a_xeno()
+	return pick(mob_weighted)

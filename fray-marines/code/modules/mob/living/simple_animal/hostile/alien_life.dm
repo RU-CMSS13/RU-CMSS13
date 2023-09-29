@@ -28,6 +28,9 @@
 	SHOULD_NOT_SLEEP(TRUE)
 
 	if(!stat && canmove)
+		if (isturf(src.loc) && !resting && !buckled)
+			turns_since_move++
+
 		switch(stance)
 			if(HOSTILE_STANCE_IDLE)
 				idle_stance()
@@ -44,35 +47,65 @@
 	if (stance != HOSTILE_STANCE_IDLE)
 		return
 
-	if(!client && !stop_automated_movement && wander && !anchored)
-		if(isturf(src.loc) && !resting && !buckled && canmove) //This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_move++
-			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					var/move_dir = 0
+	if(!client && !anchored)
+		if(turns_since_move >= turns_per_move)
+			if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
+				var/move_dir = 0
+				var/list/shuffled_cardinals = shuffle(cardinal.Copy())
 
-					for (var/picked_dir in cardinal)
-						var/turf/step = get_step(src.loc, picked_dir)
+				for (var/picked_dir in shuffled_cardinals)
+					var/turf/step = get_step(src.loc, picked_dir)
 
-						if (!(locate(/obj/flamer_fire) in get_turf(step)))
-							move_dir = get_dir(src.loc, step)
-							break
+					if (!(locate(/obj/flamer_fire) in get_turf(step)) && !step.density)
+						move_dir = get_dir(src.loc, step)
+						break
 
-					if (move_dir != 0)
-						move_dir = pick(cardinal)
-						Move(get_step(src, move_dir ))
-						setDir(move_dir)
-						turns_since_move = 0
+				if (move_dir != 0)
+					Move(get_step(src, move_dir))
+					setDir(move_dir)
 
 /mob/living/simple_animal/hostile/alien/spawnable/proc/attack_stance()
 	if(destroy_surroundings && can_attack)
-		can_attack = FALSE
-		addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
 		DestroySurroundings()
 	MoveToTarget()
 
+/mob/living/simple_animal/hostile/alien/spawnable/MoveToTarget()
+	stop_automated_movement = 1
+	if(!target_mob || SA_attackable(target_mob))
+		stance = HOSTILE_STANCE_IDLE
+	if(target_mob in ListTargets(10))
+		if (Adjacent(target_mob))
+			stance = HOSTILE_STANCE_ATTACKING
+			return
+
+		if (turns_since_move >= move_to_delay)
+			var/move_dir = get_cardinal_dir(src, target_mob)
+			Move(get_step(src, move_dir), move_dir)
+	else
+		stance = HOSTILE_STANCE_IDLE
+		// Найти ещё жертву!
+		target_mob = FindTarget()
+
 /mob/living/simple_animal/hostile/alien/spawnable/proc/attacking_stance()
 	if(!AttackTarget() && destroy_surroundings && can_attack)
-		can_attack = FALSE
-		addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
 		DestroySurroundings()
+
+/mob/living/simple_animal/hostile/alien/spawnable/AttackTarget()
+	stop_automated_movement = 1
+	if(!target_mob || SA_attackable(target_mob) || target_mob.pulledby && isxeno(target_mob.pulledby) || target_mob.alpha < 50)
+		LoseTarget()
+		return 0
+	if(!(target_mob in ListTargets(10)))
+		LostTarget()
+		return 0
+	if(get_dist(src, target_mob) <= 1) //Attacking
+		AttackingTarget()
+		return 1
+	else
+		stance = HOSTILE_STANCE_ATTACK
+		return 1
+
+/mob/living/simple_animal/hostile/alien/spawnable/DestroySurroundings()
+	can_attack = FALSE
+	addtimer(CALLBACK(src, PROC_REF(allow_attack)), attack_cooldown)
+	. = ..()

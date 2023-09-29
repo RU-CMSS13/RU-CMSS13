@@ -67,6 +67,14 @@
 		icon_state = "[icon_name] Running"
 	update_wounds()
 
+/mob/living/simple_animal/hostile/alien/spawnable/Moved(atom/oldloc, direction, Forced)
+	. = ..()
+
+	if (.)
+		turns_since_move = 0
+
+	return .
+
 /mob/living/simple_animal/hostile/alien/spawnable/FindTarget()
 	var/atom/T = null
 	stop_automated_movement = 0
@@ -120,19 +128,6 @@
 
 	return FALSE
 
-/mob/living/simple_animal/hostile/alien/spawnable/AttackTarget()
-
-	stop_automated_movement = 1
-	if(!target_mob || SA_attackable(target_mob) || target_mob.pulledby && isxeno(target_mob.pulledby) || target_mob.alpha < 50)
-		LoseTarget()
-		return 0
-	if(!(target_mob in ListTargets(10)))
-		LostTarget()
-		return 0
-	if(get_dist(src, target_mob) <= 1) //Attacking
-		AttackingTarget()
-		return 1
-
 /mob/living/simple_animal/hostile/alien/spawnable/AttackingTarget()
 	face_atom(target_mob)
 	if(!Adjacent(target_mob))
@@ -169,6 +164,7 @@
 	if(ammo_flags & AMMO_FLAME)
 		health = 0
 		emote("bursts into flames!")
+		updatehealth()
 		return TRUE
 
 	if(isxeno(P.firer))
