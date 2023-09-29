@@ -277,7 +277,7 @@ var/global/list/gear_datums_by_name = list()
 	display_name = "Helmet netting"
 	path = /obj/item/prop/helmetgarb/netting
 
-	/datum/gear/helmet_garb/facehuggertoy
+/datum/gear/helmet_garb/facehuggertoy
 	display_name = "Facehugger plushe"
 	path = /obj/item/prop/helmetgarb/facehuggertoy
 	cost = 2
