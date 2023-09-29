@@ -721,7 +721,7 @@
 		if(health > 0)
 			take_damage(250, "abstract")
 			visible_message(SPAN_DANGER("\The [A] ramms \the [src]!"))
-		playsound(loc, 'sound/effects/mech_evac.ogg', 50)
+		playsound(loc, 'sound/mecha/mech_evac.ogg', 50)
 
 /obj/vehicle/walker/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)
 	var/mob/driver = seats[VEHICLE_DRIVER]
