@@ -303,7 +303,6 @@
 		/datum/action/xeno_action/onclick/readmit,
 		/datum/action/xeno_action/onclick/queen_award,
 		/datum/action/xeno_action/activable/info_marker/queen,
-
 	)
 
 	inherent_verbs = list(
