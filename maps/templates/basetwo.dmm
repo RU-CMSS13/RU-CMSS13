@@ -240,12 +240,9 @@
 	},
 /area/adminlevel/bunker01/medbay)
 "aP" = (
-/obj/structure/surface/rack,
-/obj/item/tool/shovel/etool/folded,
-/obj/item/tool/shovel/etool/folded,
-/obj/item/tool/shovel/etool/folded,
-/obj/item/tool/shovel/etool/folded,
-/obj/item/tool/shovel/etool/folded,
+/obj/structure/machinery/power/fusion_engine{
+	name = "\improper S-52 fusion reactor 2"
+	},
 /turf/open/floor/almayer{
 	dir = 8;
 	icon_state = "orange"
@@ -376,6 +373,7 @@
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
+/obj/item/tool/shovel/etool/folded,
 /turf/open/floor/almayer{
 	dir = 8;
 	icon_state = "orange"
@@ -480,8 +478,7 @@
 	},
 /area/adminlevel/bunker01/engineering)
 "bp" = (
-/obj/structure/surface/table/reinforced,
-/obj/item/clothing/gloves/yellow,
+/obj/structure/machinery/fuelcell_recycler,
 /turf/open/floor/almayer{
 	icon_state = "orange"
 	},
@@ -1055,6 +1052,9 @@
 	},
 /area/adminlevel/bunker01/caves/outpost)
 "cK" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
 /turf/open/floor/almayer{
 	dir = 4;
 	icon_state = "green"
@@ -1385,6 +1385,86 @@
 	icon_state = "plate"
 	},
 /area/adminlevel/bunker01/breakroom)
+"ea" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer,
+/area/adminlevel/bunker01/mainroom)
+"hK" = (
+/obj/structure/machinery/power/smes/buildable,
+/turf/open/floor/almayer,
+/area/adminlevel/bunker01/mainroom)
+"lL" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "orange"
+	},
+/area/adminlevel/bunker01/engineering)
+"rF" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer,
+/area/adminlevel/bunker01/storage)
+"ww" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 80
+	},
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo"
+	},
+/area/adminlevel/bunker01/gear)
+"Cg" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/adminlevel/bunker01/breakroom)
+"Nm" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "sterile_green_side"
+	},
+/area/adminlevel/bunker01/medbay)
+"ND" = (
+/obj/structure/machinery/portable_atmospherics/hydroponics,
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "blue"
+	},
+/area/adminlevel/bunker01/hydroponics)
+"Ps" = (
+/obj/structure/machinery/power/terminal{
+	dir = 1
+	},
+/turf/open/floor/almayer,
+/area/adminlevel/bunker01/mainroom)
+"WL" = (
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/obj/structure/machinery/power/apc/almayer{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 5;
+	icon_state = "green"
+	},
+/area/adminlevel/bunker01/caves/outpost)
 
 (1,1,1) = {"
 aa
@@ -1806,11 +1886,11 @@ ax
 aI
 aR
 bb
-aR
+lL
 bq
 bu
 bA
-bO
+ww
 bQ
 bO
 bW
@@ -1961,8 +2041,8 @@ ah
 ak
 ah
 ac
-aJ
-aJ
+hK
+Ps
 aK
 aJ
 br
@@ -2595,7 +2675,7 @@ ah
 ac
 aJ
 aJ
-aJ
+ea
 aJ
 aJ
 aJ
@@ -2772,7 +2852,7 @@ cj
 cj
 cj
 cv
-cz
+WL
 cI
 cj
 cj
@@ -2959,7 +3039,7 @@ ab
 ab
 bu
 bA
-bO
+ww
 bQ
 bO
 bW
@@ -3507,7 +3587,7 @@ aJ
 do
 do
 do
-dv
+Cg
 dE
 dv
 dv
@@ -3592,7 +3672,7 @@ do
 do
 do
 aJ
-aJ
+ea
 aJ
 ac
 ab
@@ -3619,7 +3699,7 @@ aa
 ab
 am
 aw
-aE
+Nm
 aE
 aZ
 am
@@ -3640,7 +3720,7 @@ ab
 cj
 cj
 cv
-cz
+WL
 cD
 cj
 cj
@@ -3659,7 +3739,7 @@ ab
 ab
 ab
 ac
-aJ
+ea
 aK
 aJ
 aJ
@@ -3946,7 +4026,7 @@ ab
 bP
 bS
 bV
-bZ
+rF
 bY
 cg
 cl
@@ -4371,7 +4451,7 @@ aa
 ab
 cW
 df
-dm
+ND
 dm
 du
 dC

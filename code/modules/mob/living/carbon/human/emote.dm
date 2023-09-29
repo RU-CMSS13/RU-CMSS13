@@ -67,6 +67,12 @@
 	key_third_person = "coughs"
 	message = "coughs!"
 
+/datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
+	if(user.gender == FEMALE)
+		return pick('fray-marines/sound/voice/human_female_cough1.ogg', 'fray-marines/sound/voice/human_female_cough2.ogg')
+	else
+		return pick('fray-marines/sound/voice/human_male_cough1.ogg', 'fray-marines/sound/voice/human_male_cough2.ogg')
+
 /datum/emote/living/carbon/human/cry
 	key = "cry"
 	key_third_person = "cries"
@@ -99,6 +105,12 @@
 	key = "gasp"
 	key_third_person = "gasps"
 	message = "gasps!"
+
+/datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
+	if(user.gender == FEMALE)
+		return pick('fray-marines/sound/voice/human_female_gasp1.ogg', 'fray-marines/sound/voice/human_female_gasp2.ogg')
+	else
+		return pick('fray-marines/sound/voice/human_male_gasp1.ogg', 'fray-marines/sound/voice/human_male_gasp2.ogg')
 
 /datum/emote/living/carbon/human/giggle
 	key = "giggle"
@@ -149,6 +161,12 @@
 	key_third_person = "laughs"
 	message = "laughs!"
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
+
+/datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
+	if(user.gender == FEMALE)
+		return pick('fray-marines/sound/voice/human_female_laugh_1.ogg', 'fray-marines/sound/voice/human_female_laugh_2.ogg')
+	else
+		return pick('fray-marines/sound/voice/human_male_laugh_1.ogg', 'fray-marines/sound/voice/human_male_laugh_2.ogg')
 
 /datum/emote/living/carbon/human/look
 	key = "look"

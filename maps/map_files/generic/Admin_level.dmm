@@ -682,8 +682,8 @@
 	},
 /area/adminlevel/chinook/cargo)
 "aEZ" = (
-/obj/structure/machinery/cm_vending/clothing/antag{
-	name = "\improper Response Team Automated Equipment Rack"
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260)
 	},
 /turf/open/floor/corsat{
 	icon_state = "squares"
@@ -6172,12 +6172,11 @@
 	},
 /area/tdome)
 "fdB" = (
-/obj/structure/machinery/cm_vending/sorted/medical/chemistry/no_access{
-	req_access = null
-	},
 /obj/structure/machinery/light/double/blue{
 	dir = 1
 	},
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/storage/belt/medical/lifesaver/upp/full,
 /turf/open/floor/strata{
 	dir = 1;
 	icon_state = "white_cyan3"
@@ -11716,6 +11715,12 @@
 	icon_state = "grass2"
 	},
 /area/adminlevel/ert_station/clf_station)
+"jgY" = (
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260)
+	},
+/turf/open/floor/wood,
+/area/adminlevel/ert_station/clf_station)
 "jhR" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N"
@@ -15514,6 +15519,18 @@
 	icon_state = "sterile_green_side"
 	},
 /area/adminlevel/ert_station)
+"meQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260)
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
+/area/adminlevel/ert_station/royal_marines_station)
 "meY" = (
 /obj/structure/monorail{
 	dir = 4;
@@ -15699,8 +15716,9 @@
 	},
 /area/adminlevel/chinook/offices)
 "mmm" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/storage/belt/medical/lifesaver/upp/full,
+/obj/structure/machinery/cm_vending/sorted/medical/chemistry/no_access{
+	req_access = null
+	},
 /turf/open/floor/strata{
 	dir = 1;
 	icon_state = "white_cyan3"
@@ -15957,8 +15975,8 @@
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "mud" = (
-/turf/closed/wall/r_wall/unmeltable,
-/area/space)
+/turf/closed/wall/almayer/outer,
+/area/adminlevel/ert_station)
 "mva" = (
 /obj/structure/surface/table/almayer,
 /obj/structure/machinery/chem_dispenser/soda{
@@ -17053,7 +17071,8 @@
 /area/adminlevel/ert_station)
 "nso" = (
 /obj/docking_port/stationary/emergency_response/idle_port5{
-	dwidth = 8
+	dwidth = 8;
+	name = "Chinook 91 GSO"
 	},
 /turf/open/floor/plating,
 /area/adminlevel/ert_station)
@@ -18246,6 +18265,11 @@
 /turf/open/floor/almayer,
 /area/adminlevel/chinook/cargo)
 "oCl" = (
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	density = 0;
+	pixel_y = 32;
+	req_one_access = list(120,230,260)
+	},
 /turf/open/floor/strata{
 	icon_state = "blue4"
 	},
@@ -27462,7 +27486,7 @@
 /area/adminlevel/chinook)
 "wdu" = (
 /obj/structure/sign/poster/ad,
-/turf/closed/wall/r_wall/unmeltable,
+/turf/closed/wall/almayer/outer,
 /area/adminlevel/ert_station)
 "weu" = (
 /turf/open/floor/almayer{
@@ -29003,6 +29027,17 @@
 	icon_state = "sterileplate"
 	},
 /area/adminlevel/ert_station/weyland_station)
+"xDs" = (
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260)
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
+/area/adminlevel/ert_station/royal_marines_station)
 "xDC" = (
 /obj/structure/machinery/light,
 /turf/open/floor/almayer{
@@ -45694,7 +45729,7 @@ llO
 llO
 tTZ
 tTZ
-fPM
+xDs
 wQl
 wQl
 lxV
@@ -50212,7 +50247,7 @@ fjr
 sKY
 aMY
 qax
-cwh
+jgY
 cwh
 cwh
 cwh
@@ -51774,7 +51809,7 @@ llO
 llO
 tTZ
 tTZ
-ecQ
+meQ
 wQl
 wQl
 lxV
@@ -79917,28 +79952,28 @@ llO
 llO
 llO
 llO
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
 wdu
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
 mud
 llO
 llO
@@ -80069,7 +80104,7 @@ llO
 llO
 llO
 llO
-xeo
+mud
 hnN
 fJl
 fJl
@@ -80221,7 +80256,7 @@ llO
 llO
 llO
 llO
-xeo
+mud
 voV
 iXR
 iXR
@@ -80373,7 +80408,7 @@ dtI
 dtI
 pWv
 llO
-xeo
+mud
 voV
 iXR
 iXR
@@ -80525,7 +80560,7 @@ dnj
 qqE
 pAQ
 llO
-xeo
+mud
 voV
 iXR
 iXR
@@ -80677,7 +80712,7 @@ dnj
 qqE
 pAQ
 llO
-xeo
+mud
 voV
 iXR
 iXR
@@ -80829,7 +80864,7 @@ dnj
 qqE
 pAQ
 llO
-xeo
+mud
 voV
 iXR
 iXR
@@ -80981,7 +81016,7 @@ dnj
 qqE
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -81133,7 +81168,7 @@ dnj
 qqE
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -81285,7 +81320,7 @@ dnj
 qqE
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -81437,7 +81472,7 @@ bgn
 qqE
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -81589,7 +81624,7 @@ bgn
 qqE
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -81741,7 +81776,7 @@ bgn
 qqE
 qqE
 dtI
-xeo
+mud
 voV
 iXR
 iXR
@@ -81893,7 +81928,7 @@ dnj
 qqE
 qqE
 qqE
-xeo
+mud
 voV
 iXR
 iXR
@@ -82045,7 +82080,7 @@ iTa
 iTa
 iTa
 iTa
-xeo
+mud
 voV
 iXR
 iXR
@@ -82197,7 +82232,7 @@ jXo
 jyC
 iSC
 jyC
-xeo
+mud
 ejS
 iXR
 iXR
@@ -82957,7 +82992,7 @@ jXo
 jyC
 rNy
 jyC
-xeo
+mud
 voV
 iXR
 iXR
@@ -83109,7 +83144,7 @@ jXo
 iTa
 iTa
 iTa
-xeo
+mud
 voV
 iXR
 iXR
@@ -83261,7 +83296,7 @@ kOH
 iTa
 qqE
 qqE
-xeo
+mud
 voV
 iXR
 iXR
@@ -83413,7 +83448,7 @@ kKM
 xBD
 qqE
 bcG
-xeo
+mud
 voV
 iXR
 iXR
@@ -83565,7 +83600,7 @@ hNo
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -83717,7 +83752,7 @@ qxB
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -83869,7 +83904,7 @@ cSr
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84021,7 +84056,7 @@ cSr
 iTa
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84173,7 +84208,7 @@ cSr
 iTa
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84325,7 +84360,7 @@ cSr
 iTa
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84477,7 +84512,7 @@ cSr
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84629,7 +84664,7 @@ cSr
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84781,7 +84816,7 @@ cSr
 xBD
 pAQ
 iWb
-xeo
+mud
 voV
 iXR
 iXR
@@ -84933,7 +84968,7 @@ qxB
 iTa
 pAQ
 iWb
-xeo
+mud
 hnN
 eMu
 eMu
@@ -85085,28 +85120,28 @@ ifk
 iTa
 pAQ
 llO
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
-xeo
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
+mud
 mud
 llO
 llO
