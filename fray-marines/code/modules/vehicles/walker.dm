@@ -93,8 +93,8 @@
 			. += "\nПочти уничтожен."
 		else
 			. += "\nIt's falling apart."
-	. += "\n[left ? left.name : "Nothing"] установленно на левой платформе."
-	. += "\n[right ? right.name : "Nothing"] установлено на правой платформе."
+	. += "\n[left ? left.name : "Ничего"] не установленно на левой платформе."
+	. += "\n[right ? right.name : "Ничего"] не установлено на правой платформе."
 
 	return .
 
@@ -568,7 +568,7 @@
 
 	else if(right && !right.ammo && istype(mag, right.magazine_type))
 		if(!do_after(user, 20, TRUE, 5, BUSY_ICON_BUILD))
-			to_chat(user, "Вы преврали установку.")
+			to_chat(user, "Вы прервали установку.")
 			return
 		else
 			user.drop_held_item()
