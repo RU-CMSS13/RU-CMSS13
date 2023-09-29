@@ -31,19 +31,17 @@
 		if (M.stat || QDELETED(M))
 			created_mobs -= M
 
-	if (length(created_mobs) >= max_mobs || last_spawned + spawn_delay >= world.time || locate(/mob/living/simple_animal/hostile/alien/spawnable) in get_turf(src))
+	if (length(created_mobs) >= max_mobs || locate(/mob/living/simple_animal/hostile/alien/spawnable) in get_turf(src))
+		last_spawned = world.time
 		return 1
 
-	var/picked_mob = pick_a_mob()
+	if (last_spawned + spawn_delay >= world.time)
+		return 1
+
+	var/picked_mob = SSxeno_ai.pick_a_xeno()
 	created_mobs += new picked_mob(get_turf(src))
 	visible_message(SPAN_XENODANGER("A xenomorph rises from the ground!"))
-	playsound(picked, 'sound/effects/burrowoff.ogg')
+	playsound(src.loc, 'sound/effects/burrowoff.ogg')
 	last_spawned = world.time
 
 	return 1
-
-// TODO: Написать эту ебурину нормально, и обозначить весы как надо
-/obj/structure/alien/wither_flower/proc/pick_a_mob()
-	if(prob(10))
-		return /mob/living/simple_animal/hostile/alien/spawnable/tearer
-	return /mob/living/simple_animal/hostile/alien/spawnable/trooper
