@@ -72,7 +72,7 @@
 /datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-		return pick('sound/voice/human_male_cough_1.ogg', 'sound/voice/human_male_cough_2.ogg')
+			return pick('sound/voice/human_male_cough_1.ogg', 'sound/voice/human_male_cough_2.ogg')
 	else
 		return pick('sound/voice/human_female_cough_1.ogg', 'sound/voice/human_female_cough_2.ogg')
 
@@ -115,7 +115,7 @@
 /datum/emote/living/carbon/human/gasp/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-		return pick('sound/voice/human_male_gasp_1.ogg', 'sound/voice/human_male_gasp_2.ogg', 'sound/voice/human_male_gasp_3.ogg')
+			return pick('sound/voice/human_male_gasp_1.ogg', 'sound/voice/human_male_gasp_2.ogg', 'sound/voice/human_male_gasp_3.ogg')
 	else
 		return pick('sound/voice/human_female_gasp_1.ogg', 'sound/voice/human_female_gasp_2.ogg')
 
@@ -173,7 +173,7 @@
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
-		return pick('sound/voice/human_male_laugh_1.ogg', 'sound/voice/human_male_laugh_2.ogg')
+			return pick('sound/voice/human_male_laugh_1.ogg', 'sound/voice/human_male_laugh_2.ogg')
 	else
 		return pick('sound/voice/human_female_laugh_1.ogg', 'sound/voice/human_female_laugh_2.ogg')
 
