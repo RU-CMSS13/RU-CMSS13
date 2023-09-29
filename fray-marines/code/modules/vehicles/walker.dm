@@ -7,7 +7,7 @@
 
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
-	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
+	desc = "Новый шагоход \"Enforcer\"-серии. В отличии от \"Carharodon\"-серии, медленнее, однако обладает более летальным вооружением и крепкой броней."
 	icon = 'fray-marines/icons/obj/vehicles/mech.dmi'
 	icon_state = "mech_open"
 	layer = BIG_XENO_LAYER
@@ -84,17 +84,17 @@
 	var/integrity = round(health/maxHealth*100)
 	switch(integrity)
 		if(85 to 100)
-			. += "\nIt's fully intact."
+			. += "\nВ полной боевой готовности."
 		if(65 to 85)
-			. += "\nIt's slightly damaged."
+			. += "\nВыглядит слегка потрепанным."
 		if(45 to 65)
-			. += "\nIt's badly damaged."
+			. += "\nЗаметно поврежден."
 		if(25 to 45)
-			. += "\nIt's heavily damaged."
+			. += "\nПочти уничтожен."
 		else
 			. += "\nIt's falling apart."
-	. += "\n[left ? left.name : "Nothing"] is placed on its left hardpoint."
-	. += "\n[right ? right.name : "Nothing"] is placed on its right hardpoint."
+	. += "\n[left ? left.name : "Nothing"] установленно на левой платформе."
+	. += "\n[right ? right.name : "Nothing"] установлено на правой платформе."
 
 	return .
 
@@ -120,7 +120,7 @@
 	if(usr.skills.get_skill_level(SKILL_POWERLOADER))
 		move_in(H)
 	else
-		to_chat(H, "How to operate it?")
+		to_chat(H, "Ну и как этим управлять?")
 
 /obj/vehicle/walker/relaymove(mob/user, direction)
 	if(user.is_mob_incapacitated()) return
@@ -140,7 +140,7 @@
 			. = step(src, direction)
 			setDir(oldDir)
 			if(.)
-				pick(playsound(loc, 'sound/mecha/powerloader_step.ogg', 25), playsound(loc, 'sound/mecha/powerloader_step2.ogg', 25))
+				pick(playsound(loc, 'sound/mecha/l_leg_mech-_1.ogg', 25), playsound(loc, 'sound/mecha/r_leg_mech-_1.ogg', 25))
 
 /obj/vehicle/walker/Bump(atom/obstacle)
 	if(istype(obstacle, /obj/structure/machinery/door))
@@ -155,7 +155,7 @@
 		return
 
 	else if(istype(obstacle, /obj/structure/barricade))
-		pick(playsound(loc, 'sound/mecha/powerloader_step.ogg', 25), playsound(loc, 'sound/mecha/powerloader_step2.ogg', 25))
+		pick(playsound(loc, 'sound/mecha/l_leg_mech-_1.ogg', 25), playsound(loc, 'sound/mecha/r_leg_mech-_1.ogg', 25))
 		var/obj/structure/barricade/cade = obstacle
 		var/new_dir = get_dir(src, cade) ? get_dir(src, cade) : cade.dir
 		var/turf/new_loc = get_step(loc, new_dir)
@@ -165,28 +165,28 @@
 //Breaking stuff
 	else if(istype(obstacle, /obj/structure/fence))
 		var/obj/structure/fence/F = obstacle
-		F.visible_message("<span class='danger'>[src.name] smashes through [F]!</span>")
+		F.visible_message("<span class='danger'>[src.name] прошибает насквозь [F]!</span>")
 		take_damage(5, "abstract")
 		F.health = 0
 		F.healthcheck()
 	else if(istype(obstacle, /obj/structure/surface/table))
 		var/obj/structure/surface/table/T = obstacle
-		T.visible_message("<span class='danger'>[src.name] crushes [T]!</span>")
+		T.visible_message("<span class='danger'>[src.name] сталкивается с [T]!</span>")
 		take_damage(5, "abstract")
 		T.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/showcase))
 		var/obj/structure/showcase/S = obstacle
-		S.visible_message("<span class='danger'>[src.name] bulldozes over [S]!</span>")
+		S.visible_message("<span class='danger'>[src.name] сминает под собой [S]!</span>")
 		take_damage(15, "abstract")
 		S.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/window/framed))
 		var/obj/structure/window/framed/W = obstacle
-		W.visible_message("<span class='danger'>[src.name] crashes through the [W]!</span>")
+		W.visible_message("<span class='danger'>[src.name] врезается в [W]!</span>")
 		take_damage(20, "abstract")
 		W.shatter_window(1)
 	else if(istype(obstacle, /obj/structure/window_frame))
 		var/obj/structure/window_frame/WF = obstacle
-		WF.visible_message("<span class='danger'>[src.name] runs over the [WF]!</span>")
+		WF.visible_message("<span class='danger'>[src.name] проходит по [WF]!</span>")
 		take_damage(20, "abstract")
 		WF.deconstruct()
 	else
@@ -194,20 +194,20 @@
 
 /obj/vehicle/walker/verb/enter_walker()
 	set category = "Object"
-	set name = "Enter Into Walker"
+	set name = "Залезть в шагоход"
 	set src in oview(1)
 
 	if(usr.skills.get_skill_level(SKILL_POWERLOADER))
 		move_in(usr)
 	else
-		to_chat(usr, "How to operate it?")
+		to_chat(usr, "Ну и как этим управлять?")
 
 /obj/vehicle/walker/proc/move_in(mob/living/carbon/user)
 	set waitfor = FALSE
 	if(!ishuman(user))
 		return
 	if(seats[VEHICLE_DRIVER])
-		to_chat(user, "There is someone occupying mecha right now.")
+		to_chat(user, "Кто-то уже есть внутри.")
 		return
 	var/mob/living/carbon/human/H = user
 	for(var/ID in list(H.wear_id, H.belt))
@@ -224,9 +224,9 @@
 			user.loc = src
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
-			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/powerup.ogg')
+			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/heavylightswitch.ogg')
 			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/nominalsyndi.ogg'), 5 SECONDS)
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/mission_start_01.ogg'), 5 SECONDS)
 			return
 
 	to_chat(user, "Access denied.")
@@ -237,7 +237,7 @@
 	return FALSE
 
 /obj/vehicle/walker/proc/eject()
-	set name = "Eject"
+	set name = "Покинуть шагоход"
 	set category = "Vehicle"
 	var/mob/M = usr
 	if(!M || !istype(M))
@@ -253,7 +253,7 @@
 	if(!seats[VEHICLE_DRIVER])
 		return FALSE
 	if(health <= 0)
-		to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
+		to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ПРИОРИТЕТНАЯ ТРЕВОГА! Нарушение целостности шасси. Потеря управления.</span>")
 	if(zoom)
 		unzoom()
 	if(seats[VEHICLE_DRIVER].client)
@@ -274,7 +274,7 @@
 	return TRUE
 
 /obj/vehicle/walker/proc/lights()
-	set name = "Lights on/off"
+	set name = "ВКЛ/ВЫКЛ Прожекторы"
 	set category = "Vehicle"
 	var/mob/M = usr
 	if(!M || !istype(M))
@@ -297,7 +297,7 @@
 	seats[VEHICLE_DRIVER] << sound('sound/machines/click.ogg',volume=50)
 
 /obj/vehicle/walker/proc/deploy_magazine()
-	set name = "Deploy Magazine"
+	set name = "Сбросить магазин"
 	set category = "Vehicle"
 	var/mob/M = usr
 
@@ -312,19 +312,19 @@
 		else
 			W.left.ammo.loc = W.loc
 			W.left.ammo = null
-			to_chat(M, "<span class='warning'>WARNING! [W.left.name] ammo magazine deployed.</span>")
-			visible_message("[W.name]'s systems deployed used magazine.","")
+			to_chat(M, "<span class='warning'>Внимание! [W.left.name] пустой боекомплект сброшен.</span>")
+			visible_message("[W.name] модуль отстрелил пустой магазин.","")
 	else
 		if(!W.right || !W.right.ammo)
 			return
 		else
 			W.right.ammo.loc = W.loc
 			W.right.ammo = null
-			to_chat(M, "<span class='warning'>WARNING! [W.right.name] ammo magazine deployed.</span>")
-			visible_message("[W.name]'s systems deployed used magazine.","")
+			to_chat(M, "<span class='warning'>Внимание! [W.right.name] пустой боекомплект сброшен.</span>")
+			visible_message("[W.name] модуль отстрелил пустой магазин.","")
 
 /obj/vehicle/walker/proc/get_stats()
-	set name = "Status Display"
+	set name = "Показать Статус"
 	set category = "Vehicle"
 
 	var/mob/M = usr
@@ -360,16 +360,16 @@
 		var/munition = left.ammo ? "[left.ammo.current_rounds]/[left.ammo.max_rounds]" : "<span class='warning'>DEPLETED</span>"
 		to_chat(user, "<span class='notice'>Left hardpoint: [left.name].\n Current ammo level: [munition]</span>")
 	else
-		to_chat(user, "<span class='warning'>LEFT HARDPOINT IS EMPTY!</span>")
+		to_chat(user, "<span class='warning'>ЛЕВАЯ ПЛАТФОРМА ПУСТА!</span>")
 
 	if(right)
 		var/munition = right.ammo ? "[right.ammo.current_rounds]/[right.ammo.max_rounds]" : "<span class='warning'>DEPLETED</span>"
 		to_chat(user, "<span class='notice'>Right hardpoint: [right.name].\n Current ammo level: [munition]</span>")
 	else
-		to_chat(user, "<span class='warning'>RIGHT HARDPOINT IS EMPTY!</span>")
+		to_chat(user, "<span class='warning'>ПРАВАЯ ПЛАТФОРМА ПУСТА!</span>")
 
 /obj/vehicle/walker/proc/select_weapon()
-	set name = "Select Weapon"
+	set name = "Выберите активный модуль"
 	set category = "Vehicle"
 
 	var/mob/M = usr
@@ -403,12 +403,12 @@
 		return
 	if(selected)
 		if(!left)
-			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
+			to_chat(usr, "<span class='warning'>Внимание! Выбранная платформа пуста.</span>")
 			return
 		left.active_effect(A)
 	else
 		if(!right)
-			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
+			to_chat(usr, "<span class='warning'>Внимание! Выбранная платформа пуста.</span>")
 			return
 		right.active_effect(A)
 
@@ -433,7 +433,7 @@
 	return abs(angle) <= max_angle
 
 /obj/vehicle/walker/proc/zoom()
-	set name = "Zoom on/off"
+	set name = "Отдаление ВКЛ/ВЫКЛ"
 	set category = "Vehicle"
 
 	var/mob/M = usr
@@ -517,39 +517,39 @@
 
 /obj/vehicle/walker/proc/install_gun(obj/item/walker_gun/W, mob/user as mob)
 	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
-		to_chat(user, "You don't know how to mount weapon.")
+		to_chat(user, "У вас не хватает навыков для установки модулей.")
 		return
-	var/choice = input("On which hardpoint install gun.") in list("Left", "Right", "Cancel")
+	var/choice = input("Выберите орудийную платформу для монтажа.") in list("Left", "Right", "Cancel")
 	switch(choice)
 		if("Cancel")
 			return
 
 		if("Left")
 			if(left)
-				to_chat(user, "This hardpoint is full")
+				to_chat(user, "Эта платформа уже занята")
 				return
-			to_chat(user, "You start mounting [W.name] on left hardpoint.")
+			to_chat(user, "Вы начали установку [W.name] к левой платформе.")
 			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
 				user.drop_held_item()
 				W.loc = src
 				left = W
 				left.owner = src
-				to_chat(user, "You mount [W.name] on left hardpoint.")
+				to_chat(user, "Вы установили [W.name] к левой платформе.")
 				update_icon()
 				return
 			return
 
 		if("Right")
 			if(right)
-				to_chat(user, "This hardpoint is full")
+				to_chat(user, "Эта платформа уже занята")
 				return
-			to_chat(user, "You start mounting [W.name] on right hardpoint.")
+			to_chat(user, "Вы начали установку [W.name] к правой платформе.")
 			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
 				user.drop_held_item()
 				W.loc = src
 				right = W
 				right.owner = src
-				to_chat(user, "You mount [W] on right hardpoint.")
+				to_chat(user, "Вы установили [W] к правой платформе.")
 				update_icon()
 				return
 			return
@@ -557,34 +557,34 @@
 /obj/vehicle/walker/proc/rearm(obj/item/ammo_magazine/walker/mag  as obj, mob/user as mob)
 	if(left && !left.ammo && istype(mag, left.magazine_type))
 		if(!do_after(user, 20, TRUE, 5, BUSY_ICON_BUILD))
-			to_chat(user, "Your action was interrupted.")
+			to_chat(user, "Вы преврали установку.")
 			return
 		else
 			user.drop_held_item()
 			mag.loc = left
 			left.ammo = mag
-			to_chat(user, "You install magazine in [left.name].")
+			to_chat(user, "Магазин установлен для [left.name].")
 			return
 
 	else if(right && !right.ammo && istype(mag, right.magazine_type))
 		if(!do_after(user, 20, TRUE, 5, BUSY_ICON_BUILD))
-			to_chat(user, "Your action was interrupted.")
+			to_chat(user, "Вы преврали установку.")
 			return
 		else
 			user.drop_held_item()
 			mag.loc = right
 			right.ammo = mag
-			to_chat(user, "You install magazine in [right.name].")
+			to_chat(user, "Магазин установлен для [right.name].")
 			return
 
 	else
-		to_chat(user, "You cannot fit that magazine in any weapon.")
+		to_chat(user, "Нельзя установить этот магазин.")
 		return
 
 /obj/vehicle/walker/proc/dismount(obj/item/tool/wrench/WR  as obj, mob/user as mob)
 	if(!left && !right)
 		return
-	var/choice = input("Which hardpoint should be dismounted.") in list("Left", "Right", "Cancel")
+	var/choice = input("Выберите точку для демонтажа.") in list("Left", "Right", "Cancel")
 	switch(choice)
 		if("Cancel")
 			return
@@ -593,36 +593,36 @@
 			if(!left)
 				to_chat(user, "Left hardpoint is empty.")
 				return
-			to_chat(user, "You start dismounting [left.name] from walker.")
+			to_chat(user, "Вы начали демонтаж [left.name] с шагохода.")
 			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
 				left.loc = loc
 				left = null
 				update_icon()
 				return
 			else
-				to_chat(user, "Dismounting has been interrupted.")
+				to_chat(user, "Демонтаж прерван.")
 
 		if("Right")
 			if(!right)
 				to_chat(user, "Right hardpoint is empty.")
 				return
-			to_chat(user, "You start dismounting [right.name] from walker.")
+			to_chat(user, "Вы начали демонтаж [right.name] с шагохода.")
 			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
 				right.loc = loc
 				right = null
 				update_icon()
 				return
 			else
-				to_chat(user, "Dismounting has been interrupted.")
+				to_chat(user, "Демонтаж прерван.")
 
 /obj/vehicle/walker/proc/repair_walker(obj/item/tool/weldingtool/weld  as obj, mob/user as mob)
 	if(!weld.isOn())
 		return
 	if(health >= maxHealth)
-		to_chat(user, "Armor seems fully intact.")
+		to_chat(user, "Броня выглядит полностью целой.")
 		return
 	if(repair)
-		to_chat(user, "Someone already reparing this vehicle.")
+		to_chat(user, "Кто-то уже занят ремонтом.")
 		return
 	repair = TRUE
 	var/repair_time = 20 SECONDS
@@ -630,7 +630,7 @@
 	to_chat(user, "You start repairing broken part of [src.name]'s armor...")
 	if(do_after(user, repair_time, TRUE, 5, BUSY_ICON_BUILD))
 		if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_ENGI))
-			to_chat(user, "You haphazardly weld together chunks of broken armor.")
+			to_chat(user, "Ты с трудом привариваешь заплатки к поврежденной броне.")
 			health += 100
 			healthcheck()
 		else
@@ -639,11 +639,11 @@
 			to_chat(user, "You repair broken part of the armor.")
 		playsound(src.loc, 'sound/items/weldingtool_weld.ogg', 25)
 		if(seats[VEHICLE_DRIVER])
-			to_chat(seats[VEHICLE_DRIVER], "Notification.Armor partly restored.")
+			to_chat(seats[VEHICLE_DRIVER], "Уведомление. Броня частично восстановлена.")
 		repair = FALSE
 		return
 	else
-		to_chat(user, "Repair has been interrupted.")
+		to_chat(user, "Ремонт прерван.")
 	repair = FALSE
 
 
@@ -701,13 +701,13 @@
 		return
 	var/damage = dam * dmg_multipliers[damtype]
 	if(damage <= 10)
-		to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ALERT! Hostile incursion detected. Deflected.</span>")
+		to_chat(seats[VEHICLE_DRIVER], "<span class='danger'> ТРЕВОГА. Обнаружены внешние повреждения!</span>")
 		return
 
 	health -= damage
-	to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ALERT! Hostile incursion detected. Chassis taking damage.</span>")
+	to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ТРЕВОГА! Теряем прочность обшивки, обширные повреждения!</span>")
 	if(seats[VEHICLE_DRIVER] && damage >= 50)
-		seats[VEHICLE_DRIVER] << sound('sound/mecha/critdestrsyndi.ogg',volume=50)
+		seats[VEHICLE_DRIVER] << sound('sound/mecha/mech_alarm.ogg',volume=50)
 	healthcheck()
 
 /obj/vehicle/walker/Collided(atom/A)
@@ -721,7 +721,7 @@
 		if(health > 0)
 			take_damage(250, "abstract")
 			visible_message(SPAN_DANGER("\The [A] ramms \the [src]!"))
-		playsound(loc, 'sound/effects/metal_crash.ogg', 35)
+		playsound(loc, 'sound/effects/mech_evac.ogg', 50)
 
 /obj/vehicle/walker/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)
 	var/mob/driver = seats[VEHICLE_DRIVER]
@@ -744,7 +744,7 @@
 
 /obj/structure/walker_wreckage
 	name = "CW13 wreckage"
-	desc = "Remains of some unfortunate walker. Completely unrepairable."
+	desc = "Уничтоженный шагоход. Обломки явно не подлежат ремонту."
 	icon = 'fray-marines/icons/obj/vehicles/mech.dmi'
 	icon_state = "mech_broken"
 	density = TRUE
