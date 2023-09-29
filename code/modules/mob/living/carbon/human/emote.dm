@@ -66,12 +66,15 @@
 	key = "cough"
 	key_third_person = "coughs"
 	message = "coughs!"
+	cooldown = 5 SECONDS
+	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
 /datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
-	if(user.gender == FEMALE)
-		return pick('fray-marines/sound/voice/human_female_cough1.ogg', 'fray-marines/sound/voice/human_female_cough2.ogg')
-	else
-		return pick('fray-marines/sound/voice/human_male_cough1.ogg', 'fray-marines/sound/voice/human_male_cough2.ogg')
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			return get_sfx("male_cough")
+		else
+			return get_sfx("female_cough")
 
 /datum/emote/living/carbon/human/cry
 	key = "cry"
@@ -105,12 +108,15 @@
 	key = "gasp"
 	key_third_person = "gasps"
 	message = "gasps!"
+	cooldown = 5 SECONDS
+	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
-/datum/emote/living/carbon/human/cough/get_sound(mob/living/user)
-	if(user.gender == FEMALE)
-		return pick('fray-marines/sound/voice/human_female_gasp1.ogg', 'fray-marines/sound/voice/human_female_gasp2.ogg')
-	else
-		return pick('fray-marines/sound/voice/human_male_gasp1.ogg', 'fray-marines/sound/voice/human_male_gasp2.ogg')
+/datum/emote/living/carbon/human/gasp/get_sound(mob/living/user)
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			return get_sfx("male_gasp")
+		else
+			return get_sfx("female_gasp")
 
 /datum/emote/living/carbon/human/giggle
 	key = "giggle"
@@ -160,13 +166,15 @@
 	key = "laugh"
 	key_third_person = "laughs"
 	message = "laughs!"
+	cooldown = 5 SECONDS
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
-	if(user.gender == FEMALE)
-		return pick('fray-marines/sound/voice/human_female_laugh_1.ogg', 'fray-marines/sound/voice/human_female_laugh_2.ogg')
-	else
-		return pick('fray-marines/sound/voice/human_male_laugh_1.ogg', 'fray-marines/sound/voice/human_male_laugh_2.ogg')
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			return get_sfx("male_laugh")
+		else
+			return get_sfx("female_laugh")
 
 /datum/emote/living/carbon/human/look
 	key = "look"
@@ -283,7 +291,7 @@
 	if(!ishuman_strict(user))
 		return
 
-	var/scream_message = pick("FUCK!!!", "AGH!!!", "ARGH!!!", "AAAA!!!", "HGH!!!", "NGHHH!!!", "NNHH!!!", "SHIT!!!")
+	var/scream_message = pick("БЛЯТЬ!!!", "АГХ!!!", "МГРХ!!!", "AAAA!!!", "УФГХ!!!", "УФФ!!!", "ММГХ!!!", "СУКА!!!")
 	user.langchat_speech(scream_message, group, GLOB.all_languages, skip_language_check = TRUE, animation_style = LANGCHAT_PANIC_POP, additional_styles = list("langchat_yell"))
 
 /datum/emote/living/carbon/human/shakehead
