@@ -11079,15 +11079,14 @@
 	},
 /area/almayer/hallways/aft_hallway)
 "aKN" = (
-/obj/structure/bed,
-/obj/item/bedsheet/brown,
-/mob/living/simple_animal/bunny{
-	name = "Dina"
+/obj/structure/sign/safety/storage{
+	pixel_x = 8;
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
-/area/almayer/living/numbertwobunks)
+/area/almayer/hallways/hangar)
 "aKO" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/storage/briefcase,
@@ -31495,12 +31494,13 @@
 	},
 /area/almayer/shipboard/brig/lobby)
 "eqi" = (
-/obj/structure/machinery/camera/autoname/almayer,
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_10";
+	pixel_y = 8;
+	layer = 3.5
 	},
-/turf/open/floor/plating,
-/area/almayer/hallways/hangar)
+/turf/open/floor/almayer,
+/area/almayer/living/numbertwobunks)
 "eqk" = (
 /mob/living/simple_animal/mouse/brown,
 /turf/open/floor/almayer{
@@ -32962,6 +32962,7 @@
 	pixel_x = 8;
 	pixel_y = 32
 	},
+/obj/structure/machinery/camera/autoname/almayer,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -35283,6 +35284,16 @@
 	icon_state = "red"
 	},
 /area/almayer/shipboard/brig/general_equipment)
+"fNB" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 4;
+	name = "ship-grade camera"
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "green"
+	},
+/area/almayer/hallways/port_hallway)
 "fNC" = (
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /obj/structure/disposalpipe/junction{
@@ -35785,6 +35796,13 @@
 	icon_state = "plate"
 	},
 /area/almayer/hull/upper_hull/u_m_s)
+"fZJ" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	dir = 1
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
 "gai" = (
 /obj/structure/closet/firecloset,
 /turf/open/floor/almayer{
@@ -54452,6 +54470,14 @@
 	allow_construction = 0
 	},
 /area/almayer/shipboard/brig/lobby)
+"nwB" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera"
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo"
+	},
+/area/almayer/hallways/port_hallway)
 "nwG" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 1
@@ -69890,17 +69916,6 @@
 	icon_state = "dark_sterile"
 	},
 /area/almayer/medical/lower_medical_lobby)
-"tAg" = (
-/obj/structure/machinery/door/firedoor/border_only/almayer,
-/obj/structure/machinery/door/airlock/almayer/command/reinforced{
-	name = "\improper XO's Quarters";
-	req_access = null;
-	req_access_txt = "1"
-	},
-/turf/open/floor/almayer{
-	icon_state = "test_floor4"
-	},
-/area/almayer/command/cichallway)
 "tAh" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/almayer{
@@ -70288,6 +70303,10 @@
 "tIS" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "SW-out"
+	},
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	dir = 1
 	},
 /turf/open/floor/almayer,
 /area/almayer/hallways/hangar)
@@ -70784,14 +70803,14 @@
 	},
 /area/almayer/living/captain_mess)
 "tTX" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "S";
-	layer = 3.3
-	},
 /obj/structure/machinery/camera/autoname/almayer{
+	dir = 1;
 	name = "ship-grade camera"
 	},
-/turf/open/floor/almayer,
+/turf/open/floor/almayer{
+	dir = 5;
+	icon_state = "plating"
+	},
 /area/almayer/hallways/port_hallway)
 "tUh" = (
 /obj/structure/disposalpipe/segment{
@@ -77099,10 +77118,7 @@
 	icon_state = "NE-out";
 	pixel_y = 1
 	},
-/obj/structure/sign/safety/storage{
-	pixel_x = 8;
-	pixel_y = 32
-	},
+/obj/structure/machinery/camera/autoname/almayer,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -78103,12 +78119,14 @@
 	},
 /area/almayer/command/cic)
 "wIb" = (
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_10";
-	pixel_y = 8;
-	layer = 3.5
+/obj/structure/bed,
+/obj/item/bedsheet/brown,
+/mob/living/simple_animal/bunny{
+	name = "Dina"
 	},
-/turf/open/floor/almayer,
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
 /area/almayer/living/numbertwobunks)
 "wIq" = (
 /obj/structure/machinery/landinglight/ds1/delaythree{
@@ -80038,6 +80056,17 @@
 	},
 /turf/open/floor/wood/ship,
 /area/almayer/living/commandbunks)
+"xsN" = (
+/obj/structure/machinery/door/firedoor/border_only/almayer,
+/obj/structure/machinery/door/airlock/almayer/command/reinforced{
+	name = "\improper XO's Quarters";
+	req_access = null;
+	req_access_txt = "1"
+	},
+/turf/open/floor/almayer{
+	icon_state = "test_floor4"
+	},
+/area/almayer/command/cichallway)
 "xsP" = (
 /turf/open/floor/almayer{
 	dir = 1;
@@ -100233,10 +100262,10 @@ baI
 baI
 baI
 baI
-eqi
+anI
 aHB
 bHB
-btO
+fZJ
 bcm
 ksP
 gdi
@@ -100616,7 +100645,7 @@ sIT
 uNL
 uNL
 uNL
-xyw
+aKN
 bHB
 aZO
 rGE
@@ -105201,7 +105230,7 @@ jnX
 dum
 awz
 awz
-tAg
+xsN
 awz
 awF
 awF
@@ -105403,7 +105432,7 @@ jnw
 aBq
 pRL
 awF
-wIb
+eqi
 gkd
 rvA
 aFo
@@ -106015,7 +106044,7 @@ awF
 aWk
 aGY
 rvA
-aKN
+wIb
 awF
 dOl
 mUh
@@ -119126,8 +119155,8 @@ mfb
 mfb
 cbD
 eXE
-eXE
 pcS
+fNB
 nBy
 pwk
 clR
@@ -120753,8 +120782,8 @@ bwb
 vXm
 dQJ
 bJz
+xhA
 tTX
-vup
 bGb
 fsH
 bHa
@@ -121358,7 +121387,7 @@ bHY
 bJz
 nMN
 bGb
-rwI
+nwB
 vXm
 kmR
 rKp
