@@ -593,15 +593,8 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 
 	for(var/i= 1 to squads_copy.len)
 		var/datum/squad/S = pick_n_take(squads_copy)
-		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root")
+		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root" && GLOB.clients.len >= S.active_at)
 			mixed_squads += S
-
-//		if(length(GLOB.clients) < 75)
-//			mixed_squads -= /datum/squad/marine/charlie
-//		if(length(GLOB.clients) < 50)
-//			mixed_squads -= /datum/squad/marine/bravo
-		if(length(GLOB.clients) < 25)
-			mixed_squads -= /datum/squad/marine/delta
 
 	var/datum/squad/lowest = pick(mixed_squads)
 
@@ -677,6 +670,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 			pref_squad_name = H.client.prefs.preferred_squad
 
 		var/datum/squad/lowest
+
 
 		switch(H.job)
 			if(JOB_SQUAD_ENGI)
