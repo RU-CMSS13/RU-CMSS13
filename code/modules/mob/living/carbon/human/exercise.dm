@@ -106,13 +106,17 @@ Verbs related to getting fucking jacked, bro
 		return 0
 	switch(skills.get_skill_level(SKILL_ENDURANCE))
 		if(SKILL_ENDURANCE_NONE)
-			stamina_loss += 2.5
+			stamina_loss += 2
+		if(SKILL_ENDURANCE_WEAK)
+			stamina_loss += 3
 		if(SKILL_ENDURANCE_TRAINED)
 			stamina_loss -= 3.5
 		if(SKILL_ENDURANCE_MASTER)
 			stamina_loss -= 4
 		if(SKILL_ENDURANCE_EXPERT)
 			stamina_loss -= 4.5
+		if(SKILL_ENDURANCE_MAX)
+			stamina_loss -= 4.7
 	if(wear_suit)
 		stamina_loss += 0.5
 	if(back)
