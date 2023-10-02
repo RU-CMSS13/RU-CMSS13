@@ -130,7 +130,7 @@
 	access = list(ACCESS_MARINE_ALPHA)
 	radio_freq = ALPHA_FREQ
 	minimap_color = MINIMAP_SQUAD_ALPHA
-/*
+
 /datum/squad/marine/bravo
 	name = SQUAD_MARINE_2
 	equipment_color = "#ffc32d"
@@ -139,9 +139,9 @@
 	radio_freq = BRAVO_FREQ
 	minimap_color = MINIMAP_SQUAD_BRAVO
 
-	active = FALSE
-	roundstart = FALSE
-	locked = TRUE
+	//active = FALSE
+	//roundstart = FALSE
+	//locked = TRUE
 	active_at = 50
 
 /datum/squad/marine/charlie
@@ -152,11 +152,10 @@
 	radio_freq = CHARLIE_FREQ
 	minimap_color = MINIMAP_SQUAD_CHARLIE
 
-	active = FALSE
-	roundstart = FALSE
-	locked = TRUE
+	//active = FALSE
+	//roundstart = FALSE
+	//locked = TRUE
 	active_at = 75
-*/
 
 /datum/squad/marine/delta
 	name = SQUAD_MARINE_4
