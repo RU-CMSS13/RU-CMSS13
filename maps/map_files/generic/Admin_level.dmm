@@ -683,7 +683,8 @@
 /area/adminlevel/chinook/cargo)
 "aEZ" = (
 /obj/structure/machinery/cm_vending/sorted/attachments{
-	req_one_access = list(120,230,260)
+	req_one_access = list(120,230,260);
+	req_access = null
 	},
 /turf/open/floor/corsat{
 	icon_state = "squares"
@@ -881,15 +882,6 @@
 	icon_state = "floor_marked"
 	},
 /area/adminlevel/ert_station/upp_station)
-"aNY" = (
-/obj/structure/pipes/standard/manifold/hidden/green{
-	dir = 8
-	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	icon_state = "squares"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "aNZ" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N"
@@ -2021,7 +2013,6 @@
 	pixel_x = -10;
 	pixel_y = 1
 	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 9;
 	icon_state = "blue"
@@ -2452,6 +2443,13 @@
 	},
 /area/adminlevel/chinook/cargo)
 "bZh" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/antag_guns{
+	hacked = 1;
+	name = "\improper Response Team Automated Guns Rack";
+	use_power = 0;
+	use_snowflake_points = 1;
+	pixel_y = 29
+	},
 /obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	icon_state = "plate"
@@ -3193,13 +3191,6 @@
 /obj/structure/bed/stool,
 /turf/open/floor/kutjevo/tan/multi_tiles,
 /area/adminlevel/chinook/event)
-"cGy" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	dir = 4;
-	icon_state = "browncorner"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "cGP" = (
 /obj/structure/surface/table/woodentable/fancy,
 /obj/structure/machinery/computer/emails{
@@ -5574,7 +5565,6 @@
 /area/adminlevel/ert_station/clf_station)
 "eDk" = (
 /obj/item/prop/helmetgarb/spent_buckshot,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood{
 	icon_state = "wood-broken"
 	},
@@ -5804,7 +5794,6 @@
 /obj/structure/bed/chair/comfy/orange{
 	dir = 1
 	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 10;
 	icon_state = "blue"
@@ -6812,10 +6801,7 @@
 	},
 /area/centcom/living)
 "fHt" = (
-/obj/structure/machinery/cm_vending/sorted/marine_food{
-	density = 0;
-	pixel_y = 16
-	},
+/obj/structure/machinery/vending/sovietsoda,
 /turf/open/floor/strata{
 	dir = 6;
 	icon_state = "multi_tiles"
@@ -6880,12 +6866,6 @@
 "fKS" = (
 /turf/closed/wall/almayer,
 /area/adminlevel/chinook/cryo)
-"fKZ" = (
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/floor/wood{
-	icon_state = "wood-broken4"
-	},
-/area/adminlevel/ert_station/clf_station)
 "fLd" = (
 /obj/structure/closet/secure_closet/guncabinet/red,
 /obj/item/ammo_magazine/shotgun,
@@ -7142,7 +7122,6 @@
 /obj/structure/machinery/light/small/built{
 	dir = 4
 	},
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood{
 	icon_state = "wood-broken"
 	},
@@ -8189,7 +8168,13 @@
 	},
 /area/adminlevel/chinook/sec)
 "gHt" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/antag_guns{
+	hacked = 1;
+	name = "\improper Response Team Automated Guns Rack";
+	use_power = 0;
+	use_snowflake_points = 1;
+	pixel_y = 29
+	},
 /turf/open/floor/corsat{
 	icon_state = "squares"
 	},
@@ -8243,10 +8228,6 @@
 	icon_state = "grass2"
 	},
 /area/adminlevel/ert_station/clf_station)
-"gIQ" = (
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/auto_turf/strata_grass/layer0_mud,
-/area/adminlevel/ert_station/clf_station)
 "gJb" = (
 /obj/structure/machinery/photocopier,
 /turf/open/floor/almayer{
@@ -8276,7 +8257,6 @@
 /area/adminlevel/chinook/engineering)
 "gJm" = (
 /obj/item/ammo_box/magazine/l42a,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "gJn" = (
@@ -9494,7 +9474,6 @@
 /area/adminlevel/chinook/cargo)
 "hCR" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood{
 	icon_state = "wood-broken4"
 	},
@@ -10238,6 +10217,10 @@
 "icW" = (
 /obj/structure/machinery/light{
 	dir = 8
+	},
+/obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260);
+	req_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "redfull"
@@ -11717,7 +11700,8 @@
 /area/adminlevel/ert_station/clf_station)
 "jgY" = (
 /obj/structure/machinery/cm_vending/sorted/attachments{
-	req_one_access = list(120,230,260)
+	req_one_access = list(120,230,260);
+	req_access = null
 	},
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
@@ -12928,12 +12912,6 @@
 	icon_state = "wood"
 	},
 /area/adminlevel/chinook/offices)
-"kdX" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	icon_state = "yellow"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "kem" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
 	name = "\improper Hydroponics"
@@ -13027,7 +13005,6 @@
 /area/adminlevel/ert_station/royal_marines_station)
 "khN" = (
 /obj/structure/bed/sofa/south/white/right,
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "red"
@@ -13103,15 +13080,6 @@
 	icon_state = "plate"
 	},
 /area/adminlevel/chinook/engineering)
-"kkL" = (
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 4
-	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	icon_state = "plate"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "kld" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/item/clothing/mask/rebreather/scarf,
@@ -13331,6 +13299,7 @@
 "kvf" = (
 /obj/effect/decal/strata_decals/catwalk/prison,
 /obj/structure/pipes/standard/simple/hidden/green,
+/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/plating,
 /area/adminlevel/ert_station/weyland_station)
 "kvl" = (
@@ -13625,7 +13594,9 @@
 	},
 /area/adminlevel/chinook/sec)
 "kGo" = (
-/obj/docking_port/stationary/emergency_response/idle_port2,
+/obj/docking_port/stationary/emergency_response/idle_port2{
+	name = "USCSS Lunalorne"
+	},
 /turf/open/floor/plating,
 /area/adminlevel/ert_station/weyland_station)
 "kGq" = (
@@ -13978,7 +13949,8 @@
 	hacked = 1;
 	name = "\improper Response Team Automated Guns Rack";
 	use_power = 0;
-	use_snowflake_points = 1
+	use_snowflake_points = 1;
+	density = 0
 	},
 /obj/structure/machinery/light/double,
 /turf/open/floor/corsat{
@@ -14184,10 +14156,6 @@
 	icon_state = "floor"
 	},
 /area/adminlevel/ert_station/shuttle_dispatch)
-"laA" = (
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/floor/wood,
-/area/adminlevel/ert_station/clf_station)
 "laO" = (
 /obj/structure/machinery/shower{
 	pixel_y = 16
@@ -14912,7 +14880,9 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/adminlevel/chinook/shuttle)
 "lAn" = (
-/obj/docking_port/stationary/emergency_response/idle_port3,
+/obj/docking_port/stationary/emergency_response/idle_port3{
+	name = "UPP Force Hungar"
+	},
 /turf/open/floor/plating,
 /area/adminlevel/ert_station/upp_station)
 "lAQ" = (
@@ -15525,7 +15495,8 @@
 	dir = 1
 	},
 /obj/structure/machinery/cm_vending/sorted/attachments{
-	req_one_access = list(120,230,260)
+	req_one_access = list(120,230,260);
+	req_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -15893,10 +15864,13 @@
 	},
 /area/adminlevel/ert_station/weyland_station)
 "mrw" = (
-/obj/structure/window/reinforced,
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/floor/wood,
-/area/adminlevel/ert_station/clf_station)
+/obj/effect/landmark/ert_spawns/distress_upp,
+/obj/effect/landmark/freed_mob_spawner/upp_soldier,
+/turf/open/floor/strata{
+	dir = 8;
+	icon_state = "blue3"
+	},
+/area/adminlevel/ert_station/upp_station)
 "mry" = (
 /obj/structure/bed/chair/comfy/black,
 /turf/open/floor/almayer{
@@ -16682,7 +16656,6 @@
 /obj/structure/bed/chair/comfy/orange{
 	dir = 1
 	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	icon_state = "blue"
 	},
@@ -17035,21 +17008,6 @@
 	icon_state = "yellow"
 	},
 /area/adminlevel/ert_station/weyland_station)
-"nrz" = (
-/obj/structure/machinery/shower{
-	pixel_y = 16
-	},
-/obj/structure/window/reinforced{
-	dir = 4;
-	health = 80
-	},
-/obj/structure/window/reinforced{
-	dir = 8;
-	health = 80
-	},
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/floor/plating/plating_catwalk,
-/area/adminlevel/ert_station/clf_station)
 "nrX" = (
 /obj/structure/closet/secure_closet/brig,
 /turf/open/floor/almayer{
@@ -17295,7 +17253,6 @@
 /area/adminlevel/chinook/cryo)
 "nzw" = (
 /obj/item/clothing/shoes/jackboots,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "nAH" = (
@@ -18266,9 +18223,10 @@
 /area/adminlevel/chinook/cargo)
 "oCl" = (
 /obj/structure/machinery/cm_vending/sorted/attachments{
+	req_one_access = list(120,230,260);
+	req_access = null;
 	density = 0;
-	pixel_y = 32;
-	req_one_access = list(120,230,260)
+	pixel_y = 31
 	},
 /turf/open/floor/strata{
 	icon_state = "blue4"
@@ -18912,7 +18870,6 @@
 	dir = 4
 	},
 /obj/structure/machinery/light/double,
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 4;
 	icon_state = "brown"
@@ -19680,7 +19637,6 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	icon_state = "green"
 	},
@@ -20826,7 +20782,9 @@
 /turf/open/auto_turf/strata_grass/layer1,
 /area/adminlevel/ert_station/clf_station)
 "qHs" = (
-/obj/docking_port/stationary/emergency_response/idle_port1,
+/obj/docking_port/stationary/emergency_response/idle_port1{
+	name = "LV-223"
+	},
 /turf/open/floor/plating,
 /area/adminlevel/ert_station/clf_station)
 "qHG" = (
@@ -22647,13 +22605,6 @@
 /obj/structure/prop/brazier/torch,
 /turf/closed/wall/mineral/sandstone/runed,
 /area/adminlevel/ert_station/clf_station)
-"sjy" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	dir = 8;
-	icon_state = "brown"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "sjH" = (
 /obj/structure/prop/invuln/overhead_pipe{
 	dir = 4;
@@ -22709,12 +22660,6 @@
 	icon_state = "plating"
 	},
 /area/adminlevel/chinook/engineering)
-"smy" = (
-/obj/effect/landmark/ert_spawns/distress,
-/turf/open/floor/wood{
-	icon_state = "wood-broken3"
-	},
-/area/adminlevel/ert_station/clf_station)
 "smK" = (
 /obj/structure/platform/kutjevo{
 	dir = 1
@@ -23015,7 +22960,6 @@
 /area/adminlevel/chinook/offices)
 "szO" = (
 /obj/structure/bed/chair/comfy/orange,
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "blue"
@@ -23339,13 +23283,6 @@
 	},
 /turf/open/floor/wood/ship,
 /area/adminlevel/ert_station/weyland_station)
-"sLJ" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
-/turf/open/floor/corsat{
-	dir = 4;
-	icon_state = "brown"
-	},
-/area/adminlevel/ert_station/weyland_station)
 "sLP" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -23424,7 +23361,6 @@
 /obj/item/holder/cat/kitten{
 	name = "Isabelle"
 	},
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "sPH" = (
@@ -24004,7 +23940,6 @@
 /area/adminlevel/chinook/sec)
 "tlg" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "tlT" = (
@@ -24458,7 +24393,6 @@
 /area/adminlevel/chinook/sec)
 "tEV" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "green"
@@ -24783,7 +24717,6 @@
 /area/adminlevel/ert_station/upp_station)
 "tQJ" = (
 /obj/structure/bed/sofa/south/white/left,
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "red"
@@ -24807,7 +24740,9 @@
 	},
 /area/adminlevel/chinook/cargo)
 "tSd" = (
-/obj/docking_port/stationary/emergency_response/idle_port6,
+/obj/docking_port/stationary/emergency_response/idle_port6{
+	name = "TWE Shuttle Hangar"
+	},
 /turf/open/floor/plating,
 /area/adminlevel/ert_station/royal_marines_station)
 "tSl" = (
@@ -25137,7 +25072,6 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood{
 	icon_state = "wood-broken4"
 	},
@@ -25580,7 +25514,6 @@
 /mob/living/simple_animal/cat{
 	name = "Edwin"
 	},
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood{
 	icon_state = "wood-broken"
 	},
@@ -28168,7 +28101,6 @@
 	},
 /area/adminlevel/ert_station/clf_station)
 "wOa" = (
-/obj/effect/landmark/ert_spawns/distress_pmc,
 /turf/open/floor/corsat{
 	dir = 4;
 	icon_state = "yellowcorner"
@@ -28843,7 +28775,6 @@
 /area/adminlevel/chinook/engineering)
 "xxR" = (
 /obj/item/clothing/under/colonist/clf,
-/obj/effect/landmark/ert_spawns/distress,
 /turf/open/floor/wood,
 /area/adminlevel/ert_station/clf_station)
 "xxU" = (
@@ -29032,7 +28963,8 @@
 	dir = 1
 	},
 /obj/structure/machinery/cm_vending/sorted/attachments{
-	req_one_access = list(120,230,260)
+	req_one_access = list(120,230,260);
+	req_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -48837,7 +48769,7 @@ bNd
 cSM
 cSM
 oCl
-rmB
+mrw
 rmB
 jNx
 cSM
@@ -49183,8 +49115,8 @@ apw
 fZG
 fzS
 whn
-gIQ
-gIQ
+aAd
+aAd
 aAd
 aAd
 aAd
@@ -49800,8 +49732,8 @@ uob
 rHA
 bUB
 rQK
-laA
-smy
+cwh
+pDC
 gUn
 bUB
 uob
@@ -49952,8 +49884,8 @@ uob
 rHA
 xgv
 tsd
-laA
-laA
+cwh
+cwh
 gJn
 xgv
 uob
@@ -50104,15 +50036,15 @@ uob
 rHA
 qax
 jTh
-laA
-laA
+cwh
+cwh
 cly
 bUB
 uob
 rHA
 bUB
 cJp
-laA
+cwh
 cwh
 tNC
 xgv
@@ -50257,7 +50189,7 @@ rHA
 xgv
 kdj
 xxR
-smy
+pDC
 ohl
 xgv
 uob
@@ -50408,15 +50340,15 @@ uob
 rHA
 bUB
 rQK
-laA
-laA
+cwh
+cwh
 gUn
 bUB
 uob
 pNJ
 bUB
 cbe
-mrw
+edJ
 cwh
 fMz
 bUB
@@ -50552,8 +50484,8 @@ fzS
 rHA
 bUB
 kKa
-laA
-laA
+cwh
+cwh
 sUv
 bUB
 uob
@@ -50561,7 +50493,7 @@ ajM
 xgv
 yeo
 uCA
-laA
+cwh
 pOj
 xgv
 uob
@@ -50704,8 +50636,8 @@ fzS
 rHA
 bUB
 gUX
-smy
-laA
+pDC
+cwh
 sBk
 bUB
 uob
@@ -50856,16 +50788,16 @@ fjr
 rHA
 bUB
 gUX
-laA
-fKZ
+cwh
+bPk
 mtM
 bUB
 uob
 rHA
 xgv
 hzL
-laA
-laA
+cwh
+cwh
 qWV
 xgv
 uob
@@ -51016,14 +50948,14 @@ uob
 rHA
 bUB
 jwc
-laA
-laA
+cwh
+cwh
 gUn
 bUB
 uob
 ajM
 bUB
-nrz
+laO
 rdH
 rdH
 rxG
@@ -53467,7 +53399,7 @@ xBB
 swP
 dbA
 swP
-kdX
+cOJ
 tcH
 tcH
 llO
@@ -54986,7 +54918,7 @@ tlX
 tlX
 tlX
 ehC
-hfQ
+lhM
 xAZ
 pqE
 iHA
@@ -55442,7 +55374,7 @@ xzR
 uRP
 iaf
 cVU
-kkL
+lHP
 knw
 pqE
 vlQ
@@ -56956,10 +56888,10 @@ eWF
 ccZ
 tlX
 tlX
-swP
+gHt
 cSc
 lPD
-sLJ
+aOv
 aOv
 oku
 uVO
@@ -57114,7 +57046,7 @@ qoi
 hVg
 jci
 dnC
-aNY
+pAS
 lwr
 wmT
 lLI
@@ -57266,7 +57198,7 @@ lfR
 kLu
 taU
 eZa
-kkL
+lHP
 uLE
 ocz
 uxu
@@ -57415,14 +57347,14 @@ tlX
 qTT
 nZO
 kGq
-sjy
+iMQ
 iMQ
 hNV
 deQ
 uTv
 prj
 lwz
-lwz
+lLI
 piH
 tcH
 tcH
@@ -57724,10 +57656,10 @@ uzR
 rSX
 cbS
 ehx
-sLJ
-sLJ
-sLJ
-cGy
+aOv
+aOv
+aOv
+oku
 vfH
 llO
 llO

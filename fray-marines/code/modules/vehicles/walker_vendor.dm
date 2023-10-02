@@ -15,7 +15,8 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 /obj/structure/machinery/cm_vending/gear/walker
 	name = "ColMarTech Automated Mech Vendor"
 	desc = "This vendor is connected to main ship storage, allows to fetch one hardpoint module per category for free."
-	icon_state = "engi"
+	icon = 'fray-marines/icons/obj/structures/machinery/mech_vendor.dmi'
+	icon_state = "mech_deploying"
 
 	req_access = list(ACCESS_MARINE_WALKER)
 	vendor_role = list(JOB_WALKER) //everyone else, mind your business

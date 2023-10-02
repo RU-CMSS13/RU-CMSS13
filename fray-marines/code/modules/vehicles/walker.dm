@@ -133,7 +133,7 @@
 		if(dir != direction && reverse_dir[dir] != direction)
 			l_move_time = world.time
 			dir = direction
-			pick(playsound(src.loc, 'sound/mecha/powerloader_turn.ogg', 25, 1), playsound(src.loc, 'sound/mecha/powerloader_turn2.ogg', 25, 1))
+			pick(playsound(src.loc, 'sound/mecha/servo_01.ogg', 25, 1), playsound(src.loc, 'sound/mecha/servo_02.ogg', 25, 1))
 			. = TRUE
 		else
 			var/oldDir = dir
@@ -225,8 +225,9 @@
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
 			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/heavylightswitch.ogg')
-			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/mission_start_01.ogg'), 5 SECONDS)
+			update_icon() 
+			var/soundfile = pick('sound/mecha/mission_start_01.ogg', 'sound/mecha/mission_start_02.ogg', 'sound/mecha/mission_start_03.ogg')
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, soundfile, 5 SECONDS))
 			return
 
 	to_chat(user, "Access denied.")
@@ -312,6 +313,7 @@
 		else
 			W.left.ammo.loc = W.loc
 			W.left.ammo = null
+			playsound(loc, 'sound/mecha/switch_metal.ogg')
 			to_chat(M, "<span class='warning'>Внимание! [W.left.name] пустой боекомплект сброшен.</span>")
 			visible_message("[W.name] модуль отстрелил пустой магазин.","")
 	else
@@ -320,6 +322,7 @@
 		else
 			W.right.ammo.loc = W.loc
 			W.right.ammo = null
+			playsound(loc, 'sound/mecha/switch_metal.ogg')
 			to_chat(M, "<span class='warning'>Внимание! [W.right.name] пустой боекомплект сброшен.</span>")
 			visible_message("[W.name] модуль отстрелил пустой магазин.","")
 
