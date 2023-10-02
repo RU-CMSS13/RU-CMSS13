@@ -20149,14 +20149,14 @@
 	plane = -4
 	},
 /obj/structure/machinery/door_control{
-	id = s;
-	name = s;
+	id = "CIC_armory";
+	name = "CIC Armory Control";
 	pixel_y = 4;
 	req_one_access_txt = "1;4";
 	pixel_x = 7
 	},
 /obj/structure/machinery/door_control{
-	id = ""cic_railing"";
+	id = "cic_railing";
 	name = "CIC Railing Control";
 	pixel_y = 12;
 	req_one_access_txt = "1;4";
@@ -20538,10 +20538,6 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/shipboard/navigation)
 "bKt" = (
-/obj/structure/machinery/door_control/railings{
-	pixel_y = -30;
-	id = "mechdoor"
-	},
 /obj/structure/machinery/cm_vending/sorted/tech/electronics_storage{
 	req_access = null;
 	req_one_access_txt = "7;23;27"
@@ -44747,6 +44743,19 @@
 	icon_state = "plate"
 	},
 /area/almayer/hull/upper_hull/u_a_p)
+"jpa" = (
+/obj/structure/machinery/door_control{
+	dir = 1;
+	id = "mechdoor";
+	name = "Mech Bay Door Control";
+	normaldoorcontrol = 1;
+	pixel_x = -28;
+	pixel_y = -23
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow"
+	},
+/area/almayer/hallways/vehiclehangar)
 "jpl" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "NE-out";
@@ -97632,7 +97641,7 @@ uBn
 ivA
 bzA
 rwV
-uBn
+jpa
 bjR
 bBB
 bBB
