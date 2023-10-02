@@ -648,7 +648,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 	// The following code removes non useable squads from the lists of squads we assign marines too.
 	for(var/i= 1 to squads_copy.len)
 		var/datum/squad/S = pick_n_take(squads_copy)
-		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root")
+		if (S.roundstart && S.usable && S.faction == H.faction && S.name != "Root" && GLOB.clients.len >= S.active_at)
 			mixed_squads += S
 
 	//Deal with IOs first
