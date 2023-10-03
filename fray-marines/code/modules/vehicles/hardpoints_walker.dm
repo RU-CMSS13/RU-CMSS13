@@ -62,7 +62,7 @@
 		target = src.target
 	if(!user)
 		user = owner.seats[VEHICLE_DRIVER]
-	if(!target || !user)
+	if(!target || !user || !owner.firing_arc(target))
 		return NONE
 	return active_effect(target, user)
 
