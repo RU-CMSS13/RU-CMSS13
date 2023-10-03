@@ -12,7 +12,7 @@
 	/// extra damage multiplier, divided by 1000
 	var/bonus_damage_stacks = 0
 	/// extra damage multiplier, divided by 1000
-	var/bonus_damage_cap = 100
+	var/bonus_damage_cap = 300
 	/// Last world.time that the afflicted was hit by a holo-targeting round.
 	var/last_stack
 
@@ -67,9 +67,9 @@
 	SIGNAL_HANDLER
 	L += "Bonus Damage Taken: [bonus_damage_stacks * 0.1]%"
 
-/datum/component/bonus_damage_stack/proc/get_bonus_damage(mob/M, list/damage_data) // 10% damage bonus at most
+/datum/component/bonus_damage_stack/proc/get_bonus_damage(mob/M, list/damage_data) // 30% damage bonus at most
 	SIGNAL_HANDLER
-	damage_data["bonus_damage"] = damage_data["damage"] * (2 *(min(bonus_damage_stacks, bonus_damage_cap) / 1000))
+	damage_data["bonus_damage"] = damage_data["damage"] *(min(bonus_damage_stacks, bonus_damage_cap) / 1000)
 
 #undef COLOR_BONUS_DAMAGE
 #undef BONUS_DAMAGE_MAX_ALPHA
