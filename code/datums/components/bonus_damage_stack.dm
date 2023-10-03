@@ -69,7 +69,7 @@
 
 /datum/component/bonus_damage_stack/proc/get_bonus_damage(mob/M, list/damage_data) // 20% damage bonus at most
 	SIGNAL_HANDLER
-	damage_data["bonus_damage"] = damage_data["damage"] *(min(bonus_damage_stacks, bonus_damage_cap) / 1000)
+	damage_data["bonus_damage"] = damage_data["damage"] * (min(bonus_damage_stacks, bonus_damage_cap) / 1000)
 
 #undef COLOR_BONUS_DAMAGE
 #undef BONUS_DAMAGE_MAX_ALPHA
