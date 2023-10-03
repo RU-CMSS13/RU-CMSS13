@@ -226,7 +226,7 @@
 			seats[VEHICLE_DRIVER].set_interaction(src)
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите среднюю кнопку мыши чтобы менять оружие. Нажмите Alt+LMB чтобы прекрати вести огонь."))
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Большинство орудий шагохода имеют автоматическую стрельбу. Чтобы шагоход начал автоматическую стрельбу, достаточно просто кликнуть по цели один раз."))
-			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите Shift+MMB."))
+			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите Shift+MMB для сброса боеприпасов с основного орудия."))
 			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/powerup.ogg')
 			update_icon()
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/nominalsyndi.ogg'), 5 SECONDS)
