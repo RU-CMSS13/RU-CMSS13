@@ -217,13 +217,16 @@
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
-				/obj/vehicle/walker/proc/select_weapon,
+				/obj/vehicle/walker/proc/cycle_weapons,
 				/obj/vehicle/walker/proc/deploy_magazine,
 				/obj/vehicle/walker/proc/get_stats,
 			))
 			user.loc = src
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
+			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите среднюю кнопку мыши чтобы менять оружие. Нажмите Alt+LMB чтобы прекрати вести огонь."))
+			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Большинство орудий шагохода имеют автоматическую стрельбу. Чтобы шагоход начал автоматическую стрельбу, достаточно просто кликнуть по цели один раз."))
+			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите Shift+MMB."))
 			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/powerup.ogg')
 			update_icon()
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/nominalsyndi.ogg'), 5 SECONDS)
@@ -265,7 +268,7 @@
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
-				/obj/vehicle/walker/proc/select_weapon,
+				/obj/vehicle/walker/proc/cycle_weapons,
 				/obj/vehicle/walker/proc/deploy_magazine,
 				/obj/vehicle/walker/proc/get_stats,
 			))
@@ -368,7 +371,7 @@
 	else
 		to_chat(user, "<span class='warning'>RIGHT HARDPOINT IS EMPTY!</span>")
 
-/obj/vehicle/walker/proc/select_weapon()
+/obj/vehicle/walker/proc/cycle_weapons()
 	set name = "Select Weapon"
 	set category = "Vehicle"
 
@@ -391,10 +394,35 @@
 		W.selected = !W.selected
 	to_chat(M, "Selected [W.selected ? "[W.left]" : "[W.right]"]")
 
+/obj/vehicle/walker/proc/handle_click_mods(list/mods)
+	if (mods["middle"] && mods["shift"])
+		deploy_magazine()
+		return TRUE
+	if (mods["ctrl"])
+		cycle_weapons()
+		return TRUE
+	if (mods["alt"])
+		if (left)
+			SEND_SIGNAL(left, COMSIG_GUN_STOP_FIRE)
+		if (right)
+			SEND_SIGNAL(right, COMSIG_GUN_STOP_FIRE)
+		return TRUE
+
+	return !mods["left"]
+
 /obj/vehicle/walker/handle_click(mob/living/user, atom/A, list/mods)
+	var/special_click = handle_click_mods(mods)
+
+	if (special_click)
+		return
+
 	if(istype(A, /atom/movable/screen) || A.z != src.z)
 		return
 	if(!firing_arc(A))
+		if (left)
+			SEND_SIGNAL(left, COMSIG_GUN_STOP_FIRE)
+		if (right)
+			SEND_SIGNAL(right, COMSIG_GUN_STOP_FIRE)
 		var/newDir = get_cardinal_dir(src, A)
 		l_move_time = world.time
 		if(dir != newDir)
@@ -405,12 +433,20 @@
 		if(!left)
 			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
 			return
-		left.active_effect(A)
+		if (left.automatic)
+			left.set_target(A)
+			SEND_SIGNAL(left, COMSIG_GUN_FIRE)
+			return
+		left.active_effect(A, user)
 	else
 		if(!right)
 			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
 			return
-		right.active_effect(A)
+		if (right.automatic)
+			right.set_target(A)
+			SEND_SIGNAL(right, COMSIG_GUN_FIRE)
+			return
+		right.active_effect(A, user)
 
 /obj/vehicle/walker/proc/firing_arc(atom/A)
 	var/turf/T = get_turf(A)
