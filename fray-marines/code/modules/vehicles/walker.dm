@@ -401,7 +401,7 @@
 			return
 		W.selected = !W.selected
 		W.right.register_signals(M)
-		W.left.register_signals(M)
+		W.left.unregister_signals(M)
 	else
 		if(!W.left)
 			return
@@ -667,25 +667,37 @@
 		to_chat(user, "Someone already reparing this vehicle.")
 		return
 	repair = TRUE
-	var/repair_time = 20 SECONDS
+	var/repair_time = 1 SECONDS
 
-	to_chat(user, "You start repairing broken part of [src.name]'s armor...")
-	if(do_after(user, repair_time, TRUE, 5, BUSY_ICON_BUILD))
-		if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_ENGI))
-			to_chat(user, "You haphazardly weld together chunks of broken armor.")
-			health += 100
+	to_chat(user, SPAN_NOTICE("You start repairing broken part of [src.name]'s armor..."))
+	playsound(src.loc, 'sound/items/weldingtool_weld.ogg', 25)
+
+	while (weld.get_fuel() > 1)
+		if(!(world.time % 3))
+			playsound(get_turf(user), 'sound/items/weldingtool_weld.ogg', 25)
+		if(!do_after(user, repair_time, INTERRUPT_ALL, BUSY_ICON_BUILD))
+			break
+		if(!skillcheckexplicit(user, SKILL_ENGINEER, SKILL_ENGINEER_ENGI))
+			to_chat(user, SPAN_NOTICE("You haphazardly weld together chunks of broken armor."))
+			health += 5
 			healthcheck()
 		else
-			health += 250
+			health += 25
 			healthcheck()
-			to_chat(user, "You repair broken part of the armor.")
-		playsound(src.loc, 'sound/items/weldingtool_weld.ogg', 25)
+			to_chat(user, SPAN_NOTICE("You repair broken part of the armor."))
 		if(seats[VEHICLE_DRIVER])
-			to_chat(seats[VEHICLE_DRIVER], "Notification.Armor partly restored.")
-		repair = FALSE
-		return
-	else
-		to_chat(user, "Repair has been interrupted.")
+			to_chat(seats[VEHICLE_DRIVER], SPAN_NOTICE("Notification.Armor partly restored."))
+
+		weld.remove_fuel(1, user)
+
+		if (health >= maxHealth)
+			health = maxHealth
+			to_chat(user, SPAN_NOTICE("You've finished repairing the walker"))
+			break
+
+		if(!weld.isOn())
+			break;
+
 	repair = FALSE
 
 
