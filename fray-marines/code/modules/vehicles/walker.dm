@@ -224,9 +224,19 @@
 			user.loc = src
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
-			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите среднюю кнопку мыши чтобы менять оружие. Нажмите Alt+LMB чтобы прекрати вести огонь."))
-			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Большинство орудий шагохода имеют автоматическую стрельбу. Чтобы шагоход начал автоматическую стрельбу, достаточно просто кликнуть по цели один раз."))
+			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите среднюю кнопку мыши чтобы менять оружие."))
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите Shift+MMB для сброса боеприпасов с основного орудия."))
+
+			if (selected) {
+				if (left && left.automatic) {
+					left.register_signals(user)
+				}
+			} else {
+				if (right && right.automatic) {
+					right.register_signals(user)
+				}
+			}
+
 			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/powerup.ogg')
 			update_icon()
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/nominalsyndi.ogg'), 5 SECONDS)
@@ -272,6 +282,8 @@
 				/obj/vehicle/walker/proc/deploy_magazine,
 				/obj/vehicle/walker/proc/get_stats,
 			))
+	left.unregister_signals(seats[VEHICLE_DRIVER])
+	right.unregister_signals(seats[VEHICLE_DRIVER])
 	seats[VEHICLE_DRIVER] = null
 	update_icon()
 	return TRUE
@@ -388,24 +400,22 @@
 		if(!W.right)
 			return
 		W.selected = !W.selected
+		W.right.register_signals(M)
+		W.left.register_signals(M)
 	else
 		if(!W.left)
 			return
 		W.selected = !W.selected
+		W.left.register_signals(M)
+		W.right.unregister_signals(M)
 	to_chat(M, "Selected [W.selected ? "[W.left]" : "[W.right]"]")
 
 /obj/vehicle/walker/proc/handle_click_mods(list/mods)
 	if (mods["middle"] && mods["shift"])
 		deploy_magazine()
 		return TRUE
-	if (mods["ctrl"])
+	if (mods["middle"])
 		cycle_weapons()
-		return TRUE
-	if (mods["alt"])
-		if (left)
-			SEND_SIGNAL(left, COMSIG_GUN_STOP_FIRE)
-		if (right)
-			SEND_SIGNAL(right, COMSIG_GUN_STOP_FIRE)
 		return TRUE
 
 	return !mods["left"]
@@ -434,8 +444,6 @@
 			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
 			return
 		if (left.automatic)
-			left.set_target(A)
-			SEND_SIGNAL(left, COMSIG_GUN_FIRE)
 			return
 		left.active_effect(A, user)
 	else
@@ -443,8 +451,6 @@
 			to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
 			return
 		if (right.automatic)
-			right.set_target(A)
-			SEND_SIGNAL(right, COMSIG_GUN_FIRE)
 			return
 		right.active_effect(A, user)
 
@@ -756,7 +762,8 @@
 
 		if(health > 0)
 			take_damage(250, "abstract")
-			visible_message(SPAN_DANGER("\The [A] ramms \the [src]!"))
+			visible_message(SPAN_DANGER("\The [A] rams \the [src]!"))
+			Move(get_step(src, A.dir))
 		playsound(loc, 'sound/effects/metal_crash.ogg', 35)
 
 /obj/vehicle/walker/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)

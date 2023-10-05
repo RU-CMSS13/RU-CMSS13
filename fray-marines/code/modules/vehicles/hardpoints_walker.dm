@@ -36,6 +36,46 @@
 	if (automatic)
 		AddComponent(/datum/component/automatedfire/autofire, fire_delay, fire_delay, burst, GUN_FIREMODE_AUTOMATIC, autofire_slow_mult, CALLBACK(src, PROC_REF(set_bursting)), CALLBACK(src, PROC_REF(reset_fire)), CALLBACK(src, PROC_REF(fire_wrapper)), CALLBACK(src, PROC_REF(display_ammo)), CALLBACK(src, PROC_REF(set_auto_firing))) //This should go after handle_starting_attachment() and setup_firemodes() to get the proper values set.
 
+/obj/item/walker_gun/proc/register_signals(mob/user)
+	RegisterSignal(user, COMSIG_MOB_MOUSEDOWN, PROC_REF(start_fire))
+	RegisterSignal(user, COMSIG_MOB_MOUSEDRAG, PROC_REF(change_target))
+	RegisterSignal(user, COMSIG_MOB_MOUSEUP, PROC_REF(stop_fire))
+
+/obj/item/walker_gun/proc/unregister_signals(mob/user)
+	UnregisterSignal(user, list(COMSIG_MOB_MOUSEUP, COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEDRAG))
+
+/obj/item/walker_gun/proc/change_target(datum/source, atom/src_object, atom/over_object, turf/src_location, turf/over_location, src_control, over_control, params)
+	SIGNAL_HANDLER
+	set_target(get_turf_on_clickcatcher(over_object, owner.seats[VEHICLE_DRIVER], params))
+
+/obj/item/walker_gun/proc/start_fire(datum/source, atom/object, turf/location, control, params, bypass_checks = FALSE)
+	SIGNAL_HANDLER
+
+	var/list/modifiers = params2list(params)
+	if(modifiers["shift"] || modifiers["middle"] || modifiers["right"])
+		return
+
+	// Don't allow doing anything else if inside a container of some sort, like a locker.
+	if(!isturf(owner.loc))
+		return
+
+	if(istype(object, /atom/movable/screen))
+		return
+
+	if (!owner.firing_arc(object))
+		return
+
+	set_target(get_turf_on_clickcatcher(object, owner.seats[VEHICLE_DRIVER], params))
+
+	SEND_SIGNAL(src, COMSIG_GUN_FIRE)
+
+/obj/item/walker_gun/proc/stop_fire()
+	SIGNAL_HANDLER
+	if(!target)
+		return
+
+	reset_fire()
+
 /obj/item/walker_gun/proc/get_icon_image(hardpoint)
 	if(!owner)
 		return
@@ -52,6 +92,7 @@
 	shots_fired = 0//Let's clean everything
 	set_target(null)
 	set_auto_firing(FALSE)
+	SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
 
 /obj/item/walker_gun/proc/set_auto_firing(auto = FALSE)
 	fa_firing = auto
@@ -71,6 +112,9 @@
 		return
 	if(target)
 		UnregisterSignal(target, COMSIG_PARENT_QDELETING)
+	if (!owner.firing_arc(object))
+		reset_fire()
+		return
 	target = object
 	if(target)
 		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(clean_target))
@@ -106,7 +150,7 @@
 		P = new
 		P.generate_bullet(new ammo.default_ammo)
 		for (var/trait in projectile_traits)
-			GIVE_BULLET_TRAIT(P, /datum/element/bullet_trait_iff, FACTION_MARINE)
+			GIVE_BULLET_TRAIT(P, trait, FACTION_MARINE)
 		playsound(get_turf(owner), pick(fire_sound), 60)
 		target = simulate_scatter(target, P)
 		P.fire_at(target, owner, src, P.ammo.max_range, P.ammo.shell_speed)
@@ -177,7 +221,7 @@
 	burst = 2
 	fire_delay = 3
 
-	projectile_traits = list("iff")
+	projectile_traits = list(/datum/element/bullet_trait_iff)
 
 /obj/item/walker_gun/hmg
 	name = "M30 Machine Gun"
