@@ -88,7 +88,7 @@
 	var/heal_range = 0
 	var/heal_amount = 30
 	var/shield_decay = 5
-	var/shield_duration = 15 SECONDS
+	var/shield_duration = 25 SECONDS
 
 /datum/ammo/xeno/sticky/heal/on_hit_mob(mob/M,obj/projectile/P)
 	heal_xeno_range(get_turf(M), P)
