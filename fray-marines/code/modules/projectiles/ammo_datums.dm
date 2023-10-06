@@ -113,7 +113,7 @@
 		buddy.flick_heal_overlay(2 SECONDS, "#FFA800") //D9F500
 		buddy.xeno_jitter(1 SECONDS)
 
-		buddy.add_xeno_shield(heal_amount/2, XENO_SHIELD_SOURCE_SPITTER_SUPRESSOR, duration = shield_duration, decay_amount_per_second = shield_decay)
+		buddy.add_xeno_shield(heal_amount/2, XENO_SHIELD_SOURCE_SPITTER_SUPPRESSOR, duration = shield_duration, decay_amount_per_second = shield_decay)
 		buddy.gain_health(heal_amount)
 
 /datum/ammo/xeno/sticky/heal/strong
