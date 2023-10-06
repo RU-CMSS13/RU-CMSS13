@@ -30,7 +30,7 @@
 /datum/ammo/xeno/sticky/on_hit_mob(mob/M,obj/projectile/P)
 	if (!isxeno(M))
 		var/add_time = M.superslowed + effect_time / 10
-		M.SetSuperslow(min(new_time, effect_max / 10))
+		M.SetSuperslow(min(add_time, effect_max / 10))
 		M.visible_message(SPAN_DANGER("[M]'s movements are slowed."))
 	drop_resin(get_turf(M))
 
