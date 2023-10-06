@@ -37,6 +37,7 @@
 	spitter.caste.spit_types = list(/datum/ammo/xeno/sticky, /datum/ammo/xeno/sticky/heal)
 
 	mutator_update_actions(spitter)
-	mutator_set.recalculate_actions(description, flavor_description)
 	spitter.recalculate_everything()
+	mutator_set.recalculate_actions(description, flavor_description)
+	spitter.mutation_icon_state = SPITTER_NORMAL // replace this if you add custom sprites for this
 	spitter.mutation_type = SPITTER_SUPPRESSOR
