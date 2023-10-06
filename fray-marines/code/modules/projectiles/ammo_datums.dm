@@ -82,6 +82,7 @@
 
 /datum/ammo/xeno/sticky/heal
 	name = "living resin spit"
+	icon_state = "boiler_railgun"
 	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_IGNORE_XENO_IFF
 	added_spit_delay = 0
 	spit_cost = 40
