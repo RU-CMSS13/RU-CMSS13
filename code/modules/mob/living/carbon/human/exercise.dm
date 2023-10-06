@@ -52,15 +52,15 @@ Verbs related to getting fucking jacked, bro
 		if(!can_do_pushup())
 			return
 		staminaloss = calculate_stamina_loss_per_pushup(on_knees)
-		animate(src, pixel_y = target_y, time = 0.8 SECONDS, easing = QUAD_EASING) //down to the floor
+		animate(src, pixel_y = target_y, time = 0.4 SECONDS, easing = QUAD_EASING) //down to the floor
 		if(!do_after(src, 0.6 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
 			visible_message(SPAN_NOTICE("[src] stops doing pushups."), SPAN_NOTICE("You stop doing pushups."), SPAN_NOTICE("You hear movements."))
-			animate(src, pixel_y = 0, time = 0.2 SECONDS, easing = QUAD_EASING)
+			animate(src, pixel_y = 0, time = 0.1 SECONDS, easing = QUAD_EASING)
 			return
 		animate(src, pixel_y = 0, time = 0.8 SECONDS, easing = QUAD_EASING) //back up
 		if(!do_after(src, 0.6 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
 			visible_message(SPAN_NOTICE("[src] stops doing pushups."), SPAN_NOTICE("You stop doing pushups."), SPAN_NOTICE("You hear movements."))
-			animate(src, pixel_y = 0, time = 0.2 SECONDS, easing = QUAD_EASING)
+			animate(src, pixel_y = 0, time = 0.1 SECONDS, easing = QUAD_EASING)
 			return
 		pushups_in_a_row++
 		visible_message(SPAN_BOLDNOTICE("[src] does a pushup - [pushups_in_a_row] done so far!"), SPAN_BOLDNOTICE("You do a pushup - [pushups_in_a_row] done so far!"), SPAN_NOTICE("You hear rustling."))
