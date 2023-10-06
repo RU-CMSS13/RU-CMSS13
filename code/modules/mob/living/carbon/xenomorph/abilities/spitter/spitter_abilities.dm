@@ -44,16 +44,3 @@
 
 /datum/action/xeno_action/activable/tail_stab/spitter
 	name = "Corrosive Tail Stab"
-
-//////////////////////////// SUPPRESSOR ABILITIES
-
-/datum/action/xeno_action/onclick/shift_spits/suppressor
-	action_icon_state = "shift_spit_sticky"
-	macro_path = /datum/action/xeno_action/verb/verb_toggle_spit_type
-	ability_primacy = XENO_PRIMARY_ACTION_3
-	xeno_cooldown = 1 SECONDS // Spam prevention
-
-/datum/action/xeno_action/onclick/shift_spits/suppressor/can_use_action()
-	var/mob/living/carbon/xenomorph/X = owner
-	if(..() == TRUE && (X.ammo.type in X.spit_types))
-		return TRUE
