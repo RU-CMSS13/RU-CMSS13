@@ -1,7 +1,7 @@
 //////////////////////////// SUPPRESSOR ABILITIES
 
 /datum/action/xeno_action/onclick/shift_spits/suppressor
-	action_icon_state = "shift_spit_sticky"
+	action_icon_state = "prae_aid"
 	macro_path = /datum/action/xeno_action/verb/verb_toggle_spit_type
 	ability_primacy = XENO_PRIMARY_ACTION_3
 	xeno_cooldown = 1 SECONDS // Spam prevention

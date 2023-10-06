@@ -20,7 +20,7 @@
 	ping = null
 	flags_ammo_behavior = AMMO_SKIPS_ALIENS|AMMO_EXPLOSIVE|AMMO_IGNORE_RESIST
 	added_spit_delay = 5
-	spit_cost = 30
+	spit_cost = 40
 
 	shell_speed = AMMO_SPEED_TIER_3
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_4
@@ -85,7 +85,7 @@
 	icon_state = "boiler_railgun"
 	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_IGNORE_XENO_IFF
 	added_spit_delay = 0
-	spit_cost = 40
+	spit_cost = 50
 
 	effect_time = 1 SECONDS
 	resin_type = null
@@ -113,12 +113,16 @@
 	for(var/mob/living/carbon/xenomorph/buddy in range(heal_range,center))
 		if (buddy == P.firer)
 			continue
+
+		if (SEND_SIGNAL(buddy, COMSIG_XENO_PRE_HEAL) & COMPONENT_CANCEL_XENO_HEAL)
+			continue
+
 		if (buddy.health < buddy.maxHealth)
 			to_chat(buddy, SPAN_XENOHIGHDANGER("You are healed by [P.firer]!"))
 			buddy.visible_message(SPAN_BOLDNOTICE("[P] quickly wraps around [buddy], sealing some of its wounds!"))
+
 		buddy.flick_heal_overlay(2 SECONDS, "#FFA800") //FFA800
 		buddy.xeno_jitter(1 SECONDS)
-
 		buddy.add_xeno_shield(heal_amount/2, XENO_SHIELD_SOURCE_SPITTER_SUPPRESSOR, duration = shield_duration, decay_amount_per_second = shield_decay)
 		buddy.gain_health(heal_amount)
 

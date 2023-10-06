@@ -2,6 +2,9 @@
 
 /datum/action/xeno_action/onclick/shift_spits/suppressor/use_ability(atom/A)
 	. = ..()
+	button.overlays.Cut()
+	button.overlays += image('icons/mob/hud/actions_xeno.dmi', button, "prae_aid")
+
 	apply_cooldown()
 
 /datum/action/xeno_action/onclick/charge_spit/suppressor/use_ability(atom/A)
