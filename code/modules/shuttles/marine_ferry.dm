@@ -417,7 +417,7 @@
 		// At halftime, we announce whether or not the AA forced the dropship to divert
 		// The rounding is because transit time is decreased by 10 each loop. Travel time, however, might not be a multiple of 10
 		if(in_transit_time_left == round(travel_time / 2, 10) && true_crash_target_section != crash_target_section)
-			marine_announcement("Вражеское судно направляющееся к [true_crash_target_section] было успешно ликвидировано.", "Система IX-50 MGAD", logging = ARES_LOG_SECURITY)
+			marine_announcement("Вражеское судно направляющееся к [true_crash_target_section] было успешно ликвидировано.", "Система IX-50 MGAD", 'sound/effects/gau.ogg', logging = ARES_LOG_SECURITY)
 
 			var/area/shuttle_area
 			for(var/turf/T in turfs_int)
@@ -438,7 +438,7 @@
 
 	if(Alm.ferry_crashed)
 		Alm.ferry_crashed = FALSE
-		return
+		return FALSE
 	if(EvacuationAuthority.dest_status >= NUKE_EXPLOSION_IN_PROGRESS)
 		return FALSE //If a nuke is in progress, don't attempt a landing.
 

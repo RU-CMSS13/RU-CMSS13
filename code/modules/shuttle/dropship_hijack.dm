@@ -125,7 +125,7 @@
 		if(!offset_target)
 			offset_target = target // Welp the offsetting failed so...
 		crash_site.forceMove(offset_target)
-		marine_announcement("Вражеское судно направляющееся к [target_ship_section] было успешно ликвидировано.", "Система IX-50 MGAD", logging = ARES_LOG_SECURITY)
+		marine_announcement("Вражеское судно направляющееся к [target_ship_section] было успешно ликвидировано.", "Система IX-50 MGAD", 'sound/effects/gau.ogg', logging = ARES_LOG_SECURITY)
 		target_ship_section = offset_target
 		// TODO mobs not alerted
 		for(var/area/internal_area in shuttle.shuttle_areas)
