@@ -108,9 +108,10 @@
 	for(var/mob/living/carbon/xenomorph/buddy in range(heal_range,center))
 		if (buddy == P.firer)
 			continue
-		to_chat(buddy, SPAN_XENOHIGHDANGER("You are healed by [P.firer]!"))
-		buddy.visible_message(SPAN_BOLDNOTICE("[P] quickly wraps around [buddy], sealing some of its wounds!"))
-		buddy.flick_heal_overlay(2 SECONDS, "#FFA800") //D9F500
+		if (buddy.health < buddy.maxHealth)
+			to_chat(buddy, SPAN_XENOHIGHDANGER("You are healed by [P.firer]!"))
+			buddy.visible_message(SPAN_BOLDNOTICE("[P] quickly wraps around [buddy], sealing some of its wounds!"))
+		buddy.flick_heal_overlay(2 SECONDS, "#FFA800") //FFA800
 		buddy.xeno_jitter(1 SECONDS)
 
 		buddy.add_xeno_shield(heal_amount/2, XENO_SHIELD_SOURCE_SPITTER_SUPPRESSOR, duration = shield_duration, decay_amount_per_second = shield_decay)
@@ -121,5 +122,5 @@
 	max_range = 6
 
 	effect_time = 1.5 SECONDS
-	heal_amount = 120
+	heal_amount = 90
 	heal_range = 1
