@@ -8,10 +8,10 @@
 	mutator_actions_to_remove = list(
 		/datum/action/xeno_action/activable/pounce/lurker,
 		/datum/action/xeno_action/onclick/lurker_invisibility,
-		/datum/action/xeno_action/onclick/lurker_assassinate
+		/datum/action/xeno_action/onclick/lurker_assassinate,
 	)
 	mutator_actions_to_add = list(
-		/datum/action/xeno_action/activable/pounce/lurker/stalker
+		/datum/action/xeno_action/activable/pounce/lurker/stalker,
 	)
 	behavior_delegate_type = /datum/behavior_delegate/lurker_stalker
 	keystone = TRUE
