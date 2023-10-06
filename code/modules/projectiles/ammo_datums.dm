@@ -561,8 +561,8 @@
 	name = "revolver bullet"
 	headshot_state = HEADSHOT_OVERLAY_MEDIUM
 
-	damage = 55
-	penetration = ARMOR_PENETRATION_TIER_1
+	damage = 75
+	penetration = ARMOR_PENETRATION_TIER_3
 	accuracy = HIT_ACCURACY_TIER_1
 
 /datum/ammo/bullet/revolver/marksman
@@ -576,7 +576,7 @@
 /datum/ammo/bullet/revolver/heavy
 	name = "heavy revolver bullet"
 
-	damage = 35
+	damage = 45
 	penetration = ARMOR_PENETRATION_TIER_4
 	accuracy = HIT_ACCURACY_TIER_3
 
@@ -2464,9 +2464,6 @@
 		else
 			M.apply_effect(stun_time, WEAKEN)
 
-
-
-
 /datum/ammo/energy/yautja/rifle/bolt
 	name = "plasma rifle bolt"
 	icon_state = "ion"
@@ -2475,7 +2472,13 @@
 	flags_ammo_behavior = AMMO_IGNORE_RESIST
 
 	damage = 55
-	penetration = 50
+	penetration = ARMOR_PENETRATION_TIER_10
+
+/datum/ammo/energy/yautja/rifle/bolt/on_hit_mob(mob/hit_mob, obj/projectile/hit_projectile)
+	if(isxeno(hit_mob))
+		var/mob/living/carbon/xenomorph/xeno = hit_mob
+		xeno.apply_damage(damage * 0.75, BURN)
+		xeno.interference = 30
 
 /*
 //======
@@ -2540,7 +2543,7 @@
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(!H.wear_suit || H.wear_suit.slowdown == 0)
+			if(!H.wear_suit)
 				no_clothes_neuro = TRUE
 
 		if(no_clothes_neuro)

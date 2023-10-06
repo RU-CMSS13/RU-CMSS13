@@ -15,7 +15,7 @@
 	icon_override = 'icons/mob/humans/onmob/head_0.dmi'
 	flags_inventory = BLOCKSHARPOBJ
 	flags_inv_hide = HIDEEARS
-	flags_atom = NO_NAME_OVERRIDE
+	flags_atom = FPRINT|CONDUCT|NO_NAME_OVERRIDE|NO_SNOW_TYPE
 	min_cold_protection_temperature = ICE_PLANET_MIN_COLD_PROT
 	flags_marine_helmet = NO_FLAGS
 
@@ -67,7 +67,7 @@
 	desc = "ITEM DESCRIPTION.  DONOR ITEM" //Add UNIQUE if Unique
 	icon_state = null
 	item_state = null
-	flags_atom = NO_NAME_OVERRIDE
+	flags_atom = FPRINT|CONDUCT|NO_NAME_OVERRIDE|NO_SNOW_TYPE
 	//DON'T GRAB STUFF BETWEEN THIS LINE
 	icon = 'icons/obj/items/clothing/suits.dmi'
 	icon_override = 'icons/mob/humans/onmob/suit_0.dmi'  //Don't fuck with this in the future please.
@@ -80,7 +80,7 @@
 	desc = "ITEM DESCRIPTION.  DONOR ITEM" //Add UNIQUE if Unique
 	icon_state = null
 	item_state = null
-	flags_atom = NO_NAME_OVERRIDE
+	flags_atom = FPRINT|CONDUCT|NO_NAME_OVERRIDE|NO_SNOW_TYPE
 	//DON'T GRAB STUFF BETWEEN THIS LINE
 	icon = 'icons/obj/items/clothing/suits.dmi'
 	icon_override = 'icons/mob/humans/onmob/suit_0.dmi'  //Don't fuck with this in the future please.
@@ -971,7 +971,7 @@
 /obj/item/clothing/under/marine/fluff
 	name = "ITEM NAME"
 	desc = "ITEM DESCRIPTION.  DONOR ITEM" //Add UNIQUE if Unique
-	flags_atom = NO_NAME_OVERRIDE
+	flags_atom = FPRINT|NO_NAME_OVERRIDE|NO_SNOW_TYPE
 	icon_state = null
 	item_state = null
 	min_cold_protection_temperature = ICE_PLANET_MIN_COLD_PROT
@@ -1400,6 +1400,21 @@
 	smoketime = 7200
 	chem_volume = 30
 	flags_inventory = COVERMOUTH|ALLOWREBREATH
+
+/obj/item/weapon/donatorkatana
+	name = "Kou"
+	desc = "A piece of steel with a hand-engraved name and a fine signature of the craftsman underneath. Kou was custom made as an object of encouragement with a practical application. || DONATOR ITEM"
+	icon_state = "donatorkatana"
+	flags_atom = FPRINT|CONDUCT
+	force = MELEE_FORCE_VERY_STRONG
+	throwforce = MELEE_FORCE_WEAK
+	sharp = IS_SHARP_ITEM_BIG
+	edge = 1
+	w_class = SIZE_MEDIUM
+	flags_equip_slot = SLOT_BACK
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	attack_speed = 9
 
 
 //GHOST CIGAR CODE
