@@ -455,6 +455,9 @@
 		right.active_effect(A, user)
 
 /obj/vehicle/walker/proc/firing_arc(atom/A)
+	if (!A)
+		return FALSE
+
 	var/turf/T = get_turf(A)
 	var/dx = T.x - x
 	var/dy = T.y - y
