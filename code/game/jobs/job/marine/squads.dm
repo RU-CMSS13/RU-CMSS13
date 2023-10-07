@@ -142,7 +142,7 @@
 	//active = FALSE
 	//roundstart = FALSE
 	//locked = TRUE
-	active_at = 50
+	active_at = 60
 
 /datum/squad/marine/charlie
 	name = SQUAD_MARINE_3
@@ -155,7 +155,7 @@
 	//active = FALSE
 	//roundstart = FALSE
 	//locked = TRUE
-	active_at = 75
+	active_at = 90
 
 /datum/squad/marine/delta
 	name = SQUAD_MARINE_4
@@ -164,7 +164,7 @@
 	access = list(ACCESS_MARINE_DELTA)
 	radio_freq = DELTA_FREQ
 	minimap_color = MINIMAP_SQUAD_DELTA
-	active_at = 25
+	active_at = 30
 
 
 /datum/squad/marine/echo
