@@ -39,5 +39,5 @@
 	mutator_update_actions(spitter)
 	spitter.recalculate_everything()
 	mutator_set.recalculate_actions(description, flavor_description)
-	spitter.mutation_icon_state = SPITTER_NORMAL // replace this if you add custom sprites for this
+	spitter.mutation_icon_state = SPITTER_SUPPRESSOR // replace this if you add custom sprites for this
 	spitter.mutation_type = SPITTER_SUPPRESSOR
