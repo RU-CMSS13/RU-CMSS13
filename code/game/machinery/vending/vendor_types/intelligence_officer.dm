@@ -21,7 +21,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_intelligence_officer, list(
 		list("POUCHES", 0, null, null, null),
 		list("Large Magazine Pouch", 10, /obj/item/storage/pouch/magazine/large, null, VENDOR_ITEM_REGULAR),
 		list("Large Shotgun Shell Pouch", 10, /obj/item/storage/pouch/shotgun/large, null, VENDOR_ITEM_REGULAR),
-		list("Autoinjector Pouch (Full)", 15, /obj/item/storage/pouch/autoinjector/full/skillless, null, VENDOR_ITEM_RECOMMENDED),
+		list("M276 Pattern Combat Toolbelt Rig", 10, /obj/item/storage/belt/gun/utility, null, VENDOR_ITEM_REGULAR),
+		list("Autoinjector Pouch (Full)", 10, /obj/item/storage/pouch/autoinjector/full/skillless, null, VENDOR_ITEM_RECOMMENDED),
 		list("Machete Pouch (Full)", 10, /obj/item/storage/pouch/machete/full, null, VENDOR_ITEM_REGULAR),
 
 		list("PRIMARY AMMUNITION", 0, null, null, null),
