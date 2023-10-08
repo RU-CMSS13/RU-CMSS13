@@ -153,22 +153,22 @@
 	var/shield_duration = 25 SECONDS
 
 /datum/ammo/xeno/sticky/heal/on_hit_mob(mob/M,obj/projectile/P)
-	heal_xeno_range(get_turf(M), P)
+	heal_xeno_in_radius(get_turf(M), P)
 	..()
 
 /datum/ammo/xeno/sticky/heal/on_hit_obj(obj/O,obj/projectile/P)
-	heal_xeno_range(get_turf(O), P)
+	heal_xeno_in_radius(get_turf(O), P)
 
 /datum/ammo/xeno/sticky/heal/on_hit_turf(turf/T,obj/projectile/P)
 	var/turf/center = T.density && heal_range ? get_step(T,reverse_dir[P.dir]) : T
-	heal_xeno_range(center, P)
+	heal_xeno_in_radius(center, P)
 
 /datum/ammo/xeno/sticky/heal/do_at_max_range(obj/projectile/P)
-	heal_xeno_range(get_turf(P), P)
+	heal_xeno_in_radius(get_turf(P), P)
 
-/datum/ammo/xeno/sticky/heal/proc/heal_xeno_range(turf/center, obj/projectile/P)
+/datum/ammo/xeno/sticky/heal/proc/heal_xeno_in_radius(turf/center, obj/projectile/P)
 	for(var/mob/living/carbon/xenomorph/buddy in range(heal_range,center))
-		if (buddy == P.firer)
+		if (buddy == P.firer || buddy.stat == DEAD)
 			continue
 
 		if (SEND_SIGNAL(buddy, COMSIG_XENO_PRE_HEAL) & COMPONENT_CANCEL_XENO_HEAL)
