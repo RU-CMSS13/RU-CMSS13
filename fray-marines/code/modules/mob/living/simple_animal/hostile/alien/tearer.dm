@@ -18,9 +18,12 @@
 
 	if(probability)
 		visible_message(SPAN_DANGER("[src] goes savage!"))
+		src.animation_attack_on(L)
+		src.flick_attack_overlay(L, "slash")
 		for(var/mob/living/ajacent in range(1, L))
 			if(ajacent == src)
 				continue
 			ajacent.attack_animal(src)
+			src.flick_attack_overlay(ajacent, "slash")
 
 	return probability
