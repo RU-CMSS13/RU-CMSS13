@@ -67,9 +67,9 @@
 /mob/living/simple_animal/hostile/alien/spawnable/proc/attack_stance()
 	if(destroy_surroundings && can_attack)
 		DestroySurroundings()
-	MoveToTarget()
+	MoveToTarget(TRUE)
 
-/mob/living/simple_animal/hostile/alien/spawnable/MoveToTarget()
+/mob/living/simple_animal/hostile/alien/spawnable/MoveToTarget(evasive = FALSE)
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
@@ -80,7 +80,16 @@
 
 		if (turns_since_move >= move_to_delay)
 			var/move_dir = get_cardinal_dir(src, target_mob)
-			Move(get_step(src, move_dir), move_dir)
+
+			if (evasive && prob(evasive_movement_chance))
+				move_dir = pick(list(
+					turn(move_dir, 90),
+					turn(move_dir, -90)
+				))
+
+			if(!Move(get_step(src, move_dir), move_dir))
+				move_dir = get_cardinal_dir(src, target_mob)
+				Move(get_step(src, move_dir), move_dir)
 	else
 		stance = HOSTILE_STANCE_IDLE
 		// Найти ещё жертву!

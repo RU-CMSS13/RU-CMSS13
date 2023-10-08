@@ -35,6 +35,7 @@
 	var/special_attack_probability = XENO_AI_SPECIAL_ATTACK_PROBABILITY
 	var/can_attack = TRUE
 	var/attack_cooldown = 1.2 SECONDS
+	var/evasive_movement_chance = XENO_AI_EVASIVE_MOVEMENT_PROBABILITY
 
 /mob/living/simple_animal/hostile/alien/spawnable/New()
 	. = ..()
@@ -141,6 +142,9 @@
 		L.attack_animal(src)
 		src.animation_attack_on(L)
 		src.flick_attack_overlay(L, "slash")
+
+		if(prob(evasive_movement_chance))
+			MoveAround(L)
 		return L
 
 /mob/living/simple_animal/hostile/alien/spawnable/proc/allow_attack()
