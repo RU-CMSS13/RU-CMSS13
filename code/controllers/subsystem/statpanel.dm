@@ -27,13 +27,13 @@ SUBSYSTEM_DEF(statpanels)
 		if(SSmapping.next_map_configs)
 			cached = SSmapping.next_map_configs[GROUND_MAP]
 		global_data = list(
-			"Map: [SSmapping.configs?[GROUND_MAP]?.map_name || "Loading..."]",
+			"Карта: [SSmapping.configs?[GROUND_MAP]?.map_name || "Загрузка..."]",
 			cached ? "Next Map: [cached?.map_name]" : null,
-			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
+			"ID раунда: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 //   "Round Time: [ROUND_TIME]",
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
-			"Round Time: [duration2text()]",
-			"Operation Time: [worldtime2text()]",
+			"Серверное время: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
+			"Время раунда: [duration2text()]",
+			"Оперативное время: [worldtime2text()]",
 		)
 
 		src.currentrun = GLOB.clients.Copy()
@@ -383,8 +383,10 @@ SUBSYSTEM_DEF(statpanels)
 	set name = "Open Statbrowser Options"
 	set hidden = TRUE
 
+	if (!current_fontsize)
+		current_fontsize = 12
 
-	var/datum/statbrowser_options/SM = statbrowser_options
-	if(!SM)
-		SM = statbrowser_options = new(src, current_fontsize)
-	SM.tgui_interact()
+	var/datum/statbrowser_options/options_panel = statbrowser_options
+	if(!options_panel)
+		options_panel = statbrowser_options = new(src, current_fontsize)
+	options_panel.tgui_interact()

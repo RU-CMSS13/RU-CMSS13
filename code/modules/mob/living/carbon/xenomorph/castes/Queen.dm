@@ -303,7 +303,6 @@
 		/datum/action/xeno_action/onclick/readmit,
 		/datum/action/xeno_action/onclick/queen_award,
 		/datum/action/xeno_action/activable/info_marker/queen,
-		/datum/action/xeno_action/onclick/build_lessers_burrow,
 	)
 
 	inherent_verbs = list(
@@ -340,7 +339,6 @@
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		/datum/action/xeno_action/activable/xeno_spit/queen_macro, //third macro
 		/datum/action/xeno_action/onclick/shift_spits, //second macro
-		/datum/action/xeno_action/onclick/build_lessers_burrow,
 	)
 
 	// Abilities they get when they've successfully aged.
@@ -785,6 +783,7 @@
 	if(hive.living_xeno_queen == src)
 		hive.xeno_queen_timer = world.time + XENO_QUEEN_DEATH_DELAY
 		hive.banished_ckeys   = list() // Reset the banished ckey list
+		hive.reserved_larva   = 0 // Reset the reserved larvae
 	icon = queen_standing_icon
 	return ..()
 
@@ -820,7 +819,7 @@
 		// Screech is typically new for this list, but its possible they never ovi and it then is forced here:
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		// These are new and their arrangement matters:
-		/datum/action/xeno_action/onclick/remove_eggsac,
+		/datum/action/xeno_action/onclick/remove_eggsac, /datum/action/xeno_action/onclick/set_larva_reserve,
 		/datum/action/xeno_action/onclick/give_evo_points,
 		/datum/action/xeno_action/onclick/set_xeno_lead,
 		/datum/action/xeno_action/activable/queen_heal, //first macro

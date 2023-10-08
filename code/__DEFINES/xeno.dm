@@ -74,7 +74,7 @@
 
 /// Multiplier for time taken for a xeno to place down a resin structure
 #define BUILD_TIME_MULT_LESSER_DRONE 2
-#define BUILD_TIME_MULT_XENO 1
+#define BUILD_TIME_MULT_XENO 2
 #define BUILD_TIME_MULT_BUILDER 1
 #define BUILD_TIME_MULT_HIVELORD 0.5
 
@@ -169,10 +169,14 @@
 #define XENO_BURIED_LARVA_TIME_LIMIT (30 MINUTES)
 
 /// The time when xenos can start taking over comm towers
-#define XENO_COMM_ACQUISITION_TIME (55 MINUTES)
+#define XENO_COMM_ACQUISITION_TIME (25 MINUTES)
 
 /// The time it takes for a pylon to give one larva while activated
 #define XENO_PYLON_ACTIVATION_COOLDOWN (5 MINUTES)
+
+/// The time until you can re-corrupt a comms relay after the last pylon was destroyed
+#define XENO_PYLON_DESTRUCTION_DELAY (5 MINUTES)
+
 
 /// The time against away_timer when an AFK xeno larva can be replaced
 #define XENO_LEAVE_TIMER_LARVA 80 //80 seconds
@@ -578,6 +582,7 @@
 #define XENO_STRUCTURE_PYLON "hive pylon"
 #define XENO_STRUCTURE_POOL  "spawn pool"
 #define XENO_STRUCTURE_EGGMORPH  "egg morpher"
+#define XENO_STRUCTURE_SUNKEN  "sunken colony"
 #define XENO_STRUCTURE_EVOPOD    "evolution pod"
 #define XENO_STRUCTURE_RECOVERY  "recovery node"
 #define XENO_STRUCTURE_NEST  "thick resin nest"
@@ -708,5 +713,5 @@
 
 #define FRENZY_DAMAGE_MULTIPLIER 2
 
-#define JOIN_AS_FACEHUGGER_DELAY (3 MINUTES)
+#define JOIN_AS_FACEHUGGER_DELAY (1 MINUTES)
 #define JOIN_AS_LESSER_DRONE_DELAY (30 SECONDS)

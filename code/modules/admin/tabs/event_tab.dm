@@ -218,14 +218,14 @@
 	if(!istype(chosen_ert))
 		return
 
-	var/is_announcing = tgui_alert(usr, "Would you like to announce the distress beacon to the server population? This will reveal the distress beacon to all players.", "Announce distress beacon?", list("Yes", "No"), 20 SECONDS)
-	if(!is_announcing)
+	var/quiet_launch = tgui_alert(usr, "Would you like to announce the distress beacon to the server population? This will reveal the distress beacon to all players.", "Announce distress beacon?", list("Yes", "No"), 20 SECONDS)
+	if(!quiet_launch)
 		qdel(chosen_ert)
 		return
-	if(is_announcing == "No")
-		is_announcing = FALSE
-	if (is_announcing == "Yes")
-		is_announcing = TRUE
+	if(quiet_launch == "No")
+		quiet_launch = TRUE
+	if (quiet_launch == "Yes")
+		quiet_launch = FALSE
 
 	var/turf/override_spawn_loc
 	var/prompt = tgui_alert(usr, "Spawn at their assigned spawn, or at your location?", "Spawnpoint Selection", list("Spawn", "Current Location"), 0)
@@ -235,7 +235,7 @@
 	if(prompt == "Current Location")
 		override_spawn_loc = get_turf(usr)
 
-	chosen_ert.activate(is_announcing, override_spawn_loc)
+	chosen_ert.activate(quiet_launch = quiet_launch, announce = !quiet_launch, override_spawn_loc = override_spawn_loc)
 
 	message_admins("[key_name_admin(usr)] admin-called a [choice == "Randomize" ? "randomized ":""]distress beacon: [chosen_ert.name]")
 
@@ -282,7 +282,7 @@
 
 	message_admins("[key_name_admin(usr)] granted requisitions [points_to_add] points.")
 	if(points_to_add >= 0)
-		shipwide_ai_announcement("Additional Supply Budget has been authorised for this operation.")
+		shipwide_ai_announcement("Дополнительный Бюджет Снабжения был выделен для этой операции.")
 
 /datum/admins/proc/check_req_heat()
 	set name = "Check Requisitions Heat"
@@ -437,7 +437,7 @@
 	new_order.approvedby = MAIN_AI_SYSTEM
 	supply_controller.shoppinglist += new_order
 
-	marine_announcement("A nuclear device has been supplied and will be delivered to requisitions via ASRS.", "NUCLEAR ARSENAL ACQUIRED", 'sound/misc/notice2.ogg')
+	marine_announcement("Ядерный заряд был загружен и будет доставлен в карго через ASRS.", "ПОЛУЧЕНО ЯДЕРНОЕ ВООРУЖЕНИЕ", 'sound/misc/notice2.ogg')
 	message_admins("[key_name_admin(usr)] admin-spawned a [encrypt] nuke.")
 	log_game("[key_name_admin(usr)] admin-spawned a [encrypt] nuke.")
 
