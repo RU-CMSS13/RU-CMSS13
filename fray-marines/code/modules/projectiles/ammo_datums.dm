@@ -183,6 +183,9 @@
 		buddy.add_xeno_shield(heal_amount/2, XENO_SHIELD_SOURCE_SPITTER_SUPPRESSOR, duration = shield_duration, decay_amount_per_second = shield_decay)
 		buddy.gain_health(heal_amount)
 
+		if (!heal_range) /// без усиления мы будем лечить лишь одного
+			break
+
 /datum/ammo/xeno/sticky/heal/strong
 	name = "living resin spatter"
 	max_range = 6
