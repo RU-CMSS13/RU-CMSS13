@@ -1146,6 +1146,7 @@
 	verbs -= /obj/item/weapon/gun/verb/field_strip
 	verbs -= /obj/item/weapon/gun/verb/use_toggle_burst
 	verbs -= /obj/item/weapon/gun/verb/empty_mag
+	RegisterSignal(src, COMSIG_ITEM_DROPPED, PROC_REF(delete_on_drop))
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/Destroy()
 	. = ..()
@@ -1206,6 +1207,9 @@
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/bolt]
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/use_unique_action()
+	switch_mode()
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/switch_mode()
 	switch(mode)
 		if("stun")
 			mode = "lethal"
@@ -1236,12 +1240,35 @@
 		. += SPAN_ORANGE(msg)
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/dropped(mob/living/carbon/human/M)
-	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
-	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
-	if(source)
-		forceMove(source)
-		source.caster_deployed = FALSE
+	flags_item &= ~DELONDROP
+	..()
+/*
+	if(M.r_hand == src || M.l_hand == src) /// Я блять отказываюсь делать эту проверку рабочей, я уже второй день ебусь в попытках найти способ НЕ ДРОПАТЬ плазмакастер после переноса в руку ~Danilcus
 		return
+*/
+	var/obj/item/clothing/gloves/yautja/hunter/bracers = M.gloves
+	if(!istype(bracers))
+		return
+
+	forceMove(bracers)
+	bracers.caster_deployed = FALSE
+	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
+	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/delete_on_drop()
+	SIGNAL_HANDLER
+
+	flags_item |= DELONDROP
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/attack_hand(mob/user)
+	var/mob/living/carbon/human/yautja = user
+	if(istype(yautja))
+		if(yautja.s_store == src)
+			if(strength == "plasma immobilizers" || strength ==  "plasma spheres")
+				switch_mode()
+			else
+				attack_self(user)
+			return
 	..()
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/able_to_fire(mob/user)

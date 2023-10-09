@@ -3,7 +3,7 @@
 	name = "Yautja"
 	name_plural = "Yautja"
 	brute_mod = 0.28 //Beefy!
-	burn_mod = 0.65
+	burn_mod = 0.35
 	reagent_tag = IS_YAUTJA
 	mob_flags = KNOWS_TECHNOLOGY
 	uses_ethnicity = TRUE
