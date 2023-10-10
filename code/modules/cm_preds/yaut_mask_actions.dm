@@ -1,4 +1,4 @@
-/obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown_delay = 3 SECONDS
+/obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown_delay = 4 SECONDS
 /obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown
 /obj/item/clothing/mask/gas/yautja/var/aiming_time = 1.5 SECONDS
 
@@ -73,6 +73,7 @@
 
 	if (yautja.client)
 		playsound_client(yautja.client, 'sound/effects/nightvision.ogg', yautja, 25)
+	playsound(target, 'sound/effects/nightvision.ogg', 25, FALSE, 5, falloff = 0.4)
 
 	if(!do_after(yautja, 1 SECONDS, INTERRUPT_NONE, BUSY_ICON_HOSTILE))
 		target.overlays -= locking_icon
@@ -90,15 +91,17 @@
 		target.overlays -= locked_icon
 		return
 
-	target.overlays -= locked_icon
+	if(check_can_use(target, TRUE))
+		yautja.face_atom(target)
 
-	if(!check_can_use(target, TRUE))
+		var/obj/item/weapon/gun/plasma_caster = yautja?:gloves?:caster
+		plasma_caster.Fire(target, yautja)
+
+	if(!do_after(yautja, 1 SECONDS, INTERRUPT_NONE, BUSY_ICON_HOSTILE))
+		target.overlays -= locked_icon
 		return
 
-	yautja.face_atom(target)
-
-	var/obj/item/weapon/gun/plasma_caster = yautja?:gloves?:caster
-	plasma_caster.Fire(target, yautja)
+	target.overlays -= locked_icon
 
 /datum/action/item_action/specialist/yautja_aimed_shot/proc/check_can_use(mob/M, active_shooter)
 	var/obj/item/clothing/mask/gas/yautja/mask = holder_item
@@ -111,6 +114,10 @@
 		to_chat(H, SPAN_WARNING("How do you expect to do this without your mask?"))
 		return FALSE
 
+	if(check_shot_is_blocked(H, M))
+		to_chat(H, SPAN_WARNING("Something is in the way!"))
+		return FALSE
+
 	if(!active_shooter)
 		return TRUE
 
@@ -119,10 +126,6 @@
 		return FALSE
 
 	if(!bracers.caster_deployed)
-		return FALSE
-
-	if(check_shot_is_blocked(H, M))
-		to_chat(H, SPAN_WARNING("Something is in the way, or you're out of range!"))
 		return FALSE
 
 	return TRUE
