@@ -38,20 +38,6 @@
 	icon = 'icons/obj/structures/props/stationobjs.dmi'
 	icon_state = "corporateb"
 	req_one_access = list(ACCESS_WY_GENERAL)
-	var/obj/item/card/id/scan = null
-	var/authenticated = null
-	var/rank = null
-	var/screen = null
-	var/datum/data/record/active1 = null
-	var/a_id = null
-	var/temp = null
-	var/printing = null
-	var/can_change_id = 0
-	var/list/Perp
-	var/tempname = null
-	//Sorting Variables
-	var/sortBy = "name"
-	var/order = 1 // -1 = Descending - 1 = Ascending
 	var/console_cooldown
 	var/console_cooldown_duration = COOLDOWN_CORPORATE_BUTTON
 
@@ -63,16 +49,11 @@
 		message_admins("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]", 1)
 
 	if(href_list["cssend"])
-		message_admins("[key_name_admin(usr)] одобрил вызов корпоративной охраны!")
+		message_admins("[key_name_admin(usr)] одобрил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]")
 		marine_announcement("Вызов корпоративной охраны одобрен.", "Corporate Security Beacon", logging = ARES_LOG_SECURITY)
 		var/datum/emergency_call/goon/goon = new()
 		goon.activate(FALSE, TRUE, FALSE, TRUE)
-
-
-/datum/admins/proc/accept_cs_ert(mob/approver, mob/ref_person)
-	log_game("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
-	message_admins("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
-
+		log_game("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
 
 /obj/structure/machinery/computer/corporate/button/attack_hand(mob/user)
 	. = ..()
