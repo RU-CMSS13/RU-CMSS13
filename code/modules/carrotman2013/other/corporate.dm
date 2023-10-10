@@ -30,14 +30,14 @@
 	new /obj/item/ammo_magazine/rifle/ap(src)
 
 //Button//
-/*
+#define COOLDOWN_CORPORATE_BUTTON 10 MINUTES
+
 /obj/structure/machinery/computer/corporate/button//TODO:SANITY
-	name = "Employment Records"
-	desc = "Used to view personnel's employment records"
+	name = "Request Corporate Security"
+	desc = "Used to request a dispatch of corporate security squad."
 	icon = 'icons/obj/structures/props/stationobjs.dmi'
 	icon_state = "corporateb"
-	req_one_access = list(ACCESS_MARINE_DATABASE)
-	circuit = /obj/item/circuitboard/computer/skills
+	req_one_access = list(ACCESS_WY_GENERAL)
 	var/obj/item/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -52,37 +52,42 @@
 	//Sorting Variables
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
-
-/obj/structure/machinery/computer/corporate/button/proc/request_cs(user)
-	if(!user)
-		return FALSE
-	message_admins("[key_name(user)] запросил группу корпоративных охранников! (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];cssend=\ref[user]'>SEND</A>) (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];csdeny=\ref[user]'>DENY</A>)")
-	return TRUE
+	var/console_cooldown
+	var/console_cooldown_duration = COOLDOWN_CORPORATE_BUTTON
 
 /datum/admins/Topic(href, href_list)
 	..()
-	if(href_list["cddeny"]) // CentComm-deny. The distress call is denied, without any further conditions
-		var/mob/ref_person = locate(href_list["ccdeny"])
+	if(href_list["csdeny"])
+		var/mob/ref_person = locate(href_list["csdeny"])
 		log_game("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]")
 		message_admins("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]", 1)
 
-	if(href_list["cssend"]) // CentComm-deny. The distress call is denied, without any further conditions
-		message_admins("[key_name_admin(usr)] одобрил вызов корпоративной охраны! Высылаем через 10 секунд...")
-		addtimer(CALLBACK(src, PROC_REF(accept_ert), usr, locate(href_list["distress"])), 10 SECONDS)
-		marine_announcement("Вызов корпоративной охраны одобрен.", "Corporate Security beacon", logging = ARES_LOG_SECURITY)
+	if(href_list["cssend"])
+		message_admins("[key_name_admin(usr)] одобрил вызов корпоративной охраны!")
+		marine_announcement("Вызов корпоративной охраны одобрен.", "Corporate Security Beacon", logging = ARES_LOG_SECURITY)
+		var/datum/emergency_call/goon/goon = new()
+		goon.activate(FALSE, TRUE, FALSE, TRUE)
+
 
 /datum/admins/proc/accept_cs_ert(mob/approver, mob/ref_person)
-	SSticker.mode.get_specific_call(goon, FALSE, TRUE, FALSE)
-	log_game("[key_name_admin(approver)] has sent a PMC distress beacon, requested by [key_name_admin(ref_person)]")
-	message_admins("[key_name_admin(approver)] has sent a PMC distress beacon, requested by [key_name_admin(ref_person)]")
+	log_game("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
+	message_admins("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
 
 
-/obj/structure/machinery/computer/computer/corporate/button/attack_hand
+/obj/structure/machinery/computer/corporate/button/attack_hand(mob/user)
 	. = ..()
+	to_chat(user, SPAN_WARNING("Прикладываю палец к сканнеру... Сейчас..."))
+	if(!do_after(usr, 3 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+		return
+	if(world.time < console_cooldown)
+		to_chat(user, SPAN_WARNING("Заблокировано. Обычно такое на 10 минут."))
+		return
 	var/message = tgui_input_text(user, "Причина?", "Request Corporate Security", multiline = TRUE)
 	if(!message)
 		return
 	// we know user is a human now, so adjust user for this check
-	var/mob/living/carbon/human/humanoid = user
-
-*/
+	for(var/client/admin in GLOB.admins)
+		if((R_ADMIN|R_MOD) & admin.admin_holder.rights)
+			playsound_client(admin,'sound/effects/sos-morse-code.ogg',10)
+			message_admins("[key_name(usr)] запросил вызов корпоративной охраны! Причина: <b>[message]</b> [CC_MARK(usr)] (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];cssend=\ref[user]'>SEND</A>) (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];csdeny=\ref[user]'>DENY</A>) [ADMIN_JMP_USER(usr)]")
+	console_cooldown = world.time + console_cooldown_duration
