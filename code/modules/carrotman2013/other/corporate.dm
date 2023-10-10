@@ -49,11 +49,12 @@
 		message_admins("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]", 1)
 
 	if(href_list["cssend"])
+		var/mob/ref_person = locate(href_list["cssend"])
 		message_admins("[key_name_admin(usr)] одобрил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]")
 		marine_announcement("Вызов корпоративной охраны одобрен.", "Corporate Security Beacon", logging = ARES_LOG_SECURITY)
 		var/datum/emergency_call/goon/goon = new()
-		goon.activate(FALSE, TRUE, FALSE, TRUE)
-		log_game("[key_name_admin(approver)] has sent corporate security, requested by [key_name_admin(ref_person)]")
+		goon.activate(TRUE, FALSE)
+		log_game("[key_name_admin(usr)] has sent corporate security, requested by [key_name_admin(ref_person)]")
 
 /obj/structure/machinery/computer/corporate/button/attack_hand(mob/user)
 	. = ..()
