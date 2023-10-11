@@ -8454,6 +8454,10 @@
 	icon_state = "silver"
 	},
 /area/almayer/command/cichallway)
+"aAg" = (
+/obj/structure/machinery/self_destruct/rod,
+/turf/open/floor/almayer,
+/area/almayer/command/self_destruct)
 "aAj" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 1
@@ -8925,11 +8929,12 @@
 /turf/open/floor/almayer,
 /area/almayer/command/lifeboat)
 "aBG" = (
+/obj/structure/machinery/self_destruct/console,
 /turf/open/floor/almayer/uscm/directional{
 	dir = 8;
 	icon_state = "logo_c"
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "aBH" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 4
@@ -18293,7 +18298,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 1
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "bAf" = (
 /obj/structure/machinery/door/airlock/almayer/engineering{
 	dir = 2;
@@ -28455,6 +28460,10 @@
 	icon_state = "orange"
 	},
 /area/almayer/engineering/lower_engineering)
+"dja" = (
+/obj/structure/bed/sofa/vert/grey/bot,
+/turf/open/floor/almayer,
+/area/almayer/command/self_destruct)
 "djm" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -31378,7 +31387,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 4
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "ejw" = (
 /obj/structure/window/framed/almayer,
 /turf/open/floor/plating,
@@ -31854,7 +31863,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 9
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "etf" = (
 /turf/open/floor/almayer{
 	dir = 1;
@@ -52379,6 +52388,12 @@
 	icon_state = "plate"
 	},
 /area/almayer/squads/bravo)
+"mqQ" = (
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "red"
+	},
+/area/almayer/command/self_destruct)
 "mqU" = (
 /obj/structure/pipes/vents/pump{
 	dir = 8;
@@ -53635,7 +53650,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 6
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "mPh" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/machinery/door/airlock/almayer/engineering{
@@ -55801,6 +55816,10 @@
 	icon_state = "dark_sterile"
 	},
 /area/almayer/medical/lower_medical_lobby)
+"nFk" = (
+/obj/structure/bed/sofa/vert/grey,
+/turf/open/floor/almayer,
+/area/almayer/command/self_destruct)
 "nFm" = (
 /obj/structure/closet/secure_closet/staff_officer/armory/shotgun,
 /obj/structure/machinery/light/small{
@@ -56724,7 +56743,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 8
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "nYP" = (
 /obj/structure/machinery/door/airlock/almayer/generic{
 	dir = 1
@@ -57749,7 +57768,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 10
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "orZ" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -64397,6 +64416,9 @@
 	icon_state = "test_floor4"
 	},
 /area/almayer/squads/charlie)
+"qVc" = (
+/turf/open/floor/almayer,
+/area/almayer/command/self_destruct)
 "qVC" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/book/manual/chef_recipes,
@@ -68852,7 +68874,7 @@
 /area/almayer/hull/upper_hull/u_f_p)
 "sGh" = (
 /turf/open/floor/almayer/uscm/directional,
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "sGK" = (
 /turf/open/floor/almayer{
 	icon_state = "redfull"
@@ -77247,6 +77269,10 @@
 	icon_state = "plate"
 	},
 /area/almayer/command/cic)
+"vOb" = (
+/obj/structure/bed/sofa/vert/grey/top,
+/turf/open/floor/almayer,
+/area/almayer/command/self_destruct)
 "vOd" = (
 /obj/structure/machinery/optable,
 /obj/structure/sign/safety/medical{
@@ -80733,7 +80759,7 @@
 /turf/open/floor/almayer/uscm/directional{
 	dir = 5
 	},
-/area/almayer/command/lifeboat)
+/area/almayer/command/self_destruct)
 "xaZ" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -139587,11 +139613,11 @@ aPw
 aHe
 tqB
 eky
-eky
-atg
-aBE
-ouB
-eky
+qVc
+vOb
+nFk
+dja
+qVc
 eky
 gwu
 aHe
@@ -139790,11 +139816,11 @@ aPw
 aNe
 avu
 eky
-eky
+aAg
 esT
 nYE
 orH
-eky
+aAg
 eky
 aMU
 aNe
@@ -139993,11 +140019,11 @@ aPw
 atY
 avu
 eky
-eky
+aAg
 bAe
 aBG
 sGh
-eky
+aAg
 eky
 aMU
 atY
@@ -140196,11 +140222,11 @@ aPw
 qpU
 aqJ
 dqj
-eky
+aAg
 xaS
 ejt
 mPf
-eky
+aAg
 gUV
 aqp
 qpU
@@ -140399,11 +140425,11 @@ aPw
 jbq
 aPw
 vgD
-eky
+qVc
 atg
 aBE
 ouB
-eky
+qVc
 ihX
 aPw
 jbq
@@ -140603,9 +140629,9 @@ aag
 jbq
 iaR
 aBu
-aBu
-aBu
-aBu
+mqQ
+mqQ
+mqQ
 aBu
 iub
 jbq
