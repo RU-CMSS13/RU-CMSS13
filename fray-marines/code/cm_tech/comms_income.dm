@@ -28,7 +28,6 @@
 	if (tree)
 		tree.on_process()
 		tree.add_points(RESOURCE_INCOME_TELECOMMS)
-		tree.points = round(tree.points, 0.1)
 
 #undef RESOURCE_INCOME_TELECOMMS_DELAY
 
