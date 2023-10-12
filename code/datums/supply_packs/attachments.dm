@@ -89,6 +89,7 @@
 	contains = list(
 		/obj/item/attachable/heavy_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel,
 	)
 	cost = 60
 	containertype = /obj/structure/closet/crate
