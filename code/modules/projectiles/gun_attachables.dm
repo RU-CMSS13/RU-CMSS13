@@ -384,7 +384,7 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/extended_barrel/New()
 	..()
 	accuracy_mod = HIT_ACCURACY_MULT_TIER_2
-	damage_mod = BULLET_DAMAGE_MULT_TIER_1
+	damage_mod = BULLET_DAMAGE_MULT_TIER_2
 	velocity_mod = AMMO_SPEED_TIER_1
 
 /obj/item/attachable/heavy_barrel
@@ -576,7 +576,7 @@ Defined in conflicts.dm of the #defines folder.
 	..()
 	accuracy_mod = HIT_ACCURACY_MULT_TIER_4
 	scatter_mod = -SCATTER_AMOUNT_TIER_6
-	damage_mod = BULLET_DAMAGE_MULT_TIER_2
+	damage_mod = BULLET_DAMAGE_MULT_TIER_3
 	velocity_mod = AMMO_SPEED_TIER_1
 	delay_mod = FIRE_DELAY_TIER_7
 
