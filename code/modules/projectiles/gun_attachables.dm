@@ -290,7 +290,7 @@ Defined in conflicts.dm of the #defines folder.
 	flags_item = CAN_DIG_SHRAPNEL
 
 	attach_icon = "bayonet_a"
-	melee_mod = 20
+	melee_mod = 25
 	slot = "muzzle"
 	pixel_shift_x = 14 //Below the muzzle.
 	pixel_shift_y = 18
@@ -304,7 +304,7 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/bayonet/New()
 	..()
-	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_1
+	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_2
 
 /obj/item/attachable/bayonet/upp_replica
 	name = "\improper Type 80 bayonet"
@@ -383,7 +383,8 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/extended_barrel/New()
 	..()
-	accuracy_mod = HIT_ACCURACY_MULT_TIER_4
+	accuracy_mod = HIT_ACCURACY_MULT_TIER_2
+	damage_mod = BULLET_DAMAGE_MULT_TIER_1
 	velocity_mod = AMMO_SPEED_TIER_1
 
 /obj/item/attachable/heavy_barrel
@@ -398,16 +399,17 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/heavy_barrel/New()
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
-	damage_mod = BULLET_DAMAGE_MULT_TIER_6
+	damage_mod = BULLET_DAMAGE_MULT_TIER_10
+	velocity_mod = AMMO_SPEED_TIER_1
 	delay_mod = FIRE_DELAY_TIER_11
 
 	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_7
 
 /obj/item/attachable/heavy_barrel/Attach(obj/item/weapon/gun/G)
 	if(G.gun_category == GUN_CATEGORY_SHOTGUN)
-		damage_mod = BULLET_DAMAGE_MULT_TIER_1
+		damage_mod = BULLET_DAMAGE_MULT_TIER_3
 	else
-		damage_mod = BULLET_DAMAGE_MULT_TIER_6
+		damage_mod = BULLET_DAMAGE_MULT_TIER_10
 	..()
 
 /obj/item/attachable/compensator
@@ -574,6 +576,8 @@ Defined in conflicts.dm of the #defines folder.
 	..()
 	accuracy_mod = HIT_ACCURACY_MULT_TIER_4
 	scatter_mod = -SCATTER_AMOUNT_TIER_6
+	damage_mod = BULLET_DAMAGE_MULT_TIER_2
+	velocity_mod = AMMO_SPEED_TIER_1
 	delay_mod = FIRE_DELAY_TIER_7
 
 /obj/item/attachable/mateba/long/Attach(obj/item/weapon/gun/G)
@@ -593,6 +597,7 @@ Defined in conflicts.dm of the #defines folder.
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_4
 	scatter_mod = SCATTER_AMOUNT_TIER_6
+	damage_mod = -BULLET_DAMAGE_MULT_TIER_2
 	delay_mod = -FIRE_DELAY_TIER_7
 
 /obj/item/attachable/mateba/short/Attach(obj/item/weapon/gun/G)
