@@ -398,16 +398,17 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/heavy_barrel/New()
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
-	damage_mod = BULLET_DAMAGE_MULT_TIER_6
+	damage_mod = BULLET_DAMAGE_MULT_TIER_10
+	velocity_mod = AMMO_SPEED_TIER_1
 	delay_mod = FIRE_DELAY_TIER_11
 
 	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_7
 
 /obj/item/attachable/heavy_barrel/Attach(obj/item/weapon/gun/G)
 	if(G.gun_category == GUN_CATEGORY_SHOTGUN)
-		damage_mod = BULLET_DAMAGE_MULT_TIER_1
+		damage_mod = BULLET_DAMAGE_MULT_TIER_3
 	else
-		damage_mod = BULLET_DAMAGE_MULT_TIER_6
+		damage_mod = BULLET_DAMAGE_MULT_TIER_10
 	..()
 
 /obj/item/attachable/compensator
