@@ -389,7 +389,7 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/heavy_barrel
 	name = "barrel charger"
-	desc = "A hyper threaded barrel extender that fits to the muzzle of most firearms. Increases bullet speed and velocity.\nGreatly increases projectile damage at the cost of accuracy and firing speed."
+	desc = "A hyper threaded barrel extender that fits to the muzzle of most firearms. Increases bullet speed and velocity.\nGreatly increases projectile damage and velocity speed at the cost of accuracy and firing speed."
 	slot = "muzzle"
 	icon = 'icons/obj/items/weapons/guns/attachments/barrel.dmi'
 	icon_state = "hbarrel"
