@@ -90,7 +90,7 @@
 		/obj/item/attachable/heavy_barrel,
 		/obj/item/attachable/heavy_barrel,
 	)
-	cost = 50
+	cost = 60
 	containertype = /obj/structure/closet/crate
 	containername = "heavy barrel attachment crate"
 	group = "Attachments"
