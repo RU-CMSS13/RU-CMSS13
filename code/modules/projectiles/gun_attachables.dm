@@ -304,7 +304,7 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/bayonet/New()
 	..()
-	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_1
+	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_2
 
 /obj/item/attachable/bayonet/upp_replica
 	name = "\improper Type 80 bayonet"
