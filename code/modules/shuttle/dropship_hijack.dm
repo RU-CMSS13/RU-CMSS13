@@ -168,7 +168,6 @@
 	if(!ferry_crashed)
 		marine_announcement("ДЕСАНТНЫЙ КОРАБЛЬ ПРЯМО ПО КУРСУ. АВАРИЯ НЕИЗБЕЖНА." , "ТРЕВОГА", 'sound/AI/dropship_emergency.ogg', logging = ARES_LOG_SECURITY)
 		final_announcement = TRUE
-		ferry_crashed = FALSE
 
 	playsound_area(get_area(crash_site), 'sound/effects/engine_landing.ogg', 100)
 	playsound_area(get_area(crash_site), channel = SOUND_CHANNEL_AMBIENCE, status = SOUND_UPDATE)
