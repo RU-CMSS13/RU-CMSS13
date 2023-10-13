@@ -48,7 +48,7 @@
 	if (!target)
 		return
 
-	if(target.stat == DEAD || isyautja(target))
+	if(target.stat == DEAD)
 		return
 
 	var/obj/item/clothing/mask/gas/yautja/mask = holder_item

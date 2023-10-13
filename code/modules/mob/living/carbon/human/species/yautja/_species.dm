@@ -51,6 +51,7 @@
 		/mob/living/carbon/human/proc/mark_thralled,
 		/mob/living/carbon/human/proc/unmark_thralled,
 		/mob/living/carbon/human/proc/mark_panel,
+		/mob/living/carbon/human/proc/unmark_panel,
 	)
 
 	knock_down_reduction = 4
