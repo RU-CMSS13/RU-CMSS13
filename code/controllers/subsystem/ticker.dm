@@ -380,7 +380,16 @@ SUBSYSTEM_DEF(ticker)
 
 	log_game("АГАСЬ. [reason]")
 	to_chat_forced(world, "<h3>[SPAN_BOLDNOTICE("Rebooting...")]</h3>")
-
+	var/end_sound = pick("sound/misc/Game_Over_Man.ogg",
+								"sound/misc/asses_kicked.ogg",
+								"sound/misc/hardon.ogg",
+								"sound/misc/outstanding_marines.ogg",
+								"sound/misc/sadtrombone.ogg",
+								"sound/misc/distressbeacon_Sunshine.ogg",
+								"sound/misc/surrounded_by_assholes.ogg",
+								"sound/misc/good_is_dumb.ogg"
+																		)
+	world << sound(end_sound)
 	world.Reboot(TRUE)
 
 /datum/controller/subsystem/ticker/proc/create_characters()
