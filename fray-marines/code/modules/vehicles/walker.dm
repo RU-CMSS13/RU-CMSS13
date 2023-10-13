@@ -213,7 +213,7 @@
 	for(var/ID in list(H.wear_id, H.belt))
 		if(operation_allowed(ID))
 			seats[VEHICLE_DRIVER] = user
-			add_verb(seats[VEHICLE_DRIVER].client, list(
+			add_verb(seats[VEHICLE_DRIVER], list(
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
@@ -274,7 +274,7 @@
 	seats[VEHICLE_DRIVER].unset_interaction()
 	seats[VEHICLE_DRIVER].loc = src.loc
 	seats[VEHICLE_DRIVER].reset_view(null)
-	remove_verb(seats[VEHICLE_DRIVER].client, list(
+	remove_verb(seats[VEHICLE_DRIVER], list(
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
