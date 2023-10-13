@@ -390,8 +390,7 @@ SUBSYSTEM_DEF(ticker)
 						"sound/misc/sadtrombone.ogg",
 						"sound/misc/distressbeacon_Sunshine.ogg",
 						"sound/misc/surrounded_by_assholes.ogg",
-						"sound/misc/good_is_dumb.ogg"
-						)
+						"sound/misc/good_is_dumb.ogg")
 	world << sound(end_sound)
 	world.Reboot(TRUE)
 
