@@ -1054,14 +1054,11 @@
 		/// RUS [CYRILLIC]
 		msg = replacetext(msg, "а", "@")
 		msg = replacetext(msg, "б", "6")
-		msg = replacetext(msg, "г", "✓")
 		msg = replacetext(msg, "д", "∆")
 		msg = replacetext(msg, "з", "3")
-		msg = replacetext(msg, "з", "3")
 		msg = replacetext(msg, "о", "0")
-		msg = replacetext(msg, "у", "¥")
 		msg = replacetext(msg, "ф", "%")
-		msg = replacetext(msg, "э", "€")
+		msg = replacetext(msg, "э", "3")
 
 	caller.langchat_speech(msg, heard, GLOB.all_languages, overhead_color, TRUE)
 
