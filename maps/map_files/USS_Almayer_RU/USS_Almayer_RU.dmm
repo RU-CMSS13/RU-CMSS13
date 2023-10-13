@@ -30451,9 +30451,7 @@
 	},
 /area/almayer/medical/lower_medical_medbay)
 "dUf" = (
-/obj/structure/machinery/cm_vending/clothing/engi/delta{
-	req_access = list(11,17)
-	},
+/obj/structure/machinery/cm_vending/clothing/engi/charlie,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -31067,14 +31065,12 @@
 	},
 /area/almayer/squads/charlie)
 "eeM" = (
-/obj/structure/machinery/cm_vending/clothing/leader/alpha{
-	density = 0;
-	pixel_y = 30;
-	req_access = list(12,16)
-	},
 /obj/structure/machinery/cm_vending/gear/leader{
 	density = 0;
 	pixel_x = 31
+	},
+/obj/structure/machinery/cm_vending/clothing/leader/bravo{
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
@@ -32780,7 +32776,7 @@
 	},
 /area/almayer/engineering/laundry)
 "eMt" = (
-/obj/structure/machinery/cm_vending/clothing/marine/delta,
+/obj/structure/machinery/cm_vending/clothing/marine/charlie,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -35672,14 +35668,12 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hull/upper_hull/u_f_p)
 "fQq" = (
-/obj/structure/machinery/cm_vending/clothing/leader/delta{
-	density = 0;
-	pixel_y = -31;
-	req_access = list(12,17)
-	},
 /obj/structure/machinery/cm_vending/gear/leader{
 	density = 0;
 	pixel_x = 31
+	},
+/obj/structure/machinery/cm_vending/clothing/leader/delta{
+	pixel_y = -32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
@@ -41765,10 +41759,8 @@
 	pixel_y = 32;
 	density = 0
 	},
-/obj/structure/machinery/cm_vending/clothing/smartgun/alpha{
-	density = 0;
-	pixel_x = 31;
-	req_access = list(14,16)
+/obj/structure/machinery/cm_vending/clothing/smartgun/bravo{
+	pixel_x = 32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
@@ -42688,10 +42680,8 @@
 /turf/open/floor/almayer,
 /area/almayer/squads/delta)
 "iDZ" = (
-/obj/structure/machinery/cm_vending/clothing/tl/delta{
-	density = 0;
-	pixel_x = 32;
-	req_access = list(32,17)
+/obj/structure/machinery/cm_vending/clothing/tl/charlie{
+	pixel_x = 32
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/squads/charlie)
@@ -45886,10 +45876,8 @@
 /turf/closed/wall/almayer/outer,
 /area/space)
 "jRB" = (
-/obj/structure/machinery/cm_vending/clothing/tl/alpha{
-	density = 0;
-	pixel_x = 32;
-	req_access = list(32,16)
+/obj/structure/machinery/cm_vending/clothing/tl/bravo{
+	pixel_x = 32
 	},
 /turf/open/floor/almayer{
 	icon_state = "orange"
@@ -48357,10 +48345,8 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hull/upper_hull/u_f_p)
 "kPp" = (
-/obj/structure/machinery/cm_vending/clothing/medic/alpha{
-	density = 0;
-	pixel_y = 28;
-	req_access = list(10,16)
+/obj/structure/machinery/cm_vending/clothing/medic/bravo{
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -49112,14 +49098,12 @@
 	},
 /area/almayer/command/cic)
 "lbZ" = (
-/obj/structure/machinery/cm_vending/clothing/specialist/delta{
-	density = 0;
-	pixel_y = -31;
-	req_access = list(13,16)
-	},
 /obj/structure/machinery/cm_vending/gear/spec{
 	density = 0;
 	pixel_x = -32
+	},
+/obj/structure/machinery/cm_vending/clothing/specialist/charlie{
+	pixel_y = -32
 	},
 /turf/open/floor/almayer{
 	dir = 8;
@@ -51318,10 +51302,8 @@
 	},
 /area/almayer/hull/upper_hull/u_a_s)
 "lWm" = (
-/obj/structure/machinery/cm_vending/clothing/medic/delta{
-	density = 0;
-	pixel_y = -30;
-	req_access = list(10,17)
+/obj/structure/machinery/cm_vending/clothing/medic/charlie{
+	pixel_y = -32
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -51874,10 +51856,8 @@
 	pixel_x = 32;
 	density = 0
 	},
-/obj/structure/machinery/cm_vending/clothing/medic/alpha{
-	density = 0;
-	pixel_y = 28;
-	req_access = list(10,16)
+/obj/structure/machinery/cm_vending/clothing/medic/bravo{
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
@@ -54770,10 +54750,8 @@
 	density = 0;
 	pixel_x = -32
 	},
-/obj/structure/machinery/cm_vending/clothing/medic/delta{
-	density = 0;
-	pixel_y = -30;
-	req_access = list(10,17)
+/obj/structure/machinery/cm_vending/clothing/medic/charlie{
+	pixel_y = -32
 	},
 /turf/open/floor/almayer{
 	dir = 8;
@@ -55338,10 +55316,8 @@
 	},
 /area/almayer/shipboard/brig/lobby)
 "nwB" = (
-/obj/structure/machinery/cm_vending/clothing/tl/alpha{
-	density = 0;
-	pixel_x = 32;
-	req_access = list(32,16)
+/obj/structure/machinery/cm_vending/clothing/tl/bravo{
+	pixel_x = 32
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/squads/bravo)
@@ -55452,9 +55428,7 @@
 	},
 /area/almayer/hallways/aft_hallway)
 "nxP" = (
-/obj/structure/machinery/cm_vending/clothing/engi/alpha{
-	req_access = list(11,16)
-	},
+/obj/structure/machinery/cm_vending/clothing/engi/bravo,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -59009,10 +58983,8 @@
 	pixel_y = -31;
 	density = 0
 	},
-/obj/structure/machinery/cm_vending/clothing/smartgun/delta{
-	pixel_x = 31;
-	density = 0;
-	req_access = list(14,17)
+/obj/structure/machinery/cm_vending/clothing/smartgun/charlie{
+	pixel_x = 32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
@@ -63255,7 +63227,7 @@
 	},
 /area/almayer/living/grunt_rnr)
 "qyO" = (
-/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/obj/structure/machinery/cm_vending/clothing/marine/bravo,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -66936,14 +66908,12 @@
 	},
 /area/almayer/squads/alpha)
 "rSE" = (
-/obj/structure/machinery/cm_vending/clothing/specialist/alpha{
-	density = 0;
-	pixel_y = 28;
-	req_access = list(13,16)
-	},
 /obj/structure/machinery/cm_vending/gear/spec{
 	density = 0;
 	pixel_x = -32
+	},
+/obj/structure/machinery/cm_vending/clothing/specialist/bravo{
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	dir = 8;
@@ -71307,14 +71277,12 @@
 	},
 /area/almayer/command/combat_correspondent)
 "tEL" = (
-/obj/structure/machinery/cm_vending/clothing/medic/alpha{
-	density = 0;
-	pixel_y = 28;
-	req_access = list(10,16)
-	},
 /obj/structure/machinery/cm_vending/gear/medic{
 	density = 0;
 	pixel_x = -32
+	},
+/obj/structure/machinery/cm_vending/clothing/medic/bravo{
+	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	dir = 8;
@@ -76325,10 +76293,8 @@
 	},
 /area/almayer/command/airoom)
 "vwt" = (
-/obj/structure/machinery/cm_vending/clothing/tl/delta{
-	density = 0;
-	pixel_x = 32;
-	req_access = list(32,17)
+/obj/structure/machinery/cm_vending/clothing/tl/charlie{
+	pixel_x = 32
 	},
 /turf/open/floor/almayer{
 	dir = 1;
@@ -77229,10 +77195,8 @@
 	pixel_x = 32;
 	density = 0
 	},
-/obj/structure/machinery/cm_vending/clothing/medic/delta{
-	density = 0;
-	pixel_y = -30;
-	req_access = list(10,17)
+/obj/structure/machinery/cm_vending/clothing/medic/charlie{
+	pixel_y = -32
 	},
 /turf/open/floor/almayer{
 	dir = 4;
