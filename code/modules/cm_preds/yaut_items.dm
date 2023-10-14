@@ -362,6 +362,8 @@
 		to_chat(user, SPAN_NOTICE("There are no signatures that require your attention."))
 		return
 
+	options += "Nothing (Stop Tracking)"
+
 	var/new_track = tgui_input_list(user, "Choose a new tracking target.", "Tracking Selection", options)
 	if(!new_track)
 		return
