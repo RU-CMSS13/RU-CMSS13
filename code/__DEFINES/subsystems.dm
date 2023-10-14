@@ -139,6 +139,7 @@
 #define SS_INIT_INFLUXSTATS 11
 #define SS_INIT_LIGHTING 10
 #define SS_INIT_DEFCON 9
+#define SS_INIT_ERTSTATIONS  7
 #define SS_INIT_LAW 6
 #define SS_INIT_FZ_TRANSITIONS 5
 #define SS_INIT_PROJECTILES 4.1
@@ -163,7 +164,6 @@
 #define SS_INIT_PLAYTIME   -29
 #define SS_INIT_PREDSHIPS  -30
 #define SS_INIT_OBJECTIVES -31
-#define SS_INIT_ERTSTATIONS  -32
 #define SS_INIT_MINIMAP    -34
 #define SS_INIT_STATPANELS -98
 #define SS_INIT_CHAT    -100 //Should be last to ensure chat remains smooth during init.
