@@ -1416,13 +1416,6 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	attack_speed = 9
 
-// /obj/item/weapon/claymore/mercsword/machete/dinka
-// 	name = "Kou"
-// 	desc = "A piece of steel with a hand-engraved name and a fine signature of the craftsman underneath. Kou was custom made as an object of encouragement with a practical application. || DONATOR ITEM"
-// 	icon_state = "donatorkatana"
-// 	item_state = "donatorkatana"
-// 	flags_equip_slot = SLOT_BACK
-
 //GHOST CIGAR CODE
 /obj/item/clothing/mask/cigarette/cigar/fluff/ghostdex/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/tool/lighter/zippo/fluff/ghostdex))
