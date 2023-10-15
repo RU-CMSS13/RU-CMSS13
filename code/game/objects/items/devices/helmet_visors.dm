@@ -206,7 +206,7 @@
 	var/power_use = 16.5
 
 	/// The alpha of darkness we set to for the mob while the visor is on, not completely fullbright but see-able
-	var/lighting_alpha = 100
+	var/lighting_alpha = 0
 
 	/// A slight glowing green light while the NVG is activated, is initialized as in the attached_helmet's contents
 	var/atom/movable/nvg_light/on_light
