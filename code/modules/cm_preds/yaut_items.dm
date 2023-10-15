@@ -344,13 +344,13 @@
 /obj/item/device/radio/headset/yautja/handle_switching_tracker_target(mob/living/carbon/human/user)
 	var/list/options = list()
 	for(var/mob/living/carbon/human/Y as anything in GLOB.yautja_mob_list)
-		if(Y.stat != DEAD)
+		if(Y.stat != DEAD || QDELETED(Y))
 			continue
 		if(istype(get_area(Y), /area/yautja))
 			continue
 		options += Y
 	for(var/obj/item/tracked_item as anything in GLOB.loose_yautja_gear)
-		if(tracked_item.anchored)
+		if(tracked_item.anchored || QDELETED(tracked_item))
 			continue
 		if(is_honorable_carrier(recursive_holder_check(tracked_item)))
 			continue
