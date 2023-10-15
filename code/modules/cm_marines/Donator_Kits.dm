@@ -48,5 +48,5 @@
 //Unless specified in comments as otherwise, subtype of box/donator_kit/ is CKEY of the donator (example: /obj/item/storage/box/donator_kit/sasoperative)
 /obj/item/storage/box/donator_kit/xdinka
 	donor_key = "xdinka"
-	donor_gear = list(/obj/item/weapon/donatorkatana)
+	donor_gear = list(/obj/item/weapon/claymore/mercsword/machete/dinka)
 
