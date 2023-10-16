@@ -200,10 +200,10 @@
 	toggle_off_sound = 'sound/handling/toggle_nv2.ogg'
 
 	/// The internal battery for the visor
-	var/obj/item/cell/high/power_cell
+	var/obj/item/cell/super/power_cell
 
 	/// About 10 minutes active use charge (hypothetically)
-	var/power_use = 16.5
+	var/power_use = 33
 
 	/// The alpha of darkness we set to for the mob while the visor is on, not completely fullbright but see-able
 	var/lighting_alpha = 100
@@ -212,7 +212,7 @@
 	var/atom/movable/nvg_light/on_light
 
 	/// Whether or not the sight uses on_light and produces light
-	var/visor_glows = TRUE
+	var/visor_glows = FALSE
 
 /obj/item/device/helmet_visor/night_vision/Initialize(mapload, ...)
 	. = ..()
