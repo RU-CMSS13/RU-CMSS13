@@ -212,7 +212,7 @@
 	var/atom/movable/nvg_light/on_light
 
 	/// Whether or not the sight uses on_light and produces light
-	var/visor_glows = FALSE
+	var/visor_glows = TRUE
 
 /obj/item/device/helmet_visor/night_vision/Initialize(mapload, ...)
 	. = ..()
