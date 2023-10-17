@@ -403,7 +403,7 @@
 
 /obj/item/weapon/gun/pistol/kt42/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_11)
+	set_fire_delay(FIRE_DELAY_TIER_9)
 	accuracy_mult = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_1
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_2
 	scatter = SCATTER_AMOUNT_TIER_6
