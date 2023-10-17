@@ -212,8 +212,8 @@
 	var/mob/living/carbon/human/H = user
 	for(var/ID in list(H.wear_id, H.belt))
 		if(operation_allowed(ID))
-			seats[VEHICLE_DRIVER] = user
-			add_verb(seats[VEHICLE_DRIVER], list(
+			seats[VEHICLE_DRIVER] = H
+			add_verb(H.client, list(
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
@@ -253,6 +253,7 @@
 	set name = "Eject"
 	set category = "Vehicle"
 	var/mob/M = usr
+
 	if(!M || !istype(M))
 		return
 
@@ -271,10 +272,12 @@
 		unzoom()
 	if(seats[VEHICLE_DRIVER].client)
 		seats[VEHICLE_DRIVER].client.mouse_pointer_icon = initial(seats[VEHICLE_DRIVER].client.mouse_pointer_icon)
-	seats[VEHICLE_DRIVER].unset_interaction()
-	seats[VEHICLE_DRIVER].loc = src.loc
-	seats[VEHICLE_DRIVER].reset_view(null)
-	remove_verb(seats[VEHICLE_DRIVER], list(
+
+	var/mob/living/L = seats[VEHICLE_DRIVER]
+	L.unset_interaction()
+	L.loc = src.loc
+	L.reset_view(null)
+	remove_verb(L.client, list(
 				/obj/vehicle/walker/proc/eject,
 				/obj/vehicle/walker/proc/lights,
 				/obj/vehicle/walker/proc/zoom,
@@ -282,8 +285,8 @@
 				/obj/vehicle/walker/proc/deploy_magazine,
 				/obj/vehicle/walker/proc/get_stats,
 			))
-	left.unregister_signals(seats[VEHICLE_DRIVER])
-	right.unregister_signals(seats[VEHICLE_DRIVER])
+	left.unregister_signals(L)
+	right.unregister_signals(L)
 	seats[VEHICLE_DRIVER] = null
 	update_icon()
 	return TRUE
