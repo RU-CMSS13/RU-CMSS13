@@ -63,3 +63,25 @@
 /datum/ammo/bullet/rifle/ap/cluster/on_hit_mob(mob/M, obj/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/cluster_stack, cluster_addon, damage, world.time)
+
+/datum/ammo/bullet/smg/nail/on_hit_mob(mob/living/L, obj/projectile/P)
+    if(!L || L == P.firer || L.lying)
+        return
+
+    L.AdjustSlow(1) //Slow on hit.
+    L.recalculate_move_delay = TRUE
+    var/super_slowdown_duration = 3
+    //If there's an obstacle on the far side, superslow and do extra damage.
+    if(isxeno(L)) //Unless they're a strong xeno, in which case the slowdown is drastically reduced
+        var/mob/living/carbon/xenomorph/X = L
+        if(X.tier != 1) // 0 is queen!
+            super_slowdown_duration = 0.5
+    else if(HAS_TRAIT(L, TRAIT_SUPER_STRONG))
+        super_slowdown_duration = 0.5
+
+    var/atom/movable/thick_surface = LinkBlocked(L, get_turf(L), get_step(L, get_dir(P.loc ? P : P.firer, L)))
+    if(!thick_surface || ismob(thick_surface) && !thick_surface.anchored)
+        return
+
+    L.apply_armoured_damage(damage*0.5, ARMOR_BULLET, BRUTE, null, penetration)
+    L.AdjustSuperslow(super_slowdown_duration)
