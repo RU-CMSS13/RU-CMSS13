@@ -399,7 +399,7 @@ Defined in conflicts.dm of the #defines folder.
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
 	damage_mod = BULLET_DAMAGE_MULT_TIER_6
-	delay_mod = FIRE_DELAY_TIER_11
+	delay_mod = FIRE_DELAY_TIER_9
 
 	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_7
 
@@ -910,13 +910,13 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/scope/New()
 	..()
-	delay_mod = FIRE_DELAY_TIER_12
+	delay_mod = FIRE_DELAY_TIER_10
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_1
 	movement_onehanded_acc_penalty_mod = MOVEMENT_ACCURACY_PENALTY_MULT_TIER_4
 	accuracy_unwielded_mod = 0
 
 	accuracy_scoped_buff = HIT_ACCURACY_MULT_TIER_8 //to compensate initial debuff
-	delay_scoped_nerf = FIRE_DELAY_TIER_11 //to compensate initial debuff. We want "high_fire_delay"
+	delay_scoped_nerf = FIRE_DELAY_TIER_9 //to compensate initial debuff. We want "high_fire_delay"
 	damage_falloff_scoped_buff = -0.4 //has to be negative
 
 /obj/item/attachable/scope/Attach(obj/item/weapon/gun/gun)
@@ -1103,7 +1103,7 @@ Defined in conflicts.dm of the #defines folder.
 	accuracy_unwielded_mod = 0
 
 	accuracy_scoped_buff = HIT_ACCURACY_MULT_TIER_8
-	delay_scoped_nerf = FIRE_DELAY_TIER_9
+	delay_scoped_nerf = FIRE_DELAY_TIER_8
 
 /obj/item/attachable/scope/mini/hunting
 	name = "2x hunting mini-scope"
@@ -2105,7 +2105,7 @@ Defined in conflicts.dm of the #defines folder.
 	scatter_mod = -SCATTER_AMOUNT_TIER_7
 	burst_scatter_mod = -1
 	burst_mod = BURST_AMOUNT_TIER_2
-	delay_mod = -FIRE_DELAY_TIER_11
+	delay_mod = -FIRE_DELAY_TIER_9
 	movement_onehanded_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_4
 	//1h
 	accuracy_unwielded_mod = HIT_ACCURACY_MULT_TIER_1
@@ -3195,7 +3195,7 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/gyro/New()
 	..()
-	delay_mod = FIRE_DELAY_TIER_11
+	delay_mod = FIRE_DELAY_TIER_9
 	scatter_mod = -SCATTER_AMOUNT_TIER_10
 	burst_scatter_mod = -2
 	movement_onehanded_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_3
@@ -3249,7 +3249,7 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/bipod/New()
 	..()
 
-	delay_mod = FIRE_DELAY_TIER_11
+	delay_mod = FIRE_DELAY_TIER_9
 	wield_delay_mod = WIELD_DELAY_FAST
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_5
 	scatter_mod = SCATTER_AMOUNT_TIER_9
@@ -3298,7 +3298,7 @@ Defined in conflicts.dm of the #defines folder.
 	scatter_mod = SCATTER_AMOUNT_TIER_9
 	recoil_mod = RECOIL_AMOUNT_TIER_5
 	burst_scatter_mod = 0
-	delay_mod = FIRE_DELAY_TIER_12
+	delay_mod = FIRE_DELAY_TIER_10
 	G.recalculate_attachment_bonuses()
 	G.stop_fire()
 	var/mob/living/user
@@ -3342,7 +3342,7 @@ Defined in conflicts.dm of the #defines folder.
 				if(istype(G,/obj/item/weapon/gun/rifle/sniper/M42A))
 					delay_mod = -FIRE_DELAY_TIER_7
 				else
-					delay_mod = -FIRE_DELAY_TIER_12
+					delay_mod = -FIRE_DELAY_TIER_10
 				G.recalculate_attachment_bonuses()
 				G.stop_fire()
 
