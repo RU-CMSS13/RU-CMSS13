@@ -214,6 +214,7 @@
 
 	hunter.set_languages(list(LANGUAGE_YAUTJA))
 	give_action(hunter, /datum/action/yautja_emote_panel)
+	give_action(hunter, /datum/action/human_action/yautja_jump)
 	return ..()
 
 /datum/species/yautja/get_hairstyle(style)

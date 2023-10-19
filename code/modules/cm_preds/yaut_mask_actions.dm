@@ -1,5 +1,5 @@
 /obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown_delay = 4 SECONDS
-/obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown
+/obj/item/clothing/mask/gas/yautja/var/aimed_shot_cooldown = 0
 /obj/item/clothing/mask/gas/yautja/var/aiming_time = 1.5 SECONDS
 
 // Aimed shot ability, but yautja
@@ -13,8 +13,6 @@
 	button.overlays.Cut()
 	var/image/IMG = image('icons/effects/Targeted.dmi', button, "locked-y")
 	button.overlays += IMG
-	var/obj/item/clothing/mask/gas/yautja/mask = holder_item
-	mask.aimed_shot_cooldown = world.time
 
 /*
 		ACTIONS YAUTJA CAN TAKE

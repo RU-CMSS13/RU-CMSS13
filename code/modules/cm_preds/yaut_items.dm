@@ -342,7 +342,7 @@
 	..()
 
 /obj/item/device/radio/headset/yautja/handle_switching_tracker_target(mob/living/carbon/human/user)
-	var/list/options = list()
+	var/list/options = list("Nothing (Stop Tracking)")
 	for(var/mob/living/carbon/human/Y as anything in GLOB.yautja_mob_list)
 		if(Y.stat != DEAD || QDELETED(Y))
 			continue
@@ -361,8 +361,6 @@
 	if(!LAZYLEN(options))
 		to_chat(user, SPAN_NOTICE("There are no signatures that require your attention."))
 		return
-
-	options += "Nothing (Stop Tracking)"
 
 	var/new_track = tgui_input_list(user, "Choose a new tracking target.", "Tracking Selection", options)
 	if(!new_track)
