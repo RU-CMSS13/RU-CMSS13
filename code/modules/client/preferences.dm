@@ -82,6 +82,8 @@ var/const/MAX_SAVE_SLOTS = 10
 	//Synthetic specific preferences
 	var/synthetic_name = "Undefined"
 	var/synthetic_type = SYNTH_GEN_THREE
+	var/synth_manufacturer = "Weyland-Yutani"
+	var/new_manufacturer = "Weyland-Yutani"
 	//Predator specific preferences.
 	var/predator_name = "Undefined"
 	var/predator_gender = MALE
@@ -498,6 +500,7 @@ var/const/MAX_SAVE_SLOTS = 10
 				dat += "<b>Synthetic Name:</b> <a href='?_src_=prefs;preference=synth_name;task=input'><b>[synthetic_name]</b></a><br>"
 				dat += "<b>Synthetic Type:</b> <a href='?_src_=prefs;preference=synth_type;task=input'><b>[synthetic_type]</b></a><br>"
 				dat += "<b>Synthetic Whitelist Status:</b> <a href='?_src_=prefs;preference=synth_status;task=input'><b>[synth_status]</b></a><br>"
+				dat += "<b>Manufacturer:</b> <a href ='?_src_=prefs;preference=synth_manufacturer;task=input'><b>[new_manufacturer]</b></a><br>"
 				dat += "</div>"
 			else
 				dat += "<b>You do not have the whitelist for this role.</b>"
@@ -649,7 +652,7 @@ var/const/MAX_SAVE_SLOTS = 10
 //splitJobs - Allows you split the table by job. You can make different tables for each department by including their heads. Defaults to CE to make it look nice.
 //width - Screen' width. Defaults to 550 to make it look nice.
 //height - Screen's height. Defaults to 500 to make it look nice.
-/datum/preferences/proc/SetChoices(mob/user, limit = 21, list/splitJobs = list(JOB_CHIEF_REQUISITION), width = 950, height = 700)
+/datum/preferences/proc/SetChoices(mob/user, limit = 19, list/splitJobs = list(JOB_CHIEF_REQUISITION), width = 950, height = 700)
 	if(!RoleAuthority)
 		return
 
@@ -1610,6 +1613,11 @@ var/const/MAX_SAVE_SLOTS = 10
 					var/new_relation = input(user, "Choose your relation to the Weyland-Yutani company. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference")  as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
 					if(new_relation)
 						nanotrasen_relation = new_relation
+
+				if("synth_manufacturer")
+					var/synth_builder = input(user, "Choose your manufacturer.")  as null|anything in list("Weyland-Yutani", "Borgia Industries", "Hyperdyne Systems", "Lasalle Bionational", "Seegson", "MedTech", "Grant Corporation", "AlphaTech Hardware", "Independent Manufacturer")
+					if(synth_builder)
+						new_manufacturer = synth_builder
 
 				if("prefsquad")
 					var/new_pref_squad = input(user, "Choose your preferred squad.", "Character Preference")  as null|anything in list("Alpha", "Bravo", "Charlie", "Delta", "None")
