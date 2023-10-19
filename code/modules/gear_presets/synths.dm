@@ -126,7 +126,8 @@
 
 /datum/equipment_preset/synth/survivor/load_race(mob/living/carbon/human/new_human)
 	//Switch to check client for synthetic generation preference, and set the subspecies of colonial synth
-	var/generation_selection = SYNTH_COLONY_GEN_ONE
+	new_human.set_species(SYNTH_COLONY_GEN_ONE)
+/*	var/generation_selection = SYNTH_COLONY_GEN_ONE
 	if(new_human.client?.prefs?.synthetic_type)
 		generation_selection = new_human.client.prefs.synthetic_type
 	switch(generation_selection)
@@ -138,10 +139,15 @@
 			new_human.set_species(SYNTH_COLONY_GEN_ONE)
 		else
 			new_human.set_species(SYNTH_COLONY)
+*/
 
 /datum/equipment_preset/synth/survivor/New()
 	. = ..()
 	access = get_access(ACCESS_LIST_COLONIAL_ALL) + get_region_accesses(2) + get_region_accesses(4) + ACCESS_MARINE_RESEARCH //Access to civillians stuff + medbay stuff + engineering stuff + research
+
+/datum/equipment_preset/synth/survivor/pmc/New()
+	. = ..()
+	access = get_access(ACCESS_LIST_WY_PMC)
 
 /datum/equipment_preset/synth/survivor/load_gear(mob/living/carbon/human/new_human)
 	for(var/equipment in equipment_to_spawn)
