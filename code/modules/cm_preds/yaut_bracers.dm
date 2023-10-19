@@ -654,10 +654,12 @@
 			caller.drop_inv_item_to_loc(caster, src, FALSE, TRUE)
 		caster_deployed = FALSE
 	else
+		if(QDELETED(caster))
+			caster = new(src, FALSE, caster_material)
 		if(!drain_power(caller, 50))
 			return
 		if(caller.get_active_hand())
-			to_chat(caller, SPAN_WARNING("Your hand must be free to activate your wristblade!"))
+			to_chat(caller, SPAN_WARNING("Your hand must be free to activate your plasma caster!"))
 			return
 		var/obj/limb/hand = caller.get_limb(caller.hand ? "l_hand" : "r_hand")
 		if(!istype(hand) || !hand.is_usable())

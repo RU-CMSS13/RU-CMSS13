@@ -197,7 +197,7 @@ Additional game mode variables.
 
 	if(show_warning && tgui_alert(pred_candidate, "Confirm joining the hunt. You will join as \a [lowertext(J.get_whitelist_status(RoleAuthority.roles_whitelist, pred_candidate.client))] predator", "Confirmation", list("Yes", "No"), 10 SECONDS) != "Yes")
 		return
-	if(J.get_whitelist_status(RoleAuthority.roles_whitelist, pred_candidate.client) == WHITELIST_NORMAL)
+	if(J.get_whitelist_status(RoleAuthority.roles_whitelist, pred_candidate.client) != CLAN_RANK_ADMIN)
 		var/pred_max = calculate_pred_max
 		if(pred_current_num >= pred_max)
 			if(show_warning) to_chat(pred_candidate, SPAN_WARNING("Only [pred_max] predators may spawn this round, but Councillors and Ancients do not count."))
