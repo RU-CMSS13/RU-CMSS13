@@ -143,6 +143,37 @@
 				pick(playsound(loc, 'sound/mecha/powerloader_step.ogg', 25), playsound(loc, 'sound/mecha/powerloader_step2.ogg', 25))
 
 /obj/vehicle/walker/Bump(atom/obstacle)
+	if(isxeno(obstacle))
+		var/mob/living/carbon/xenomorph/xeno = obstacle
+
+		if (xeno.mob_size >= MOB_SIZE_IMMOBILE)
+			xeno.visible_message(SPAN_DANGER("\The [xeno] digs it's claws into the ground, anchoring itself in place and halting \the [src] in it's tracks!"),
+				SPAN_DANGER("You dig your claws into the ground, stopping \the [src] in it's tracks!")
+			)
+			return
+
+		switch(xeno.tier)
+			if(1)
+				xeno.visible_message(
+					SPAN_DANGER("\The [src] smashes at [xeno], bringing him down!"),
+					SPAN_DANGER("You got smashed by walking metal box!")
+				)
+				xeno.AdjustKnockDown(0.5 SECONDS)
+				xeno.apply_damage(round((maxHealth / 100) * VEHICLE_TRAMPLE_DAMAGE_MIN), BRUTE)
+				xeno.last_damage_data = create_cause_data("[initial(name)] roadkill", seats[VEHICLE_DRIVER])
+				var/mob/living/driver = seats[VEHICLE_DRIVER]
+				log_attack("[key_name(xeno)] was rammed by [key_name(driver)] with [src].")
+			if(2)
+				xeno.visible_message(
+					SPAN_DANGER("\The [src] smashes at [xeno], bringing him down!"),
+					SPAN_DANGER("You got smashed by walking metal box!")
+				)
+				xeno.AdjustKnockDown(0.5 SECONDS)
+			if(3)
+				xeno.visible_message(SPAN_DANGER("\The [xeno] digs it's claws into the ground, anchoring itself in place and halting \the [src] in it's tracks!"),
+					SPAN_DANGER("You dig your claws into the ground, stopping \the [src] in it's tracks!")
+				)
+		return
 	if(istype(obstacle, /obj/structure/machinery/door))
 		var/obj/structure/machinery/door/door = obstacle
 		if(door.allowed(seats[VEHICLE_DRIVER]))
