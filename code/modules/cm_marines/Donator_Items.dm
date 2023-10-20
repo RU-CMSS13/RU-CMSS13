@@ -1235,6 +1235,12 @@
 	worn_state = "mileswolfe_u"
 	flags_jumpsuit = FALSE
 
+/obj/item/clothing/under/marine/fluff/xdinka //CKEY=xdinka
+	name = "White formal uniform"
+	desc = "Elegance personified, this suit exudes sophistication and charm. || DONOR ITEM"
+	icon_state = "formalwhite"
+	worn_state = "formalwhite"
+	flags_jumpsuit = UNIFORM_SLEEVE_ROLLABLE|UNIFORM_JACKET_REMOVABLE
 
 // MASK COSMETICS  ////////////////////////////////////////////////
 
@@ -1406,15 +1412,15 @@
 	desc = "A piece of steel with a hand-engraved name and a fine signature of the craftsman underneath. Kou was custom made as an object of encouragement with a practical application. || DONATOR ITEM"
 	icon_state = "donatorkatana"
 	flags_atom = FPRINT|CONDUCT
-	force = MELEE_FORCE_VERY_STRONG
+	force = MELEE_FORCE_STRONG
 	throwforce = MELEE_FORCE_WEAK
 	sharp = IS_SHARP_ITEM_BIG
 	edge = 1
 	w_class = SIZE_MEDIUM
-	flags_equip_slot = SLOT_BACK
+	flags_equip_slot = SLOT_BACK|SLOT_WAIST
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	attack_speed = 9
+	attack_speed = 8
 
 
 //GHOST CIGAR CODE
