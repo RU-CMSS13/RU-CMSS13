@@ -108,7 +108,6 @@
 	. = ..()
 	if(.)
 		return
-
 	switch(action)
 		if("award")
 			print_medal(usr, src)
@@ -131,8 +130,7 @@
 
 			log_game("[key_name(usr)] has called for an emergency evacuation.")
 			message_admins("[key_name_admin(usr)] has called for an emergency evacuation.")
-			var/datum/ares_link/link = GLOB.ares_link
-			link.log_ares_security("Initiate Evacuation", "[usr] has called for an emergency evacuation.")
+			log_ares_security("Initiate Evacuation", "[usr] has called for an emergency evacuation.")
 			. = TRUE
 
 		if("evacuation_cancel")
@@ -144,8 +142,7 @@
 
 			log_game("[key_name(usr)] has canceled the emergency evacuation.")
 			message_admins("[key_name_admin(usr)] has canceled the emergency evacuation.")
-			var/datum/ares_link/link = GLOB.ares_link
-			link.log_ares_security("Cancel Evacuation", "[usr] has cancelled the emergency evacuation.")
+			log_ares_security("Cancel Evacuation", "[usr] has cancelled the emergency evacuation.")
 			. = TRUE
 
 		// evac stuff end \\
@@ -167,8 +164,7 @@
 			set_security_level(seclevel2num(level_selected), log = ARES_LOG_NONE)
 			log_game("[key_name(usr)] has changed the security level to [get_security_level()].")
 			message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].")
-			var/datum/ares_link/link = GLOB.ares_link
-			link.log_ares_security("Manual Security Update", "[usr] has changed the security level to [get_security_level()].")
+			log_ares_security("Manual Security Update", "[usr] has changed the security level to [get_security_level()].")
 			. = TRUE
 
 		if("messageUSCM")
@@ -258,12 +254,7 @@
 				to_chat(usr, SPAN_WARNING("The [MAIN_SHIP_NAME]'s self-destruct is already activated."))
 				return FALSE
 
-			for(var/client/admin_client as anything in GLOB.admins)
-				if((R_ADMIN|R_MOD) & admin_client.admin_holder.rights)
-					admin_client << 'sound/effects/sos-morse-code.ogg'
-			message_admins("[key_name(usr)] has requested Self-Destruct! [CC_MARK(usr)] (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];destroyship=\ref[usr]'>GRANT</A>) (<A HREF='?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];sddeny=\ref[usr]'>DENY</A>) [ADMIN_JMP_USER(usr)] [CC_REPLY(usr)]")
-			to_chat(usr, SPAN_NOTICE("A self-destruct request has been sent to USCM Central Command."))
-			COOLDOWN_START(src, cooldown_destruct, COOLDOWN_COMM_DESTRUCT)
+			set_security_level(SEC_LEVEL_DELTA)
 			. = TRUE
 
 		if("delmessage")

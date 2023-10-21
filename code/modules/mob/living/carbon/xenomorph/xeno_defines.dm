@@ -314,7 +314,7 @@
 		XENO_STRUCTURE_CORE = 1,
 		XENO_STRUCTURE_CLUSTER = 8,
 		XENO_STRUCTURE_POOL = 1,
-		XENO_STRUCTURE_EGGMORPH = 6,
+		XENO_STRUCTURE_EGGMORPH = 6, XENO_STRUCTURE_SUNKEN = 3,
 		XENO_STRUCTURE_EVOPOD = 2,
 		XENO_STRUCTURE_RECOVERY = 6,
 		XENO_STRUCTURE_PYLON = 2,
@@ -323,7 +323,7 @@
 	var/global/list/hive_structure_types = list(
 		XENO_STRUCTURE_CORE = /datum/construction_template/xenomorph/core,
 		XENO_STRUCTURE_CLUSTER = /datum/construction_template/xenomorph/cluster,
-		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph,
+		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph, XENO_STRUCTURE_SUNKEN = /datum/construction_template/xenomorph/sunken_colony,
 		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery
 	)
 
@@ -1066,7 +1066,7 @@
 		return FALSE
 	if(world.time - user.timeofdeath < JOIN_AS_FACEHUGGER_DELAY)
 		var/time_left = round((user.timeofdeath + JOIN_AS_FACEHUGGER_DELAY - world.time) / 10)
-		to_chat(user, SPAN_WARNING("You ghosted too recently. You cannot become a facehugger until 3 minutes have passed ([time_left] seconds remaining)."))
+		to_chat(user, SPAN_WARNING("You ghosted too recently. You cannot become a facehugger until 1 minute has passed ([time_left] seconds remaining)."))
 		return FALSE
 	if(totalXenos.len <= 0)
 		//This is to prevent people from joining as Forsaken Huggers on the pred ship

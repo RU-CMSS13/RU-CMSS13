@@ -78,6 +78,31 @@
 	icon_state = "hair_ponytail4"
 	gender = FEMALE
 
+/datum/sprite_accessory/hair/ponytail5
+	name = "Ponytail 5"
+	icon_state = "hair_ponytail5"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/ponytail6
+	name = "Ponytail 6"
+	icon_state = "hair_ponytail6"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/ponytail7
+	name = "Ponytail 7"
+	icon_state = "hair_ponytail7"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/ponytail8
+	name = "Ponytail 8"
+	icon_state = "hair_ponytail8"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/ponytail9
+	name = "Ponytail 9"
+	icon_state = "hair_ponytail8"
+	gender = FEMALE
+
 /datum/sprite_accessory/hair/ponytail_rough
 	name = "Ponytail, Rough"
 	icon_state = "hair_ponytail_rough"
@@ -88,6 +113,10 @@
 	icon_state = "hair_stail"
 	gender = FEMALE
 
+/datum/sprite_accessory/hair/sideponytail2
+	name = "Side Ponytail 2"
+	icon_state = "hair_stail2"
+	gender = FEMALE
 /datum/sprite_accessory/hair/parted
 	name = "Parted"
 	icon_state = "hair_parted"
@@ -516,16 +545,6 @@
 	name = "Bald"
 	icon_state = "bald"
 
-/datum/sprite_accessory/hair/ponytail6
-	name = "Ponytail 5"
-	icon_state = "hair_ponytail6"
-	gender = FEMALE
-
-/datum/sprite_accessory/hair/ponytail7
-	name = "Ponytail 6"
-	icon_state = "hair_ponytail7"
-	gender = FEMALE
-
 /datum/sprite_accessory/hair/shorthair3
 	name = "Short Hair 3"
 	icon_state = "hair_shorthair3"
@@ -690,11 +709,6 @@
 	icon_state = "hair_scully2alt"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/ponytail8
-	name = "Ponytail 8"
-	icon_state = "hair_ponytail8"
-	gender = FEMALE
-
 /datum/sprite_accessory/hair/chelsea
 	name = "Punk Shave, Chelsea"
 	icon_state = "hair_punk_chelsea"
@@ -734,3 +748,7 @@
 /datum/sprite_accessory/hair/croft
 	name = "Croft"
 	icon_state = "hair_croft"
+
+/datum/sprite_accessory/hair/aviator
+	name = "Aviator"
+	icon_state = "hair_aviator"

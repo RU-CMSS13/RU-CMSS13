@@ -115,6 +115,12 @@
 
 /datum/action/xeno_action/onclick/screech/use_ability(atom/target)
 	var/mob/living/carbon/xenomorph/queen/xeno = owner
+	var/screech_memes = list('code/modules/carrotman2013/sounds/screeches/eagle-screech.ogg',
+							'code/modules/carrotman2013/sounds/screeches/fnaf.ogg',
+							'code/modules/carrotman2013/sounds/screeches/hee-hee.ogg',
+							'code/modules/carrotman2013/sounds/screeches/pig.ogg',
+							'code/modules/carrotman2013/sounds/screeches/victory-screech.ogg',
+							'code/modules/carrotman2013/sounds/screeches/yaay.ogg')
 
 	if (!istype(xeno))
 		return
@@ -139,7 +145,10 @@
 		if(hugger.stat != DEAD)
 			hugger.die()
 
-	playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
+	if(prob(1))
+		playsound(xeno.loc, pick(screech_memes), 75, 0, status = 0)
+	else
+		playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
 	xeno.visible_message(SPAN_XENOHIGHDANGER("[xeno] emits an ear-splitting guttural roar!"))
 	xeno.create_shriekwave() //Adds the visual effect. Wom wom wom
 
@@ -207,9 +216,9 @@
 	if(msg)
 		log_say("PsychicWhisper: [key_name(X)]->[M.key] : [msg]")
 		if(!istype(M, /mob/living/carbon/xenomorph))
-			to_chat(M, SPAN_XENO("You hear a strange, alien voice in your head. \"[msg]\""))
+			to_chat(M, SPAN_XENOQUEEN("You hear a strange, alien voice in your head. \"[msg]\""))
 		else
-			to_chat(M, SPAN_XENO("You hear the voice of [X] resonate in your head. \"[msg]\""))
+			to_chat(M, SPAN_XENOQUEEN("You hear the voice of [X] resonate in your head. \"[msg]\""))
 		to_chat(X, SPAN_XENONOTICE("You said: \"[msg]\" to [M]"))
 	return ..()
 
@@ -234,9 +243,9 @@
 			continue
 		target_list += possible_target
 		if(!istype(possible_target, /mob/living/carbon/xenomorph))
-			to_chat(possible_target, SPAN_XENO("You hear a strange, alien voice in your head. \"[msg]\""))
+			to_chat(possible_target, SPAN_XENOQUEEN("You hear a strange, alien voice in your head. \"[msg]\""))
 		else
-			to_chat(possible_target, SPAN_XENO("You hear the voice of [X] resonate in your head. \"[msg]\""))
+			to_chat(possible_target, SPAN_XENOQUEEN("You hear the voice of [X] resonate in your head. \"[msg]\""))
 	if(!length(target_list))
 		return
 	var/targetstring = english_list(target_list)

@@ -337,11 +337,12 @@
 /obj/item/weapon/yautja/combistick/IsShield()
 	return on
 
-/obj/item/weapon/yautja/combistick/verb/use_unique_action()
+/obj/item/weapon/yautja/combistick/verb/fold_combistick()
 	set category = "Weapons"
-	set name = "Unique Action"
-	set desc = "Activate or deactivate the combistick."
-	set src in usr
+	set name = "Collapse Combi-stick"
+	set desc = "Collapse or extend the combistick."
+	set src = usr.contents
+
 	unique_action(usr)
 
 /obj/item/weapon/yautja/combistick/attack_self(mob/user)
@@ -751,7 +752,7 @@
 	sharp = IS_SHARP_ITEM_BIG
 	flags_atom = FPRINT|CONDUCT
 	attack_verb = list("sliced", "slashed", "carved", "diced", "gored")
-	attack_speed = 14 //Default is 7.
+	attack_speed = 1.4 SECONDS
 
 /obj/item/weapon/twohanded/yautja/glaive/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
@@ -954,12 +955,15 @@
 	if(!HAS_TRAIT(user, TRAIT_YAUTJA_TECH))
 		to_chat(user, SPAN_WARNING("You have no idea how this thing works!"))
 		return
+	if(charge_time < 7)
+		to_chat(user, SPAN_WARNING("The rifle does not have enough power remaining!"))
+		return
 
 	return ..()
 
 /obj/item/weapon/gun/energy/yautja/plasmarifle/load_into_chamber()
 	ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/rifle/bolt]
-	charge_time -= 10
+	charge_time -= 7
 	var/obj/projectile/projectile = create_bullet(ammo, initial(name))
 	projectile.set_light(1)
 	in_chamber = projectile
@@ -974,7 +978,8 @@
 
 /obj/item/weapon/gun/energy/yautja/plasmarifle/delete_bullet(obj/projectile/projectile_to_fire, refund = 0)
 	qdel(projectile_to_fire)
-	if(refund) charge_time *= 2
+	if(refund)
+		charge_time += 7
 	return TRUE
 
 #define FIRE_MODE_STANDARD "Standard"
@@ -1118,9 +1123,11 @@
 	w_class = SIZE_HUGE
 	force = 0
 	fire_delay = 3
+	throw_speed = MIN_SPEED
 	flags_atom = FPRINT|CONDUCT
-	flags_item = NOBLUDGEON|DELONDROP|IGNITING_ITEM //Can't bludgeon with this.
+	flags_item = NOBLUDGEON|DELONDROP|IGNITING_ITEM|ITEM_UNCATCHABLE //Can't bludgeon with this.
 	flags_gun_features = GUN_UNUSUAL_DESIGN
+	has_special_table_placement = TRUE //Что-б обиднее было
 	has_empty_icon = FALSE
 	indestructible = TRUE
 
@@ -1141,6 +1148,7 @@
 	verbs -= /obj/item/weapon/gun/verb/field_strip
 	verbs -= /obj/item/weapon/gun/verb/use_toggle_burst
 	verbs -= /obj/item/weapon/gun/verb/empty_mag
+	RegisterSignal(src, COMSIG_ITEM_DROPPED, PROC_REF(delete_on_drop_flag))
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/Destroy()
 	. = ..()
@@ -1164,15 +1172,15 @@
 			switch(strength)
 				if("low power stun bolts")
 					strength = "high power stun bolts"
-					charge_cost = 100
-					set_fire_delay(FIRE_DELAY_TIER_6 * 3)
+					charge_cost = 50
+					set_fire_delay(FIRE_DELAY_TIER_1)
 					fire_sound = 'sound/weapons/pred_lasercannon.ogg'
 					to_chat(user, SPAN_NOTICE("[src] will now fire [strength]."))
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/bolt/stun]
 				if("high power stun bolts")
 					strength = "plasma immobilizers"
-					charge_cost = 300
-					set_fire_delay(FIRE_DELAY_TIER_6 * 20)
+					charge_cost = 200
+					set_fire_delay(FIRE_DELAY_TIER_2 * 8)
 					fire_sound = 'sound/weapons/pulse.ogg'
 					to_chat(user, SPAN_NOTICE("[src] will now fire [strength]."))
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/sphere/stun]
@@ -1187,8 +1195,8 @@
 			switch(strength)
 				if("plasma bolts")
 					strength = "plasma spheres"
-					charge_cost = 1200
-					set_fire_delay(FIRE_DELAY_TIER_6 * 20)
+					charge_cost = 1000
+					set_fire_delay(FIRE_DELAY_TIER_2 * 12)
 					fire_sound = 'sound/weapons/pulse.ogg'
 					to_chat(user, SPAN_NOTICE("[src] will now fire [strength]."))
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/sphere]
@@ -1201,6 +1209,9 @@
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/bolt]
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/use_unique_action()
+	switch_mode()
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/switch_mode()
 	switch(mode)
 		if("stun")
 			mode = "lethal"
@@ -1230,15 +1241,49 @@
 	else
 		. += SPAN_ORANGE(msg)
 
+/obj/item/weapon/gun/energy/yautja/plasma_caster/set_to_table(obj/structure/surface/target)
+	return
+
 /obj/item/weapon/gun/energy/yautja/plasma_caster/dropped(mob/living/carbon/human/M)
-	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
-	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
-	if(source)
-		forceMove(source)
-		source.caster_deployed = FALSE
-		return
+	flags_item &= ~DELONDROP
 	..()
 
+	var/obj/item/clothing/gloves/yautja/hunter/bracers = M.gloves
+	if(!istype(bracers))
+		return
+
+	addtimer(CALLBACK(src, PROC_REF(hide_caster), M), 1)
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/hide_caster(mob/living/carbon/human/M)
+	if(src == M.r_hand || src == M.l_hand)
+		return
+
+	var/obj/item/clothing/gloves/yautja/hunter/bracers = M.gloves
+	if(!istype(bracers))
+		return
+
+	forceMove(bracers)
+	bracers.caster_deployed = FALSE
+
+	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
+	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/delete_on_drop_flag()
+	SIGNAL_HANDLER
+
+	flags_item |= DELONDROP
+/*
+/obj/item/weapon/gun/energy/yautja/plasma_caster/attack_hand(mob/user)
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		if(H.s_store == src)
+			if(strength == "plasma immobilizers" || strength ==  "plasma spheres")
+				switch_mode()
+			else
+				attack_self(user)
+			return
+	..()
+*/
 /obj/item/weapon/gun/energy/yautja/plasma_caster/able_to_fire(mob/user)
 	if(!source)
 		return

@@ -102,6 +102,21 @@
 		}\
 	} while (0)
 
+/// Will 100% nuke a trait regardless of source. Preferably use this as little as possible
+#define REMOVE_TRAIT_ALLSOURCES(target, trait) \
+	do { \
+		var/list/_L = target.status_traits; \
+		if (_L?[trait]) { \
+			if (length(_L)) { \
+				_L -= trait; \
+				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
+			}; \
+			else { \
+				target.status_traits = null \
+			}; \
+		} \
+	} while (0)
+
 #define HAS_TRAIT(target, trait) (target.status_traits ? (target.status_traits[trait] ? TRUE : FALSE) : FALSE)
 #define HAS_TRAIT_FROM(target, trait, source) (target.status_traits ? (target.status_traits[trait] ? (source in target.status_traits[trait]) : FALSE) : FALSE)
 #define HAS_TRAIT_FROM_ONLY(target, trait, source) (\
@@ -205,6 +220,9 @@
 
 /// Can lockout blackmarket from ASRS console circuits.
 #define TRAIT_TOOL_TRADEBAND "t_tool_tradeband"
+
+/// Can hack ASRS consoles to access the black market
+#define TRAIT_TOOL_BLACKMARKET_HACKER "t_tool_blackmarket_hacker"
 
 // CLOTHING TRAITS
 #define TRAIT_CLOTHING_HOOD "t_clothing_hood"

@@ -37,6 +37,8 @@
 
 
 /atom/movable/screen/close/clicked(mob/user)
+	if(isobserver(user))
+		return TRUE
 	if(master)
 		if(isstorage(master))
 			var/obj/item/storage/master_storage = master
@@ -439,7 +441,11 @@
 	name = "health"
 	icon_state = "health0"
 	icon = 'icons/mob/hud/human_midnight.dmi'
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+//	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+/atom/movable/screen/healths/clicked(mob/living/carbon/human/user)
+	user.check_for_injuries(user)
+	return TRUE
 
 /atom/movable/screen/pull
 	name = "stop pulling"
@@ -484,6 +490,11 @@
 	else if(mods["alt"])
 		earpiece.switch_tracker_target()
 		return
+	if(isyautja(user))
+		var/obj/item/clothing/gloves/yautja/hunter/bracers = user.gloves
+		if(istype(bracers))
+			bracers.track_gear()
+			return
 	if(user.get_active_hand())
 		return
 	if(user.assigned_squad)
@@ -612,10 +623,10 @@
 	if(user && user.hud_used)
 		if(user.hud_used.inventory_shown)
 			user.hud_used.inventory_shown = 0
-			user.client.screen -= user.hud_used.toggleable_inventory
+			user.client.remove_from_screen(user.hud_used.toggleable_inventory)
 		else
 			user.hud_used.inventory_shown = 1
-			user.client.screen += user.hud_used.toggleable_inventory
+			user.client.add_to_screen(user.hud_used.toggleable_inventory)
 
 		user.hud_used.hidden_inventory_update()
 	return 1

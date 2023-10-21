@@ -148,7 +148,7 @@
 		if(hijack_delete)
 			return ..()
 
-		marine_announcement("ALERT.\n\nEnergy build up around communication relay at [get_area(src)] halted.", "[MAIN_AI_SYSTEM] Biological Scanner")
+		marine_announcement("ВНИМАНИЕ.\n\nЭнергетический всплеск вблизи коммуникационного реле в [get_area(src)] ОСТАНОВЛЕН.", "[MAIN_AI_SYSTEM] Biological Scanner")
 
 		for(var/hivenumber in GLOB.hive_datum)
 			var/datum/hive_status/checked_hive = GLOB.hive_datum[hivenumber]
@@ -164,7 +164,7 @@
 
 /// Checks if all comms towers are connected and then starts end game content on all pylons if they are
 /obj/effect/alien/resin/special/pylon/endgame/proc/comms_relay_connection()
-	marine_announcement("ALERT.\n\nIrregular build up of energy around communication relays at [get_area(src)].", "[MAIN_AI_SYSTEM] Biological Scanner")
+	marine_announcement("ВНИМАНИЕ.\n\nОбнаружен иррегулярный всплеск энергии вблизи коммуникационного реле в [get_area(src)], подтверждена биологическая угроза.\n\nОПАСНОСТЬ: Объект формирует новые ксено-организмы, рекомендация к немедленному устранению угрозы наземными силами.", "[MAIN_AI_SYSTEM] Biological Scanner")
 
 	for(var/hivenumber in GLOB.hive_datum)
 		var/datum/hive_status/checked_hive = GLOB.hive_datum[hivenumber]
@@ -172,15 +172,15 @@
 			continue
 
 		if(checked_hive == linked_hive)
-			xeno_announcement(SPAN_XENOANNOUNCE("We have harnessed the tall's communication relay at [get_area(src)]. Hold it!"), hivenumber, XENO_GENERAL_ANNOUNCE)
+			xeno_announcement(SPAN_XENOANNOUNCE("We have harnessed the tall's communication relay at [get_area(src)].\n\nWe will now grow more of our number from this pylon. Hold it!"), hivenumber, XENO_GENERAL_ANNOUNCE)
 		else
 			xeno_announcement(SPAN_XENOANNOUNCE("Another hive has harnessed the tall's communication relay at [get_area(src)].[linked_hive.faction_is_ally(checked_hive.name) ? "" : " Stop them!"]"), hivenumber, XENO_GENERAL_ANNOUNCE)
 
 	activated = TRUE
 	addtimer(CALLBACK(src, PROC_REF(give_larva)), XENO_PYLON_ACTIVATION_COOLDOWN, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_LOOP|TIMER_DELETE_ME)
 
-#define ENDGAME_LARVA_CAP_MULTIPLIER 0.4
-#define LARVA_ADDITION_MULTIPLIER 0.10
+#define ENDGAME_LARVA_CAP_MULTIPLIER 0.3
+#define LARVA_ADDITION_MULTIPLIER 0.05
 
 /// Looped proc via timer to give larva after time
 /obj/effect/alien/resin/special/pylon/endgame/proc/give_larva()
@@ -196,10 +196,13 @@
 		if(!xeno.counts_for_slots)
 			hive_xenos -= xeno
 
-	if(length(hive_xenos) > (length(GLOB.alive_human_list) * ENDGAME_LARVA_CAP_MULTIPLIER))
+	var/real_total_xeno_count = length(hive_xenos) + linked_hive.stored_larva
+	var/total_human_count = length(GLOB.alive_human_list)
+
+	if(real_total_xeno_count > (total_human_count * ENDGAME_LARVA_CAP_MULTIPLIER))
 		return
 
-	linked_hive.partial_larva += length(hive_xenos) * LARVA_ADDITION_MULTIPLIER
+	linked_hive.partial_larva += total_human_count * LARVA_ADDITION_MULTIPLIER
 	linked_hive.convert_partial_larva_to_full_larva()
 	linked_hive.hive_ui.update_burrowed_larva()
 
@@ -251,7 +254,6 @@
 /obj/effect/alien/resin/special/pylon/core/process()
 	. = ..()
 	update_minimap_icon()
-
 	// Handle spawning larva if core is connected to a hive
 	if(linked_hive)
 		for(var/mob/living/carbon/xenomorph/larva/worm in range(2, src))
@@ -263,25 +265,26 @@
 					linked_hive.hive_ui.update_burrowed_larva()
 				qdel(worm)
 
+		var/count_spawned = 0
 		var/spawning_larva = can_spawn_larva() && (last_larva_time + spawn_cooldown) < world.time
 		if(spawning_larva)
 			last_larva_time = world.time
 		if(spawning_larva || (last_larva_queue_time + spawn_cooldown * 4) < world.time)
 			last_larva_queue_time = world.time
 			var/list/players_with_xeno_pref = get_alien_candidates(linked_hive)
-			if(players_with_xeno_pref && players_with_xeno_pref.len)
+			if(length(players_with_xeno_pref))
 				if(spawning_larva && spawn_burrowed_larva(players_with_xeno_pref[1]))
 					// We were in spawning_larva mode and successfully spawned someone
-					message_alien_candidates(players_with_xeno_pref, dequeued = 1)
-				else
-					// Just time to update everyone their queue status (or the spawn failed)
-					message_alien_candidates(players_with_xeno_pref, dequeued = 0)
+					count_spawned = 1
+				// Update everyone's queue status
+				message_alien_candidates(players_with_xeno_pref, dequeued = count_spawned)
 
 		if(linked_hive.hijack_burrowed_surge && (last_surge_time + surge_cooldown) < world.time)
 			last_surge_time = world.time
 			linked_hive.stored_larva++
 			linked_hive.hijack_burrowed_left--
-			notify_ghosts(header = "Claim Xeno", message = "The Hive has gained another burrowed larva! Click to take it.", source = src, action = NOTIFY_JOIN_XENO, enter_link = "join_xeno")
+			if(GLOB.xeno_queue_candidate_count < 1 + count_spawned)
+				notify_ghosts(header = "Claim Xeno", message = "The Hive has gained another burrowed larva! Click to take it.", source = src, action = NOTIFY_JOIN_XENO, enter_link = "join_xeno=1")
 			if(surge_cooldown > 30 SECONDS) //mostly for sanity purposes
 				surge_cooldown = surge_cooldown - surge_incremental_reduction //ramps up over time
 			if(linked_hive.hijack_burrowed_left < 1)
@@ -293,14 +296,17 @@
 		health += min(heal_amount, maxhealth-health)
 		last_healed = world.time + heal_interval
 
-/obj/effect/alien/resin/special/pylon/core/proc/can_spawn_larva()
+/obj/effect/alien/resin/special/pylon/core/proc/can_spawn_larva(mob/xeno_candidate)
 	if(linked_hive.hardcore)
+		return FALSE
+	if(linked_hive.stored_larva <= linked_hive.reserved_larva)
+		to_chat(xeno_candidate, SPAN_WARNING("Королева улья зарезервировала эту лярву закопанной."))
 		return FALSE
 
 	return linked_hive.stored_larva
 
 /obj/effect/alien/resin/special/pylon/core/proc/spawn_burrowed_larva(mob/xeno_candidate)
-	if(can_spawn_larva() && xeno_candidate)
+	if(can_spawn_larva(xeno_candidate) && xeno_candidate)
 		var/mob/living/carbon/xenomorph/larva/new_xeno = spawn_hivenumber_larva(loc, linked_hive.hivenumber)
 		if(isnull(new_xeno))
 			return FALSE

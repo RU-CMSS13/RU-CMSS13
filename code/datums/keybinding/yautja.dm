@@ -73,6 +73,22 @@
 		return
 	H.mark_for_hunt()
 
+/datum/keybinding/yautja/unmark_panel
+	hotkey_keys = list("Unbound")
+	classic_keys = list("Unbound")
+	name = "unmark_panel"
+	full_name = "Unmark panel"
+	keybind_signal = COMSIG_KB_YAUTJA_MARK_PANEL
+
+/datum/keybinding/yautja/unmark_panel/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/carbon/human/H = user.mob
+	if(!isyautja(H))
+		return
+	H.unmark_panel()
+
 /datum/keybinding/yautja/remove_from_hunt
 	hotkey_keys = list("Unbound")
 	classic_keys = list("Unbound")
@@ -594,3 +610,21 @@
 	var/mob/living/carbon/human/H = user.mob
 	var/obj/item/device/yautja_teleporter/tele = locate(/obj/item/device/yautja_teleporter) in H.contents
 	tele.add_tele_loc()
+
+
+/datum/keybinding/yautja/fold_combi
+	hotkey_keys = list("Space")
+	classic_keys = list("Unbound")
+	name = "fold_combi"
+	full_name = "Collapse Combi-stick"
+	keybind_signal = COMSIG_KB_YAUTJA_FOLD_COMBISTICK
+
+/datum/keybinding/yautja/fold_combi/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/carbon/human/human = user.mob
+	var/obj/item/weapon/yautja/combistick/held_item = human.get_held_item()
+	if(istype(held_item))
+		held_item.fold_combistick()
+	return TRUE
