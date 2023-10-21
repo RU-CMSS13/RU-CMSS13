@@ -56,6 +56,19 @@
 				/obj/vehicle/walker/proc/get_stats,
 			)
 
+	var/list/step_sounds = list(
+		'fray-marines/sound/vehicle/walker/mecha_step1.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_step2.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_step3.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_step4.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_step5.ogg'
+	)
+	var/list/turn_sounds = list(
+		'fray-marines/sound/vehicle/walker/mecha_turn1.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_turn2.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_turn3.ogg',
+		'fray-marines/sound/vehicle/walker/mecha_turn4.ogg'
+	)
 	flags_atom = FPRINT|USES_HEARING
 
 /obj/vehicle/walker/Initialize()
@@ -142,14 +155,14 @@
 		if(dir != direction && reverse_dir[dir] != direction)
 			l_move_time = world.time
 			dir = direction
-			pick(playsound(src.loc, 'sound/mecha/powerloader_turn.ogg', 25, 1), playsound(src.loc, 'sound/mecha/powerloader_turn2.ogg', 25, 1))
+			playsound(src.loc, pick(turn_sounds), 80, 1)
 			. = TRUE
 		else
 			var/oldDir = dir
 			. = step(src, direction)
 			setDir(oldDir)
 			if(.)
-				pick(playsound(loc, 'sound/mecha/powerloader_step.ogg', 25), playsound(loc, 'sound/mecha/powerloader_step2.ogg', 25))
+				playsound(src.loc, pick(step_sounds), 80, 1)
 
 /obj/vehicle/walker/Bump(atom/obstacle)
 	if(isxeno(obstacle))
@@ -195,7 +208,7 @@
 		return
 
 	else if(istype(obstacle, /obj/structure/barricade))
-		pick(playsound(loc, 'sound/mecha/powerloader_step.ogg', 25), playsound(loc, 'sound/mecha/powerloader_step2.ogg', 25))
+		playsound(src.loc, pick(step_sounds), 80, 1)
 		var/obj/structure/barricade/cade = obstacle
 		var/new_dir = get_dir(src, cade) ? get_dir(src, cade) : cade.dir
 		var/turf/new_loc = get_step(loc, new_dir)
@@ -271,9 +284,9 @@
 				}
 			}
 
-			playsound_client(seats[VEHICLE_DRIVER].client, 'sound/mecha/powerup.ogg')
+			playsound_client(seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_start.ogg')
 			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'sound/mecha/nominalsyndi.ogg'), 5 SECONDS)
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_online.ogg'), 2 SECONDS)
 			return
 
 	to_chat(user, "Access denied.")
@@ -761,7 +774,7 @@
 	if(health <= 0)
 		move_out()
 		new /obj/structure/walker_wreckage(src.loc)
-		playsound(loc, 'sound/effects/metal_crash.ogg', 75)
+		playsound(loc, 'fray-marines/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
 
 /obj/vehicle/walker/bullet_act(obj/projectile/Proj)
@@ -795,7 +808,7 @@
 	health -= damage
 	to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ALERT! Hostile incursion detected. Chassis taking damage.</span>")
 	if(seats[VEHICLE_DRIVER] && damage >= 50)
-		seats[VEHICLE_DRIVER] << sound('sound/mecha/critdestrsyndi.ogg',volume=50)
+		seats[VEHICLE_DRIVER] << sound('fray-marines/sound/vehicle/walker/mecha_alarm.ogg',volume=50)
 	healthcheck()
 
 /obj/vehicle/walker/Collided(atom/A)
@@ -810,7 +823,7 @@
 			take_damage(250, "abstract")
 			visible_message(SPAN_DANGER("\The [A] rams \the [src]!"))
 			Move(get_step(src, A.dir))
-		playsound(loc, 'sound/effects/metal_crash.ogg', 35)
+		playsound(loc, 'fray-marines/sound/vehicle/walker/mecha_crusher.ogg', 35)
 
 /obj/vehicle/walker/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)
 	var/mob/driver = seats[VEHICLE_DRIVER]
