@@ -47,6 +47,15 @@
 	var/obj/item/walker_armor/armor_module = null
 	var/selected = GUN_LEFT
 
+	var/list/verb_list = list(
+				/obj/vehicle/walker/verb/get_out,
+				/obj/vehicle/walker/proc/lights,
+				/obj/vehicle/walker/proc/zoom,
+				/obj/vehicle/walker/proc/cycle_weapons,
+				/obj/vehicle/walker/proc/deploy_magazine,
+				/obj/vehicle/walker/proc/get_stats,
+			)
+
 	flags_atom = FPRINT|USES_HEARING
 
 /obj/vehicle/walker/Initialize()
@@ -228,7 +237,7 @@
 	set name = "Enter Into Walker"
 	set src in oview(1)
 
-	if(usr.skills.get_skill_level(SKILL_POWERLOADER))
+	if(usr.skills.get_skill_level(SKILL_POWERLOADER) >= SKILL_POWERLOADER_TRAINED)
 		move_in(usr)
 	else
 		to_chat(usr, "How to operate it?")
@@ -244,17 +253,11 @@
 	for(var/ID in list(H.wear_id, H.belt))
 		if(operation_allowed(ID))
 			seats[VEHICLE_DRIVER] = H
-			add_verb(H.client, list(
-				/obj/vehicle/walker/proc/eject,
-				/obj/vehicle/walker/proc/lights,
-				/obj/vehicle/walker/proc/zoom,
-				/obj/vehicle/walker/proc/cycle_weapons,
-				/obj/vehicle/walker/proc/deploy_magazine,
-				/obj/vehicle/walker/proc/get_stats,
-			))
+			add_verb(H, verb_list)
 			user.loc = src
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
+			RegisterSignal(H, COMSIG_MOB_RESISTED, PROC_REF(move_out))
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите среднюю кнопку мыши чтобы менять оружие."))
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Нажмите Shift+MMB для сброса боеприпасов с основного орудия."))
 
@@ -280,19 +283,19 @@
 		return TRUE
 	return FALSE
 
-/obj/vehicle/walker/proc/eject()
-	set name = "Eject"
-	set category = "Vehicle"
-	var/mob/M = usr
+// /obj/vehicle/walker/proc/eject()
+// 	set name = "Eject"
+// 	set category = "Vehicle"
+// 	var/mob/M = usr
 
-	if(!M || !istype(M))
-		return
+// 	if(!M || !istype(M))
+// 		return
 
-	var/obj/vehicle/walker/W = M.interactee
+// 	var/obj/vehicle/walker/W = M.interactee
 
-	if(!W || !istype(W))
-		return
-	W.move_out()
+// 	if(!W || !istype(W))
+// 		return
+// 	W.move_out()
 
 /obj/vehicle/walker/proc/move_out()
 	if(!seats[VEHICLE_DRIVER])
@@ -308,14 +311,8 @@
 	L.unset_interaction()
 	L.loc = src.loc
 	L.reset_view(null)
-	remove_verb(L.client, list(
-				/obj/vehicle/walker/proc/eject,
-				/obj/vehicle/walker/proc/lights,
-				/obj/vehicle/walker/proc/zoom,
-				/obj/vehicle/walker/proc/cycle_weapons,
-				/obj/vehicle/walker/proc/deploy_magazine,
-				/obj/vehicle/walker/proc/get_stats,
-			))
+	remove_verb(L, verb_list)
+	UnregisterSignal(L, COMSIG_MOB_RESISTED)
 	left.unregister_signals(L)
 	right.unregister_signals(L)
 	seats[VEHICLE_DRIVER] = null
