@@ -49,11 +49,11 @@
 
 	var/list/verb_list = list(
 				/obj/vehicle/walker/verb/get_out,
-				/obj/vehicle/walker/proc/lights,
-				/obj/vehicle/walker/proc/zoom,
-				/obj/vehicle/walker/proc/cycle_weapons,
-				/obj/vehicle/walker/proc/deploy_magazine,
-				/obj/vehicle/walker/proc/get_stats,
+				/obj/vehicle/walker/verb/toggle_lights,
+				/obj/vehicle/walker/verb/toggle_zoom,
+				/obj/vehicle/walker/verb/eject_magazines,
+				/obj/vehicle/walker/verb/select_weapon,
+				/obj/vehicle/walker/verb/get_stats,
 			)
 
 	var/list/step_sounds = list(
@@ -155,14 +155,14 @@
 		if(dir != direction && reverse_dir[dir] != direction)
 			l_move_time = world.time
 			dir = direction
-			playsound(src.loc, pick(turn_sounds), 80, 1)
+			playsound(src.loc, pick(turn_sounds), 60, 1)
 			. = TRUE
 		else
 			var/oldDir = dir
 			. = step(src, direction)
 			setDir(oldDir)
 			if(.)
-				playsound(src.loc, pick(step_sounds), 80, 1)
+				playsound(src.loc, pick(step_sounds), 60, 1)
 
 /obj/vehicle/walker/Bump(atom/obstacle)
 	if(isxeno(obstacle))
@@ -208,7 +208,7 @@
 		return
 
 	else if(istype(obstacle, /obj/structure/barricade))
-		playsound(src.loc, pick(step_sounds), 80, 1)
+		playsound(src.loc, pick(step_sounds), 60, 1)
 		var/obj/structure/barricade/cade = obstacle
 		var/new_dir = get_dir(src, cade) ? get_dir(src, cade) : cade.dir
 		var/turf/new_loc = get_step(loc, new_dir)
@@ -266,7 +266,14 @@
 	for(var/ID in list(H.wear_id, H.belt))
 		if(operation_allowed(ID))
 			seats[VEHICLE_DRIVER] = H
-			add_verb(H, verb_list)
+			add_verb(H, list(
+				/obj/vehicle/walker/verb/get_out,
+				/obj/vehicle/walker/verb/toggle_lights,
+				/obj/vehicle/walker/verb/toggle_zoom,
+				/obj/vehicle/walker/verb/eject_magazines,
+				/obj/vehicle/walker/verb/select_weapon,
+				/obj/vehicle/walker/verb/get_stats,
+			))
 			user.loc = src
 			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 			seats[VEHICLE_DRIVER].set_interaction(src)
@@ -284,9 +291,9 @@
 				}
 			}
 
-			playsound_client(seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_start.ogg')
+			playsound_client(seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_start.ogg', 60)
 			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_online.ogg'), 2 SECONDS)
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'fray-marines/sound/vehicle/walker/mecha_online.ogg', 60), 2 SECONDS)
 			return
 
 	to_chat(user, "Access denied.")
@@ -324,7 +331,14 @@
 	L.unset_interaction()
 	L.loc = src.loc
 	L.reset_view(null)
-	remove_verb(L, verb_list)
+	remove_verb(L, list(
+				/obj/vehicle/walker/verb/get_out,
+				/obj/vehicle/walker/verb/toggle_lights,
+				/obj/vehicle/walker/verb/toggle_zoom,
+				/obj/vehicle/walker/verb/eject_magazines,
+				/obj/vehicle/walker/verb/select_weapon,
+				/obj/vehicle/walker/verb/get_stats,
+			))
 	UnregisterSignal(L, COMSIG_MOB_RESISTED)
 	left.unregister_signals(L)
 	right.unregister_signals(L)
@@ -333,20 +347,11 @@
 	return TRUE
 
 /obj/vehicle/walker/proc/lights()
-	set name = "Lights on/off"
-	set category = "Vehicle"
-	var/mob/M = usr
+	var/mob/M = seats[VEHICLE_DRIVER]
+
 	if(!M || !istype(M))
 		return
 
-	var/obj/vehicle/walker/W = M.interactee
-
-
-	if(!W || !istype(W))
-		return
-	W.handle_lights()
-
-/obj/vehicle/walker/proc/handle_lights()
 	if(!lights)
 		lights = TRUE
 		set_light(lights_power)
@@ -356,11 +361,9 @@
 	seats[VEHICLE_DRIVER] << sound('sound/machines/click.ogg',volume=50)
 
 /obj/vehicle/walker/proc/deploy_magazine()
-	set name = "Deploy Magazine"
-	set category = "Vehicle"
-	var/mob/M = usr
+	var/mob/M = seats[VEHICLE_DRIVER]
 
-	var/obj/vehicle/walker/W = M.interactee
+	var/obj/vehicle/walker/W = src
 
 	if(!W || !istype(W))
 		return
@@ -382,24 +385,30 @@
 			to_chat(M, "<span class='warning'>WARNING! [W.right.name] ammo magazine deployed.</span>")
 			visible_message("[W.name]'s systems deployed used magazine.","")
 
-/obj/vehicle/walker/proc/get_stats()
-	set name = "Status Display"
-	set category = "Vehicle"
+// /obj/vehicle/walker/proc/get_stats()
+// 	set name = "Status Display"
+// 	set category = "Vehicle"
 
-	var/mob/M = usr
-	if(!M || !istype(M))
-		return
+// 	var/mob/M = usr
+// 	if(!M || !istype(M))
+// 		return
 
-	var/obj/vehicle/walker/W = M.interactee
+// 	var/obj/vehicle/walker/W = M.interactee
 
-	if(!W || !istype(W))
-		return
+// 	if(!W || !istype(W))
+// 		return
 
-	if(M != W.seats[VEHICLE_DRIVER])
-		return
-	W.statistics(M)
+// 	if(M != W.seats[VEHICLE_DRIVER])
+// 		return
+// 	W.statistics(M)
 
 /obj/vehicle/walker/proc/statistics(mob/user)
+	if(!user)
+		user = seats[VEHICLE_DRIVER]
+
+		if(!user)
+			return
+
 	to_chat(user, "<h2>[name] Interface</h2>")
 	to_chat(user, "<span class='notice'>Vehicle Status:</span><br>")
 
@@ -427,15 +436,14 @@
 	else
 		to_chat(user, "<span class='warning'>RIGHT HARDPOINT IS EMPTY!</span>")
 
-/obj/vehicle/walker/proc/cycle_weapons()
-	set name = "Select Weapon"
-	set category = "Vehicle"
+/obj/vehicle/walker/proc/cycle_weapons(mob/M)
+	if(!M)
+		M = seats[VEHICLE_DRIVER]
 
-	var/mob/M = usr
-	if(!M || !istype(M))
-		return
+		if(!M)
+			return
 
-	var/obj/vehicle/walker/W = M.interactee
+	var/obj/vehicle/walker/W = src
 
 	if(!W || !istype(W))
 		return
@@ -503,6 +511,10 @@
 		return FALSE
 
 	var/turf/T = get_turf(A)
+
+	if(!T)
+		return FALSE
+
 	var/dx = T.x - x
 	var/dy = T.y - y
 	var/deg = 0
@@ -520,21 +532,6 @@
 	if(nx < 0)
 		angle += 180
 	return abs(angle) <= max_angle
-
-/obj/vehicle/walker/proc/zoom()
-	set name = "Zoom on/off"
-	set category = "Vehicle"
-
-	var/mob/M = usr
-	if(!M || !istype(M))
-		return
-
-	var/obj/vehicle/walker/W = M.interactee
-
-	if(!W || !istype(W))
-		return
-
-	W.zoom_activate()
 
 /obj/vehicle/walker/proc/zoom_activate()
 	if (zoom)
