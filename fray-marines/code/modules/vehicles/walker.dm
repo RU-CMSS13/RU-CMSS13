@@ -187,10 +187,14 @@
 				log_attack("[key_name(xeno)] was rammed by [key_name(driver)] with [src].")
 			if(2)
 				xeno.visible_message(
-					SPAN_DANGER("\The [src] smashes at [xeno], bringing him down!"),
+					SPAN_DANGER("\The [src] smashes at [xeno], shoving it away!"),
 					SPAN_DANGER("You got smashed by walking metal box!")
 				)
-				xeno.AdjustKnockDown(0.5 SECONDS)
+				var/direction_taken = pick(45, 0, -45)
+				var/mob_moved = step(xeno, turn(last_move_dir, direction_taken))
+
+				if(!mob_moved)
+					mob_moved = step(xeno, turn(last_move_dir, -direction_taken))
 			if(3)
 				xeno.visible_message(SPAN_DANGER("\The [xeno] digs it's claws into the ground, anchoring itself in place and halting \the [src] in it's tracks!"),
 					SPAN_DANGER("You dig your claws into the ground, stopping \the [src] in it's tracks!")
