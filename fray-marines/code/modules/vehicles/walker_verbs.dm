@@ -1,3 +1,13 @@
+/obj/vehicle/walker/verb/enter_walker()
+	set category = "Object"
+	set name = "Enter Into Walker"
+	set src in oview(1)
+
+	if(usr.skills.get_skill_level(SKILL_POWERLOADER) >= SKILL_POWERLOADER_TRAINED)
+		move_in(usr)
+	else
+		to_chat(usr, "How to operate it?")
+
 /obj/vehicle/walker/verb/get_out()
 	set name = "Eject"
 	set category = "Vehicle"
