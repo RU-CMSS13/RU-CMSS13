@@ -107,7 +107,7 @@
 	ability_name = "screech"
 	macro_path = /datum/action/xeno_action/verb/verb_screech
 	action_type = XENO_ACTION_CLICK
-	xeno_cooldown = 80 SECONDS
+	xeno_cooldown = 60 SECONDS
 	plasma_cost = 250
 	cooldown_message = "You feel your throat muscles vibrate. You are ready to screech again."
 	no_cooldown_msg = FALSE // Needed for onclick actions
@@ -145,7 +145,7 @@
 		if(hugger.stat != DEAD)
 			hugger.die()
 
-	if(prob(1))
+	if(prob(5))
 		playsound(xeno.loc, pick(screech_memes), 75, 0, status = 0)
 	else
 		playsound(xeno.loc, pick(xeno.screech_sound_effect_list), 75, 0, status = 0)
