@@ -33,8 +33,8 @@
 	var/acid_process_cooldown = null
 	var/list/dmg_multipliers = list(
 		"all" = 1.0, //for when you want to make it invincible
-		"acid" = 1.0,
-		"slash" = 0.8,
+		"acid" = 1.2,
+		"slash" = 0.85,
 		"bullet" = 0.2,
 		"explosive" = 5.0,
 		"blunt" = 0.1,
@@ -761,7 +761,7 @@
 	M.animation_attack_on(src)
 	playsound(loc, "alien_claw_metal", 25, 1)
 	M.visible_message(SPAN_DANGER("[M] slashes [src]!"), SPAN_DANGER("You slash [src]!"))
-	take_damage(M.melee_vehicle_damage + rand(-5,5), "slash")
+	take_damage(M.melee_vehicle_damage + rand(-5,5) + rand(5, 10) * (M.claw_type - 1), "slash")
 
 	return XENO_ATTACK_ACTION
 
@@ -799,7 +799,7 @@
 	if(!(damtype in list("explosive", "acid", "energy", "blunt", "slash", "bullet", "all", "abstract")))
 		return
 	var/damage = dam * dmg_multipliers[damtype]
-	if(damage <= 10)
+	if(damage <= 3)
 		to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>ALERT! Hostile incursion detected. Deflected.</span>")
 		return
 

@@ -25,6 +25,7 @@
 	var/fa_firing = FALSE
 
 	var/atom/target = null
+	var/scatter_value = 5
 
 	var/autofire_slow_mult = 1
 
@@ -201,7 +202,7 @@
 
 /obj/item/walker_gun/proc/simulate_scatter(atom/target, obj/projectile/projectile_to_fire)
 	var/fire_angle = Get_Angle(owner.loc, get_turf(target))
-	var/total_scatter_angle = projectile_to_fire.scatter - rand(-5,5)
+	var/total_scatter_angle = projectile_to_fire.scatter - rand(-scatter_value,scatter_value)
 
 	//Not if the gun doesn't scatter at all, or negative scatter.
 	if(total_scatter_angle > 0)
@@ -212,7 +213,7 @@
 
 /obj/item/walker_gun/smartgun
 	name = "M56 High-Caliber Mounted Smartgun"
-	desc = "Modifyed version of standart USCM Smartgun System, mounted on military walkers"
+	desc = "Modified version of standart USCM Smartgun System, mounted on military walkers"
 	icon_state = "mech_smartgun_parts"
 	equip_state = "redy_smartgun"
 	magazine_type = /obj/item/ammo_magazine/walker/smartgun
@@ -228,8 +229,9 @@
 	equip_state = "redy_minigun"
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
-	fire_delay = 3
+	fire_delay = 6
 	burst = 3
+	scatter_value = 30
 
 	projectile_traits = list()
 
@@ -447,9 +449,10 @@
 	name = "machinegun bullet"
 	icon_state = "bullet"
 
-	accurate_range = 12
+	accurate_range = 6
+	max_range = 12
 	damage = 50
-	penetration= ARMOR_PENETRATION_TIER_10
+	penetration= ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_3
 
 ////////////////
