@@ -13,7 +13,7 @@
 	layer = BIG_XENO_LAYER
 	opacity = FALSE
 	can_buckle = FALSE
-	move_delay = 6
+	move_delay = 4
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
 
@@ -33,8 +33,8 @@
 	var/acid_process_cooldown = null
 	var/list/dmg_multipliers = list(
 		"all" = 1.0, //for when you want to make it invincible
-		"acid" = 0.9,
-		"slash" = 0.6,
+		"acid" = 1.0,
+		"slash" = 0.8,
 		"bullet" = 0.2,
 		"explosive" = 5.0,
 		"blunt" = 0.1,
@@ -155,7 +155,7 @@
 		if(dir != direction && reverse_dir[dir] != direction)
 			l_move_time = world.time
 			dir = direction
-			playsound(src.loc, pick(turn_sounds), 60, 1)
+			playsound(src.loc, pick(turn_sounds), 70, 1)
 			. = TRUE
 		else
 			var/oldDir = dir
@@ -249,16 +249,6 @@
 	else
 		..()
 
-/obj/vehicle/walker/verb/enter_walker()
-	set category = "Object"
-	set name = "Enter Into Walker"
-	set src in oview(1)
-
-	if(usr.skills.get_skill_level(SKILL_POWERLOADER) >= SKILL_POWERLOADER_TRAINED)
-		move_in(usr)
-	else
-		to_chat(usr, "How to operate it?")
-
 /obj/vehicle/walker/proc/move_in(mob/living/carbon/user)
 	set waitfor = FALSE
 	if(!ishuman(user))
@@ -267,6 +257,9 @@
 		to_chat(user, "There is someone occupying mecha right now.")
 		return
 	var/mob/living/carbon/human/H = user
+
+	if (!do_after(H, 1 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED))
+		return
 	for(var/ID in list(H.wear_id, H.belt))
 		if(operation_allowed(ID))
 			seats[VEHICLE_DRIVER] = H
@@ -332,6 +325,10 @@
 		seats[VEHICLE_DRIVER].client.mouse_pointer_icon = initial(seats[VEHICLE_DRIVER].client.mouse_pointer_icon)
 
 	var/mob/living/L = seats[VEHICLE_DRIVER]
+
+	if(!do_after(L, 1 SECONDS, INTERRUPT_ALL, null, src, INTERRUPT_MOVED, BUSY_ICON_GENERIC))
+		return
+
 	L.unset_interaction()
 	L.loc = src.loc
 	L.reset_view(null)
@@ -492,7 +489,7 @@
 		var/newDir = get_cardinal_dir(src, A)
 		l_move_time = world.time
 		if(dir != newDir)
-			pick(playsound(src.loc, 'sound/mecha/powerloader_turn.ogg', 25, 1), playsound(src.loc, 'sound/mecha/powerloader_turn2.ogg', 25, 1))
+			playsound(src.loc, pick(turn_sounds), 70, 1)
 		dir = newDir
 		return
 	if(selected)

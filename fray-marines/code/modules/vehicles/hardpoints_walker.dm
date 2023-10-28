@@ -71,8 +71,6 @@
 
 /obj/item/walker_gun/proc/stop_fire()
 	SIGNAL_HANDLER
-	if(!target)
-		return
 
 	reset_fire()
 
@@ -112,7 +110,7 @@
 		return
 	if(target)
 		UnregisterSignal(target, COMSIG_PARENT_QDELETING)
-	if (!owner.firing_arc(object))
+	if (!owner.firing_arc(object) && object != null)
 		reset_fire()
 		return
 	target = object
@@ -127,17 +125,17 @@
 	if (!ammo)
 		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
 		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
-		return
+		return FALSE
 	if(ammo.current_rounds <= 0)
 		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
 		ammo.loc = owner.loc
 		ammo = null
 		visible_message("[owner.name]'s systems deployed used magazine.","")
 		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
-		return
+		return FALSE
 	if(world.time < last_fire + fire_delay)
 		to_chat(user, "<span class='warning'>WARNING! System report: weapon is not ready to fire again!</span>")
-		return
+		return FALSE
 	last_fire = world.time
 	var/obj/projectile/P
 	for(var/i = 1 to burst)
@@ -146,7 +144,7 @@
 				return
 			display_ammo(user)
 			visible_message("<span class='danger'>[owner.name] fires from [name]!</span>", "<span class='warning'>You hear [istype(P.ammo, /datum/ammo/bullet) ? "gunshot" : "blast"]!</span>")
-			return
+			return FALSE
 		P = new
 		P.generate_bullet(new ammo.default_ammo)
 		for (var/trait in projectile_traits)
@@ -213,12 +211,12 @@
 	return get_turf(target)
 
 /obj/item/walker_gun/smartgun
-	name = "M56 Double-Barrel Mounted Smartgun"
+	name = "M56 High-Caliber Mounted Smartgun"
 	desc = "Modifyed version of standart USCM Smartgun System, mounted on military walkers"
 	icon_state = "mech_smartgun_parts"
 	equip_state = "redy_smartgun"
 	magazine_type = /obj/item/ammo_magazine/walker/smartgun
-	burst = 2
+	burst = 3
 	fire_delay = 3
 
 	projectile_traits = list(/datum/element/bullet_trait_iff)
@@ -230,8 +228,10 @@
 	equip_state = "redy_minigun"
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
-	fire_delay = 7
+	fire_delay = 3
 	burst = 3
+
+	projectile_traits = list()
 
 /obj/item/walker_gun/flamer
 	name = "F40 \"Hellfire\" Flamethower"
@@ -438,18 +438,19 @@
 	flags_ammo_behavior = AMMO_BALLISTIC
 
 	max_range = 24
+	accurate_range = 12
 	accuracy = HIT_ACCURACY_TIER_5
-	damage = 35
-	penetration = 0
+	damage = 40
+	penetration = ARMOR_PENETRATION_TIER_1
 
 /datum/ammo/bullet/walker/machinegun
 	name = "machinegun bullet"
 	icon_state = "bullet"
 
 	accurate_range = 12
-	damage = 45
+	damage = 50
 	penetration= ARMOR_PENETRATION_TIER_10
-	accuracy = HIT_ACCURACY_TIER_3
+	accuracy = -HIT_ACCURACY_TIER_3
 
 ////////////////
 // MEGALODON HARDPOINTS // END
