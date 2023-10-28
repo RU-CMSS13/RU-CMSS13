@@ -13,7 +13,7 @@
 	layer = BIG_XENO_LAYER
 	opacity = FALSE
 	can_buckle = FALSE
-	move_delay = 4
+	move_delay = 6
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
 

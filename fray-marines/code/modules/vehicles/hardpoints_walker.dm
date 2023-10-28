@@ -229,9 +229,9 @@
 	equip_state = "redy_minigun"
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
-	fire_delay = 6
+	fire_delay = 7
 	burst = 3
-	scatter_value = 30
+	scatter_value = 25
 
 	projectile_traits = list()
 
@@ -451,7 +451,7 @@
 
 	accurate_range = 6
 	max_range = 12
-	damage = 50
+	damage = 45
 	penetration= ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_3
 
