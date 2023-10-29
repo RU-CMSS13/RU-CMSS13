@@ -442,7 +442,7 @@
 	max_range = 24
 	accurate_range = 12
 	accuracy = HIT_ACCURACY_TIER_5
-	damage = 40
+	damage = 20
 	penetration = ARMOR_PENETRATION_TIER_1
 
 /datum/ammo/bullet/walker/machinegun
