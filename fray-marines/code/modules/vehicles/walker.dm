@@ -341,8 +341,16 @@
 				/obj/vehicle/walker/verb/get_stats,
 			))
 	UnregisterSignal(L, COMSIG_MOB_RESISTED)
-	left.unregister_signals(L)
-	right.unregister_signals(L)
+
+	if (selected) {
+		if (left && left.automatic) {
+			left.unregister_signals(L)
+		}
+	} else {
+		if (right && right.automatic) {
+			right.unregister_signals(L)
+		}
+	}
 	seats[VEHICLE_DRIVER] = null
 	update_icon()
 	return TRUE
