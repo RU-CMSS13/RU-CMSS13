@@ -796,6 +796,12 @@ var/global/list/gear_datums_by_name = list()
 	display_name = "Facepaint, black"
 	path = /obj/item/facepaint/black
 
+/datum/gear/misc/skullfacepaint
+	display_name = "Skull Facepaint"
+	path = /obj/item/facepaint/skull
+	slot = WEAR_IN_BACK
+	cost = 4
+
 /datum/gear/misc/facepaint_body
 	display_name = "Fullbody paint"
 	path = /obj/item/facepaint/sniper

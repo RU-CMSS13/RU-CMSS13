@@ -343,7 +343,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	icon_state = "helmet"
 	item_state = "helmet"
 	armor_melee = CLOTHING_ARMOR_MEDIUM
-	armor_bullet = CLOTHING_ARMOR_MEDIUM
+	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
 	armor_energy = CLOTHING_ARMOR_NONE
 	armor_bomb = CLOTHING_ARMOR_LOW
@@ -766,7 +766,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	desc = "An M10 marine helmet version designed for use in darkened enviroments. It is coated with a special anti-reflective paint."
 	icon_state = "marsoc_helmet"
 	armor_melee = CLOTHING_ARMOR_MEDIUM
-	armor_bullet = CLOTHING_ARMOR_MEDIUM
+	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
 	armor_bomb = CLOTHING_ARMOR_LOW
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
@@ -803,7 +803,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	icon_state = "grenadier_helmet"
 	item_state = "grenadier_helmet"
 	armor_melee = CLOTHING_ARMOR_HIGH
-	armor_bullet = CLOTHING_ARMOR_HIGH
+	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
 	armor_bomb = CLOTHING_ARMOR_ULTRAHIGH
 	armor_bio = CLOTHING_ARMOR_HIGH
 	armor_rad = CLOTHING_ARMOR_HIGH
@@ -819,7 +819,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	icon_state = "grenadier_helmet"
 	item_state = "grenadier_helmet"
 	armor_melee = CLOTHING_ARMOR_MEDIUMHIGH
-	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
+	armor_bullet = CLOTHING_ARMOR_HIGH
 	armor_bomb = CLOTHING_ARMOR_ULTRAHIGH
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_rad = CLOTHING_ARMOR_HIGH
@@ -909,7 +909,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	icon_state = "co_officer"
 	item_state = "co_officer"
 	armor_melee = CLOTHING_ARMOR_MEDIUMHIGH
-	armor_bullet = CLOTHING_ARMOR_HIGH
+	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
 	armor_energy = CLOTHING_ARMOR_MEDIUMLOW
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	specialty = "M10 pattern captain"
@@ -953,7 +953,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	desc = "A special variant of the M10 Pattern Helmet worn by USCM SOF."
 	icon_state = "marsoc_helmet"
 	armor_melee = CLOTHING_ARMOR_MEDIUMHIGH
-	armor_bullet = CLOTHING_ARMOR_HIGH
+	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
 	armor_energy = CLOTHING_ARMOR_MEDIUMLOW
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	specialty = "M10 pattern SOF"
