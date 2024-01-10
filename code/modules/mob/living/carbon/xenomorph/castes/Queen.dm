@@ -797,6 +797,8 @@
 	if(src == hive?.living_xeno_queen)
 		hive.xeno_queen_timer = world.time + XENO_QUEEN_DEATH_DELAY
 
+		hive.reserved_larva   = 0 // Reset the reserved larvae
+
 		// Reset the banished ckey list
 		if(length(hive.banished_ckeys))
 			for(var/mob/living/carbon/xenomorph/target_xeno in hive.totalXenos)
@@ -846,7 +848,7 @@
 		// Screech is typically new for this list, but its possible they never ovi and it then is forced here:
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		// These are new and their arrangement matters:
-		/datum/action/xeno_action/onclick/remove_eggsac,
+		/datum/action/xeno_action/onclick/remove_eggsac, /datum/action/xeno_action/onclick/set_larva_reserve,
 		/datum/action/xeno_action/onclick/give_evo_points,
 		/datum/action/xeno_action/onclick/set_xeno_lead,
 		/datum/action/xeno_action/activable/queen_heal, //first macro

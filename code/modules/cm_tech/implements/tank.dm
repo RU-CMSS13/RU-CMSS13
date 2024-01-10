@@ -38,20 +38,10 @@
 		return
 
 	. = TRUE
-	comp.spent = FALSE
-	QDEL_NULL_LIST(comp.vehicles)
-	comp.vehicles = list(
-		new vehicle_type(),
-	)
-	comp.allowed_roles = null
-	comp.req_access = list()
-	comp.req_one_access = list()
-	comp.spent = FALSE
 
-	gearcomp.req_access = list()
-	gearcomp.req_one_access = list()
-	gearcomp.vendor_role = list()
-	gearcomp.selected_vehicle = vehicle_category
-	gearcomp.available_categories = VEHICLE_ALL_AVAILABLE
+	QDEL_LIST_ASSOC_VAL(comp.vehicles)
+	comp.vehicles = list(
+		/datum/vehicle_order/tank = new /datum/vehicle_order/tank()
+	)
 
 	return TRUE

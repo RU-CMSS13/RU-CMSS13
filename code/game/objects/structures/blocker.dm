@@ -112,7 +112,7 @@
 	return FALSE
 
 /obj/structure/blocker/forcefield/multitile_vehicles
-	types = list(/obj/vehicle/multitile/)
+//	types = list(/obj/vehicle/multitile/) /// затроллено до лучших времён
 
 
 /obj/structure/blocker/forcefield/multitile_vehicles/handle_vehicle_bump(obj/vehicle/multitile/multitile_vehicle)

@@ -479,7 +479,8 @@ GLOBAL_LIST_INIT(available_specialist_sets, list(
 			"Sniper Set",
 			"Demolitionist Set",
 			"Heavy Grenadier Set",
-			"Pyro Set"
+			"Pyro Set",
+			"Stormtrooper Set"
 			))
 
 //Similar thing, but used in /obj/item/spec_kit
@@ -489,7 +490,8 @@ GLOBAL_LIST_INIT(available_specialist_kit_boxes, list(
 			"Sniper" = 2,
 			"Scout" = 2,
 			"Demo" = 2,
-			))
+			"ST" = 2,
+			)
 
 /proc/init_global_referenced_datums()
 	init_keybindings()
