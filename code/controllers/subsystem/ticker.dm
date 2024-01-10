@@ -260,7 +260,7 @@ SUBSYSTEM_DEF(ticker)
 	// Switch back to default automatically
 	save_mode(CONFIG_GET(string/gamemode_default))
 
-	if(round_statistics)
+	if(GLOB.round_statistics)
 		to_chat_spaced(world, html = FONT_SIZE_BIG(SPAN_ROLE_BODY("<B>Добро пожаловать на [GLOB.round_statistics.round_name]</B>")))
 
 	GLOB.supply_controller.start_processing()

@@ -49,12 +49,12 @@ GLOBAL_LIST_EMPTY(jobban_keylist)
 
 /proc/jobban_loadbanfile()
 	var/savefile/S=new("data/job_new.ban")
-	S["new_bans"] >> jobban_keylist
+	S["new_bans"] >> GLOB.jobban_keylist
 	log_admin("Загружаю jobban_rank")
-	S["runonce"] >> jobban_runonce
+	S["runonce"] >> GLOB.jobban_runonce
 
-	if (!length(jobban_keylist))
-		jobban_keylist=list()
+	if (!length(GLOB.jobban_keylist))
+		GLOB.jobban_keylist=list()
 		log_admin("jobban_keylist был пуст")
 
 /proc/jobban_savebanfile()

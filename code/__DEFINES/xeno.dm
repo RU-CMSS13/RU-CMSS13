@@ -187,10 +187,10 @@
 #define HIJACK_RATIO_FOR_TACMAP 0.8
 
 /// Xenos need to have their number to marines ratio lower than this to get larvae from pylons
-#define ENDGAME_LARVA_CAP_MULTIPLIER 0.5
+#define ENDGAME_LARVA_CAP_MULTIPLIER 0.3
 
 /// What percent of their numbers xeno get from pylons
-#define LARVA_ADDITION_MULTIPLIER 0.10
+#define LARVA_ADDITION_MULTIPLIER 0.05
 
 /// The time against away_timer when an AFK xeno larva can be replaced
 #define XENO_LEAVE_TIMER_LARVA 80 //80 seconds

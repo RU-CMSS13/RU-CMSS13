@@ -129,9 +129,9 @@
 					shake_camera(M, 60, 2)
 			playsound_area(internal_area, 'sound/effects/antiair_explosions.ogg')
 		ferry_crashed = TRUE
-		almayer_aa_cannon.recharging = TRUE
+		GLOB.almayer_aa_cannon.recharging = TRUE
 	hijacked_bypass_aa = TRUE
-	almayer_aa_cannon.protecting_section = ""
+	GLOB.almayer_aa_cannon.protecting_section = ""
 
 
 

@@ -1,40 +1,6 @@
 //Refer to life.dm for caller
 
 /mob/living/carbon/human/proc/handle_disabilities()
-
-	if(disabilities & EPILEPSY)
-		if((prob(1) && knocked_out < 1))
-			visible_message(SPAN_DANGER("\The [src] starts having a seizure!"), \
-			SPAN_DANGER("You start having a seizure!"), null, 5)
-			apply_effect(10, PARALYZE)
-			make_jittery(1000)
-			return
-
-	if(disabilities & COUGHING)
-		if((prob(5) && knocked_out <= 1))
-			drop_held_item()
-			INVOKE_ASYNC(src, PROC_REF(emote), "cough")
-			return
-
-	if(disabilities & TOURETTES)
-		speech_problem_flag = TRUE
-		if((prob(10) && knocked_out <= 1))
-			apply_effect(10, STUN)
-			spawn()
-				switch(rand(1, 3))
-					if(1)
-						emote("twitch")
-					if(2 to 3)
-						say("[prob(50) ? ";" : ""][pick("ДЕРЬМО", "СУКА", "БЛЯТЬ", "ХУЙ", "ХУЕСОС", "ЕБАЛ ТВОЮ МАТЬ", "ОТСОСИ")]")
-				var/old_x = pixel_x
-				var/old_y = pixel_y
-				pixel_x += rand(-2, 2)
-				pixel_y += rand(-1, 1)
-				sleep(2)
-				pixel_x = old_x
-				pixel_y = old_y
-				return
-
 	if(disabilities & NERVOUS)
 		if(prob(10))
 			stuttering = max(10, stuttering)

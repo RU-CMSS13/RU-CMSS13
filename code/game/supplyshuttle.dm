@@ -1413,8 +1413,8 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	for(var/order as anything in vehicles)
 		vehicles[order] = new order
 
-	if(!VehicleElevatorConsole)
-		VehicleElevatorConsole = src
+	if(!GLOB.VehicleElevatorConsole)
+		GLOB.VehicleElevatorConsole = src
 
 /obj/structure/machinery/computer/supplycomp/vehicle/Destroy()
 	GLOB.VehicleElevatorConsole = null

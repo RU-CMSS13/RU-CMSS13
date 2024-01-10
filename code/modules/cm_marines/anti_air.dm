@@ -132,7 +132,7 @@ GLOBAL_DATUM(almayer_aa_cannon, /obj/structure/anti_air_cannon)
 	if(..())
 		return
 
-	if(almayer_aa_cannon.recharging)
+	if(GLOB.almayer_aa_cannon.recharging)
 		to_chat(user, SPAN_WARNING("Система перезаряжается."))
 		return TRUE
 

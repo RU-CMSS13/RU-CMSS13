@@ -28,7 +28,7 @@ GLOBAL_VAR_INIT(security_level, SEC_LEVEL_GREEN)
 				else
 					if(announce)
 						ai_announcement("Внимание: Уровень безопасности понижен до КРАСНОГО - прямая угроза кораблю.", no_sound ? null : 'sound/AI/code_red_lowered.ogg', log)
-				security_level = SEC_LEVEL_RED
+				GLOB.security_level = SEC_LEVEL_RED
 
 			if(SEC_LEVEL_DELTA)
 				if(announce)

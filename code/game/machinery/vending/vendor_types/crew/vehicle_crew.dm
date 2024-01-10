@@ -89,9 +89,9 @@
 	. = list()
 	. += ui_static_data(user)
 
-	if(supply_controller.tank_points) //we steal points from supply_controller, meh-he-he. Solely to be able to modify amount of points in vendor if needed by just changing one var.
-		available_points_to_display += supply_controller.tank_points
-		supply_controller.tank_points = 0
+	if(GLOB.supply_controller.tank_points) //we steal points from supply_controller, meh-he-he. Solely to be able to modify amount of points in vendor if needed by just changing one var.
+		available_points_to_display += GLOB.supply_controller.tank_points
+		GLOB.supply_controller.tank_points = 0
 	.["current_m_points"] = available_points_to_display
 
 	var/list/ui_listed_products = get_listed_products(user)

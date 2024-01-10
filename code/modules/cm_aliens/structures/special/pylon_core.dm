@@ -180,9 +180,6 @@
 	linked_hive.check_if_hit_larva_from_pylon_limit()
 	addtimer(CALLBACK(src, PROC_REF(give_larva)), XENO_PYLON_ACTIVATION_COOLDOWN, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_LOOP|TIMER_DELETE_ME)
 
-#define ENDGAME_LARVA_CAP_MULTIPLIER 0.3
-#define LARVA_ADDITION_MULTIPLIER 0.05
-
 /// Looped proc via timer to give larva after time
 /obj/effect/alien/resin/special/pylon/endgame/proc/give_larva()
 	if(!activated)

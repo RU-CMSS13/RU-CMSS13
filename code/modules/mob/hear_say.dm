@@ -229,7 +229,7 @@
 		heard = SPAN_LOCALSAY("Бубню что-то про... [stars(message, clear_char_probability = 99)]")
 
 	else if(!sleeping && proximity_flag)
-		heard = SPAN_LOCALSAY("Кто-то рядом говорит о... [stars(message, clear_char_probability = 90)]")
+		heard = SPAN_LOCALSAY("Кто-то рядом говорит о... [stars(message, clear_char_probability)]")
 
 	else if(prob(15))
 

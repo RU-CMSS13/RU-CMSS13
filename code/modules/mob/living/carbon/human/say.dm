@@ -31,9 +31,9 @@
 
 	if(length(message) >= 2 && (message[1] == "." || message[1] == ":" || message[1] == "#"))
 		var/channel_prefix = copytext_char(message, 1, 3)
-		if(channel_prefix in department_radio_keys)
+		if(channel_prefix in GLOB.department_radio_keys)
 			.["message_and_language"] = copytext_char(message, 3)
-			.["modes"] += department_radio_keys[channel_prefix]
+			.["modes"] += GLOB.department_radio_keys[channel_prefix]
 			return
 
 	.["message_and_language"] = message
@@ -257,44 +257,31 @@ for it but just ignore it.
 	return verb
 
 /mob/living/carbon/human/proc/handle_speech_problems(message)
-	var/list/returns[3]
+	var/list/returns[2]
 	var/verb = "говорит"
-	var/handled = FALSE
 	if(silent)
 		message = ""
 	if(sdisabilities & DISABILITY_MUTE)
 		message = ""
-		handled = TRUE
-	if(wear_mask)
-		if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
-			var/obj/item/clothing/mask/horsehead/hoers = wear_mask
-			if(hoers.voicechange)
-				message = pick("ЫЫЫЫЫЫЫ!", "ЫААААААЫЫЫЫ!", "ЫЫЫЫХЫЫЫЫЫ!", "ХЫЫЫАААЫ!", "ЫААААА!")
-				verb = pick("ржет","выжимает", "говорит")
-				handled = TRUE
-
 	var/braindam = getBrainLoss()
 	if(slurring || stuttering || HAS_TRAIT(src, TRAIT_DAZED) || braindam >= 60)
-		msg_admin_niche("[key_name(src)] stuttered while saying: \"[message]\"") //Messages that get modified by the 4 reasons below have their original message logged too
+		msg_admin_niche("[key_name(src)] заплетается говоря: \"[message]\"") //Messages that get modified by the 4 reasons below have their original message logged too
 	if(slurring)
 		message = slur(message)
 		verb = pick("заплетаясь говорит","заикается")
-		handled = TRUE
 	if(stuttering)
 		message = NewStutter(message)
 		verb = pick("заплетаясь говорит", "заикается")
-		handled = TRUE
-	if(dazed)
+	if(HAS_TRAIT(src, TRAIT_DAZED))
 		message = DazedText(message)
 		verb = pick("бормочет", "болтает")
-		handled = TRUE
 	if(braindam >= 60)
 		if(prob(braindam/4))
 			message = stutter(message, stuttering)
 			verb = pick("заплетаясь говорит", "заикается")
 		if(prob(braindam))
 			message = uppertext(message)
-			verb = pick("вопит как идиот","довольно громко говорит")
+			verb = pick("вопит как идиот","громко заявляет")
 	if(HAS_TRAIT(src, TRAIT_LISPING))
 		var/old_message = message
 		message = lisp_replace(message)
