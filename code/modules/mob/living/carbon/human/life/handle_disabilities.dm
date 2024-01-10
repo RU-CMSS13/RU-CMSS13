@@ -36,7 +36,6 @@
 				return
 
 	if(disabilities & NERVOUS)
-		speech_problem_flag = TRUE
 		if(prob(10))
 			stuttering = max(10, stuttering)
 			return
@@ -56,6 +55,6 @@
 					to_chat(src, SPAN_DANGER("Your hand won't respond properly, you drop what you're holding."))
 					drop_held_item()
 			if(10 to 12)
-				if(getBrainLoss() >= 50 && !lying)
+				if(getBrainLoss() >= 50 && body_position == STANDING_UP)
 					to_chat(src, SPAN_DANGER("Your legs won't respond properly, you fall down."))
 					resting = 1

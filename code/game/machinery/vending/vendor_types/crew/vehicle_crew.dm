@@ -25,12 +25,12 @@
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/Initialize(mapload, ...)
 	. = ..()
 	RegisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED, PROC_REF(populate_products))
-	if(!VehicleGearConsole)
-		VehicleGearConsole = src
+	if(!GLOB.VehicleGearConsole)
+		GLOB.VehicleGearConsole = src
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/Destroy()
 	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
-	VehicleGearConsole = null
+	GLOB.VehicleGearConsole = null
 	return ..()
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/get_appropriate_vend_turf(mob/living/carbon/human/H)
