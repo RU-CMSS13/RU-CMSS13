@@ -491,7 +491,7 @@ GLOBAL_LIST_INIT(available_specialist_kit_boxes, list(
 			"Scout" = 2,
 			"Demo" = 2,
 			"ST" = 2,
-			)
+			))
 
 /proc/init_global_referenced_datums()
 	init_keybindings()
