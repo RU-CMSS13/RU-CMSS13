@@ -1,7 +1,7 @@
 ////////////////////////
 //////SD effects////////
 ////////////////////////
-/*
+
 /datum/authority/branch/evacuation/proc/spawn_sd_effects()
 	set background = 1
 
@@ -71,4 +71,3 @@
 			return
 
 		sleep(60)
-*/
