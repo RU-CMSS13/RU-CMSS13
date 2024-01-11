@@ -43,7 +43,7 @@ Regardless of where it's detonated, or how, a successful detonation will end the
 All of the necessary difines are stored under mode.dm in defines.
 */
 
-var/global/datum/authority/branch/evacuation/EvacuationAuthority //This is initited elsewhere so that the world has a chance to load in.
+GLOBAL_DATUM(EvacuationAuthority, /datum/authority/branch/evacuation)
 
 #define SOUND_CHANNEL_SD 666
 
