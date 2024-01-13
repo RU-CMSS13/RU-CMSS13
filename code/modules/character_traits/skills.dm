@@ -1,6 +1,6 @@
 /datum/character_trait_group/skills
 	trait_group_name = "Skills"
-	group_visible = FALSE
+	group_visible = TRUE
 
 
 /datum/character_trait/skills
