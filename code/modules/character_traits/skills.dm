@@ -122,7 +122,7 @@
 
 /datum/character_trait/skills/endurance
 	trait_name = "Advance Physical Training"
-	trait_desc = "Boosts the Endurance skill to 2. Crewmember passed trough advance physical training course, and now can better withstand agaisnt physical traumas and hazard conditions."
+	trait_desc = "Boosts the Endurance skill to 1. Crewmember passed trough advance physical training course, and now can better withstand agaisnt physical traumas and hazard conditions."
 	skill = SKILL_ENDURANCE
 	skill_cap = 3
 	skill_increment = 1
