@@ -106,7 +106,7 @@
 
 /datum/character_trait/skills/cqc
 	trait_name = "Close Quarters Training"
-	trait_desc = "Boosts the cqc skill to 1. Crewmember passed trough basic cqc course, and deals more damage in close combat (+1 brute per level), and have more chances to disarm the opponent (+5% per level)."
+	trait_desc = "Boosts the cqc skill to 1. Crewmember passed trough basic cqc course, and deals more damage in close combat (+1 brute per level), and have more chances to disarm the opponent (+10% per level)."
 	skill = SKILL_CQC
 	skill_cap = 3
 	skill_increment = 1
@@ -116,7 +116,7 @@
 	trait_name = "Heavy Lifting Training"
 	trait_desc = "Boosts the Fireman Carry skill to 1. Crewmember working out at the gym too much, and have a big muscles, physical strength allowed him to carry people on his back."
 	skill = SKILL_FIREMAN
-	skill_cap = 2
+	skill_cap = 3
 	skill_increment = 1
 	cost = 2
 
