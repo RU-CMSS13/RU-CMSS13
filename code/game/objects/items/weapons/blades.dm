@@ -12,7 +12,7 @@
 	w_class = SIZE_LARGE
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	attack_speed = 9
+	attack_speed = 8
 
 /obj/item/weapon/sword/claymore
 	name = "claymore"
