@@ -284,7 +284,7 @@ Defined in conflicts.dm of the #defines folder.
 	throw_range = 6
 	hitsound = 'sound/weapons/slash.ogg'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	attack_speed = 9
+	attack_speed = 7
 	flags_equip_slot = SLOT_FACE
 	flags_armor_protection = SLOT_FACE
 	flags_item = CAN_DIG_SHRAPNEL
