@@ -131,7 +131,7 @@
 
 	damage = 60
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
-	damage_var_high = PROJECTILE_VARIANCE_TIER_6
+	damage_var_ = PROJECTILE_VARIANCE_TIER_6
 	penetration = ARMOR_PENETRATION_TIER_4
 
 /datum/ammo/bullet/revolver/mateba/highimpact
@@ -143,7 +143,7 @@
 /datum/ammo/bullet/revolver/mateba/highimpact/ap
 	name = ".454 heavy high-impact armor piercing revolver bullet"
 	penetration = ARMOR_PENETRATION_TIER_10
-	damage = 45
+	damage = 50
 
 /datum/ammo/bullet/revolver/mateba/highimpact/New()
 	..()
