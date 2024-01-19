@@ -110,7 +110,7 @@
 	sound_override = 'sound/weapons/gun_c99.ogg'
 
 	damage = 0
-	stamina_damage = 15
+	stamina_damage = 25
 	shrapnel_chance = 0
 
 /datum/ammo/bullet/rifle/incendiary
@@ -139,7 +139,7 @@
 
 	damage = 55
 	scatter = -SCATTER_AMOUNT_TIER_8
-	penetration= ARMOR_PENETRATION_TIER_7
+	penetration= ARMOR_PENETRATION_TIER_6
 	shell_speed = AMMO_SPEED_TIER_6
 
 /datum/ammo/bullet/rifle/m4ra/incendiary
@@ -149,7 +149,7 @@
 	damage = 40
 	accuracy = HIT_ACCURACY_TIER_4
 	scatter = -SCATTER_AMOUNT_TIER_8
-	penetration= ARMOR_PENETRATION_TIER_5
+	penetration= ARMOR_PENETRATION_TIER_4
 	shell_speed = AMMO_SPEED_TIER_6
 
 /datum/ammo/bullet/rifle/m4ra/incendiary/set_bullet_traits()
