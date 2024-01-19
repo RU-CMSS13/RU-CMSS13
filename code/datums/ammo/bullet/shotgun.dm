@@ -47,7 +47,7 @@
 	max_range = 12
 	shrapnel_chance = 0
 	damage = 0
-	stamina_damage = 45
+	stamina_damage = 90
 	accuracy = HIT_ACCURACY_TIER_3
 	shell_speed = AMMO_SPEED_TIER_3
 	handful_state = "beanbag_slug"
