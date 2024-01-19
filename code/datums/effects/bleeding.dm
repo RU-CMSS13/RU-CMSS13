@@ -9,7 +9,7 @@
 	flags = NO_PROCESS_ON_DEATH | DEL_ON_UNDEFIBBABLE
 	var/blood_loss = 0 //How much blood to lose every tick
 	var/obj/limb/limb = null
-	var/blood_duration_multiplier = 2.5
+	var/blood_duration_multiplier = 3
 	var/blood_loss_divider = 80
 
 /datum/effects/bleeding/New(atom/A, obj/limb/L = null, damage = 0)
