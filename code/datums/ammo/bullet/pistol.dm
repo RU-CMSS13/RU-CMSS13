@@ -11,7 +11,7 @@
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
 	damage = 40
-	penetration= ARMOR_PENETRATION_TIER_1
+	penetration= ARMOR_PENETRATION_TIER_2
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_2
 
 /datum/ammo/bullet/pistol/tiny
@@ -113,7 +113,7 @@
 
 /datum/ammo/bullet/pistol/heavy/super/highimpact
 	name = ".50 high-impact pistol bullet"
-	penetration = ARMOR_PENETRATION_TIER_1
+	penetration = ARMOR_PENETRATION_TIER_2
 	debilitate = list(0,1.5,0,0,0,1,0,0)
 	flags_ammo_behavior = AMMO_BALLISTIC
 
