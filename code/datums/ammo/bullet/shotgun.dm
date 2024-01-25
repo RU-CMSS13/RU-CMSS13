@@ -13,8 +13,8 @@
 
 	accurate_range = 6
 	max_range = 8
-	damage = 70
-	penetration = ARMOR_PENETRATION_TIER_4
+	damage = 80
+	penetration = ARMOR_PENETRATION_TIER_2
 	damage_armor_punch = 2
 	handful_state = "slug_shell"
 
@@ -100,7 +100,7 @@
 	damage = 30
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
 	damage_var_high = PROJECTILE_VARIANCE_TIER_8
-	penetration = ARMOR_PENETRATION_TIER_7
+	penetration = ARMOR_PENETRATION_TIER_5
 	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_3
 	handful_state = "flechette_shell"
 	multiple_handful_name = TRUE
