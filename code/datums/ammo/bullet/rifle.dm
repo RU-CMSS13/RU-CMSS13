@@ -55,7 +55,7 @@
 	name = "armor-piercing rifle bullet"
 
 	damage = 30
-	penetration = ARMOR_PENETRATION_TIER_8
+	penetration = ARMOR_PENETRATION_TIER_6
 
 // Basically AP but better. Focused at taking out armour temporarily
 /datum/ammo/bullet/rifle/ap/toxin
