@@ -182,7 +182,7 @@
 
 	accuracy = HIT_ACCURACY_TIER_4
 	damage = 50
-	penetration= ARMOR_PENETRATION_TIER_4
+	penetration= ARMOR_PENETRATION_TIER_3
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_4
 	damage_falloff = DAMAGE_FALLOFF_TIER_6 //"VP78 - the only pistol viable as a primary."-Vampmare, probably.
 
