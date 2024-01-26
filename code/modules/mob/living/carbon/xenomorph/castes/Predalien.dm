@@ -2,16 +2,16 @@
 	caste_type = XENO_CASTE_PREDALIEN
 	display_name = "Abomination"
 
-	melee_damage_lower = XENO_DAMAGE_TIER_4
-	melee_damage_upper = XENO_DAMAGE_TIER_5
-	melee_vehicle_damage = XENO_DAMAGE_TIER_5
-	max_health = XENO_HEALTH_TIER_9
+	melee_damage_lower = XENO_DAMAGE_TIER_8
+	melee_damage_upper = XENO_DAMAGE_TIER_9
+	melee_vehicle_damage = XENO_DAMAGE_TIER_9
+	max_health = XENO_HEALTH_QUEEN
 	plasma_gain = XENO_PLASMA_GAIN_TIER_9
 	plasma_max = XENO_PLASMA_TIER_3
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_10
-	armor_deflection = XENO_ARMOR_TIER_3
+	armor_deflection = XENO_ARMOR_TIER_7
 	evasion = XENO_EVASION_NONE
-	speed = XENO_SPEED_TIER_7
+	speed = XENO_SPEED_TIER_9
 
 	evolution_allowed = FALSE
 	minimum_evolve_time = 0
@@ -33,7 +33,7 @@
 /mob/living/carbon/xenomorph/predalien
 	caste_type = XENO_CASTE_PREDALIEN
 	name = "Abomination" //snowflake name
-	desc = "A strange looking creature with fleshy strands on its head. It appears like a mixture of armor and flesh, smooth, but well carapaced."
+	desc = "A strange looking creature with fleshy strands on its head. It appears like a mixture of armor and flesh, smooth, but well carapaced. Superior evolution."
 	icon = 'icons/mob/xenos/predalien.dmi'
 	icon_xeno = 'icons/mob/xenos/predalien.dmi'
 	icon_xenonid = 'icons/mob/xenos/predalien.dmi'
