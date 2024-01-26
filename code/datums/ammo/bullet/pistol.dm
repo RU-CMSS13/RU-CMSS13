@@ -119,7 +119,7 @@
 
 /datum/ammo/bullet/pistol/heavy/super/highimpact/ap
 	name = ".50 high-impact armor piercing pistol bullet"
-	penetration = ARMOR_PENETRATION_TIER_10
+	penetration = ARMOR_PENETRATION_TIER_6
 	damage = 50
 
 /datum/ammo/bullet/pistol/heavy/super/highimpact/upp
@@ -142,7 +142,7 @@
 	headshot_state = HEADSHOT_OVERLAY_HEAVY
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_6
+	penetration = ARMOR_PENETRATION_TIER_3
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_5
 
 /datum/ammo/bullet/pistol/incendiary
