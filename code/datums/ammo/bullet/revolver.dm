@@ -142,7 +142,7 @@
 
 /datum/ammo/bullet/revolver/mateba/highimpact/ap
 	name = ".454 heavy high-impact armor piercing revolver bullet"
-	penetration = ARMOR_PENETRATION_TIER_10
+	penetration = ARMOR_PENETRATION_TIER_7
 	damage = 50
 
 /datum/ammo/bullet/revolver/mateba/highimpact/New()
