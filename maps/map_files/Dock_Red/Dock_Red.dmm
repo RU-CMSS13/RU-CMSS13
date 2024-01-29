@@ -632,11 +632,6 @@
 	icon_state = "darkred2"
 	},
 /area/dockred/caves/eta/research)
-"bN" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_4"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "bO" = (
 /obj/structure/surface/rack,
 /obj/effect/spawner/random/toolbox,
@@ -668,15 +663,6 @@
 /obj/structure/surface/table/holotable/wood,
 /turf/open/floor/carpet,
 /area/dockred/caves/lambda/breakroom)
-"bV" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 6
-	},
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "bW" = (
 /obj/structure/machinery/light{
 	dir = 8
@@ -775,11 +761,6 @@
 	icon_state = "blue"
 	},
 /area/dockred/outside/dorms)
-"ck" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_10"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "cl" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/structure/machinery/computer/general_air_control/large_tank_control{
@@ -1084,11 +1065,6 @@
 	icon_state = "darkblue2"
 	},
 /area/dockred/caves/eta/storage)
-"dl" = (
-/turf/open/mars_cave{
-	icon_state = "mars_cave_19"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "dm" = (
 /turf/open/floor/prison{
 	dir = 8;
@@ -2072,11 +2048,6 @@
 /obj/effect/landmark/objective_landmark/far,
 /turf/open/floor/plating,
 /area/dockred/caves/lambda/xenobiology)
-"gx" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_11"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "gz" = (
 /obj/structure/machinery/light{
 	dir = 8
@@ -2233,6 +2204,11 @@
 	icon_state = "sterile_white"
 	},
 /area/dockred/outside/bar)
+"gU" = (
+/turf/open/mars_cave{
+	icon_state = "mars_cave_19"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "gV" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor{
@@ -3441,9 +3417,6 @@
 	icon_state = "mars_cave_2"
 	},
 /area/dockred/outside/cargo)
-"kG" = (
-/turf/open/mars,
-/area/dockred/outside/port_outside/landing_zone)
 "kH" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/mars_cave,
@@ -3538,12 +3511,6 @@
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/plating,
 /area/dockred/outside/port_inside)
-"lb" = (
-/turf/open/floor{
-	dir = 8;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "le" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/mars_cave{
@@ -3685,6 +3652,11 @@
 	icon_state = "darkgreen2"
 	},
 /area/dockred/caves/eta/xenobiology)
+"lz" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_5"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "lD" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/engine,
@@ -3871,9 +3843,13 @@
 	icon_state = "darkblue2"
 	},
 /area/dockred/caves/eta/storage)
-"mi" = (
-/turf/open/mars_cave{
-	icon_state = "mars_cave_13"
+"mj" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
 	},
 /area/dockred/outside/port_outside/landing_zone)
 "mk" = (
@@ -3995,6 +3971,15 @@
 	},
 /turf/open/floor/plating,
 /area/dockred/outside/checkpoint_west)
+"mC" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 5
+	},
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "mD" = (
 /obj/structure/machinery/light/small/built{
 	dir = 8
@@ -4535,12 +4520,6 @@
 	icon_state = "grass_impenetrable"
 	},
 /area/dockred/caves/eta/xenobiology)
-"ok" = (
-/turf/open/floor{
-	dir = 6;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "ol" = (
 /obj/effect/decal/mecha_wreckage/ripley/firefighter,
 /turf/open/floor{
@@ -5033,11 +5012,6 @@
 	icon_state = "darkredcorners2"
 	},
 /area/dockred/caves/eta/xenobiology)
-"pK" = (
-/turf/open/floor{
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "pL" = (
 /obj/structure/bed,
 /turf/open/floor{
@@ -5217,6 +5191,12 @@
 	icon_state = "mars_cave_7"
 	},
 /area/dockred/caves/lambda/xenobiology)
+"qk" = (
+/turf/open/floor{
+	dir = 4;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "qn" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -5551,12 +5531,6 @@
 /obj/structure/surface/table/reinforced/prison,
 /turf/open/floor/plating,
 /area/dockred/outside/checkpoint_west)
-"rl" = (
-/turf/open/floor{
-	dir = 10;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "rm" = (
 /obj/structure/cable{
 	icon_state = "5-8"
@@ -5589,20 +5563,6 @@
 	icon_state = "mars_cave_2"
 	},
 /area/dockred/outside/port_outside)
-"rr" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_5"
-	},
-/area/dockred/outside/port_outside/landing_zone)
-"rs" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 5
-	},
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "rt" = (
 /obj/structure/machinery/power/apc{
 	dir = 1;
@@ -5792,11 +5752,6 @@
 	icon_state = "mars_cave_2"
 	},
 /area/dockred/caves/north)
-"rU" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_12"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "rV" = (
 /obj/item/ore/diamond,
 /obj/item/stack/sheet/mineral/diamond{
@@ -6087,6 +6042,11 @@
 	icon_state = "delivery"
 	},
 /area/dockred/outside/cargo)
+"sT" = (
+/turf/open/mars_cave{
+	icon_state = "mars_cave_17"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "sV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -6306,11 +6266,6 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/caves/south)
-"tJ" = (
-/turf/open/mars_cave{
-	icon_state = "mars_cave_17"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "tK" = (
 /obj/structure/closet,
 /obj/item/explosive/grenade/high_explosive/frag,
@@ -6915,6 +6870,11 @@
 /obj/effect/landmark/objective_landmark/far,
 /turf/open/floor/plating,
 /area/dockred/outside/checkpoint_west)
+"vw" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_13"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "vx" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/generic,
 /obj/effect/decal/cleanable/dirt,
@@ -7003,6 +6963,21 @@
 	icon_state = "darkyellow2"
 	},
 /area/dockred/caves/eta/research)
+"vL" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 9
+	},
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
+"vM" = (
+/turf/open/floor{
+	dir = 6;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "vN" = (
 /obj/structure/bed/chair/wood/normal{
 	dir = 8
@@ -7277,11 +7252,6 @@
 	},
 /turf/open/floor,
 /area/dockred/caves/eta/storage)
-"wD" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_3"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "wE" = (
 /obj/structure/machinery/light{
 	dir = 8
@@ -7385,12 +7355,6 @@
 	icon_state = "asteroidfloor"
 	},
 /area/dockred/caves/south)
-"wU" = (
-/turf/open/floor{
-	dir = 4;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "wV" = (
 /turf/open/floor/plating,
 /area/dockred/outside/port_inside)
@@ -7412,15 +7376,6 @@
 	icon_state = "platingdmg3"
 	},
 /area/dockred/outside/checkpoint_west)
-"wY" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "wZ" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor{
@@ -8225,6 +8180,11 @@
 	},
 /turf/open/floor/plating,
 /area/dockred/caves/eta/storage)
+"zt" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_10"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "zu" = (
 /obj/effect/landmark/corpsespawner/wy/manager,
 /obj/item/ammo_casing/bullet{
@@ -8439,9 +8399,8 @@
 	},
 /area/dockred/outside/dorms)
 "Aa" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor{
-	dir = 1;
+	dir = 9;
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/outside/port_outside/landing_zone)
@@ -8658,11 +8617,6 @@
 	icon_state = "asteroidfloor"
 	},
 /area/dockred/outside/checkpoint_west)
-"AC" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_6"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "AE" = (
 /obj/structure/machinery/vending/coffee,
 /turf/open/floor{
@@ -8720,11 +8674,6 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/outside/port_outside)
-"AN" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_13"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "AO" = (
 /obj/structure/machinery/light{
 	dir = 4
@@ -8811,15 +8760,6 @@
 	icon_state = "dark"
 	},
 /area/dockred/caves/eta/research)
-"Bb" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 9
-	},
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Bc" = (
 /turf/open/floor{
 	dir = 1;
@@ -9578,11 +9518,9 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/plating,
 /area/dockred/caves/eta/storage)
-"DD" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
+"DE" = (
+/turf/open/mars_cave{
+	icon_state = "mars_cave_2"
 	},
 /area/dockred/outside/port_outside/landing_zone)
 "DF" = (
@@ -9692,12 +9630,6 @@
 "DV" = (
 /turf/open/floor/greengrid,
 /area/dockred/caves/lambda/research)
-"DW" = (
-/turf/open/floor{
-	dir = 5;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "DZ" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -9785,6 +9717,12 @@
 	icon_state = "elevatorshaft"
 	},
 /area/dockred/caves/lambda/breakroom)
+"Ek" = (
+/obj/vehicle/multitile/van,
+/turf/open/mars_cave{
+	icon_state = "mars_cave_2"
+	},
+/area/dockred/outside/port_outside)
 "El" = (
 /obj/item/tool/pickaxe/drill,
 /obj/structure/machinery/light{
@@ -9867,6 +9805,11 @@
 	icon_state = "asteroidfloor"
 	},
 /area/dockred/outside/port_inside)
+"Ex" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_3"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "Ey" = (
 /obj/structure/barricade/metal{
 	dir = 4
@@ -9996,6 +9939,15 @@
 	icon_state = "mars_cave_2"
 	},
 /area/dockred/outside/port_outside)
+"EQ" = (
+/obj/structure/pipes/standard/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "ER" = (
 /obj/structure/surface/table/reinforced,
 /turf/open/floor{
@@ -10122,12 +10074,6 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/caves/lambda/research)
-"Fo" = (
-/turf/open/floor{
-	dir = 9;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Fp" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -10204,6 +10150,12 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/caves/south)
+"FB" = (
+/turf/open/floor{
+	dir = 8;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "FC" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor{
@@ -10893,6 +10845,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/solaris/reinforced/hull,
 /area/dockred/outside/checkpoint_south)
+"HJ" = (
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "HK" = (
 /obj/structure/cargo_container/seegson/right,
 /turf/open/floor/plating{
@@ -10952,6 +10911,12 @@
 /obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/plating,
 /area/dockred/outside/checkpoint_west)
+"HV" = (
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "HW" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_nest,
 /turf/open/mars_cave{
@@ -11309,6 +11274,11 @@
 	icon_state = "whitepurple"
 	},
 /area/dockred/caves/lambda/research)
+"IT" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_11"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "IU" = (
 /obj/structure/filingcabinet,
 /obj/effect/landmark/objective_landmark/science,
@@ -11390,6 +11360,12 @@
 /obj/effect/landmark/item_pool_spawner/survivor_ammo,
 /turf/open/floor/plating,
 /area/dockred/outside/checkpoint_west)
+"Jf" = (
+/turf/open/floor{
+	dir = 5;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "Jg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -11466,11 +11442,6 @@
 	icon_state = "mars_cave_2"
 	},
 /area/dockred/outside/port_outside)
-"Js" = (
-/turf/open/mars_cave{
-	icon_state = "mars_cave_2"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Jt" = (
 /turf/open/floor{
 	dir = 1;
@@ -11595,6 +11566,9 @@
 	icon_state = "darkredcorners2"
 	},
 /area/dockred/caves/eta/xenobiology)
+"JO" = (
+/turf/open/mars,
+/area/dockred/outside/port_outside/landing_zone)
 "JP" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/mars_cave{
@@ -11763,6 +11737,12 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/caves/north)
+"Kq" = (
+/turf/open/floor{
+	dir = 10;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "Kr" = (
 /obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor,
@@ -11895,6 +11875,11 @@
 	icon_state = "platingdmg3"
 	},
 /area/dockred/outside/checkpoint_south)
+"KN" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_14"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "KO" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor{
@@ -12573,6 +12558,11 @@
 	icon_state = "white"
 	},
 /area/dockred/caves/lambda/xenobiology)
+"ML" = (
+/turf/open/mars_cave{
+	icon_state = "mars_cave_13"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "MM" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_11"
@@ -12695,6 +12685,11 @@
 	icon_state = "whitegreen"
 	},
 /area/dockred/caves/lambda/virology)
+"Ne" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_12"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "Nf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -12892,6 +12887,11 @@
 	icon_state = "darkgreencorners2"
 	},
 /area/dockred/caves/eta/research)
+"NL" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_4"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "NM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -12930,6 +12930,13 @@
 	icon_state = "mars_cave_7"
 	},
 /area/dockred/caves/north)
+"NU" = (
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "NV" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /turf/open/shuttle/dropship{
@@ -13194,15 +13201,6 @@
 	icon_state = "darkblue2"
 	},
 /area/dockred/caves/eta/storage)
-"OL" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
-	dir = 1
-	},
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "OM" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor{
@@ -13220,6 +13218,12 @@
 	icon_state = "asteroidfloor"
 	},
 /area/dockred/outside/port_inside)
+"OO" = (
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "OP" = (
 /obj/effect/landmark/corpsespawner/wygoon,
 /turf/open/floor/plating,
@@ -13465,12 +13469,6 @@
 	icon_state = "mars_cave_11"
 	},
 /area/dockred/caves/eta/research)
-"PI" = (
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidfloor"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "PJ" = (
 /obj/effect/landmark/corpsespawner/wygoon,
 /obj/item/ammo_casing/bullet{
@@ -14158,6 +14156,11 @@
 	icon_state = "warnplate"
 	},
 /area/dockred/outside/checkpoint_south)
+"RG" = (
+/turf/open/mars_cave{
+	icon_state = "mars_cave_20"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "RI" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
@@ -14209,6 +14212,11 @@
 	icon_state = "green"
 	},
 /area/dockred/outside/dorms)
+"RQ" = (
+/turf/open/mars_cave{
+	icon_state = "mars_dirt_6"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "RS" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/pipes/vents/pump{
@@ -14581,11 +14589,6 @@
 	icon_state = "freezerfloor"
 	},
 /area/dockred/caves/eta/research)
-"Td" = (
-/turf/open/mars_cave{
-	icon_state = "mars_cave_20"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Te" = (
 /obj/effect/landmark/corpsespawner/colonist/random,
 /turf/open/floor/plating,
@@ -16052,12 +16055,6 @@
 	icon_state = "asteroidwarning"
 	},
 /area/dockred/outside/port_inside)
-"Xi" = (
-/turf/open/floor{
-	dir = 1;
-	icon_state = "asteroidwarning"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Xj" = (
 /turf/open/mars_cave{
 	icon_state = "mars_dirt_3"
@@ -16173,6 +16170,11 @@
 	icon_state = "darkblue2"
 	},
 /area/dockred/caves/eta/research)
+"XB" = (
+/turf/open/floor{
+	icon_state = "asteroidwarning"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "XC" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 9
@@ -16770,11 +16772,6 @@
 	icon_state = "blue"
 	},
 /area/dockred/outside/dorms)
-"Zu" = (
-/turf/open/mars_cave{
-	icon_state = "mars_dirt_14"
-	},
-/area/dockred/outside/port_outside/landing_zone)
 "Zy" = (
 /obj/structure/showcase{
 	icon_state = "mechfab1"
@@ -16930,6 +16927,15 @@
 	icon_state = "podhatch"
 	},
 /area/dockred/caves/lambda/research)
+"ZW" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 6
+	},
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor"
+	},
+/area/dockred/outside/port_outside/landing_zone)
 "ZX" = (
 /obj/structure/surface/table,
 /obj/item/alienjar,
@@ -27408,44 +27414,44 @@ JV
 Pr
 Pr
 Pr
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
 ra
-lb
-lb
-lb
-lb
-lb
-lb
-PI
-PI
-PI
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
+FB
+FB
+FB
+FB
+FB
+FB
+HV
+HV
+HV
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
 Pr
 Pr
 Pr
@@ -27590,44 +27596,44 @@ FS
 bD
 bD
 bD
-PI
-bV
-DD
-DD
-DD
-DD
-DD
-DD
+HV
+ZW
+NU
+NU
+NU
+NU
+NU
+NU
 oF
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
 Xv
 Xv
 Xv
@@ -27772,44 +27778,44 @@ FS
 bD
 bD
 bD
-PI
-wY
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
-PI
+HV
+mj
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
+HV
 qI
 bD
 bD
@@ -27954,44 +27960,44 @@ FI
 yG
 yG
 yG
-PI
-wY
-PI
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
+HV
+mj
+HV
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
 yG
 KO
 KO
@@ -28136,44 +28142,44 @@ fC
 fC
 kF
 JL
-Xi
-wY
-pK
+OO
+mj
+XB
 JL
 Pv
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
 DQ
 JL
-kG
-kG
-kG
+JO
+JO
+JO
 JL
 Pv
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-ck
-tJ
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+zt
+sT
 vQ
 bD
 fC
@@ -28184,7 +28190,7 @@ fC
 fC
 fC
 fC
-fC
+pb
 bD
 vQ
 FS
@@ -28318,44 +28324,44 @@ fC
 fC
 fC
 zP
-Xi
-wY
-pK
+OO
+mj
+XB
 gz
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-ck
-tJ
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+zt
+sT
 jn
 bD
 fC
@@ -28363,9 +28369,9 @@ fC
 jj
 fC
 Nu
-fC
-Ww
 pb
+Ww
+fC
 fC
 bD
 jn
@@ -28500,11 +28506,11 @@ fC
 fC
 fC
 fC
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 mW
 mW
 mW
@@ -28534,10 +28540,10 @@ mW
 mW
 mW
 mW
-kG
-kG
-ck
-tJ
+JO
+JO
+zt
+sT
 jn
 Lv
 fC
@@ -28546,8 +28552,8 @@ rq
 fC
 eO
 fC
-pb
 fC
+Ek
 fC
 bD
 jn
@@ -28682,11 +28688,11 @@ fC
 fC
 fC
 ne
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 Bv
 Fs
 Fs
@@ -28716,10 +28722,10 @@ tN
 Fs
 Fs
 Bv
-kG
-kG
-ck
-Td
+JO
+JO
+zt
+RG
 jn
 bD
 Ww
@@ -28864,11 +28870,11 @@ fC
 fC
 Bw
 Sy
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 Bv
 Fs
 rJ
@@ -28898,9 +28904,9 @@ Fs
 Az
 Fs
 Bv
-kG
-kG
-ck
+JO
+JO
+zt
 WQ
 vQ
 bD
@@ -29046,11 +29052,11 @@ fC
 Bw
 Sy
 Cv
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 Bv
 Fs
 Fs
@@ -29080,10 +29086,10 @@ he
 Fs
 Fs
 Bv
-kG
-kG
-ck
-bN
+JO
+JO
+zt
+NL
 vQ
 vQ
 jn
@@ -29228,11 +29234,11 @@ Km
 Sy
 TG
 TG
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 Bv
 hY
 Fs
@@ -29262,18 +29268,18 @@ pv
 tN
 gk
 Bv
-kG
-kG
-Zu
-bN
-rr
-bN
-Td
-Js
-Js
-Js
-Js
-Js
+JO
+JO
+KN
+NL
+lz
+NL
+RG
+DE
+DE
+DE
+DE
+DE
 fC
 fC
 fC
@@ -29410,11 +29416,11 @@ Km
 su
 MQ
 MQ
-Xi
-wY
-pK
-kG
-kG
+OO
+mj
+XB
+JO
+JO
 Bv
 KZ
 KZ
@@ -29444,18 +29450,18 @@ hQ
 tN
 Fs
 Bv
-kG
-kG
-kG
-ck
-bN
-bN
-bN
-Td
-mi
-Js
-Js
-Js
+JO
+JO
+JO
+zt
+NL
+NL
+NL
+RG
+ML
+DE
+DE
+DE
 fC
 fC
 fC
@@ -29588,15 +29594,15 @@ fC
 fC
 fC
 fC
-Fo
-lb
-lb
-lb
-PI
-wY
-pK
-kG
-kG
+Aa
+FB
+FB
+FB
+HV
+mj
+XB
+JO
+JO
 Bv
 GH
 Fs
@@ -29626,18 +29632,18 @@ lj
 sV
 tN
 Bv
-kG
-kG
-kG
-Zu
-bN
-bN
-bN
-bN
-bN
-Td
-Js
-Js
+JO
+JO
+JO
+KN
+NL
+NL
+NL
+NL
+NL
+RG
+DE
+DE
 fC
 fC
 Km
@@ -29770,15 +29776,15 @@ fC
 fC
 fC
 fC
-Xi
-bV
-DD
-DD
-DD
-Bb
-pK
-kG
-kG
+OO
+ZW
+NU
+NU
+NU
+vL
+XB
+JO
+JO
 Bv
 Fs
 Ue
@@ -29808,18 +29814,18 @@ he
 Gi
 tN
 rK
-kG
-kG
-kG
-kG
-Zu
-rU
-rU
-bN
-bN
-bN
-Td
-mi
+JO
+JO
+JO
+JO
+KN
+Ne
+Ne
+NL
+NL
+NL
+RG
+ML
 fC
 fC
 Km
@@ -29952,15 +29958,15 @@ hm
 fC
 fC
 fC
-Xi
-wY
-PI
-wU
-wU
-wU
-ok
-kG
-kG
+OO
+mj
+HV
+qk
+qk
+qk
+vM
+JO
+JO
 Bv
 Iz
 zY
@@ -29990,18 +29996,18 @@ Wj
 tN
 tN
 VM
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-Zu
-bN
-bN
-bN
-bN
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+KN
+NL
+NL
+NL
+NL
 nV
 fC
 fC
@@ -30134,15 +30140,15 @@ hm
 hm
 fC
 Bw
-Xi
-wY
-pK
-kG
-kG
-kG
-kG
-kG
-kG
+OO
+mj
+XB
+JO
+JO
+JO
+JO
+JO
+JO
 Bv
 Fs
 tN
@@ -30172,18 +30178,18 @@ hQ
 tN
 yf
 cC
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-Zu
-bN
-bN
-bN
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+KN
+NL
+NL
+NL
 nV
 fC
 hm
@@ -30316,15 +30322,15 @@ hm
 hm
 Km
 Sy
-Xi
-wY
-pK
-kG
-kG
-kG
-kG
-kG
-kG
+OO
+mj
+XB
+JO
+JO
+JO
+JO
+JO
+JO
 Bv
 xN
 Ew
@@ -30354,18 +30360,18 @@ iM
 oE
 Kk
 Bv
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-ck
-AC
-bN
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+zt
+RQ
+NL
 xt
 hm
 hm
@@ -30498,10 +30504,10 @@ hm
 hm
 Km
 Sy
-Xi
-wY
-pK
-Fo
+OO
+mj
+XB
+Aa
 Bv
 Bv
 Bv
@@ -30541,13 +30547,13 @@ Bv
 Bv
 Bv
 Bv
-rl
-lb
-lb
-lb
-lb
-lb
-lb
+Kq
+FB
+FB
+FB
+FB
+FB
+FB
 Pr
 Pr
 Pr
@@ -30680,9 +30686,9 @@ hm
 hm
 Bw
 Sy
-Xi
-wY
-pK
+OO
+mj
+XB
 NZ
 Mb
 bW
@@ -30724,12 +30730,12 @@ MU
 CB
 vc
 WP
-DD
-DD
-DD
-DD
-DD
-DD
+NU
+NU
+NU
+NU
+NU
+NU
 Xv
 Xv
 Xv
@@ -30862,10 +30868,10 @@ hm
 Mm
 Sy
 TG
-Xi
-wY
+OO
+mj
 bq
-Xi
+OO
 Mb
 Fs
 Fs
@@ -30906,12 +30912,12 @@ Uo
 tN
 lN
 Hs
-wU
-wU
-wU
-wU
-wU
-wU
+qk
+qk
+qk
+qk
+qk
+qk
 yG
 yG
 yG
@@ -31044,10 +31050,10 @@ hm
 Bw
 su
 MQ
-Xi
-wY
-pK
-Xi
+OO
+mj
+XB
+OO
 Mb
 tN
 FW
@@ -31088,12 +31094,12 @@ Hw
 tS
 lN
 Hs
-kG
-AN
-gx
-bN
-bN
-tJ
+JO
+vw
+IT
+NL
+NL
+sT
 hm
 fC
 fC
@@ -31226,10 +31232,10 @@ hm
 su
 MQ
 MQ
-Xi
-OL
+OO
+EQ
 gn
-Aa
+HJ
 zn
 gl
 PV
@@ -31270,12 +31276,12 @@ gl
 gl
 Rm
 hf
-kG
-ck
-AC
-bN
-dl
-Js
+JO
+zt
+RQ
+NL
+gU
+DE
 hm
 hm
 fC
@@ -31408,9 +31414,9 @@ Sy
 su
 MQ
 MQ
-Xi
-wY
-pK
+OO
+mj
+XB
 IL
 Mb
 tN
@@ -31452,12 +31458,12 @@ tN
 tN
 lN
 Hs
-kG
-ck
-bN
-dl
-Js
-Js
+JO
+zt
+NL
+gU
+DE
+DE
 hm
 hm
 hm
@@ -31590,10 +31596,10 @@ IJ
 su
 MQ
 MQ
-Xi
-wY
-pK
-Xi
+OO
+mj
+XB
+OO
 Mb
 ON
 Fs
@@ -31634,12 +31640,12 @@ DA
 Hw
 lN
 Hs
-lb
-lb
-lb
-lb
-lb
-rl
+FB
+FB
+FB
+FB
+FB
+Kq
 fC
 hm
 hm
@@ -31772,10 +31778,10 @@ Km
 ls
 MQ
 MQ
-Xi
-wY
-pK
-Xi
+OO
+mj
+XB
+OO
 Mb
 BU
 Fs
@@ -31816,12 +31822,12 @@ tN
 ko
 lN
 Ht
-rs
-PI
-PI
-PI
-PI
-pK
+mC
+HV
+HV
+HV
+HV
+XB
 fC
 hm
 hm
@@ -31954,10 +31960,10 @@ Km
 Sy
 Jj
 MQ
-Xi
-wY
-pK
-DW
+OO
+mj
+XB
+Jf
 Bv
 Bv
 rK
@@ -31997,13 +32003,13 @@ rK
 rK
 Bv
 Bv
-ok
+vM
 PU
-wU
-wU
-PI
-PI
-pK
+qk
+qk
+HV
+HV
+XB
 fC
 fC
 fC
@@ -32136,10 +32142,10 @@ fC
 IJ
 Sy
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 Bv
 HB
 oG
@@ -32179,13 +32185,13 @@ YR
 xC
 iF
 Bv
-kG
+JO
 Qf
-Js
-Js
-Xi
-PI
-pK
+DE
+DE
+OO
+HV
+XB
 fC
 fC
 fC
@@ -32318,10 +32324,10 @@ hm
 hm
 IJ
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 rK
 Uf
 ge
@@ -32361,13 +32367,13 @@ yd
 ge
 lq
 rK
-Fo
+Aa
 ra
-lb
-lb
-PI
-PI
-pK
+FB
+FB
+HV
+HV
+XB
 fC
 fC
 fC
@@ -32500,10 +32506,10 @@ hm
 hm
 Mm
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 rK
 ij
 Pg
@@ -32543,13 +32549,13 @@ hb
 UM
 SD
 rK
-Xi
-wY
-PI
-PI
-PI
-PI
-pK
+OO
+mj
+HV
+HV
+HV
+HV
+XB
 fC
 fC
 fC
@@ -32682,10 +32688,10 @@ fC
 fC
 Bw
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 Bv
 Bs
 LS
@@ -32725,13 +32731,13 @@ LS
 qc
 UM
 Bv
-Xi
-wY
-PI
-wU
-wU
-wU
-ok
+OO
+mj
+HV
+qk
+qk
+qk
+vM
 fC
 fC
 fC
@@ -32864,10 +32870,10 @@ fC
 Km
 Sy
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 Bv
 Bv
 Bv
@@ -33046,10 +33052,10 @@ fC
 lW
 su
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 df
 hR
 hR
@@ -33228,10 +33234,10 @@ fC
 lW
 su
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 YU
 Id
 Id
@@ -33410,10 +33416,10 @@ fC
 Km
 su
 MQ
-Xi
-wY
-pK
-kG
+OO
+mj
+XB
+JO
 YU
 Id
 Id
@@ -33592,10 +33598,10 @@ fC
 Km
 Sy
 Jj
-Xi
-wY
-pK
-gx
+OO
+mj
+XB
+IT
 YU
 Id
 Id
@@ -33774,10 +33780,10 @@ fC
 Km
 Sy
 Sy
-Xi
-wY
-pK
-bN
+OO
+mj
+XB
+NL
 df
 hR
 hR
@@ -33956,10 +33962,10 @@ fC
 fC
 IJ
 Sy
-Xi
-wY
-pK
-bN
+OO
+mj
+XB
+NL
 iV
 Fm
 Fm
@@ -34138,45 +34144,45 @@ hm
 fC
 lW
 ls
-Xi
-wY
-pK
-bN
-bN
-bN
-bN
-bN
-wD
-kG
+OO
+mj
+XB
+NL
+NL
+NL
+NL
+NL
+Ex
+JO
 DQ
 JL
-bN
-bN
-bN
-bN
+NL
+NL
+NL
+NL
 sy
-bN
-bN
-bN
-bN
-bN
+NL
+NL
+NL
+NL
+NL
 sy
-bN
-bN
-wD
-kG
+NL
+NL
+Ex
+JO
 JL
 Pv
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
-kG
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
+JO
 xh
 iV
 nK
@@ -34320,46 +34326,46 @@ hm
 fC
 lW
 Sy
-Xi
-wY
-PI
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
-lb
+OO
+mj
+HV
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
+FB
 nS
 zL
 zL
@@ -34502,46 +34508,46 @@ hm
 hm
 fC
 IJ
-Xi
-OL
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
-DD
+OO
+EQ
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
+NU
 qy
 jX
 jX
@@ -34684,46 +34690,46 @@ hm
 hm
 fC
 fC
-Xi
-wY
-PI
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-PI
-PI
-PI
-PI
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-PI
-PI
-PI
-PI
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-wU
+OO
+mj
+HV
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+HV
+HV
+HV
+HV
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+HV
+HV
+HV
+HV
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
+qk
 nS
 zL
 zL
@@ -34866,45 +34872,45 @@ hm
 hm
 fC
 fC
-Xi
-wY
-pK
-kG
-kG
-kG
-rU
-rr
-bN
-bN
+OO
+mj
+XB
+JO
+JO
+JO
+Ne
+lz
+NL
+NL
 MC
 JL
-Xi
-PI
-PI
-pK
+OO
+HV
+HV
+XB
 sy
-Js
+DE
 hm
 hm
-Js
-Js
+DE
+DE
 sy
-Xi
-PI
-PI
-pK
+OO
+HV
+HV
+XB
 JL
 dS
-Js
-Js
+DE
+DE
 cd
-bN
-bN
-bN
-wD
-kG
-kG
-kG
+NL
+NL
+NL
+Ex
+JO
+JO
+JO
 xh
 iV
 zL
