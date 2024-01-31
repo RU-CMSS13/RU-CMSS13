@@ -403,6 +403,7 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/heavy_barrel/New()
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
+	velocity_mod = AMMO_SPEED_TIER_1
 	damage_mod = BULLET_DAMAGE_MULT_TIER_6
 	delay_mod = FIRE_DELAY_TIER_11
 
