@@ -117,7 +117,7 @@
 	trait_name = "Hardcore"
 	trait_desc = "One life. One chance. (Rifleman Only)"
 	applyable = TRUE
-	cost = 1
+	cost = -1
 
 /datum/character_trait/biology/hardcore/apply_trait(mob/living/carbon/human/target, datum/equipment_preset/preset)
 	if(target.job != JOB_SQUAD_MARINE)
