@@ -389,6 +389,7 @@ Defined in conflicts.dm of the #defines folder.
 	..()
 	accuracy_mod = HIT_ACCURACY_MULT_TIER_4
 	velocity_mod = AMMO_SPEED_TIER_1
+	damage_mod = BULLET_DAMAGE_MULT_TIER_2
 
 /obj/item/attachable/heavy_barrel
 	name = "barrel charger"
@@ -409,7 +410,7 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/heavy_barrel/Attach(obj/item/weapon/gun/G)
 	if(G.gun_category == GUN_CATEGORY_SHOTGUN)
-		damage_mod = BULLET_DAMAGE_MULT_TIER_1
+		damage_mod = BULLET_DAMAGE_MULT_TIER_4
 	else
 		damage_mod = BULLET_DAMAGE_MULT_TIER_6
 	..()
@@ -593,6 +594,7 @@ Defined in conflicts.dm of the #defines folder.
 	accuracy_mod = HIT_ACCURACY_MULT_TIER_4
 	scatter_mod = -SCATTER_AMOUNT_TIER_6
 	delay_mod = FIRE_DELAY_TIER_7
+	damage_mod = BULLET_DAMAGE_MULT_TIER_2
 
 /obj/item/attachable/mateba/long/Attach(obj/item/weapon/gun/G)
 	..()
@@ -612,6 +614,7 @@ Defined in conflicts.dm of the #defines folder.
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_4
 	scatter_mod = SCATTER_AMOUNT_TIER_6
 	delay_mod = -FIRE_DELAY_TIER_7
+	damage_mod = -BULLET_DAMAGE_MULT_TIER_4
 
 /obj/item/attachable/mateba/short/Attach(obj/item/weapon/gun/G)
 	..()
