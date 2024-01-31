@@ -282,6 +282,79 @@
 	name = "\improper XM4 pattern intelligence officer armor"
 	uniform_restricted = list(/obj/item/clothing/under/marine/officer, /obj/item/clothing/under/rank/qm_suit, /obj/item/clothing/under/marine/officer/intel)
 	specialty = "XM4 pattern intel"
+	slowdown = SLOWDOWN_ARMOR_LIGHT
+	desc = "The XM4 armor is custom made for Intelligence Officers, it has an experimental integrated motion detector attached. The R&D team spent an entire weekend designing this armor."
+	/// XM4 Integral Motion Detector Ability
+	actions_types = list(/datum/action/item_action/toggle, /datum/action/item_action/intel/toggle_motion_detector)
+	var/motion_detector = FALSE
+	var/obj/item/device/motiondetector/xm4/proximity
+	var/long_range_cooldown = 2
+	var/recycletime = 120
+
+/obj/item/clothing/suit/storage/marine/medium/rto/intel/Initialize(mapload, ...)
+	. = ..()
+	proximity = new(src)
+	update_icon()
+
+/datum/action/item_action/intel/action_activate()
+	if(!ishuman(owner))
+		return
+
+/datum/action/item_action/intel/update_button_icon()
+	return
+
+/datum/action/item_action/intel/toggle_motion_detector/New(Target, obj/item/holder)
+	. = ..()
+	name = "Toggle Motion Detector"
+	action_icon_state = "motion_detector"
+	button.name = name
+	button.overlays.Cut()
+	button.overlays += image('icons/mob/hud/actions.dmi', button, action_icon_state)
+
+/datum/action/item_action/intel/toggle_motion_detector/action_activate()
+	. = ..()
+	var/obj/item/clothing/suit/storage/marine/medium/rto/intel/armor = holder_item
+	armor.toggle_motion_detector(usr)
+
+/datum/action/item_action/intel/toggle_motion_detector/proc/update_icon()
+	if(!holder_item)
+		return
+	var/obj/item/clothing/suit/storage/marine/medium/rto/intel/armor = holder_item
+	if(armor.motion_detector)
+		button.icon_state = "template_on"
+	else
+		button.icon_state = "template"
+
+/obj/item/clothing/suit/storage/marine/medium/rto/intel/process()
+	if(!motion_detector)
+		STOP_PROCESSING(SSobj, src)
+	if(motion_detector)
+		recycletime--
+		if(!recycletime)
+			recycletime = initial(recycletime)
+			proximity.refresh_blip_pool()
+		long_range_cooldown--
+		if(long_range_cooldown)
+			return
+		long_range_cooldown = initial(long_range_cooldown)
+		proximity.scan()
+
+/obj/item/clothing/suit/storage/marine/medium/rto/intel/proc/toggle_motion_detector(mob/user)
+	to_chat(user,SPAN_NOTICE("You [motion_detector? "<B>disable</b>" : "<B>enable</b>"] \the [src]'s motion detector."))
+	if(!motion_detector)
+		playsound(loc,'sound/items/detector_turn_on.ogg', 25, 1)
+	else
+		playsound(loc,'sound/items/detector_turn_off.ogg', 25, 1)
+	motion_detector = !motion_detector
+	var/datum/action/item_action/intel/toggle_motion_detector/TMD = locate(/datum/action/item_action/intel/toggle_motion_detector) in actions
+	TMD.update_icon()
+	motion_detector()
+
+/obj/item/clothing/suit/storage/marine/medium/rto/intel/proc/motion_detector()
+	if(motion_detector)
+		START_PROCESSING(SSobj, src)
+	if(!motion_detector)
+		STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/suit/storage/marine/MP
 	name = "\improper M2 pattern MP armor"
