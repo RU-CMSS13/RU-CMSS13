@@ -817,7 +817,7 @@
 
 /obj/item/clothing/suit/storage/marine/M40
 	name = "\improper M40 armor"
-	desc = "A custom set of M40 armor designed for use by USCM stormtrooper. Contains thick kevlar shielding."
+	desc = "A custom set of M40 armor designed for use by USCM stormtrooper. Contains thick venlar shielding."
 	item_icons = list(WEAR_JACKET = 'fray-marines/icons/mob/human/onmob/suit_1.dmi')
 	icon_state = "st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGH
@@ -827,6 +827,7 @@
 	flags_heat_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
 	specialty = "M40 stormtrooper"
+	slowdown = SLOWDOWN_ARMOR_LIGHT
 	unacidable = TRUE
 
 #define FIRE_SHIELD_CD 150
