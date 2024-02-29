@@ -100,6 +100,9 @@
 	if(movement_force)
 		M.movement_force = movement_force.Copy()
 
+/datum/map_template/shuttle/uss_crash
+	shuttle_id = DROPSHIP_CRASH
+	name = "USS Crash"
 
 /datum/map_template/shuttle/vehicle
 	shuttle_id = MOBILE_SHUTTLE_VEHICLE_ELEVATOR

@@ -228,6 +228,8 @@
 	var/surge_cooldown = 90 SECONDS
 	var/surge_incremental_reduction = 3 SECONDS
 
+	var/crash_mode = FALSE
+
 	protection_level = TURF_PROTECTION_OB
 
 	lesser_drone_spawn_limit = 10
@@ -276,7 +278,7 @@
 			// Update everyone's queue status
 			message_alien_candidates(players_with_xeno_pref, dequeued = count_spawned)
 
-		if(linked_hive.hijack_burrowed_surge && (last_surge_time + surge_cooldown) < world.time)
+		if((linked_hive.hijack_burrowed_surge || crash_mode) && (last_surge_time + surge_cooldown) < world.time)
 			last_surge_time = world.time
 			linked_hive.stored_larva++
 			linked_hive.hijack_burrowed_left--

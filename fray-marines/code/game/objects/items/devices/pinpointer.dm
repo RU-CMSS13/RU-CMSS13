@@ -1,4 +1,3 @@
-/*relocated to fray-marines same dir
 /obj/item/device/pinpointer
 	name = "pinpointer"
 	icon_state = "pinoff"
@@ -9,31 +8,40 @@
 	throw_speed = SPEED_VERY_FAST
 	throw_range = 20
 	matter = list("metal" = 500)
-	var/obj/item/disk/nuclear/the_disk = null
-	var/active = 0
-
+	var/active
+	var/atom/movable/target
+	var/list/tracked_list
 
 /obj/item/device/pinpointer/attack_self()
-	..()
+	. = ..()
 
 	if(!active)
-		active = 1
-		workdisk()
-		to_chat(usr, SPAN_NOTICE(" You activate the pinpointer"))
+		activate(usr)
 	else
-		active = 0
-		icon_state = "pinoff"
-		to_chat(usr, SPAN_NOTICE(" You deactivate the pinpointer"))
+		deactivate(usr)
+
+/obj/item/device/pinpointer/proc/set_target(mob/user)
+	if(!length(tracked_list))
+		to_chat(user, SPAN_WARNING("No traceable signals found!"))
+		return
+	target = tgui_input_list(user, "Select the item you wish to track.", "Pinpointer", tracked_list)
+	if(QDELETED(target))
+		return
+	var/turf/pinpointer_loc = get_turf(src)
+	if(target.z != pinpointer_loc.z)
+		to_chat(user, SPAN_WARNING("Chosen target signal too weak. Choose another."))
+		target = null
+		return
 
 /obj/item/device/pinpointer/proc/workdisk()
 	if(!active) return
-	if(!the_disk)
-		the_disk = locate()
-		if(!the_disk)
+	if(!target)
+		target = pick(tracked_list)
+		if(!target)
 			icon_state = "pinonnull"
 			return
-	setDir(Get_Compass_Dir(src,the_disk))
-	switch(get_dist(src,the_disk))
+	setDir(get_dir(src,target))
+	switch(get_dist(src,target))
 		if(0)
 			icon_state = "pinondirect"
 		if(1 to 8)
@@ -50,13 +58,63 @@
 		if(bomb.timing)
 			. += "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]"
 
+/obj/item/device/pinpointer/proc/activate(mob/user)
+	set_target(user)
+	if(!target)
+		return
+	active = TRUE
+	START_PROCESSING(SSobj, src)
+	to_chat(user, "<span class='notice'>You activate the pinpointer</span>")
+
+
+/obj/item/device/pinpointer/proc/deactivate(mob/user)
+	active = FALSE
+	target = null
+	STOP_PROCESSING(SSobj, src)
+	icon_state = "pinoff"
+	to_chat(user, "<span class='notice'>You deactivate the pinpointer</span>")
+
+
+/obj/item/device/pinpointer/process()
+	if(!target)
+		icon_state = "pinonnull"
+		active = FALSE
+		return
+
+	setDir(get_dir(src, target))
+	switch(get_dist(src, target))
+		if(0)
+			icon_state = "pinondirect"
+		if(1 to 8)
+			icon_state = "pinonclose"
+		if(9 to 16)
+			icon_state = "pinonmedium"
+		if(16 to INFINITY)
+			icon_state = "pinonfar"
+
+
+/obj/item/device/pinpointer/nuke
+	name = "Nuke Pinpointer"
+	desc = "A pinpointer designed to detect the encrypted emissions of nuclear devices"
+
+/obj/item/device/pinpointer/nuke/Initialize()
+	. = ..()
+	tracked_list += GLOB.nuke_disk_generators
+	tracked_list += GLOB.nuke_list
+
+/obj/item/device/pinpointer/nuke/examine(mob/user)
+	. = ..()
+	for(var/i in GLOB.nuke_list)
+		var/obj/structure/machinery/nuclearbomb/bomb = i
+		if(bomb.timing)
+			continue
+		to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")
 
 /obj/item/device/pinpointer/advpinpointer
 	name = "Advanced Pinpointer"
 	desc = "A larger version of the normal pinpointer, this unit features a helpful quantum entanglement detection system to locate various objects that do not broadcast a locator signal."
 	var/mode = 0  // Mode 0 locates disk, mode 1 locates coordinates.
 	var/turf/location = null
-	var/obj/target = null
 
 /obj/item/device/pinpointer/advpinpointer/attack_self()
 	..()
@@ -74,14 +132,13 @@
 		icon_state = "pinoff"
 		to_chat(usr, SPAN_NOTICE(" You deactivate the pinpointer"))
 
-
 /obj/item/device/pinpointer/advpinpointer/proc/worklocation()
 	if(!active)
 		return
 	if(!location)
 		icon_state = "pinonnull"
 		return
-	setDir(Get_Compass_Dir(src,location))
+	setDir(get_dir(src,location))
 	switch(get_dist(src,location))
 		if(0)
 			icon_state = "pinondirect"
@@ -93,14 +150,13 @@
 			icon_state = "pinonfar"
 	spawn(5) .()
 
-
 /obj/item/device/pinpointer/advpinpointer/proc/workobj()
 	if(!active)
 		return
 	if(!target)
 		icon_state = "pinonnull"
 		return
-	setDir(Get_Compass_Dir(src,target))
+	setDir(get_dir(src,target))
 	switch(get_dist(src,target))
 		if(0)
 			icon_state = "pinondirect"
@@ -119,7 +175,7 @@
 
 	active = 0
 	icon_state = "pinoff"
-	target=null
+	target = null
 	location = null
 
 	switch(alert("Please select the mode you want to put the pinpointer in.", "Pinpointer Mode Select", "Location", "Disk Recovery", "Other Signature"))
@@ -145,4 +201,3 @@
 		if("Disk Recovery")
 			mode = 0
 			return attack_self()
-*/
