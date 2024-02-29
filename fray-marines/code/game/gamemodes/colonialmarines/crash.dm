@@ -129,7 +129,7 @@
 
 	// Shuttle crash point creating
 	var/obj/docking_port/stationary/crashmode/temp_crashable_port
-	for(var/i = 1 to 10)
+	for(var/i = 1 to 20)
 		var/list/all_ground_levels = SSmapping.levels_by_trait(ZTRAIT_GROUND)
 		var/ground_z_level = all_ground_levels[1]
 

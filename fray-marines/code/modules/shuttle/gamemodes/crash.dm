@@ -4,6 +4,8 @@
 	name = "USS Crash Site"
 	width = 29
 	height = 19
+	dwidth = 14
+	dheight = 9
 	dir = NORTH
 
 /obj/docking_port/stationary/crashmode/on_prearrival()
@@ -23,12 +25,15 @@
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(cell_explosion), rear, 600, 40, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause_data)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(cell_explosion), left, 600, 40, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause_data)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(cell_explosion), right, 600, 40, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause_data)
+
 // -- Shuttles
 
 /obj/docking_port/mobile/crashmode
 	name = "USS Heart Of Gold"
 	width = 29
 	height = 19
+	dwidth = 14
+	dheight = 9
 	preferred_direction = SOUTH
 
 	callTime = 10 MINUTES
@@ -36,6 +41,12 @@
 	prearrivalTime = 12 SECONDS
 
 	var/list/blended = list()
+
+/obj/docking_port/mobile/crashmode/canDock(obj/docking_port/stationary/S)
+	if(crashing)
+		return TRUE
+	else
+		return ..()
 
 /obj/docking_port/mobile/crashmode/register()
 	. = ..()
