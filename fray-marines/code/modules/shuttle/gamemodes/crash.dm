@@ -97,8 +97,6 @@
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/uss_crash/Topic(href, href_list)
 	. = ..()
-	if(.)
-		return
 
 	add_fingerprint(usr, "topic")
 
