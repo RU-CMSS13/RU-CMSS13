@@ -103,7 +103,7 @@
 	qdel(NS)
 	var/obj/effect/landmark/crash/resin_silo_spawn/RSS = SAFEPICK(GLOB.resin_silo_spawn_locs)
 	if(RSS)
-		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, GLOB.hive_datum[FACTION_XENOMORPH])
+		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, GLOB.hive_datum[XENO_HIVE_NORMAL])
 		core.crash_mode = TRUE
 		GLOB.xeno_resin_silos += core
 	qdel(RSS)
