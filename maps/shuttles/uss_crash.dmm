@@ -38,6 +38,7 @@
 /area/shuttle/uss_crash)
 "ae" = (
 /obj/structure/machinery/recharge_station,
+/obj/effect/landmark/start/synthetic,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -58,7 +59,6 @@
 	req_access = null;
 	req_one_access = null;
 	req_one_access_txt = null;
-	special_mode_rest = 1;
 	vend_x_offset = 0;
 	vend_y_offset = 0
 	},
@@ -397,7 +397,6 @@
 	req_access = null;
 	req_one_access = null;
 	req_one_access_txt = null;
-	special_mode_rest = 1;
 	vend_x_offset = 0
 	},
 /turf/open/floor/almayer{
@@ -409,7 +408,6 @@
 /obj/structure/machinery/cm_vending/clothing/smartgun/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -440,6 +438,7 @@
 /area/shuttle/uss_crash)
 "aU" = (
 /obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/computer/shuttle/shuttle_control/uss_crash,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -472,7 +471,7 @@
 /obj/structure/machinery/status_display{
 	pixel_y = 30
 	},
-/obj/structure/defcon_vendor,
+/obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -482,7 +481,6 @@
 /obj/structure/machinery/cm_vending/clothing/marine/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -498,8 +496,7 @@
 	},
 /obj/structure/machinery/cm_vending/gear/smartgun{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -573,8 +570,7 @@
 	},
 /obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -585,7 +581,6 @@
 /obj/structure/machinery/cm_vending/clothing/tl/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -598,7 +593,6 @@
 	req_access = null;
 	req_one_access = null;
 	req_one_access_txt = null;
-	special_mode_rest = 1;
 	vend_y_offset = 0
 	},
 /turf/open/floor/almayer{
@@ -643,8 +637,7 @@
 	},
 /obj/structure/machinery/cm_vending/gear/tl{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -705,7 +698,6 @@
 /obj/structure/machinery/cm_vending/clothing/leader/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -727,6 +719,7 @@
 /obj/structure/bed/chair/dropship/pilot{
 	dir = 4
 	},
+/obj/effect/landmark/start/captain,
 /turf/open/floor/almayer/uscm/directional{
 	dir = 8;
 	icon_state = "logo_c"
@@ -740,7 +733,6 @@
 	},
 /area/shuttle/uss_crash)
 "bz" = (
-/obj/structure/machinery/computer/shuttle/shuttle_control/uss_heart_of_gold,
 /obj/structure/transmitter{
 	dir = 8;
 	name = "Command Center Telephone";
@@ -774,7 +766,7 @@
 	},
 /area/shuttle/uss_crash)
 "bB" = (
-/obj/effect/landmark/late_join/marine,
+/obj/effect/landmark/start/marine,
 /turf/open/floor/almayer,
 /area/shuttle/uss_crash)
 "bC" = (
@@ -858,8 +850,7 @@
 "bI" = (
 /obj/structure/machinery/cm_vending/sorted/cargo_guns/squad_prep{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -870,7 +861,6 @@
 /obj/structure/machinery/cm_vending/clothing/engi/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -881,8 +871,7 @@
 "bK" = (
 /obj/structure/machinery/cm_vending/gear/leader{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -892,8 +881,7 @@
 "bL" = (
 /obj/structure/machinery/cm_vending/gear/engi{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -904,7 +892,6 @@
 /obj/structure/machinery/cm_vending/clothing/specialist/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -915,8 +902,7 @@
 "bN" = (
 /obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -930,7 +916,6 @@
 /obj/structure/machinery/cm_vending/clothing/medic/alpha{
 	req_access = null;
 	req_one_access = null;
-	special_mode_rest = 1;
 	squad_tag = null
 	},
 /turf/open/floor/almayer{
@@ -941,8 +926,7 @@
 "bP" = (
 /obj/structure/machinery/cm_vending/gear/spec{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -957,8 +941,7 @@
 "bR" = (
 /obj/structure/machinery/cm_vending/gear/medic{
 	req_access = null;
-	req_one_access = null;
-	special_mode_rest = 1
+	req_one_access = null
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
@@ -1024,14 +1007,16 @@
 	},
 /area/shuttle/uss_crash)
 "bW" = (
-/obj/effect/landmark/late_join/marine,
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/ert_spawns/distress_cryo,
+/obj/effect/landmark/start/marine/smartgunner,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
 	},
 /area/shuttle/uss_crash)
 "bX" = (
-/obj/effect/landmark/late_join/marine,
+/obj/effect/landmark/start/marine,
 /turf/open/floor/plating/plating_catwalk,
 /area/shuttle/uss_crash)
 "bY" = (
@@ -1281,7 +1266,7 @@
 /area/shuttle/uss_crash)
 "cE" = (
 /obj/structure/bed/chair/dropship/pilot,
-/obj/effect/landmark/start/intel,
+/obj/effect/landmark/start/engineering,
 /turf/open/floor/almayer,
 /area/shuttle/uss_crash)
 "cF" = (
@@ -1577,13 +1562,61 @@
 	tag = "icon-sterile"
 	},
 /area/shuttle/uss_crash)
+"hW" = (
+/obj/effect/landmark/start/marine/engineer,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/shuttle/uss_crash)
+"sR" = (
+/obj/effect/landmark/start/marine/engineer,
+/turf/open/floor/plating/plating_catwalk,
+/area/shuttle/uss_crash)
+"uY" = (
+/obj/effect/landmark/start/marine/medic,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/shuttle/uss_crash)
+"zB" = (
+/obj/effect/landmark/start/marine/leader,
+/turf/open/floor/plating/plating_catwalk,
+/area/shuttle/uss_crash)
 "zC" = (
 /turf/template_noop,
 /area/space)
+"BN" = (
+/obj/effect/landmark/start/marine/medic,
+/turf/open/floor/plating/plating_catwalk,
+/area/shuttle/uss_crash)
 "Ci" = (
-/obj/structure/machinery/cm_vending/ammo/squad_prep,
+/obj/effect/landmark/start/marine/medic,
+/turf/open/floor/almayer,
+/area/shuttle/uss_crash)
+"FP" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/ert_spawns/distress_cryo,
+/obj/effect/landmark/start/marine/spec,
 /turf/open/floor/almayer{
 	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/shuttle/uss_crash)
+"Jq" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/ert_spawns/distress_cryo,
+/obj/effect/landmark/start/marine,
+/turf/open/floor/almayer,
+/area/shuttle/uss_crash)
+"Ym" = (
+/obj/structure/bed/chair/vehicle{
+	dir = 4
+	},
+/obj/effect/landmark/start/professor,
+/turf/open/floor/almayer{
+	icon_state = "sterile_green";
 	tag = "icon-sterile"
 	},
 /area/shuttle/uss_crash)
@@ -1656,7 +1689,7 @@ ca
 bd
 be
 dp
-be
+Ym
 aO
 cl
 bG
@@ -1689,7 +1722,7 @@ ca
 aZ
 bW
 bK
-bW
+FP
 bP
 cf
 "}
@@ -1709,7 +1742,7 @@ cg
 br
 aX
 bB
-bX
+zB
 bB
 bw
 cf
@@ -1728,10 +1761,10 @@ dL
 dL
 dC
 cq
-dL
-dL
+bX
+bX
 aR
-dR
+bB
 bc
 cf
 "}
@@ -1749,8 +1782,8 @@ dL
 dR
 dC
 dC
-dR
-dR
+bB
+bB
 bj
 bB
 bc
@@ -1771,9 +1804,9 @@ dR
 aE
 ca
 bh
-dR
-bX
 bB
+bX
+Jq
 fg
 cf
 "}
@@ -1792,9 +1825,9 @@ dR
 el
 cn
 aY
-dR
-bX
 bB
+bX
+Jq
 by
 cf
 "}
@@ -1813,8 +1846,8 @@ dR
 el
 cn
 aY
-dR
-Ci
+bB
+aR
 bB
 bI
 cf
@@ -1834,9 +1867,9 @@ dR
 el
 ca
 bj
-dR
+bB
 bj
-dR
+bB
 bI
 cf
 "}
@@ -1855,9 +1888,9 @@ dR
 el
 ca
 ah
-dR
+bB
 aR
-dR
+Ci
 bO
 cf
 "}
@@ -1875,11 +1908,11 @@ dL
 dR
 el
 ca
-dC
-dL
-dL
-dL
-dC
+hW
+sR
+sR
+BN
+uY
 cf
 "}
 (15,1,1) = {"

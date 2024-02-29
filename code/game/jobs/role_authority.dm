@@ -261,7 +261,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 	if(istype(CO_surv_job))
 		CO_surv_job.set_spawn_positions(GLOB.players_preassigned)
 
-	if(SSnightmare.get_scenario_value("predator_round") && !Check_WO())
+	if(SSnightmare.get_scenario_value("predator_round") && !Check_WO() && !Check_Crash())
 		SSticker.mode.flags_round_type |= MODE_PREDATOR
 		send2chat("Predator round!", CONFIG_GET(string/new_round_alert_channel))
 		// Set predators starting amount based on marines assigned

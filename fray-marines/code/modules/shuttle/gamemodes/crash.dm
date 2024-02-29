@@ -4,6 +4,7 @@
 	name = "USS Crash Site"
 	width = 29
 	height = 19
+	dir = NORTH
 
 /obj/docking_port/stationary/crashmode/on_prearrival()
 	//clear areas around the shuttle with explosions
@@ -28,6 +29,7 @@
 	name = "USS Heart Of Gold"
 	width = 29
 	height = 19
+	preferred_direction = SOUTH
 
 	callTime = 10 MINUTES
 	ignitionTime = 5 SECONDS
@@ -55,6 +57,7 @@
 /obj/docking_port/stationary/crashmode/hangar
 	name = "Hangar Pad One"
 	id = DROPSHIP_CRASH
+	dir = NORTH
 //	roundstart_template = /datum/map_template/shuttle/uss_crash
 
 

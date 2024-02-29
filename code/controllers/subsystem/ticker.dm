@@ -49,6 +49,9 @@ SUBSYSTEM_DEF(ticker)
 	var/tutorial_disabled = FALSE //zonenote
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
+	if(!SSmapping.configs)
+		SSmapping.HACK_LoadMapConfig()
+
 	load_mode()
 
 	login_music = pick("sound/lobby/darkday.ogg",
@@ -175,19 +178,15 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, SPAN_BOLDNOTICE("Enjoy the game!"))
 	var/init_start = world.timeofday
-	//Create and announce mode
-	mode = config.pick_mode(GLOB.master_mode)
 
 	CHECK_TICK
 	if(!mode.can_start(bypass_checks))
 		to_chat(world, "Reverting to pre-game lobby.")
-		QDEL_NULL(mode)
 		GLOB.RoleAuthority.reset_roles()
 		return FALSE
 
 	CHECK_TICK
 	if(!mode.pre_setup() && !bypass_checks)
-		QDEL_NULL(mode)
 		to_chat(world, "<b>Error in pre-setup for [GLOB.master_mode].</b> Reverting to pre-game lobby.")
 		GLOB.RoleAuthority.reset_roles()
 		return FALSE
@@ -213,9 +212,6 @@ SUBSYSTEM_DEF(ticker)
 		cb.InvokeAsync()
 	LAZYCLEARLIST(round_start_events)
 	CHECK_TICK
-
-	// We need stats to track roundstart role distribution.
-	mode.setup_round_stats()
 
 	//Configure mode and assign player to special mode stuff
 	if (!(mode.flags_round_type & MODE_NO_SPAWN))
@@ -338,11 +334,17 @@ SUBSYSTEM_DEF(ticker)
 
 
 /datum/controller/subsystem/ticker/proc/load_mode()
-	var/mode = trim(file2text("data/mode.txt"))
-	if(mode)
-		GLOB.master_mode = SSmapping.configs[GROUND_MAP].force_mode ? SSmapping.configs[GROUND_MAP].force_mode : mode
+	var/cfg_mode = trim(file2text("data/mode.txt"))
+	if(SSmapping?.configs?[GROUND_MAP].force_mode)
+		GLOB.master_mode = SSmapping.configs[GROUND_MAP].force_mode
+	else if(cfg_mode)
+		GLOB.master_mode = cfg_mode
 	else
 		GLOB.master_mode = "Extended"
+
+	mode = config.pick_mode(GLOB.master_mode)
+	mode.setup_round_stats()
+
 	log_game("Saved mode is '[GLOB.master_mode]'")
 
 
