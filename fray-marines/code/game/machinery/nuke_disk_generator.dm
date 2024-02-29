@@ -3,6 +3,7 @@
 /obj/structure/machinery/computer/nuke_disk_generator
 	name = "nuke disk generator"
 	desc = "Used to generate the correct auth discs for the nuke."
+	icon = 'fray-marines/icons/obj/structures/machinery/computer.dmi'
 	icon_state = "nuke_red"
 
 	density = TRUE

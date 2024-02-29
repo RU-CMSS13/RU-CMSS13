@@ -754,11 +754,13 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 							lowest = S
 						else if(S.num_smartgun < lowest.num_smartgun)
 							lowest = S
-		if(!lowest)
-			var/ranpick = rand(1,4)
+		if(!length(mixed_squads))
+			to_chat(H, "Something went badly with randomize_squad()! Tell a coder!")
+		else if(!lowest)
+			var/ranpick = rand(1,mixed_squads.len)
 			lowest = mixed_squads[ranpick]
-		if(lowest) lowest.put_marine_in_squad(H)
-		else to_chat(H, "Something went badly with randomize_squad()! Tell a coder!")
+		else
+			lowest.put_marine_in_squad(H)
 
 	else
 		//Deal with marines. They get distributed to the lowest populated squad.
