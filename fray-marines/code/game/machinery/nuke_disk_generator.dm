@@ -53,7 +53,7 @@
 
 /obj/structure/machinery/computer/nuke_disk_generator/Destroy()
 	GLOB.nuke_disk_generators -= src
-	..()
+	. = ..()
 
 /obj/structure/machinery/computer/nuke_disk_generator/process()
 	. = ..()
