@@ -1,3 +1,7 @@
+/datum/equipment_preset/crash
+	faction = FACTION_MARINE
+	faction_group = FACTION_LIST_MARINE
+
 //*****************************************************************************************************//
 
 /datum/equipment_preset/synth/uscm/crash

@@ -111,7 +111,7 @@ GLOBAL_VAR_INIT(bomb_set, FALSE)
 			to_chat(usr, SPAN_INFO("You don't have the dexterity to do this!"))
 			return
 
-		if(isqueen(user))
+		if(isxeno(user))
 			if(timing && GLOB.bomb_set)
 				user.visible_message(SPAN_INFO("[user] begins engulfing \the [src] with resin."), SPAN_INFO("You start regurgitating and engulfing the \the [src] with resin... stopping the electronics from working, this will take some time..."))
 				if(do_after(user, 5 SECONDS, INTERRUPT_NO_NEEDHAND, BUSY_ICON_HOSTILE))

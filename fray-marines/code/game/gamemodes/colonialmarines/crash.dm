@@ -19,7 +19,8 @@
 		/datum/job/marine/smartgunner/crash = JOB_SQUAD_SMARTGUN,
 		/datum/job/marine/medic/crash = JOB_SQUAD_MEDIC,
 		/datum/job/marine/engineer/crash = JOB_SQUAD_ENGI,
-		/datum/job/marine/standard/crash = JOB_SQUAD_MARINE
+		/datum/job/marine/standard/crash = JOB_SQUAD_MARINE,
+		/datum/job/antag/xenos = JOB_XENOMORPH
 	)
 
 	population_min = 0
@@ -93,7 +94,7 @@
 /datum/game_mode/crash/pre_setup()
 	if(GLOB.RoleAuthority)
 		for(var/datum/squad/squad in GLOB.RoleAuthority.squads)
-			if(squad.faction == FACTION_MARINE && squad.name != "Root")
+			if(squad.faction == FACTION_MARINE && squad.name != "Root" && squad.name != "Alpha")
 				squad.roundstart = FALSE
 				squad.usable = FALSE
 
