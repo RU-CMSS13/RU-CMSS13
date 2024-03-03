@@ -19,8 +19,7 @@
 		/datum/job/marine/smartgunner/crash = JOB_SQUAD_SMARTGUN,
 		/datum/job/marine/medic/crash = JOB_SQUAD_MEDIC,
 		/datum/job/marine/engineer/crash = JOB_SQUAD_ENGI,
-		/datum/job/marine/standard/crash = JOB_SQUAD_MARINE,
-		/datum/job/antag/xenos = JOB_XENOMORPH
+		/datum/job/marine/standard/crash = JOB_SQUAD_MARINE
 	)
 
 	population_min = 0
@@ -40,7 +39,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/game_mode/crash/get_roles_list()
-	return GLOB.ROLES_CRASH
+	return GLOB.ROLES_CRASH + JOB_XENOMORPH
 
 /* Pre-pre-startup */
 /datum/game_mode/crash/can_start(bypass_checks = FALSE)
