@@ -445,7 +445,7 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 	if(GLOB.job_squad_roles.Find(J.title))
 		var/list/squad_list = list()
 		for(sq in GLOB.RoleAuthority.squads)
-			if(sq.usable)
+			if(sq.roundstart && sq.usable && sq.name != "Root")
 				squad_list += sq
 		sq = null
 		sq = input(user, "Select squad you want to free [J.title] slot from.", "Squad Selection")  as null|anything in squad_list
