@@ -20,6 +20,10 @@
 	var/turf/left = locate(C.x - leftright, C.y, C.z)
 	var/turf/right = locate(C.x + leftright, C.y, C.z)
 
+	if(is_ground_level(z) && !SSobjectives.first_drop_complete)
+		SSticker.mode.ds_first_landed(src)
+		SSticker.mode.flags_round_type |= MODE_DS_LANDED
+
 	var/datum/cause_data/cause_data = create_cause_data("посадки USS Crash")
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(cell_explosion), front, 600, 40, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause_data)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(cell_explosion), rear, 600, 40, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause_data)

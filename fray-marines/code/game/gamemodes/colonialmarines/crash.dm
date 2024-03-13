@@ -8,7 +8,7 @@
 	config_tag = "Crash"
 	required_players = 2
 	xeno_required_num = 1
-	flags_round_type = MODE_NEW_SPAWN|MODE_NO_SHIP_MAP
+	flags_round_type = MODE_NEW_SPAWN|MODE_NO_SHIP_MAP|MODE_INFESTATION
 	role_mappings = list(
 		/datum/job/command/commander/crash = JOB_CO,
 		/datum/job/civilian/synthetic/crash = JOB_SYNTH,
@@ -155,8 +155,7 @@
 		break
 
 	shuttle.crashing = TRUE
-	SSshuttle.moveShuttleToDock(shuttle, temp_crashable_port, TRUE) // FALSE = instant arrival
-	addtimer(CALLBACK(src, PROC_REF(crash_shuttle), temp_crashable_port), 10 MINUTES)
+	SSshuttle.moveShuttleToDock(shuttle, temp_crashable_port, TRUE)
 
 	..()
 
@@ -178,6 +177,10 @@
 		flags_round_type |= MODE_BASIC_RT
 
 	round_time_lobby = world.time
+
+	for(var/area/A in GLOB.all_areas)
+		if(!(A.is_resin_allowed))
+			A.is_resin_allowed = TRUE
 
 	open_podlocks("map_lockdown")
 
@@ -227,8 +230,9 @@
 #undef FOG_DELAY_INTERVAL
 #undef PODLOCKS_OPEN_WAIT
 
-/datum/game_mode/crash/proc/crash_shuttle(obj/docking_port/stationary/target)
-	sleep(1200)
+/datum/game_mode/crash/ds_first_landed()
+	. = ..()
+
 	shuttle_landed = TRUE
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(show_blurb_uscm)), DROPSHIP_DROP_MSG_DELAY)
 	// We delay this a little because the shuttle takes some time to land, and we want to the xenos to know the position of the marines.

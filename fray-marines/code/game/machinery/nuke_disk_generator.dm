@@ -37,12 +37,20 @@
 /obj/structure/machinery/computer/nuke_disk_generator/Initialize()
 	. = ..()
 
+	update_minimap_icon()
+
 	if(!disk_type)
 		WARNING("disk_type is required to be set before init")
 		return INITIALIZE_HINT_QDEL
 	GLOB.nuke_disk_generators += src
 	addtimer(CALLBACK(src, PROC_REF(check_mode)), 300 SECONDS)
 
+/obj/structure/machinery/computer/nuke_disk_generator/proc/update_minimap_icon()
+	if(!is_ground_level(z))
+		return
+
+	SSminimaps.remove_marker(src)
+	SSminimaps.add_marker(src, z, MINIMAP_FLAG_ALL, "border", 'icons/ui_icons/map_blips.dmi')
 
 /obj/structure/machinery/computer/nuke_disk_generator/ex_act(severity)
 	return
