@@ -56,6 +56,10 @@
 
 /obj/docking_port/mobile/crashmode/register()
 	. = ..()
+
+	// Add our own powernet
+	makepowernets()
+
 	SSshuttle.uss_crash = src
 	for(var/obj/structure/machinery/door/poddoor/almayer/blended/crash/B in GLOB.machines)
 		if(B.id == "crash_pod1")
