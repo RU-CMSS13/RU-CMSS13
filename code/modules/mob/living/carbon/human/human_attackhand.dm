@@ -108,7 +108,7 @@
 
 			visible_message(SPAN_DANGER("[attacking_mob] [pick(attack.attack_verb)]ed [src]!"), null, null, 5)
 
-			raw_damage = attack.damage + extra_cqc_dmg
+			raw_damage = attack.damage + extra_cqc_dmg * 2.5
 			var/final_damage = armor_damage_reduction(GLOB.marine_melee, raw_damage, armor, FALSE) // no penetration from punches
 			apply_damage(final_damage, BRUTE, affecting, sharp=attack.sharp, edge = attack.edge)
 
