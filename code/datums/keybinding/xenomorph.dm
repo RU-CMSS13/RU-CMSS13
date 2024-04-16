@@ -195,7 +195,7 @@
 	if(!current_xeno?.hive)
 		return
 
-	if((!current_xeno.hive.living_xeno_queen || Check_WO()) && !Check_Crash() && !current_xeno.hive.allow_no_queen_actions) //No Hive status on WO
+	if((!current_xeno.hive.living_xeno_queen || check_wo()) && !check_crash() && !current_xeno.hive.allow_no_queen_actions) //No Hive status on WO
 		to_chat(current_xeno, SPAN_WARNING("There is no Queen. We are alone."))
 		return
 

@@ -1,4 +1,4 @@
-/proc/Check_Crash()
+/proc/check_crash()
 	if(SSticker.mode == "Crash" || GLOB.master_mode == "Crash")
 		return TRUE
 	return FALSE
@@ -92,7 +92,7 @@
 
 /datum/game_mode/crash/pre_setup()
 	if(GLOB.RoleAuthority)
-		for(var/datum/squad/squad in GLOB.RoleAuthority.squads)
+		for(var/datum/squad/squad as anything in GLOB.RoleAuthority.squads)
 			if(squad.faction == FACTION_MARINE && squad.name != "Root" && squad.name != "Alpha")
 				squad.roundstart = FALSE
 				squad.usable = FALSE
@@ -108,8 +108,7 @@
 		GLOB.xeno_resin_silos += core
 	qdel(RSS)
 
-	for(var/i in GLOB.shuttle_controls)
-		var/obj/structure/machinery/computer/shuttle_control/computer_to_disable = i
+	for(var/obj/structure/machinery/computer/shuttle_control/computer_to_disable as anything in GLOB.shuttle_controls)
 		if(istype(computer_to_disable, /obj/structure/machinery/computer/shuttle/shuttle_control/uss_crash))
 			continue
 		computer_to_disable.stat |= BROKEN
@@ -196,7 +195,7 @@
 			SSitem_cleanup.delete_almayer()
 
 /datum/game_mode/crash/announce()
-	to_chat(world, "<span class='round_header'>Ship crashed over - [SSmapping.configs[GROUND_MAP].map_name]! You know all about enemy, time to final battle!</span>")
+	to_chat(world, SPAN_ROUNDHEADER("Your ship has crashed over - [SSmapping.configs[GROUND_MAP].map_name]! You know everything about the enemy, time for the final battle!"))
 	marine_announcement("Scheduled for landing in T-10 Minutes. Prepare for landing. Known hostiles near LZ. Detonation Protocol Active, planet disposable. Marines disposable.")
 	playsound(shuttle, 'sound/machines/warning-buzzer.ogg', 75, 0, 30)
 

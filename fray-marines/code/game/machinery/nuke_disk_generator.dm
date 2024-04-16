@@ -56,7 +56,7 @@
 	return
 
 /obj/structure/machinery/computer/nuke_disk_generator/proc/check_mode()
-	if(!Check_Crash())
+	if(!check_crash())
 		qdel(src)
 
 /obj/structure/machinery/computer/nuke_disk_generator/Destroy()

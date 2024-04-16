@@ -300,7 +300,7 @@
 	var/list/departments
 	if(is_centcom)
 		departments = list("CentCom" = get_all_centcom_jobs())
-	else if(Check_WO())
+	else if(check_wo())
 		// I am not sure about WOs departments so it may need adjustment
 		departments = list(
 			CARDCON_DEPARTMENT_COMMAND = GLOB.ROLES_CIC & GLOB.ROLES_WO,
@@ -312,7 +312,7 @@
 			CARDCON_DEPARTMENT_MEDICAL = GLOB.ROLES_MEDICAL & GLOB.ROLES_WO,
 			CARDCON_DEPARTMENT_MARINE = GLOB.ROLES_MARINES
 		)
-	else if(Check_Crash())
+	else if(check_crash())
 		// I am not sure about WOs departments so it may need adjustment
 		departments = list(
 			CARDCON_DEPARTMENT_COMMAND = GLOB.ROLES_CIC & GLOB.ROLES_CRASH,
