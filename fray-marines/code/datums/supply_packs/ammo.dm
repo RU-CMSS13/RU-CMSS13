@@ -1,4 +1,4 @@
-/datum/supply_packs/MK1AP
+/datum/supply_packs/mk1ap
 	contains = list(
 		/obj/item/ammo_box/magazine/mk1/ap
 	)
@@ -8,7 +8,7 @@
 	containername = "Magazine box (M41A MK1, 8x AP mags)"
 	group = "Ammo"
 
-/datum/supply_packs/MK1
+/datum/supply_packs/mk1
 	contains = list(
 		/obj/item/ammo_box/magazine/mk1
 	)
