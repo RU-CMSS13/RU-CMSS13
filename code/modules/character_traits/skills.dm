@@ -138,8 +138,7 @@
 	trait_name = "Police Training"
 	trait_desc = "Boosts the policing skill by 2. Before the army, You was the police officer, you know how to protect yourself against pepper spray, how to strip the equipment faster, and use all police stuff."
 	skill = SKILL_POLICE
-	cost = 1
-	skill_increment = 2
+	cost = 2
 	applyable = FALSE
 
 /datum/character_trait/skills/surgery
