@@ -140,6 +140,7 @@
 	skill = SKILL_POLICE
 	cost = 1
 	skill_increment = 2
+	applyable = FALSE
 
 /datum/character_trait/skills/surgery
 	trait_name = "Surgery Training"
