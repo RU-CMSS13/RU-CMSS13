@@ -97,13 +97,18 @@
 				squad.roundstart = FALSE
 				squad.usable = FALSE
 
+	var/datum/hive_status/hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
+	hive.allow_queen_evolve = FALSE
+	hive.allow_no_queen_evo = TRUE
+	hive.allow_no_queen_actions = TRUE
+
 	var/obj/effect/landmark/crash/nuclear_spawn/NS = SAFEPICK(GLOB.nuke_spawn_locs)
 	if(NS)
 		GLOB.nuke_list += new /obj/structure/machinery/nuclearbomb/crash(NS.loc)
 	qdel(NS)
 	var/obj/effect/landmark/crash/resin_silo_spawn/RSS = SAFEPICK(GLOB.resin_silo_spawn_locs)
 	if(RSS)
-		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, GLOB.hive_datum[XENO_HIVE_NORMAL])
+		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, hive)
 		core.crash_mode = TRUE
 		GLOB.xeno_resin_silos += core
 	qdel(RSS)

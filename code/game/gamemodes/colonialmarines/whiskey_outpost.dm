@@ -1,6 +1,5 @@
 #define WO_MAX_WAVE 15
 
-//Global proc for checking if the game is whiskey outpost so I dont need to type if(gamemode == whiskey outpost) 50000 times
 /proc/check_wo()
 	if(SSticker.mode == GAMEMODE_WHISKEY_OUTPOST || GLOB.master_mode == GAMEMODE_WHISKEY_OUTPOST)
 		return TRUE
@@ -97,6 +96,9 @@
 	for(var/obj/effect/landmark/whiskey_outpost/supplydrops/S)
 		supply_spawns += S.loc
 
+	var/datum/hive_status/hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
+	hive.allow_queen_evolve = FALSE
+	hive.allow_no_queen_actions = TRUE
 
 	//  WO waves
 	var/list/paths = typesof(/datum/whiskey_outpost_wave) - /datum/whiskey_outpost_wave - /datum/whiskey_outpost_wave/random

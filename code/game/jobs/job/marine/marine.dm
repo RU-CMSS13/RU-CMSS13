@@ -12,7 +12,7 @@
 
 /datum/job/marine/generate_entry_conditions(mob/living/carbon/human/current_human)
 	..()
-	if(!check_wo())
+	if(!check_wo() || !check_crash())
 		current_human.nutrition = rand(NUTRITION_VERYLOW, NUTRITION_LOW) //Start hungry for the default marine.
 
 /datum/timelock/squad
