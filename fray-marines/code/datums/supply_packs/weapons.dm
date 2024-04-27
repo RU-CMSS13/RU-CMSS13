@@ -13,7 +13,7 @@
         /obj/item/defenses/handheld/sentry/flamer,
 	)
 	name = "UA 42-F Sentry Flamer"
-	cost = 60
+	cost = 65
 	containertype = /obj/structure/closet/crate/supply
 	containername = "UA 42-F Sentry Flamer (x1)"
 	group = "Weapons"
@@ -23,7 +23,7 @@
         /obj/item/defenses/handheld/tesla_coil,
 	)
 	name = "21S Tesla Coil"
-	cost = 40
+	cost = 50
 	containertype = /obj/structure/closet/crate/supply
 	containername = "21S Tesla Coil (x1)"
 	group = "Weapons"
@@ -33,7 +33,7 @@
         /obj/item/defenses/handheld/planted_flag,
 	)
 	name = "JIMA Planted Flag"
-	cost = 25
+	cost = 30
 	containertype = /obj/structure/closet/crate/supply
 	containername = "JIMA Planted Flag (x1)"
 	group = "Weapons"
