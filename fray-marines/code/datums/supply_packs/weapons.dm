@@ -46,7 +46,7 @@
 		/obj/item/defenses/handheld/sentry,
 	)
 	name = "Sentry mix, all in one"
-	cost = 120
+	cost = 150
 	containertype = /obj/structure/closet/crate/supply
 	containername = "JIMA Planted Flag (x1)\n21S Tesla Coil (x1)\nUA 42-F Sentry Flamer (x1)\nUA 571-C Sentry Gun (x1)"
 	group = "Weapons"
