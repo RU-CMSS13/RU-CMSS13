@@ -67,6 +67,7 @@
 		sleep(10)
 
 /datum/dropship_hijack/almayer/proc/finish_landing()
+	if (!ferry_crashed)	return	// Nope! Doesn't count!
 	SShijack.announce_status_on_crash()
 	SSticker.hijack_ocurred()
 
