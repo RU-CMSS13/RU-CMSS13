@@ -292,6 +292,7 @@
 
 //Big Red V2
 /area/bigredv2
+	powernet_name = "ground"
 	can_build_special = TRUE
 	ambience_exterior = AMBIENCE_BIGRED
 	soundscape_playlist = SCAPE_PL_THUNDER
