@@ -15,7 +15,7 @@ FORBID_INCLUDE = [
     # Included by _ndatabase/includes.dm
     r'code/datums/_ndatabase/**/*.dm',
 
-    # Included by __DEFINES/includes.dm
+    # Included by __DEFINES/__includes.dm
     r'code/__DEFINES/fray-marines/*.dm',
 
     # Included by BSQL/includes.dm
