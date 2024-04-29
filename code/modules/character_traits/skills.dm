@@ -106,7 +106,7 @@
 
 /datum/character_trait/skills/cqc
 	trait_name = "Close Quarters Training"
-	trait_desc = "Boosts the cqc skill to 1. Before the army You were involved in martial arts, and You can stand up for yourself. + 2.5 damage per lvl in cqc, and +5% to disarm an opponent"
+	trait_desc = "Boosts the cqc skill to 1. Before the army You were involved in martial arts, and You can stand up for yourself. + 2.5 damage per lvl in cqc, and +10% to disarm an opponent"
 	skill = SKILL_CQC
 	skill_cap = 3
 	skill_increment = 1
@@ -136,7 +136,7 @@
 
 /datum/character_trait/skills/police
 	trait_name = "Police Training"
-	trait_desc = "Boosts the policing skill by 2. Before the army, Crewman recieved police training by 1."
+	trait_desc = "Boosts the policing skill by 1. You received standard anti-riot equipment training, now you're available to use flash."
 	skill = SKILL_POLICE
 	cost = 2
 	applyable = FALSE
