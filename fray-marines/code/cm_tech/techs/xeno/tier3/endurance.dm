@@ -42,7 +42,7 @@
 
 /datum/tech/xeno/endurance/process(delta_time)
 	for(var/i in hive.totalXenos)
-		var/mob/living/carbon/Xenomorph/X = i
+		var/mob/living/carbon/xenomorph/X = i
 		var/turf/T = get_turf(X)
 		if(!T.weeds)
 			X.apply_damage(-(heal_amt_per_second*delta_time), BRUTE)
