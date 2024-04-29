@@ -1,7 +1,7 @@
 /datum/tech/droppod/item/barrel
 	name = "Upgraded barrel charger modification"
 	desc = "Gives marines powerful modification UPC for M41"
-	icon_state = "medic_qol"
+	icon_state = "adv_bc"
 	droppod_name = "UPC Modification"
 
 	flags = TREE_FLAG_MARINE
