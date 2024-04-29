@@ -257,7 +257,7 @@
 					if(!is_type_in_list(I,known_implants))
 						surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"shrapnel")
 			if(M.incision_depths[L.name] != SURGERY_DEPTH_SURFACE)
-				surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"open") 
+				surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"open")
 
 	var/datum/internal_organ/I = M.internal_organs_by_name["eyes"]
 	if(I && (M.disabilities & NEARSIGHTED || M.sdisabilities & DISABILITY_BLIND || I.damage > 0))
@@ -488,7 +488,7 @@
 							visible_message("[icon2html(src, viewers(src))] \The <b>[src]</b> speaks: Procedure has been deemed unnecessary.");
 							surgery_todo_list -= S
 							continue
-						
+
 						open_incision(H,S.limb_ref)
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							open_encased(H,S.limb_ref)
@@ -500,11 +500,16 @@
 									S.limb_ref.implants -= I
 									H.embedded_items -= I
 									qdel(I)
-						var/obj/item/larva_ref = locate(/obj/item/alien_embryo) in H.contents
-						if(S.limb_ref.name == "chest" && larva_ref)
+						var/obj/item/alien_embryo/A = locate() in H.contents
+						if(S.limb_ref.name == "chest" && A)
 							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-							H.contents -= larva_ref
-						qdel(larva_ref)
+							var/mob/living/carbon/xenomorph/larva/L = locate() in H.contents
+							if(L)
+								L.forceMove(H.loc.loc)
+								qdel(A)
+							else
+								A.forceMove(H.loc)
+								H.status_flags &= ~XENO_HOST
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							close_encased(H,S.limb_ref)
 						if(!surgery) break
