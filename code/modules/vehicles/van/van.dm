@@ -83,7 +83,7 @@
 
 	icon_state = null
 
-	RegisterSignal(SSdcs, COMSIG_GLOB_MOB_LOGIN, PROC_REF(add_default_image))
+	RegisterSignal(SSdcs, COMSIG_GLOB_MOB_LOGGED_IN, PROC_REF(add_default_image))
 
 	for(var/I in GLOB.player_list)
 		add_default_image(SSdcs, I)
@@ -125,7 +125,7 @@
 
 	mobs_under += L
 	RegisterSignal(L, COMSIG_PARENT_QDELETING, PROC_REF(remove_under_van))
-	RegisterSignal(L, COMSIG_MOB_LOGIN, PROC_REF(add_client))
+	RegisterSignal(L, COMSIG_MOB_LOGGED_IN, PROC_REF(add_client))
 	RegisterSignal(L, COMSIG_MOVABLE_MOVED, PROC_REF(check_under_van))
 
 	if(L.client)
@@ -141,7 +141,7 @@
 
 	UnregisterSignal(L, list(
 		COMSIG_PARENT_QDELETING,
-		COMSIG_MOB_LOGIN,
+		COMSIG_MOB_LOGGED_IN,
 		COMSIG_MOVABLE_MOVED,
 	))
 
@@ -241,3 +241,52 @@
 		return FALSE
 
 	return ..()
+
+/*
+** PRESETS SPAWNERS
+*/
+
+/obj/effect/vehicle_spawner/van
+	name = "Van Spawner"
+	icon = 'icons/obj/vehicles/van.dmi'
+	icon_state = "van_base"
+	pixel_x = -16
+	pixel_y = -16
+
+/obj/effect/vehicle_spawner/van/Initialize()
+	. = ..()
+	spawn_vehicle()
+	qdel(src)
+
+//PRESET: no hardpoints
+/obj/effect/vehicle_spawner/van/spawn_vehicle()
+	var/obj/vehicle/multitile/van/VAN = new (loc)
+
+	load_misc(VAN)
+	handle_direction(VAN)
+	VAN.update_icon()
+
+//PRESET: wheels installed, destroyed
+/obj/effect/vehicle_spawner/van/decrepit/spawn_vehicle()
+	var/obj/vehicle/multitile/van/VAN = new (loc)
+
+	load_misc(VAN)
+	load_hardpoints(VAN)
+	handle_direction(VAN)
+	load_damage(VAN)
+	VAN.update_icon()
+
+/obj/effect/vehicle_spawner/van/decrepit/load_hardpoints(obj/vehicle/multitile/van/V)
+	V.add_hardpoint(new /obj/item/hardpoint/locomotion/van_wheels)
+
+//PRESET: wheels installed
+/obj/effect/vehicle_spawner/van/fixed/spawn_vehicle()
+	var/obj/vehicle/multitile/van/VAN = new (loc)
+
+	load_misc(VAN)
+	load_hardpoints(VAN)
+	handle_direction(VAN)
+	VAN.update_icon()
+
+/obj/effect/vehicle_spawner/van/fixed/load_hardpoints(obj/vehicle/multitile/van/V)
+	V.add_hardpoint(new /obj/item/hardpoint/locomotion/van_wheels)
