@@ -1,8 +1,8 @@
 /datum/tech/droppod/item/barrel
 	name = "Upgraded barrel charger modification"
-	desc = "Gives marines powerful modification UPC for M41"
+	desc = "Gives marines powerful modification UBC for your weapon"
 	icon_state = "adv_bc"
-	droppod_name = "UPC Modification"
+	droppod_name = "UBC Modification"
 
 	flags = TREE_FLAG_MARINE
 
@@ -14,4 +14,4 @@
 /datum/tech/droppod/item/barrel/get_options(mob/living/carbon/human/H, obj/structure/droppod/D)
 	. = ..()
 
-	.["Upgrade Barrel Charger"] = /obj/item/attachable/upc
+	.["Upgraded Barrel Charger"] = /obj/item/attachable/heavy_barrel/upgraded
