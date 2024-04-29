@@ -14,4 +14,4 @@
 /datum/tech/droppod/item/barrel/get_options(mob/living/carbon/human/H, obj/structure/droppod/D)
 	. = ..()
 
-	.["Upgrade Barrel Charger"] = /obj/item/attachable/heavy_barrel
+	.["Upgrade Barrel Charger"] = /obj/item/attachable/upc
