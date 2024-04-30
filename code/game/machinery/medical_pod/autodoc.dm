@@ -500,16 +500,17 @@
 									S.limb_ref.implants -= I
 									H.embedded_items -= I
 									qdel(I)
-						var/obj/item/alien_embryo/A = locate() in H.contents
-						if(S.limb_ref.name == "chest" && A)
+						var/obj/item/alien_embryo/alien_embryo = locate() in H.contents
+						if(S.limb_ref.name == "chest" && alien_embryo)
 							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-							var/mob/living/carbon/xenomorph/larva/L = locate() in H.contents
-							if(L)
-								L.forceMove(H.loc.loc)
-								qdel(A)
+							var/mob/living/carbon/xenomorph/larva/larva_ref = locate() in H.contents
+							if(larva_ref)
+								larva_ref.forceMove(get_turf(H))
+								qdel(alien_embryo)
 							else
-								A.forceMove(H.loc)
+								alien_embryo.forceMove(get_turf(H))
 								H.status_flags &= ~XENO_HOST
+							H.emote("scream")
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							close_encased(H,S.limb_ref)
 						if(!surgery) break
