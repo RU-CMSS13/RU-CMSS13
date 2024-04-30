@@ -307,6 +307,8 @@
 	set waitfor = 0
 	if(victim.chestburst || loc != victim)
 		return
+	if(istype(victim.loc, /obj/structure/machinery/medical_pod/autodoc))
+		return
 	victim.chestburst = TRUE
 	to_chat(src, SPAN_DANGER("We start bursting out of [victim]'s chest!"))
 	if(!HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
