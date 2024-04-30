@@ -173,13 +173,14 @@ SUBSYSTEM_DEF(who)
 			"text" = "Neutrals",
 		))
 
-	for(var/faction_to_get in FACTION_LIST_XENOMORPH)
+	for(var/faction_to_get in ALL_XENO_HIVES)
 		var/datum/hive_status/hive = GLOB.hive_datum[faction_to_get]
-		new_list_data["xenomorphs"] += list(list(
-			"content" = "[hive.name]: [length(hive.totalXenos)]",
-			"color" = hive.color ? hive.color : "#8200FF",
-			"text" = "Queen: [hive.living_xeno_queen ? "Alive" : "Dead"]",
-		))
+		if(hive && length(hive.totalXenos))
+			new_list_data["xenomorphs"] += list(list(
+				"content" = "[hive.name]: [length(hive.totalXenos)]",
+				"color" = hive.color ? hive.color : "#8200FF",
+				"text" = "Queen: [hive.living_xeno_queen ? "Alive" : "Dead"]",
+			))
 
 	list_data = new_list_data
 	mobs_ckey = new_mobs_ckey
