@@ -14,11 +14,11 @@ export const Who = (props, context) => {
   } = data;
 
   return (
-    <Window resizable width={600} height={600}>
+    <Window resizable width={800} height={600}>
       <Window.Content scrollable>
         <Stack fill vertical>
-          {total_players !== undefined ? (
-            <Stack.Item mt={0.2} grow>
+          <Stack.Item mt={0.2} grow>
+            {total_players !== undefined ? (
               <WhoCollapsible title={'Players - ' + all_clients} color="good">
                 {total_players.map((x, index) => (
                   <GetPlayerInfo
@@ -31,11 +31,8 @@ export const Who = (props, context) => {
                   />
                 ))}
               </WhoCollapsible>
-            </Stack.Item>
-          ) : null}
-          <Stack.Item height="6px" />
-          {admin !== 0 ? (
-            <Stack.Item mt={0.2} grow>
+            ) : null}
+            {admin !== 0 ? (
               <WhoCollapsible title="Information" color="olive">
                 <Box direction="column">
                   {additional_info !== undefined
@@ -70,8 +67,8 @@ export const Who = (props, context) => {
                     : null}
                 </Box>
               </WhoCollapsible>
-            </Stack.Item>
-          ) : null}
+            ) : null}
+          </Stack.Item>
         </Stack>
       </Window.Content>
     </Window>
