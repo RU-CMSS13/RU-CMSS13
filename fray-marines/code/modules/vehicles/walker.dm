@@ -354,6 +354,11 @@
 		to_chat(driver, "<span class='warning'>WARNING! [selected_gun.name] ammo magazine deployed.</span>")
 		visible_message("[name]'s systems deployed used magazine.","")
 
+/obj/vehicle/walker/ui_status(mob/user)
+	. = ..()
+	if(get_dist(get_turf(user), get_turf(src)) > 0)
+		return UI_CLOSE
+
 /obj/vehicle/walker/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
