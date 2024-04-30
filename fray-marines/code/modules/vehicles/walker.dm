@@ -28,8 +28,6 @@
 	var/max_health = 1000
 	var/repair = FALSE
 
-	var/mob/pilot = null
-
 	var/acid_process_cooldown = null
 	var/list/dmg_multipliers = list(
 		"all" = 1.0, //for when you want to make it invincible
@@ -107,7 +105,17 @@
 
 /obj/vehicle/walker/get_examine_text(mob/user)
 	. = ..()
-	. += "Integrity: [round(100 * health / max_health)]"
+	switch(round(100 * health / max_health))
+		if(85 to 100)
+			. += "It's fully intact."
+		if(65 to 85)
+			. += "It's slightly damaged."
+		if(45 to 65)
+			. += "It's badly damaged."
+		if(25 to 45)
+			. += "It's heavily damaged."
+		else
+			. += "It's falling apart."
 	. += "[left ? left.name : "Nothing"] is placed on its left hardpoint."
 	. += "[right ? right.name : "Nothing"] is placed on its right hardpoint."
 
@@ -346,58 +354,39 @@
 		to_chat(driver, "<span class='warning'>WARNING! [selected_gun.name] ammo magazine deployed.</span>")
 		visible_message("[name]'s systems deployed used magazine.","")
 
-/*UHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH........................................................... NOTHING TO SAY
-/obj/vehicle/walker/proc/get_stats()
-	set name = "Status Display"
-	set category = "Vehicle"
+/obj/vehicle/walker/tgui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Walker")
+		ui.open()
+		ui.set_autoupdate(TRUE)
 
-	var/mob/M = usr
-	if(!M || !istype(M))
-		return
+/obj/vehicle/walker/ui_data(mob/user)
+	. = list()
 
-	var/obj/vehicle/walker/W = M.interactee
-
-	if(!W || !istype(W))
-		return
-
-	if(M != W.seats[VEHICLE_DRIVER])
-		return
-	W.statistics(M)
-
-/obj/vehicle/walker/proc/statistics(mob/user)
-	if(!user)
-		user = seats[VEHICLE_DRIVER]
-
-		if(!user)
-			return
-
-	to_chat(user, "<h2>[name] Interface</h2>")
-	to_chat(user, "<span class='notice'>Vehicle Status:</span><br>")
-
+	//simply solution
+	.["text"] = "<h2>[name] Interface</h2>"
+	.["text"] += "<span class='notice'>Vehicle Status:</span><br>"
 	var/danger = "'notice'"
-
 	var/curr_health = round(health/max_health*100)
 	danger = "'notice'"
 	if(curr_health <= 50)
 		danger = "'warning'"
 	if(curr_health <= 25)
 		danger = "'danger'"
-	to_chat(user, "<span class='notice'>Overall vehicle integrity: </span><span class=[danger]> [curr_health] percent. [danger == "'danger'" ? "LEVEL CRITICAL!" : ""]</span>")
-
-	to_chat(user, "<span class='notice'>=========</span>")
-
+	.["text"] += "<span class='notice'>Overall vehicle integrity: </span><span class=[danger]> [curr_health] percent. [danger == "'danger'" ? "LEVEL CRITICAL!" : ""]</span>"
+	.["text"] += "<span class='notice'>=========</span>"
 	if(left)
 		var/munition = left.ammo ? "[left.ammo.current_rounds]/[left.ammo.max_rounds]" : "<span class='warning'>DEPLETED</span>"
-		to_chat(user, "<span class='notice'>Left hardpoint: [left.name].\n Current ammo level: [munition]</span>")
+		.["text"] += "<span class='notice'>Left hardpoint: [left.name].\n Current ammo level: [munition]</span>"
 	else
-		to_chat(user, "<span class='warning'>LEFT HARDPOINT IS EMPTY!</span>")
+		.["text"] += "<span class='warning'>LEFT HARDPOINT IS EMPTY!</span>"
 
 	if(right)
 		var/munition = right.ammo ? "[right.ammo.current_rounds]/[right.ammo.max_rounds]" : "<span class='warning'>DEPLETED</span>"
-		to_chat(user, "<span class='notice'>Right hardpoint: [right.name].\n Current ammo level: [munition]</span>")
+		.["text"] += "<span class='notice'>Right hardpoint: [right.name].\n Current ammo level: [munition]</span>"
 	else
-		to_chat(user, "<span class='warning'>RIGHT HARDPOINT IS EMPTY!</span>")
-*/
+		.["text"] += "<span class='warning'>RIGHT HARDPOINT IS EMPTY!</span>"
 
 /obj/vehicle/walker/proc/cycle_weapons(mob/M)
 	if(!M)
@@ -555,39 +544,20 @@
 			return
 
 	else if(istype(held_item, /obj/item/walker_gun))
-		var/slot = input("On which hardpoint install gun.") in list("Left", "Right", "Cancel")
-		if(slot != "Cancel")
+		var/slot = tgui_alert(user, "On which hardpoint install gun.", "Hardpoint", list("Left", "Right", "Cancel"))
+		if(slot && slot != "Cancel")
 			install_gun(held_item, user, slot)
 
 	else if(HAS_TRAIT(held_item, TRAIT_TOOL_WRENCH))
-		dismount(held_item, user)
+		var/slot = tgui_alert(user, "Which hardpoint should be dismounted.", "Hardpoint", list("Left", "Right", "Cancel"))
+		if(slot && slot != "Cancel")
+			dismount(held_item, user, slot)
 
 	else if(iswelder(held_item))
 		repair_walker(held_item, user)
 
 	else
 		. = ..()
-
-/obj/vehicle/walker/proc/install_gun(obj/item/walker_gun/gun, mob/user, slot)
-	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
-		to_chat(user, "You don't know how to mount weapon.")
-		return
-
-	if((slot = "Left" && left) || (slot = "Right" && right))
-		to_chat(user, "This [lowertext(slot)] hardpoint is full")
-		return
-
-	to_chat(user, "You start mounting [gun.name] on left hardpoint.")
-	if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
-		user.drop_inv_item_to_loc(gun, src)
-		gun.owner = src
-		if(slot == "Left")
-			left = gun
-		else
-			right = gun
-
-		to_chat(user, "You mount [gun.name] on [lowertext(slot)] hardpoint.")
-		update_icon()
 
 /obj/vehicle/walker/proc/rearm(obj/item/ammo_magazine/walker/mag, mob/user, obj/item/walker_gun/selected_gun)
 	if(!do_after(user, 20, TRUE, 5, BUSY_ICON_BUILD))
@@ -598,39 +568,53 @@
 	selected_gun.ammo = mag
 	to_chat(user, "You load magazine in [selected_gun.name].")
 
-/obj/vehicle/walker/proc/dismount(obj/item/tool/wrench/WR  as obj, mob/user as mob)
-	if(!left && !right)
+/obj/vehicle/walker/proc/install_gun(obj/item/walker_gun/gun, mob/user, slot)
+	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
+		to_chat(user, "You don't know how to mount weapon.")
 		return
-	var/choice = input("Which hardpoint should be dismounted.") in list("Left", "Right", "Cancel")
-	switch(choice)
-		if("Cancel")
-			return
 
-		if("Left")
-			if(!left)
-				to_chat(user, "Left hardpoint is empty.")
-				return
-			to_chat(user, "You start dismounting [left.name] from walker.")
-			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
-				left.forceMove(get_turf(src))
-				left = null
-				update_icon()
-				return
-			else
-				to_chat(user, "Dismounting has been interrupted.")
+	if((slot == "Left" && left) || (slot == "Right" && right))
+		to_chat(user, "This [lowertext(slot)] hardpoint is full")
+		return
 
-		if("Right")
-			if(!right)
-				to_chat(user, "Right hardpoint is empty.")
-				return
-			to_chat(user, "You start dismounting [right.name] from walker.")
-			if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
-				right.loc = loc
-				right = null
-				update_icon()
-				return
-			else
-				to_chat(user, "Dismounting has been interrupted.")
+	to_chat(user, "You start mounting [gun.name] on [lowertext(slot)] hardpoint.")
+	if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
+		user.drop_inv_item_to_loc(gun, src)
+		gun.owner = src
+		if(slot == "Left")
+			left = gun
+		else
+			right = gun
+
+		to_chat(user, "You mount [gun.name] on [lowertext(slot)] hardpoint.")
+		update_icon()
+	else
+		to_chat(user, "Mounting has been interrupted.")
+
+/obj/vehicle/walker/proc/dismount(obj/item/tool, mob/user, slot)
+	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
+		to_chat(user, "You don't know how to mount weapon.")
+		return
+
+	if((slot == "Left" && !left) || (slot == "Right" && !right))
+		to_chat(user, "This [lowertext(slot)] hardpoint is empty")
+		return
+
+	to_chat(user, "You start dismounting [lowertext(slot)] hardpoint.")
+	if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
+		if(slot == "Left")
+			left.forceMove(get_turf(src))
+			left.owner = null
+			left = null
+		else
+			right.forceMove(get_turf(src))
+			right.owner = null
+			right = null
+
+		to_chat(user, "You dismount [lowertext(slot)] hardpoint.")
+		update_icon()
+	else
+		to_chat(user, "Dismounting has been interrupted.")
 
 /obj/vehicle/walker/proc/repair_walker(obj/item/tool/weldingtool/weld  as obj, mob/user as mob)
 	if(!weld.isOn())

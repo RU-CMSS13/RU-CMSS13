@@ -29,14 +29,14 @@
 	set src in range(0)
 
 	deploy_magazine()
-/*
+
 /obj/vehicle/walker/verb/get_stats()
 	set name = "Status Display"
 	set category = "Vehicle"
 	set src in range(0)
 
-	statistics()
-*/
+	tgui_interact(usr)
+
 /obj/vehicle/walker/verb/select_weapon()
 	set name = "Select Weapon"
 	set category = "Vehicle"
