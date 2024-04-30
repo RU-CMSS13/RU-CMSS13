@@ -26,6 +26,12 @@
 		has_auth = TRUE
 	..()
 
+/obj/structure/machinery/nuclearbomb/crash/disable()
+	timing = FALSE
+	GLOB.bomb_set = FALSE
+	explosion_time = null
+	announce_to_players()
+
 /obj/structure/machinery/nuclearbomb/crash/Destroy()
 	GLOB.nuke_list -= src
 	return ..()
