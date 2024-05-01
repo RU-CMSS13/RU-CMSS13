@@ -109,7 +109,7 @@
 	var/obj/effect/landmark/crash/resin_silo_spawn/RSS = SAFEPICK(GLOB.resin_silo_spawn_locs)
 	if(RSS)
 		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, hive)
-		core.surge_cooldown = 120 SECONDS
+		core.surge_cooldown = 160 SECONDS
 		core.surge_incremental_reduction = 2 SECONDS
 		core.crash_mode = TRUE
 		GLOB.xeno_resin_silos += core
@@ -294,7 +294,6 @@
 	var/living_player_list[] = count_humans_and_xenos(SSmapping.levels_by_trait(ZTRAIT_GROUND))
 	var/num_humans = living_player_list[1]
 	if(!num_humans)
-		addtimer(VARSET_CALLBACK(src, marines_evac, CRASH_EVAC_COMPLETED), 10 SECONDS)
 		marine_announcement("WARNING. WARNING. Planetary Nuke Deactivated. WARNING. WARNING. Mission Failed. WARNING. WARNING.", "Priority Alert", "Everyone (-Yautja)")
 
 /datum/game_mode/crash/declare_completion()
