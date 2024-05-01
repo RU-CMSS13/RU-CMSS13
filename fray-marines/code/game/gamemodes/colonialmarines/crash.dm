@@ -111,6 +111,7 @@
 		var/obj/effect/alien/resin/special/pylon/core/core = new(RSS.loc, hive)
 		core.surge_cooldown = 160 SECONDS
 		core.surge_incremental_reduction = 2 SECONDS
+		core.spawn_cooldown = 10 SECONDS
 		core.crash_mode = TRUE
 		GLOB.xeno_resin_silos += core
 	qdel(RSS)
@@ -120,6 +121,9 @@
 			continue
 		computer_to_disable.stat |= BROKEN
 		computer_to_disable.update_icon()
+
+	GLOB.xeno_join_dead_larva_time = 0
+	GLOB.xeno_join_dead_time = 0
 
 	QDEL_LIST(GLOB.hunter_primaries)
 	QDEL_LIST(GLOB.hunter_secondaries)
