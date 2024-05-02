@@ -154,7 +154,7 @@
 		if(7) // Stage 6 is while we are trying to find a candidate in become_larva
 			if(larva_autoburst_countdown > 0)
 				larva_autoburst_countdown--
-			if(!larva_autoburst_countdown)
+			else
 				//	Предотвращаем возможность лярвы покинуть тело пока в автодоке,
 				//	с периодичностью наносит урон на случай, если тело закинут в автодок без задач,
 				//	автодок выкидывает из себя мертвые тела. Мертвое тело - путь к свободе лярвы.
@@ -163,7 +163,7 @@
 						affected_mob.pain.apply_pain(PAIN_CHESTBURST_WEAK)
 						affected_mob.visible_message("\The [affected_mob]\'s chest starts moving strangely!", \
 													SPAN_DANGER("You feel something moving inside you painfully!"))
-						affected_mob.apply_damage(20, BRUTE, "chest")
+						affected_mob.apply_damage(20 + rand(1, 10), BRUTE, "chest")
 					return
 				var/mob/living/carbon/xenomorph/larva/larva_embryo = locate() in affected_mob.contents
 				if(larva_embryo)
