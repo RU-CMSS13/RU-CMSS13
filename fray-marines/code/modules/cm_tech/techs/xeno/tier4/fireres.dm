@@ -6,8 +6,8 @@
 
 	flags = TREE_FLAG_XENO
 
-	required_points = 15
-	tier = /datum/tier/four
+	required_points = 10
+	tier = /datum/tier/two
 
 /datum/tech/xeno/fireres/on_unlock(datum/techtree/two)
 	. = ..()
