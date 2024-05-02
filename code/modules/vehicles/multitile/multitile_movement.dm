@@ -99,7 +99,7 @@
 	rotate_hardpoints(deg)
 	rotate_entrances(deg)
 	rotate_bounds(deg)
-	setDir(turn(dir, deg))
+	setDir(turn(dir, deg), TRUE)
 
 	last_move_dir = dir
 
@@ -110,6 +110,11 @@
 	update_icon()
 
 	return TRUE
+
+/obj/vehicle/multitile/setDir(newdir, real_rotate = FALSE)
+	if(!real_rotate)
+		return
+	..()
 
 // Increases/decreases the vehicle's momentum according to whether or not the user is steppin' on the gas or not
 /obj/vehicle/multitile/proc/update_momentum(direction)

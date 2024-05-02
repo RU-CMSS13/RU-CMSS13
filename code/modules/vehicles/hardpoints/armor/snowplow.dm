@@ -51,6 +51,6 @@
 			for(var/atom/movable/atom in turf.contents)
 				if(atom.anchored)
 					continue
-				atom.throw_atom(get_step(turf, turn(move_dir, 90)), 4, SPEED_SLOW, src, TRUE, HIGH_LAUNCH)
+				INVOKE_ASYNC(atom, TYPE_PROC_REF(/atom/movable, throw_atom), get_step(turf, turn(move_dir, 90)), 4, SPEED_SLOW, src, TRUE, HIGH_LAUNCH)
 		else
 			continue
