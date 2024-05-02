@@ -245,6 +245,8 @@ GLOBAL_LIST_INIT(admin_verbs_possess, list(
 
 GLOBAL_LIST_INIT(admin_verbs_permissions, list(
 	/client/proc/whitelist_panel,
+	/client/proc/manage_chatfilter,
+	/client/proc/toggle_chatfilter_hardcore,
 ))
 
 GLOBAL_LIST_INIT(admin_verbs_color, list(

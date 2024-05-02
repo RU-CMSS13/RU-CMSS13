@@ -20,7 +20,7 @@
 /mob/verb/whisper()
 	set name = "Whisper"
 	set category = "IC"
-	return
+	return //зачем шепот отключен?
 
 /mob
 	var/picksay_cooldown = 0
@@ -44,7 +44,12 @@
 	if(!client?.attempt_talking(message))
 		return
 
-	usr.say(message)
+	if(message)
+		if(stat != DEAD)
+			if(GLOB.ic_autoemote[message])
+				message = "*[GLOB.ic_autoemote[message]]" // возврат автокоррекции эмоутов
+			message = check_for_brainrot(message)
+		usr.say(message)
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
@@ -54,10 +59,12 @@
 	if(!client?.attempt_talking(message))
 		return
 
-	if(use_me)
-		usr.emote("me",usr.emote_type,message, TRUE)
-	else
-		usr.emote(message, 1, null, TRUE)
+	if(message)
+		message = check_for_brainrot(message)
+		if(use_me)
+			usr.emote("me",usr.emote_type,message, TRUE)
+		else
+			usr.emote(message, 1, null, TRUE)
 
 /mob/proc/say_dead(message)
 	var/name = src.real_name
@@ -238,3 +245,147 @@ for it but just ignore it.
 			return
 		hud_typing = NONE
 		remove_typing_indicator()
+
+///   ///   ///   Чат фильтр   ///   ///   ///
+// Управление находится в Admin - Чат Фильтр
+// Каждое новое слово вносится с новой строки
+// Файлы словарей плохих слов храняться на локальном сервере по адресу RU-CMSS13/cfg/chatfilter/
+// Словари автокоррекции вносятся только через код (см. ниже)
+
+GLOBAL_LIST_INIT(bad_words, file2list("cfg/chatfilter/bad_words.cf"))
+GLOBAL_LIST_INIT(exc_full, file2list("cfg/chatfilter/exc_full.cf"))
+
+#define CF_SOFT "МЯГКИЙ (предупреждение)"
+#define CF_HARD "СТРОГИЙ (предупреждение и удаление сообщения)"
+#define CF_HARDCORE "ЖЕСТОКИЙ (мут и удаление сообщения)"
+
+GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
+
+// Управление
+/client/proc/toggle_chatfilter_hardcore()
+	set category = "Admin.Чат Фильтр"
+	set name = "Строгость Чат Фильтра"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	var filter_level = input(usr, "Текущий режим фильтра: [GLOB.chatfilter_hardcore].", "Выбор строгости фильтра")  as null|anything in (list("МЯГКИЙ (предупреждение)","СТРОГИЙ (предупреждение и удаление сообщения)","ЖЕСТОКИЙ (мут и удаление сообщения)"))
+	if(filter_level && alert("Переключить на [filter_level]?","Смена строгости фильра","Да","Нет") == "Да")
+		switch(filter_level)
+			if("МЯГКИЙ (предупреждение)")
+				GLOB.chatfilter_hardcore = CF_SOFT
+			if("СТРОГИЙ (предупреждение и удаление сообщения)")
+				GLOB.chatfilter_hardcore = CF_HARD
+			if("ЖЕСТОКИЙ (мут и удаление сообщения)")
+				GLOB.chatfilter_hardcore = CF_HARDCORE
+		log_admin("[key_name(usr)] edit filters to [GLOB.chatfilter_hardcore].")
+		message_admins("[key_name_admin(usr)] изменил режим фильтра на [GLOB.chatfilter_hardcore].")
+
+
+/client/proc/manage_chatfilter()
+	set category = "Admin.Чат Фильтр"
+	set name = "Словари Чат Фильтра"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/list/listoflists = list(
+		"Словарь плохих слов" = list(GLOB.bad_words, "cfg/chatfilter/bad_words.cf"),
+		"Словарь исключений" = list(GLOB.exc_full, "cfg/chatfilter/exc_full.cf")
+		)
+
+	var/selected = tgui_input_list(usr, "Новые слова вносить с новой строки", "Чат фильтр", listoflists)
+	if(!islist(listoflists[selected]))
+		return
+
+	var/list/L = listoflists[selected]
+	var/list/LT = L[1]
+	var/owtext = input(usr, "[selected]", "Новые слова вносить с новой строки", LT.Join("\n")) as message|null
+
+	if(!owtext)
+		return
+
+	LT.Remove(LT)
+	LT.Add(splittext(owtext,"\n"))
+
+	if(fexists(L[2]))
+		fdel(L[2])
+
+	log_admin("[key_name(usr)] edits [selected].")
+	message_admins("[key_name_admin(usr)] редактирует [selected].")
+
+	text2file(LT.Join("\n"), L[2])
+
+// Механика
+/mob/proc/check_for_brainrot(msg)
+	if(!client)
+		return msg
+	var/corrected_message = msg
+
+	msg = lowertext(msg)
+
+	var/list/words = splittext(msg, " ")
+
+	for(var/replacement in GLOB.ic_autocorrect) // возврат слов из списка автокоррекции
+		if(replacement in words)
+			corrected_message = replacetext_char(corrected_message, uppertext(replacement), GLOB.ic_autocorrect[replacement])
+			return corrected_message
+
+	for(var/bad_word in GLOB.bad_words) // поиск плохих слов
+		bad_word = lowertext(bad_word)
+		if(findtext_char(msg, bad_word) && isliving(src) && bad_word != "")
+
+			for(var/exc_word in GLOB.exc_full) // поиск исключений
+				exc_word = lowertext(exc_word)
+				if(findtext_char(msg, exc_word) && isliving(src) && exc_word != "")
+					return corrected_message
+
+			apply_execution(bad_word, msg)
+
+			switch(GLOB.chatfilter_hardcore)
+				if(CF_SOFT)
+					return corrected_message
+				if(CF_HARD)
+					return
+				if(CF_HARDCORE)
+					sdisabilities |= DISABILITY_MUTE
+					addtimer(CALLBACK(src, /mob/proc/fix_mute, src), 60 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+
+	return corrected_message
+
+/mob/proc/fix_mute()
+	sdisabilities &= ~DISABILITY_MUTE
+
+/mob/proc/apply_execution(for_what, msg)
+	client.bad_word_counter += 1
+	message_admins(SPAN_BOLDANNOUNCE("[key_name_admin(client)], нарушил ИЦ словом \"[for_what]\". Это его [client.bad_word_counter]-й раз в этом раунде.<br>(<u>[strip_html(msg)]</u>) [client.bad_word_counter >= 5 ? "Возможно, он заслужил смайт." : ""]"))
+
+	if(GLOB.chatfilter_hardcore == CF_HARDCORE)
+		to_chat(src, SPAN_BOLDNOTICE("...При попытке сказать \"[uppertext(for_what)]\", я прикусил язык..."))
+	else if(client.bad_word_counter < 3)
+		to_chat(src, SPAN_BOLDNOTICE("...Возможно, мне не стоит говорить такие \"смешные\" слова, как \"[uppertext(for_what)]\"..."))
+	else
+		to_chat(src, SPAN_BOLDNOTICE("...Чувствую, что за \"[uppertext(for_what)]\" мне скоро влетит..."))
+
+/client
+	var/bad_word_counter = 0
+
+// Список автокоррекции текста в эмоуты
+GLOBAL_LIST_INIT(ic_autoemote, list(
+	")" = "smile", "(" = "frown",
+	"))" = "laugh", "((" = "cry",
+	"лол" = "laugh", "lol" = "laugh",
+	"лмао" = "laugh", "lmao" = "laugh",
+	"рофл" = "laugh", "rofl" = "laugh",
+	"кек" = "giggle", "kek" = "giggle",
+	"хз" = "пожимает плечами", "hz" = "пожимает плечами",
+	"я хз" = "пожимает плечами", "ya hz" = "пожимает плечами",
+))
+
+// Список автокоррекции текста в другой текст
+GLOBAL_LIST_INIT(ic_autocorrect, list(
+	"квина" = "королева", "квины" = "королевы", "квине" = "королеве", "квину" = "королеву", "квиной" = "королевой",
+	"хреноид" = "первозданный, истинно почитаемый, всепрощающий верховный благодеятель, владыка священный бог-император Хреноид, сотрясающий небеса",
+	// новые восхваления хреноиду писать тут. Не забывать ставить запятые и предусматривать склонения. Можно добавить автосклонятор, но если ток позже.
+
+))
