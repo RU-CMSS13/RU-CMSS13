@@ -57,7 +57,7 @@
 	return success
 
 // Attempts to execute the given movement input
-/obj/vehicle/multitile/proc/try_move(direction, force=FALSE)
+/obj/vehicle/multitile/proc/try_move(direction, force = FALSE)
 	if(!can_move(direction))
 		return FALSE
 
@@ -71,8 +71,9 @@
 	var/turf/old_turf = get_turf(src)
 	forceMove(get_step(src, direction))
 
+	var/turf/current_loc = get_turf(src)
 	for(var/obj/item/hardpoint/H in hardpoints)
-		H.on_move(old_turf, get_turf(src), direction)
+		H.on_move(old_turf, current_loc, direction)
 
 	if(movement_sound && world.time > move_next_sound_play)
 		playsound(src, movement_sound, vol = 20, sound_range = 30)
