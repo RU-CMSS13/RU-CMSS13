@@ -576,7 +576,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 									user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_PYRO)
 									specialist_assignment = "Pyro"
 								if("Stormtrooper Set")
-									user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_ST)
+									user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_ST, SKILL_ENDURANCE_MAX)
 									specialist_assignment = "ST"
 								else
 									to_chat(user, SPAN_WARNING("<b>Something bad occurred with [src], tell a Dev.</b>"))
