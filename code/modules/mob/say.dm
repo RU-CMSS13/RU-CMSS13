@@ -305,7 +305,7 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 	if(!owtext)
 		return
 
-	LT.Remove(LT)
+	LT.Cut(LT)
 	LT.Add(splittext(owtext,"\n"))
 
 	if(fexists(L[2]))
