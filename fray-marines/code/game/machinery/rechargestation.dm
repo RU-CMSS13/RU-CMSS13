@@ -112,6 +112,10 @@
 								sleep(FIX_ORGAN_MAX_DURATION)
 								very_busy = FALSE
 								current_organ.rejuvenate()
+								// Actualy fixing eyes
+								if (current_organ == humanoid_occupant.internal_organs_by_name["eyes"])
+									humanoid_occupant.disabilities &= ~NEARSIGHTED
+									humanoid_occupant.sdisabilities &= ~DISABILITY_BLIND
 								to_chat(occupant, "Внутренний компонент отремонтирован.")
 			// Пластическая операция для синтетика?
 			if(!doing_stuff)
@@ -126,9 +130,11 @@
 						very_busy = TRUE
 						sleep(10 SECONDS)
 						very_busy = FALSE
-						H.remove_all_bleeding(TRUE)
 						H.disfigured = FALSE
 						H.owner.name = H.owner.get_visible_name()
+						H.remove_all_bleeding(TRUE)
+						humanoid_occupant.update_body()
+						H.update_icon()
 						to_chat(occupant, "Товарный вид востановлен.")
 
 			// TODO убрать звук дефиба?
@@ -277,6 +283,7 @@
 
 		if(!doing_stuff)
 			to_chat(occupant, "Цикл обслуживания завершен. Все системы исправны.")
+			humanoid_occupant.pain.recalculate_pain()
 			go_out()
 	else
 		very_busy = FALSE
