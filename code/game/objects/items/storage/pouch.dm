@@ -832,6 +832,9 @@
 		return ..()
 	if(user.action_busy)
 		return
+	if(user.skills?.get_skill_level(SKILL_MEDICAL) < SKILL_MEDICAL_TRAINED)
+		to_chat(user, SPAN_WARNING("You untrained to do this."))
+		return
 	if(!medkit.contents.len)
 		to_chat(user, SPAN_WARNING("[medkit] is empty."))
 		return
