@@ -39201,12 +39201,10 @@
 	},
 /obj/item/storage/box/donkpockets{
 	pixel_x = 7;
-	step_y = 10
+	pixel_y = 10
 	},
 /obj/item/reagent_container/spray/cleaner{
-	pixel_x = 7;
-	pixel_y = 14;
-	step_y = -15
+	pixel_x = 7
 	},
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
@@ -56874,9 +56872,13 @@
 	},
 /area/almayer/squads/req)
 "opC" = (
-/obj/structure/window/framed/almayer/hull,
-/turf/closed/wall/almayer/outer,
-/area/almayer/command/lifeboat)
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/command/cic)
 "opD" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/living/gym)
@@ -57787,12 +57789,11 @@
 "oER" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/device/flashlight/lamp/green{
-	step_x = -4
+	pixel_x = -4
 	},
 /obj/item/device/whistle{
-	pixel_y = 0;
 	pixel_x = 7;
-	step_y = -5
+	pixel_y = -1
 	},
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
@@ -59165,14 +59166,9 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_a_s)
 "piX" = (
-/mob/living/simple_animal/cat/kitten{
-	name = "Chilipila";
-	desc = "Kinda stuck"
-	},
-/turf/open/shuttle/dropship{
-	icon_state = "rasputin3"
-	},
-/area/almayer/powered/agent)
+/obj/structure/window/framed/almayer/hull,
+/turf/open/floor/almayer_hull,
+/area/almayer/command/lifeboat)
 "pjb" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -75718,6 +75714,10 @@
 	icon_state = "plate"
 	},
 /area/almayer/living/gym)
+"vnV" = (
+/obj/structure/window/framed/almayer/hull,
+/turf/closed/wall/almayer/outer,
+/area/almayer/command/lifeboat)
 "vob" = (
 /obj/structure/machinery/door_control{
 	id = "laddernortheast";
@@ -76124,13 +76124,14 @@
 	},
 /area/almayer/squads/bravo)
 "vuY" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
+/mob/living/simple_animal/cat/kitten{
+	name = "Chilipila";
+	desc = "Kinda stuck"
 	},
-/turf/open/floor/almayer{
-	icon_state = "mono"
+/turf/open/shuttle/dropship{
+	icon_state = "rasputin3"
 	},
-/area/almayer/command/cic)
+/area/almayer/powered/agent)
 "vuZ" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -78679,9 +78680,9 @@
 	},
 /area/almayer/shipboard/brig/chief_mp_office)
 "wlE" = (
-/obj/structure/window/framed/almayer/hull,
-/turf/open/floor/almayer_hull,
-/area/almayer/command/lifeboat)
+/obj/structure/bed/alien,
+/turf/open/floor/wood/ship,
+/area/almayer/engineering/ce_room)
 "wlF" = (
 /obj/structure/stairs/perspective{
 	dir = 1;
@@ -104188,7 +104189,7 @@ aoA
 gkK
 aEB
 rKd
-vuY
+opC
 bvb
 rtt
 abk
@@ -104198,7 +104199,7 @@ lXS
 abk
 fYf
 awt
-vuY
+opC
 kUh
 aEB
 aPD
@@ -116915,7 +116916,7 @@ avC
 avC
 wEg
 axa
-piX
+vuY
 dSZ
 oMs
 avs
@@ -131585,7 +131586,7 @@ iEr
 fhH
 eNi
 pUh
-rPt
+wlE
 jyE
 eNi
 alG
@@ -140728,7 +140729,7 @@ xVk
 xVk
 iki
 aah
-opC
+vnV
 jbq
 vLW
 mqQ
@@ -140738,7 +140739,7 @@ mqQ
 mqQ
 iIz
 jbq
-wlE
+piX
 aah
 tGe
 xVk
