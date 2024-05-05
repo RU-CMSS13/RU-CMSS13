@@ -51869,11 +51869,9 @@
 	},
 /area/almayer/medical/lower_medical_medbay)
 "mwQ" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
+/obj/structure/bed/alien,
+/turf/open/floor/wood/ship,
+/area/almayer/engineering/ce_room)
 "mwR" = (
 /obj/effect/step_trigger/teleporter_vector{
 	name = "Almayer_Down4";
@@ -56872,13 +56870,14 @@
 	},
 /area/almayer/squads/req)
 "opC" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
+/mob/living/simple_animal/cat/kitten{
+	name = "Chilipila";
+	desc = "Kinda stuck"
 	},
-/turf/open/floor/almayer{
-	icon_state = "mono"
+/turf/open/shuttle/dropship{
+	icon_state = "rasputin3"
 	},
-/area/almayer/command/cic)
+/area/almayer/powered/agent)
 "opD" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/living/gym)
@@ -59165,10 +59164,6 @@
 "piR" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_a_s)
-"piX" = (
-/obj/structure/window/framed/almayer/hull,
-/turf/open/floor/almayer_hull,
-/area/almayer/command/lifeboat)
 "pjb" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -75714,10 +75709,6 @@
 	icon_state = "plate"
 	},
 /area/almayer/living/gym)
-"vnV" = (
-/obj/structure/window/framed/almayer/hull,
-/turf/closed/wall/almayer/outer,
-/area/almayer/command/lifeboat)
 "vob" = (
 /obj/structure/machinery/door_control{
 	id = "laddernortheast";
@@ -76124,14 +76115,13 @@
 	},
 /area/almayer/squads/bravo)
 "vuY" = (
-/mob/living/simple_animal/cat/kitten{
-	name = "Chilipila";
-	desc = "Kinda stuck"
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
 	},
-/turf/open/shuttle/dropship{
-	icon_state = "rasputin3"
+/turf/open/floor/almayer{
+	icon_state = "mono"
 	},
-/area/almayer/powered/agent)
+/area/almayer/command/cic)
 "vuZ" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -78680,9 +78670,11 @@
 	},
 /area/almayer/shipboard/brig/chief_mp_office)
 "wlE" = (
-/obj/structure/bed/alien,
-/turf/open/floor/wood/ship,
-/area/almayer/engineering/ce_room)
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/command/cic)
 "wlF" = (
 /obj/structure/stairs/perspective{
 	dir = 1;
@@ -103783,7 +103775,7 @@ teY
 lgK
 dMr
 rKd
-mwQ
+wlE
 bvb
 lQq
 oyZ
@@ -103793,7 +103785,7 @@ uNg
 oyZ
 gKJ
 awt
-mwQ
+wlE
 kUh
 aZy
 uTU
@@ -103986,7 +103978,7 @@ yks
 lgK
 rzn
 rKd
-mwQ
+wlE
 sCP
 bcd
 gLT
@@ -103996,7 +103988,7 @@ mJu
 aqN
 ljs
 gkK
-mwQ
+wlE
 cvZ
 gmq
 uTU
@@ -104189,7 +104181,7 @@ aoA
 gkK
 aEB
 rKd
-opC
+vuY
 bvb
 rtt
 abk
@@ -104199,7 +104191,7 @@ lXS
 abk
 fYf
 awt
-opC
+vuY
 kUh
 aEB
 aPD
@@ -116916,7 +116908,7 @@ avC
 avC
 wEg
 axa
-vuY
+opC
 dSZ
 oMs
 avs
@@ -131586,7 +131578,7 @@ iEr
 fhH
 eNi
 pUh
-wlE
+mwQ
 jyE
 eNi
 alG
@@ -140526,7 +140518,7 @@ xVk
 xVk
 oyG
 aPw
-jbq
+aPw
 vLW
 qVc
 qVc
@@ -140536,7 +140528,7 @@ qVc
 qVc
 qVc
 iIz
-jbq
+aPw
 aPw
 lFo
 xVk
@@ -140729,8 +140721,8 @@ xVk
 xVk
 iki
 aah
-vnV
-jbq
+aPw
+aPw
 vLW
 mqQ
 mqQ
@@ -140738,8 +140730,8 @@ mqQ
 mqQ
 mqQ
 iIz
-jbq
-piX
+aPw
+aPw
 aah
 tGe
 xVk
@@ -140931,7 +140923,7 @@ xVk
 xVk
 xVk
 aab
-aaa
+bdH
 aad
 aPw
 aPw
