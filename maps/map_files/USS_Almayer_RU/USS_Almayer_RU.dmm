@@ -6151,6 +6151,7 @@
 	icon_state = "N";
 	pixel_y = 1
 	},
+/obj/structure/reagent_dispensers/fueltank/oxygentank,
 /turf/open/floor/almayer{
 	icon_state = "cargo"
 	},
@@ -6377,13 +6378,10 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.1;
-	pixel_y = -4
-	},
 /obj/structure/machinery/prop/almayer/CICmap{
 	layer = 3.1
 	},
+/obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer{
 	icon_state = "mono"
 	},
@@ -6806,9 +6804,6 @@
 	},
 /obj/item/storage/box/masks{
 	pixel_x = 5
-	},
-/obj/structure/closet/secure_closet/surgical{
-	pixel_y = 30
 	},
 /obj/item/reagent_container/glass/minitank{
 	pixel_x = -7;
@@ -14532,6 +14527,9 @@
 	pixel_x = -8;
 	pixel_y = 14
 	},
+/obj/structure/closet/secure_closet/surgical{
+	pixel_x = -30
+	},
 /turf/open/floor/almayer{
 	dir = 8;
 	icon_state = "sterile_green_corner"
@@ -14820,7 +14818,7 @@
 "bkD" = (
 /obj/structure/machinery/door/poddoor/railing{
 	dir = 2;
-	id = "cic_railing"
+	id = "vehicle_elevator_railing"
 	},
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/almayer{
@@ -19154,14 +19152,6 @@
 /obj/structure/machinery/door_control{
 	id = "CIC_armory";
 	name = "CIC Armory Control";
-	pixel_y = 4;
-	req_one_access_txt = "1;4";
-	pixel_x = 7
-	},
-/obj/structure/machinery/door_control{
-	id = "cic_railing";
-	name = "CIC Railing Control";
-	pixel_y = 12;
 	req_one_access_txt = "1;4";
 	pixel_x = 7
 	},
@@ -20526,11 +20516,6 @@
 "bPs" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 8
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 4;
-	id = "cic_railing";
-	density = 0
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
@@ -22829,11 +22814,6 @@
 "ccg" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 8;
-	id = "cic_railing";
-	density = 0
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
@@ -37649,11 +37629,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 10
 	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 4;
-	id = "cic_railing";
-	density = 0
-	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
 "gZK" = (
@@ -39217,15 +39192,21 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/storage/box/cups{
 	pixel_x = -6;
-	pixel_y = 8
+	pixel_y = 9
+	},
+/obj/item/tool/stamp/ro{
+	name = "spare requisitions officer's rubber stamp";
+	pixel_y = -5;
+	pixel_x = -7
+	},
+/obj/item/storage/box/donkpockets{
+	pixel_x = 7;
+	step_y = 10
 	},
 /obj/item/reagent_container/spray/cleaner{
 	pixel_x = 7;
-	pixel_y = 14
-	},
-/obj/item/device/whistle{
-	pixel_y = 0;
-	pixel_x = 7
+	pixel_y = 14;
+	step_y = -15
 	},
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
@@ -39678,13 +39659,7 @@
 	},
 /area/almayer/hallways/lower/vehiclehangar)
 "hNY" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/item/storage/box/donkpockets,
-/obj/item/tool/stamp/ro{
-	name = "spare requisitions officer's rubber stamp";
-	pixel_x = -7;
-	pixel_y = 11
-	},
+/obj/structure/machinery/cm_vending/sorted/boozeomat,
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
 	},
@@ -51899,11 +51874,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 2;
-	id = "cic_railing";
-	density = 0
-	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
 "mwR" = (
@@ -56904,18 +56874,9 @@
 	},
 /area/almayer/squads/req)
 "opC" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 2;
-	id = "cic_railing";
-	density = 0
-	},
-/turf/open/floor/almayer{
-	icon_state = "mono"
-	},
-/area/almayer/command/cic)
+/obj/structure/window/framed/almayer/hull,
+/turf/closed/wall/almayer/outer,
+/area/almayer/command/lifeboat)
 "opD" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/living/gym)
@@ -57599,11 +57560,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 5
 	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 8;
-	id = "cic_railing";
-	density = 0
-	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
 "oAd" = (
@@ -57830,7 +57786,14 @@
 /area/almayer/shipboard/brig/cells)
 "oER" = (
 /obj/structure/surface/table/reinforced/almayer_B,
-/obj/item/device/flashlight/lamp/green,
+/obj/item/device/flashlight/lamp/green{
+	step_x = -4
+	},
+/obj/item/device/whistle{
+	pixel_y = 0;
+	pixel_x = 7;
+	step_y = -5
+	},
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
 	},
@@ -59202,14 +59165,14 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_a_s)
 "piX" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 8;
-	id = "cic_railing";
-	density = 0
+/mob/living/simple_animal/cat/kitten{
+	name = "Chilipila";
+	desc = "Kinda stuck"
 	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
+/turf/open/shuttle/dropship{
+	icon_state = "rasputin3"
+	},
+/area/almayer/powered/agent)
 "pjb" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -59444,6 +59407,12 @@
 	icon_state = "plate"
 	},
 /area/almayer/living/pilotbunks)
+"poy" = (
+/obj/structure/machinery/sentry_holder/almayer,
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/lifeboat_pumps/north1)
 "poR" = (
 /obj/structure/machinery/vending/cola{
 	density = 0;
@@ -62588,6 +62557,12 @@
 	icon_state = "emerald"
 	},
 /area/almayer/squads/charlie)
+"quS" = (
+/obj/structure/machinery/sentry_holder/almayer,
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/lifeboat_pumps/north2)
 "quT" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	layer = 1.9
@@ -71439,6 +71414,12 @@
 	icon_state = "plating"
 	},
 /area/almayer/hallways/lower/vehiclehangar)
+"tKY" = (
+/obj/structure/machinery/sentry_holder/almayer,
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/lifeboat_pumps/south2)
 "tLc" = (
 /obj/structure/surface/rack,
 /obj/item/storage/bag/plants{
@@ -75737,17 +75718,6 @@
 	icon_state = "plate"
 	},
 /area/almayer/living/gym)
-"vnV" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment,
-/obj/structure/machinery/door/poddoor/railing{
-	id = "cic_railing";
-	density = 0
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
 "vob" = (
 /obj/structure/machinery/door_control{
 	id = "laddernortheast";
@@ -76156,10 +76126,6 @@
 "vuY" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	id = "cic_railing";
-	density = 0
 	},
 /turf/open/floor/almayer{
 	icon_state = "mono"
@@ -76700,6 +76666,10 @@
 "vEf" = (
 /obj/structure/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/machinery/cm_vending/clothing/combat_correspondent{
+	pixel_x = 32;
+	density = 0
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -78709,15 +78679,9 @@
 	},
 /area/almayer/shipboard/brig/chief_mp_office)
 "wlE" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	id = "cic_railing";
-	density = 0
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
+/obj/structure/window/framed/almayer/hull,
+/turf/open/floor/almayer_hull,
+/area/almayer/command/lifeboat)
 "wlF" = (
 /obj/structure/stairs/perspective{
 	dir = 1;
@@ -79472,7 +79436,7 @@
 	},
 /area/almayer/squads/bravo_charlie_shared)
 "wDl" = (
-/obj/effect/decal/cleanable/blood/oil/streak,
+/obj/structure/machinery/sentry_holder/almayer,
 /turf/open/floor/almayer{
 	icon_state = "mono"
 	},
@@ -80027,11 +79991,6 @@
 "wPs" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 9
-	},
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 4;
-	id = "cic_railing";
-	density = 0
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
@@ -82971,11 +82930,6 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/obj/structure/machinery/door/poddoor/railing{
-	dir = 2;
-	id = "cic_railing";
-	density = 0
-	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
 "xNj" = (
@@ -102818,7 +102772,7 @@ gII
 urD
 lbY
 ccg
-piX
+xIh
 ozP
 atN
 qBo
@@ -103625,7 +103579,7 @@ aoA
 asc
 gmq
 amS
-vnV
+xNf
 odX
 wVW
 bIz
@@ -103828,7 +103782,7 @@ teY
 lgK
 dMr
 rKd
-wlE
+mwQ
 bvb
 lQq
 oyZ
@@ -104031,7 +103985,7 @@ yks
 lgK
 rzn
 rKd
-wlE
+mwQ
 sCP
 bcd
 gLT
@@ -104244,7 +104198,7 @@ lXS
 abk
 fYf
 awt
-opC
+vuY
 kUh
 aEB
 aPD
@@ -107667,7 +107621,7 @@ awW
 add
 add
 add
-add
+poy
 add
 add
 add
@@ -109088,7 +109042,7 @@ aoC
 add
 add
 add
-add
+poy
 add
 add
 add
@@ -109134,7 +109088,7 @@ qLj
 aJU
 aJU
 aJU
-aJU
+wDl
 aJU
 aJU
 aJU
@@ -116961,7 +116915,7 @@ avC
 avC
 wEg
 axa
-axa
+piX
 dSZ
 oMs
 avs
@@ -124921,7 +124875,7 @@ aeA
 aeC
 aeC
 aeC
-aeC
+quS
 aeC
 aeC
 aeC
@@ -124969,7 +124923,7 @@ lJY
 vcE
 vcE
 vcE
-vcE
+tKY
 vcE
 vcE
 vcE
@@ -126342,7 +126296,7 @@ amH
 aeC
 aeC
 aeC
-aeC
+quS
 aeC
 aeC
 aeC
@@ -126390,7 +126344,7 @@ kKR
 vcE
 vcE
 vcE
-vcE
+tKY
 vcE
 vcE
 vcE
@@ -140572,7 +140526,7 @@ xVk
 oyG
 aPw
 jbq
-aqJ
+vLW
 qVc
 qVc
 qVc
@@ -140580,7 +140534,7 @@ qVc
 qVc
 qVc
 qVc
-aqp
+iIz
 jbq
 aPw
 lFo
@@ -140774,7 +140728,7 @@ xVk
 xVk
 iki
 aah
-aag
+opC
 jbq
 vLW
 mqQ
@@ -140784,7 +140738,7 @@ mqQ
 mqQ
 iIz
 jbq
-aag
+wlE
 aah
 tGe
 xVk
