@@ -51869,9 +51869,11 @@
 	},
 /area/almayer/medical/lower_medical_medbay)
 "mwQ" = (
-/obj/structure/bed/alien,
-/turf/open/floor/wood/ship,
-/area/almayer/engineering/ce_room)
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/command/cic)
 "mwR" = (
 /obj/effect/step_trigger/teleporter_vector{
 	name = "Almayer_Down4";
@@ -56870,14 +56872,13 @@
 	},
 /area/almayer/squads/req)
 "opC" = (
-/mob/living/simple_animal/cat/kitten{
-	name = "Chilipila";
-	desc = "Kinda stuck"
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
 	},
-/turf/open/shuttle/dropship{
-	icon_state = "rasputin3"
+/turf/open/floor/almayer{
+	icon_state = "mono"
 	},
-/area/almayer/powered/agent)
+/area/almayer/command/cic)
 "opD" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/living/gym)
@@ -59164,6 +59165,15 @@
 "piR" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_a_s)
+"piX" = (
+/mob/living/simple_animal/cat/kitten{
+	name = "Chilipila";
+	desc = "Kinda stuck"
+	},
+/turf/open/shuttle/dropship{
+	icon_state = "rasputin3"
+	},
+/area/almayer/powered/agent)
 "pjb" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -66611,7 +66621,7 @@
 /area/almayer/maint/hull/upper/s_bow)
 "rTY" = (
 /obj/structure/transmitter{
-	name = "Mech Bay Telephone";
+	name = "Requisitions Telephone";
 	phone_category = "Almayer";
 	phone_id = "Mech Bay";
 	pixel_y = 30
@@ -76115,13 +76125,9 @@
 	},
 /area/almayer/squads/bravo)
 "vuY" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer{
-	icon_state = "mono"
-	},
-/area/almayer/command/cic)
+/obj/structure/bed/alien,
+/turf/open/floor/wood/ship,
+/area/almayer/engineering/ce_room)
 "vuZ" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -78670,11 +78676,12 @@
 	},
 /area/almayer/shipboard/brig/chief_mp_office)
 "wlE" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
+/obj/item/reagent_container/food/snacks/fortunecookie/prefilled{
+	name = "placeholder";
+	desc = "someday there will be something here."
 	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
+/turf/closed/wall/almayer,
+/area/almayer/lifeboat_pumps/south1)
 "wlF" = (
 /obj/structure/stairs/perspective{
 	dir = 1;
@@ -103775,7 +103782,7 @@ teY
 lgK
 dMr
 rKd
-wlE
+mwQ
 bvb
 lQq
 oyZ
@@ -103785,7 +103792,7 @@ uNg
 oyZ
 gKJ
 awt
-wlE
+mwQ
 kUh
 aZy
 uTU
@@ -103978,7 +103985,7 @@ yks
 lgK
 rzn
 rKd
-wlE
+mwQ
 sCP
 bcd
 gLT
@@ -103988,7 +103995,7 @@ mJu
 aqN
 ljs
 gkK
-wlE
+mwQ
 cvZ
 gmq
 uTU
@@ -104181,7 +104188,7 @@ aoA
 gkK
 aEB
 rKd
-vuY
+opC
 bvb
 rtt
 abk
@@ -104191,7 +104198,7 @@ lXS
 abk
 fYf
 awt
-vuY
+opC
 kUh
 aEB
 aPD
@@ -111930,7 +111937,7 @@ wYA
 vpn
 csI
 goL
-pgD
+wlE
 tQV
 bdH
 bdH
@@ -116908,7 +116915,7 @@ avC
 avC
 wEg
 axa
-opC
+piX
 dSZ
 oMs
 avs
@@ -131578,7 +131585,7 @@ iEr
 fhH
 eNi
 pUh
-mwQ
+vuY
 jyE
 eNi
 alG
