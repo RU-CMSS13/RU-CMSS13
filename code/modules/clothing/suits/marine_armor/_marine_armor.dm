@@ -688,7 +688,7 @@
 	icon = 'fray-marines/icons/obj/items/clothing/cm_suits.dmi'
 	icon_state = "st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGHPLUS
-	armor_bullet = CLOTHING_ARMOR_HIGH
+	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_internaldamage = CLOTHING_ARMOR_MEDIUMHIGH
 	flags_inventory = BLOCKSHARPOBJ|BLOCK_KNOCKDOWN
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROT
