@@ -115,6 +115,18 @@
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
 	adopts_squad_color = FALSE
 
+/obj/item/clothing/gloves/marine/M40
+	name = "\improper M40 Stormtrooper gloves"
+	desc = "A pair of plated, but nimble, gloves."
+	icon_state = "stormtrooper"
+	item_state = "stormtrooper"
+	armor_melee = CLOTHING_ARMOR_VERYHIGH
+	armor_bullet = CLOTHING_ARMOR_VERYHIGH
+	armor_internaldamage = CLOTHING_ARMOR_VERYHIGH
+	unacidable = TRUE
+	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
+	adopts_squad_color = FALSE
+
 /obj/item/clothing/gloves/marine/veteran
 	name = "armored gloves"
 	desc = "Non-standard kevlon fiber gloves. They're insulated and heavily armored."

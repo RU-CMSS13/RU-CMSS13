@@ -881,13 +881,17 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	item_icons = list(WEAR_HEAD = 'fray-marines/icons/mob/human/onmob/head_1.dmi')
 	icon = 'fray-marines/icons/mob/human/onmob/head_1.dmi'
 	icon_state = "st_helmet"
-	desc = "A helmet designed for USCM storm trooper. Contains heavy insulation, covered in nomex weave."
-	armor_melee = CLOTHING_ARMOR_HIGH
+	desc = "A helmet designed for USCM stormtrooper. Contains heavy insulation, covered in nomex weave."
+	armor_melee = CLOTHING_ARMOR_HIGHPLUS
+	armor_bullet = CLOTHING_ARMOR_HIGH
+	armor_internaldamage = CLOTHING_ARMOR_HIGH
+	clothing_traits = list(TRAIT_EAR_PROTECTION)
 	min_cold_protection_temperature = ICE_PLANET_MIN_COLD_PROT
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROT
+	unacidable = TRUE
+	anti_hug = 6
 	specialty = "M40 stormtrooper"
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
-	unacidable = TRUE
 
 /obj/item/clothing/head/helmet/marine/M3T
 	name = "\improper M3-T bombardier helmet"
