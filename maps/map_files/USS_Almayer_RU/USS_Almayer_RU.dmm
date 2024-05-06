@@ -5850,6 +5850,10 @@
 /obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
+/mob/living/simple_animal/cat/kitten{
+	name = "Chilipila";
+	desc = "Kinda stuck"
+	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -14516,17 +14520,6 @@
 /area/almayer/medical/operating_room_three)
 "biF" = (
 /obj/structure/surface/table/reinforced/prison,
-/obj/item/roller/surgical,
-/obj/item/roller/surgical,
-/obj/item/roller/surgical,
-/obj/item/reagent_container/spray/cleaner{
-	desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back.";
-	name = "Surgery Cleaner"
-	},
-/obj/item/folded_tent/med{
-	pixel_x = -8;
-	pixel_y = 14
-	},
 /obj/structure/closet/secure_closet/surgical{
 	pixel_x = -30
 	},
@@ -43490,9 +43483,9 @@
 	},
 /obj/structure/pipes/vents/scrubber,
 /obj/structure/transmitter{
-	name = "Requisition Telephone";
+	name = "Mech Bay Telephone";
 	phone_category = "Almayer";
-	phone_id = "Requisition";
+	phone_id = "Mech Bay";
 	pixel_y = 30
 	},
 /turf/open/floor/almayer{
@@ -51869,11 +51862,28 @@
 	},
 /area/almayer/medical/lower_medical_medbay)
 "mwQ" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/machinery/light{
 	dir = 4
 	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/command/cic)
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/folded_tent/med{
+	pixel_x = 3;
+	pixel_y = 14
+	},
+/obj/item/roller/surgical,
+/obj/item/roller/surgical,
+/obj/item/roller/surgical,
+/obj/item/reagent_container/spray/cleaner{
+	desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back.";
+	name = "Surgery Cleaner";
+	pixel_x = 7;
+	pixel_y = -2
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "sterile_green_side"
+	},
+/area/almayer/medical/lower_medical_medbay)
 "mwR" = (
 /obj/effect/step_trigger/teleporter_vector{
 	name = "Almayer_Down4";
@@ -56871,14 +56881,6 @@
 	icon_state = "green"
 	},
 /area/almayer/squads/req)
-"opC" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer{
-	icon_state = "mono"
-	},
-/area/almayer/command/cic)
 "opD" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/living/gym)
@@ -59166,14 +59168,9 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_a_s)
 "piX" = (
-/mob/living/simple_animal/cat/kitten{
-	name = "Chilipila";
-	desc = "Kinda stuck"
-	},
-/turf/open/shuttle/dropship{
-	icon_state = "rasputin3"
-	},
-/area/almayer/powered/agent)
+/obj/structure/bed/alien,
+/turf/open/floor/wood/ship,
+/area/almayer/engineering/ce_room)
 "pjb" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -66623,7 +66620,7 @@
 /obj/structure/transmitter{
 	name = "Requisitions Telephone";
 	phone_category = "Almayer";
-	phone_id = "Mech Bay";
+	phone_id = "Requisitions";
 	pixel_y = 30
 	},
 /turf/open/floor/almayer{
@@ -75719,6 +75716,13 @@
 	icon_state = "plate"
 	},
 /area/almayer/living/gym)
+"vnV" = (
+/obj/item/reagent_container/food/snacks/fortunecookie/prefilled{
+	name = "placeholder";
+	desc = "someday there will be something here."
+	},
+/turf/closed/wall/almayer,
+/area/almayer/lifeboat_pumps/south1)
 "vob" = (
 /obj/structure/machinery/door_control{
 	id = "laddernortheast";
@@ -76125,9 +76129,13 @@
 	},
 /area/almayer/squads/bravo)
 "vuY" = (
-/obj/structure/bed/alien,
-/turf/open/floor/wood/ship,
-/area/almayer/engineering/ce_room)
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/command/cic)
 "vuZ" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -78676,12 +78684,11 @@
 	},
 /area/almayer/shipboard/brig/chief_mp_office)
 "wlE" = (
-/obj/item/reagent_container/food/snacks/fortunecookie/prefilled{
-	name = "placeholder";
-	desc = "someday there will be something here."
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
 	},
-/turf/closed/wall/almayer,
-/area/almayer/lifeboat_pumps/south1)
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/command/cic)
 "wlF" = (
 /obj/structure/stairs/perspective{
 	dir = 1;
@@ -103782,7 +103789,7 @@ teY
 lgK
 dMr
 rKd
-mwQ
+wlE
 bvb
 lQq
 oyZ
@@ -103792,7 +103799,7 @@ uNg
 oyZ
 gKJ
 awt
-mwQ
+wlE
 kUh
 aZy
 uTU
@@ -103985,7 +103992,7 @@ yks
 lgK
 rzn
 rKd
-mwQ
+wlE
 sCP
 bcd
 gLT
@@ -103995,7 +104002,7 @@ mJu
 aqN
 ljs
 gkK
-mwQ
+wlE
 cvZ
 gmq
 uTU
@@ -104188,7 +104195,7 @@ aoA
 gkK
 aEB
 rKd
-opC
+vuY
 bvb
 rtt
 abk
@@ -104198,7 +104205,7 @@ lXS
 abk
 fYf
 awt
-opC
+vuY
 kUh
 aEB
 aPD
@@ -111937,7 +111944,7 @@ wYA
 vpn
 csI
 goL
-wlE
+vnV
 tQV
 bdH
 bdH
@@ -114639,7 +114646,7 @@ rrV
 tIA
 kan
 avW
-bZn
+mwQ
 dXr
 kLl
 vhX
@@ -116915,7 +116922,7 @@ avC
 avC
 wEg
 axa
-piX
+axa
 dSZ
 oMs
 avs
@@ -131585,7 +131592,7 @@ iEr
 fhH
 eNi
 pUh
-vuY
+piX
 jyE
 eNi
 alG
