@@ -118,9 +118,8 @@
 /obj/item/clothing/gloves/marine/M40
 	name = "\improper M40 Stormtrooper gloves"
 	desc = "A pair of plated, but nimble, gloves."
-	item_icons = list(WEAR_HANDS = 'fray-marines/icons/mob/human/onmob/gloves.dmi')
-	icon = 'fray-marines/icons/obj/items/clothing/gloves.dmi'
-	item_state = 'stormtrooper'
+	icon_state = "fray-marines/icons/obj/items/clothing/gloves.dmi"
+	item_state = "list(WEAR_HANDS = 'fray-marines/icons/mob/human/onmob/hands.dmi')"
 	armor_melee = CLOTHING_ARMOR_VERYHIGH
 	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_internaldamage = CLOTHING_ARMOR_HIGH
