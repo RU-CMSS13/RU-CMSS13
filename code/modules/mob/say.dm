@@ -20,7 +20,7 @@
 /mob/verb/whisper()
 	set name = "Whisper"
 	set category = "IC"
-	return //зачем шепот отключен?
+	return
 
 /mob
 	var/picksay_cooldown = 0
@@ -47,7 +47,7 @@
 	if(message)
 		if(stat != DEAD)
 			if(GLOB.ic_autoemote[message])
-				message = "*[GLOB.ic_autoemote[message]]" // возврат автокоррекции эмоутов
+				message = "*[GLOB.ic_autoemote[message]]" // возврат автокоррекции эмоутов params2list
 			message = check_for_brainrot(message)
 		usr.say(message)
 
@@ -247,13 +247,17 @@ for it but just ignore it.
 		remove_typing_indicator()
 
 ///   ///   ///   Чат фильтр   ///   ///   ///
+// Чат Фильт 3-ей генерации
 // Управление находится в Admin - Чат Фильтр
-// Каждое новое слово вносится с новой строки
+// Словари блокировки вносятся в формате: новое слово с новой строки
+// Словари автокоррекции вносятся в формате: name1=value1;name2=value2
+// Желательно предусматривать склонения квина=королева;квины=королевы;квине=королеве;квину=королеву;квиной=королевой
 // Файлы словарей плохих слов храняться на локальном сервере по адресу RU-CMSS13/cfg/chatfilter/
-// Словари автокоррекции вносятся только через код (см. ниже)
 
 GLOBAL_LIST_INIT(bad_words, file2list("cfg/chatfilter/bad_words.cf"))
 GLOBAL_LIST_INIT(exc_full, file2list("cfg/chatfilter/exc_full.cf"))
+GLOBAL_LIST_INIT(ic_autoemote, params2list(file2text("cfg/chatfilter/emote.cf")))	// файл в текст, текст в лист
+GLOBAL_LIST_INIT(ic_autocorrect, params2list(file2text("cfg/chatfilter/correct.cf")))
 
 #define CF_SOFT "МЯГКИЙ (предупреждение)"
 #define CF_HARD "СТРОГИЙ (предупреждение и удаление сообщения)"
@@ -269,17 +273,20 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 	if(!check_rights(R_ADMIN))
 		return
 
-	var filter_level = input(usr, "Текущий режим фильтра: [GLOB.chatfilter_hardcore].", "Выбор строгости фильтра")  as null|anything in (list("МЯГКИЙ (предупреждение)","СТРОГИЙ (предупреждение и удаление сообщения)","ЖЕСТОКИЙ (мут и удаление сообщения)"))
-	if(filter_level && alert("Переключить на [filter_level]?","Смена строгости фильра","Да","Нет") == "Да")
-		switch(filter_level)
-			if("МЯГКИЙ (предупреждение)")
-				GLOB.chatfilter_hardcore = CF_SOFT
-			if("СТРОГИЙ (предупреждение и удаление сообщения)")
-				GLOB.chatfilter_hardcore = CF_HARD
-			if("ЖЕСТОКИЙ (мут и удаление сообщения)")
-				GLOB.chatfilter_hardcore = CF_HARDCORE
-		log_admin("[key_name(usr)] edit filters to [GLOB.chatfilter_hardcore].")
-		message_admins("[key_name_admin(usr)] изменил режим фильтра на [GLOB.chatfilter_hardcore].")
+	var/list/level = list(CF_SOFT, CF_HARD, CF_HARDCORE)
+	var/filter_level = tgui_input_list(usr, "Текущий режим фильтра: [GLOB.chatfilter_hardcore].", "Выбор строгости фильтра", level)
+	if(!filter_level)
+		return
+
+	switch(filter_level)
+		if("МЯГКИЙ (предупреждение)")
+			GLOB.chatfilter_hardcore = CF_SOFT
+		if("СТРОГИЙ (предупреждение и удаление сообщения)")
+			GLOB.chatfilter_hardcore = CF_HARD
+		if("ЖЕСТОКИЙ (мут и удаление сообщения)")
+			GLOB.chatfilter_hardcore = CF_HARDCORE
+	log_admin("[key_name(usr)] edit filters to [GLOB.chatfilter_hardcore].")
+	message_admins("[key_name_admin(usr)] изменил режим фильтра на [GLOB.chatfilter_hardcore].")
 
 
 /client/proc/manage_chatfilter()
@@ -291,7 +298,9 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 
 	var/list/listoflists = list(
 		"Словарь плохих слов" = list(GLOB.bad_words, "cfg/chatfilter/bad_words.cf"),
-		"Словарь исключений" = list(GLOB.exc_full, "cfg/chatfilter/exc_full.cf")
+		"Словарь исключений" = list(GLOB.exc_full, "cfg/chatfilter/exc_full.cf"),
+		"Словарь автоэмоутов" = list(GLOB.ic_autoemote, "cfg/chatfilter/emote.cf"),
+		"Словарь автозамены" = list(GLOB.ic_autocorrect, "cfg/chatfilter/correct.cf")
 		)
 
 	var/selected = tgui_input_list(usr, "Новые слова вносить с новой строки", "Чат фильтр", listoflists)
@@ -300,13 +309,28 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 
 	var/list/L = listoflists[selected]
 	var/list/LT = L[1]
-	var/owtext = input(usr, "[selected]", "Новые слова вносить с новой строки", LT.Join("\n")) as message|null
+	if(selected == "Словарь автоэмоутов" || selected == "Словарь автозамены")
+		var/string
+		for(var/i in LT)
+			string += "[i]=[LT[i]];"
+		var/owtext = tgui_input_text(usr, "ФОРМАТ: имя1=замена1;имя2=замена2", "[selected]", string, multiline = TRUE, max_length = MAX_BOOK_MESSAGE_LEN)
 
-	if(!owtext)
-		return
+		if(!owtext)
+			return
 
-	LT.Cut(LT)
-	LT.Add(splittext(owtext,"\n"))
+		LT.Cut(LT)
+		LT.Add(owtext)
+
+		GLOB.ic_autoemote = params2list(file2text("cfg/chatfilter/emote.cf"))
+		GLOB.ic_autocorrect = params2list(file2text("cfg/chatfilter/correct.cf"))
+	else
+		var/owtext = tgui_input_text(usr, "ФОРМАТ: Новые слова вносить с новой строки", "[selected]", LT.Join("\n"), multiline = TRUE, max_length = MAX_BOOK_MESSAGE_LEN)
+
+		if(!owtext)
+			return
+
+		LT.Cut(LT)
+		LT.Add(splittext(owtext,"\n"))
 
 	if(fexists(L[2]))
 		fdel(L[2])
@@ -370,22 +394,3 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 /client
 	var/bad_word_counter = 0
 
-// Список автокоррекции текста в эмоуты
-GLOBAL_LIST_INIT(ic_autoemote, list(
-	")" = "smile", "(" = "frown",
-	"))" = "laugh", "((" = "cry",
-	"лол" = "laugh", "lol" = "laugh",
-	"лмао" = "laugh", "lmao" = "laugh",
-	"рофл" = "laugh", "rofl" = "laugh",
-	"кек" = "giggle", "kek" = "giggle",
-	"хз" = "пожимает плечами", "hz" = "пожимает плечами",
-	"я хз" = "пожимает плечами", "ya hz" = "пожимает плечами",
-))
-
-// Список автокоррекции текста в другой текст
-GLOBAL_LIST_INIT(ic_autocorrect, list(
-	"квина" = "королева", "квины" = "королевы", "квине" = "королеве", "квину" = "королеву", "квиной" = "королевой",
-	"хреноид" = "первозданный, истинно почитаемый, всепрощающий верховный благодеятель, владыка священный бог-император Хреноид, сотрясающий небеса",
-	// новые восхваления хреноиду писать тут. Не забывать ставить запятые и предусматривать склонения. Можно добавить автосклонятор, но если ток позже.
-
-))
