@@ -40,7 +40,7 @@
 
 		if(istype(turf, /turf/open))
 			if(istype(turf, /turf/open/snow) || istype(turf, /turf/open/auto_turf/snow))
-				var/turf/open/open = target
+				var/turf/open/open = turf
 				new /obj/item/stack/snow(open, open.bleed_layer)
 				if(istype(open, /turf/open/auto_turf/snow))
 					var/turf/open/auto_turf/snow/auto_turf = open
