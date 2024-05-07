@@ -39,12 +39,12 @@
 	icon_state = "guncase"
 	storage_slots = 4
 
-/obj/item/storage/box/combat_zone_engi_package/flamer
+/obj/item/storage/box/combat_zone_engi_package_flamer
 	name = "Engineer sentry flamer czsp"
 	icon_state = "guncase"
 	storage_slots = 4
 
-/obj/item/storage/box/combat_zone_engi_package/tesla
+/obj/item/storage/box/combat_zone_engi_package_tesla
 	name = "Engineer tesla czsp"
 	icon_state = "guncase"
 	storage_slots = 4
@@ -56,14 +56,14 @@
 	new /obj/item/weapon/gun/smg/nailgun/compact(src)
 	new /obj/item/ammo_magazine/smg/nailgun(src)
 
-/obj/item/storage/box/combat_zone_engi_package/flamer/Initialize()
+/obj/item/storage/box/combat_zone_engi_package_flamer/Initialize()
 	. = ..()
 	new /obj/item/defenses/handheld/sentry(src)
 	new /obj/item/engi_upgrade_kit(src)
 	new /obj/item/weapon/gun/smg/nailgun/compact(src)
 	new /obj/item/ammo_magazine/smg/nailgun(src)
 
-/obj/item/storage/box/combat_zone_engi_package/tesla/Initialize()
+/obj/item/storage/box/combat_zone_engi_package_tesla/Initialize()
 	. = ..()
 	new /obj/item/defenses/handheld/sentry(src)
 	new /obj/item/engi_upgrade_kit(src)
