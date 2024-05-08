@@ -120,7 +120,7 @@
 	desc = "A pair of plated, but nimble, gloves."
 	icon = 'fray-marines/icons/obj/items/clothing/gloves.dmi'
 	item_icons = list(WEAR_HANDS = 'fray-marines/icons/mob/human/onmob/hands.dmi')
-	icon_state = 'stormtrooper'
+	icon_state = "stormtrooper"
 	armor_melee = CLOTHING_ARMOR_VERYHIGH
 	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_internaldamage = CLOTHING_ARMOR_HIGH
