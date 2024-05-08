@@ -24,4 +24,3 @@
 
 	.["Experimental Hoverpack"] = /obj/item/hoverpack
 	.["Speed Stimulant"] = /obj/item/reagent_container/hypospray/autoinjector/stimulant/speed_stimulant
-	.["Brain Stimulant"] = /obj/item/reagent_container/hypospray/autoinjector/stimulant/brain_stimulant
