@@ -5,13 +5,13 @@
 	completion_xp = 5
 	pick_weight = 8
 	/// The minimum possible amount of nodes that need to be planted
-	var/minimum_nodes = 20 as num
+	var/minimum_nodes = 20
 	/// The maximum
-	var/maximum_nodes = 30 as num
+	var/maximum_nodes = 30
 	/// How many nodes need to be planted
-	var/node_requirement = 0 as num
+	var/node_requirement = 0
 	/// How many nodes have been planted so far
-	var/planted_nodes = 0 as num
+	var/planted_nodes = 0
 
 /datum/battlepass_challenge/plant_resin_nodes/New(client/owning_client)
 	. = ..()

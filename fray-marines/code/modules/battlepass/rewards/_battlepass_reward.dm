@@ -3,11 +3,11 @@
 
 /datum/battlepass_reward
 	/// The name of this reward
-	var/name = "" as text
+	var/name = ""
 	/// The iconfile that contains the image of this reward
 	var/icon = 'fray-marines/code/modules/battlepass/rewards/sprites/battlepass.dmi'
 	/// The iconstate of the image of this reward
-	var/icon_state = "coin_diamond" as text
+	var/icon_state = "coin_diamond"
 	/// What category this item falls under (armor, toy, etc)
 	var/category
 	/// If this item can bypass the 1-per-category limit

@@ -5,11 +5,11 @@
 	completion_xp = 5
 	pick_weight = 6
 	/// The minimum possible amount of times rage needs to be entered
-	var/minimum_rages = 2 as num
+	var/minimum_rages = 2
 	/// The maximum
-	var/maximum_rages = 4 as num
-	var/rage_requirement = 0 as num
-	var/completed_rages = 0 as num
+	var/maximum_rages = 4
+	var/rage_requirement = 0
+	var/completed_rages = 0
 
 /datum/battlepass_challenge/berserker_rage/New(client/owning_client)
 	. = ..()

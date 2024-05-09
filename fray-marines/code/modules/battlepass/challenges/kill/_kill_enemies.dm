@@ -1,14 +1,14 @@
 /datum/battlepass_challenge/kill_enemies
 	/// How many enemies need to be killed to complete the challenge
-	var/enemy_kills_required = 0 as num
+	var/enemy_kills_required = 0
 	/// How many enemies have been killed thus far for this challenge
-	var/current_enemy_kills = 0 as num
+	var/current_enemy_kills = 0
 	/// A list of valid mob paths to count towards kills
 	var/list/valid_kill_paths = list()
 	/// The minimum amt of kills possibly required to complete this challenge
-	var/kill_requirement_lower = 0 as num
+	var/kill_requirement_lower = 0
 	/// The maximum amt of kills possibly required to complete this challenge
-	var/kill_requirement_upper = 0 as num
+	var/kill_requirement_upper = 0
 
 /datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()

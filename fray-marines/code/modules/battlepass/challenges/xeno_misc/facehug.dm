@@ -4,10 +4,10 @@
 	challenge_category = CHALLENGE_XENO
 	completion_xp = 5
 	pick_weight = 7
-	var/minimum = 1 as num
-	var/maximum = 3 as num
-	var/requirement = 0 as num
-	var/filled = 0 as num
+	var/minimum = 1
+	var/maximum = 3
+	var/requirement = 0
+	var/filled = 0
 
 /datum/battlepass_challenge/facehug/New(client/owning_client)
 	. = ..()

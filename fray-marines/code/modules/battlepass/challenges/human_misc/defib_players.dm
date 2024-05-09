@@ -3,9 +3,9 @@
 	desc = "Successfully defibrillate AMOUNT unique marine players."
 	challenge_category = CHALLENGE_HUMAN
 	completion_xp = 5
-	var/minimum = 4 as num
-	var/maximum = 8 as num
-	var/requirement = 0 as num
+	var/minimum = 4
+	var/maximum = 8
+	var/requirement = 0
 	var/list/mob_name_list = list()
 
 

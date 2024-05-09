@@ -4,10 +4,10 @@
 	challenge_category = CHALLENGE_XENO
 	completion_xp = 5
 	pick_weight = 8
-	var/minimum = 20 as num
-	var/maximum = 30 as num
-	var/requirement = 0 as num
-	var/filled = 0 as num
+	var/minimum = 20
+	var/maximum = 30
+	var/requirement = 0
+	var/filled = 0
 
 /datum/battlepass_challenge/plant_fruit/New(client/owning_client)
 	. = ..()

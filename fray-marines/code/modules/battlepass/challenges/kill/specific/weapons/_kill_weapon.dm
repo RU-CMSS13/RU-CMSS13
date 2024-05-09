@@ -7,7 +7,7 @@
 	/// A list of possible weapons for this challenge to choose from. I would do it with typepaths but cause data only tracks names
 	var/list/possible_weapons = list()
 	/// The weapon chosen for this challenge
-	var/weapon_to_use = "" as text
+	var/weapon_to_use = ""
 
 /datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/New(client/owning_client)
 	. = ..()
