@@ -557,6 +557,9 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	// the human sprite is the only thing that reliably renders things, so
 	// we have to add overlays to that.
 	helmet_overlays = list() // Rebuild our list every time
+//RUCM EDIT START
+	overlays.Cut()
+//RUCM EDIT END
 	if(pockets && pockets.contents.len && (flags_marine_helmet & HELMET_GARB_OVERLAY))
 		var/list/above_band_layer = list()
 		var/list/below_band_layer = list()
@@ -583,6 +586,11 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 
 	if(active_visor)
 		helmet_overlays += active_visor.helmet_overlay
+
+//RUCM EDIT START
+	if(helmet_fire_overlay_icon)
+		overlays += helmet_fire_overlay_icon
+//RUCM EDIT END
 
 	if(ismob(loc))
 		var/mob/M = loc

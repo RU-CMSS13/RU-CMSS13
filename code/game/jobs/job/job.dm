@@ -239,6 +239,10 @@
 
 	setup_human(new_character, NP)
 
+//RUCM EDIT START
+	addtimer(CALLBACK(src, PROC_REF(add_to_battlepass_earners), new_character), BATTLEPASS_TIME_TO_EARN_REWARD)
+//RUCM EDIT END
+
 	return new_character
 
 /datum/job/proc/equip_job(mob/living/M)
