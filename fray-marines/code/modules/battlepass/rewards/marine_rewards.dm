@@ -207,15 +207,15 @@
 	gotten_rifle.base_gun_icon = "[gotten_rifle.base_gun_icon]_golden"
 	gotten_rifle.item_state = "m41a_golden"
 	gotten_rifle.map_specific_decoration = FALSE
-	gotten_rifle.icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
+	gotten_rifle.icon = 'fray-marines/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	gotten_rifle.item_icons = list(
-		WEAR_L_HAND = 'icons/mob/humans/onmob/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/items_righthand_1.dmi',
-		WEAR_J_STORE = 'icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_BACK = 'icons/mob/humans/onmob/back.dmi',
+		WEAR_L_HAND = 'fray-marines/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'fray-marines/icons/mob/humans/onmob/items_righthand_1.dmi',
+		WEAR_J_STORE = 'fray-marines/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_BACK = 'fray-marines/icons/mob/humans/onmob/back.dmi',
 	)
 	gotten_rifle.item_state_slots = list(
-		WEAR_BACK = 'icons/mob/humans/onmob/back.dmi',
+		WEAR_BACK = 'fray-marines/icons/mob/humans/onmob/back.dmi',
 	)
 	gotten_rifle.update_icon()
 	target_human.update_inv_l_hand()
@@ -248,15 +248,15 @@
 	gotten_rifle.base_gun_icon = "[gotten_rifle.base_gun_icon]_golden"
 	gotten_rifle.item_state = "m37_golden"
 	gotten_rifle.map_specific_decoration = FALSE
-	gotten_rifle.icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
+	gotten_rifle.icon = 'fray-marines/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	gotten_rifle.item_icons = list(
-		WEAR_L_HAND = 'icons/mob/humans/onmob/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/items_righthand_1.dmi',
-		WEAR_J_STORE = 'icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_BACK = 'icons/mob/humans/onmob/back.dmi',
+		WEAR_L_HAND = 'fray-marines/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'fray-marines/icons/mob/humans/onmob/items_righthand_1.dmi',
+		WEAR_J_STORE = 'fray-marines/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_BACK = 'fray-marines/icons/mob/humans/onmob/back.dmi',
 	)
 	gotten_rifle.item_state_slots = list(
-		WEAR_BACK = 'icons/mob/humans/onmob/back.dmi',
+		WEAR_BACK = 'fray-marines/icons/mob/humans/onmob/back.dmi',
 	)
 	gotten_rifle.update_icon()
 	target_human.update_inv_l_hand()
