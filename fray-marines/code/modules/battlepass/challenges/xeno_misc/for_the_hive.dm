@@ -22,6 +22,8 @@
 
 /datum/battlepass_challenge/for_the_hive/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_XENO_FTH_MAX_ACID, PROC_REF(on_sigtrigger))
 

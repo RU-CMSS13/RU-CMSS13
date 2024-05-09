@@ -42,6 +42,9 @@
 /client/proc/save_battlepass()
 	var/savefile/battlepass_save = new("data/player_saves/[copytext(ckey,1,2)]/[ckey]/battlepass.sav")
 
+	if(!owned_battlepass)
+		return
+
 	battlepass_save["tier"] = owned_battlepass.tier
 	battlepass_save["xp"] = owned_battlepass.xp
 	battlepass_save["daily_challenges_last_updated"] = owned_battlepass.daily_challenges_last_updated

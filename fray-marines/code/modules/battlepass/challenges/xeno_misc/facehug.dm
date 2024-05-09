@@ -22,6 +22,8 @@
 
 /datum/battlepass_challenge/facehug/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_XENO_FACEHUGGED_HUMAN, PROC_REF(on_sigtrigger))
 

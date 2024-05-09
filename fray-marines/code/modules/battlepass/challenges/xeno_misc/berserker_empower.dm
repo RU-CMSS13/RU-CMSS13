@@ -24,6 +24,8 @@
 
 /datum/battlepass_challenge/berserker_rage/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_XENO_RAGE_MAX, PROC_REF(on_rage_max))
 

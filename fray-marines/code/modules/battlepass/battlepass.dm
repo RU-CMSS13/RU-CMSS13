@@ -125,7 +125,9 @@
 /// Check that the user has all the rewards they should (in case rewards shifted in config or etc).
 /// Doesn't remove ones that aren't in their tiers (in case they have some from a previous season, for example)
 /datum/battlepass/proc/verify_rewards()
-	for(var/i in 1 to tier)
+	for(var/i = 1 to tier)
+		if(SSbattlepass.season_rewards.len < i)
+			break
 		var/reward_path = SSbattlepass.season_rewards[i]
 		if(reward_path in reward_paths)
 			continue

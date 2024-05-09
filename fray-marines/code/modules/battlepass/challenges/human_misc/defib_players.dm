@@ -22,6 +22,8 @@
 
 /datum/battlepass_challenge/defib_players/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_HUMAN_USED_DEFIB, PROC_REF(on_defib))
 

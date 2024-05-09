@@ -26,6 +26,8 @@
 
 /datum/battlepass_challenge/plant_resin_nodes/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_XENO_PLANT_RESIN_NODE, PROC_REF(on_plant_node))
 

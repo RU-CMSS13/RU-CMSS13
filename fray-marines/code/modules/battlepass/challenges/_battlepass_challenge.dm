@@ -32,6 +32,10 @@
 	UnregisterSignal(logged_in_mob.client, COMSIG_CLIENT_MOB_LOGGED_IN)
 	RegisterSignal(logged_in_mob, COMSIG_MOB_LOGOUT, PROC_REF(on_client_logout_mob))
 
+	if(logged_in_mob.statistic_exempt)
+		return FALSE
+	return TRUE
+
 /// Cleanup code from on_client_login_mob
 /datum/battlepass_challenge/proc/on_client_logout_mob(mob/source)
 	SIGNAL_HANDLER

@@ -22,6 +22,8 @@
 
 /datum/battlepass_challenge/glob_hits/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_FIRER_PROJECTILE_DIRECT_HIT, PROC_REF(on_sigtrigger))
 

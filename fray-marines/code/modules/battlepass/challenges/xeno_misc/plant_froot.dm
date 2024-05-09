@@ -22,6 +22,8 @@
 
 /datum/battlepass_challenge/plant_fruit/on_client_login_mob(datum/source, mob/logged_in_mob)
 	. = ..()
+	if(!.)
+		return
 	if(!completed)
 		RegisterSignal(logged_in_mob, COMSIG_XENO_PLANTED_FRUIT, PROC_REF(on_sigtrigger))
 
