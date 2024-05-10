@@ -37,6 +37,29 @@
 		say_verb(pick(possible_phrases))
 		picksay_cooldown = world.time + 1.5 SECONDS
 
+/* //CM Old
+/mob/verb/say_verb(message as text)
+	set name = "Say"
+	set category = "IC"
+
+	if(!client?.attempt_talking(message))
+		return
+
+	usr.say(message)
+
+/mob/verb/me_verb(message as text)
+	set name = "Me"
+	set category = "IC"
+
+	message = trim(strip_html(message, MAX_EMOTE_LEN))
+	if(!client?.attempt_talking(message))
+		return
+
+	if(use_me)
+		usr.emote("me",usr.emote_type,message, TRUE)
+	else
+		usr.emote(message, 1, null, TRUE)
+*/
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
