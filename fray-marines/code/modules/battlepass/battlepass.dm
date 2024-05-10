@@ -88,6 +88,8 @@
 		return
 
 	for(var/i in previous_on_tier_up_tier + 1 to tier)
+		if(SSbattlepass.season_rewards.len < i)
+			break
 		var/reward_path = SSbattlepass.season_rewards[i]
 		var/datum/battlepass_reward/reward = new reward_path
 		rewards += reward

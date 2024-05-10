@@ -18,6 +18,8 @@
 		return FALSE
 
 	RegisterSignal(owning_client, COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(on_client_login_mob))
+	if(owning_client.mob)
+		on_client_login_mob(src, owning_client.mob)
 	return TRUE
 
 /// Override to change the desc of the challenge post-init
