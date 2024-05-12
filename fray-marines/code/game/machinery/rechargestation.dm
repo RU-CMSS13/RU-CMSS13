@@ -271,7 +271,6 @@
 
 		if(!doing_stuff)
 			to_chat(occupant, "Цикл обслуживания завершен. Все системы исправны.")
-			humanoid_occupant.pain.recalculate_pain()
 			go_out()
 	else
 		very_busy = FALSE
