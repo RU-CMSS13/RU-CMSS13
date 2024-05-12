@@ -86,6 +86,9 @@
 			if(!doing_stuff)
 				for(var/datum/internal_organ/current_organ in humanoid_occupant.internal_organs)
 					if(!doing_stuff && (current_organ.robotic == ORGAN_ASSISTED||current_organ.robotic == ORGAN_ROBOT)) //this time the machine can *only* fix robotic organs
+						// Shithack to trigger eye repairs if they somehow undamaged but user still blind
+						if(current_organ == humanoid_occupant.internal_organs_by_name["eyes"] && current_organ.damage <= 0 && (humanoid_occupant.disabilities & NEARSIGHTED || humanoid_occupant.disabilities & DISABILITY_BLIND))
+							current_organ.damage++
 						if(current_organ.damage > 0)
 							if (very_busy)
 								to_chat(occupant, "Востановление компонента '[current_organ]' в процессе...")
