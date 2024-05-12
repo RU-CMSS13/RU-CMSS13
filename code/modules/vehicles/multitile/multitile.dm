@@ -247,29 +247,15 @@
 
 	var/amt_hardpoints = LAZYLEN(hardpoints)
 	if(amt_hardpoints)
-		var/list/hardpoint_images = list()
-
-		for(var/obj/item/hardpoint/H in hardpoints)
-			hardpoint_images[H.get_hardpoint_image()] = H.hdpt_layer
-
-		for(var/k = hardpoint_images.len, k > 0, k--)
-			for(var/j = 1, j < k, j++)
-				if(hardpoint_images[hardpoint_images[j]] > hardpoint_images[hardpoint_images[j+1]])
-					hardpoint_images.Swap(j, j+1)
-
-		for(var/i in hardpoint_images)
-			if(islist(i))
-				for(var/l in i)
-					var/image/P = l
-					if(istype(P))
-						P.layer = layer + (hardpoint_images[i]*0.1)
-					overlays += P
-				continue
-			var/image/I = i
-			// get_hardpoint_image() can return a list of images
-			if(istype(I))
-				I.layer = layer + (hardpoint_images[i]*0.1)
-			overlays += I
+		for(var/obj/item/hardpoint/hardpoint in hardpoints)
+			var/image/hardpoint_image = hardpoint.get_hardpoint_image()
+			if(istype(hardpoint_image))
+				hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.1
+			else if(islist(hardpoint_image))
+				var/list/image/hardpoint_image_list = hardpoint_image // Linter will complain about iterating on "an image" otherwise
+				for(var/image/subimage in hardpoint_image_list)
+					subimage.layer = layer + hardpoint.hdpt_layer * 0.1
+			overlays += hardpoint_image
 
 	if(clamped)
 		var/image/J = image(icon, icon_state = "vehicle_clamp", layer = layer+0.1)
@@ -361,13 +347,26 @@
 	M.reset_view(src)
 	give_action(M, /datum/action/human_action/vehicle_unbuckle)
 
+//It's breaking it, so we don't throwing it anyways
+/obj/vehicle/multitile/throw_atom(atom/target, range, speed = 0, atom/thrower, spin, launch_type = NORMAL_LAUNCH, pass_flags = NO_FLAGS, list/end_throw_callbacks, list/collision_callbacks)
+	return FALSE
+
+/// Get crewmember of seat.
 /obj/vehicle/multitile/proc/get_seat_mob(seat)
 	return seats[seat]
 
+/// Get seat of crewmember.
 /obj/vehicle/multitile/proc/get_mob_seat(mob/M)
 	for(var/seat in seats)
 		if(seats[seat] == M)
 			return seat
+	return null
+
+/// Get active hardpoint of crewmember.
+/obj/vehicle/multitile/proc/get_mob_hp(mob/crew)
+	var/seat = get_mob_seat(crew)
+	if(seat)
+		return active_hp[seat]
 	return null
 
 /obj/vehicle/multitile/proc/get_passengers()
@@ -397,6 +396,52 @@
 		if (health <= 0) lighting_holder.set_light_on(FALSE)
 		else lighting_holder.set_light_on(TRUE)
 	update_icon()
+
+/*
+** PRESETS SPAWNERS
+*/
+//These help spawning vehicles that don't end up as subtypes, causing problems later with various checks
+//as well as allowing customizations, like properly turning on mapped in direction and so on.
+
+/obj/effect/vehicle_spawner
+	name = "Vehicle Spawner"
+
+//Main proc which handles spawning and adding hardpoints/damaging the vehicle
+/obj/effect/vehicle_spawner/proc/spawn_vehicle()
+	return
+
+//Installation of modules kit
+/obj/effect/vehicle_spawner/proc/load_hardpoints(obj/vehicle/multitile/V)
+	return
+
+//Miscellaneous additions
+/obj/effect/vehicle_spawner/proc/load_misc(obj/vehicle/multitile/V)
+
+	V.load_role_reserved_slots()
+	V.initialize_cameras()
+	//transfer mapped in edits
+	if(color)
+		V.color = color
+	if(name != initial(name))
+		V.name = name
+	if(desc)
+		V.desc = desc
+
+//Dealing enough damage to destroy the vehicle
+/obj/effect/vehicle_spawner/proc/load_damage(obj/vehicle/multitile/V)
+	V.take_damage_type(1e8, "abstract")
+	V.take_damage_type(1e8, "abstract")
+	V.healthcheck()
+
+/obj/effect/vehicle_spawner/proc/handle_direction(obj/vehicle/multitile/M)
+	switch(dir)
+		if(EAST)
+			M.try_rotate(90)
+		if(WEST)
+			M.try_rotate(-90)
+		if(NORTH)
+			M.try_rotate(90)
+			M.try_rotate(90)
 
 /obj/vehicle/multitile/get_applying_acid_time()
 	return 3 SECONDS

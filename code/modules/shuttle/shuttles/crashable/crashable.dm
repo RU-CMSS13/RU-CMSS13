@@ -26,7 +26,7 @@
 			found_turf.ChangeTurf(/turf/open/floor)
 
 	for(var/mob/current_mob as anything in get_mobs_in_z_level_range(destination.return_center_turf(), 18))
-		var/relative_dir = get_dir(current_mob, destination.return_center_turf())
+		var/relative_dir = Get_Compass_Dir(current_mob, destination.return_center_turf())
 		var/final_dir = dir2text(relative_dir)
 		to_chat(current_mob, SPAN_HIGHDANGER("You hear something crashing down from above [final_dir ? "to the [final_dir]" : "nearby"]!"))
 
@@ -96,7 +96,10 @@
 		crash_land = TRUE
 
 /// Checks for anything that may get in the way of a crash, returns FALSE if there is something in the way or is out of bounds
-/obj/docking_port/mobile/crashable/proc/check_crash_point(obj/docking_port/stationary/crashable/checked_crashable_port)
+/obj/docking_port/mobile/proc/check_crash_point(obj/docking_port/stationary/crashable/checked_crashable_port)
+	if(length(return_turfs()) != length(checked_crashable_port.return_turfs()))
+		return FALSE
+
 	for(var/turf/found_turf as anything in checked_crashable_port.return_turfs())
 		var/area/found_area = get_area(found_turf)
 		if(found_area.flags_area & AREA_NOTUNNEL)

@@ -5,21 +5,6 @@
 /obj/structure/machinery/recharge_station/proc/process_occupant_localized()
 	if(src.occupant)
 		var/doing_stuff = FALSE
-		if (isrobot(occupant))
-			var/mob/living/silicon/robot/R = occupant
-			if(R.module)
-				R.module.respawn_consumable(R)
-			if(!R.cell)
-				return
-			if(!R.cell.fully_charged())
-				var/diff = min(R.cell.maxcharge - R.cell.charge, 500) // 500 charge / tick is about 2% every 3 seconds
-				diff = min(diff, current_internal_charge) // No over-discharging
-				R.cell.give(diff)
-				current_internal_charge = max(current_internal_charge - diff, 0)
-				to_chat(occupant, "Зарядка...")
-				doing_stuff = TRUE
-			else
-				update_use_power(USE_POWER_IDLE)
 		if (issynth(occupant))
 			var/mob/living/carbon/human/humanoid_occupant = occupant //for special synth surgeries
 			// Ремонт урона
@@ -170,7 +155,7 @@
 
 					if (detached_brain)
 						visible_message("[icon2html(src, viewers(src))] \The <b>[src]</b> states: Этот ключ активации уже был использован. Запрос на проведение полной деактивации андроида.")
-						if (detached_brain.loc in hear(world_view_size, src))
+						if (detached_brain.loc in hear(GLOB.world_view_size, src))
 							var/client/brain = detached_brain.client
 							var/transfer_needed = FALSE
 							var/mob/dead/observer/G2

@@ -5,27 +5,25 @@
 	allow_additional = 1
 	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_SQUAD
 	gear_preset = /datum/equipment_preset/uscm/engineer
-	entry_message_body = "You have the <a href='%WIKIURL%'>equipment and skill</a> to build fortifications, reroute power lines, and bunker down. Your squaddies will look to you when it comes to construction in the field of battle."
+	entry_message_body = "You have the <a href='"+WIKI_PLACEHOLDER+"'>equipment and skill</a> to build fortifications, reroute power lines, and bunker down. Your squaddies will look to you when it comes to construction in the field of battle."
 
 /datum/job/marine/engineer/set_spawn_positions(count)
-	for(var/datum/squad/sq in RoleAuthority.squads)
+	for(var/datum/squad/sq in GLOB.RoleAuthority.squads)
 		if(sq)
 			sq.max_engineers = engi_slot_formula(count)
 
-/datum/job/marine/engineer/get_total_positions(latejoin=0)
-	var/slots = engi_slot_formula(get_total_marines())
+/datum/job/marine/engineer/get_total_positions(latejoin = FALSE)
+	var/real_max_positions = 0
+	for(var/datum/squad/squad in GLOB.RoleAuthority.squads)
+		if(squad.roundstart && squad.usable && squad.faction == FACTION_MARINE && squad.name != "Root")
+			real_max_positions += squad.max_engineers
 
-	if(slots <= total_positions_so_far)
-		slots = total_positions_so_far
-	else
-		total_positions_so_far = slots
+	if(real_max_positions > total_positions_so_far)
+		total_positions_so_far = real_max_positions
 
-	if(latejoin)
-		for(var/datum/squad/sq in RoleAuthority.squads)
-			if(sq)
-				sq.max_engineers = slots
+	spawn_positions = real_max_positions
 
-	return (slots*4)
+	return real_max_positions
 
 /datum/job/marine/engineer/whiskey
 	title = JOB_WO_SQUAD_ENGINEER

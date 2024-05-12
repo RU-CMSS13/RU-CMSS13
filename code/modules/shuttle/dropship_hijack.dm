@@ -7,13 +7,10 @@
 	var/target_ship_section
 	var/hijacked_bypass_aa = FALSE
 	var/final_announcement = FALSE
-	var/ship_killed = FALSE
-	var/messaged = FALSE
-	var/ferry_crashed = FALSE
 
 /datum/dropship_hijack/almayer/proc/crash_landing()
 	//break APCs
-	for(var/obj/structure/machinery/power/apc/A in machines)
+	for(var/obj/structure/machinery/power/apc/A in GLOB.machines)
 		if(A.z != crash_site.z)
 			continue
 		if(prob(A.crash_break_probability))
@@ -53,28 +50,21 @@
 
 	// Break the ultra-reinforced windows.
 	// Break the briefing windows.
-	for(var/i in GLOB.hijack_bustable_windows)
-		var/obj/structure/window/H = i
-		H.deconstruct(FALSE)
-
-	for(var/k in GLOB.hijack_bustable_ladders)
-		var/obj/structure/ladder/fragile_almayer/L = k
-		L.deconstruct()
-
-	// Delete the briefing door(s).
-	for(var/D in GLOB.hijack_deletable_windows)
-		qdel(D)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_HIJACK_IMPACTED)
+	RegisterSignal(SSdcs, COMSIG_GLOB_HIJACK_LANDED, PROC_REF(finish_landing))
 
 	// Sleep while the explosions do their job
 	var/explosion_alive = TRUE
 	while(explosion_alive)
 		explosion_alive = FALSE
-		for(var/datum/automata_cell/explosion/E in cellauto_cells)
+		for(var/datum/automata_cell/explosion/E in GLOB.cellauto_cells)
 			if(E.explosion_cause_data && E.explosion_cause_data.cause_name == "dropship crash")
 				explosion_alive = TRUE
 				break
 		sleep(10)
 
+/datum/dropship_hijack/almayer/proc/finish_landing()
+	SShijack.announce_status_on_crash()
 	SSticker.hijack_ocurred()
 
 /datum/dropship_hijack/almayer/proc/fire()
@@ -82,8 +72,8 @@
 		return FALSE
 	shuttle.callTime = DROPSHIP_CRASH_TRANSIT_DURATION * GLOB.ship_alt
 	SSshuttle.moveShuttle(shuttle.id, crash_site.id, TRUE)
-	if(round_statistics)
-		round_statistics.track_hijack()
+	if(GLOB.round_statistics)
+		GLOB.round_statistics.track_hijack()
 	return TRUE
 
 /datum/dropship_hijack/almayer/proc/target_crash_site(ship_section)
@@ -117,32 +107,27 @@
 		return
 
 	// if the AA site matches target site
-	if(target_ship_section == almayer_aa_cannon.protecting_section)
-//		var/list/remaining_crash_sites = almayer_ship_sections.Copy()
-//		remaining_crash_sites -= target_ship_section
-		var/turf/target = get_crashcolony_turf()
+	if(target_ship_section == GLOB.almayer_aa_cannon.protecting_section)
+		var/list/remaining_crash_sites = GLOB.almayer_ship_sections.Copy()
+		remaining_crash_sites -= target_ship_section
+		var/new_target_ship_section = pick(remaining_crash_sites)
+		var/turf/target = get_crashsite_turf(new_target_ship_section)
 		var/turf/offset_target = locate(target.x + HIJACK_CRASH_SITE_OFFSET_X, target.y + HIJACK_CRASH_SITE_OFFSET_Y, target.z)
 		if(!offset_target)
 			offset_target = target // Welp the offsetting failed so...
 		crash_site.forceMove(offset_target)
 		marine_announcement("Вражеское судно направляющееся к [target_ship_section] было успешно ликвидировано.", "Система IX-50 MGAD", 'sound/effects/gau.ogg', logging = ARES_LOG_SECURITY)
-		target_ship_section = offset_target
+		target_ship_section = new_target_ship_section
 		// TODO mobs not alerted
 		for(var/area/internal_area in shuttle.shuttle_areas)
 			for(var/turf/internal_turf in internal_area)
 				for(var/mob/M in internal_turf)
-					to_chat(M, SPAN_DANGER("Корабль сильно трясет, в то время как взрывы сотрясают его!"))
-					to_chat(M, SPAN_DANGER("Я чувствую как корабль разворачивается и меняет направление!"))
+					to_chat(M, SPAN_DANGER("The ship jostles violently as explosions rock the ship!"))
+					to_chat(M, SPAN_DANGER("Вы чувствуете как корабль резко поворачивается и меняет направление!"))
 					shake_camera(M, 60, 2)
 			playsound_area(internal_area, 'sound/effects/antiair_explosions.ogg')
 
 	hijacked_bypass_aa = TRUE
-	almayer_aa_cannon.protecting_section = ""
-	almayer_aa_cannon.recharging = TRUE
-	ship_killed = TRUE
-	ferry_crashed = TRUE
-
-
 
 /datum/dropship_hijack/almayer/proc/check_final_approach()
 	// if our duration isn't far enough away
@@ -154,15 +139,6 @@
 
 	if(final_announcement)
 		return
-
-	if(ship_killed == TRUE)
-		if(messaged == FALSE)
-			notify_ghosts(header = "Крушение", message = "Десантный корабль был сбит!", source = crash_site, extra_large = TRUE)
-			messaged = TRUE
-		ship_killed = FALSE
-		return
-
-	shuttle.crashing = TRUE
 
 	marine_announcement("ДЕСАНТНЫЙ КОРАБЛЬ ПРЯМО ПО КУРСУ. АВАРИЯ НЕИЗБЕЖНА." , "ТРЕВОГА", 'sound/AI/dropship_emergency.ogg', logging = ARES_LOG_SECURITY)
 
@@ -176,6 +152,7 @@
 
 	addtimer(CALLBACK(src, PROC_REF(disable_latejoin)), 3 MINUTES) // latejoin cryorines have 3 minutes to get the hell out
 
+
 /datum/dropship_hijack/almayer/proc/do_dropship_incoming_sound()
 	for(var/area/internal_area in shuttle.shuttle_areas)
 		playsound_area(internal_area, 'sound/effects/dropship_incoming.ogg', vol = 75)
@@ -187,7 +164,7 @@
 	playsound_z(SSmapping.levels_by_any_trait(list(ZTRAIT_MARINE_MAIN_SHIP)), 'sound/effects/dropship_crash.ogg', volume = 75)
 
 /datum/dropship_hijack/almayer/proc/disable_latejoin()
-	enter_allowed = FALSE
+	GLOB.enter_allowed = FALSE
 
 /datum/dropship_hijack/almayer/proc/get_crashsite_turf(ship_section)
 	var/list/turfs = list()
@@ -198,13 +175,14 @@
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/cic_hallway)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/cryo)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/evidence_storage)
-			turfs += get_area_turfs(/area/almayer/shipboard/brig/execution)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/general_equipment)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/lobby)
-			turfs += get_area_turfs(/area/almayer/shipboard/brig/main_office)
+			turfs += get_area_turfs(/area/almayer/shipboard/brig/starboard_hallway)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/perma)
 			turfs += get_area_turfs(/area/almayer/shipboard/brig/processing)
-			turfs += get_area_turfs(/area/almayer/shipboard/brig/surgery)
+			turfs += get_area_turfs(/area/almayer/shipboard/brig/medical)
+			turfs += get_area_turfs(/area/almayer/shipboard/brig/mp_bunks)
+			turfs += get_area_turfs(/area/almayer/shipboard/brig/chief_mp_office)
 			turfs += get_area_turfs(/area/almayer/command/cichallway)
 			turfs += get_area_turfs(/area/almayer/command/cic)
 		if("Upper deck Midship")
@@ -213,14 +191,13 @@
 			turfs += get_area_turfs(/area/almayer/medical/containment)
 			turfs += get_area_turfs(/area/almayer/medical/containment/cell)
 			turfs += get_area_turfs(/area/almayer/medical/medical_science)
-			turfs += get_area_turfs(/area/almayer/medical/testlab)
 			turfs += get_area_turfs(/area/almayer/medical/hydroponics)
 		if("Upper deck Aftship")
 			turfs += get_area_turfs(/area/almayer/engineering/upper_engineering)
 			turfs += get_area_turfs(/area/almayer/engineering/laundry)
 		if("Lower deck Foreship")
 			turfs += get_area_turfs(/area/almayer/hallways/hangar)
-			turfs += get_area_turfs(/area/almayer/hallways/vehiclehangar)
+			turfs += get_area_turfs(/area/almayer/hallways/lower/vehiclehangar)
 		if("Lower deck Midship")
 			turfs += get_area_turfs(/area/almayer/medical/chemistry)
 			turfs += get_area_turfs(/area/almayer/medical/lower_medical_lobby)
@@ -234,35 +211,9 @@
 			turfs += get_area_turfs(/area/almayer/squads/req)
 		if("Lower deck Aftship")
 			turfs += get_area_turfs(/area/almayer/living/cryo_cells)
-			turfs += get_area_turfs(/area/almayer/engineering/engineering_workshop)
+			turfs += get_area_turfs(/area/almayer/engineering/lower/workshop)
 		else
 			CRASH("Crash site [ship_section] unknown.")
-	return pick(turfs)
-
-/datum/dropship_hijack/almayer/proc/get_crashcolony_turf()
-	var/map_name = SSmapping.configs[GROUND_MAP].map_name
-	var/list/turfs = list()
-	switch(map_name)
-		if(MAP_LV_624)
-			turfs += get_area_turfs(/area/lv624/ground/river/central_river)
-		if(MAP_DESERT_DAM)
-			turfs += get_area_turfs(/area/desert_dam/exterior/valley/valley_northwest)
-		if(MAP_BIG_RED)
-			turfs += get_area_turfs(/area/bigredv2/outside/medical)
-		if(MAP_PRISON_STATION)
-			turfs += get_area_turfs(/area/prison/canteen)
-		if(MAP_SOROKYNE_STRATA)
-			turfs += get_area_turfs(/area/strata/ag/exterior/marsh)
-		if(MAP_CORSAT)
-			turfs += get_area_turfs(/area/corsat/gamma/hallwaysouth)
-		if(MAP_KUTJEVO)
-			turfs += get_area_turfs(/area/kutjevo/interior/complex/botany)
-		if(MAP_ICE_COLONY_V3)
-			turfs += get_area_turfs(/area/ice_colony/surface/dorms)
-		if(MAP_NEW_VARADERO)
-			turfs += get_area_turfs(/area/varadero/interior/medical)
-		else
-			CRASH("Crash site [map_name] unknown.")
 	return pick(turfs)
 
 #undef HIJACK_CRASH_SITE_OFFSET_X

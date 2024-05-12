@@ -2,9 +2,9 @@ SUBSYSTEM_DEF(techtree)
 	name = "Tech Tree"
 	init_order = SS_INIT_TECHTREE
 
-	flags = SS_NO_FIRE
+	flags = NO_FLAGS
 
-	wait = 5 SECONDS
+	wait = 1 MINUTES
 
 	var/list/datum/tech/techs = list()
 	var/list/datum/techtree/trees = list()
@@ -34,17 +34,6 @@ SUBSYSTEM_DEF(techtree)
 		var/datum/space_level/zpos = SSmapping.add_new_zlevel(tree.name, list(ZTRAIT_TECHTREE))
 		tree.zlevel = zpos
 
-		var/zlevel = zpos.z_value
-		var/turf/z_min = locate(1, 1, zlevel)
-		var/turf/z_max = locate(world.maxx, world.maxy, zlevel)
-
-
-
-		for(var/t in block(z_min, z_max))
-			var/turf/Tu = t
-			Tu.ChangeTurf(/turf/closed/void, list(/turf/closed/void))
-			new /area/techtree(Tu)
-
 		for(var/tier in tree.tree_tiers)
 			tree.unlocked_techs += tier
 			tree.all_techs += tier
@@ -72,6 +61,11 @@ SUBSYSTEM_DEF(techtree)
 		to_chat(world, SPAN_BOLDANNOUNCE("[msg]"))
 
 	return SS_INIT_SUCCESS
+
+/datum/controller/subsystem/techtree/fire()
+	for(var/name in trees)
+		var/datum/techtree/tree_income = trees[name]
+		tree_income.add_points(0.1) // 6 поинов час, 2 поинта до высадки
 
 /datum/controller/subsystem/techtree/proc/activate_passive_nodes()
 	for(var/name in trees)

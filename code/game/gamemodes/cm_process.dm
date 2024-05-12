@@ -1,5 +1,5 @@
 
-#define QUEEN_DEATH_COUNTDOWN  10 MINUTES //10 minutes. Can be changed into a variable if it needs to be manipulated later.
+#define QUEEN_DEATH_COUNTDOWN  15 MINUTES //10 minutes. Can be changed into a variable if it needs to be manipulated later.
 
 #define MODE_INFESTATION_X_MAJOR "Xenomorph Major Victory"
 #define MODE_INFESTATION_M_MAJOR "Marine Major Victory"
@@ -39,16 +39,16 @@ of predators), but can be added to include variant game modes (like humans vs. h
 /datum/game_mode/proc/declare_completion_announce_fallen_soldiers()
 	set waitfor = 0
 	sleep(2 SECONDS)
-	fallen_list += fallen_list_cross
-	if(fallen_list.len)
+	GLOB.fallen_list += GLOB.fallen_list_cross
+	if(GLOB.fallen_list.len)
 		var/dat = "<br>"
 		dat += SPAN_ROUNDBODY("На полях Фландрии...<br>")
 		dat += SPAN_CENTERBOLD("В память нашим падшим солдатам: <br>")
-		for(var/i = 1 to fallen_list.len)
-			if(i != fallen_list.len)
-				dat += "[fallen_list[i]], "
+		for(var/i = 1 to GLOB.fallen_list.len)
+			if(i != GLOB.fallen_list.len)
+				dat += "[GLOB.fallen_list[i]], "
 			else
-				dat += "[fallen_list[i]].<br>"
+				dat += "[GLOB.fallen_list[i]].<br>"
 		to_world("[dat]")
 
 
@@ -134,7 +134,7 @@ of predators), but can be added to include variant game modes (like humans vs. h
 // Open podlocks with the given ID if they aren't already opened.
 // DO NOT USE THIS WITH ID's CORRESPONDING TO SHUTTLES OR THEY WILL BREAK!
 /datum/game_mode/proc/open_podlocks(podlock_id)
-	for(var/obj/structure/machinery/door/poddoor/M in machines)
+	for(var/obj/structure/machinery/door/poddoor/M in GLOB.machines)
 		if(M.id == podlock_id && M.density)
 			M.open()
 

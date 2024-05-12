@@ -41,6 +41,10 @@
 	ambience_exterior = 'sound/ambience/shuttle_fly_loop.ogg'
 	base_lighting_alpha = 255
 
+/area/shuttle/uss_crash
+	name = "USS Crash"
+	powernet_name = "crash"
+
 /area/shuttle/vehicle_elevator
 	name = "Vehicle ASRS"
 
@@ -81,4 +85,4 @@
 /area/shuttle/lifeboat
 	icon = 'icons/turf/area_almayer.dmi'
 	icon_state = "lifeboat"
-	flags_atom = AREA_NOTUNNEL
+	flags_area = AREA_NOTUNNEL

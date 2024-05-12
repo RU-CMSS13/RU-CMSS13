@@ -128,6 +128,7 @@
 	attack_speed = 5
 	attack_verb = list("sliced", "slashed", "jabbed", "torn", "gored")
 	force = MELEE_FORCE_TIER_5
+	has_speed_bonus = FALSE
 
 /*#########################################
 ########### One Handed Weapons ############
@@ -248,14 +249,16 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("speared", "stabbed", "impaled")
 
-	var/on = 1
-	var/charged
+	var/on = TRUE
+	var/charged = FALSE
 
 	var/force_wielded = MELEE_FORCE_TIER_6
 	var/force_unwielded = MELEE_FORCE_TIER_2
 	var/force_storage = MELEE_FORCE_TIER_1
 	/// Ref to the tether effect when thrown
 	var/datum/effects/tethering/chain
+	///The mob the chain is linked to
+	var/mob/living/linked_to
 
 /obj/item/weapon/yautja/combistick/Destroy()
 	cleanup_chain()
@@ -273,11 +276,13 @@
 	charged = FALSE
 	remove_filter("combistick_charge")
 	unwield(user) //Otherwise stays wielded even when thrown
-	if(on)
-		setup_chain(user)
 	return TRUE
 
 /obj/item/weapon/yautja/combistick/proc/setup_chain(mob/living/user)
+	give_action(user, /datum/action/predator_action/bracer/combistick)
+	add_verb(user, /mob/living/carbon/human/proc/call_combi)
+	linked_to = user
+
 	var/list/tether_effects = apply_tether(user, src, range = 6, resistable = FALSE)
 	chain = tether_effects["tetherer_tether"]
 	RegisterSignal(chain, COMSIG_PARENT_QDELETING, PROC_REF(cleanup_chain))
@@ -293,6 +298,10 @@
 /// Clean up the chain, deleting/nulling/unregistering as needed
 /obj/item/weapon/yautja/combistick/proc/cleanup_chain()
 	SIGNAL_HANDLER
+	if(linked_to)
+		remove_action(linked_to, /datum/action/predator_action/bracer/combistick)
+		remove_verb(linked_to, /mob/living/carbon/human/proc/call_combi)
+
 	if(!QDELETED(chain))
 		QDEL_NULL(chain)
 
@@ -752,7 +761,7 @@
 	sharp = IS_SHARP_ITEM_BIG
 	flags_atom = FPRINT|CONDUCT
 	attack_verb = list("sliced", "slashed", "carved", "diced", "gored")
-	attack_speed = 14 //Default is 7.
+	attack_speed = 1.4 SECONDS
 
 /obj/item/weapon/twohanded/yautja/glaive/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
@@ -929,7 +938,7 @@
 
 /obj/item/weapon/gun/energy/yautja/plasmarifle/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_6*2)
+	set_fire_delay(FIRE_DELAY_TIER_4*2)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_10
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -1123,9 +1132,11 @@
 	w_class = SIZE_HUGE
 	force = 0
 	fire_delay = 3
+	throw_speed = MIN_SPEED
 	flags_atom = FPRINT|CONDUCT
-	flags_item = NOBLUDGEON|DELONDROP|IGNITING_ITEM //Can't bludgeon with this.
+	flags_item = NOBLUDGEON|DELONDROP|IGNITING_ITEM|ITEM_UNCATCHABLE //Can't bludgeon with this.
 	flags_gun_features = GUN_UNUSUAL_DESIGN
+	has_special_table_placement = TRUE //Что-б обиднее было
 	has_empty_icon = FALSE
 	indestructible = TRUE
 
@@ -1146,6 +1157,7 @@
 	verbs -= /obj/item/weapon/gun/verb/field_strip
 	verbs -= /obj/item/weapon/gun/verb/use_toggle_burst
 	verbs -= /obj/item/weapon/gun/verb/empty_mag
+	RegisterSignal(src, COMSIG_ITEM_DROPPED, PROC_REF(delete_on_drop_flag))
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/Destroy()
 	. = ..()
@@ -1206,6 +1218,9 @@
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/bolt]
 
 /obj/item/weapon/gun/energy/yautja/plasma_caster/use_unique_action()
+	switch_mode()
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/switch_mode()
 	switch(mode)
 		if("stun")
 			mode = "lethal"
@@ -1235,15 +1250,67 @@
 	else
 		. += SPAN_ORANGE(msg)
 
+/obj/item/weapon/gun/energy/yautja/plasma_caster/set_to_table(obj/structure/surface/target)
+	return
+
 /obj/item/weapon/gun/energy/yautja/plasma_caster/dropped(mob/living/carbon/human/M)
 	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
 	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
+
+	var/datum/action/predator_action/bracer/caster/caster_action
+	for(caster_action as anything in M.actions)
+		if(istypestrict(caster_action, /datum/action/predator_action/bracer/caster))
+			caster_action.update_button_icon(FALSE)
+			break
+
 	if(source)
 		forceMove(source)
 		source.caster_deployed = FALSE
 		return
 	..()
 
+	var/obj/item/clothing/gloves/yautja/hunter/bracers = M.gloves
+	if(!istype(bracers))
+		return
+
+	addtimer(CALLBACK(src, PROC_REF(hide_caster), M), 1)
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/hide_caster(mob/living/carbon/human/M)
+	if(src == M.r_hand || src == M.l_hand)
+		return
+
+	var/obj/item/clothing/gloves/yautja/hunter/bracers = M.gloves
+	if(!istype(bracers))
+		return
+
+	forceMove(bracers)
+	bracers.caster_deployed = FALSE
+
+	var/datum/action/predator_action/bracer/caster/caster_action
+	for(caster_action as anything in M.actions)
+		if(istypestrict(caster_action, /datum/action/predator_action/bracer/caster))
+			caster_action.update_button_icon(FALSE)
+			break
+
+	to_chat(M, SPAN_NOTICE("You deactivate your plasma caster."))
+	playsound(M, 'sound/weapons/pred_plasmacaster_off.ogg', 15, 1)
+
+/obj/item/weapon/gun/energy/yautja/plasma_caster/proc/delete_on_drop_flag()
+	SIGNAL_HANDLER
+
+	flags_item |= DELONDROP
+/*
+/obj/item/weapon/gun/energy/yautja/plasma_caster/attack_hand(mob/user)
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		if(H.s_store == src)
+			if(strength == "plasma immobilizers" || strength ==  "plasma spheres")
+				switch_mode()
+			else
+				attack_self(user)
+			return
+	..()
+*/
 /obj/item/weapon/gun/energy/yautja/plasma_caster/able_to_fire(mob/user)
 	if(!source)
 		return

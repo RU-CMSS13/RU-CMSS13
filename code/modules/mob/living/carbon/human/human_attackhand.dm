@@ -4,9 +4,11 @@
 	if(..())
 		return TRUE
 
-	if((attacking_mob != src) && check_shields(0, attacking_mob.name, attacker_dir = get_dir(attacking_mob,src)))
+	SEND_SIGNAL(attacking_mob, COMSIG_LIVING_ATTACKHAND_HUMAN, src)
+
+	if((attacking_mob != src) && check_shields(0, attacking_mob.name))
 		visible_message(SPAN_DANGER("<B>[attacking_mob] attempted to touch [src]!</B>"), null, null, 5)
-		return 0
+		return FALSE
 
 	switch(attacking_mob.a_intent)
 		if(INTENT_HELP)
@@ -21,7 +23,7 @@
 						SPAN_NOTICE("You extinguished the fire on [src]."), null, 5)
 				return 1
 
-			// If unconcious with oxygen damage, do CPR. If dead, we do CPR
+			// If unconscious with oxygen damage, do CPR. If dead, we do CPR
 			if(!(stat == UNCONSCIOUS && getOxyLoss() > 0) && !(stat == DEAD))
 				help_shake_act(attacking_mob)
 				return 1
@@ -86,7 +88,7 @@
 				attack = attacking_mob.species.secondary_unarmed
 				return
 
-			last_damage_data = create_cause_data("fisticuffs", src)
+			last_damage_data = create_cause_data("fisticuffs", attacking_mob)
 			attacking_mob.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [key_name(src)]</font>")
 			attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [key_name(attacking_mob)]</font>")
 			msg_admin_attack("[key_name(attacking_mob)] [pick(attack.attack_verb)]ed [key_name(src)] in [get_area(src)] ([src.loc.x],[src.loc.y],[src.loc.z]).", src.loc.x, src.loc.y, src.loc.z)
@@ -96,7 +98,7 @@
 
 			var/extra_cqc_dmg = 0 //soft maximum of 5, this damage is added onto the final value depending on how much cqc skill you have
 			if(attacking_mob.skills)
-				extra_cqc_dmg = attacking_mob.skills?.get_skill_level(SKILL_CQC)
+				extra_cqc_dmg = attacking_mob.skills?.get_skill_level(SKILL_CQC) * 2.5
 			var/raw_damage = 0 //final value, gets absorbed by the armor and then deals the leftover to the mob
 
 			var/obj/limb/affecting = get_limb(rand_zone(attacking_mob.zone_selected, 70))
@@ -105,7 +107,6 @@
 			playsound(loc, attack.attack_sound, 25, 1)
 
 			visible_message(SPAN_DANGER("[attacking_mob] [pick(attack.attack_verb)]ed [src]!"), null, null, 5)
-
 			raw_damage = attack.damage + extra_cqc_dmg
 			var/final_damage = armor_damage_reduction(GLOB.marine_melee, raw_damage, armor, FALSE) // no penetration from punches
 			apply_damage(final_damage, BRUTE, affecting, sharp=attack.sharp, edge = attack.edge)
@@ -155,13 +156,15 @@
 						return held_weapon.afterattack(target,src)
 
 			var/disarm_chance = rand(1, 100)
-			var/attacker_skill_level = skills && attacking_mob.skills ? skills.get_skill_level(SKILL_CQC) : SKILL_CQC_MAX // No skills, so assume max
+			var/attacker_skill_level = attacking_mob.skills ? attacking_mob.skills.get_skill_level(SKILL_CQC) : SKILL_CQC_MAX // No skills, so assume max
 			var/defender_skill_level = skills ? skills.get_skill_level(SKILL_CQC) : SKILL_CQC_MAX // No skills, so assume max
-			disarm_chance -= 5 * attacker_skill_level
-			disarm_chance += 5 * defender_skill_level
+			disarm_chance -= 10 * attacker_skill_level
+			disarm_chance += 10 * defender_skill_level
 
 			if(disarm_chance <= 25)
-				apply_effect(2 + max((attacker_skill_level - defender_skill_level), 0), WEAKEN)
+				var/strength = 2 + max((attacker_skill_level - defender_skill_level), 0)
+				KnockDown(strength)
+				Stun(strength)
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 25, 1, 7)
 				var/shove_text = attacker_skill_level > 1 ? "tackled" : pick("pushed", "shoved")
 				visible_message(SPAN_DANGER("<B>[attacking_mob] has [shove_text] [src]!</B>"), null, null, 5)
@@ -175,7 +178,7 @@
 				else
 					drop_held_item()
 					visible_message(SPAN_DANGER("<B>[attacking_mob] has disarmed [src]!</B>"), null, null, 5)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 25, 1, 7)
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, 7)
 				return
 
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, 7)
@@ -205,16 +208,14 @@
 	if (w_uniform)
 		w_uniform.add_fingerprint(M)
 
-
-	if(lying || sleeping)
+	if(HAS_TRAIT(src, TRAIT_FLOORED) || HAS_TRAIT(src, TRAIT_KNOCKEDOUT) || body_position == LYING_DOWN || sleeping)
 		if(client)
 			sleeping = max(0,src.sleeping-5)
 		if(!sleeping)
-			resting = 0
-			update_canmove()
+			set_resting(FALSE)
 		M.visible_message(SPAN_NOTICE("[M] shakes [src] trying to wake [t_him] up!"), \
 			SPAN_NOTICE("You shake [src] trying to wake [t_him] up!"), null, 4)
-	else if(stunned)
+	else if(HAS_TRAIT(src, TRAIT_INCAPACITATED))
 		M.visible_message(SPAN_NOTICE("[M] shakes [src], trying to shake [t_him] out of his stupor!"), \
 			SPAN_NOTICE("You shake [src], trying to shake [t_him] out of his stupor!"), null, 4)
 	else

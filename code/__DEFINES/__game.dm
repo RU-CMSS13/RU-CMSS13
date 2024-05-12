@@ -1,9 +1,3 @@
-#define RANGE_TURFS(RADIUS, CENTER) \
-block( \
-	locate(max(CENTER.x-(RADIUS),1),   max(CENTER.y-(RADIUS),1),   CENTER.z), \
-	locate(min(CENTER.x+(RADIUS),world.maxx), min(CENTER.y+(RADIUS),world.maxy), CENTER.z) \
-)
-
 //Admin perms are in global.dm.
 
 /// To make it even more clear that something is a bitfield.
@@ -32,9 +26,11 @@ block( \
 #define MAP_PRISON_STATION_V3 "Fiorina Science Annex"
 #define MAP_WHISKEY_OUTPOST "Whiskey Outpost" // Unused
 #define MAP_DESERT_DAM "Trijent Dam"  // Highpop only
+#define MAP_DOCK_RED "Dock Red"
 #define MAP_SOROKYNE_STRATA "Sorokyne Strata"
 #define MAP_CORSAT "CORSAT" // Highpop only
 #define MAP_KUTJEVO "Kutjevo Refinery"
+#define MAP_KHAMI_BARRENS "Khami Barrens"
 #define MAP_ICE_COLONY_V3 "Shivas Snowball" //Ice Rework, low pop enabled.
 #define MAP_RUNTIME "USS Runtime"
 #define MAP_LV522_CHANCES_CLAIM "LV-522 Chance's Claim" // Highpop Only
@@ -103,7 +99,7 @@ block( \
 #define SOUND_MIDI (1<<1)
 #define SOUND_AMBIENCE (1<<2)
 #define SOUND_LOBBY (1<<3)
-#define SOUND_INTERNET (1<<4)
+#define SOUND_INTERNET (1<<4) // Unused currently. Kept for default prefs compat only
 #define SOUND_REBOOT (1<<5)
 #define SOUND_ADMIN_MEME (1<<6)
 #define SOUND_ADMIN_ATMOSPHERIC (1<<7)
@@ -124,6 +120,7 @@ block( \
 #define CHAT_FFATTACKLOGS (1<<11)
 #define CHAT_GHOSTHIVEMIND (1<<12)
 #define CHAT_NICHELOGS (1<<13)
+#define CHAT_LISTENINGBUG (1<<14)
 
 //toggles_ghost
 #define GHOST_HEALTH_SCAN  (1<<0)
@@ -151,6 +148,7 @@ block( \
 //toggles_admin
 /// Splits admin tabs in Statpanel
 #define SPLIT_ADMIN_TABS (1<<0)
+#define ADMIN_STEALTHMODE (1<<1)
 
 //=================================================
 
@@ -281,8 +279,7 @@ block( \
 
 // Helpers
 /// Only use the CEILING_PROTECTION_TIER_X defines for `protection_level`
-#define CEILING_IS_PROTECTED(ceiling, protection_level) (ceiling >= protection_level)
-
+#define CEILING_IS_PROTECTED(ceiling, protection_level) ((ceiling) >= (protection_level))
 
 // Default font settings
 #define FONT_SIZE "5pt"
@@ -392,6 +389,7 @@ block( \
 #define FIRE_MISSION_WEAPON_REMOVED 8
 #define FIRE_MISSION_WEAPON_UNUSABLE 16
 #define FIRE_MISSION_WEAPON_OUT_OF_AMMO 32
+#define FIRE_MISSION_BAD_DIRECTION 64
 #define FIRE_MISSION_NOT_EXECUTABLE -1
 
 //Defines for firemission state
@@ -493,6 +491,18 @@ block( \
 #define TURF_PROTECTION_CAS 2
 #define TURF_PROTECTION_OB 3
 
+/// Convert a turf protection level to a ceiling protection level
+/proc/get_ceiling_protection_level(turf_protection_level)
+	switch(turf_protection_level)
+		if(TURF_PROTECTION_OB)
+			return CEILING_PROTECTION_TIER_4
+		if(TURF_PROTECTION_CAS)
+			return CEILING_PROTECTION_TIER_3
+		if(TURF_PROTECTION_MORTAR)
+			return CEILING_PROTECTION_TIER_2
+		else
+			return CEILING_NO_PROTECTION
+
 // Anything above the deck boundary is the upper deck, anything below is the lower deck
 // This is exclusive, so anything ON the boundary is an edge case that's neither on the upper nor the lower deck
 #define ALMAYER_DECK_BOUNDARY 101
@@ -522,7 +532,7 @@ block( \
 /// `amount` - The number to get per time
 /// `time` - The time period in which to gain this amount
 /// To be used with delta_time. Multiplied by 10 to convert from deciseconds to seconds
-#define AMOUNT_PER_TIME(amount, time) ((amount / (time))*10)
+#define AMOUNT_PER_TIME(amount, time) (((amount) / (time))*10)
 
 // Local message mode. Used to decide wheter message should be dispatched on the radio.
 #define MESSAGE_MODE_LOCAL 1

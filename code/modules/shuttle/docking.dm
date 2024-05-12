@@ -1,7 +1,5 @@
 /// This is the main proc. It instantly moves our mobile port to stationary port `new_dock`.
 /obj/docking_port/mobile/proc/initiate_docking(obj/docking_port/stationary/new_dock, movement_direction, force=FALSE)
-	// Crashing this ship with NO SURVIVORS
-
 	if(new_dock.get_docked() == src)
 		remove_ripples()
 		return DOCKING_SUCCESS
@@ -54,7 +52,7 @@
 	if(!istype(new_dock, /obj/docking_port/stationary/transit) && crashing)
 		new_dock.on_crash()
 		on_crash()
-		crashing = FALSE
+		addtimer(VARSET_CALLBACK(src, crashing, FALSE), 10 SECONDS)
 
 	. = preflight_check(old_turfs, new_turfs, areas_to_move, rotation)
 	if(.)

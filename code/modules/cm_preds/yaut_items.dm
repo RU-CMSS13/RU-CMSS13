@@ -3,7 +3,7 @@
 //Thrall subtypes are located in /code/modules/cm_preds/thrall_items.dm
 
 /proc/add_to_missing_pred_gear(obj/item/W)
-	if(!is_admin_level(W.z))
+	if(!should_block_game_interaction(W))
 		GLOB.loose_yautja_gear |= W
 
 /proc/remove_from_missing_pred_gear(obj/item/W)
@@ -217,7 +217,7 @@
 	siemens_coefficient = 0.2
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROT
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROT
-	items_allowed = list(
+	allowed_items_typecache = list(
 		/obj/item/weapon/yautja/knife,
 		/obj/item/weapon/gun/energy/yautja/plasmapistol,
 	)
@@ -259,10 +259,9 @@
 	armor_rad = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_internaldamage = CLOTHING_ARMOR_MEDIUMHIGH
 
-/obj/item/clothing/shoes/yautja/hunter/knife/New()
-	..()
-	stored_item = new /obj/item/weapon/yautja/knife(src)
-	update_icon()
+/obj/item/clothing/shoes/yautja/hunter/knife
+	spawn_item_type = /obj/item/weapon/yautja/knife
+
 /obj/item/clothing/under/chainshirt
 	name = "ancient alien mesh suit"
 	desc = "A strange alloy weave in the form of a vest. It feels cold with an alien weight."
@@ -327,6 +326,10 @@
 	black_market_value = 100
 	flags_item = ITEM_PREDATOR
 
+	has_hud = TRUE
+	misc_tracking = TRUE
+	headset_hud_on = TRUE
+
 /obj/item/device/radio/headset/yautja/talk_into(mob/living/M as mob, message, channel, verb = "commands", datum/language/speaking)
 	if(!isyautja(M)) //Nope.
 		to_chat(M, SPAN_WARNING("You try to talk into the headset, but just get a horrible shrieking in your ears!"))
@@ -336,6 +339,34 @@
 		if(!hellhound.stat)
 			to_chat(hellhound, "\[Radio\]: [M.real_name] [verb], '<B>[message]</b>'.")
 	..()
+
+/obj/item/device/radio/headset/yautja/handle_switching_tracker_target(mob/living/carbon/human/user)
+	var/list/options = list("Nothing (Stop Tracking)")
+	for(var/mob/living/carbon/human/Y as anything in GLOB.yautja_mob_list)
+		if(Y.stat != DEAD || QDELETED(Y))
+			continue
+		if(istype(get_area(Y), /area/yautja))
+			continue
+		options += Y
+	for(var/obj/item/tracked_item as anything in GLOB.loose_yautja_gear)
+		if(tracked_item.anchored || QDELETED(tracked_item))
+			continue
+		if(is_honorable_carrier(recursive_holder_check(tracked_item)))
+			continue
+		if(istype(get_area(tracked_item), /area/yautja))
+			continue
+		options += tracked_item
+
+	if(!LAZYLEN(options))
+		to_chat(user, SPAN_NOTICE("There are no signatures that require your attention."))
+		return
+
+	var/new_track = tgui_input_list(user, "Choose a new tracking target.", "Tracking Selection", options)
+	if(!new_track)
+		return
+
+	to_chat(user, SPAN_NOTICE("You set your headset's tracker to point to <b>[new_track]</b>."))
+	locate_setting = new_track
 
 /obj/item/device/radio/headset/yautja/elder //primarily for use in another MR
 	name = "\improper Elder Communicator"
@@ -394,7 +425,7 @@
 	var/mob/living/carbon/human/H = user
 	var/ship_to_tele = list("Yautja Ship" = -1, "Human Ship" = "Human")
 
-	if(!HAS_TRAIT(H, TRAIT_YAUTJA_TECH) || is_admin_level(H.z))
+	if(!HAS_TRAIT(H, TRAIT_YAUTJA_TECH) || should_block_game_interaction(H))
 		to_chat(user, SPAN_WARNING("You fiddle with it, but nothing happens!"))
 		return
 
@@ -430,12 +461,12 @@
 
 	if(do_after(user, 10 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
 		// Display fancy animation for you and the person you might be pulling (Legacy)
-		REMOVE_TRAIT_ALLSOURCES(user, TRAIT_CLOAKED)
+		SEND_SIGNAL(user, COMSIG_MOB_EFFECT_CLOAK_CANCEL)
 		user.visible_message(SPAN_WARNING("[icon2html(user, viewers(src))][user] disappears!"))
 		var/tele_time = animation_teleport_quick_out(user)
 		var/mob/living/M = user.pulling
 		if(istype(M)) // Pulled person
-			REMOVE_TRAIT_ALLSOURCES(M, TRAIT_CLOAKED)
+			SEND_SIGNAL(M, COMSIG_MOB_EFFECT_CLOAK_CANCEL)
 			M.visible_message(SPAN_WARNING("[icon2html(M, viewers(src))][M] disappears!"))
 			animation_teleport_quick_out(M)
 

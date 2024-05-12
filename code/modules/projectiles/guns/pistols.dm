@@ -24,6 +24,7 @@
 		/obj/item/attachable/lasersight,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/burstfire_assembly,
 	)
 
@@ -63,6 +64,7 @@
 		/obj/item/attachable/lasersight,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/burstfire_assembly,
 	)
 
@@ -236,7 +238,6 @@
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/colony.dmi'
 	icon_state = "c_deagle"
 	item_state = "c_deagle"
-	base_gun_icon = "c_deagle"
 	current_mag = /obj/item/ammo_magazine/pistol/heavy/super/highimpact
 	black_market_value = 100
 
@@ -257,7 +258,6 @@
 	desc = "A Desert Eagle anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it."
 	icon_state = "g_deagle"
 	item_state = "g_deagle"
-	base_gun_icon = "g_deagle"
 
 //-------------------------------------------------------
 //NP92 pistol
@@ -365,6 +365,7 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/suppressor,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 	)
 
 /obj/item/weapon/gun/pistol/t73/leader/handle_starting_attachment()
@@ -429,6 +430,7 @@
 		/obj/item/attachable/suppressor,
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/lasersight,
 		/obj/item/attachable/burstfire_assembly,
 	)
@@ -506,6 +508,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail
 		/obj/item/attachable/reflex,
@@ -588,8 +591,8 @@
 	name = "\improper 88 Mod 4 combat pistol"
 	desc = "Standard issue USCM firearm. Also found in the hands of Weyland-Yutani PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst."
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
-	icon_state = "88m4"
-	item_state = "88m4"
+	icon_state = "_88m4" // to comply with css standards
+	item_state = "_88m4"
 	fire_sound = "88m4"
 	firesound_volume = 20
 	reload_sound = 'sound/weapons/gun_88m4_reload.ogg'
@@ -601,6 +604,7 @@
 		/obj/item/attachable/suppressor,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/reflex,
@@ -701,6 +705,7 @@
 		/obj/item/attachable/flashlight/laser_light_combo,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 	)
 
 /obj/item/weapon/gun/pistol/vp78/handle_starting_attachment()
@@ -851,6 +856,7 @@ It is a modified Beretta 93R, and can fire three-round burst or single fire. Whe
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/lasersight, //Underbarrel
 		/obj/item/attachable/burstfire_assembly,
 	)

@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(vote)
 	voting.Cut()
 	remove_action_buttons()
 
-	UnregisterSignal(SSdcs, COMSIG_GLOB_CLIENT_LOGIN)
+	UnregisterSignal(SSdcs, COMSIG_GLOB_CLIENT_LOGGED_IN)
 
 	for(var/c in GLOB.player_list)
 		update_static_data(c)
@@ -100,10 +100,9 @@ SUBSYSTEM_DEF(vote)
 				if(choices["Continue Playing"] >= greatest_votes)
 					greatest_votes = choices["Continue Playing"]
 	. = list()
-	if(greatest_votes)
-		for(var/option in choices_adjusted)
-			if(choices_adjusted[option] == greatest_votes)
-				. += option
+	for(var/option in choices_adjusted)
+		if(choices_adjusted[option] == greatest_votes)
+			. += option
 	return .
 
 
@@ -273,10 +272,11 @@ SUBSYSTEM_DEF(vote)
 				question = "Gamemode vote"
 				randomize_entries = TRUE
 				for(var/mode_type in config.gamemode_cache)
-					var/datum/game_mode/M = initial(mode_type)
+					var/datum/game_mode/M = mode_type
 					if(initial(M.config_tag))
 						var/vote_cycle_met = !initial(M.vote_cycle) || (text2num(SSperf_logging?.round?.id) % initial(M.vote_cycle) == 0)
-						if(initial(M.votable) && vote_cycle_met)
+						var/population_met = (!initial(M.population_min) || initial(M.population_min) < length(GLOB.clients)) && (!initial(M.population_max) || initial(M.population_max) > length(GLOB.clients))
+						if(initial(M.votable) && vote_cycle_met && population_met)
 							choices += initial(M.config_tag)
 			if("groundmap")
 				question = "Ground map vote"
@@ -359,7 +359,7 @@ SUBSYSTEM_DEF(vote)
 		log_vote(text)
 		var/vp = CONFIG_GET(number/vote_period)
 		SEND_SOUND(world, sound(vote_sound, channel = SOUND_CHANNEL_VOX, volume = vote_sound_vol))
-		to_chat(world, SPAN_CENTERBOLD("<br><br><font color='purple'<b>[text]</b><br>Type <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.<br>You have [DisplayTimeText(vp)] to vote.</font><br><br>"))
+		to_chat(world, SPAN_CENTERBOLD("<br><br><font color='purple'><b>[text]</b><br>Type <b>vote</b> or click <a href='?src=[REF(src)]'>here</a> to place your votes.<br>You have [DisplayTimeText(vp)] to vote.</font><br><br>"))
 		time_remaining = round(vp/10)
 		for(var/c in GLOB.clients)
 			var/client/C = c
@@ -370,7 +370,7 @@ SUBSYSTEM_DEF(vote)
 			if(send_clients_vote)
 				C.mob.vote()
 
-		RegisterSignal(SSdcs, COMSIG_GLOB_CLIENT_LOGIN, PROC_REF(handle_client_joining))
+		RegisterSignal(SSdcs, COMSIG_GLOB_CLIENT_LOGGED_IN, PROC_REF(handle_client_joining))
 		SStgui.update_uis(src)
 		return TRUE
 	return FALSE
@@ -522,7 +522,7 @@ GLOBAL_LIST_INIT(possible_vote_types, list(
 			if(!(params["vote_type"] in GLOB.possible_vote_types))
 				return
 
-			if(!check_rights(R_ADMIN))
+			if(!check_rights(R_MOD))
 				var/list/vote_type = GLOB.possible_vote_types[params["vote_type"]]
 				if(vote_type["admin_only"])
 					return

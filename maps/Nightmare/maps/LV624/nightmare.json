@@ -8,6 +8,13 @@
 	},
 	{
 		"type": "map_insert",
+		"landmark": "corporatedome",
+		"chance": 0.5,
+		"path": "standalone/corporatedome.dmm",
+		"when": { "lvevent": "asset_protection" }
+	},
+	{
+		"type": "map_insert",
 		"landmark": "lv-skylight",
 		"chance": 0.15,
 		"path": "standalone/laststand.dmm",
@@ -38,5 +45,10 @@
 	{
 		"type": "include", "name": "Standalone variations",
 		"file": "mapgen_variations.json"
-	}
+	},
+	{
+        "type": "map_sprinkle",
+        "path": "crash/",
+        "when": { "gamemode": "Crash" }
+    }
 ]

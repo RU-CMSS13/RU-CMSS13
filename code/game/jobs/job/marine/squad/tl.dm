@@ -5,11 +5,24 @@
 	allow_additional = 1
 	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_SQUAD
 	gear_preset = /datum/equipment_preset/uscm/tl
-	entry_message_body = "You are the <a href='%WIKIPAGE%'>Team Leader.</a>Your task is to assist the squad leader in leading the squad as well as utilize ordnance such as orbital bombardments, CAS, and mortar as well as coordinating resupply with Requisitions and CIC. If the squad leader dies, you are expected to lead in their place."
+	entry_message_body = "You are the <a href='"+WIKI_PLACEHOLDER+"'>Team Leader.</a>Your task is to assist the squad leader in leading the squad as well as utilize ordnance such as orbital bombardments, CAS, and mortar as well as coordinating resupply with Requisitions and CIC. If the squad leader dies, you are expected to lead in their place."
 
 /datum/job/marine/tl/generate_entry_conditions(mob/living/carbon/human/spawning_human)
 	. = ..()
 	spawning_human.important_radio_channels += JTAC_FREQ
+
+/datum/job/marine/tl/get_total_positions(latejoin = FALSE)
+	var/real_max_positions = 0
+	for(var/datum/squad/squad in GLOB.RoleAuthority.squads)
+		if(squad.roundstart && squad.usable && squad.faction == FACTION_MARINE && squad.name != "Root")
+			real_max_positions += squad.max_tl
+
+	if(real_max_positions > total_positions_so_far)
+		total_positions_so_far = real_max_positions
+
+	spawn_positions = real_max_positions
+
+	return real_max_positions
 
 AddTimelock(/datum/job/marine/tl, list(
 	JOB_SQUAD_ROLES = 3 HOURS

@@ -86,7 +86,7 @@
 				break
 
 		if(success)
-			if(get_dir(src, T) in cardinal)
+			if(get_dir(src, T) in GLOB.cardinals)
 				wall_dirs += get_dir(src, T)
 
 	for(var/neighbor in wall_dirs)
@@ -99,6 +99,8 @@
 	for(var/wb_type in blend_turfs)
 		for(var/nb_type in noblend_turfs)
 			if(istype(W, nb_type))
+				if(W.force_blend)
+					return TRUE
 				return FALSE
 		if(istype(W, wb_type))
 			return TRUE

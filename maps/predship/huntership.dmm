@@ -672,7 +672,7 @@
 /obj/structure/surface/table/reinforced/prison{
 	color = "#6b675e"
 	},
-/obj/item/weapon/claymore/mercsword/machete/arnold{
+/obj/item/weapon/sword/machete/arnold{
 	anchored = 1;
 	desc = "Won by an Elder during their youthful hunting days. None are allowed to touch it.";
 	name = "\improper Dutch's Machete"
@@ -1271,36 +1271,36 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = 12
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = 8
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = 4
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = -4
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = -12
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25
 	},
-/obj/item/weapon/claymore/mercsword{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	pixel_x = -8
@@ -1338,6 +1338,11 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
+/obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
+/obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
+/obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
+/obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
+/obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
 /obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
 /obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
 /obj/item/stack/sheet/mineral/sandstone/runed/large_stack,
@@ -1807,8 +1812,7 @@
 	name = "Armory Shutters";
 	needs_power = 0;
 	pixel_x = 24;
-	req_one_access_txt = "392";
-	needs_power = 0
+	req_one_access_txt = "392"
 	},
 /turf/open/floor/corsat{
 	dir = 1;
@@ -1883,24 +1887,24 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
-/obj/item/weapon/claymore{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	name = "duelling claymore"
 	},
-/obj/item/weapon/claymore{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	name = "duelling claymore";
 	pixel_x = -5
 	},
-/obj/item/weapon/claymore{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	name = "duelling claymore";
 	pixel_x = 5
 	},
-/obj/item/weapon/claymore{
+/obj/item/weapon/sword{
 	attack_speed = 12;
 	force = 25;
 	name = "duelling claymore";
@@ -1955,7 +1959,7 @@
 	color = "#6b675e"
 	},
 /obj/item/storage/large_holster/katana,
-/obj/item/weapon/katana,
+/obj/item/weapon/sword/katana,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "squareswood"
@@ -2246,7 +2250,7 @@
 /obj/structure/surface/table/reinforced/prison{
 	color = "#6b675e"
 	},
-/obj/item/weapon/claymore/mercsword/ceremonial,
+/obj/item/weapon/sword/ceremonial,
 /turf/open/floor/corsat{
 	dir = 1;
 	icon_state = "squareswood"
@@ -2357,6 +2361,10 @@
 	dir = 1;
 	icon_state = "squareswood"
 	},
+/area/yautja)
+"yf" = (
+/obj/effect/spawner,
+/turf/open/shuttle/predship,
 /area/yautja)
 "yH" = (
 /obj/structure/closet/secure_closet/freezer/fridge/groceries,
@@ -2577,6 +2585,18 @@
 	color = "#5e5d5d";
 	dir = 10;
 	icon_state = "multi_tiles"
+	},
+/area/yautja)
+"Fo" = (
+/obj/structure/surface/rack{
+	color = "#6b675e";
+	layer = 2.79
+	},
+/obj/item/stack/sheet/wood/large_stack,
+/obj/item/stack/sheet/wood/large_stack,
+/turf/open/floor/corsat{
+	dir = 1;
+	icon_state = "squareswood"
 	},
 /area/yautja)
 "Ft" = (
@@ -2908,6 +2928,27 @@
 	pixel_y = -25
 	},
 /turf/open/shuttle/predship,
+/area/yautja)
+"KP" = (
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 80
+	},
+/obj/item/reagent_container/food/snacks/fortunecookie/prefilled{
+	name = "placeholder";
+	desc = "someday there will be something here."
+	},
+/turf/open/floor/corsat{
+	dir = 1;
+	icon_state = "squareswood"
+	},
 /area/yautja)
 "KV" = (
 /obj/structure/surface/table/reinforced/prison{
@@ -4670,7 +4711,7 @@ at
 bw
 bS
 cP
-cP
+yf
 cP
 cP
 cP
@@ -5320,7 +5361,7 @@ bL
 SB
 bL
 bj
-wQ
+KP
 cP
 bL
 wQ
@@ -6400,7 +6441,7 @@ bL
 cP
 bL
 bj
-bL
+Fo
 bL
 JH
 JH
