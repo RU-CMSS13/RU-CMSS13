@@ -7,7 +7,7 @@
 	max_heavies = 10
 	arrival_message = "'Deus le volt. Deus le volt! DEUS LE VOLT!!'"
 	objectives = "Clense the place of all that is unholy! Die in glory!"
-	probability = 5
+	probability = 0
 	hostility = TRUE
 
 /datum/emergency_call/deus_vult/create_member(datum/mind/M, turf/override_spawn_loc)
