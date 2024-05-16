@@ -20,6 +20,7 @@
 		/obj/item/weapon/gun/smg/nailgun,
 		/obj/item/ammo_magazine/smg/nailgun,
 		/obj/item/ammo_magazine/handful,
+		/obj/item/ammo_magazine/pistol,
 		/obj/item/tool/weldingtool,
 		/obj/item/tool/shovel/etool,
 		/obj/item/device/lightreplacer,
