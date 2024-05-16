@@ -46,6 +46,10 @@
 		else
 			to_chat(src, SPAN_LOCALSAY("<span class='prefix'>[comm_paygrade][speaker_name]</span>[alt_name] говорит, но я ни черта не слышу."))
 	else
+		// TRANSLATOR START
+		if(client?.prefs)
+			message = SStranslator.translate(message, client?.prefs?.translate_russian)
+		// TRANSLATOR END
 		to_chat(src, SPAN_LOCALSAY("<span class='prefix'>[comm_paygrade][speaker_name]</span>[alt_name] [verb], <span class='[style]'>\"[message]\"</span>"))
 		if (speech_sound && (get_dist(speaker, src) <= GLOB.world_view_size && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)

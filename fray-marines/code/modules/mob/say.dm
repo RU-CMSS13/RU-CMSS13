@@ -146,3 +146,14 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 /client
 	var/bad_word_counter = 0
 
+/client/proc/toggle_translator()
+	set category = "Admin.Чат Фильтр"
+	set name = "Автопереводчик"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	SStranslator.enabled = !SStranslator.enabled
+
+	log_admin("[key_name(usr)] set autotranslated to [SStranslator.enabled ? "enabled" : "disabled"].")
+	message_admins("[key_name_admin(usr)] переключает автопереводчик в положение [SStranslator.enabled ? "вкл" : "выкл"].")

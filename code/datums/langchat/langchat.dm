@@ -116,6 +116,10 @@
 	langchat_listeners = listeners
 	for(var/mob/M in langchat_listeners)
 		if(langchat_client_enabled(M) && !M.ear_deaf && (skip_language_check || M.say_understands(src, language)))
+			// TRANSLATOR START
+			if(M?.client?.prefs)
+				langchat_image.maptext = SStranslator.translate(text_to_display, M?.client?.prefs?.translate_russian, FALSE, keep_html = TRUE)
+			// TRANSLATOR END
 			M.client.images += langchat_image
 
 	if(isturf(loc))
