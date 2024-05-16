@@ -118,7 +118,8 @@
 		if(langchat_client_enabled(M) && !M.ear_deaf && (skip_language_check || M.say_understands(src, language)))
 			// TRANSLATOR START
 			if(M?.client?.prefs)
-				langchat_image.maptext = SStranslator.translate(text_to_display, M?.client?.prefs?.translate_russian, FALSE, keep_html = TRUE)
+				spawn(-1) // да похуй пусть там висит 1000000 лет
+					langchat_image.maptext = SStranslator.translate(text_to_display, M?.client?.prefs?.translate_russian, FALSE, keep_html = TRUE)
 			// TRANSLATOR END
 			M.client.images += langchat_image
 
