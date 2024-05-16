@@ -48,4 +48,4 @@ SUBSYSTEM_DEF(translator)
 	// дай боже апи не высрало говно
 	var/translated_text = json_decode(response.body)?["translatedText"]
 	LAZYADDASSOC(cached_translations, msg, translated_text)
-	return "[translated_text] <i class='[span_class]'>[append_source ? "([msg])" : ""]</i>"
+	return "[translated_text][append_source ? " <i class='[span_class]'>([msg])</i>" : ""]"
