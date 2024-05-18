@@ -4,7 +4,7 @@
 	mob_max = 6
 	arrival_message = "'Ia! Ia!'"
 	objectives = "Support the Xenomorphs in any way, up to and including giving your life for them!"
-	probability = 1
+	probability = 0
 	hostility = TRUE
 	var/max_synths = 1
 	var/synths = 0
