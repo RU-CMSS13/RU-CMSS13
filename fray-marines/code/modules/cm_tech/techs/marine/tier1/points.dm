@@ -12,7 +12,7 @@
 	flags = TREE_FLAG_MARINE
 	tier = /datum/tier/one
 
-	var/points_to_give = 200
+	points_to_give = 200
 
 /datum/tech/repeatable/req_points/proc/get_tech_scaling_value()
 	//We take the number of marine players, deduced from other lists, and then get a scale multiplier from it, to be used in arbitrary manners to distribute equipment
@@ -40,7 +40,7 @@
 	flags = TREE_FLAG_MARINE
 	tier = /datum/tier/one
 
-	var/points_to_give = 5000
+	points_to_give = 5000
 
 /datum/tech/repeatable/dropship_points/on_unlock()
 	. = ..()
