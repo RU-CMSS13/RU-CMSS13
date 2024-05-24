@@ -8,7 +8,7 @@
 /datum/game_mode/whiskey_outpost
 	name = GAMEMODE_WHISKEY_OUTPOST
 	config_tag = GAMEMODE_WHISKEY_OUTPOST
-	required_players = 140
+	required_players = 40
 	xeno_bypass_timer = 1
 	flags_round_type = MODE_NEW_SPAWN
 	role_mappings = list(
@@ -122,7 +122,7 @@
 	sleep(10)
 	to_world(SPAN_ROUND_HEADER("Режим игры - WHISKEY OUTPOST!"))
 	to_world(SPAN_ROUNDBODY("События происходят на планете LV-624 в 2177 году, за пять лет до прибытия военного корабля USS «Almayer» и 2-го батальона «Падающие соколы» в сектор."))
-	to_world(SPAN_ROUNDBODY("3 Батальону 'Dust Raiders' выдана задача распространять влияние USCM в Секторе Нероид."))
+	to_world(SPAN_ROUNDBODY("3 Батальону 'Пыльных рейдеров' выдана задача распространять влияние USCM в Секторе Нероид."))
 	to_world(SPAN_ROUNDBODY("[SSmapping.configs[GROUND_MAP].map_name], одна из баз 'Dust Raiders' расположившаяся в этом секторе, попала под атаку неизвестных инопланетных форм жизни."))
 	to_world(SPAN_ROUNDBODY("С ростом количества жертв и постепенно истощающимися припасами, 'Dust Raiders' на [SSmapping.configs[GROUND_MAP].map_name] должны прожить еще час, чтобы оповестить оставшуюся часть своего батальона в секторе о надвигающейся опасности."))
 	to_world(SPAN_ROUNDBODY("Продержитесь столько, сколько сможете."))
@@ -131,18 +131,18 @@
 	sleep(10)
 	switch(map_locale) //Switching it up.
 		if(0)
-			marine_announcement("This is Captain Hans Naiche, commander of the 3rd Battalion 'Dust Raiders' forces here on LV-624. In our attempts to establish a base on this planet, several of our patrols were wiped out by hostile creatures.  We're setting up a distress call, but we need you to hold [SSmapping.configs[GROUND_MAP].map_name] in order for our engineers to set up the relay. We're prepping several M402 mortar units to provide fire support. If they overrun your positon, we will be wiped out with no way to call for help. Hold the line or we all die.", "Captain Naiche, 3rd Battalion Command, LV-624 Garrison")
+			marine_announcement("Это капитан Ханс Найхе, командир 3-го батальона "Пыльных рейдеров", который находится здесь, на LV-624. В ходе наших попыток создать базу на этой планете, несколько наших патрулей были уничтожены враждебными существами. Мы отправляем сигнал бедствия, но нам нужно, чтобы вы продержались на [SSmapping.configs[GROUND_MAP].map_name] пока наши инженеры настроят ретранслятор. Мы готовим несколько минометных установок M402 для оказания огневой поддержки. Если они захватят вашу позицию, мы будем уничтожены и не сможем позвать на помощь. Держите оборону или мы все умрем.", "Капитан Найхе, командир 3-го батальона, Гарнизон LV-624")
 	addtimer(CALLBACK(src, PROC_REF(story_announce), 0), 3 MINUTES)
 	return ..()
 
 /datum/game_mode/whiskey_outpost/proc/story_announce(time)
 	switch(time)
 		if(0)
-			marine_announcement("This is Captain Hans Naiche, Commander of the 3rd Bataillion, 'Dust Raiders' forces on LV-624. As you already know, several of our patrols have gone missing and likely wiped out by hostile local creatures as we've attempted to set our base up.", "Captain Naiche, 3rd Battalion Command, LV-624 Garrison")
+			marine_announcement("Это капитан Ханс Найхе, командир 3-го батальона "Пыльных рейдеров" на LV-624. Как вы уже знаете, несколько наших патрулей пропали без вести и, вероятно были уничтожены враждебно настроенными местными существами, когда мы пытались обустроить нашу базу.", "Captain Naiche, 3rd Battalion Command, LV-624 Garrison")
 		if(1)
-			marine_announcement("Our scouts report increased activity in the area and given our intel, we're already preparing for the worst. We're setting up a comms relay to send out a distress call, but we're going to need time while our engineers get everything ready. All other stations should prepare accordingly and maximize combat readiness, effective immediately.", "Captain Naiche, 3rd Battalion Command, LV-624 Garrison")
+			marine_announcement("Наши разведчики сообщают о возросшей активности в этом районе, и учитывая наши разведданные, мы уже готовимся к худшему. Мы устанавливаем ретранслятор, чтобы отправить сигнал бедствия, но нам потребуется время, пока наши инженеры все подготовят. Все остальные аванпосты должны подготовиться соответствующим образом и обеспечить максимальную боевую готовность, которая должна вступить в силу немедленно.", "Капитан Найхе, командир 3-го батальона, Гарнизон LV-624")
 		if(2)
-			marine_announcement("Captain Naiche here. We've tracked the bulk of enemy forces on the move and [SSmapping.configs[GROUND_MAP].map_name] is likely to be hit before they reach the base. We need you to hold them off while we finish sending the distress call. Expect incoming within a few minutes. Godspeed, [SSmapping.configs[GROUND_MAP].map_name].", "Captain Naiche, 3rd Battalion Command, LV-624 Garrison")
+			marine_announcement("Говорит капитан Найхе. Мы засекли основные силы противника, и [SSmapping.configs[GROUND_MAP].map_name]  скорее всего, они будут уничтожены до того, как достигнут базы. Нам нужно, чтобы вы задержали их, пока мы не отправим сигнал бедствия. Прибытие ожидается в течение нескольких минут. Удачи [SSmapping.configs[GROUND_MAP].map_name].", "Капитан Найхе, командир 3-го батальона, Гарнизон LV-624")
 
 	if(time <= 2)
 		addtimer(CALLBACK(src, PROC_REF(story_announce), time+1), 3 MINUTES)
@@ -264,10 +264,10 @@
 		GLOB.round_statistics.track_round_end()
 	if(finished == 1)
 		log_game("Round end result - xenos won")
-		to_world(SPAN_ROUND_HEADER("The Xenos have successfully defended their hive from colonization."))
-		to_world(SPAN_ROUNDBODY("Well done, you've secured LV-624 for the hive!"))
-		to_world(SPAN_ROUNDBODY("It will be another five years before the USCM returns to the Neroid Sector, with the arrival of the 2nd 'Falling Falcons' Battalion and the USS Almayer."))
-		to_world(SPAN_ROUNDBODY("The xenomorph hive on LV-624 remains unthreatened until then..."))
+		to_world(SPAN_ROUND_HEADER("Ксеноморфы успешно защитили свой улей от колонизации."))
+		to_world(SPAN_ROUNDBODY("Отличная работа, вы закрепились на LV-624 за улей!"))
+		to_world(SPAN_ROUNDBODY("Пройдет еще пять лет, прежде чем USCM вернется в сектор Нероид, с прибытием 2-го батальона "Падающих Соколов" и эсминца ВМС США  Almayer."))
+		to_world(SPAN_ROUNDBODY("До тех пор улью ксеноморфов на LV-624 ничто не угрожает..."))
 		world << sound('sound/misc/Game_Over_Man.ogg')
 		if(GLOB.round_statistics)
 			GLOB.round_statistics.round_result = MODE_INFESTATION_X_MAJOR
@@ -277,10 +277,10 @@
 
 	else if(finished == 2)
 		log_game("Round end result - marines won")
-		to_world(SPAN_ROUND_HEADER("Against the onslaught, the marines have survived."))
-		to_world(SPAN_ROUNDBODY("The signal rings out to the USS Alistoun, and Dust Raiders stationed elsewhere in the Neroid Sector begin to converge on LV-624."))
-		to_world(SPAN_ROUNDBODY("Eventually, the Dust Raiders secure LV-624 and the entire Neroid Sector in 2182, pacifiying it and establishing peace in the sector for decades to come."))
-		to_world(SPAN_ROUNDBODY("The USS Almayer and the 2nd 'Falling Falcons' Battalion are never sent to the sector and are spared their fate in 2186."))
+		to_world(SPAN_ROUND_HEADER("Несмотря на этот натиск, морпехи выжили."))
+		to_world(SPAN_ROUNDBODY("Сигнал поступает на корабль USS Alistoun, и Пустынные рейдеры дислоцированные в других местах сектора Нероид начинают стягиваться к LV-624."))
+		to_world(SPAN_ROUNDBODY("В конце концов, в 2182 году Пылевые рейдеры захватывают LV-624 и весь сектор Нероидов, умиротворяя его и устанавливая мир в секторе на десятилетия вперед."))
+		to_world(SPAN_ROUNDBODY("USS "Almayer" и 2-й батальон "Падающие соколы" так и не были отправлены в этот сектор, и их судьба была решена в 2186 году."))
 		world << sound('sound/misc/hell_march.ogg')
 		if(GLOB.round_statistics)
 			GLOB.round_statistics.round_result = MODE_INFESTATION_M_MAJOR
