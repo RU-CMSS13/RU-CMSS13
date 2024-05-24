@@ -1,4 +1,3 @@
-
 /datum/tech/repeatable/cryomarine
 	name = "Wake Up Additional Troops"
 	desc = "Wakes up additional troops to fight against any threats."
