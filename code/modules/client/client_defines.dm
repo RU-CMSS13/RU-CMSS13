@@ -3,6 +3,7 @@
 		////////////////
 		//ADMIN THINGS//
 		////////////////
+	authenticate = FALSE
 	var/datum/admins/admin_holder = null //Datum for storing admin permissions and other admin stuff
 	var/datum/buildmode/buildmode = null
 
