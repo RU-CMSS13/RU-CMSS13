@@ -790,13 +790,13 @@
 	vendor_role = list(JOB_WO_DOCTOR,JOB_WO_RESEARCHER,JOB_WO_CMO)
 
 /obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med/get_listed_products(mob/user)
-	if(!user)
+    if(!user)
         var/list/combined = list()
         combined += GLOB.cm_vending_clothing_researcher
         combined += GLOB.cm_vending_clothing_cmo
         combined += GLOB.cm_vending_clothing_doctor
         return combined
-        if(user.job == JOB_WO_RESEARCHER)
+    if(user.job == JOB_WO_RESEARCHER)
         return GLOB.cm_vending_clothing_researcher
     else if(user.job == JOB_WO_CMO)
         ///defined in senior_officers.dm
