@@ -788,7 +788,6 @@
 
 /obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med //Ниже добавлены вендоры для медбея, СГ, спека и СЛа, делать по такому же типу остальные
 	vendor_role = list(JOB_WO_DOCTOR,JOB_WO_RESEARCHER,JOB_WO_CMO)
-
 /obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med/get_listed_products(mob/user)
 <<<<<<< HEAD
 if(!user)
@@ -823,19 +822,16 @@ return ..()
 
 /obj/structure/machinery/cm_vending/gear/spec/wo_spec
 	vendor_role = list(JOB_WO_CREWMAN,JOB_WO_SQUAD_SPECIALIST,JOB_SQUAD_SPECIALIST)
-
 /obj/structure/machinery/cm_vending/gear/spec/wo_spec/get_listed_products(mob/user)
 	return GLOB.cm_vending_gear_spec
 
 /obj/structure/machinery/cm_vending/gear/leader/wo_leader
 	vendor_role = list(JOB_WO_CHIEF_POLICE,JOB_WO_SQUAD_LEADER,JOB_SQUAD_LEADER)
-
 /obj/structure/machinery/cm_vending/gear/leader/wo_leader/get_listed_products(mob/user)
 	return GLOB.cm_vending_gear_leader
 
 /obj/structure/machinery/cm_vending/gear/smartgun/wo_smartgun
 	vendor_role = list(JOB_WO_SQUAD_SMARTGUNNER,JOB_SQUAD_SMARTGUN)
-
 /obj/structure/machinery/cm_vending/gear/smartgun/wo_smartgun/get_listed_products(mob/user)
 	return GLOB.cm_vending_gear_smartgun
 
