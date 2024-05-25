@@ -789,36 +789,19 @@
 /obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med //Ниже добавлены вендоры для медбея, СГ, спека и СЛа, делать по такому же типу остальные
 	vendor_role = list(JOB_WO_DOCTOR,JOB_WO_RESEARCHER,JOB_WO_CMO)
 /obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med/get_listed_products(mob/user)
-<<<<<<< HEAD
-if(!user)
-var/list/combined = list()
-combined += GLOB.cm_vending_clothing_researcher
-combined += GLOB.cm_vending_clothing_cmo
-combined += GLOB.cm_vending_clothing_doctor
-return combined
-if(user.job == JOB_WO_RESEARCHER)
-return GLOB.cm_vending_clothing_researcher
-else if(user.job == JOB_WO_CMO)
-return GLOB.cm_vending_clothing_cmo
-else if(user.job == JOB_WO_DOCTOR)
-return GLOB.cm_vending_clothing_doctor
-return ..()
-=======
-    if(!user)
-        var/list/combined = list()
-        combined += GLOB.cm_vending_clothing_researcher
-        combined += GLOB.cm_vending_clothing_cmo
-        combined += GLOB.cm_vending_clothing_doctor
-        return combined
-    if(user.job == JOB_WO_RESEARCHER)
-        return GLOB.cm_vending_clothing_researcher
-    else if(user.job == JOB_WO_CMO)
-        ///defined in senior_officers.dm
-        return GLOB.cm_vending_clothing_cmo
-    else if(user.job == JOB_WO_DOCTOR)
-        return GLOB.cm_vending_clothing_doctor
-    return ..()
->>>>>>> parent of 41515d47de (1101010)
+	if(!user)
+		var/list/combined = list()
+		combined += GLOB.cm_vending_clothing_researcher
+		combined += GLOB.cm_vending_clothing_cmo
+		combined += GLOB.cm_vending_clothing_doctor
+		return combined
+	if(user.job == JOB_WO_RESEARCHER)
+		return GLOB.cm_vending_clothing_researcher
+	else if(user.job == JOB_WO_CMO)
+		return GLOB.cm_vending_clothing_cmo
+	else if(user.job == JOB_WO_DOCTOR)
+		return GLOB.cm_vending_clothing_doctor
+	return ..()
 
 /obj/structure/machinery/cm_vending/gear/spec/wo_spec
 	vendor_role = list(JOB_WO_CREWMAN,JOB_WO_SQUAD_SPECIALIST,JOB_SQUAD_SPECIALIST)
