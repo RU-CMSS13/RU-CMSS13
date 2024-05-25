@@ -1391,7 +1391,7 @@
 /area/whiskey_outpost/outside/lane/three_north)
 "fc" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/machinery/cm_vending/clothing/medical_crew{
+/obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med{
 	pixel_x = 32;
 	density = 0
 	},
@@ -7092,9 +7092,7 @@
 	},
 /area/whiskey_outpost/inside/bunker)
 "yJ" = (
-/obj/structure/machinery/cm_vending/gear/smartgun{
-	pixel_y = -8
-	},
+/obj/structure/machinery/cm_vending/gear/smartgun/wo_smartgun,
 /turf/open/floor/prison{
 	dir = 4;
 	icon_state = "darkyellowfull2"
@@ -7571,7 +7569,7 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/whiskey_outpost/inside/bunker)
 "Aw" = (
-/obj/structure/machinery/cm_vending/clothing/medical_crew{
+/obj/structure/machinery/cm_vending/clothing/medical_crew/wo_med{
 	pixel_y = -32;
 	density = 0
 	},
@@ -9952,8 +9950,8 @@
 /turf/open/gm/river,
 /area/whiskey_outpost/outside/south)
 "JD" = (
-/obj/structure/machinery/cm_vending/gear/leader{
-	pixel_y = -8
+/obj/structure/machinery/cm_vending/gear/leader/wo_leader{
+	req_access = list(12,19)
 	},
 /turf/open/floor/prison{
 	dir = 4;
@@ -11778,19 +11776,14 @@
 /turf/open/gm/coast/south,
 /area/whiskey_outpost/outside/river)
 "Sb" = (
-/obj/structure/machinery/cm_vending/gear/spec{
-	pixel_y = -8
+/obj/structure/machinery/cm_vending/gear/spec/wo_spec{
+	req_access = list(13,2)
 	},
 /turf/open/floor/prison{
 	dir = 4;
 	icon_state = "darkyellowfull2"
 	},
 /area/whiskey_outpost/inside/living)
-"Sd" = (
-/obj/effect/landmark/start/whiskey/police,
-/obj/structure/machinery/cryobag_recycler,
-/turf/open/floor/prison,
-/area/whiskey_outpost/inside/cic)
 "Se" = (
 /obj/structure/machinery/door/airlock/almayer/marine/alpha{
 	dir = 1;
@@ -21460,7 +21453,7 @@ fF
 gE
 fx
 hw
-Sd
+iS
 jq
 iS
 fx
