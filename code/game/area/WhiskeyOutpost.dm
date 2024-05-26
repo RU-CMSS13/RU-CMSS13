@@ -176,7 +176,7 @@
 	name = "\improper Rock"
 	icon_state = "rock"
 	//ambience = list('sound/ambience/ambimine.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambisin4.ogg')
-	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
+	ceiling = CEILING_DEEP_UNDERGROUND
 	requires_power = 1
 	always_unpowered = 1
 	power_light = FALSE
