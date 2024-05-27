@@ -428,7 +428,7 @@
 /obj/item/weapon/gun/rifle/m46c
 	name = "\improper M46C pulse rifle"
 	desc = "A prototype M46C, an experimental rifle platform built to outperform the standard M41A. Commander version. Uses standard MK1 & MK2 rifle magazines. Use against any threats."
-	desc_lore = "M46 - New combat platform, developed in 2176 by ARMAT and WY Combat Division, result of the U.P.C (Universal Combat Platform) project. The C - Commander version includes built in Barrel Charger 3.0, Quick Fire system and ID lock."
+	desc_lore = "M46 - New combat platform, developed in 2176 by ARMAT and WY Combat Division, result of the U.C.P (Universal Combat Platform) project. The C - Commander version includes built in Barrel Charger 3.0, Quick Fire system and ID lock."
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "m46c"
 	item_state = "m46c"
