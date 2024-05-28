@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(resin_build_order_lesser_slave, list(
 	behavior_delegate_type = /datum/behavior_delegate/lesser_slave
 
 /datum/xeno_strain/slave/apply_strain(mob/living/carbon/xenomorph/lesser_drone/lesser)
-	lesser.plasmapool_modifier = 1.5 // +50%
+	lesser.plasmapool_modifier = 1.66667 // ~500
 	lesser.speed_modifier = XENO_SPEED_SLOWMOD_TIER_4
 	lesser.damage_modifier -= XENO_DAMAGE_MOD_LARGE
 	lesser.tackle_chance_modifier = -35

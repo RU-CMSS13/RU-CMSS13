@@ -114,7 +114,7 @@
 	ability_primacy = XENO_PRIMARY_ACTION_3
 	plasma_cost = 50
 	xeno_cooldown = 26 SECONDS
-	var/shield_amount = 200
+	var/shield_amount = 300
 
 /datum/action/xeno_action/verb/verb_lesser_shield()
 	set category = "Alien"
@@ -156,7 +156,7 @@
 	xeno.add_xeno_shield(shield_amount, XENO_SHIELD_SACRIFICE)
 	xeno.overlay_shields()
 
-	addtimer(CALLBACK(src, PROC_REF(remove_lesser_shield)), 50, TIMER_UNIQUE|TIMER_OVERRIDE)
+	addtimer(CALLBACK(src, PROC_REF(remove_lesser_shield)), 100, TIMER_UNIQUE|TIMER_OVERRIDE)
 
 	apply_cooldown()
 
@@ -169,7 +169,7 @@
 	shield.color = rgb(207, 29, 29)
 	overlays_standing[9] = shield
 	apply_overlay(9)
-	addtimer(CALLBACK(src, PROC_REF(remove_overlay), 9), 50)
+	addtimer(CALLBACK(src, PROC_REF(remove_overlay), 9), 100)
 
 
 /datum/action/xeno_action/onclick/lesser_shield/proc/remove_lesser_shield()

@@ -1,6 +1,6 @@
 /datum/xeno_strain/scout
 	name = "Разведчик"
-	description = "Мутация - Разведчик: Теряя смольную железы и феромоны, вы получаете возможность кратковременного ускорения скорости передвижения - однако во время спринта сила атаки снижатся вдвое. В дополнение к этому у вас перманентно увеличивается радиус обзора."
+	description = "Мутация - Разведчик: Теряя смольную, кислотную железы и феромоны, вы получаете возможность кратковременного ускорения скорости передвижения - однако во время спринта сила атаки снижатся вдвое. В дополнение к этому у вас перманентно увеличивается радиус обзора."
 	flavor_description = "Run!"
 	icon_state_prefix = "Scout"
 
@@ -17,7 +17,7 @@
 
 /datum/xeno_strain/scout/apply_strain(mob/living/carbon/xenomorph/lesser_drone/lesser)
 	lesser.client?.change_view(9, src)
-	lesser.health_modifier -= XENO_HEALTH_MOD_MED
+	lesser.health_modifier -= XENO_HEALTH_MOD_SMALL
 
 	lesser.recalculate_everything()
 
@@ -29,7 +29,7 @@
 	ability_name = "На четырех лапах"
 	macro_path = /datum/action/xeno_action/verb/verb_lesser_shield
 	ability_primacy = XENO_PRIMARY_ACTION_1
-	plasma_cost = 50
+	plasma_cost = 100
 	action_type = XENO_ACTION_CLICK
 	xeno_cooldown = 45 SECONDS
 	cooldown_message = "Мы отдохнули и готовы бежать вновь."
