@@ -12,7 +12,7 @@
 	flags = TREE_FLAG_MARINE
 	tier = /datum/tier/one
 
-	var/points_to_give = 200
+	points_to_give = 200
 
 /datum/tech/repeatable/dropship_points
 	name = "Dropship Budget Increase"
@@ -28,7 +28,7 @@
 	flags = TREE_FLAG_MARINE
 	tier = /datum/tier/one
 
-	var/points_to_give = 5000
+	points_to_give = 5000
 
 /datum/tech/repeatable/dropship_points/on_unlock()
 	. = ..()

@@ -1,7 +1,7 @@
 #define WAITING_HEALTH_THRESHOLD 300
 
 /datum/tutorial/xenomorph/basic
-	name = "Ксеноморф - Базовое"
+	name = "Ксеноморф - Начинайщий"
 	desc = "Это обучение покажет тебе как играть за ксеноморфа, хотя бы базовое."
 	icon_state = "xeno"
 	tutorial_id = "xeno_basic_1"

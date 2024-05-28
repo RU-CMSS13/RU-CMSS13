@@ -1,5 +1,5 @@
 /datum/tutorial/ss13/basic
-	name = "Space Station 13 - Базовое"
+	name = "Space Station 13 - Начинающий"
 	desc = "Главное обучение если вы не играли в космическую станцию ранее."
 	tutorial_id = "ss13_basic_1"
 	tutorial_template = /datum/map_template/tutorial/s7x7

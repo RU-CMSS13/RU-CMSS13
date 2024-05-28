@@ -9,7 +9,7 @@
 
 	announce_name = "ALMAYER SPECIAL ASSETS AUTHORIZED"
 
-	var/type_to_give
+	type_to_give
 
 /datum/tech/repeatable/ob/on_unlock()
 	. = ..()

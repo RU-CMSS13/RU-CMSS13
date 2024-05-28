@@ -1,6 +1,6 @@
 /datum/tutorial/marine/basic
-	name = "Морпех - базовое"
-	desc = "Это базовое обучение, а именно что надо знать обычному наземному морпеху."
+	name = "Морпех - Начинающий"
+	desc = "Это начальное обучение, а именно что надо знать обычному наземному морпеху."
 	tutorial_id = "marine_basic_1"
 	tutorial_template = /datum/map_template/tutorial/s8x9/no_baselight
 	/// How many items need to be vended from the clothing vendor for the script to continue, if something vends 2 items (for example), increase this number by 2.
