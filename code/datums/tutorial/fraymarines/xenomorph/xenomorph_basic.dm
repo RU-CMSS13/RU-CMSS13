@@ -1,6 +1,6 @@
 #define WAITING_HEALTH_THRESHOLD 300
 
-/datum/tutorial/fray-marines/xenomorph/basic
+/datum/tutorial/fraymarines/xenomorph/basic
 	name = "Ксеноморф - Базовое"
 	desc = "Это обучение покажет тебе как играть за ксеноморфа, хотя бы базовое."
 	icon_state = "xeno"
@@ -10,7 +10,7 @@
 
 // START OF SCRITPING
 
-/datum/tutorial/fray-marines/xenomorph/basic/start_tutorial(mob/starting_mob)
+/datum/tutorial/fraymarines/xenomorph/basic/start_tutorial(mob/starting_mob)
 	. = ..()
 	if(!.)
 		return
@@ -27,33 +27,33 @@
 
 	addtimer(CALLBACK(src, PROC_REF(on_stretch_legs)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_stretch_legs()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_stretch_legs()
 	message_to_player("Как дрон, ты будешь выполнять базовые действия в улье. Такие как распространение, строительство, сажание яиц и крепление захваченых хостов (людей).")
 	addtimer(CALLBACK(src, PROC_REF(on_inform_health)), 5 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_inform_health()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_inform_health()
 	message_to_player("Зелёная иконка <b>справа</b>, твоего экрана, зелёный овал показывает твоё здоровье.")
 	addtimer(CALLBACK(src, PROC_REF(on_give_plasma)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_give_plasma()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_give_plasma()
 	message_to_player("Тебе была дана <b>плазма</b>, это ресурс для использования твоих способностей. она отображена <b>справа</b> твоего экрана, синий овал.")
 	xeno.plasma_max = 200
 	xeno.plasma_stored = 200
 	addtimer(CALLBACK(src, PROC_REF(on_damage_xenomorph)), 15 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_damage_xenomorph()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_damage_xenomorph()
 	xeno.apply_damage(350)
 	xeno.emote("hiss")
 	message_to_player("О нет! Ты получил повреждения. Посмотри, количество твоего здоровья снизилось. Ксеноморфы восстанавливают его только если отдыхают на траве улья.")
 	addtimer(CALLBACK(src, PROC_REF(request_player_plant_weed)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/request_player_plant_weed()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/request_player_plant_weed()
 	update_objective("Установи кластер травы с помощью способности сверху слева, она называется <b>Plant Weeds</b>.")
 	give_action(xeno, /datum/action/xeno_action/onclick/plant_weeds)
 	message_to_player("Установи кластер травы с помощью своей новой способности. Трава лечит всех ксеноморфов и восстанавливает плазму. Она так же замедляет хостов для более лёгкого боя.")
 	RegisterSignal(xeno, COMSIG_XENO_PLANT_RESIN_NODE, PROC_REF(on_plant_resinode))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_plant_resinode()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_plant_resinode()
 	SIGNAL_HANDLER
 	UnregisterSignal(xeno, COMSIG_XENO_PLANT_RESIN_NODE)
 	message_to_player("Отлично. Теперь ты можешь <b>отдохнуть</b> с помощью нажатия на [retrieve_bind("rest")] или нажав на иконку сверху слева.")
@@ -63,7 +63,7 @@
 	xeno.plasma_max = 500
 	RegisterSignal(xeno, COMSIG_XENO_ON_HEAL_WOUNDS, PROC_REF(on_xeno_gain_health))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_xeno_gain_health()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_xeno_gain_health()
 	SIGNAL_HANDLER
 	UnregisterSignal(xeno, COMSIG_XENO_ON_HEAL_WOUNDS)
 	message_to_player("Пока ты отдыхаешь, лечение очень медленное. Оно может быть ускорено с помощью феромонов. раздай феромоны \"Лечения (Recovery)\" они позволят тебе быстро встать в строй.")
@@ -71,7 +71,7 @@
 	update_objective("Раздай феромоны.")
 	RegisterSignal(xeno, COMSIG_XENO_START_EMIT_PHEROMONES, PROC_REF(on_xeno_emit_pheromone))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_xeno_emit_pheromone(emitter, pheromone)
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_xeno_emit_pheromone(emitter, pheromone)
 	SIGNAL_HANDLER
 	if(!(pheromone == "recovery"))
 		message_to_player("Это не феромоны лечения. Нажми на способность что бы прекратить раздавать феромоны и попробуй ещё раз.")
@@ -84,7 +84,7 @@
 		message_to_player("Феромоны так же раздаются всем сёстрам (ксеноморфам) поблизости!")
 		RegisterSignal(xeno, COMSIG_XENO_ON_HEAL_WOUNDS, PROC_REF(reach_health_threshold))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/reach_health_threshold()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/reach_health_threshold()
 	SIGNAL_HANDLER
 	if(xeno.health < WAITING_HEALTH_THRESHOLD)
 		return
@@ -100,7 +100,7 @@
 	add_highlight(human_dummy, COLOR_RED)
 	RegisterSignal(human_dummy, COMSIG_MOB_DEATH, PROC_REF(on_human_death_phase_one))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_human_death_phase_one()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_human_death_phase_one()
 	SIGNAL_HANDLER
 
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
@@ -111,7 +111,7 @@
 	addtimer(CALLBACK(human_dummy, TYPE_PROC_REF(/mob/living, rejuvenate)), 8 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(proceed_to_tackle_phase)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/proceed_to_tackle_phase()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/proceed_to_tackle_phase()
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	remove_highlight(human_dummy)
 	RegisterSignal(human_dummy, COMSIG_MOB_TAKE_DAMAGE, PROC_REF(on_tackle_phase_human_damage))
@@ -119,7 +119,7 @@
 	message_to_player("Толкни хоста с помощью <b>толкания</b>. Это может потребовать нескольких попыток для дрона.")
 	update_objective("Толкни хоста на землю!")
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_tackle_phase_human_damage(source, damagedata)
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_tackle_phase_human_damage(source, damagedata)
 	SIGNAL_HANDLER
 	if(damagedata["damage"] <= 0)
 		return
@@ -129,7 +129,7 @@
 		message_to_player("Не надо убивать если можешь захватить!")
 		human_dummy.rejuvenate()
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/proceed_to_cap_phase()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/proceed_to_cap_phase()
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 
 	UnregisterSignal(human_dummy, COMSIG_MOB_TACKLED_DOWN)
@@ -141,7 +141,7 @@
 	message_to_player("Отлично. В основном, если ты продолжаешь толкать хоста, он останется лежать, а может и встать, но тут он будет лежать вечно.")
 	addtimer(CALLBACK(src, PROC_REF(cap_phase)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/cap_phase()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/cap_phase()
 	var/obj/effect/alien/resin/special/eggmorph/morpher = new(loc_from_corner(2,2), GLOB.hive_datum[XENO_HIVE_TUTORIAL])
 	morpher.stored_huggers = 1
 	add_to_tracking_atoms(morpher)
@@ -149,7 +149,7 @@
 	message_to_player("На юго-западе появился формовщик яиц. Нажми на него что бы получить <b>лицехвата</b>.")
 	RegisterSignal(xeno, COMSIG_XENO_TAKE_HUGGER_FROM_MORPHER, PROC_REF(take_facehugger_phase))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/take_facehugger_phase(source, hugger)
+/datum/tutorial/fraymarines/xenomorph/basic/proc/take_facehugger_phase(source, hugger)
 	SIGNAL_HANDLER
 	UnregisterSignal(xeno, COMSIG_XENO_TAKE_HUGGER_FROM_MORPHER)
 	TUTORIAL_ATOM_FROM_TRACKING(/obj/effect/alien/resin/special/eggmorph, morpher)
@@ -162,7 +162,7 @@
 	message_to_player("Подойди к человеку на земле и кликни на него. или урони лицехвата рядом что бы посмотреть как он автоматически прыгнет на него после подготовки.")
 	RegisterSignal(human_dummy, COMSIG_HUMAN_IMPREGNATE, PROC_REF(nest_cap_phase))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase()
 	SIGNAL_HANDLER
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	TUTORIAL_ATOM_FROM_TRACKING(/obj/item/clothing/mask/facehugger, hugger)
@@ -174,7 +174,7 @@
 	message_to_player("Хосты не могут сбежать из резины без чьей то помощи, так же резина будет поддерживать его жизнь пока новые сёстры не прорвут его торс.")
 	addtimer(CALLBACK(src, PROC_REF(nest_cap_phase_two)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_two()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_two()
 
 	loc_from_corner(8,0).ChangeTurf(/turf/closed/wall/resin/tutorial)
 	loc_from_corner(8,1).ChangeTurf(/turf/closed/wall/resin/tutorial)
@@ -182,31 +182,31 @@
 
 	addtimer(CALLBACK(src, PROC_REF(nest_cap_phase_three)), 5 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_three()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_three()
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	message_to_player("Схвати хоста с помощью захвата. Или используй <b>Ctrl + Click</b>.")
 	RegisterSignal(human_dummy, COMSIG_MOVABLE_XENO_START_PULLING, PROC_REF(nest_cap_phase_four))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_four()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_four()
 	SIGNAL_HANDLER
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	UnregisterSignal(human_dummy, COMSIG_MOVABLE_XENO_START_PULLING)
 	message_to_player("Отлично. Теперь поглоти его с помощью нажатия на себя. Тебе нельзя двигаться во время этого.")
 	RegisterSignal(human_dummy, COMSIG_MOB_DEVOURED, PROC_REF(nest_cap_phase_five))
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_five()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_five()
 	SIGNAL_HANDLER
 	message_to_player("Отлично теперь ты можешь его срыгнуть с помощью новой способности.")
 	message_to_player("Будь осторожен! Хосты часто сопротивляются и пробуют разрезать тебя изнутри! Так же они через некоторое время выберутся сами.")
 	give_action(xeno, /datum/action/xeno_action/onclick/regurgitate)
 	addtimer(CALLBACK(src, PROC_REF(nest_cap_phase_six)), 15 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_six()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_six()
 	message_to_player("Хосты могут быть прикреплены к стенам которые обвиты <b>травой улья</b>. Это специальная трава которая образуется в улье и с помощью кластеров.")
 	message_to_player("Мы поместили тебе траву улья на востоке.")
 	addtimer(CALLBACK(src, PROC_REF(nest_cap_phase_seven)), 10 SECONDS)
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/nest_cap_phase_seven()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/nest_cap_phase_seven()
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	UnregisterSignal(human_dummy, COMSIG_MOB_DEVOURED)
 	RegisterSignal(human_dummy, COMSIG_MOB_NESTED, PROC_REF(on_mob_nested))
@@ -216,7 +216,7 @@
 	message_to_player("Теперь захвати хоста и нажми по стене, или зажми мышку на хосте и перетащи на стену. Ты не должен двигаться.")
 	new /obj/effect/alien/resin/special/cluster(loc_from_corner(9,0), GLOB.hive_datum[XENO_HIVE_TUTORIAL])
 
-/datum/tutorial/fray-marines/xenomorph/basic/proc/on_mob_nested()
+/datum/tutorial/fraymarines/xenomorph/basic/proc/on_mob_nested()
 	SIGNAL_HANDLER
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human, human_dummy)
 	UnregisterSignal(human_dummy, COMSIG_MOB_NESTED)
@@ -227,7 +227,7 @@
 
 // END OF SCRIPTING
 
-/datum/tutorial/fray-marines/xenomorph/basic/init_map()
+/datum/tutorial/fraymarines/xenomorph/basic/init_map()
 	loc_from_corner(9,0).ChangeTurf(/turf/closed/wall/resin/tutorial)
 
 #undef WAITING_HEALTH_THRESHOLD

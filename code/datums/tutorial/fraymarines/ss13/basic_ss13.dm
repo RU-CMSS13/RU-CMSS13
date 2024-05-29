@@ -1,4 +1,4 @@
-/datum/tutorial/fray-marines/ss13/basic
+/datum/tutorial/fraymarines/ss13/basic
 	name = "Space Station 13 - Базовое"
 	desc = "Главное обучение если вы не играли в космическую станцию ранее."
 	tutorial_id = "ss13_basic_1"
@@ -6,7 +6,7 @@
 
 // START OF SCRIPTING
 
-/datum/tutorial/fray-marines/ss13/basic/start_tutorial(mob/starting_mob)
+/datum/tutorial/fraymarines/ss13/basic/start_tutorial(mob/starting_mob)
 	. = ..()
 	if(!.)
 		return
@@ -17,13 +17,13 @@
 
 	addtimer(CALLBACK(src, PROC_REF(require_move)), 4 SECONDS) // check if this is a good amount of time
 
-/datum/tutorial/fray-marines/ss13/basic/proc/require_move()
+/datum/tutorial/fraymarines/ss13/basic/proc/require_move()
 	message_to_player("Теперь, подвигайся в любую сторону с помощью <b>[retrieve_bind("North")]</b>, <b>[retrieve_bind("West")]</b>, <b>[retrieve_bind("South")]</b>, или <b>[retrieve_bind("East")]</b>.")
 	update_objective("Подвигайся в любую сторону с помощью [retrieve_bind("North")][retrieve_bind("West")][retrieve_bind("South")][retrieve_bind("East")] клавиш.")
 
 	RegisterSignal(tutorial_mob, COMSIG_MOB_MOVE_OR_LOOK, PROC_REF(on_move))
 
-/datum/tutorial/fray-marines/ss13/basic/proc/on_move(datum/source, actually_moving, direction, specific_direction)
+/datum/tutorial/fraymarines/ss13/basic/proc/on_move(datum/source, actually_moving, direction, specific_direction)
 	SIGNAL_HANDLER
 
 	if(!actually_moving) // The mob just looked in a different dir instead of moving
@@ -36,7 +36,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_MOB_SWAPPED_HAND, PROC_REF(on_hand_swap))
 
-/datum/tutorial/fray-marines/ss13/basic/proc/on_hand_swap(datum/source)
+/datum/tutorial/fraymarines/ss13/basic/proc/on_hand_swap(datum/source)
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tutorial_mob, COMSIG_MOB_SWAPPED_HAND)
@@ -50,7 +50,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_HUMAN_EQUIPPED_ITEM, PROC_REF(on_satchel_equip))
 
-/datum/tutorial/fray-marines/ss13/basic/proc/on_satchel_equip(datum/source, obj/item/equipped, slot)
+/datum/tutorial/fraymarines/ss13/basic/proc/on_satchel_equip(datum/source, obj/item/equipped, slot)
 	SIGNAL_HANDLER
 
 	if(!istype(equipped, /obj/item/storage/backpack/marine/satchel) || (slot != WEAR_BACK))
@@ -64,7 +64,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_SPEAK, PROC_REF(on_speak))
 
-/datum/tutorial/fray-marines/ss13/basic/proc/on_speak(datum/source)
+/datum/tutorial/fraymarines/ss13/basic/proc/on_speak(datum/source)
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tutorial_mob, COMSIG_LIVING_SPEAK)
@@ -79,6 +79,6 @@
 
 // END OF SCRIPT HELPERS
 
-/datum/tutorial/fray-marines/ss13/basic/init_mob()
+/datum/tutorial/fraymarines/ss13/basic/init_mob()
 	. = ..()
 	tutorial_mob.forceMove(loc_from_corner(2, 1))

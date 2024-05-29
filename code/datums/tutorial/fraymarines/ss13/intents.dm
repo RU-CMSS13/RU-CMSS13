@@ -1,4 +1,4 @@
-/datum/tutorial/fray-marines/ss13/intents
+/datum/tutorial/fraymarines/ss13/intents
 	name = "Space Station 13 - Интенты"
 	desc = "Что такое интенты, и почему 'настрой' так важен."
 	icon_state = "intents"
@@ -7,7 +7,7 @@
 
 // START OF SCRIPTING
 
-/datum/tutorial/fray-marines/ss13/intents/start_tutorial(mob/starting_mob)
+/datum/tutorial/fraymarines/ss13/intents/start_tutorial(mob/starting_mob)
 	. = ..()
 	if(!.)
 		return
@@ -19,14 +19,14 @@
 
 	addtimer(CALLBACK(src, PROC_REF(require_help)), 6 SECONDS)
 
-/datum/tutorial/fray-marines/ss13/intents/proc/require_help()
+/datum/tutorial/fraymarines/ss13/intents/proc/require_help()
 	tutorial_mob.a_intent_change(INTENT_DISARM)
 	message_to_player("Сейчас твой настрой изменён с <b>помощи</b> на <b>толкать</b> поменяй его обратно используя <b>[retrieve_bind("select_help_intent")]</b>.")
 	update_objective("Смени свой настрой обратно на помощь исопльзуя [retrieve_bind("select_help_intent")].")
 
 	RegisterSignal(tutorial_mob, COMSIG_MOB_INTENT_CHANGE, PROC_REF(on_help_intent))
 
-/datum/tutorial/fray-marines/ss13/intents/proc/on_help_intent(datum/source, new_intent)
+/datum/tutorial/fraymarines/ss13/intents/proc/on_help_intent(datum/source, new_intent)
 	SIGNAL_HANDLER
 
 	if(new_intent != INTENT_HELP)
@@ -42,7 +42,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_ATTACKHAND_HUMAN, PROC_REF(on_help_attack))
 
-/datum/tutorial/fray-marines/ss13/intents/proc/on_help_attack(datum/source, mob/living/carbon/human/attacked_mob)
+/datum/tutorial/fraymarines/ss13/intents/proc/on_help_attack(datum/source, mob/living/carbon/human/attacked_mob)
 	SIGNAL_HANDLER
 
 	if((attacked_mob == src) || (tutorial_mob.a_intent != INTENT_HELP))
@@ -59,7 +59,7 @@
 
 	RegisterSignal(tutorial_dummy, COMSIG_LIVING_APPLY_EFFECT, PROC_REF(on_shove_down))
 
-/datum/tutorial/fray-marines/ss13/intents/proc/on_shove_down(datum/source, datum/status_effect/new_effect)
+/datum/tutorial/fraymarines/ss13/intents/proc/on_shove_down(datum/source, datum/status_effect/new_effect)
 	SIGNAL_HANDLER
 
 	if(!istype(new_effect, /datum/status_effect/incapacitating/knockdown))
@@ -75,7 +75,7 @@
 
 	RegisterSignal(tutorial_dummy, COMSIG_MOB_AGGRESSIVELY_GRABBED, PROC_REF(on_aggrograb))
 
-/datum/tutorial/fray-marines/ss13/intents/proc/on_aggrograb(datum/source, mob/living/carbon/human/choker)
+/datum/tutorial/fraymarines/ss13/intents/proc/on_aggrograb(datum/source, mob/living/carbon/human/choker)
 	SIGNAL_HANDLER
 
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/human/dummy/tutorial, tutorial_dummy)
@@ -86,7 +86,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_ATTACKHAND_HUMAN, PROC_REF(on_harm_attack))
 
-/datum/tutorial/fray-marines/ss13/intents/proc/on_harm_attack(datum/source, mob/living/carbon/human/attacked_mob)
+/datum/tutorial/fraymarines/ss13/intents/proc/on_harm_attack(datum/source, mob/living/carbon/human/attacked_mob)
 	SIGNAL_HANDLER
 
 	if((attacked_mob == src) || (tutorial_mob.a_intent != INTENT_HARM))
@@ -108,6 +108,6 @@
 
 // END OF SCRIPT HELPERS
 
-/datum/tutorial/fray-marines/ss13/intents/init_mob()
+/datum/tutorial/fraymarines/ss13/intents/init_mob()
 	. = ..()
 	tutorial_mob.forceMove(loc_from_corner(2, 0))

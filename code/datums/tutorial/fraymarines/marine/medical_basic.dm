@@ -1,4 +1,4 @@
-/datum/tutorial/fray-marines/marine/medical_basic
+/datum/tutorial/fraymarines/marine/medical_basic
 	name = "Морпех - Медицина (Базовое)"
 	desc = "Обучись как лечиться от частых повреждений на поле боя."
 	tutorial_id = "marine_medical_1"
@@ -6,7 +6,7 @@
 
 // START OF SCRIPTING
 
-/datum/tutorial/fray-marines/marine/medical_basic/start_tutorial(mob/starting_mob)
+/datum/tutorial/fraymarines/marine/medical_basic/start_tutorial(mob/starting_mob)
 	. = ..()
 	if(!.)
 		return
@@ -15,18 +15,18 @@
 	message_to_player("Это обучение научит тебя лечить самого себя на поле боя.")
 	addtimer(CALLBACK(src, PROC_REF(brute_tutorial)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/brute_tutorial()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/brute_tutorial()
 	message_to_player("Первый вид повреждений это <b>травма (brute)</b>, он очень распространён. Ты его получаешь когда тебя бьют, стреляют, или режут.")
 	var/mob/living/living_mob = tutorial_mob
 	living_mob.adjustBruteLoss(10)
 	addtimer(CALLBACK(src, PROC_REF(brute_tutorial_2)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/brute_tutorial_2()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/brute_tutorial_2()
 	message_to_player("Тебе плохо... Ты можешь осмотреть свои <b>травмы</b> или <b>ожоги</b> с помощью нажатия на себя в настрое помощи.")
 	update_objective("Нажми на себя пустой рукой с настроем помощи.")
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_ATTACKHAND_HUMAN, PROC_REF(on_health_examine))
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_health_examine(datum/source, mob/living/carbon/human/attacked_mob)
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_health_examine(datum/source, mob/living/carbon/human/attacked_mob)
 	SIGNAL_HANDLER
 
 	if(attacked_mob != tutorial_mob)
@@ -40,7 +40,7 @@
 	add_highlight(brute_injector)
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_HYPOSPRAY_INJECTED, PROC_REF(on_brute_inject))
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_brute_inject(datum/source, obj/item/reagent_container/hypospray/injector)
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_brute_inject(datum/source, obj/item/reagent_container/hypospray/injector)
 	SIGNAL_HANDLER
 
 	if(!istype(injector, /obj/item/reagent_container/hypospray/autoinjector/bicaridine/skillless/one_use))
@@ -55,7 +55,7 @@
 	living_mob.adjustFireLoss(10)
 	addtimer(CALLBACK(src, PROC_REF(burn_tutorial)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/burn_tutorial()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/burn_tutorial()
 	message_to_player("<b>Келотан</b> используется что бы вылечить ожоги со временем. Введи себе <b>автоинжектор EZ келотана</b> со стола.")
 	update_objective("Нажми на себя автоинжектором келотана.")
 	var/obj/item/reagent_container/hypospray/autoinjector/kelotane/skillless/one_use/burn_injector = new(loc_from_corner(0, 4))
@@ -64,7 +64,7 @@
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_HYPOSPRAY_INJECTED, PROC_REF(on_burn_inject))
 
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_burn_inject(datum/source, obj/item/reagent_container/hypospray/injector)
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_burn_inject(datum/source, obj/item/reagent_container/hypospray/injector)
 	SIGNAL_HANDLER
 
 	if(!istype(injector, /obj/item/reagent_container/hypospray/autoinjector/kelotane/skillless/one_use))
@@ -79,7 +79,7 @@
 	living_mob.pain.apply_pain(PAIN_CHESTBURST_STRONG)
 	addtimer(CALLBACK(src, PROC_REF(pain_tutorial)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/pain_tutorial()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/pain_tutorial()
 	message_to_player("<b>Трамадол</b> позволяет заглушить боль. Введи себе <b>автоинжектор EZ трамадола</b>.")
 	update_objective("Нажми на себя автоинжектором трамадола.")
 	var/obj/item/reagent_container/hypospray/autoinjector/tramadol/skillless/one_use/pain_injector = new(loc_from_corner(0, 4))
@@ -87,7 +87,7 @@
 	add_highlight(pain_injector)
 	RegisterSignal(tutorial_mob, COMSIG_LIVING_HYPOSPRAY_INJECTED, PROC_REF(on_pain_inject))
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_pain_inject(datum/source, obj/item/reagent_container/hypospray/injector)
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_pain_inject(datum/source, obj/item/reagent_container/hypospray/injector)
 	SIGNAL_HANDLER
 
 	if(!istype(injector, /obj/item/reagent_container/hypospray/autoinjector/tramadol/skillless/one_use))
@@ -102,7 +102,7 @@
 	living_mob.pain.apply_pain(-PAIN_CHESTBURST_STRONG) // just to make sure
 	addtimer(CALLBACK(src, PROC_REF(bleed_tutorial)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/bleed_tutorial()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/bleed_tutorial()
 	message_to_player("Иногда получая повреждения ты будешь <b>кровоточить</b>. Если ты истечёшь, ты будешь получать <b>кислородный (окси)</b> повреждения, и рано или поздно, приведёт тебя к смерти.")
 	update_objective("")
 	var/mob/living/carbon/human/human_mob = tutorial_mob
@@ -110,7 +110,7 @@
 	mob_chest.add_bleeding(damage_amount = 15)
 	addtimer(CALLBACK(src, PROC_REF(bleed_tutorial_2)), 4 SECONDS)
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/bleed_tutorial_2()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/bleed_tutorial_2()
 	message_to_player("Кровоточащие раны закрываются со временем, или ты можешь закрыть их быстрее с помощью <b>бинта</b>. Возьми бинт, у тебя кровоточит <b>торс</b>, выбери его и нажми на себя.")
 	update_objective("Замотай бинтом свой торс.")
 	var/obj/item/stack/medical/bruise_pack/two/bandage = new(loc_from_corner(0, 4))
@@ -120,7 +120,7 @@
 	var/obj/limb/chest/mob_chest = locate(/obj/limb/chest) in human_mob.limbs
 	RegisterSignal(mob_chest, COMSIG_LIMB_STOP_BLEEDING, PROC_REF(on_chest_bleed_stop))
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_chest_bleed_stop(datum/source, external, internal)
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_chest_bleed_stop(datum/source, external, internal)
 	SIGNAL_HANDLER
 
 	// If you exit on this step, your limbs get deleted, which stops the bleeding, which progresses the tutorial despite it ending
@@ -150,7 +150,7 @@
 
 	RegisterSignal(tutorial_mob, COMSIG_HUMAN_SHRAPNEL_REMOVED, PROC_REF(on_shrapnel_removed))
 
-/datum/tutorial/fray-marines/marine/medical_basic/proc/on_shrapnel_removed()
+/datum/tutorial/fraymarines/marine/medical_basic/proc/on_shrapnel_removed()
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tutorial_mob, COMSIG_HUMAN_SHRAPNEL_REMOVED)
@@ -165,10 +165,10 @@
 
 // END OF SCRIPT HELPERS
 
-/datum/tutorial/fray-marines/marine/medical_basic/init_mob()
+/datum/tutorial/fraymarines/marine/medical_basic/init_mob()
 	. = ..()
 	arm_equipment(tutorial_mob, /datum/equipment_preset/tutorial/fed)
 
 
-/datum/tutorial/fray-marines/marine/medical_basic/init_map()
+/datum/tutorial/fraymarines/marine/medical_basic/init_map()
 	new /obj/structure/surface/table/almayer(loc_from_corner(0, 4))

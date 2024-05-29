@@ -1,4 +1,4 @@
-/datum/tutorial/fray-marines/marine/basic
+/datum/tutorial/fraymarines/marine/basic
 	name = "Морпех - базовое"
 	desc = "Это базовое обучение, а именно что надо знать обычному наземному морпеху."
 	tutorial_id = "marine_basic_1"
@@ -10,7 +10,7 @@
 
 // START OF SCRIPTING
 
-/datum/tutorial/fray-marines/marine/basic/start_tutorial(mob/starting_mob)
+/datum/tutorial/fraymarines/marine/basic/start_tutorial(mob/starting_mob)
 	. = ..()
 	if(!.)
 		return
@@ -28,7 +28,7 @@
 	update_objective("Выйди из крио капсулы с помощью [retrieve_bind("North")] или [retrieve_bind("East")].")
 	RegisterSignal(tracking_atoms[/obj/structure/machinery/cryopod/tutorial], COMSIG_CRYOPOD_GO_OUT, PROC_REF(on_cryopod_exit))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_cryopod_exit()
+/datum/tutorial/fraymarines/marine/basic/proc/on_cryopod_exit()
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tracking_atoms[/obj/structure/machinery/cryopod/tutorial], COMSIG_CRYOPOD_GO_OUT)
@@ -39,7 +39,7 @@
 	food_vendor.req_access = list()
 	RegisterSignal(food_vendor, COMSIG_VENDOR_SUCCESSFUL_VEND, PROC_REF(on_food_vend))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_food_vend(datum/source, obj/structure/machinery/cm_vending/vendor, list/itemspec, mob/living/carbon/human/user)
+/datum/tutorial/fraymarines/marine/basic/proc/on_food_vend(datum/source, obj/structure/machinery/cm_vending/vendor, list/itemspec, mob/living/carbon/human/user)
 	SIGNAL_HANDLER
 
 	TUTORIAL_ATOM_FROM_TRACKING(/obj/structure/machinery/cm_vending/sorted/marine_food/tutorial, food_vendor)
@@ -50,7 +50,7 @@
 	update_objective("Съешь протеиновый батончик у тебя в руках, ешь его до тех пор, пока он не кончится.")
 	RegisterSignal(tutorial_mob, COMSIG_MOB_EATEN_SNACK, PROC_REF(on_foodbar_eaten))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_foodbar_eaten(datum/source, obj/item/reagent_container/food/snacks/eaten_food)
+/datum/tutorial/fraymarines/marine/basic/proc/on_foodbar_eaten(datum/source, obj/item/reagent_container/food/snacks/eaten_food)
 	SIGNAL_HANDLER
 
 	if(!istype(eaten_food, /obj/item/reagent_container/food/snacks/protein_pack) || eaten_food.reagents.total_volume)
@@ -64,7 +64,7 @@
 	clothing_vendor.req_access = list()
 	RegisterSignal(clothing_vendor, COMSIG_VENDOR_SUCCESSFUL_VEND, PROC_REF(on_clothing_vend))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_clothing_vend(datum/source)
+/datum/tutorial/fraymarines/marine/basic/proc/on_clothing_vend(datum/source)
 	SIGNAL_HANDLER
 
 	clothing_items_to_vend--
@@ -81,7 +81,7 @@
 		RegisterSignal(tutorial_mob, COMSIG_MOB_ITEM_ATTACK_SELF, PROC_REF(on_flare_light))
 		addtimer(CALLBACK(src, PROC_REF(dim_room)), 2.5 SECONDS)
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_flare_light(datum/source, obj/item/used)
+/datum/tutorial/fraymarines/marine/basic/proc/on_flare_light(datum/source, obj/item/used)
 	SIGNAL_HANDLER
 
 	if(!istype(used, /obj/item/device/flashlight/flare))
@@ -96,7 +96,7 @@
 	update_objective("Кинь свой флаер рядом с собой, или брось на пол нажатием на [retrieve_bind("drop_item")].")
 	RegisterSignal(tutorial_mob, COMSIG_MOB_ITEM_DROPPED, PROC_REF(on_flare_throw))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_flare_throw(datum/source, obj/item/thrown)
+/datum/tutorial/fraymarines/marine/basic/proc/on_flare_throw(datum/source, obj/item/thrown)
 	SIGNAL_HANDLER
 
 	if(!istype(thrown, /obj/item/device/flashlight/flare))
@@ -111,7 +111,7 @@
 	add_highlight(gun_vendor)
 	RegisterSignal(gun_vendor, COMSIG_VENDOR_SUCCESSFUL_VEND, PROC_REF(on_gun_vend))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_gun_vend(datum/source)
+/datum/tutorial/fraymarines/marine/basic/proc/on_gun_vend(datum/source)
 	SIGNAL_HANDLER
 
 	gun_items_to_vend--
@@ -124,7 +124,7 @@
 		update_objective("Вставь магазин в оружие нажимая магазином на винтовку.")
 		RegisterSignal(tutorial_mob, COMSIG_MOB_RELOADED_GUN, PROC_REF(on_magazine_insert))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_magazine_insert(datum/source, atom/attacked, obj/item/attacked_with)
+/datum/tutorial/fraymarines/marine/basic/proc/on_magazine_insert(datum/source, atom/attacked, obj/item/attacked_with)
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tutorial_mob, COMSIG_MOB_RELOADED_GUN)
@@ -132,7 +132,7 @@
 	update_objective("Возьми свою винтовку в обе руки нажатием [retrieve_bind("activate_inhand")] со своей винтовкой в активной руке.")
 	RegisterSignal(tutorial_mob, COMSIG_MOB_ITEM_ATTACK_SELF, PROC_REF(on_gun_wield))
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_gun_wield(datum/source, obj/item/used)
+/datum/tutorial/fraymarines/marine/basic/proc/on_gun_wield(datum/source, obj/item/used)
 	SIGNAL_HANDLER
 
 	if(!istype(used, /obj/item/weapon/gun/rifle/m41a))
@@ -148,7 +148,7 @@
 	RegisterSignal(tutorial_mob, COMSIG_MOB_GUN_EMPTY, PROC_REF(on_magazine_empty)) // I'd like to prevent unwilling softlocks as much as I can
 
 /// Non-contiguous part of the script, called if the user manages to run out of ammo in the gun without the xeno dying
-/datum/tutorial/fray-marines/marine/basic/proc/on_magazine_empty(obj/item/weapon/gun/empty_gun)
+/datum/tutorial/fraymarines/marine/basic/proc/on_magazine_empty(obj/item/weapon/gun/empty_gun)
 	SIGNAL_HANDLER
 
 	UnregisterSignal(tutorial_mob, COMSIG_MOB_GUN_EMPTY)
@@ -157,7 +157,7 @@
 	gun_vendor.req_access = list()
 	gun_vendor.load_ammo() // 99 magazines, to make sure that the xeno dies
 
-/datum/tutorial/fray-marines/marine/basic/proc/on_xeno_death(datum/source)
+/datum/tutorial/fraymarines/marine/basic/proc/on_xeno_death(datum/source)
 	SIGNAL_HANDLER
 
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/xenomorph/drone/tutorial, xeno_dummy)
@@ -173,15 +173,15 @@
 // END OF SCRIPTING
 // START OF SCRIPT HELPERS
 
-/datum/tutorial/fray-marines/marine/basic/proc/dim_room()
+/datum/tutorial/fraymarines/marine/basic/proc/dim_room()
 	TUTORIAL_ATOM_FROM_TRACKING(/obj/item/device/flashlight, flashlight)
 	flashlight.set_light_on(FALSE)
 
-/datum/tutorial/fray-marines/marine/basic/proc/brighten_room()
+/datum/tutorial/fraymarines/marine/basic/proc/brighten_room()
 	TUTORIAL_ATOM_FROM_TRACKING(/obj/item/device/flashlight, flashlight)
 	flashlight.set_light_on(TRUE)
 
-/datum/tutorial/fray-marines/marine/basic/proc/disappear_xeno()
+/datum/tutorial/fraymarines/marine/basic/proc/disappear_xeno()
 	TUTORIAL_ATOM_FROM_TRACKING(/mob/living/carbon/xenomorph/drone/tutorial, xeno_dummy)
 	animate(xeno_dummy, time = 5 SECONDS, alpha = 0)
 	remove_from_tracking_atoms(xeno_dummy)
@@ -189,7 +189,7 @@
 
 // END OF SCRIPT HELPERS
 
-/datum/tutorial/fray-marines/marine/basic/init_mob()
+/datum/tutorial/fraymarines/marine/basic/init_mob()
 	. = ..()
 	arm_equipment(tutorial_mob, /datum/equipment_preset/tutorial)
 
@@ -197,7 +197,7 @@
 	tutorial_pod.go_in_cryopod(tutorial_mob, TRUE, FALSE)
 
 
-/datum/tutorial/fray-marines/marine/basic/init_map()
+/datum/tutorial/fraymarines/marine/basic/init_map()
 	var/obj/structure/machinery/cryopod/tutorial/tutorial_pod = new(bottom_left_corner)
 	add_to_tracking_atoms(tutorial_pod)
 	var/obj/structure/machinery/cm_vending/sorted/marine_food/tutorial/food_vendor = new(loc_from_corner(0, 2))

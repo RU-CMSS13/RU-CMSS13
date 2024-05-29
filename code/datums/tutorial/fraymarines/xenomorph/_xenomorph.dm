@@ -1,4 +1,4 @@
-/datum/tutorial/fray-marines/xenomorph
+/datum/tutorial/fraymarines/xenomorph
 	category = TUTORIAL_CATEGORY_XENO
 	parent_path = /datum/tutorial/xenomorph
 	icon_state = "xeno"
@@ -9,7 +9,7 @@
 	///If TRUE remove all actions from the tutorial xenomorph. If FALSE none will be removed. You can give actions back in the tutorial with give_action()
 	var/remove_all_actions = TRUE
 
-/datum/tutorial/fray-marines/xenomorph/init_mob()
+/datum/tutorial/fraymarines/xenomorph/init_mob()
 	var/mob/living/carbon/xenomorph/new_character = new starting_xenomorph_type(bottom_left_corner, null, XENO_HIVE_TUTORIAL)
 	new_character.lastarea = get_area(bottom_left_corner)
 

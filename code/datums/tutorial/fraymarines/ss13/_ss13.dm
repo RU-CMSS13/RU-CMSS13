@@ -1,9 +1,9 @@
-/datum/tutorial/fray-marines/ss13
+/datum/tutorial/fraymarines/ss13
 	category = TUTORIAL_CATEGORY_SS13
 	parent_path = /datum/tutorial/ss13
 	icon_state = "ss13"
 
-/datum/tutorial/fray-marines/ss13/init_mob()
+/datum/tutorial/fraymarines/ss13/init_mob()
 	tutorial_mob.close_spawn_windows()
 
 	var/mob/living/carbon/human/new_character = new(bottom_left_corner)

@@ -1,9 +1,9 @@
-/datum/tutorial/fray-marines/marine
+/datum/tutorial/fraymarines/marine
 	category = TUTORIAL_CATEGORY_MARINE
 	parent_path = /datum/tutorial/marine
 	icon_state = "marine"
 
-/datum/tutorial/fray-marines/marine/init_mob()
+/datum/tutorial/fraymarines/marine/init_mob()
 	var/mob/living/carbon/human/new_character = new(bottom_left_corner)
 	new_character.lastarea = get_area(bottom_left_corner)
 
