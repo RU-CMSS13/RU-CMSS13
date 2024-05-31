@@ -11,7 +11,7 @@
 	)
 	actions_to_add = list(/datum/action/xeno_action/activable/secrete_resin)
 
-//	behavior_delegate_type = /datum/behavior_delegate/lesser_slave
+	behavior_delegate_type = /datum/behavior_delegate/lesser_slave
 
 /datum/xeno_strain/slave/apply_strain(mob/living/carbon/xenomorph/lesser_drone/lesser)
 	lesser.plasmapool_modifier = 1.66667 // ~500
@@ -30,12 +30,15 @@
 			if(choose_resin_ability)
 				choose_resin_ability.update_button_icon(lesser.selected_resin)
 				break
-/*
+
+/datum/behavior_delegate/lesser_base/on_life()
+	return
+
 //  Смерть вне травы
 /datum/behavior_delegate/lesser_slave/on_life()
 	if(bound_xeno.body_position == STANDING_UP && !(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno)))
 		bound_xeno.adjustBruteLoss(20)
-*/
+
 //	Способности
 
 /datum/resin_construction/resin_turf/wall/lesser_slave
