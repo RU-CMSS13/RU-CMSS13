@@ -3,7 +3,7 @@
 	available_strains = list(
 //		/datum/xeno_strain/sacrificer,
 		/datum/xeno_strain/scout,
-//		/datum/xeno_strain/slave,
+		/datum/xeno_strain/slave,
 		)
 
 /mob/living/carbon/xenomorph/lesser_drone
