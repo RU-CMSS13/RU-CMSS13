@@ -1,10 +1,14 @@
 // 	Стрейны низшего
 /datum/caste_datum/lesser_drone
+	behavior_delegate_type = /datum/behavior_delegate/lesser_base
 	available_strains = list(
 		/datum/xeno_strain/sacrificer,
 		/datum/xeno_strain/scout,
-//		/datum/xeno_strain/slave,
+		/datum/xeno_strain/slave,
 		)
+
+/datum/behavior_delegate/lesser_base
+	name = "Base Lesser Behavior Delegate"
 
 /mob/living/carbon/xenomorph/lesser_drone
 	icon_xeno = 'fray-marines/icons/mob/xenos/lesser_drone_new.dmi'
