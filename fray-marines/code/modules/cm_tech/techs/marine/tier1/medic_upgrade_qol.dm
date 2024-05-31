@@ -1,3 +1,5 @@
+#define JOB_MED_CZSP_LIST list(JOB_SQUAD_MEDIC, JOB_MEDIC_ROLES_LIST, JOB_COMMAND_ROLES_LIST, JOB_SYNTH)
+
 /datum/tech/droppod/item/medic_czsp
 	name = "Squad Medic Combat Zone Support Package"
 	desc = "Gives medics to use powerful tools to heal marines."
@@ -13,7 +15,7 @@
 	. = ..()
 	if(!H || !D)
 		return
-	if(H.job == JOB_SQUAD_MEDIC || JOB_MEDIC_ROLES_LIST || JOB_COMMAND_ROLES_LIST || JOB_SYNTH)
+	if(H.job == JOB_SQUAD_MEDIC || H.job == JOB_MEDIC_ROLES_LIST || H.job == JOB_COMMAND_ROLES_LIST || H.job == JOB_SYNTH)
 		.["Medical CZSP"] = /obj/item/storage/box/combat_zone_support_package
 	else
 		var/type_to_add = /obj/item/stack/medical/bruise_pack

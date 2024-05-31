@@ -1,3 +1,5 @@
+#define JOB_ENG_CZSP_LIST list(JOB_SQUAD_ENGI, JOB_SYNTH)
+
 /datum/tech/droppod/item/engi_czsp
 	name = "Combat Technician Combat Zone Support Package"
 	desc = {"Gives upgraded composite (deployable) cades to regulars. \
@@ -25,7 +27,7 @@
 	. = ..()
 	if(!H || !D)
 		return
-	if(H.job == JOB_SQUAD_ENGI || JOB_SYNTH)
+	if(H.job == JOB_SQUAD_ENGI || H.job == JOB_SYNTH)
 		.["21S Tesla Coil"] = /obj/item/storage/box/combat_zone_engi_package_tesla
 		.["UA 42-F Sentry Flamer"] = /obj/item/storage/box/combat_zone_engi_package_flamer
 		.["UA 571-C Sentry Gun"] = /obj/item/storage/box/combat_zone_engi_package
