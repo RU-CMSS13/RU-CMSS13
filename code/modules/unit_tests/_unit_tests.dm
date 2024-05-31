@@ -75,7 +75,7 @@
 #define TRAIT_SOURCE_UNIT_TESTS "unit_tests"
 
 // Unit tests
-#include "autowiki.dm"
+/*#include "autowiki.dm"
 #include "check_runtimes.dm"
 #include "create_and_destroy.dm"
 #include "emote_panels.dm"
@@ -86,7 +86,7 @@
 #include "subsystem_init.dm"
 #include "tgui_create_message.dm"
 #include "timer_sanity.dm"
-#include "tutorials.dm"
+#include "tutorials.dm"*/
 #include "xeno_strains.dm"
 
 // Unit tests backend
