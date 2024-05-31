@@ -1,3 +1,9 @@
+/datum/caste_datum/lesser_drone
+	behavior_delegate_type = /datum/behavior_delegate/lesser_base
+
+/datum/behavior_delegate/lesser_base
+	name = "Base Lesser Behavior Delegate"
+
 /datum/xeno_strain/slave
 	name = "Раб"
 	description = "Мутация - Раб: Вы теряете кислотную железу, возможность атаковать, но взамен значительно увеличиваете запас плазмы и увеличиваете скорость строительства. Однако возведенные вами постройки будут слабее и вы будете погибать вне смолы."
