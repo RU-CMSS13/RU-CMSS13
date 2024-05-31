@@ -4285,12 +4285,8 @@
 	},
 /area/almayer/engineering/upper_engineering)
 "aoZ" = (
-/obj/structure/bed{
-	pixel_y = 0
-	},
-/obj/item/bedsheet/hop{
-	pixel_y = 0
-	},
+/obj/structure/bed,
+/obj/item/bedsheet/hop,
 /obj/structure/machinery/light{
 	dir = 4
 	},
@@ -5898,8 +5894,7 @@
 /area/almayer/command/lifeboat)
 "atN" = (
 /obj/structure/barricade/handrail{
-	dir = 8;
-	pixel_y = 0
+	dir = 8
 	},
 /obj/structure/pipes/vents/scrubber{
 	dir = 8
@@ -9552,9 +9547,7 @@
 	},
 /area/almayer/hallways/upper/stern_hallway)
 "aGb" = (
-/obj/structure/machinery/power/smes/buildable{
-	pixel_y = 0
-	},
+/obj/structure/machinery/power/smes/buildable,
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
 	pixel_x = 2
@@ -9906,9 +9899,7 @@
 	pixel_x = -7;
 	pixel_y = 16
 	},
-/obj/item/clothing/mask/cigarette/pipe{
-	pixel_y = 0
-	},
+/obj/item/clothing/mask/cigarette/pipe,
 /obj/structure/surface/table/woodentable/fancy,
 /turf/open/floor/wood/ship,
 /area/almayer/living/commandbunks)
@@ -12194,8 +12185,7 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/door_control{
 	id = "officers_mess";
-	name = "Privacy Shutters";
-	pixel_y = 0
+	name = "Privacy Shutters"
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -13537,12 +13527,10 @@
 /area/almayer/hallways/hangar)
 "bcd" = (
 /obj/structure/machinery/computer/cameras/hangar{
-	pixel_y = 0;
 	plane = -4
 	},
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.215;
-	pixel_y = 0
+	layer = 3.215
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -20683,8 +20671,7 @@
 /area/almayer/shipboard/weapon_room)
 "bQF" = (
 /obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_22";
-	pixel_y = 0
+	icon_state = "pottedplant_22"
 	},
 /turf/open/floor/almayer{
 	icon_state = "mono"
@@ -26710,24 +26697,22 @@
 /obj/structure/platform/shiva{
 	dir = 1
 	},
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.1;
-	pixel_y = -4
-	},
 /obj/structure/machinery/computer/card{
-	pixel_y = 0;
 	layer = 3.125;
 	pixel_x = -15
 	},
 /obj/structure/machinery/computer/squad_changer{
 	layer = 3.125;
-	pixel_y = 0;
 	pixel_x = -32
 	},
 /obj/item/device/flashlight/lamp{
 	pixel_y = 8;
 	layer = 3.1;
 	pixel_x = 3
+	},
+/obj/structure/surface/table/reinforced/black{
+	layer = 3.01;
+	pixel_y = -4
 	},
 /turf/open/floor/almayer{
 	dir = 1;
@@ -36033,8 +36018,7 @@
 "gvq" = (
 /obj/structure/barricade/handrail{
 	dir = 4;
-	layer = 3.3;
-	pixel_y = 0
+	layer = 3.3
 	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "SE-out";
@@ -36733,8 +36717,7 @@
 "gHl" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/bed/chair/comfy/alpha{
-	dir = 8;
-	pixel_y = 0
+	dir = 8
 	},
 /turf/open/floor/almayer{
 	dir = 8;
@@ -41237,13 +41220,13 @@
 /obj/structure/platform/shiva{
 	dir = 1
 	},
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.1;
-	pixel_y = -4
-	},
 /obj/structure/machinery/computer/working_joe{
 	layer = 3.2;
 	pixel_x = -17
+	},
+/obj/structure/surface/table/reinforced/black{
+	layer = 3.01;
+	pixel_y = -4
 	},
 /turf/open/floor/almayer{
 	dir = 1;
@@ -43693,7 +43676,6 @@
 "jpl" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "NE-out";
-	pixel_y = 0;
 	pixel_x = 1
 	},
 /obj/structure/sign/safety/bridge{
@@ -44022,9 +44004,7 @@
 /obj/item/roller{
 	pixel_y = 12
 	},
-/obj/item/roller/surgical{
-	pixel_y = 0
-	},
+/obj/item/roller/surgical,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -44782,7 +44762,6 @@
 /area/almayer/medical/containment/cell)
 "jNo" = (
 /obj/structure/sign/poster{
-	pixel_y = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/almayer{
@@ -46625,8 +46604,7 @@
 	pixel_y = -28
 	},
 /obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_22";
-	pixel_y = 0
+	icon_state = "pottedplant_22"
 	},
 /turf/open/floor/almayer{
 	icon_state = "mono"
@@ -48252,8 +48230,7 @@
 /area/almayer/engineering/upper_engineering/port)
 "lbY" = (
 /obj/structure/barricade/handrail{
-	dir = 8;
-	pixel_y = 0
+	dir = 8
 	},
 /obj/structure/pipes/vents/pump{
 	dir = 8
@@ -50255,7 +50232,6 @@
 /obj/structure/machinery/computer/shuttle/dropship/flight/remote_control{
 	name = "Alamo Remote Control Console";
 	shuttleId = "dropship_alamo";
-	pixel_y = 0;
 	plane = -4;
 	pixel_x = 15
 	},
@@ -50266,8 +50242,7 @@
 	plane = -4
 	},
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.215;
-	pixel_y = 0
+	layer = 3.215
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -56459,8 +56434,7 @@
 /area/almayer/shipboard/weapon_room)
 "ohB" = (
 /obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_22";
-	pixel_y = 0
+	icon_state = "pottedplant_22"
 	},
 /turf/open/floor/almayer,
 /area/almayer/lifeboat_pumps/north1)
@@ -57127,10 +57101,6 @@
 /obj/structure/machinery/light{
 	dir = 8
 	},
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.1;
-	pixel_y = -4
-	},
 /obj/item/storage/box/ids{
 	pixel_y = 10;
 	pixel_x = -2;
@@ -57140,6 +57110,10 @@
 	pixel_y = 3;
 	pixel_x = -2;
 	layer = 3.2
+	},
+/obj/structure/surface/table/reinforced/black{
+	layer = 3.01;
+	pixel_y = -4
 	},
 /turf/open/floor/almayer{
 	dir = 9;
@@ -65235,12 +65209,10 @@
 /area/almayer/squads/req)
 "rtt" = (
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.215;
-	pixel_y = 0
+	layer = 3.215
 	},
 /obj/structure/machinery/computer/shuttle/dropship/flight/remote_control{
 	name = "Normandy Remote Control Console";
-	pixel_y = 0;
 	shuttleId = "dropship_normandy";
 	plane = -4;
 	pixel_x = -15
@@ -65299,15 +65271,13 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/device/radio/intercom{
 	freerange = 1;
-	name = "General Listening Channel";
-	pixel_y = 0
+	name = "General Listening Channel"
 	},
 /obj/item/ashtray/bronze{
 	pixel_y = -12
 	},
 /obj/item/trash/cigbutt/cigarbutt{
-	pixel_x = 6;
-	pixel_y = 0
+	pixel_x = 6
 	},
 /turf/open/floor/almayer{
 	icon_state = "bluefull"
@@ -67627,8 +67597,7 @@
 	pixel_x = -26
 	},
 /obj/structure/sign/safety/terminal{
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /obj/structure/closet/toolcloset,
 /turf/open/floor/almayer{
@@ -70166,9 +70135,6 @@
 	},
 /area/almayer/maint/hull/upper/u_m_p)
 "toI" = (
-/obj/structure/machinery/power/apc/almayer{
-	dir = 4
-	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "W";
 	layer = 2.5
@@ -70177,7 +70143,7 @@
 	dir = 5;
 	icon_state = "plating"
 	},
-/area/almayer/living/commandbunks)
+/area/almayer/living/synthcloset)
 "tpa" = (
 /obj/structure/machinery/portable_atmospherics/hydroponics,
 /obj/structure/window/reinforced{
@@ -73483,7 +73449,6 @@
 "uwJ" = (
 /obj/structure/surface/table/reinforced/black,
 /obj/structure/machinery/computer/card{
-	pixel_y = 0;
 	pixel_x = 3
 	},
 /obj/structure/machinery/computer/crew/alt{
@@ -76009,8 +75974,7 @@
 "vta" = (
 /obj/structure/barricade/handrail{
 	dir = 4;
-	layer = 3.3;
-	pixel_y = 0
+	layer = 3.3
 	},
 /turf/open/floor/almayer{
 	icon_state = "mono"
@@ -78093,8 +78057,7 @@
 "wbX" = (
 /obj/structure/barricade/handrail{
 	dir = 4;
-	layer = 3.3;
-	pixel_y = 0
+	layer = 3.3
 	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "NE-out";
@@ -79120,9 +79083,7 @@
 	},
 /area/almayer/shipboard/brig/processing)
 "wvU" = (
-/obj/structure/machinery/power/smes/buildable{
-	pixel_y = 0
-	},
+/obj/structure/machinery/power/smes/buildable,
 /obj/structure/machinery/light/small{
 	dir = 4
 	},
