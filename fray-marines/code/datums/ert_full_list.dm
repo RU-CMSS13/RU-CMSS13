@@ -40,11 +40,6 @@
 	name = "Military Contractors (Covert) (Hostile to WY)"
 	mob_max = 7
 	probability = 0
-
-/datum/emergency_call/contractors/covert
-	name = "Military Contractors (Covert) (Hostile to WY)"
-	mob_max = 7
-	probability = 0
 	hostility = TRUE
 
 /datum/emergency_call/death
@@ -67,8 +62,8 @@
 	hostility = TRUE
 */
 /datum/emergency_call/dutch
-	name = "Dutch's Dozen"
-	mob_max = 6
+//	name = "Dutch's Dozen"
+//	mob_max = 6
 	probability = 5
 /*
 /datum/emergency_call/feral_xenos
@@ -83,10 +78,10 @@
 	probability = 0
 */
 /datum/emergency_call/hefa_knight
-	name = "HEFA knights"
+//	name = "HEFA knights" // А
 	mob_max = 6
 	probability = 1
-	hostility = TRUE
+//	hostility = TRUE
 /*
 /datum/emergency_call/mercs
 	name = "Freelancers (Squad)"
@@ -116,8 +111,8 @@
 	probability = 15
 */
 /datum/emergency_call/souto
-	name = "Souto Man"
-	mob_max = 1
+//	name = "Souto Man"
+//	mob_max = 1
 	probability = 1
 /*
 /datum/emergency_call/upp_commando
@@ -132,10 +127,10 @@
 	probability = 20
 */
 /datum/emergency_call/xeno_cult
-	name = "Xeno Cultists"
-	mob_max = 6
+//	name = "Xeno Cultists"
+//	mob_max = 6
 	probability = 1
-	hostility = TRUE
+//	hostility = TRUE
 /*
 /datum/emergency_call/xenos
 	name = "Xenomorphs (Squad)"
