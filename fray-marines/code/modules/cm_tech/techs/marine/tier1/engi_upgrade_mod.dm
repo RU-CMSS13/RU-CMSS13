@@ -1,5 +1,3 @@
-#define JOB_ENG_CZSP_LIST list(JOB_SQUAD_ENGI, JOB_SYNTH)
-
 /datum/tech/droppod/item/engi_czsp
 	name = "Combat Technician Combat Zone Support Package"
 	desc = {"Gives upgraded composite (deployable) cades to regulars. \

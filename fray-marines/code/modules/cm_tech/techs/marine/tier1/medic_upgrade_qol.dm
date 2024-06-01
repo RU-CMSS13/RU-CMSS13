@@ -1,5 +1,3 @@
-#define JOB_MED_CZSP_LIST list(JOB_SQUAD_MEDIC, JOB_MEDIC_ROLES_LIST, JOB_COMMAND_ROLES_LIST, JOB_SYNTH)
-
 /datum/tech/droppod/item/medic_czsp
 	name = "Squad Medic Combat Zone Support Package"
 	desc = "Gives medics to use powerful tools to heal marines."
