@@ -1,5 +1,5 @@
 /datum/xeno_strain/stalker
-	name = "STRAIN: Lurker - Stalker"
+	name = "Сталкер"
 	description = "Вы обмениваете свою способность замедляющего удара на возможность становится невидимым в режиме ходьбы на неопределённый срок."
 	flavor_description = "О н о   х о ч е т   е с т ь . . ."
 
