@@ -262,6 +262,9 @@
 /area/almayer/shipboard/brig/general_equipment
 	name = "\improper Brig General Equipment"
 
+/area/almayer/shipboard/brig/office
+	name = "\improper Brig Office"
+
 /area/almayer/shipboard/brig/evidence_storage
 	name = "\improper Brig Evidence Storage"
 
