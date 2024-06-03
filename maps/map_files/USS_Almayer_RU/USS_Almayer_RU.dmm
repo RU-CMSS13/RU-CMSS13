@@ -53678,7 +53678,9 @@
 	},
 /obj/structure/machinery/door/airlock/almayer/marine{
 	dir = 2;
-	name = "Squad Preparations"
+	name = "Squad Preparations";
+	req_access = list(9);
+	req_one_access = list(2,21)
 	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
@@ -57482,7 +57484,9 @@
 	},
 /obj/structure/machinery/door/airlock/almayer/marine{
 	dir = 2;
-	name = "Squad Preparations"
+	name = "Squad Preparations";
+	req_access = list(9);
+	req_one_access = list(2,21)
 	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
@@ -59173,7 +59177,9 @@
 	},
 /obj/structure/machinery/door/airlock/almayer/marine{
 	dir = 2;
-	name = "Squad Preparations"
+	name = "Squad Preparations";
+	req_access = list(9);
+	req_one_access = list(2,21)
 	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
@@ -74632,15 +74638,6 @@
 	icon_state = "cargo"
 	},
 /area/almayer/squads/charlie)
-"uPa" = (
-/obj/structure/machinery/camera/autoname/almayer{
-	name = "ship-grade camera"
-	},
-/turf/open/floor/almayer{
-	dir = 1;
-	icon_state = "red"
-	},
-/area/almayer/shipboard/brig/office)
 "uPr" = (
 /turf/open/floor/almayer{
 	dir = 5;
@@ -82646,7 +82643,9 @@
 	},
 /obj/structure/machinery/door/airlock/almayer/marine{
 	dir = 2;
-	name = "Squad Preparations"
+	name = "Squad Preparations";
+	req_access = list(9);
+	req_one_access = list(2,21)
 	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
@@ -93710,7 +93709,7 @@ oCL
 rvu
 fuB
 clB
-uPa
+wNi
 fXc
 fXc
 ckS
