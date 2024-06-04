@@ -13,7 +13,7 @@
 	. = ..()
 	if(!H || !D)
 		return
-	if(H.job == JOB_SQUAD_MEDIC || H.job == JOB_MEDIC_ROLES_LIST || H.job == JOB_COMMAND_ROLES_LIST || H.job == JOB_SYNTH)
+	if(H.job == JOB_SQUAD_MEDIC || H.job == JOB_SQUAD_MEDIC || H.job == JOB_CMO || H.job == JOB_DOCTOR || H.job == JOB_NURSE || H.job == JOB_RESEARCHER || H.job == JOB_SURGEON || H.job == JOB_CO || H.job == JOB_XO || H.job == JOB_SO || H.job == JOB_SYNTH)
 		.["Medical CZSP"] = /obj/item/storage/box/combat_zone_support_package
 	else
 		var/type_to_add = /obj/item/stack/medical/bruise_pack
