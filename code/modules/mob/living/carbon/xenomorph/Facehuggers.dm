@@ -330,7 +330,7 @@
 				target.species.larva_impregnated(embryo)
 */
 
-  //  RU CM Edit
+//  RU CM Edit
 			var/embryos_to_implant = get_impregnation_amount(target)
 			for(var/i=1, i <= embryos_to_implant, i++)
 				var/obj/item/alien_embryo/embryo = new /obj/item/alien_embryo(target)
