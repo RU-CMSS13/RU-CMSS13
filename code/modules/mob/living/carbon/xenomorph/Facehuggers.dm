@@ -315,6 +315,9 @@
 			else
 				qdel(embryo)
 		if(!embryos)
+
+//  RU CM Start
+/*
 			var/obj/item/alien_embryo/embryo = new /obj/item/alien_embryo(target)
 			embryo.hivenumber = hivenumber
 			embryo.hugger_ckey = hugger_ckey
@@ -325,6 +328,23 @@
 
 			if(target.species)
 				target.species.larva_impregnated(embryo)
+*/
+
+  //  RU CM Edit
+			var/embryos_to_implant = get_impregnation_amount(target)
+			for(var/i=1, i <= embryos_to_implant, i++)
+				var/obj/item/alien_embryo/embryo = new /obj/item/alien_embryo(target)
+				embryo.hivenumber = hivenumber
+
+				embryo.hugger_ckey = hugger_ckey
+				GLOB.player_embryo_list += embryo
+
+				embryo.flags_embryo = flags_embryo
+				if(i == embryos_to_implant)
+					if(target.species)
+						target.species.larva_impregnated(embryo)
+					flags_embryo = NO_FLAGS
+//  RU CM End
 
 			icon_state = "[initial(icon_state)]_impregnated"
 			impregnated = TRUE

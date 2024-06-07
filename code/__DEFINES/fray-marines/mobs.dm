@@ -7,3 +7,5 @@
 
 // Lurker strain flags
 #define LURKER_STALKER	"Stalker"
+
+#define TECH_TREE_MULTIBURST 1
