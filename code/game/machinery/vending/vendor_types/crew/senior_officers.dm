@@ -161,6 +161,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_chief_engineer, list(
 		list("M37A2 Pump Shotgun", 0, /obj/item/storage/box/guncase/pumpshotgun, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("M41A Pulse Rifle MK2", 0, /obj/item/storage/box/guncase/m41a, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("M240 Incinerator Unit", 0, /obj/item/storage/box/guncase/flamer, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
+		list("F1X Nailgun", 0, /obj/item/storage/box/guncase/repairbelt, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 
 	))
 

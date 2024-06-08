@@ -941,6 +941,7 @@
 			update_gun_icon(slot)
 			return
 
+/*	//RUCM REMOVE
 /obj/item/storage/belt/gun/attack_hand(mob/user, mods)
 	if(length(holstered_guns) && ishuman(user) && loc == user)
 		var/obj/item/I
@@ -953,6 +954,7 @@
 		return
 
 	..()
+*/	//RUCM REMOVE
 
 /obj/item/storage/belt/gun/proc/update_gun_icon(slot) //We do not want to use regular update_icon as it's called for every item inserted. Not worth the icon math.
 	var/mob/living/carbon/human/user = loc
