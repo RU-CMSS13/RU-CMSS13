@@ -3,4 +3,3 @@
 #include "fray-marines\job.dm"
 #include "fray-marines\mobs.dm"
 #include "fray-marines\shuttles.dm"
-#include "fray-marines\xeno.dm"
