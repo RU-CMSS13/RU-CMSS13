@@ -1,0 +1,14 @@
+name: check potential conflicts
+on: pull_request
+
+jobs:
+  build:
+    name: potential-conflicts-checker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: outsideris/potential-conflicts-checker-action@0.1.0
+        with:
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
