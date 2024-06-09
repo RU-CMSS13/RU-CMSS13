@@ -9713,7 +9713,7 @@
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
-/area/almayer/shipboard/brig/mp_bunks)
+/area/almayer/hallways/upper/aft_hallway)
 "aGW" = (
 /turf/open/floor/almayer{
 	icon_state = "sterile_green_side"
@@ -22132,7 +22132,7 @@
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
-/area/almayer/shipboard/brig/mp_bunks)
+/area/almayer/hallways/upper/aft_hallway)
 "bZi" = (
 /obj/structure/largecrate/random/case/double,
 /turf/open/floor/almayer{
@@ -27748,6 +27748,10 @@
 	icon_state = "mono"
 	},
 /area/almayer/medical/upper_medical)
+"dwG" = (
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/upper/u_m_p)
 "dwI" = (
 /obj/structure/machinery/door/airlock/almayer/engineering{
 	dir = 1;
@@ -39944,6 +39948,14 @@
 	icon_state = "ai_floors"
 	},
 /area/almayer/command/airoom)
+"hSg" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "green"
+	},
+/area/almayer/hallways/upper/aft_hallway)
 "hSk" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/engineering/upper_engineering/port)
@@ -41265,6 +41277,12 @@
 	icon_state = "ai_floors"
 	},
 /area/almayer/command/airoom)
+"isE" = (
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
+/area/almayer/maint/upper/u_m_p)
 "isH" = (
 /obj/structure/reagent_dispensers/water_cooler/stacks{
 	density = 0;
@@ -48248,6 +48266,10 @@
 /obj/item/tool/crowbar{
 	pixel_x = 6;
 	pixel_y = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -61191,6 +61213,15 @@
 	icon_state = "test_floor4"
 	},
 /area/almayer/command/airoom)
+"pTJ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/turf/open/floor/almayer{
+	icon_state = "green"
+	},
+/area/almayer/hallways/upper/aft_hallway)
 "pUd" = (
 /obj/structure/pipes/vents/pump,
 /turf/open/floor/almayer{
@@ -62225,6 +62256,15 @@
 	icon_state = "sterile_green_corner"
 	},
 /area/almayer/medical/medical_science)
+"qmz" = (
+/obj/structure/machinery/door/airlock/almayer/maint{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/almayer{
+	icon_state = "test_floor4"
+	},
+/area/almayer/maint/upper/u_m_p)
 "qmC" = (
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 4;
@@ -66608,6 +66648,15 @@
 	icon_state = "blue"
 	},
 /area/almayer/squads/delta)
+"rQp" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate"
+	},
+/area/almayer/maint/upper/u_m_p)
 "rQt" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 1
@@ -71851,6 +71900,15 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/upper/stern_hallway)
+"tPH" = (
+/obj/structure/machinery/light,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "green"
+	},
+/area/almayer/hallways/upper/aft_hallway)
 "tQd" = (
 /obj/structure/machinery/light{
 	dir = 8
@@ -76655,6 +76713,13 @@
 "vyI" = (
 /turf/open/floor/almayer,
 /area/almayer/engineering/upper_engineering/port)
+"vzk" = (
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/upper/u_m_p)
 "vzp" = (
 /turf/open/floor/almayer/research/containment/entrance,
 /area/almayer/medical/containment/cell/cl)
@@ -81919,6 +81984,10 @@
 /area/almayer/hallways/hangar)
 "xqg" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
 /turf/open/floor/almayer{
 	icon_state = "green"
 	},
@@ -110841,7 +110910,7 @@ leQ
 avn
 mIH
 vOW
-ajC
+hSg
 dCD
 aXe
 baw
@@ -111044,7 +111113,7 @@ aoe
 aoe
 aEI
 vOW
-haT
+tPH
 wYA
 wYA
 wYA
@@ -111247,13 +111316,13 @@ cnZ
 aoe
 dtM
 vOW
-ajC
+hSg
 wYA
 aWn
 aWn
-aub
-uTY
-aub
+rQp
+qmz
+jPx
 qHq
 srH
 wYA
@@ -111450,15 +111519,15 @@ coa
 aoe
 udF
 aqB
-ajC
-uTY
-aub
-qHq
-qHq
+pTJ
+qmz
+isE
+dwG
+vzk
 wYA
 laB
-aub
-aub
+isE
+isE
 qFQ
 jPx
 wYA
