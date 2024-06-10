@@ -663,6 +663,8 @@
 #define XENO_SHIELD_SOURCE_SHIELD_PILLAR 9
 #define XENO_SHIELD_SOURCE_CUMULATIVE_GENERIC 10
 
+#define XENO_SHIELD_SACRIFICE 101 /// временно полежит здесь пока не решатся конфликты на мержах
+
 //XENO CASTES
 #define XENO_CASTE_LARVA  "Bloody Larva"
 #define XENO_CASTE_PREDALIEN_LARVA   "Predalien Larva"
