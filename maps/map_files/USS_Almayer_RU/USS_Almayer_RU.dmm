@@ -848,9 +848,8 @@
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/obj/structure/disposalpipe/junction{
-	dir = 8;
-	icon_state = "pipe-j2"
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -24968,9 +24967,6 @@
 	name = "Auxiliary Support Officer Office";
 	req_access = list(1)
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -33085,17 +33081,6 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/maint/hull/upper/u_f_s)
-"fqw" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/almayer{
-	icon_state = "plate"
-	},
-/area/almayer/living/offices/flight)
 "fqO" = (
 /obj/structure/surface/table/reinforced/black,
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -33237,10 +33222,6 @@
 "fsw" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
 	},
 /turf/open/floor/almayer,
 /area/almayer/living/auxiliary_officer_office)
@@ -62748,16 +62729,6 @@
 	icon_state = "plate"
 	},
 /area/almayer/squads/alpha)
-"qup" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
-	dir = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/living/offices/flight)
 "quq" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -80516,13 +80487,6 @@
 	icon_state = "dark_sterile"
 	},
 /area/almayer/engineering/laundry)
-"wSq" = (
-/obj/structure/machinery/disposal,
-/obj/structure/disposalpipe/trunk{
-	dir = 2
-	},
-/turf/open/floor/almayer,
-/area/almayer/living/auxiliary_officer_office)
 "wSR" = (
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/plating/plating_catwalk,
@@ -107733,7 +107697,7 @@ dQZ
 dpy
 ocl
 acZ
-qup
+aeJ
 azl
 ahS
 ajA
@@ -107936,7 +107900,7 @@ dQZ
 fkW
 ocl
 vhw
-fqw
+aeh
 azw
 xWp
 aAK
@@ -108341,7 +108305,7 @@ uId
 dQZ
 sqZ
 ocl
-wSq
+gZK
 fsw
 pmb
 jjX
