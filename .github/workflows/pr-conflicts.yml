@@ -6,6 +6,6 @@ jobs:
     name: potential-conflicts-checker
     runs-on: ubuntu-latest
     steps:
-      - uses: outsideris/potential-conflicts-checker-action@0.1.0
+      - uses: RU-CMSS13/potential-conflicts-checker-action@0.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
