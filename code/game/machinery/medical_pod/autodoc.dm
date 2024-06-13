@@ -257,7 +257,7 @@
 					if(!is_type_in_list(I,known_implants))
 						surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"shrapnel")
 			if(M.incision_depths[L.name] != SURGERY_DEPTH_SURFACE)
-				surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"open") 
+				surgery_list += create_autodoc_surgery(L,LIMB_SURGERY,"open")
 
 	var/datum/internal_organ/I = M.internal_organs_by_name["eyes"]
 	if(I && (M.disabilities & NEARSIGHTED || M.sdisabilities & DISABILITY_BLIND || I.damage > 0))
@@ -488,7 +488,7 @@
 							visible_message("[icon2html(src, viewers(src))] \The <b>[src]</b> speaks: Procedure has been deemed unnecessary.");
 							surgery_todo_list -= S
 							continue
-						
+
 						open_incision(H,S.limb_ref)
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							open_encased(H,S.limb_ref)
@@ -500,11 +500,23 @@
 									S.limb_ref.implants -= I
 									H.embedded_items -= I
 									qdel(I)
+/*  RU CM Start
 						var/obj/item/larva_ref = locate(/obj/item/alien_embryo) in H.contents
 						if(S.limb_ref.name == "chest" && larva_ref)
 							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
 							H.contents -= larva_ref
 						qdel(larva_ref)
+*/
+//  RU CM Edit
+						for(var/i in H.contents)
+							if(i)
+								if(istype(i, /obj/item/alien_embryo))
+									var/obj/item/larva_ref = i
+									if(S.limb_ref.name == "chest" && larva_ref)
+										H.contents -= larva_ref
+									qdel(larva_ref)
+						sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
+//  RU CM End
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							close_encased(H,S.limb_ref)
 						if(!surgery) break
@@ -767,7 +779,12 @@
 		else
 			dat += "<br>The autodoc is empty."
 	dat += text("<a href='?src=\ref[];mach_close=sleeper'>Close</a>", user)
+/*  RU CM Start
 	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=300x400")
+*/
+//  RU CM Edit
+	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=380x700")
+//  RU CM End
 	onclose(user, "sleeper")
 
 /obj/structure/machinery/autodoc_console/Topic(href, href_list)
