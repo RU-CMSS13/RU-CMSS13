@@ -501,58 +501,22 @@
 									H.embedded_items -= I
 									qdel(I)
 
-/*  RU CM Start
-						var/obj/item/larva_ref = locate(/obj/item/alien_embryo) in H.contents
-						if(S.limb_ref.name == "chest" && larva_ref)
-							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-							H.contents -= larva_ref
-						qdel(larva_ref)
-*/
-//  RU CM Edit
-/*
-						for(var/i in H.contents)
+						for(var/i in H.contents)	// цикл для мультибурстов
 							if(i)
-								if(istype(i, /obj/item/alien_embryo))
-									var/obj/item/larva_ref = i
-									if(S.limb_ref.name == "chest" && larva_ref)
-										H.contents -= larva_ref
-									qdel(larva_ref)
-						sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-//  RU CM End
-
-						var/obj/item/alien_embryo/alien_ref = locate() in H.contents
-						if(S.limb_ref.name == "chest" && alien_ref)
-							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-							var/mob/living/carbon/xenomorph/larva/larva_ref = locate() in H.contents
-							if(larva_ref)
-								larva_ref.forceMove(get_turf(H))
-								qdel(alien_ref)
-							else
-								alien_ref.forceMove(get_turf(H))
-								H.status_flags &= ~XENO_HOST
-							H.emote("scream")
-*/
-
-
-
-						for(var/i in H.contents)
-							if(i)
-								if(istype(i, /obj/item/alien_embryo))
+								if(istype(i, /obj/item/alien_embryo))	// эмбрион, лярва-предмет
 									var/obj/item/alien_embryo/embryo_ref = i
-									if(embryo_ref.stage >= 5)
+									if(embryo_ref.stage >= 5)	// удаляет предмет если лярва уже сформирована
 										H.contents -= embryo_ref
 										qdel(embryo_ref)
 									else
 										embryo_ref.forceMove(get_turf(H))
 
-								if(istype(i, /mob/living/carbon/xenomorph/larva))
+								if(istype(i, /mob/living/carbon/xenomorph/larva)) // сформированная лярва-юнит
 									var/mob/living/carbon/xenomorph/larva/larva_ref = i
 									larva_ref.forceMove(get_turf(H))
 									H.status_flags &= ~XENO_HOST
 
 						sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-
-//////////
 
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							close_encased(H,S.limb_ref)
