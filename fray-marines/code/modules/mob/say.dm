@@ -4,12 +4,12 @@
 // Словари блокировки вносятся в формате: новое слово с новой строки
 // Словари автокоррекции вносятся в формате: name1=value1;name2=value2
 // Желательно предусматривать склонения квина=королева;квины=королевы;квине=королеве;квину=королеву;квиной=королевой
-// Файлы словарей плохих слов храняться на локальном сервере по адресу RU-CMSS13/cfg/chatfilter/
+// Файлы словарей плохих слов храняться на локальном сервере по адресу RU-CMSS13/data/chatfilter/
 
-GLOBAL_LIST_INIT(bad_words, file2list("cfg/chatfilter/bad_words.cf"))
-GLOBAL_LIST_INIT(exc_full, file2list("cfg/chatfilter/exc_full.cf"))
-GLOBAL_LIST_INIT(ic_autoemote, params2list(file2text("cfg/chatfilter/emote.cf")))	// файл в текст, текст в лист
-GLOBAL_LIST_INIT(ic_autocorrect, params2list(file2text("cfg/chatfilter/correct.cf")))
+GLOBAL_LIST_INIT(bad_words, file2list("data/chatfilter/bad_words.txt"))
+GLOBAL_LIST_INIT(exc_full, file2list("data/chatfilter/exc_full.txt"))
+GLOBAL_LIST_INIT(ic_autoemote, params2list(file2text("data/chatfilter/emote.txt")))	// файл в текст, текст в лист
+GLOBAL_LIST_INIT(ic_autocorrect, params2list(file2text("data/chatfilter/correct.txt")))
 
 #define CF_SOFT "МЯГКИЙ (предупреждение)"
 #define CF_HARD "СТРОГИЙ (предупреждение и удаление сообщения)"
@@ -49,10 +49,10 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 		return
 
 	var/list/listoflists = list(
-		"Словарь плохих слов" = list(GLOB.bad_words, "cfg/chatfilter/bad_words.cf"),
-		"Словарь исключений" = list(GLOB.exc_full, "cfg/chatfilter/exc_full.cf"),
-		"Словарь автоэмоутов" = list(GLOB.ic_autoemote, "cfg/chatfilter/emote.cf"),
-		"Словарь автозамены" = list(GLOB.ic_autocorrect, "cfg/chatfilter/correct.cf")
+		"Словарь плохих слов" = list(GLOB.bad_words, "data/chatfilter/bad_words.txt"),
+		"Словарь исключений" = list(GLOB.exc_full, "data/chatfilter/exc_full.txt"),
+		"Словарь автоэмоутов" = list(GLOB.ic_autoemote, "data/chatfilter/emote.txt"),
+		"Словарь автозамены" = list(GLOB.ic_autocorrect, "data/chatfilter/correct.txt")
 		)
 
 	var/selected = tgui_input_list(usr, "Новые слова вносить с новой строки", "Чат фильтр", listoflists)
@@ -73,8 +73,8 @@ GLOBAL_VAR_INIT(chatfilter_hardcore, CF_SOFT)
 		LT.Cut(LT)
 		LT.Add(owtext)
 
-		GLOB.ic_autoemote = params2list(file2text("cfg/chatfilter/emote.cf"))
-		GLOB.ic_autocorrect = params2list(file2text("cfg/chatfilter/correct.cf"))
+		GLOB.ic_autoemote = params2list(file2text("data/chatfilter/emote.txt"))
+		GLOB.ic_autocorrect = params2list(file2text("data/chatfilter/correct.txt"))
 	else
 		var/owtext = tgui_input_text(usr, "ФОРМАТ: Новые слова вносить с новой строки", "[selected]", LT.Join("\n"), multiline = TRUE, max_length = MAX_BOOK_MESSAGE_LEN)
 

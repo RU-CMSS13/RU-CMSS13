@@ -152,9 +152,20 @@
 		if(5)
 			become_larva()
 		if(7) // Stage 6 is while we are trying to find a candidate in become_larva
-			larva_autoburst_countdown--
-			if(!larva_autoburst_countdown)
-				var/mob/living/carbon/xenomorph/larva/larva_embryo = locate() in affected_mob
+			if(larva_autoburst_countdown > 0)
+				larva_autoburst_countdown--
+			else
+				//	Предотвращаем возможность лярвы покинуть тело пока в автодоке,
+				//	с периодичностью наносит урон на случай, если тело закинут в автодок без задач,
+				//	автодок выкидывает из себя мертвые тела. Мертвое тело - путь к свободе лярвы.
+				if(istype(src.loc.loc, /obj/structure/machinery/medical_pod/autodoc))
+					if(prob(35))
+						affected_mob.pain.apply_pain(PAIN_CHESTBURST_WEAK)
+						affected_mob.visible_message("\The [affected_mob]\'s chest starts moving strangely!", \
+													SPAN_DANGER("You feel something moving inside you painfully!"))
+						affected_mob.apply_damage(20 + rand(1, 10), BRUTE, "chest")
+					return
+				var/mob/living/carbon/xenomorph/larva/larva_embryo = locate() in affected_mob.contents
 				if(larva_embryo)
 					larva_embryo.chest_burst(affected_mob)
 
@@ -295,6 +306,8 @@
 /mob/living/carbon/xenomorph/larva/proc/chest_burst(mob/living/carbon/victim)
 	set waitfor = 0
 	if(victim.chestburst || loc != victim)
+		return
+	if(istype(victim.loc, /obj/structure/machinery/medical_pod/autodoc))
 		return
 	victim.chestburst = TRUE
 	to_chat(src, SPAN_DANGER("We start bursting out of [victim]'s chest!"))
