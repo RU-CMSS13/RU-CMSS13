@@ -1423,6 +1423,8 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 
 	vehicles = list(
 		new /datum/vehicle_order/apc(),
+		//new /datum/vehicle_order/apc/med(), // RUCM REMOVE
+		//new /datum/vehicle_order/apc/cmd(), // RUCM REMOVE
 		new /datum/vehicle_order/tank(), // RUCM ADD
 	)
 
@@ -1471,12 +1473,12 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 		dat += "Available vehicles:<br>"
 
 		for(var/d in vehicles)
-			var/datum/vehicle_order/VO = vehicles[d]
+			var/datum/vehicle_order/VO = d
 
 			if(VO.has_vehicle_lock())
 				dat += VO.failure_message
 			else
-				dat += "<a href='?src=\ref[src];get_vehicle=[d]'>[VO.name]</a><br>"
+				dat += "<a href='?src=\ref[src];get_vehicle=\ref[VO]'>[VO.name]</a><br>"
 
 	show_browser(H, dat, "Automated Storage and Retrieval System", "computer", "size=575x450")
 
@@ -1521,7 +1523,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 
 		VO.on_created(ordered_vehicle)
 
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, VO)
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, ordered_vehicle)
 
 	else if(href_list["lower_elevator"])
 		if(!is_mainship_level(SSshuttle.vehicle_elevator.z))
