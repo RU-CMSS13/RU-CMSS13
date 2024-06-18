@@ -1,5 +1,5 @@
 //Please use mob or src (not usr) in these procs. This way they can be called in the same fashion as procs.
-/client/verb/wiki()
+/*/client/verb/wiki()
 	set name = "wiki"
 	set desc = "Visit the wiki."
 	set hidden = TRUE
@@ -9,7 +9,17 @@
 		src << link(CONFIG_GET(string/wikiurl))
 	else
 		to_chat(src, SPAN_DANGER("The wiki URL is not set in the server configuration."))
+	return*/
+//RUCM START
+/client/verb/wiki()
+	set name = "wiki"
+	set desc = "Visit the wiki."
+	set hidden = TRUE
+	if(tgui_alert(src, "This will open the wiki in your browser. Are you sure?", "Confirm", list("Yes", "No")) != "Yes")
+		return
+	src << link("https://colonialmarines.ru")
 	return
+//RUCM END
 
 /client/verb/forum()
 	set name = "forum"
