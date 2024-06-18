@@ -50,6 +50,7 @@
 	user.speed -=1
 	user.status_flags &= ~CANPUSH
 	user.pain.feels_pain = FALSE
+	user.pain.current_pain = 0
 	to_chat(user, SPAN_DANGER("[name] beeps, \"You feel adrenaline rush in your blood.\""))
 	playsound(loc, 'sound/items/hypospray.ogg', 25, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(enrage_form_duration), user), enrage_form_duration)
