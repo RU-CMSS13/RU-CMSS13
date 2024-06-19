@@ -1390,7 +1390,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 /datum/vehicle_order
 	var/name = "vehicle order"
 
-	var/obj/vehicle/ordered_vehicle
+	var/obj/effect/vehicle_spawner/ordered_vehicle
 	var/failure_message = "<font color=\"red\"><b>Not enough resources were allocated to repair this vehicle during this operation.</b></font><br>"
 
 /datum/vehicle_order/proc/has_vehicle_lock()
