@@ -1,5 +1,3 @@
-import { filter } from 'common/collections';
-import { flow } from 'common/fp';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -27,18 +25,10 @@ export const Who = (props, context) => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const MostRelevant = (searchQuery) => {
-    const mostRelevant = flow([
-      filter((player) => isMatch(player, searchQuery)),
-    ])(total_players)[0];
-    if (mostRelevant !== undefined) {
-      act('get_player_panel', { ckey: mostRelevant.ckey });
-    }
-  };
+  const searchPlayers = () =>
+    total_players.filter((player) => isMatch(player, searchQuery));
 
-  const filtered_total_players = flow([
-    filter((player) => isMatch(player, searchQuery)),
-  ])(total_players);
+  const filteredTotalPlayers = searchPlayers();
 
   return (
     <Window resizable width={800} height={600}>
@@ -54,7 +44,9 @@ export const Who = (props, context) => {
                   <Input
                     autoFocus
                     fluid
-                    onEnter={(e, value) => MostRelevant(value)}
+                    onEnter={(e, value) =>
+                      act('get_player_panel', { ckey: searchPlayers()?.[0].ckey })
+                    }
                     onInput={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search..."
                     value={searchQuery}
@@ -66,17 +58,10 @@ export const Who = (props, context) => {
           <Stack.Item mt={0.2} grow>
             <Section>
               <WhoCollapsible title={'Players - ' + all_clients} color="good">
-                {filtered_total_players.length ? (
+                {filteredTotalPlayers.length ? (
                   <Box>
-                    {filtered_total_players.map((x, index) => (
-                      <GetPlayerInfo
-                        key={index}
-                        admin={admin}
-                        ckey={x.ckey}
-                        ckey_color={x.ckey_color}
-                        color={x.color}
-                        text={x.text}
-                      />
+                    {filteredTotalPlayers.map((x) => (
+                      <GetPlayerInfo key={x.ckey} admin={admin} player={x} />
                     ))}
                   </Box>
                 ) : null}
@@ -159,7 +144,10 @@ const GetAddInfo = (props, context) => {
 
 const GetPlayerInfo = (props, context) => {
   const { act } = useBackend(context);
-  const { admin, ckey, ckey_color, color, text } = props;
+  const {
+    admin,
+    player: { ckey, ckey_color, color, text },
+  } = props;
   return admin !== 0 ? (
     <Button
       color={'transparent'}
