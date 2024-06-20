@@ -1,4 +1,4 @@
-/obj/item/clothing/head/helmet/marine/M40
+/obj/item/clothing/head/helmet/marine/m40
 	name = "\improper M40 helmet"
 	item_icons = list(WEAR_HEAD = 'core_ru/icons/mob/human/onmob/head_1.dmi')
 	icon = 'core_ru/icons/mob/human/onmob/head_1.dmi'
