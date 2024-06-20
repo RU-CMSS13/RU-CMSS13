@@ -19,7 +19,6 @@
 	var/enrage_form_cooldown = 1200
 	var/enrage_form_duration = 160
 	var/st_activated_form = FALSE
-	var/saved_speed = 0
 
 /obj/item/clothing/suit/storage/marine/m40/Initialize()
 	. = ..()
@@ -46,8 +45,7 @@
 	flags_item |= NODROP
 	flags_inventory |= CANTSTRIP
 	LAZYSET(user.brute_mod_override, src, 0.6)
-	saved_speed = user.speed
-	user.speed -=0.55
+	user.speed = 0.55
 	user.status_flags &= ~CANPUSH
 	user.status_flags &= ~CANKNOCKOUT
 	user.pain.feels_pain = FALSE
@@ -62,7 +60,7 @@
 
 	flags_item &= ~NODROP
 	flags_inventory &= ~CANTSTRIP
-	user.speed = saved_speed
+	user.speed = 0
 	user.status_flags |= CANPUSH
 	user.status_flags |= CANKNOCKOUT
 	user.pain.feels_pain = TRUE
