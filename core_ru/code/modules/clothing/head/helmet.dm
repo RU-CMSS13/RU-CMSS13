@@ -5,8 +5,6 @@
 	icon_state = "st_helmet"
 	desc = "A helmet designed for USCM stormtrooper. Contains heavy insulation, covered in nomex weave."
 	armor_melee = CLOTHING_ARMOR_HIGH
-	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
-	armor_internaldamage = CLOTHING_ARMOR_HIGH
 	min_cold_protection_temperature = ICE_PLANET_MIN_COLD_PROT
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROT
 	unacidable = TRUE
