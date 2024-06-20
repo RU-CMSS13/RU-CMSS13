@@ -17,7 +17,7 @@
 	unacidable = TRUE
 
 	var/enrage_form_cooldown = 1200
-	var/enrage_form_duration = 80
+	var/enrage_form_duration = 160
 	var/st_activated_form = FALSE
 	var/saved_speed = 0
 
@@ -47,8 +47,9 @@
 	flags_inventory |= CANTSTRIP
 	LAZYSET(user.brute_mod_override, src, 0.6)
 	saved_speed = user.speed
-	user.speed -=1
+	user.speed -=0.55
 	user.status_flags &= ~CANPUSH
+	user.status_flags &= ~CANKNOCKOUT
 	user.pain.feels_pain = FALSE
 	user.pain.current_pain = 0
 	to_chat(user, SPAN_DANGER("[name] beeps, \"You feel adrenaline rush in your blood.\""))
@@ -58,10 +59,12 @@
 	user.add_filter("enrage_form", priority = 1, params = list("type" = "outline", "color" = ENRAGE_FORM_COLOR, "size" = 0.5))
 
 /obj/item/clothing/suit/storage/marine/m40/proc/enrage_form_duration(mob/living/carbon/human/user)
+
 	flags_item &= ~NODROP
 	flags_inventory &= ~CANTSTRIP
 	user.speed = saved_speed
 	user.status_flags |= CANPUSH
+	user.status_flags |= CANKNOCKOUT
 	user.pain.feels_pain = TRUE
 	LAZYREMOVE(user.brute_mod_override, src)
 	to_chat(user, SPAN_DANGER("[name] beeps, \"Protective dialysis has been activated.\""))
