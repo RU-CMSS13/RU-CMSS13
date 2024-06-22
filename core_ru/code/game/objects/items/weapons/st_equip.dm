@@ -5,6 +5,7 @@
 	icon_state = "d2_breacher"
 	item_state = "d2_breacher"
 	pickup_sound = "gunequip"
+	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
 	force = MELEE_FORCE_STRONG
 	flags_item = TWOHANDED
 	force_wielded = MELEE_FORCE_TIER_8
