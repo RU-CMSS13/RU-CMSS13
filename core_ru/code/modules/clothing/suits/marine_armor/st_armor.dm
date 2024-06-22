@@ -52,6 +52,7 @@
 	src.flags_inventory |= CANTSTRIP
 	LAZYSET(H.brute_mod_override, src, 0.6)
 	src.slowdown = SLOWDOWN_ARMOR_NONE
+	H.allow_gun_usage = FALSE
 	H.status_flags &= ~CANPUSH
 	H.status_flags &= ~CANKNOCKOUT
 	H.pain.feels_pain = FALSE
@@ -67,6 +68,7 @@
 	src.flags_item &= ~NODROP
 	src.flags_inventory &= ~CANTSTRIP
 	src.slowdown = SLOWDOWN_ARMOR_MEDIUM
+	H.allow_gun_usage = TRUE
 	H.status_flags |= CANPUSH
 	H.status_flags |= CANKNOCKOUT
 	H.pain.feels_pain = TRUE
