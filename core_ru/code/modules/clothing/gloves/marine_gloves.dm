@@ -1,4 +1,4 @@
-/obj/item/clothing/gloves/marine/M40
+/obj/item/clothing/gloves/marine/m40
 	name = "\improper M40 Stormtrooper gloves"
 	desc = "A pair of plated, but nimble, gloves."
 	icon = 'core_ru/icons/obj/items/clothing/gloves.dmi'
