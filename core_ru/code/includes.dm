@@ -31,7 +31,7 @@
 #include "game\objects\items\weapons\st_equip.dm"
 #include "game\objects\items\weapons\st_hammer_stacks.dm"
 #include "game\turfs\closed.dm"
-#include "modules\\clothing\suits\marine_armor\_marine_armor.dm"
+#include "modules\\clothing\suits\marine_armor\st_armor.dm"
 #include "modules\cm_aliens\structures\sunken_colony.dm"
 #include "modules\cm_aliens\structures\special\pylon_core.dm"
 #include "modules\cm_tech\comms_income.dm"
