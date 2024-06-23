@@ -18,6 +18,8 @@
 	unacidable = TRUE
 	var/enrage_active = FALSE
 	var/enrage_activable = TRUE
+	var/saved_agu = TRUE
+	var/saved_feels = TRUE
 
 /obj/item/clothing/suit/storage/marine/m40/verb/enrage()
 	set name = "Activate Enrage"
@@ -52,9 +54,11 @@
 	src.flags_inventory |= CANTSTRIP
 	LAZYSET(H.brute_mod_override, src, 0.6)
 	src.slowdown = SLOWDOWN_ARMOR_NONE
+	saved_agu = H.allow_gun_usage
 	H.allow_gun_usage = FALSE
 	H.status_flags &= ~CANPUSH
 	H.status_flags &= ~CANKNOCKOUT
+	saved_feels = H.pain.feels_pain
 	H.pain.feels_pain = FALSE
 	H.pain.current_pain = 0
 	H.add_filter("enrage_form", priority = 1, params = list("type" = "outline", "color" = ENRAGE_FORM_COLOR, "size" = 1))
@@ -68,10 +72,10 @@
 	src.flags_item &= ~NODROP
 	src.flags_inventory &= ~CANTSTRIP
 	src.slowdown = SLOWDOWN_ARMOR_MEDIUM
-	H.allow_gun_usage = TRUE
+	H.allow_gun_usage = saved_agu
 	H.status_flags |= CANPUSH
 	H.status_flags |= CANKNOCKOUT
-	H.pain.feels_pain = TRUE
+	H.pain.feels_pain = saved_feels
 	LAZYREMOVE(H.brute_mod_override, src)
 	to_chat(H, SPAN_DANGER("M40 experimental armor  beeps, \"Protective dialysis has been activated.\""))
 	playsound(H, 'core_ru/sound/effects/hearth_attack.ogg', 25, TRUE)
