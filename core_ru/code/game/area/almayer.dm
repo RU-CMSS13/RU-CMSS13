@@ -4,7 +4,8 @@
 // Bow = Western|Stern = Eastern //(those are the front and back small sections)
 // Naming convention is to start by port or starboard then put eitheir (bow,fore,midship,aft,stern)
 /area/almayer
-	icon = 'icons/turf/area_almayer.dmi'
+	// RUCM add core_ru
+	icon = 'core_ru/icons/turf/area_almayer.dmi'
 	// ambience = list('sound/ambience/shipambience.ogg')
 	icon_state = "almayer"
 	ceiling = CEILING_METAL
@@ -770,6 +771,18 @@
 	name = "\improper Alpha Bravo Equipment Preparation"
 	icon_state = "ab_shared"
 	fake_zlevel = 2 // lowerdeck
+
+// RUCM code
+/area/almayer/squads/alpha_delta_shared
+	name = "\improper Alpha Delta Equipment Preparation"
+	icon_state = "ad_shared"
+	fake_zlevel = 2 // lowerdeck
+
+/area/almayer/squads/bravo_charlie_shared
+	name = "\improper Bravo Charlie Equipment Preparation"
+	icon_state = "bc_shared"
+	fake_zlevel = 2 // lowerdeck
+// RUCM end
 
 /area/almayer/squads/charlie_delta_shared
 	name = "\improper Charlie Delta Equipment Preparation"
