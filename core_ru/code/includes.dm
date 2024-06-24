@@ -16,7 +16,7 @@
 #include "datums\supply_packs\weapons.dm"
 #include "game\area\DockRed.dm"
 #include "game\area\KhamiBarrens.dm"
-#include "game\area\almayer.dm"
+#include "game\area\rumayer.dm"
 #include "game\gamemodes\game_mode.dm"
 #include "game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "game\gamemodes\colonialmarines\crash.dm"
@@ -70,7 +70,7 @@
 #include "modules\gear_presets\usmc.dm"
 #include "modules\mob\mod_defines.dm"
 #include "modules\mob\say.dm"
-#include "modules\mob\living\carbon\human\species\working_joe\russian.dm
+#include "modules\mob\living\carbon\human\species\working_joe\russian.dm"
 #include "modules\mob\living\carbon\xenomorph\hive_status.dm"
 #include "modules\mob\living\carbon\xenomorph\xeno_helpers.dm"
 #include "modules\mob\living\carbon\xenomorph\xeno_verbs.dm"
