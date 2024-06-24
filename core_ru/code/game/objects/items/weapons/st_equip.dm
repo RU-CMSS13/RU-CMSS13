@@ -1,9 +1,9 @@
 /obj/item/weapon/twohanded/st_hammer
 	name = "N45 battle hammer"
 	desc = "RIP AND TEAR."
-	icon = 'icons/obj/items/experimental_tools.dmi'
-	icon_state = "d2_breacher"
-	item_state = "d2_breacher"
+	icon = 'core_ru/icons/obj/items/weapons/weapons.dmi'
+	icon_state = "st_hammer"
+	item_state = "st_hammer"
 	pickup_sound = "gunequip"
 	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
 	force = MELEE_FORCE_STRONG
@@ -12,7 +12,7 @@
 	throwforce = MELEE_FORCE_NORMAL
 	w_class = SIZE_LARGE
 	sharp = IS_SHARP_ITEM_BIG
-	flags_equip_slot = SLOT_WAIST|SLOT_BACK
+	flags_equip_slot = SLOT_SUIT_STORE|SLOT_WAIST
 	unacidable = TRUE
 	indestructible = TRUE
 
@@ -74,9 +74,9 @@
 	icon = 'core_ru/icons/mob/human/st_equip.dmi'
 	icon_state = "metal_st"
 	item_icons = list(
-		WEAR_L_HAND = 'core_ru/icons/mob/human/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/items_righthand_1.dmi',
-		WEAR_BACK = 'core_ru/icons/mob/human/back.dmi'
+		WEAR_L_HAND = 'core_ru/icons/mob/human/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/human/onmob/items_righthand_1.dmi',
+		WEAR_BACK = 'core_ru/icons/mob/human/onmob/back.dmi'
 		)
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"
