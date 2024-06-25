@@ -25,7 +25,7 @@
 	throw_range = 3
 	attack_speed = 12
 
-	var/speed_penalty = 0.7
+	var/speed_penalty = 0.85 // 15%
 	var/retrieval_slot = WEAR_J_STORE
 
 /obj/item/weapon/twohanded/st_hammer/attack(mob/M, mob/user)
