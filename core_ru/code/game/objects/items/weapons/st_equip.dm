@@ -26,7 +26,7 @@
 	attack_speed = 12
 
 	var/speed_penalty = 0.7
-	var/retrieval_slot = WEAR_WAIST
+	var/retrieval_slot = WEAR_J_STORE
 
 /obj/item/weapon/twohanded/st_hammer/attack(mob/M, mob/user)
 	if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ST)
