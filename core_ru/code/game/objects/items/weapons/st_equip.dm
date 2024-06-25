@@ -3,11 +3,12 @@
 	desc = "RIP AND TEAR."
 	icon = 'core_ru/icons/obj/items/weapons/weapons.dmi'
 	icon_state = "st_hammer"
+	item_state = "st_hammer"
 	item_icons = list(
-		WEAR_J_STORE = 'core_ru/icons/mob/human/onmob/'
+		WEAR_J_STORE = 'core_ru/icons/mob/human/onmob/suit_slot.dmi',
 		WEAR_WAIST = 'core_ru/icons/mob/human/onmob/belt.dmi',
-		WEAR_L_HAND = 'core_ru/icons/mob/human/onmob/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/onmob/items_righthand_1.dmi'
+		WEAR_L_HAND = 'core_ru/icons/mob/human/onmob/items_lefthand_0.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/human/onmob/items_righthand_0.dmi'
 	)
 	pickup_sound = "gunequip"
 	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
