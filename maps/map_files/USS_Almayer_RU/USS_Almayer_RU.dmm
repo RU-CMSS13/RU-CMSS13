@@ -20231,6 +20231,11 @@
 	},
 /obj/structure/machinery/door/firedoor/border_only/almayer,
 /obj/structure/surface/table/reinforced/almayer_blend/north,
+/obj/item/desk_bell{
+	pixel_x = -6;
+	pixel_y = -8;
+	anchored = 1
+	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
 	},
@@ -20618,6 +20623,11 @@
 	},
 /obj/structure/machinery/door/firedoor/border_only/almayer,
 /obj/structure/surface/table/reinforced/almayer_blend,
+/obj/item/desk_bell{
+	pixel_x = -6;
+	pixel_y = 10;
+	anchored = 1
+	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
 	},
@@ -35887,6 +35897,11 @@
 /obj/structure/machinery/status_display{
 	pixel_x = -32
 	},
+/obj/item/desk_bell{
+	anchored = 1;
+	pixel_x = -8;
+	pixel_y = 8
+	},
 /turf/open/floor/carpet,
 /area/almayer/command/corporateliaison)
 "guG" = (
@@ -42570,6 +42585,10 @@
 /obj/structure/surface/table/almayer,
 /obj/structure/machinery/prop/almayer/computer/PC{
 	dir = 4
+	},
+/obj/item/tool/stamp/approved{
+	pixel_x = -3;
+	pixel_y = -11
 	},
 /turf/open/floor/almayer,
 /area/almayer/squads/req)
@@ -56481,6 +56500,14 @@
 "nZa" = (
 /turf/open/floor/almayer,
 /area/almayer/hallways/lower/starboard_midship_hallway)
+"nZb" = (
+/obj/item/desk_bell{
+	pixel_x = -6;
+	pixel_y = -8;
+	anchored = 1
+	},
+/turf/closed/wall/almayer,
+/area/almayer/squads/req)
 "nZF" = (
 /turf/open/floor/almayer{
 	icon_state = "orange"
@@ -126301,7 +126328,7 @@ nZa
 wab
 xTd
 mbO
-bdl
+nZb
 bDZ
 bdj
 bri
