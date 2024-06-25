@@ -1,3 +1,4 @@
+//RUCM ALMAYER ZONES
 /area/rumayer
 	icon = 'core_ru/icons/turf/area_rumayer.dmi'
 	// ambience = list('sound/ambience/shipambience.ogg')
