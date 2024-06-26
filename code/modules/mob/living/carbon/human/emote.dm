@@ -141,6 +141,15 @@
 	message = "laughs!"
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
+//RU CM START
+/datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			return pick('core_ru/sound/voice/human_male_laugh_1.ogg', 'core_ru/sound/voice/human_male_laugh_2.ogg')
+		else
+			return pick('core_ru/sound/voice/human_female_laugh_1.ogg', 'core_ru/sound/voice/human_female_laugh_2.ogg')
+//RU CM END
+
 /datum/emote/living/carbon/human/look
 	key = "look"
 	key_third_person = "looks"
@@ -256,7 +265,10 @@
 	if(!ishuman_strict(user))
 		return
 
-	var/scream_message = pick("FUCK!!!", "AGH!!!", "ARGH!!!", "AAAA!!!", "HGH!!!", "NGHHH!!!", "NNHH!!!", "SHIT!!!")
+//	var/scream_message = pick("FUCK!!!", "AGH!!!", "ARGH!!!", "AAAA!!!", "HGH!!!", "NGHHH!!!", "NNHH!!!", "SHIT!!!")
+//RU CM START
+	var/scream_message = pick("БЛЯТЬ!!!", "АЙ!!!", "АРГХ!!!", "АААА!!!", "УХХХ!!!", "ГХХ!!!", "АХУЕТЬ!!!", "СУКА!!!")
+//RU CM END
 	user.langchat_speech(scream_message, group, GLOB.all_languages, skip_language_check = TRUE, animation_style = LANGCHAT_PANIC_POP, additional_styles = list("langchat_yell"))
 
 /datum/emote/living/carbon/human/shakehead
@@ -358,6 +370,7 @@
 
 	user.show_speech_bubble("warcry")
 
+/*
 /datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
@@ -370,6 +383,23 @@
 				return get_sfx("female_upp_warcry")
 			else
 				return get_sfx("female_warcry")
+*/
+//RU CM START
+/datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
+	var/default_lang = LANGUAGE_ENGLISH
+	default_lang = user.get_default_language()
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
+				return get_sfx("male_upp_warcry")
+			else
+				return get_sfx("male_warcry")
+		else
+			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
+				return get_sfx("female_upp_warcry")
+			else
+				return get_sfx("female_warcry")
+//RU CM END
 
 /datum/emote/living/carbon/human/whimper
 	key = "whimper"
