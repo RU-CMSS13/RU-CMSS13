@@ -500,17 +500,24 @@
 									S.limb_ref.implants -= I
 									H.embedded_items -= I
 									qdel(I)
-						var/obj/item/alien_embryo/alien_ref = locate() in H.contents
-						if(S.limb_ref.name == "chest" && alien_ref)
-							sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
-							var/mob/living/carbon/xenomorph/larva/larva_ref = locate() in H.contents
-							if(larva_ref)
-								larva_ref.forceMove(get_turf(H))
-								qdel(alien_ref)
-							else
-								alien_ref.forceMove(get_turf(H))
-								H.status_flags &= ~XENO_HOST
-							H.emote("scream")
+
+						for(var/i in H.contents)	// цикл для мультибурстов
+							if(i)
+								if(istype(i, /obj/item/alien_embryo))	// эмбрион, лярва-предмет
+									var/obj/item/alien_embryo/embryo_ref = i
+									if(embryo_ref.stage >= 5)	// удаляет предмет если лярва уже сформирована
+										H.contents -= embryo_ref
+										qdel(embryo_ref)
+									else
+										embryo_ref.forceMove(get_turf(H))
+
+								if(istype(i, /mob/living/carbon/xenomorph/larva)) // сформированная лярва-юнит
+									var/mob/living/carbon/xenomorph/larva/larva_ref = i
+									larva_ref.forceMove(get_turf(H))
+									H.status_flags &= ~XENO_HOST
+
+						sleep(REMOVE_OBJECT_MAX_DURATION*surgery_mod)
+
 						if(S.limb_ref.name == "chest" || S.limb_ref.name == "head")
 							close_encased(H,S.limb_ref)
 						if(!surgery) break
@@ -773,7 +780,12 @@
 		else
 			dat += "<br>The autodoc is empty."
 	dat += text("<a href='?src=\ref[];mach_close=sleeper'>Close</a>", user)
+/*  RU CM Start
 	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=300x400")
+*/
+//  RU CM Edit
+	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=380x700")
+//  RU CM End
 	onclose(user, "sleeper")
 
 /obj/structure/machinery/autodoc_console/Topic(href, href_list)
