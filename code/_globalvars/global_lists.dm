@@ -494,9 +494,12 @@ GLOBAL_LIST_INIT(available_specialist_sets, list(
 			"Anti-materiel Sniper Set",
 			"Demolitionist Set",
 			"Heavy Grenadier Set",
+/*
+			"Pyro Set"
+*/
 //RUCM START
 			"Pyro Set",
-			"Stormtrooper Set"
+			"Stormtrooper Set",
 //RUCM END
 			))
 
