@@ -463,6 +463,10 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 	for(var/i in HEAD_GARB_LAYER to (HEAD_GARB_LAYER + MAX_HEAD_GARB_ITEMS - 1))
 		remove_overlay(i)
 
+//RUCM EDIT START
+	remove_overlay(MAX_HEAD_GARB_ITEMS + 1)
+//RUCM EDIT END
+
 	if(head)
 
 		if(client && hud_used && hud_used.hud_shown && hud_used.inventory_shown && hud_used.ui_datum)
@@ -500,8 +504,17 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 			for(var/i in num_helmet_overlays+1 to MAX_HEAD_GARB_ITEMS)
 				overlays_standing[HEAD_GARB_LAYER + (i-1)] = null
 
+//RUCM EDIT START
+			if(marine_helmet.helmet_fire_overlay_mob_icon)
+				overlays_standing[MAX_HEAD_GARB_ITEMS + 1] = marine_helmet.helmet_fire_overlay_mob_icon
+//RUCM EDIT END
+
 			for(var/i in HEAD_GARB_LAYER to (HEAD_GARB_LAYER + MAX_HEAD_GARB_ITEMS - 1))
 				apply_overlay(i)
+
+//RUCM EDIT START
+			apply_overlay(MAX_HEAD_GARB_ITEMS + 1)
+//RUCM EDIT END
 
 #undef MAX_HEAD_GARB_ITEMS
 

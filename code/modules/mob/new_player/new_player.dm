@@ -43,6 +43,9 @@
 	output +="<br><b>[(client.prefs && client.prefs.real_name) ? client.prefs.real_name : client.key]</b>"
 	output +="<br><b>[xeno_text]</b>"
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=tutorial'>Tutorial</A></p>"
+//RUCM EDIT START
+	output += "<p><span style='color: #15d512; font-family: Courier New, cursive, sans-serif; font-style: italic;'><a href='byond://?src=\ref[src];lobby_choice=battlepass'>Battlepass</A></span></p>"
+//RUCM EDIT END
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_preferences'>Setup Character</A></p>"
 
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_playtimes'>View Playtimes</A></p>"
@@ -213,6 +216,18 @@
 		if("tutorial")
 			tutorial_menu()
 
+//RUCM EDIT START
+		if("battlepass")
+			if(!client?.owned_battlepass)
+				return
+
+			if(!SSbattlepass.initialized)
+				to_chat(src, SPAN_WARNING("Please wait for battlepasses to initialize first."))
+				return
+
+			client.owned_battlepass.ui_interact(src)
+//RUCM EDIT END
+
 		else
 			new_player_panel()
 
@@ -289,6 +304,9 @@
 				msg_sea("NEW PLAYER: <b>[key_name(character, 0, 1, 0)]</b> only has [(round(client.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1))] hours as a human. Current role: [get_actual_job_name(character)] - Current location: [get_area(character)]")
 
 	character.client.init_verbs()
+//RUCM EDIT START
+	SSbattlepass.marine_battlepass_earners |= character.client.ckey
+//RUCM EDIT END
 	qdel(src)
 
 

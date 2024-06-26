@@ -2,6 +2,7 @@
 //Abby
 
 //Xeno Overlays Indexes//////////
+#define X_HALO_LAYER 11
 #define X_BACK_LAYER 10
 #define X_HEAD_LAYER 9
 #define X_SUIT_LAYER 8
@@ -12,7 +13,7 @@
 #define X_TARGETED_LAYER 3
 #define X_LEGCUFF_LAYER 2
 #define X_FIRE_LAYER 1
-#define X_TOTAL_LAYERS 10
+#define X_TOTAL_LAYERS 11
 /////////////////////////////////
 
 
@@ -329,11 +330,14 @@
 		icon = GLOB.default_xeno_onmob_icons[source.type]
 
 //Xeno Overlays Indexes//////////
-#undef X_BACK_LAYER
-#undef X_BACK_FRONT_LAYER
-#undef X_HEAD_LAYER
-#undef X_SUIT_LAYER
-#undef X_L_HAND_LAYER
-#undef X_R_HAND_LAYER
-#undef X_LEGCUFF_LAYER
 #undef X_FIRE_LAYER
+#undef X_LEGCUFF_LAYER
+#undef X_TARGETED_LAYER
+#undef X_RESOURCE_LAYER
+#undef X_BACK_FRONT_LAYER
+#undef X_R_HAND_LAYER
+#undef X_L_HAND_LAYER
+#undef X_SUIT_LAYER
+#undef X_HEAD_LAYER
+#undef X_BACK_LAYER
+#undef X_HALO_LAYER
