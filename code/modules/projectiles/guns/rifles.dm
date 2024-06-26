@@ -427,7 +427,8 @@
 
 /obj/item/weapon/gun/rifle/m46c
 	name = "\improper M46C pulse rifle"
-	desc = "A prototype M46C, an experimental rifle platform built to outperform the standard M41A. Back issue only. Uses standard MK1 & MK2 rifle magazines."
+	desc = "A prototype M46C, an experimental rifle platform built to outperform the standard M41A. Commander version. Uses standard MK1 & MK2 rifle magazines. Use against any threats."
+	desc_lore = "M46 - New combat platform, developed in 2176 by ARMAT and WY Combat Division, result of the U.C.P (Universal Combat Platform) project. The C - Commander version includes built in Barrel Charger 3.0, Quick Fire system and ID lock."
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "m46c"
 	item_state = "m46c"
@@ -460,8 +461,6 @@
 		/obj/item/attachable/reflex,
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/extended_barrel,
-		/obj/item/attachable/heavy_barrel,
-		/obj/item/attachable/heavy_barrel/upgraded,
 		/obj/item/attachable/scope/mini,
 		/obj/item/attachable/verticalgrip,
 		/obj/item/attachable/angledgrip,
@@ -527,15 +526,15 @@
 
 /obj/item/weapon/gun/rifle/m46c/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_9)
+	set_fire_delay(FIRE_DELAY_TIER_LMG)
 	set_burst_amount(BURST_AMOUNT_TIER_4)
-	set_burst_delay(FIRE_DELAY_TIER_12)
+	set_burst_delay(FIRE_DELAY_TIER_11)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_4
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_8
 	scatter = SCATTER_AMOUNT_TIER_8
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_8
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_3
+	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_8
 	recoil_unwielded = RECOIL_AMOUNT_TIER_2
 	fa_max_scatter = SCATTER_AMOUNT_TIER_7
 
