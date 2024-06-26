@@ -128,6 +128,7 @@
 /obj/item/storage/box/spec/st/fill_preset_inventory()
 	new /obj/item/clothing/suit/storage/marine/M40(src)
 	new /obj/item/clothing/head/helmet/marine/M40(src)
+	new /obj/item/clothing/gloves/marine/M40(src)
 	new /obj/item/weapon/gun/shotgun/combat(src)
 	new /obj/item/attachable/stock/tactical(src)
 	new /obj/item/clothing/accessory/storage/holster(src)
