@@ -39,6 +39,16 @@ export const Panel = (props) => {
                 <ChatTabs />
               </Stack.Item>
               <Stack.Item>
+                <Button
+                  icon="language"
+                  tooltip="Toggle Translation Dir"
+                  tooltipPosition="bottom-start"
+                  onClick={() => {
+                    Byond.command('Toggle-Translation');
+                  }}
+                />
+              </Stack.Item>
+              <Stack.Item>
                 <PingIndicator />
               </Stack.Item>
               <Stack.Item>

@@ -95,6 +95,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/datum/admins/proc/open_shuttlepanel,
 	/client/proc/manage_chatfilter,
 	/client/proc/toggle_chatfilter_hardcore,
+	/client/proc/toggle_translator,
 ))
 
 GLOBAL_LIST_INIT(admin_verbs_ban, list(

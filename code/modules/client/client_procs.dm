@@ -913,3 +913,12 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		return TRUE
 
 	return FALSE
+
+/client/verb/toggle_translation()
+	set name = "Toggle Translation"
+	set hidden = TRUE
+
+	prefs?.translate_russian = !prefs?.translate_russian
+	prefs.save_preferences()
+
+	to_chat(src, SPAN_INFO(prefs?.translate_russian ? "Now translating from Russian to English." : "Теперь переводим с английского на русский."))

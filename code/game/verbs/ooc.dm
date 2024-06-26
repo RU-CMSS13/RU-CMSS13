@@ -61,6 +61,9 @@
 	for(var/client/C in GLOB.clients)
 		if(C.prefs.toggles_chat & CHAT_OOC)
 			var/display_name = src.key
+			// TRANSLATOR START
+			msg = SStranslator.translate(msg, C.prefs?.translate_russian)
+			// TRANSLATOR END
 			to_chat(C, "<font color='[display_colour]'><span class='ooc linkify'>[ooc_prefix]<span class='prefix'>OOC: [display_name]</span>: <span class='message'>[msg]</span></span></font>")
 
 /client/proc/set_ooc_color_global(newColor as color)

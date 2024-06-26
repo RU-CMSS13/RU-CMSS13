@@ -246,6 +246,9 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 	/// If this client has auto observe enabled, used by /datum/orbit_menu
 	var/auto_observe = TRUE
 
+	/// Переключалка языков
+	var/translate_russian = FALSE
+
 /datum/preferences/New(client/C)
 	key_bindings = deep_copy_list(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	macros = new(C, src)

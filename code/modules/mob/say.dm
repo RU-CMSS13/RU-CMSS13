@@ -124,11 +124,17 @@
 			if(alpha && observer.ghostvision && my_turf.z == their_turf.z && get_dist(my_turf, their_turf) <= observer.client.view)
 				langchat_listeners += observer
 
+		// TRANSLATOR START
+		var/modified_message = message
+		if(M?.client?.prefs)
+			modified_message = SStranslator.translate(message, M?.client?.prefs?.translate_russian)
+
 		if(M.stat == DEAD)
-			to_chat(M, "<span class='game deadsay'><span class='prefix'>МЕРТВЕЦ:</span> <span class='name'>[name] (<a href='byond://?src=\ref[M];track=\ref[src]'>F</a>)</span> сообщает, <span class='message'>\"[message]\"</span></span>")
+			to_chat(M, "<span class='game deadsay'><span class='prefix'>МЕРТВЕЦ:</span> <span class='name'>[name] (<a href='byond://?src=\ref[M];track=\ref[src]'>F</a>)</span> сообщает, <span class='message'>\"[modified_message]\"</span></span>")
 
 		else if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_MOD) && M.client.prefs && (M.client.prefs.toggles_chat & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
-			to_chat(M, "<span class='game deadsay'><span class='prefix'>МЕРТВЕЦ:</span> <span class='name'>[name]</span> сообщает, <span class='message'>\"[message]\"</span></span>") //Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
+			to_chat(M, "<span class='game deadsay'><span class='prefix'>МЕРТВЕЦ:</span> <span class='name'>[name]</span> сообщает, <span class='message'>\"[modified_message]\"</span></span>") //Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
+		// TRANSLATOR END
 
 	if(length(langchat_listeners))
 		langchat_speech(message, langchat_listeners, GLOB.all_languages, skip_language_check = TRUE)
