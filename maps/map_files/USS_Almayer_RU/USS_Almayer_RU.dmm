@@ -10149,6 +10149,7 @@
 /obj/structure/machinery/cm_vending/sorted/medical{
 	req_access = list(8,19,20)
 	},
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -11490,6 +11491,7 @@
 	icon_state = "E";
 	pixel_x = 1
 	},
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	dir = 4;
 	icon_state = "sterile_green_corner"
@@ -13646,6 +13648,7 @@
 /area/almayer/medical/chemistry)
 "bek" = (
 /obj/structure/machinery/cm_vending/sorted/medical/marinemed,
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	dir = 1;
 	icon_state = "sterile_green_side"
@@ -18147,6 +18150,7 @@
 /area/almayer/medical/lockerroom)
 "bET" = (
 /obj/structure/machinery/cm_vending/sorted/medical,
+/obj/structure/medical_supply_link/green,
 /turf/open/floor/almayer{
 	icon_state = "sterile_green_side"
 	},
@@ -33128,6 +33132,7 @@
 /area/almayer/command/cic)
 "fvJ" = (
 /obj/structure/machinery/cm_vending/sorted/medical,
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	dir = 1;
 	icon_state = "sterile_green_side"
@@ -34527,6 +34532,7 @@
 /obj/structure/machinery/cm_vending/sorted/medical{
 	req_access = list(10)
 	},
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -37564,16 +37570,10 @@
 	},
 /area/almayer/medical/lower_medical_lobby)
 "haB" = (
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/structure/surface/rack,
-/obj/item/clothing/suit/storage/marine/light/vest,
-/obj/item/clothing/suit/storage/marine/light/vest,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -28
 	},
+/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -38458,6 +38458,7 @@
 	pixel_x = 20;
 	pixel_y = -32
 	},
+/obj/structure/medical_supply_link/green,
 /turf/open/floor/almayer{
 	icon_state = "sterile_green_side"
 	},
@@ -39845,7 +39846,14 @@
 /area/almayer/shipboard/brig/execution)
 "hRT" = (
 /obj/structure/machinery/light/small,
-/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
+/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/structure/surface/rack,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -40700,6 +40708,7 @@
 /area/almayer/maint/upper/u_a_s)
 "ihw" = (
 /obj/structure/machinery/cm_vending/sorted/medical,
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	dir = 1;
 	icon_state = "sterile_green_corner"
@@ -43015,6 +43024,7 @@
 /area/almayer/medical/containment)
 "jbO" = (
 /obj/structure/machinery/cm_vending/sorted/medical,
+/obj/structure/medical_supply_link/green,
 /turf/open/floor/almayer{
 	icon_state = "sterile_green_side"
 	},
@@ -43484,8 +43494,12 @@
 /obj/structure/machinery/door/window/eastleft{
 	req_access_txt = "8"
 	},
-/obj/item/book/manual/medical_diagnostics_manual,
-/obj/item/device/megaphone,
+/obj/item/desk_bell{
+	pixel_x = -6;
+	pixel_y = 10;
+	anchored = 1
+	},
+/obj/structure/machinery/door/firedoor/border_only/almayer,
 /turf/open/floor/almayer{
 	icon_state = "sterile_green"
 	},
@@ -45188,17 +45202,10 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/upper/port)
 "jTi" = (
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/item/attachable/bayonet,
-/obj/structure/surface/rack,
-/obj/item/clothing/suit/storage/marine/light/vest,
-/obj/item/clothing/suit/storage/marine/light/vest,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 26
 	},
-/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -45449,7 +45456,7 @@
 	name = "Lobby"
 	},
 /turf/open/floor/almayer{
-	icon_state = "dark_sterile"
+	icon_state = "test_floor4"
 	},
 /area/almayer/medical/lower_medical_medbay)
 "jXk" = (
@@ -52835,6 +52842,7 @@
 	pixel_x = 8;
 	pixel_y = 32
 	},
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -55412,7 +55420,15 @@
 /obj/structure/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
+/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/attachable/bayonet,
+/obj/structure/surface/rack,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/item/attachable/bayonet,
+/obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/clothing/suit/storage/marine/light/vest,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -73189,6 +73205,8 @@
 	dir = 8;
 	pixel_x = 17
 	},
+/obj/item/device/megaphone,
+/obj/item/book/manual/medical_diagnostics_manual,
 /turf/open/floor/almayer{
 	icon_state = "sterile_green_side"
 	},
@@ -73674,6 +73692,7 @@
 /obj/structure/machinery/cm_vending/sorted/medical{
 	req_access = list(10)
 	},
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
@@ -73803,7 +73822,8 @@
 /obj/structure/machinery/light{
 	dir = 4
 	},
-/obj/structure/machinery/cm_vending/sorted/medical,
+/obj/structure/machinery/cm_vending/sorted/medical/bolted,
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	dir = 1;
 	icon_state = "sterile_green_side"
@@ -74508,6 +74528,7 @@
 /area/almayer/medical/containment/cell)
 "uyJ" = (
 /obj/structure/machinery/cm_vending/sorted/medical/chemistry,
+/obj/structure/medical_supply_link,
 /turf/open/floor/almayer{
 	icon_state = "dark_sterile"
 	},
