@@ -61,18 +61,27 @@
 /obj/item/weapon/twohanded/st_hammer/dropped(mob/user, silent)
 	. = ..()
 	UnregisterSignal(user, COMSIG_HUMAN_POST_MOVE_DELAY)
-	var/mob/living/carbon/human/H = user
-	if(!istype(H))
+	if (!ishuman(user))
 		return
-	if(H.belt == null && istype(H.wear_suit, /obj/item/clothing/suit/storage/marine/m40))
-		addtimer(CALLBACK(src, PROC_REF(retrieve_to_slot), H, retrieval_slot), 0.3 SECONDS, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
+	if (!retrieval_check(user, retrieval_slot))
+		return
+	addtimer(CALLBACK(src, PROC_REF(retrieve_to_slot), user, retrieval_slot), 0.3 SECONDS, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 
 /obj/item/weapon/twohanded/st_hammer/retrieve_to_slot(mob/living/carbon/human/user, retrieval_slot)
 	if (!loc || !user)
 		return FALSE
-	if (get_dist(src,user) > 1)
+	if (!isturf(loc))
 		return FALSE
-	..(user, retrieval_slot)
+	if(!retrieval_check(user, retrieval_slot))
+		return FALSE
+	if(!user.equip_to_slot_if_possible(src, retrieval_slot, disable_warning = TRUE))
+		return FALSE
+	var/message
+	switch(retrieval_slot)
+		if(WEAR_J_STORE)
+			message = "[src] snaps into place on [user.wear_suit]."
+	to_chat(user, SPAN_NOTICE(message))
+	return TRUE
 
 /obj/item/weapon/shield/montage
 	name = "N30 montage shield"
