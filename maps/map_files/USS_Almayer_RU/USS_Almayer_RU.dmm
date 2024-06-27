@@ -11653,9 +11653,6 @@
 	pixel_x = 1;
 	pixel_y = 1
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/open/floor/almayer{
 	dir = 5;
 	icon_state = "sterile_green_side"
@@ -39698,9 +39695,6 @@
 /obj/structure/machinery/light{
 	dir = 1
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 10
 	},
@@ -51892,10 +51886,7 @@
 	pixel_y = 1;
 	req_access_txt = "28"
 	},
-/obj/structure/disposalpipe/junction{
-	dir = 2;
-	icon_state = "pipe-j2"
-	},
+/obj/structure/disposalpipe/segment,
 /turf/open/floor/almayer{
 	dir = 8;
 	icon_state = "sterile_green_side"
@@ -55427,7 +55418,6 @@
 /obj/item/attachable/bayonet,
 /obj/item/attachable/bayonet,
 /obj/item/attachable/bayonet,
-/obj/item/clothing/suit/storage/marine/light/vest,
 /obj/item/clothing/suit/storage/marine/light/vest,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
@@ -65469,9 +65459,6 @@
 	},
 /area/almayer/medical/lower_medical_medbay)
 "rmc" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 8
 	},
