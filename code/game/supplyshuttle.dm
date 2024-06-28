@@ -1323,8 +1323,14 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	req_access = list(ACCESS_MARINE_CREWMAN)
 	circuit = /obj/item/circuitboard/computer/supplycomp/vehicle
 	// Can only retrieve one vehicle per round
+/*
 	var/spent = TRUE
 	var/tank_unlocked = FALSE
+*/
+//RUCM START
+	var/spent = FALSE
+	var/tank_unlocked = TRUE
+//RUCM END
 	var/list/allowed_roles = list(JOB_CREWMAN)
 
 	var/list/vehicles
@@ -1372,6 +1378,11 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 /datum/vehicle_order/apc/empty
 	name = "Barebones M577 Armored Personal Carrier"
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc/unarmed/broken
+//RUCM START
+/datum/vehicle_order/apc/max
+	name = "M888 Armored Personnel Carrier"
+	ordered_vehicle = /obj/effect/vehicle_spawner/apc_max
+//RUCM END
 
 /datum/vehicle_order/arc
 	name = "M540-B Armored Recon Carrier"
@@ -1384,9 +1395,15 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	. = ..()
 
 	vehicles = list(
+//RUCM REMOVE START
+/*
 		new /datum/vehicle_order/apc(),
 		new /datum/vehicle_order/apc/med(),
 		new /datum/vehicle_order/apc/cmd(),
+*/
+//RUCM REMOVE END
+		new /datum/vehicle_order/apc/max,
+		new /datum/vehicle_order/tank,
 	)
 
 	if(!GLOB.VehicleElevatorConsole)

@@ -100,7 +100,6 @@
 #include "modules\vehicles\walker_verbs.dm"
 #include "modules\vehicles\multitile\multitile_verbs.dm"
 #include "modules\vehicles\multitile\multitile.dm"
-#include "modules\vehicles\multitile\apc\apc.dm"
 #include "modules\vehicles\multitile\hardpoints\holder\tank_turret.dm"
 #include "modules\vehicles\multitile\hardpoints\support\smoke.dm"
 #include "modules\vehicles\multitile\tank\tank.dm"
