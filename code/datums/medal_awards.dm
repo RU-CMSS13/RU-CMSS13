@@ -582,7 +582,12 @@ GLOBAL_DATUM_INIT(ic_medals_panel, /datum/ic_medal_panel, new)
 		return
 	var/mob/living/carbon/human/user = ui.user
 	var/obj/item/card/id/card = user?.get_idcard()
+/*
 	if(card)
+*/
+//RUCM START
+	if(!card)
+//RUCM END
 		to_chat(user, SPAN_WARNING("You must have an authenticated ID Card to award medals."))
 		return
 
