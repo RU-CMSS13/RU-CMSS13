@@ -204,7 +204,12 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
+/*
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
+*/
+//RUCM START
+		newletter=copytext_char(phrase,(leng-counter)+3,(leng-counter)+4) // Ну теперь он не всё перекрашивает в вопросики, а глотает те буквы что должны заменятся
+//RUCM END
 		if(rand(1,3)==3)
 			if(lowertext(newletter)=="o") newletter="u"
 			if(lowertext(newletter)=="s") newletter="ch"
