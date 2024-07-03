@@ -17733,8 +17733,8 @@
 	},
 /obj/structure/machinery/door/airlock/almayer/generic{
 	name = "\improper Mech Bay";
-	req_access = list(33);
-	req_one_access = list()
+	req_one_access = list(40;1);
+	req_one_access_txt = "40;1"
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -39659,9 +39659,9 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/machinery/door/airlock/almayer/generic{
 	name = "\improper Mech Ops's Room";
-	req_access = list(33);
-	req_one_access = list();
-	dir = 2
+	req_one_access = list(40;1);
+	dir = 2;
+	req_one_access_txt = "40;1"
 	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
@@ -40802,8 +40802,8 @@
 "ijp" = (
 /obj/structure/machinery/door/airlock/almayer/generic{
 	name = "\improper Mech Ops's Room";
-	req_access = list(33);
-	req_one_access = list()
+	req_one_access = list(40;1);
+	req_one_access_txt = "40;1"
 	},
 /turf/open/floor/almayer{
 	icon_state = "test_floor4"
