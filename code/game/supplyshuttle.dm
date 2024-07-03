@@ -1488,20 +1488,45 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 
 		var/obj/vehicle/multitile/ordered_vehicle
 
+/*
 		var/datum/vehicle_order/VO = locate(href_list["get_vehicle"])
 		if(!(VO in vehicles))
+*/
+		var/datum/vehicle_order/V = locate(href_list["get_vehicle"])
+		if(!(V in vehicles))
 			return
 
+/*
 		if(VO?.has_vehicle_lock())
 			return
 
+*/
+//RUCM START
+		if(V?.has_vehicle_lock())
+			return
+//RUCM END
 		spent = TRUE
+/*
 		ordered_vehicle = new VO.ordered_vehicle(middle_turf)
+*/
+//RUCM START
+		ordered_vehicle = new V.ordered_vehicle(middle_turf)
+//RUCM END
 		SSshuttle.vehicle_elevator.request(SSshuttle.getDock("almayer vehicle"))
 
+/*
 		VO.on_created(ordered_vehicle)
 
+*/
+//RUCM START
+		V.on_created(ordered_vehicle)
+//RUCM END
+/*
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, ordered_vehicle)
+*/
+//RUCM START
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, v)
+//RUCM END
 
 	else if(href_list["lower_elevator"])
 		if(!is_mainship_level(SSshuttle.vehicle_elevator.z))

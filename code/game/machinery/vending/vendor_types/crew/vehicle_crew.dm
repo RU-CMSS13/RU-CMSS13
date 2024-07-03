@@ -51,14 +51,30 @@
 			malfunction()
 			return
 
+/*
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, obj/vehicle/multitile/V)
+*/
+//RUCM START
+/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/V)
+//RUCM END
 	SIGNAL_HANDLER
 	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
 
+/*
 	if(!selected_vehicle)
 		selected_vehicle = "APC" // The whole thing seems to be based upon the assumption you unlock tank as an override, defaulting to APC
 	if(selected_vehicle == "APC")
 		available_categories &= ~(VEHICLE_ARMOR_AVAILABLE|VEHICLE_INTEGRAL_AVAILABLE) //APC lacks these, so we need to remove these flags to be able to access spare parts section
+*/
+//RUCM START
+	available_categories = VEHICLE_ALL_AVAILABLE
+
+	if(istype(V, /datum/vehicle_order/tank))
+		selected_vehicle = "TANK"
+	else
+		selected_vehicle = "APC"
+		available_categories &= ~(VEHICLE_ARMOR_AVAILABLE|VEHICLE_INTEGRAL_AVAILABLE)
+//RUCM END
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/get_listed_products(mob/user)
 	var/list/display_list = list()

@@ -196,6 +196,9 @@
 			return
 
 		health = min(health + max_hp/100 * (5 / amount_fixed_adjustment), max_hp)
+//RUCM START
+		healthcheck()
+//RUCM END
 
 		if(WT)
 			WT.remove_fuel(1, user)

@@ -382,9 +382,17 @@
 		handle_all_modules_broken()
 
 	//vehicle is dead, no more lights
+/*
 	if(health <= 0 && lighting_holder.light_range)
 		lighting_holder.set_light_on(FALSE)
+*/
+//RUCM START
+	if(lighting_holder)
+		//vehicle is dead, no more lights
+		if (health <= 0) lighting_holder.set_light_on(FALSE)
+		else lighting_holder.set_light_on(TRUE)
 	update_icon()
+//RUCM END
 
 /*
 ** PRESETS SPAWNERS
