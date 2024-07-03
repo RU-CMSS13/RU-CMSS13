@@ -1525,7 +1525,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, ordered_vehicle)
 */
 //RUCM START
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, v)
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VEHICLE_ORDERED, V)
 //RUCM END
 
 	else if(href_list["lower_elevator"])
