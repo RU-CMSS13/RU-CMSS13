@@ -584,6 +584,11 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	if(active_visor)
 		helmet_overlays += active_visor.helmet_overlay
 
+//RUCM START
+	if(helmet_fire_overlay_icon)
+		helmet_overlays += helmet_fire_overlay_icon
+//RUCM END
+
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_head()

@@ -549,6 +549,9 @@ Additional game mode variables.
 				to_chat(xeno_candidate, SPAN_WARNING("You are banished from this hive, You may not rejoin unless the Queen re-admits you or dies."))
 				return FALSE
 		if(transfer_xeno(xeno_candidate, new_xeno))
+//RUCM START
+			SSbattlepass.xeno_battlepass_earners |= new_xeno?.client?.ckey
+//RUCM END
 			return TRUE
 	to_chat(xeno_candidate, "JAS01: Something went wrong, tell a coder.")
 

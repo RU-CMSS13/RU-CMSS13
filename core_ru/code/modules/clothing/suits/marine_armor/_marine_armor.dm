@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/storage/marine/m40
 	name = "\improper M40 armor"
 	desc = "A custom set of M40 armor designed for use by USCM stormtrooper. Contains thick kevlar shielding."
-	item_icons = list(WEAR_JACKET = 'core_ru/icons/mob/human/onmob/suit_1.dmi')
+	item_icons = list(WEAR_JACKET = 'core_ru/icons/mob/humans/onmob/suit_1.dmi')
 	icon = 'core_ru/icons/obj/items/clothing/cm_suits.dmi'
 	icon_state = ""//"st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGH

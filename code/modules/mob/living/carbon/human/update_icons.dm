@@ -450,6 +450,10 @@ Applied by gun suicide and high impact bullet executions, removed by rejuvenate,
 	for(var/i in HEAD_GARB_LAYER to (HEAD_GARB_LAYER + MAX_HEAD_GARB_ITEMS - 1))
 		remove_overlay(i)
 
+//RUCM START
+	remove_overlay(MAX_HEAD_GARB_ITEMS + 1)
+//RUCM END
+
 	if(head)
 
 		if(client && hud_used && hud_used.hud_shown && hud_used.inventory_shown && hud_used.ui_datum)

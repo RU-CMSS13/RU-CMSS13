@@ -70,12 +70,12 @@
 /obj/item/weapon/shield/montage
 	name = "N30 montage shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'core_ru/icons/mob/human/st_equip.dmi'
+	icon = 'core_ru/icons/mob/humans/st_equip.dmi'
 	icon_state = "metal_st"
 	item_icons = list(
-		WEAR_L_HAND = 'core_ru/icons/mob/human/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/items_righthand_1.dmi',
-		WEAR_BACK = 'core_ru/icons/mob/human/back.dmi'
+		WEAR_L_HAND = 'core_ru/icons/mob/humans/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/humans/items_righthand_1.dmi',
+		WEAR_BACK = 'core_ru/icons/mob/humans/back.dmi'
 		)
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"

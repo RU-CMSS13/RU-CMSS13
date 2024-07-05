@@ -149,6 +149,9 @@
 #define SS_INIT_STICKY -30
 #define SS_INIT_PREDSHIPS  -31
 #define SS_INIT_OBJECTIVES -32
+//RUCM START
+#define SS_INIT_BATTLEPASS -33
+//RUCM END
 #define SS_INIT_MINIMAP    -34
 #define SS_INIT_STATPANELS -98
 #define SS_INIT_CHAT    -100 //Should be last to ensure chat remains smooth during init.

@@ -37,9 +37,9 @@
 	icon = 'core_ru/icons/obj/items/nailgun.dmi'
 	icon_state = "nailgun_holster"
 	item_icons = list(
-		WEAR_WAIST = 'core_ru/icons/mob/human/onmob/belt.dmi',
-		WEAR_L_HAND = 'core_ru/icons/mob/human/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/items_righthand_1.dmi'
+		WEAR_WAIST = 'core_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'core_ru/icons/mob/humans/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/humans/items_righthand_1.dmi'
 		)
 	item_state_slots = list(
 		WEAR_L_HAND = "utility",
