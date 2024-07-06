@@ -1,7 +1,7 @@
 /obj/item/clothing/head/helmet/marine/m40
 	name = "\improper M40 helmet"
-	item_icons = list(WEAR_HEAD = 'core_ru/icons/mob/human/onmob/head_1.dmi')
-	icon = 'core_ru/icons/mob/human/onmob/head_1.dmi'
+	item_icons = list(WEAR_HEAD = 'core_ru/icons/mob/humans/onmob/head_1.dmi')
+	icon = 'core_ru/icons/mob/humans/onmob/head_1.dmi'
 	icon_state = "st_helmet"
 	desc = "A helmet designed for USCM stormtrooper. Contains heavy insulation, covered in nomex weave."
 	armor_melee = CLOTHING_ARMOR_HIGH

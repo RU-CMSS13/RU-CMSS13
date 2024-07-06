@@ -81,6 +81,8 @@
 #include "modules\objectives\communications.dm"
 #include "modules\projectiles\gun_attachables.dm"
 #include "modules\projectiles\magazines\magazines_assorted.dm"
+#include "modules\projectiles\guns\rifles.dm"
+#include "modules\projectiles\magazines\rifles.dm"
 #include "modules\shuttle\gamemodes\crash.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
 #include "modules\vehicles\walker.dm"

@@ -5,10 +5,10 @@
 	icon_state = "st_hammer"
 	item_state = "st_hammer"
 	item_icons = list(
-		WEAR_J_STORE = 'core_ru/icons/mob/human/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'core_ru/icons/mob/human/onmob/belt.dmi',
-		WEAR_L_HAND = 'core_ru/icons/mob/human/onmob/items_lefthand_0.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/onmob/items_righthand_0.dmi'
+		WEAR_J_STORE = 'core_ru/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_WAIST = 'core_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_0.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/humans/onmob/items_righthand_0.dmi'
 	)
 	pickup_sound = "gunequip"
 	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
@@ -86,12 +86,12 @@
 /obj/item/weapon/shield/montage
 	name = "N30 montage shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'core_ru/icons/mob/human/st_equip.dmi'
+	icon = 'core_ru/icons/mob/humans/st_equip.dmi'
 	icon_state = "metal_st"
 	item_icons = list(
-		WEAR_L_HAND = 'core_ru/icons/mob/human/onmob/items_lefthand_1.dmi',
-		WEAR_R_HAND = 'core_ru/icons/mob/human/onmob/items_righthand_1.dmi',
-		WEAR_BACK = 'core_ru/icons/mob/human/onmob/back.dmi'
+		WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'core_ru/icons/mob/humans/onmob/items_righthand_1.dmi',
+		WEAR_BACK = 'core_ru/icons/mob/humans/onmob/back.dmi'
 		)
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"
