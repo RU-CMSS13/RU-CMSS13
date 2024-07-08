@@ -62,6 +62,13 @@
 		pump_delay = FIRE_DELAY_TIER_8*1
 	additional_fire_group_delay += pump_delay
 
+/obj/item/weapon/gun/rifle/xm52/able_to_fire(mob/living/user)
+	. = ..()
+	if (. && istype(user)) //Let's check all that other stuff first.
+		if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ST)
+			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
+			return FALSE
+
 /obj/item/weapon/gun/rifle/xm52/set_bullet_traits()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY_ID("turfs", /datum/element/bullet_trait_damage_boost, 30, GLOB.damage_boost_turfs), //2550, 2 taps colony walls, 4 taps reinforced walls
