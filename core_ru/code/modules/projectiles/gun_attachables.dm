@@ -30,8 +30,8 @@
 	icon_state = "xm52_folding_a"
 	attach_icon = "xm52_folding_a"
 	wield_delay_mod = WIELD_DELAY_FAST
-	pixel_shift_x = 30
-	pixel_shift_y = 14
+	pixel_shift_x = 31
+	pixel_shift_y = 15
 	hud_offset_mod = 3
 	melee_mod = 10
 	flags_attach_features = ATTACH_ACTIVATION
@@ -65,6 +65,8 @@
 		aim_speed_mod = CONFIG_GET(number/slowdown_med)
 		icon_state = "xm52_folding_a_on"
 		attach_icon = "xm52_folding_a_on"
+		pixel_shift_x = 29
+		size_mod = 2
 		wield_delay_mod = WIELD_DELAY_VERY_FAST //added 0.2 seconds for wield, basic solid stock adds 0.4
 
 	else
@@ -78,6 +80,8 @@
 		aim_speed_mod = 0
 		icon_state = "xm52_folding_a"
 		attach_icon = "xm52_folding_a"
+		pixel_shift_x = 31
+		size_mod = 1
 		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay
 
 	gun.recalculate_attachment_bonuses()

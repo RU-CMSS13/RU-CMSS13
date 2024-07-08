@@ -41,6 +41,11 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("Large Incinerator Tank (B) (Green Flame)", 40, /obj/item/ammo_magazine/flamer_tank/large/B, null, VENDOR_ITEM_REGULAR),
 		list("Large Incinerator Tank (X) (Blue Flame)", 40, /obj/item/ammo_magazine/flamer_tank/large/X, null, VENDOR_ITEM_REGULAR),
 
+//RUCM START
+		list("EXTRA STORMTROOPER SPARKSHOTS", 0, null, null, null),
+		list("Extra sparkshots magazine", 40, /obj/item/ammo_magazine/rifle/xm52, null, VENDOR_ITEM_REGULAR),
+		list("Extra sparkshots shells", 40, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots, null, VENDOR_ITEM_REGULAR),
+//RUCM END
 	))
 
 /obj/structure/machinery/cm_vending/gear/spec

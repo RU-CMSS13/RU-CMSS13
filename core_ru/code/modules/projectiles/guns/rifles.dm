@@ -2,8 +2,8 @@
 	name = "\improper XM52 experimental breaching scattergun"
 	desc = "An experimental shotgun model going through testing trials in the USCM. Based on the original XM51 version, the XM52 is a mag-fed, burst pump-action shotgun. It utilizes special lighted 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells."
 	icon = 'core_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
-	icon_state = "xm51"
-	item_state = "xm51"
+	icon_state = "xm52"
+	item_state = "xm52"
 	item_icons = list(
 	WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'core_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
@@ -31,7 +31,7 @@
 	gun_category = GUN_CATEGORY_SHOTGUN
 	gun_firemode = GUN_FIREMODE_BURSTFIRE
 	aim_slowdown = SLOWDOWN_ADS_SHOTGUN
-	map_specific_decoration = TRUE
+	map_specific_decoration = FALSE
 
 	var/pump_delay //How long we have to wait before we can pump the shotgun again.
 	var/pump_sound = "shotgunpump"
