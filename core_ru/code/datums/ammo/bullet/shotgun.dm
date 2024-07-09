@@ -1,6 +1,5 @@
 /datum/ammo/bullet/shotgun/light/breaching/sparkshots
 	name = "Sparkshot shell"
-	icon = 'core_ru/icons/obj/items/weapons/guns/handful.dmi'
 	icon_state = "flechette"
 	handful_state = "sparkshot_shell"
 	handful_type = /obj/item/ammo_magazine/handful/shotgun/light/breaching/sparkshots
