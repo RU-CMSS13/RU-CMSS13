@@ -166,8 +166,8 @@
 	var/maxmag = 2
 
 /obj/item/storage/belt/gun/xm52/attackby(obj/item/item, mob/user)
-	if(istype(item, /obj/item/ammo_magazine/shotgun/light/breaching))
-		var/obj/item/ammo_magazine/shotgun/light/breaching/ammo_box = item
+	if(istype(item, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots))
+		var/obj/item/ammo_magazine/shotgun/light/breaching/sparkshots/ammo_box = item
 		dump_ammo_to(ammo_box, user, ammo_box.transfer_handful_amount)
 	else
 		return ..()
