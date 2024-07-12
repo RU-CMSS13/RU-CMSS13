@@ -5,6 +5,7 @@
 #include "_globalvars\misc.dm"
 #include "controllers\subsystem\who.dm"
 #include "datums\skills.dm"
+#include "datums\skills\civilan.dm"
 #include "datums\ammo\tank.dm"
 #include "datums\ammo\xeno.dm"
 #include "datums\ammo\bullet\pistol.dm"
