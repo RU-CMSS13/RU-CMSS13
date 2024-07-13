@@ -7,7 +7,7 @@
 			continue
 
 		// Make sure these variables are overridden on any subtypes.
-		TEST_ASSERT_NOTEQUAL(idnitial(tutorial_path.name), initial(base_path.name),
+		TEST_ASSERT_NOTEQUAL(initial(tutorial_path.name), initial(base_path.name),
 			"[tutorial_path] does not have a name set.")
 		TEST_ASSERT_NOTEQUAL(initial(tutorial_path.tutorial_id), initial(base_path.tutorial_id),
 			"[tutorial_path] does not have a tutorial_id set.")
@@ -17,4 +17,3 @@
 			"[tutorial_path] does not have an icon_state set.")
 
 // TODO: Add a test verifying that a basic tutorial can be started and completed. (Requires unit test client handling)
-ss
