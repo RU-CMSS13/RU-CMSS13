@@ -7,7 +7,7 @@
 			continue
 
 		// Make sure these variables are overridden on any subtypes.
-		TEST_ASSERT_NOTEQUAL(initial(tutorial_path.name), initial(base_path.name),
+		TEST_ASSERT_NOTEQUAL(idnitial(tutorial_path.name), initial(base_path.name),
 			"[tutorial_path] does not have a name set.")
 		TEST_ASSERT_NOTEQUAL(initial(tutorial_path.tutorial_id), initial(base_path.tutorial_id),
 			"[tutorial_path] does not have a tutorial_id set.")
