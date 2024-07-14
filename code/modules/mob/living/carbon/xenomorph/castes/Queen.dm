@@ -342,6 +342,7 @@
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		/datum/action/xeno_action/activable/xeno_spit/queen_macro, //third macro
 		/datum/action/xeno_action/onclick/shift_spits,
+		/datum/action/xeno_action/onclick/techtree,
 		//second macro
 	)
 
@@ -845,6 +846,7 @@
 		/datum/action/xeno_action/activable/secrete_resin/remote/queen, //fifth macro
 		/datum/action/xeno_action/onclick/queen_tacmap,
 		/datum/action/xeno_action/onclick/eye,
+		/datum/action/xeno_action/onclick/techtree,
 	)
 
 	for(var/path in immobile_abilities)

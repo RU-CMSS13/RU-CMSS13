@@ -37,6 +37,8 @@
 		say_verb(pick(possible_phrases))
 		picksay_cooldown = world.time + 1.5 SECONDS
 
+/*  RU CM Start
+
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
@@ -58,6 +60,37 @@
 		usr.emote("me",usr.emote_type,message, TRUE)
 	else
 		usr.emote(message, 1, null, TRUE)
+*/
+//	RU CM EDIT
+/mob/verb/say_verb(message as text)
+	set name = "Say"
+	set category = "IC"
+
+	if(!client?.attempt_talking(message))
+		return
+
+	if(message)
+		if(stat != DEAD)
+			if(GLOB.ic_autoemote[message])
+				message = "*[GLOB.ic_autoemote[message]]" // возврат автокоррекции эмоутов params2list
+			message = check_for_brainrot(message)
+		usr.say(message)
+
+/mob/verb/me_verb(message as text)
+	set name = "Me"
+	set category = "IC"
+
+	message = trim(strip_html(message, MAX_EMOTE_LEN))
+	if(!client?.attempt_talking(message))
+		return
+
+	if(message)
+		message = check_for_brainrot(message)
+		if(use_me)
+			usr.emote("me",usr.emote_type,message, TRUE)
+		else
+			usr.emote(message, 1, null, TRUE)
+//  RU CM End
 
 /mob/proc/say_dead(message)
 	var/name = src.real_name

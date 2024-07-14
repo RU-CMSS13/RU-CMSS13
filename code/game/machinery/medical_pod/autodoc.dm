@@ -395,6 +395,7 @@
 								E.heal_damage(E.damage)
 								E.eye_surgery_stage = 0
 					if("larva")
+/*	RU CM Start
 						if(prob(30))
 							visible_message("[icon2html(src, viewers(src))] \The <b>[src]</b>beeps: Removing unknown parasites.")
 						if(!locate(/obj/item/alien_embryo) in occupant)
@@ -412,6 +413,31 @@
 							alien_larva.forceMove(get_turf(occupant))
 							occupant.status_flags &= ~XENO_HOST
 
+*/
+//  RU CM Edit
+						if(locate(/obj/item/alien_embryo) in occupant)
+							visible_message("[icon2html(src, viewers(src))] <b>[src]</b>пиликает: Извлечение неизвестных паразитов.")
+							sleep(pick(SCALPEL_MIN_DURATION, SCALPEL_MAX_DURATION) + pick(HEMOSTAT_MIN_DURATION, HEMOSTAT_MAX_DURATION) + pick(REMOVE_OBJECT_MIN_DURATION, REMOVE_OBJECT_MAX_DURATION))
+						else
+							visible_message("[icon2html(src, viewers(src))] <b>[src]</b>гудит: Паразитические организмы не обнаружены, отмена операции.")
+							surgery_todo_list -= S
+							continue
+
+						for(var/i in H.contents)	// цикл для мультибурстов
+							if(i)
+								if(istype(i, /obj/item/alien_embryo))	// эмбрион, лярва-предмет
+									var/obj/item/alien_embryo/embryo_ref = i
+									if(embryo_ref.stage >= 5)	// удаляет предмет если лярва уже сформирована
+										H.contents -= embryo_ref
+										qdel(embryo_ref)
+									else
+										embryo_ref.forceMove(get_turf(H))
+
+								if(istype(i, /mob/living/carbon/xenomorph/larva)) // сформированная лярва-юнит
+									var/mob/living/carbon/xenomorph/larva/larva_ref = i
+									larva_ref.forceMove(get_turf(H))
+									H.status_flags &= ~XENO_HOST
+//  RU CM End
 
 			if(LIMB_SURGERY)
 				switch(S.surgery_procedure)
@@ -785,6 +811,7 @@
 				dat += "<br>"
 				if(length(upgrades))
 					dat += "<b>Orthopedic Surgeries</b>"
+					dat += "<br>"
 					for(var/iter in upgrades)
 						switch(iter)
 							if(RESEARCH_UPGRADE_TIER_2)
@@ -802,7 +829,12 @@
 		else
 			dat += "The autodoc is empty."
 	dat += text("<a href='?src=\ref[];mach_close=sleeper'>Close</a>", user)
+/*  RU CM Start
 	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=300x400")
+*/
+//  RU CM Edit
+	show_browser(user, dat, "Auto-Doc Medical System", "sleeper", "size=380x700")
+//  RU CM End
 	onclose(user, "sleeper")
 
 /obj/structure/machinery/autodoc_console/Topic(href, href_list)

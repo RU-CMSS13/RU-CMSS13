@@ -65,6 +65,7 @@
 		/obj/item/storage/belt/gun/m4a3,
 		/obj/item/storage/belt/gun/m44,
 		/obj/item/storage/belt/gun/smartpistol,
+		/obj/item/storage/belt/gun/repairbelt,
 		/obj/item/device/motiondetector,
 		/obj/item/device/walkman,
 	)
@@ -192,6 +193,7 @@
 		/obj/item/storage/belt/gun/m44,
 		/obj/item/storage/belt/gun/mateba,
 		/obj/item/storage/belt/gun/smartpistol,
+		/obj/item/storage/belt/gun/repairbelt,
 
 		/obj/item/device/flashlight,
 		/obj/item/device/healthanalyzer,
@@ -252,6 +254,7 @@
 		/obj/item/storage/belt/gun/m44,
 		/obj/item/storage/belt/gun/mateba,
 		/obj/item/storage/belt/gun/smartpistol,
+		/obj/item/storage/belt/gun/repairbelt,
 
 		/obj/item/device/flashlight,
 		/obj/item/device/healthanalyzer,
@@ -317,6 +320,7 @@
 		/obj/item/storage/belt/gun/m44,
 		/obj/item/storage/belt/gun/mateba,
 		/obj/item/storage/belt/gun/smartpistol,
+		/obj/item/storage/belt/gun/repairbelt,
 
 		/obj/item/device/flashlight,
 		/obj/item/device/healthanalyzer,
@@ -417,6 +421,7 @@
 		/obj/item/storage/belt/gun/m44,
 		/obj/item/storage/belt/gun/mateba,
 		/obj/item/storage/belt/gun/smartpistol,
+		/obj/item/storage/belt/gun/repairbelt,
 		/obj/item/weapon/gun,
 
 		/obj/item/device/flashlight,

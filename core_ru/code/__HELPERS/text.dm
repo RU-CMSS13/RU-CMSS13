@@ -1,3 +1,4 @@
+// #core_ru #румарины #модуль #важная закладка
 
 //Removes a few problematic characters
 /proc/sanitize_simple(text, list/repl_chars = list("\n"=" ","\t"=" ","�"=" "))
