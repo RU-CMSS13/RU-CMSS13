@@ -42,7 +42,9 @@
 		list("M240 Incinerator Unit", floor(scale * 2), /obj/item/storage/box/guncase/flamer, VENDOR_ITEM_REGULAR),
 		list("M79 Grenade Launcher", floor(scale * 3), /obj/item/storage/box/guncase/m79, VENDOR_ITEM_REGULAR),
 		list("XM51 Breaching Scattergun", floor(scale * 3), /obj/item/storage/box/guncase/xm51, VENDOR_ITEM_REGULAR),
+//  RU CM Start
 		list("F1X Nailgun", round(scale * 1.5), /obj/item/storage/box/guncase/repairbelt, VENDOR_ITEM_REGULAR),
+//  RU CM End
 
 		list("EXPLOSIVES", -1, null, null),
 		list("M15 Fragmentation Grenade", floor(scale * 2), /obj/item/explosive/grenade/high_explosive/m15, VENDOR_ITEM_REGULAR),

@@ -4,6 +4,7 @@
 #include "_globalvars\global_lists.dm"
 #include "_globalvars\misc.dm"
 #include "controllers\subsystem\who.dm"
+#include "includes_feline.dm"
 #include "datums\skills.dm"
 #include "datums\ammo\tank.dm"
 #include "datums\ammo\xeno.dm"

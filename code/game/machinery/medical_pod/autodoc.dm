@@ -808,7 +808,10 @@
 					dat += "<a href='?src=\ref[src];dialysis=1'>Dialysis</a><br>"
 				if(isnull(surgeryqueue["toxin"]))
 					dat += "<a href='?src=\ref[src];toxin=1'>Bloodstream Toxin Removal</a><br>"
+/*  RU CM Start
 				dat += "<br>"
+*/
+//	RU CM End
 				if(length(upgrades))
 					dat += "<b>Orthopedic Surgeries</b>"
 					dat += "<br>"
