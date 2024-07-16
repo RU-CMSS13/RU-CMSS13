@@ -6,6 +6,7 @@
 #include "_globalvars\mobs.dm"
 #include "controllers\subsystem\queue.dm"
 #include "controllers\subsystem\who.dm"
+#include "datums\shuttles.dm"
 #include "datums\skills.dm"
 #include "datums\world_topic.dm"
 #include "datums\ammo\tank.dm"
