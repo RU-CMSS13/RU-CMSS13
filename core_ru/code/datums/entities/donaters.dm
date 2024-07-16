@@ -104,3 +104,59 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 		if(discord_rank)
 			return discord_rank.buns[required]
 	return FALSE
+
+//COMPACT VERSION << ALL IN ONE >>
+/obj/proc/skin(S)
+	return
+
+//HELMET
+/obj/item/clothing/head/helmet/skin(skin)
+	icon = 'core_ru/icons/custom/items/clothings.dmi'
+	icon_state = "[icon_state]_[skin]"
+	item_state = "[item_state]_[skin]"
+	item_icons = list(
+		WEAR_HEAD = 'core_ru/icons/custom/items/clothing_on_mob.dmi'
+	)
+
+//STORAGE
+/obj/item/clothing/suit/storage/marine/skin(skin)
+	icon = 'core_ru/icons/custom/items/clothings.dmi'
+	icon_state = "[icon_state]_[skin]"
+	item_state = "[item_state]_[skin]"
+	item_state_slots[WEAR_BODY] = icon_state
+
+//UNDER
+/obj/item/clothing/under/skin(skin)
+	icon = 'core_ru/icons/custom/items/clothings.dmi'
+	icon_state += "_[skin]"
+	worn_state = icon_state
+
+	item_icons = list()
+	item_icons += list(WEAR_BODY = 'core_ru/icons/custom/items/clothing_on_mob.dmi')
+
+	icon_override = 'core_ru/icons/custom/items/clothings.dmi'
+
+	item_state_slots[WEAR_BODY] = worn_state
+	update_rollsuit_status()
+
+//GUNS
+/obj/item/weapon/gun/skin(skin)
+	base_gun_icon = "[base_gun_icon]_[skin]"
+	icon = 'core_ru/icons/custom/items/guns.dmi'
+
+	item_icons = list(
+		WEAR_L_HAND = 'core_ru/icons/custom/items/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'core_ru/icons/custom/items/items_righthand_1.dmi',
+		WEAR_BACK = 'core_ru/icons/custom/items/back.dmi',
+		WEAR_J_STORE = 'core_ru/icons/custom/items/suit_slot.dmi'
+		)
+
+	item_state = "[base_gun_icon]"
+
+	LAZYSET(item_state_slots, WEAR_BACK, item_state)
+
+//	var/icon/I = new /icon('core_ru/icons/custom/items/attach_recoloring.dmi', skin)
+//	attachment_recoloring = image(I)
+//	attachment_recoloring.alpha = 180
+//	attachment_recoloring.blend_mode = BLEND_ADD|BLEND_INSET_OVERLAY|BLEND_SUBTRACT
+	update_icon()
