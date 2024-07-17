@@ -163,8 +163,7 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 	icon_state += "_[skin]"
 	worn_state = icon_state
 
-	item_icons = list()
-	item_icons += list(WEAR_BODY = 'core_ru/icons/custom/items/clothing_on_mob.dmi')
+	item_icons = list(WEAR_BODY = 'core_ru/icons/custom/items/clothing_on_mob.dmi')
 
 	icon_override = 'core_ru/icons/custom/items/clothings.dmi'
 
