@@ -372,21 +372,6 @@
 			else
 				return get_sfx("female_warcry")
 */
-//RU CM START
-/datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
-	var/default_lang = user.get_default_language()
-	if(ishumansynth_strict(user))
-		if(user.gender == MALE)
-			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
-				return get_sfx("male_upp_warcry")
-			else
-				return get_sfx("male_warcry")
-		else
-			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
-				return get_sfx("female_upp_warcry")
-			else
-				return get_sfx("female_warcry")
-//RU CM END
 
 /datum/emote/living/carbon/human/whimper
 	key = "whimper"

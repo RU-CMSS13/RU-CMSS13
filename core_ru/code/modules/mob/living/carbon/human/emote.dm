@@ -13,3 +13,17 @@
 			return pick('core_ru/sound/voice/human_male_laugh_1.ogg', 'core_ru/sound/voice/human_male_laugh_2.ogg')
 		else
 			return pick('core_ru/sound/voice/human_female_laugh_1.ogg', 'core_ru/sound/voice/human_female_laugh_2.ogg')
+
+/datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
+	var/default_lang = user.get_default_language()
+	if(ishumansynth_strict(user))
+		if(user.gender == MALE)
+			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
+				return get_sfx("male_upp_warcry")
+			else
+				return get_sfx("male_warcry")
+		if(user.gender == FEMALE)
+			if(default_lang == GLOB.all_languages[LANGUAGE_RUSSIAN])
+				return get_sfx("female_upp_warcry")
+			else
+				return get_sfx("female_warcry")
