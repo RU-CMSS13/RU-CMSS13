@@ -94,7 +94,7 @@
 #include "modules\gear_presets\usmc.dm"
 #include "modules\gear_presets\uscm_ship.dm"
 #include "modules\mob\mod_defines.dm"
-#include "modules\mob\say.dm
+#include "modules\mob\say.dm"
 #include "modules\mob\dead\observer\observer.dm"
 #include "modules\mob\living\carbon\human\emote.dm"
 #include "modules\mob\living\carbon\human\species\working_joe\russian.dm"
