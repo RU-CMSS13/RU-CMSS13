@@ -240,6 +240,7 @@ CULT
 	if(!can_deploy_droppod(T))
 		return
 
+//RUCM START
 	var/list/list_of_techs = list()
 	for(var/i in GLOB.unlocked_droppod_techs)
 		var/datum/tech/tech_to_use = i
@@ -249,6 +250,9 @@ CULT
 		return
 	var/tech_to_deploy = tgui_input_list(H, "Choose a tech to deploy at this location", "Tech deployment", list_of_techs)
 	if(!tech_to_deploy)
+		return
+//RUCM END
+	if(!can_deploy_droppod(T))
 		return
 	var/area/turf_area = get_area(T)
 	if(!turf_area)

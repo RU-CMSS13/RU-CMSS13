@@ -34,14 +34,15 @@
 			continue
 		list_of_techs[droppod_tech.name] = droppod_tech
 	*/
-*/
 
 	if(!length(list_of_techs))
+*/
 //RUCM START
 	if(!length(GLOB.unlocked_droppod_techs))
 //RUCM END
 		to_chat(user, SPAN_WARNING("No tech gear is available at the moment!"))
 		return
+
 /*
 	var/user_input = tgui_input_list(user, "Choose a tech to retrieve an item from.", name, list_of_techs)
 	if(!user_input)
