@@ -10,11 +10,17 @@
 	entry_message_body = "Your job is to operate and maintain the ship's armored vehicles. You are in charge of representing the armored presence amongst the marines during the operation, as well as maintaining and repairing your own vehicles."
 
 /datum/job/command/tank_crew/set_spawn_positions(count)
+/*
 	if (length(GLOB.clients) >= 200)
 		spawn_positions = 2
 	else
 		spawn_positions = 0
 
+*/
+//RUCM START
+	spawn_positions = 2
+//RUCM END
+/*
 /datum/job/command/tank_crew/get_total_positions(latejoin = FALSE)
 	if(SStechtree.trees[TREE_MARINE].get_node(/datum/tech/arc).unlocked)
 		return 0
@@ -22,6 +28,11 @@
 		return 2
 
 	return 0
+*/
+//RUCM START
+/datum/job/command/tank_crew/get_total_positions(latejoin = TRUE)
+	return 2
+//RUCM END
 
 /obj/effect/landmark/start/tank_crew
 	name = JOB_TANK_CREW
