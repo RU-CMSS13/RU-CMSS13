@@ -18,7 +18,10 @@
 
 */
 //RUCM START
-	spawn_positions = 2
+	if (length(GLOB.clients) >= 1)
+		spawn_positions = 2
+	else
+		spawn_positions = 0
 //RUCM END
 /*
 /datum/job/command/tank_crew/get_total_positions(latejoin = FALSE)
@@ -31,7 +34,10 @@
 */
 //RUCM START
 /datum/job/command/tank_crew/get_total_positions(latejoin = TRUE)
-	return 2
+	if(length(GLOB.clients) >= 1 || total_positions_so_far > 0)
+		return 2
+
+	return 0
 //RUCM END
 
 /obj/effect/landmark/start/tank_crew
