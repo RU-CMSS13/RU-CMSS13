@@ -20,6 +20,7 @@
 	cooldown = COMMAND_ORDER_COOLDOWN
 
 /datum/action/human_action/issue_order/action_activate()
+	. = ..()
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
@@ -58,6 +59,7 @@
 		return FALSE
 
 /datum/action/human_action/smartpack/action_activate()
+	. = ..()
 	if(!istype(owner, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/H = owner
@@ -129,6 +131,7 @@ CULT
 
 // Called when the action is clicked on.
 /datum/action/human_action/activable/action_activate()
+	. = ..()
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
@@ -302,6 +305,7 @@ CULT
 	action_icon_state = "cultist_channel_hivemind"
 
 /datum/action/human_action/activable/cult/speak_hivemind/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -332,6 +336,7 @@ CULT
 	var/list/items_to_spawn = list(/obj/item/clothing/suit/cultist_hoodie/, /obj/item/clothing/head/cultist_hood/)
 
 /datum/action/human_action/activable/cult/obtain_equipment/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -531,6 +536,7 @@ CULT
 	action_icon_state = "mutineer_begin"
 
 /datum/action/human_action/activable/mutineer/mutineer_begin/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -565,6 +571,7 @@ CULT
 	UnregisterSignal(L, COMSIG_MOB_RESET_VIEW)
 
 /datum/action/human_action/cancel_view/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -591,6 +598,7 @@ CULT
 	UnregisterSignal(L, COMSIG_MOB_RESET_VIEW)
 
 /datum/action/human_action/vehicle_unbuckle/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -616,6 +624,7 @@ CULT
 	action_icon_state = "cancel_view"
 
 /datum/action/human_action/mg_exit/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
@@ -635,6 +644,7 @@ CULT
 	UnregisterSignal(user, COMSIG_MOB_RESET_VIEW)
 
 /datum/action/human_action/toggle_arc_antenna/action_activate()
+	. = ..()
 	if(!can_use_action())
 		return
 
