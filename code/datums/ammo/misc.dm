@@ -50,7 +50,6 @@
 
 /datum/ammo/flamethrower/tank_flamer
 	flamer_reagent_id = "highdamagenapalm"
-
 	max_range = 8
 
 /datum/ammo/flamethrower/tank_flamer/drop_flame(turf/turf, datum/cause_data/cause_data)
