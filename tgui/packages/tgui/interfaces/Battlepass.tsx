@@ -1,7 +1,7 @@
 import { BooleanLike, classes } from 'common/react';
 
 import { useBackend, useLocalState } from '../backend';
-import { Button, Dimmer, ProgressBar, Section } from '../components';
+import { Box, Button, Dimmer, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 interface BattlepassReward {
@@ -51,17 +51,17 @@ const BattlepassContent = (props) => {
     <>
       {infoView === true ? (
         <Dimmer>
-          <div
+          <Box
             style={{
               width: '800px',
               height: '460px',
               display: 'flex',
-              'background-color': '#0c0e1e',
-              'font-family': 'Verdana, Geneva, sans-serif',
-              'text-align': 'center',
+              backgroundColor: '#0c0e1e',
+              fontFamily: 'Verdana, Geneva, sans-serif',
+              textAlign: 'center',
               justifyContent: 'center',
               alignItems: 'center',
-              'font-size': '18px',
+              fontSize: '18px',
               padding: '10px',
             }}
           >
@@ -73,8 +73,9 @@ const BattlepassContent = (props) => {
               }}
             >
               The battlepass system is a way of rewarding players with in-game
-              rewards for playing well. <br />
-              <br />
+              rewards for playing well.
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
               On the left of the UI, you can find your objectives. These
               objectives are unique to you and reset every 24 hours. Completing
               them gives you XP. The other way to obtain XP is by playing a
@@ -82,14 +83,18 @@ const BattlepassContent = (props) => {
               losing, but the winning side earns more. Whichever side you join
               first will be the side you gain XP for, even if you log out before
               the round ends.
-              <br /> <br />
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
               Every 10 XP, your battlepass tier increases by 1, granting you new
-              rewards to use in game. You can claim rewards with the "Claim
-              Battlepass Reward" verb, and come back to this UI with the
-              "Battlepass" verb. <br /> <br />
+              rewards to use in game. You can claim rewards with the &quot;Claim
+              Battlepass Reward&quot; verb, and come back to this UI with the
+              &quot;Battlepass&quot; verb.
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
               The premium battlepass is coming soon, purchasable for an
               also-coming-soon 1000 ColonialCoins.
-              <br /> <br />
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
               <Button
                 fontSize="16px"
                 icon="xmark"
@@ -99,52 +104,52 @@ const BattlepassContent = (props) => {
                 }}
               />
             </Section>
-          </div>
+          </Box>
         </Dimmer>
       ) : (
         <> </>
       )}
-      <div
+      <Box
         style={{
           display: 'flex',
           overflow: 'auto',
         }}
       >
         <BattlepassInfoContainer />
-        <div
+        <Box
           style={{
-            'overflow-x': 'auto',
+            overflowX: 'auto',
             display: 'flex',
-            'flex-wrap': 'wrap',
+            flexWrap: 'wrap',
             position: 'relative',
-            'max-width': '1500px',
-            'min-width': '1500px',
+            maxWidth: '1500px',
+            minWidth: '1500px',
           }}
         >
-          <div
+          <Box
             style={{
               position: 'absolute',
               top: '32%',
               left: '35%',
-              'font-size': '24px',
-              'font-family': 'Verdana, Geneva, sans-serif',
-              'z-index': `${infoView === true ? '0' : '10'}`,
+              fontSize: '24px',
+              fontFamily: 'Verdana, Geneva, sans-serif',
+              zIndex: `${infoView === true ? '0' : '10'}`,
             }}
           >
             Premium Battlepass coming soon!
-          </div>
-          <div
+          </Box>
+          <Box
             style={{
               position: 'absolute',
               top: '84%',
               left: '35%',
-              'font-size': '24px',
-              'font-family': 'Verdana, Geneva, sans-serif',
-              'z-index': `${infoView === true ? '0' : '10'}`,
+              fontSize: '24px',
+              fontFamily: 'Verdana, Geneva, sans-serif',
+              zIndex: `${infoView === true ? '0' : '10'}`,
             }}
           >
             Premium Battlepass coming soon!
-          </div>
+          </Box>
           {rewards.map((reward, rewardIndex) => (
             <BattlepassRegularEntry
               key={reward.tier}
@@ -152,8 +157,8 @@ const BattlepassContent = (props) => {
               premiumReward={premium_rewards[rewardIndex]}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 };
@@ -162,10 +167,10 @@ const BattlepassInfoContainer = (props) => {
   const { act, data } = useBackend<BattlepassData>();
   const [infoView, setInfoView] = useLocalState('info_view', false);
   return (
-    <div
+    <Box
       style={{
-        'padding-right': '20px',
-        'border-right': 'solid',
+        paddingRight: '20px',
+        borderRight: 'solid',
       }}
     >
       <Section title="Season 1">
@@ -177,32 +182,28 @@ const BattlepassInfoContainer = (props) => {
             setInfoView(true);
           }}
         />
-        <br />
-        <b
-          style={{
-            'font-size': '16px',
-          }}
-        >
+        <Box style={{ height: '10px' }} />
+        <Box style={{ fontWeight: 'bold', fontSize: '16px' }}>
           Tier: {data.tier} / {data.max_tier}
-          <br />
+          <Box style={{ height: '10px' }} />
           XP: {data.xp} / 10
-        </b>
+        </Box>
         {data.daily_challenges.map((challenge) => (
-          <BattlepassChallenge challenge={challenge} key={challenge.name} />
+          <BattlepassChallengeUI challenge={challenge} key={challenge.name} />
         ))}
       </Section>
-    </div>
+    </Box>
   );
 };
 
-const BattlepassChallenge = (props) => {
+const BattlepassChallengeUI = (props) => {
   const challenge: BattlepassChallenge = props.challenge;
   return (
     <Section title={`${challenge.category} - ${challenge.name}`}>
       {challenge.desc}
-      <div
+      <Box
         style={{
-          'padding-bottom': '4px',
+          paddingBottom: '4px',
         }}
       />
       <ProgressBar
@@ -228,135 +229,137 @@ const BattlepassRegularEntry = (props) => {
   const reward: BattlepassReward = props.reward;
   const premiumReward: BattlepassReward = props.premiumReward;
   return (
-    <div
+    <Box
       style={{
-        'border-style': 'none',
-        'border-width': '2px',
-        'border-color': 'black',
-        'margin-right': '10px',
+        borderStyle: 'none',
+        borderWidth: '2px',
+        borderColor: 'black',
+        marginRight: '10px',
         width: '135px',
       }}
     >
       {data.tier >= reward.tier ? (
-        <div
+        <Box
           style={{
-            'background-color': 'rgba(0, 255, 0, 0.4)',
+            backgroundColor: 'rgba(0, 255, 0, 0.4)',
             width: '100%',
-            'padding-top': '3px',
-            'padding-bottom': '3px',
-            'text-align': 'center',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            textAlign: 'center',
           }}
         >
           {reward.name}
-        </div>
+        </Box>
       ) : (
-        <div
+        <Box
           style={{
-            'background-color': 'rgba(255, 0, 0, 0.4)',
+            backgroundColor: 'rgba(255, 0, 0, 0.4)',
             width: '100%',
-            'padding-top': '3px',
-            'padding-bottom': '3px',
-            'text-align': 'center',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            textAlign: 'center',
           }}
         >
           {reward.name}
-        </div>
+        </Box>
       )}
-      <div
+      <Box
         style={{
-          'background-image': 'linear-gradient(black, transparent)',
+          backgroundImage: 'linear-gradient(black, transparent)',
         }}
       >
-        <div
+        <Box
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          <span
+          <Box
+            style={{ display: 'inline', fontWeight: 'bold' }}
             className={classes(['battlepass96x96', `${reward.icon_state}`])}
           />
-        </div>
-        <div
+        </Box>
+        <Box
           style={{
-            'text-align': 'center',
+            textAlign: 'center',
           }}
         >
           ({reward.lifeform_type})
-        </div>
-      </div>
+        </Box>
+      </Box>
       {data.tier >= reward.tier ? (
-        <div
+        <Box
           style={{
-            'background-image':
+            backgroundImage:
               'linear-gradient(rgba(0, 255, 0, 0.4), rgba(212, 68, 23, 0.4))',
             width: '100%',
-            'padding-top': '3px',
-            'padding-bottom': '3px',
-            'text-align': 'center',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            textAlign: 'center',
           }}
         >
           {reward.tier}
-        </div>
+        </Box>
       ) : (
-        <div
+        <Box
           style={{
-            'background-image':
+            backgroundImage:
               'linear-gradient(rgba(255, 0, 0, 0.4), rgba(212, 68, 23, 0.4))',
             width: '100%',
-            'padding-top': '3px',
-            'padding-bottom': '3px',
-            'text-align': 'center',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            textAlign: 'center',
           }}
         >
           {reward.tier}
-        </div>
+        </Box>
       )}
-      <div
+      <Box
         style={{
           opacity: '0.5',
         }}
       >
-        <div
+        <Box
           style={{
-            'background-image': 'linear-gradient(black, transparent)',
+            backgroundImage: 'linear-gradient(black, transparent)',
           }}
         >
-          <div
+          <Box
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            <span
+            <Box
+              style={{ display: 'inline', fontWeight: 'bold' }}
               className={classes([
                 'battlepass96x96',
                 `${premiumReward.icon_state}`,
               ])}
             />
-          </div>
-          <div
+          </Box>
+          <Box
             style={{
-              'text-align': 'center',
+              textAlign: 'center',
             }}
           >
             ({premiumReward.lifeform_type})
-          </div>
-        </div>
-        <div
+          </Box>
+        </Box>
+        <Box
           style={{
-            'background-color': 'rgba(212, 68, 23, 0.4)',
+            backgroundColor: 'rgba(212, 68, 23, 0.4)',
             width: '100%',
-            'padding-top': '3px',
-            'padding-bottom': '3px',
-            'text-align': 'center',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            textAlign: 'center',
           }}
         >
           {premiumReward.name}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
