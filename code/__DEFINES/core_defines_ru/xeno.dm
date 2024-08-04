@@ -4,3 +4,4 @@
 
 #define XENO_SHIELD_SACRIFICE 101 /// щит лейзера жертвы. слоты 1-10 заняты оффами
 
+#define XENO_COMM_ACQUISITION_TIME (45 MINUTES)
