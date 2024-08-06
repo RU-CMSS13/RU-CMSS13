@@ -45,7 +45,7 @@ GLOBAL_PROTECT(href_token)
 		var/datum/view_record/admin_holder/db_holder = GLOB.db_admin_datums[owner.ckey]
 		db_holder.ref_vars = vars
 		rank = db_holder.rank
-		rights = db_holder.admin_rank.text_rights
+		rights = db_holder.admin_rank.rights
 		extra_titles = db_holder.extra_titles
 //RUCM END
 		owner.admin_holder = src
