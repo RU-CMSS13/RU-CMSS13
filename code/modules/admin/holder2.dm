@@ -39,13 +39,14 @@ GLOBAL_PROTECT(href_token)
 	return FALSE
 
 /datum/admins/proc/associate(client/C, datum/view_record/admin_holder/db_holder)
-	if(istype(C) && istype(db_holder) && db_holder.ckey == C.ckey)
+	if(istype(C))
 		owner = C
 //RUCM START
-		db_holder.ref_vars = vars
-		rank = db_holder.rank
-		rights = db_holder.admin_rank.rights
-		extra_titles = db_holder.extra_titles
+		if(istype(db_holder) && db_holder.ckey == C.ckey)
+			db_holder.ref_vars = vars
+			rank = db_holder.rank
+			rights = db_holder.admin_rank.rights
+			extra_titles = db_holder.extra_titles
 //RUCM END
 		owner.admin_holder = src
 		owner.add_admin_verbs()

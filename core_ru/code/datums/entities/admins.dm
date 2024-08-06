@@ -22,11 +22,9 @@ GLOBAL_PROTECT(db_admin_datums)
 			if(potential_admin.ckey != admin.ckey)
 				continue
 			if(!potential_admin.admin_holder)
-				if(potential_admin.ckey in GLOB.admin_datums)
-					potential_admin.admin_holder = GLOB.admin_datums[potential_admin.ckey]
-				else
-					potential_admin.admin_holder = new /datum/admins(potential_admin.ckey, admin)
-				potential_admin.admin_holder.associate(potential_admin, admin)
+				if(!(potential_admin.ckey in GLOB.admin_datums))
+					new /datum/admins(potential_admin.ckey)
+				GLOB.admin_datums[potential_admin.ckey].associate(potential_admin, admin)
 			break
 	return ckeyed_admins
 
@@ -248,16 +246,11 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		GLOB.admin_ranks = load_ranks()
 		GLOB.db_admin_datums = load_admins()
 
-/datum/admins/New(ckey, datum/view_record/admin_holder/db_holder)
-	if(!ckey || !db_holder || db_holder.ckey != ckey)
+/datum/admins/New(ckey)
+	if(!ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
-
-	db_holder.ref_vars = vars
-	rank = db_holder.rank
-	rights = db_holder.admin_rank.rights
-	extra_titles = db_holder.extra_titles
 
 	href_token = GenerateToken()
 	GLOB.admin_datums[ckey] = src
@@ -268,7 +261,6 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		return PROC_BLOCKED
 	if(admin_holder)
 		admin_holder.disassociate()
-		admin_holder = null
 	return TRUE
 
 /client/proc/readmin()
