@@ -22,9 +22,9 @@
 /*
 	if(GLOB.admin_datums[ckey] && (GLOB.admin_datums[ckey].rights & R_MOD))
 */
-//RUCM EDIT STAR
+//RUCM START
 	if(GLOB.db_admin_datums[ckey] && (GLOB.db_admin_datums[ckey].admin_rank.text_rights & R_MOD))
-//RUCM EDIT END
+//RUCM END
 		return ..()
 
 	if(CONFIG_GET(number/limit_players) && CONFIG_GET(number/limit_players) < length(GLOB.clients))
