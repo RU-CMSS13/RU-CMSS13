@@ -237,7 +237,10 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	if(!admin_client.admin_holder)
 		GLOB.admin_ranks = load_ranks()
 		GLOB.db_admin_datums = load_admins()
-		admin_client.admin_holder = GLOB.admin_datums[admin_client.ckey]
+		if(ckey in GLOB.admin_datums)
+			admin_client.admin_holder = GLOB.admin_datums[admin_client.ckey]
+		else
+			admin_client.admin_holder = new /datum/admins(admin_client.ckey)
 		admin_client.admin_holder.associate(admin_client)
 
 /datum/admins/New(ckey)
