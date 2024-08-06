@@ -118,7 +118,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 
 	if(admin.ref_vars)
 		admin.ref_vars["rank"] = admin.rank
-		admin.ref_vars["rights"] = admin.admin_rank.text_rights
+		admin.ref_vars["rights"] = admin.admin_rank.rights
 
 /datum/entity_view_meta/admin_holder/vv_edit_var(var_name, var_value)
 	return FALSE
@@ -251,7 +251,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	var/datum/view_record/admin_holder/db_holder = GLOB.db_admin_datums[ckey]
 	db_holder.ref_vars = vars
 	rank = db_holder.rank
-	rights = db_holder.admin_rank.text_rights
+	rights = db_holder.admin_rank.rights
 	extra_titles = db_holder.extra_titles
 
 	href_token = GenerateToken()
