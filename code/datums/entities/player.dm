@@ -514,7 +514,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 	player_data = player
 	player_data.owning_client = src
 //RUCM EDIT STAR
-	if(ckey in GLOB.db_admin_datums && !admin_holder)
+	if((ckey in GLOB.db_admin_datums) && !admin_holder)
 		if(!(ckey in GLOB.admin_datums))
 			new /datum/admins(ckey)
 		GLOB.admin_datums[ckey].associate(src, GLOB.db_admin_datums[ckey])
