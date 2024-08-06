@@ -23,7 +23,7 @@
 	if(GLOB.admin_datums[ckey] && (GLOB.admin_datums[ckey].rights & R_MOD))
 */
 //RUCM START
-	if(GLOB.db_admin_datums[ckey] && (GLOB.db_admin_datums[ckey].admin_rank.text_rights & R_MOD))
+	if(ckey in GLOB.db_admin_datums && (GLOB.db_admin_datums[ckey].admin_rank.text_rights & R_MOD))
 //RUCM END
 		return ..()
 
