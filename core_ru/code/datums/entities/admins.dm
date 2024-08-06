@@ -113,8 +113,9 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	admin.admin_rank = GLOB.admin_ranks[admin.rank]
 	if(values["extra_titles_encoded"])
 		var/list/decoded = json_decode(values["extra_titles_encoded"])
-		for(var/srank in decoded)
-			admin.extra_titles += srank
+		if(length(decoded))
+			for(var/srank in decoded)
+				admin.extra_titles += srank
 
 	if(admin.ref_vars)
 		admin.ref_vars["rank"] = admin.rank
