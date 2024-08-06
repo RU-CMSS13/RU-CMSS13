@@ -91,7 +91,6 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		.["extra_titles_encoded"] = json_encode(admin.extra_titles)
 
 /datum/view_record/admin_holder
-	var/admin_id
 	var/ckey
 	var/rank
 	var/extra_titles_encoded
@@ -104,7 +103,6 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	root_record_type = /datum/entity/admin_holder
 	destination_entity = /datum/view_record/admin_holder
 	fields = list(
-		"admin_id",
 		"ckey",
 		"rank",
 		"extra_titles_encoded",
