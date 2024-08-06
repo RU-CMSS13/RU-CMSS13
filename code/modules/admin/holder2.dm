@@ -38,11 +38,10 @@ GLOBAL_PROTECT(href_token)
 /datum/admins/vv_edit_var(var_name, var_value)
 	return FALSE
 
-/datum/admins/proc/associate(client/C)
-	if(istype(C))
+/datum/admins/proc/associate(client/C, datum/view_record/admin_holder/db_holder)
+	if(istype(C) && istype(db_holder) && db_holder.ckey == C.ckey)
 		owner = C
 //RUCM START
-		var/datum/view_record/admin_holder/db_holder = GLOB.db_admin_datums[owner.ckey]
 		db_holder.ref_vars = vars
 		rank = db_holder.rank
 		rights = db_holder.admin_rank.rights
@@ -130,6 +129,7 @@ you will have to do something like if(client.admin_holder.rights & R_ADMIN) your
 		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
+/* RUCM CHANGE
 /client/proc/deadmin()
 	if(IsAdminAdvancedProcCall())
 		alert_proccall("deadmin")
@@ -143,6 +143,7 @@ you will have to do something like if(client.admin_holder.rights & R_ADMIN) your
 	if(GLOB.admin_datums[ckey])
 		GLOB.admin_datums[ckey].associate(src)
 	return TRUE
+*/
 
 /datum/admins/proc/check_for_rights(rights_required)
 	if(rights_required && !(rights_required & rights))

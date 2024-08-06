@@ -18,6 +18,16 @@ GLOBAL_PROTECT(db_admin_datums)
 	var/list/datum/view_record/admin_holder/admins = DB_VIEW(/datum/view_record/admin_holder)
 	for(var/datum/view_record/admin_holder/admin as anything in admins)
 		ckeyed_admins[admin.ckey] = admin
+		for(var/client/potential_admin in GLOB.clients)
+			if(potential_admin.ckey != admin.ckey)
+				continue
+			if(!potential_admin.admin_holder)
+				if(potential_admin.ckey in GLOB.admin_datums)
+					potential_admin.admin_holder = GLOB.admin_datums[potential_admin.ckey]
+				else
+					potential_admin.admin_holder = new /datum/admins(potential_admin.ckey, admin)
+				potential_admin.admin_holder.associate(potential_admin, admin)
+			break
 	return ckeyed_admins
 
 /datum/entity/admin_rank
@@ -237,19 +247,13 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	if(!admin_client.admin_holder)
 		GLOB.admin_ranks = load_ranks()
 		GLOB.db_admin_datums = load_admins()
-		if(admin_client.ckey in GLOB.admin_datums)
-			admin_client.admin_holder = GLOB.admin_datums[admin_client.ckey]
-		else
-			admin_client.admin_holder = new /datum/admins(admin_client.ckey)
-		admin_client.admin_holder.associate(admin_client)
 
-/datum/admins/New(ckey)
-	if(!ckey)
+/datum/admins/New(ckey, datum/view_record/admin_holder/db_holder)
+	if(!ckey || !db_holder || db_holder.ckey != ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
 
-	var/datum/view_record/admin_holder/db_holder = GLOB.db_admin_datums[ckey]
 	db_holder.ref_vars = vars
 	rank = db_holder.rank
 	rights = db_holder.admin_rank.rights
@@ -257,3 +261,17 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 
 	href_token = GenerateToken()
 	GLOB.admin_datums[ckey] = src
+
+/client/proc/deadmin()
+	if(IsAdminAdvancedProcCall())
+		alert_proccall("deadmin")
+		return PROC_BLOCKED
+	if(admin_holder)
+		admin_holder.disassociate()
+		admin_holder = null
+	return TRUE
+
+/client/proc/readmin()
+	if(GLOB.admin_datums[ckey])
+		GLOB.admin_datums[ckey].associate(src, GLOB.db_admin_datums[ckey])
+	return TRUE
