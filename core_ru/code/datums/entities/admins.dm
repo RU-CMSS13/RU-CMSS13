@@ -9,7 +9,7 @@ GLOBAL_PROTECT(db_admin_datums)
 	var/list/named_ranks = list()
 	var/list/datum/view_record/admin_rank/ranks = DB_VIEW(/datum/view_record/admin_rank)
 	for(var/datum/view_record/admin_rank/rank as anything in ranks)
-		named_ranks[rank.rank] = rank
+		named_ranks[rank.rank_name] = rank
 	return named_ranks
 
 /proc/load_admins()
@@ -29,7 +29,7 @@ GLOBAL_PROTECT(db_admin_datums)
 	return ckeyed_admins
 
 /datum/entity/admin_rank
-	var/rank
+	var/rank_name
 	var/text_rights
 	var/rights = NO_FLAGS
 
@@ -54,7 +54,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 		.["text_rights"] = flags2rights(rank.rights)
 
 /datum/view_record/admin_rank
-	var/rank
+	var/rank_name
 	var/text_rights
 	var/rights = NO_FLAGS
 
@@ -62,7 +62,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 	root_record_type = /datum/entity/admin_rank
 	destination_entity = /datum/view_record/admin_rank
 	fields = list(
-		"rank",
+		"rank_name",
 		"text_rights",
 	)
 
@@ -73,7 +73,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 
 /datum/entity/admin_holder
 	var/ckey
-	var/rank
+	var/rank_name
 	var/extra_titles_encoded
 	var/list/extra_titles
 
@@ -84,7 +84,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	table_name = "admins"
 	field_types = list(
 		"ckey" = DB_FIELDTYPE_STRING_MEDIUM,
-		"rank" = DB_FIELDTYPE_STRING_MEDIUM,
+		"rank_name" = DB_FIELDTYPE_STRING_MEDIUM,
 		"extra_titles_encoded" = DB_FIELDTYPE_STRING_MAX,
 	)
 
@@ -100,7 +100,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 
 /datum/view_record/admin_holder
 	var/ckey
-	var/rank
+	var/rank_name
 	var/extra_titles_encoded
 	var/list/extra_titles = list()
 
@@ -112,13 +112,13 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	destination_entity = /datum/view_record/admin_holder
 	fields = list(
 		"ckey",
-		"rank",
+		"rank_name",
 		"extra_titles_encoded",
 	)
 
 /datum/entity_view_meta/admin_holder/map(datum/view_record/admin_holder/admin, list/values)
 	..()
-	admin.admin_rank = GLOB.admin_ranks[admin.rank]
+	admin.admin_rank = GLOB.admin_ranks[admin.rank_name]
 	if(values["extra_titles_encoded"])
 		var/list/decoded = json_decode(values["extra_titles_encoded"])
 		if(length(decoded))
@@ -126,7 +126,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 				admin.extra_titles += srank
 
 	if(admin.ref_vars)
-		admin.ref_vars["rank"] = admin.rank
+		admin.ref_vars["rank"] = admin.rank_name
 		admin.ref_vars["rights"] = admin.admin_rank.rights
 
 /datum/entity_view_meta/admin_holder/vv_edit_var(var_name, var_value)
@@ -223,7 +223,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	var/datum/entity/admin_rank/rank
 	if(!length(ranks))
 		rank = DB_ENTITY(/datum/entity/admin_rank)
-		rank.rank = "!localhost!"
+		rank.rank_name = "!localhost!"
 		rank.rights = RL_HOST
 		rank.text_rights = "host"
 		rank.save()
@@ -237,7 +237,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	if(!length(admins))
 		admin = DB_ENTITY(/datum/entity/admin_holder)
 		admin.ckey = admin_client.ckey
-		admin.rank = rank.rank
+		admin.rank_name = rank.rank_name
 		admin.save()
 	else
 		admin = admins[length(admins)]
