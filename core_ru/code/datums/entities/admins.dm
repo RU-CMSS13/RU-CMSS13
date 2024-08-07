@@ -39,7 +39,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 	entity_type = /datum/entity/admin_rank
 	table_name = "admin_ranks"
 	field_types = list(
-		"rank" = DB_FIELDTYPE_STRING_MEDIUM,
+		"rank_name" = DB_FIELDTYPE_STRING_MEDIUM,
 		"text_rights" = DB_FIELDTYPE_STRING_MAX,
 	)
 
