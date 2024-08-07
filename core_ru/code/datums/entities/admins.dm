@@ -18,14 +18,10 @@ GLOBAL_PROTECT(db_admin_datums)
 	var/list/datum/view_record/admin_holder/admins = DB_VIEW(/datum/view_record/admin_holder)
 	for(var/datum/view_record/admin_holder/admin as anything in admins)
 		ckeyed_admins[admin.ckey] = admin
-		for(var/client/potential_admin in GLOB.clients)
-			if(potential_admin.ckey != admin.ckey)
-				continue
-			if(!potential_admin.admin_holder)
-				if(!(potential_admin.ckey in GLOB.admin_datums))
-					new /datum/admins(potential_admin.ckey)
-				GLOB.admin_datums[potential_admin.ckey].associate(potential_admin, admin)
-			break
+		if(GLOB.directory[admin.ckey])
+			if(!(admin.ckey in GLOB.admin_datums))
+				new /datum/admins(admin.ckey)
+			GLOB.admin_datums[admin.ckey].associate(GLOB.directory[ckey], admin)
 	return ckeyed_admins
 
 /datum/entity/admin_rank
