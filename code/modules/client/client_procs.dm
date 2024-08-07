@@ -910,10 +910,10 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	return success
 
 /client/proc/check_localhost_status()
-//	if(CONFIG_GET(flag/no_localhost_rank))
-//		return FALSE
+	if(CONFIG_GET(flag/no_localhost_rank))
+		return FALSE
 
-	var/static/list/localhost_addresses = list("127.0.0.1", "::1", "176.98.232.152")
+	var/static/list/localhost_addresses = list("127.0.0.1", "::1")
 	if(isnull(address) || (address in localhost_addresses))
 		return TRUE
 
