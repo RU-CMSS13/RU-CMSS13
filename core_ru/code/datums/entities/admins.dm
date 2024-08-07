@@ -19,7 +19,7 @@ GLOBAL_PROTECT(db_admin_datums)
 	for(var/datum/view_record/admin_holder/admin as anything in admins)
 		ckeyed_admins[admin.ckey] = admin
 		if(GLOB.directory[admin.ckey])
-			if(!(admin.ckey in GLOB.admin_datums))
+			if(!GLOB.admin_datums[admin.ckey])
 				new /datum/admins(admin.ckey)
 			GLOB.admin_datums[admin.ckey].associate(GLOB.directory[ckey], admin)
 	return ckeyed_admins
