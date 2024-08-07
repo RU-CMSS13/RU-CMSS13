@@ -44,7 +44,7 @@ GLOBAL_PROTECT(href_token)
 //RUCM START
 		if(istype(db_holder) && db_holder.ckey == C.ckey)
 			db_holder.ref_vars = vars
-			rank = db_holder.rank
+			rank = db_holder.rank_name
 			rights = db_holder.admin_rank.rights
 			extra_titles = db_holder.extra_titles
 //RUCM END
