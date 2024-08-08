@@ -42,12 +42,12 @@ GLOBAL_PROTECT(href_token)
 	if(istype(C))
 		owner = C
 //RUCM START
-		if(istype(db_holder) && db_holder.ckey == C.ckey)
+		if(istype(db_holder))
 			db_holder.ref_vars = vars
-			rank = db_holder.rank_name
+			rank = db_holder.admin_rank.rank_name
 			rights = db_holder.admin_rank.rights
 			extra_titles = db_holder.extra_titles
-//RUCM END
+//RUCM ENDка
 		owner.admin_holder = src
 		owner.add_admin_verbs()
 		owner.tgui_say.load()
