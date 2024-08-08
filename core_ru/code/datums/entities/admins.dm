@@ -131,6 +131,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	var/ckey
 
 	var/list/extra_titles = list()
+	var/rank_name
 	var/datum/view_record/admin_rank/admin_rank
 	var/list/ref_vars
 
@@ -142,18 +143,19 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		"rank_id",
 		"extra_titles_encoded",
 		"ckey" = "player.ckey",
-		"admin_rank" = "admin_rank",
+		"rank_name" = "admin_rank.rank_name",
 	)
 
 /datum/entity_view_meta/admin_holder/map(datum/view_record/admin_holder/admin, list/values)
 	..()
+	admin.admin_rank = GLOB.admin_ranks[admin.rank_name]
 	if(values["extra_titles_encoded"])
 		var/list/decoded = json_decode(values["extra_titles_encoded"])
 		if(length(decoded))
 			for(var/srank in decoded)
 				admin.extra_titles += srank
 
-	if(admin.ref_vars)
+	if(admin.ref_vars && admin.admin_rank)
 		admin.ref_vars["rank"] = admin.admin_rank.rank_name
 		admin.ref_vars["rights"] = admin.admin_rank.rights
 
