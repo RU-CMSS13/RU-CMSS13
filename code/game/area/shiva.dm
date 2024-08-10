@@ -6,7 +6,6 @@
 	//ambience = list('figuresomethingout.ogg')
 	icon_state = "shiva"
 	can_build_special = TRUE //T-Comms structure
-	powernet_name = "ground"
 	temperature = ICE_COLONY_TEMPERATURE
 	minimap_color = MINIMAP_AREA_COLONY
 
