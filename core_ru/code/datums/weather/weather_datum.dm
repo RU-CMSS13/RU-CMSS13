@@ -262,11 +262,15 @@
 	overlays += "[new_overlay]"
 
 /obj/structure/snow/proc/damage_act(damage)
-	if(progression > damage / 5)
-		progression -= damage / 5
+	var/remaining = progression - damage
+	if(remaining > 0 )
+		progression = remaining
 	else
-		changing_layer(min(bleed_layer - round(damage / (bleed_layer * 20), 1), MAX_LAYER_SNOW_LEVELS))
-		progression = bleed_layer * 4
+		if(remaining < -(bleed_layer * 4))
+			changing_layer(0)
+		else
+			changing_layer(bleed_layer - 1)
+			progression = bleed_layer * 4
 
 /obj/structure/snow/get_projectile_hit_boolean(obj/projectile/proj)
 	return FALSE
