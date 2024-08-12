@@ -188,11 +188,11 @@
 
 	. = ..()
 
-/obj/structure/snow/process(delta_time)
+/obj/structure/snow/process()
 	if(!SSweather_conditions.running_weather)
-		damage_act(3 * delta_time)
+		damage_act(3)
 	else if(SSweather_conditions.running_weather.weather_special_effect != /datum/weather_effect/snow)
-		damage_act(6 * delta_time)
+		damage_act(6)
 	update_overlays()
 
 /obj/structure/snow/proc/update_visuals_effects(datum/source, replace = TRUE)
