@@ -128,7 +128,7 @@ SUBSYSTEM_DEF(global_light)
 	custom_time_offset = new_value
 
 /datum/controller/subsystem/global_light/proc/game_time_offseted()
-	return (REALTIMEOFDAY + custom_time_offset) % game_time_length
+	return (world.time + custom_time_offset) % game_time_length
 
 /datum/controller/subsystem/global_light/proc/create_steps()
 	for(var/path in typesof(/datum/time_of_day))
