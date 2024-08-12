@@ -14,7 +14,7 @@
 	max_severity = 10
 	max_severity_change = 5
 	severity_steps = 5
-	probability = 3
+	probability = 2
 	target_trait = PARTICLEWEATHER_SNOW
 
 	weather_special_effect = /datum/weather_effect/snow
@@ -40,7 +40,7 @@
 	max_severity = 100
 	max_severity_change = 60
 	severity_steps = 10
-	probability = 2
+	probability = 1
 	target_trait = PARTICLEWEATHER_SNOW
 
 	weather_special_effect = /datum/weather_effect/snow

@@ -13,7 +13,7 @@
 	max_severity = 10
 	max_severity_change = 5
 	severity_steps = 5
-	probability = 5
+	probability = 4
 	target_trait = PARTICLEWEATHER_RAIN
 
 	weather_special_effect = /datum/weather_effect/rain
@@ -40,7 +40,7 @@
 	max_severity = 150
 	max_severity_change = 50
 	severity_steps = 50
-	probability = 3
+	probability = 2
 	target_trait = PARTICLEWEATHER_RAIN
 
 	weather_special_effect = /datum/weather_effect/rain

@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(weather_conditions)
 		run_weather(next_hit)
 		CHECK_TICK
 
-	if((!running_weather || prob(1)) && COOLDOWN_FINISHED(src, next_weather_start) && !running_weather && length(elligble_weathers) && prob(10))
+	if((!running_weather || prob(1)) && COOLDOWN_FINISHED(src, next_weather_start) && length(elligble_weathers) && prob(1))
 		var/our_event = pick(elligble_weathers)
 		if(our_event && prob(elligble_weathers[our_event]))
 			next_hit = new our_event()
