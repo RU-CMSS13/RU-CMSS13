@@ -39,6 +39,7 @@
 	data["gamestate"] = SSticker.current_state
 
 	data["round_duration"] = ROUND_TIME
+	data["zone_time"] = SSsunlighting.game_time_offseted() - GLOB.timezoneOffset
 	// Amount of world's ticks in seconds, useful for calculating round duration
 
 	//Time dilation stats.
