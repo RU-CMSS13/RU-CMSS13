@@ -12,6 +12,7 @@
 #include "core_defines_ru\skills.dm"
 #include "core_defines_ru\sounds.dm"
 #include "core_defines_ru\turf_flags.dm"
+#include "core_defines_ru\subsystems.dm"
 #include "core_defines_ru\vendors.dm"
 #include "core_defines_ru\weather.dm"
 #include "core_defines_ru\xeno.dm"
