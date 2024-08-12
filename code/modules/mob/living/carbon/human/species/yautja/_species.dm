@@ -14,6 +14,7 @@
 		TRAIT_FOREIGN_BIO,
 		TRAIT_DEXTROUS,
 		TRAIT_EMOTE_CD_EXEMPT,
+		TRAIT_IRON_TEETH,
 	)
 	unarmed_type = /datum/unarmed_attack/punch/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
@@ -215,6 +216,9 @@
 	give_action(hunter, /datum/action/yautja_emote_panel)
 	give_action(hunter, /datum/action/predator_action/mark_for_hunt)
 	give_action(hunter, /datum/action/predator_action/mark_panel)
+//RUCM START
+	give_action(hunter, /datum/action/human_action/yautja_jump)
+//RUCM END
 	return ..()
 
 /datum/species/yautja/get_hairstyle(style)

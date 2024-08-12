@@ -122,7 +122,7 @@
 			return
 		if(user.action_busy)
 			return
-		if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_TRAINED))
+		if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
 			to_chat(user, SPAN_WARNING("You're not trained to repair [src]..."))
 			return
 		var/obj/item/tool/weldingtool/WT = I
@@ -374,6 +374,9 @@ GLOBAL_LIST_EMPTY(all_static_telecomms_towers)
 	addtimer(CALLBACK(src, PROC_REF(switch_to_idle_corruption)), (2 SECONDS))
 
 	new_pylon.comms_relay_connection()
+//RUCM START
+	START_PROCESSING(SSslowobj, src)
+//RUCM END
 
 /// Handles removing corruption effects from the comms relay
 /obj/structure/machinery/telecomms/relay/preset/tower/mapcomms/proc/uncorrupt(datum/deleting_datum)
