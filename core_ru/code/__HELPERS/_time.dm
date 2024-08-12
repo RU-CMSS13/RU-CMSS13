@@ -10,4 +10,4 @@
 	return time2text(game_time(), format)
 
 /proc/planet_game_time_timestamp(format = "hh:mm:ss")
-	return time2text(SSsunlighting.game_time_offseted() - GLOB.timezoneOffset, format)
+	return time2text(SSglobal_light.game_time_offseted() - GLOB.timezoneOffset, format)
