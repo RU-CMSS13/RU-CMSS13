@@ -18,7 +18,7 @@
 
 	weather_special_effect = /datum/weather_effect/rain
 	weather_color_offset = "#23386b"
-	weather_additional_events = list("thunder" = list(1, /datum/weather_event/thunder), "wind" = list(2, /datum/weather_event/wind))
+	weather_additional_events = list("thunder" = list(2, /datum/weather_event/thunder), "wind" = list(4, /datum/weather_event/wind))
 	weather_warnings = list("siren" = null, "message" = FALSE)
 	fire_smothering_strength = 6
 
@@ -42,6 +42,6 @@
 
 	weather_special_effect = /datum/weather_effect/rain
 	weather_color_offset = "#102356"
-	weather_additional_events = list("thunder" = list(2, /datum/weather_event/thunder), "wind" = list(4, /datum/weather_event/wind))
+	weather_additional_events = list("thunder" = list(6, /datum/weather_event/thunder), "wind" = list(8, /datum/weather_event/wind))
 	weather_warnings = list("siren" = null, "message" = FALSE)
 	fire_smothering_strength = 6

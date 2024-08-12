@@ -1,7 +1,7 @@
 /particles/weather
 	icon					= 'core_ru/icons/effects/particles/particle.dmi'
-	width					= 1500 // I think this is supposed to be in pixels, but it doesn't match bounds, so idk - 1000x1000 seems to prevent particle-less edges
-	height					= 1500
+	width					= 2000 // I think this is supposed to be in pixels, but it doesn't match bounds, so idk - 1000x1000 seems to prevent particle-less edges
+	height					= 2000
 	count					= 10000
 	bound1					= list(-480, -480, -10)
 	bound2					= list(480, 480, 10)
