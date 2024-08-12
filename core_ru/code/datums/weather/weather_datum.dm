@@ -386,8 +386,8 @@
 
 	var/particles/weather/particle_effect_type = /particles/weather/rain
 
-	var/weather_duration_lower = 5 MINUTES
-	var/weather_duration_upper = 20 MINUTES
+	var/weather_duration_lower = 10 MINUTES
+	var/weather_duration_upper = 60 MINUTES
 
 	var/damage_type = null
 	var/damage_per_tick = 0
