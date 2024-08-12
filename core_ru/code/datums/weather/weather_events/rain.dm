@@ -32,6 +32,9 @@
 	weather_sounds = /datum/looping_sound/storm
 	weather_messages = list("The rain cools your skin.", "The storm is really picking up!")
 
+	weather_duration_lower = 40 MINUTES
+	weather_duration_upper = 100 MINUTES
+
 	damage_type = TOX
 	min_severity = 4
 	max_severity = 150

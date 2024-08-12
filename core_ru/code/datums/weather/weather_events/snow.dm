@@ -31,6 +31,9 @@
 	weather_sounds = /datum/looping_sound/snow
 	weather_messages = list("You feel a chill", "The cold wind is freezing you to the bone", "How can a man who is warm, understand a man who is cold?")
 
+	weather_duration_lower = 40 MINUTES
+	weather_duration_upper = 100 MINUTES
+
 	damage_type = BURN
 	damage_per_tick = 0.15
 	min_severity = 40
