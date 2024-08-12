@@ -10,4 +10,6 @@
 
 /datum/game_mode/extended/faction_clash/post_setup()
 	. = ..()
+/*
 	SSweather.force_weather_holder(/datum/weather_ss_map_holder/faction_clash)
+*/

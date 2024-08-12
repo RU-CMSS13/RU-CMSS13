@@ -170,10 +170,55 @@
 	for(var/i in 1 to length(old_turfs))
 		CHECK_TICK
 		if(!(old_turfs[old_turfs[i]] & MOVE_TURF))
+//RUCM START
+			GLOB.global_light_queue_work |= old_turfs[i]
+			GLOB.global_light_queue_work |= new_turfs[i]
+//RUCM END
 			continue
 		var/turf/oldT = old_turfs[i]
 		var/turf/newT = new_turfs[i]
+/*
 		newT.afterShuttleMove(oldT, rotation) //turfs
+*/
+//RUCM START
+//		var/turf/new_ceiling = get_step_multiz(newT, UP)
+		if(newT.outdoor_effect)
+			qdel(newT.outdoor_effect, TRUE)
+		if(oldT.outdoor_effect)
+			qdel(oldT.outdoor_effect, TRUE)
+//silent fix
+		newT.pseudo_roof = custom_ceiling
+/*
+		if(new_ceiling)
+			if(!new_ceiling.baseturfs || !(new_ceiling.turf_flags & TURF_WEATHER_PROOF))
+				new_ceiling.ChangeTurf(custom_ceiling)
+			else
+				if(length(new_ceiling.baseturfs) > 1)
+					new_ceiling.baseturfs = list(new_ceiling.baseturfs[1], custom_ceiling) + new_ceiling.baseturfs.Copy(2, length(new_ceiling.baseturfs))
+				else
+					new_ceiling.baseturfs = list(custom_ceiling) + new_ceiling.baseturfs
+		else
+			newT.pseudo_roof = custom_ceiling
+*/
+		newT.afterShuttleMove(oldT, rotation)
+		GLOB.global_light_queue_work |= newT
+
+//silent fix
+		var/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/presetted_pseudo = locate(/obj/effect/mapping_helpers/global_light/pseudo_roof_setter) in oldT
+		oldT.pseudo_roof = presetted_pseudo ? presetted_pseudo.pseudo_roof : initial(oldT.pseudo_roof)
+/*
+		var/turf/old_ceiling = get_step_multiz(oldT, UP)
+		if(!old_ceiling)
+			var/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/presetted_pseudo = locate(/obj/effect/mapping_helpers/global_light/pseudo_roof_setter) in oldT
+			oldT.pseudo_roof = presetted_pseudo ? presetted_pseudo.pseudo_roof : initial(oldT.pseudo_roof)
+		else if(istype(old_ceiling, custom_ceiling))
+			var/turf/open/floor/roof/old_shuttle_ceiling = old_ceiling
+			old_shuttle_ceiling.ScrapeAway()
+		else
+			old_ceiling.baseturfs -= custom_ceiling
+*/
+		GLOB.global_light_queue_work |= oldT
+//RUCM END
 
 	for(var/i in 1 to length(moved_atoms))
 		CHECK_TICK
@@ -199,6 +244,9 @@
 		var/turf/oldT = old_turfs[i]
 		var/turf/newT = new_turfs[i]
 		newT.lateShuttleMove(oldT)
+//RUCM START
+		oldT.get_sky_and_weather_states()
+//RUCM END
 
 	for(var/i in 1 to length(moved_atoms))
 		CHECK_TICK

@@ -8,7 +8,12 @@
 	..()
 
 	handle_fire() //Check if we're on fire
+/*
 	if(SSweather.is_weather_event)
+*/
+//RUCM START
+	if(SSweather_conditions.running_weather)
+//RUCM END
 		handle_weather(delta_time)
 
 	if(stat != CONSCIOUS)

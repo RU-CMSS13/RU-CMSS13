@@ -648,7 +648,13 @@
 	..()
 	update_overlays()
 
+/*
 /turf/open/gm/river/proc/update_overlays()
+*/
+//RUCM START
+/turf/open/gm/river/update_overlays()
+	. = ..()
+//RUCM END
 	overlays.Cut()
 	if(no_overlay)
 		return

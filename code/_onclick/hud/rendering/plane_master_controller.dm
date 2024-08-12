@@ -64,7 +64,12 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 		GAME_PLANE,
 		FLOOR_PLANE,
 		LIGHTING_PLANE,
+/*
 		EXTERIOR_LIGHTING_PLANE,
+*/
+//RUCM START
+		S_LIGHTING_VISUAL_PLANE,
+//RUCM END
 	)
 
 /// Exists for convienience when referencing all non-master render plates.

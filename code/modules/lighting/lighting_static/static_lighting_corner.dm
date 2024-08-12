@@ -151,6 +151,7 @@
 	return
 
 
+/* RUCM CHANGE
 /datum/static_lighting_corner/Destroy(force)
 	if (!force)
 		return QDEL_HINT_LETMELIVE
@@ -174,3 +175,4 @@
 	if(needs_update)
 		SSlighting.corners_queue -= src
 	return ..()
+*/

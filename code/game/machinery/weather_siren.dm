@@ -11,12 +11,21 @@
 	health = 0
 
 /obj/structure/machinery/weather_siren/Initialize()
+/*
 	GLOB.weather_notify_objects += src
 	return ..()
+*/
+//RUCM START
+	. = ..()
+	new /obj/structure/machinery/siren/weather(loc)
+	return INITIALIZE_HINT_QDEL
+//RUCM END
 
+/* RUCM REMOVE
 /obj/structure/machinery/weather_siren/Destroy()
 	GLOB.weather_notify_objects -= src
 	. = ..()
+*/
 
 /obj/structure/machinery/weather_siren/power_change()
 	return

@@ -2,15 +2,24 @@
 //Formulas. These don't need to be defines, but helpful green. Should likely reuse these for a base 8 icon system.
 #define cur_increment(v) floor((v-1)/8)+1
 
+/*
 /turf/closed/wall/update_icon()
 	..()
 	if(QDELETED(src))
+*/
+//RUCM START
+/turf/closed/wall/update_overlays()
+	. = ..()
+	if(!.)
+//RUCM END
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated
 		generate_damage_overlays()
 
+/*
 	overlays.Cut()
+*/
 
 	add_cleanable_overlays()
 
@@ -26,9 +35,11 @@
 			overlays += I
 			return
 
+/*
 		for(var/i = 1 to 4)
 			I = image(icon, "[walltype][wall_connections[i]]", dir = 1<<(i-1))
 			overlays += I
+*/
 
 	if(damage)
 		var/current_dmg_overlay = floor(damage / damage_cap * length(damage_overlays)) + 1
@@ -44,9 +55,11 @@
 				bullet_overlay = image('icons/effects/bulletholes.dmi', src, "bhole_[bullethole_state]_2")
 			overlays += bullet_overlay
 
+/*
 	var/area/my_area = loc
 	if(my_area.lighting_effect)
 		overlays += my_area.lighting_effect
+*/
 
 #undef BULLETHOLE_STATES
 #undef cur_increment
@@ -61,7 +74,7 @@
 		img.alpha = (i * alpha_inc) - 1
 		damage_overlays[i] = img
 
-
+/*
 /turf/closed/wall/proc/update_connections(propagate = 0)
 	var/list/wall_dirs = list()
 
@@ -135,3 +148,7 @@
 #undef CORNER_COUNTERCLOCKWISE
 #undef CORNER_DIAGONAL
 #undef CORNER_CLOCKWISE
+*/
+
+/turf/closed/wall/get_base_icon()
+	return walltype

@@ -662,7 +662,12 @@
 
 	var/turf/T = get_turf(A)
 
+/*
 	if(!T || T.is_weedable() < FULLY_WEEDABLE || T.density || (T.z != X.z))
+*/
+//RUCM START
+	if(!T || T.is_weedable() < FULLY_WEEDABLE || T.snow || T.density || (T.z != X.z))
+//RUCM END
 		to_chat(X, SPAN_XENOWARNING("You can't do that here."))
 		return
 

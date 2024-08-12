@@ -46,7 +46,9 @@
 	var/changing_turf = FALSE
 	var/chemexploded = FALSE // Prevents explosion stacking
 
+/* RUCM CHANGE
 	var/turf_flags = NO_FLAGS
+*/
 
 	/// Whether we've broken through the ceiling yet
 	var/ceiling_debrised = FALSE
@@ -97,6 +99,10 @@
 	var/area/current_area = loc
 	if(current_area?.lighting_effect)
 		overlays += current_area.lighting_effect
+//RUCM START
+	else
+		GLOB.global_light_queue_work |= src
+//RUCM END
 
 	if(opacity)
 		directional_opacity = ALL_CARDINALS
@@ -137,8 +143,10 @@
 /turf/ex_act(severity)
 	return 0
 
+/* RUCM CHANGE
 /turf/proc/update_icon() //Base parent. - Abby
 	return
+*/
 
 /// Call to move a turf from its current area to a new one
 /turf/proc/change_area(area/old_area, area/new_area)
@@ -273,6 +281,7 @@
 
 	return TRUE //Nothing found to block so return success!
 
+/*
 /turf/Entered(atom/movable/A)
 	if(!istype(A))
 		return
@@ -283,6 +292,26 @@
 	// Let explosions know that the atom entered
 	for(var/datum/automata_cell/explosion/E in autocells)
 		E.on_turf_entered(A)
+*/
+//RUCM START
+/turf/Entered(atom/movable/arrived, old_loc, list/old_locs)
+	if(!istype(arrived))
+		return
+
+	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
+
+	// Let explosions know that the atom entered
+	for(var/datum/automata_cell/explosion/E in autocells)
+		E.on_turf_entered(arrived)
+
+/turf/Exited(atom/movable/gone, direction)
+	if(!istype(gone))
+		return
+
+	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
+//RUCM END
 
 /turf/proc/is_plating()
 	return 0
@@ -387,6 +416,13 @@
 
 	var/pylons = linked_pylons
 
+//RUCM START
+	var/old_ceiling_status = ceiling_status
+
+	var/old_weeds = weeds
+	var/old_snow = snow
+//RUCM END
+
 	var/list/old_baseturfs = baseturfs
 
 	//static lighting
@@ -414,6 +450,13 @@
 
 	W.linked_pylons = pylons
 
+//RUCM START
+	W.ceiling_status = old_ceiling_status
+
+	W.weeds = old_weeds
+	W.snow = old_snow
+//RUCM END
+
 	W.hybrid_lights_affecting = old_hybrid_lights_affecting
 	W.dynamic_lumcount = dynamic_lumcount
 
@@ -438,6 +481,9 @@
 
 	if(W.directional_opacity != old_directional_opacity)
 		W.reconsider_lights()
+//RUCM START
+		W.reconsider_global_light()
+//RUCM END
 
 	var/area/thisarea = get_area(W)
 	if(thisarea.lighting_effect)
@@ -860,3 +906,37 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(T.dir != dir)
 		T.setDir(dir)
 	return T
+
+//RUCM START
+/turf/proc/on_atom_created(atom/created_atom)
+	return
+
+/turf/proc/handle_transpare_turf(is_openspace)
+/* FUTURE
+	layer = OPENSPACE_LAYER
+	if(is_openspace)
+		plane = OPENSPACE_PLANE
+	else
+		plane = TRANSPARENT_FLOOR_PLANE
+
+	var/turf/below_turf = below()
+	if(below_turf)
+		vis_contents += below_turf
+	update_multi_z()
+
+///Updates the viscontents or underlays below this tile.
+/turf/proc/update_multi_z()
+	var/turf/below_turf = below()
+	if(!below_turf)
+		vis_contents.Cut()
+		var/turf/path = SSmapping.level_trait(z, ZTRAIT_BASETURF) || /turf/open/space
+		if(!ispath(path))
+			path = text2path(path)
+			if(!ispath(path))
+				warning("Z-level [z] has invalid baseturf '[SSmapping.level_trait(z, ZTRAIT_BASETURF)]'")
+				path = /turf/open/space
+		var/mutable_appearance/underlay_appearance = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = TURF_LAYER-0.02, plane = PLANE_SPACE)
+		underlay_appearance.appearance_flags = RESET_ALPHA | RESET_COLOR
+		underlays += underlay_appearance
+*/
+//RUCM END

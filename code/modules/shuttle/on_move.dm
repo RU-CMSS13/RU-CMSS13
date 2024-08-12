@@ -40,6 +40,10 @@ All ShuttleMove procs go here
 		else //non-living mobs shouldn't be affected by shuttles, which is why this is an else
 			if(thing.anchored)
 				// Ordered by most likely:
+//RUCM START
+				if(istype(thing, /atom/movable/outdoor_effect))
+					continue
+//RUCM END
 				if(istype(thing, /obj/structure/machinery/landinglight))
 					continue
 				if(istype(thing, /obj/docking_port))
@@ -270,6 +274,11 @@ All ShuttleMove procs go here
 */
 
 /* ***********************************Misc move procs************************************/
+
+//RUCM START
+/atom/movable/outdoor_effect/onShuttleMove()
+	return FALSE
+//RUCM END
 
 /atom/movable/lighting_object/onShuttleMove()
 	return FALSE

@@ -1,6 +1,8 @@
 #define FALLOFF_SOUNDS 1
 
+/* RUCM MOVE
 #define FREE_CHAN_END 1016
+*/
 #define INITIAL_SOUNDSCAPE_COOLDOWN 20
 
 #define EAR_DEAF_MUTE 1
@@ -20,6 +22,7 @@
 
 #define ITEM_EQUIP_VOLUME 50
 
+/* RUCM MOVE
 //Reserved channels
 #define SOUND_CHANNEL_NOTIFY 1016
 #define SOUND_CHANNEL_VOX    1017
@@ -30,6 +33,7 @@
 //#define SOUND_CHANNEL_ADMIN_MIDI 1022
 #define SOUND_CHANNEL_LOBBY 1023
 #define SOUND_CHANNEL_Z 1024
+*/
 
 //default byond sound environments
 #define SOUND_ENVIRONMENT_NONE -1
