@@ -83,6 +83,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"stickyban_whitelisted" = DB_FIELDTYPE_INT,
 		"byond_account_age" = DB_FIELDTYPE_STRING_MEDIUM,
 		"first_join_date" = DB_FIELDTYPE_STRING_MEDIUM,
+//RUCM START
+		"glob_pt_visibility" = DB_FIELDTYPE_INT,
+//RUCM END
 	)
 
 // NOTE: good example of database operations using NDatabase, so it is well commented
@@ -513,6 +516,12 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		error("ALARM: MISMATCH. Loaded player data for client [ckey], player data ckey is [player.ckey], id: [player.id]")
 	player_data = player
 	player_data.owning_client = src
+//RUCM EDIT STAR
+	if((ckey in GLOB.db_admin_datums) && !admin_holder)
+		if(!GLOB.admin_datums[ckey])
+			new /datum/admins(ckey)
+		GLOB.admin_datums[ckey].associate(src, GLOB.db_admin_datums[ckey])
+//RUCM EDIT END
 	if(!player_data.last_login)
 		player_data.first_join_date = "[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]"
 	if(!player_data.first_join_date)
@@ -785,5 +794,8 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"last_known_ip",
 		"last_known_cid",
 		"discord_link_id",
-		"whitelist_status"
+		"whitelist_status",
+//RUCM START
+		"glob_pt_visibility",
+//RUCM END
 		)
