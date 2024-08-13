@@ -166,7 +166,7 @@
 	scatter = 0
 	damage = 3*100
 	penetration= ARMOR_PENETRATION_TIER_10
-	shell_speed = AMMO_SPEED_TIER_6
+	shell_speed = AMMO_SPEED_TIER_8
 	damage_falloff = 0
 
 /datum/ammo/bullet/sniper/railgun/on_hit_mob(mob/M, _unused)

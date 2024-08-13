@@ -10,7 +10,7 @@
 	damage = 80
 	penetration = 0
 	accuracy = HIT_ACCURACY_TIER_1
-	shell_speed = AMMO_SPEED_TIER_6
+	shell_speed = AMMO_SPEED_TIER_8
 	accurate_range = 14
 	handful_state = "lever_action_bullet"
 
@@ -35,7 +35,7 @@
 	penetration = 0
 	accuracy = HIT_ACCURACY_TIER_1
 	damage_falloff = DAMAGE_FALLOFF_BLANK //not much, though (comparatively)
-	shell_speed = AMMO_SPEED_TIER_5
+	shell_speed = AMMO_SPEED_TIER_6
 	handful_state = "training_lever_action_bullet"
 
 //unused, and unobtainable... for now
@@ -46,7 +46,6 @@
 	accurate_range = 12
 	damage = 70
 	penetration = ARMOR_PENETRATION_TIER_6
-	shell_speed = AMMO_SPEED_TIER_6
 	handful_state = "marksman_lever_action_bullet"
 
 /datum/ammo/bullet/lever_action/xm88
@@ -55,7 +54,6 @@
 	damage = 104
 	penetration = ARMOR_PENETRATION_TIER_2
 	accuracy = HIT_ACCURACY_TIER_1
-	shell_speed = AMMO_SPEED_TIER_6
 	accurate_range = 14
 	handful_state = "boomslang_bullet"
 

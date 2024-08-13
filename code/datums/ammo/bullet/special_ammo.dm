@@ -90,7 +90,7 @@
 	penetration = ARMOR_PENETRATION_TIER_7
 	damage_armor_punch = 0
 	pen_armor_punch = 0
-	shell_speed = 2*AMMO_SPEED_TIER_6
+	shell_speed = AMMO_SPEED_TIER_8
 	accuracy = HIT_ACCURACY_TIER_5
 
 /datum/ammo/bullet/turret/dumb

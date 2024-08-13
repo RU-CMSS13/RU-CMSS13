@@ -30,7 +30,6 @@
 	anchored = TRUE //You will not have me, space wind!
 	flags_atom = NOINTERACT //No real need for this, but whatever. Maybe this flag will do something useful in the future.
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	alpha = 0 // We want this thing to be transparent when it drops on a turf because it will be on the user's turf. We then want to make it opaque as it travels.
 	layer = FLY_LAYER
 	animate_movement = SLIDE_STEPS //disables gliding because it fights against what animate() is doing
 
@@ -216,10 +215,15 @@
 	return
 
 /obj/projectile/proc/calculate_damage()
+	if(damage_boosted)
+		damage = damage / last_damage_mult
+		damage_boosted--
+		last_damage_mult = 1
+
 	if(effective_range_min && distance_travelled < effective_range_min)
-		return max(0, damage - round((effective_range_min - distance_travelled) * damage_buildup))
+		return max(0, damage - floor((effective_range_min - distance_travelled) * damage_buildup))
 	else if(distance_travelled > effective_range_max)
-		return max(0, damage - round((distance_travelled - effective_range_max) * damage_falloff))
+		return max(0, damage - floor((distance_travelled - effective_range_max) * damage_falloff))
 	return damage
 
 /*
@@ -247,7 +251,7 @@ So if we are on the 32th absolute pixel coordinate we are on tile 1, but if we a
 		qdel(src)
 		return
 
-	if(projectile_speed > AMMO_SPEED_TIER_5)
+	if(projectile_speed > AMMO_SPEED_TIER_7)
 		projectile_flags |= PROJECTILE_HITSCAN
 
 	if(!isnull(range))

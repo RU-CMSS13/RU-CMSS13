@@ -18,7 +18,7 @@
 	scatter = 0
 	damage = 70
 	penetration= ARMOR_PENETRATION_TIER_10
-	shell_speed = AMMO_SPEED_TIER_6
+	shell_speed = AMMO_SPEED_TIER_8
 	damage_falloff = 0
 
 /datum/ammo/bullet/sniper/on_hit_mob(mob/hit, obj/projectile/proj)
@@ -106,7 +106,6 @@
 	shrapnel_chance = 0 // This isn't leaving any shrapnel.
 	accuracy = HIT_ACCURACY_TIER_8
 	damage = 125
-	shell_speed = AMMO_SPEED_TIER_6
 	penetration = ARMOR_PENETRATION_TIER_10 + ARMOR_PENETRATION_TIER_5
 
 /datum/ammo/bullet/sniper/anti_materiel/proc/stopping_power_knockback(mob/living/living_mob, obj/projectile/fired_projectile)
@@ -315,7 +314,7 @@
 	shrapnel_chance = 0 // This isn't leaving any shrapnel.
 	accuracy = HIT_ACCURACY_TIER_8
 	damage = 150
-	shell_speed = AMMO_SPEED_TIER_6 + AMMO_SPEED_TIER_2
+	shell_speed = AMMO_SPEED_TIER_8
 	penetration = ARMOR_PENETRATION_TIER_10 + ARMOR_PENETRATION_TIER_5
 
 /datum/ammo/bullet/sniper/elite/set_bullet_traits()

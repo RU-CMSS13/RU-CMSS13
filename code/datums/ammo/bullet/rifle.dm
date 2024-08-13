@@ -145,7 +145,7 @@
 	damage = 55
 	scatter = -SCATTER_AMOUNT_TIER_8
 	penetration= ARMOR_PENETRATION_TIER_7
-	shell_speed = AMMO_SPEED_TIER_6
+	shell_speed = AMMO_SPEED_TIER_8
 
 /datum/ammo/bullet/rifle/m4ra/incendiary
 	name = "A19 high velocity incendiary bullet"
@@ -155,7 +155,6 @@
 	accuracy = HIT_ACCURACY_TIER_4
 	scatter = -SCATTER_AMOUNT_TIER_8
 	penetration= ARMOR_PENETRATION_TIER_5
-	shell_speed = AMMO_SPEED_TIER_6
 
 /datum/ammo/bullet/rifle/m4ra/incendiary/set_bullet_traits()
 	. = ..()
@@ -171,7 +170,6 @@
 	accuracy = -HIT_ACCURACY_TIER_2
 	scatter = -SCATTER_AMOUNT_TIER_8
 	penetration = ARMOR_PENETRATION_TIER_10
-	shell_speed = AMMO_SPEED_TIER_6
 
 /datum/ammo/bullet/rifle/m4ra/impact/on_hit_mob(mob/M, obj/projectile/P)
 	knockback(M, P, 32) // Can knockback basically at max range max range is 24 tiles...
