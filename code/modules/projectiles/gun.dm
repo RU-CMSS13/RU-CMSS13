@@ -1174,9 +1174,6 @@ and you're good to go.
 			if(istype(clicked_target))
 				projectile_to_fire.p_x -= clicked_target.bound_width / 2
 				projectile_to_fire.p_y -= clicked_target.bound_height / 2
-			else
-				projectile_to_fire.p_x -= world.icon_size / 2
-				projectile_to_fire.p_y -= world.icon_size / 2
 		else
 			projectile_to_fire.p_x -= world.icon_size / 2
 			projectile_to_fire.p_y -= world.icon_size / 2
