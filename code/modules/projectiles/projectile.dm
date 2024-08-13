@@ -168,7 +168,7 @@
 		proj.apply_bullet_trait(entry.Copy())
 
 /obj/projectile/proc/bullet_ready_to_fire(atom/bullet_source = null, weapon_source_mob = null)
-	generate_bullet(null, weapon_source_mob, 0, NO_FLAGS)
+	generate_bullet(null, 0, NO_FLAGS, weapon_source_mob)
 
 	if(isliving(loc) && !weapon_source_mob)
 		var/mob/M = loc

@@ -1,7 +1,7 @@
 /atom/movable/hitscan_projectile_effect
 	name = "pew"
 	icon = 'icons/obj/items/weapons/projectiles.dmi'
-	icon_state = "redtrac"
+	icon_state = "redtracer"
 	layer = ABOVE_MOB_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = NONE
