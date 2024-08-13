@@ -157,7 +157,7 @@
 /datum/ammo/bullet/sniper/railgun
 	name = "railgun bullet"
 	damage_falloff = 0
-	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_SNIPER|AMMO_IGNORE_COVER
+	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_IGNORE_COVER
 	accurate_range_min = 4
 
 	accuracy = HIT_ACCURACY_TIER_8

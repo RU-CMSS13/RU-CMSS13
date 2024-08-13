@@ -221,7 +221,7 @@
 	misc_multipliers["move"] += overdrive_speed_mult
 
 /obj/vehicle/multitile/van/get_projectile_hit_boolean(obj/projectile/P)
-	if(src == P.original) //clicking on the van itself will hit it.
+	if(src == P.original_target) //clicking on the van itself will hit it.
 		var/hitchance = P.get_effective_accuracy()
 		if(prob(hitchance))
 			return TRUE

@@ -55,6 +55,7 @@
 	var/accurate_range = 6
 	/// This will de-increment a counter on the bullet.
 	var/max_range = 22
+	var/ammo_range_fallof = BULLET_FALLOF_MULT_TIER_1
 	/// Same as with accuracy variance.
 	var/damage_var_low = PROJECTILE_VARIANCE_TIER_9
 	/// This INCREASES the upper bound of damage variance by 2%, to 107%.
@@ -69,6 +70,8 @@
 	var/effective_range_max = EFFECTIVE_RANGE_OFF
 	/// How fast the projectile moves.
 	var/shell_speed = AMMO_SPEED_TIER_1
+	/// Determines what color our bullet will be when it flies.
+	var/bullet_color = COLOR_WHITE
 
 	var/handful_type = /obj/item/ammo_magazine/handful
 	var/handful_color
@@ -130,6 +133,10 @@
 
 /datum/ammo/proc/on_hit_obj(obj/O, obj/projectile/P) //Special effects when hitting objects.
 	SHOULD_NOT_SLEEP(TRUE)
+	return
+
+///Special effects for leaving a turf. Only called if the projectile has AMMO_LEAVE_TURF enabled
+/datum/ammo/proc/on_leave_turf(turf/T, atom/firer, obj/projectile/proj)
 	return
 
 /datum/ammo/proc/on_near_target(turf/T, obj/projectile/P) //Special effects when passing near something. Range of things that triggers it is controlled by other ammo flags.
@@ -221,26 +228,26 @@
 		else
 			P.play_hit_effect(M)
 
-/datum/ammo/proc/fire_bonus_projectiles(obj/projectile/original_P)
-	set waitfor = 0
+/datum/ammo/proc/fire_bonus_projectiles(obj/projectile/orig_proj)
+	set waitfor = FALSE
 
-	var/turf/curloc = get_turf(original_P.shot_from)
-	var/initial_angle = Get_Angle(curloc, original_P.target_turf)
+	var/turf/curloc = get_turf(orig_proj.shot_from)
+	var/initial_angle = Get_Angle(curloc, orig_proj.original_target_turf)
 
 	for(var/i in 1 to bonus_projectiles_amount) //Want to run this for the number of bonus projectiles.
 		var/final_angle = initial_angle
 
-		var/obj/projectile/P = new /obj/projectile(curloc, original_P.weapon_cause_data)
-		P.generate_bullet(GLOB.ammo_list[bonus_projectiles_type]) //No bonus damage or anything.
-		P.accuracy = floor(P.accuracy * original_P.accuracy/initial(original_P.accuracy)) //if the gun changes the accuracy of the main projectile, it also affects the bonus ones.
-		original_P.give_bullet_traits(P)
-		P.bonus_projectile_check = 2 //It's a bonus projectile!
+		var/obj/projectile/proj = new /obj/projectile(curloc, orig_proj.weapon_cause_data)
+		proj.generate_bullet(GLOB.ammo_list[bonus_projectiles_type]) //No bonus damage or anything.
+		proj.accuracy = round(proj.accuracy * orig_proj.accuracy/initial(orig_proj.accuracy)) //if the gun changes the accuracy of the main proj, it also affects the bonus ones.
+		orig_proj.give_bullet_traits(proj)
+		proj.bonus_projectile_check = 2 //It's a bonus projectile!
 
-		var/total_scatter_angle = P.scatter
+		var/total_scatter_angle = proj.scatter
 		final_angle += rand(-total_scatter_angle, total_scatter_angle)
 		var/turf/new_target = get_angle_target_turf(curloc, final_angle, 30)
 
-		P.fire_at(new_target, original_P.firer, original_P.shot_from, P.ammo.max_range, P.ammo.shell_speed, original_P.original) //Fire!
+		proj.fire_at(new_target, orig_proj.firer, orig_proj.shot_from, proj.ammo.max_range, proj.ammo.shell_speed, final_angle) //Fire!
 
 /datum/ammo/proc/drop_flame(turf/turf, datum/cause_data/cause_data) // ~Art updated fire 20JAN17
 	if(!istype(turf))
@@ -251,3 +258,6 @@
 	var/datum/reagent/chemical = GLOB.chemical_reagents_list[flamer_reagent_id]
 
 	new /obj/flamer_fire(turf, cause_data, chemical)
+
+/datum/ammo/proc/ammo_process(obj/projectile/proj)
+	return

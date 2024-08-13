@@ -18,7 +18,7 @@
 #define AMMO_LASER (1<<3)
 #define AMMO_ENERGY (1<<4)
 #define AMMO_ROCKET (1<<5)
-#define AMMO_SNIPER (1<<6)
+#define AMMO_SPECIAL_PROCESS (1<<6)
 /// Primarily for railgun but can be implemented for other projectiles that are for antitank and antistructure (wall/machine)
 #define AMMO_ANTISTRUCT (1<<7)
 #define AMMO_SKIPS_ALIENS (1<<8)
@@ -26,7 +26,7 @@
 #define AMMO_IGNORE_RESIST (1<<10)
 #define AMMO_BALLISTIC (1<<11)
 #define AMMO_IGNORE_COVER (1<<12)
-#define AMMO_ANTIVEHICLE (1<<13)
+#define AMMO_SCANS_NEARBY (1<<13)
 #define AMMO_STOPPED_BY_COVER (1<<14)
 #define AMMO_SPECIAL_EMBED (1<<15)
 /// If the projectile hits a dense turf it'll do on_hit_turf on the turf just in front of the turf instead of on the turf itself
@@ -42,11 +42,16 @@
 /// Handles sentry flamers glob
 #define AMMO_FLAME (1<<22)
 // NOTE: Don't add flags past 1<<23, it'll break things due to BYOND limitations. You can usually use a Component instead.
+#define AMMO_LEAVE_TURF			(1<<23) // If the projectile does something with on_leave_turf()
 
-/// Projectile is shrpanel which allow it to skip some collisions
-#define PROJECTILE_SHRAPNEL  (1<<0)
-/// Apply additional effects upon hitting clicked target
-#define PROJECTILE_BULLSEYE  (1<<1)
+// Special projectile flags
+#define PROJECTILE_SHRAPNEL		(1<<0) // Projectile is shrpanel which allow it to skip some collisions
+#define PROJECTILE_BULLSEYE		(1<<1) // Apply additional effects upon hitting clicked target
+#define PROJECTILE_HITSCAN		(1<<2) // No visual real time, just hitscan and then tracer
+//status
+#define PROJECTILE_FROZEN		(1<<0)
+#define PROJECTILE_ERROR		(1<<1)
+#define PROJECTILE_HIT			(1<<2)
 
 //Gun defines for gun related thing. More in the projectile folder.
 

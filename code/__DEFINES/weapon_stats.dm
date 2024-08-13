@@ -200,6 +200,17 @@ As such, don't expect any values assigned to common firearms to even consider ho
 #define EFFECTIVE_RANGE_MAX_TIER_9 27
 #define EFFECTIVE_RANGE_MAX_TIER_10 30
 
+#define BULLET_FALLOF_MULT_TIER_1 10
+#define BULLET_FALLOF_MULT_TIER_2 9
+#define BULLET_FALLOF_MULT_TIER_3 8
+#define BULLET_FALLOF_MULT_TIER_4 7
+#define BULLET_FALLOF_MULT_TIER_5 6
+#define BULLET_FALLOF_MULT_TIER_6 5
+#define BULLET_FALLOF_MULT_TIER_7 4
+#define BULLET_FALLOF_MULT_TIER_8 3
+#define BULLET_FALLOF_MULT_TIER_9 2
+#define BULLET_FALLOF_MULT_TIER_10 1.5
+
 /*
 ////BURST AMOUNT////
 */

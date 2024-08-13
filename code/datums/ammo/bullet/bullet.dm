@@ -15,6 +15,8 @@
 	sound_bounce = "ballistic_bounce"
 	sound_shield_hit = "ballistic_shield_hit"
 
+	bullet_color = COLOR_VERY_SOFT_YELLOW
+
 	accurate_range_min = 0
 	damage = 10
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_1

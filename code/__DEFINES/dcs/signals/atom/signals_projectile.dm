@@ -32,3 +32,8 @@
 
 /// Called when a bullet hits a living mob on a sprite click (original target is final target)
 #define COMSIG_BULLET_DIRECT_HIT "bullet_direct_hit"
+
+// /obj/item/projectile signals
+#define COMSIG_PROJ_SCANTURF "proj_scanturf"
+	#define COMPONENT_PROJ_SCANTURF_TURFCLEAR (1<<0)
+	#define COMPONENT_PROJ_SCANTURF_TARGETFOUND (1<<1)

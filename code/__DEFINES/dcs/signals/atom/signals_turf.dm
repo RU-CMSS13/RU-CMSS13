@@ -22,3 +22,6 @@
 
 ///from base of /datum/turf_reservation/proc/Release: (datum/turf_reservation/reservation)
 #define COMSIG_TURF_RESERVATION_RELEASED "turf_reservation_released"
+
+#define COMSIG_TURF_RESUME_PROJECTILE_MOVE "resume_projetile"
+#define COMSIG_TURF_PROJECTILE_MANIPULATED "projectile_manipulated"

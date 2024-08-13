@@ -34,7 +34,6 @@
 
 /datum/component/homing_projectile/proc/terminal_retarget()
 	var/obj/projectile/projectile = parent
-	var/turf/homing_turf = get_turf(homing_target)
-	projectile.speed *= 2 // Double speed to ensure hitting next tick despite eventual movement
-	projectile.retarget(homing_turf, keep_angle = FALSE)
+	projectile.projectile_speed *= 2 // Double speed to ensure hitting next tick despite eventual movement
+	projectile.fire_at(target = homing_target)
 	qdel(src)

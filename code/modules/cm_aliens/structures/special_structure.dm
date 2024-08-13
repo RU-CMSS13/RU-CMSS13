@@ -54,7 +54,7 @@
 		return ..()
 
 /obj/effect/alien/resin/special/get_projectile_hit_boolean(obj/projectile/firing_projectile)
-	if(firing_projectile.original == src || firing_projectile.original == get_turf(src))
+	if(firing_projectile.original_target == src || firing_projectile.original_target == get_turf(src))
 		return TRUE
 
 	return FALSE

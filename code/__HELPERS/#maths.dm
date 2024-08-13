@@ -18,6 +18,8 @@ GLOBAL_LIST_INIT(sqrtTable, list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4,
 
 #define Default(a, b) ((a) ? (a) : (b))
 
+#define ATAN2(x, y) ( !(x) && !(y) ? 0 : (y) >= 0 ? arccos((x) / sqrt((x)*(x) + (y)*(y))) : -arccos((x) / sqrt((x)*(x) + (y)*(y))) )
+
 // Greatest Common Divisor - Euclid's algorithm
 #define Gcd(a, b) ((b) ? Gcd((b), (a) % (b)) : (a))
 
