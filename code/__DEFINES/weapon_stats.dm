@@ -253,14 +253,14 @@ As such, don't expect any values assigned to common firearms to even consider ho
 //How many tiles it travels per tick.
 */
 
-#define AMMO_SPEED_TIER_1 1
-#define AMMO_SPEED_TIER_2 2
-#define AMMO_SPEED_TIER_3 3
-#define AMMO_SPEED_TIER_4 4
-#define AMMO_SPEED_TIER_5 6
-#define AMMO_SPEED_TIER_6 8
-#define AMMO_SPEED_TIER_7 10
-#define AMMO_SPEED_TIER_8 16
+#define AMMO_SPEED_TIER_1 0.5
+#define AMMO_SPEED_TIER_2 1
+#define AMMO_SPEED_TIER_3 1.5
+#define AMMO_SPEED_TIER_4 2
+#define AMMO_SPEED_TIER_5 2.5
+#define AMMO_SPEED_TIER_6 3
+#define AMMO_SPEED_TIER_7 4
+#define AMMO_SPEED_TIER_8 6
 
 /*
 ////ARMOR PENETRATION////

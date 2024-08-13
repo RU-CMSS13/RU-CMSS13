@@ -33,4 +33,5 @@
 /atom/movable/hitscan_projectile_effect/proc/remove_effect()
 	SIGNAL_HANDLER
 	animate(src, alpha = 0, time = 2 SECONDS)
+	sleep(2 SECONDS)
 	qdel(src)
