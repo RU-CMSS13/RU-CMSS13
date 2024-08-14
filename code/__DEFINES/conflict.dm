@@ -48,10 +48,6 @@
 #define PROJECTILE_SHRAPNEL		(1<<0) // Projectile is shrpanel which allow it to skip some collisions
 #define PROJECTILE_BULLSEYE		(1<<1) // Apply additional effects upon hitting clicked target
 #define PROJECTILE_HITSCAN		(1<<2) // No visual real time, just hitscan and then tracer
-//status
-#define PROJECTILE_FROZEN		(1<<0)
-#define PROJECTILE_ERROR		(1<<1)
-#define PROJECTILE_HIT			(1<<2)
 
 //Gun defines for gun related thing. More in the projectile folder.
 

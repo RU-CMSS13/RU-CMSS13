@@ -325,7 +325,7 @@
 		if(ISDIAGONALDIR(movement_dir)) //Diagonal case. We need to check the turf to cross to get there.
 			if(!x_offset || !y_offset) //Unless a coder screws up this won't happen. Buf if they do it will cause an infinite processing loop due to division by zero, so better safe than sorry.
 				stack_trace("projectile_batch_move called with diagonal movement_dir and offset-lacking. x_offset: [x_offset], y_offset: [y_offset].")
-				return PROJECTILE_ERROR
+				return
 			var/turf/turf_crossed_by
 			var/pixel_moves_until_crossing_x_border
 			var/pixel_moves_until_crossing_y_border
@@ -477,6 +477,9 @@
 
 	animate_flight(process_start_turf, process_start_pixel_x, process_start_pixel_y, process_start_delta_time)
 
+	if(ammo.flags_ammo_behavior & AMMO_SPECIAL_PROCESS)
+		ammo.ammo_process(src)
+
 	return FALSE
 
 /// Animates the projectile across the process'ed flight.
@@ -626,6 +629,53 @@
 	// So does ammo that's flagged to always hit the target
 	if(((ammo_flags & AMMO_EXPLOSIVE) || (ammo_flags & AMMO_HITS_TARGET_TURF)) && T == target_turf)
 		hit_turf = TRUE
+
+	if(ammo_flags & AMMO_SCANS_NEARBY && proj_dir)
+		//this thing scans depending on dir
+		var/cardinal_dir = get_perpen_dir(proj_dir)
+		if(!cardinal_dir)
+			var/d1 = proj_dir&(proj_dir-1)	// eg west	(1+8)&(8) = 8
+			var/d2 = proj_dir - d1			// eg north	(1+8) - 8 = 1
+			cardinal_dir = list(d1,d2)
+
+		var/remote_detonation = 0
+		var/kill_proj = 0
+
+		for(var/ddir in cardinal_dir)
+			var/dloc = get_step(T, ddir)
+			var/turf/dturf = get_turf(dloc)
+			for(var/atom/movable/dA in dturf)
+				if(!isliving(dA))
+					continue
+
+				var/mob/living/dL = dA
+				if(dL.is_dead())
+					continue
+
+				if(SEND_SIGNAL(src, COMSIG_BULLET_CHECK_MOB_SKIPPING, dL) & COMPONENT_SKIP_MOB\
+					|| runtime_iff_group && dL.get_target_lock(runtime_iff_group)\
+				)
+					continue
+
+				if(ammo_flags & AMMO_SKIPS_ALIENS && isxeno(dL))
+					var/mob/living/carbon/xenomorph/X = dL
+					var/mob/living/carbon/xenomorph/F = firer
+
+					if(!istype(F))
+						continue
+
+					if(F.can_not_harm(X))
+						continue
+
+				remote_detonation = 1
+				kill_proj = ammo.on_near_target(T, src)
+				break
+
+			if(remote_detonation)
+				break
+
+		if(kill_proj)
+			return TRUE
 
 	for(var/atom/movable/clone/C in T) //Handle clones if there are any
 		if(isobj(C.mstr) && handle_object(C.mstr))

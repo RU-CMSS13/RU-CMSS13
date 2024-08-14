@@ -259,3 +259,6 @@
 	var/datum/reagent/chemical = GLOB.chemical_reagents_list[flamer_reagent_id]
 
 	new /obj/flamer_fire(turf, cause_data, chemical)
+
+/datum/ammo/proc/ammo_process(obj/projectile/proj)
+	return
