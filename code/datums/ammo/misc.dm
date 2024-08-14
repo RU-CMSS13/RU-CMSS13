@@ -156,7 +156,7 @@
 /datum/ammo/flare/proc/drop_flare(turf/T, obj/projectile/fired_projectile, mob/firer)
 	var/obj/item/device/flashlight/flare/G = new flare_type(T)
 	var/matrix/rotation = matrix()
-	rotation.Turn(fired_projectile.dir_angle - 90)
+	rotation.Turn(fired_projectile.angle - 90)
 	G.apply_transform(rotation)
 	G.visible_message(SPAN_WARNING("\A [G] bursts into brilliant light nearby!"))
 	return G

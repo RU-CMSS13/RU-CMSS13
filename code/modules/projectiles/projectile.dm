@@ -31,7 +31,6 @@
 	var/apy //These values are floats, not integers. They need to be converted through CEILING or such when translated to relative pixel coordinates.
 	var/x_offset //Float, not integer.
 	var/y_offset
-	var/angle //0 is north, 90 is east, 180 is south, 270 is west. BYOND angles and all.
 	///The icon of the laser beam that will be created
 	var/effect_icon = null
 	var/list/atom/movable/uncross_scheduled = list() // List of border movable atoms to check for when exiting a turf.
