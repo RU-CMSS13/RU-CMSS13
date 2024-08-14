@@ -21,6 +21,12 @@
 	layer = FLY_LAYER
 	animate_movement = NO_STEPS //disables gliding because it fights against what animate() is doing
 
+	//light
+	light_system = MOVABLE_LIGHT
+	light_range = 2
+	light_power = 0.2
+	light_color = COLOR_VERY_SOFT_YELLOW
+
 	var/datum/ammo/ammo //The ammo data which holds most of the actual info.
 
 	var/def_zone = "chest" //So we're not getting empty strings.
