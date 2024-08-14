@@ -1151,7 +1151,7 @@ and you're good to go.
 		target = original_target
 		targloc = get_turf(target)
 
-	projectile_to_fire.original_target = target
+	projectile_to_fire.original = target
 
 	// turf-targeted projectiles are fired without scatter, because proc would raytrace them further away
 	var/ammo_flags = projectile_to_fire.ammo.flags_ammo_behavior | projectile_to_fire.projectile_override_flags
@@ -1189,11 +1189,11 @@ and you're good to go.
 
 	if(targloc != curloc)
 		simulate_recoil(dual_wield, user, target)
-		projectile_to_fire.bullet_ready_to_fire(src, user)
+
 		//This is where the projectile leaves the barrel and deals with projectile code only.
 		//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 		in_chamber = null // It's not in the gun anymore
-		INVOKE_ASYNC(projectile_to_fire, TYPE_PROC_REF(/obj/projectile, fire_at), target, user, src, null, bullet_velocity)
+		INVOKE_ASYNC(projectile_to_fire, TYPE_PROC_REF(/obj/projectile, fire_at), target, user, src, projectile_to_fire?.ammo?.max_range, bullet_velocity, original_target)
 		projectile_to_fire = null // Important: firing might have made projectile collide early and ALREADY have deleted it. We clear it too.
 		//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1425,7 +1425,7 @@ and you're good to go.
 
 				projectile_to_fire.give_bullet_traits(BP)
 				if(bullets_fired > 1)
-					BP.original_target = attacked_mob //original == the original target of the projectile. If the target is downed and this isn't set, the projectile will try to fly over it. Of course, it isn't going anywhere, but it's the principle of the thing. Very embarrassing.
+					BP.original = attacked_mob //original == the original target of the projectile. If the target is downed and this isn't set, the projectile will try to fly over it. Of course, it isn't going anywhere, but it's the principle of the thing. Very embarrassing.
 					if(!BP.handle_mob(attacked_mob) && attacked_mob.body_position == LYING_DOWN) //This is the 'handle impact' proc for a flying projectile, including hit RNG, on_hit_mob and bullet_act. If it misses, it doesn't go anywhere. We'll pretend it slams into the ground or punches a hole in the ceiling, because trying to make it bypass the xeno or shoot from the tile beyond it is probably more spaghet than my life is worth.
 						if(BP.ammo.sound_bounce)
 							playsound(attacked_mob.loc, BP.ammo.sound_bounce, 35, 1)
@@ -1438,7 +1438,7 @@ and you're good to go.
 				qdel(BP)
 
 		if(bullets_fired > 1)
-			projectile_to_fire.original_target = attacked_mob
+			projectile_to_fire.original = attacked_mob
 			if(!projectile_to_fire.handle_mob(attacked_mob) && attacked_mob.body_position == LYING_DOWN)
 				if(projectile_to_fire.ammo.sound_bounce)
 					playsound(attacked_mob.loc, projectile_to_fire.ammo.sound_bounce, 35, 1)

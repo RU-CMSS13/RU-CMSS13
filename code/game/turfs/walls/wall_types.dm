@@ -1196,6 +1196,7 @@ INITIALIZE_IMMEDIATE(/turf/closed/wall/indestructible/splashscreen)
 	var/angle = Get_Angle(src, P.firer) + rand(30, -30)
 	var/atom/target = get_angle_target_turf(src, angle, get_dist(src, P.firer))
 	new_proj.projectile_flags |= PROJECTILE_SHRAPNEL
+	new_proj.projectile_flags |= P.projectile_flags
 	new_proj.fire_at(target, P.firer, src, reflect_range, speed = P.ammo.shell_speed)
 
 	return TRUE

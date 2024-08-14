@@ -744,7 +744,7 @@
 	else if((dir != NORTH) && (abs(angle - dir2angle(dir)) > shoot_degree))
 		return
 
-	in_chamber.original_target = target
+	in_chamber.original = target
 
 	var/initial_angle = Get_Angle(T, U)
 	var/final_angle = initial_angle

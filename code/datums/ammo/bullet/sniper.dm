@@ -22,7 +22,7 @@
 	damage_falloff = 0
 
 /datum/ammo/bullet/sniper/on_hit_mob(mob/hit, obj/projectile/proj)
-	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original_target)
+	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original)
 		var/mob/living/living = hit
 		living.apply_armoured_damage(damage*2, ARMOR_BULLET, BRUTE, null, penetration)
 		to_chat(proj.firer, SPAN_WARNING("Bullseye!"))
@@ -44,7 +44,7 @@
 	))
 
 /datum/ammo/bullet/sniper/incendiary/on_hit_mob(mob/hit, obj/projectile/proj)
-	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original_target)
+	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original)
 		var/mob/living/living = hit
 		var/blind_duration = 5
 		if(isxeno(hit))
@@ -67,7 +67,7 @@
 	penetration = 0
 
 /datum/ammo/bullet/sniper/flak/on_hit_mob(mob/hit, obj/projectile/proj)
-	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original_target)
+	if((proj.projectile_flags & PROJECTILE_BULLSEYE) && hit == proj.original)
 		var/slow_duration = 7
 		var/mob/living/living = hit
 		if(isxeno(hit))
@@ -127,7 +127,7 @@
 				return stopping_power
 			if(stopping_power >= 4)
 				to_chat(living_mob, SPAN_XENOHIGHDANGER("You are knocked off-balance by the sudden massive impact!"))
-				if(living_mob.mob_size >= MOB_SIZE_IMMOBILE && !((fired_projectile.projectile_flags & PROJECTILE_BULLSEYE) && living_mob == fired_projectile.original_target)) // Queens and Crushers
+				if(living_mob.mob_size >= MOB_SIZE_IMMOBILE && !((fired_projectile.projectile_flags & PROJECTILE_BULLSEYE) && living_mob == fired_projectile.original)) // Queens and Crushers
 					return stopping_power // For Crushers and Queens, must be aimed at them.
 				living_mob.KnockDown(0.05) // Must deal more than 90 damage to mini-stun big mobs for 0.1s
 				// Can't interrupt a big mob unless it's completely alone with nothing blocking the shot.
@@ -159,7 +159,7 @@
 
 	var/stopping_power = stopping_power_knockback(living_target, aimed_projectile)
 
-	if((aimed_projectile.projectile_flags & PROJECTILE_BULLSEYE) && target_mob == aimed_projectile.original_target)
+	if((aimed_projectile.projectile_flags & PROJECTILE_BULLSEYE) && target_mob == aimed_projectile.original)
 
 		var/amr_counter = 0
 		var/datum/weakref/old_target = null // This is used to let xenos know when they're no longer targeted.
@@ -324,7 +324,7 @@
 	))
 
 /datum/ammo/bullet/sniper/elite/on_hit_mob(mob/M,obj/projectile/P)
-	if((P.projectile_flags & PROJECTILE_BULLSEYE) && M == P.original_target)
+	if((P.projectile_flags & PROJECTILE_BULLSEYE) && M == P.original)
 		var/mob/living/L = M
 		var/size_damage_mod = 0.5
 		if(isxeno(M))
