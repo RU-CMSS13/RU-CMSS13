@@ -31,7 +31,7 @@
 	var/apy //These values are floats, not integers. They need to be converted through CEILING or such when translated to relative pixel coordinates.
 	var/x_offset //Float, not integer.
 	var/y_offset
-	var/dir_angle //0 is north, 90 is east, 180 is south, 270 is west. BYOND angles and all.
+	var/angle //0 is north, 90 is east, 180 is south, 270 is west. BYOND angles and all.
 	///The icon of the laser beam that will be created
 	var/effect_icon = null
 	var/list/atom/movable/uncross_scheduled = list() // List of border movable atoms to check for when exiting a turf.
@@ -267,12 +267,8 @@
 	if(projectile_flags & PROJECTILE_HITSCAN)
 		apx = ABS_COOR(x)
 		apy = ABS_COOR(y)
-		if(isliving(target)) //If we clicked on a living mob, use the clicked atom tile's center for maximum accuracy. Else aim for the clicked pixel.
-			dir_angle = round(Get_Pixel_Angle((ABS_COOR(target.x) - apx), (ABS_COOR(target.y) - apy))) //Using absolute pixel coordinates.
-		else
-			dir_angle = round(Get_Pixel_Angle((ABS_COOR_OFFSET(target.x, p_x) - apx), (ABS_COOR_OFFSET(target.y, p_y) - apy)))
-		x_offset = round(sin(dir_angle), 0.01)
-		y_offset = round(cos(dir_angle), 0.01)
+		x_offset = round(sin(angle), 0.01)
+		y_offset = round(cos(angle), 0.01)
 		if(firer.Adjacent(target) && ismob(target))
 			var/mob/mob_to_hit = target
 			ammo.on_hit_mob(mob_to_hit, src)
@@ -302,7 +298,7 @@
 #define ABS_PIXEL_TO_REL(apc) (MODULUS(apc, 32) || 32)
 #define PROJ_ABS_PIXEL_TO_TURF(abspx, abspy, zlevel) (locate(CEILING((abspx / 32), 1), CEILING((abspy / 32), 1), zlevel))
 
-// HITSCAN
+// HITSCAN (do not using for now tile_path)
 /obj/projectile/proc/projectile_batch_move_hitscan(first_projectile = TRUE)
 	var/end_of_movement = FALSE //In batch moves this loop, only if the projectile stopped.
 	var/turf/last_processed_turf = loc
@@ -323,7 +319,7 @@
 			apy += 0.1
 
 		if(next_turf == last_processed_turf)
-			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), dir_angle, apx % 32 - 16, apy % 32 - 16, 1.1, effect_icon, ammo.bullet_color)
+			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), angle, apx % 32 - 16, apy % 32 - 16, 1.1, effect_icon, ammo.bullet_color)
 			continue //Pixel movement only, didn't manage to change turf.
 		var/movement_dir = get_dir(last_processed_turf, next_turf)
 
@@ -425,10 +421,10 @@
 			end_of_movement = TRUE
 			break
 		if(first_projectile)
-			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), dir_angle, apx % 32 - 16, apy % 32 - 16, 1.01, "muzzle_"+effect_icon, ammo.bullet_color)
+			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), angle, apx % 32 - 16, apy % 32 - 16, 1.01, "muzzle_"+effect_icon, ammo.bullet_color)
 			first_projectile = FALSE
 		else
-			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), dir_angle, apx % 32 - 16, apy % 32 - 16, 1.01, effect_icon, ammo.bullet_color)
+			laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), angle, apx % 32 - 16, apy % 32 - 16, 1.01, effect_icon, ammo.bullet_color)
 	apx -= 8 * x_offset
 	apy -= 8 * y_offset
 
@@ -437,8 +433,8 @@
 	if(apy % 32 == 0)
 		apy += 0.1
 	if(first_projectile)
-		laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), dir_angle, apx % 32 - 16, apy % 32 - 16, 1.01, "muzzle_"+effect_icon, ammo.bullet_color)
-	laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), dir_angle, apx % 32 - 16, apy % 32 - 16, 1.01, "impact_"+effect_icon, ammo.bullet_color)
+		laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), angle, apx % 32 - 16, apy % 32 - 16, 1.01, "muzzle_"+effect_icon, ammo.bullet_color)
+	laser_effects += new /atom/movable/hitscan_projectile_effect(PROJ_ABS_PIXEL_TO_TURF(apx, apy, z), angle, apx % 32 - 16, apy % 32 - 16, 1.01, "impact_"+effect_icon, ammo.bullet_color)
 	QDEL_LIST_IN(laser_effects, 2)
 
 #undef ISDIAGONALDIR
