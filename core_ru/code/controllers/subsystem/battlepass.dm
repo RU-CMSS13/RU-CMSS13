@@ -18,19 +18,11 @@ SUBSYSTEM_DEF(battlepass)
 	var/list/xeno_battlepass_earners = list()
 
 /datum/controller/subsystem/battlepass/Initialize()
-	if(!fexists("config/battlepass.json"))
-		return
+	mapped_point_sources
 
-	var/list/battlepass_data = json_decode(file2text("config/battlepass.json"))
 
-	maximum_tier = battlepass_data["maximum_tier"]
-	season = battlepass_data["season"]
 
-	for(var/reward_path in battlepass_data["reward_data"])
-		season_rewards += text2path(reward_path)
 
-	for(var/reward_path in battlepass_data["premium_reward_data"])
-		premium_season_rewards += text2path(reward_path)
 
 	for(var/datum/battlepass_challenge/challenge_path as anything in subtypesof(/datum/battlepass_challenge))
 		switch(initial(challenge_path.challenge_category))
@@ -43,23 +35,13 @@ SUBSYSTEM_DEF(battlepass)
 			if(CHALLENGE_XENO)
 				xeno_challenges[challenge_path] = initial(challenge_path.pick_weight)
 
-	RegisterSignal(src, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(do_postinit))
-
 	for(var/client/client as anything in GLOB.clients)
-		if(!client.owned_battlepass)
+		if(!client.player_data?.battlepass)
 			continue
 
-		client.owned_battlepass.verify_rewards()
+		client.player_data.battlepass.verify_rewards()
 
 	return SS_INIT_SUCCESS
-
-/datum/controller/subsystem/battlepass/proc/do_postinit(datum/source)
-	SIGNAL_HANDLER
-
-	UnregisterSignal(src, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-
-	for(var/client/client as anything in GLOB.clients)
-		client.owned_battlepass?.check_daily_challenge_reset()
 
 /// Returns a typepath of a challenge of the given category
 /datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
@@ -81,10 +63,6 @@ SUBSYSTEM_DEF(battlepass)
 	if(xeno_points)
 		give_side_points(xeno_points, xeno_battlepass_earners)
 
-/datum/controller/subsystem/battlepass/proc/save_battlepasses()
-	for(var/client/player as anything in GLOB.clients)
-		player.save_battlepass()
-
 /datum/controller/subsystem/battlepass/proc/give_side_points(point_amount = 0, ckey_list)
 	if(!islist(ckey_list))
 		CRASH("give_side_points in SSbattlepass called without giving a list of ckeys")
@@ -92,8 +70,8 @@ SUBSYSTEM_DEF(battlepass)
 	for(var/ckey in ckey_list)
 		if(ckey in GLOB.directory)
 			var/client/ckey_client = GLOB.directory[ckey]
-			if(ckey_client.owned_battlepass)
-				ckey_client.owned_battlepass.add_xp(point_amount)
+			if(ckey_client.player_data?.battlepass)
+				ckey_client.player_data.battlepass.add_xp(point_amount)
 		else
 			if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/battlepass.sav"))
 				continue
@@ -108,10 +86,10 @@ SUBSYSTEM_DEF(battlepass)
 	for(var/i = 1 to maximum_tier)
 		levels["[i]"] = 0
 	for(var/client/player_client as anything in GLOB.clients)
-		if(!player_client.owned_battlepass)
+		if(!player_client.player_data?.battlepass)
 			continue
 
-		levels["[player_client.owned_battlepass.tier]"] += 1
+		levels["[player_client.player_data.battlepass.tier]"] += 1
 
 	to_chat(caller, SPAN_NOTICE(json_encode(levels)))
 

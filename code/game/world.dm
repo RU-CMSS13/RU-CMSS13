@@ -224,10 +224,6 @@ RUCM REMOVE END*/
 		return json_encode(response)
 
 /world/Reboot(reason)
-//RUCM START
-	SSbattlepass.save_battlepasses()
-//RUCM END
-
 	Master.Shutdown()
 	send_reboot_sound()
 	var/server = CONFIG_GET(string/server)

@@ -218,14 +218,14 @@
 
 //RUCM START
 		if("battlepass")
-			if(!client?.owned_battlepass)
+			if(!client.player_data?.battlepass)
 				return
 
 			if(!SSbattlepass.initialized)
 				to_chat(src, SPAN_WARNING("Please wait for battlepasses to initialize first."))
 				return
 
-			client.owned_battlepass.ui_interact(src)
+			client.player_data.battlepass.tgui_interact(src)
 //RUCM END
 
 		else

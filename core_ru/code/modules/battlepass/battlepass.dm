@@ -65,9 +65,6 @@
 	/// Typepaths of all earned battlepass rewards. This isn't saved because it's populated by loading the rewards list
 	var/list/reward_paths = list()
 
-	/// The tier of the battlepass the last time on_tier_up() was called
-	var/previous_on_tier_up_tier = 0
-
 /datum/battlepass/proc/add_xp(xp_amount)
 	if(tier >= SSbattlepass.maximum_tier)
 		return
@@ -225,7 +222,7 @@
 	add_xp(challenge.completion_xp)
 	challenge.unhook_signals(resolved_client.mob)
 
-/datum/battlepass/proc/ui_interact(mob/user, datum/tgui/ui)
+/datum/battlepass/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "Battlepass")
@@ -295,7 +292,4 @@
 	return data
 
 /datum/battlepass/vv_edit_var(var_name, var_value)
-	if(usr.ckey != "zonespace")
-		to_chat(usr, SPAN_BOLDWARNING("FUCK OFF"))
-		return FALSE
-	return ..()
+	return FALSE

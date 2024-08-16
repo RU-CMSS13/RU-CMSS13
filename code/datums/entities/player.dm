@@ -432,6 +432,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 				whitelist_flags |= GLOB.bitfields["whitelist_status"]["[whitelist]"]
 
 //RUCM START
+	load_battlepass()
 	load_donator_info()
 //RUCM END
 
