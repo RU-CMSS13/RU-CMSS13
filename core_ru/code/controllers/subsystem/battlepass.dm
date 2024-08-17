@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(battlepass)
 			battlepass.tier = save_obj["tier"]
 			battlepass.xp = save_obj["xp"]
 			battlepass.save()
-			fdel("data/player_saves/[a]/[ckey_str]/battlepass.sav")
+//			fdel("data/player_saves/[a]/[ckey_str]/battlepass.sav")
 
 /datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
 	switch(challenge_type)
