@@ -99,6 +99,9 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	for(var/datum/battlepass_challenge/challenge as anything in mapped_daily_challenges)
 		challenge.on_client_hooked(owner.owning_client)
 
+	if(owner.donator_info?.patreon_function_available("battlepass_modificator"))
+		premium = TRUE
+
 	verify_rewards()
 	check_tier_up()
 	check_daily_challenge_reset()
@@ -122,6 +125,10 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 /datum/entity/battlepass_player/proc/add_xp(xp_amount)
 	if(tier >= GLOB.current_battlepass.max_tier)
 		return
+	if(owner?.donator_info)
+		var/modificator = owner.donator_info.patreon_function_available("battlepass_modificator")
+		if(modificator)
+			xp_amount *= modificator
 	xp += xp_amount
 	check_tier_up()
 

@@ -48,7 +48,7 @@ const BattlepassContent = (props) => {
   const { act, data } = useBackend<BattlepassData>();
   const rewards = data.rewards;
   const premium_rewards = data.premium_rewards;
-  const [infoView, setInfoView] = useState(false);
+  const [infoView, setInfoView] = useState(0);
 
   const rewardMap = new Map(rewards.map((reward) => [reward.tier, reward]));
   const premiumRewardMap = new Map(
@@ -86,7 +86,7 @@ const BattlepassContent = (props) => {
               <Button
                 fontSize="16px"
                 icon="xmark"
-                onClick={() => setInfoView(false)}
+                onClick={() => setInfoView(0)}
               >
                 Exit
               </Button>
@@ -132,7 +132,7 @@ const BattlepassContent = (props) => {
 
 const BattlepassInfoContainer = (props) => {
   const { act, data } = useBackend<BattlepassData>();
-  const [infoView, setInfoView] = useState(false);
+  const [infoView, setInfoView] = useState(0);
   return (
     <Box
       style={{
@@ -144,7 +144,7 @@ const BattlepassInfoContainer = (props) => {
         <Button
           fontSize="12px"
           icon="circle-info"
-          onClick={() => setInfoView(true)}
+          onClick={() => setInfoView(1)}
         >
           Information
         </Button>
