@@ -44,7 +44,7 @@
 	output +="<br><b>[xeno_text]</b>"
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=tutorial'>Tutorial</A></p>"
 //RUCM START
-	output += "<p><span style='color: #15d512; font-family: Courier New, cursive, sans-serif; font-style: italic;'><a href='byond://?src=\ref[src];lobby_choice=battlepass'>Battlepass</A></span></p>"
+	output += "<p><a href='byond://?src=\ref[src];lobby_choice=battlepass'>Battlepass</A></p>"
 //RUCM END
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_preferences'>Setup Character</A></p>"
 
