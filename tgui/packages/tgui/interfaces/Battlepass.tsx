@@ -137,11 +137,13 @@ const BattlepassContent = (props) => {
         <Box
           style={{
             overflowX: 'auto',
+            overflowY: 'auto',
             display: 'flex',
             flexWrap: 'wrap',
             position: 'relative',
             maxWidth: '1500px',
             minWidth: '1500px',
+            maxHeight: '600px',
           }}
         >
           {Array.from({ length: data.max_tier }, (_, tier) => tier + 1).map(
