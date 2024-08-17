@@ -9,6 +9,7 @@
 	storage_slots = 14
 	slowdown = 1
 	can_hold = list() //Nada. Once you take the stuff out it doesn't fit back in.
+	max_w_class = 0
 	foldable = null
 
 /obj/item/storage/box/spec/update_icon()
@@ -120,7 +121,6 @@
 	else
 		new /obj/item/device/binoculars/range/designator/scout(src)
 
-
 /obj/item/storage/box/spec/pyro
 	name = "\improper Pyrotechnician equipment case"
 	desc = "A large case containing M240-T incinerator unit, M35 pyrotechnician armor and helmet, Broiler-T flexible refueling system and additional pieces of equipment.\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
@@ -151,6 +151,30 @@
 	new /obj/item/storage/belt/grenade/large/full(src)
 	new /obj/item/storage/backpack/marine/grenadepack(src)
 	new /obj/item/storage/backpack/marine/grenadepack(src)
+	new /obj/item/clothing/gloves/marine/M3G(src)
+	new /obj/item/clothing/suit/storage/marine/M3G(src)
+	new /obj/item/clothing/head/helmet/marine/grenadier(src)
+	new /obj/item/weapon/gun/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/device/binoculars(src)
+
+/obj/item/storage/box/spec/sharp_operator
+	name = "\improper SHARP Operator equipment case"
+	desc = "A large case containing a P9 SHARP rifle, M3-G4 Grenadier armor and helmet, and various pieces of additional equipment.\nDrag this sprite onto yourself to open it up!"
+	kit_overlay = "grenadier"
+
+/obj/item/storage/box/spec/sharp_operator/fill_preset_inventory()
+	new /obj/item/weapon/gun/rifle/sharp(src)
+	new /obj/item/storage/belt/marine/sharp(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/flechette(src)
+	new /obj/item/ammo_magazine/rifle/sharp/flechette(src)
+	new /obj/item/ammo_magazine/rifle/sharp/incendiary(src)
+	new /obj/item/ammo_magazine/rifle/sharp/incendiary(src)
 	new /obj/item/clothing/gloves/marine/M3G(src)
 	new /obj/item/clothing/suit/storage/marine/M3G(src)
 	new /obj/item/clothing/head/helmet/marine/grenadier(src)
@@ -248,67 +272,27 @@
 			return TRUE
 
 /obj/item/spec_kit/proc/select_and_spawn(mob/living/carbon/human/user)
-	var/selection = tgui_input_list(user, "Pick your specialist equipment type.", "Specialist Kit Selection", GLOB.available_specialist_kit_boxes, 10 SECONDS)
+	var/list/available_specialist_kits = list()
+	for(var/path in GLOB.specialist_set_datums)
+		var/datum/specialist_set/specset = GLOB.specialist_set_datums[path]
+		if(specset.get_available_kit_num() >= 1)
+			available_specialist_kits += specset.get_name()
+
+	var/selection = tgui_input_list(user, "Pick your specialist equipment type.", "Specialist Kit Selection", available_specialist_kits, 10 SECONDS)
 	if(!selection || QDELETED(src))
 		return FALSE
-	if(!GLOB.available_specialist_kit_boxes[selection] || GLOB.available_specialist_kit_boxes[selection] <= 0)
+	if(!skillcheckexplicit(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_TRAINED) && !skillcheckexplicit(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL))
+		to_chat(user, SPAN_WARNING("You already unwrapped your [name], give this one to someone else!"))
+		return FALSE
+	if(!GLOB.specialist_set_name_dict[selection] || (GLOB.specialist_set_name_dict[selection].get_available_kit_num() <= 0))
 		to_chat(user, SPAN_WARNING("No more kits of this type may be chosen!"))
 		return FALSE
 	var/obj/item/card/id/card = user.get_idcard()
 	if(!card || card.registered_ref != WEAKREF(user))
 		to_chat(user, SPAN_WARNING("You must be wearing your [SPAN_INFO("ID card")] or [SPAN_INFO("dog tags")] to select a specialization!"))
-		return
-	var/turf/T = get_turf(loc)
-	var/obj/item/storage/box/spec/spec_box
-	var/specialist_assignment
-	switch(selection)
-		if("Pyro")
-			spec_box = new /obj/item/storage/box/spec/pyro(T)
-			specialist_assignment = "Pyro"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_PYRO)
-		if("Grenadier")
-			spec_box = new /obj/item/storage/box/spec/heavy_grenadier(T)
-			specialist_assignment = "Grenadier"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_GRENADIER)
-		if("Sniper")
-			spec_box = new /obj/item/storage/box/spec/sniper(T)
-			specialist_assignment = "Sniper"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_SNIPER)
-		if("Anti-materiel Sniper")
-			spec_box = new /obj/item/storage/box/spec/sniper/anti_materiel(T)
-			specialist_assignment = "Heavy Sniper"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_SNIPER)
-		if("Scout")
-			spec_box = new /obj/item/storage/box/spec/scout(T)
-			specialist_assignment = "Scout"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_SCOUT)
-			//this is to be able to use C4s that are coming with the kit
-			if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
-				user.skills.set_skill(SKILL_ENGINEER, SKILL_ENGINEER_NOVICE)
-		if("Demo")
-			spec_box = new /obj/item/storage/box/spec/demolitionist(T)
-			specialist_assignment = "Demo"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_ROCKET)
-			//this is to be able to use C4s that are coming with the kit
-			if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
-				user.skills.set_skill(SKILL_ENGINEER, SKILL_ENGINEER_NOVICE)
-//RUCM START
-		if("Stormtrooper")
-			spec_box = new /obj/item/storage/box/spec/stormtrooper(T)
-			specialist_assignment = "Stormtrooper"
-			user.skills.set_skill(SKILL_SPEC_WEAPONS, SKILL_SPEC_ST)
-			user.skills.set_skill(SKILL_ENDURANCE, SKILL_ENDURANCE_MAX)
-			//this is to be able to use C4s that are coming with the kit
-			if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
-				user.skills.set_skill(SKILL_ENGINEER, SKILL_ENGINEER_NOVICE)
-//RUCM END
-	if(specialist_assignment)
-		user.put_in_hands(spec_box)
-		card.set_assignment((user.assigned_squad && squad_assignment_update ? (user.assigned_squad.name + " ") : "") + card.assignment + " ([specialist_assignment])")
-		GLOB.data_core.manifest_modify(user.real_name, WEAKREF(user), card.assignment)
-		GLOB.available_specialist_kit_boxes[selection]--
-		return TRUE
-	return FALSE
+		return FALSE
+	return GLOB.specialist_set_name_dict[selection].redeem_set(user, TRUE)
+
 
 
 //******************************************PFC Kits****************************************************************/
