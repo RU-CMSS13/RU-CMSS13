@@ -1,3 +1,9 @@
+/datum/entity/player
+	var/colonial_coins
+
+/datum/view_record/players
+	var/colonial_coins
+
 /datum/entity/player/proc/load_battlepass()
 //PORT OUR SAVES
 	UNTIL(GLOB.battlepass_challenges)

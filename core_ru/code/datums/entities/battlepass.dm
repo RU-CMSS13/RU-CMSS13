@@ -108,17 +108,17 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 /datum/entity/battlepass_player/proc/verify_rewards()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] > tier && !mapped_rewards[reward])
+		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] > tier && !mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"])
 			continue
 		if(apply_reward(GLOB.battlepass_rewards[reward]))
-			mapped_rewards += reward
+			mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"] = reward
 
 	if(premium)
 		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] > tier && !mapped_premium_rewards[reward])
+			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] > tier && !mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"])
 				continue
 			if(apply_reward(GLOB.battlepass_rewards[reward]))
-				mapped_premium_rewards += reward
+				mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"] = reward
 
 	save()
 
@@ -144,14 +144,14 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] != tier)
 			continue
 		if(apply_reward(GLOB.battlepass_rewards[reward]))
-			mapped_rewards += reward
+			mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"] = reward
 
 	if(premium)
 		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
 			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] != tier)
 				continue
 			if(apply_reward(GLOB.battlepass_rewards[reward]))
-				mapped_premium_rewards += reward
+				mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"] = reward
 
 	save()
 	log_game("[owner.owning_client.mob] ([owner.owning_client.key]) has increased to battlepass tier [tier]")
@@ -173,7 +173,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 			new_skin.skin[reward.mapped_reward_data["skin"]] = reward.mapped_reward_data["skin"]
 			new_skin.save()
 		if("points")
-			return FALSE // Not handled for now
+			owner.colonial_coins += reward.mapped_reward_data["amount"]
+			owner.save()
 		else
 			return FALSE
 	return TRUE
@@ -249,12 +250,12 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 	data["rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		data["rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
+		data["rewards"] += list(GLOB.battlepass_rewards[GLOB.current_battlepass.mapped_rewards[reward]].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
 
 	data["premium"] = premium
 	data["premium_rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_premium_rewards[reward]))
+		data["premium_rewards"] += list(GLOB.battlepass_rewards[GLOB.current_battlepass.mapped_premium_rewards[reward]].get_ui_data(GLOB.current_battlepass.mapped_premium_rewards[reward]))
 
 	data["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)

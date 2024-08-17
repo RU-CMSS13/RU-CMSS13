@@ -85,6 +85,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"first_join_date" = DB_FIELDTYPE_STRING_MEDIUM,
 //RUCM START
 		"glob_pt_visibility" = DB_FIELDTYPE_INT,
+		"colonial_coins" = DB_FIELDTYPE_BIGINT,
 //RUCM END
 	)
 
@@ -802,5 +803,6 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"whitelist_status",
 //RUCM START
 		"glob_pt_visibility",
+		"colonial_coins",
 //RUCM END
 		)
