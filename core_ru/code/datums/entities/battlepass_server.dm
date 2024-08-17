@@ -5,23 +5,47 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 /proc/load_server_battlepasses()
 	WAIT_DB_READY
 	UNTIL(GLOB.round_id)
-	var/current_battlepass_id = 0
-	var/current_name = ""
 	var/list/season_battlepasses = list()
 	var/list/datum/view_record/battlepass_server/battlepasses = DB_VIEW(/datum/view_record/battlepass_server)
 	for(var/datum/view_record/battlepass_server/battlepass as anything in battlepasses)
 		season_battlepasses[battlepass.season_name] = battlepass
-		if(battlepass.season > current_battlepass_id && battlepass.start_round_id != null && text2num(GLOB.round_id) > battlepass.start_round_id && !battlepass.end_round_id)
-			current_battlepass_id = battlepass.season
-			current_name = battlepass.season_name
 
-	DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season_name", DB_EQUALS, current_name), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(on_read_server_battlepasses)))
+	var/datum/view_record/battlepass_server/current
+	for(var/battlepass_name in season_battlepasses)
+		var/datum/view_record/battlepass_server/battlepass = season_battlepasses[battlepass_name]
+		if(!current)
+			current = battlepass
+			continue
+		if(battlepass.battlepass_status == "Ended")
+			continue
+		if(battlepass.battlepass_status == "Ongoing")
+			current = battlepass
+			break
+		if(battlepass.battlepass_status == "Starting")
+			current = battlepass
+			break
+
+	DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season_name", DB_EQUALS, current.season_name), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(on_read_server_battlepasses)))
 	return season_battlepasses
 
 /proc/on_read_server_battlepasses(list/datum/entity/battlepass_server/_battlepass)
 	if(length(_battlepass))
 		GLOB.current_battlepass = pick(_battlepass)
 		GLOB.current_battlepass.sync()
+		if(GLOB.current_battlepass.status == "Starting")
+			GLOB.current_battlepass.status = "Ongoing"
+			GLOB.current_battlepass.start_round_id = text2num(GLOB.round_id)
+		else if(GLOB.current_battlepass.status == "Ongoing" && !GLOB.current_battlepass.end_round_id)
+			GLOB.current_battlepass.check_pre_ending_starting()
+		else if(text2num(GLOB.round_id) > GLOB.current_battlepass.end_round_id)
+			GLOB.current_battlepass.status = "Ended"
+
+/proc/prepare_next_season(list/datum/entity/battlepass_server/_battlepass)
+	if(length(_battlepass))
+		var/datum/entity/battlepass_server/battlepass = pick(_battlepass)
+		battlepass.sync()
+		battlepass.status = "Starting"
+		battlepass.save()
 
 /datum/entity/battlepass_server
 	var/season
@@ -35,6 +59,8 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 
 	var/start_round_id
 	var/end_round_id
+
+	var/battlepass_status
 
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
@@ -55,6 +81,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 		"point_sources" = DB_FIELDTYPE_STRING_MAX,
 		"start_round_id" = DB_FIELDTYPE_BIGINT,
 		"end_round_id" = DB_FIELDTYPE_BIGINT,
+		"battlepass_status" = DB_FIELDTYPE_STRING_LARGE,
 	)
 	key_field = "season"
 
@@ -76,6 +103,19 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 	if(length(battlepass.mapped_point_sources))
 		.["point_sources"] = json_encode(battlepass.mapped_point_sources)
 
+/datum/entity/battlepass_server/proc/check_pre_ending_starting()
+	UNTIL(length(GLOB.current_battlepasses))
+	var/max_lvls = 0
+	for(var/datum/view_record/battlepass_player/battlepass in GLOB.current_battlepasses)
+		if(battlepass.tier < max_tier)
+			continue
+		max_lvls++
+
+	var/percentage = length(GLOB.current_battlepasses) / max_lvls * 100
+	if(percentage > 100 - (text2num(GLOB.round_id) - start_round_id) / 5)
+		end_round_id = text2num(GLOB.round_id) + round(100 - percentage)
+		DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season", DB_EQUALS, season + 1), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(prepare_next_season)))
+
 /datum/view_record/battlepass_server
 	var/season
 	var/season_name
@@ -86,6 +126,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 
 	var/start_round_id
 	var/end_round_id
+
+	var/battlepass_status
 
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
@@ -102,6 +144,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 		"premium_rewards",
 		"start_round_id",
 		"end_round_id",
+		"battlepass_status",
 	)
 
 /datum/entity_view_meta/battlepass_server/map(datum/view_record/battlepass_server/battlepass, list/values)

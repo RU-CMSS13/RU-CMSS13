@@ -2,7 +2,14 @@ import { BooleanLike, classes } from 'common/react';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
-import { Box, Button, Dimmer, ProgressBar, Section } from '../components';
+import {
+  Box,
+  Button,
+  Dimmer,
+  NoticeBox,
+  ProgressBar,
+  Section,
+} from '../components';
 import { Window } from '../layouts';
 
 interface BattlepassReward {
@@ -27,6 +34,7 @@ interface BattlepassData {
   season: string;
   xp: number;
   tier: number;
+  remaining_rounds: string;
   max_tier: number;
   xp_tierup: number;
   rewards: BattlepassReward[];
@@ -57,7 +65,10 @@ const BattlepassContent = (props) => {
 
   return (
     <>
-      {infoView && (
+      {data.remaining_rounds ? (
+        <NoticeBox danger>data.remaining_rounds</NoticeBox>
+      ) : null}
+      {infoView ? (
         <Dimmer>
           <Box
             style={{
@@ -83,6 +94,26 @@ const BattlepassContent = (props) => {
               The battlepass system is a way of rewarding players with in-game
               rewards for playing well.
               <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
+              On the left of the UI, you can find your objectives. These
+              objectives are unique to you and reset every 24 hours. Completing
+              them gives you XP. The other way to obtain XP is by playing a
+              match to completion. Everyone gets XP regardless of winning or
+              losing, but the winning side earns more. Whichever side you join
+              first will be the side you gain XP for, even if you log out before
+              the round ends.
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
+              Every {data.xp_tierup} XP, your battlepass tier increases by 1,
+              granting you new rewards to use in game. You can claim rewards
+              with the &quot;Claim Battlepass Reward&quot; verb, and come back
+              to this UI with the &quot;Battlepass&quot; verb.
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
+              The premium battlepass is coming soon, purchasable for an
+              also-coming-soon 1000 ColonialCoins.
+              <Box style={{ height: '10px' }} />
+              <Box style={{ height: '10px' }} />
               <Button
                 fontSize="16px"
                 icon="xmark"
@@ -93,7 +124,7 @@ const BattlepassContent = (props) => {
             </Section>
           </Box>
         </Dimmer>
-      )}
+      ) : null}
       <Box
         style={{
           display: 'flex',
@@ -152,7 +183,7 @@ const BattlepassInfoContainer = (props) => {
         <Box style={{ fontWeight: 'bold', fontSize: '16px' }}>
           Tier: {data.tier} / {data.max_tier}
           <Box style={{ height: '10px' }} />
-          XP: {data.xp} / 10
+          XP: {data.xp} / {data.xp_tierup}
         </Box>
         {data.daily_challenges.map((challenge) => (
           <BattlepassChallengeUI challenge={challenge} key={challenge.name} />

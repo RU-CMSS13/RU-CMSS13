@@ -233,6 +233,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	var/list/data = list()
 
 	data["tier"] = tier
+	data["remaining_rounds"] = "Warning, this battlepasse endning in [GLOB.current_battlepass.end_round_id - text2num(GLOB.round_id)] ROUNDS!"
 	data["xp"] = tier >= GLOB.current_battlepass.max_tier ? GLOB.current_battlepass.xp_per_tier_up : xp
 	data["xp_tierup"] = GLOB.current_battlepass.xp_per_tier_up
 
