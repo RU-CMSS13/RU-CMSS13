@@ -35,6 +35,7 @@ interface BattlepassData {
   xp: number;
   tier: number;
   remaining_rounds: string;
+  premium: number;
   max_tier: number;
   xp_tierup: number;
   rewards: BattlepassReward[];
@@ -66,7 +67,7 @@ const BattlepassContent = (props) => {
   return (
     <>
       {data.remaining_rounds ? (
-        <NoticeBox danger>data.remaining_rounds</NoticeBox>
+        <NoticeBox danger>{data.remaining_rounds}</NoticeBox>
       ) : null}
       {infoView ? (
         <Dimmer>
@@ -91,8 +92,9 @@ const BattlepassContent = (props) => {
                 height: '100%',
               }}
             >
-              The battlepass system is a way of rewarding players with in-game
-              rewards for playing well.
+              {data.premium ? (
+                <NoticeBox danger>Premium enabled</NoticeBox>
+              ) : null}
               <Box style={{ height: '10px' }} />
               <Box style={{ height: '10px' }} />
               On the left of the UI, you can find your objectives. These

@@ -30,3 +30,8 @@
 	else
 		donator_info = new(src)
 		GLOB.donators_info["[ckey]"] = donator_info
+
+/datum/entity/player/proc/on_read_discord_link(list/datum/entity/discord_link/_discord_link)
+	if(length(_discord_link))
+		discord_link = pick(_discord_link)
+		discord_link_id = discord_link.id

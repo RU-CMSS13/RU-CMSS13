@@ -25,7 +25,7 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 			current = battlepass
 			break
 
-	DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season_name", DB_EQUALS, current.season_name), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(on_read_server_battlepasses)))
+	DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season", DB_EQUALS, current.season), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(on_read_server_battlepasses)))
 	return season_battlepasses
 
 /proc/on_read_server_battlepasses(list/datum/entity/battlepass_server/_battlepass)
