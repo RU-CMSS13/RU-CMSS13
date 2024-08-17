@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/berserker_rage
 	name = "Max Berserker Rage"
+	code_name = "xenobrage"
 	desc = "As a Berserker Ravager, enter maximum berserker rage AMOUNT times."
 	challenge_category = CHALLENGE_XENO
 	completion_xp_array = list(4, 6)

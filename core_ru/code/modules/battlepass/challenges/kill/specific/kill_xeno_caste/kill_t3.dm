@@ -1,4 +1,5 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/caste/t3
+	code_name = "killxct3"
 	possible_xeno_castes = list(
 		/mob/living/carbon/xenomorph/crusher,
 		/mob/living/carbon/xenomorph/praetorian,

@@ -15,8 +15,8 @@
 	if(!completion_xp)
 		if(length(completion_xp_array))
 			completion_xp = rand(completion_xp_array[1], completion_xp_array[2])
-		if(GLOB.current_battlepass.mapped_point_sources["daily"][code_name] && length(GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp_array"]))
-			completion_xp = rand(GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp_array"][1], GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp_array"][2])
+		if(GLOB.current_battlepass.mapped_point_sources["daily"][code_name] && length(GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp"]))
+			completion_xp = rand(GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp"][1], GLOB.current_battlepass.mapped_point_sources["daily"][code_name]["xp"][2])
 
 	if(owner)
 		on_client_hooked(owner)

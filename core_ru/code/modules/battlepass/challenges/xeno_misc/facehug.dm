@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/facehug
 	name = "Facehug Humans"
+	code_name = "xenohhug"
 	desc = "As a facehugger, facehug AMOUNT humans."
 	challenge_category = CHALLENGE_XENO
 	completion_xp_array = list(4, 6)

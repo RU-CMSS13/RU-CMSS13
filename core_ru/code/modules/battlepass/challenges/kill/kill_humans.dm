@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/kill_enemies/humans
 	name = "Kill Humans"
+	code_name = "killh"
 	desc = "Kill AMOUNT humans as a Xenomorph."
 	challenge_category = CHALLENGE_XENO
 	kill_requirement_lower = 3
@@ -7,8 +8,6 @@
 	valid_kill_paths = list(
 		/mob/living/carbon/human,
 	)
-	completion_xp_array = list(5, 7)
-	pick_weight = 10
 
 /datum/battlepass_challenge/kill_enemies/humans/regenerate_desc()
 	desc = "Kill [enemy_kills_required] human\s as a Xenomorph."

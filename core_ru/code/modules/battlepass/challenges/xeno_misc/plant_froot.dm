@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/plant_fruit
 	name = "Plant Resin Fruit"
+	code_name = "xenodplt"
 	desc = "Plant AMOUNT resin fruits."
 	challenge_category = CHALLENGE_XENO
 	completion_xp_array = list(4, 6)

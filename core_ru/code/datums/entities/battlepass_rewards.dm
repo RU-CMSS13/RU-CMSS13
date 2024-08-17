@@ -39,7 +39,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_reward)
 	if(values["reward_data"])
 		reward.mapped_reward_data = json_decode(values["reward_data"])
 
-/datum/entity_meta/battlepass_player/unmap(datum/entity/battlepass_reward/reward)
+/datum/entity_meta/battlepass_reward/unmap(datum/entity/battlepass_reward/reward)
 	. = ..()
 	if(length(reward.mapped_reward_data))
 		.["reward_data"] = json_encode(reward.mapped_reward_data)

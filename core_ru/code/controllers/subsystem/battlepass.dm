@@ -1,3 +1,11 @@
+GLOBAL_LIST_INIT_TYPED(battlepass_challenges_by_code_name, /datum/battlepass_challenge, load_battlepass_challenges())
+
+/proc/load_battlepass_challenges()
+	var/list/challenges = list()
+	for(var/datum/battlepass_challenge/challenge_path as anything in subtypesof(/datum/battlepass_challenge))
+		challenges[initial(challenge_path.code_name)] = challenge_path
+	return challenges
+
 SUBSYSTEM_DEF(battlepass)
 	name = "Battlepass"
 	flags = SS_NO_FIRE
@@ -10,11 +18,13 @@ SUBSYSTEM_DEF(battlepass)
 	var/list/xeno_battlepass_earners = list()
 
 /datum/controller/subsystem/battlepass/Initialize()
+	if(!GLOB.current_battlepass)
+		return SS_INIT_SUCCESS
 	for(var/challenge as anything in GLOB.current_battlepass.mapped_point_sources["daily"])
-		var/datum/battlepass_challenge/challenge_path = GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["path"]
+		var/datum/battlepass_challenge/challenge_path = GLOB.battlepass_challenges_by_code_name[challenge]
 		var/pick_weight = initial(challenge_path.pick_weight)
-		if("pick_weight" in GLOB.current_battlepass.mapped_point_sources["daily"][challenge])
-			pick_weight = GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["pick_weight"]
+		if(GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["piwgt"])
+			pick_weight = GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["piwgt"]
 
 		switch(initial(challenge_path.challenge_category))
 			if(CHALLENGE_NONE)

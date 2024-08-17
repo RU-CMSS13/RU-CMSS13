@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/caste
 	name = "Kill Xenomorphs - Caste"
+	code_name = "killxc"
 	desc = "Kill AMOUNT CASTEs as a human."
 	challenge_category = CHALLENGE_NONE
 	/// Possible xenoes to pick from

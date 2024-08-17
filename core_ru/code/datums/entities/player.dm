@@ -9,7 +9,7 @@
 		DB_FILTER(/datum/entity/battlepass_player, DB_AND(DB_COMP("player_id", DB_EQUALS, id), DB_COMP("season", DB_EQUALS, GLOB.current_battlepass.season)), CALLBACK(src, TYPE_PROC_REF(/datum/entity/player, on_read_battlepass)))
 
 /datum/entity/player/proc/on_read_battlepass(list/datum/entity/battlepass_player/_battlepass)
-	if(_battlepass)
+	if(length(_battlepass))
 		battlepass = pick(_battlepass)
 	else
 		battlepass = DB_ENTITY(/datum/entity/battlepass_player)

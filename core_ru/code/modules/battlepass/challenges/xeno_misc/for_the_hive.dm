@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/for_the_hive
 	name = "For The Hive!"
+	code_name = "xenorsuic"
 	desc = "As an Acider Runner, detonate For The Hive at maximum acid AMOUNT times."
 	challenge_category = CHALLENGE_XENO
 	completion_xp_array = list(5, 7)

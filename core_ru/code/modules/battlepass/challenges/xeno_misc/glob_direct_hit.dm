@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/glob_hits
 	name = "Direct Glob Hits"
+	code_name = "xenobdir"
 	desc = "Land AMOUNT direct acid glob hits as a Boiler."
 	challenge_category = CHALLENGE_XENO
 	completion_xp_array = list(5, 7)

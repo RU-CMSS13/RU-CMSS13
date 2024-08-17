@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/weapon
 	name = "Kill Xenomorphs - Weapon"
+	code_name = "killhwx"
 	desc = "Kill AMOUNT Xenomorphs using a WEAPON."
 	kill_requirement_lower = 1
 	kill_requirement_upper = 2

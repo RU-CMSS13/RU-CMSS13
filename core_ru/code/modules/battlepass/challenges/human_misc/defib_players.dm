@@ -1,8 +1,10 @@
 /datum/battlepass_challenge/defib_players
 	name = "Defibrillate Players"
+	code_name = "defib"
 	desc = "Successfully defibrillate AMOUNT unique marine players."
 	challenge_category = CHALLENGE_HUMAN
 	completion_xp_array = list(4, 6)
+	pick_weight = 5
 	var/minimum = 4
 	var/maximum = 8
 	var/requirement = 0

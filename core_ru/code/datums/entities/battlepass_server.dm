@@ -15,7 +15,8 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 			current_name = battlepass.season_name
 
 	GLOB.current_battlepass = DB_EKEY(/datum/entity/battlepass_server, current_name)
-	GLOB.current_battlepass.sync()
+	if(GLOB.current_battlepass)
+		GLOB.current_battlepass.sync()
 	return season_battlepasses
 
 /datum/entity/battlepass_server

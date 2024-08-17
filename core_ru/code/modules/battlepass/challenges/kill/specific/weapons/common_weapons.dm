@@ -1,4 +1,5 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/common
+	code_name = "killhwxc"
 	possible_weapons = list(
 		"M39 submachinegun",
 		"M4RA battle rifle",

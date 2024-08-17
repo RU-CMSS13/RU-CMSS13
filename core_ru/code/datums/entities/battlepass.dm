@@ -155,10 +155,16 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		return FALSE
 	switch(reward.reward_type)
 		if("skin")
-			var/datum/entity/skin/new_skin = DB_ENTITY(/datum/entity/skin)
-			new_skin.player_id = owner.id
-			new_skin.skin_name =  reward.mapped_reward_data["path"]
-			new_skin.skin = reward.mapped_reward_data["skin"]
+			if(!owner.donator_info)
+				return FALSE
+			var/datum/entity/skin/new_skin = owner.donator_info.skins[reward.mapped_reward_data["path"]]
+			if(!new_skin)
+				new_skin = DB_ENTITY(/datum/entity/skin)
+				new_skin.player_id = owner.id
+				new_skin.skin_name = reward.mapped_reward_data["path"]
+			else if(new_skin.skin[reward.mapped_reward_data["skin"]])
+				return FALSE
+			new_skin.skin[reward.mapped_reward_data["skin"]] = reward.mapped_reward_data["skin"]
 			new_skin.save()
 		if("points")
 			return FALSE // Not handled for now

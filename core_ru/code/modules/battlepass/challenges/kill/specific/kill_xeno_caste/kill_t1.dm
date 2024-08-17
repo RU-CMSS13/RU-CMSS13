@@ -1,4 +1,5 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/caste/t1
+	code_name = "killxct1"
 	possible_xeno_castes = list(
 		/mob/living/carbon/xenomorph/drone,
 		/mob/living/carbon/xenomorph/runner,

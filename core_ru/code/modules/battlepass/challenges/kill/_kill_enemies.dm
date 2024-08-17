@@ -1,4 +1,7 @@
 /datum/battlepass_challenge/kill_enemies
+	completion_xp_array = list(5, 7)
+	pick_weight = 10
+
 	/// How many enemies need to be killed to complete the challenge
 	var/enemy_kills_required = 0
 	/// How many enemies have been killed thus far for this challenge
