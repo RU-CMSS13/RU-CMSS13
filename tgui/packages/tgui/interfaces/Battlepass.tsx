@@ -299,7 +299,7 @@ const BattlepassRegularEntry = (props) => {
         />
       )}
 
-      {premiumReward && (
+      {premiumReward ? (
         <Box
           style={{
             opacity: '0.5',
@@ -345,6 +345,13 @@ const BattlepassRegularEntry = (props) => {
             {premiumReward.name}
           </Box>
         </Box>
+      ) : (
+        <Box
+          style={{
+            height: '135px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          }}
+        />
       )}
     </Box>
   );
