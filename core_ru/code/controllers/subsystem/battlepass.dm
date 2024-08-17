@@ -26,6 +26,22 @@ SUBSYSTEM_DEF(battlepass)
 			if(CHALLENGE_XENO)
 				xeno_challenges[challenge_path] = pick_weight
 
+	for(var/a in flist("data/player_saves/"))
+		for(var/ckey_str in flist("data/player_saves/[a]/"))
+			if(!fexists("data/player_saves/[a]/[ckey_str]/battlepass.sav"))
+				continue
+
+			var/savefile/save_obj = new("data/player_saves/[a]/[ckey_str]/battlepass.sav")
+			var/datum/entity/battlepass_player/battlepass = DB_ENTITY(/datum/entity/battlepass_player)
+			var/datum/entity/player/bp_player = get_player_from_key(ckey_str)
+			bp_player.sync()
+			battlepass.player_id = bp_player.id
+			battlepass.season = 1
+			battlepass.tier = save_obj["tier"]
+			battlepass.xp = save_obj["xp"]
+			battlepass.save()
+			fdel("data/player_saves/[a]/[ckey_str]/battlepass.sav")
+
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
