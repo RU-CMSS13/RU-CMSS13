@@ -49,9 +49,15 @@ const BattlepassContent = (props) => {
   const rewards = data.rewards;
   const premium_rewards = data.premium_rewards;
   const [infoView, setInfoView] = useState(false);
+
+  const rewardMap = new Map(rewards.map((reward) => [reward.tier, reward]));
+  const premiumRewardMap = new Map(
+    premium_rewards.map((reward) => [reward.tier, reward]),
+  );
+
   return (
     <>
-      {infoView === true ? (
+      {infoView && (
         <Dimmer>
           <Box
             style={{
@@ -77,40 +83,16 @@ const BattlepassContent = (props) => {
               The battlepass system is a way of rewarding players with in-game
               rewards for playing well.
               <Box style={{ height: '10px' }} />
-              <Box style={{ height: '10px' }} />
-              On the left of the UI, you can find your objectives. These
-              objectives are unique to you and reset every 24 hours. Completing
-              them gives you XP. The other way to obtain XP is by playing a
-              match to completion. Everyone gets XP regardless of winning or
-              losing, but the winning side earns more. Whichever side you join
-              first will be the side you gain XP for, even if you log out before
-              the round ends.
-              <Box style={{ height: '10px' }} />
-              <Box style={{ height: '10px' }} />
-              Every 10 XP, your battlepass tier increases by 1, granting you new
-              rewards to use in game. You can claim rewards with the &quot;Claim
-              Battlepass Reward&quot; verb, and come back to this UI with the
-              &quot;Battlepass&quot; verb.
-              <Box style={{ height: '10px' }} />
-              <Box style={{ height: '10px' }} />
-              The premium battlepass is coming soon, purchasable for an
-              also-coming-soon 1000 ColonialCoins.
-              <Box style={{ height: '10px' }} />
-              <Box style={{ height: '10px' }} />
               <Button
                 fontSize="16px"
                 icon="xmark"
-                onClick={() => {
-                  setInfoView(false);
-                }}
+                onClick={() => setInfoView(false)}
               >
                 Exit
               </Button>
             </Section>
           </Box>
         </Dimmer>
-      ) : (
-        <> </>
       )}
       <Box
         style={{
@@ -129,13 +111,19 @@ const BattlepassContent = (props) => {
             minWidth: '1500px',
           }}
         >
-          {rewards.map((reward, rewardIndex) => (
-            <BattlepassRegularEntry
-              key={reward.tier}
-              reward={reward}
-              premiumReward={premium_rewards[rewardIndex]}
-            />
-          ))}
+          {Array.from({ length: data.max_tier }, (_, tier) => tier + 1).map(
+            (tier) => {
+              const reward = rewardMap.get(tier);
+              const premiumReward = premiumRewardMap.get(tier);
+              return (
+                <BattlepassRegularEntry
+                  key={tier}
+                  reward={reward}
+                  premiumReward={premiumReward}
+                />
+              );
+            },
+          )}
         </Box>
       </Box>
     </>
@@ -156,9 +144,7 @@ const BattlepassInfoContainer = (props) => {
         <Button
           fontSize="12px"
           icon="circle-info"
-          onClick={() => {
-            setInfoView(true);
-          }}
+          onClick={() => setInfoView(true)}
         >
           Information
         </Button>
@@ -181,11 +167,7 @@ const BattlepassChallengeUI = (props) => {
   return (
     <Section title={`${challenge.category} - ${challenge.name}`}>
       {challenge.desc}
-      <Box
-        style={{
-          paddingBottom: '4px',
-        }}
-      />
+      <Box style={{ paddingBottom: '4px' }} />
       <ProgressBar
         minValue={0}
         maxValue={1}
@@ -206,8 +188,8 @@ const BattlepassChallengeUI = (props) => {
 
 const BattlepassRegularEntry = (props) => {
   const { act, data } = useBackend<BattlepassData>();
-  const reward: BattlepassReward = props.reward;
-  const premiumReward: BattlepassReward = props.premiumReward;
+  const reward: BattlepassReward | undefined = props.reward;
+  const premiumReward: BattlepassReward | undefined = props.premiumReward;
   return (
     <Box
       style={{
@@ -218,128 +200,118 @@ const BattlepassRegularEntry = (props) => {
         width: '135px',
       }}
     >
-      {data.tier >= reward.tier ? (
-        <Box
-          style={{
-            backgroundColor: 'rgba(0, 255, 0, 0.4)',
-            width: '100%',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            textAlign: 'center',
-          }}
-        >
-          {reward.name}
-        </Box>
-      ) : (
-        <Box
-          style={{
-            backgroundColor: 'rgba(255, 0, 0, 0.4)',
-            width: '100%',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            textAlign: 'center',
-          }}
-        >
-          {reward.name}
-        </Box>
-      )}
-      <Box
-        style={{
-          backgroundImage: 'linear-gradient(black, transparent)',
-        }}
-      >
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Box
-            style={{ display: 'inline', fontWeight: 'bold' }}
-            className={classes(['battlepass96x96', `${reward.icon_state}`])}
-          />
-        </Box>
-        <Box
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          ({reward.lifeform_type})
-        </Box>
-      </Box>
-      {data.tier >= reward.tier ? (
-        <Box
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(0, 255, 0, 0.4), rgba(212, 68, 23, 0.4))',
-            width: '100%',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            textAlign: 'center',
-          }}
-        >
-          {reward.tier}
-        </Box>
-      ) : (
-        <Box
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255, 0, 0, 0.4), rgba(212, 68, 23, 0.4))',
-            width: '100%',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            textAlign: 'center',
-          }}
-        >
-          {reward.tier}
-        </Box>
-      )}
-      <Box
-        style={{
-          opacity: '0.5',
-        }}
-      >
-        <Box
-          style={{
-            backgroundImage: 'linear-gradient(black, transparent)',
-          }}
-        >
+      {reward ? (
+        <>
           <Box
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Box
-              style={{ display: 'inline', fontWeight: 'bold' }}
-              className={classes([
-                'battlepass96x96',
-                `${premiumReward.icon_state}`,
-              ])}
-            />
-          </Box>
-          <Box
-            style={{
+              backgroundColor:
+                data.tier >= reward.tier
+                  ? 'rgba(0, 255, 0, 0.4)'
+                  : 'rgba(255, 0, 0, 0.4)',
+              width: '100%',
+              paddingTop: '3px',
+              paddingBottom: '3px',
               textAlign: 'center',
             }}
           >
-            ({premiumReward.lifeform_type})
+            {reward.name}
           </Box>
-        </Box>
+          <Box
+            style={{
+              backgroundImage: 'linear-gradient(black, transparent)',
+            }}
+          >
+            <Box
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                style={{ display: 'inline', fontWeight: 'bold' }}
+                className={classes(['battlepass96x96', `${reward.icon_state}`])}
+              />
+            </Box>
+            <Box
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              ({reward.lifeform_type})
+            </Box>
+          </Box>
+          <Box
+            style={{
+              backgroundImage:
+                data.tier >= reward.tier
+                  ? 'linear-gradient(rgba(0, 255, 0, 0.4), rgba(212, 68, 23, 0.4))'
+                  : 'linear-gradient(rgba(255, 0, 0, 0.4), rgba(212, 68, 23, 0.4))',
+              width: '100%',
+              paddingTop: '3px',
+              paddingBottom: '3px',
+              textAlign: 'center',
+            }}
+          >
+            {reward.tier}
+          </Box>
+        </>
+      ) : (
         <Box
           style={{
-            backgroundColor: 'rgba(212, 68, 23, 0.4)',
-            width: '100%',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            textAlign: 'center',
+            height: '135px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          }}
+        />
+      )}
+
+      {premiumReward && (
+        <Box
+          style={{
+            opacity: '0.5',
           }}
         >
-          {premiumReward.name}
+          <Box
+            style={{
+              backgroundImage: 'linear-gradient(black, transparent)',
+            }}
+          >
+            <Box
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                style={{ display: 'inline', fontWeight: 'bold' }}
+                className={classes([
+                  'battlepass96x96',
+                  `${premiumReward.icon_state}`,
+                ])}
+              />
+            </Box>
+            <Box
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              ({premiumReward.lifeform_type})
+            </Box>
+          </Box>
+          <Box
+            style={{
+              backgroundColor: 'rgba(212, 68, 23, 0.4)',
+              width: '100%',
+              paddingTop: '3px',
+              paddingBottom: '3px',
+              textAlign: 'center',
+            }}
+          >
+            {premiumReward.name}
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };
