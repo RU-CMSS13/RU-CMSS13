@@ -221,7 +221,7 @@
 			if(!client.player_data?.battlepass)
 				return
 
-			if(!SSbattlepass.initialized)
+			if(!GLOB.current_battlepass)
 				to_chat(src, SPAN_WARNING("Please wait for battlepasses to initialize first."))
 				return
 

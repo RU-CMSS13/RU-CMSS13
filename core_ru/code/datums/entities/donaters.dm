@@ -123,11 +123,11 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 /obj/structure/painting_table/attackby(obj/item/item as obj, mob/user as mob)
 	if(user?.client?.player_data?.donator_info)
 		if(user.client.player_data.donator_info.skins["[item.type]"] && !user.client.player_data.donator_info.skins_used["[item.type]"])
-			handle_skinning(item, user)
+			handle_skinning_item(item, user)
 			return
 	. = ..()
 
-/proc/handle_skinning(obj/item, mob/user)
+/proc/handle_skinning_item(obj/item, mob/user)
 	var/datum/entity/skin/skin_selection = user.client.player_data.donator_info.skins["[item.type]"]
 	if(!skin_selection)
 		return
@@ -142,7 +142,7 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 	item.skin(skin)
 
 //COMPACT VERSION << ALL IN ONE >>
-/obj/proc/skin(S)
+/obj/proc/skin(skin)
 	return
 
 //HELMET
@@ -195,3 +195,24 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 //	attachment_recoloring.alpha = 180
 //	attachment_recoloring.blend_mode = BLEND_ADD|BLEND_INSET_OVERLAY|BLEND_SUBTRACT
 	update_icon()
+
+/mob/living/carbon/xenomorph
+	var/selected_skin
+
+/proc/handle_skinning_xeno(mob/living/carbon/xenomorph/xeno, mob/user)
+	var/datum/entity/skin/skin_selection = user.client.player_data.donator_info.skins["[xeno.type]"]
+	if(!skin_selection)
+		return
+	var/list/skins_choice = list()
+	for(var/i in skin_selection.skin)
+		skins_choice += skin_selection.skin[i]
+	var/skin = tgui_input_list(usr, "Select skin, you can only one time use it for round (cancel for selecting normal one)", "Skin Selector", skins_choice)
+	if(!skin)
+		to_chat(user, SPAN_WARNING("Vending base skin."))
+		return
+	user.client.player_data.donator_info.skins_used["[xeno.type]"] = skin_selection
+	xeno.skin(skin)
+
+/mob/living/carbon/xenomorph/proc/skin(skin)
+	selected_skin = skin
+	return

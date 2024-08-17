@@ -1,6 +1,6 @@
 /datum/entity/player/proc/load_battlepass()
 //PORT OUR SAVES
-	UNTIL(GLOB.battlepasses)
+	UNTIL(GLOB.current_battlepass)
 	if(GLOB.client_loaded_battlepasses[ckey])
 		battlepass = GLOB.client_loaded_battlepasses[ckey]
 		battlepass.owner = src
@@ -16,8 +16,10 @@
 		battlepass.player_id = id
 		battlepass.season = GLOB.current_battlepass.season
 		battlepass.save()
-		battlepass.sync()
 
+	battlepass.sync()
+	battlepass.owner = src
+	battlepass.verify_data()
 	GLOB.client_loaded_battlepasses[ckey] = battlepass
 
 /datum/entity/player/proc/load_donator_info()

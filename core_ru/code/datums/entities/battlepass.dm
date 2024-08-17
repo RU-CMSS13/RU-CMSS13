@@ -19,7 +19,6 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 
 /datum/entity/player
 	var/datum/entity/battlepass_player/battlepass
-	var/list/datum/view_record/battlepass_player/all_seasons_battlepass
 
 /datum/entity/battlepass_player
 	var/player_id
@@ -32,13 +31,12 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/premium_rewards
 	var/premium = FALSE
 
-	var/season_name
 	var/datum/entity/player/owner
 	var/list/datum/battlepass_challenge/mapped_daily_challenges = list()
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
 
-BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
+///BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 /datum/entity_meta/battlepass_player
 	entity_type = /datum/entity/battlepass_player
@@ -54,11 +52,9 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		"premium_rewards" = DB_FIELDTYPE_STRING_MAX,
 		"premium" = DB_FIELDTYPE_BIGINT,
 	)
-	key_field = "player_id"
 
 /datum/entity_meta/battlepass_player/map(datum/entity/battlepass_player/battlepass, list/values)
 	. = ..()
-	battlepass.check_tier_up(FALSE)
 	if(values["daily_challenges"])
 		var/list/decoded = json_decode(values["daily_challenges"])
 		for(var/list/entry as anything in decoded)
@@ -76,9 +72,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 	if(values["premium_rewards"])
 		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
-
-	battlepass.check_daily_challenge_reset()
-	battlepass.verify_rewards()
 
 /datum/entity_meta/battlepass_player/unmap(datum/entity/battlepass_player/battlepass)
 	. = ..()
@@ -101,7 +94,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	for(var/datum/battlepass_challenge/challenge as anything in mapped_daily_challenges)
 		challenge.on_client_hooked(owner.owning_client)
 
-	check_tier_up(FALSE)
+	verify_rewards()
+	check_tier_up()
 	check_daily_challenge_reset()
 
 /datum/entity/battlepass_player/proc/verify_rewards()
@@ -273,14 +267,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	parent_name = "player"
 	child_name = "battlepass_player"
 
-/datum/entity_link/battlepass_server_to_battlepass
-	parent_entity = /datum/entity/battlepass_server
-	child_entity = /datum/entity/battlepass_player
-	child_field = "season"
-
-	parent_name = "battlepass_server"
-	child_name = "battlepass_player"
-
 /datum/view_record/battlepass_player
 	var/player_id
 	var/season
@@ -293,7 +279,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	var/premium = FALSE
 
 	var/ckey
-	var/season_name
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
 
@@ -310,8 +295,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		"rewards",
 		"premium_rewards",
 		"premium",
-		"ckey" = "player.ckey",
-		"season_name" = "battlepass_server.season_name"
+		"ckey" = "player.ckey"
 	)
 
 /datum/entity_view_meta/battlepass_player/map(datum/view_record/battlepass_player/battlepass, list/values)
