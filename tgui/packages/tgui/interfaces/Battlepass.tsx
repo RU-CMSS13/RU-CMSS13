@@ -118,7 +118,7 @@ const BattlepassContent = (props) => {
               <Button
                 fontSize="16px"
                 icon="xmark"
-                onClick={() => setInfoView(0)}
+                onClick={() => setInfoView(false)}
               >
                 Exit
               </Button>
@@ -178,7 +178,7 @@ const BattlepassInfoContainer = (props) => {
         <Button
           fontSize="12px"
           icon="circle-info"
-          onClick={() => setInfoView(1)}
+          onClick={() => setInfoView(true)}
         >
           Information
         </Button>
@@ -337,8 +337,8 @@ const BattlepassRegularEntry = (props) => {
             style={{
               backgroundImage: data.premium
                 ? data.tier >= premiumReward.tier
-                  ? 'linear-gradient(rgba(0, 225, 0, 0.4), rgba(212, 68, 23, 0.4))'
-                  : 'linear-gradient(rgba(225, 32, 12, 0.4), rgba(212, 68, 23, 0.4))'
+                  ? 'linear-gradient(rgba(32, 255, 12, 0.4), rgba(212, 68, 23, 0.4))'
+                  : 'linear-gradient(rgba(255, 32, 12, 0.4), rgba(212, 68, 23, 0.4))'
                 : 'linear-gradient(rgba(212, 68, 23, 0.4), rgba(212, 68, 23, 0.4))',
               width: '100%',
               paddingTop: '3px',
