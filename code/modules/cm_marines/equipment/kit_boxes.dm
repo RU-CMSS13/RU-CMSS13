@@ -183,6 +183,25 @@
 	new /obj/item/ammo_magazine/pistol/vp78(src)
 	new /obj/item/device/binoculars(src)
 
+//RUCM START
+/obj/item/storage/box/spec/stormtrooper
+	name = "\improper SHARP Operator equipment case"
+	desc = "A large case containing a P9 SHARP rifle, M3-G4 Grenadier armor and helmet, and various pieces of additional equipment.\nDrag this sprite onto yourself to open it up!"
+	kit_overlay = "grenadier"
+
+/obj/item/storage/box/spec/stormtrooper/fill_preset_inventory()
+	new /obj/item/clothing/suit/storage/marine/m40(src)
+	new /obj/item/clothing/head/helmet/marine/m40(src)
+	new /obj/item/clothing/gloves/marine/m40(src)
+	new /obj/item/weapon/twohanded/st_hammer(src)
+	new /obj/item/weapon/shield/montage(src)
+	new /obj/item/storage/belt/gun/xm52(src)
+	new /obj/item/weapon/gun/rifle/xm52(src)
+	new /obj/item/ammo_magazine/rifle/xm52(src)
+	new /obj/item/ammo_magazine/rifle/xm52(src)
+	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
+	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
+//RUCM END
 
 //maybe put in req for later use?
 /obj/item/storage/box/spec/B18

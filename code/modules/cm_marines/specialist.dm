@@ -198,3 +198,11 @@
 	role_name = "Pyro"
 	skill_to_give = SKILL_SPEC_PYRO
 	kit_typepath = /obj/item/storage/box/spec/pyro
+
+//RUCM START
+/datum/specialist_set/stormtrooper
+	name = "Stormtrooper Set"
+	role_name = "Stormtrooper"
+	skill_to_give = SKILL_SPEC_PYRO
+	kit_typepath = /obj/item/storage/box/spec/stormtrooper
+//RUCM END
