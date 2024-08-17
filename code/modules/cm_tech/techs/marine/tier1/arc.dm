@@ -18,10 +18,12 @@
 
 	var/obj/structure/machinery/cm_vending/gear/vehicle_crew/gearcomp = GLOB.VehicleGearConsole
 
+/*RUCM REMOVAL
 	if(gearcomp.selected_vehicle == "TANK")
 		to_chat(unlocking_mob, SPAN_WARNING ("A vehicle has already been selected for this operation."))
 		return FALSE
 
+*/
 	return TRUE
 
 

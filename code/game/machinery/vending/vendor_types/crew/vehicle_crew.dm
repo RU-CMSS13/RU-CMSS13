@@ -51,6 +51,7 @@
 			malfunction()
 			return
 
+/* RUCM CHANGE
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, obj/vehicle/multitile/V)
 	SIGNAL_HANDLER
 	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
@@ -60,6 +61,17 @@
 	if(selected_vehicle == "TANK")
 		available_categories &= ~(VEHICLE_INTEGRAL_AVAILABLE) //APC lacks these, so we need to remove these flags to be able to access spare parts section
 		marine_announcement("A tank is being sent up to reinforce this operation.")
+*/
+//RUCM START
+/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/V)
+
+	if(istype(V, /datum/vehicle_order/tank))
+		selected_vehicle = "TANK"
+	else
+		selected_vehicle = "APC"
+		available_categories &= ~(VEHICLE_ARMOR_AVAILABLE|VEHICLE_INTEGRAL_AVAILABLE)
+	marine_announcement("Vehicle is being sent up to reinforce this operation.")
+//RUCM END
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/get_listed_products(mob/user)
 	var/list/display_list = list()
@@ -76,7 +88,12 @@
 	else if(selected_vehicle == "ARC")
 		display_list = GLOB.cm_vending_vehicle_crew_arc
 
+/*
 	else if(selected_vehicle == "TANK")
+*/
+//RUCM START
+	else if(selected_vehicle == "APC")
+//RUCM END
 		if(available_categories)
 			display_list = GLOB.cm_vending_vehicle_crew_apc
 		else //APC stuff costs more to prevent 4000 points spent on shitton of ammunition
