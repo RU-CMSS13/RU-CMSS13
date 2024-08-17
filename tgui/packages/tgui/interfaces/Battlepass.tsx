@@ -129,30 +129,6 @@ const BattlepassContent = (props) => {
             minWidth: '1500px',
           }}
         >
-          <Box
-            style={{
-              position: 'absolute',
-              top: '32%',
-              left: '35%',
-              fontSize: '24px',
-              fontFamily: 'Verdana, Geneva, sans-serif',
-              zIndex: `${infoView === true ? '0' : '10'}`,
-            }}
-          >
-            Premium Battlepass coming soon!
-          </Box>
-          <Box
-            style={{
-              position: 'absolute',
-              top: '84%',
-              left: '35%',
-              fontSize: '24px',
-              fontFamily: 'Verdana, Geneva, sans-serif',
-              zIndex: `${infoView === true ? '0' : '10'}`,
-            }}
-          >
-            Premium Battlepass coming soon!
-          </Box>
           {rewards.map((reward, rewardIndex) => (
             <BattlepassRegularEntry
               key={reward.tier}
