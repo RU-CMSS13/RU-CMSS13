@@ -14,8 +14,6 @@
 
 /datum/battlepass_challenge/berserker_rage/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	rage_requirement = rand(minimum_rages, maximum_rages)
 	regenerate_desc()

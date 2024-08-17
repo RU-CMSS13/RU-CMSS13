@@ -10,10 +10,8 @@
 	var/requirement = 0
 	var/filled = 0
 
-/datum/battlepass_challenge/facehug/New(client/owning_client)
+/datum/battlepass_challenge/facehug/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	requirement = rand(minimum, maximum)
 	regenerate_desc()

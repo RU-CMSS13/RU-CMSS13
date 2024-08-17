@@ -243,7 +243,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
 
 	data["daily_challenges"] = list()
-	for(var/datum/battlepass_challenge/daily_challenge as anything in daily_challenges)
+	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)
 		data["daily_challenges"] += list(list(
 			"name" = daily_challenge.name,
 			"desc" = daily_challenge.desc,

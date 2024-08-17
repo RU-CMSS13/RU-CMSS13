@@ -10,10 +10,8 @@
 	/// The weapon chosen for this challenge
 	var/weapon_to_use = ""
 
-/datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/New(client/owning_client)
+/datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	weapon_to_use = pick(possible_weapons)
 	regenerate_desc()

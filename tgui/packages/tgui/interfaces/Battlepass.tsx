@@ -1,6 +1,7 @@
 import { BooleanLike, classes } from 'common/react';
+import { useState } from 'react';
 
-import { useBackend, useLocalState } from '../backend';
+import { useBackend } from '../backend';
 import { Box, Button, Dimmer, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
@@ -47,7 +48,7 @@ const BattlepassContent = (props) => {
   const { act, data } = useBackend<BattlepassData>();
   const rewards = data.rewards;
   const premium_rewards = data.premium_rewards;
-  const [infoView, setInfoView] = useLocalState('info_view', false);
+  const [infoView, setInfoView] = useState(false);
   return (
     <>
       {infoView === true ? (
@@ -99,11 +100,12 @@ const BattlepassContent = (props) => {
               <Button
                 fontSize="16px"
                 icon="xmark"
-                content="Exit"
                 onClick={() => {
                   setInfoView(false);
                 }}
-              />
+              >
+                Exit
+              </Button>
             </Section>
           </Box>
         </Dimmer>
@@ -166,7 +168,7 @@ const BattlepassContent = (props) => {
 
 const BattlepassInfoContainer = (props) => {
   const { act, data } = useBackend<BattlepassData>();
-  const [infoView, setInfoView] = useLocalState('info_view', false);
+  const [infoView, setInfoView] = useState(false);
   return (
     <Box
       style={{
@@ -178,11 +180,12 @@ const BattlepassInfoContainer = (props) => {
         <Button
           fontSize="12px"
           icon="circle-info"
-          content="Information"
           onClick={() => {
             setInfoView(true);
           }}
-        />
+        >
+          Information
+        </Button>
         <Box style={{ height: '10px' }} />
         <Box style={{ fontWeight: 'bold', fontSize: '16px' }}>
           Tier: {data.tier} / {data.max_tier}

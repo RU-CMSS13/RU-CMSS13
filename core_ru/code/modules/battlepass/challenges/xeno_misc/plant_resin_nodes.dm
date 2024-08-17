@@ -14,10 +14,8 @@
 	/// How many nodes have been planted so far
 	var/planted_nodes = 0
 
-/datum/battlepass_challenge/plant_resin_nodes/New(client/owning_client)
+/datum/battlepass_challenge/plant_resin_nodes/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	node_requirement = rand(minimum_nodes, maximum_nodes)
 	regenerate_desc()

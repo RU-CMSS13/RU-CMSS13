@@ -16,8 +16,6 @@
 
 /datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	enemy_kills_required = rand(kill_requirement_lower, kill_requirement_upper)
 	regenerate_desc()

@@ -11,10 +11,8 @@
 	var/list/mob_name_list = list()
 
 
-/datum/battlepass_challenge/defib_players/New(client/owning_client)
+/datum/battlepass_challenge/defib_players/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	requirement = rand(minimum, maximum)
 	regenerate_desc()

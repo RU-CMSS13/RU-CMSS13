@@ -6,10 +6,8 @@
 	/// Possible xenoes to pick from
 	var/list/possible_xeno_castes = list()
 
-/datum/battlepass_challenge/kill_enemies/xenomorphs/caste/New(client/owning_client)
+/datum/battlepass_challenge/kill_enemies/xenomorphs/caste/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
 	. = ..()
-	if(!.)
-		return .
 
 	valid_kill_paths = list(pick(possible_xeno_castes))
 	regenerate_desc()
