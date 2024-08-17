@@ -10,7 +10,6 @@
 	entry_message_body = "Your job is to operate and maintain the ship's armored vehicles. You are in charge of representing the armored presence amongst the marines during the operation, as well as maintaining and repairing your own vehicles."
 
 /datum/job/command/tank_crew/set_spawn_positions(count)
-
 	if (length(GLOB.clients) >= 200)
 		spawn_positions = 2
 	else
