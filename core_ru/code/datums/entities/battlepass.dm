@@ -107,18 +107,20 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	check_daily_challenge_reset()
 
 /datum/entity/battlepass_player/proc/verify_rewards()
-	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] > tier && !mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"])
+	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
+		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
+		if(params["tier"] > tier && !mapped_rewards[list_key])
 			continue
-		if(apply_reward(GLOB.battlepass_rewards[reward]))
-			mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"] = reward
+		if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
+			mapped_rewards[list_key] = params["type"]
 
 	if(premium)
-		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] > tier && !mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"])
+		for(var/list_key as anything in GLOB.current_battlepass.mapped_premium_rewards)
+			var/list/params = GLOB.current_battlepass.mapped_premium_rewards[list_key]
+			if(params["tier"] > tier && !mapped_premium_rewards[list_key])
 				continue
-			if(apply_reward(GLOB.battlepass_rewards[reward]))
-				mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"] = reward
+			if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
+				mapped_premium_rewards[list_key] = params["type"]
 
 	save()
 
@@ -140,18 +142,20 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 		check_tier_up()
 
 /datum/entity/battlepass_player/proc/on_tier_up()
-	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] != tier)
+	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
+		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
+		if(params["tier"] != tier)
 			continue
-		if(apply_reward(GLOB.battlepass_rewards[reward]))
-			mapped_rewards["[reward]_[GLOB.current_battlepass.mapped_rewards[reward]["tier"]]"] = reward
+		if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
+			mapped_rewards[list_key] = params["type"]
 
 	if(premium)
-		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] != tier)
+		for(var/list_key as anything in GLOB.current_battlepass.mapped_premium_rewards)
+			var/list/params = GLOB.current_battlepass.mapped_premium_rewards[list_key]
+			if(params["tier"] != tier)
 				continue
-			if(apply_reward(GLOB.battlepass_rewards[reward]))
-				mapped_premium_rewards["[reward]_[GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"]]"] = reward
+			if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
+				mapped_premium_rewards[list_key] = params["type"]
 
 	save()
 	log_game("[owner.owning_client.mob] ([owner.owning_client.key]) has increased to battlepass tier [tier]")
@@ -173,7 +177,10 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 			new_skin.skin[reward.mapped_reward_data["skin"]] = reward.mapped_reward_data["skin"]
 			new_skin.save()
 		if("points")
-			owner.colonial_coins += reward.mapped_reward_data["amount"]
+			if(!owner.colonial_coins)
+				owner.colonial_coins = reward.mapped_reward_data["amount"]
+			else
+				owner.colonial_coins += reward.mapped_reward_data["amount"]
 			owner.save()
 		else
 			return FALSE
@@ -249,13 +256,15 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	data["max_tier"] = GLOB.current_battlepass.max_tier
 
 	data["rewards"] = list()
-	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		data["rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
+	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
+		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
+		data["rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
 
 	data["premium"] = premium
 	data["premium_rewards"] = list()
-	for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_premium_rewards[reward]))
+	for(var/list_key as anything in GLOB.current_battlepass.mapped_premium_rewards)
+		var/list/params = GLOB.current_battlepass.mapped_premium_rewards[list_key]
+		data["premium_rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
 
 	data["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)
