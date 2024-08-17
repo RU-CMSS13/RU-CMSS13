@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 			break
 		if(battlepass.battlepass_status == "Starting")
 			current = battlepass
-			break
+			continue
 
 	DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season", DB_EQUALS, current.season), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(on_read_server_battlepasses)))
 	return season_battlepasses
