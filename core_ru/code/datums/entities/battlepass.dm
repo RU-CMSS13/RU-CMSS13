@@ -70,13 +70,13 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
-		if(!battlepass.mapped_rewards)
-			battlepass.mapped_rewards = list()
+	if(!battlepass.mapped_rewards)
+		battlepass.mapped_rewards = list()
 
 	if(values["premium_rewards"])
 		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
-		if(!battlepass.mapped_premium_rewards)
-			battlepass.mapped_premium_rewards = list()
+	if(!battlepass.mapped_premium_rewards)
+		battlepass.mapped_premium_rewards = list()
 
 /datum/entity_meta/battlepass_player/unmap(datum/entity/battlepass_player/battlepass)
 	. = ..()
