@@ -10,7 +10,6 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 
 /datum/entity/battlepass_reward
 	var/unique_name
-	var/tier
 	var/icon_state
 	var/lifeform_type
 
@@ -26,7 +25,6 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 	table_name = "battlepass_rewards"
 	field_types = list(
 		"unique_name" = DB_FIELDTYPE_STRING_LARGE,
-		"tier" = DB_FIELDTYPE_BIGINT,
 		"icon_state" = DB_FIELDTYPE_STRING_MAX,
 		"lifeform_type" = DB_FIELDTYPE_STRING_LARGE,
 		"reward_type" = DB_FIELDTYPE_STRING_LARGE,
@@ -47,7 +45,6 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 //BATTLEPASS REWARD ENTITY VIEW META
 /datum/view_record/battlepass_reward
 	var/unique_name
-	var/tier
 	var/icon_state
 	var/lifeform_type
 
@@ -61,7 +58,6 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 	destination_entity = /datum/view_record/battlepass_reward
 	fields = list(
 		"unique_name",
-		"tier",
 		"icon_state",
 		"lifeform_type",
 		"reward_type",
@@ -73,8 +69,8 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 	if(values["reward_data"])
 		reward.mapped_reward_data = json_decode(values["reward_data"])
 
-/datum/view_record/battlepass_reward/proc/get_ui_data()
-	.["tier"] = tier
+/datum/view_record/battlepass_reward/proc/get_ui_data(list/data)
+	.["tier"] = data["tier"]
 	.["name"] = unique_name
 	.["icon_state"] = icon_state
 	.["lifeform_type"] = lifeform_type

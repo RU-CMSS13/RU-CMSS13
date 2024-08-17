@@ -52,6 +52,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 		"premium_rewards" = DB_FIELDTYPE_STRING_MAX,
 		"premium" = DB_FIELDTYPE_BIGINT,
 	)
+	key_field = "player_id"
 
 /datum/entity_meta/battlepass_player/map(datum/entity/battlepass_player/battlepass, list/values)
 	. = ..()
@@ -100,14 +101,14 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 
 /datum/entity/battlepass_player/proc/verify_rewards()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		if(GLOB.battlepass_rewards[reward].tier > tier && !mapped_rewards[reward])
+		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] > tier && !mapped_rewards[reward])
 			continue
 		if(apply_reward(GLOB.battlepass_rewards[reward]))
 			mapped_rewards += reward
 
 	if(premium)
 		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-			if(GLOB.battlepass_rewards[reward].tier > tier && !mapped_premium_rewards[reward])
+			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] > tier && !mapped_premium_rewards[reward])
 				continue
 			if(apply_reward(GLOB.battlepass_rewards[reward]))
 				mapped_premium_rewards += reward
@@ -129,14 +130,14 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 
 /datum/entity/battlepass_player/proc/on_tier_up()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		if(GLOB.battlepass_rewards[reward].tier != tier)
+		if(GLOB.current_battlepass.mapped_rewards[reward]["tier"] != tier)
 			continue
 		if(apply_reward(GLOB.battlepass_rewards[reward]))
 			mapped_rewards += reward
 
 	if(premium)
 		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-			if(GLOB.battlepass_rewards[reward].tier != tier)
+			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tier"] != tier)
 				continue
 			if(apply_reward(GLOB.battlepass_rewards[reward]))
 				mapped_premium_rewards += reward
@@ -234,12 +235,12 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 
 	data["rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		data["rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data())
+		data["rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
 
 	data["premium"] = premium
 	data["premium_rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data())
+		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
 
 	data["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in daily_challenges)

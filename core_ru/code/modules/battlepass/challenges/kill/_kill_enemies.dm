@@ -1,4 +1,5 @@
 /datum/battlepass_challenge/kill_enemies
+	code_name = "kille"
 	completion_xp_array = list(5, 7)
 	pick_weight = 10
 

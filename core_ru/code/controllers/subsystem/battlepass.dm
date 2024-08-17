@@ -6,20 +6,24 @@ GLOBAL_LIST_INIT_TYPED(battlepass_challenges_by_code_name, /datum/battlepass_cha
 		challenges[initial(challenge_path.code_name)] = challenge_path
 	return challenges
 
+GLOBAL_LIST(battlepass_challenges)
+
 SUBSYSTEM_DEF(battlepass)
 	name = "Battlepass"
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_BATTLEPASS
 
-	var/list/marine_challenges = list()
-	var/list/xeno_challenges = list()
-
 	var/list/marine_battlepass_earners = list()
 	var/list/xeno_battlepass_earners = list()
 
 /datum/controller/subsystem/battlepass/Initialize()
-	if(!GLOB.current_battlepass)
-		return SS_INIT_SUCCESS
+	await_initialization()
+	return SS_INIT_SUCCESS
+
+/datum/controller/subsystem/battlepass/proc/await_initialization()
+	set waitfor = FALSE
+	UNTIL(GLOB.current_battlepass)
+	GLOB.battlepass_challenges = list("marine_challenges" = list(), "xeno_challenges" = list())
 	for(var/challenge as anything in GLOB.current_battlepass.mapped_point_sources["daily"])
 		var/datum/battlepass_challenge/challenge_path = GLOB.battlepass_challenges_by_code_name[challenge]
 		var/pick_weight = initial(challenge_path.pick_weight)
@@ -31,10 +35,10 @@ SUBSYSTEM_DEF(battlepass)
 				continue
 
 			if(CHALLENGE_HUMAN)
-				marine_challenges[challenge_path] = pick_weight
+				GLOB.battlepass_challenges["marine_challenges"][challenge_path] = pick_weight
 
 			if(CHALLENGE_XENO)
-				xeno_challenges[challenge_path] = pick_weight
+				GLOB.battlepass_challenges["xeno_challenges"][challenge_path] = pick_weight
 
 	for(var/a in flist("data/player_saves/"))
 		for(var/ckey_str in flist("data/player_saves/[a]/"))
@@ -52,18 +56,16 @@ SUBSYSTEM_DEF(battlepass)
 			battlepass.save()
 			fdel("data/player_saves/[a]/[ckey_str]/battlepass.sav")
 
-	return SS_INIT_SUCCESS
-
 /datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
 	switch(challenge_type)
 		if(CHALLENGE_NONE)
 			return
 
 		if(CHALLENGE_HUMAN)
-			return pick_weight(marine_challenges)
+			return pick_weight(GLOB.battlepass_challenges["marine_challenges"])
 
 		if(CHALLENGE_XENO)
-			return pick_weight(xeno_challenges)
+			return pick_weight(GLOB.battlepass_challenges["xeno_challenges"])
 
 /datum/controller/subsystem/battlepass/proc/give_sides_points(marine_points = 0, xeno_points = 0)
 	if(marine_points)
