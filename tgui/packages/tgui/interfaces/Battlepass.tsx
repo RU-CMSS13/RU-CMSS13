@@ -335,7 +335,11 @@ const BattlepassRegularEntry = (props) => {
           </Box>
           <Box
             style={{
-              backgroundColor: 'rgba(212, 68, 23, 0.4)',
+              backgroundImage: data.premium
+                ? data.tier >= premiumReward.tier
+                  ? 'linear-gradient(rgba(0, 225, 0, 0.4), rgba(212, 68, 23, 0.4))'
+                  : 'linear-gradient(rgba(225, 32, 12, 0.4), rgba(212, 68, 23, 0.4))'
+                : 'linear-gradient(rgba(212, 68, 23, 0.4), rgba(212, 68, 23, 0.4))',
               width: '100%',
               paddingTop: '3px',
               paddingBottom: '3px',
