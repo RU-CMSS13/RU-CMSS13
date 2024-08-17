@@ -54,7 +54,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 	key_field = "season"
 
 /datum/entity_meta/battlepass_server/map(datum/entity/battlepass_server/battlepass, list/values)
-	..()
+	. = ..()
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
 	if(values["premium_rewards"])
@@ -100,7 +100,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 	)
 
 /datum/entity_view_meta/battlepass_server/map(datum/view_record/battlepass_server/battlepass, list/values)
-	..()
+	. = ..()
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
 	if(values["premium_rewards"])

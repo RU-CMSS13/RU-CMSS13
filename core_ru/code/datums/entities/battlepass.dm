@@ -30,7 +30,6 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/daily_challenges
 	var/rewards
 	var/premium_rewards
-	var/previous_on_tier_up_tier
 	var/premium = FALSE
 
 	var/season_name
@@ -53,14 +52,12 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		"daily_challenges" = DB_FIELDTYPE_STRING_MAX,
 		"rewards" = DB_FIELDTYPE_STRING_MAX,
 		"premium_rewards" = DB_FIELDTYPE_STRING_MAX,
-		"previous_on_tier_up_tier" = DB_FIELDTYPE_BIGINT,
 		"premium" = DB_FIELDTYPE_BIGINT,
 	)
 	key_field = "player_id"
 
 /datum/entity_meta/battlepass_player/map(datum/entity/battlepass_player/battlepass, list/values)
-	..()
-
+	. = ..()
 	battlepass.check_tier_up(FALSE)
 	if(values["daily_challenges"])
 		var/list/decoded = json_decode(values["daily_challenges"])
@@ -107,69 +104,21 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	check_tier_up(FALSE)
 	check_daily_challenge_reset()
 
-
-
-//BATTLEPASS ACTIONS
-/mob/verb/battlepass()
-	set category = "OOC"
-	set name = "Battlepass"
-
-	if(!client.player_data?.battlepass)
-		return
-
-	client.player_data.battlepass.tgui_interact(src)
-
-/*
-/mob/living/carbon/verb/claim_battlepass_reward()
-	set category = "OOC"
-	set name = "Claim Battlepass Reward"
-
-	if(!client)
-		return
-
-	var/list/acceptable_rewards = list()
-	for(var/datum/battlepass_reward/reward as anything in client.player_data.battlepass.rewards)
-		if(reward.can_claim(src))
-			acceptable_rewards += reward
-
-	if(!length(acceptable_rewards))
-		to_chat(src, SPAN_WARNING("You have no rewards to claim."))
-		return
-
-	var/datum/battlepass_reward/chosen_reward = tgui_input_list(src, "Claim a battlepass reward.", "Claim Reward", acceptable_rewards)
-	if(!chosen_reward || !chosen_reward.can_claim(src))
-		return
-
-	if(chosen_reward.on_claim(src))
-		claimed_reward_categories |= chosen_reward.category
-*/
-
-/* Not really used by now
-/datum/entity/battlepass_player/proc/display_tier_up_popup()
-	var/client/user_client = owner.owning_client
-	if(!user_client.mob)
-		return
-
-	playsound_client(user_client, 'core_ru/sound/effects/bp_levelup.mp3', get_turf(user_client.mob), 70, FALSE) // .mp3, sue me
-	user_client.mob.overlay_fullscreen("battlepass_tierup", /atom/movable/screen/fullscreen/battlepass)
-	addtimer(CALLBACK(user_client.mob, TYPE_PROC_REF(/mob, clear_fullscreen), "battlepass_tierup", 0), 1.2 SECONDS)
-*/
-
-/// Check that the user has all the rewards they should (in case rewards shifted in config or etc).
-/// Doesn't remove ones that aren't in their tiers (in case they have some from a previous season, for example)
 /datum/entity/battlepass_player/proc/verify_rewards()
-	GLOB.current_battlepass
-/*
-	for(var/i = 1 to tier)
-		if(SSbattlepass.season_rewards.len < i)
-			break
-		var/reward_path = SSbattlepass.season_rewards[i]
-		if(reward_path in reward_paths)
+	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
+		if(GLOB.battlepass_rewards[reward].tier > tier && !mapped_rewards[reward])
 			continue
+		if(apply_reward(GLOB.battlepass_rewards[reward]))
+			mapped_rewards += reward
 
-		rewards += new reward_path
-		reward_paths += reward_path
-*/
+	if(premium)
+		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
+			if(GLOB.battlepass_rewards[reward].tier > tier && !mapped_premium_rewards[reward])
+				continue
+			if(apply_reward(GLOB.battlepass_rewards[reward]))
+				mapped_premium_rewards += reward
+
+	save()
 
 /datum/entity/battlepass_player/proc/add_xp(xp_amount)
 	if(tier >= GLOB.current_battlepass.max_tier)
@@ -188,20 +137,34 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
 		if(GLOB.battlepass_rewards[reward].tier != tier)
 			continue
-		apply_reward(GLOB.battlepass_rewards[reward])
-		mapped_rewards += reward
+		if(apply_reward(GLOB.battlepass_rewards[reward]))
+			mapped_rewards += reward
 
 	if(premium)
 		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
 			if(GLOB.battlepass_rewards[reward].tier != tier)
 				continue
-			apply_reward(GLOB.battlepass_rewards[reward])
-			mapped_premium_rewards += reward
+			if(apply_reward(GLOB.battlepass_rewards[reward]))
+				mapped_premium_rewards += reward
 
 	save()
 	log_game("[owner.owning_client.mob] ([owner.owning_client.key]) has increased to battlepass tier [tier]")
 
-/datum/entity/battlepass_player/proc/apply_reward(list/reward)
+/datum/entity/battlepass_player/proc/apply_reward(datum/view_record/battlepass_reward/reward)
+	if(!owner)
+		return FALSE
+	switch(reward.reward_type)
+		if("skin")
+			var/datum/entity/skin/new_skin = DB_ENTITY(/datum/entity/skin)
+			new_skin.player_id = owner.id
+			new_skin.skin_name =  reward.mapped_reward_data["path"]
+			new_skin.skin = reward.mapped_reward_data["skin"]
+			new_skin.save()
+		if("points")
+			return FALSE // Not handled for now
+		else
+			return FALSE
+	return TRUE
 
 /// Check if it's been 24h since daily challenges were last assigned
 /datum/entity/battlepass_player/proc/check_daily_challenge_reset()
@@ -304,12 +267,12 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	parent_name = "player"
 	child_name = "battlepass_player"
 
-/datum/entity_link/player_to_battlepass
-	parent_entity = /datum/entity/player
+/datum/entity_link/battlepass_server_to_battlepass
+	parent_entity = /datum/entity/battlepass_server
 	child_entity = /datum/entity/battlepass_player
-	child_field = "player_id"
+	child_field = "season"
 
-	parent_name = "player"
+	parent_name = "battlepass_server"
 	child_name = "battlepass_player"
 
 /datum/view_record/battlepass_player
@@ -318,9 +281,15 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	var/tier
 	var/xp
 	var/daily_challenges_last_updated
+	var/daily_challenges
+	var/rewards
+	var/premium_rewards
 	var/premium = FALSE
 
 	var/ckey
+	var/season_name
+	var/list/mapped_rewards
+	var/list/mapped_premium_rewards
 
 /datum/entity_view_meta/battlepass_player
 	root_record_type = /datum/entity/battlepass_player
@@ -333,6 +302,28 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		"daily_challenges_last_updated",
 		"daily_challenges",
 		"rewards",
+		"premium_rewards",
 		"premium",
 		"ckey" = "player.ckey",
+		"season_name" = "battlepass_server.season_name"
 	)
+
+/datum/entity_view_meta/battlepass_player/map(datum/view_record/battlepass_player/battlepass, list/values)
+	. = ..()
+	if(values["rewards"])
+		battlepass.mapped_rewards = json_decode(values["rewards"])
+
+	if(values["premium_rewards"])
+		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
+
+
+
+//BATTLEPASS VIEW
+/mob/verb/battlepass()
+	set category = "OOC"
+	set name = "Battlepass"
+
+	if(!client.player_data?.battlepass)
+		return
+
+	client.player_data.battlepass.tgui_interact(src)

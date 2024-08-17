@@ -10,6 +10,14 @@ GLOBAL_LIST_INIT_TYPED(battlepass_rewards, /datum/view_record/battlepass_reward,
 
 /datum/entity/battlepass_reward
 	var/unique_name
+	var/tier
+	var/icon_state
+	var/lifeform_type
+
+	var/reward_type
+	var/reward_data
+
+	var/list/mapped_reward_data
 
 BSQL_PROTECT_DATUM(/datum/entity/battlepass_reward)
 
@@ -18,22 +26,55 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_reward)
 	table_name = "battlepass_rewards"
 	field_types = list(
 		"unique_name" = DB_FIELDTYPE_STRING_LARGE,
+		"tier" = DB_FIELDTYPE_BIGINT,
+		"icon_state" = DB_FIELDTYPE_STRING_MAX,
+		"lifeform_type" = DB_FIELDTYPE_STRING_LARGE,
+		"reward_type" = DB_FIELDTYPE_STRING_LARGE,
+		"reward_data" = DB_FIELDTYPE_STRING_MAX,
 	)
 	key_field = "unique_name"
 
-/datum/entity/battlepass_reward/proc/get_ui_data()
-	.["tier"]
-	.["name"]
-	.["icon_state"]
-	.["lifeform_type"]
+/datum/entity_meta/battlepass_reward/map(datum/entity/battlepass_reward/reward, list/values)
+	. = ..()
+	if(values["reward_data"])
+		reward.mapped_reward_data = json_decode(values["reward_data"])
 
+/datum/entity_meta/battlepass_player/unmap(datum/entity/battlepass_player/battlepass)
+	. = ..()
+	if(length(reward.mapped_reward_data))
+		.["reward_data"] = json_encode(reward.mapped_reward_data)
 
+//BATTLEPASS REWARD ENTITY VIEW META
 /datum/view_record/battlepass_reward
 	var/unique_name
+	var/tier
+	var/icon_state
+	var/lifeform_type
+
+	var/reward_type
+	var/reward_data
+
+	var/list/mapped_reward_data
 
 /datum/entity_view_meta/battlepass_reward
 	root_record_type = /datum/entity/battlepass_reward
 	destination_entity = /datum/view_record/battlepass_reward
 	fields = list(
 		"unique_name",
+		"tier",
+		"icon_state",
+		"lifeform_type",
+		"reward_type",
+		"reward_data",
 	)
+
+/datum/entity_view_meta/battlepass_reward/map(datum/view_record/battlepass_reward/reward, list/values)
+	. = ..()
+	if(values["reward_data"])
+		reward.mapped_reward_data = json_decode(values["reward_data"])
+
+/datum/view_record/battlepass_reward/proc/get_ui_data()
+	.["tier"] = tier
+	.["name"] = unique_name
+	.["icon_state"] = icon_state
+	.["lifeform_type"] = lifeform_type
