@@ -208,7 +208,6 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 		skins_choice += skin_selection.skin[i]
 	var/skin = tgui_input_list(usr, "Select skin, you can only one time use it for round (cancel for selecting normal one)", "Skin Selector", skins_choice)
 	if(!skin)
-		to_chat(user, SPAN_WARNING("Vending base skin."))
 		return
 	user.client.player_data.donator_info.skins_used["[xeno.type]"] = skin_selection
 	xeno.skin(skin)
