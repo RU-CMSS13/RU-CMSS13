@@ -1,7 +1,6 @@
 import { BooleanLike, classes } from 'common/react';
-import { useState } from 'react';
 
-import { useBackend } from '../backend';
+import { useBackend, useLocalState } from '../backend';
 import {
   Box,
   Button,
@@ -57,7 +56,7 @@ const BattlepassContent = (props) => {
   const { act, data } = useBackend<BattlepassData>();
   const rewards = data.rewards;
   const premium_rewards = data.premium_rewards;
-  const [infoView, setInfoView] = useState(0);
+  const [infoView, setInfoView] = useLocalState('info_view', false);
 
   const rewardMap = new Map(rewards.map((reward) => [reward.tier, reward]));
   const premiumRewardMap = new Map(
@@ -167,7 +166,7 @@ const BattlepassContent = (props) => {
 
 const BattlepassInfoContainer = (props) => {
   const { act, data } = useBackend<BattlepassData>();
-  const [infoView, setInfoView] = useState(0);
+  const [infoView, setInfoView] = useLocalState('info_view', false);
   return (
     <Box
       style={{
