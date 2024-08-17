@@ -67,10 +67,11 @@
 
 	if(istype(V, /datum/vehicle_order/tank))
 		selected_vehicle = "TANK"
+		marine_announcement("Tank is being sent up to reinforce this operation. Good luck")
 	else
 		selected_vehicle = "APC"
 		available_categories &= ~(VEHICLE_ARMOR_AVAILABLE|VEHICLE_INTEGRAL_AVAILABLE)
-	marine_announcement("Vehicle is being sent up to reinforce this operation.")
+		marine_announcement("APC is being sent up to reinforce this operation. Good luck")
 //RUCM END
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/get_listed_products(mob/user)
