@@ -6,10 +6,8 @@
 	if(!character?.client?.ckey)
 		return
 
-	var/ckey = character.client.ckey
-
-	// You cannot double dip; marine or xeno only
-	if(marine_sided)
-		SSbattlepass.marine_battlepass_earners |= ckey
-	else if(xeno_sided)
-		SSbattlepass.xeno_battlepass_earners |= ckey
+	if(character.client?.player_data?.battlepass)
+		if(marine_sided)
+			SSbattlepass.marine_battlepass_earners |= character.client.player_data.battlepass
+		else if(xeno_sided)
+			SSbattlepass.xeno_battlepass_earners |= character.client.player_data.battlepass

@@ -29,6 +29,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/client_battlepa
 	var/daily_challenges_last_updated
 	var/daily_challenges
 	var/rewards
+	var/premium_rewards
 	var/previous_on_tier_up_tier
 	var/premium = FALSE
 
@@ -36,6 +37,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/client_battlepa
 	var/datum/entity/player/owner
 	var/list/datum/battlepass_challenge/mapped_daily_challenges = list()
 	var/list/mapped_rewards
+	var/list/mapped_premium_rewards
 
 BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 
@@ -50,6 +52,7 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 		"daily_challenges_last_updated" = DB_FIELDTYPE_BIGINT,
 		"daily_challenges" = DB_FIELDTYPE_STRING_MAX,
 		"rewards" = DB_FIELDTYPE_STRING_MAX,
+		"premium_rewards" = DB_FIELDTYPE_STRING_MAX,
 		"previous_on_tier_up_tier" = DB_FIELDTYPE_BIGINT,
 		"premium" = DB_FIELDTYPE_BIGINT,
 	)
@@ -74,6 +77,9 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
 
+	if(values["premium_rewards"])
+		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
+
 	battlepass.check_daily_challenge_reset()
 	battlepass.verify_rewards()
 
@@ -88,6 +94,9 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 	if(length(battlepass.mapped_rewards))
 		.["rewards"] = json_encode(battlepass.mapped_rewards)
 
+	if(length(battlepass.mapped_premium_rewards))
+		.["premium_rewards"] = json_encode(battlepass.mapped_premium_rewards)
+
 
 
 //BATTLEPASS FULLFILMENT
@@ -97,9 +106,6 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 
 	check_tier_up(FALSE)
 	check_daily_challenge_reset()
-
-
-
 
 
 
@@ -136,34 +142,6 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 
 	if(chosen_reward.on_claim(src))
 		claimed_reward_categories |= chosen_reward.category
-
-/datum/entity/client_battlepass/proc/on_tier_up()
-	if(previous_on_tier_up_tier == tier)
-		return
-
-	for(var/i in previous_on_tier_up_tier + 1 to tier)
-		if(SSbattlepass.season_rewards.len < i)
-			break
-		var/reward_path = SSbattlepass.season_rewards[i]
-		var/datum/battlepass_reward/reward = new reward_path
-		rewards += reward
-		reward_paths += reward_path
-
-	if(display_popup)
-		display_tier_up_popup()
-
-	var/list/types_in_rewards = list()
-	for(var/datum/battlepass_reward/reward as anything in rewards)
-		if(reward.type in types_in_rewards)
-			rewards -= reward
-			reward_paths -= reward.type
-			qdel(reward)
-			continue
-
-		types_in_rewards += reward.type
-
-	previous_on_tier_up_tier = tier
-	log_game("[owner.owning_client.mob] ([owner.owning_client.key]) has increased to battlepass tier [tier]")
 */
 
 /* Not really used by now
@@ -199,22 +177,30 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 	check_tier_up()
 
 /datum/entity/client_battlepass/proc/check_tier_up()
-	if(xp >= GLOB.current_battlepass.xp_per_tier_up)
-		var/tier_increase = round(xp / GLOB.current_battlepass.xp_per_tier_up)
-		xp -= (tier_increase * GLOB.current_battlepass.xp_per_tier_up)
-		tier += tier_increase
-		if(!tier_increase)
-			return
-		on_tier_up(tier_increase)
+	if(tier < GLOB.current_battlepass.max_tier && xp >= GLOB.current_battlepass.xp_per_tier_up)
+		xp -= GLOB.current_battlepass.xp_per_tier_up
+		tier++
+		on_tier_up()
+		check_tier_up()
 
-/datum/entity/client_battlepass/proc/on_tier_up(tier_increase)
-	for(var/i in previous_on_tier_up_tier + 1 to tier)
-		if(SSbattlepass.season_rewards.len < i)
-			break
-		var/reward_path = SSbattlepass.season_rewards[i]
-		var/datum/battlepass_reward/reward = new reward_path
-		rewards += reward
-		reward_paths += reward_path
+/datum/entity/client_battlepass/proc/on_tier_up()
+	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
+		if(GLOB.current_battlepass.mapped_rewards[reward]["tire"] != tier)
+			continue
+		apply_reward(GLOB.current_battlepass.mapped_rewards[reward])
+		mapped_rewards += GLOB.current_battlepass.mapped_rewards[reward]
+
+	if(premium)
+		for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
+			if(GLOB.current_battlepass.mapped_premium_rewards[reward]["tire"] != tier)
+				continue
+			apply_reward(GLOB.current_battlepass.mapped_premium_rewards[reward])
+			mapped_premium_rewards += GLOB.current_battlepass.mapped_premium_rewards[reward]
+
+	save()
+	log_game("[owner.owning_client.mob] ([owner.owning_client.key]) has increased to battlepass tier [tier]")
+
+/datum/entity/client_battlepass/proc/apply_reward(list/reward)
 
 /// Check if it's been 24h since daily challenges were last assigned
 /datum/entity/client_battlepass/proc/check_daily_challenge_reset()
@@ -286,6 +272,7 @@ BSQL_PROTECT_DATUM(/datum/entity/client_battlepass)
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
 		data["rewards"] += list(GLOB.current_battlepass.mapped_rewards[reward])
 
+	data["premium"] = premium
 	data["premium_rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
 		data["premium_rewards"] += list(GLOB.current_battlepass.mapped_premium_rewards[reward])

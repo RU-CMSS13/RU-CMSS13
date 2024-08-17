@@ -5,7 +5,8 @@
 		if(client.player_data)
 			generate_name()
 //RUCM START
-		SSbattlepass.xeno_battlepass_earners |= client.ckey
+			if(client.player_data?.battlepass)
+				SSbattlepass.xeno_battlepass_earners |= client.player_data.battlepass
 //RUCM END
 	if(SSticker.mode)
 		SSticker.mode.xenomorphs |= mind

@@ -328,7 +328,8 @@
 			if(new_xeno.client.prefs.toggles_flashing & FLASH_POOLSPAWN)
 				window_flash(new_xeno.client)
 //RUCM START
-			SSbattlepass.xeno_battlepass_earners |= new_xeno.client.ckey
+			if(new_xeno.client?.player_data?.battlepass)
+				SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
 //RUCM END
 
 		linked_hive.stored_larva--

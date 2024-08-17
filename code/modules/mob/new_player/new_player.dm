@@ -310,7 +310,8 @@
 
 	character.client.init_verbs()
 //RUCM START
-	SSbattlepass.marine_battlepass_earners |= character.client.ckey
+	if(character.client?.player_data?.battlepass)
+		SSbattlepass.marine_battlepass_earners |= character.client.player_data.battlepass
 //RUCM END
 	qdel(src)
 

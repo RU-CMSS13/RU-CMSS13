@@ -550,7 +550,8 @@ Additional game mode variables.
 				return FALSE
 		if(transfer_xeno(xeno_candidate, new_xeno))
 //RUCM START
-			SSbattlepass.xeno_battlepass_earners |= new_xeno?.client?.ckey
+			if(new_xeno.client?.player_data?.battlepass)
+				SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
 //RUCM END
 			return TRUE
 	to_chat(xeno_candidate, "JAS01: Something went wrong, tell a coder.")

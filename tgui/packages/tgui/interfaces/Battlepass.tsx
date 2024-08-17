@@ -24,6 +24,7 @@ interface BattlepassChallenge {
 }
 
 interface BattlepassData {
+  season: string;
   xp: number;
   tier: number;
   max_tier: number;
