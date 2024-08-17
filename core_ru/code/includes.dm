@@ -20,6 +20,7 @@
 #include "datums\ammo\bullet\smg.dm"
 #include "datums\ammo\bullet\shotgun.dm"
 #include "datums\entities\admins.dm"
+#include "datums\entities\battlepass_server.dm"
 #include "datums\entities\battlepass.dm"
 #include "datums\entities\discord_link.dm"
 #include "datums\entities\donaters.dm"

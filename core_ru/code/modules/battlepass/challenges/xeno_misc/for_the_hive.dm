@@ -2,7 +2,7 @@
 	name = "For The Hive!"
 	desc = "As an Acider Runner, detonate For The Hive at maximum acid AMOUNT times."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 6
+	completion_xp_array = list(5, 7)
 	pick_weight = 6
 	var/minimum = 1
 	var/maximum = 2
@@ -20,7 +20,7 @@
 /datum/battlepass_challenge/for_the_hive/regenerate_desc()
 	desc = "As an Acider Runner, detonate For The Hive at maximum acid [requirement] times."
 
-/datum/battlepass_challenge/for_the_hive/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/for_the_hive/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

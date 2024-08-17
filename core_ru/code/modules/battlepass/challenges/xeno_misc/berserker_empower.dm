@@ -2,7 +2,7 @@
 	name = "Max Berserker Rage"
 	desc = "As a Berserker Ravager, enter maximum berserker rage AMOUNT times."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 5
+	completion_xp_array = list(4, 6)
 	pick_weight = 6
 	/// The minimum possible amount of times rage needs to be entered
 	var/minimum_rages = 2
@@ -22,7 +22,7 @@
 /datum/battlepass_challenge/berserker_rage/regenerate_desc()
 	desc = "As a Berserker Ravager, enter maximum berserker rage [rage_requirement] time\s."
 
-/datum/battlepass_challenge/berserker_rage/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/berserker_rage/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

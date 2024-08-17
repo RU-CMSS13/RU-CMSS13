@@ -2,38 +2,32 @@ SUBSYSTEM_DEF(battlepass)
 	name = "Battlepass"
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_BATTLEPASS
-	/// The maximum tier the battlepass goes to
-	var/maximum_tier = 20
-	/// What season we're currently in
-	var/season = 1
-	/// Dict of all marine challenges to their pick weight
+
+	var/list/actual_challenges
+
 	var/list/marine_challenges = list()
-	/// Dict of all xeno challenges to their pick weight
 	var/list/xeno_challenges = list()
-	/// List of paths of all battlepass rewards for the current season, in order
-	var/list/season_rewards = list()
-	/// List of all paths of all premium battlepass rewards for the current season, in order
-	var/list/premium_season_rewards = list()
+
 	var/list/marine_battlepass_earners = list()
 	var/list/xeno_battlepass_earners = list()
 
 /datum/controller/subsystem/battlepass/Initialize()
-	mapped_point_sources
+	actual_challenges = GLOB.current_battlepass.mapped_point_sources["daily"]
+	for(var/challenge as anything in actual_challenges)
+		var/datum/battlepass_challenge/challenge_path = actual_challenges[challenge]["path"]
+		var/pick_weight = initial(challenge_path.pick_weight)
+		if("pick_weight" in actual_challenges[challenge])
+			pick_weight = actual_challenges[challenge]["pick_weight"]
 
-
-
-
-
-	for(var/datum/battlepass_challenge/challenge_path as anything in subtypesof(/datum/battlepass_challenge))
 		switch(initial(challenge_path.challenge_category))
 			if(CHALLENGE_NONE)
 				continue
 
 			if(CHALLENGE_HUMAN)
-				marine_challenges[challenge_path] = initial(challenge_path.pick_weight)
+				marine_challenges[challenge_path] = actual_challenges[challenge]["pick_weight"]
 
 			if(CHALLENGE_XENO)
-				xeno_challenges[challenge_path] = initial(challenge_path.pick_weight)
+				xeno_challenges[challenge_path] = actual_challenges[challenge]["pick_weight"]
 
 	for(var/client/client as anything in GLOB.clients)
 		if(!client.player_data?.battlepass)
@@ -79,20 +73,6 @@ SUBSYSTEM_DEF(battlepass)
 			var/savefile/ckey_save = new("data/player_saves/[copytext(ckey,1,2)]/[ckey]/battlepass.sav")
 
 			ckey_save["xp"] += point_amount // if they're >=10 XP, it'll get sorted next time they log on
-
-/// Proc meant for admin calling to see BP levels of all online players
-/datum/controller/subsystem/battlepass/proc/output_bp_levels(mob/caller)
-	var/list/levels = list()
-	for(var/i = 1 to maximum_tier)
-		levels["[i]"] = 0
-	for(var/client/player_client as anything in GLOB.clients)
-		if(!player_client.player_data?.battlepass)
-			continue
-
-		levels["[player_client.player_data.battlepass.tier]"] += 1
-
-	to_chat(caller, SPAN_NOTICE(json_encode(levels)))
-
 
 /datum/controller/subsystem/battlepass/proc/get_bp_ge_to_tier(mob/caller, tiernum = 1)
 	var/i = 0

@@ -7,7 +7,7 @@
 	valid_kill_paths = list(
 		/mob/living/carbon/human,
 	)
-	completion_xp = 6
+	completion_xp_array = list(5, 7)
 	pick_weight = 10
 
 /datum/battlepass_challenge/kill_enemies/humans/regenerate_desc()

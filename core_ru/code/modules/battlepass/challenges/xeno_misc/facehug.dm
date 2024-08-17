@@ -2,7 +2,7 @@
 	name = "Facehug Humans"
 	desc = "As a facehugger, facehug AMOUNT humans."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 5
+	completion_xp_array = list(4, 6)
 	pick_weight = 7
 	var/minimum = 1
 	var/maximum = 3
@@ -20,7 +20,7 @@
 /datum/battlepass_challenge/facehug/regenerate_desc()
 	desc = "As a facehugger, facehug [requirement] human\s."
 
-/datum/battlepass_challenge/facehug/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/facehug/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

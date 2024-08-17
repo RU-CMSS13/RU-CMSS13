@@ -2,7 +2,7 @@
 	name = "Direct Glob Hits"
 	desc = "Land AMOUNT direct acid glob hits as a Boiler."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 6
+	completion_xp_array = list(5, 7)
 	pick_weight = 6
 	var/minimum = 1
 	var/maximum = 4
@@ -20,7 +20,7 @@
 /datum/battlepass_challenge/glob_hits/regenerate_desc()
 	desc = "Land [requirement] direct acid glob hit\s as a Boiler."
 
-/datum/battlepass_challenge/glob_hits/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/glob_hits/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

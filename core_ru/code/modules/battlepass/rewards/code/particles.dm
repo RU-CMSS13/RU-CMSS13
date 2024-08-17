@@ -1,3 +1,6 @@
+/mob
+	var/obj/effect/abstract/particle_holder/particle_holder
+
 ///objects can only have one particle on them at a time, so we use these abstract effects to hold and display the effects. You know, so multiple particle effects can exist at once.
 ///also because some objects do not display particles due to how their visuals are built
 /obj/effect/abstract/particle_holder

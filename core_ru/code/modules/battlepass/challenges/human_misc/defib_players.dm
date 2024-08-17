@@ -2,7 +2,7 @@
 	name = "Defibrillate Players"
 	desc = "Successfully defibrillate AMOUNT unique marine players."
 	challenge_category = CHALLENGE_HUMAN
-	completion_xp = 5
+	completion_xp_array = list(4, 6)
 	var/minimum = 4
 	var/maximum = 8
 	var/requirement = 0
@@ -20,7 +20,7 @@
 /datum/battlepass_challenge/defib_players/regenerate_desc()
 	desc = "Successfully defibrillate [requirement] unique marine player\s."
 
-/datum/battlepass_challenge/defib_players/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/defib_players/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

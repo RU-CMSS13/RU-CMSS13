@@ -1,6 +1,7 @@
 import { BooleanLike, classes } from 'common/react';
+import { useState } from 'react';
 
-import { useBackend, useLocalState } from '../backend';
+import { useBackend } from '../backend';
 import { Box, Button, Dimmer, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
@@ -46,7 +47,7 @@ const BattlepassContent = (props) => {
   const { act, data } = useBackend<BattlepassData>();
   const rewards = data.rewards;
   const premium_rewards = data.premium_rewards;
-  const [infoView, setInfoView] = useLocalState('info_view', false);
+  const [infoView, setInfoView] = useState(false);
   return (
     <>
       {infoView === true ? (
@@ -165,7 +166,7 @@ const BattlepassContent = (props) => {
 
 const BattlepassInfoContainer = (props) => {
   const { act, data } = useBackend<BattlepassData>();
-  const [infoView, setInfoView] = useLocalState('info_view', false);
+  const [infoView, setInfoView] = useState(false);
   return (
     <Box
       style={{
@@ -173,7 +174,7 @@ const BattlepassInfoContainer = (props) => {
         borderRight: 'solid',
       }}
     >
-      <Section title="Season 1">
+      <Section title={data.season}>
         <Button
           fontSize="12px"
           icon="circle-info"

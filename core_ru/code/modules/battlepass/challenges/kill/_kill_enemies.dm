@@ -18,7 +18,7 @@
 	enemy_kills_required = rand(kill_requirement_lower, kill_requirement_upper)
 	regenerate_desc()
 
-/datum/battlepass_challenge/kill_enemies/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/kill_enemies/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

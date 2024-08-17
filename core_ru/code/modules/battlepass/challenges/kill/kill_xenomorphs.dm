@@ -7,7 +7,7 @@
 	valid_kill_paths = list(
 		/mob/living/carbon/xenomorph,
 	)
-	completion_xp = 6
+	completion_xp_array = list(5, 7)
 
 /datum/battlepass_challenge/kill_enemies/xenomorphs/regenerate_desc()
 	desc = "Kill [enemy_kills_required] Xenomorph\s as a human."

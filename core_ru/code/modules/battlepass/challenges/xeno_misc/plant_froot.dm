@@ -2,7 +2,7 @@
 	name = "Plant Resin Fruit"
 	desc = "Plant AMOUNT resin fruits."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 5
+	completion_xp_array = list(4, 6)
 	pick_weight = 8
 	var/minimum = 20
 	var/maximum = 30
@@ -20,7 +20,7 @@
 /datum/battlepass_challenge/plant_fruit/regenerate_desc()
 	desc = "Plant [requirement] resin fruit\s."
 
-/datum/battlepass_challenge/plant_fruit/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/plant_fruit/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return

@@ -2,7 +2,7 @@
 	name = "Plant Resin Nodes"
 	desc = "Plant AMOUNT resin nodes."
 	challenge_category = CHALLENGE_XENO
-	completion_xp = 5
+	completion_xp_array = list(4, 6)
 	pick_weight = 8
 	/// The minimum possible amount of nodes that need to be planted
 	var/minimum_nodes = 20
@@ -24,7 +24,7 @@
 /datum/battlepass_challenge/plant_resin_nodes/regenerate_desc()
 	desc = "Plant [node_requirement] resin node\s."
 
-/datum/battlepass_challenge/plant_resin_nodes/on_client_login_mob(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/plant_resin_nodes/hook_client_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return
