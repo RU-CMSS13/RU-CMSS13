@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
 
-BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
+//BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 /datum/entity_meta/battlepass_player
 	entity_type = /datum/entity/battlepass_player
@@ -250,12 +250,12 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 	data["rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_rewards)
-		data["rewards"] += list(GLOB.battlepass_rewards[GLOB.current_battlepass.mapped_rewards[reward]].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
+		data["rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_rewards[reward]))
 
 	data["premium"] = premium
 	data["premium_rewards"] = list()
 	for(var/reward as anything in GLOB.current_battlepass.mapped_premium_rewards)
-		data["premium_rewards"] += list(GLOB.battlepass_rewards[GLOB.current_battlepass.mapped_premium_rewards[reward]].get_ui_data(GLOB.current_battlepass.mapped_premium_rewards[reward]))
+		data["premium_rewards"] += list(GLOB.battlepass_rewards[reward].get_ui_data(GLOB.current_battlepass.mapped_premium_rewards[reward]))
 
 	data["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)

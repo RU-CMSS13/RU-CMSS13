@@ -13,9 +13,6 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 	var/datum/view_record/battlepass_server/current
 	for(var/battlepass_name in season_battlepasses)
 		var/datum/view_record/battlepass_server/battlepass = season_battlepasses[battlepass_name]
-		if(!current)
-			current = battlepass
-			continue
 		if(battlepass.battlepass_status == "Ended")
 			continue
 		if(battlepass.battlepass_status == "Ongoing")
