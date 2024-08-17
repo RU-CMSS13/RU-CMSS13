@@ -20,7 +20,7 @@
 		battlepass.owner = src
 		battlepass.verify_data()
 	else
-		DB_FILTER(/datum/entity/client_battlepass, DB_AND(DB_COMP("player_id", DB_EQUALS, id), DB_COMP("season", DB_EQUALS, GLOB.current_battlepass.season)), CALLBACK(src, TYPE_PROC_REF(/datum/entity/player, on_read_battlepass)))
+		DB_FILTER(/datum/entity/battlepass_player, DB_AND(DB_COMP("player_id", DB_EQUALS, id), DB_COMP("season", DB_EQUALS, GLOB.current_battlepass.season)), CALLBACK(src, TYPE_PROC_REF(/datum/entity/player, on_read_battlepass)))
 
 /* WORK THIS AROUND FOR CONVERTING ALL TO DB
 /datum/controller/subsystem/battlepass/proc/get_bp_ge_to_tier(mob/caller, tiernum = 1)
@@ -36,7 +36,7 @@
 	to_chat(caller, SPAN_NOTICE("[i]"))
 */
 
-/datum/entity/player/proc/on_read_battlepass(list/datum/entity/client_battlepass/_battlepass)
+/datum/entity/player/proc/on_read_battlepass(list/datum/entity/battlepass_player/_battlepass)
 	if(_battlepass)
 		battlepass = pick(_battlepass)
 	else

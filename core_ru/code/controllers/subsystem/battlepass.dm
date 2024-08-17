@@ -41,9 +41,9 @@ SUBSYSTEM_DEF(battlepass)
 
 /datum/controller/subsystem/battlepass/proc/give_sides_points(marine_points = 0, xeno_points = 0)
 	if(marine_points)
-		for(var/datum/entity/client_battlepass/battlepass in marine_battlepass_earners)
+		for(var/datum/entity/battlepass_player/battlepass in marine_battlepass_earners)
 			battlepass.add_xp(marine_points)
 
 	if(xeno_points)
-		for(var/datum/entity/client_battlepass/battlepass in xeno_battlepass_earners)
+		for(var/datum/entity/battlepass_player/battlepass in xeno_battlepass_earners)
 			battlepass.add_xp(xeno_points)
