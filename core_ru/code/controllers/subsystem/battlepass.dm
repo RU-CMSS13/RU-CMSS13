@@ -40,12 +40,6 @@ SUBSYSTEM_DEF(battlepass)
 			if(CHALLENGE_XENO)
 				GLOB.battlepass_challenges["xeno_challenges"][challenge_path] = pick_weight
 
-	for(var/a in flist("data/player_saves/"))
-		for(var/ckey_str in flist("data/player_saves/[a]/"))
-			if(!fexists("data/player_saves/[a]/[ckey_str]/battlepass.sav"))
-				continue
-			fdel("data/player_saves/[a]/[ckey_str]/battlepass.sav")
-
 /datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
 	switch(challenge_type)
 		if(CHALLENGE_NONE)
