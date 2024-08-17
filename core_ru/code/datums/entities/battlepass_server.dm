@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 	var/list/mapped_premium_rewards
 	var/list/mapped_point_sources
 
-///BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
+BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 
 /datum/entity_meta/battlepass_server
 	entity_type = /datum/entity/battlepass_server

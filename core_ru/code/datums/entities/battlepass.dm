@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
 
-///BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
+BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 /datum/entity_meta/battlepass_player
 	entity_type = /datum/entity/battlepass_player
