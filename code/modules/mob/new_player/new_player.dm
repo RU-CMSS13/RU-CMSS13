@@ -43,11 +43,10 @@
 	output +="<br><b>[(client.prefs && client.prefs.real_name) ? client.prefs.real_name : client.key]</b>"
 	output +="<br><b>[xeno_text]</b>"
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=tutorial'>Tutorial</A></p>"
+	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_preferences'>Setup Character</A></p>"
 //RUCM START
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=battlepass'>Battlepass</A></p>"
 //RUCM END
-	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_preferences'>Setup Character</A></p>"
-
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_playtimes'>View Playtimes</A></p>"
 
 	if(round_start)
