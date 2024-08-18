@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/req
 	code_name = "killhwxr"
+	pick_weight = 10
 	possible_weapons = list(
 		"M240A1 incinerator unit",
 		"MOU53 break action shotgun",

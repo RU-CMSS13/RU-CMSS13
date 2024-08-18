@@ -3,6 +3,7 @@
 	code_name = "killx"
 	desc = "Kill AMOUNT Xenomorphs as a human."
 	challenge_category = CHALLENGE_HUMAN
+	pick_weight = 10
 	kill_requirement_lower = 2
 	kill_requirement_upper = 3
 	valid_kill_paths = list(

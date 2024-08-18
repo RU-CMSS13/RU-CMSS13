@@ -1,5 +1,6 @@
 /datum/battlepass_challenge/kill_enemies/xenomorphs/weapon/pistol
 	code_name = "killhwxp"
+	pick_weight = 10
 	possible_weapons = list(
 		"VP78 pistol",
 		"SU-6 Smartpistol",
