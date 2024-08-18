@@ -55,7 +55,6 @@
 #include "game\objects\items\weapons\st_equip.dm"
 #include "game\objects\items\weapons\st_hammer_stacks.dm"
 #include "game\turfs\closed.dm"
-#include "game\turfs\open.dm"
 #include "modules\clothing\suits\marine_armor\st_armor.dm"
 #include "modules\clothing\gloves\marine_gloves.dm"
 #include "modules\clothing\head\helmet.dm"
