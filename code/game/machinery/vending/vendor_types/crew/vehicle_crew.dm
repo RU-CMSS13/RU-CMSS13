@@ -63,9 +63,12 @@
 		marine_announcement("A tank is being sent up to reinforce this operation.")
 */
 //RUCM START
-/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/V)
+/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/VO)
 
-	if(istype(V, /datum/vehicle_order/tank))
+	SIGNAL_HANDLER
+	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
+
+	if(istype(VO, /datum/vehicle_order/tank/plain))
 		selected_vehicle = "TANK"
 		marine_announcement("Tank is being sent up to reinforce this operation. Good luck")
 	else
