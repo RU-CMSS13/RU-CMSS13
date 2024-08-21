@@ -1,3 +1,43 @@
+//[ {"name":"", "desc":"", "mapped_modules":{"killp1": {"cn":"ex","opt":{"name":"","desc":"", ...}}, ...} }, ...]
+// cn is code name, opt is initial data
+/datum/battlepass_challenge
+	var/name = "Example"
+	var/desc = "Example"
+	// Modules builder
+	var/list/mapped_modules
+	var/list/datum/battlepass_challenge_modules/modules = list()
+
+	var/completion_xp_total = 0
+
+/datum/battlepass_challenge/New(list/initial_data)
+	for(var/param in initial_data)
+		vars[param] = initial_data[param]
+
+	for(var/module in mapped_modules)
+		modules[module] = new GLOB.challenge_modules_types[mapped_modules[module]["cn"]](mapped_modules[module]["opt"])
+		completion_xp_total += modules[module].module_exp
+
+
+// Handle moduled req actions to finish challenge
+/datum/battlepass_challenge_modules
+	var/name = "Example"
+	// Simply text string for DB
+	var/code_name = "ex"
+
+	var/module_exp
+
+	var/signals
+
+/datum/battlepass_challenge/New(list/initial_data)
+
+
+
+
+// Задача сделать модульные челенджи по типу "Убить 2 ксеноса" + ", с m41a" + " при передозе Oxycodone"
+
+
+
+/*
 /datum/battlepass_challenge
 	var/name = ""
 	var/code_name = ""
@@ -93,3 +133,4 @@
 	desc = info["desc"]
 	completion_xp = info["completion_xp"]
 	completed = info["completed"]
+*/
