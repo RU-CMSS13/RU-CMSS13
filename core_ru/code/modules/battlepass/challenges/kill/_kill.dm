@@ -1,33 +1,22 @@
-/datum/battlepass_challenge/kill_enemies
-	code_name = "kille"
-	completion_xp_array = list(5, 7)
-	pick_weight = 0
+/datum/battlepass_challenge_module/kill
+	var/name = "Kill"
+	var/desc = "Kill ###AMMOUNT###"
+	var/code_name = "ki"
 
-	/// How many enemies need to be killed to complete the challenge
-	var/enemy_kills_required = 0
-	/// How many enemies have been killed thus far for this challenge
-	var/current_enemy_kills = 0
-	/// A list of valid mob paths to count towards kills
+	module_exp = list(5, 7)
+	req_gen = list("kills" = list(0, 0))
 	var/list/valid_kill_paths = list()
-	/// The minimum amt of kills possibly required to complete this challenge
-	var/kill_requirement_lower = 0
-	/// The maximum amt of kills possibly required to complete this challenge
-	var/kill_requirement_upper = 0
 
-/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
-
-	enemy_kills_required = rand(kill_requirement_lower, kill_requirement_upper)
-	regenerate_desc()
-
-/datum/battlepass_challenge/kill_enemies/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/kill_enemies/hook_signals(datum/source, mob/logged_in_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_MOB_KILL_TOTAL_INCREASED, PROC_REF(on_kill))
+	RegisterSignal(logged_in_mob, COMSIG_MOB_KILL_TOTAL_INCREASED, PROC_REF(on_kill))
 
 /datum/battlepass_challenge/kill_enemies/unhook_signals(mob/source)
+	. = ..()
+	if(!.)
+		return
 	UnregisterSignal(source, COMSIG_MOB_KILL_TOTAL_INCREASED)
 
 /datum/battlepass_challenge/kill_enemies/check_challenge_completed()

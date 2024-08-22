@@ -1,35 +1,150 @@
-//[ {"name":"", "desc":"", "mapped_modules":{"killp1": {"cn":"ex","opt":{"name":"","desc":"", ...}}, ...} }, ...]
-// cn is code name, opt is initial data
+//[ {"desc":"", "xp_completion":0, "mapped_modules":{"ex": {"opt":{"req":{}, ...}}, ...}, "progress":{}}, ...]
+// cn is code name, opt is vars to replace
 /datum/battlepass_challenge
-	var/name = "Example"
 	var/desc = "Example"
+	var/xp_completion = 0
 	// Modules builder
 	var/list/mapped_modules
-	var/list/datum/battlepass_challenge_modules/modules = list()
 
-	var/completion_xp_total = 0
+	var/list/progress
 
-/datum/battlepass_challenge/New(list/initial_data)
-	for(var/param in initial_data)
-		vars[param] = initial_data[param]
+	// Untracked
+	var/completed = FALSE
+	var/list/datum/battlepass_challenge_module/modules = list()
 
-	for(var/module in mapped_modules)
-		modules[module] = new GLOB.challenge_modules_types[mapped_modules[module]["cn"]](mapped_modules[module]["opt"])
-		completion_xp_total += modules[module].module_exp
+/datum/battlepass_challenge/New(list/opt)
+	if(opt)
+		for(var/param in opt)
+			vars[param] = opt[param]
+
+		for(var/module in mapped_modules)
+			modules[module] = new GLOB.challenge_modules_types[module](mapped_modules[module]["opt"])
+
+		completed = check_challenge_completed()
+		regenerate_desc()
+
+/datum/battlepass_challenge/proc/regenerate_desc()
+	var/new_desc = ""
+	for(var/datum/battlepass_challenge_module/module in modules)
+		new_desc += module.get_description()
+	desc = new_desc
+
+/datum/battlepass_challenge/proc/get_completion_percent()
+	if(!length(progress))
+		return 0
+	var/name = progress[1]
+	return (progress[name][1] / progress[name][2])
+
+/datum/battlepass_challenge/proc/get_completion_numerator()
+	if(!length(progress))
+		return 0
+	var/name = progress[1]
+	return progress[name][1]
+
+/datum/battlepass_challenge/proc/get_completion_denominator()
+	if(!length(progress))
+		return 1
+	var/name = progress[1]
+	return progress[name][2]
+
+/datum/battlepass_challenge/proc/check_challenge_completed()
+	var/total = length(progress)
+	var/current = 0
+	for(var/name in progress)
+		if(progress[name][1] != progress[name][2])
+			continue
+		current++
+	if(current == total)
+		return TRUE
+	return FALSE
+
+/datum/battlepass_challenge/proc/on_possible_challenge_completed()
+	if(!check_challenge_completed())
+		return FALSE
+	SEND_SIGNAL(src, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED)
+	return TRUE
+
+//Signals
+/datum/battlepass_challenge/proc/on_client(client/ref)
+	if(ref && !completed)
+		if(ref.mob)
+			hook_client_signals(src, ref.mob)
+		else
+			RegisterSignal(ref, COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_signals))
+
+/datum/battlepass_challenge/proc/hook_signals(datum/source, mob/logged_in_mob)
+	SIGNAL_HANDLER
+	SHOULD_CALL_PARENT(TRUE)
+
+	UnregisterSignal(logged_in_mob.client, COMSIG_CLIENT_MOB_LOGGED_IN)
+	RegisterSignal(logged_in_mob, COMSIG_MOB_LOGOUT, PROC_REF(unhook_signals))
+
+	if(logged_in_mob.statistic_exempt)
+		return FALSE
+	return TRUE
+
+/datum/battlepass_challenge/proc/unhook_signals(mob/source)
+	SIGNAL_HANDLER
+	SHOULD_CALL_PARENT(TRUE)
+
+	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
+	if(source.logging_ckey in GLOB.directory)
+		RegisterSignal(GLOB.directory[source.logging_ckey], COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_client_signals))
+
+	if(logged_in_mob.statistic_exempt)
+		return FALSE
+	return TRUE
+
+//[ {"desc":"", "xp_completion":0, "mapped_modules":{"killp1": {"cn":"ex","opt":{"req":{}, ...}}, ...}, "progress":{}}, ...]
+
+/datum/battlepass_challenge/proc/serialize()
+	SHOULD_CALL_PARENT(TRUE)
+	var/list/re_mapped_modules = list()
+	for(var/datum/battlepass_challenge_module/module in modules)
+		re_mapped_modules += module.serialize()
+	return list(
+		"desc" = desc,
+		"xp_completion" = xp_completion,
+		"mapped_modules" = re_mapped_modules,
+		"completion_xp" = completion_xp,
+		"progress" = progress
+	)
 
 
 // Handle moduled req actions to finish challenge
-/datum/battlepass_challenge_modules
+/datum/battlepass_challenge_module
 	var/name = "Example"
-	// Simply text string for DB
+	var/desc = "Example"
 	var/code_name = "ex"
+	var/challenge_category = CHALLENGE_NONE
 
-	var/module_exp
+	var/pick_weight = 1
+	var/module_exp = list(0, 0)
+	var/module_exp_modificator = 1
 
 	var/signals
+	var/list/req_gen
 
-/datum/battlepass_challenge/New(list/initial_data)
+	// Tracked
+	var/list/req
 
+/datum/battlepass_challenge_module/New(list/opt)
+	if(opt)
+		for(var/param in opt)
+			vars[param] = opt[param]
+
+/datum/battlepass_challenge_module/proc/get_description()
+	. = initial(desc)
+	for(var/name in req)
+		. = replacetext_char(., "###[name]###", req[name])
+	desc = .
+
+/datum/battlepass_challenge_module/proc/serialize()
+	. = list(
+		code_name = list(
+			"opt" = list()
+		)
+	)
 
 
 
@@ -38,18 +153,6 @@
 
 
 /*
-/datum/battlepass_challenge
-	var/name = ""
-	var/code_name = ""
-	var/desc = ""
-
-	var/completion_xp = 0
-	var/list/completion_xp_array = list(0, 0)
-
-	var/completed = FALSE
-	var/challenge_category = CHALLENGE_NONE
-	var/pick_weight = 1
-
 /datum/battlepass_challenge/New(client/owner)
 	. = ..()
 	if(!completion_xp)
@@ -61,76 +164,4 @@
 	if(owner)
 		on_client_hooked(owner)
 
-//Signalls
-/datum/battlepass_challenge/proc/on_client_hooked(client/owner)
-	if(owner && !completed)
-		if(owner.mob)
-			hook_client_signals(src, owner.mob)
-		else
-			RegisterSignal(owner, COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_client_signals))
-
-/datum/battlepass_challenge/proc/hook_client_signals(datum/source, mob/logged_in_mob)
-	SIGNAL_HANDLER
-	SHOULD_CALL_PARENT(TRUE)
-
-	UnregisterSignal(logged_in_mob.client, COMSIG_CLIENT_MOB_LOGGED_IN)
-	RegisterSignal(logged_in_mob, COMSIG_MOB_LOGOUT, PROC_REF(unhook_client_signals))
-
-	if(logged_in_mob.statistic_exempt)
-		return FALSE
-	return TRUE
-
-/datum/battlepass_challenge/proc/unhook_client_signals(mob/source)
-	SIGNAL_HANDLER
-	SHOULD_CALL_PARENT(TRUE)
-
-	unhook_signals(source)
-	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
-	if(source.logging_ckey in GLOB.directory)
-		RegisterSignal(GLOB.directory[source.logging_ckey], COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_client_signals))
-
-/datum/battlepass_challenge/proc/unhook_signals(mob/source)
-	return
-
-
-//Basic
-/datum/battlepass_challenge/proc/regenerate_desc()
-	return
-
-/datum/battlepass_challenge/proc/check_challenge_completed()
-	return TRUE
-
-/datum/battlepass_challenge/proc/on_possible_challenge_completed()
-	if(!check_challenge_completed())
-		return FALSE
-	SEND_SIGNAL(src, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED)
-	return TRUE
-
-/// Get how completed the challenge is as a percentage out of 1
-/datum/battlepass_challenge/proc/get_completion_percent()
-	return 0
-
-/datum/battlepass_challenge/proc/get_completion_numerator()
-	return 0
-
-/datum/battlepass_challenge/proc/get_completion_denominator()
-	return 1
-
-/datum/battlepass_challenge/proc/serialize()
-	SHOULD_CALL_PARENT(TRUE)
-	return list(
-		"type" = type,
-		"name" = name,
-		"desc" = desc,
-		"completion_xp" = completion_xp,
-		"completed" = completed
-	)
-
-/// Given a list, update the challenge data accordingly
-/datum/battlepass_challenge/proc/deserialize(list/info)
-	SHOULD_CALL_PARENT(TRUE)
-	name = info["name"]
-	desc = info["desc"]
-	completion_xp = info["completion_xp"]
-	completed = info["completed"]
 */

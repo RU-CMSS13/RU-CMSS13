@@ -74,7 +74,7 @@
 #include "modules\asset_cache\asset_list_items.dm"
 #include "modules\battlepass\challenges\_battlepass_challenge.dm"
 #include "modules\battlepass\challenges\human_misc\defib_players.dm"
-#include "modules\battlepass\challenges\kill\_kill_enemies.dm"
+#include "modules\battlepass\challenges\kill\_kill.dm"
 #include "modules\battlepass\challenges\kill\kill_humans.dm"
 #include "modules\battlepass\challenges\kill\kill_xenomorphs.dm"
 #include "modules\battlepass\challenges\kill\specific\kill_xeno_caste\_kill_caste.dm"
