@@ -577,7 +577,7 @@
 	gender = sanitize_gender(gender)
 	age = sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	if(!(forced_voice in SStts.available_speakers))
-		forced_voice = pick(SStts.available_speakers)
+		forced_voice = SAFEPICK(SStts.available_speakers)
 	skin_color = sanitize_skin_color(skin_color)
 	body_type = sanitize_body_type(body_type)
 	body_size = sanitize_body_size(body_size)
