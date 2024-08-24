@@ -308,6 +308,10 @@
 	adaptive_zoom = sanitize_integer(adaptive_zoom, 0, 2, 0)
 	tooltips = sanitize_integer(tooltips, FALSE, TRUE, TRUE)
 
+	//RUCM START
+	if(!(tts_setting in list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS)))
+		tts_setting = TTS_SOUND_ENABLED
+	//RUCM END
 	synthetic_name = synthetic_name ? sanitize_text(synthetic_name, initial(synthetic_name)) : initial(synthetic_name)
 	synthetic_type = sanitize_inlist(synthetic_type, PLAYER_SYNTHS, initial(synthetic_type))
 	predator_name = predator_name ? sanitize_text(predator_name, initial(predator_name)) : initial(predator_name)

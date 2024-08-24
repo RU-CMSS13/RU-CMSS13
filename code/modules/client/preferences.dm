@@ -592,7 +592,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Game Settings:</u></b></h2>"
 			//RUCM START
-			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=tts_set'><b>[tts_setting]</b></a><br>"
+			dat += "<b>TTS Setting:</b> <a href='?_src_=prefs;preference=tts_set'><b>[tts_setting]</b></a><br>"
 			//RUCM END
 			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'><b>[toggle_prefs & TOGGLE_AMBIENT_OCCLUSION ? "Enabled" : "Disabled"]</b></a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
