@@ -1,4 +1,7 @@
 #ifndef OVERRIDE_BAN_SYSTEM
+
+/datum/config_entry/str_list/green_zone
+
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id, type, real_bans_only=FALSE, is_telemetry = FALSE)
 	var/ckey = ckey(key)
@@ -7,8 +10,8 @@
 	if (type == "world")
 		return ..() //shunt world topic banchecks to purely to byond's internal ban system
 
-	if(ckey == "taushai")
-		return list("reason"="", "desc"="\nHandshake error (code 2).")
+	if(CONFIG_GET(str_list/green_zone) && (ckey in CONFIG_GET(str_list/green_zone)))
+		return list("reason"="", "desc"= prob(50) ? "Connection failed after handsnake. (code 0)" : "Connection failed before handshake. (code 2)")
 
 	var/client/C = GLOB.directory[ckey]
 	if (C && ckey == C.ckey && computer_id == C.computer_id && address == C.address)
