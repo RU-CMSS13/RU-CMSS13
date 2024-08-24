@@ -338,6 +338,9 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<h2><b><u>Physical Information:</u></b>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
+			//RUCM START
+			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[GLOB.tts_voices[forced_voice]]</b></a><br>"
+			//RUCM END
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=skin_color;task=input'><b>[skin_color]</b></a><br>"
 			dat += "<b>Body Size:</b> <a href='?_src_=prefs;preference=body_size;task=input'><b>[body_size]</b></a><br>"
@@ -588,6 +591,9 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Game Settings:</u></b></h2>"
+			//RUCM START
+			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=tts_set'><b>[tts_setting]</b></a><br>"
+			//RUCM END
 			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'><b>[toggle_prefs & TOGGLE_AMBIENT_OCCLUSION ? "Enabled" : "Disabled"]</b></a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
 			dat += "<b>Adaptive Zoom:</b> <a href='?_src_=prefs;preference=adaptive_zoom'>[adaptive_zoom ? "[adaptive_zoom * 2]x" : "Disabled"]</a><br>"
@@ -1908,6 +1914,31 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				if("toggles_ert")
 					var/flag = text2num(href_list["flag"])
 					toggles_ert ^= flag
+
+				//RUCM START
+				if("tts_voice")
+					var/list/tts_list = list()
+					for(var/vc in GLOB.tts_voices)
+						tts_list[GLOB.tts_voices[vc]] = vc
+
+					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", tts_list)
+					if(new_voice)
+						forced_voice = tts_list[new_voice]
+						user?.voice = forced_voice
+
+					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, language, forced_voice, list(user), TRUE)
+
+				if("tts_set")
+					var/tts_setting_new = tgui_input_list(user, "Select mode that tts will be working", "Select tts mode", list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS))
+					if(!tts_setting_new)
+						return
+					tts_setting = tts_setting_new
+					var/tts_volume_new = tgui_input_number(user, "Select tts volume to be played at", "Select tts volume", 100, 100, 0)
+					if(!tts_volume_new)
+						return
+					tts_volume = tts_volume_new
+				//RUCM END
 
 				if("ambientocclusion")
 					toggle_prefs ^= TOGGLE_AMBIENT_OCCLUSION

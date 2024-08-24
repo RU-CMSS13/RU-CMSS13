@@ -198,6 +198,10 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 		overlays += speech_bubble
 
+		//RUCM START
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), speaking, voice, listening, message_range)
+		//RUCM END
+
 		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)
 
 		for(var/obj/O as anything in listening_obj)
