@@ -1,8 +1,8 @@
-GLOBAL_LIST_INIT_TYPED(battlepass_challenges_by_code_name, /datum/battlepass_challenge, load_battlepass_challenges())
+GLOBAL_LIST_INIT_TYPED(challenge_modules_types, /datum/battlepass_challenge_module, load_battlepass_challenges())
 
 /proc/load_battlepass_challenges()
 	var/list/challenges = list()
-	for(var/datum/battlepass_challenge/challenge_path as anything in subtypesof(/datum/battlepass_challenge))
+	for(var/datum/battlepass_challenge_module/challenge_path as anything in subtypesof(/datum/battlepass_challenge_module))
 		challenges[initial(challenge_path.code_name)] = challenge_path
 	return challenges
 

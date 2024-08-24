@@ -65,22 +65,26 @@
 	return TRUE
 
 //Signals
-/datum/battlepass_challenge/proc/on_client(client/ref)
-	if(ref && !completed)
-		if(ref.mob)
-			hook_client_signals(src, ref.mob)
+/datum/battlepass_challenge/proc/on_client(client/logged)
+	if(logged && !completed)
+		if(logged.mob)
+			hook_signals(src, logged.mob)
 		else
-			RegisterSignal(ref, COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_signals))
+			RegisterSignal(logged, COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_signals))
 
-/datum/battlepass_challenge/proc/hook_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge/proc/hook_signals(datum/source, mob/logged_mob)
 	SIGNAL_HANDLER
 	SHOULD_CALL_PARENT(TRUE)
 
-	UnregisterSignal(logged_in_mob.client, COMSIG_CLIENT_MOB_LOGGED_IN)
-	RegisterSignal(logged_in_mob, COMSIG_MOB_LOGOUT, PROC_REF(unhook_signals))
+	UnregisterSignal(logged_mob.client, COMSIG_CLIENT_MOB_LOGGED_IN)
+	RegisterSignal(logged_mob, COMSIG_MOB_LOGOUT, PROC_REF(unhook_signals))
 
-	if(logged_in_mob.statistic_exempt)
+	if(logged_mob.statistic_exempt)
 		return FALSE
+
+	for(var/datum/battlepass_challenge_module/module in modules)
+		module.hook_signals(logged_mob)
+
 	return TRUE
 
 /datum/battlepass_challenge/proc/unhook_signals(mob/source)
@@ -89,10 +93,14 @@
 
 	UnregisterSignal(source, COMSIG_MOB_LOGOUT)
 	if(source.logging_ckey in GLOB.directory)
-		RegisterSignal(GLOB.directory[source.logging_ckey], COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_client_signals))
+		RegisterSignal(GLOB.directory[source.logging_ckey], COMSIG_CLIENT_MOB_LOGGED_IN, PROC_REF(hook_signals))
 
-	if(logged_in_mob.statistic_exempt)
+	if(source.statistic_exempt)
 		return FALSE
+
+	for(var/datum/battlepass_challenge_module/module in modules)
+		module.unhook_signals(source)
+
 	return TRUE
 
 //[ {"desc":"", "xp_completion":0, "mapped_modules":{"killp1": {"cn":"ex","opt":{"req":{}, ...}}, ...}, "progress":{}}, ...]
@@ -106,9 +114,15 @@
 		"desc" = desc,
 		"xp_completion" = xp_completion,
 		"mapped_modules" = re_mapped_modules,
-		"completion_xp" = completion_xp,
 		"progress" = progress
 	)
+
+/datum/battlepass_challenge/proc/check_other_components(datum/battlepass_challenge_module/source)
+	for(var/datum/battlepass_challenge_module/module in modules - source)
+		if(module.on_possible_challenge_completed())
+			continue
+		return FALSE
+	return TRUE
 
 
 // Handle moduled req actions to finish challenge
@@ -139,12 +153,25 @@
 		. = replacetext_char(., "###[name]###", req[name])
 	desc = .
 
+/datum/battlepass_challenge_module/proc/hook_signals(mob/logged_mob)
+	SIGNAL_HANDLER
+	SHOULD_CALL_PARENT(TRUE)
+	if(logged_mob.statistic_exempt)
+		return FALSE
+	return TRUE
+
+/datum/battlepass_challenge_module/proc/unhook_signals(mob/logged_mob)
+	SIGNAL_HANDLER
+	SHOULD_CALL_PARENT(TRUE)
+	if(source.statistic_exempt)
+		return FALSE
+	return TRUE
+
 /datum/battlepass_challenge_module/proc/serialize()
-	. = list(
-		code_name = list(
-			"opt" = list()
-		)
-	)
+	. = list(code_name = list("opt" = list("req" = req)))
+
+/datum/battlepass_challenge_module/proc/on_possible_challenge_completed()
+	return TRUE
 
 
 
