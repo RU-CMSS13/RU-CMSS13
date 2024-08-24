@@ -17,5 +17,5 @@
 		if(client?.prefs?.forced_voice)
 			voice = client.prefs.forced_voice
 		else
-			voice = pick(GLOB.tts_voices)
+			voice = pick(SStts.available_speakers)
 	//RUCM END

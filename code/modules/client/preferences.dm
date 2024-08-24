@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
 			//RUCM START
-			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[GLOB.tts_voices[forced_voice]]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[SStts.available_speakers[forced_voice]]</b></a><br>"
 			//RUCM END
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=skin_color;task=input'><b>[skin_color]</b></a><br>"
@@ -1918,8 +1918,8 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				//RUCM START
 				if("tts_voice")
 					var/list/tts_list = list()
-					for(var/vc in GLOB.tts_voices)
-						tts_list[GLOB.tts_voices[vc]] = vc
+					for(var/vc in SStts.available_speakers)
+						tts_list[SStts.available_speakers[vc]] = vc
 
 					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", tts_list)
 					if(new_voice)
