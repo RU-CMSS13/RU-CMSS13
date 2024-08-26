@@ -268,6 +268,11 @@
 	S["tooltips"] >> tooltips
 	S["key_bindings"] >> key_bindings
 
+	//RUCM START
+	S["tts_setting"] >> tts_setting
+	S["tts_volume"] >> tts_volume
+	//RUCC END
+
 	var/list/remembered_key_bindings
 	S["remembered_key_bindings"] >> remembered_key_bindings
 
@@ -457,6 +462,11 @@
 	S["key_bindings"] << key_bindings
 	S["hotkeys"] << hotkeys
 
+	//RUCM START
+	S["tts_setting"] << tts_setting
+	S["tts_volume"] << tts_volume
+	//RUCC END
+
 	S["autofit_viewport"] << auto_fit_viewport
 	S["adaptive_zoom"] << adaptive_zoom
 
@@ -491,8 +501,6 @@
 	S["age"] >> age
 	//RUCM START
 	S["forced_voice"] >> forced_voice
-	S["tts_setting"] >> tts_setting
-	S["tts_volume"] >> tts_volume
 	//RUCC END
 	S["ethnicity"] >> ethnicity
 	S["skin_color"] >> skin_color
@@ -576,7 +584,7 @@
 	be_random_body = sanitize_integer(be_random_body, 0, 1, initial(be_random_body))
 	gender = sanitize_gender(gender)
 	age = sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
-	if(!(forced_voice in SStts.available_speakers))
+	if(!(forced_voice in SStts.available_speakers) && SStts.tts_enabled)
 		forced_voice = SAFEPICK(SStts.available_speakers)
 	skin_color = sanitize_skin_color(skin_color)
 	body_type = sanitize_body_type(body_type)
@@ -652,8 +660,6 @@
 	S["age"] << age
 	//RUCM START
 	S["forced_voice"] << forced_voice
-	S["tts_setting"] << tts_setting
-	S["tts_volume"] << tts_volume
 	//RUCC END
 	S["ethnicity"] << ethnicity
 	S["skin_color"] << skin_color

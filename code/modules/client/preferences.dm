@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
 			//RUCM START
-			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[SStts.available_speakers[forced_voice]]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[forced_voice ? SStts.available_speakers[forced_voice] : "No voice"]</b></a><br>"
 			//RUCM END
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=skin_color;task=input'><b>[skin_color]</b></a><br>"
@@ -1917,17 +1917,15 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 
 				//RUCM START
 				if("tts_voice")
-					var/list/tts_list = list()
-					for(var/vc in SStts.available_speakers)
-						tts_list[SStts.available_speakers[vc]] = vc
-
-					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", tts_list)
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", SStts.available_speakers)
 					if(new_voice)
-						forced_voice = tts_list[new_voice]
-						user?.voice = forced_voice
+						forced_voice = new_voice
+						user?.voice = new_voice
 
 					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
-					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, language, forced_voice, list(user), TRUE)
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, language, new_voice, list(user), TRUE)
 
 				if("tts_set")
 					var/tts_setting_new = tgui_input_list(user, "Select mode that tts will be working", "Select tts mode", list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS))

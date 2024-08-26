@@ -58,11 +58,7 @@ SUBSYSTEM_DEF(tts)
 	/// 7 seconds (or whatever the value of message_timeout is) to receive back a response.
 	var/average_tts_messages_time = 0
 
-/datum/controller/subsystem/tts/vv_edit_var(var_name, var_value)
-	// tts being enabled depends on whether it actually exists
-	if(NAMEOF(src, tts_enabled) == var_name)
-		return FALSE
-	return ..()
+BSQL_PROTECT_DATUM(/datum/controller/subsystem/tts)
 
 /datum/controller/subsystem/tts/stat_entry(msg)
 	msg = "Active:[length(in_process_http_messages)]|Standby:[length(queued_http_messages?.L)]|Avg:[average_tts_messages_time]"
@@ -77,20 +73,16 @@ SUBSYSTEM_DEF(tts)
 	var/datum/http_request/request = new()
 	var/list/headers = list()
 	headers["Authorization"] = CONFIG_GET(string/tts_http_token)
-	/// WD-EDIT START
 	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/speakers", "", headers)
-	/// WD-EDIT END
 	request.begin_async()
 	UNTIL(request.is_complete())
 	var/datum/http_response/response = request.into_response()
 	if(response.errored || response.status_code != 200)
 		stack_trace(response.error)
 		return FALSE
-	/// WD-EDIT START
 	var/list/temp_speakers = json_decode(response.body)?["voices"]
 	for(var/speaker in temp_speakers)
 		available_speakers.Add(speaker["speakers"][1])
-	/// WD-EDIT END
 	tts_enabled = TRUE
 	if(CONFIG_GET(str_list/tts_voice_blacklist))
 		var/list/blacklisted_voices = CONFIG_GET(str_list/tts_voice_blacklist)
