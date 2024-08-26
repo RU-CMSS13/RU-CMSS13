@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(tts)
 	var/pitch_enabled = FALSE
 
 	/// TTS messages won't play if requests took longer than this duration of time.
-	var/message_timeout = 7 SECONDS
+	var/message_timeout = 1 MINUTES
 
 	/// The max concurrent http requests that can be made at one time. Used to prevent 1 server from overloading the tts server
 	var/max_concurrent_requests = 4
@@ -75,9 +75,7 @@ SUBSYSTEM_DEF(tts)
 /// This is blocking, so be careful when calling.
 /datum/controller/subsystem/tts/proc/establish_connection_to_tts()
 	var/datum/http_request/request = new()
-	var/list/headers = list()
-	headers["Authorization"] = CONFIG_GET(string/tts_http_token)
-	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/speakers", "", headers)
+	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/speakers", "")
 	request.begin_async()
 	UNTIL(request.is_complete())
 	var/datum/http_response/response = request.into_response()
@@ -96,9 +94,7 @@ SUBSYSTEM_DEF(tts)
 				log_config("Removed speaker [voice] from the TTS voice pool per config.")
 				available_speakers.Remove(voice)
 	var/datum/http_request/request_pitch = new()
-	var/list/headers_pitch = list()
-	headers_pitch["Authorization"] = CONFIG_GET(string/tts_http_token)
-	request_pitch.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/pitch-available", "", headers_pitch)
+	request_pitch.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/pitch-available", "")
 	request_pitch.begin_async()
 	UNTIL(request_pitch.is_complete())
 	pitch_enabled = TRUE
@@ -357,8 +353,6 @@ SUBSYSTEM_DEF(tts)
 	var/use_blips = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
-
-BSQL_PROTECT_DATUM(/datum/tts_request)
 
 /datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, datum/language/language, message_range, volume_offset, list/listeners, pitch)
 	. = ..()
