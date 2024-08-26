@@ -164,7 +164,7 @@
 		return
 
 	//RUCM START
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), "jaina", list(targets, list()), FALSE, 100)
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), "jaina", list(targets, list(), list(), list()), FALSE, 100)
 	//RUCM END
 
 	for(var/mob/T in targets)
