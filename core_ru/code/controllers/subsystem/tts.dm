@@ -138,12 +138,12 @@ SUBSYSTEM_DEF(tts)
 		if(!elligible_mob(receiver))
 			continue
 		var/audio_to_use = (receiver.client.prefs.tts_setting == TTS_SOUND_BLIPS) ? audio_blips : audio
-		playsound_client(receiver.client, audio_to_use, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 2)
+		playsound_client(receiver.client, audio_to_use, null, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 1.5)
 
 	for(var/mob/receiver in listeners[4])
 		if(!elligible_mob(receiver))
 			continue
-		playsound_client(receiver.client, audio_blips, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 2)
+		playsound_client(receiver.client, audio_blips, null, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 1.5)
 
 /datum/controller/subsystem/tts/proc/elligible_mob(mob/receiver)
 	if(QDELING(receiver))
@@ -353,6 +353,8 @@ SUBSYSTEM_DEF(tts)
 	var/use_blips = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
+
+BSQL_PROTECT_DATUM(/datum/tts_request)
 
 /datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, volume_offset, list/listeners, pitch)
 	. = ..()

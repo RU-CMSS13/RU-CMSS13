@@ -446,7 +446,7 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 		vname = attached_to.phone_id
 
 	//RUCM START
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), speaking, html_decode(message), speaking.tts_voice, list(list(M), list(), list(), list()), FALSE, loudness ? 50 : -50)
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), speaking, html_decode(message), speaking.tts_voice, list(list(M), list(), list(), list()), FALSE, loudness ? 25 : -25)
 	//RUCM END
 
 	M.hear_radio(

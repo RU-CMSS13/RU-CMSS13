@@ -80,7 +80,7 @@
 
 	//RUCM START
 	var/list/tts_heard_list = list(list(), list(), list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE, -50)
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE, -25)
 	//RUCM END
 
 	//pass on the message to objects that can hear us.
