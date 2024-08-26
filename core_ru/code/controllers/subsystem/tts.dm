@@ -208,6 +208,9 @@ BSQL_PROTECT_DATUM(/datum/controller/subsystem/tts)
 		if(MC_TICK_CHECK)
 			break
 
+	if(MC_TICK_CHECK)
+		return
+
 	var/list/processing_tts_messages = current_processing_tts_messages
 	while(processing_tts_messages.len)
 		if(MC_TICK_CHECK)
