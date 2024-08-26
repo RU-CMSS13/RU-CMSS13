@@ -15,7 +15,7 @@
 	//RUCM START
 	if(SStts.tts_enabled)
 		if(client?.prefs?.forced_voice)
-			voice = client.prefs.forced_voice
+			tts_voice = client.prefs.forced_voice
 		else
-			voice = SAFEPICK(SStts.available_speakers)
+			tts_voice = SAFEPICK(SStts.available_speakers)
 	//RUCM END

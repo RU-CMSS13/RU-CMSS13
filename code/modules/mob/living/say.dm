@@ -199,7 +199,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		overlays += speech_bubble
 
 		//RUCM START
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), speaking, voice, listening, message_range)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), speaking, tts_voice, listening, message_range)
 		//RUCM END
 
 		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)

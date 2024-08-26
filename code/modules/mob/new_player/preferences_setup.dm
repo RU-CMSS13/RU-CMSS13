@@ -9,7 +9,7 @@
 	//RUCM START
 	if(SStts.tts_enabled)
 		forced_voice = pick(SStts.available_speakers)
-		H?.voice = forced_voice
+		H?.tts_voice = forced_voice
 	//RUCM END
 
 	skin_color = random_skin_color()

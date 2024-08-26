@@ -508,5 +508,4 @@ SUBSYSTEM_DEF(tts)
 	. = L.Copy()
 
 /mob
-	var/voice
-	var/speaker
+	var/tts_voice
