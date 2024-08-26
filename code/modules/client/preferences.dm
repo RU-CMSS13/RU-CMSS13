@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
 			//RUCM START
-			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[forced_voice ? SStts.available_speakers[forced_voice] : "No voice"]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=tts_voice'><b>[forced_voice ? forced_voice : "No Voice"]</b></a><br>"
 			//RUCM END
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=skin_color;task=input'><b>[skin_color]</b></a><br>"
