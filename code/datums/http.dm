@@ -11,8 +11,6 @@
 
 	var/_raw_response
 
-BSQL_PROTECT_DATUM(/datum/http_request)
-
 /datum/http_request/proc/prepare(method, url, body = "", list/headers, output_file)
 	if (!length(headers))
 		headers = ""

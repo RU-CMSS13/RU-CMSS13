@@ -58,8 +58,6 @@ SUBSYSTEM_DEF(tts)
 	/// 7 seconds (or whatever the value of message_timeout is) to receive back a response.
 	var/average_tts_messages_time = 0
 
-BSQL_PROTECT_DATUM(/datum/controller/subsystem/tts)
-
 /datum/controller/subsystem/tts/stat_entry(msg)
 	msg = "Active:[length(in_process_http_messages)]|Standby:[length(queued_http_messages?.L)]|Avg:[average_tts_messages_time]"
 	return ..()
@@ -159,6 +157,7 @@ BSQL_PROTECT_DATUM(/datum/controller/subsystem/tts)
 
 #define SHIFT_DATA_ARRAY(tts_message_queue, target, data) \
 	popleft(##data); \
+	stack_trace("tts server didnt answered"); \
 	if(length(##data) == 0) { \
 		##tts_message_queue -= ##target; \
 	};
@@ -365,7 +364,6 @@ BSQL_PROTECT_DATUM(/datum/controller/subsystem/tts)
 	var/use_blips = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
-
 
 /datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, datum/language/language, message_range, volume_offset, list/listeners, pitch)
 	. = ..()
