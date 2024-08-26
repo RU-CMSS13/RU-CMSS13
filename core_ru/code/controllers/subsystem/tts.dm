@@ -14,7 +14,7 @@
 
 /datum/preferences
 	var/forced_voice
-	var/tts_volume = 100
+	var/tts_volume = 50
 	var/tts_setting = TTS_SOUND_ENABLED
 
 SUBSYSTEM_DEF(tts)
