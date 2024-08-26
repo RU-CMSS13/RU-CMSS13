@@ -298,7 +298,7 @@ SUBSYSTEM_DEF(tts)
 
 	var/list/headers = list()
 	headers["Content-Type"] = "application/json"
-	headers["Authorization"] = CONFIG_GET(string/tts_http_token)
+	headers["Authorization"] = "Bearer [CONFIG_GET(string/tts_http_token)]"
 	var/datum/http_request/request = new()
 	var/datum/http_request/request_blips = new()
 	var/file_name = "tmp/tts/[identifier].ogg"
