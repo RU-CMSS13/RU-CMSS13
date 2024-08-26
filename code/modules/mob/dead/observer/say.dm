@@ -17,7 +17,7 @@
 
 
 
-/mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
+/mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
 	if(!client)
 		return
 
@@ -44,6 +44,7 @@
 	var/track = null
 
 	if(italics && client.prefs.toggles_chat & CHAT_GHOSTRADIO)
+		tts_heard_list[1] += src
 		return
 	if(speaker_name != speaker.real_name && speaker.real_name)
 		speaker_name = "[speaker.real_name] ([speaker_name])"
@@ -55,6 +56,7 @@
 	if(client && client.prefs && client.prefs.toggles_chat & CHAT_GHOSTEARS && speaker.z == z && get_dist(speaker, src) <= GLOB.world_view_size)
 		message = "<b>[message]</b>"
 
+	tts_heard_list[1] += src
 	to_chat(src, "<span class='game say'><span class='name'>[comm_paygrade][speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='[style]'>\"[message]\"</span></span></span>")
 	if (speech_sound && (get_dist(speaker, src) <= GLOB.world_view_size && src.z == speaker.z))
 		var/turf/source = speaker? get_turf(speaker) : get_turf(src)

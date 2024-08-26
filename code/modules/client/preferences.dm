@@ -1924,7 +1924,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 						forced_voice = new_voice
 
 					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
-					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, language, new_voice, list(user), TRUE)
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user, random_text, new_voice, list(user), TRUE)
 
 				if("tts_set")
 					var/tts_setting_new = tgui_input_list(user, "Select mode that tts will be working", "Select tts mode", list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS))

@@ -131,6 +131,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	message = process_chat_markup(message, list("~", "_"))
 
+	//RUCM START
+	var/list/tts_heard_list = list(list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE)
+	//RUCM END
+
 	for(var/dst=0; dst<=1; dst++) //Will run twice if src has a clone
 		if(!dst && src.clone) //Will speak in src's location and the clone's
 			T = locate(src.loc.x + src.clone.proj_x, src.loc.y + src.clone.proj_y, src.loc.z)
@@ -195,18 +200,14 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(not_dead_speaker)
 			langchat_speech(message, listening, speaking)
 		for(var/mob/M as anything in listening)
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list = tts_heard_list)
 		overlays += speech_bubble
-
-		//RUCM START
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), speaking, tts_voice, listening, FALSE, message_range)
-		//RUCM END
 
 		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)
 
 		for(var/obj/O as anything in listening_obj)
 			if(O) //It's possible that it could be deleted in the meantime.
-				O.hear_talk(src, message, verb, speaking, italics)
+				O.hear_talk(src, message, verb, speaking, italics, tts_heard_list = tts_heard_list)
 
 	//used for STUI to stop logging of animal messages and radio
 	//if(!nolog)
@@ -223,7 +224,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else
 		log_say("[name != "Unknown" ? name : "([real_name])"]: [message] (CKEY: [key]) (AREA: [get_area_name(loc)])")
 
-	return 1
+	return tts_heard_list
 
 /mob/living/proc/say_signlang(message, verb="gestures", datum/language/language)
 	for (var/mob/O in viewers(src, null))

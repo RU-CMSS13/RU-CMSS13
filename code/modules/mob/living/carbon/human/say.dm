@@ -166,13 +166,17 @@
 			italics = 1
 			message_range = 2
 
-		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
+		var/list/tts_heard_list = ..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
 
-		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
+		//Just in case
+		if(!tts_heard_list)
+			tts_heard_list = list(list(), list())
 
-/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
+
+/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, tts_heard_list)
 	for(var/obj/item/device/radio/R in used_radios)
-		R.talk_into(src, message, message_mode, verb, speaking)
+		R.talk_into(src, message, message_mode, verb, speaking, tts_heard_list = tts_heard_list)
 
 /mob/living/carbon/human/proc/forcesay(forcesay_type = SUDDEN)
 	if (!client || stat != CONSCIOUS)

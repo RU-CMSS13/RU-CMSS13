@@ -68,7 +68,12 @@
 		if("broadcast") message_mode = "headset"
 		else message = copytext(message, 3)
 
-	ai_headset.talk_into(src, message, message_mode, "states", languages[1])
+	//RUCM START
+	var/list/tts_heard_list = list(list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE)
+	//RUCM END
+
+	ai_headset.talk_into(src, message, message_mode, "states", languages[1], tts_heard_list = tts_heard_list)
 	return TRUE
 
 /mob/living/silicon/decoy/parse_message_mode(message)

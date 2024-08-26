@@ -117,37 +117,42 @@ SUBSYSTEM_DEF(tts)
 		return SS_INIT_FAILURE
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, sound/audio_blips, datum/language/language, range = 7, volume_offset = 0)
+/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, sound/audio_blips, volume_offset = 0)
 	var/turf/turf_source = get_turf(target)
 	if(!turf_source)
 		return
 
-	for(var/mob/listening_dead_mob in GLOB.observer_list)
-		if(turf_source.z != listening_dead_mob.z)
+	for(var/mob/receiver in listeners[1])
+		if(!elligible_mob(receiver))
 			continue
-		listeners += listening_dead_mob
+		var/audio_to_use = (receiver.client.prefs.tts_setting == TTS_SOUND_BLIPS) ? audio_blips : audio
+		playsound_client(receiver.client, audio_to_use, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100))
 
-	for(var/mob/listening_mob in listeners)
-		if(QDELING(listening_mob))
-			stack_trace("TTS tried to play a sound to a deleted mob.")
+	for(var/mob/receiver in listeners[2])
+		if(!elligible_mob(receiver))
 			continue
-		if(!listening_mob.client?.prefs)
-			continue
-		var/volume_to_play_at = listening_mob.client.prefs.tts_volume
-		var/tts_pref = listening_mob.client.prefs.tts_setting
-		if(volume_to_play_at == 0 || (tts_pref == TTS_SOUND_OFF))
-			continue
+		playsound_client(receiver.client, audio_blips, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100))
 
-		var/sound_volume = ((listening_mob == target)? 60 : 85) + volume_offset
-		sound_volume = sound_volume * (volume_to_play_at / 100)
-		var/audio_to_use = (tts_pref == TTS_SOUND_BLIPS) ? audio_blips : audio
-		var/found_language = FALSE
-		for(var/datum/language/speaking in listening_mob.languages)
-			if(speaking.name == language.name)
-				found_language = TRUE
-				break
-		if(get_dist(listening_mob, turf_source) <= range && found_language)
-			playsound_client(listening_mob.client, audio_to_use, turf_source, sound_volume, TRUE, VOLUME_SFX, SOUND_CHANNEL_TTS)
+	//Radio
+	for(var/mob/receiver in listeners[3])
+		if(!elligible_mob(receiver))
+			continue
+		var/audio_to_use = (receiver.client.prefs.tts_setting == TTS_SOUND_BLIPS) ? audio_blips : audio
+		playsound_client(receiver.client, audio_to_use, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 2)
+
+	for(var/mob/receiver in listeners[4])
+		if(!elligible_mob(receiver))
+			continue
+		playsound_client(receiver.client, audio_blips, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 2)
+
+/datum/controller/subsystem/tts/proc/elligible_mob(mob/receiver)
+	if(QDELING(receiver))
+		return FALSE
+	if(!receiver.client?.prefs)
+		return FALSE
+	if(receiver.client.prefs.tts_volume == 0 || (receiver.client.prefs.tts_setting == TTS_SOUND_OFF))
+		return FALSE
+	return TRUE
 
 // Need to wait for all HTTP requests to complete here because of a rustg crash bug that causes crashes when dd restarts whilst HTTP requests are ongoing.
 /datum/controller/subsystem/tts/Shutdown()
@@ -262,7 +267,7 @@ SUBSYSTEM_DEF(tts)
 			else if(current_target.when_to_play < world.time)
 				audio_file = new(current_target.audio_file)
 				audio_file_blips = new(current_target.audio_file_blips)
-				play_tts(tts_target, current_target.listeners, audio_file, audio_file_blips, current_target.language, current_target.message_range, current_target.volume_offset)
+				play_tts(tts_target, current_target.listeners, audio_file, audio_file_blips, current_target.volume_offset)
 				if(length(data) != 1)
 					var/datum/tts_request/next_target = data[2]
 					next_target.when_to_play = world.time + current_target.audio_length
@@ -278,7 +283,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, datum/language/language, speaker, list/listeners, local = FALSE, message_range = 7, volume_offset = 0, pitch = 0, special_filters = "")
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, list/listeners, local = FALSE, volume_offset = 0, pitch = 0, special_filters = "")
 	if(!tts_enabled)
 		return
 
@@ -300,7 +305,7 @@ SUBSYSTEM_DEF(tts)
 	var/file_name_blips = "tmp/tts/[identifier]_blips.ogg"
 	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name)
 	request_blips.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name_blips)
-	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, request_blips, shell_scrubbed_input, target, local, language, message_range, volume_offset, listeners, pitch)
+	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, request_blips, shell_scrubbed_input, target, local, volume_offset, listeners, pitch)
 	var/list/player_queued_tts_messages = queued_tts_messages[target]
 	if(!player_queued_tts_messages)
 		player_queued_tts_messages = list()
@@ -323,8 +328,6 @@ SUBSYSTEM_DEF(tts)
 	var/datum/http_request/request
 	/// The HTTP request of this message for blips
 	var/datum/http_request/request_blips
-	/// The language to limit this TTS message to
-	var/datum/language/language
 	/// The message itself
 	var/message
 	/// The message identifier
@@ -333,8 +336,6 @@ SUBSYSTEM_DEF(tts)
 	var/volume_offset = 0
 	/// Whether this TTS message should be sent to the target only or not.
 	var/local = FALSE
-	/// The message range to play this TTS message
-	var/message_range = 7
 	/// The time at which this request was started
 	var/start_time
 
@@ -353,16 +354,14 @@ SUBSYSTEM_DEF(tts)
 	/// What's the pitch adjustment?
 	var/pitch = 0
 
-/datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, datum/language/language, message_range, volume_offset, list/listeners, pitch)
+/datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, volume_offset, list/listeners, pitch)
 	. = ..()
 	src.identifier = identifier
 	src.request = request
 	src.request_blips = request_blips
 	src.message = message
-	src.language = language
 	src.target = target
 	src.local = local
-	src.message_range = message_range
 	src.volume_offset = volume_offset
 	src.listeners = listeners
 	src.pitch = pitch
