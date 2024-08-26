@@ -159,7 +159,6 @@ SUBSYSTEM_DEF(tts)
 
 #define SHIFT_DATA_ARRAY(tts_message_queue, target, data) \
 	popleft(##data); \
-	stack_trace("tts server didnt answered"); \
 	if(length(##data) == 0) { \
 		##tts_message_queue -= ##target; \
 	};
