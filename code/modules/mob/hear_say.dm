@@ -16,6 +16,7 @@
 			message = language.scramble(message)
 
 	if(!say_understands(speaker,language))
+		tts_heard_list[2] += src
 		if(istype(speaker,/mob/living/simple_animal))
 			var/mob/living/simple_animal/S = speaker
 			if(length(S.speak))
@@ -26,6 +27,10 @@
 			message = language.scramble(message)
 		else
 			message = stars(message)
+	else if(sdisabilities & DISABILITY_DEAF || ear_deaf)
+		tts_heard_list[2] += src
+	else
+		tts_heard_list[1] += src
 
 	if(language)
 		style = language.color
@@ -45,13 +50,11 @@
 			to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 		else
 			to_chat(src, SPAN_LOCALSAY("<span class='prefix'>[comm_paygrade][speaker_name]</span>[alt_name] talks but you cannot hear them."))
-			tts_heard_list[2] += src
 	else
 		to_chat(src, SPAN_LOCALSAY("<span class='prefix'>[comm_paygrade][speaker_name]</span>[alt_name] [verb], <span class='[style]'>\"[message]\"</span>"))
 		if (speech_sound && (get_dist(speaker, src) <= GLOB.world_view_size && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			playsound_client(src.client, speech_sound, source, sound_vol, GET_RANDOM_FREQ)
-		tts_heard_list[1] += src
 
 
 /mob/proc/hear_radio(
