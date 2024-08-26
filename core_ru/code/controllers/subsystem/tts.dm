@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(tts)
 	wait = 0.05 SECONDS
 	init_order = 82
 	priority = SS_PRIORITY_TTS
-	runlevels = RUNLEVELS_DEFAULT
+	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
 	/// Queued HTTP requests that have yet to be sent. TTS requests are handled as lists rather than datums.
 	var/datum/heap/queued_http_messages
@@ -57,6 +57,12 @@ SUBSYSTEM_DEF(tts)
 	/// For tts messages which time out, it won't keep tracking the tts message and will just assume that the message took
 	/// 7 seconds (or whatever the value of message_timeout is) to receive back a response.
 	var/average_tts_messages_time = 0
+
+/datum/controller/subsystem/tts/vv_edit_var(var_name, var_value)
+	// tts being enabled depends on whether it actually exists
+	if(NAMEOF(src, tts_enabled) == var_name)
+		return FALSE
+	return ..()
 
 /datum/controller/subsystem/tts/stat_entry(msg)
 	msg = "Active:[length(in_process_http_messages)]|Standby:[length(queued_http_messages?.L)]|Avg:[average_tts_messages_time]"
@@ -285,18 +291,7 @@ SUBSYSTEM_DEF(tts)
 	if(!fexists("tmp/tts/init.txt"))
 		rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 
-	/// WD-EDIT START
-	/// var/static/regex/contains_alphanumeric = regex("\[a-zA-Z0-9]")
-	// If there is no alphanumeric char, the output will usually be static, so
-	// don't bother sending
-	/// if(contains_alphanumeric.Find(message) == 0)
-	/// 	return
-	/// WD-EDIT END
-
-	/// WD-EDIT START
 	var/shell_scrubbed_input = message
-	///shell_scrubbed_input = copytext(shell_scrubbed_input, 1, 300)
-	/// WD-EDIT END
 	var/identifier = "[sha1(speaker + num2text(pitch) + special_filters + shell_scrubbed_input)].[world.time]"
 	if(!(speaker in available_speakers))
 		return
@@ -308,10 +303,8 @@ SUBSYSTEM_DEF(tts)
 	var/datum/http_request/request_blips = new()
 	var/file_name = "tmp/tts/[identifier].ogg"
 	var/file_name_blips = "tmp/tts/[identifier]_blips.ogg"
-	/// WD-EDIT START
 	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name)
 	request_blips.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name_blips)
-	/// WD-EDIT END
 	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, request_blips, shell_scrubbed_input, target, local, language, message_range, volume_offset, listeners, pitch)
 	var/list/player_queued_tts_messages = queued_tts_messages[target]
 	if(!player_queued_tts_messages)
@@ -364,6 +357,8 @@ SUBSYSTEM_DEF(tts)
 	var/use_blips = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
+
+BSQL_PROTECT_DATUM(/datum/tts_request)
 
 /datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, datum/language/language, message_range, volume_offset, list/listeners, pitch)
 	. = ..()
