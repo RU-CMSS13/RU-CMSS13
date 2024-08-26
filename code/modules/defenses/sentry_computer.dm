@@ -148,9 +148,9 @@
  * Broadcast a message to those nearby and on sentry radio.
  * @param message: message to broadcast.
  */
-/obj/item/device/sentry_computer/proc/send_message(message, tts_heard_list)
+/obj/item/device/sentry_computer/proc/send_message(message)
 	if(!silent && transceiver)
-		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY, tts_heard_list = tts_heard_list)
+		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY, tts_heard_list = list(list(), list(), list(), list())
 		voice.say(message)
 
 /obj/item/device/sentry_computer/attack_hand(mob/user)
