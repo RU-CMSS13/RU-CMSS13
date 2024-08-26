@@ -79,7 +79,7 @@
 				listening += C
 
 	//RUCM START
-	var/list/tts_heard_list = list(list(), list())
+	var/list/tts_heard_list = list(list(), list(), list(), list())
 	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE, -50)
 	//RUCM END
 

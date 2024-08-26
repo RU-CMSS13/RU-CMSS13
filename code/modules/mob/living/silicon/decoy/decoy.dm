@@ -69,7 +69,7 @@
 		else message = copytext(message, 3)
 
 	//RUCM START
-	var/list/tts_heard_list = list(list(), list())
+	var/list/tts_heard_list = list(list(), list(), list(), list())
 	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE)
 	//RUCM END
 

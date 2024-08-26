@@ -170,7 +170,7 @@
 
 		//Just in case
 		if(!tts_heard_list)
-			tts_heard_list = list(list(), list())
+			tts_heard_list = list(list(), list(), list(), list())
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
 
