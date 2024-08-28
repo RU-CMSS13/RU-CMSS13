@@ -1,6 +1,7 @@
 //[ {"desc":"", "xp_completion":0, "mapped_modules":{["cn":"ex", "opt":{"req":{}, ...}], ...}}, ...]
 // cn is code name, opt is vars to replace
 /datum/battlepass_challenge
+	var/name = "Example"
 	var/desc = "Example"
 	var/xp_completion = 0
 	// Modules builder
@@ -25,8 +26,11 @@
 		regenerate_desc()
 
 /datum/battlepass_challenge/proc/regenerate_desc()
+	name = null
 	var/new_desc = ""
 	for(var/datum/battlepass_challenge_module/module in modules)
+		if(!name)
+			name = module.name
 		new_desc += module.get_description()
 	desc = new_desc
 
@@ -852,6 +856,8 @@
 //Additional
 /datum/battlepass_challenge_module/requirement/additional
 
+/datum/battlepass_challenge_module/requirement/additional/damage
+
 /datum/battlepass_challenge_module/requirement/additional/weapon
 	name = "Weapon"
 	desc = "using a ###weapon###"
@@ -941,6 +947,12 @@
 
 	var/list/overdose_types = list()
 
-/datum/battlepass_challenge_module/requirement/bad_buffs/overdose/small
+/datum/battlepass_challenge_module/requirement/bad_buffs/overdose/easy
+	module_exp_modificator = 1.5
+
+/datum/battlepass_challenge_module/requirement/bad_buffs/overdose/normal
+	module_exp_modificator = 1.5
+
+/datum/battlepass_challenge_module/requirement/bad_buffs/overdose/hard
 	module_exp_modificator = 1.5
 //

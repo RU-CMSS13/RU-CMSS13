@@ -59,14 +59,9 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	if(values["daily_challenges"])
 		var/list/decoded = json_decode(values["daily_challenges"])
 		for(var/list/entry as anything in decoded)
-			if(!("type" in entry))
-				continue
-
-			var/path = entry["type"]
-			var/datum/battlepass_challenge/challenge = new path()
+			var/datum/battlepass_challenge/challenge = new (entry)
 			battlepass.mapped_daily_challenges += challenge
 			battlepass.RegisterSignal(challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, TYPE_PROC_REF(/datum/entity/battlepass_player, on_challenge_complete))
-			challenge.deserialize(entry)
 
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
@@ -97,7 +92,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 //BATTLEPASS FULLFILMENT
 /datum/entity/battlepass_player/proc/verify_data()
 	for(var/datum/battlepass_challenge/challenge as anything in mapped_daily_challenges)
-		challenge.on_client_hooked(owner.owning_client)
+		challenge.on_client(owner.owning_client)
 
 	if(owner.donator_info?.patreon_function_available("battlepass_modificator"))
 		premium = TRUE
@@ -172,15 +167,13 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 				new_skin = DB_ENTITY(/datum/entity/skin)
 				new_skin.player_id = owner.id
 				new_skin.skin_name = reward.mapped_reward_data["path"]
-			else if(new_skin.skin[reward.mapped_reward_data["skin"]])
+			else if(reward.mapped_reward_data["skin"] in new_skin.mapped_skins)
 				return FALSE
-			new_skin.skin[reward.mapped_reward_data["skin"]] = reward.mapped_reward_data["skin"]
+			new_skin.mapped_skins += reward.mapped_reward_data["skin"]
 			new_skin.save()
 		if("points")
-			var/datum/entity/player_shop/player_shop = DB_EKEY(/datum/entity/player_shop, owner.id)
-			player_shop.save()
-			player_shop.sync()
-			player_shop.coins_ammount += reward.mapped_reward_data["amount"]
+			owner.player_shop.coins_ammount += reward.mapped_reward_data["amount"]
+			return TRUE
 		else
 			return FALSE
 	return TRUE
@@ -217,7 +210,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	SIGNAL_HANDLER
 
 	challenge.completed = TRUE
-	add_xp(challenge.completion_xp)
+	add_xp(challenge.xp_completion)
 	if(owner.owning_client)
 		challenge.unhook_signals(owner.owning_client.mob)
 
@@ -271,8 +264,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 			"name" = daily_challenge.name,
 			"desc" = daily_challenge.desc,
 			"completed" = daily_challenge.completed,
-			"category" = daily_challenge.challenge_category,
-			"completion_xp" = daily_challenge.completion_xp,
+			"completion_xp" = daily_challenge.xp_completion,
 			"completion_percent" = daily_challenge.get_completion_percent(),
 			"completion_numerator" = daily_challenge.get_completion_numerator(),
 			"completion_denominator" = daily_challenge.get_completion_denominator(),
@@ -352,7 +344,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player_shop)
 
 /datum/entity_meta/player_shop
 	entity_type = /datum/entity/player_shop
-	table_name = "player_shop"
+	table_name = "players_shop"
 	field_types = list(
 		"player_id" = DB_FIELDTYPE_BIGINT,
 		"coins_ammount" = DB_FIELDTYPE_BIGINT,

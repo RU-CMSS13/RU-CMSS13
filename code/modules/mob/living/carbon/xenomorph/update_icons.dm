@@ -371,6 +371,46 @@
 #undef X_FIRE_LAYER
 */
 //RUCM START
+/atom/movable/vis_obj/xeno_skin
+
+/mob/living/carbon/xenomorph/proc/handle_special_skin_states()
+	return FALSE
+
+/mob/living/carbon/xenomorph/defender/handle_special_skin_states()
+	. = ..()
+	if(fortify)
+		return "fortify_[selected_skin]"
+	if(crest_defense)
+		return "crest_[selected_skin]"
+
+/mob/living/carbon/xenomorph/queen/handle_special_skin_states()
+	. = ..()
+	if(ovipositor)
+		return "ovipositor_[selected_skin]"
+
+/mob/living/carbon/xenomorph/proc/update_skin()
+	if(!skin_icon_holder)
+		return
+
+	if(selected_skin)
+		if(body_position == LYING_DOWN)
+			if(!HAS_TRAIT(src, TRAIT_INCAPACITATED) && !HAS_TRAIT(src, TRAIT_FLOORED))
+				skin_icon_holder.icon_state = "[selected_skin]_rest"
+			else
+				skin_icon_holder.icon_state = "[selected_skin]_downed"
+		else if(!handle_special_state())
+			skin_icon_holder.icon_state = "[selected_skin]"
+		else
+			skin_icon_holder.icon_state = handle_special_skin_states()
+	else
+		skin_icon_holder.icon_state = "none"
+
+/mob/living/carbon/xenomorph/proc/skin(skin)
+	selected_skin = skin
+	update_skin()
+	return
+
+
 #undef X_FIRE_LAYER
 #undef X_LEGCUFF_LAYER
 #undef X_TARGETED_LAYER

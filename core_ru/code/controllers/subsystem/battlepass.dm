@@ -17,39 +17,12 @@ SUBSYSTEM_DEF(battlepass)
 	var/list/xeno_battlepass_earners = list()
 
 /datum/controller/subsystem/battlepass/Initialize()
-	await_initialization()
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/battlepass/proc/await_initialization()
-	set waitfor = FALSE
-	UNTIL(GLOB.current_battlepass)
-	GLOB.battlepass_challenges = list("marine_challenges" = list(), "xeno_challenges" = list())
-	for(var/challenge as anything in GLOB.current_battlepass.mapped_point_sources["daily"])
-		var/datum/battlepass_challenge/challenge_path = GLOB.battlepass_challenges_by_code_name[challenge]
-		var/pick_weight = initial(challenge_path.pick_weight)
-		if(GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["piwgt"])
-			pick_weight = GLOB.current_battlepass.mapped_point_sources["daily"][challenge]["piwgt"]
+/datum/controller/subsystem/battlepass/proc/create_challenge()
+	var/datum/battlepass_challenge/new_challenge = new
 
-		switch(initial(challenge_path.challenge_category))
-			if(CHALLENGE_NONE)
-				continue
-
-			if(CHALLENGE_HUMAN)
-				GLOB.battlepass_challenges["marine_challenges"][challenge_path] = pick_weight
-
-			if(CHALLENGE_XENO)
-				GLOB.battlepass_challenges["xeno_challenges"][challenge_path] = pick_weight
-
-/datum/controller/subsystem/battlepass/proc/get_challenge(challenge_type = CHALLENGE_NONE)
-	switch(challenge_type)
-		if(CHALLENGE_NONE)
-			return
-
-		if(CHALLENGE_HUMAN)
-			return pick_weight(GLOB.battlepass_challenges["marine_challenges"])
-
-		if(CHALLENGE_XENO)
-			return pick_weight(GLOB.battlepass_challenges["xeno_challenges"])
+	return new_challenge
 
 /datum/controller/subsystem/battlepass/proc/give_sides_points(marine_points = 0, xeno_points = 0)
 	if(marine_points)

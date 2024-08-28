@@ -436,6 +436,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 				whitelist_flags |= GLOB.bitfields["whitelist_status"]["[whitelist]"]
 
 //RUCM START
+	player_shop = DB_EKEY(/datum/entity/player_shop, id)
+	player_shop.save()
+	player_shop.sync()
 	load_battlepass()
 	load_donator_info()
 //RUCM END

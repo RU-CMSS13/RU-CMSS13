@@ -1,3 +1,6 @@
+/datum/entity/player
+	var/datum/entity/player_shop/player_shop
+
 /datum/entity/player/proc/load_battlepass()
 //PORT OUR SAVES
 	UNTIL(GLOB.battlepass_challenges)
