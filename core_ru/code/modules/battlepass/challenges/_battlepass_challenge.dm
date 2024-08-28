@@ -11,6 +11,8 @@
 	var/completed = FALSE
 	var/list/datum/battlepass_challenge_module/modules = list()
 
+	var/client/client_reference
+
 /datum/battlepass_challenge/New(list/opt)
 	if(opt)
 		for(var/param in opt)
@@ -73,6 +75,7 @@
 //Signals
 /datum/battlepass_challenge/proc/on_client(client/logged)
 	if(logged && !completed)
+		client_reference = logged
 		if(logged.mob)
 			hook_signals(src, logged.mob)
 		else
@@ -342,7 +345,8 @@
 /datum/battlepass_challenge_module/requirement/kill/proc/on_kill(mob/source, mob/killed_mob, datum/cause_data/cause_data)
 	SIGNAL_HANDLER
 
-	if(!killed_mob.life_value)
+	var/req_name = req[1]
+	if(!killed_mob.life_value || req[req_name][1] == req[req_name][2])
 		return FALSE
 
 	if(source.faction == killed_mob.faction)
@@ -354,7 +358,7 @@
 		if(!next_module.allow_completion())
 			return FALSE
 
-		req[req[1]][1]++
+		req[req_name][1]++
 		on_possible_challenge_completed()
 
 /datum/battlepass_challenge_module/requirement/kill/human
@@ -429,13 +433,17 @@
 /datum/battlepass_challenge_module/requirement/defib/proc/on_defib(datum/source, mob/living/carbon/human/defibbed)
 	SIGNAL_HANDLER
 
+	var/req_name = req[1]
+	if(req[req_name][1] == req[req_name][2])
+		return
+
 	var/current_pos = challenge_ref.modules[src]
 	var/datum/battlepass_challenge_module/next_module = challenge_ref.modules[current_pos + 1]
 	if(!next_module.allow_completion())
 		return FALSE
 
 	mob_name_list |= defibbed.real_name
-	req[req[1]][1]++
+	req[req_name][1]++
 	on_possible_challenge_completed()
 
 /datum/battlepass_challenge_module/requirement/defib/serialize(list/options)
@@ -859,7 +867,7 @@
 
 /datum/battlepass_challenge_module/requirement/additional/damage
 	name = "Damage"
-	desc = "survive ###damage### damage"
+	desc = " survive minimum ###damage### damage"
 	code_name = "additional_survive_damage"
 
 	module_exp = list(4, 10)
@@ -885,7 +893,7 @@
 	var/req_name = req[1]
 	if(req[req_name][1] == req[req_name][2])
 		return
-	req[req_name][1] = logged_mob.life_damage_taken_total
+	req[req_name][1] = min(logged_mob.life_damage_taken_total, req[req_name][2])
 	on_possible_challenge_completed()
 
 
@@ -977,6 +985,11 @@
 	module_exp = list(2, 4)
 
 	var/list/overdose_types = list()
+
+/datum/battlepass_challenge_module/requirement/bad_buffs/overdose/allow_completion()
+	if(!client_reference.mob)
+		return FALSE
+	if(client_reference.mob.reagents.reagent_list)
 
 /datum/battlepass_challenge_module/requirement/bad_buffs/overdose/easy
 	module_exp_modificator = 1.5
