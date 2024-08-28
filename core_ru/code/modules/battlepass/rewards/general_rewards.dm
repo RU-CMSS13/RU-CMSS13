@@ -3,7 +3,6 @@
 
 
 /datum/battlepass_reward/general/particle
-	category = REWARD_CATEGORY_PARTICLE
 	var/particle_path
 
 /datum/battlepass_reward/general/particle/on_claim(mob/target_mob)
