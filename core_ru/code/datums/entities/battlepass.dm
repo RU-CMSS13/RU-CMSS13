@@ -191,17 +191,10 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	// We give the player 2 marine challenges and 2 xeno challenges
 	QDEL_LIST(mapped_daily_challenges)
 
-	for(var/i in 1 to 2)
-		var/gotten_path = SSbattlepass.get_challenge(CHALLENGE_HUMAN)
-		var/datum/battlepass_challenge/human_challenge = new gotten_path(owner.owning_client)
-		RegisterSignal(human_challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, PROC_REF(on_challenge_complete))
-		mapped_daily_challenges += human_challenge
-
-	for(var/i in 1 to 2)
-		var/gotten_path = SSbattlepass.get_challenge(CHALLENGE_XENO)
-		var/datum/battlepass_challenge/xeno_challenge = new gotten_path(owner.owning_client)
-		RegisterSignal(xeno_challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, PROC_REF(on_challenge_complete))
-		mapped_daily_challenges += xeno_challenge
+	for(var/i in 1 to 4)
+		var/datum/battlepass_challenge/new_challenge = SSbattlepass.create_challenge(owner.owning_client)
+		RegisterSignal(new_challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, PROC_REF(on_challenge_complete))
+		mapped_daily_challenges += new_challenge
 
 	daily_challenges_last_updated = rustg_unix_timestamp()
 

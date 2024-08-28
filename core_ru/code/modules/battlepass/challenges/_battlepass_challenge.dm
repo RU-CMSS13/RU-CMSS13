@@ -856,7 +856,38 @@
 //Additional
 /datum/battlepass_challenge_module/requirement/additional
 
+
 /datum/battlepass_challenge_module/requirement/additional/damage
+	name = "Damage"
+	desc = "survive ###damage### damage"
+	code_name = "additional_survive_damage"
+
+	module_exp = list(4, 10)
+
+	req_gen = list("damage" = list(1000, 6000))
+
+/datum/battlepass_challenge_module/requirement/additional/damage/hook_signals(mob/logged_mob)
+	. = ..()
+	if(!.)
+		return
+	var/req_name = req[1]
+	if(req[req_name][1] == req[req_name][2])
+		return
+	RegisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED, PROC_REF(on_game_end), logged_mob)
+
+/datum/battlepass_challenge_module/requirement/additional/damage/unhook_signals(mob/logged_mob)
+	. = ..()
+	if(!.)
+		return
+	UnregisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED)
+
+/datum/battlepass_challenge_module/requirement/additional/damage/proc/on_game_end(mob/logged_mob)
+	var/req_name = req[1]
+	if(req[req_name][1] == req[req_name][2])
+		return
+	req[req_name][1] = logged_mob.life_damage_taken_total
+	on_possible_challenge_completed()
+
 
 /datum/battlepass_challenge_module/requirement/additional/weapon
 	name = "Weapon"

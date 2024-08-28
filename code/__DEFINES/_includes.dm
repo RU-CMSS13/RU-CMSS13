@@ -15,6 +15,7 @@
 #include "core_defines_ru\vendors.dm"
 #include "core_defines_ru\xeno.dm"
 #include "core_defines_ru\dcs\signals\signals_datum.dm"
+#include "core_defines_ru\dcs\signals\signals_global.dm"
 #include "core_defines_ru\dcs\signals\atom\mob\signals_mob.dm"
 #include "core_defines_ru\dcs\signals\atom\mob\living\signals_human.dm"
 #include "core_defines_ru\dcs\signals\atom\mob\living\signals_xeno.dm"
