@@ -40,13 +40,18 @@
 		var/list/mob/listeners = viewers(user) // slow but we need it
 		// mobs that pass the conditionals will be added here
 		var/list/mob/langchat_long_listeners = list()
+		//RUCM START
+		var/list/tts_heard_list = list(list(), list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), user.tts_voice, tts_heard_list, FALSE, 50)
+		//RUCM END
 		for(var/mob/listener in listeners)
 			if(!ishumansynth_strict(listener) && !isobserver(listener))
 				listener.show_message("[user] says something on the microphone, but you can't understand it.")
+				tts_heard_list[2] += listener
 				continue
 			listener.show_message("<B>[user]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
 		playsound(loc, 'sound/items/megaphone.ogg', 100, FALSE, TRUE)
-		user.langchat_long_speech(message, langchat_long_listeners, user.get_default_language())
+		user.langchat_long_speech(message, langchat_long_listeners, user.get_default_language(), tts_heard_list = tts_heard_list)
 
 		COOLDOWN_START(src, spam_cooldown, spam_cooldown_time)
