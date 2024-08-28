@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/list/mapped_rewards
 	var/list/mapped_premium_rewards
 
-//BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
+BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 /datum/entity_meta/battlepass_player
 	entity_type = /datum/entity/battlepass_player
@@ -177,11 +177,10 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 			new_skin.skin[reward.mapped_reward_data["skin"]] = reward.mapped_reward_data["skin"]
 			new_skin.save()
 		if("points")
-			if(!owner.colonial_coins)
-				owner.colonial_coins = reward.mapped_reward_data["amount"]
-			else
-				owner.colonial_coins += reward.mapped_reward_data["amount"]
-			owner.save()
+			var/datum/entity/player_shop/player_shop = DB_EKEY(/datum/entity/player_shop, owner.id)
+			player_shop.save()
+			player_shop.sync()
+			player_shop.coins_ammount += reward.mapped_reward_data["amount"]
 		else
 			return FALSE
 	return TRUE
@@ -342,3 +341,20 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 		return
 
 	client.player_data.battlepass.tgui_interact(src)
+
+
+
+/datum/entity/player_shop
+	var/player_id
+	var/coins_ammount = 0
+
+BSQL_PROTECT_DATUM(/datum/entity/player_shop)
+
+/datum/entity_meta/player_shop
+	entity_type = /datum/entity/player_shop
+	table_name = "player_shop"
+	field_types = list(
+		"player_id" = DB_FIELDTYPE_BIGINT,
+		"coins_ammount" = DB_FIELDTYPE_BIGINT,
+	)
+	key_field = "player_id"
