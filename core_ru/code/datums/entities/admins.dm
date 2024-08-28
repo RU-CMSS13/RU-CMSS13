@@ -86,6 +86,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 	var/rank_id
 	var/extra_titles_encoded
 	var/list/extra_titles
+	var/list/rank_ids_extra
 
 BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 
@@ -101,12 +102,17 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 /datum/entity_meta/admin_holder/map(datum/entity/admin_holder/admin, list/values)
 	..()
 	if(values["extra_titles_encoded"])
-		admin.extra_titles = json_decode(values["extra_titles_encoded"])
+		admin.rank_ids_extra = json_decode(values["extra_titles_encoded"])
+		for(var/rank_id as anything in admin.rank_ids_extra)
+			var/datum/view_record/admin_rank/admin_rank = SAFEPICK(DB_VIEW(/datum/view_record/admin_rank, DB_COMP("id", DB_EQUALS, text2num(rank_id))))
+			if(!admin_rank)
+				continue
+			admin.extra_titles += admin_rank.rank_name
 
 /datum/entity_meta/admin_holder/unmap(datum/entity/admin_holder/admin)
 	. = ..()
-	if(length(admin.extra_titles))
-		.["extra_titles_encoded"] = json_encode(admin.extra_titles)
+	if(length(admin.rank_ids_extra))
+		.["extra_titles_encoded"] = json_encode(admin.rank_ids_extra)
 
 /datum/entity_link/player_to_admin_holder
 	parent_entity = /datum/entity/player
@@ -260,7 +266,9 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	else
 		rank = ranks[length(ranks)]
 
-	DB_FILTER(/datum/entity/admin_holder, DB_COMP("ckey", DB_EQUALS, admin_client.ckey), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(localhost_entity_check), admin_client, rank))
+	UNTIL(admin_client.player_data)
+
+	DB_FILTER(/datum/entity/admin_holder, DB_COMP("player_id", DB_EQUALS, admin_client.player_data.id), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(localhost_entity_check), admin_client, rank))
 
 /proc/localhost_entity_check(client/admin_client, datum/entity/admin_rank/rank, list/datum/entity/admin_holder/admins)
 	var/datum/entity/admin_holder/admin
