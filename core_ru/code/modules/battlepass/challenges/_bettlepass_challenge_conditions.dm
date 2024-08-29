@@ -5,44 +5,6 @@
 /datum/battlepass_challenge_module/condition
 	pick_weight = 5
 
-//Задержка, например "Убить 4 морпехов" + " с задержкой 2 минуты"
-/datum/battlepass_challenge_module/condition/delay
-	name = "Delay"
-	desc = " with delay ###DELAY###"
-	code_name = "delay"
-
-	module_exp_modificator = 1.25
-
-	compatibility = list(
-		"strict" = list(
-			/datum/battlepass_challenge_module/condition/after,
-			/datum/battlepass_challenge_module/condition/before,
-			/datum/battlepass_challenge_module/condition/and,
-			/datum/battlepass_challenge_module/condition/exempt,
-		),
-		"subtyped" = list()
-	)
-
-//За отведенное время, например "Реанимировать 10 морпехов" + " за 2 минуты"
-/datum/battlepass_challenge_module/condition/time
-	name = "Time"
-	desc = " in ###TIME###"
-	code_name = "time"
-
-	module_exp_modificator = 1.25
-
-	compatibility = list(
-		"strict" = list(
-			/datum/battlepass_challenge_module/condition/with,
-			/datum/battlepass_challenge_module/condition/without,
-			/datum/battlepass_challenge_module/condition/after,
-			/datum/battlepass_challenge_module/condition/before,
-			/datum/battlepass_challenge_module/condition/and,
-			/datum/battlepass_challenge_module/condition/exempt,
-		),
-		"subtyped" = list()
-	)
-
 //"Убить 2 ксеносов" + " с" (наприммер " m41a")
 /datum/battlepass_challenge_module/condition/with
 	name = "With"

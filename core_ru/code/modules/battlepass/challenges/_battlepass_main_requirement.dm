@@ -1,5 +1,7 @@
 // REQUIREMENTS
 /datum/battlepass_challenge_module/main_requirement // Базовое требование для выполнения задачи
+	pick_weight = 5
+
 	var/list/mapped_sub_requirements
 	var/list/datum/battlepass_challenge_module/sub_requirements
 

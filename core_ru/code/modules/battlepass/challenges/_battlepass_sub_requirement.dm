@@ -1,11 +1,15 @@
 //Additional requirements for main task, that will make it harder to complete
 /datum/battlepass_challenge_module/requirement
+	pick_weight = 5
 
-//Additional
-/datum/battlepass_challenge_module/requirement/additional
+	compatibility = list(
+		"strict" = list(),
+		"subtyped" = list(/datum/battlepass_challenge_module/condition)
+	)
 
 
-/datum/battlepass_challenge_module/requirement/additional/damage
+
+/datum/battlepass_challenge_module/requirement/damage
 	name = "Damage"
 	desc = " survive minimum ###damage### damage"
 	code_name = "additional_survive_damage"
@@ -14,7 +18,7 @@
 
 	req_gen = list("damage" = list(1000, 6000))
 
-/datum/battlepass_challenge_module/requirement/additional/damage/hook_signals(mob/logged_mob)
+/datum/battlepass_challenge_module/requirement/damage/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
@@ -23,13 +27,13 @@
 		return
 	RegisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED, PROC_REF(on_game_end), logged_mob)
 
-/datum/battlepass_challenge_module/requirement/additional/damage/unhook_signals(mob/logged_mob)
+/datum/battlepass_challenge_module/requirement/damage/unhook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
 	UnregisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED)
 
-/datum/battlepass_challenge_module/requirement/additional/damage/proc/on_game_end(mob/logged_mob)
+/datum/battlepass_challenge_module/requirement/damage/proc/on_game_end(mob/logged_mob)
 	var/req_name = req[1]
 	if(req[req_name][1] == req[req_name][2])
 		return
@@ -37,7 +41,7 @@
 	on_possible_challenge_completed()
 
 
-/datum/battlepass_challenge_module/requirement/additional/weapon
+/datum/battlepass_challenge_module/requirement/weapon
 	name = "Weapon"
 	desc = "using a ###weapon###"
 	code_name = "weapon"
@@ -47,20 +51,21 @@
 	var/list/possible_weapons = list()
 	var/obj/weapon_to_use
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/get_description()
+/datum/battlepass_challenge_module/requirement/weapon/get_description()
 	. = ..()
 	. = replacetext_char(., "###weapon###", initial(weapon_to_use.name))
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/allow_completion(mob/source, mob/killed_mob, datum/cause_data/cause_data)
+/datum/battlepass_challenge_module/requirement/weapon/allow_completion(mob/source, mob/killed_mob, datum/cause_data/cause_data)
 	if(!findtext(cause_data.cause_name, weapon_to_use))
 		return FALSE
 	return TRUE
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/serialize(list/options)
+/datum/battlepass_challenge_module/requirement/weapon/serialize(list/options)
 	. = ..()
 	options["weapon_to_use"] = weapon_to_use
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/common
+
+/datum/battlepass_challenge_module/requirement/weapon/common
 	code_name = "weapon_common"
 
 	module_exp_modificator = 1.2
@@ -72,7 +77,8 @@
 		/obj/item/weapon/gun/shotgun/pump,
 	)
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/pistol
+
+/datum/battlepass_challenge_module/requirement/weapon/pistol
 	code_name = "weapon_pistol"
 
 	module_exp_modificator = 1.5
@@ -85,7 +91,8 @@
 		/obj/item/weapon/gun/pistol/m4a3,
 	)
 
-/datum/battlepass_challenge_module/requirement/additional/weapon/req
+
+/datum/battlepass_challenge_module/requirement/weapon/req
 	code_name = "weapon_req"
 
 	module_exp_modificator = 1.1
@@ -98,11 +105,11 @@
 		/obj/item/storage/box/guncase/m41aMK1,
 		/obj/item/storage/box/guncase/lmg,
 	)
-//
 
 
-//Buffs
+
 /datum/battlepass_challenge_module/requirement/good_buffs // Хороший, баф который должен быть исключен для выполенния задания (саб задание)
+
 
 /datum/battlepass_challenge_module/requirement/good_buffs/ammunition
 	name = "Ammunition"
@@ -113,6 +120,7 @@
 
 	var/list/ammo_types = list()
 
+
 /datum/battlepass_challenge_module/requirement/good_buffs/reagents
 	name = "Reagents"
 	desc = " any reagents in blood"
@@ -120,17 +128,18 @@
 
 	module_exp = list(2, 4)
 
+
 /datum/battlepass_challenge_module/requirement/good_buffs/reagents/allow_completion()
 	if(!challenge_ref.client_reference?.mob)
 		return FALSE
 	if(length(challenge_ref.client_reference.mob.reagents.reagent_list))
 		return FALSE
 	return TRUE
-//
 
 
-//Debuffs
+
 /datum/battlepass_challenge_module/requirement/bad_buffs // Плохой баф, который должен быть для выполнения задания (саб задание)
+
 
 /datum/battlepass_challenge_module/requirement/bad_buffs/overdose
 	name = "OD"
@@ -192,4 +201,33 @@
 			if(reagent.overdose_critical && reagent.volume > reagent.overdose_critical)
 				return TRUE
 	return FALSE
-//
+
+
+
+//Задержка, например "Убить 4 морпехов" + " с задержкой 2 минуты"
+/datum/battlepass_challenge_module/requirement/delay
+	name = "Delay"
+	desc = " delay ###DELAY###"
+	code_name = "delay"
+
+	module_exp_modificator = 1.25
+
+	compatibility = list(
+		"strict" = list(
+			/datum/battlepass_challenge_module/condition/after,
+			/datum/battlepass_challenge_module/condition/before,
+			/datum/battlepass_challenge_module/condition/and,
+			/datum/battlepass_challenge_module/condition/exempt,
+		),
+		"subtyped" = list()
+	)
+
+
+
+//За отведенное время, например "Реанимировать 10 морпехов" + " за 2 минуты"
+/datum/battlepass_challenge_module/requirement/time
+	name = "Time"
+	desc = " in ###TIME###"
+	code_name = "time"
+
+	module_exp_modificator = 1.25
