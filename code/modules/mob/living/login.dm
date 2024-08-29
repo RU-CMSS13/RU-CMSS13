@@ -13,7 +13,7 @@
 			update_pipe_icons(A)
 
 	//RUCM START
-	if(SStts.tts_enabled)
+	if(SStts.tts_enabled && !tts_voice)
 		if(client?.prefs?.forced_voice)
 			tts_voice = client.prefs.forced_voice
 		else

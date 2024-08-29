@@ -372,6 +372,9 @@
 
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	if(old_xeno)
+		//RUCM SART
+		tts_voice = old_xeno.tts_voice
+		//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total
