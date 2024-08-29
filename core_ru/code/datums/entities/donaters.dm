@@ -219,6 +219,45 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 //	user.client.player_data.donator_info.skins_used["[xeno.type]"] = skin_selection // xeno skins for now reusable
 	xeno.skin(skin)
 
+/atom/movable/vis_obj/xeno_skin
+
+/mob/living/carbon/xenomorph/proc/handle_special_skin_states()
+	return FALSE
+
+/mob/living/carbon/xenomorph/defender/handle_special_skin_states()
+	. = ..()
+	if(fortify)
+		return "fortify_[selected_skin]"
+	if(crest_defense)
+		return "crest_[selected_skin]"
+
+/mob/living/carbon/xenomorph/queen/handle_special_skin_states()
+	. = ..()
+	if(ovipositor)
+		return "ovipositor_[selected_skin]"
+
+/mob/living/carbon/xenomorph/proc/update_skin()
+	if(!skin_icon_holder)
+		return
+
+	if(selected_skin)
+		if(body_position == LYING_DOWN)
+			if(!HAS_TRAIT(src, TRAIT_INCAPACITATED) && !HAS_TRAIT(src, TRAIT_FLOORED))
+				skin_icon_holder.icon_state = "[selected_skin]_rest"
+			else
+				skin_icon_holder.icon_state = "[selected_skin]_downed"
+		else if(!handle_special_state())
+			skin_icon_holder.icon_state = "[selected_skin]"
+		else
+			skin_icon_holder.icon_state = handle_special_skin_states()
+	else
+		skin_icon_holder.icon_state = "none"
+
+/mob/living/carbon/xenomorph/proc/skin(skin)
+	selected_skin = skin
+	update_skin()
+	return
+
 /mob/living/carbon/xenomorph/queen
 	icon_skin = 'core_ru/icons/custom/mob/xenos/queen.dmi'
 
@@ -278,5 +317,3 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 
 /mob/living/carbon/xenomorph/facehugger
 	icon_skin = 'core_ru/icons/custom/mob/xenos/facehugger.dmi'
-
-
