@@ -316,6 +316,7 @@
 	//RUCM START
 	if(!(tts_setting in list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS)))
 		tts_setting = TTS_SOUND_ENABLED
+	tts_volume = sanitize_integer(tts_volume, 0, 100, 100)
 	//RUCM END
 	synthetic_name = synthetic_name ? sanitize_text(synthetic_name, initial(synthetic_name)) : initial(synthetic_name)
 	synthetic_type = sanitize_inlist(synthetic_type, PLAYER_SYNTHS, initial(synthetic_type))
