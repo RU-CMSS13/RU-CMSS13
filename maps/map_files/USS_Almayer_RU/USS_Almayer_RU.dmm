@@ -45203,7 +45203,6 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 26
 	},
-/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -69914,6 +69913,15 @@
 	},
 /turf/open/floor/plating,
 /area/almayer/hallways/hangar)
+"sVK" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/machinery/computer/altitude_control_console,
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/command/cic)
 "sVO" = (
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 2;
@@ -71745,6 +71753,18 @@
 	icon_state = "cargo"
 	},
 /area/almayer/squads/charlie)
+"tAT" = (
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/prop/almayer/CICmap{
+	layer = 3.1
+	},
+/turf/open/floor/almayer{
+	icon_state = "mono"
+	},
+/area/almayer/command/cic)
 "tAU" = (
 /obj/structure/machinery/cryopod{
 	pixel_y = 6
@@ -104324,7 +104344,7 @@ wVW
 lsb
 pPB
 boS
-auQ
+sVK
 awm
 aJG
 czJ
@@ -104527,7 +104547,7 @@ wVW
 awt
 alX
 cnM
-awH
+tAT
 oPE
 awt
 atO
