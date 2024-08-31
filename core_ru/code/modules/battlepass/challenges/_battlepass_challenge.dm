@@ -27,18 +27,55 @@
 		completed = check_challenge_completed()
 		regenerate_desc()
 
+
+
+
 /datum/battlepass_challenge/proc/generate_challenge()
-	var/total_xp_modificator = 1
-	var/total_main_modules = rand(1, 3)
-	for(var/i in 1 to total_main_modules)
-		//TODO: Make here find outs, if it right to take module by it module_exp, requirements and etc
-		var/datum/battlepass_challenge_module/module = new
-		module.challenge_ref = src
-		module.generate_module()
-		xp_completion += rand(module.module_exp[1], module.module_exp[2])
-		total_xp_modificator *= module.module_exp_modificator
-		//TODO: If we not done yet, set here /datum/battlepass_challenge_module/condition or if we done, and like to make it finishible only after hijack, you know
-	xp_completion *= total_xp_modificator
+    var/total_xp_modificator = 1
+    var/total_main_modules = rand(1, 3)
+
+    // Создаем список всех доступных модулей
+    var/list/available_modules = typesof(/datum/battlepass_challenge_module/main_requirement)
+    // Выбираем первый модуль случайно
+    var/datum/battlepass_challenge_module/initial_module = new pick(available_modules)
+    initial_module.challenge_ref = src
+    initial_module.generate_module()
+    modules += initial_module
+
+    xp_completion += rand(initial_module.module_exp[1], initial_module.module_exp[2])
+    total_xp_modificator *= initial_module.module_exp_modificator
+
+    // Генерация последующих модулей с учетом совместимости
+    var/datum/battlepass_challenge_module/previous_module = initial_module
+    for (var/i in 2 to total_main_modules)
+        var/datum/battlepass_challenge_module/next_module = pick_next_compatible_module(available_modules, previous_module)
+        next_module.challenge_ref = src
+        next_module.generate_module()
+        modules += next_module
+
+        xp_completion += rand(next_module.module_exp[1], next_module.module_exp[2])
+        total_xp_modificator *= next_module.module_exp_modificator
+
+        previous_module = next_module
+
+    xp_completion *= total_xp_modificator
+
+/datum/battlepass_challenge/proc/pick_next_compatible_module(list/available_modules, datum/battlepass_challenge_module/previous_module)
+    var/list/compatible_modules = filter_modules_by_compatibility(available_modules, previous_module)
+
+    if (!compatible_modules.len)
+        return null // Если нет совместимых модулей, вернем null или выберем случайный
+
+    var/datum/battlepass_challenge_module/selected_module = pick(compatible_modules)
+
+    // Удаляем выбранный модуль из списка доступных, чтобы не использовать его снова
+    available_modules -= selected_module
+
+    return selected_module
+
+
+
+
 
 /datum/battlepass_challenge/proc/regenerate_desc()
 	name = null
