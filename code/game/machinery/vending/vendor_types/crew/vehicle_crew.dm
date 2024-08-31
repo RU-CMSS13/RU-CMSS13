@@ -63,12 +63,12 @@
 		marine_announcement("A tank is being sent up to reinforce this operation.")
 */
 //RUCM START
-/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/VO)
+/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/tank/plain/VO)
 
 	SIGNAL_HANDLER
 	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
 
-	if(istype(VO, /datum/vehicle_order/tank/plain))
+	if(istype(VO, /obj/effect/vehicle_spawner/tank))
 		selected_vehicle = "TANK"
 		marine_announcement("Tank is being sent up to reinforce this operation. Good luck")
 	else
@@ -149,8 +149,10 @@
 GLOBAL_LIST_INIT(cm_vending_vehicle_crew_tank, list(
 	list("STARTING KIT SELECTION:", 0, null, null, null),
 
+/*RUCM REMOVAL
 	list("INTEGRAL PARTS", 0, null, null, null),
 	list("M34A2-A Multipurpose Turret", 0, /obj/effect/essentials_set/tank/turret, VEHICLE_INTEGRAL_AVAILABLE, VENDOR_ITEM_MANDATORY),
+*/
 
 	list("PRIMARY WEAPON", 0, null, null, null),
 	list("AC3-E Autocannon", 0, /obj/effect/essentials_set/tank/autocannon, VEHICLE_PRIMARY_AVAILABLE, VENDOR_ITEM_RECOMMENDED),
@@ -168,7 +170,13 @@ GLOBAL_LIST_INIT(cm_vending_vehicle_crew_tank, list(
 	list("Overdrive Enhancer", 0, /obj/item/hardpoint/support/overdrive_enhancer, VEHICLE_SUPPORT_AVAILABLE, VENDOR_ITEM_RECOMMENDED),
 
 	list("ARMOR", 0, null, null, null),
-	list("Snowplow", 0, /obj/item/hardpoint/armor/snowplow, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+//RUCM CHANGE
+	list("External snowplow", 0, /obj/item/hardpoint/armor/snowplow, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+	list("Ballistic external armor", 0, /obj/item/hardpoint/armor/ballistic, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+	list("Caustic external armor", 0, /obj/item/hardpoint/armor/caustic, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+	list("Concussive external armor", 0, /obj/item/hardpoint/armor/concussive, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+	list("Paladin external armor", 0, /obj/item/hardpoint/armor/paladin, VEHICLE_ARMOR_AVAILABLE, VENDOR_ITEM_REGULAR),
+//RUCM END
 
 	list("TREADS", 0, null, null, null),
 	list("Reinforced Treads", 0, /obj/item/hardpoint/locomotion/treads/robust, VEHICLE_TREADS_AVAILABLE, VENDOR_ITEM_REGULAR),
