@@ -17,7 +17,11 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 
 /proc/load_sub_modules_weighted()
 	. = list()
-	var/list/modules = subtypesof(/datum/battlepass_challenge_module/requirement)
+	var/list/modules = subtypesof(/datum/battlepass_challenge_module/requirement) - list(
+		/datum/battlepass_challenge_module/requirement/weapon,
+		/datum/battlepass_challenge_module/requirement/good_buffs,
+		/datum/battlepass_challenge_module/requirement/bad_buffs
+		)
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		.[module] = initial(module.pick_weight)
 	return .
@@ -188,7 +192,6 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		"mapped_modules" = re_mapped_modules
 	)
 
-//TODO: СДЕЛАТЬ ВЫДАЧУ ЕСЛИ ЕСТЬ module_exp или module_exp_modificator
 
 // Handle moduled req actions to finish challenge
 /datum/battlepass_challenge_module
@@ -203,7 +206,6 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	var/module_exp = list(0, 0)
 	var/module_exp_modificator = 1
 
-	var/signals
 	var/list/req_gen
 	var/list/compatibility = list("strict" = list(), "subtyped" = list()) // Проверяется пикая следующее условие, например есть 1 и в 2, теперь время выбрать 3, мы смотрим что в 2 за ограничения на пик
 

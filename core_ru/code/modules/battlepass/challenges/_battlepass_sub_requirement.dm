@@ -173,18 +173,26 @@
 
 	module_exp_modificator = 1.25
 
-	compatibility = list(
-		"strict" = list(
-			/datum/battlepass_challenge_module/condition/after,
-			/datum/battlepass_challenge_module/condition/before,
-			/datum/battlepass_challenge_module/condition/and,
-			/datum/battlepass_challenge_module/condition/exempt,
-		),
-		"subtyped" = list()
-	)
+	var/delay_time = 120 SECONDS
+	var/timestamp
+
+/datum/battlepass_challenge_module/requirement/delay/generate_module()
+	delay_time = rand(delay_time/2, delay_time*2)
+	return TRUE
+
+/datum/battlepass_challenge_module/requirement/delay/get_description()
+	. = ..()
+	. = replacetext_char(., "###DELAY###", "[delay_time / 60] minutes")
+
+/datum/battlepass_challenge_module/requirement/delay/allow_completion()
+	// Check if enough time has passed since the last task was completed
+	if(world.time < timestamp + delay_time)
+		return FALSE
+	timestamp = world.time
+	return TRUE
 
 
-
+/* WIP
 //За отведенное время, например "Реанимировать 10 морпехов" + " за 2 минуты"
 /datum/battlepass_challenge_module/requirement/time
 	name = "Time"
@@ -192,3 +200,27 @@
 	code_name = "time"
 
 	module_exp_modificator = 1.25
+	time_limit = 300 SECONDS
+
+	var/timestamp
+
+/datum/battlepass_challenge_module/requirement/time/generate_module()
+	time_limit = rand(time_limit/2, time_limit*2)
+	return TRUE
+
+/datum/battlepass_challenge_module/requirement/time/get_description()
+	. = ..()
+	. = replacetext_char(., "###TIME###", "[time_limit / 60] minutes")
+
+/datum/battlepass_challenge_module/requirement/time/allow_completion()
+	if(!timestamp)
+		timestamp = world.time
+//TODO: Put here callback to reset if time run out
+	if(world.time > timestamp + time_limit * 10)
+		return FALSE
+	return TRUE
+
+/datum/battlepass_challenge_module/requirement/time/proc/reset_challenge()
+	timestamp = null
+	//reset values
+*/

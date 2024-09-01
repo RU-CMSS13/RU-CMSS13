@@ -15,6 +15,9 @@
 			sub_requirements += module
 
 /datum/battlepass_challenge_module/main_requirement/generate_module(building_around_flag)
+	for(var/req_name in req_gen)
+		req[req_name] = list(0, rand(req_gen[req_name][1], req_gen[req_name][2]))
+
 	var/total_sub_modules = rand(1, 3)
 	var/list/actual_sub_requirements = GLOB.challenge_condition_modules_weighted.Copy()
 	for(var/i = 1, i <= total_sub_modules, i++)
@@ -34,7 +37,8 @@
 		var/datum/battlepass_challenge_module/sub_requirement
 		while(!sub_requirement && length(potential_modules_to_pick))
 			selected_type = pick_weight(GLOB.challenge_sub_modules_weighted & potential_modules_to_pick)
-			if(initial(selected_type.mob_challenge_flags) & building_around_flag)
+			if(!(initial(selected_type.mob_challenge_flags) & building_around_flag))
+				potential_modules_to_pick -= selected_type
 				continue
 			var/any_flag_present = FALSE
 			for(var/flag in challenge_flags)
@@ -166,9 +170,25 @@
 
 	valid_kill_paths = list("strict" = list(), "subtyped" = list(/mob/living/carbon/xenomorph))
 
-	var/mob/xeno_caste
+	var/mob/living/carbon/xenomorph/xeno_caste
 
-//TODO: Get here selection and module_exp * on xeno tier value
+/datum/battlepass_challenge_module/main_requirement/kill/xenomorph/caste/generate_module(building_around_flag)
+	xeno_caste = pick(subtypesof(valid_kill_paths["subtyped"]))
+	var/modificator = initial(xeno_caste.tier) / 2
+	module_exp[1] *= modificator
+	module_exp[2] *= modificator
+
+	. = ..()
+
+/datum/battlepass_challenge_module/main_requirement/kill/xenomorph/caste/on_kill(mob/source, mob/killed_mob, datum/cause_data/cause_data)
+	if(!killed_mob.life_value)
+		return FALSE
+
+	if(source.faction == killed_mob.faction)
+		return FALSE
+
+	if(istype(killed_mob, xeno_caste))
+		count_for_completion(1, req[1])
 
 /datum/battlepass_challenge_module/main_requirement/kill/xenomorph/caste/get_description()
 	. = ..()
@@ -219,21 +239,20 @@
 
 	req_gen = list("damage" = list(1000, 6000))
 
-//REDO: DO IT COUNT IT EVERY TIMME YOU TAKE DAMAGE
 /datum/battlepass_challenge_module/main_requirement/damage/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	RegisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED, PROC_REF(on_game_end), logged_mob)
+	RegisterSignal(logged_mob, COMSIG_DAMAGE_TAKEN, PROC_REF(on_damage_take))
 
 /datum/battlepass_challenge_module/main_requirement/damage/unhook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	UnregisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED)
+	UnregisterSignal(logged_mob, COMSIG_DAMAGE_TAKEN)
 
-/datum/battlepass_challenge_module/main_requirement/damage/proc/on_game_end(mob/logged_mob)
-	count_for_completion(logged_mob.life_damage_taken_total, req[1])
+/datum/battlepass_challenge_module/main_requirement/damage/proc/on_damage_take(mob/logged_mob, damage)
+	count_for_completion(damage, req[1])
 //
 
 //Berserk Rage
