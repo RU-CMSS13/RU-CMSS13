@@ -15,6 +15,7 @@
 			sub_requirements += module
 
 /datum/battlepass_challenge_module/main_requirement/generate_module(building_around_flag)
+	req = list()
 	for(var/req_name in req_gen)
 		req[req_name] = list(0, rand(req_gen[req_name][1], req_gen[req_name][2]))
 
@@ -27,7 +28,6 @@
 		condition.challenge_ref = challenge_ref
 		if(!condition.generate_module())
 			return FALSE
-		sub_requirements += condition
 
 		var/list/potential_modules_to_pick = list()
 		for(var/subtype in condition.compatibility["subtyped"] + compatibility["subtyped"])
@@ -50,12 +50,15 @@
 				continue
 			sub_requirement = new selected_type()
 
-		if(!sub_requirement)
-			return FALSE
-		sub_requirement.challenge_ref = challenge_ref
-		if(!sub_requirement.generate_module())
-			return FALSE
-		sub_requirements += sub_requirement
+		if(sub_requirement)
+			sub_requirements += condition
+			sub_requirement.challenge_ref = challenge_ref
+			if(!sub_requirement.generate_module())
+				return FALSE
+			sub_requirements += sub_requirement
+		else
+			qdel(condition)
+			break
 
 	return TRUE
 
@@ -97,6 +100,10 @@
 
 	req[req_name][1] = min(req[req_name][1] + amount, req[req_name][2])
 	challenge_ref.on_possible_challenge_completed()
+
+/datum/battlepass_challenge_module/main_requirement/Destroy()
+	. = ..()
+	QDEL_NULL_LIST(sub_requirements)
 
 
 
@@ -173,7 +180,7 @@
 	var/mob/living/carbon/xenomorph/xeno_caste
 
 /datum/battlepass_challenge_module/main_requirement/kill/xenomorph/caste/generate_module(building_around_flag)
-	xeno_caste = pick(subtypesof(valid_kill_paths["subtyped"]))
+	xeno_caste = pick(subtypesof(pick(valid_kill_paths["subtyped"])))
 	var/modificator = initial(xeno_caste.tier) / 2
 	module_exp[1] *= modificator
 	module_exp[2] *= modificator

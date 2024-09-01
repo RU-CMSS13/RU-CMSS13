@@ -206,7 +206,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	var/module_exp = list(0, 0)
 	var/module_exp_modificator = 1
 
-	var/list/req_gen
+	var/list/req_gen = list()
 	var/list/compatibility = list("strict" = list(), "subtyped" = list()) // Проверяется пикая следующее условие, например есть 1 и в 2, теперь время выбрать 3, мы смотрим что в 2 за ограничения на пик
 
 	// Tracked
@@ -249,6 +249,10 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 
 /datum/battlepass_challenge_module/proc/allow_completion()
 	return TRUE
+
+/datum/battlepass_challenge_module/Destroy()
+	challenge_ref = null
+	. = ..()
 
 
 // Задача сделать модульные челенджи по типу "Убить 2 ксеноса" + ", с m41a" + " при передозе Oxycodone"
