@@ -8,7 +8,7 @@
 
 	//RUCM START
 	if(SStts.tts_enabled)
-		forced_voice = pick(SStts.available_speakers)
+		forced_voice = SAFEPICK(SStts.available_speakers & gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists)
 		H?.tts_voice = forced_voice
 	//RUCM END
 
@@ -194,10 +194,10 @@
 	var/J = job_pref_to_gear_preset()
 	if(isnull(preview_dummy))
 		preview_dummy = new()
-	
+
 	preview_dummy.blocks_emissive = FALSE
 	preview_dummy.update_emissive_block()
-	
+
 	clear_equipment()
 	if(refresh_limb_status)
 		for(var/obj/limb/L in preview_dummy.limbs)

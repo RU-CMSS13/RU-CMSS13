@@ -10,10 +10,10 @@
 	if (type == "world")
 		return ..() //shunt world topic banchecks to purely to byond's internal ban system
 
-	if(CONFIG_GET(str_list/green_zone) && (ckey in CONFIG_GET(str_list/green_zone)))
-		return list("reason"="", "desc"= prob(50) ? "Connection failed after handsnake. (code 0)" : "Connection failed before handshake. (code 2)")
-
 	var/client/C = GLOB.directory[ckey]
+	if(CONFIG_GET(str_list/green_zone) && (ckey in CONFIG_GET(str_list/green_zone)))
+		qdel(C)
+		return
 	if (C && ckey == C.ckey && computer_id == C.computer_id && address == C.address)
 		return //don't recheck connected clients.
 
