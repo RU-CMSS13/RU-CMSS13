@@ -4,6 +4,10 @@ GLOBAL_LIST_INIT(challenge_sub_modules_weighted, load_sub_modules_weighted())
 
 GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_weighted())
 
+#define BATTLEPASS_HUMAN_CHALLENGE (1<<0)
+#define BATTLEPASS_XENO_CHALLENGE (1<<1)
+#define BATTLEPASS_CHALLENGE_WEAPON (1<<2)
+
 /proc/load_modules_weighted()
 	. = list()
 	var/list/modules = subtypesof(/datum/battlepass_challenge_module/main_requirement)
@@ -63,7 +67,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		available_modules -= picked_type
 		var/datum/battlepass_challenge_module/main_requirement/new_module = new picked_type
 		new_module.challenge_ref = src
-		if(!new_module.generate_module())
+		if(!new_module.generate_module(pick(new_module.mob_challenge_flags)))
 			return FALSE
 		modules += new_module
 
@@ -86,7 +90,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 /datum/battlepass_challenge/proc/regenerate_desc()
 	name = null
 	var/new_desc = ""
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		if(!name)
 			name = module.name
 		new_desc += module.get_description()
@@ -97,7 +101,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 
 /datum/battlepass_challenge/proc/get_completion_numerator()
 	var/current_max = 0
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		if(!length(module.req))
 			continue
 		for(var/progress_name in module.req)
@@ -106,7 +110,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 
 /datum/battlepass_challenge/proc/get_completion_denominator()
 	var/current_max = 1
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		if(!length(module.req))
 			continue
 		for(var/progress_name in module.req)
@@ -114,7 +118,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	return current_max
 
 /datum/battlepass_challenge/proc/check_challenge_completed()
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		if(module.on_possible_challenge_completed())
 			continue
 		return FALSE
@@ -150,7 +154,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	if(should_block_game_interaction(logged_mob))
 		return FALSE
 
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		module.hook_signals(logged_mob)
 
 	return TRUE
@@ -166,7 +170,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	if(source.statistic_exempt)
 		return FALSE
 
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		module.unhook_signals(source)
 
 	return TRUE
@@ -176,7 +180,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 /datum/battlepass_challenge/proc/serialize()
 	SHOULD_CALL_PARENT(TRUE)
 	var/list/re_mapped_modules = list()
-	for(var/datum/battlepass_challenge_module/module in modules)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		re_mapped_modules += module.serialize()
 	return list(
 		"desc" = desc,
@@ -192,6 +196,8 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	var/desc = "Example"
 	var/code_name = "ex"
 	var/datum/battlepass_challenge/challenge_ref
+	var/mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE|BATTLEPASS_XENO_CHALLENGE
+	var/challenge_flags = NO_FLAGS
 
 	var/pick_weight = 0
 	var/module_exp = list(0, 0)

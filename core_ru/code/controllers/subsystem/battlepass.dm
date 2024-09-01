@@ -6,8 +6,6 @@ GLOBAL_LIST_INIT_TYPED(challenge_modules_types, /datum/battlepass_challenge_modu
 		challenges[initial(challenge_path.code_name)] = challenge_path
 	return challenges
 
-GLOBAL_LIST(battlepass_challenges)
-
 SUBSYSTEM_DEF(battlepass)
 	name = "Battlepass"
 	flags = SS_NO_FIRE
@@ -19,9 +17,13 @@ SUBSYSTEM_DEF(battlepass)
 /datum/controller/subsystem/battlepass/Initialize()
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/battlepass/proc/create_challenge()
+/datum/controller/subsystem/battlepass/proc/create_challenge(repeats)
+	if(repeats > 5)
+		stack_trace("Fatal error in challenge generation")
+		return
 	var/datum/battlepass_challenge/new_challenge = new
-
+	if(!new_challenge.generate_challenge())
+		return create_challenge(repeats++)
 	return new_challenge
 
 /datum/controller/subsystem/battlepass/proc/give_sides_points(marine_points = 0, xeno_points = 0)

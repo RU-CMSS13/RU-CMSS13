@@ -14,11 +14,11 @@
 			module.challenge_ref = src
 			sub_requirements += module
 
-/datum/battlepass_challenge_module/main_requirement/generate_module()
+/datum/battlepass_challenge_module/main_requirement/generate_module(building_around_flag)
 	var/total_sub_modules = rand(1, 3)
 	var/list/actual_sub_requirements = GLOB.challenge_condition_modules_weighted.Copy()
 	for(var/i = 1, i <= total_sub_modules, i++)
-		var/selected_type = pick_weight(actual_sub_requirements)
+		var/datum/battlepass_challenge_module/selected_type = pick_weight(actual_sub_requirements)
 		actual_sub_requirements -= selected_type
 		var/datum/battlepass_challenge_module/condition = new selected_type()
 		condition.challenge_ref = challenge_ref
@@ -26,24 +26,38 @@
 			return FALSE
 		sub_requirements += condition
 
-		if(i < total_sub_modules)
-			var/list/potential_modules_to_pick = list()
-			for(var/subtype in condition.compatibility["subtyped"])
-				potential_modules_to_pick += subtypesof(subtype)
-			for(var/type in condition.compatibility["strict"])
-				potential_modules_to_pick += type
+		var/list/potential_modules_to_pick = list()
+		for(var/subtype in condition.compatibility["subtyped"] + compatibility["subtyped"])
+			potential_modules_to_pick += subtypesof(subtype)
+		for(var/type in condition.compatibility["strict"] + compatibility["strict"])
+			potential_modules_to_pick += type
+		var/datum/battlepass_challenge_module/sub_requirement
+		while(!sub_requirement && length(potential_modules_to_pick))
 			selected_type = pick_weight(GLOB.challenge_sub_modules_weighted & potential_modules_to_pick)
-			var/datum/battlepass_challenge_module/sub_requirement = new selected_type()
-			sub_requirement.challenge_ref = challenge_ref
-			if(!sub_requirement.generate_module())
-				return FALSE
-			sub_requirements += sub_requirement
+			if(initial(selected_type.mob_challenge_flags) & building_around_flag)
+				continue
+			var/any_flag_present = FALSE
+			for(var/flag in challenge_flags)
+				if(initial(selected_type.challenge_flags) & flag)
+					any_flag_present = TRUE
+					break
+			if(!any_flag_present)
+				potential_modules_to_pick -= selected_type
+				continue
+			sub_requirement = new selected_type()
+
+		if(!sub_requirement)
+			return FALSE
+		sub_requirement.challenge_ref = challenge_ref
+		if(!sub_requirement.generate_module())
+			return FALSE
+		sub_requirements += sub_requirement
 
 	return TRUE
 
 /datum/battlepass_challenge_module/main_requirement/get_description()
 	. = ..()
-	for(var/datum/battlepass_challenge_module/module in sub_requirements)
+	for(var/datum/battlepass_challenge_module/module as anything in sub_requirements)
 		. += module.get_description()
 
 /datum/battlepass_challenge_module/main_requirement/hook_signals(mob/logged_mob)
@@ -55,7 +69,7 @@
 			return TRUE
 
 /datum/battlepass_challenge_module/main_requirement/allow_completion()
-    for(var/datum/battlepass_challenge_module/submodule in sub_requirements)
+    for(var/datum/battlepass_challenge_module/condition/submodule in sub_requirements)
         if(!submodule.allow_completion(sub_requirements))
             return FALSE
     return TRUE
@@ -63,7 +77,7 @@
 /datum/battlepass_challenge_module/main_requirement/serialize(list/options)
 	. = ..()
 	var/list/re_mapped_modules = list()
-	for(var/datum/battlepass_challenge_module/module in sub_requirements)
+	for(var/datum/battlepass_challenge_module/module as anything in sub_requirements)
 		re_mapped_modules += module.serialize()
 	options["mapped_sub_requirements"] = re_mapped_modules
 
@@ -78,7 +92,7 @@
 		return FALSE
 
 	req[req_name][1] = min(req[req_name][1] + amount, req[req_name][2])
-	on_possible_challenge_completed()
+	challenge_ref.on_possible_challenge_completed()
 
 
 
@@ -87,10 +101,14 @@
 	name = "Kill"
 	desc = "Kill ###kills### enemies"
 	code_name = "kill"
+	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE|BATTLEPASS_XENO_CHALLENGE
+	challenge_flags = BATTLEPASS_CHALLENGE_WEAPON
 
 	module_exp = list(4, 8)
 
 	req_gen = list("kills" = list(2, 6))
+
+	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement/weapon))
 
 	var/list/valid_kill_paths = list("strict" = list(), "subtyped" = list())
 
@@ -166,6 +184,7 @@
 	name = "Defibrillate Players"
 	desc = "Successfully defibrillate ###defib### unique marine players"
 	code_name = "defib"
+	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
 	module_exp = list(6, 12)
 
@@ -222,6 +241,7 @@
 	name = "Max Berserker Rage"
 	desc = "As a Berserker Ravager, enter maximum berserker rage ###rages### times."
 	code_name = "berserker_rage"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(4, 6)
 
@@ -249,6 +269,7 @@
 	name = "Facehug Humans"
 	desc = "As a facehugger, facehug ###huggs### humans."
 	code_name = "facehug"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(4, 6)
 
@@ -276,6 +297,7 @@
 	name = "For The Hive!"
 	desc = "As an Acider Runner, detonate For The Hive at maximum acid ###forhivesuicides### times."
 	code_name = "for_the_hive"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(5, 7)
 
@@ -303,6 +325,7 @@
 	name = "Direct Glob Hits"
 	desc = "Land ###boilerhits### direct acid glob hits as a Boiler."
 	code_name = "glob_hits"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(5, 7)
 
@@ -332,6 +355,7 @@
 	name = "Plant Resin Fruit"
 	desc = "Plant ###plantedfruits### resin fruits."
 	code_name = "plant_fruits"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(4, 6)
 
@@ -359,6 +383,7 @@
 	name = "Plant Resin Nodes"
 	desc = "Plant ###node_requirement### resin nodes."
 	code_name = "plant_resin_nodes"
+	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
 	module_exp = list(4, 6)
 

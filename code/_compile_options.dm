@@ -11,6 +11,8 @@
 #define UNIT_TESTS
 #endif
 
+#define TESTING
+
 #ifdef CITESTING
 #define TESTING
 #endif

@@ -10,8 +10,10 @@
 
 /datum/battlepass_challenge_module/requirement/weapon
 	name = "Weapon"
-	desc = "using a ###weapon###"
+	desc = " a ###weapon###"
 	code_name = "weapon"
+	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
+	challenge_flags = BATTLEPASS_CHALLENGE_WEAPON
 
 	module_exp_modificator = 1.25
 
@@ -78,20 +80,11 @@
 /datum/battlepass_challenge_module/requirement/good_buffs // Хороший, баф который должен быть исключен для выполенния задания (саб задание)
 
 
-/datum/battlepass_challenge_module/requirement/good_buffs/ammunition
-	name = "Ammunition"
-	desc = " ammunition ###type###"
-	code_name = "overdose"
-
-	module_exp = list(2, 4)
-
-	var/list/ammo_types = list()
-
-
 /datum/battlepass_challenge_module/requirement/good_buffs/reagents
 	name = "Reagents"
 	desc = " any reagents in blood"
 	code_name = "reagents"
+	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
 	module_exp = list(2, 4)
 
@@ -112,6 +105,7 @@
 	name = "OD"
 	desc = " OD ###type###"
 	code_name = "overdose"
+	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
 	module_exp = list(2, 4)
 

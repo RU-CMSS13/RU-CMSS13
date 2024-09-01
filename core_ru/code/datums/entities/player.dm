@@ -3,7 +3,7 @@
 
 /datum/entity/player/proc/load_battlepass()
 //PORT OUR SAVES
-	UNTIL(GLOB.battlepass_challenges)
+	UNTIL(GLOB.current_battlepass)
 	if(GLOB.client_loaded_battlepasses[ckey])
 		battlepass = GLOB.client_loaded_battlepasses[ckey]
 		battlepass.owner = src

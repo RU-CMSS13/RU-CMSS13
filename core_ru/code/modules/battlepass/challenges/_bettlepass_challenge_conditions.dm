@@ -1,11 +1,16 @@
-
-// CONDITIONS
-//TODO: conditions
-
+// Base Condition Class
 /datum/battlepass_challenge_module/condition
 	pick_weight = 5
 
-//"Убить 2 ксеносов" + " с" (наприммер " m41a")
+	var/revers_value = FALSE
+
+/datum/battlepass_challenge_module/condition/allow_completion(list/sub_requirements)
+	var/current_pos = sub_requirements[src]
+	var/datum/battlepass_challenge_module/next_module = sub_requirements[current_pos + 1]
+	var/result = next_module.allow_completion(sub_requirements)
+	return revers_value ? !result : result
+
+// "With" Condition
 /datum/battlepass_challenge_module/condition/with
 	name = "With"
 	desc = " with"
@@ -13,7 +18,7 @@
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement/bad_buffs))
 
-//"Убить 2 ксеносов" + " без" (например " брони")
+// "Without" Condition
 /datum/battlepass_challenge_module/condition/without
 	name = "Without"
 	desc = " without"
@@ -21,23 +26,31 @@
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement/good_buffs))
 
-//"Убить 4 ксеноса" + " после" (" реанимации" / " краша" / " оглушения" / или другой сложный реквайрмент)
+	revers_value = TRUE
+
+// "After" Condition
 /datum/battlepass_challenge_module/condition/after
 	name = "After"
 	desc = " after"
 	code_name = "after"
 
+	pick_weight = 0 // WIP
+
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
 
-//"Убить 4 ксеноса" + " перед" (" реанимацией" + некст действие / " краша" / " оглушения")
+// "Before" Condition
 /datum/battlepass_challenge_module/condition/before
 	name = "Before"
 	desc = " before"
 	code_name = "before"
 
+	pick_weight = 0 // WIP
+
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
 
-// " и"
+	revers_value = TRUE
+
+// "And" Condition
 /datum/battlepass_challenge_module/condition/and
 	name = "And"
 	desc = " and"
@@ -45,10 +58,12 @@
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
 
-// " исключая"
+// "Exempt" Condition
 /datum/battlepass_challenge_module/condition/exempt
 	name = "Exempt"
 	desc = " exempt"
 	code_name = "exempt"
+
+	pick_weight = 0 // WIP
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
