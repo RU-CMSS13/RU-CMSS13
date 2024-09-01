@@ -1,3 +1,30 @@
+GLOBAL_LIST_INIT(challenge_modules_weighted, load_modules_weighted())
+
+GLOBAL_LIST_INIT(challenge_sub_modules_weighted, load_sub_modules_weighted())
+
+GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_weighted())
+
+/proc/load_modules_weighted()
+	. = list()
+	var/list/modules = subtypesof(/datum/battlepass_challenge_module/main_requirement)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
+		.[module] = initial(module.pick_weight)
+	return .
+
+/proc/load_sub_modules_weighted()
+	. = list()
+	var/list/modules = subtypesof(/datum/battlepass_challenge_module/requirement)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
+		.[module] = initial(module.pick_weight)
+	return .
+
+/proc/load_condition_modules_weighted()
+	. = list()
+	var/list/modules = subtypesof(/datum/battlepass_challenge_module/condition)
+	for(var/datum/battlepass_challenge_module/module as anything in modules)
+		.[module] = initial(module.pick_weight)
+	return .
+
 //[ {"desc":"", "xp_completion":0, "mapped_modules":{["cn":"ex", "opt":{"req":{}, ...}], ...}}, ...]
 // cn is code name, opt is vars to replace
 /datum/battlepass_challenge
@@ -27,58 +54,29 @@
 		completed = check_challenge_completed()
 		regenerate_desc()
 
-
-
-
 /datum/battlepass_challenge/proc/generate_challenge()
-    var/total_xp_modificator = 1
-    var/total_main_modules = rand(1, 3)
-    var/list/available_modules = typesof(/datum/battlepass_challenge_module/main_requirement)
+	var/total_xp_modificator = 1
+	var/total_main_modules = rand(1, 3)
+	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
+	for(var/i = 1, i <= total_main_modules, i++)
+		var/picked_type = pick_weight(available_modules)
+		available_modules -= picked_type
+		var/datum/battlepass_challenge_module/new_module = new picked_type
+		new_module.challenge_ref = src
+		new_module.generate_module()
+		modules += new_module
 
-    var/datum/battlepass_challenge_module/initial_module = new pick(available_modules)
-    initial_module.challenge_ref = src
-    initial_module.generate_module()
-    modules += initial_module
+		for(var/datum/battlepass_challenge_module/sub_requirement in new_module.sub_requirements)
+			xp_completion += rand(sub_requirement.module_exp[1], sub_requirement.module_exp[2])
+			total_xp_modificator *= sub_requirement.module_exp_modificator
+		xp_completion += rand(new_module.module_exp[1], new_module.module_exp[2])
+		total_xp_modificator *= new_module.module_exp_modificator
 
-    xp_completion += rand(initial_module.module_exp[1], initial_module.module_exp[2])
-    total_xp_modificator *= initial_module.module_exp_modificator
-
-    var/datum/battlepass_challenge_module/previous_module = initial_module
-    for (var/i in 2 to total_main_modules)
-        var/datum/battlepass_challenge_module/next_module = pick_next_compatible_module(available_modules, previous_module)
-        next_module.challenge_ref = src
-        next_module.generate_module()
-        modules += next_module
-
-        xp_completion += rand(next_module.module_exp[1], next_module.module_exp[2])
-        total_xp_modificator *= next_module.module_exp_modificator
-
-        previous_module = next_module
-
-    xp_completion *= total_xp_modificator
-
-/datum/battlepass_challenge/proc/pick_next_compatible_module(list/available_modules, datum/battlepass_challenge_module/previous_module)
-    var/list/compatible_modules = filter_modules_by_compatibility(available_modules, previous_module)
-    if(!compatible_modules.len)
-        return null
-    var/datum/battlepass_challenge_module/selected_module = pick(compatible_modules)
-    available_modules -= selected_module
-    return selected_module
-
-/datum/battlepass_challenge/proc/filter_modules_by_compatibility(list/available_modules, datum/battlepass_challenge_module/previous_module)
-    var/list/filtered_modules = list()
-    for (var/module in available_modules)
-        if (check_compatibility(previous_module, module))
-            filtered_modules += module
-    return filtered_modules
-
-/datum/battlepass_challenge/proc/check_compatibility(datum/battlepass_challenge_module/previous_module, datum/battlepass_challenge_module/next_module)
-    if (next_module.type in previous_module.compatibility["strict"] || istype(next_module.type, previous_module.compatibility["subtyped"]))
-        return TRUE
-    return FALSE
-
-
-
+		if(i < total_main_modules)
+			var/datum/battlepass_challenge_module/condition/and/and_condition = new
+			new_module.challenge_ref = src
+			modules += and_condition
+	xp_completion *= total_xp_modificator
 
 /datum/battlepass_challenge/proc/regenerate_desc()
 	name = null
@@ -142,6 +140,9 @@
 	RegisterSignal(logged_mob, COMSIG_MOB_LOGOUT, PROC_REF(unhook_signals))
 
 	if(logged_mob.statistic_exempt)
+		return FALSE
+
+	if(should_block_game_interaction(logged_mob))
 		return FALSE
 
 	for(var/datum/battlepass_challenge_module/module in modules)

@@ -14,6 +14,90 @@
 			module.challenge_ref = src
 			sub_requirements += module
 
+/datum/battlepass_challenge_module/main_requirement/generate_module()
+	var/total_sub_modules = rand(1, 3)
+	var/list/actual_sub_requirements = GLOB.challenge_sub_modules_weighted.Copy()
+	for(var/i = 1, i <= total_sub_modules, i++)
+		var/selected_type = pick_weight(actual_sub_requirements)
+		actual_sub_requirements -= selected_type
+		var/datum/battlepass_challenge_module/sub_requirement = new selected_type()
+		sub_requirement.generate_module()
+		sub_requirements += sub_requirement
+
+		var/list/potential_modules_to_pick = list()
+		for(var/subtype in sub_requirement.compatibility["subtyped"])
+			potential_modules_to_pick += subtypesof(subtype)
+		for(var/type in sub_requirement.compatibility["strict"])
+			potential_modules_to_pick += type
+		var/datum/battlepass_challenge_module/condition/selected_condition = pick_weight(GLOB.challenge_condition_modules_weighted & potential_modules_to_pick)
+		sub_requirements += selected_condition
+
+	return TRUE
+
+/*
+	var/total_xp_modificator = 1
+	var/total_main_modules = rand(1, 3)
+	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
+
+	var/picked_type = pick_weight(available_modules)
+	var/datum/battlepass_challenge_module/initial_module = new picked_type
+	initial_module.challenge_ref = src
+	initial_module.generate_module()
+	modules += initial_module
+
+	xp_completion += rand(initial_module.module_exp[1], initial_module.module_exp[2])
+	total_xp_modificator *= initial_module.module_exp_modificator
+
+	var/datum/battlepass_challenge_module/previous_module = initial_module
+	for(var/i = 1, i <= total_main_modules, i++)
+		var/datum/battlepass_challenge_module/next_module = pick_next_compatible_module(available_modules, previous_module)
+		next_module.challenge_ref = src
+		next_module.generate_module()
+		modules += next_module
+
+		xp_completion += rand(next_module.module_exp[1], next_module.module_exp[2])
+		total_xp_modificator *= next_module.module_exp_modificator
+
+		previous_module = next_module
+
+	xp_completion *= total_xp_modificator
+
+/datum/battlepass_challenge/proc/pick_next_compatible_module(list/available_modules, datum/battlepass_challenge_module/previous_module)
+	var/list/compatible_modules = filter_modules_by_compatibility(available_modules, previous_module)
+	if(!compatible_modules.len)
+		return null
+	var/datum/battlepass_challenge_module/selected_module = pick(compatible_modules)
+	available_modules -= selected_module
+	return selected_module
+
+/datum/battlepass_challenge/proc/filter_modules_by_compatibility(list/available_modules, datum/battlepass_challenge_module/previous_module)
+	var/list/filtered_modules = list()
+	for (var/module in available_modules)
+		if (check_compatibility(previous_module, module))
+			filtered_modules += module
+	return filtered_modules
+
+/datum/battlepass_challenge/proc/check_compatibility(datum/battlepass_challenge_module/previous_module, datum/battlepass_challenge_module/next_module)
+	if (next_module.type in previous_module.compatibility["strict"] || istype(next_module.type, previous_module.compatibility["subtyped"]))
+		return TRUE
+	return FALSE
+*/
+
+/datum/battlepass_challenge_module/main_requirement/hook_signals(mob/logged_mob)
+	. = ..()
+	if(!.)
+		return
+	for(var/req_name in req)
+		if(req[req_name][1] != req[req_name][2])
+			return TRUE
+
+//TODO: Do it count every subbmodule
+/datum/battlepass_challenge_module/main_requirement/allow_completion()
+	var/current_pos = challenge_ref.modules[src]
+	var/datum/battlepass_challenge_module/next_module = challenge_ref.modules[current_pos + 1]
+	if(!next_module.allow_completion())
+		return FALSE
+
 /datum/battlepass_challenge_module/main_requirement/serialize(list/options)
 	. = ..()
 	var/list/re_mapped_modules = list()
@@ -23,6 +107,16 @@
 
 /datum/battlepass_challenge_module/main_requirement/proc/can_apply(mob_type)
 	return TRUE
+
+/datum/battlepass_challenge_module/main_requirement/proc/count_for_completion(amount, req_name)
+	if(req[req_name][1] == req[req_name][2])
+		return
+
+	if(!allow_completion())
+		return FALSE
+
+	req[req_name][1] = min(req[req_name][1] + amount, req[req_name][2])
+	on_possible_challenge_completed()
 
 
 
@@ -42,9 +136,6 @@
 	. = ..()
 	if(!.)
 		return
-	var/req_name = req[1]
-	if(req[req_name][1] == req[req_name][2])
-		return
 	RegisterSignal(logged_mob, COMSIG_MOB_KILL_TOTAL_INCREASED, PROC_REF(on_kill))
 
 
@@ -57,21 +148,14 @@
 /datum/battlepass_challenge_module/main_requirement/kill/proc/on_kill(mob/source, mob/killed_mob, datum/cause_data/cause_data)
 	SIGNAL_HANDLER
 
-	var/req_name = req[1]
-	if(!killed_mob.life_value || req[req_name][1] == req[req_name][2])
+	if(!killed_mob.life_value)
 		return FALSE
 
 	if(source.faction == killed_mob.faction)
 		return FALSE
 
 	if((killed_mob.type in valid_kill_paths["strict"]) || (length(valid_kill_paths["subtyped"]) && is_type_in_list(killed_mob, valid_kill_paths["subtyped"])))
-		var/current_pos = challenge_ref.modules[src]
-		var/datum/battlepass_challenge_module/next_module = challenge_ref.modules[current_pos + 1]
-		if(!next_module.allow_completion())
-			return FALSE
-
-		req[req_name][1]++
-		on_possible_challenge_completed()
+		count_for_completion(1, req[1])
 
 /datum/battlepass_challenge_module/main_requirement/kill/human
 	name = "Kill Humans"
@@ -131,9 +215,6 @@
 	. = ..()
 	if(!.)
 		return
-	var/req_name = req[1]
-	if(req[req_name][1] == req[req_name][2])
-		return
 	RegisterSignal(logged_mob, COMSIG_HUMAN_USED_DEFIB, PROC_REF(on_defib))
 
 /datum/battlepass_challenge_module/main_requirement/defib/unhook_signals(mob/logged_mob)
@@ -144,26 +225,10 @@
 
 /datum/battlepass_challenge_module/main_requirement/defib/proc/on_defib(datum/source, mob/living/carbon/human/defibbed)
 	SIGNAL_HANDLER
-
-	var/req_name = req[1]
-	if(req[req_name][1] == req[req_name][2])
-		return
-
-	var/current_pos = challenge_ref.modules[src]
-	var/datum/battlepass_challenge_module/next_module = challenge_ref.modules[current_pos + 1]
-	if(!next_module.allow_completion())
-		return FALSE
-
-	mob_name_list |= defibbed.real_name
-	req[req_name][1]++
-	on_possible_challenge_completed()
-
-/datum/battlepass_challenge_module/main_requirement/defib/serialize(list/options)
-	. = ..()
-	options["mob_name_list"] = mob_name_list
+	count_for_completion(1, req[1])
 //
 
-
+//Damage
 /datum/battlepass_challenge_module/main_requirement/damage
 	name = "Damage"
 	desc = "Survive ###damage### damage"
@@ -173,12 +238,10 @@
 
 	req_gen = list("damage" = list(1000, 6000))
 
+//REDO: DO IT COUNT IT EVERY TIMME YOU TAKE DAMAGE
 /datum/battlepass_challenge_module/main_requirement/damage/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
-		return
-	var/req_name = req[1]
-	if(req[req_name][1] == req[req_name][2])
 		return
 	RegisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED, PROC_REF(on_game_end), logged_mob)
 
@@ -189,407 +252,170 @@
 	UnregisterSignal(SSdcs, COMSIG_GLOB_CONFIG_LOADED)
 
 /datum/battlepass_challenge_module/main_requirement/damage/proc/on_game_end(mob/logged_mob)
-	var/req_name = req[1]
-	if(req[req_name][1] == req[req_name][2])
-		return
-	req[req_name][1] = min(logged_mob.life_damage_taken_total, req[req_name][2])
-	on_possible_challenge_completed()
+	count_for_completion(logged_mob.life_damage_taken_total, req[1])
+//
 
-
-//Xeno
-/*
-/datum/battlepass_challenge/berserker_rage
+//Berserk Rage
+/datum/battlepass_challenge_module/main_requirement/berserker_rage
 	name = "Max Berserker Rage"
-	code_name = "xenobrage"
-	desc = "As a Berserker Ravager, enter maximum berserker rage AMOUNT times."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(4, 6)
-	pick_weight = 6
-	/// The minimum possible amount of times rage needs to be entered
-	var/minimum_rages = 2
-	/// The maximum
-	var/maximum_rages = 4
-	var/rage_requirement = 0
-	var/completed_rages = 0
+	desc = "As a Berserker Ravager, enter maximum berserker rage ###rages### times."
+	code_name = "berserker_rage"
 
-/datum/battlepass_challenge/berserker_rage/New(client/owning_client)
-	. = ..()
+	module_exp = list(4, 6)
 
-	rage_requirement = rand(minimum_rages, maximum_rages)
-	regenerate_desc()
+	req_gen = list("rages" = list(2, 4))
 
-/datum/battlepass_challenge/berserker_rage/regenerate_desc()
-	desc = "As a Berserker Ravager, enter maximum berserker rage [rage_requirement] time\s."
-
-/datum/battlepass_challenge/berserker_rage/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/berserker_rage/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_XENO_RAGE_MAX, PROC_REF(on_rage_max))
+	RegisterSignal(logged_mob, COMSIG_XENO_RAGE_MAX, PROC_REF(on_rage_max))
 
-/datum/battlepass_challenge/berserker_rage/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_XENO_RAGE_MAX)
-
-/datum/battlepass_challenge/berserker_rage/check_challenge_completed()
-	return (completed_rages >= rage_requirement)
-
-/datum/battlepass_challenge/berserker_rage/get_completion_percent()
-	return (completed_rages / rage_requirement)
-
-/datum/battlepass_challenge/berserker_rage/get_completion_numerator()
-	return completed_rages
-
-/datum/battlepass_challenge/berserker_rage/get_completion_denominator()
-	return rage_requirement
-
-/datum/battlepass_challenge/berserker_rage/serialize()
+/datum/battlepass_challenge_module/main_requirement/berserker_rage/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["rage_requirement"] = rage_requirement
-	.["completed_rages"] = completed_rages
+	if(!.)
+		return
+	UnregisterSignal(logged_mob, COMSIG_XENO_RAGE_MAX)
 
-/datum/battlepass_challenge/berserker_rage/deserialize(list/save_list)
-	. = ..()
-	rage_requirement = save_list["rage_requirement"]
-	completed_rages = save_list["completed_rages"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/berserker_rage/proc/on_rage_max(datum/source)
+/datum/battlepass_challenge_module/main_requirement/berserker_rage/proc/on_rage_max(datum/source)
 	SIGNAL_HANDLER
+	count_for_completion(1, req[1])
+//
 
-	completed_rages++
-	on_possible_challenge_completed()
-
-
-/datum/battlepass_challenge/facehug
+//Facehugs
+/datum/battlepass_challenge_module/main_requirement/facehug
 	name = "Facehug Humans"
-	code_name = "xenohhug"
-	desc = "As a facehugger, facehug AMOUNT humans."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(4, 6)
-	pick_weight = 7
-	var/minimum = 1
-	var/maximum = 3
-	var/requirement = 0
-	var/filled = 0
+	desc = "As a facehugger, facehug ###huggs### humans."
+	code_name = "facehug"
 
-/datum/battlepass_challenge/facehug/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
+	module_exp = list(4, 6)
 
-	requirement = rand(minimum, maximum)
-	regenerate_desc()
+	req_gen = list("facehugs" = list(2, 4))
 
-/datum/battlepass_challenge/facehug/regenerate_desc()
-	desc = "As a facehugger, facehug [requirement] human\s."
-
-/datum/battlepass_challenge/facehug/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/facehug/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_XENO_FACEHUGGED_HUMAN, PROC_REF(on_sigtrigger))
+	RegisterSignal(logged_mob, COMSIG_XENO_FACEHUGGED_HUMAN, PROC_REF(on_facehug))
 
-/datum/battlepass_challenge/facehug/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_XENO_FACEHUGGED_HUMAN)
-
-/datum/battlepass_challenge/facehug/check_challenge_completed()
-	return (filled >= requirement)
-
-/datum/battlepass_challenge/facehug/get_completion_percent()
-	return (filled / requirement)
-
-/datum/battlepass_challenge/facehug/get_completion_numerator()
-	return filled
-
-/datum/battlepass_challenge/facehug/get_completion_denominator()
-	return requirement
-
-/datum/battlepass_challenge/facehug/serialize()
+/datum/battlepass_challenge_module/main_requirement/facehug/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["requirement"] = requirement
-	.["filled"] = filled
+	if(!.)
+		return
+	UnregisterSignal(logged_mob, COMSIG_XENO_FACEHUGGED_HUMAN)
 
-/datum/battlepass_challenge/facehug/deserialize(list/save_list)
-	. = ..()
-	requirement = save_list["requirement"]
-	filled = save_list["filled"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/facehug/proc/on_sigtrigger(datum/source)
+/datum/battlepass_challenge_module/main_requirement/facehug/proc/on_facehug(datum/source)
 	SIGNAL_HANDLER
+	count_for_completion(1, req[1])
+//
 
-	filled++
-	on_possible_challenge_completed()
-
-
-
-
-
-
-/datum/battlepass_challenge/for_the_hive
+//For The Hive
+/datum/battlepass_challenge_module/main_requirement/for_the_hive
 	name = "For The Hive!"
-	code_name = "xenorsuic"
-	desc = "As an Acider Runner, detonate For The Hive at maximum acid AMOUNT times."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(5, 7)
-	pick_weight = 6
-	var/minimum = 1
-	var/maximum = 2
-	var/requirement = 0
-	var/filled = 0
+	desc = "As an Acider Runner, detonate For The Hive at maximum acid ###forhivesuicides### times."
+	code_name = "for_the_hive"
 
-/datum/battlepass_challenge/for_the_hive/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
+	module_exp = list(5, 7)
 
-	requirement = rand(minimum, maximum)
-	regenerate_desc()
+	req_gen = list("forhivesuicides" = list(2, 4))
 
-/datum/battlepass_challenge/for_the_hive/regenerate_desc()
-	desc = "As an Acider Runner, detonate For The Hive at maximum acid [requirement] times."
-
-/datum/battlepass_challenge/for_the_hive/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/for_the_hive/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_XENO_FTH_MAX_ACID, PROC_REF(on_sigtrigger))
+	RegisterSignal(logged_mob, COMSIG_XENO_FTH_MAX_ACID, PROC_REF(on_for_the_hive))
 
-/datum/battlepass_challenge/for_the_hive/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_XENO_FTH_MAX_ACID)
-
-/datum/battlepass_challenge/for_the_hive/check_challenge_completed()
-	return (filled >= requirement)
-
-/datum/battlepass_challenge/for_the_hive/get_completion_percent()
-	return (filled / requirement)
-
-/datum/battlepass_challenge/for_the_hive/get_completion_numerator()
-	return filled
-
-/datum/battlepass_challenge/for_the_hive/get_completion_denominator()
-	return requirement
-
-/datum/battlepass_challenge/for_the_hive/serialize()
+/datum/battlepass_challenge_module/main_requirement/for_the_hive/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["requirement"] = requirement
-	.["filled"] = filled
+	if(!.)
+		return
+	UnregisterSignal(logged_mob, COMSIG_XENO_FTH_MAX_ACID)
 
-/datum/battlepass_challenge/for_the_hive/deserialize(list/save_list)
-	. = ..()
-	requirement = save_list["requirement"]
-	filled = save_list["filled"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/for_the_hive/proc/on_sigtrigger(datum/source)
+/datum/battlepass_challenge_module/main_requirement/for_the_hive/proc/on_for_the_hive(datum/source)
 	SIGNAL_HANDLER
+	count_for_completion(1, req[1])
+//
 
-	filled++
-	on_possible_challenge_completed()
-
-
-
-
-
-
-/datum/battlepass_challenge/glob_hits
+// Glob Hits
+/datum/battlepass_challenge_module/main_requirement/glob_hits
 	name = "Direct Glob Hits"
-	code_name = "xenobdir"
-	desc = "Land AMOUNT direct acid glob hits as a Boiler."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(5, 7)
-	pick_weight = 6
-	var/minimum = 1
-	var/maximum = 4
-	var/requirement = 0
-	var/filled = 0
+	desc = "Land ###boilerhits### direct acid glob hits as a Boiler."
+	code_name = "glob_hits"
 
-/datum/battlepass_challenge/glob_hits/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
+	module_exp = list(5, 7)
 
-	requirement = rand(minimum, maximum)
-	regenerate_desc()
+	req_gen = list("boilerhits" = list(6, 12))
 
-/datum/battlepass_challenge/glob_hits/regenerate_desc()
-	desc = "Land [requirement] direct acid glob hit\s as a Boiler."
-
-/datum/battlepass_challenge/glob_hits/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/glob_hits/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_FIRER_PROJECTILE_DIRECT_HIT, PROC_REF(on_sigtrigger))
+	RegisterSignal(logged_mob, COMSIG_FIRER_PROJECTILE_DIRECT_HIT, PROC_REF(on_glob_hit))
 
-/datum/battlepass_challenge/glob_hits/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_FIRER_PROJECTILE_DIRECT_HIT)
-
-/datum/battlepass_challenge/glob_hits/check_challenge_completed()
-	return (filled >= requirement)
-
-/datum/battlepass_challenge/glob_hits/get_completion_percent()
-	return (filled / requirement)
-
-/datum/battlepass_challenge/glob_hits/get_completion_numerator()
-	return filled
-
-/datum/battlepass_challenge/glob_hits/get_completion_denominator()
-	return requirement
-
-/datum/battlepass_challenge/glob_hits/serialize()
+/datum/battlepass_challenge_module/main_requirement/glob_hits/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["requirement"] = requirement
-	.["filled"] = filled
+	if(!.)
+		return
+	UnregisterSignal(logged_mob, COMSIG_FIRER_PROJECTILE_DIRECT_HIT)
 
-/datum/battlepass_challenge/glob_hits/deserialize(list/save_list)
-	. = ..()
-	requirement = save_list["requirement"]
-	filled = save_list["filled"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/glob_hits/proc/on_sigtrigger(datum/source, obj/projectile/hit_projectile)
+/datum/battlepass_challenge_module/main_requirement/glob_hits/proc/on_glob_hit(datum/source, obj/projectile/hit_projectile)
 	SIGNAL_HANDLER
 	if(!istype(hit_projectile.ammo, /datum/ammo/xeno/boiler_gas))
-		return
+		return FALSE
+	count_for_completion(1, req[1])
+//
 
-	filled++
-	on_possible_challenge_completed()
-
-
-
-
-
-/datum/battlepass_challenge/plant_fruit
+// Plant Fruits
+/datum/battlepass_challenge_module/main_requirement/plant_fruits
 	name = "Plant Resin Fruit"
-	code_name = "xenodplt"
-	desc = "Plant AMOUNT resin fruits."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(4, 6)
-	pick_weight = 8
-	var/minimum = 20
-	var/maximum = 30
-	var/requirement = 0
-	var/filled = 0
+	desc = "Plant ###plantedfruits### resin fruits."
+	code_name = "plant_fruits"
 
-/datum/battlepass_challenge/plant_fruit/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
+	module_exp = list(4, 6)
 
-	requirement = rand(minimum, maximum)
-	regenerate_desc()
+	req_gen = list("plantedfruits" = list(20, 40))
 
-/datum/battlepass_challenge/plant_fruit/regenerate_desc()
-	desc = "Plant [requirement] resin fruit\s."
-
-/datum/battlepass_challenge/plant_fruit/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/plant_fruits/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_XENO_PLANTED_FRUIT, PROC_REF(on_sigtrigger))
+	RegisterSignal(logged_mob, COMSIG_XENO_PLANTED_FRUIT, PROC_REF(on_plant_fruit))
 
-/datum/battlepass_challenge/plant_fruit/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_XENO_PLANTED_FRUIT)
-
-/datum/battlepass_challenge/plant_fruit/check_challenge_completed()
-	return (filled >= requirement)
-
-/datum/battlepass_challenge/plant_fruit/get_completion_percent()
-	return (filled / requirement)
-
-/datum/battlepass_challenge/plant_fruit/get_completion_numerator()
-	return filled
-
-/datum/battlepass_challenge/plant_fruit/get_completion_denominator()
-	return requirement
-
-/datum/battlepass_challenge/plant_fruit/serialize()
+/datum/battlepass_challenge_module/main_requirement/plant_fruits/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["requirement"] = requirement
-	.["filled"] = filled
-
-/datum/battlepass_challenge/plant_fruit/deserialize(list/save_list)
-	. = ..()
-	requirement = save_list["requirement"]
-	filled = save_list["filled"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/plant_fruit/proc/on_sigtrigger(datum/source, mob/planter)
-	SIGNAL_HANDLER
-	if(should_block_game_interaction(planter))
+	if(!.)
 		return
+	UnregisterSignal(logged_mob, COMSIG_XENO_PLANTED_FRUIT)
 
-	filled++
-	on_possible_challenge_completed()
+/datum/battlepass_challenge_module/main_requirement/plant_fruits/proc/on_plant_fruit(datum/source, mob/planter)
+	SIGNAL_HANDLER
+	count_for_completion(1, req[1])
+//
 
-
-
-
-/datum/battlepass_challenge/plant_resin_nodes
+// Plant Resin Nodes
+/datum/battlepass_challenge_module/main_requirement/plant_resin_nodes
 	name = "Plant Resin Nodes"
-	code_name = "xenocplrs"
-	desc = "Plant AMOUNT resin nodes."
-	challenge_category = CHALLENGE_XENO
-	completion_xp_array = list(4, 6)
-	pick_weight = 8
-	/// The minimum possible amount of nodes that need to be planted
-	var/minimum_nodes = 20
-	/// The maximum
-	var/maximum_nodes = 30
-	/// How many nodes need to be planted
-	var/node_requirement = 0
-	/// How many nodes have been planted so far
+	desc = "Plant ###node_requirement### resin nodes."
+	code_name = "plant_resin_nodes"
+
+	module_exp = list(4, 6)
+
+	req_gen = list("node_requirement" = list(20, 40))
 	var/planted_nodes = 0
 
-/datum/battlepass_challenge/plant_resin_nodes/datum/battlepass_challenge/kill_enemies/New(client/owning_client)
-	. = ..()
-
-	node_requirement = rand(minimum_nodes, maximum_nodes)
-	regenerate_desc()
-
-/datum/battlepass_challenge/plant_resin_nodes/regenerate_desc()
-	desc = "Plant [node_requirement] resin node\s."
-
-/datum/battlepass_challenge/plant_resin_nodes/hook_client_signals(datum/source, mob/logged_in_mob)
+/datum/battlepass_challenge_module/main_requirement/plant_resin_nodes/hook_signals(mob/logged_mob)
 	. = ..()
 	if(!.)
 		return
-	if(!completed)
-		RegisterSignal(logged_in_mob, COMSIG_XENO_PLANT_RESIN_NODE, PROC_REF(on_plant_node))
+	RegisterSignal(logged_mob, COMSIG_XENO_PLANT_RESIN_NODE, PROC_REF(on_plant_node))
 
-/datum/battlepass_challenge/plant_resin_nodes/unhook_signals(mob/source)
-	UnregisterSignal(source, COMSIG_XENO_PLANT_RESIN_NODE)
-
-/datum/battlepass_challenge/plant_resin_nodes/check_challenge_completed()
-	return (planted_nodes >= node_requirement)
-
-/datum/battlepass_challenge/plant_resin_nodes/get_completion_percent()
-	return (planted_nodes / node_requirement)
-
-/datum/battlepass_challenge/plant_resin_nodes/get_completion_numerator()
-	return planted_nodes
-
-/datum/battlepass_challenge/plant_resin_nodes/get_completion_denominator()
-	return node_requirement
-
-/datum/battlepass_challenge/plant_resin_nodes/serialize()
+/datum/battlepass_challenge_module/main_requirement/plant_resin_nodes/unhook_signals(mob/logged_mob)
 	. = ..()
-	.["node_requirement"] = node_requirement
-	.["planted_nodes"] = planted_nodes
-
-/datum/battlepass_challenge/plant_resin_nodes/deserialize(list/save_list)
-	. = ..()
-	node_requirement = save_list["node_requirement"]
-	planted_nodes = save_list["planted_nodes"]
-
-/// When the xeno plants a resin node
-/datum/battlepass_challenge/plant_resin_nodes/proc/on_plant_node(datum/source, mob/planter)
-	SIGNAL_HANDLER
-	if(should_block_game_interaction(planter))
+	if(!.)
 		return
+	UnregisterSignal(logged_mob, COMSIG_XENO_PLANT_RESIN_NODE)
 
-	planted_nodes++
-	on_possible_challenge_completed()
-
-
-
-*/
-
+/datum/battlepass_challenge_module/main_requirement/plant_resin_nodes/proc/on_plant_node(datum/source, mob/planter)
+	SIGNAL_HANDLER
+	count_for_completion(1, req[1])
 //
