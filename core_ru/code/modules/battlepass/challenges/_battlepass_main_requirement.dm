@@ -16,72 +16,35 @@
 
 /datum/battlepass_challenge_module/main_requirement/generate_module()
 	var/total_sub_modules = rand(1, 3)
-	var/list/actual_sub_requirements = GLOB.challenge_sub_modules_weighted.Copy()
+	var/list/actual_sub_requirements = GLOB.challenge_condition_modules_weighted.Copy()
 	for(var/i = 1, i <= total_sub_modules, i++)
 		var/selected_type = pick_weight(actual_sub_requirements)
 		actual_sub_requirements -= selected_type
-		var/datum/battlepass_challenge_module/sub_requirement = new selected_type()
-		sub_requirement.generate_module()
-		sub_requirements += sub_requirement
+		var/datum/battlepass_challenge_module/condition = new selected_type()
+		condition.challenge_ref = challenge_ref
+		if(!condition.generate_module())
+			return FALSE
+		sub_requirements += condition
 
-		var/list/potential_modules_to_pick = list()
-		for(var/subtype in sub_requirement.compatibility["subtyped"])
-			potential_modules_to_pick += subtypesof(subtype)
-		for(var/type in sub_requirement.compatibility["strict"])
-			potential_modules_to_pick += type
-		var/datum/battlepass_challenge_module/condition/selected_condition = pick_weight(GLOB.challenge_condition_modules_weighted & potential_modules_to_pick)
-		sub_requirements += selected_condition
+		if(i < total_sub_modules)
+			var/list/potential_modules_to_pick = list()
+			for(var/subtype in condition.compatibility["subtyped"])
+				potential_modules_to_pick += subtypesof(subtype)
+			for(var/type in condition.compatibility["strict"])
+				potential_modules_to_pick += type
+			selected_type = pick_weight(GLOB.challenge_sub_modules_weighted & potential_modules_to_pick)
+			var/datum/battlepass_challenge_module/sub_requirement = new selected_type()
+			sub_requirement.challenge_ref = challenge_ref
+			if(!sub_requirement.generate_module())
+				return FALSE
+			sub_requirements += sub_requirement
 
 	return TRUE
 
-/*
-	var/total_xp_modificator = 1
-	var/total_main_modules = rand(1, 3)
-	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
-
-	var/picked_type = pick_weight(available_modules)
-	var/datum/battlepass_challenge_module/initial_module = new picked_type
-	initial_module.challenge_ref = src
-	initial_module.generate_module()
-	modules += initial_module
-
-	xp_completion += rand(initial_module.module_exp[1], initial_module.module_exp[2])
-	total_xp_modificator *= initial_module.module_exp_modificator
-
-	var/datum/battlepass_challenge_module/previous_module = initial_module
-	for(var/i = 1, i <= total_main_modules, i++)
-		var/datum/battlepass_challenge_module/next_module = pick_next_compatible_module(available_modules, previous_module)
-		next_module.challenge_ref = src
-		next_module.generate_module()
-		modules += next_module
-
-		xp_completion += rand(next_module.module_exp[1], next_module.module_exp[2])
-		total_xp_modificator *= next_module.module_exp_modificator
-
-		previous_module = next_module
-
-	xp_completion *= total_xp_modificator
-
-/datum/battlepass_challenge/proc/pick_next_compatible_module(list/available_modules, datum/battlepass_challenge_module/previous_module)
-	var/list/compatible_modules = filter_modules_by_compatibility(available_modules, previous_module)
-	if(!compatible_modules.len)
-		return null
-	var/datum/battlepass_challenge_module/selected_module = pick(compatible_modules)
-	available_modules -= selected_module
-	return selected_module
-
-/datum/battlepass_challenge/proc/filter_modules_by_compatibility(list/available_modules, datum/battlepass_challenge_module/previous_module)
-	var/list/filtered_modules = list()
-	for (var/module in available_modules)
-		if (check_compatibility(previous_module, module))
-			filtered_modules += module
-	return filtered_modules
-
-/datum/battlepass_challenge/proc/check_compatibility(datum/battlepass_challenge_module/previous_module, datum/battlepass_challenge_module/next_module)
-	if (next_module.type in previous_module.compatibility["strict"] || istype(next_module.type, previous_module.compatibility["subtyped"]))
-		return TRUE
-	return FALSE
-*/
+/datum/battlepass_challenge_module/main_requirement/get_description()
+	. = ..()
+	for(var/datum/battlepass_challenge_module/module in sub_requirements)
+		. += module.get_description()
 
 /datum/battlepass_challenge_module/main_requirement/hook_signals(mob/logged_mob)
 	. = ..()
@@ -91,12 +54,11 @@
 		if(req[req_name][1] != req[req_name][2])
 			return TRUE
 
-//TODO: Do it count every subbmodule
 /datum/battlepass_challenge_module/main_requirement/allow_completion()
-	var/current_pos = challenge_ref.modules[src]
-	var/datum/battlepass_challenge_module/next_module = challenge_ref.modules[current_pos + 1]
-	if(!next_module.allow_completion())
-		return FALSE
+    for(var/datum/battlepass_challenge_module/submodule in sub_requirements)
+        if(!submodule.allow_completion(sub_requirements))
+            return FALSE
+    return TRUE
 
 /datum/battlepass_challenge_module/main_requirement/serialize(list/options)
 	. = ..()

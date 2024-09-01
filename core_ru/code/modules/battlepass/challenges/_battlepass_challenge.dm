@@ -61,9 +61,10 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	for(var/i = 1, i <= total_main_modules, i++)
 		var/picked_type = pick_weight(available_modules)
 		available_modules -= picked_type
-		var/datum/battlepass_challenge_module/new_module = new picked_type
+		var/datum/battlepass_challenge_module/main_requirement/new_module = new picked_type
 		new_module.challenge_ref = src
-		new_module.generate_module()
+		if(!new_module.generate_module())
+			return FALSE
 		modules += new_module
 
 		for(var/datum/battlepass_challenge_module/sub_requirement in new_module.sub_requirements)
@@ -75,8 +76,12 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		if(i < total_main_modules)
 			var/datum/battlepass_challenge_module/condition/and/and_condition = new
 			new_module.challenge_ref = src
+			if(!new_module.generate_module())
+				return FALSE
 			modules += and_condition
+
 	xp_completion *= total_xp_modificator
+	return TRUE
 
 /datum/battlepass_challenge/proc/regenerate_desc()
 	name = null
