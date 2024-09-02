@@ -1919,7 +1919,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				if("tts_voice")
 					if(!SStts.tts_enabled)
 						return
-					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", SStts.available_speakers & gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists)
+					var/new_voice = tgui_input_list(user, "Выбор голоса:", "Настройки персонажа", SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
 					if(new_voice)
 						forced_voice = new_voice
 

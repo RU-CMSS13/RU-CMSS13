@@ -17,5 +17,5 @@
 		if(client?.prefs?.forced_voice)
 			tts_voice = client.prefs.forced_voice
 		else
-			tts_voice = SAFEPICK(SStts.available_speakers & gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists)
+			tts_voice = SAFEPICK(SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
 	//RUCM END
