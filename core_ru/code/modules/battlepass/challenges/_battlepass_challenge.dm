@@ -201,7 +201,6 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		re_mapped_modules += module.serialize(list())
 	return list(
-		"desc" = desc,
 		"xp_completion" = xp_completion,
 		"mapped_modules" = re_mapped_modules
 	)

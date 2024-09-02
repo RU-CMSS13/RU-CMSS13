@@ -263,14 +263,23 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 
 	data["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)
+		var/list/completion = list()
+		for(var/datum/battlepass_challenge_module/module as anything in daily_challenge.modules)
+			if(!length(module.req))
+				continue
+			for(var/progress_name in module.req)
+				completion += list(list(
+					"completion_percent" = module.req[progress_name][1] / module.req[progress_name][2],
+					"completion_numerator" = module.req[progress_name][1],
+					"completion_denominator" = module.req[progress_name][2],
+				))
+
 		data["daily_challenges"] += list(list(
 			"name" = daily_challenge.name,
 			"desc" = daily_challenge.desc,
 			"completed" = daily_challenge.completed,
 			"completion_xp" = daily_challenge.xp_completion,
-			"completion_percent" = daily_challenge.get_completion_percent(),
-			"completion_numerator" = daily_challenge.get_completion_numerator(),
-			"completion_denominator" = daily_challenge.get_completion_denominator(),
+			"completion" = completion,
 		))
 
 	return data

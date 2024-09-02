@@ -18,14 +18,18 @@ interface BattlepassReward {
   lifeform_type: string;
 }
 
+interface BattlepassCompletion {
+  completion_percent: number;
+  completion_numerator: number;
+  completion_denominator: number;
+}
+
 interface BattlepassChallenge {
   name: string;
   desc: string;
   completed: BooleanLike;
   completion_xp: number;
-  completion_percent: number;
-  completion_numerator: number;
-  completion_denominator: number;
+  completion: BattlepassCompletion[];
 }
 
 interface BattlepassData {
@@ -201,19 +205,21 @@ const BattlepassChallengeUI = (props) => {
     <Section title={`${challenge.name}`}>
       {challenge.desc}
       <Box style={{ paddingBottom: '4px' }} />
-      <ProgressBar
-        minValue={0}
-        maxValue={1}
-        value={challenge.completion_percent}
-        ranges={{
-          bad: [0, 0.4],
-          average: [0.4, 0.7],
-          good: [0.7, 1],
-        }}
-      >
-        Completion: {challenge.completion_numerator} /{' '}
-        {challenge.completion_denominator}
-      </ProgressBar>
+      {challenge.completion.map((challenge, index) => (
+        <ProgressBar
+          key={index}
+          minValue={0}
+          maxValue={1}
+          value={challenge.completion_percent}
+          ranges={{
+            bad: [0, 0.4],
+            average: [0.4, 0.7],
+            good: [0.7, 1],
+          }}
+        >
+          {challenge.completion_numerator} / {challenge.completion_denominator}
+        </ProgressBar>
+      ))}
       Reward: {challenge.completion_xp} XP
     </Section>
   );
