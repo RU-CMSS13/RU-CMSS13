@@ -243,11 +243,11 @@ BSQL_PROTECT_DATUM(/datum/entity/skin)
 	if(selected_skin)
 		if(body_position == LYING_DOWN)
 			if(!HAS_TRAIT(src, TRAIT_INCAPACITATED) && !HAS_TRAIT(src, TRAIT_FLOORED))
-				skin_icon_holder.icon_state = "[caste.caste_type]_[selected_skin]_rest"
+				skin_icon_holder.icon_state = "[lowertext(caste.caste_type)]_[selected_skin]_rest"
 			else
-				skin_icon_holder.icon_state = "[caste.caste_type]_[selected_skin]_downed"
+				skin_icon_holder.icon_state = "[lowertext(caste.caste_type)]_[selected_skin]_downed"
 		else if(!handle_special_state())
-			skin_icon_holder.icon_state = "[caste.caste_type]_[selected_skin]"
+			skin_icon_holder.icon_state = "[lowertext(caste.caste_type)]_[selected_skin]"
 		else
 			skin_icon_holder.icon_state = handle_special_skin_states()
 	else
