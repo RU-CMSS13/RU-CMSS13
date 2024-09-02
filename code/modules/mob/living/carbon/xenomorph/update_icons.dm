@@ -326,6 +326,9 @@
 
 // Shamelessly inspired from the equivalent proc on TGCM
 /mob/living/carbon/xenomorph/proc/update_wounds()
+	//RUCM START
+	update_skin()
+	//RUCM END
 	if(!wound_icon_holder)
 		return
 
