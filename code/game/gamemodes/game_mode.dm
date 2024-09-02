@@ -130,7 +130,6 @@ GLOBAL_VAR_INIT(cas_tracking_id_increment, 0) //this var used to assign unique t
 	return
 
 /datum/game_mode/proc/announce_ending()
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MODE_END)
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.track_round_end()
 	log_game("Round end result: [round_finished]")
