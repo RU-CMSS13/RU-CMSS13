@@ -67,6 +67,8 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	var/total_main_modules = rand(1, 3)
 	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
 	for(var/i = 1, i <= total_main_modules, i++)
+		if(!length(available_modules))
+			break
 		var/picked_type = pick_weight(available_modules)
 		available_modules -= picked_type
 		var/datum/battlepass_challenge_module/main_requirement/new_module = new picked_type
@@ -185,7 +187,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	SHOULD_CALL_PARENT(TRUE)
 	var/list/re_mapped_modules = list()
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
-		re_mapped_modules += module.serialize()
+		re_mapped_modules += module.serialize(list())
 	return list(
 		"desc" = desc,
 		"xp_completion" = xp_completion,

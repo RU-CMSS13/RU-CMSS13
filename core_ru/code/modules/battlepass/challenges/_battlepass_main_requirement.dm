@@ -22,6 +22,8 @@
 	var/total_sub_modules = rand(1, 3)
 	var/list/actual_sub_requirements = GLOB.challenge_condition_modules_weighted.Copy()
 	for(var/i = 1, i <= total_sub_modules, i++)
+		if(!length(actual_sub_requirements))
+			break
 		var/datum/battlepass_challenge_module/selected_type = pick_weight(actual_sub_requirements)
 		actual_sub_requirements -= selected_type
 		var/datum/battlepass_challenge_module/condition = new selected_type()
@@ -34,9 +36,12 @@
 			potential_modules_to_pick += subtypesof(subtype)
 		for(var/type in condition.compatibility["strict"] + compatibility["strict"])
 			potential_modules_to_pick += type
+
 		var/datum/battlepass_challenge_module/sub_requirement
 		while(!sub_requirement && length(potential_modules_to_pick))
 			selected_type = pick_weight(GLOB.challenge_sub_modules_weighted & potential_modules_to_pick)
+			if(!selected_type)
+				break
 			if(!(initial(selected_type.mob_challenge_flags) & building_around_flag))
 				potential_modules_to_pick -= selected_type
 				continue
