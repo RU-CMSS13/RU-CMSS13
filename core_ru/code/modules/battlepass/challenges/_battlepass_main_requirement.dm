@@ -328,7 +328,7 @@
 //Facehugs
 /datum/battlepass_challenge_module/main_requirement/facehug
 	name = "Facehug Humans"
-	desc = " Facehug ###facehugs### humans."
+	desc = " Facehug ###facehugs### humans"
 	code_name = "facehug"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -384,7 +384,7 @@
 // Glob Hits
 /datum/battlepass_challenge_module/main_requirement/glob_hits
 	name = "Direct Glob Hits"
-	desc = " Land ###boilerhits### direct acid glob hits as a Boiler."
+	desc = " Land ###boilerhits### direct acid glob hits as a Boiler"
 	code_name = "glob_hits"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -414,7 +414,7 @@
 // Plant Fruits
 /datum/battlepass_challenge_module/main_requirement/plant_fruits
 	name = "Plant Resin Fruit"
-	desc = " Plant ###plantedfruits### resin fruits."
+	desc = " Plant ###plantedfruits### resin fruits"
 	code_name = "plant_fruits"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -442,7 +442,7 @@
 // Plant Resin Nodes
 /datum/battlepass_challenge_module/main_requirement/plant_resin_nodes
 	name = "Plant Resin Nodes"
-	desc = " Plant ###node_requirement### resin nodes."
+	desc = " Plant ###node_requirement### resin nodes"
 	code_name = "plant_resin_nodes"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
