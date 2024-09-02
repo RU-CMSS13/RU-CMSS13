@@ -328,7 +328,7 @@
 //Facehugs
 /datum/battlepass_challenge_module/main_requirement/facehug
 	name = "Facehug Humans"
-	desc = " As a facehugger, facehug ###facehugs### humans."
+	desc = " Facehug ###facehugs### humans."
 	code_name = "facehug"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
