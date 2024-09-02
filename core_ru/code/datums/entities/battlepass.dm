@@ -104,6 +104,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 /datum/entity/battlepass_player/proc/verify_rewards()
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
 		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
+		if(!params)
+			continue
 		if(params["tier"] > tier && !mapped_rewards[list_key])
 			continue
 		if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
@@ -112,6 +114,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	if(premium)
 		for(var/list_key as anything in GLOB.current_battlepass.mapped_premium_rewards)
 			var/list/params = GLOB.current_battlepass.mapped_premium_rewards[list_key]
+			if(!params)
+				continue
 			if(params["tier"] > tier && !mapped_premium_rewards[list_key])
 				continue
 			if(apply_reward(GLOB.battlepass_rewards[params["type"]]))
@@ -191,8 +195,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	// We give the player 2 marine challenges and 2 xeno challenges
 	QDEL_LIST(mapped_daily_challenges)
 
-	for(var/i in 1 to 4)
-		var/datum/battlepass_challenge/new_challenge = SSbattlepass.create_challenge()
+	for(var/i in 1 to 3)
+		var/datum/battlepass_challenge/new_challenge = SSbattlepass.create_challenge(list())
 		if(!new_challenge)
 			continue
 		RegisterSignal(new_challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, PROC_REF(on_challenge_complete))

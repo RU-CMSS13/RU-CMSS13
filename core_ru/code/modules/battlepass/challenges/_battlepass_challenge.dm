@@ -62,12 +62,13 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		completed = check_challenge_completed()
 		regenerate_desc()
 
-/datum/battlepass_challenge/proc/generate_challenge()
+/datum/battlepass_challenge/proc/generate_challenge(already_taken_tasks)
 	var/challenge_type_flag = pick(BATTLEPASS_HUMAN_CHALLENGE, BATTLEPASS_XENO_CHALLENGE)
 
 	var/total_xp_modificator = 1
 	var/total_main_modules = rand(1, 3)
 	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
+	available_modules -= already_taken_tasks
 	for(var/i = 1, i <= total_main_modules, i++)
 		if(!length(available_modules))
 			break
@@ -76,6 +77,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		while(!new_module && length(available_modules))
 			var/datum/battlepass_challenge_module/selected_type = pick_weight(available_modules)
 			if(!(initial(selected_type.mob_challenge_flags) & challenge_type_flag))
+				already_taken_tasks += selected_type
 				available_modules -= selected_type
 				continue
 			new_module = new selected_type()

@@ -10,7 +10,7 @@
 
 /datum/battlepass_challenge_module/requirement/weapon
 	name = "Weapon"
-	desc = " a ###weapon###"
+	desc = "a ###weapon###"
 	code_name = "weapon"
 	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 	challenge_flags = BATTLEPASS_CHALLENGE_WEAPON
@@ -82,7 +82,7 @@
 
 /datum/battlepass_challenge_module/requirement/good_buffs/reagents
 	name = "Reagents"
-	desc = " any reagents in blood"
+	desc = "any reagents in blood"
 	code_name = "reagents"
 	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
@@ -103,7 +103,7 @@
 
 /datum/battlepass_challenge_module/requirement/bad_buffs/overdose
 	name = "OD"
-	desc = " OD ###type###"
+	desc = "OD ###type###"
 	code_name = "overdose"
 	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
@@ -165,10 +165,10 @@
 
 
 
-//Задержка, например "Убить 4 морпехов" + " с задержкой 2 минуты"
+//Задержка, например "Убить 4 морпехов" + "с задержкой 2 минуты"
 /datum/battlepass_challenge_module/requirement/delay
 	name = "Delay"
-	desc = " delay ###DELAY###"
+	desc = "delay ###DELAY###"
 	code_name = "delay"
 
 	module_exp_modificator = 1.25
@@ -193,10 +193,10 @@
 
 
 /* WIP
-//За отведенное время, например "Реанимировать 10 морпехов" + " за 2 минуты"
+//За отведенное время, например "Реанимировать 10 морпехов" + "за 2 минуты"
 /datum/battlepass_challenge_module/requirement/time
 	name = "Time"
-	desc = " in ###TIME###"
+	desc = "in ###TIME###"
 	code_name = "time"
 
 	module_exp_modificator = 1.25

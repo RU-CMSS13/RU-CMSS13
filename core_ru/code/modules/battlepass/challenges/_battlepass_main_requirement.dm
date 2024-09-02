@@ -115,7 +115,7 @@
 //Kill
 /datum/battlepass_challenge_module/main_requirement/kill
 	name = "Kill"
-	desc = " Kill ###kills### enemies"
+	desc = "Kill ###kills### enemies"
 	code_name = "kill"
 	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE|BATTLEPASS_XENO_CHALLENGE
 	challenge_flags = BATTLEPASS_CHALLENGE_WEAPON
@@ -155,7 +155,7 @@
 
 /datum/battlepass_challenge_module/main_requirement/kill/human
 	name = "Kill Humans"
-	desc = " Kill ###human_kills### humans"
+	desc = "Kill ###human_kills### humans"
 	code_name = "kill_human"
 
 	module_exp = list(6, 10)
@@ -166,7 +166,7 @@
 
 /datum/battlepass_challenge_module/main_requirement/kill/xenomorph
 	name = "Kill Xenomorphs"
-	desc = " Kill ###xenomorph_kills### xenomorphs"
+	desc = "Kill ###xenomorph_kills### xenomorphs"
 	code_name = "kill_xenomorph"
 
 	module_exp = list(6, 10)
@@ -177,7 +177,7 @@
 
 /datum/battlepass_challenge_module/main_requirement/kill/xenomorph/caste
 	name = "Kill Xenomorphs - Caste"
-	desc = " Kill ###xenomorph_kills### ###castes###"
+	desc = "Kill ###xenomorph_kills### ###castes###"
 	code_name = "kill_xenomorph_caste"
 
 	valid_kill_paths = list(
@@ -244,7 +244,7 @@
 //Defib
 /datum/battlepass_challenge_module/main_requirement/defib
 	name = "Defibrillate Players"
-	desc = " Successfully defibrillate ###defib### unique marine players"
+	desc = "Successfully defibrillate ###defib### unique marine players"
 	code_name = "defib"
 	mob_challenge_flags = BATTLEPASS_HUMAN_CHALLENGE
 
@@ -274,7 +274,7 @@
 //Damage
 /datum/battlepass_challenge_module/main_requirement/damage
 	name = "Damage"
-	desc = " Survive ###damage### damage"
+	desc = "Survive ###damage### damage"
 	code_name = "additional_survive_damage"
 
 	module_exp = list(4, 10)
@@ -300,7 +300,7 @@
 //Berserk Rage
 /datum/battlepass_challenge_module/main_requirement/berserker_rage
 	name = "Max Berserker Rage"
-	desc = " As a Berserker Ravager, enter maximum berserker rage ###rages### times"
+	desc = "As a Berserker Ravager, enter maximum berserker rage ###rages### times"
 	code_name = "berserker_rage"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -328,7 +328,7 @@
 //Facehugs
 /datum/battlepass_challenge_module/main_requirement/facehug
 	name = "Facehug Humans"
-	desc = " Facehug ###facehugs### humans"
+	desc = "Facehug ###facehugs### humans"
 	code_name = "facehug"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -356,7 +356,7 @@
 //For The Hive
 /datum/battlepass_challenge_module/main_requirement/for_the_hive
 	name = "For The Hive!"
-	desc = " As an Acider Runner, detonate For The Hive at maximum acid ###forhivesuicides### times"
+	desc = "As an Acider Runner, detonate For The Hive at maximum acid ###forhivesuicides### times"
 	code_name = "for_the_hive"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -384,7 +384,7 @@
 // Glob Hits
 /datum/battlepass_challenge_module/main_requirement/glob_hits
 	name = "Direct Glob Hits"
-	desc = " Land ###boilerhits### direct acid glob hits as a Boiler"
+	desc = "Land ###boilerhits### direct acid glob hits as a Boiler"
 	code_name = "glob_hits"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -414,7 +414,7 @@
 // Plant Fruits
 /datum/battlepass_challenge_module/main_requirement/plant_fruits
 	name = "Plant Resin Fruit"
-	desc = " Plant ###plantedfruits### resin fruits"
+	desc = "Plant ###plantedfruits### resin fruits"
 	code_name = "plant_fruits"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 
@@ -442,7 +442,7 @@
 // Plant Resin Nodes
 /datum/battlepass_challenge_module/main_requirement/plant_resin_nodes
 	name = "Plant Resin Nodes"
-	desc = " Plant ###node_requirement### resin nodes"
+	desc = "Plant ###node_requirement### resin nodes"
 	code_name = "plant_resin_nodes"
 	mob_challenge_flags = BATTLEPASS_XENO_CHALLENGE
 

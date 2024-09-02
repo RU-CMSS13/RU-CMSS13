@@ -12,16 +12,16 @@
 
 // "With" Condition
 /datum/battlepass_challenge_module/condition/with
-	name = "With"
-	desc = " with"
+	name = " With "
+	desc = " with "
 	code_name = "with"
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement/bad_buffs))
 
 // "Without" Condition
 /datum/battlepass_challenge_module/condition/without
-	name = "Without"
-	desc = " without"
+	name = " Without "
+	desc = " without "
 	code_name = "without"
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement/good_buffs))
@@ -30,8 +30,8 @@
 
 // "After" Condition
 /datum/battlepass_challenge_module/condition/after
-	name = "After"
-	desc = " after"
+	name = " After "
+	desc = " after "
 	code_name = "after"
 
 	pick_weight = 0 // WIP
@@ -40,8 +40,8 @@
 
 // "Before" Condition
 /datum/battlepass_challenge_module/condition/before
-	name = "Before"
-	desc = " before"
+	name = " Before "
+	desc = " before "
 	code_name = "before"
 
 	pick_weight = 0 // WIP
@@ -52,16 +52,16 @@
 
 // "And" Condition
 /datum/battlepass_challenge_module/condition/and
-	name = "And"
-	desc = " and"
+	name = " And "
+	desc = " and "
 	code_name = "and"
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
 
 // "Exempt" Condition
 /datum/battlepass_challenge_module/condition/exempt
-	name = "Exempt"
-	desc = " exempt"
+	name = " Exempt "
+	desc = " exempt "
 	code_name = "exempt"
 
 	pick_weight = 0 // WIP
