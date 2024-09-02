@@ -15,7 +15,6 @@
 			sub_requirements += module
 
 /datum/battlepass_challenge_module/main_requirement/generate_module(building_around_flag)
-	req = list()
 	for(var/req_name in req_gen)
 		req[req_name] = list(0, rand(req_gen[req_name][1], req_gen[req_name][2]))
 

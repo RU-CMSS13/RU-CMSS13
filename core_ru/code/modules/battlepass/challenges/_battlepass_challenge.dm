@@ -224,7 +224,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	var/list/compatibility = list("strict" = list(), "subtyped" = list()) // Проверяется пикая следующее условие, например есть 1 и в 2, теперь время выбрать 3, мы смотрим что в 2 за ограничения на пик
 
 	// Tracked
-	var/list/req
+	var/list/req = list()
 
 /datum/battlepass_challenge_module/New(list/opt)
 	if(opt)
