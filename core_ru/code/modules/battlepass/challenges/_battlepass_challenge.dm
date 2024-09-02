@@ -123,13 +123,15 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	return current_max
 
 /datum/battlepass_challenge/proc/get_completion_denominator()
-	var/current_max = 1
+	var/current_max = 0
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
 		if(!length(module.req))
 			continue
 		for(var/progress_name in module.req)
 			current_max += module.req[progress_name][2]
-	return current_max
+	if(current_max)
+		return current_max
+	return 1
 
 /datum/battlepass_challenge/proc/check_challenge_completed()
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
