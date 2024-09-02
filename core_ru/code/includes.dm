@@ -61,7 +61,6 @@
 #include "game\machinery\nuke_disk_generator.dm"
 #include "game\machinery\rechargestation.dm"
 #include "game\machinery\doors\poddoor.dm"
-#include "game\objects\effects\decals\crayon.dm"
 #include "game\objects\items\devices\pinpointer.dm"
 #include "game\objects\items\storage\backpack.dm"
 #include "game\objects\items\storage\belt.dm"
