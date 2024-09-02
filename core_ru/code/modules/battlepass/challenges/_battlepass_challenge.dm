@@ -103,11 +103,9 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 	return TRUE
 
 /datum/battlepass_challenge/proc/regenerate_desc()
-	name = null
+	name = ""
 	var/new_desc = ""
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
-		if(name)
-			name += " and "
 		name += module.name
 		new_desc += module.get_description()
 	desc = new_desc

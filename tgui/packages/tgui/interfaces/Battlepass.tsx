@@ -198,7 +198,7 @@ const BattlepassInfoContainer = (props) => {
 const BattlepassChallengeUI = (props) => {
   const challenge: BattlepassChallenge = props.challenge;
   return (
-    <Section title={`Special Challenge: ${challenge.name}`}>
+    <Section title={`${challenge.name}`}>
       {challenge.desc}
       <Box style={{ paddingBottom: '4px' }} />
       <ProgressBar
