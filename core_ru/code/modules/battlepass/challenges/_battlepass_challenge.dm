@@ -63,17 +63,25 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		regenerate_desc()
 
 /datum/battlepass_challenge/proc/generate_challenge()
+	var/challenge_type_flag = pick(BATTLEPASS_HUMAN_CHALLENGE, BATTLEPASS_XENO_CHALLENGE)
+
 	var/total_xp_modificator = 1
 	var/total_main_modules = rand(1, 3)
 	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
 	for(var/i = 1, i <= total_main_modules, i++)
 		if(!length(available_modules))
 			break
-		var/picked_type = pick_weight(available_modules)
-		available_modules -= picked_type
-		var/datum/battlepass_challenge_module/main_requirement/new_module = new picked_type
+
+		var/datum/battlepass_challenge_module/main_requirement/new_module
+		while(!new_module && length(available_modules))
+			var/datum/battlepass_challenge_module/selected_type = pick_weight(available_modules)
+			if(!(initial(selected_type.mob_challenge_flags) & challenge_type_flag))
+				available_modules -= selected_type
+				continue
+			new_module = new selected_type()
+
 		new_module.challenge_ref = src
-		if(!new_module.generate_module(pick(new_module.mob_challenge_flags)))
+		if(!new_module.generate_module(challenge_type_flag))
 			return FALSE
 		modules += new_module
 
@@ -91,14 +99,16 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 			modules += and_condition
 
 	xp_completion *= total_xp_modificator
+	regenerate_desc()
 	return TRUE
 
 /datum/battlepass_challenge/proc/regenerate_desc()
 	name = null
 	var/new_desc = ""
 	for(var/datum/battlepass_challenge_module/module as anything in modules)
-		if(!name)
-			name = module.name
+		if(name)
+			name += " and "
+		name += module.name
 		new_desc += module.get_description()
 	desc = new_desc
 
@@ -225,7 +235,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 /datum/battlepass_challenge_module/proc/get_description()
 	. = initial(desc)
 	for(var/name in req)
-		. = replacetext_char(., "###[name]###", req[name])
+		. = replacetext_char(., "###[name]###", req[name][2])
 	desc = .
 
 /datum/battlepass_challenge_module/proc/hook_signals(mob/logged_mob)

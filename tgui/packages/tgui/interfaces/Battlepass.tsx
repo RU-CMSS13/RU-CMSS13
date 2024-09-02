@@ -22,7 +22,6 @@ interface BattlepassChallenge {
   name: string;
   desc: string;
   completed: BooleanLike;
-  category: string;
   completion_xp: number;
   completion_percent: number;
   completion_numerator: number;
@@ -188,8 +187,8 @@ const BattlepassInfoContainer = (props) => {
           <Box style={{ height: '10px' }} />
           XP: {data.xp} / {data.xp_tierup}
         </Box>
-        {data.daily_challenges.map((challenge) => (
-          <BattlepassChallengeUI challenge={challenge} key={challenge.name} />
+        {data.daily_challenges.map((challenge, index) => (
+          <BattlepassChallengeUI challenge={challenge} key={index} />
         ))}
       </Section>
     </Box>
@@ -199,7 +198,7 @@ const BattlepassInfoContainer = (props) => {
 const BattlepassChallengeUI = (props) => {
   const challenge: BattlepassChallenge = props.challenge;
   return (
-    <Section title={`${challenge.category} - ${challenge.name}`}>
+    <Section title={`Special Challenge: ${challenge.name}`}>
       {challenge.desc}
       <Box style={{ paddingBottom: '4px' }} />
       <ProgressBar
