@@ -190,8 +190,7 @@ SUBSYSTEM_DEF(tts)
 		fdel("tmp/tts/")
 	for(var/datum/tts_request/data in in_process_http_messages)
 		var/datum/http_request/request = data.request
-		var/datum/http_request/request_blips = data.request_blips
-		UNTIL(request.is_complete() && request_blips.is_complete())
+		UNTIL(request.is_complete())
 
 /// Establishes (or re-establishes) a connection to the TTS server and updates the list of available speakers.
 /// This is blocking, so be careful when calling.
@@ -254,7 +253,7 @@ SUBSYSTEM_DEF(tts)
 			return TRUE
 	return FALSE
 
-/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, sound/audio_blips, volume_offset = 0)
+/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, volume_offset = 0)
 	var/turf/turf_source = get_turf(target)
 	if(!turf_source)
 		return
@@ -329,10 +328,8 @@ SUBSYSTEM_DEF(tts)
 		if(!current_request.audio_length)
 			current_request.audio_length = 0
 		current_request.audio_file = "tmp/tts/[identifier].ogg"
-		current_request.audio_file_blips = "tmp/tts/[identifier]_blips.ogg" // We aren't as concerned about the audio length for blips as we are with actual speech
 		// Don't need the request anymore so we can deallocate it
 		current_request.request = null
-		current_request.request_blips = null
 		if(MC_TICK_CHECK)
 			return
 
@@ -375,21 +372,15 @@ SUBSYSTEM_DEF(tts)
 					SHIFT_DATA_ARRAY(queued_tts_messages, tts_target, data)
 				continue
 			var/sound/audio_file
-			var/sound/audio_file_blips
 			if(current_target.local)
-				if(current_target.use_blips)
-					audio_file_blips = new(current_target.audio_file_blips)
-					SEND_SOUND(current_target.target, audio_file_blips)
-				else
-					audio_file = new(current_target.audio_file)
-					SEND_SOUND(current_target.target, audio_file)
+				audio_file = new(current_target.audio_file)
+				SEND_SOUND(current_target.target, audio_file)
 				SHIFT_DATA_ARRAY(queued_tts_messages, tts_target, data)
 			else if(current_target.when_to_play < world.time)
 				audio_file = new(current_target.audio_file)
-				audio_file_blips = new(current_target.audio_file_blips)
 				if(current_target.start_noise)
 					playsound(tts_target, current_target.start_noise, 5, TRUE)
-				play_tts(tts_target, current_target.listeners, audio_file, audio_file_blips, current_target.volume_offset)
+				play_tts(tts_target, current_target.listeners, audio_file, current_target.volume_offset)
 				if(length(data) != 1)
 					var/datum/tts_request/next_target = data[2]
 					next_target.when_to_play = world.time + current_target.audio_length
@@ -421,13 +412,10 @@ SUBSYSTEM_DEF(tts)
 	headers["Content-Type"] = "application/json"
 	headers["Authorization"] = "Bearer [CONFIG_GET(string/tts_http_token)]"
 	var/datum/http_request/request = new()
-//	var/datum/http_request/request_blips = new()
 	var/file_name = "tmp/tts/[identifier].ogg"
-//	var/file_name_blips = "tmp/tts/[identifier]_blips.ogg"
 
 	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&pitch=[pitch]&ext=ogg&text=[message]", null, headers, file_name)
-//	request_blips.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&pitch=[pitch]&ext=ogg&text=[message]", null, headers, file_name_blips)
-	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, null/*request_blips*/, message, target, local, volume_offset, listeners, pitch, start_noise)
+	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, message, target, local, volume_offset, listeners, pitch, start_noise)
 
 	var/list/player_queued_tts_messages = queued_tts_messages[target]
 	if(!player_queued_tts_messages)
@@ -449,8 +437,6 @@ SUBSYSTEM_DEF(tts)
 	var/list/listeners
 	/// The HTTP request of this message
 	var/datum/http_request/request
-	/// The HTTP request of this message for blips
-	var/datum/http_request/request_blips
 	/// The message itself
 	var/message
 	/// The message identifier
@@ -464,16 +450,12 @@ SUBSYSTEM_DEF(tts)
 
 	/// The audio file of this tts request.
 	var/sound/audio_file
-	/// The blips audio file of this tts request.
-	var/sound/audio_file_blips
 	/// The audio length of this tts request.
 	var/audio_length
 	/// When the audio file should play at the minimum
 	var/when_to_play = 0
 	/// Whether this request was timed out or not
-	var/timed_out = FALSE
-	/// Does this use blips during local generation or not?
-	var/use_blips = FALSE
+	var/timed_out = FALS
 	/// What's the pitch adjustment?
 	var/pitch = 0
 	/// Sfx to play when the voice is ready to play.
@@ -481,11 +463,10 @@ SUBSYSTEM_DEF(tts)
 
 BSQL_PROTECT_DATUM(/datum/tts_request)
 
-/datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, volume_offset, list/listeners, pitch, start_noise)
+/datum/tts_request/New(identifier, datum/http_request/request, message, target, local, volume_offset, list/listeners, pitch, start_noise)
 	. = ..()
 	src.identifier = identifier
 	src.request = request
-	src.request_blips = request_blips
 	src.message = message
 	src.target = target
 	src.local = local
@@ -496,62 +477,16 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	start_time = world.time
 
 /datum/tts_request/proc/start_requests()
-	if(istype(target, /client))
-		var/client/current_client = target
-		use_blips = (current_client?.prefs.tts_mode == TTS_SOUND_BLIPS)
-	else if(istype(target, /mob))
-		use_blips = (target.client?.prefs.tts_mode == TTS_SOUND_BLIPS)
 	request.begin_async()
-/*
-	if(local)
-		if(use_blips)
-			request_blips.begin_async()
-		else
-			request.begin_async()
-	else
-		request.begin_async()
-		request_blips.begin_async()
-*/
 
 /datum/tts_request/proc/get_primary_response()
-/*
-	if(local)
-		if(use_blips)
-			return request_blips.into_response()
-		else
-			return request.into_response()
-	else
-		return request.into_response()
-*/
 	return request.into_response()
 
 /datum/tts_request/proc/requests_errored()
-/*
-	if(local)
-		var/datum/http_response/response
-		if(use_blips)
-			response = request_blips.into_response()
-		else
-			response = request.into_response()
-		return response.errored
-	else
-		var/datum/http_response/response = request.into_response()
-		var/datum/http_response/response_blips = request_blips.into_response()
-		return response.errored || response_blips.errored
-*/
 	var/datum/http_response/response = request.into_response()
 	return response.errored
 
 /datum/tts_request/proc/requests_completed()
-/*
-	if(local)
-		if(use_blips)
-			return request_blips.is_complete()
-		else
-			return request.is_complete()
-	else
-		return request.is_complete() && request_blips.is_complete()
-*/
 	return request.is_complete()
 
 #undef SHIFT_DATA_ARRAY
