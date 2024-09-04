@@ -1529,18 +1529,27 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 						age = max(min( floor(text2num(new_age)), AGE_MAX),AGE_MIN)
 
 				//RUCM START
-				if("voice", "synth_voice", "xeno_voice")
+				if("voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
+					if(new_voice)
+						voice = new_voice
+
+				if("synth_voice")
 					if(!SStts.tts_enabled)
 						return
 					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
 					if(new_voice)
-						switch(href_list["preference"])
-							if("voice")
-								voice = new_voice
-							if("synth_voice")
-								synth_voice = new_voice
-							if("xeno_voice")
-								xeno_voice = new_voice
+						synth_voice = new_voice
+
+				if("xeno_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						xeno_voice = new_voice
+
 				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
 					if(!SStts.tts_enabled)
 						return
@@ -1553,6 +1562,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 								synth_pitch = new_voice_pitch
 							if("xeno_voice_pitch")
 								xeno_pitch = new_voice_pitch
+
 				if("test_voice")
 					if(!SStts.tts_enabled)
 						return

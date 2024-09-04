@@ -352,7 +352,7 @@
 	pref_job_slots = sanitize_islist(pref_job_slots, list())
 	//RUCM START
 	if(SStts.tts_enabled)
-		var/availible_voices = SStts.available_speakers & (GLOB.tts_voices_men_whitelists + GLOB.tts_voices_woman_whitelists)
+		var/availible_voices = SStts.available_speakers
 		synth_voice = sanitize_inlist(synth_voice, availible_voices, pick(availible_voices))
 		xeno_voice = sanitize_inlist(xeno_voice, availible_voices, pick(availible_voices))
 	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
