@@ -16,7 +16,6 @@
 			message = language.scramble(message)
 
 	if(!say_understands(speaker,language))
-		tts_heard_list[2] += src
 		if(istype(speaker,/mob/living/simple_animal))
 			var/mob/living/simple_animal/S = speaker
 			if(length(S.speak))
@@ -27,8 +26,6 @@
 			message = language.scramble(message)
 		else
 			message = stars(message)
-	else if(sdisabilities & DISABILITY_DEAF || ear_deaf)
-		tts_heard_list[2] += src
 	else
 		tts_heard_list[1] += src
 

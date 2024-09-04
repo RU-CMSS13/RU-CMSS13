@@ -195,6 +195,10 @@
 	S["chat_display_preferences"] >> chat_display_preferences
 	S["toggles_ghost"] >> toggles_ghost
 	S["toggles_langchat"] >> toggles_langchat
+	//RUCM START
+	S["tts_mode"] >> tts_mode
+	S["tts_hivemind_mode"] >> tts_hivemind_mode
+	//RUCM END
 	S["toggles_sound"] >> toggles_sound
 	S["toggle_prefs"] >> toggle_prefs
 	S["dual_wield_pref"] >> dual_wield_pref
@@ -220,6 +224,10 @@
 
 	S["xeno_prefix"] >> xeno_prefix
 	S["xeno_postfix"] >> xeno_postfix
+	//RUCM START
+	S["xeno_pitch"] >> xeno_pitch
+	S["xeno_voice"] >> xeno_voice
+	//RUCM END
 	S["xeno_name_ban"] >> xeno_name_ban
 	S["playtime_perks"] >> playtime_perks
 	S["xeno_vision_level_pref"] >> xeno_vision_level_pref
@@ -229,6 +237,10 @@
 	S["pref_job_slots"] >> pref_job_slots
 
 	S["synth_name"] >> synthetic_name
+	//RUCM START
+	S["synth_voice"] >> synth_voice
+	S["synth_pitch"] >> synth_pitch
+	//RUCM END
 	S["synth_type"] >> synthetic_type
 	S["pred_name"] >> predator_name
 	S["pred_gender"] >> predator_gender
@@ -267,11 +279,6 @@
 	S["adaptive_zoom"] >> adaptive_zoom
 	S["tooltips"] >> tooltips
 	S["key_bindings"] >> key_bindings
-
-	//RUCM START
-	S["tts_setting"] >> tts_setting
-	S["tts_volume"] >> tts_volume
-	//RUCC END
 
 	var/list/remembered_key_bindings
 	S["remembered_key_bindings"] >> remembered_key_bindings
@@ -313,11 +320,6 @@
 	adaptive_zoom = sanitize_integer(adaptive_zoom, 0, 2, 0)
 	tooltips = sanitize_integer(tooltips, FALSE, TRUE, TRUE)
 
-	//RUCM START
-	if(!(tts_setting in list(TTS_SOUND_OFF, TTS_SOUND_ENABLED, TTS_SOUND_BLIPS)))
-		tts_setting = TTS_SOUND_ENABLED
-	tts_volume = sanitize_integer(tts_volume, 0, 100, 100)
-	//RUCM END
 	synthetic_name = synthetic_name ? sanitize_text(synthetic_name, initial(synthetic_name)) : initial(synthetic_name)
 	synthetic_type = sanitize_inlist(synthetic_type, PLAYER_SYNTHS, initial(synthetic_type))
 	predator_name = predator_name ? sanitize_text(predator_name, initial(predator_name)) : initial(predator_name)
@@ -348,6 +350,17 @@
 	custom_cursors = sanitize_integer(custom_cursors, FALSE, TRUE, TRUE)
 	pref_special_job_options = sanitize_islist(pref_special_job_options, list())
 	pref_job_slots = sanitize_islist(pref_job_slots, list())
+	//RUCM START
+	if(SStts.tts_enabled)
+		var/availible_voices = SStts.available_speakers & (GLOB.tts_voices_men_whitelists + GLOB.tts_voices_woman_whitelists)
+		synth_voice = sanitize_inlist(synth_voice, availible_voices, pick(availible_voices))
+		xeno_voice = sanitize_inlist(xeno_voice, availible_voices, pick(availible_voices))
+	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
+	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
+	tts_mode = sanitize_inlist(tts_mode, list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF), TTS_SOUND_ENABLED)
+	tts_hivemind_mode = sanitize_integer(tts_hivemind_mode, TTS_HIVEMIND_OFF, TTS_HIVEMIND_ALL, TTS_HIVEMIND_LEADERS)
+	//RUCM END
+
 	vars["fps"] = fps
 
 	check_keybindings()
@@ -407,6 +420,10 @@
 	S["chat_display_preferences"] << chat_display_preferences
 	S["toggles_ghost"] << toggles_ghost
 	S["toggles_langchat"] << toggles_langchat
+	//RUCM START
+	S["tts_mode"] << tts_mode
+	S["tts_hivemind_mode"] << tts_hivemind_mode
+	//RUCM END
 	S["toggles_sound"] << toggles_sound
 	S["toggle_prefs"] << toggle_prefs
 	S["dual_wield_pref"] << dual_wield_pref
@@ -423,6 +440,10 @@
 
 	S["xeno_prefix"] << xeno_prefix
 	S["xeno_postfix"] << xeno_postfix
+	//RUCM START
+	S["xeno_voice"] << xeno_voice
+	S["xeno_pitch"] << xeno_pitch
+	//RUCM END
 	S["xeno_name_ban"] << xeno_name_ban
 	S["xeno_vision_level_pref"] << xeno_vision_level_pref
 	S["playtime_perks"] << playtime_perks
@@ -433,6 +454,10 @@
 	S["pref_job_slots"] << pref_job_slots
 
 	S["synth_name"] << synthetic_name
+	//RUCM START
+	S["synth_voice"] << synth_voice
+	S["synth_pitch"] << synth_pitch
+	//RUCM END
 	S["synth_type"] << synthetic_type
 	S["pred_name"] << predator_name
 	S["pred_gender"] << predator_gender
@@ -462,11 +487,6 @@
 	S["show_permission_errors"] << show_permission_errors
 	S["key_bindings"] << key_bindings
 	S["hotkeys"] << hotkeys
-
-	//RUCM START
-	S["tts_setting"] << tts_setting
-	S["tts_volume"] << tts_volume
-	//RUCC END
 
 	S["autofit_viewport"] << auto_fit_viewport
 	S["adaptive_zoom"] << adaptive_zoom
@@ -500,9 +520,6 @@
 	S["body_is_always_random"] >> be_random_body
 	S["gender"] >> gender
 	S["age"] >> age
-	//RUCM START
-	S["forced_voice"] >> forced_voice
-	//RUCC END
 	S["ethnicity"] >> ethnicity
 	S["skin_color"] >> skin_color
 	S["body_type"] >> body_type
@@ -585,8 +602,6 @@
 	be_random_body = sanitize_integer(be_random_body, 0, 1, initial(be_random_body))
 	gender = sanitize_gender(gender)
 	age = sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
-	if(!(forced_voice in SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists)) && SStts.tts_enabled)
-		forced_voice = SAFEPICK(SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
 	skin_color = sanitize_skin_color(skin_color)
 	body_type = sanitize_body_type(body_type)
 	body_size = sanitize_body_size(body_size)
@@ -620,6 +635,12 @@
 	undershirt = sanitize_inlist(undershirt, gender == MALE ? GLOB.undershirt_m : GLOB.undershirt_f, initial(undershirt))
 	backbag = sanitize_integer(backbag, 1, length(GLOB.backbaglist), initial(backbag))
 	preferred_armor = sanitize_inlist(preferred_armor, GLOB.armor_style_list, "Random")
+	//RUCM START
+	if(SStts.tts_enabled)
+		var/availible_voices = SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists)
+		voice = sanitize_inlist(voice, availible_voices, pick(availible_voices))
+	voice_pitch = sanitize_integer(voice_pitch, -12, 12, 0)
+	//RUCM END
 	//b_type = sanitize_text(b_type, initial(b_type))
 
 	alternate_option = sanitize_integer(alternate_option, 0, 3, initial(alternate_option))
@@ -659,9 +680,6 @@
 	S["body_is_always_random"] << be_random_body
 	S["gender"] << gender
 	S["age"] << age
-	//RUCM START
-	S["forced_voice"] << forced_voice
-	//RUCC END
 	S["ethnicity"] << ethnicity
 	S["skin_color"] << skin_color
 	S["body_type"] << body_type
@@ -688,6 +706,10 @@
 	S["underwear"] << underwear
 	S["undershirt"] << undershirt
 	S["backbag"] << backbag
+	//RUCM START
+	S["human_voice"] << voice
+	S["human_pitch"] << voice_pitch
+	//RUCM END
 	//S["b_type"] << b_type
 	S["spawnpoint"] << spawnpoint
 

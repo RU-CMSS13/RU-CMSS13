@@ -7,9 +7,8 @@
 			gender = FEMALE
 
 	//RUCM START
-	if(SStts.tts_enabled)
-		forced_voice = SAFEPICK(SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
-		H?.tts_voice = forced_voice
+	if(SStts.tts_enabled && H.has_tts_voice)
+		H.tts_voice = SAFEPICK(SStts.available_speakers & (H.gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
 	//RUCM END
 
 	skin_color = random_skin_color()

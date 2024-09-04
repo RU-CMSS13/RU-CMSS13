@@ -262,19 +262,13 @@
 		var/list/mobs_in_view = get_mobs_in_view(7, src)
 		for(var/mob/M in langchat_listeners)
 			if(!M.ear_deaf && M.say_understands(src, language))
-				tts_heard_list[3] += mobs_in_view
-			else
-				tts_heard_list[4] += mobs_in_view
+				tts_heard_list[2] += mobs_in_view
 		langchat_speech(message, mobs_in_view, language, sourcemob.langchat_color, FALSE, LANGCHAT_FAST_POP, list(sourcemob.langchat_styles))
 	for(var/datum/weakref/user_ref in concurrent_users)
 		var/mob/user = user_ref.resolve()
 		if(user?.client?.prefs && !user.client.prefs.lang_chat_disabled && !user.ear_deaf && user.say_understands(sourcemob, language))
 			sourcemob.langchat_display_image(user)
-
-		if(user.say_understands(sourcemob, language))
-			tts_heard_list[3] += user
-		else
-			tts_heard_list[4] += user
+			tts_heard_list[2] += user
 
 /obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_emote(obj/item/camera, mob/living/sourcemob, emote, audible = FALSE, show_message_above_tv = FALSE)
 	SIGNAL_HANDLER

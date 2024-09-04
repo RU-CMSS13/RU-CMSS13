@@ -25,10 +25,8 @@
 	to_chat(user, SPAN_YAUTJABOLD("Falcon Relay: [sourcemob.name] [verb], <span class='[language.color]'>\"[message]\"</span>"))
 	if(user && user.client && user.client.prefs && !user.client.prefs.lang_chat_disabled \
 	   && !user.ear_deaf && user.say_understands(sourcemob, language))
-		tts_heard_list[3] += user
+		tts_heard_list[2] += user
 		sourcemob.langchat_display_image(user)
-	else if(user && user.client && user.client.prefs)
-		tts_heard_list[4] += user
 
 	return TRUE
 

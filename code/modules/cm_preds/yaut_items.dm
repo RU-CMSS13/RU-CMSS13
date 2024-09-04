@@ -333,7 +333,7 @@
 
 	for(var/mob/living/carbon/xenomorph/hellhound/hellhound as anything in GLOB.hellhound_list)
 		if(!hellhound.stat)
-			tts_heard_list[3] +=hellhound
+			tts_heard_list[2] += hellhound
 			to_chat(hellhound, "\[Radio\]: [M.real_name] [verb], '<B>[message]</b>'.")
 	..()
 

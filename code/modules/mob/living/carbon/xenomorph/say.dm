@@ -117,8 +117,8 @@
 	var/rendered
 
 	//RUCM START
-	var/list/tts_heard_list = list(list(), list(), list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_heard_list, FALSE)
+	var/list/tts_heard_list = list(list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, speaking_noise)
 	//RUCM END
 
 	for (var/mob/S in GLOB.player_list)
@@ -131,7 +131,7 @@
 		if(!QDELETED(S) && (isxeno(S) || S.stat == DEAD || hear_hivemind) && !istype(S,/mob/new_player))
 			var/mob/living/carbon/xenomorph/X = src
 			if(istype(S,/mob/dead/observer))
-				tts_heard_list[3] += S
+				tts_heard_list[2] += S
 				if(S.client.prefs && S.client.prefs.toggles_chat & CHAT_GHOSTHIVEMIND)
 					track = "(<a href='byond://?src=\ref[S];track=\ref[src]'>F</a>)"
 					if(isqueen(src))
@@ -148,7 +148,7 @@
 					S.show_message(ghostrend, SHOW_MESSAGE_AUDIBLE)
 
 			else if(hive.hivenumber == xeno_hivenumber(S) || hive.hivenumber == hear_hivemind)
-				tts_heard_list[3] += S
+				tts_heard_list[2] += S
 				if(isxeno(src) && isxeno(S))
 					overwatch_insert = " (<a href='byond://?src=\ref[S];[overwatch_target]=\ref[src];[overwatch_src]=\ref[S]'>watch</a>)"
 

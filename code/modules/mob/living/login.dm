@@ -13,9 +13,6 @@
 			update_pipe_icons(A)
 
 	//RUCM START
-	if(SStts.tts_enabled && !tts_voice)
-		if(client?.prefs?.forced_voice)
-			tts_voice = client.prefs.forced_voice
-		else
-			tts_voice = SAFEPICK(SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
+	if(!tts_voice && SStts.tts_enabled && has_tts_voice)
+		tts_voice = SAFEPICK(SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
 	//RUCM END

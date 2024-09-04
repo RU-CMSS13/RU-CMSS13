@@ -234,8 +234,7 @@
 		/* ###### Send the message ###### */
 
 		//RUCM START
-		tts_heard_list[3] += heard_masked + heard_normal
-		tts_heard_list[4] += heard_garbled + heard_gibberish + heard_voice
+		tts_heard_list[2] += heard_masked + heard_normal
 		//RUCM END
 
 		/* --- Process all the mobs that heard a masked voice (understood) --- */

@@ -12,11 +12,6 @@
 
 #define SS_PRIORITY_TTS 153
 
-/datum/preferences
-	var/forced_voice
-	var/tts_volume = 50
-	var/tts_setting = TTS_SOUND_ENABLED
-
 GLOBAL_LIST_INIT(tts_voices_men_whitelists, list(
 	"papich",
 	"bebey",
@@ -140,7 +135,7 @@ SUBSYSTEM_DEF(tts)
 	wait = 0.05 SECONDS
 	init_order = 82
 	priority = SS_PRIORITY_TTS
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
 	/// Queued HTTP requests that have yet to be sent. TTS requests are handled as lists rather than datums.
 	var/datum/heap/queued_http_messages
@@ -166,7 +161,7 @@ SUBSYSTEM_DEF(tts)
 	var/pitch_enabled = FALSE
 
 	/// TTS messages won't play if requests took longer than this duration of time.
-	var/message_timeout = 1 MINUTES
+	var/message_timeout = 7 SECONDS
 
 	/// The max concurrent http requests that can be made at one time. Used to prevent 1 server from overloading the tts server
 	var/max_concurrent_requests = 4
@@ -188,6 +183,15 @@ SUBSYSTEM_DEF(tts)
 
 /proc/cmp_word_length_asc(datum/tts_request/a, datum/tts_request/b)
 	return length(b.message) - length(a.message)
+
+/datum/controller/subsystem/tts/Shutdown()
+	tts_enabled = FALSE
+	if (fexists("tmp/tts/"))
+		fdel("tmp/tts/")
+	for(var/datum/tts_request/data in in_process_http_messages)
+		var/datum/http_request/request = data.request
+		var/datum/http_request/request_blips = data.request_blips
+		UNTIL(request.is_complete() && request_blips.is_complete())
 
 /// Establishes (or re-establishes) a connection to the TTS server and updates the list of available speakers.
 /// This is blocking, so be careful when calling.
@@ -235,50 +239,51 @@ SUBSYSTEM_DEF(tts)
 		return SS_INIT_FAILURE
 	return SS_INIT_SUCCESS
 
+/datum/controller/subsystem/tts/proc/should_play_hivemind_tts(client/listener, target)
+	var/hivemind_preference = listener?.prefs.tts_hivemind_mode
+	if(hivemind_preference == TTS_HIVEMIND_ALL)
+		return TRUE
+	else if(hivemind_preference == TTS_HIVEMIND_LEADERS)
+		var/mob/living/carbon/xenomorph/xeno = target
+		if(!istype(xeno))
+			return FALSE
+		if(isqueen(xeno) || IS_XENO_LEADER(xeno))
+			return TRUE
+	else if(hivemind_preference == TTS_HIVEMIND_QUEEN)
+		if(isqueen(target))
+			return TRUE
+	return FALSE
+
 /datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, sound/audio_blips, volume_offset = 0)
 	var/turf/turf_source = get_turf(target)
 	if(!turf_source)
 		return
 
 	for(var/mob/receiver in listeners[1])
-		if(!elligible_mob(receiver))
+		if(!elligible_mob(receiver, target))
 			continue
-		var/audio_to_use = (receiver.client.prefs.tts_setting == TTS_SOUND_BLIPS) ? audio_blips : audio
-		playsound_client(receiver.client, audio_to_use, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100))
-
-	for(var/mob/receiver in listeners[2])
-		if(!elligible_mob(receiver))
-			continue
-		playsound_client(receiver.client, audio_blips, turf_source, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100))
-
+		var/audio_to_use = audio
+//		var/audio_to_use = (receiver.client.prefs.tts_mode == TTS_SOUND_BLIPS) ? audio_blips : audio
+		playsound_client(receiver.client, audio_to_use, turf_source, ((receiver == target)? 60 : 85) + volume_offset, vol_cat = VOLUME_TTS)
 	//Radio
-	for(var/mob/receiver in listeners[3])
-		if(!elligible_mob(receiver))
+	for(var/mob/receiver in listeners[2])
+		if(!elligible_mob(receiver, target, flags = TTS_FLAG_HIVEMIND|TTS_FLAG_RADIO))
 			continue
-		var/audio_to_use = (receiver.client.prefs.tts_setting == TTS_SOUND_BLIPS) ? audio_blips : audio
-		playsound_client(receiver.client, audio_to_use, null, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 1.5)
+		var/audio_to_use = audio
+//		var/audio_to_use = (receiver.client.prefs.tts_mode == TTS_SOUND_BLIPS) ? audio_blips : audio
+		playsound_client(receiver.client, audio_to_use, null, ((receiver == target)? 30 : 50) + volume_offset, vol_cat = VOLUME_TTS)
 
-	for(var/mob/receiver in listeners[4])
-		if(!elligible_mob(receiver))
-			continue
-		playsound_client(receiver.client, audio_blips, null, (((receiver == target)? 60 : 85) + volume_offset) * (receiver.client.prefs.tts_volume / 100) / 1.5)
-
-/datum/controller/subsystem/tts/proc/elligible_mob(mob/receiver)
+/datum/controller/subsystem/tts/proc/elligible_mob(mob/receiver, target, flags)
 	if(QDELING(receiver))
 		return FALSE
 	if(!receiver.client?.prefs)
 		return FALSE
-	if(receiver.client.prefs.tts_volume == 0 || (receiver.client.prefs.tts_setting == TTS_SOUND_OFF))
+	var/tts_pref = receiver.client?.prefs.tts_mode
+	if(tts_pref == TTS_SOUND_OFF || !receiver.client)
+		return FALSE
+	if((flags & TTS_FLAG_HIVEMIND) && !should_play_hivemind_tts(receiver.client, target))
 		return FALSE
 	return TRUE
-
-// Need to wait for all HTTP requests to complete here because of a rustg crash bug that causes crashes when dd restarts whilst HTTP requests are ongoing.
-/datum/controller/subsystem/tts/Shutdown()
-	tts_enabled = FALSE
-	for(var/datum/tts_request/data in in_process_http_messages)
-		var/datum/http_request/request = data.request
-		var/datum/http_request/request_blips = data.request_blips
-		UNTIL(request.is_complete() && request_blips.is_complete())
 
 #define SHIFT_DATA_ARRAY(tts_message_queue, target, data) \
 	popleft(##data); \
@@ -329,15 +334,12 @@ SUBSYSTEM_DEF(tts)
 		current_request.request = null
 		current_request.request_blips = null
 		if(MC_TICK_CHECK)
-			break
-
-	if(MC_TICK_CHECK)
-		return
+			return
 
 	var/list/processing_tts_messages = current_processing_tts_messages
 	while(processing_tts_messages.len)
 		if(MC_TICK_CHECK)
-			break
+			return
 
 		var/datum/tts_target = processing_tts_messages[processing_tts_messages.len]
 		var/list/data = processing_tts_messages[tts_target]
@@ -385,6 +387,8 @@ SUBSYSTEM_DEF(tts)
 			else if(current_target.when_to_play < world.time)
 				audio_file = new(current_target.audio_file)
 				audio_file_blips = new(current_target.audio_file_blips)
+				if(current_target.start_noise)
+					playsound(tts_target, current_target.start_noise, 5, TRUE)
 				play_tts(tts_target, current_target.listeners, audio_file, audio_file_blips, current_target.volume_offset)
 				if(length(data) != 1)
 					var/datum/tts_request/next_target = data[2]
@@ -401,7 +405,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, list/listeners, local = FALSE, volume_offset = 0, pitch = 0, special_filters = "")
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, filter, list/listeners, local = FALSE, volume_offset = 0, pitch = 0, special_filters = "", start_noise = null)
 	if(!tts_enabled)
 		return
 
@@ -409,8 +413,7 @@ SUBSYSTEM_DEF(tts)
 	if(!fexists("tmp/tts/init.txt"))
 		rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 
-	var/shell_scrubbed_input = message
-	var/identifier = "[sha1(speaker + num2text(pitch) + special_filters + shell_scrubbed_input)].[world.time]"
+	var/identifier = "[sha1(speaker + filter + num2text(pitch) + special_filters + message)].[world.time]"
 	if(!(speaker in available_speakers))
 		return
 
@@ -418,12 +421,14 @@ SUBSYSTEM_DEF(tts)
 	headers["Content-Type"] = "application/json"
 	headers["Authorization"] = "Bearer [CONFIG_GET(string/tts_http_token)]"
 	var/datum/http_request/request = new()
-	var/datum/http_request/request_blips = new()
+//	var/datum/http_request/request_blips = new()
 	var/file_name = "tmp/tts/[identifier].ogg"
-	var/file_name_blips = "tmp/tts/[identifier]_blips.ogg"
-	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name)
-	request_blips.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&ext=ogg&text=[shell_scrubbed_input]", null, headers, file_name_blips)
-	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, request_blips, shell_scrubbed_input, target, local, volume_offset, listeners, pitch)
+//	var/file_name_blips = "tmp/tts/[identifier]_blips.ogg"
+
+	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&pitch=[pitch]&ext=ogg&text=[message]", null, headers, file_name)
+//	request_blips.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&pitch=[pitch]&ext=ogg&text=[message]", null, headers, file_name_blips)
+	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, null/*request_blips*/, message, target, local, volume_offset, listeners, pitch, start_noise)
+
 	var/list/player_queued_tts_messages = queued_tts_messages[target]
 	if(!player_queued_tts_messages)
 		player_queued_tts_messages = list()
@@ -471,10 +476,12 @@ SUBSYSTEM_DEF(tts)
 	var/use_blips = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
+	/// Sfx to play when the voice is ready to play.
+	var/start_noise
 
 BSQL_PROTECT_DATUM(/datum/tts_request)
 
-/datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, volume_offset, list/listeners, pitch)
+/datum/tts_request/New(identifier, datum/http_request/request, datum/http_request/request_blips, message, target, local, volume_offset, list/listeners, pitch, start_noise)
 	. = ..()
 	src.identifier = identifier
 	src.request = request
@@ -485,14 +492,17 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	src.volume_offset = volume_offset
 	src.listeners = listeners
 	src.pitch = pitch
+	src.start_noise = start_noise
 	start_time = world.time
 
 /datum/tts_request/proc/start_requests()
 	if(istype(target, /client))
 		var/client/current_client = target
-		use_blips = (current_client?.prefs.tts_setting == TTS_SOUND_BLIPS)
+		use_blips = (current_client?.prefs.tts_mode == TTS_SOUND_BLIPS)
 	else if(istype(target, /mob))
-		use_blips = (target.client?.prefs.tts_setting == TTS_SOUND_BLIPS)
+		use_blips = (target.client?.prefs.tts_mode == TTS_SOUND_BLIPS)
+	request.begin_async()
+/*
 	if(local)
 		if(use_blips)
 			request_blips.begin_async()
@@ -501,17 +511,10 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	else
 		request.begin_async()
 		request_blips.begin_async()
-
-/datum/tts_request/proc/get_primary_request()
-	if(local)
-		if(use_blips)
-			return request_blips
-		else
-			return request
-	else
-		return request
+*/
 
 /datum/tts_request/proc/get_primary_response()
+/*
 	if(local)
 		if(use_blips)
 			return request_blips.into_response()
@@ -519,8 +522,11 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 			return request.into_response()
 	else
 		return request.into_response()
+*/
+	return request.into_response()
 
 /datum/tts_request/proc/requests_errored()
+/*
 	if(local)
 		var/datum/http_response/response
 		if(use_blips)
@@ -532,8 +538,12 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 		var/datum/http_response/response = request.into_response()
 		var/datum/http_response/response_blips = request_blips.into_response()
 		return response.errored || response_blips.errored
+*/
+	var/datum/http_response/response = request.into_response()
+	return response.errored
 
 /datum/tts_request/proc/requests_completed()
+/*
 	if(local)
 		if(use_blips)
 			return request_blips.is_complete()
@@ -541,6 +551,8 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 			return request.is_complete()
 	else
 		return request.is_complete() && request_blips.is_complete()
+*/
+	return request.is_complete()
 
 #undef SHIFT_DATA_ARRAY
 
@@ -627,4 +639,62 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	. = L.Copy()
 
 /mob
+	/// Text to speech voice. Set to null if no voice.
 	var/tts_voice
+	/// Text to speech filter. Filter that gets applied when passed in.
+	var/tts_voice_filter = ""
+	/// Text to speech pitch. Used to determine the pitch of the voice.
+	var/tts_voice_pitch = 0
+
+	var/speaking_noise
+	var/has_tts_voice = TRUE
+
+/client/verb/adjust_volume_tts()
+	set name = "Adjust Volume TTS"
+	set category = "Preferences.Sound"
+	adjust_volume_prefs(VOLUME_TTS, "Set the volume for TTS", 0)
+
+/datum/preferences
+	var/voice = "Random"
+	var/voice_pitch = 0
+	var/xeno_voice = "Random"
+	var/xeno_pitch = 0
+	var/synth_voice = "Random"
+	var/synth_pitch = 0
+	var/tts_mode = TTS_SOUND_ENABLED
+	var/tts_hivemind_mode = TTS_HIVEMIND_LEADERS
+	var/tts_radio_mode = TTS_RADIO_BIG_VOICE_ONLY
+	COOLDOWN_DECLARE(tts_test_cooldown)
+
+/datum/preferences/proc/tts_hivemind_to_text(value)
+	switch(value)
+		if(TTS_HIVEMIND_OFF)
+			return "Disabled"
+		if(TTS_HIVEMIND_QUEEN)
+			return "Queen"
+		if(TTS_HIVEMIND_LEADERS)
+			return "Queen and leaders"
+		if(TTS_HIVEMIND_ALL)
+			return "Everyone"
+
+/datum/species
+	/// Whether they have a TTS voice or not.
+	var/has_tts_voice = TRUE
+
+/datum/species/synthetic/colonial/working_joe
+	has_tts_voice = FALSE
+
+/datum/species/yautja
+	has_tts_voice = FALSE
+
+/mob/living/carbon/xenomorph
+	speaking_noise = "alien_talk"
+	tts_voice_filter = TTS_FILTER_XENO
+
+/mob/living/carbon/xenomorph/proc/init_voice()
+	if(!client)
+		return
+	if(!SStts.tts_enabled)
+		return
+	tts_voice = sanitize_inlist(client.prefs?.xeno_voice, SStts.available_speakers, pick(SStts.available_speakers))
+	tts_voice_pitch = client.prefs?.xeno_pitch
