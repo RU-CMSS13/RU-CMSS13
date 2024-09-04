@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(tts_voices_woman_whitelists, list(
 SUBSYSTEM_DEF(tts)
 	name = "Text To Speech"
 	wait = 0.05 SECONDS
-	init_order = 82
+	init_order = 84
 	priority = SS_PRIORITY_TTS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
