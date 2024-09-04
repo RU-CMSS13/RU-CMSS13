@@ -1528,6 +1528,78 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					if(new_age)
 						age = max(min( floor(text2num(new_age)), AGE_MAX),AGE_MIN)
 
+				//RUCM START
+				if("voice", "synth_voice", "xeno_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						switch(href_list["preference"])
+							if("voice")
+								voice = new_voice
+							if("synth_voice")
+								synth_voice = new_voice
+							if("xeno_voice")
+								xeno_voice = new_voice
+				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice_pitch = input(user, "Choose your voice's pitch:\n([-12] to [12])", "Character Preferences") as num|null
+					if(!isnull(new_voice_pitch))
+						switch(href_list["preference"])
+							if("voice_pitch")
+								voice_pitch = new_voice_pitch
+							if("synth_voice_pitch")
+								synth_pitch = new_voice_pitch
+							if("xeno_voice_pitch")
+								xeno_pitch = new_voice_pitch
+				if("test_voice")
+					if(!SStts.tts_enabled)
+						return
+					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
+						return
+
+					COOLDOWN_START(src, tts_test_cooldown, 0.5 SECONDS)
+					var/target_voice
+					var/target_pitch
+					var/target_filter = ""
+					switch(href_list["target_voice"])
+						if("human")
+							target_voice = voice
+							target_pitch = voice_pitch
+						if("synth")
+							target_voice = synth_voice
+							target_pitch = synth_pitch
+						if("xeno")
+							target_voice = xeno_voice
+							target_pitch = xeno_pitch
+							target_filter = TTS_FILTER_XENO
+
+					if(!target_voice)
+						return
+
+					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, target_filter, null, TRUE, 0, target_pitch)
+
+				if("hivemind_tts")
+					var/list/options = list(
+						tts_hivemind_to_text(TTS_HIVEMIND_ALL) = TTS_HIVEMIND_ALL,
+						tts_hivemind_to_text(TTS_HIVEMIND_LEADERS) = TTS_HIVEMIND_LEADERS,
+						tts_hivemind_to_text(TTS_HIVEMIND_QUEEN) = TTS_HIVEMIND_QUEEN,
+						tts_hivemind_to_text(TTS_HIVEMIND_OFF) = TTS_HIVEMIND_OFF
+					)
+					var/result_text = tgui_input_list(user, "Select hivemind TTS mode.", "Hivemind TTS Mode Selection", options, theme = "hive_status")
+					if(!result_text)
+						return
+					var/result_value = options[result_text]
+					tts_hivemind_mode = result_value
+
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+				//RUCM END
+
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
@@ -1932,71 +2004,6 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					toggles_ert ^= flag
 
 				//RUCM START
-				if("voice", "synth_voice", "xeno_voice")
-					if(!SStts.tts_enabled)
-						return
-					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
-					if(new_voice)
-						switch(href_list["preference"])
-							if("voice")
-								voice = new_voice
-							if("synth_voice")
-								synth_voice = new_voice
-							if("xeno_voice")
-								xeno_voice = new_voice
-				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
-					if(!SStts.tts_enabled)
-						return
-					var/new_voice_pitch = input(user, "Choose your voice's pitch:\n([-12] to [12])", "Character Preferences") as num|null
-					if(!isnull(new_voice_pitch))
-						switch(href_list["preference"])
-							if("voice_pitch")
-								voice_pitch = new_voice_pitch
-							if("synth_voice_pitch")
-								synth_pitch = new_voice_pitch
-							if("xeno_voice_pitch")
-								xeno_pitch = new_voice_pitch
-				if("test_voice")
-					if(!SStts.tts_enabled)
-						return
-					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
-						return
-
-					COOLDOWN_START(src, tts_test_cooldown, 0.5 SECONDS)
-					var/target_voice
-					var/target_pitch
-					var/target_filter = ""
-					switch(href_list["target_voice"])
-						if("human")
-							target_voice = voice
-							target_pitch = voice_pitch
-						if("synth")
-							target_voice = synth_voice
-							target_pitch = synth_pitch
-						if("xeno")
-							target_voice = xeno_voice
-							target_pitch = xeno_pitch
-							target_filter = TTS_FILTER_XENO
-
-					if(!target_voice)
-						return
-
-					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
-					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, target_filter, null, TRUE, 0, target_pitch)
-
-				if("hivemind_tts")
-					var/list/options = list(
-						tts_hivemind_to_text(TTS_HIVEMIND_ALL) = TTS_HIVEMIND_ALL,
-						tts_hivemind_to_text(TTS_HIVEMIND_LEADERS) = TTS_HIVEMIND_LEADERS,
-						tts_hivemind_to_text(TTS_HIVEMIND_QUEEN) = TTS_HIVEMIND_QUEEN,
-						tts_hivemind_to_text(TTS_HIVEMIND_OFF) = TTS_HIVEMIND_OFF
-					)
-					var/result_text = tgui_input_list(user, "Select hivemind TTS mode.", "Hivemind TTS Mode Selection", options, theme = "hive_status")
-					if(!result_text)
-						return
-					var/result_value = options[result_text]
-					tts_hivemind_mode = result_value
-
 				if("tts_mode")
 					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
 					if(new_mode)
