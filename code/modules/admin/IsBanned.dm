@@ -1,5 +1,4 @@
 #ifndef OVERRIDE_BAN_SYSTEM
-
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id, type, real_bans_only=FALSE, is_telemetry = FALSE)
 	var/ckey = ckey(key)

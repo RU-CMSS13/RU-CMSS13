@@ -455,7 +455,7 @@ SUBSYSTEM_DEF(tts)
 	/// When the audio file should play at the minimum
 	var/when_to_play = 0
 	/// Whether this request was timed out or not
-	var/timed_out = FALS
+	var/timed_out = FALSE
 	/// What's the pitch adjustment?
 	var/pitch = 0
 	/// Sfx to play when the voice is ready to play.
