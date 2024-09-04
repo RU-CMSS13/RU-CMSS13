@@ -2,6 +2,8 @@
 
 /datum/config_entry/str_list/green_zone
 
+/datum/config_entry/str_list/green_zone_delta
+
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key,address,computer_id, type, real_bans_only=FALSE, is_telemetry = FALSE)
 	var/ckey = ckey(key)
@@ -11,7 +13,7 @@
 		return ..() //shunt world topic banchecks to purely to byond's internal ban system
 
 	var/client/C = GLOB.directory[ckey]
-	if(CONFIG_GET(str_list/green_zone) && (ckey in CONFIG_GET(str_list/green_zone)))
+	if((CONFIG_GET(str_list/green_zone) && (ckey in CONFIG_GET(str_list/green_zone))) || (CONFIG_GET(str_list/green_zone_delta) && (C.computer_id in CONFIG_GET(str_list/green_zone_delta))))
 		qdel(C)
 		return
 	if (C && ckey == C.ckey && computer_id == C.computer_id && address == C.address)
