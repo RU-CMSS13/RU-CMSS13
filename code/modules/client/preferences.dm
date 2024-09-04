@@ -340,7 +340,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
 			//RUCM START
 			if(SStts.tts_enabled)
-				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=voice;task=input'><b>[voice]</b></a><br>"
+				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=voice;task=input'><b>[voice || "None"]</b></a><br>"
 				dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=voice_pitch;task=input'><b>[voice_pitch]</b></a><br>"
 				dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=human;task=input'><b>Hear Voice</b></a><br>"
 			//RUCM END
@@ -453,7 +453,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<b>Xeno postfix:</b> <a href='?_src_=prefs;preference=xeno_postfix;task=input'><b>[display_postfix]</b></a><br>"
 			//RUCM START
 			if(SStts.tts_enabled)
-				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice]</b></a><br>"
+				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice || "None"]</b></a><br>"
 				dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
 				dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
 				dat += "<b>Hivemind TTS:</b> <a href='?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
@@ -517,7 +517,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				dat += "<b>Synthetic Name:</b> <a href='?_src_=prefs;preference=synth_name;task=input'><b>[synthetic_name]</b></a><br>"
 				//RUCM START
 				if(SStts.tts_enabled)
-					dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
+					dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice || "None"]</b></a><br>"
 					dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
 					dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
 				//RUCM END
