@@ -549,6 +549,10 @@
 	S["underwear"] >> underwear
 	S["undershirt"] >> undershirt
 	S["backbag"] >> backbag
+	//RUCM START
+	S["human_voice"] >> voice
+	S["human_pitch"] >> voice_pitch
+	//RUCM END
 	//S["b_type"] >> b_type
 
 	//Jobs
