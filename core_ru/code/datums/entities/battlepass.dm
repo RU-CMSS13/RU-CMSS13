@@ -57,12 +57,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 /datum/entity_meta/battlepass_player/map(datum/entity/battlepass_player/battlepass, list/values)
 	. = ..()
 	if(values["daily_challenges"])
-		var/list/decoded = json_decode(values["daily_challenges"])
-		for(var/list/entry as anything in decoded)
-			var/datum/battlepass_challenge/challenge = new (entry)
-			battlepass.mapped_daily_challenges += challenge
-			battlepass.RegisterSignal(challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, TYPE_PROC_REF(/datum/entity/battlepass_player, on_challenge_complete))
-
+		INVOKE_ASYNC(src, PROC_REF(safe_load_challenges), battlepass, values["daily_challenges"])
 	if(values["rewards"])
 		battlepass.mapped_rewards = json_decode(values["rewards"])
 	if(!battlepass.mapped_rewards)
@@ -72,6 +67,14 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
 	if(!battlepass.mapped_premium_rewards)
 		battlepass.mapped_premium_rewards = list()
+
+//fix for shitty shit
+/datum/entity_meta/battlepass_player/proc/safe_load_challenges(datum/entity/battlepass_player/battlepass, list/daily_challenges)
+	var/list/decoded = json_decode(daily_challenges)
+	for(var/list/entry as anything in decoded)
+		var/datum/battlepass_challenge/challenge = new (entry)
+		battlepass.mapped_daily_challenges += challenge
+		battlepass.RegisterSignal(challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, TYPE_PROC_REF(/datum/entity/battlepass_player, on_challenge_complete))
 
 /datum/entity_meta/battlepass_player/unmap(datum/entity/battlepass_player/battlepass)
 	. = ..()
