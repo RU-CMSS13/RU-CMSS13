@@ -37,6 +37,7 @@ GLOBAL_LIST_INIT_TYPED(server_battlepasses, /datum/view_record/battlepass_server
 			GLOB.current_battlepass.check_pre_ending_starting()
 		else if(text2num(GLOB.round_id) > GLOB.current_battlepass.end_round_id)
 			GLOB.current_battlepass.status = "Ended"
+		GLOB.current_battlepass.save()
 
 /proc/prepare_next_season(list/datum/entity/battlepass_server/_battlepass)
 	if(length(_battlepass))
@@ -105,13 +106,14 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_server)
 	UNTIL(length(GLOB.current_battlepasses))
 	var/max_lvls = 0
 	for(var/datum/view_record/battlepass_player/battlepass in GLOB.current_battlepasses)
-		if(battlepass.tier < max_tier)
+		if(battlepass.xp < max_tier * xp_per_tier_up)
 			continue
 		max_lvls++
 
 	var/percentage = length(GLOB.current_battlepasses) / max_lvls * 100
-	if(percentage > 100 - (text2num(GLOB.round_id) - start_round_id) / 5)
+	if(percentage > 100 - (text2num(GLOB.round_id) - start_round_id) / 10)
 		end_round_id = text2num(GLOB.round_id) + round(100 - percentage)
+		save()
 		DB_FILTER(/datum/entity/battlepass_server, DB_COMP("season", DB_EQUALS, season + 1), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(prepare_next_season)))
 
 /datum/view_record/battlepass_server

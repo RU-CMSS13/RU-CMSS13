@@ -23,7 +23,6 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 /datum/entity/battlepass_player
 	var/player_id
 	var/season
-	var/tier = 0
 	var/xp = 0
 	var/daily_challenges_last_updated
 	var/daily_challenges
@@ -31,6 +30,7 @@ GLOBAL_LIST_INIT_TYPED(client_loaded_battlepasses, /datum/entity/battlepass_play
 	var/premium_rewards
 	var/premium = FALSE
 
+	var/tier
 	var/datum/entity/player/owner
 	var/list/datum/battlepass_challenge/mapped_daily_challenges = list()
 	var/list/mapped_rewards
@@ -44,7 +44,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	field_types = list(
 		"player_id" = DB_FIELDTYPE_BIGINT,
 		"season" = DB_FIELDTYPE_BIGINT,
-		"tier" = DB_FIELDTYPE_BIGINT,
 		"xp" = DB_FIELDTYPE_BIGINT,
 		"daily_challenges_last_updated" = DB_FIELDTYPE_BIGINT,
 		"daily_challenges" = DB_FIELDTYPE_STRING_MAX,
@@ -67,6 +66,8 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 		battlepass.mapped_premium_rewards = json_decode(values["premium_rewards"])
 	if(!battlepass.mapped_premium_rewards)
 		battlepass.mapped_premium_rewards = list()
+
+	battlepass.tier = battlepass.xp / GLOB.current_battlepass.xp_per_tier_up - battlepass.xp % GLOB.current_battlepass.xp_per_tier_up
 
 //fix for shitty shit
 /datum/entity_meta/battlepass_player/proc/safe_load_challenges(datum/entity/battlepass_player/battlepass, list/daily_challenges)
@@ -105,6 +106,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	check_daily_challenge_reset()
 
 /datum/entity/battlepass_player/proc/verify_rewards()
+	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
 		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
 		if(!length(params))
@@ -131,6 +133,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	save()
 
 /datum/entity/battlepass_player/proc/add_xp(xp_amount)
+	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
 	if(tier >= GLOB.current_battlepass.max_tier)
 		return
 	if(owner?.donator_info)
@@ -141,11 +144,11 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	check_tier_up()
 
 /datum/entity/battlepass_player/proc/check_tier_up()
-	if(tier < GLOB.current_battlepass.max_tier && xp >= GLOB.current_battlepass.xp_per_tier_up)
-		xp -= GLOB.current_battlepass.xp_per_tier_up
-		tier++
-		on_tier_up()
-		check_tier_up()
+	if(xp - (tier * GLOB.current_battlepass.xp_per_tier_up) < GLOB.current_battlepass.xp_per_tier_up)
+		return
+	tier++
+	on_tier_up()
+	check_tier_up()
 
 /datum/entity/battlepass_player/proc/on_tier_up()
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
@@ -236,35 +239,34 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	)
 
 /datum/entity/battlepass_player/ui_data(mob/user)
-	var/list/data = list()
+	. = list()
 
-	data["tier"] = tier
+	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
+	.["tier"] = tier
 	if(GLOB.current_battlepass.end_round_id)
-		data["remaining_rounds"] = "Warning, this battlepass endning in [GLOB.current_battlepass.end_round_id - text2num(GLOB.round_id)] ROUNDS!"
-	data["premium"] = premium
-	data["xp"] = tier >= GLOB.current_battlepass.max_tier ? GLOB.current_battlepass.xp_per_tier_up : xp
-	data["xp_tierup"] = GLOB.current_battlepass.xp_per_tier_up
-
-	return data
+		.["remaining_rounds"] = "Warning, this battlepass endning in [GLOB.current_battlepass.end_round_id - text2num(GLOB.round_id)] ROUNDS!"
+	.["premium"] = premium
+	.["xp"] = xp % GLOB.current_battlepass.xp_per_tier_up
+	.["xp_tierup"] = GLOB.current_battlepass.xp_per_tier_up
 
 /datum/entity/battlepass_player/ui_static_data(mob/user)
-	var/list/data = list()
+	. = list()
 
-	data["season"] = "Season: [GLOB.current_battlepass.season_name] ([GLOB.current_battlepass.season])"
-	data["max_tier"] = GLOB.current_battlepass.max_tier
+	.["season"] = "Season: [GLOB.current_battlepass.season_name] ([GLOB.current_battlepass.season])"
+	.["max_tier"] = GLOB.current_battlepass.max_tier
 
-	data["rewards"] = list()
+	.["rewards"] = list()
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
 		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
-		data["rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
+		.["rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
 
-	data["premium"] = premium
-	data["premium_rewards"] = list()
+	.["premium"] = premium
+	.["premium_rewards"] = list()
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_premium_rewards)
 		var/list/params = GLOB.current_battlepass.mapped_premium_rewards[list_key]
-		data["premium_rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
+		.["premium_rewards"] += list(GLOB.battlepass_rewards[params["type"]].get_ui_data(params))
 
-	data["daily_challenges"] = list()
+	.["daily_challenges"] = list()
 	for(var/datum/battlepass_challenge/daily_challenge as anything in mapped_daily_challenges)
 		var/list/completion = list()
 		for(var/datum/battlepass_challenge_module/module as anything in daily_challenge.modules)
@@ -277,15 +279,13 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 					"completion_denominator" = module.req[progress_name][2],
 				))
 
-		data["daily_challenges"] += list(list(
+		.["daily_challenges"] += list(list(
 			"name" = daily_challenge.name,
 			"desc" = daily_challenge.desc,
 			"completed" = daily_challenge.completed,
 			"completion_xp" = daily_challenge.xp_completion,
 			"completion" = completion,
 		))
-
-	return data
 
 
 
@@ -301,7 +301,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 /datum/view_record/battlepass_player
 	var/player_id
 	var/season
-	var/tier
 	var/xp
 	var/daily_challenges_last_updated
 	var/daily_challenges
@@ -319,7 +318,6 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	fields = list(
 		"player_id",
 		"season",
-		"tier",
 		"xp",
 		"daily_challenges_last_updated",
 		"daily_challenges",
