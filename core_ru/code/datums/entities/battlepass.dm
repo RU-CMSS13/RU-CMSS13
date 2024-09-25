@@ -67,7 +67,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	if(!battlepass.mapped_premium_rewards)
 		battlepass.mapped_premium_rewards = list()
 
-	battlepass.tier = battlepass.xp / GLOB.current_battlepass.xp_per_tier_up - battlepass.xp % GLOB.current_battlepass.xp_per_tier_up
+	battlepass.tier = (battlepass.xp - battlepass.xp % GLOB.current_battlepass.xp_per_tier_up) / GLOB.current_battlepass.xp_per_tier_up
 
 //fix for shitty shit
 /datum/entity_meta/battlepass_player/proc/safe_load_challenges(datum/entity/battlepass_player/battlepass, list/daily_challenges)
@@ -106,7 +106,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	check_daily_challenge_reset()
 
 /datum/entity/battlepass_player/proc/verify_rewards()
-	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
+	tier = (xp - xp % GLOB.current_battlepass.xp_per_tier_up) / GLOB.current_battlepass.xp_per_tier_up
 	for(var/list_key as anything in GLOB.current_battlepass.mapped_rewards)
 		var/list/params = GLOB.current_battlepass.mapped_rewards[list_key]
 		if(!length(params))
@@ -133,7 +133,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	save()
 
 /datum/entity/battlepass_player/proc/add_xp(xp_amount)
-	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
+	tier = (xp - xp % GLOB.current_battlepass.xp_per_tier_up) / GLOB.current_battlepass.xp_per_tier_up
 	if(tier >= GLOB.current_battlepass.max_tier)
 		return
 	if(owner?.donator_info)
@@ -241,7 +241,7 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 /datum/entity/battlepass_player/ui_data(mob/user)
 	. = list()
 
-	tier = xp / GLOB.current_battlepass.xp_per_tier_up - xp % GLOB.current_battlepass.xp_per_tier_up
+	tier = (xp - xp % GLOB.current_battlepass.xp_per_tier_up) / GLOB.current_battlepass.xp_per_tier_up
 	.["tier"] = tier
 	if(GLOB.current_battlepass.end_round_id)
 		.["remaining_rounds"] = "Warning, this battlepass endning in [GLOB.current_battlepass.end_round_id - text2num(GLOB.round_id)] ROUNDS!"
