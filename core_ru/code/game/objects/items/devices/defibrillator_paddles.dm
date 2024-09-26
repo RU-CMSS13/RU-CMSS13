@@ -33,6 +33,9 @@
 	remove_attached()
 	. = ..()
 
+/obj/item/device/paddles/beam(atom/BeamTarget, icon_state="b_beam", icon='icons/effects/beam.dmi', time = BEAM_INFINITE_DURATION, maxdistance = INFINITY, beam_type=/obj/effect/ebeam, always_turn = TRUE)
+	. = ..(BeamTarget, icon_state, 'core_ru/icons/effects/beam.dmi', time, maxdistance, beam_type, always_turn)
+
 /obj/item/device/paddles/proc/attach_to(obj/item/device/defibrillator/to_attach)
 	if(!istype(to_attach))
 		return

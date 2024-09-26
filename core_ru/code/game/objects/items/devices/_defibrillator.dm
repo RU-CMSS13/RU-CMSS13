@@ -101,6 +101,12 @@
 	else
 		overlays += image(icon, "+empty")
 
+//No flying aroun da map, defib is heavy, medic is stupid
+/obj/item/device/defibrillator/try_to_throw(mob/living/user)
+	if(!paddles_type || paddles_type.loc != src)
+		return FALSE
+	return TRUE
+
 /obj/item/device/defibrillator/get_examine_text(mob/user)
 	. = ..()
 	var/maxuses = 0
