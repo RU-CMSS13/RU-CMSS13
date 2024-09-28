@@ -62,23 +62,23 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 		completed = check_challenge_completed()
 		regenerate_desc()
 
-/datum/battlepass_challenge/proc/generate_challenge(already_taken_tasks)
+/datum/battlepass_challenge/proc/generate_challenge(list/available_modules)
 	var/challenge_type_flag = pick(BATTLEPASS_HUMAN_CHALLENGE, BATTLEPASS_XENO_CHALLENGE)
 
 	var/total_xp_modificator = 1
 	var/total_main_modules = rand(1, 3)
-	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
-	available_modules -= already_taken_tasks
+	var/list/currentrun_available = available_modules.Copy()
+	var/list/modules_removal_pending = list()
 	for(var/i = 1, i <= total_main_modules, i++)
-		if(!length(available_modules))
+		if(!length(currentrun_available))
 			break
 
 		var/datum/battlepass_challenge_module/main_requirement/new_module
-		while(!new_module && length(available_modules))
-			var/datum/battlepass_challenge_module/selected_type = pick_weight(available_modules)
+		while(!new_module && length(currentrun_available))
+			var/datum/battlepass_challenge_module/selected_type = pick_weight(currentrun_available)
 			if(!(initial(selected_type.mob_challenge_flags) & challenge_type_flag))
-				already_taken_tasks += selected_type
-				available_modules -= selected_type
+				currentrun_available -= selected_type
+				modules_removal_pending += selected_type
 				continue
 			new_module = new selected_type()
 
@@ -102,6 +102,7 @@ GLOBAL_LIST_INIT(challenge_condition_modules_weighted, load_condition_modules_we
 
 	xp_completion *= total_xp_modificator
 	regenerate_desc()
+	available_modules -= modules_removal_pending
 	return TRUE
 
 /datum/battlepass_challenge/proc/regenerate_desc()

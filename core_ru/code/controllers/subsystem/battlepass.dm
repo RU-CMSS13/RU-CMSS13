@@ -17,13 +17,13 @@ SUBSYSTEM_DEF(battlepass)
 /datum/controller/subsystem/battlepass/Initialize()
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/battlepass/proc/create_challenge(repeats, taken_tasks)
+/datum/controller/subsystem/battlepass/proc/create_challenge(list/available_modules, repeats)
 	if(repeats > 5)
 		stack_trace("Fatal error in challenge generation")
 		return
 	var/datum/battlepass_challenge/new_challenge = new
-	if(!new_challenge.generate_challenge(taken_tasks))
-		return create_challenge(++repeats, taken_tasks)
+	if(!new_challenge.generate_challenge(available_modules))
+		return create_challenge(available_modules, ++repeats)
 	return new_challenge
 
 /datum/controller/subsystem/battlepass/proc/give_sides_points(marine_points = 0, xeno_points = 0)

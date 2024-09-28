@@ -205,8 +205,9 @@ BSQL_PROTECT_DATUM(/datum/entity/battlepass_player)
 	// We give the player 2 marine challenges and 2 xeno challenges
 	QDEL_LIST(mapped_daily_challenges)
 
+	var/list/available_modules = GLOB.challenge_modules_weighted.Copy()
 	for(var/i in 1 to 3)
-		var/datum/battlepass_challenge/new_challenge = SSbattlepass.create_challenge(0, list())
+		var/datum/battlepass_challenge/new_challenge = SSbattlepass.create_challenge(available_modules, 0)
 		if(!new_challenge)
 			continue
 		RegisterSignal(new_challenge, COMSIG_BATTLEPASS_CHALLENGE_COMPLETED, PROC_REF(on_challenge_complete))

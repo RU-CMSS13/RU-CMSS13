@@ -67,3 +67,7 @@
 	pick_weight = 0 // WIP
 
 	compatibility = list("strict" = list(), "subtyped" = list(/datum/battlepass_challenge_module/requirement))
+
+#undef BATTLEPASS_HUMAN_CHALLENGE
+#undef BATTLEPASS_XENO_CHALLENGE
+#undef BATTLEPASS_CHALLENGE_WEAPON
