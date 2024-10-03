@@ -35,7 +35,9 @@
 
 	var/squads_max_num = 4
 
+/*
 	var/weather_holder
+*/
 
 	var/list/survivor_types
 	var/list/survivor_types_by_variant
@@ -64,6 +66,14 @@
 	var/vote_cycle = 1
 
 	var/nightmare_path
+
+//RUCM START
+	var/list/map_global_light_modificator = list()
+	var/list/map_global_light_colors = list()
+	var/custom_time_length = list()
+
+	var/list/weather = list()
+//RUCM END
 
 	/// If truthy this is config for a round overridden map: search for override maps in data/, instead of using a path in maps/
 	var/override_map
@@ -347,11 +357,37 @@
 	if(json["infection_announce_text"])
 		infection_announce_text = json["infection_announce_text"]
 
+/*
 	if(json["weather_holder"])
 		weather_holder = text2path(json["weather_holder"])
 		if(!weather_holder)
 			log_world("map_config weather_holder is not a proper typepath!")
 			return
+*/
+//RUCM START
+	if(islist(json["map_global_light_modificator"]))
+		if(!islist(json["map_global_light_modificator"]))
+			log_world("map_config custom day/night modificator is not a list!")
+			return
+		map_global_light_modificator = json["map_global_light_modificator"]
+
+	if(islist(json["map_global_light_colors"]))
+		if(!islist(json["map_global_light_colors"]))
+			log_world("map_config custom day/night colors is not a list!")
+			return
+		map_global_light_colors = json["map_global_light_colors"]
+
+	if(json["custom_time_length"])
+		custom_time_length = json["custom_time_length"]
+	else
+		custom_time_length = 24 HOURS
+
+	if(islist(json["weather"]))
+		weather = json["weather"]
+	else if(!isnull(json["weather"]))
+		log_world("map_config weather is not a list!")
+		return
+//RUCM END
 
 	if(json["map_item_type"])
 		map_item_type = text2path(json["map_item_type"])

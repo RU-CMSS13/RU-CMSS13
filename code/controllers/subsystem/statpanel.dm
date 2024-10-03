@@ -33,7 +33,13 @@ SUBSYSTEM_DEF(statpanels)
 //   "Round Time: [ROUND_TIME]",
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
 			"Round Time: [duration2text()]",
+/*
 			"Operation Time: [worldtime2text()]",
+*/
+//RUCM START
+			"Operation Time: [game_time_timestamp()]",
+			"Operation Zone Time: [planet_game_time_timestamp()]",
+//RUCM END
 		)
 
 		src.currentrun = GLOB.clients.Copy()

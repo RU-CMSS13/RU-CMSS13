@@ -26,3 +26,15 @@
 
 	qdel(src)
 	return TRUE
+
+/mob/dead/observer/Life(delta_time)
+	..()
+	if(!loc)
+		return
+	if(!client)
+		return FALSE
+
+	if(SSweather_conditions.running_weather)
+		SSweather_conditions.running_weather.process_mob_effect(src, delta_time)
+
+	return TRUE

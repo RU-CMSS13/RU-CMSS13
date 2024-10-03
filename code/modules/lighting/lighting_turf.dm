@@ -26,6 +26,7 @@
 	for(var/atom/movable/lighting_mask/mask as anything in hybrid_lights_affecting)
 		mask.queue_mask_update()
 
+/* RUCM CHANGE
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	var/totallums = 0
@@ -58,6 +59,7 @@
 		else
 			totallums -= LIGHT_POWER_ESTIMATION(mask.alpha, mask.radius, get_dist(src, get_turf(mask.attached_atom)))
 	return clamp(totallums, 0.0, 1.0)
+*/
 
 ///Proc to add movable sources of opacity on the turf and let it handle lighting code.
 /turf/proc/add_opacity_source(atom/movable/new_source)

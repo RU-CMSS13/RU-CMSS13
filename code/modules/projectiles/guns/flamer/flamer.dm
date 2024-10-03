@@ -795,11 +795,20 @@
 
 /obj/flamer_fire/proc/update_in_weather_status()
 	SIGNAL_HANDLER
+/*
 	var/area/A = get_area(src)
 	if(!A)
 		return
 	if(SSweather.is_weather_event && locate(A) in SSweather.weather_areas)
 		weather_smothering_strength = SSweather.weather_event_instance.fire_smothering_strength
+*/
+//RUCM START
+	var/turf/turf = get_turf(src)
+	if(!turf)
+		return
+	if(SSweather_conditions.running_weather && turf.turf_flags & TURF_WEATHER)
+		weather_smothering_strength = SSweather_conditions.running_weather.fire_smothering_strength
+//RUCM END
 	else
 		weather_smothering_strength = 0
 

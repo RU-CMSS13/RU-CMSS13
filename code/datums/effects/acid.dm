@@ -100,6 +100,7 @@
 /datum/effects/acid/proc/handle_weather()
 	SIGNAL_HANDLER
 
+/*
 	var/area/acids_area = get_area(src)
 	if(!acids_area)
 		return
@@ -112,4 +113,11 @@
 		//ideally this would look like the rain dilutting the acid
 		//but since we dont want to check every process if we're in weather etc...
 		//its just a one permenant time stat change
-
+*/
+//RUCM START
+	var/turf/turf = get_turf(affected_atom)
+	if(SSweather_conditions.running_weather && turf.turf_flags & TURF_WEATHER)
+		duration = duration - (duration * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))
+		damage_in_total_human = damage_in_total_human - (damage_in_total_human * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))
+		damage_in_total_obj = damage_in_total_obj - (damage_in_total_obj * (SSweather_conditions.running_weather.fire_smothering_strength * 0.1))
+//RUCM END

@@ -71,9 +71,19 @@
 	if(user.action_busy)
 		return
 
+//RUCM START
+	if(istype(target, /obj/structure/snow))
+		var/obj/structure/snow/snow
+		target = snow.snowed_turf
+//RUCM END
+
 	if(!dirt_amt)
 		var/turf/T = target
 		var/turfdirt = T.get_dirt_type()
+//RUCM START
+		if(T.snow)
+			turfdirt = DIRT_TYPE_SNOW
+//RUCM END
 		if(turfdirt)
 			to_chat(user, SPAN_NOTICE("You start digging."))
 			playsound(user.loc, 'sound/effects/thud.ogg', 40, 1, 6)
@@ -82,7 +92,14 @@
 				return
 
 			var/transfer_amount = dirt_amt_per_dig
+/*
 			if(istype(T,/turf/open))
+*/
+//RUCM START
+			if(T.snow)
+				T.snow.changing_layer(T.snow.bleed_layer - transfer_amount)
+			else if(istype(T, /turf/open))
+//RUCM END
 				var/turf/open/OT = T
 				if(OT.bleed_layer)
 					transfer_amount = min(OT.bleed_layer, dirt_amt_per_dig)
@@ -149,6 +166,7 @@
 	else
 		dump_shovel(target, user)
 
+/*
 /obj/item/tool/shovel/proc/dump_shovel(atom/target, mob/user)
 	var/turf/T = target
 	to_chat(user, SPAN_NOTICE("You dump the [dirt_type_to_name(dirt_type)]!"))
@@ -161,6 +179,34 @@
 			new /obj/item/stack/snow(T, dirt_amt)
 	dirt_amt = 0
 	update_icon()
+*/
+//RUCM START
+/obj/item/tool/shovel/proc/dump_shovel(atom/target, mob/user)
+	if(istype(target, /turf))
+		var/turf/turf = target
+		to_chat(user, SPAN_NOTICE("You dump the [dirt_type_to_name(dirt_type)]!"))
+		playsound(user.loc, "rustle", 30, 1, 6)
+		if(dirt_type == DIRT_TYPE_SNOW)
+			var/obj/item/stack/snow/S = locate() in turf
+			if(S && S.amount + dirt_amt < S.max_amount)
+				S.amount += dirt_amt
+			else
+				new /obj/item/stack/snow(turf, dirt_amt)
+		dirt_amt = 0
+
+	else if(istype(target, /obj/structure/snow) && dirt_type == DIRT_TYPE_SNOW)
+		var/obj/structure/snow/snow = target
+		if(snow.bleed_layer >= MAX_LAYER_SNOW_LEVELS)
+			to_chat(user, SPAN_NOTICE("There no more space!"))
+			return
+		else
+			to_chat(user, SPAN_NOTICE("You dump the [dirt_type_to_name(dirt_type)]!"))
+			playsound(user.loc, "rustle", 30, 1, 6)
+			snow.changing_layer(1)
+			dirt_amt = 0
+
+	update_icon()
+//RUCM END
 
 /obj/item/tool/shovel/proc/dirt_type_to_name(dirt_type)
 	switch(dirt_type)

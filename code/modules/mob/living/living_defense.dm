@@ -187,8 +187,14 @@
 		return TRUE
 	if(fire_stacks > 0)
 		adjust_fire_stacks(-0.5, min_stacks = 0) //the fire is consumed slowly
+/*
 	if(current_weather_effect_type && SSweather && SSweather.weather_event_instance)
 		adjust_fire_stacks(-SSweather.weather_event_instance.fire_smothering_strength, min_stacks = 0)
+*/
+//RUCM START
+	if(current_weather_effect_type)
+		adjust_fire_stacks(-current_weather_effect_type.fire_smothering_strength, min_stacks = 0)
+//RUCM END
 
 /mob/living/fire_act()
 	TryIgniteMob(2)
@@ -203,6 +209,7 @@
 //Mobs on Fire end
 
 /mob/living/proc/handle_weather(delta_time = 1)
+/*
 	var/starting_weather_type = current_weather_effect_type
 	var/area/area = get_area(src)
 	// Check if we're supposed to be something affected by weather
@@ -217,6 +224,15 @@
 			overlay_fullscreen("weather", SSweather.weather_event_instance.fullscreen_type)
 		else
 			clear_fullscreen("weather")
+*/
+//RUCM START
+	var/turf/turf = get_turf(src)
+	if(!SSweather_conditions.running_weather || !(turf.turf_flags & TURF_WEATHER))
+		current_weather_effect_type = null
+	else
+		current_weather_effect_type = SSweather_conditions.running_weather
+	SSweather_conditions.running_weather.process_mob_effect(src, delta_time)
+//RUCM END
 
 /mob/living/handle_flamer_fire(obj/flamer_fire/fire, damage, delta_time)
 	. = ..()

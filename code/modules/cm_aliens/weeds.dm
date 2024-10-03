@@ -221,7 +221,7 @@
 		if(!istype(T))
 			continue
 		var/is_weedable = T.is_weedable()
-		if(!is_weedable)
+		if(!is_weedable || T.snow)
 			continue
 		if(!spread_on_semiweedable && is_weedable < FULLY_WEEDABLE)
 			continue

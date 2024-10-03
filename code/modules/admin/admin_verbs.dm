@@ -162,7 +162,12 @@ GLOBAL_LIST_INIT(admin_verbs_major_event, list(
 	/client/proc/force_load_lazy_template,
 	/client/proc/enable_podlauncher,
 	/client/proc/change_taskbar_icon,
+/*
 	/client/proc/change_weather,
+*/
+//RUCM START
+	/client/proc/run_particle_weather,
+//RUCM END
 	/client/proc/admin_blurb
 ))
 

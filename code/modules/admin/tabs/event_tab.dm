@@ -1004,6 +1004,7 @@
 	SSticker.set_clients_taskbar_icon(taskbar_icon)
 	message_admins("[key_name_admin(usr)] has changed the taskbar icon to [taskbar_icon].")
 
+/* RUCM CHANGE
 /client/proc/change_weather()
 	set name = "Change Weather"
 	set category = "Admin.Events"
@@ -1038,7 +1039,44 @@
 		to_chat(src, SPAN_WARNING("Could not start the weather event at present!"))
 		return
 	to_chat(src, SPAN_BOLDNOTICE("Success! The weather event should start shortly."))
+*/
+//RUCM START
+/client/proc/run_particle_weather()
+	set name = "Run Particle Weather"
+	set desc = "Triggers a particle weather"
+	set category = "Admin.Events"
 
+	if(!check_rights(R_ADMIN))
+		return
+
+	if(SSweather_conditions.running_weather)
+		if(tgui_alert(src, "A weather event is already in progress! End it?", "Confirm", list("End", "Continue"), 10 SECONDS) == "End")
+			if(SSweather_conditions.running_weather)
+				SSweather_conditions.running_weather.end()
+			return
+
+	if(SSweather_conditions.next_hit)
+		switch(tgui_alert(src, "A next weather event is already in delay! What to do?", "Confirm", list("Start", "Change", "Cancel"), 10 SECONDS))
+			if("Cancel")
+				return
+			if("Start")
+				if(SSweather_conditions.next_hit)
+					SSweather_conditions.run_weather(SSweather_conditions.next_hit, TRUE)
+				return
+
+	var/weather_type = tgui_input_list(src, "Select a weather event to start", "Weather Selector", sort_list(subtypesof(/datum/particle_weather), GLOBAL_PROC_REF(cmp_typepaths_asc)))
+	if(!weather_type)
+		return
+
+	if(tgui_alert(src, "A weather event is already in progress! End it?", "Confirm", list("Instant", "Delayed"), 10 SECONDS) == "Delayed")
+		SSweather_conditions.next_hit = new weather_type()
+		COOLDOWN_START(SSweather_conditions, next_weather_start, rand(-3000, 3000) + initial(SSweather_conditions.next_hit.weather_duration_upper) / 5)
+	else
+		SSweather_conditions.run_weather(new weather_type(), TRUE)
+
+	message_admins("[key_name_admin(usr)] started weather of type [weather_type]. What a cunt.")
+	log_admin("[key_name(usr)] started weather of type [weather_type]. What a cunt.")
+//RUCM END
 
 /client/proc/cmd_admin_create_bioscan()
 	set name = "Report: Bioscan"
