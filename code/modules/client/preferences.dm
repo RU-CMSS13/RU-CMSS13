@@ -609,6 +609,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			//RUCM START
 			if(SStts.tts_enabled)
 				dat += "<b>TTS Mode:</b> <a href='?_src_=prefs;preference=tts_mode'><b>[tts_mode]</b></a><br>"
+			dat += "<b>End Of Round Death Match:</b> <a href='?_src_=prefs;preference=ooc_flag'><b>[(toggle_prefs & TOGGLE_END_OF_ROUND_ARENA) ? "Enabled" : "Disabled"]</b></a><br>"
 			//RUCM END
 			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'><b>[toggle_prefs & TOGGLE_AMBIENT_OCCLUSION ? "Enabled" : "Disabled"]</b></a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"

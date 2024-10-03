@@ -181,6 +181,16 @@ GLOBAL_VAR_INIT(cas_tracking_id_increment, 0) //this var used to assign unique t
 			else
 				record_playtime(M.client.player_data, M.job, type)
 
+//RUCM START
+//Fuck shitty old code and... ... you know.
+	if(GLOB.arena_active)
+		for(var/client/target_client in GLOB.clients)
+			CHECK_TICK
+			if(!(target_client.prefs.toggle_prefs & TOGGLE_END_OF_ROUND_ARENA) || !target_client.mob)
+				continue
+			drop_to_arena(target_client)
+//RUCM END
+
 /datum/game_mode/proc/show_end_statistics(icon_state)
 	GLOB.round_statistics.update_panel_data()
 	for(var/mob/M in GLOB.player_list)
