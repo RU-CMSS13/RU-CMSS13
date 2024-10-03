@@ -33,6 +33,7 @@ GLOBAL_VAR_INIT(arena_active, TRUE)
 	target_client.mob.RegisterSignal(target_client.mob, COMSIG_MOB_GHOSTIZE, GLOBAL_PROC_REF(set_right_timeofdeath), timeofdeath)
 
 /proc/set_right_timeofdeath(mob/source, real_timeofdeath)
+	set waitfor = FALSE
 	// Funny fuckery
 	var/client/target_client = source.client
 	sleep(1) // Give time for a shitty cm code to do their fuckery around with timeofdeath and set it to 1 or right now, and then we place a real one
