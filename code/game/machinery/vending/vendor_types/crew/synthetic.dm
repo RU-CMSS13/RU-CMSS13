@@ -406,6 +406,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth_snowflake, list(
 GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("PK-130", 0, null, null, null),
 	list("PK-130 Repair Mode", 7, /obj/item/device/simi_chip/repair, null, VENDOR_ITEM_RECOMMENDED),
+	list("PK-130 Rescue Hook", 7, /obj/item/device/simi_chip/rescue_hook, null, VENDOR_ITEM_RECOMMENDED),
 	list("PK-130 Protection Mode", 7, /obj/item/device/simi_chip/protect, null, VENDOR_ITEM_REGULAR),
 	list("PK-130 Anchor Mode", 4, /obj/item/device/simi_chip/anchor, null, VENDOR_ITEM_REGULAR),
 	list("PK-130 Motion Detector", 4, /obj/item/device/simi_chip/motion_detector, null, VENDOR_ITEM_REGULAR),
