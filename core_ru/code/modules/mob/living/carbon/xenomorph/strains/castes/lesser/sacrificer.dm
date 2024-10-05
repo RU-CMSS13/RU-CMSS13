@@ -160,8 +160,8 @@
 
 	var/image/shield = image("icon"='icons/mob/xenos/overlay_effects64x64.dmi', "icon_state" = "shield2", pixel_x = - 16, pixel_y = -8)
 	shield.color = "#cf1d1d"
-	overlays_standing[9] = shield
-	apply_overlay(9)
+	overlays_standing[LESSER_SHIELD_OVERLAY] = shield
+	apply_overlay(LESSER_SHIELD_OVERLAY)
 	addtimer(CALLBACK(src, PROC_REF(remove_overlay), 9), 100)
 
 
