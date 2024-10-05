@@ -17,7 +17,7 @@
 	lesser.plasmapool_modifier = 1.5 // ~500
 	lesser.speed_modifier = XENO_SPEED_SLOWMOD_TIER_4
 	lesser.damage_modifier -= XENO_DAMAGE_MOD_LARGE
-	lesser.tackle_chance_modifier = -35
+	lesser.tackle_chance_modifier -= 35
 	lesser.caste.build_time_mult = BUILD_TIME_MULT_BUILDER
 
 	lesser.recalculate_everything()
@@ -52,7 +52,7 @@
 	name = "Lesser resin wall"
 	desc = "Weird slime solidified into a wall."
 	damage_cap = 600
-	color = rgb(203, 200, 252)
+	color = LESSER_BUILD_COLOR
 
 /datum/resin_construction/resin_turf/membrane/lesser_slave
 	name = "Lesser resin membrane"
@@ -65,7 +65,7 @@
 	name = "Lesser resin membrane"
 	desc = "Weird slime translucent enough to let light pass through."
 	damage_cap = 200
-	color = rgb(203, 200, 252)
+	color = LESSER_BUILD_COLOR
 
 /datum/resin_construction/resin_obj/door/lesser_slave
 	name = "Lesser resin door"
@@ -78,4 +78,4 @@
 	name = "Lesser resin door"
 	hardness = 1
 	health = 300
-	color = rgb(203, 200, 252)
+	color = LESSER_BUILD_COLOR

@@ -64,7 +64,7 @@
 		return
 
 	if(isfacehugger(target) || islesserdrone(target))
-		to_chat(xeno, "His don't deserver this...")
+		to_chat(xeno, "He don't deserver this...")
 		return
 
 	if(!xeno.check_state())
@@ -156,10 +156,10 @@
 	return ..()
 
 /mob/living/carbon/xenomorph/proc/create_lesser_shield()
-	remove_overlay(9)
+	remove_overlay(LESSER_SHIELD_OVERLAY)
 
 	var/image/shield = image("icon"='icons/mob/xenos/overlay_effects64x64.dmi', "icon_state" = "shield2", pixel_x = - 16, pixel_y = -8)
-	shield.color = rgb(207, 29, 29)
+	shield.color = "#cf1d1d"
 	overlays_standing[9] = shield
 	apply_overlay(9)
 	addtimer(CALLBACK(src, PROC_REF(remove_overlay), 9), 100)

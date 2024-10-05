@@ -16,7 +16,7 @@
 	)
 
 /datum/xeno_strain/scout/apply_strain(mob/living/carbon/xenomorph/lesser_drone/lesser)
-	lesser.client?.change_view(9, src)
+	lesser.viewsize = 9
 	lesser.health_modifier -= XENO_HEALTH_MOD_SMALL
 
 	lesser.recalculate_everything()

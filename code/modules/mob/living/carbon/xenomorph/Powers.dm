@@ -58,19 +58,19 @@
 				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
 */
 //RUCM START
-			if(((WR.type == /turf/closed/wall/resin) || (WR.type == /turf/closed/wall/resin/lesser_slave)) && thick) // Hivelord wall
+			if(WR.type == /turf/closed/wall/resin || WR.type == /turf/closed/wall/resin/lesser_slave && thick) // Hivelord wall
 				WR.ChangeTurf(/turf/closed/wall/resin/thick)
 				total_resin_cost = XENO_THICKEN_WALL_COST
 
-			else if((WR.type == /turf/closed/wall/resin/lesser_slave) && (istype(src, /mob/living/carbon/xenomorph/drone))) // Drone wall
+			else if(WR.type == /turf/closed/wall/resin/lesser_slave && istype(src, /mob/living/carbon/xenomorph/drone)) // Drone wall
 				WR.ChangeTurf(/turf/closed/wall/resin)
 				total_resin_cost = XENO_THICKEN_WALL_COST
 
-			else if(((WR.type == /turf/closed/wall/resin/membrane) || (WR.type == /turf/closed/wall/resin/membrane/lesser_slave)) && thick) // Hivelord membrane
+			else if(WR.type == /turf/closed/wall/resin/membrane || WR.type == /turf/closed/wall/resin/membrane/lesser_slave && thick) // Hivelord membrane
 				WR.ChangeTurf(/turf/closed/wall/resin/membrane/thick)
 				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
 
-			else if((WR.type == /turf/closed/wall/resin/membrane/lesser_slave) && (istype(src, /mob/living/carbon/xenomorph/drone))) // Drone membrane
+			else if(WR.type == /turf/closed/wall/resin/membrane/lesser_slave && istype(src, /mob/living/carbon/xenomorph/drone)) // Drone membrane
 				WR.ChangeTurf(/turf/closed/wall/resin/membrane)
 				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
 //RUCM END
@@ -83,7 +83,7 @@
 		else if(istype(A, /obj/structure/mineral_door/resin))
 */
 //RUCM START
-		else if((istype(A, /obj/structure/mineral_door/resin)) || (istype(A, /obj/structure/mineral_door/resin/lesser_slave)))
+		else if(istype(A, /obj/structure/mineral_door/resin) || istype(A, /obj/structure/mineral_door/resin/lesser_slave))
 //RUCM END
 			var/obj/structure/mineral_door/resin/DR = A
 			if (DR.hivenumber != hivenumber)
@@ -102,7 +102,7 @@
 				total_resin_cost = XENO_THICKEN_DOOR_COST
 */
 //RUCM START
-			if(((DR.hardness == 1.5) || (DR.hardness == 1)) && (thick)) // Hivelord door
+			if(DR.hardness == 1.5 || DR.hardness == 1 && thick) // Hivelord door
 				var/oldloc = DR.loc
 				qdel(DR)
 				new /obj/structure/mineral_door/resin/thick (oldloc, DR.hivenumber)
