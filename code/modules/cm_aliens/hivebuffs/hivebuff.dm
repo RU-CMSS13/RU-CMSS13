@@ -103,7 +103,7 @@
 	if(!_check_num_required_pylons())
 		to_chat(purchasing_mob, SPAN_XENONOTICE("Our hive does not have the required number of available pylons! We require [number_of_required_pylons]"))
 		return FALSE
-	
+
 	if(!_check_danger())
 		to_chat(purchasing_mob, SPAN_XENONOTICE("There is not enough danger to warrant hive buffs."))
 		return FALSE
@@ -196,12 +196,12 @@
 /datum/hivebuff/proc/_on_cease()
 	if(cease_timer_id)
 		deltimer(cease_timer_id)
-	
+
 	_announce_buff_cease()
 	on_cease()
 	LAZYREMOVE(hive.active_hivebuffs, src)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_XENO_SPAWN)
-	
+
 	for(var/mob/living/carbon/xenomorph/xeno in hive.totalXenos)
 		remove_buff_effects(xeno)
 
@@ -224,15 +224,11 @@
 	return FALSE
 
 /datum/hivebuff/proc/_check_danger()
-	var/groundside_humans = 0
-	for(var/mob/living/carbon/human/current_human as anything in GLOB.alive_human_list)
-		if(!(isspecieshuman(current_human) || isspeciessynth(current_human)))
-			continue
-
-		var/turf/turf = get_turf(current_human)
-		if(is_ground_level(turf?.z))
-			groundside_humans++
-			if(groundside_humans >= 12)
+	var/total_marines = 0
+	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+		if(H.faction == FACTION_MARINE)
+			total_marines++
+			if(total_marines >= 12)
 				return TRUE
 
 	return FALSE
@@ -398,7 +394,7 @@
 	desc = "A huge behemoth of a Xenomorph which can tear its way through defences and flesh alike. Requires open space to grow."
 	tier = HIVEBUFF_TIER_MAJOR
 	radial_icon = "king"
-	
+
 	is_reusable = TRUE
 	cost = 0
 	special_fail_message = "Only one hatchery may exist at a time."
