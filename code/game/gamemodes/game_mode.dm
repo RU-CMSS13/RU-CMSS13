@@ -183,12 +183,12 @@ GLOBAL_VAR_INIT(cas_tracking_id_increment, 0) //this var used to assign unique t
 
 //RUCM START
 //Fuck shitty old code and... ... you know.
-	if(GLOB.arena_active)
-		for(var/client/target_client in GLOB.clients)
-			CHECK_TICK
-			if(!(target_client.prefs.toggle_prefs & TOGGLE_END_OF_ROUND_ARENA) || !target_client.mob)
-				continue
-			drop_to_arena(target_client)
+	GLOB.arena_active = TRUE
+	for(var/client/target_client in GLOB.clients)
+		CHECK_TICK
+		if(!(target_client.prefs.toggle_prefs & TOGGLE_END_OF_ROUND_ARENA) || !target_client.mob || istype(target_client.mob, /mob/new_player))
+			continue
+		drop_to_arena(target_client)
 //RUCM END
 
 /datum/game_mode/proc/show_end_statistics(icon_state)

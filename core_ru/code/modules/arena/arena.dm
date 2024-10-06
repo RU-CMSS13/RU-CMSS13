@@ -1,12 +1,9 @@
 GLOBAL_LIST_EMPTY(arena_spawn_landmarks)
-GLOBAL_VAR_INIT(arena_active, TRUE)
+GLOBAL_VAR_INIT(arena_active, FALSE)
 
 /proc/drop_to_arena(client/target_client)
 	var/turf/spawn_loc = get_turf(pick(GLOB.arena_spawn_landmarks))
 	var/datum/mind/target_mind = target_client.mob?.mind
-	var/timeofdeath = target_client.mob.timeofdeath
-	if(!timeofdeath)
-		timeofdeath = world.time
 	if(!target_mind)
 		target_client.mob.mind = new /datum/mind(target_client.key, target_client.ckey)
 		target_client.mob.mind_initialize()
@@ -29,15 +26,6 @@ GLOBAL_VAR_INIT(arena_active, TRUE)
 		var/mob/living/carbon/human/human = new(spawn_loc)
 		target_mind.transfer_to(human, TRUE)
 		arm_equipment(human, pick(GLOB.gear_path_presets_list), TRUE, FALSE)
-	//Self signal registration, because reg on client or something else is bad idea
-	target_client.mob.RegisterSignal(target_client.mob, COMSIG_MOB_GHOSTIZE, GLOBAL_PROC_REF(set_right_timeofdeath), timeofdeath)
-
-/proc/set_right_timeofdeath(mob/source, real_timeofdeath)
-	set waitfor = FALSE
-	// Funny fuckery
-	var/client/target_client = source.client
-	sleep(1) // Give time for a shitty cm code to do their fuckery around with timeofdeath and set it to 1 or right now, and then we place a real one
-	target_client.mob.timeofdeath = real_timeofdeath
 
 /obj/effect/landmark/spawn_arena
 	name = "arena"
