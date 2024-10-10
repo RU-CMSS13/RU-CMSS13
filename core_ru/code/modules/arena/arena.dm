@@ -28,7 +28,7 @@ GLOBAL_VAR_INIT(arena_active, FALSE)
 		arm_equipment(human, pick(GLOB.gear_path_presets_list), TRUE, FALSE)
 
 	// Make sure, we don't track any statistic, later make some protection for interactions with real GAME (we can overkill it and make just another server, but... AHHH good idea)
-	target_client.mob.statistic_exempt = TRIE
+	target_client.mob.statistic_exempt = TRUE
 
 /obj/effect/landmark/spawn_arena
 	name = "arena"
