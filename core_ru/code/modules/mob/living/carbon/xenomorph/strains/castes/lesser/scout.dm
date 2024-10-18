@@ -13,15 +13,22 @@
 	)
 	actions_to_add = list(
 		/datum/action/xeno_action/onclick/lesser_run,
+		/datum/action/xeno_action/onclick/toggle_long_range/lesser_scout,
 	)
 
 /datum/xeno_strain/scout/apply_strain(mob/living/carbon/xenomorph/lesser_drone/lesser)
-	lesser.viewsize = 9
 	lesser.health_modifier -= XENO_HEALTH_MOD_SMALL
 
 	lesser.recalculate_everything()
+	lesser.viewsize = 9
+	lesser.recalculate_everything()
 
 //	Способности
+
+/datum/action/xeno_action/onclick/toggle_long_range/lesser_scout
+	handles_movement = FALSE
+	should_delay = FALSE
+	ability_primacy = XENO_PRIMARY_ACTION_3
 
 /datum/action/xeno_action/onclick/lesser_run
 	name = "On four paws"

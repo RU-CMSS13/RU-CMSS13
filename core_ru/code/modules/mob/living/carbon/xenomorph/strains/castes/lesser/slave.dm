@@ -1,3 +1,9 @@
+/mob/living/carbon/xenomorph/lesser_drone/initialize_pass_flags(datum/pass_flags_container/PF)
+	..()
+	if (PF)
+		PF.flags_pass = PASS_MOB_IS_XENO|PASS_MOB_THRU_XENO|PASS_MOB_IS_HUMAN|PASS_MOB_THRU_HUMAN
+		PF.flags_can_pass_all = PASS_MOB_IS_XENO|PASS_MOB_THRU_XENO|PASS_MOB_IS_HUMAN|PASS_MOB_THRU_HUMAN
+
 /datum/xeno_strain/slave
 	name = "Slave"
 	description = "You lose your ability to slash and you gain damage off weeds, and gain more plasma in your pool and your build fast such a drone. Your buildings be more fragile."
