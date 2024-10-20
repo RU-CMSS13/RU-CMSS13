@@ -49356,7 +49356,6 @@
 	pixel_x = -3;
 	pixel_y = -4
 	},
-/obj/item/ammo_casing/bullet,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer{
 	icon_state = "cargo"
@@ -57980,7 +57979,6 @@
 	pixel_x = -3;
 	pixel_y = 5
 	},
-/obj/item/ammo_casing/bullet,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/prop/invuln/overhead_pipe{
 	pixel_x = 12
@@ -61023,9 +61021,6 @@
 /turf/open/floor/wood/ship,
 /area/almayer/engineering/ce_room)
 "olW" = (
-/obj/item/ammo_casing/bullet,
-/obj/item/ammo_casing/bullet,
-/obj/item/ammo_casing/bullet,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/prop/invuln{
 	desc = "a pile of cables";
@@ -67967,6 +67962,9 @@
 	name = "cables";
 	density = 0;
 	layer = 3
+	},
+/obj/item/ammo_casing/bullet{
+	icon_state = "casing_1_1"
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_m_s)
@@ -75224,6 +75222,9 @@
 "sZu" = (
 /obj/structure/prop/invuln/overhead_pipe{
 	pixel_x = 12
+	},
+/obj/item/ammo_casing/bullet{
+	icon_state = "casing_7_1"
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_m_s)
@@ -82848,6 +82849,9 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/effect/decal/strata_decals/grime/grime4,
+/obj/item/ammo_casing/bullet{
+	icon_state = "casing_6_1"
+	},
 /turf/open/floor/almayer{
 	icon_state = "plate"
 	},
