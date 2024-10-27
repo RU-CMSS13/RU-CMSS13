@@ -26875,8 +26875,18 @@
 /area/almayer/living/synthcloset)
 "dmE" = (
 /obj/structure/surface/rack,
-/obj/item/mortar_shell/incendiary,
-/obj/item/mortar_shell/incendiary,
+/obj/item/mortar_shell/incendiary{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/incendiary{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/flare{
+	pixel_x = 6
+	},
+/obj/item/mortar_shell/flare{
+	pixel_x = 6
+	},
 /turf/open/floor/almayer{
 	icon_state = "cargo"
 	},
@@ -37572,7 +37582,6 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -28
 	},
-/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -38967,8 +38976,18 @@
 /area/almayer/maint/hull/lower/l_a_p)
 "hAc" = (
 /obj/structure/surface/rack,
-/obj/item/mortar_shell/flare,
-/obj/item/mortar_shell/flare,
+/obj/item/mortar_shell/custom{
+	pixel_x = 6
+	},
+/obj/item/mortar_shell/custom{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/custom{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/custom{
+	pixel_x = 6
+	},
 /turf/open/floor/almayer{
 	icon_state = "cargo"
 	},
@@ -45203,7 +45222,6 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 26
 	},
-/obj/structure/machinery/cm_vending/clothing/staff_officer_armory,
 /turf/open/floor/almayer{
 	icon_state = "redfull"
 	},
@@ -54141,8 +54159,18 @@
 /area/almayer/maint/hull/lower/l_a_s)
 "ngw" = (
 /obj/structure/surface/rack,
-/obj/item/mortar_shell/frag,
-/obj/item/mortar_shell/frag,
+/obj/item/mortar_shell/cluster{
+	pixel_x = 6
+	},
+/obj/item/mortar_shell/cluster{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/cluster{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/cluster{
+	pixel_x = 6
+	},
 /turf/open/floor/almayer{
 	icon_state = "cargo"
 	},
@@ -83705,8 +83733,18 @@
 /area/almayer/living/tankerbunks)
 "xId" = (
 /obj/structure/surface/rack,
-/obj/item/mortar_shell/he,
-/obj/item/mortar_shell/he,
+/obj/item/mortar_shell/he{
+	pixel_x = 6
+	},
+/obj/item/mortar_shell/he{
+	pixel_x = 6
+	},
+/obj/item/mortar_shell/frag{
+	pixel_x = -6
+	},
+/obj/item/mortar_shell/frag{
+	pixel_x = -6
+	},
 /turf/open/floor/almayer{
 	icon_state = "cargo"
 	},
