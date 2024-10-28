@@ -1,5 +1,5 @@
 #define SUNKEN_DELAY_PER_RANGE 0.2 SECONDS
-#define SUNKEN_MAX_RANGE 24
+#define SUNKEN_MAX_RANGE 12
 #define SUNKEN_MIN_RANGE 2
 #define SUNKEN_COOLDOWN 4 SECONDS
 
@@ -8,8 +8,18 @@
 	build_type = /obj/effect/alien/resin/special/sunken_colony
 	build_icon_state = "sunken"
 
+	var/range_between_sunken = 7
 	pixel_y = -8
 	pixel_x = -24
+
+/datum/construction_template/xenomorph/sunken_colony/on_template_creation(turf/T, mob/living/carbon/xenomorph/X)
+	if(range_between_sunken)
+		for(var/i in urange(range_between_sunken, T))
+			var/atom/A = i
+			if(A.type == build_type)
+				xeno_message(SPAN_XENOWARNING("This is too close to other sunken."), 7, XENO_HIVE_NORMAL)
+				qdel(owner)
+				qdel(src)
 
 /datum/construction_template/xenomorph/sunken_colony/set_structure_image()
 	build_icon = 'core_ru/icons/obj/structures/alien/Buildings.dmi'
