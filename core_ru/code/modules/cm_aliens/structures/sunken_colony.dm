@@ -1,14 +1,14 @@
 #define SUNKEN_DELAY_PER_RANGE 0.2 SECONDS
 #define SUNKEN_MAX_RANGE 12
 #define SUNKEN_MIN_RANGE 2
-#define SUNKEN_COOLDOWN 4 SECONDS
+#define SUNKEN_COOLDOWN 6 SECONDS
 
 /datum/construction_template/xenomorph/sunken_colony
 	name = XENO_STRUCTURE_SUNKEN
 	build_type = /obj/effect/alien/resin/special/sunken_colony
 	build_icon_state = "sunken"
 
-	var/range_between_sunken = 7
+	var/range_between_sunken = 8
 	pixel_y = -8
 	pixel_x = -24
 
