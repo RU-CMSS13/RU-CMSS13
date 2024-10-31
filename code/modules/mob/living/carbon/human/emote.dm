@@ -5,7 +5,7 @@
 	/// Species that can use this emote.
 	var/list/species_type_allowed_typecache = list(/datum/species/human, /datum/species/synthetic, /datum/species/yautja)
 	/// Species that can't use this emote.
-	var/list/species_type_blacklist_typecache = list(/datum/species/monkey)
+	var/list/species_type_blacklist_typecache = list(/datum/species/monkey, /datum/species/synthetic/synth_k9)
 
 /datum/emote/living/carbon/human/New()
 	. = ..()
@@ -358,6 +358,7 @@
 
 	user.show_speech_bubble("warcry")
 
+/* RUCM CHANGE
 /datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
@@ -370,6 +371,7 @@
 				return get_sfx("female_upp_warcry")
 			else
 				return get_sfx("female_warcry")
+*/
 
 /datum/emote/living/carbon/human/whimper
 	key = "whimper"

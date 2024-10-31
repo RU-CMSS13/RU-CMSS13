@@ -119,6 +119,9 @@
 
 	var/has_species_tab_items = FALSE
 
+	var/fire_sprite_prefix = "Standing"
+	var/fire_sprite_sheet = 'icons/mob/humans/onmob/OnFire.dmi'
+
 /datum/species/New()
 	if(unarmed_type)
 		unarmed = new unarmed_type()
@@ -378,6 +381,10 @@
 		add_verb(H, inherent_verbs)
 
 /datum/species/proc/handle_post_spawn(mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+	//RUCM START
+	if(!has_tts_voice)
+		H.tts_voice = null
+	//RUCM END
 	add_inherent_verbs(H)
 	apply_signals(H)
 

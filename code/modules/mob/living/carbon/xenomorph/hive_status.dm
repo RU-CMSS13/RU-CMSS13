@@ -81,6 +81,9 @@
 		XENO_STRUCTURE_CORE = 1,
 		XENO_STRUCTURE_CLUSTER = 8,
 		XENO_STRUCTURE_EGGMORPH = 6,
+//RUCM START
+		XENO_STRUCTURE_SUNKEN = 3,
+//RUCM END
 		XENO_STRUCTURE_RECOVERY = 6,
 		XENO_STRUCTURE_PYLON = 2,
 	)
@@ -817,6 +820,10 @@
 	if(new_xeno.client)
 		if(new_xeno.client?.prefs?.toggles_flashing & FLASH_POOLSPAWN)
 			window_flash(new_xeno.client)
+//RUCM START
+		if(new_xeno.client?.player_data?.battlepass)
+			SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
+//RUCM END
 
 	stored_larva--
 	hive_ui.update_burrowed_larva()

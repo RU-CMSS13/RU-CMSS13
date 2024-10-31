@@ -256,8 +256,14 @@
 
 		// copied from join as xeno
 		var/deathtime = world.time - cur_obs.timeofdeath
+/*
 		if(deathtime < XENO_JOIN_DEAD_TIME && ( !cur_obs.client.admin_holder || !(cur_obs.client.admin_holder.rights & R_ADMIN)) && !cur_obs.bypass_time_of_death_checks)
 			continue
+*/
+//RUCM START
+		if(deathtime < GLOB.xeno_join_dead_time && ( !cur_obs.client.admin_holder || !(cur_obs.client.admin_holder.rights & R_ADMIN)) && !cur_obs.bypass_time_of_death_checks)
+			continue
+//RUCM END
 
 		// AFK players cannot be drafted
 		if(cur_obs.client.inactivity > XENO_JOIN_AFK_TIME_LIMIT)
@@ -277,7 +283,7 @@
 				continue
 
 		if(abomination)
-			if(!(/datum/tutorial/xenomorph/abomination::tutorial_id in cur_obs.client.prefs.completed_tutorials))
+			if(!IS_TUTORIAL_COMPLETED(cur_obs, "xeno_abom_1"))
 				to_chat(cur_obs, SPAN_BOLDNOTICE("You were passed over for playing as an Abomination because you have not completed its tutorial."))
 				continue
 

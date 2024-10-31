@@ -49,6 +49,54 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	":K" = SQUAD_SOF, ".K" = SQUAD_SOF, "#K" = RADIO_CHANNEL_WY_WO,
 	":Q" = RADIO_CHANNEL_ROYAL_MARINE, ".Q" = RADIO_CHANNEL_ROYAL_MARINE,
 	":R" = RADIO_CHANNEL_PROVOST, ".R" = RADIO_CHANNEL_PROVOST, "#R" = RADIO_CHANNEL_PROVOST,
+//RUCM START
+	":ш" = RADIO_CHANNEL_INTERCOM, ".ш" = RADIO_CHANNEL_INTERCOM, "#ш" = RADIO_CHANNEL_INTERCOM,
+	":р" = RADIO_CHANNEL_DEPARTMENT, ".р" = RADIO_CHANNEL_DEPARTMENT, "#р" = RADIO_CHANNEL_DEPARTMENT,
+	":ц" = RADIO_MODE_WHISPER, ".ц" = RADIO_MODE_WHISPER, "#ц" = RADIO_MODE_WHISPER,
+	":=" = RADIO_CHANNEL_SPECIAL, ".=" = RADIO_CHANNEL_SPECIAL, "#=" = RADIO_CHANNEL_SPECIAL, //activate radio-specific special functions
+
+	":ь" = RADIO_CHANNEL_MEDSCI, ".ь" = RADIO_CHANNEL_MEDSCI, "#ь" = RADIO_CHANNEL_UPP_MED,
+	":т" = RADIO_CHANNEL_ENGI, ".т" = RADIO_CHANNEL_ENGI, "#т" = RADIO_CHANNEL_UPP_ENGI,
+	":п" = RADIO_CHANNEL_ALMAYER, ".п" = RADIO_CHANNEL_ALMAYER, "#п" = RADIO_CHANNEL_CLF_GEN,
+	":м" = RADIO_CHANNEL_COMMAND , ".м" = RADIO_CHANNEL_COMMAND , "#м" = RADIO_CHANNEL_UPP_CMD,
+	":ф" = SQUAD_MARINE_1, ".ф" = SQUAD_MARINE_1, "#ф" = RADIO_CHANNEL_CLF_MED,
+	":и" = SQUAD_MARINE_2, ".и" = SQUAD_MARINE_2, "#и" = RADIO_CHANNEL_CLF_ENGI,
+	":с" = SQUAD_MARINE_3, ".с" = SQUAD_MARINE_3, "#с" = RADIO_CHANNEL_CLF_CMD,
+	":в" = SQUAD_MARINE_4, ".в" = SQUAD_MARINE_4, "#в" = RADIO_CHANNEL_CLF_CCT,
+	":у" = SQUAD_MARINE_5, ".у" = SQUAD_MARINE_5, "#у" = RADIO_CHANNEL_PMC_ENGI,
+	":а" = SQUAD_MARINE_CRYO, ".а" = SQUAD_MARINE_CRYO, "#а" = RADIO_CHANNEL_PMC_MED,
+	":з" = RADIO_CHANNEL_MP , ".з" = RADIO_CHANNEL_MP , "#з" = RADIO_CHANNEL_PMC_GEN,
+	":г" = RADIO_CHANNEL_REQ, ".г" = RADIO_CHANNEL_REQ, "#г" = RADIO_CHANNEL_UPP_GEN,
+	":о" = RADIO_CHANNEL_JTAC, ".о" = RADIO_CHANNEL_JTAC, "#о" = RADIO_CHANNEL_UPP_CCT,
+	":е" = RADIO_CHANNEL_INTEL, ".е" = RADIO_CHANNEL_INTEL, "#е" = RADIO_CHANNEL_UPP_KDO,
+	":н" = RADIO_CHANNEL_WY, ".н" = RADIO_CHANNEL_WY, "#н" = RADIO_CHANNEL_WY,
+	":щ" = RADIO_CHANNEL_COLONY, ".щ" = RADIO_CHANNEL_COLONY, "#щ" = RADIO_CHANNEL_PMC_CCT,
+	":я" = RADIO_CHANNEL_HIGHCOM, ".я" = RADIO_CHANNEL_HIGHCOM, "#я" = RADIO_CHANNEL_PMC_CMD,
+	":л" = SQUAD_SOF, ".л" = SQUAD_SOF, "#л" = RADIO_CHANNEL_WY_WO,
+
+	":Ш" = RADIO_CHANNEL_INTERCOM, ".Ш" = RADIO_CHANNEL_INTERCOM, "#Ш" = RADIO_CHANNEL_INTERCOM,
+	":Р" = RADIO_CHANNEL_DEPARTMENT, ".Р" = RADIO_CHANNEL_DEPARTMENT, "#Р" = RADIO_CHANNEL_DEPARTMENT,
+	":Ц" = RADIO_MODE_WHISPER, ".Ц" = RADIO_MODE_WHISPER, "#Ц" = RADIO_MODE_WHISPER,
+
+	":Ь" = RADIO_CHANNEL_MEDSCI, ".Ь" = RADIO_CHANNEL_MEDSCI, "#Ь" = RADIO_CHANNEL_UPP_MED,
+	":Т" = RADIO_CHANNEL_ENGI, ".Т" = RADIO_CHANNEL_ENGI, "#Т" = RADIO_CHANNEL_UPP_ENGI,
+	":П" = RADIO_CHANNEL_ALMAYER, ".П" = RADIO_CHANNEL_ALMAYER, "#П" = RADIO_CHANNEL_CLF_GEN,
+	":М" = RADIO_CHANNEL_COMMAND, ".М" = RADIO_CHANNEL_COMMAND, "#М" = RADIO_CHANNEL_UPP_CMD,
+	":Ф" = SQUAD_MARINE_1, ".Ф" = SQUAD_MARINE_1, "#Ф" = RADIO_CHANNEL_CLF_MED,
+	":И" = SQUAD_MARINE_2, ".И" = SQUAD_MARINE_2, "#И" = RADIO_CHANNEL_CLF_ENGI,
+	":С" = SQUAD_MARINE_3, ".С" = SQUAD_MARINE_3, "#С" = RADIO_CHANNEL_CLF_CMD,
+	":В" = SQUAD_MARINE_4, ".В" = SQUAD_MARINE_4, "#В" = RADIO_CHANNEL_CLF_CCT,
+	":У" = SQUAD_MARINE_5, ".У" = SQUAD_MARINE_5, "#У" = RADIO_CHANNEL_PMC_ENGI,
+	":А" = SQUAD_MARINE_CRYO, ".А" = SQUAD_MARINE_CRYO, "#А" = RADIO_CHANNEL_PMC_MED,
+	":З" = RADIO_CHANNEL_MP, ".З" = RADIO_CHANNEL_MP, "#З" = RADIO_CHANNEL_PMC_GEN,
+	":Г" = RADIO_CHANNEL_REQ, ".Г" = RADIO_CHANNEL_REQ, "#Г" = RADIO_CHANNEL_UPP_GEN,
+	":О" = RADIO_CHANNEL_JTAC, ".О" = RADIO_CHANNEL_JTAC, "#О" = RADIO_CHANNEL_UPP_CCT,
+	":Е" = RADIO_CHANNEL_INTEL, ".Е" = RADIO_CHANNEL_INTEL, "#Е" = RADIO_CHANNEL_UPP_KDO,
+	":Н" = RADIO_CHANNEL_WY, ".Н" = RADIO_CHANNEL_WY, "#Н" = RADIO_CHANNEL_WY,
+	":Щ" = RADIO_CHANNEL_COLONY, ".Щ" = RADIO_CHANNEL_COLONY, "#Щ" = RADIO_CHANNEL_PMC_CCT,
+	":Я" = RADIO_CHANNEL_HIGHCOM, ".Я" = RADIO_CHANNEL_HIGHCOM, "#Я" = RADIO_CHANNEL_PMC_CMD,
+	":Л" = SQUAD_SOF, ".Л" = SQUAD_SOF, "#Л" = RADIO_CHANNEL_WY_WO,
+//RUCM END
 ))
 
 /proc/channel_to_prefix(channel)
@@ -94,7 +142,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/remove_speech_bubble(mutable_appearance/speech_bubble, list_of_mobs)
 	overlays -= speech_bubble
 
-/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon)
+/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, tts_heard_list)
 	var/turf/T
 
 	if(!filter_message(src, message))
@@ -103,6 +151,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(SEND_SIGNAL(src, COMSIG_LIVING_SPEAK, message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, nolog, message_mode) & COMPONENT_OVERRIDE_SPEAK) return
 
 	message = process_chat_markup(message, list("~", "_"))
+
+	//RUCM START
+	if(!length(tts_heard_list))
+		tts_heard_list = list(list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, speaking_noise)
+	//RUCM END
 
 	for(var/dst=0; dst<=1; dst++) //Will run twice if src has a clone
 		if(!dst && src.clone) //Will speak in src's location and the clone's
@@ -168,14 +222,14 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(not_dead_speaker)
 			langchat_speech(message, listening, speaking)
 		for(var/mob/M as anything in listening)
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list = tts_heard_list)
 		overlays += speech_bubble
 
 		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)
 
 		for(var/obj/O as anything in listening_obj)
 			if(O) //It's possible that it could be deleted in the meantime.
-				O.hear_talk(src, message, verb, speaking, italics)
+				O.hear_talk(src, message, verb, speaking, italics, tts_heard_list = tts_heard_list)
 
 	//used for STUI to stop logging of animal messages and radio
 	//if(!nolog)
@@ -192,7 +246,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else
 		log_say("[name != "Unknown" ? name : "([real_name])"]: [message] (CKEY: [key]) (AREA: [get_area_name(loc)])")
 
-	return 1
+	return tts_heard_list
 
 /mob/living/proc/say_signlang(message, verb="gestures", datum/language/language)
 	for (var/mob/O in viewers(src, null))

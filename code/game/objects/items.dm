@@ -163,6 +163,8 @@
 	var/ground_offset_x = 0
 	/// How much to offset the item randomly either way alongside Y visually
 	var/ground_offset_y = 0
+	/// bypass any species specific OnMob overlay blockers
+	var/force_overlays_on = FALSE
 
 	/// Special storages this item prioritizes
 	var/list/preferred_storage
@@ -349,7 +351,7 @@ cases. Override_icon_state should be a list.*/
 
 	return
 
-/obj/item/proc/talk_into(mob/M as mob, text)
+/obj/item/proc/talk_into(mob/M as mob, text, tts_heard_list)
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
