@@ -258,7 +258,12 @@
 	if (!msg)
 		return
 
+/*
 	REDIS_PUBLISH("byond.asay", "author" = src.key, "message" = strip_html(msg), "admin" = CLIENT_HAS_RIGHTS(src, R_ADMIN), "rank" = admin_holder.rank)
+*/
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "asay", "author" = src.key, "message" = strip_html(msg), "admin" = CLIENT_HAS_RIGHTS(src, R_ADMIN), "rank" = admin_holder.rank)
+	//RUCM END
 
 	if(findtext(msg, "@") || findtext(msg, "#"))
 		var/list/link_results = check_asay_links(msg)
@@ -372,7 +377,7 @@
 
 /client/proc/cmd_mentor_say(msg as text)
 	set name = "MentorSay"
-	set category = "OOC"
+	set category = "Admin.Mentor"
 	set hidden = 0
 
 	if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))
@@ -608,7 +613,7 @@
 	return
 
 /datum/admins/proc/imaginary_friend()
-	set category = "OOC.Mentor"
+	set category = "Admin.Mentor"
 	set name = "Imaginary Friend"
 
 	var/mob/user = usr

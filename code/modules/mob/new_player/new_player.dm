@@ -48,7 +48,9 @@
 	output +="<br><b>[xeno_text]</b>"
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=tutorial'>Tutorial</A></p>"
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_preferences'>Setup Character</A></p>"
-
+//RUCM START
+	output += "<p><a href='byond://?src=\ref[src];lobby_choice=battlepass'>Battlepass</A></p>"
+//RUCM END
 	output += "<p><a href='byond://?src=\ref[src];lobby_choice=show_playtimes'>View Playtimes</A></p>"
 
 	if(round_start)
@@ -151,7 +153,7 @@
 				if(SSticker.mode.check_xeno_late_join(src))
 					var/mob/new_xeno = SSticker.mode.attempt_to_join_as_xeno(src, FALSE)
 					if(!new_xeno)
-						if(tgui_alert(src, "Do you sure you wish to observe to be a xeno candidate? When you observe, you will not be able to join as marine. It might also take some time to become a xeno or responder!", "Player Setup", list("Yes", "No")) == "Yes")
+						if(tgui_alert(src, "Are you sure you wish to observe to be a xeno candidate? When you observe, you will not be able to join as marine. It might also take some time to become a xeno or responder!", "Player Setup", list("Yes", "No")) == "Yes")
 							if(!client)
 								return TRUE
 							if(client.prefs && !(client.prefs.be_special & BE_ALIEN_AFTER_DEATH))
@@ -191,6 +193,18 @@
 
 		if("tutorial")
 			tutorial_menu()
+
+//RUCM START
+		if("battlepass")
+			if(!client.player_data?.battlepass)
+				return
+
+			if(!GLOB.current_battlepass)
+				to_chat(src, SPAN_WARNING("Please wait for battlepasses to initialize first."))
+				return
+
+			client.player_data.battlepass.tgui_interact(src)
+//RUCM END
 
 		else
 			new_player_panel()
@@ -315,6 +329,10 @@
 				msg_sea("NEW PLAYER: <b>[key_name(character, 0, 1, 0)]</b> only has [(round(client.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1))] hours as a human. Current role: [get_actual_job_name(character)] - Current location: [get_area(character)]")
 
 	character.client.init_verbs()
+//RUCM START
+	if(character.client?.player_data?.battlepass)
+		SSbattlepass.marine_battlepass_earners |= character.client.player_data.battlepass
+//RUCM END
 	qdel(src)
 
 
@@ -461,7 +479,7 @@
 /mob/new_player/is_ready()
 	return ready && ..()
 
-/mob/new_player/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null)
+/mob/new_player/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, tts_heard_list)
 	return
 
 /mob/new_player/hear_radio(message, verb, datum/language/language, part_a, part_b, mob/speaker, hard_to_hear, vname, command, no_paygrade = FALSE)

@@ -63,6 +63,9 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/scope/mini,
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/gyro,
@@ -159,6 +162,9 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail
 		/obj/item/attachable/reflex,
@@ -449,6 +455,9 @@
 		/obj/item/attachable/suppressor, // Barrel
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail
 		/obj/item/attachable/reflex,
@@ -497,6 +506,9 @@
 		/obj/item/attachable/suppressor, // Barrel
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail
 		/obj/item/attachable/reflex,
@@ -579,6 +591,9 @@
 		/obj/item/attachable/lasersight,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 	)
 	random_spawn_chance = 65
 	random_spawn_under = list(

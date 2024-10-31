@@ -162,17 +162,21 @@
 #define WEED_BASE_GROW_SPEED (5 SECONDS)
 #define WEED_BASE_DECAY_SPEED (10 SECONDS)
 
+/* RUCM CHANGE
 /// The time you must be dead to join as a xeno larva
 #define XENO_JOIN_DEAD_LARVA_TIME (2.5 MINUTES)
 /// The time you must be dead to join as xeno (not larva)
 #define XENO_JOIN_DEAD_TIME (5 MINUTES)
+*/
 /// The time of inactivity you cannot exceed to join as a xeno
 #define XENO_JOIN_AFK_TIME_LIMIT (5 MINUTES)
 /// The amount of time after round start before buried larva spawns are disallowed
 #define XENO_BURIED_LARVA_TIME_LIMIT (30 MINUTES)
 
 /// The time when xenos can start taking over comm towers
+/*RUCM CHANGE
 #define XENO_COMM_ACQUISITION_TIME (55 MINUTES)
+*/
 
 /// The time it takes for a pylon to give one royal resin while activated
 #define XENO_PYLON_ACTIVATION_COOLDOWN (5 MINUTES)

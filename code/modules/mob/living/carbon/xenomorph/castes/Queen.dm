@@ -352,6 +352,9 @@
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		/datum/action/xeno_action/activable/xeno_spit/queen_macro, //third macro
 		/datum/action/xeno_action/onclick/shift_spits, //second macro
+//RUCM START
+		/datum/action/xeno_action/onclick/give_tech_points,
+//RUCM END
 	)
 	claw_type = CLAW_TYPE_VERY_SHARP
 
@@ -453,6 +456,9 @@
 	if(!nicknumber)
 		generate_and_set_nicknumber()
 	var/name_prefix = hive.prefix
+	//RUCM START
+	init_voice()
+	//RUCM END
 	if(queen_aged)
 		age_xeno()
 		switch(age)
@@ -877,6 +883,9 @@
 		/datum/action/xeno_action/activable/secrete_resin/remote/queen, //fifth macro
 		/datum/action/xeno_action/onclick/queen_tacmap,
 		/datum/action/xeno_action/onclick/eye,
+//RUCM START
+		/datum/action/xeno_action/onclick/give_tech_points,
+//RUCM END
 	)
 
 	for(var/path in immobile_abilities)

@@ -83,6 +83,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"stickyban_whitelisted" = DB_FIELDTYPE_INT,
 		"byond_account_age" = DB_FIELDTYPE_STRING_MEDIUM,
 		"first_join_date" = DB_FIELDTYPE_STRING_MEDIUM,
+//RUCM START
+		"glob_pt_visibility" = DB_FIELDTYPE_INT,
+//RUCM END
 	)
 
 // NOTE: good example of database operations using NDatabase, so it is well commented
@@ -195,6 +198,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		to_chat_forced(owning_client, SPAN_WARNING("This is a temporary ban, it will be removed in [duration] minutes."))
 		QDEL_NULL(owning_client)
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "add_time_ban", "ref_player_id" = id)
+	//RUCM END
 	return TRUE
 
 /datum/entity/player/proc/remove_timed_ban()
@@ -224,6 +230,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 	time_ban_admin = null
 	save()
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "remove_time_ban", "ref_player_id" = id)
+	//RUCM END
 	return TRUE
 
 /datum/entity/player/proc/add_job_ban(ban_text, list/ranks, duration = null)
@@ -285,6 +294,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		PJB.save()
 		job_bans[safe_rank] = PJB
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "add_job_ban", "ref_player_id" = id)
+	//RUCM END
 	return TRUE
 
 // removing job bans is done one by one
@@ -313,6 +325,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 	ban_unban_log_save("[key_name(admin)] unjobbanned [ckey] from [safe_rank]")
 	log_admin("[key_name(admin)] unbanned [ckey] from [safe_rank]")
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "remove_job_ban", "ref_player_id" = id)
+	//RUCM END
 	return TRUE
 
 /// Permanently bans this user, with the provided reason. The banner ([/datum/entity/player]) argument is optional, as this can be done without admin intervention.
@@ -343,6 +358,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 
 	save()
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "add_perma_ban", "ref_player_id" = id)
+	//RUCM END
 	return TRUE
 
 /datum/entity/player/proc/auto_unban()
@@ -357,13 +375,28 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		is_time_banned = FALSE
 		save()
 
+	//RUCM START
+	REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "auto_unban", "ref_player_id" = id)
+	//RUCM END
+
 /datum/entity/player/proc/auto_unjobban()
+	//RUCM START
+	var/any_jobbans_lifted = FALSE
+	//RUCM END
 	for(var/key in job_bans)
 		var/datum/entity/player_job_ban/value = job_bans[key]
 		var/time_left = value.expiration - MINUTES_STAMP
 		if(value.ban_time && time_left < 0)
 			value.delete()
 			job_bans -= value
+			//RUCM START
+			any_jobbans_lifted = TRUE
+			//RUCM END
+
+	//RUCM START
+	if(any_jobbans_lifted)
+		REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "auto_unjobban", "ref_player_id" = id)
+	//RUCM END
 
 /datum/entity_meta/player/on_read(datum/entity/player/player)
 	player.job_bans = list()
@@ -420,6 +453,10 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		time_ban_admin = DB_ENTITY(/datum/entity/player, time_ban_admin_id)
 	if(discord_link_id)
 		discord_link = DB_ENTITY(/datum/entity/discord_link, discord_link_id)
+//RUCM START
+	else
+		DB_FILTER(/datum/entity/discord_link, DB_COMP("player_id", DB_EQUALS, id), CALLBACK(src, TYPE_PROC_REF(/datum/entity/player, on_read_discord_link)))
+//RUCM END
 
 	if(whitelist_status)
 		var/list/whitelists = splittext(whitelist_status, "|")
@@ -427,6 +464,14 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		for(var/whitelist in whitelists)
 			if(whitelist in GLOB.bitfields["whitelist_status"])
 				whitelist_flags |= GLOB.bitfields["whitelist_status"]["[whitelist]"]
+
+//RUCM START
+	player_shop = DB_EKEY(/datum/entity/player_shop, id)
+	player_shop.save()
+	player_shop.sync()
+	load_battlepass()
+	load_donator_info()
+//RUCM END
 
 /datum/entity/player/proc/on_read_notes(list/datum/entity/player_note/_notes)
 	notes_loaded = TRUE
@@ -509,6 +554,13 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		error("ALARM: MISMATCH. Loaded player data for client [ckey], player data ckey is [player.ckey], id: [player.id]")
 	player_data = player
 	player_data.owning_client = src
+//RUCM STAR
+	if((ckey in GLOB.db_admin_datums) && !admin_holder)
+		if(!GLOB.admin_datums[ckey])
+			new /datum/admins(ckey)
+		GLOB.admin_datums[ckey].associate(src, GLOB.db_admin_datums[ckey])
+	notify_login()
+//RUCM END
 	if(!player_data.last_login)
 		player_data.first_join_date = "[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]"
 	if(!player_data.first_join_date)
@@ -781,5 +833,8 @@ BSQL_PROTECT_DATUM(/datum/entity/player)
 		"last_known_ip",
 		"last_known_cid",
 		"discord_link_id",
-		"whitelist_status"
+		"whitelist_status",
+//RUCM START
+		"glob_pt_visibility",
+//RUCM END
 		)

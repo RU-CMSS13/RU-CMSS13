@@ -302,6 +302,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	player_entity = setup_player_entity(ckey)
 
 	if(check_localhost_status())
+/*
 		var/datum/admins/admin = new("!localhost!", RL_HOST, ckey)
 		admin.associate(src)
 
@@ -309,6 +310,10 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	admin_holder = GLOB.admin_datums[ckey]
 	if(admin_holder)
 		admin_holder.associate(src)
+*/
+//RUCM START
+		check_localhost_admin_datum()
+//RUCM END
 
 	add_pref_verbs()
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
@@ -321,7 +326,9 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	prefs.last_id = computer_id //these are gonna be used for banning
 	fps = prefs.fps
 
+/* RUCM CHANGE
 	notify_login()
+*/
 
 	load_xeno_name()
 
@@ -420,6 +427,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	update_fullscreen()
 
+/* RUCM CHANGE
 	var/file = file2text("config/donators.txt")
 	var/lines = splittext(file, "\n")
 
@@ -427,6 +435,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		if(src.ckey == line)
 			src.donator = TRUE
 			add_verb(src, /client/proc/set_ooc_color_self)
+*/
 
 	//if(prefs.window_skin & TOGGLE_WINDOW_SKIN)
 	// set_night_skin()
@@ -472,7 +481,12 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		message_admins("Admin logout: [key_name(src)]")
 
 		var/list/adm = get_admin_counts(R_MOD)
+/*
 		REDIS_PUBLISH("byond.access", "type" = "logout", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+*/
+		//RUCM START
+		REDIS_PUBLISH("byond.access", "type" = "admin", "state" = "logout", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+		//RUCM END
 
 	..()
 	return QDEL_HINT_HARDDEL_NOW
@@ -489,7 +503,12 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		message_admins("Admin login: [key_name(src)]")
 
 		var/list/adm = get_admin_counts(R_MOD)
+/*
 		REDIS_PUBLISH("byond.access", "type" = "login", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+*/
+		//RUCM START
+		REDIS_PUBLISH("byond.access", "type" = "admin", "state" = "login", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+		//RUCM END
 
 	if(CONFIG_GET(flag/log_access))
 		for(var/mob/M in GLOB.player_list)
