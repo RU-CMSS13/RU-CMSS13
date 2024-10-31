@@ -66,6 +66,10 @@
 	HasProximity(target)
 
 /obj/effect/alien/resin/special/sunken_colony/HasProximity(atom/movable/AM as mob|obj)
+
+	if(isxeno)
+		return
+
 	if (!linked_hive)
 		return
 
