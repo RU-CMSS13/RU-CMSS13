@@ -10,6 +10,10 @@
 	pockets.max_storage_space = 4
 	flags_atom |= USES_HEARING
 
+/obj/item/clothing/suit/storage/Destroy()
+	QDEL_NULL(pockets)
+	return ..()
+
 /obj/item/clothing/suit/storage/get_pockets()
 	if(pockets)
 		return pockets
@@ -36,8 +40,8 @@
 	. = ..()
 	pockets.emp_act(severity)
 
-/obj/item/clothing/suit/storage/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics)
-	pockets.hear_talk(M, msg, verb, speaking, italics)
+/obj/item/clothing/suit/storage/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics, tts_heard_list)
+	pockets.hear_talk(M, msg, verb, speaking, italics, tts_heard_list = tts_heard_list)
 	..()
 
 /obj/item/clothing/suit/storage/verb/toggle_draw_mode()

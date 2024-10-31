@@ -45,7 +45,7 @@
 	see_in_dark = 12
 	recovery_constant = 1.5
 	see_invisible = SEE_INVISIBLE_LIVING
-	hud_possible = list(HEALTH_HUD_XENO, PLASMA_HUD, PHEROMONE_HUD, QUEEN_OVERWATCH_HUD, ARMOR_HUD_XENO, XENO_STATUS_HUD, XENO_BANISHED_HUD, XENO_HOSTILE_ACID, XENO_HOSTILE_SLOW, XENO_HOSTILE_TAG, XENO_HOSTILE_FREEZE, HUNTER_HUD)
+	hud_possible = list(HEALTH_HUD_XENO, PLASMA_HUD, PHEROMONE_HUD, QUEEN_OVERWATCH_HUD, ARMOR_HUD_XENO, XENO_STATUS_HUD, XENO_BANISHED_HUD, XENO_HOSTILE_ACID, XENO_HOSTILE_SLOW, XENO_HOSTILE_TAG, XENO_HOSTILE_FREEZE, HUNTER_HUD, NEW_PLAYER_HUD)
 	unacidable = TRUE
 	rebounds = TRUE
 	faction = FACTION_XENOMORPH
@@ -75,7 +75,9 @@
 	//////////////////////////////////////////////////////////////////
 	var/datum/caste_datum/caste // Used to extract determine ALL Xeno stats.
 	var/speaking_key = "x"
+/* RUCM CHANGE
 	var/speaking_noise = "alien_talk"
+*/
 	slash_verb = "slash"
 	slashes_verb = "slashes"
 	var/slash_sound = "alien_claw_flesh"
@@ -368,10 +370,19 @@
 	wound_icon_holder = new(null, src)
 	vis_contents += wound_icon_holder
 
+	//RUCM START
+	skin_icon_holder = new(null, src)
+	skin_icon_holder.icon = icon_skin
+	vis_contents += skin_icon_holder
+	//RUCM END
+
 	set_languages(list(LANGUAGE_XENOMORPH, LANGUAGE_HIVEMIND))
 
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	if(old_xeno)
+		//RUCM SART
+		tts_voice = old_xeno.tts_voice
+		//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total
@@ -581,6 +592,9 @@
 	if(client)
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
+		//RUCM START
+		init_voice()
+		//RUCM END
 		age_xeno()
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 	if(!HAS_TRAIT(src, TRAIT_NO_COLOR))
@@ -718,6 +732,12 @@
 	if(backpack_icon_holder)
 		vis_contents -= backpack_icon_holder
 		QDEL_NULL(backpack_icon_holder)
+
+	//RUCM START
+	if(skin_icon_holder)
+		vis_contents -= skin_icon_holder
+		QDEL_NULL(skin_icon_holder)
+	//RUCM END
 
 	QDEL_NULL(iff_tag)
 
@@ -1072,7 +1092,7 @@
 		var/datum/reagent/D = GLOB.chemical_reagents_list[special_blood]
 		if(D)
 			color_override = D.color
-	new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(loc, splatter_dir, duration, color_override)
+	new /obj/effect/bloodsplatter/xenosplatter(loc, splatter_dir, duration, color_override)
 
 /mob/living/carbon/xenomorph/Collide(atom/movable/movable_atom)
 	. = ..()

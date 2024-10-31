@@ -2,7 +2,7 @@
 	name = "megaphone"
 	desc = "A device used to project your voice. Loudly."
 	icon_state = "megaphone"
-	item_state = "radio"
+	item_state = "megaphone"
 	w_class = SIZE_SMALL
 	flags_atom = FPRINT|CONDUCT
 
@@ -40,12 +40,17 @@
 		var/list/mob/listeners = viewers(user) // slow but we need it
 		// mobs that pass the conditionals will be added here
 		var/list/mob/langchat_long_listeners = list()
+		//RUCM START
+		var/list/tts_heard_list = list(list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), user.tts_voice, user.tts_voice_filter, tts_heard_list, FALSE, 50, user.tts_voice_pitch, user.speaking_noise)
+		//RUCM END
 		for(var/mob/listener in listeners)
 			if(!ishumansynth_strict(listener) && !isobserver(listener))
 				listener.show_message("[user] says something on the microphone, but you can't understand it.")
 				continue
 			listener.show_message("<B>[user]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
-		user.langchat_long_speech(message, langchat_long_listeners, user.get_default_language())
+		playsound(loc, 'sound/items/megaphone.ogg', 100, FALSE, TRUE)
+		user.langchat_long_speech(message, langchat_long_listeners, user.get_default_language(), tts_heard_list = tts_heard_list)
 
 		COOLDOWN_START(src, spam_cooldown, spam_cooldown_time)

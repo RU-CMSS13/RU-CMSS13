@@ -51,7 +51,7 @@
 	return canhear_range
 
 
-/obj/item/device/radio/intercom/hear_talk(mob/M as mob, msg)
+/obj/item/device/radio/intercom/hear_talk(mob/M as mob, msg, tts_heard_list)
 	if(!src.anyai && !(M in src.ai))
 		return
 	..()
@@ -81,3 +81,7 @@
 /obj/item/device/radio/intercom/normandy
 	name = "dropship normandy intercom"
 	frequency = DS2_FREQ
+
+/obj/item/device/radio/intercom/saipan
+	name = "dropship saipan intercom"
+	frequency = DS3_FREQ

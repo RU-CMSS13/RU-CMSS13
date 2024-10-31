@@ -58,6 +58,20 @@
 		icon_state = "xeno_analyzer_organ_on"
 		caste_of_organ = organ.caste_origin
 		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+//RUCM START
+	if(istype(attacked_item, /obj/item/reagent_container/food/snacks/grown))
+		var/obj/item/reagent_container/food/snacks/grown/food = attacked_item
+		if(food.potency <= 0)
+			to_chat(user, SPAN_WARNING("This grown food don't have suitable biomass"))
+			return
+		if(!do_after(user, 0.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+			to_chat(user, SPAN_WARNING("You were interupted!"))
+			return
+		to_chat(user, SPAN_NOTICE("You dissolve [attacked_item]"))
+		biomass_points += (food.potency / 3)
+		qdel(attacked_item)
+		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+//RUCM END
 	if(istype(attacked_item, /obj/item/clothing/accessory/health/research_plate))
 		var/obj/item/clothing/accessory/health/research_plate/plate = attacked_item
 		if(plate.recyclable_value == 0 && !plate.can_recycle(user))
@@ -96,9 +110,8 @@
 		data["upgrades"] += list(list(
 			"name" = capitalize_first_letters(upgrade.name),
 			"desc" = upgrade.desc,
-			"vari" = upgrade.on_init_argument,
 			"cost" = price_adjustment,
-			"ref" = upgrade.item_reference,
+			"ref" = upgrade_type,
 			"category" = upgrade.upgrade_type,
 			"clearance" = upgrade.clearance_req,
 			"price_change" = upgrade.change_purchase,
@@ -125,7 +138,7 @@
 				. = TRUE
 		if("produce")
 			if(!busy)
-				start_print_upgrade(text2path(params["ref"]), usr, text2num(params["vari"]))
+				start_print_upgrade(text2path(params["ref"]), usr)
 	playsound(src, 'sound/machines/keyboard2.ogg', 25, TRUE)
 
 /obj/structure/machinery/xenoanalyzer/proc/eject_biomass(mob/user)
@@ -144,7 +157,7 @@
 	busy = FALSE
 
 
-/obj/structure/machinery/xenoanalyzer/proc/start_print_upgrade(produce_path, mob/user, variation)
+/obj/structure/machinery/xenoanalyzer/proc/start_print_upgrade(produce_path, mob/user)
 	if(stat & NOPOWER)
 		icon_state = "xeno_analyzer_off"
 		return
@@ -158,7 +171,7 @@
 		upgrade = datum_upgrades
 		if(upgrade.behavior == RESEARCH_UPGRADE_CATEGORY || upgrade.behavior == RESEARCH_UPGRADE_EXCLUDE_BUY)
 			continue
-		if(produce_path == upgrade.item_reference && upgrade.on_init_argument == variation)
+		if(produce_path == datum_upgrades)
 			path_exists = TRUE
 			break
 	if(!path_exists)
@@ -174,12 +187,10 @@
 	busy = TRUE
 	biomass_points -= clamp(upgrade.value_upgrade + upgrade.change_purchase * technology_purchased[datum_upgrades], upgrade.minimum_price, upgrade.maximum_price)
 	technology_purchased[datum_upgrades] += 1
-	addtimer(CALLBACK(src, PROC_REF(print_upgrade), produce_path, variation), 3 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(print_upgrade), produce_path), 3 SECONDS)
 
-/obj/structure/machinery/xenoanalyzer/proc/print_upgrade(produce_path, variation)
+/obj/structure/machinery/xenoanalyzer/proc/print_upgrade(produce_path)
 	busy = FALSE
-	if(variation != RESEARCH_UPGRADE_NOTHING_TO_PASS)
-		new produce_path(get_turf(src), variation)
-		return
-	new produce_path(get_turf(src))
+	var/datum/research_upgrades/item = new produce_path()
+	item.on_purchase(get_turf(src))
 

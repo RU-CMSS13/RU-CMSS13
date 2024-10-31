@@ -46,8 +46,8 @@
 #define format_frequency(f) "[floor((f) / 10)].[(f) % 10]"
 
 #define reverse_direction(direction) ( \
-											( dir & (NORTH|SOUTH) ? ~dir & (NORTH|SOUTH) : 0 ) | \
-											( dir & (EAST|WEST) ? ~dir & (EAST|WEST) : 0 ) \
+											( direction & (NORTH|SOUTH) ? ~direction & (NORTH|SOUTH) : 0 ) | \
+											( direction & (EAST|WEST) ? ~direction & (EAST|WEST) : 0 ) \
 										)
 
 // The sane, counter-clockwise angle to turn to get from /direction/ A to /direction/ B
@@ -1436,7 +1436,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	if(isRemoteControlling(user))
 		return TRUE
 	// If the user is not a xeno (with active ability) with the shift click pref on, we examine. God forgive me for snowflake
-	if(user.client?.prefs && !(user.client?.prefs?.toggle_prefs & TOGGLE_MIDDLE_MOUSE_CLICK))
+	if(user.get_ability_mouse_key() == XENO_ABILITY_CLICK_SHIFT)
 		if(isxeno(user))
 			var/mob/living/carbon/xenomorph/X = user
 			if(X.selected_ability)
@@ -1506,10 +1506,10 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 // Disable by commenting/undefining the line below!
 #define OBJECTS_PROXY_SPEECH
 #ifdef OBJECTS_PROXY_SPEECH
-/proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics)
+/proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics, tts_heard_list)
 	if(QDELETED(sourcemob) || !istype(sourcemob) || QDELETED(targetmob) || !istype(targetmob) || (targetmob.stat == DEAD))
 		return
-	targetmob.hear_say(message, verb, language, "", italics, sourcemob) // proxies speech itself to the mob
+	targetmob.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list) // proxies speech itself to the mob
 	if(targetmob && targetmob.client && targetmob.client.prefs && !targetmob.client.prefs.lang_chat_disabled \
 	   && !targetmob.ear_deaf && targetmob.say_understands(sourcemob, language))
 		sourcemob.langchat_display_image(targetmob) // strap langchat display on
