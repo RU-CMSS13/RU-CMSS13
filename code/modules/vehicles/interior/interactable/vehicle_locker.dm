@@ -13,7 +13,7 @@
 
 	unacidable = TRUE
 	unslashable = TRUE
-	indestructible = TRUE
+	explo_proof = TRUE
 
 	var/list/role_restriction = list(JOB_TANK_CREW, JOB_WO_CREWMAN, JOB_UPP_CREWMAN, JOB_PMC_CREWMAN)
 
@@ -120,8 +120,8 @@
 	. = ..()
 	container.emp_act(severity)
 
-/obj/structure/vehicle_locker/hear_talk(mob/M, msg)
-	container.hear_talk(M, msg)
+/obj/structure/vehicle_locker/hear_talk(mob/M, msg, tts_heard_list)
+	container.hear_talk(M, msg, tts_heard_list = tts_heard_list)
 	..()
 
 //Cosmetically opens/closes the locker when its storage window is accessed or closed. Only makes sound when not already open/closed.

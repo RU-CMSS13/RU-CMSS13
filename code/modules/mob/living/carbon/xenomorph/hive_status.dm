@@ -820,6 +820,10 @@
 	if(new_xeno.client)
 		if(new_xeno.client?.prefs?.toggles_flashing & FLASH_POOLSPAWN)
 			window_flash(new_xeno.client)
+//RUCM START
+		if(new_xeno.client?.player_data?.battlepass)
+			SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
+//RUCM END
 
 	stored_larva--
 	hive_ui.update_burrowed_larva()
@@ -1228,8 +1232,8 @@
 	reporting_id = "renegade"
 	hivenumber = XENO_HIVE_RENEGADE
 	prefix = "Renegade "
-	color = "#9c7a4d"
-	ui_color ="#80705c"
+	color = "#ffae00"
+	ui_color ="#ad732c"
 
 	dynamic_evolution = FALSE
 	allow_queen_evolve = FALSE

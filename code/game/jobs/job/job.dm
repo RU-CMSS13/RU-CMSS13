@@ -239,6 +239,10 @@
 
 	setup_human(new_character, NP)
 
+//RUCM START
+	addtimer(CALLBACK(src, PROC_REF(add_to_battlepass_earners), new_character), BATTLEPASS_TIME_TO_EARN_REWARD)
+//RUCM END
+
 	return new_character
 
 /datum/job/proc/equip_job(mob/living/M)
@@ -318,3 +322,7 @@
 
 	if(user.client.check_whitelist_status(flags_whitelist))
 		return TRUE
+
+/// Called when the job owner enters deep cryogenic storage
+/datum/job/proc/on_cryo(mob/living/carbon/human/cryoing)
+	return

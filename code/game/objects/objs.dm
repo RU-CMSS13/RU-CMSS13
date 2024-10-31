@@ -1,8 +1,6 @@
 /obj
 	/// Used to store information about the contents of the object.
 	var/list/matter
-	/// determines whether or not the object can be destroyed by an explosion
-	var/indestructible = FALSE
 	var/health = null
 	/// Used by SOME devices to determine how reliable they are.
 	var/reliability = 100
@@ -205,7 +203,7 @@
 	return
 
 
-/obj/proc/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)
+/obj/proc/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0, tts_heard_list)
 	return
 
 /obj/proc/see_emote(mob/living/M as mob, emote, audible = FALSE)
@@ -265,7 +263,7 @@
 					SPAN_NOTICE("You hear metal clanking."))
 			else
 				buckled_mob.visible_message(\
-					SPAN_NOTICE("[buckled_mob.name] unbuckled \himself!"),\
+					SPAN_NOTICE("[buckled_mob.name] unbuckled [buckled_mob.p_them()]self!"),\
 					SPAN_NOTICE("You unbuckle yourself from [src]."),\
 					SPAN_NOTICE("You hear metal clanking"))
 			unbuckle(buckled_mob)

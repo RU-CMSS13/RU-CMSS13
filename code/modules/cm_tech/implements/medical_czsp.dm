@@ -2,6 +2,7 @@
 /obj/item/storage/box/czsp/first_aid
 	name = "first-aid combat support kit"
 	desc = "Contains upgraded medical kits, nanosplints and an upgraded defibrillator."
+	icon = 'icons/obj/items/storage/kits.dmi'
 	icon_state = "medicbox"
 	storage_slots = 3
 
@@ -15,6 +16,7 @@
 /obj/item/storage/box/czsp/medical
 	name = "medical combat support kit"
 	desc = "Contains upgraded medical kits, nanosplints and an upgraded defibrillator."
+	icon = 'icons/obj/items/storage/kits.dmi'
 	icon_state = "medicbox"
 	storage_slots = 4
 
@@ -27,6 +29,7 @@
 
 /obj/item/storage/box/czsp/medic_upgraded_kits
 	name = "medical upgrade kit"
+	icon = 'icons/obj/items/storage/kits.dmi'
 	icon_state = "upgradedkitbox"
 	desc = "This kit holds upgraded trauma and burn kits, for critical injuries."
 	max_w_class = SIZE_MEDIUM
@@ -83,6 +86,7 @@
 /obj/item/stack/medical/splint/nano/research
 	desc = "Advanced technology allows these splints to hold bones in place while being flexible and damage-resistant. Those are made from durable carbon fiber and dont look cheap, better use them sparingly."
 
+/* RUCM CHANGE
 /obj/item/device/defibrillator/upgraded
 	name = "upgraded emergency defibrillator"
 	icon_state = "adv_defib"
@@ -92,6 +96,7 @@
 	min_heart_damage_dealt = 0
 	max_heart_damage_dealt = 0
 	damage_heal_threshold = 35
+*/
 
 /obj/item/ammo_magazine/internal/pillgun
 	name = "pill tube"

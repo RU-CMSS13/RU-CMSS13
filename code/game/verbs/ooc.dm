@@ -7,6 +7,9 @@
 		to_chat(src, "Guests may not use OOC.")
 		return
 
+	if(!filter_message(src, msg))
+		return
+
 	msg = trim(strip_html(msg))
 	if(!msg) return
 
@@ -34,6 +37,10 @@
 	if(!attempt_talking(msg))
 		return
 
+	//RUCM START
+	REDIS_PUBLISH("byond.round", "type" = "ooc", "state" = "ooc", "author" = key, "message" = msg)
+	//RUCM END
+
 	log_ooc("[mob.name]/[key] : [msg]")
 	GLOB.STUI.ooc.Add("\[[time_stamp()]] <font color='#display_colour'>OOC: [mob.name]/[key]: [msg]</font><br>")
 	GLOB.STUI.processing |= STUI_LOG_OOC_CHAT
@@ -57,7 +64,7 @@
 		display_colour = prefs.ooccolor
 */
 //RUCM START
-	else if(player_data?.donator_info.patreon_function_available("ooc_color"))
+	else if(player_data.donator_info?.patreon_function_available("ooc_color"))
 		display_colour = prefs.ooccolor
 //RUCM END
 	if(!display_colour) // if invalid R_COLOR choice
@@ -89,7 +96,7 @@
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "Donator")]"
 */
 //RUCM START
-	if(player_data.donator_info.patreon_function_available("badge"))
+	if(player_data.donator_info?.patreon_function_available("badge"))
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "Donator")]"
 //RUCM END
 	if(isCouncil(src))
@@ -111,6 +118,9 @@
 	if(!mob) return
 	if(IsGuestKey(key))
 		to_chat(src, "Guests may not use LOOC.")
+		return
+
+	if(!filter_message(src, msg))
 		return
 
 	msg = trim(strip_html(msg))

@@ -51,7 +51,8 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 	var/lastchangelog = "" // Saved changlog filesize to detect if there was a change
 	var/ooccolor
 	var/be_special = 0 // Special role selection
-	var/toggle_prefs = TOGGLE_MIDDLE_MOUSE_CLICK|TOGGLE_DIRECTIONAL_ATTACK|TOGGLE_MEMBER_PUBLIC|TOGGLE_AMBIENT_OCCLUSION|TOGGLE_VEND_ITEM_TO_HAND // flags in #define/mode.dm
+	var/toggle_prefs = TOGGLE_DIRECTIONAL_ATTACK|TOGGLE_MEMBER_PUBLIC|TOGGLE_AMBIENT_OCCLUSION|TOGGLE_VEND_ITEM_TO_HAND // flags in #define/mode.dm
+	var/xeno_ability_click_mode = XENO_ABILITY_CLICK_MIDDLE
 	var/auto_fit_viewport = FALSE
 	var/adaptive_zoom = 0
 	var/UI_style = "midnight"
@@ -75,7 +76,8 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 							"Medical HUD" = FALSE,
 							"Security HUD" = FALSE,
 							"Squad HUD" = FALSE,
-							"Xeno Status HUD" = FALSE
+							"Xeno Status HUD" = FALSE,
+							HUD_MENTOR_SIGHT = FALSE
 							)
 	var/ghost_vision_pref = GHOST_VISION_LEVEL_MID_NVG
 	var/ghost_orbit = GHOST_ORBIT_CIRCLE
@@ -203,6 +205,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 	var/xeno_name_ban = FALSE
 	var/xeno_vision_level_pref = XENO_VISION_LEVEL_MID_NVG
 	var/playtime_perks = TRUE
+	var/show_queen_name = FALSE
 
 	var/stylesheet = "Modern"
 
@@ -338,6 +341,12 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<h2><b><u>Physical Information:</u></b>"
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=voice;task=input'><b>[voice]</b></a><br>"
+				dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=voice_pitch;task=input'><b>[voice_pitch]</b></a><br>"
+				dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=human;task=input'><b>Hear Voice</b></a><br>"
+			//RUCM END
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
 			dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=skin_color;task=input'><b>[skin_color]</b></a><br>"
 			dat += "<b>Body Size:</b> <a href='?_src_=prefs;preference=body_size;task=input'><b>[body_size]</b></a><br>"
@@ -445,8 +454,15 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			var/display_postfix = xeno_postfix ? xeno_postfix : "------"
 			dat += "<b>Xeno prefix:</b> <a href='?_src_=prefs;preference=xeno_prefix;task=input'><b>[display_prefix]</b></a><br>"
 			dat += "<b>Xeno postfix:</b> <a href='?_src_=prefs;preference=xeno_postfix;task=input'><b>[display_postfix]</b></a><br>"
-
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice]</b></a><br>"
+				dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
+				dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
+				dat += "<b>Hivemind TTS:</b> <a href='?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
+			//RUCM END
 			dat += "<b>Enable Playtime Perks:</b> <a href='?_src_=prefs;preference=playtime_perks'><b>[playtime_perks? "Yes" : "No"]</b></a><br>"
+			dat += "<b>Show Queen Name:</b> <a href='?_src_=prefs;preference=show_queen_name'><b>[show_queen_name? "Yes" : "No"]</b></a><br>"
 			dat += "<b>Default Xeno Night Vision Level:</b> <a href='?_src_=prefs;preference=xeno_vision_level_pref;task=input'><b>[xeno_vision_level_pref]</b></a><br>"
 
 			var/tempnumber = rand(1, 999)
@@ -503,6 +519,12 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				dat += "<div id='column1'>"
 				dat += "<h2><b><u>Synthetic Settings:</u></b></h2>"
 				dat += "<b>Synthetic Name:</b> <a href='?_src_=prefs;preference=synth_name;task=input'><b>[synthetic_name]</b></a><br>"
+				//RUCM START
+				if(SStts.tts_enabled)
+					dat += "<b>Voice:</b> <a href='?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
+					dat += "<b>Voice Pitch:</b> <a href='?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
+					dat += "<a href='?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
+				//RUCM END
 				dat += "<b>Synthetic Type:</b> <a href='?_src_=prefs;preference=synth_type;task=input'><b>[synthetic_type]</b></a><br>"
 				dat += "<b>Synthetic Whitelist Status:</b> <a href='?_src_=prefs;preference=synth_status;task=input'><b>[synth_status]</b></a><br>"
 				dat += "</div>"
@@ -548,7 +570,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				dat += "<b>You do not have the whitelist for this role.</b>"
 		if(MENU_MENTOR)
 			if(owner.check_whitelist_status(WHITELIST_MENTOR))
-				dat += "<b>Nothing here. For now.</b>"
+				dat += "<b>New Player Ghost HUD:</b> <a href='?_src_=prefs;preference=newplayer_ghost_hud'><b>[observer_huds[HUD_MENTOR_SIGHT] ? "Enabled" : "Disabled"]</b></a><br>"
 			else
 				dat += "<b>You do not have the whitelist for this role.</b>"
 		if(MENU_SETTINGS)
@@ -588,6 +610,10 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Game Settings:</u></b></h2>"
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>TTS Mode:</b> <a href='?_src_=prefs;preference=tts_mode'><b>[tts_mode]</b></a><br>"
+			//RUCM END
 			dat += "<b>Ambient Occlusion:</b> <a href='?_src_=prefs;preference=ambientocclusion'><b>[toggle_prefs & TOGGLE_AMBIENT_OCCLUSION ? "Enabled" : "Disabled"]</b></a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
 			dat += "<b>Adaptive Zoom:</b> <a href='?_src_=prefs;preference=adaptive_zoom'>[adaptive_zoom ? "[adaptive_zoom * 2]x" : "Disabled"]</a><br>"
@@ -604,6 +630,7 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<b>Play Lobby Music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles_sound & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 			dat += "<b>Play VOX Announcements:</b> <a href='?_src_=prefs;preference=sound_vox'><b>[(hear_vox) ? "Yes" : "No"]</b></a><br>"
 			dat += "<b>Default Ghost Night Vision Level:</b> <a href='?_src_=prefs;preference=ghost_vision_pref;task=input'><b>[ghost_vision_pref]</b></a><br>"
+			dat += "<b>Button To Activate Xenomorph Abilities:</b> <a href='?_src_=prefs;preference=mouse_button_activation;task=input'><b>[xeno_ability_mouse_pref_to_string(xeno_ability_click_mode)]</b></a><br>"
 			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/receive_random_tip'>Read Random Tip of the Round</a><br>"
 			if(CONFIG_GET(flag/allow_Metadata))
 				dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a>"
@@ -615,8 +642,6 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					</b> <a href='?_src_=prefs;preference=toggle_prefs;flag=[TOGGLE_IGNORE_SELF]'><b>[toggle_prefs & TOGGLE_IGNORE_SELF ? "Off" : "On"]</b></a><br>"
 			dat += "<b>Toggle Help Intent Safety: \
 					</b> <a href='?_src_=prefs;preference=toggle_prefs;flag=[TOGGLE_HELP_INTENT_SAFETY]'><b>[toggle_prefs & TOGGLE_HELP_INTENT_SAFETY ? "On" : "Off"]</b></a><br>"
-			dat += "<b>Toggle Middle Mouse Ability Activation: \
-					</b> <a href='?_src_=prefs;preference=toggle_prefs;flag=[TOGGLE_MIDDLE_MOUSE_CLICK]'><b>[toggle_prefs & TOGGLE_MIDDLE_MOUSE_CLICK ? "On" : "Off"]</b></a><br>"
 			dat += "<b>Toggle Ability Deactivation: \
 					</b> <a href='?_src_=prefs;preference=toggle_prefs;flag=[TOGGLE_ABILITY_DEACTIVATION_OFF]'><b>[toggle_prefs & TOGGLE_ABILITY_DEACTIVATION_OFF ? "Off" : "On"]</b></a><br>"
 			dat += "<b>Toggle Directional Assist: \
@@ -1249,7 +1274,31 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					if(!choice)
 						return
 					ghost_vision_pref = choice
-
+				if("mouse_button_activation")
+					var/static/list/mouse_button_list = list(
+						xeno_ability_mouse_pref_to_string(XENO_ABILITY_CLICK_MIDDLE) = XENO_ABILITY_CLICK_MIDDLE,
+						xeno_ability_mouse_pref_to_string(XENO_ABILITY_CLICK_SHIFT) = XENO_ABILITY_CLICK_SHIFT,
+						xeno_ability_mouse_pref_to_string(XENO_ABILITY_CLICK_RIGHT) = XENO_ABILITY_CLICK_RIGHT
+					)
+					var/choice = tgui_input_list(user, "Choose how you will activate your xenomorph and human abilities.", "Mouse Activation Button", mouse_button_list)
+					if(!choice)
+						return
+					xeno_ability_click_mode = mouse_button_list[choice]
+					// This isn't that great of a way to do it, but ability code is already not that modular considering
+					// the fact that we have two datums for xeno/human abilities. Might need to refactor abilities as a whole in the future
+					// so that the `activable` type is the parent of both xeno/human abilities - it would get rid of this headache in an instant.
+					if(isxeno(user))
+						var/mob/living/carbon/xenomorph/xeno = user
+						if(xeno.selected_ability)
+							var/datum/action/xeno_action/activable/ability = xeno.selected_ability
+							xeno.set_selected_ability(null)
+							xeno.set_selected_ability(ability)
+					if(ishuman(user))
+						var/mob/living/carbon/human/human = user
+						if(human.selected_ability)
+							var/datum/action/human_action/activable/ability = human.selected_ability
+							human.set_selected_ability(null)
+							human.set_selected_ability(ability)
 				if("synth_name")
 					var/raw_name = input(user, "Choose your Synthetic's name:", "Character Preference")  as text|null
 					if(raw_name) // Check to ensure that the user entered text (rather than cancel.)
@@ -1505,6 +1554,88 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					var/new_age = tgui_input_number(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference", 19, AGE_MAX, AGE_MIN)
 					if(new_age)
 						age = max(min( floor(text2num(new_age)), AGE_MAX),AGE_MIN)
+
+				//RUCM START
+				if("voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
+					if(new_voice)
+						voice = new_voice
+
+				if("synth_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						synth_voice = new_voice
+
+				if("xeno_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						xeno_voice = new_voice
+
+				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice_pitch = input(user, "Choose your voice's pitch:\n([-12] to [12])", "Character Preferences") as num|null
+					if(!isnull(new_voice_pitch))
+						switch(href_list["preference"])
+							if("voice_pitch")
+								voice_pitch = new_voice_pitch
+							if("synth_voice_pitch")
+								synth_pitch = new_voice_pitch
+							if("xeno_voice_pitch")
+								xeno_pitch = new_voice_pitch
+
+				if("test_voice")
+					if(!SStts.tts_enabled)
+						return
+					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
+						return
+
+					COOLDOWN_START(src, tts_test_cooldown, 0.5 SECONDS)
+					var/target_voice
+					var/target_pitch
+					var/target_filter = ""
+					switch(href_list["target_voice"])
+						if("human")
+							target_voice = voice
+							target_pitch = voice_pitch
+						if("synth")
+							target_voice = synth_voice
+							target_pitch = synth_pitch
+						if("xeno")
+							target_voice = xeno_voice
+							target_pitch = xeno_pitch
+							target_filter = TTS_FILTER_XENO
+
+					if(!target_voice)
+						return
+
+					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, target_filter, null, TRUE, 0, target_pitch)
+
+				if("hivemind_tts")
+					var/list/options = list(
+						tts_hivemind_to_text(TTS_HIVEMIND_ALL) = TTS_HIVEMIND_ALL,
+						tts_hivemind_to_text(TTS_HIVEMIND_LEADERS) = TTS_HIVEMIND_LEADERS,
+						tts_hivemind_to_text(TTS_HIVEMIND_QUEEN) = TTS_HIVEMIND_QUEEN,
+						tts_hivemind_to_text(TTS_HIVEMIND_OFF) = TTS_HIVEMIND_OFF
+					)
+					var/result_text = tgui_input_list(user, "Select hivemind TTS mode.", "Hivemind TTS Mode Selection", options, theme = "hive_status")
+					if(!result_text)
+						return
+					var/result_value = options[result_text]
+					tts_hivemind_mode = result_value
+
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+				//RUCM END
 
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
@@ -1833,6 +1964,9 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 				if("playtime_perks")
 					playtime_perks = !playtime_perks
 
+				if("show_queen_name")
+					show_queen_name = !show_queen_name
+
 				if("be_special")
 					var/num = text2num(href_list["num"])
 					be_special ^= (1<<num)
@@ -1909,12 +2043,22 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 					var/flag = text2num(href_list["flag"])
 					toggles_ert ^= flag
 
+				//RUCM START
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+				//RUCM END
+
 				if("ambientocclusion")
 					toggle_prefs ^= TOGGLE_AMBIENT_OCCLUSION
 					var/atom/movable/screen/plane_master/game_world/plane_master = locate() in user?.client.screen
 					if (!plane_master)
 						return
 					plane_master.backdrop(user?.client.mob)
+
+				if("newplayer_ghost_hud")
+					observer_huds[HUD_MENTOR_SIGHT] = !observer_huds[HUD_MENTOR_SIGHT]
 
 				if("auto_fit_viewport")
 					auto_fit_viewport = !auto_fit_viewport
@@ -2081,6 +2225,11 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 	character.skin_color = skin_color
 	character.body_type = body_type
 	character.body_size = body_size
+	//RUCM START
+	if(SStts.tts_enabled)
+		character.tts_voice = sanitize_inlist(voice, SStts.available_speakers, pick(SStts.available_speakers))
+		character.tts_voice_pitch = voice_pitch
+	//RUCM END
 
 	character.r_eyes = r_eyes
 	character.g_eyes = g_eyes

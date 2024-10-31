@@ -113,7 +113,12 @@ SUBSYSTEM_DEF(ticker)
 				current_state = GAME_STATE_FINISHED
 				GLOB.ooc_allowed = TRUE
 				mode.declare_completion(force_ending)
+				/*
 				REDIS_PUBLISH("byond.round", "type" = "round-complete", "round_name" = GLOB.round_statistics.round_name)
+				*/
+				//RUCM START
+				REDIS_PUBLISH("byond.round", "type" = "round", "state" = "end")
+				//RUCM END
 				flash_clients()
 				addtimer(CALLBACK(
 					SSvote,
@@ -129,6 +134,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/request_start()
 	if(current_state == GAME_STATE_PREGAME)
 		time_left = 0
+		delay_start = FALSE
 
 	// Killswitch if hanging or interrupted
 	if(SSnightmare.stat != NIGHTMARE_STATUS_DONE)
@@ -146,7 +152,12 @@ SUBSYSTEM_DEF(ticker)
 	current_state = GAME_STATE_SETTING_UP
 	INVOKE_ASYNC(src, PROC_REF(setup_start))
 
+/*
 	REDIS_PUBLISH("byond.round", "type" = "round-start")
+*/
+	//RUCM START
+	REDIS_PUBLISH("byond.round", "type" = "round", "state" = "started")
+	//RUCM START
 
 	for(var/client/C in GLOB.admins)
 		remove_verb(C, GLOB.roundstart_mod_verbs)
@@ -180,8 +191,10 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, SPAN_BOLDNOTICE("Enjoy the game!"))
 	var/init_start = world.timeofday
+/* RUCM REMOVE
 	//Create and announce mode
 	mode = config.pick_mode(GLOB.master_mode)
+*/
 
 	CHECK_TICK
 	if(!mode.can_start(bypass_checks))
@@ -206,13 +219,17 @@ SUBSYSTEM_DEF(ticker)
 				handle_map_reboot()
 		else
 			to_chat(world, "Attempting again...")
+/* RUCM REMOVE
 		QDEL_NULL(mode)
+*/
 		GLOB.RoleAuthority.reset_roles()
 		return FALSE
 
 	CHECK_TICK
 	if(!mode.pre_setup() && !bypass_checks)
+/* RUCMM REMOVE
 		QDEL_NULL(mode)
+*/
 		to_chat(world, "<b>Error in pre-setup for [GLOB.master_mode].</b> Reverting to pre-game lobby.")
 		GLOB.RoleAuthority.reset_roles()
 		return FALSE
@@ -239,8 +256,10 @@ SUBSYSTEM_DEF(ticker)
 	LAZYCLEARLIST(round_start_events)
 	CHECK_TICK
 
+/* RUCM REMOVE
 	// We need stats to track roundstart role distribution.
 	mode.setup_round_stats()
+*/
 
 	//Configure mode and assign player to special mode stuff
 	if (!(mode.flags_round_type & MODE_NO_SPAWN))

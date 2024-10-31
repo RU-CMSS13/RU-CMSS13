@@ -20,7 +20,7 @@
 	sharp = IS_SHARP_ITEM_BIG
 	flags_equip_slot = SLOT_SUIT_STORE|SLOT_WAIST
 	unacidable = TRUE
-	indestructible = TRUE
+	explo_proof = TRUE
 
 	throw_range = 3
 	attack_speed = 12
@@ -86,7 +86,7 @@
 /obj/item/weapon/shield/montage
 	name = "N30 montage shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'core_ru/icons/mob/humans/st_equip.dmi'
+	icon = 'core_ru/icons/obj/items/st_spec.dmi'
 	icon_state = "metal_st"
 	item_icons = list(
 		WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
@@ -103,7 +103,7 @@
 	throwforce = MELEE_FORCE_TIER_1
 	w_class = SIZE_LARGE
 	unacidable = TRUE
-	indestructible = TRUE
+	explo_proof = TRUE
 	var/blocks_on_back = TRUE
 	var/retrieval_slot = WEAR_BACK
 	var/cooldown = 0	//shield bash cooldown. based on world.time

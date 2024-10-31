@@ -68,6 +68,8 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 	var/text_rights
 	var/rights = NO_FLAGS
 
+BSQL_PROTECT_DATUM(/datum/view_record/admin_rank)
+
 /datum/entity_view_meta/admin_rank
 	root_record_type = /datum/entity/admin_rank
 	destination_entity = /datum/view_record/admin_rank
@@ -86,6 +88,7 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_rank)
 	var/rank_id
 	var/extra_titles_encoded
 	var/list/extra_titles
+	var/list/rank_ids_extra
 
 BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 
@@ -101,12 +104,17 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 /datum/entity_meta/admin_holder/map(datum/entity/admin_holder/admin, list/values)
 	..()
 	if(values["extra_titles_encoded"])
-		admin.extra_titles = json_decode(values["extra_titles_encoded"])
+		admin.rank_ids_extra = json_decode(values["extra_titles_encoded"])
+		for(var/rank_id as anything in admin.rank_ids_extra)
+			var/datum/view_record/admin_rank/admin_rank = SAFEPICK(DB_VIEW(/datum/view_record/admin_rank, DB_COMP("id", DB_EQUALS, text2num(rank_id))))
+			if(!admin_rank)
+				continue
+			admin.extra_titles += admin_rank.rank_name
 
 /datum/entity_meta/admin_holder/unmap(datum/entity/admin_holder/admin)
 	. = ..()
-	if(length(admin.extra_titles))
-		.["extra_titles_encoded"] = json_encode(admin.extra_titles)
+	if(length(admin.rank_ids_extra))
+		.["extra_titles_encoded"] = json_encode(admin.rank_ids_extra)
 
 /datum/entity_link/player_to_admin_holder
 	parent_entity = /datum/entity/player
@@ -134,6 +142,8 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 	var/rank_name
 	var/datum/view_record/admin_rank/admin_rank
 	var/list/ref_vars
+
+BSQL_PROTECT_DATUM(/datum/view_record/admin_holder)
 
 /datum/entity_view_meta/admin_holder
 	root_record_type = /datum/entity/admin_holder
@@ -249,7 +259,30 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		text_rights += "everything|"
 	return text_rights
 
-/proc/localhost_rank_check(client/admin_client, list/datum/entity/admin_rank/ranks)
+/client/proc/check_localhost_admin_datum()
+	set waitfor = FALSE
+	UNTIL(player_data)
+	if(admin_holder)
+		return
+
+	var/list/return_value = list()
+	DB_FILTER(/datum/entity/admin_rank, DB_COMP("rank_name", DB_EQUALS, "!localhost!"), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(localhost_rank_check), return_value))
+	UNTIL(length(return_value))
+	var/datum/entity/admin_rank/rank = return_value[1]
+	if(!rank.id)
+		return
+
+	return_value.Cut()
+	DB_FILTER(/datum/entity/admin_holder, DB_COMP("player_id", DB_EQUALS, player_data.id), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(localhost_entity_check), player_data.id, rank.id, return_value))
+	UNTIL(length(return_value))
+	if(admin_holder)
+		return
+
+	sleep(5 SECONDS)// If you do it too fast, you will fuck yourself, or gain aorta rupture
+	GLOB.admin_ranks = load_ranks()
+	GLOB.db_admin_datums = load_admins()
+
+/proc/localhost_rank_check(list/return_value, list/datum/entity/admin_rank/ranks)
 	var/datum/entity/admin_rank/rank
 	if(!length(ranks))
 		rank = DB_ENTITY(/datum/entity/admin_rank)
@@ -257,24 +290,23 @@ BSQL_PROTECT_DATUM(/datum/entity/admin_holder)
 		rank.rights = RL_HOST
 		rank.text_rights = "host"
 		rank.save()
+		rank.sync()
 	else
 		rank = ranks[length(ranks)]
 
-	DB_FILTER(/datum/entity/admin_holder, DB_COMP("ckey", DB_EQUALS, admin_client.ckey), CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(localhost_entity_check), admin_client, rank))
+	return_value += rank
 
-/proc/localhost_entity_check(client/admin_client, datum/entity/admin_rank/rank, list/datum/entity/admin_holder/admins)
+/proc/localhost_entity_check(localhost_id, rank_id, list/return_value, list/datum/entity/admin_holder/admins)
 	var/datum/entity/admin_holder/admin
 	if(!length(admins))
 		admin = DB_ENTITY(/datum/entity/admin_holder)
-		admin.player_id = admin_client.player_data.id
-		admin.rank_id = rank.id
+		admin.player_id = localhost_id
+		admin.rank_id = rank_id
 		admin.save()
 	else
 		admin = admins[length(admins)]
 
-	if(!admin_client.admin_holder)
-		GLOB.admin_ranks = load_ranks()
-		GLOB.db_admin_datums = load_admins()
+	return_value += admin
 
 /datum/admins/New(ckey)
 	if(!ckey)

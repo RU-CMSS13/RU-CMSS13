@@ -12,12 +12,15 @@
 		if (src.client.handle_spam_prevention(message, MUTE_DEADCHAT))
 			return
 
+	if(!filter_message(client, message))
+		return
+
 	. = src.say_dead(message)
 
 
 
 
-/mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
+/mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
 	if(!client)
 		return
 
@@ -43,6 +46,7 @@
 
 	var/track = null
 
+	tts_heard_list[1] += src
 	if(italics && client.prefs.toggles_chat & CHAT_GHOSTRADIO)
 		return
 	if(speaker_name != speaker.real_name && speaker.real_name)
