@@ -57,7 +57,7 @@
 	return TRUE
 
 
-/obj/vehicle/walker/proc/eject_magazine(mob/user_mob, obj/item/walker_gun/hardpoint)
+/obj/vehicle/walker/proc/eject_magazine(mob/user_mob) //, obj/item/walker_gun/hardpoint нахуй не нужен второй аргумент; не назначается, а вынуждает игру выбирать его среди ближайших объектов СНАРУЖИ МЕХА ВКЛЮЧАЯ ЗОНЫ; а так как мы выбираем  стволы не ВНУТРИ меха, то все ломается
 	set name = "Eject Magazine"
 	set category = "Vehicle"
 
@@ -70,7 +70,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = user_mob.interactee
 
-	if(!hardpoint)
+	var obj/item/walker_gun/hardpoint = null //делаем аргумент варом теперь, по сути костыль ибо оставляю старую архитектуру
+
+	if(!hardpoint) //расчитывался что изначально выбирался до него, но так как мы мудилы, ПЛАН Б(поиска) ТЕПЕРЬ ОСНОВНОЙ;
 		var/list/acceptible_modules = list()
 		if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
 			acceptible_modules += module_map[WALKER_HARDPOIN_LEFT]
