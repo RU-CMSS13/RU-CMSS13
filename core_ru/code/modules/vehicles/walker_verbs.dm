@@ -57,7 +57,7 @@
 	return TRUE
 
 
-/obj/vehicle/walker/proc/eject_magazine(mob/user_mob) //, obj/item/walker_gun/hardpoint нахуй не нужен второй аргумент; не назначается, а вынуждает игру выбирать его среди ближайших объектов СНАРУЖИ МЕХА ВКЛЮЧАЯ ЗОНЫ; а так как мы выбираем  стволы не ВНУТРИ меха, то все ломается
+/obj/vehicle/walker/proc/eject_magazine(mob/user_mob)
 	set name = "Eject Magazine"
 	set category = "Vehicle"
 
