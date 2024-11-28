@@ -33,6 +33,7 @@
 
 	var/atom/target = null
 	var/scatter_value = 5
+	var/flags
 
 	var/autofire_slow_mult = 1
 
@@ -272,6 +273,37 @@
 
 	projectile_traits = list()
 
+/obj/item/walker_gun/shotgun8g
+	name = "M32 Mounted Shotgun"
+	desc = "8 Gauge shotgun firing wave of AP bullets, mounted on military walkers for devastation pacify"
+	icon_state = "mech_shotgun8g_parts"
+	equip_state = "redy_shotgun8g"
+	fire_sound = list('sound/weapons/gun_type23.ogg')
+	magazine_type = /obj/item/ammo_magazine/walker/shotgun8g
+	fire_delay = 11
+	scatter_value = 0
+	automatic = FALSE
+
+/obj/item/walker_gun/wm88
+	name = "M88 Mounted Automated Anti-Material rifle"
+	desc = "Anti-material rifle mounted on walker for counter-fire against enemy vehicles,each successfull hit will increase firerate and armor penetration"
+	icon_state = "mech_wm88_parts"
+	equip_state = "redy_wm88"
+	fire_sound = list('sound/weapons/gun_type23.ogg')
+	magazine_type = /obj/item/ammo_magazine/walker/wm88
+	fire_delay = 15
+	/* 	put in walker_wm88_helper.dm
+		var/overheat_reset_cooldown = 3 SECONDS
+		var/overheat_stacks_from_hit = 2
+		var/floating_overheat = 0
+		var/floating_overheat_upper_limit = 8
+		var/overheat_self_destruction_rate = 10 //each overheat stack will damage mech for each shot
+	  	var/floating_penetration = FLOATING_PENETRATION_TIER_0 //put in walker_wm88_helper.dm
+	    var/floating_penetration_upper_limit = FLOATING_PENETRATION_TIER_4
+		var/direct_hit_sound = 'sound/weapons/gun_xm88_directhit_low.ogg' */
+	scatter_value = 0
+	automatic = TRUE
+
 /obj/item/walker_gun/flamer
 	name = "F40 \"Hellfire\" Flamethower"
 	desc = "Powerful flamethower, that can send any unprotected target straight to hell."
@@ -395,6 +427,22 @@
 	default_ammo = /datum/ammo/bullet/walker/machinegun
 	gun_type = /obj/item/walker_gun/hmg
 
+/obj/item/ammo_magazine/walker/shotgun8g
+	name = "M32 Mounted Shotgun Magazine"
+	desc = "A armament M32 magazine"
+	icon_state = "mech_shotgun8g_ammo"
+	max_rounds = 60
+	default_ammo = /datum/ammo/bullet/walker/shotgun8g
+	gun_type = /obj/item/walker_gun/shotgun8g
+
+/obj/item/ammo_magazine/walker/wm88
+	name = "M88 Mounted AMR Magazine"
+	desc = "A armament M88 magazine"
+	icon_state = "mech_shotgun8g_ammo"
+	max_rounds = 80
+	default_ammo = /datum/ammo/bullet/walker/wm88
+	gun_type = /obj/item/walker_gun/wm88
+
 /obj/item/ammo_magazine/walker/flamer
 	name = "F40 UT-Napthal Canister"
 	desc = "Canister for mounted flamethower"
@@ -492,6 +540,62 @@
 	penetration= ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_3
 
+/datum/ammo/bullet/walker/shotgun8g
+	name = "8 gauge buckshot shell"
+	icon_state = "buckshot"
+
+	accurate_range = 2 //запрет на дальнюю стрельбу
+	max_range = 4 //Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
+	damage = 60 //вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
+	damage_falloff = DAMAGE_FALLOFF_TIER_1 //10 фэлл офа,фиг, а не дальнее поражение с высоким уроном
+	penetration= ARMOR_PENETRATION_TIER_2 //нулевое бронепробитие в оригинале
+	bonus_projectiles_type = /datum/ammo/bullet/walker/shotty8g/spread
+	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_2
+
+/datum/ammo/bullet/walker/shotgun8g/on_hit_mob(mob/M,obj/projectile/P)
+	knockback(M,P, 3)
+
+/datum/ammo/bullet/walker/shotgun8g/knockback_effects(mob/living/living_mob)
+	if(iscarbonsizexeno(living_mob))
+		var/mob/living/carbon/xenomorph/target = living_mob
+		to_chat(target, SPAN_XENODANGER("You are shaken and slowed by the sudden impact!"))
+		target.KnockDown(0.5) // If you ask me the KD should be left out, but players like their visual cues
+		target.Stun(0.5)
+		target.apply_effect(1, SUPERSLOW)
+		target.apply_effect(2, SLOW)
+	else
+		if(!isyautja(living_mob)) //Not predators.
+			living_mob.apply_effect(1, SUPERSLOW)
+			living_mob.apply_effect(2, SLOW)
+			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
+
+/datum/ammo/bullet/walker/shotgun8g/spread
+	name = "additional 8 gauge buckshot"
+	scatter = SCATTER_AMOUNT_TIER_1
+	bonus_projectiles_amount = 0
+
+/datum/ammo/bullet/walker/wm88
+	name = ".458 SOCOM round"
+
+	damage = 80 //изначально 104
+	penetration = ARMOR_PENETRATION_TIER_2
+	accuracy = HIT_ACCURACY_TIER_1
+	shell_speed = AMMO_SPEED_TIER_6
+	accurate_range = 14
+	handful_state = "boomslang_bullet"
+
+/datum/ammo/bullet/walker/wm88/20
+	penetration = ARMOR_PENETRATION_TIER_4
+
+/datum/ammo/bullet/walker/wm88/30
+	penetration = ARMOR_PENETRATION_TIER_6
+
+/datum/ammo/bullet/walker/wm88/40
+	penetration = ARMOR_PENETRATION_TIER_8
+
+/datum/ammo/bullet/walker/wm88/50
+	penetration = ARMOR_PENETRATION_TIER_10
+
 ////////////////
 // MEGALODON HARDPOINTS // END
 ////////////////
@@ -505,6 +609,17 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M56 Double-Barrel ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/ammo_M32_walker
+	name = "M32 Mounted Shotgun magazines crate"
+	contains = list(
+		/obj/item/ammo_magazine/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
+	)
+	cost = 20
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "M32 Mounted Shotgun ammo crate"
 	group = "Vehicle Ammo"
 
 /datum/supply_packs/ammo_M30_walker
