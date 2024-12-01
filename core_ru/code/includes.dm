@@ -163,3 +163,6 @@
 #include "modules\vehicles\multitile\hardpoints\support\smoke.dm"
 #include "modules\vehicles\multitile\tank\tank.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\queen\queen_powers.dm"
+#include "core_ru\code\game\objects\items\pamphlets.dm"
+#include "core_ru\code\modules\character_trait\character_trait.dm"
+#include "core_ru\code\modules\character_trait\skills.dm"
