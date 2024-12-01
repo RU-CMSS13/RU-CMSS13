@@ -74,6 +74,7 @@
 #include "game\objects\items\weapons\st_equip.dm"
 #include "game\objects\items\weapons\st_hammer_stacks.dm"
 #include "game\turfs\closed.dm"
+#include "modules\arena\arena.dm"
 #include "modules\asset_cache\asset_list_items.dm"
 #include "modules\battlepass\challenges\_battlepass_challenge.dm"
 #include "modules\battlepass\challenges\_battlepass_main_requirement.dm"
