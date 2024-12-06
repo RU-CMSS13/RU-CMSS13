@@ -78,7 +78,7 @@
 
 	var/obj/item/walker_gun/hardpoint = null //делаем аргумент варом теперь, по сути костыль ибо оставляю старую архитектуру
 
-	if(!hardpoint) //расчитывался что изначально выбирался до него, но, ПЛАН Б(поиска) теперь основной;
+	if(!(istype(hardpoint, /obj/item/walker_gun))) //расчитывался что изначально выбирался до него, но, ПЛАН Б(поиска) теперь основной;
 		var/list/acceptible_modules = list()
 		if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
 			acceptible_modules += module_map[WALKER_HARDPOIN_LEFT]
