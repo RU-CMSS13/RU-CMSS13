@@ -284,25 +284,6 @@
 	scatter_value = 0
 	automatic = FALSE
 
-/obj/item/walker_gun/wm88
-	name = "M88 Mounted Automated Anti-Material rifle"
-	desc = "Anti-material rifle mounted on walker for counter-fire against enemy vehicles,each successfull hit will increase firerate and armor penetration"
-	icon_state = "mech_wm88_parts"
-	equip_state = "redy_wm88"
-	fire_sound = list('sound/weapons/gun_type23.ogg')
-	magazine_type = /obj/item/ammo_magazine/walker/wm88
-	fire_delay = 15
-	/* 	put in walker_wm88_helper.dm
-		var/overheat_reset_cooldown = 3 SECONDS
-		var/overheat_stacks_from_hit = 2
-		var/floating_overheat = 0
-		var/floating_overheat_upper_limit = 8
-		var/overheat_self_destruction_rate = 10 //each overheat stack will damage mech for each shot
-	  	var/floating_penetration = FLOATING_PENETRATION_TIER_0 //put in walker_wm88_helper.dm
-	    var/floating_penetration_upper_limit = FLOATING_PENETRATION_TIER_4
-		var/direct_hit_sound = 'sound/weapons/gun_xm88_directhit_low.ogg' */
-	scatter_value = 0
-	automatic = TRUE
 
 /obj/item/walker_gun/flamer
 	name = "F40 \"Hellfire\" Flamethower"
@@ -435,13 +416,6 @@
 	default_ammo = /datum/ammo/bullet/walker/shotgun8g
 	gun_type = /obj/item/walker_gun/shotgun8g
 
-/obj/item/ammo_magazine/walker/wm88
-	name = "M88 Mounted AMR Magazine"
-	desc = "A armament M88 magazine"
-	icon_state = "mech_shotgun8g_ammo"
-	max_rounds = 80
-	default_ammo = /datum/ammo/bullet/walker/wm88
-	gun_type = /obj/item/walker_gun/wm88
 
 /obj/item/ammo_magazine/walker/flamer
 	name = "F40 UT-Napthal Canister"
@@ -549,8 +523,14 @@
 	damage = 60 //вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
 	damage_falloff = DAMAGE_FALLOFF_TIER_1 //10 фэлл офа,фиг, а не дальнее поражение с высоким уроном
 	penetration= ARMOR_PENETRATION_TIER_2 //нулевое бронепробитие в оригинале
-	bonus_projectiles_type = /datum/ammo/bullet/walker/shotty8g/spread
+	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
 	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_2
+
+/datum/ammo/bullet/walker/shotgun8g/spread
+	name = "additional 8 gauge buckshot"
+	scatter = SCATTER_AMOUNT_TIER_1
+	bonus_projectiles_amount = 0
+
 
 /datum/ammo/bullet/walker/shotgun8g/on_hit_mob(mob/M,obj/projectile/P)
 	knockback(M,P, 3)
@@ -568,33 +548,6 @@
 			living_mob.apply_effect(1, SUPERSLOW)
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
-
-/datum/ammo/bullet/walker/shotgun8g/spread
-	name = "additional 8 gauge buckshot"
-	scatter = SCATTER_AMOUNT_TIER_1
-	bonus_projectiles_amount = 0
-
-/datum/ammo/bullet/walker/wm88
-	name = ".458 SOCOM round"
-
-	damage = 80 //изначально 104
-	penetration = ARMOR_PENETRATION_TIER_2
-	accuracy = HIT_ACCURACY_TIER_1
-	shell_speed = AMMO_SPEED_TIER_6
-	accurate_range = 14
-	handful_state = "boomslang_bullet"
-
-/datum/ammo/bullet/walker/wm88/20
-	penetration = ARMOR_PENETRATION_TIER_4
-
-/datum/ammo/bullet/walker/wm88/30
-	penetration = ARMOR_PENETRATION_TIER_6
-
-/datum/ammo/bullet/walker/wm88/40
-	penetration = ARMOR_PENETRATION_TIER_8
-
-/datum/ammo/bullet/walker/wm88/50
-	penetration = ARMOR_PENETRATION_TIER_10
 
 ////////////////
 // MEGALODON HARDPOINTS // END

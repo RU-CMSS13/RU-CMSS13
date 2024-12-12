@@ -151,6 +151,7 @@
 #include "modules\projectiles\magazines\rifles.dm"
 #include "modules\projectiles\magazines\shotguns.dm"
 #include "modules\shuttle\gamemodes\crash.dm"
+#include "modules\vehicles\walker_wm88_helper.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
 #include "modules\vehicles\walker.dm"
 #include "modules\vehicles\walker_vendor.dm"

@@ -1,5 +1,6 @@
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("WEAPONS (choose 2)", 0, null, null, null),
+	list("M88 Mounted Automated Anti-Material rifle", 0, /obj/item/walker_gun/wm88, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M56 Double-Barrel Mounted Smartgun", 0, /obj/item/walker_gun/smartgun, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M32 Mounted Shotgun", 0,/obj/item/walker_gun/shotgun8g, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M30 Machine Gun", 0, /obj/item/walker_gun/hmg, MECH_GUN, VENDOR_ITEM_REGULAR),
