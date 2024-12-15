@@ -33,7 +33,6 @@
 
 	var/atom/target = null
 	var/scatter_value = 5
-	var/flags
 
 	var/autofire_slow_mult = 1
 
@@ -275,7 +274,7 @@
 
 /obj/item/walker_gun/shotgun8g
 	name = "M32 Mounted Shotgun"
-	desc = "8 Gauge shotgun firing wave of AP bullets, mounted on military walkers for devastation pacify"
+	desc = "8 Gauge shotgun firing wave of AP bullets ineffective at distance, mounted on military walkers for devastation pacify"
 	icon_state = "mech_shotgun8g_parts"
 	equip_state = "redy_shotgun8g"
 	fire_sound = list('sound/weapons/gun_type23.ogg')
@@ -518,13 +517,13 @@
 	name = "8 gauge buckshot shell"
 	icon_state = "buckshot"
 
-	accurate_range = 2 //запрет на дальнюю стрельбу
-	max_range = 4 //Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
+	accurate_range = 2 //запрет на дальнюю стрельбу, нанесет только ~30 урона из-за промахов разброса, в дистанции два тайла спереди спокойно сносит 160 квине/раве
+	max_range = 6 //Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
 	damage = 60 //вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
-	damage_falloff = DAMAGE_FALLOFF_TIER_1 //10 фэлл офа,фиг, а не дальнее поражение с высоким уроном
+	damage_falloff = DAMAGE_FALLOFF_TIER_6 //5 фэлл офа,фиг, а не дальнее поражение с высоким уроном
 	penetration= ARMOR_PENETRATION_TIER_2 //нулевое бронепробитие в оригинале
 	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
-	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_2
+	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_3 //у меха проблема с мелкими целями, больших в упор спокойно дамажит, дрон же получит 1 дробинку и оглушится, подставляя, но не нанося серьезного ущерба
 
 /datum/ammo/bullet/walker/shotgun8g/spread
 	name = "additional 8 gauge buckshot"
@@ -570,7 +569,7 @@
 		/obj/item/ammo_magazine/walker/shotgun8g,
 		/obj/item/ammo_magazine/walker/shotgun8g,
 	)
-	cost = 20
+	cost = 30
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M32 Mounted Shotgun ammo crate"
 	group = "Vehicle Ammo"

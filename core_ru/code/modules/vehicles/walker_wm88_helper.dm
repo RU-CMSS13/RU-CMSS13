@@ -1,10 +1,3 @@
-/*
-#define FLOATING_PENETRATION_TIER_0 0
-#define FLOATING_PENETRATION_TIER_1 1
-#define FLOATING_PENETRATION_TIER_2 2
-#define FLOATING_PENETRATION_TIER_3 3
-#define FLOATING_PENETRATION_TIER_4 4
-*/
 
 /obj/item/ammo_magazine/walker/wm88
 	name = "M88 Mounted AMR Magazine"
@@ -53,7 +46,7 @@
 	desc = "Anti-material rifle mounted on walker for counter-fire against enemy vehicles,each successfull hit will increase firerate and armor penetration"
 	icon_state = "mech_wm88_parts"
 	equip_state = "redy_wm88"
-	fire_sound = list('sound/weapons/gun_type23.ogg')
+	fire_sound = list('sound/weapons/gun_boomslang_fire.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/wm88
 	var/basic_fire_delay = 13
 	fire_delay = 13
@@ -63,37 +56,10 @@
 	var/overheat_rate = 2
 	var/overheat = 0
 	var/overheat_upper_limit = 8
-	var/overheat_self_destruction_rate = 10 //при финальном перегреве начнет получать урон при стрельбе
-	//var/floating_penetration = FLOATING_PENETRATION_TIER_0
-	//var/floating_penetration_upper_limit = FLOATING_PENETRATION_TIER_4
+	var/overheat_self_destruction_rate = 5 //при финальном перегреве начнет получать урон при стрельбе умноженный на перегрев
 	var/steam_effect = /obj/effect/particle_effect/smoke/bad/wm88
-	var/direct_hit_sound = 'sound/weapons/gun_xm88_directhit_low.ogg'
-
-/*
-/obj/item/walker_gun/wm88/register_signals(mob/user)
-	RegisterSignal(user, COMSIG_BULLET_DIRECT_HIT, PROC_REF(direct_hit_buff))
-	return ..()
-
-/obj/item/walker_gun/wm88/unregister_signals(mob/user)
-	UnregisterSignal(user, COMSIG_BULLET_DIRECT_HIT)
-	return ..()
-
-/obj/item/walker_gun/wm88/proc/direct_hit_buff(mob/user, mob/target)
-	SIGNAL_HANDLER
-	apply_hit_buff(user, target)
-	addtimer(CALLBACK(src, PROC_REF(reset_hit_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE)
-
-/obj/item/walker_gun/wm88/proc/apply_hit_buff()
-	fire_delay = basic_fire_delay - overheat //to shoot the next round faster
-
-	if(floating_penetration < floating_penetration_upper_limit)
-		floating_penetration++
-
-*/
 
 /obj/item/walker_gun/wm88/active_effect(atom/target, mob/living/user)
-	if(!target) //checks here since we don't want to fuck up applying the increase
-		return NONE
 	if(overheat) //has to go before actual firing
 		var/obj/item/ammo_magazine/walker/new_ammo
 		var/old_ammo = ammo
@@ -101,37 +67,72 @@
 		switch(overheat)
 			if(2)
 				new_ammo = new/obj/item/ammo_magazine/walker/wm88/a20
-				direct_hit_sound = "sound/weapons/gun_xm88_directhit_low.ogg"
 			if(4)
 				new_ammo = new/obj/item/ammo_magazine/walker/wm88/a30
-				direct_hit_sound = "sound/weapons/gun_xm88_directhit_medium.ogg"
 			if(6)
 				new_ammo = new/obj/item/ammo_magazine/walker/wm88/a40
-				direct_hit_sound = "sound/weapons/gun_xm88_directhit_medium.ogg"
 			if(8)
 				new_ammo = new/obj/item/ammo_magazine/walker/wm88/a50
-				direct_hit_sound = "sound/weapons/gun_xm88_directhit_high.ogg"
 		new_ammo.current_rounds = ammo_rounds_memory
-		ammo = new_ammo
+		ammo = new_ammo //Создаём и удаляем магазины, весело
 		qdel(old_ammo)
-		if(overheat == overheat_upper_limit)
-			var/turf/T = get_turf(owner)
-			new steam_effect(T)
-			var/damage = overheat_self_destruction_rate * overheat
-			src.owner.take_damage_type(damage, "blunt", src) //надо заменить на прямое взаимодействие со здоровьем чтобы не засорять чат и удобно высчитывать
-	//SEND_SIGNAL(user, COMSIG_BULLET_DIRECT_HIT, target, src)
-		fire_delay = basic_fire_delay - overheat
+	//Оверрайд изначальной части, ибо рефактор потом сделаем чтобы использовать флаги xd
+	if (!ammo)
+		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
+		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
+		return FALSE
+	if(ammo.current_rounds <= 0)
+		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
+		ammo.loc = owner.loc
+		ammo = null
+		visible_message("[owner.name]'s systems deployed used magazine.","")
+		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
+		return FALSE
+	if(world.time < last_fire + fire_delay)
+		to_chat(user, "<span class='warning'>WARNING! System report: weapon is not ready to fire again!</span>")
+		return FALSE
+	last_fire = world.time
+	if(!owner.firing_arc(target))
+		return FALSE
+	var/obj/projectile/P = new
+	P.generate_bullet(new ammo.default_ammo)
+	for (var/trait in projectile_traits)
+		GIVE_BULLET_TRAIT(P, trait, FACTION_MARINE)
+	playsound(get_turf(owner), pick(fire_sound), 60)
+	target = simulate_scatter(target, P)
+	P.fire_at(target, owner, src, P.ammo.max_range, P.ammo.shell_speed)
+	//////////
+	if(overheat == overheat_upper_limit)
+		var/turf/T = get_turf(owner)
+		new steam_effect(T)
+		var/damage = overheat_self_destruction_rate * overheat
+		owner.health = max(0, owner.health - damage)
+		to_chat(user, SPAN_WARNING("[src] IS LOOSING INTEGRITY FROM EXTREM HOT STEAM."))
+	fire_delay = basic_fire_delay - overheat
+	SEND_SIGNAL(src, COMSIG_GUN_AUTOFIREDELAY_MODIFIED, fire_delay)
 	if(overheat < overheat_upper_limit)
 		overheat += overheat_rate
-	addtimer(CALLBACK(src, PROC_REF(reset_hit_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE)
-	return ..()
+	addtimer(CALLBACK(src, PROC_REF(reset_overheat_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE)
+	//////////
+	ammo.current_rounds--
 
-/obj/item/walker_gun/wm88/proc/reset_hit_buff(mob/user)
+	display_ammo(user)
+	visible_message("<span class='danger'>[owner.name] fires from [name]!</span>", "<span class='warning'>You hear [istype(P.ammo, /datum/ammo/bullet) ? "gunshot" : "blast"]!</span>")
+
+	var/angle = round(Get_Angle(owner, target))
+	muzzle_flash(angle)
+
+	if(ammo && ammo.current_rounds <= 0)
+		ammo.loc = owner.loc
+		ammo = null
+		visible_message("[owner.name]'s systems deployed used magazine.","")
+	owner.healthcheck() //проверка саморазрушения после перегрева
+	return TRUE
+
+/obj/item/walker_gun/wm88/proc/reset_overheat_buff(mob/user)
 	SIGNAL_HANDLER
-	if(overheat > 0)
-		to_chat(user, SPAN_WARNING("[src] beeps as it's extinguish."))
+	to_chat(user, SPAN_WARNING("[src] beeps as it's extinguish."))
 	overheat = 0
-	direct_hit_sound = "sound/weapons/gun_xm88_directhit_low.ogg"
 	var/ammo_memory = ammo.current_rounds
 	var/obj/item/ammo_magazine/walker/new_ammo
 	var/old_ammo = ammo
@@ -139,12 +140,12 @@
 	ammo = new_ammo
 	qdel(old_ammo)
 	ammo.current_rounds = ammo_memory
-	//floating_penetration = FLOATING_PENETRATION_TIER_0
 	fire_delay = basic_fire_delay
+	SEND_SIGNAL(src, COMSIG_GUN_AUTOFIREDELAY_MODIFIED, fire_delay)
 
 /obj/effect/particle_effect/smoke/bad/wm88
-	smokeranking = SMOKE_RANK_HIGH
-	time_to_live = 20
+	smokeranking = SMOKE_RANK_MED
+	time_to_live = 8
 
 /obj/effect/particle_effect/smoke/bad/wm88/affect(mob/living/carbon/affected_mob)
 	. = ..()
@@ -173,15 +174,7 @@
 		/obj/item/ammo_magazine/walker/wm88,
 		/obj/item/ammo_magazine/walker/wm88,
 	)
-	cost = 30
+	cost = 40
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M88 Mounted AMR Magazine crate"
 	group = "Vehicle Ammo"
-
-/*
-#undef FLOATING_PENETRATION_TIER_0
-#undef FLOATING_PENETRATION_TIER_1
-#undef FLOATING_PENETRATION_TIER_2
-#undef FLOATING_PENETRATION_TIER_3
-#undef FLOATING_PENETRATION_TIER_4
-*/
