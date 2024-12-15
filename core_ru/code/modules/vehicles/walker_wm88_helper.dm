@@ -107,7 +107,7 @@
 		new steam_effect(T)
 		var/damage = overheat_self_destruction_rate * overheat
 		owner.health = max(0, owner.health - damage)
-		to_chat(user, SPAN_WARNING("[src] IS LOOSING INTEGRITY FROM EXTREM HOT STEAM."))
+		to_chat(user, SPAN_WARNING("[owner] IS LOOSING INTEGRITY FROM EXTREM HOT STEAM."))
 	fire_delay = basic_fire_delay - overheat
 	SEND_SIGNAL(src, COMSIG_GUN_AUTOFIREDELAY_MODIFIED, fire_delay)
 	if(overheat < overheat_upper_limit)
