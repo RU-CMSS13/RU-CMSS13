@@ -16,6 +16,6 @@
 	plasma_cost = 100
 	xeno_cooldown = 60 SECONDS
 	var/required_larva = 1
-	var/duration = 10 MINUTES
+	var/duration = 6 MINUTES
 	var/to_give = 8
 	var/active = FALSE
