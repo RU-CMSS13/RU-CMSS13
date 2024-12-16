@@ -4,4 +4,4 @@
 
 #define XENO_COMM_ACQUISITION_TIME (45 MINUTES)
 
-#define COMSIG_XENO_PRE_SPIT "xeno_spit_after_generation"
+#define COMSIG_XENO_PRE_SPIT "xeno_spit_before_generation"
