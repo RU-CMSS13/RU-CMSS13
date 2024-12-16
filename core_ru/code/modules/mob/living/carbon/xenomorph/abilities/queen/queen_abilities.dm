@@ -17,5 +17,5 @@
 	xeno_cooldown = 60 SECONDS
 	var/required_larva = 1
 	var/duration = 10 MINUTES
-	var/to_give = 12
+	var/to_give = 8
 	var/active = FALSE
