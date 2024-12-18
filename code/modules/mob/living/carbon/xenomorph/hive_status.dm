@@ -2,7 +2,7 @@
 	var/name = "Normal Hive"
 
 	// Used for the faction of the xenomorph. Not recommended to modify.
-	var/internal_faction
+	var/internal_faction = FACTION_XENOMORPH
 
 	/// Short Hive ID as string used in stats reporting
 	var/reporting_id = "normal"
@@ -1011,6 +1011,7 @@
 	name = "Corrupted Hive"
 	reporting_id = "corrupted"
 	hivenumber = XENO_HIVE_CORRUPTED
+	internal_faction = FACTION_XENOMORPH_CORRPUTED
 	prefix = "Corrupted "
 	color = "#80ff80"
 	ui_color ="#4d994d"
@@ -1038,6 +1039,7 @@
 	name = "Alpha Hive"
 	reporting_id = "alpha"
 	hivenumber = XENO_HIVE_ALPHA
+	internal_faction = FACTION_XENOMORPH_ALPHA
 	prefix = "Alpha "
 	color = "#ff4040"
 	ui_color = "#992626"
@@ -1049,6 +1051,7 @@
 	name = "Bravo Hive"
 	reporting_id = "bravo"
 	hivenumber = XENO_HIVE_BRAVO
+	internal_faction = FACTION_XENOMORPH_BRAVO
 	prefix = "Bravo "
 	color = "#ffff80"
 	ui_color = "#99994d"
@@ -1060,6 +1063,7 @@
 	name = "Charlie Hive"
 	reporting_id = "charlie"
 	hivenumber = XENO_HIVE_CHARLIE
+	internal_faction = FACTION_XENOMORPH_CHARLIE
 	prefix = "Charlie "
 	color = "#bb40ff"
 	ui_color = "#702699"
@@ -1071,6 +1075,7 @@
 	name = "Delta Hive"
 	reporting_id = "delta"
 	hivenumber = XENO_HIVE_DELTA
+	internal_faction = FACTION_XENOMORPH_DELTA
 	prefix = "Delta "
 	color = "#8080ff"
 	ui_color = "#4d4d99"
@@ -1082,6 +1087,7 @@
 	name = "Feral Hive"
 	reporting_id = "feral"
 	hivenumber = XENO_HIVE_FERAL
+	internal_faction = FACTION_XENOMORPH_FERAL
 	prefix = "Feral "
 	color = "#828296"
 	ui_color = "#828296"
@@ -1098,6 +1104,7 @@
 	name = "Forsaken Hive"
 	reporting_id = "forsaken"
 	hivenumber = XENO_HIVE_FORSAKEN
+	internal_faction = FACTION_XENOMORPH_FORSAKEN
 	prefix = "Forsaken "
 	color = "#cc8ec4"
 	ui_color = "#cc8ec4"

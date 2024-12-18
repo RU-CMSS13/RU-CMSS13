@@ -1063,6 +1063,14 @@
 				if(!stat && pain.feels_pain)
 					emote("scream")
 					to_chat(src, SPAN_HIGHDANGER("You scream in pain as the impact sends <B>shrapnel</b> into the wound!"))
+
+	var/mob/shoot_mob = P.weapon_cause_data?.resolve_mob()
+	if(shoot_mob)
+		if(shoot_mob.faction == faction)
+			shoot_mob.track_friendly_damage(P.weapon_cause_data.cause_name, src, damage)
+		else
+			shoot_mob.track_damage(P.weapon_cause_data.cause_name, src, damage)
+
 	SEND_SIGNAL(P, COMSIG_POST_BULLET_ACT_HUMAN, src, damage, damage_result)
 //RUCM START
 	SEND_SIGNAL(P.firer, COMSIG_FIRER_PROJECTILE_DIRECT_HIT, P)
@@ -1141,7 +1149,14 @@
 		return
 
 	if(damage)
+		var/mob/shoot_mob = P.weapon_cause_data?.resolve_mob()
 		//only apply the blood splatter if we do damage
+		if(shoot_mob)
+			if(shoot_mob.faction == faction)
+				shoot_mob.track_friendly_damage(P.weapon_cause_data.cause_name, src, damage)
+			else
+				shoot_mob.track_damage(P.weapon_cause_data.cause_name, src, damage)
+
 		handle_blood_splatter(get_dir(P.starting, loc))
 
 		apply_damage(damage_result,P.ammo.damage_type, P.def_zone) //Deal the damage.
