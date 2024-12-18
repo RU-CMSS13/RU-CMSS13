@@ -351,8 +351,14 @@ CULT
 
 	var/mob/living/carbon/human/H = user
 
+	//RUCM START THERE
+	/*
 	if(H.job != JOB_SQUAD_TEAM_LEADER)
 		return FALSE
+	*/
+	if((H.job != JOB_SQUAD_TEAM_LEADER)&&(H.job != JOB_SQUAD_LEADER))
+		return FALSE
+	//RUCM ENDS HERE
 
 	return ..()
 
