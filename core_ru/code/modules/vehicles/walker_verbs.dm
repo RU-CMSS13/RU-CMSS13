@@ -1,6 +1,8 @@
-/obj/vehicle/walker/proc/exit_walker(mob/user_mob)
+/obj/vehicle/walker/proc/exit_walker()
 	set name = "Eject"
 	set category = "Vehicle"
+
+	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
@@ -33,9 +35,11 @@
 	return TRUE
 
 
-/obj/vehicle/walker/proc/toggle_lights(mob/user_mob)
+/obj/vehicle/walker/proc/toggle_lights()
 	set name = "Lights on/off"
 	set category = "Vehicle"
+
+	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
@@ -57,9 +61,11 @@
 	return TRUE
 
 
-/obj/vehicle/walker/proc/eject_magazine(mob/user_mob, obj/item/walker_gun/hardpoint)
+/obj/vehicle/walker/proc/eject_magazine()
 	set name = "Eject Magazine"
 	set category = "Vehicle"
+
+	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
@@ -70,7 +76,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = user_mob.interactee
 
-	if(!hardpoint)
+	var/obj/item/walker_gun/hardpoint = null //делаем аргумент варом теперь, по сути костыль ибо оставляю старую архитектуру
+
+	if(!(istype(hardpoint, /obj/item/walker_gun))) //расчитывался что изначально выбирался до него, но, ПЛАН Б(поиска) теперь основной;
 		var/list/acceptible_modules = list()
 		if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
 			acceptible_modules += module_map[WALKER_HARDPOIN_LEFT]
@@ -95,9 +103,11 @@
 	return TRUE
 
 
-/obj/vehicle/walker/proc/get_stats(mob/user_mob)
+/obj/vehicle/walker/proc/get_stats()
 	set name = "Status Display"
 	set category = "Vehicle"
+
+	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
@@ -111,9 +121,11 @@
 	tgui_interact(user_mob)
 	return TRUE
 
-/obj/vehicle/walker/proc/toggle_zoom(mob/user_mob)
+/obj/vehicle/walker/proc/toggle_zoom()
 	set name = "Zoom on/off"
 	set category = "Vehicle"
+
+	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
