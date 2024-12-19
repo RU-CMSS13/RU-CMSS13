@@ -51,7 +51,7 @@
 	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button
 	var/list/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/doors = list()
 	var/list/obj/structure/machinery/gear/gears = list()
-	var/list/buttons
+	var/list/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/buttons = list()
 	var/list/disabled_floors
 	var/list/called_floors
 	var/next_moving = 0
@@ -63,14 +63,19 @@
 
 /obj/docking_port/mobile/sselevator/Destroy()
 	initial_dock = null
-	SSshuttle.scraper_elevators[id] = null
+	door = null
+	button = null
+
+	for(var/i in doors)
+		doors -= i
+	for(var/i in gears)
+		gears -= i
+	for(var/i in buttons)
+		buttons -= i
 
 	. = ..()
 
-	QDEL_NULL(door)
-	QDEL_NULL(button)
-	QDEL_NULL_LIST(doors)
-	QDEL_NULL_LIST(gears)
+	SSshuttle.scraper_elevators[id] = null
 
 /obj/docking_port/mobile/sselevator/register()
 	. = ..()
@@ -139,8 +144,6 @@
 	move_delay = clamp(move_delay, max_move_delay, min_move_delay)
 
 /obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc)
-	if(floor_calc < 50) // TODO: Finish map
-		return
 	if(!moving && !cooldown)
 		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons[floor_calc]
 		if(button)
@@ -191,8 +194,6 @@
 	target_floor = z - offseted_z
 	next_moving = 0
 
-	buttons = list()
-	buttons.len = total_floors
 	disabled_floors = list()
 	disabled_floors.len = total_floors
 	called_floors = list()
@@ -242,7 +243,6 @@
 
 	var/elevator_id = "normal_elevator"
 	var/floor
-	var/obj/docking_port/mobile/sselevator/elevator
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Initialize(mapload, ...)
 	. = ..()
@@ -251,7 +251,7 @@
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/proc/connect_elevator()
 	set waitfor = FALSE
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
-	elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(!elevator)
 		qdel(src)
 	else if(floor != "control")
@@ -259,12 +259,12 @@
 		elevator.buttons[floor] = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(elevator)
 		if(floor != "control")
 			elevator.buttons[floor] -= src
 		else
 			elevator.button = null
-	elevator = null
 
 	. = ..()
 
@@ -290,6 +290,7 @@
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_data()
 	. = list("buttons" = list())
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(!elevator)
 		return
 	for(var/i = 1 to elevator.total_floors)
@@ -304,6 +305,7 @@
 
 	if(action == "click")
 		var/target_floor = params["id"]
+		var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 		if(elevator.offseted_z == target_floor || elevator.called_floors[target_floor])
 			return
 		playsound(src, 'sound/machines/click.ogg', 15, 1)
@@ -321,6 +323,7 @@
 	desc = "The remote controls for the 'S95 v2' elevator."
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/attack_hand(mob/user)
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(!allowed(user) || !elevator)
 		to_chat(user, SPAN_WARNING("Доступ Запрещен!"))
 		return
@@ -332,9 +335,9 @@
 	if(elevator.called_floors[floor])
 		visible_message(SPAN_NOTICE("Лифт уже едет на этот этаж, ожидайте."))
 		return
-	call_elevator(user)
+	call_elevator(user, elevator)
 
-/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/proc/call_elevator()
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/proc/call_elevator(mob/user, obj/docking_port/mobile/sselevator/elevator)
 	playsound(src, 'sound/machines/click.ogg', 15, 1)
 	visible_message(SPAN_NOTICE("Лифт вызван, ожидайте."))
 	elevator.calc_elevator_order(floor)
@@ -366,7 +369,6 @@
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/move_lock_doors = list()
 	var/list/obj/structure/machinery/siren/sirens = list()
 	var/list/obj/structure/machinery/light/double/almenia/lights = list()
-	var/obj/docking_port/mobile/sselevator/elevator
 	var/list/locked = list("stairs" = FALSE, "elevator" = FALSE)
 
 	var/list/technobabble = list(
@@ -383,21 +385,25 @@
 	connect_elevator()
 
 /obj/structure/machinery/computer/security_blocker/Destroy()
-	GLOB.skyscrapers_sec_comps["[z]"] = null
-	elevator = null
+	for(var/i in stairs_doors)
+		stairs_doors -= i
+	for(var/i in elevator_doors)
+		elevator_doors -= i
+	for(var/i in move_lock_doors)
+		move_lock_doors -= i
+	for(var/i in sirens)
+		sirens -= i
+	for(var/i in lights)
+		lights -= i
 
 	. = ..()
 
-	QDEL_NULL_LIST(stairs_doors)
-	QDEL_NULL_LIST(elevator_doors)
-	QDEL_NULL_LIST(move_lock_doors)
-	QDEL_NULL_LIST(sirens)
-	QDEL_NULL_LIST(lights)
+	GLOB.skyscrapers_sec_comps["[z]"] = null
 
 /obj/structure/machinery/computer/security_blocker/proc/connect_elevator()
 	set waitfor = FALSE
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
-	elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	for(var/obj/structure/machinery/siren/S as anything in sirens)
 		S.siren_warning_start("ТРЕВОГА, КРИТИЧЕСКАЯ СИТУАЦИЯ, ЗАПУЩЕН ПРОТОКОЛ МАКСИМАЛЬНОЙ БЕЗОПАСНОСТИ, ЭТАЖ [z - elevator.floor_offset]")
 	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
@@ -429,6 +435,7 @@
 /obj/structure/machinery/computer/security_blocker/interact(mob/user)
 	. = ..()
 	user.set_interaction(src)
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	var/dat = ""
 	dat += "<div align='center'>Терминал безопасности [z - elevator.floor_offset] этажа</a></div>"
 	dat += "<br/><span><b>Протокол безопасности</b>: [security_protocol ? "включен" : "отключен"]</span>"
@@ -561,6 +568,7 @@
 	visible_message(SPAN_NOTICE("[src] beeps as it program requires attention."))
 
 /obj/structure/machinery/computer/security_blocker/proc/unlock_floor()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	elevator.disabled_floors[z - elevator.floor_offset] = FALSE
 	security_protocol = FALSE
 	for(var/obj/structure/machinery/siren/S as anything in sirens)
@@ -796,26 +804,25 @@
 
 	var/elevator_id = "normal_elevator"
 	var/floor
-	var/obj/docking_port/mobile/sselevator/elevator
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Initialize(mapload, ...)
 	. = ..()
 	connect_elevator()
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Destroy()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(elevator)
 		if(floor != "control")
 			elevator.doors["[floor]"] = null
 		else
 			elevator.door = null
-	elevator = null
 
 	. = ..()
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/proc/connect_elevator()
 	set waitfor = FALSE
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
-	elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(floor != "control")
 		floor = src.z
 		elevator.doors["[floor]"] = src
@@ -954,6 +961,13 @@
 	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
 	if(blocker)
 		blocker.lights += src
+
+/obj/structure/machinery/light/double/almenia/Destroy()
+	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	if(blocker)
+		blocker.lights -= src
+
+	. = ..()
 
 /obj/structure/machinery/light/double/almenia/proc/change_almenia_state(alert)
 	switch(alert)
