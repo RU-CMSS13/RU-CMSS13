@@ -2,6 +2,8 @@
 	name = "auto-sand"
 	icon = 'icons/turf/floors/auto_sand.dmi'
 	icon_state = "sand_1"//editor icon
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
+	weedable = FULLY_WEEDABLE
 	is_groundmap_turf = TRUE
 	var/icon_prefix = "sand"
 	var/layer_name = list("layer 1", "layer2", "layer 3", "layer 4", "layer 5")
@@ -11,8 +13,7 @@
 /turf/open/auto_turf/insert_self_into_baseturfs()
 	baseturfs += type
 
-/turf/open/auto_turf/is_weedable()//for da xenos
-	return FULLY_WEEDABLE
+/turf/open/auto_turf/weedable = FULLY_WEEDABLE
 
 /turf/open/auto_turf/get_dirt_type()
 	return DIRT_TYPE_GROUND //automatically diggable I guess
@@ -57,6 +58,8 @@
 		var/turf/open/T = get_step(src, direction)
 		if(istype(T))
 			T.update_icon()
+
+	weedable = bleed_layer ? NOT_WEEDABLE : FULLY_WEEDABLE
 
 	update_icon()
 
@@ -175,8 +178,10 @@
 	else
 		return DIRT_TYPE_GROUND
 
-/turf/open/auto_turf/snow/is_weedable()
-	return bleed_layer ? NOT_WEEDABLE : FULLY_WEEDABLE
+/turf/open/auto_turf/snow/Initialize(mapload, ...)
+	. = ..()
+
+	weedable = bleed_layer ? NOT_WEEDABLE : FULLY_WEEDABLE
 
 /turf/open/auto_turf/snow/attackby(obj/item/I, mob/user)
 	//Light Stick

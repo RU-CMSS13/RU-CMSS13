@@ -1,5 +1,6 @@
 //turfs with density = TRUE
 /turf/closed
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 	density = TRUE
 	opacity = TRUE
 
@@ -247,8 +248,7 @@
 	icon = 'icons/turf/shuttle.dmi'
 	layer = ABOVE_TURF_LAYER
 
-/turf/closed/shuttle/is_weedable()
-	return FULLY_WEEDABLE
+/turf/closed/shuttle/weedable = FULLY_WEEDABLE
 
 /turf/closed/shuttle/dropship
 	icon = 'icons/turf/walls/walls.dmi'

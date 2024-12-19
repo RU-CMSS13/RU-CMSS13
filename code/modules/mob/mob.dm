@@ -18,6 +18,7 @@
 		mind = null
 
 	QDEL_NULL(skills)
+	QDEL_NULL(shadow)
 	QDEL_NULL_LIST(actions)
 	QDEL_NULL_LIST(viruses)
 	resistances?.Cut()
@@ -331,11 +332,8 @@
 /mob/proc/sync_lighting_plane_alpha()
 	if(hud_used)
 		var/atom/movable/screen/plane_master/lighting/lighting = hud_used.plane_masters["[LIGHTING_PLANE]"]
-		if (lighting)
+		if(lighting)
 			lighting.alpha = lighting_alpha
-		var/atom/movable/screen/plane_master/lighting/exterior_lighting = hud_used.plane_masters["[EXTERIOR_LIGHTING_PLANE]"]
-		if (exterior_lighting)
-			exterior_lighting.alpha = min(GLOB.minimum_exterior_lighting_alpha, lighting_alpha)
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
@@ -888,12 +886,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 		if(istype(img))
 			img.appearance_flags &= ~PIXEL_SCALE
 
-/mob/proc/trainteleport(atom/destination)
+/mob/proc/trainteleport(atom/destination, z_move_flags)
 	if(!destination || anchored)
 		return FALSE //Gotta go somewhere and be able to move
 	if(!pulling)
-		return forceMove(destination) //No need for a special proc if there's nothing being pulled.
-	pulledby?.stop_pulling() //The leader of the choo-choo train breaks the pull
+		return zMove(target = destination, z_move_flags = ZMOVE_STAIRS_FLAGS) //No need for a special proc if there's nothing being pulled.
+
 	var/list/conga_line = list()
 	var/end_of_conga = FALSE
 	var/mob/S = src
@@ -905,7 +903,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			conga_line += S.buckled
 	while(!end_of_conga)
 		var/atom/movable/A = S.pulling
-		if((A in conga_line) || A.anchored) //No loops, nor moving anchored things.
+		if(A in conga_line || A.anchored) //No loops, nor moving anchored things.
 			end_of_conga = TRUE
 			break
 		conga_line += A
@@ -929,30 +927,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 				var/mob/buckled_mob = O.buckled_mob
 				if(!buckled_mob.pulling)
 					continue
-				buckled_mob.stop_pulling() //No support for wheelchair trains yet.
 			var/obj/structure/bed/B = O
 			if(istype(B) && B.buckled_bodybag)
 				conga_line += B.buckled_bodybag
 			end_of_conga = TRUE //Only mobs can continue the cycle.
-	var/area/new_area = get_area(destination)
 	for(var/atom/movable/AM in conga_line)
-		var/oldLoc
-		if(AM.loc)
-			oldLoc = AM.loc
-			AM.loc.Exited(AM,destination)
-		AM.loc = destination
-		AM.loc.Entered(AM,oldLoc)
-		var/area/old_area
-		if(oldLoc)
-			old_area = get_area(oldLoc)
-		if(new_area && old_area != new_area)
-			new_area.Entered(AM,oldLoc)
-		for(var/atom/movable/CR in destination)
-			if(CR in conga_line)
-				continue
-			CR.Crossed(AM)
-		if(oldLoc)
-			AM.Moved(oldLoc)
+		AM.zMove(target = destination, z_move_flags = ZMOVE_STAIRS_FLAGS)
 
 	return TRUE
 
@@ -1028,6 +1008,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/update_stat()
 	return
 
+/mob/Move()
+	. = ..()
+	if(shadow)
+		var/turf/above = SSmapping.get_turf_above(loc)
+		handle_watch_above(above)
+
+/mob/proc/handle_watch_above(turf/above)
+	if(above && above.turf_flags & TURF_TRANSPARENT)
+		shadow.forceMove(above)
+	else
+		to_chat(src, SPAN_NOTICE("You stop looking up."))
+		reset_view(0)
+		QDEL_NULL(shadow)
+
 /// Send src back to the lobby as a `/mob/new_player()`
 /mob/proc/send_to_lobby()
 	var/mob/new_player/new_player = new
@@ -1038,3 +1032,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 	mind.transfer_to(new_player)
 
 	qdel(src)
+
+/obj/shadow
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	alpha = 0
+
+/obj/shadow/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
+	return FALSE

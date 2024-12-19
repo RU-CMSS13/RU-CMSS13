@@ -24,9 +24,6 @@
 	name = "desert"
 	icon_state = "desert1"
 
-/turf/open/desert/dirt/is_weedable()
-	return FULLY_WEEDABLE
-
 /turf/open/desert/dirt/desert_transition_edge1
 	icon_state = "desert_transition_edge1"
 
@@ -86,9 +83,6 @@
 /turf/open/desert/rock
 	name = "rock"
 	icon_state = "rock1"
-
-/turf/open/desert/rock/is_weedable()
-	return FULLY_WEEDABLE
 
 /turf/open/desert/rock/edge1
 	name = "desert"
@@ -167,7 +161,8 @@
 	icon = 'icons/turf/floors/desert_water.dmi'
 	icon_state = "shore1"
 	var/toxic = 0
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/desert/desert_shore/update_icon()
 	..()
@@ -181,9 +176,6 @@
 		if(-1)
 			set_light(1)
 			icon = 'icons/turf/floors/desert_water_transition.dmi'
-
-/turf/open/desert/desert_shore/is_weedable()
-	return NOT_WEEDABLE
 
 /turf/open/desert/desert_shore/desert_shore1
 	name = "shore"
@@ -246,7 +238,8 @@
 /turf/open/desert/waterway
 	icon = 'icons/turf/floors/desert_water.dmi'
 	icon_state = "dock"
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/desert/waterway/desert_waterway
 	icon = 'icons/turf/floors/desert_water.dmi'
@@ -322,11 +315,10 @@
 	icon = 'icons/turf/floors/desert_water.dmi'
 	icon_state = "shallow"
 	icon_overlay = "_shallow"
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 	var/toxic = 0
 	default_name = "water"
-
-/turf/open/gm/river/desert/is_weedable()
-	return NOT_WEEDABLE
 
 /turf/open/gm/river/desert/update_icon()
 	..()

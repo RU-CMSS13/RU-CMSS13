@@ -916,12 +916,12 @@
 	name = "Supply Drop Pad"
 	desc = "Place a crate on here to allow bridge Overwatch officers to drop them on people's heads."
 	icon = 'icons/effects/warning_stripes.dmi'
+	plane = FLOOR_PLANE
+	layer = STAIRS_LAYER
 	anchored = TRUE
 	density = FALSE
 	unslashable = TRUE
 	unacidable = TRUE
-	plane = FLOOR_PLANE
-	layer = 2.1 //It's the floor, man
 	var/squad = SQUAD_MARINE_1
 	var/sending_package = 0
 

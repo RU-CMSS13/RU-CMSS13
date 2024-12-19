@@ -1,3 +1,6 @@
+GLOBAL_LIST_INIT(task_gen_list, list("sector_control" = list(/datum/faction_task/sector_control/occupy, /datum/faction_task/sector_control/occupy/hold)))
+GLOBAL_LIST_INIT(task_gen_list_game_enders, list("game_enders" = list(/datum/faction_task/dominate, /datum/faction_task/hold)))
+
 GLOBAL_LIST_INIT_TYPED(faction_datums, /datum/faction, setup_faction_list())
 
 /proc/setup_faction_list()

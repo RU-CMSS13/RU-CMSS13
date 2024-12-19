@@ -14,6 +14,8 @@
 #define DISPLACEMENT_PLATE_RENDER_LAYER 1
 #define DISPLACEMENT_PLATE_RENDER_TARGET "*DISPLACEMENT_PLATE_RENDER_TARGET"
 
+#define SPACE_LAYER 1.8
+
 #define UNDER_TURF_LAYER 1.99
 
 #define TURF_LAYER 2
@@ -37,6 +39,8 @@
 #define UNDERFLOOR_OBJ_LAYER 2.46
 /// catwalk overlay of /turf/open/floor/plating/plating_catwalk
 #define CATWALK_LAYER 2.5
+/// stairs overlay on turf
+#define STAIRS_LAYER 2.5
 /// Alien weeds and node layer
 #define WEED_LAYER 2.51
 /// Over weeds, such as blood
@@ -196,6 +200,9 @@
 /// Bubble for typing indicators
 #define TYPING_LAYER 500
 
+#define S_LIGHTING_VISUAL_PLANE 115
+#define S_LIGHTING_VISUAL_RENDER_TARGET "S_LIGHT_VISUAL_PLANE"
+
 #define O_LIGHTING_VISUAL_PLANE 120
 #define O_LIGHTING_VISUAL_LAYER 16
 #define O_LIGHTING_VISUAL_RENDER_TARGET "O_LIGHT_VISUAL_PLANE"
@@ -218,6 +225,13 @@
 /// NEVER HAVE ANYTHING BELOW THIS PLANE ADJUST IF YOU NEED MORE SPACE
 #define LOWEST_EVER_PLANE -200
 
+#define PLANE_SPACE -95
+
+#define OPENSPACE_LAYER 600 //Openspace layer over all
+#define TRANSPARENT_FLOOR_PLANE -62 //Transparent plane that shows openspace underneath the floor
+#define OPENSPACE_PLANE -61 //Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -60 //Black square just over openspace plane to guaranteed cover all in openspace turf
+
 /// Floor plane, self explanatory. Used for Ambient Occlusion filter
 #define FLOOR_PLANE -7
 /// Game Plane, where most of the game objects reside
@@ -234,7 +248,6 @@
 
 ///--------------- FULLSCREEN RUNECHAT BUBBLES ------------
 #define LIGHTING_PLANE 100
-#define EXTERIOR_LIGHTING_PLANE 101
 #define NVG_PLANE 110
 
 ///Popup Chat Messages

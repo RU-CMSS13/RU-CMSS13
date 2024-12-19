@@ -223,6 +223,10 @@
 		LM.invoke_end_throw_callbacks(src)
 	QDEL_NULL(launch_metadata)
 
+	if(!currently_z_moving) // I don't think you can zfall while thrown but hey, just in case.
+		var/turf/T = get_turf(src)
+		T?.zFall(src)
+
 /atom/movable/proc/throw_random_direction(range, speed = 0, atom/thrower, spin, launch_type = NORMAL_LAUNCH, pass_flags = NO_FLAGS)
 	var/throw_direction = pick(CARDINAL_ALL_DIRS)
 

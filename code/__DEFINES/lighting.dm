@@ -107,3 +107,21 @@ do { \
 #define LIGHTING_VIS_UPDATE 1
 #define LIGHTING_CHECK_UPDATE 2
 #define LIGHTING_FORCE_UPDATE 3
+
+#define LIGHTING_DARK_MATRIX \
+	list                     \
+	(                        \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 1           \
+	)                        \
+
+//Global Light states
+#define SKY_BLOCKED   0
+#define SKY_VISIBLE  1
+#define SKY_VISIBLE_BORDER   2
+
+#define SKYVISIBLE						(1<<0)
+#define WEATHERVISIBLE					(1<<1)

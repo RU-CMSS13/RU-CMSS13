@@ -3,12 +3,12 @@
 
 /turf/open
 	plane = FLOOR_PLANE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 	minimap_color = MINIMAP_AREA_COLONY
 	var/is_groundmap_turf = FALSE //whether this a turf used as main turf type for the 'outside' of a map.
 	var/allow_construction = TRUE //whether you can build things like barricades on this turf.
 	var/bleed_layer = 0 //snow layer
 	var/wet = 0 //whether the turf is wet (only used by floors).
-	var/supports_surgery = TRUE
 	var/scorchable = FALSE //if TRUE set to be an icon_state which is the full sprite version of whatever gets scorched --> for border turfs like grass edges and shorelines
 	var/scorchedness = 0 //how scorched is this turf 0 to 3
 	var/icon_state_before_scorching //this is really dumb, blame the mappers...
@@ -149,31 +149,15 @@
 			if(3)
 				. += "Well Done."
 
-// Black & invisible to the mouse. used by vehicle interiors
-/turf/open/void
-	name = "void"
-	icon = 'icons/turf/floors/space.dmi'
-	icon_state = "black"
-	mouse_opacity = FALSE
-	can_bloody = FALSE
-	supports_surgery = FALSE
-
-/turf/open/void/vehicle
-	density = TRUE
-	opacity = TRUE
-
-/turf/open/void/is_weedable()
-	return NOT_WEEDABLE
-
 /turf/open/river
-	can_bloody = FALSE
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 // Prison grass
 /turf/open/organic/grass
 	name = "grass"
 	icon = 'icons/turf/floors/floors.dmi'
 	icon_state = "grass1"
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
 /turf/open/organic/grass/astroturf
 	desc = "It'll get in your shoes no matter what you do."
@@ -187,6 +171,7 @@
 	icon_state = "mars_sand_1"
 	is_groundmap_turf = TRUE
 	minimap_color = MINIMAP_MARS_DIRT
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
 
 /turf/open/mars_cave
@@ -283,6 +268,8 @@
 	icon = 'icons/turf/floors/bigred.dmi'
 	icon_state = "mars_dirt_1"
 	minimap_color = MINIMAP_DIRT
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	antipierce = 5
 
 /turf/open/mars_dirt/Initialize(mapload, ...)
 	. = ..()
@@ -359,7 +346,6 @@
 /turf/open/beach
 	name = "Beach"
 	icon = 'icons/turf/floors/beach.dmi'
-	supports_surgery = FALSE
 
 /turf/open/beach/Entered(atom/movable/AM)
 	..()
@@ -375,17 +361,20 @@
 /turf/open/beach/sand
 	name = "Sand"
 	icon_state = "sand"
-	supports_surgery = TRUE
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
 /turf/open/beach/coastline
 	name = "Coastline"
 	icon = 'icons/turf/beach2.dmi'
 	icon_state = "sandwater"
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/beach/water
 	name = "Water"
 	icon_state = "water"
-	can_bloody = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/beach/water/Initialize(mapload, ...)
 	. = ..()
@@ -394,7 +383,8 @@
 /turf/open/beach/water2
 	name = "Water"
 	icon_state = "water"
-	can_bloody = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/beach/water2/Initialize(mapload, ...)
 	. = ..()
@@ -412,6 +402,8 @@
 	icon = 'icons/turf/ground_map.dmi'
 	icon_state = "desert"
 	is_groundmap_turf = TRUE
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_EFFECT_AFFECTABLE|TURF_WEATHER_PROOF
+	antipierce = 10
 
 /turf/open/gm/attackby(obj/item/I, mob/user)
 
@@ -627,7 +619,8 @@
 /turf/open/gm/river
 	name = "river"
 	icon_state = "seashallow"
-	can_bloody = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 	var/icon_overlay = "riverwater"
 	var/covered = 0
 	var/covered_name = "grate"
@@ -637,7 +630,6 @@
 	var/no_overlay = FALSE
 	var/base_river_slowdown = 1.75
 	baseturfs = /turf/open/gm/river
-	supports_surgery = FALSE
 	minimap_color = MINIMAP_WATER
 
 /turf/open/gm/river/Initialize(mapload, ...)
@@ -648,7 +640,8 @@
 	..()
 	update_overlays()
 
-/turf/open/gm/river/proc/update_overlays()
+/turf/open/gm/river/update_overlays()
+	. = ..()
 	overlays.Cut()
 	if(no_overlay)
 		return
@@ -800,7 +793,8 @@
 	name = "coastline"
 	icon_state = "beach"
 	baseturfs = /turf/open/gm/coast
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 /turf/open/gm/coast/north
 
@@ -847,11 +841,11 @@
 /turf/open/gm/riverdeep
 	name = "river"
 	icon_state = "seadeep"
-	can_bloody = FALSE
 	baseturfs = /turf/open/gm/riverdeep
-	supports_surgery = FALSE
 	minimap_color = MINIMAP_WATER
 	is_groundmap_turf = FALSE // Not real ground
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 
 /turf/open/gm/riverdeep/Initialize(mapload, ...)
@@ -860,7 +854,6 @@
 
 /turf/open/gm/river/no_overlay
 	no_overlay = TRUE
-	supports_surgery = FALSE
 
 
 
@@ -871,10 +864,7 @@
 	icon = 'icons/turf/floors/floors.dmi'
 	icon_state = "black"
 	density = TRUE
-	supports_surgery = FALSE
-
-/turf/open/gm/empty/is_weedable()
-	return NOT_WEEDABLE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 
 
@@ -885,8 +875,8 @@
 	desc = "It's a long way down to the ocean from here."
 	icon = 'icons/turf/ground_map.dmi'
 	icon_state = "seadeep"
-	can_bloody = FALSE
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 //Ice Colony grounds
 
@@ -896,15 +886,14 @@
 	icon = 'icons/turf/ice.dmi'
 	icon_state = "ice_floor"
 	baseturfs = /turf/open/ice
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	antipierce = 5
 
 
 //Randomize ice floor sprite
 /turf/open/ice/Initialize(mapload, ...)
 	. = ..()
 	setDir(pick(NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST))
-
-/turf/open/ice/noweed/is_weedable() //used for new prison ice block xenos
-	return NOT_WEEDABLE
 
 
 
@@ -914,6 +903,7 @@
 	icon = 'icons/turf/floors/asphalt.dmi'
 	icon_state = "sunbleached_asphalt"
 	baseturfs = /turf/open/asphalt
+	antipierce = 10
 
 /turf/open/asphalt/tile
 	icon_state = "tile"
@@ -1019,6 +1009,7 @@
 	icon_state = "grass1"
 	var/icon_spawn_state = "grass1"
 	baseturfs = /turf/open/jungle
+	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
 /turf/open/jungle/Initialize(mapload, ...)
 	. = ..()
@@ -1116,8 +1107,8 @@
 	icon = 'icons/turf/floors/beach.dmi'
 	icon_state = "water"
 	icon_spawn_state = "water"
-	can_bloody = FALSE
-	supports_surgery = FALSE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
+	weedable = NOT_WEEDABLE
 
 
 /turf/open/jungle/water/Initialize(mapload, ...)
@@ -1181,11 +1172,9 @@
 	icon_state = "floor"
 	icon = 'icons/turf/shuttle.dmi'
 	allow_construction = FALSE
-	supports_surgery = FALSE
 
 /turf/open/shuttle/can_surgery
 	allow_construction = TRUE
-	supports_surgery = TRUE
 
 /turf/open/shuttle/can_surgery/blue
 	name = "floor"
@@ -1244,7 +1233,6 @@
 /turf/open/shuttle/dropship/can_surgery
 	icon_state = "rasputin1"
 	allow_construction = TRUE
-	supports_surgery = TRUE
 
 /turf/open/shuttle/dropship/can_surgery/dark_grey_bottom
 	icon_state = "rasputin12"
@@ -1288,7 +1276,6 @@
 /turf/open/shuttle/predship
 	name = "ship floor"
 	icon_state = "floor6"
-	supports_surgery = TRUE
 	allow_construction = TRUE
 
 //not really plating, just the look
@@ -1369,7 +1356,6 @@
 	icon = 'icons/turf/almayer.dmi'
 	icon_state = "plating"
 	allow_construction = FALSE
-	supports_surgery = TRUE
 
 /turf/open/shuttle/lifeboat/plating_striped
 	icon_state = "plating_striped"
@@ -1402,7 +1388,6 @@
 /turf/open/shuttle/vehicle/med
 	name = "floor"
 	icon_state = "dark_sterile"
-	supports_surgery = TRUE
 
 /turf/open/shuttle/vehicle/dark_sterile
 	icon_state = "dark_sterile"

@@ -111,3 +111,17 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	if(hour)
 		hourT = " and [hour] hour[(hour != 1)? "s":""]"
 	return "[day] day[(day != 1)? "s":""][hourT][minuteT][secondT]"
+
+//returns time diff of two times normalized to time_rate_multiplier
+/proc/daytimeDiff(timeA, timeB)
+	var/time_diff = timeA > timeB ? (timeB + 1) - timeA : timeB - timeA
+	return time_diff
+
+/proc/game_time()
+	return REALTIMEOFDAY % 864000
+
+/proc/game_time_timestamp(format = "hh:mm:ss")
+	return time2text(game_time(), format)
+
+/proc/planet_game_time_timestamp(format = "hh:mm:ss")
+	return time2text(SSglobal_light.game_time_offseted() - GLOB.timezoneOffset, format)

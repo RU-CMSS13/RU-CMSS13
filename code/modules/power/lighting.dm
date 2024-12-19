@@ -146,7 +146,9 @@
 	light_system = STATIC_LIGHT
 	var/on = 0 // 1 if on, 0 if off
 	var/on_gs = 0
-	var/brightness = 8 // luminosity when on, also used in power calculation
+	var/brightness = 6 // power usage and light range when on
+	var/bulb_power = 0.5 // basically the light_power of the emitted light source
+	var/bulb_colour = COLOR_WHITE
 	var/status = LIGHT_OK // LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/light_bulb/tube // the type of light item
@@ -199,6 +201,7 @@
 	icon_state = "bptube1"
 	base_state = "bptube"
 	desc = "A lighting fixture that can be fitted with two bright fluorescent light tubes for that extra eye-watering goodness."
+	bulb_colour = COLOR_SOFT_BLUE
 
 /obj/structure/machinery/light/spot
 	name = "spotlight"
@@ -322,7 +325,13 @@
 /obj/structure/machinery/light/proc/update(trigger = 1)
 	update_icon()
 	if(on)
-		if(luminosity != brightness)
+		var/brightness_set = brightness
+		var/power_set = bulb_power
+		var/color_set = bulb_colour
+		if(color)
+			color_set = color
+		var/matching = light && brightness_set == light.light_range && power_set == light.light_power && color_set == light.light_color
+		if(!matching)
 			switchcount++
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
@@ -336,9 +345,11 @@
 					icon_state = "[base_state]-burned"
 					on = 0
 					set_light(0)
+			else if(prob(min(60, (switchcount ^ 4) * 0.01)))
+				flicker()
 			else
 				update_use_power(USE_POWER_ACTIVE)
-				set_light(brightness)
+				set_light(l_range = brightness_set, l_power = power_set, l_color = color_set)
 	else
 		update_use_power(USE_POWER_NONE)
 		set_light(0)
@@ -467,24 +478,31 @@
 		return A.lightswitch
 	return A.lightswitch && A.power_light
 
-/obj/structure/machinery/light/proc/flicker(amount = rand(10, 20))
-	if(flickering) return
-	flickering = 1
-	spawn(0)
-		if(on && status == LIGHT_OK)
-			for(var/i = 0; i < amount; i++)
-				if(status != LIGHT_OK) break
-				on = !on
-				update(0)
-				sleep(rand(5, 15))
-			on = (status == LIGHT_OK)
-			update(0)
-		flickering = 0
+/obj/structure/machinery/light/proc/flicker(amount = rand(1, 20))
+	set waitfor = FALSE
+	if(flickering)
+		return
+	flickering = TRUE
+	for(var/i = 0; i < amount; i++)
+		if(status != LIGHT_OK)
+			break
+		flik_light()
+		playsound(src, pick('sound/effects/light/blinks1.ogg', 'sound/effects/light/blinks2.ogg', 'sound/effects/light/blinks3.ogg'), 12, TRUE, 8, VOLUME_SFX, 0, falloff = 5)
+	flickering = FALSE
+
+/obj/structure/machinery/light/proc/flik_light()
+	on = FALSE
+	update()
+	update_icon()
+	sleep(rand(5, 50))
+	on = has_power()
+	update()
+	update_icon()
 
 // ai attack - make lights flicker, because why not
 
 /obj/structure/machinery/light/attack_remote(mob/user)
-	src.flicker(1)
+	flicker(1)
 	return
 
 /obj/structure/machinery/light/AIShiftClick()

@@ -20,6 +20,12 @@
 	var/list/created_atoms = list()
 	//make sure this list is accounted for/cleared if you request it from ssatoms!
 
+	///If true, any openspace turfs above the template will be replaced with ceiling_turf when loading. Should probably be FALSE for lower levels of multi-z ruins.
+	var/has_ceiling = FALSE
+	///What turf to replace openspace with when has_ceiling is true
+	var/turf/ceiling_turf = /turf/open/floor/plating
+	///What baseturfs to set when replacing openspace when has_ceiling is true
+	var/list/ceiling_baseturfs = list()
 
 /datum/map_template/New(path = null, rename = null, cache = FALSE)
 	if(path)
@@ -83,14 +89,14 @@
 
 	var/datum/space_level/level = SSmapping.add_new_zlevel(name, list(), contain_turfs = FALSE)
 	var/datum/parsed_map/parsed = load_map(
-		file(mappath),
+file(mappath),
 		x,
 		y,
-		level.z_value,
-		no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
+level.z_value,
+no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
 		place_on_top = should_place_on_top,
 		new_z = TRUE,
-	)
+)
 	var/list/bounds = parsed.bounds
 	if(!bounds)
 		return FALSE
@@ -123,14 +129,14 @@
 	UNSETEMPTY(turf_blacklist)
 	parsed.turf_blacklist = turf_blacklist
 	if(!parsed.load(
-		T.x,
-		T.y,
-		T.z,
-		crop_map = TRUE,
-		no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
-		place_on_top = should_place_on_top,
-		delete = delete
-	))
+T.x,
+T.y,
+T.z,
+crop_map = TRUE,
+no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
+place_on_top = should_place_on_top,
+delete = delete
+))
 		return
 
 	var/list/bounds = parsed.bounds
@@ -141,6 +147,10 @@
 
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds)
+
+	if(has_ceiling)
+		var/affected_turfs = get_affected_turfs(T, FALSE)
+		generate_ceiling(affected_turfs)
 
 	log_game("[name] loaded at [T.x],[T.y],[T.z]")
 	return bounds
@@ -156,6 +166,12 @@
 		return RECT_TURFS(floor(width / 2), floor(height / 2), T)
 	return CORNER_BLOCK(T, width, height)
 
+/datum/map_template/proc/generate_ceiling(affected_turfs)
+	for(var/turf/turf in affected_turfs)
+		var/turf/ceiling = get_step_multiz(turf, UP)
+		if(ceiling)
+			if(istype(ceiling, /turf/open/openspace) || istype(ceiling, /turf/open/space/openspace))
+				ceiling.ChangeTurf(ceiling_turf, ceiling_baseturfs)
 
 //for your ever biggening badminnery kevinz000
 //❤ - Cyberboss
