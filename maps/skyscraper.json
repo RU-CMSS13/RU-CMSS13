@@ -1,0 +1,65 @@
+{
+    "map_name": "Sky Scraper",
+    "map_path": "map_files/SkyScraper",
+    "map_file": "SkyScraper.dmm",
+    "weather": [
+        "weather_rain",
+        "weather_snow",
+        "weather_dust"
+    ],
+    "survivor_types": [
+        "/datum/equipment_preset/survivor/scientist/solaris",
+        "/datum/equipment_preset/survivor/doctor/solaris",
+        "/datum/equipment_preset/survivor/chaplain/solaris",
+        "/datum/equipment_preset/survivor/engineer/solaris",
+        "/datum/equipment_preset/survivor/trucker/solaris",
+        "/datum/equipment_preset/survivor/security/solaris",
+        "/datum/equipment_preset/survivor/colonial_marshal/solaris"
+    ],
+    "survivor_message": "You are a survivor of the attack on \"Almea\" Scy Scraper. You worked or lived in the Scy Scraper, and managed to avoid the alien attacks... until now.",
+    "announce_text": "We've lost contact with the Weyland-Yutani's \"Almea\" Scy Scraper colony. The ###SHIPNAME### has been dispatched to assist.",
+    "monkey_types": [
+        "monkey"
+    ],
+    "traits": [
+        {
+            "Ground": true,
+            "Up": 1
+        },
+        {
+            "Zlevels": 99,
+            "Ground": true,
+            "Up": 1,
+            "Down": -1,
+            "Baseturf": "/turf/open/openspace"
+        },
+        {
+            "Ground": true,
+            "Down": -1,
+            "Baseturf": "/turf/open/openspace"
+        }
+    ],
+    "xvx_hives": {
+        "alpha_xenomorph": 0,
+        "bravo_xenomorph": 0,
+        "charlie_xenomorph": 0,
+        "delta_xenomorph": 100
+    },
+    "gamemodes": [
+        "Distress Signal"
+    ],
+    "map_day_night_modificator": {
+        "Midnight": 1,
+        "Night": 0.083,
+        "Dawn": 0.16,
+        "Sunrise": 0.25,
+        "Sunrise-Morning": 0.29,
+        "Morning": 0.33,
+        "Daytime": 0.416,
+        "Evening": 0.66,
+        "Sunset": 0.7916,
+        "Dusk": 0.916
+    },
+    "custom_time_length": 10675548,
+    "map_corpses": 50
+}
