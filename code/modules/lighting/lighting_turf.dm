@@ -91,6 +91,7 @@
 		directional_opacity = ALL_CARDINALS
 		if(. != directional_opacity)
 			reconsider_lights()
+			reconsider_global_light()
 		return
 	directional_opacity = NONE
 	for(var/atom/movable/opacity_source as anything in opacity_sources)
@@ -100,4 +101,5 @@
 			directional_opacity = ALL_CARDINALS
 			break
 	if(. != directional_opacity && (. == ALL_CARDINALS || directional_opacity == ALL_CARDINALS))
-		reconsider_lights() //The lighting system only cares whether the tile is fully concealed from all directions or not.
+		reconsider_lights()
+		reconsider_global_light()

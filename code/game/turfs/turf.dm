@@ -110,19 +110,18 @@
 	if(light_power && light_range)
 		update_light()
 
-	//Get area light
-	var/area/current_area = loc
-	if(current_area?.lighting_effect)
-		overlays += current_area.lighting_effect
-	else
-		GLOB.global_light_queue_work |= src
-
 	if(opacity)
 		directional_opacity = ALL_CARDINALS
 
 	if(mapload)
 		return INITIALIZE_HINT_LATELOAD
 	else
+		//Get area light
+		var/area/current_area = loc
+		if(current_area?.lighting_effect)
+			overlays += current_area.lighting_effect
+		else
+			GLOB.global_light_queue_work |= src
 		multiz_turfs()
 		if(!special_icon)
 			update_connections(TRUE)
@@ -131,6 +130,12 @@
 
 /turf/LateInitialize()
 	SHOULD_CALL_PARENT(FALSE)
+	//Get area light
+	var/area/current_area = loc
+	if(current_area?.lighting_effect)
+		overlays += current_area.lighting_effect
+	else
+		GLOB.global_light_queue_work |= src
 	multiz_turfs()
 	if(!special_icon)
 		update_connections(FALSE)

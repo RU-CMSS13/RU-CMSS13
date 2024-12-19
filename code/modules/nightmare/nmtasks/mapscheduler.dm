@@ -30,3 +30,7 @@
 		if(!A?.area_has_base_lighting)
 			continue
 		T.update_light()
+
+	for(var/turf/turf as anything in tainted)
+		turf.reconsider_lights()
+		turf.reconsider_global_light()
