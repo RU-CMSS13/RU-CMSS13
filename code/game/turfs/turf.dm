@@ -44,7 +44,7 @@
 
 	var/intact_tile = 1 //used by floors to distinguish floor with/without a floortile(e.g. plating).
 
-	var/list/linked_sectors
+	var/list/linked_sectors = list()
 	var/list/linked_pylons
 	var/obj/effect/alien/weeds/weeds
 

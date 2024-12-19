@@ -116,7 +116,7 @@
 /obj/structure/prop/sector_center/Destroy()
 	. = ..()
 	for(var/turf/turf as anything in linked_turfs)
-		LAZYREMOVE(turf.linked_sectors, src)
+		turf.linked_sectors -= src
 	range_bounds = null
 	STOP_PROCESSING(SSslowobj, src)
 

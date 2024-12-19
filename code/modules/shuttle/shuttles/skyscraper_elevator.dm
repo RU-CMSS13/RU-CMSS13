@@ -241,12 +241,14 @@
 	set waitfor = FALSE
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
 	elevator = SSshuttle.scraper_elevators[elevator_id]
-	if(floor != "control")
+	if(!elevator)
+		qdel(src)
+	else if(floor != "control")
 		floor = z - elevator.floor_offset
 		elevator.buttons[floor] = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
-	if(floor != "control")
+	if(floor != "control" && elevator)
 		elevator.buttons[floor] -= src
 	. = ..()
 
@@ -272,6 +274,8 @@
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_data()
 	. = list("buttons" = list())
+	if(!elevator)
+		return
 	for(var/i = 1 to elevator.total_floors)
 		.["buttons"] += list(list(
 			id = i, title = "Floor [i - elevator.visual_floors_offset]", disabled = elevator.disabled_floors[i], called = elevator.called_floors[i],
@@ -301,7 +305,7 @@
 	desc = "The remote controls for the 'S95 v2' elevator."
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/attack_hand(mob/user)
-	if(!allowed(user))
+	if(!allowed(user) || !elevator)
 		to_chat(user, SPAN_WARNING("Доступ Запрещен!"))
 		return
 	if(elevator.offseted_z == floor)
