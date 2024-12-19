@@ -61,6 +61,17 @@
 	var/max_move_delay = 10 SECONDS
 	var/min_move_delay = 1 SECONDS
 
+/obj/docking_port/mobile/sselevator/Destroy()
+	initial_dock = null
+	SSshuttle.scraper_elevators[id] = null
+
+	. = ..()
+
+	QDEL_NULL(door)
+	QDEL_NULL(button)
+	QDEL_NULL_LIST(doors)
+	QDEL_NULL_LIST(gears)
+
 /obj/docking_port/mobile/sselevator/register()
 	. = ..()
 	SSshuttle.scraper_elevators[id] = src
@@ -248,8 +259,13 @@
 		elevator.buttons[floor] = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
-	if(floor != "control" && elevator)
-		elevator.buttons[floor] -= src
+	if(elevator)
+		if(floor != "control")
+			elevator.buttons[floor] -= src
+		else
+			elevator.button = null
+	elevator = null
+
 	. = ..()
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/update_icon(icon_update = "")
@@ -365,6 +381,18 @@
 	. = ..()
 	GLOB.skyscrapers_sec_comps["[z]"] += src
 	connect_elevator()
+
+/obj/structure/machinery/computer/security_blocker/Destroy()
+	GLOB.skyscrapers_sec_comps["[z]"] -= src
+	elevator = null
+
+	. = ..()
+
+	QDEL_NULL_LIST(stairs_doors)
+	QDEL_NULL_LIST(elevator_doors)
+	QDEL_NULL_LIST(move_lock_doors)
+	QDEL_NULL_LIST(sirens)
+	QDEL_NULL_LIST(lights)
 
 /obj/structure/machinery/computer/security_blocker/proc/connect_elevator()
 	set waitfor = FALSE
@@ -774,6 +802,16 @@
 	. = ..()
 	connect_elevator()
 
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Destroy()
+	if(elevator)
+		if(floor != "control")
+			elevator.doors["[floor]"] = null
+		else
+			elevator.door = null
+	elevator = null
+
+	. = ..()
+
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/proc/connect_elevator()
 	set waitfor = FALSE
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
@@ -860,6 +898,14 @@
 	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
 	if(blocker)
 		blocker.sirens += src
+
+/obj/structure/machinery/siren/Destroy()
+	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	if(blocker)
+		blocker.sirens -= src
+	GLOB.siren_objects["[siren_lt]"] -= src
+
+	. = ..()
 
 /obj/structure/machinery/siren/power_change()
 	return
@@ -949,3 +995,16 @@
 		blocker.elevator_doors += src
 	else if(lock_type == "move_lock")
 		blocker.move_lock_doors += src
+
+/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/Destroy()
+	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	if(blocker)
+		if(lock_type == "stairs")
+			blocker.stairs_doors -= src
+		else if(lock_type == "elevator")
+			blocker.elevator_doors -= src
+		else if(lock_type == "move_lock")
+			blocker.move_lock_doors -= src
+
+	. = ..()
+
