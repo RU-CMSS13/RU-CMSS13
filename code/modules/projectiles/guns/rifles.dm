@@ -36,8 +36,12 @@
 //M41A PULSE RIFLE
 
 /obj/item/weapon/gun/rifle/m41a
-	name = "\improper M41A pulse rifle MK2"
-	desc = "The standard issue rifle of the Colonial Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition."
+	name = "\improper M41A pulse rifle MK2."
+	name_list = list("EN" = "\improper M41A pulse rifle MK2.",
+	"RU" = "\improper M41A импульсная винтовка 2-ой модели.")
+	desc = "\improper The standard issue rifle of the Colonial Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition."
+	desc_list = list("EN" = "\improper The standard issue rifle of the Colonial Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.",
+	"RU" = "\improper Стандартная винтовка Колониальных Морпехов. Часто встречаема у большинства боевого персонала. Использует безгильзовые патроны 10x24 мм")
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "m41a"
 	item_state = "m41a"

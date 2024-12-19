@@ -665,6 +665,11 @@ GLOBAL_LIST_INIT(bgstate_options, list(
 			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/switch_item_animations'>Toggle Item Animations Detail Level</a><br>"
 			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/toggle_dualwield'>Toggle Dual Wield Functionality</a><br>"
 			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/toggle_auto_shove'>Toggle Auto Shove</a><br>"
+
+			dat += "<h2><b><u>Language Toggles:</u></b></h2>"
+			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/switch_interface_language'>Toggle Settings Interface Language</a><br>"
+			dat += "<a href='?src=\ref[src];action=proccall;procpath=/client/proc/switch_game_language'>Toggle Game Interface Language</a><br>"
+
 		if(MENU_SPECIAL) //wart
 			dat += "<div id='column1'>"
 			dat += "<h2><b><u>ERT Settings:</u></b></h2>"
