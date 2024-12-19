@@ -58,7 +58,7 @@
 		return
 
 	switch(action)
-		if("relations")
+//		if("relations")
 //			relations_datum.tgui_interact(usr)
 		if("tasks")
 			task_interface.tgui_interact(usr)

@@ -176,6 +176,8 @@
 /turf/proc/update_overlays()
 	if(QDELETED(src))
 		return
+	if(overlays)
+		overlays.Cut()
 
 //	if(turf_flags & TURF_WEATHER)
 //		overlays += SSsunlighting.get_weather_overlay()
