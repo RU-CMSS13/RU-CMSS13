@@ -190,6 +190,8 @@
 	if(istext(sound))
 		switch(sound)
 			// General effects
+			if("bodyfall")
+				sound = pick('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg')
 			if("shatter")
 				sound = pick('sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg')
 			if("windowshatter") //meaty window shattering sound

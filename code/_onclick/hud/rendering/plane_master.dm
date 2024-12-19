@@ -30,6 +30,43 @@
 	if(!isnull(render_relay_plane))
 		relay_render_to_plane(mymob, render_relay_plane)
 
+///Things rendered on "openspace"; holes in multi-z
+/atom/movable/screen/plane_master/openspace_backdrop
+	name = "open space backdrop plane master"
+	plane = OPENSPACE_BACKDROP_PLANE
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_MULTIPLY
+	alpha = 255
+
+//MOJAVE SUN EDIT - Depth Blur & Fixes//
+/atom/movable/screen/plane_master/openspace
+	name = "open space plane master"
+	plane = OPENSPACE_PLANE
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_OVERLAY
+	alpha = 255
+
+/atom/movable/screen/plane_master/openspace/Initialize(mapload) //Increase this if making map larger than 7 Zs
+	. = ..()
+	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
+	for(var/i = 2; i < 34; i++)
+		add_filter("[i]_stage_openspace", i, drop_shadow_filter(color = "#04080FAA", size = -(i > 8 ? 40+(i-8)*2 : (i-1)*5)))
+
+///For any transparent multi-z tiles we want to render
+/atom/movable/screen/plane_master/transparent
+	name = "transparent plane master"
+	plane = TRANSPARENT_FLOOR_PLANE
+	appearance_flags = PLANE_MASTER
+
+//Contains all sun light objects
+/atom/movable/screen/plane_master/s_light_visual
+	name = "sun light visual plane master"
+	plane = S_LIGHTING_VISUAL_PLANE
+	render_target = S_LIGHTING_VISUAL_RENDER_TARGET
+	render_relay_plane = null
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	blend_mode = BLEND_MULTIPLY
+
 /atom/movable/screen/plane_master/floor
 	name = "floor plane master"
 	plane = FLOOR_PLANE
@@ -109,10 +146,8 @@
 	. = ..()
 	add_filter("emissives", 1, alpha_mask_filter(render_source = EMISSIVE_RENDER_TARGET, flags = MASK_INVERSE))
 	add_filter("object_lighting", 2, alpha_mask_filter(render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE))
-
-/atom/movable/screen/plane_master/lighting/exterior
-	name = "exterior lighting plane master"
-	plane = EXTERIOR_LIGHTING_PLANE
+	if(SSglobal_light.initialized)
+		vis_contents += SSglobal_light.global_lighting_color
 
 /**
  * Handles emissive overlays and emissive blockers.

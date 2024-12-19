@@ -259,7 +259,7 @@
 	if(!T)
 		T = get_turf(src)
 
-	if(!T.can_bloody)
+	if(!(T.turf_flags & TURF_EFFECT_AFFECTABLE))
 		return
 
 	if(small_drip)
@@ -291,7 +291,7 @@
 	if(!T)
 		T = get_turf(src)
 
-	if(!T.can_bloody)
+	if(!(T.turf_flags & TURF_EFFECT_AFFECTABLE))
 		return
 
 	var/obj/effect/decal/cleanable/blood/xeno/XB = locate() in T.contents
@@ -304,7 +304,7 @@
 	if(!T)
 		T = get_turf(src)
 
-	if(!T.can_bloody)
+	if(!(T.turf_flags & TURF_EFFECT_AFFECTABLE))
 		return
 
 	var/obj/effect/decal/cleanable/blood/oil/O = locate() in T.contents

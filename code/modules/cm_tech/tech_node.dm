@@ -3,7 +3,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "white"
 	mouse_opacity = FALSE
-	can_bloody = FALSE
+	turf_flags = TURF_MULTIZ
 
 /obj/effect/node
 	name = "tech node"
