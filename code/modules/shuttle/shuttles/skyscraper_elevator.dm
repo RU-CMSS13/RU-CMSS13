@@ -66,11 +66,11 @@
 	door = null
 	button = null
 
-	for(var/i in doors)
-		doors -= i
 	for(var/i in gears)
 		gears -= i
-	for(var/i in buttons)
+	for(var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/i in doors)
+		doors -= i
+	for(var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/i in buttons)
 		buttons -= i
 
 	. = ..()
@@ -396,9 +396,9 @@
 	for(var/i in lights)
 		lights -= i
 
-	. = ..()
-
 	GLOB.skyscrapers_sec_comps["[z]"] = null
+
+	. = ..()
 
 /obj/structure/machinery/computer/security_blocker/proc/connect_elevator()
 	set waitfor = FALSE

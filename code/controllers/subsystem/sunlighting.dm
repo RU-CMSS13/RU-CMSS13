@@ -83,7 +83,6 @@ SUBSYSTEM_DEF(global_light)
 	name = "Global Lighting"
 	wait = 2 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
-	flags = SS_TICKER
 
 	var/atom/movable/global_lighting_color
 
