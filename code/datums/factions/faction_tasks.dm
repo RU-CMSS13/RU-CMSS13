@@ -118,6 +118,9 @@
 	for(var/turf/turf as anything in linked_turfs)
 		turf.linked_sectors -= src
 	range_bounds = null
+	for(var/obj/structure/prop/sector_center/bordered_sector as anything in bordered_sectors)
+		bordered_sectors -= bordered_sector
+	QDEL_NULL(owner)
 	STOP_PROCESSING(SSslowobj, src)
 
 /obj/structure/prop/sector_center/get_examine_text(mob/user)

@@ -62,10 +62,7 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/building/internal_cargo_sector)
 "an" = (
-/turf/open/auto_turf/sand_white/layer0{
-	desc = "Далекая поверхность планеты покрытая ядовитым туманом, кажется тут очень высоко, лучше стоять подальше от обрыва";
-	name = "Distant Planet Cover"
-	},
+/turf/open/auto_turf/sand_white/layer0/skyscraper,
 /area/skyscraper/out)
 "ao" = (
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button{
@@ -3228,9 +3225,7 @@
 	density = 0;
 	elevator_id = "sky_scraper_elevator_one"
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "hX" = (
 /obj/structure/machinery/door/airlock/almayer/engineering/reinforced{
@@ -4680,9 +4675,7 @@
 	density = 0;
 	elevator_id = "sky_scraper_elevator_two"
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "lM" = (
 /obj/structure/machinery/light/double/blue{
@@ -10185,9 +10178,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper{
 	lock_type = "elevator"
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "BT" = (
 /obj/effect/decal/cleanable/dirt,
@@ -10197,9 +10188,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper{
 	lock_type = "elevator"
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "BV" = (
 /obj/effect/decal/cleanable/blood/xeno,
@@ -11341,9 +11330,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper{
 	lock_type = "elevator"
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "Fo" = (
 /obj/structure/machinery/door/airlock/prison_hatch/autoname{
@@ -12296,9 +12283,7 @@
 /area/skyscraper/building/science_sector)
 "HX" = (
 /obj/structure/flora/grass/short_grass/ice,
-/turf/open/gm/dirtgrassborder/grassdirt_corner{
-	dir = 8
-	},
+/turf/open/gm/dirtgrassborder/grassdirt_corner/south_west,
 /area/skyscraper/building/eco_emulation_sector)
 "HZ" = (
 /obj/effect/landmark/corpsespawner/pmc,
@@ -17456,9 +17441,7 @@
 /turf/open/floor/plating/warnplate/east,
 /area/skyscraper/building/landing_zone/one)
 "XD" = (
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/building)
 "XE" = (
 /obj/effect/decal/cleanable/dirt,

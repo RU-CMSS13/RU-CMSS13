@@ -379,11 +379,11 @@
 
 /obj/structure/machinery/computer/security_blocker/Initialize()
 	. = ..()
-	GLOB.skyscrapers_sec_comps["[z]"] += src
+	GLOB.skyscrapers_sec_comps["[z]"] = src
 	connect_elevator()
 
 /obj/structure/machinery/computer/security_blocker/Destroy()
-	GLOB.skyscrapers_sec_comps["[z]"] -= src
+	GLOB.skyscrapers_sec_comps["[z]"] = null
 	elevator = null
 
 	. = ..()
@@ -1008,3 +1008,19 @@
 
 	. = ..()
 
+/turf/open/shuttle/elevator/skyscraper
+	icon = 'icons/turf/skyscraper_elevator.dmi'
+	icon_state = "floor_w"
+
+/turf/open/shuttle/elevator/skyscraper/grating
+	icon_state = "floor_grating_w"
+
+/turf/open/shuttle/elevator/skyscraper/wv
+	icon_state = "floor_w_v"
+
+/turf/open/shuttle/elevator/skyscraper/wg
+	icon_state = "floor_w_g"
+
+/turf/open/auto_turf/sand_white/layer0/skyscraper
+	name = "Distant Planet Cover"
+	desc = "Далекая поверхность планеты покрытая ядовитым туманом, кажется тут очень высоко, лучше стоять подальше от обрыва"

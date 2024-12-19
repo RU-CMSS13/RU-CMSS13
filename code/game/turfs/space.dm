@@ -210,6 +210,7 @@
 		initialize_pass_flags()
 
 	multiz_turfs()
+	return INITIALIZE_HINT_NORMAL
 
 /turf/open/void/LateInitialize()
 	SHOULD_CALL_PARENT(FALSE)
