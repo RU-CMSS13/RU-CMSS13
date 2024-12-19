@@ -55,6 +55,8 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	/client/proc/set_eye_blur_type,
 	/client/proc/set_flash_type,
 	/client/proc/set_crit_type,
+	/client/proc/switch_interface_language,
+	/client/proc/switch_game_language,
 ))
 
 /client/proc/reduce_minute_count()

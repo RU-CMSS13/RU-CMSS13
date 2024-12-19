@@ -249,6 +249,11 @@
 	S["ghost_orbit"] >> ghost_orbit
 	S["auto_observe"] >> auto_observe
 
+	//RUCM START
+	S["interface_language"] >> interface_language
+	S["game_language"] >> game_language
+	//RUCM END
+
 	S["human_name_ban"] >> human_name_ban
 
 	S["xeno_prefix"] >> xeno_prefix
@@ -395,6 +400,9 @@
 	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
 	tts_mode = sanitize_inlist(tts_mode, list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF), TTS_SOUND_ENABLED)
 	tts_hivemind_mode = sanitize_integer(tts_hivemind_mode, TTS_HIVEMIND_OFF, TTS_HIVEMIND_ALL, TTS_HIVEMIND_LEADERS)
+
+	interface_language = sanitize_inlist(interface_language, list(INTERFACE_LANGUAGE_EN, INTERFACE_LANGUAGE_RU), INTERFACE_LANGUAGE_EN)
+	game_language = sanitize_inlist(game_language, list(GAME_LANGUAGE_EN, GAME_LANGUAGE_RU), GAME_LANGUAGE_EN)
 	//RUCM END
 
 	vars["fps"] = fps
@@ -472,6 +480,11 @@
 	S["ghost_vision_pref"] << ghost_vision_pref
 	S["ghost_orbit"] << ghost_orbit
 	S["auto_observe"] << auto_observe
+
+	//RUCM START
+	S["interface_language"] << interface_language
+	S["game_language"] << game_language
+	//RUCM END
 
 	S["human_name_ban"] << human_name_ban
 

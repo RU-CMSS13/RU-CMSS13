@@ -283,9 +283,9 @@ cases. Override_icon_state should be a list.*/
 			size = "huge"
 		if(SIZE_MASSIVE)
 			size = "massive"
-	. += "[p_are() == "are" ? "These are " : "This is a "][blood_color ? blood_color != COLOR_OIL ? "bloody " : "oil-stained " : ""][icon2html(src, user)][src.name]. [p_they(TRUE)] [p_are()] a [size] item."
+	. += "[p_are() == "are" ? "These are " : "This is a "][blood_color ? blood_color != COLOR_OIL ? "bloody " : "oil-stained " : ""][icon2html(src, user)][get_translation_name(name, name_list, user)]. [p_they(TRUE)] [p_are()] a [size] item."
 	if(desc)
-		. += desc
+		. += get_translation_name(desc, desc_list, user)
 	if(desc_lore)
 		. += SPAN_NOTICE("This has an <a href='byond://?src=\ref[src];desc_lore=1'>extended lore description</a>.")
 

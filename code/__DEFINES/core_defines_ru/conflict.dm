@@ -22,3 +22,9 @@
 
 #define TTS_FLAG_HIVEMIND (1<<0)
 #define TTS_FLAG_RADIO (1<<1)
+
+#define INTERFACE_LANGUAGE_RU "Interface_Language_RU"
+#define INTERFACE_LANGUAGE_EN "Interface_Language_EN"
+
+#define GAME_LANGUAGE_RU "Game_Language_RU"
+#define GAME_LANGUAGE_EN "Game_Language_EN"

@@ -783,6 +783,36 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE, GHOST_ORBIT_TRIANGLE, GH
 	to_chat(src,SPAN_BOLDNOTICE( "As a player, you will now [(prefs.chat_display_preferences & CHAT_TYPE_BEING_HIT) ? "see you being hit messages" : "never see you being hit messages"]."))
 	prefs.save_preferences()
 
+//RUCM START HERE
+/client/proc/switch_interface_language()
+	switch(prefs.interface_language)
+		if(INTERFACE_LANGUAGE_RU)
+			prefs.interface_language = INTERFACE_LANGUAGE_EN
+			to_chat(src, SPAN_BOLDNOTICE("Now you got English settings interface language."))
+			prefs.save_preferences()
+			return "EN"
+
+		if(INTERFACE_LANGUAGE_EN)
+			prefs.interface_language = INTERFACE_LANGUAGE_RU
+			to_chat(src, SPAN_BOLDNOTICE("Теперь вы имеете Русский язык интерфейса настроек."))
+			prefs.save_preferences()
+			return "RU"
+
+/client/proc/switch_game_language()
+	switch(prefs.game_language)
+		if(GAME_LANGUAGE_RU)
+			prefs.game_language = GAME_LANGUAGE_EN
+			to_chat(src, SPAN_BOLDNOTICE("Now you got English in-game interface language."))
+			prefs.save_preferences()
+			return "EN"
+
+		if(GAME_LANGUAGE_EN)
+			prefs.game_language = GAME_LANGUAGE_RU
+			to_chat(src, SPAN_BOLDNOTICE("Теперь вы имеете Русский язык игрового интерфейса."))
+			prefs.save_preferences()
+			return "RU"
+//RUCM ENDS HERE
+
 /client/proc/toggle_chat_you_pain()
 	set name = "Toggle Pain Messages"
 	set category = "Preferences.Combat"

@@ -100,6 +100,10 @@
 
 	///The color this atom will be if we choose to draw it on the minimap
 	var/minimap_color = MINIMAP_SOLID
+	//RUCM START THERE
+	var/list/name_list
+	var/list/desc_list
+	//RUCM ENDS HERE
 
 /atom/New(loc, ...)
 	var/do_initialize = SSatoms.initialized
@@ -251,6 +255,8 @@ directive is properly returned.
 			found += A.search_contents_for(path,filter_path)
 	return found
 
+//RUCM start there
+/*
 /atom/proc/examine(mob/user)
 	var/list/examine_strings = get_examine_text(user)
 	if(!examine_strings)
@@ -266,7 +272,49 @@ directive is properly returned.
 		. += desc
 	if(desc_lore)
 		. += SPAN_NOTICE("This has an <a href='byond://?src=\ref[src];desc_lore=1'>extended lore description</a>.")
+*/
 
+/atom/proc/examine(mob/user)
+	var/list/examine_strings = get_examine_text(user)
+	if(!examine_strings)
+		log_debug("Attempted to create an examine block with no strings! Atom : [get_translation_name(name, name_list, user)], user : [user]")
+		return
+	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_strings)
+	to_chat(user, examine_block(examine_strings.Join("\n")))
+
+/atom/proc/get_examine_text(mob/user)
+	. = list()
+	. += "[icon2html(src, user)] That's \a [get_translation_name(name, name_list, user)]." //changed to "That's" from "This is" because "This is some metal sheets" sounds dumb compared to "That's some metal sheets" ~Carn
+	if(desc)
+		. += get_translation_name(desc, desc_list, user)
+	if(desc_lore)
+		. += SPAN_NOTICE("This has an <a href='byond://?src=\ref[src];desc_lore=1'>extended lore description</a>.")
+
+//RUCM CONTINUE THERE
+/proc/get_translation_name(var/value, var/list/listy, mob/user)
+	var/language
+	switch(user?.client?.prefs?.game_language)
+		if(GAME_LANGUAGE_RU)
+			language = "RU"
+		if(GAME_LANGUAGE_EN)
+			language = "EN"
+		else
+			return
+	if(islist(listy))
+		if(listy.len == 0)
+			return
+		else
+			if(listy["RU"] && (language == "RU"))
+				return listy["RU"]
+			else if(listy["EN"] && (language == "EN"))
+				return listy["EN"]
+			//else
+				//return listy[1]
+	if(istext(value)) //оригинальное значение если не удалось что-то вытащить со списка
+		return value
+	//скорее всего надо еще еррор мессайдж вписать, о том, что нам давали не-приемлемое значение
+
+//RUCM ENDS HERE
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
 /atom/proc/relaymove()

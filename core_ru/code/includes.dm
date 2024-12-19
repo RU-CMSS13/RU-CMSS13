@@ -85,6 +85,7 @@
 #include "modules\battlepass\rewards\premium_rewards.dm"
 #include "modules\battlepass\rewards\xeno_rewards.dm"
 #include "modules\battlepass\rewards\code\particles.dm"
+#include "modules\client\preferences.dm"
 #include "modules\clothing\shoes\marine_shoes.dm"
 #include "modules\clothing\suits\marine_armor\st_armor.dm"
 #include "modules\clothing\gloves\marine_gloves.dm"
