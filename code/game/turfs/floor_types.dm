@@ -219,6 +219,7 @@
 /turf/open/floor/plating/icefloor
 	icon_state = "plating"
 	name = "ice colony plating"
+	antipierce = 5
 
 /turf/open/floor/plating/icefloor/Initialize(mapload, ...)
 	. = ..()
@@ -1273,6 +1274,8 @@
 	icon_state = "grass1"
 	tile_type = /obj/item/stack/tile/grass
 	tool_flags = null
+
+	antipierce = 5
 
 /turf/open/floor/grass/Initialize(mapload, ...)
 	. = ..()

@@ -120,6 +120,10 @@
 	range_bounds = null
 	for(var/obj/structure/prop/sector_center/bordered_sector as anything in bordered_sectors)
 		bordered_sectors -= bordered_sector
+
+	owner.sector_center = null
+	owner.grooped_task?.sector_center = null
+	QDEL_NULL(owner.grooped_task)
 	QDEL_NULL(owner)
 	STOP_PROCESSING(SSslowobj, src)
 

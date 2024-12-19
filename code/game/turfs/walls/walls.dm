@@ -13,6 +13,8 @@
 	var/melting = FALSE
 	var/claws_minimum = CLAW_TYPE_SHARP
 
+	antipierce = 2
+
 	tiles_with = list(
 		/turf/closed/wall,
 		/obj/structure/window/framed,

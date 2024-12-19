@@ -29,8 +29,9 @@
 	return istype(object) && istype(object.loc,/turf/) && istype(laser_area) && laser_area.ceiling < CEILING_DEEP_UNDERGROUND_METAL  && new_z == z_initial
 
 /datum/cas_signal/proc/obstructed_signal()
-	var/area/laser_area = get_area(signal_loc)
-	return !istype(laser_area) || CEILING_IS_PROTECTED(laser_area.ceiling, CEILING_PROTECTION_TIER_2)
+	var/turf/laser_turf = get_turf(signal_loc)
+	var/turf/roof = laser_turf.get_real_roof()
+	return roof.air_strike(14, laser_turf, TRUE)
 
 /proc/z_descend(loc)
 	var/sloc = loc

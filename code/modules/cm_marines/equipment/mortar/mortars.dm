@@ -240,9 +240,6 @@
 			if(!istype(target_area))
 				to_chat(user, SPAN_WARNING("This area is out of bounds!"))
 				return
-			if(CEILING_IS_PROTECTED(target_area.ceiling, CEILING_PROTECTION_TIER_2) || protected_by_pylon(TURF_PROTECTION_MORTAR, target_turf))
-				to_chat(user, SPAN_WARNING("You cannot hit the target. It is probably underground."))
-				return
 			if(SSticker.mode && MODE_HAS_TOGGLEABLE_FLAG(MODE_LZ_PROTECTION) && target_area.is_landing_zone)
 				to_chat(user, SPAN_WARNING("You cannot bomb the landing zone!"))
 				return
@@ -330,9 +327,9 @@
 	invisibility = INVISIBILITY_MAXIMUM
 
 /obj/structure/mortar/proc/handle_shell(turf/target, obj/item/mortar_shell/shell)
-	if(protected_by_pylon(TURF_PROTECTION_MORTAR, target))
-		firing = FALSE
-		return
+	var/turf/roof = target.get_real_roof()
+	var/penetration = rand(5, 10)
+	target = roof.air_strike(penetration, target, TRUE)
 
 	if(ship_side)
 		var/turf/our_turf = get_turf(src)
@@ -368,9 +365,7 @@
 	if(SSticker.mode && MODE_HAS_TOGGLEABLE_FLAG(MODE_MORTAR_LASER_WARNING))
 		new /obj/effect/overlay/temp/blinking_laser(target)
 	sleep(2 SECONDS) // Wait out the rest of the landing time
-	target.ceiling_debris_check(2)
-	if(!protected_by_pylon(TURF_PROTECTION_MORTAR, target))
-		shell.detonate(target)
+	shell.detonate(roof.air_strike(penetration, target))
 	qdel(shell)
 	firing = FALSE
 
@@ -430,8 +425,8 @@
 	if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
 		to_chat(user, SPAN_WARNING("You don't have the training to deploy [src]."))
 		return
-	var/area/area = get_area(deploy_turf)
-	if(CEILING_IS_PROTECTED(area.ceiling, CEILING_PROTECTION_TIER_1) && is_ground_level(deploy_turf.z))
+	var/turf/roof = deploy_turf.get_real_roof()
+	if(!roof.air_strike(1, deploy_turf.get_real_roof(), TRUE))
 		to_chat(user, SPAN_WARNING("You probably shouldn't deploy [src] indoors."))
 		return
 	user.visible_message(SPAN_NOTICE("[user] starts deploying [src]."), \

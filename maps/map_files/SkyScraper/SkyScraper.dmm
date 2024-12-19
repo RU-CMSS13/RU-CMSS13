@@ -8928,15 +8928,9 @@
 /area/skyscraper/building/cargo_sector)
 "yd" = (
 /obj/structure/surface/rack,
-/obj/item/defenses/handheld/sentry/flamer{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/sentry/flamer{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/sentry/flamer{
-	faction_to_get = "wey_yu"
-	},
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/item/defenses/handheld/sentry/flamer,
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 5
 	},
@@ -9472,7 +9466,7 @@
 /area/skyscraper/building/security_sector/blockpost)
 "zH" = (
 /obj/structure/machinery/defenses/tesla_coil/stun{
-	faction_to_get = "wey_yu";
+	faction_group = list("Wey-Yu");
 	light_on = 1
 	},
 /obj/effect/decal/warning_stripes{
@@ -10695,7 +10689,6 @@
 /area/skyscraper/building/science_sector)
 "Do" = (
 /obj/structure/machinery/door/poddoor/almayer/locked{
-	indestructible = 1;
 	name = "launch bay door"
 	},
 /turf/open/floor/plating/prison,
@@ -13283,15 +13276,9 @@
 /area/skyscraper/building/security_sector/blockpost)
 "Lk" = (
 /obj/structure/surface/rack,
-/obj/item/defenses/handheld/planted_flag{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/tesla_coil{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/bell_tower{
-	faction_to_get = "wey_yu"
-	},
+/obj/item/defenses/handheld/planted_flag,
+/obj/item/defenses/handheld/tesla_coil,
+/obj/item/defenses/handheld/bell_tower,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/building/security_sector/blockpost)
@@ -14686,7 +14673,7 @@
 /area/skyscraper/building/security_sector/blockpost)
 "Pn" = (
 /obj/structure/machinery/defenses/tesla_coil/stun{
-	faction_to_get = "wey_yu";
+	faction_group = list("Wey-Yu");
 	light_on = 1
 	},
 /obj/effect/decal/warning_stripes{
@@ -15332,7 +15319,7 @@
 "Rk" = (
 /obj/structure/machinery/defenses/sentry/flamer{
 	dir = 1;
-	faction_to_get = "wey_yu";
+	faction_group = list("Wey-Yu");
 	light_on = 1
 	},
 /turf/open/asphalt/cement,
@@ -15768,7 +15755,7 @@
 "SN" = (
 /obj/structure/machinery/defenses/sentry/shotgun{
 	dir = 8;
-	faction_to_get = "wey_yu";
+	faction_group = list("Wey-Yu");
 	light_on = 1
 	},
 /obj/structure/barricade/metal/wired{
@@ -15967,9 +15954,7 @@
 "Ts" = (
 /obj/structure/surface/rack,
 /obj/item/stack/sheet/wood/small_stack,
-/obj/item/defenses/handheld/sentry/flamer{
-	faction_to_get = "wey_yu"
-	},
+/obj/item/defenses/handheld/sentry/flamer,
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/building/agro_sector)
@@ -16672,15 +16657,9 @@
 /area/skyscraper/building/building_in_progress_sector)
 "Vx" = (
 /obj/structure/surface/rack,
-/obj/item/defenses/handheld/sentry{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/sentry{
-	faction_to_get = "wey_yu"
-	},
-/obj/item/defenses/handheld/sentry{
-	faction_to_get = "wey_yu"
-	},
+/obj/item/defenses/handheld/sentry,
+/obj/item/defenses/handheld/sentry,
+/obj/item/defenses/handheld/sentry,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/building/security_sector/blockpost)
 "Vy" = (

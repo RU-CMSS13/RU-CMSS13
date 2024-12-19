@@ -783,10 +783,6 @@
 		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone appears to be out of bounds. Please check coordinates.")]")
 		return
 
-	if(protected_by_pylon(TURF_PROTECTION_OB, T))
-		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone has strong biological protection. The orbital strike cannot reach here.")]")
-		return
-
 	var/area/A = get_area(T)
 
 	if(istype(A) && CEILING_IS_PROTECTED(A.ceiling, CEILING_DEEP_UNDERGROUND))

@@ -159,6 +159,8 @@
 	icon_state = "grass1"
 	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
+	antipierce = 5
+
 /turf/open/organic/grass/astroturf
 	desc = "It'll get in your shoes no matter what you do."
 	name = "astroturf"
@@ -173,12 +175,16 @@
 	minimap_color = MINIMAP_MARS_DIRT
 	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
 
+	antipierce = 5
+
 
 /turf/open/mars_cave
 	name = "cave"
 	icon = 'icons/turf/floors/bigred.dmi'
 	icon_state = "mars_cave_1"
 	is_groundmap_turf = TRUE
+
+	antipierce = 5
 
 /turf/open/mars_cave/Initialize(mapload, ...)
 	. = ..()
@@ -346,6 +352,8 @@
 /turf/open/beach
 	name = "Beach"
 	icon = 'icons/turf/floors/beach.dmi'
+
+	antipierce = 15
 
 /turf/open/beach/Entered(atom/movable/AM)
 	..()
@@ -1010,6 +1018,8 @@
 	var/icon_spawn_state = "grass1"
 	baseturfs = /turf/open/jungle
 	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+
+	antipierce = 10
 
 /turf/open/jungle/Initialize(mapload, ...)
 	. = ..()

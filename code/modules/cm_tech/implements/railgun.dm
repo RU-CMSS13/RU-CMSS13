@@ -108,10 +108,6 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 	if(istype(T, /turf/open/space)) // No firing into space
 		return FALSE
 
-	if(protected_by_pylon(TURF_PROTECTION_OB, T))
-		to_chat(H, SPAN_WARNING("[icon2html(src)] This area is too reinforced to fire into."))
-		return FALSE
-
 	if(next_fire > world.time)
 		to_chat(H, SPAN_WARNING("[icon2html(src)] The barrel is still hot! Wait [SPAN_BOLD((next_fire - world.time)/10)] more seconds before firing."))
 		return FALSE
@@ -164,14 +160,16 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 
 	addtimer(CALLBACK(src, PROC_REF(land_shot), T, H.client, warning_zone, I), 10 SECONDS)
 
-/obj/structure/machinery/computer/railgun/proc/land_shot(turf/T, client/firer, obj/effect/warning/droppod/warning_zone, image/to_remove)
+/obj/structure/machinery/computer/railgun/proc/land_shot(turf/target_turf, client/firer, obj/effect/warning/droppod/warning_zone, image/to_remove)
 	if(warning_zone)
 		qdel(warning_zone)
 
 	if(firer)
 		firer.images -= to_remove
-		playsound(T, 'sound/machines/railgun/railgun_impact.ogg', sound_range = 75)
-		cell_explosion(T, power, power/range, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, create_cause_data("railgun", firer.mob))
+		var/turf/roof = target_turf.get_real_roof()
+		target_turf = roof.air_strike(rand(10, 15), target_turf)
+		playsound(target_turf, 'sound/machines/railgun/railgun_impact.ogg', sound_range = 75)
+		cell_explosion(target_turf, power, power/range, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, create_cause_data("railgun", firer.mob))
 
 /obj/structure/machinery/computer/railgun/proc/remove_current_operator()
 	SIGNAL_HANDLER
@@ -258,7 +256,8 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 /mob/hologram/railgun/proc/allow_turf_entry(mob/self, turf/to_enter)
 	SIGNAL_HANDLER
 
-	if(protected_by_pylon(TURF_PROTECTION_OB, to_enter))
+	var/turf/roof = to_enter.get_real_roof()
+	if(!roof.air_strike(14, to_enter, TRUE))
 		to_chat(linked_mob, SPAN_WARNING("[icon2html(src)] This area is too reinforced to enter."))
 		return COMPONENT_TURF_DENY_MOVEMENT
 

@@ -120,13 +120,10 @@
 	if(opacity)
 		directional_opacity = ALL_CARDINALS
 
-	if(mapload)
-		return INITIALIZE_HINT_LATELOAD
-	else
-		multiz_turfs()
-		if(!special_icon)
-			update_connections(TRUE)
-		update_icon()
+	multiz_turfs()
+	if(!special_icon)
+		update_connections(TRUE)
+	update_icon()
 	return INITIALIZE_HINT_NORMAL
 
 /turf/LateInitialize()
