@@ -291,7 +291,7 @@ directive is properly returned.
 		. += SPAN_NOTICE("This has an <a href='byond://?src=\ref[src];desc_lore=1'>extended lore description</a>.")
 
 //RUCM CONTINUE THERE
-/proc/get_translation_name(var/value, var/list/listy, mob/user)
+/proc/get_translation_name(value, list/listy, mob/user)
 	var/language
 	switch(user?.client?.prefs?.game_language)
 		if(GAME_LANGUAGE_RU)
