@@ -1044,3 +1044,28 @@
 /turf/open/auto_turf/sand_white/layer0/skyscraper
 	name = "Distant Planet Cover"
 	desc = "Далекая поверхность планеты покрытая ядовитым туманом, кажется тут очень высоко, лучше стоять подальше от обрыва"
+
+/turf/closed/shuttle/elevator/window
+	icon = 'icons/turf/elevator.dmi'
+	icon_state = "wall_w"
+	opacity = FALSE
+
+/turf/closed/shuttle/elevator/gears/sci
+	icon_state = "wall_w_gear"
+
+/turf/closed/shuttle/elevator/gears/sci/west
+	dir = 4
+
+/obj/structure/machinery/gear/sky_scraper
+	icon = 'icons/turf/elevator.dmi'
+	icon_state = "w_gear"
+
+/obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
+	. = ..()
+	if(istype(port, /obj/docking_port/mobile/sselevator))
+		var/obj/docking_port/mobile/sselevator/L = port
+		L.gears += src
+
+/area/shuttle/sky_scraper_elevator
+	name = "'S95 v2' Elevator"
+	ambience_exterior = 'sound/ambience/elevator_music.ogg'
