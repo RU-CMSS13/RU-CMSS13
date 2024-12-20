@@ -149,6 +149,15 @@
 			if(3)
 				. += "Well Done."
 
+//direction is direction of travel of A
+/turf/open/zPassIn(atom/movable/A, direction, turf/source)
+	if(direction == DOWN)
+		for(var/obj/O in contents)
+			if(O.flags_obj & OBJ_BLOCK_Z_IN_DOWN)
+				return FALSE
+		return TRUE
+	return FALSE
+
 /turf/open/river
 	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 

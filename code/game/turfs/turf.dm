@@ -356,7 +356,7 @@
 	if(!istype(arrived))
 		return
 
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
+	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived, old_loc)
 	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
 	// Let explosions know that the atom entered

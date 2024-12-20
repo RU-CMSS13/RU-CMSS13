@@ -43,7 +43,7 @@
 	if(leaving == src)
 		return
 
-	if(isTerminator() && get_dir(get_turf(src), direction) == dir)
+	if(isTerminator() && get_dir(source, direction) == dir)
 		leaving.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
 		INVOKE_ASYNC(src, PROC_REF(stair_ascend), leaving)
 		return COMPONENT_ATOM_BLOCK_EXIT

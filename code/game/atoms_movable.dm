@@ -447,7 +447,7 @@
 	if(z_move_flags & ZMOVE_CAN_FLY_CHECKS)
 		if(z_move_flags & ZMOVE_FEEDBACK)
 			if(rider)
-				to_chat(rider, SPAN_WARNING("[src] is is not capable of flight."))
+				to_chat(rider, SPAN_WARNING("[src] it is not capable of flight."))
 			else
 				to_chat(src, SPAN_WARNING("You are not Superman."))
 		return FALSE
