@@ -211,26 +211,13 @@ Global Light System
 		skyvisible = FALSE
 		weathervisible = FALSE
 	else
-		//SILENCE FIX FOR MULTIZ
-		var/area/area = get_area(src)
-		if(area.ceiling < CEILING_GLASS)
-			skyvisible = TRUE
-			weathervisible = TRUE
-		else if(area.ceiling == CEILING_GLASS)
-			skyvisible &= TRUE
-			weathervisible = FALSE
-		else
-			skyvisible = FALSE
-			weathervisible = FALSE
-		// EVERY turf must be transparent for global light - so &=
-		// ANY turf must be closed for weather - so |=
-/*
+		// EVERY turf must be transparent for sunlight - so &=
+		// ANY turf must be closed for TURF_WEATHER_PROOF - so |=
 		var/turf/ceiling = get_step_multiz(src, UP)
 		if(ceiling)
 			ceiling.update_ceiling_status(TRUE) //Pass TRUE because we are now acting as a ceiling
 			skyvisible &= ceiling.ceiling_status & SKYVISIBLE
 			weathervisible &= ceiling.ceiling_status & WEATHERVISIBLE
-*/
 
 		ceiling_status = NO_FLAGS
 		if(skyvisible)
