@@ -30,6 +30,8 @@
 	///Whether or not this instance is using accesses different from initial code. Used for easy locating in map files.
 	var/access_modified = FALSE
 
+	vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of obj in openspace.
+
 	var/flags_obj = NO_FLAGS
 	/// set when a player uses a pen on a renamable object
 	var/renamedByPlayer = FALSE

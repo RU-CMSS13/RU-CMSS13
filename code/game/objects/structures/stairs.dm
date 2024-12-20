@@ -31,11 +31,11 @@
 
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-	return ..()
+	. = ..()
 
 /obj/structure/stairs/Destroy()
 	listeningTo = null
-	return ..()
+	. = ..()
 
 /obj/structure/stairs/proc/on_move(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER

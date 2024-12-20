@@ -90,7 +90,8 @@
 
 	var/atom/old_loc = loc
 	var/old_dir = dir
-
+	if(!loc.Exit(src, direction))
+		return
 	. = ..()
 	if(flags_atom & DIRLOCK)
 		setDir(old_dir)

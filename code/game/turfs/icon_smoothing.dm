@@ -19,7 +19,7 @@
 
 	return
 
-/turf/proc/update_connections(propagate = 0)
+/turf/proc/update_connections(propagate = FALSE)
 	var/list/turf_dirs = list()
 
 	for(var/turf/turf in orange(src, 1))

@@ -1,5 +1,6 @@
 /mob
 	density = TRUE
+	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
 	layer = MOB_LAYER
 	animate_movement = 2
 	rebounds = TRUE

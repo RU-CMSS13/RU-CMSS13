@@ -5,6 +5,7 @@
 	icon = 'icons/turf/floors/floors.dmi'
 	icon_state = "floor"
 	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_BURNABLE|TURF_BREAKABLE
+	baseturfs = /turf/open/floor/plating
 	var/broken = FALSE
 	var/burnt = FALSE
 
@@ -88,7 +89,8 @@
 	if(!(turf_flags & TURF_BREAKABLE) || turf_flags & TURF_HULL)
 		return
 	if(broken && prob(85))
-		ScrapeAway()
+		make_plating()
+		return
 
 	broken = TRUE
 	if(is_plasteel_floor())

@@ -117,7 +117,7 @@
 		gear.start_moving()
 
 /obj/docking_port/mobile/sselevator/proc/on_stop_actions()
-	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons[offseted_z]
+	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[z]"]
 	if(button)
 		button.update_icon()
 	button.update_icon()
@@ -145,7 +145,7 @@
 
 /obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc)
 	if(!moving && !cooldown)
-		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons[floor_calc]
+		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
 		if(button)
 			button.update_icon("_animated")
 		called_floors[floor_calc] = TRUE
@@ -154,7 +154,7 @@
 		on_move_actions()
 		move_elevator()
 	else
-		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons[floor_calc]
+		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
 		if(button)
 			button.update_icon("_animated")
 		called_floors[floor_calc] = TRUE
@@ -246,25 +246,24 @@
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Initialize(mapload, ...)
 	. = ..()
-	connect_elevator()
-
-/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/proc/connect_elevator()
-	set waitfor = FALSE
 	#if !defined(UNIT_TESTS)
-	UNTIL(elevator_id in SSshuttle.scraper_elevators)
+	if(floor != "control")
+		return INITIALIZE_HINT_ROUNDSTART
+	#endif
+
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/LateInitialize()
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(!elevator)
-		qdel(src)
-	else if(floor != "control")
-		floor = z - elevator.floor_offset
-		elevator.buttons[floor] = src
-	#endif
+		return
+
+	floor = z
+	elevator.buttons["[floor]"] = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(elevator)
 		if(floor != "control")
-			elevator.buttons[floor] -= src
+			elevator.buttons["[floor]"] -= src
 		else
 			elevator.button = null
 
@@ -384,7 +383,13 @@
 /obj/structure/machinery/computer/security_blocker/Initialize()
 	. = ..()
 	GLOB.skyscrapers_sec_comps["[z]"] = src
-	connect_elevator()
+	return INITIALIZE_HINT_ROUNDSTART
+
+/obj/structure/machinery/computer/security_blocker/LateInitialize()
+	for(var/obj/structure/machinery/siren/S as anything in sirens)
+		S.siren_warning_start("ВНИМАНИЕ, КРИТИЧЕСКАЯ СИТУАЦИЯ, ЗАПУЩЕН РЕЖИМ МАКСИМАЛЬНОЙ БЕЗОПАСНОСТИ, ВНИМАНИЕ, ОСТАВАЙТЕСЬ НА МЕСТАХ И ДОЖИДАЙТЕСЬ СЛУЖБУ БЕЗОПАСНОСТИ")
+	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
+		L.change_almenia_state(1)
 
 /obj/structure/machinery/computer/security_blocker/Destroy()
 	for(var/i in stairs_doors)
@@ -401,17 +406,6 @@
 	GLOB.skyscrapers_sec_comps["[z]"] = null
 
 	. = ..()
-
-/obj/structure/machinery/computer/security_blocker/proc/connect_elevator()
-	set waitfor = FALSE
-	#if !defined(UNIT_TESTS)
-	UNTIL(elevator_id in SSshuttle.scraper_elevators)
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
-	for(var/obj/structure/machinery/siren/S as anything in sirens)
-		S.siren_warning_start("ТРЕВОГА, КРИТИЧЕСКАЯ СИТУАЦИЯ, ЗАПУЩЕН ПРОТОКОЛ МАКСИМАЛЬНОЙ БЕЗОПАСНОСТИ, ЭТАЖ [z - elevator.floor_offset]")
-	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
-		L.change_almenia_state(1)
-	#endif
 
 /obj/structure/machinery/computer/security_blocker/ex_act(severity)
 	return
@@ -811,7 +805,18 @@
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Initialize(mapload, ...)
 	. = ..()
-	connect_elevator()
+	#if !defined(UNIT_TESTS)
+	if(floor != "control")
+		return INITIALIZE_HINT_ROUNDSTART
+	#endif
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/LateInitialize()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	if(!elevator)
+		return
+
+	floor = z
+	elevator.doors["[floor]"] = src
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Destroy()
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
@@ -822,16 +827,6 @@
 			elevator.door = null
 
 	. = ..()
-
-/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/proc/connect_elevator()
-	set waitfor = FALSE
-	#if !defined(UNIT_TESTS)
-	UNTIL(elevator_id in SSshuttle.scraper_elevators)
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
-	if(floor != "control")
-		floor = src.z
-		elevator.doors["[floor]"] = src
-	#endif
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/try_to_activate_door(mob/user)
 	return

@@ -181,8 +181,6 @@
 /turf/proc/update_overlays()
 	if(QDELETED(src))
 		return
-	if(overlays)
-		overlays.Cut()
 
 //	if(turf_flags & TURF_WEATHER)
 //		overlays += SSsunlighting.get_weather_overlay()
@@ -288,6 +286,11 @@
 			mover.Collide(A)
 			return FALSE
 
+	for(var/atom/movable/thing as anything in contents)
+		if(thing == mover || thing == mover.loc) // Multi tile objects and moving out of other objects
+			continue
+		thing.Cross(mover)
+
 		// if we are thrown, moved, dragged, or in any other way abused by code - check our diagonals
 	if(!mover.move_intentionally)
 		// Check objects in adjacent turf EAST/WEST
@@ -359,6 +362,7 @@
 	// Let explosions know that the atom entered
 	for(var/datum/automata_cell/explosion/E in autocells)
 		E.on_turf_entered(arrived)
+	return TRUE
 
 /turf/Exited(atom/movable/gone, direction)
 	if(!istype(gone))

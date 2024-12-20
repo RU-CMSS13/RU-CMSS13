@@ -81,6 +81,7 @@
 		soundscape_playlist = target_area.soundscape_playlist
 
 	var/sound/S = sound(null,1,0,SOUND_CHANNEL_AMBIENCE)
+	var/list/echo_list = new(18)
 
 	if(ambience == target_ambience)
 		if(!force_update)
@@ -95,19 +96,11 @@
 	S.status = status_flags
 
 	if(target_area)
-		var/muffle
-		if(target_area.ceiling_muffle)
-			switch(target_area.ceiling)
-				if(CEILING_NONE)
-					muffle = 0
-				if(CEILING_GLASS)
-					muffle = MUFFLE_MEDIUM
-				if(CEILING_METAL)
-					muffle = MUFFLE_HIGH
-				else
-					S.volume = 0
-		muffle += target_area.base_muffle
-		S.echo = list(muffle)
+		S.environment = target_area.sound_environment
+	echo_list[ECHO_ROOM] = get_muffle(target_area, SSmapping.get_turf_above(get_turf(owner.mob)))
+	if(!echo_list[ECHO_ROOM])
+		S.volume = 0
+	S.echo = echo_list
 	sound_to(owner, S)
 
 

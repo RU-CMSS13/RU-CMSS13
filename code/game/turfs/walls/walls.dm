@@ -15,6 +15,8 @@
 
 	antipierce = 2
 
+	baseturfs = /turf/open/floor/plating
+
 	tiles_with = list(
 		/turf/closed/wall,
 		/obj/structure/window/framed,
@@ -46,24 +48,6 @@
 	noblend_turfs = list(/turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment) //Turfs to avoid blending with
 	blend_objects = list(/obj/structure/machinery/door, /obj/structure/window_frame, /obj/structure/window/framed) // Objects which to blend with
 	noblend_objects = list(/obj/structure/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
-
-/turf/closed/wall/Initialize(mapload, ...)
-	. = ..()
-	// Defer updating based on neighbors while we're still loading map
-	if(mapload && . != INITIALIZE_HINT_QDEL)
-		return INITIALIZE_HINT_LATELOAD
-	// Otherwise do it now, but defer icon update to late if it's going to happen
-	update_connections(TRUE)
-	if(. != INITIALIZE_HINT_LATELOAD)
-		update_icon()
-
-/turf/closed/wall/LateInitialize()
-	. = ..()
-	// By default this assumes being used for map late init
-	// We update without cascading changes as each wall will be updated individually
-	update_connections(FALSE)
-	update_icon()
-
 
 /turf/closed/wall/setDir(newDir)
 	..()
