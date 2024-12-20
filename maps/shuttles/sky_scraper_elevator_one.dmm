@@ -1,10 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /obj/docking_port/mobile/sselevator/one,
-/turf/closed/shuttle/elevator/window{
-	dir = 10;
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/southwest,
 /area/shuttle/sky_scraper_elevator)
 "b" = (
 /obj/structure/machinery/gear/sky_scraper{
@@ -12,89 +9,52 @@
 	},
 /turf/closed/shuttle/elevator/gears/sci/west,
 /area/shuttle/sky_scraper_elevator)
-"c" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 1;
-	icon_state = "wall_window_w"
-	},
-/area/shuttle/sky_scraper_elevator)
 "d" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator{
 	floor = "control";
 	density = 0
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
+/area/shuttle/sky_scraper_elevator)
+"g" = (
+/turf/closed/shuttle/elevator/scraper/west,
 /area/shuttle/sky_scraper_elevator)
 "i" = (
-/turf/closed/shuttle/elevator/window{
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/north,
 /area/shuttle/sky_scraper_elevator)
-"k" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 1;
-	icon_state = "wall_windowa_w"
-	},
+"j" = (
+/turf/closed/shuttle/elevator/window/a_closing/one,
 /area/shuttle/sky_scraper_elevator)
 "o" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 6;
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/southeast,
 /area/shuttle/sky_scraper_elevator)
 "p" = (
-/turf/closed/shuttle/elevator{
-	dir = 4;
-	icon_state = "wall_w"
-	},
+/turf/closed/shuttle/elevator/scraper/east,
 /area/shuttle/sky_scraper_elevator)
 "q" = (
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_v"
-	},
-/area/shuttle/sky_scraper_elevator)
-"s" = (
-/turf/closed/shuttle/elevator/window{
-	icon_state = "wall_windowa_w"
-	},
+/turf/open/shuttle/elevator/skyscraper/wv,
 /area/shuttle/sky_scraper_elevator)
 "t" = (
-/obj/structure/machinery/light/double/blue{
-	req_light_switch = 0
-	},
-/turf/open/shuttle/elevator/grating{
-	icon_state = "floor_grating_w"
-	},
+/obj/structure/machinery/light/double/blue,
+/turf/open/shuttle/elevator/skyscraper/grating,
 /area/shuttle/sky_scraper_elevator)
 "v" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 9;
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/northwest,
 /area/shuttle/sky_scraper_elevator)
 "w" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 8;
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/west,
 /area/shuttle/sky_scraper_elevator)
 "F" = (
-/turf/closed/shuttle/elevator/window{
-	dir = 5;
-	icon_state = "wall_window_w"
-	},
+/turf/closed/shuttle/elevator/window/northeast,
 /area/shuttle/sky_scraper_elevator)
 "H" = (
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_g"
-	},
+/turf/open/shuttle/elevator/skyscraper/wg,
+/area/shuttle/sky_scraper_elevator)
+"I" = (
+/turf/closed/shuttle/elevator/window/a_closing,
 /area/shuttle/sky_scraper_elevator)
 "K" = (
-/turf/open/shuttle/elevator/grating{
-	icon_state = "floor_grating_w"
-	},
+/turf/open/shuttle/elevator/skyscraper/grating,
 /area/shuttle/sky_scraper_elevator)
 "S" = (
 /obj/structure/machinery/gear/sky_scraper,
@@ -106,9 +66,7 @@
 	floor = "control";
 	pixel_y = 38
 	},
-/turf/open/shuttle/elevator{
-	icon_state = "floor_w_v"
-	},
+/turf/open/shuttle/elevator/skyscraper/wv,
 /area/shuttle/sky_scraper_elevator)
 
 (1,1,1) = {"
@@ -117,7 +75,7 @@ i
 i
 i
 i
-k
+j
 a
 "}
 (2,1,1) = {"
@@ -145,7 +103,7 @@ q
 q
 q
 t
-p
+g
 "}
 (5,1,1) = {"
 H
@@ -157,7 +115,7 @@ K
 b
 "}
 (6,1,1) = {"
-p
+g
 U
 K
 K
@@ -167,10 +125,10 @@ w
 "}
 (7,1,1) = {"
 F
-c
-c
-c
-c
-s
+i
+i
+i
+i
+I
 o
 "}

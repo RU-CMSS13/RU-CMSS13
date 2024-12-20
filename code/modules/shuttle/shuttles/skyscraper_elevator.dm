@@ -1045,16 +1045,57 @@
 	name = "Distant Planet Cover"
 	desc = "Далекая поверхность планеты покрытая ядовитым туманом, кажется тут очень высоко, лучше стоять подальше от обрыва"
 
-/turf/closed/shuttle/elevator/window
+/turf/closed/shuttle/elevator/scraper
 	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "wall_w"
+
+/turf/closed/shuttle/elevator/scraper/north
+	dir = NORTH
+
+/turf/closed/shuttle/elevator/scraper/east
+	dir = EAST
+
+/turf/closed/shuttle/elevator/scraper/west
+	dir = WEST
+
+/turf/closed/shuttle/elevator/window
+	icon = 'icons/turf/skyscraper_elevator.dmi'
+	icon_state = "wall_window_w"
 	opacity = FALSE
 
+/turf/closed/shuttle/elevator/window/a_closing
+	icon_state = "wall_windowa_w"
+
+/turf/closed/shuttle/elevator/window/a_closing/one
+	dir = 1
+
+/turf/closed/shuttle/elevator/window/north
+	dir = NORTH
+
+/turf/closed/shuttle/elevator/window/east
+	dir = EAST
+
+/turf/closed/shuttle/elevator/window/west
+	dir = WEST
+
+/turf/closed/shuttle/elevator/window/northeast
+	dir = NORTHEAST
+
+/turf/closed/shuttle/elevator/window/southeast
+	dir = SOUTHEAST
+
+/turf/closed/shuttle/elevator/window/northwest
+	dir = NORTHWEST
+
+/turf/closed/shuttle/elevator/window/southwest
+	dir = SOUTHWEST
+
 /turf/closed/shuttle/elevator/gears/sci
+	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "wall_w_gear"
 
 /turf/closed/shuttle/elevator/gears/sci/west
-	dir = 4
+	dir = WEST
 
 /obj/structure/machinery/gear/sky_scraper
 	icon = 'icons/turf/skyscraper_elevator.dmi'
@@ -1069,3 +1110,5 @@
 /area/shuttle/sky_scraper_elevator
 	name = "'S95 v2' Elevator"
 	ambience_exterior = 'sound/ambience/elevator_music.ogg'
+	lightswitch = TRUE
+	unlimited_power = TRUE
