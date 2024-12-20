@@ -250,6 +250,7 @@
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/proc/connect_elevator()
 	set waitfor = FALSE
+	#if !defined(UNIT_TESTS)
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(!elevator)
@@ -257,6 +258,7 @@
 	else if(floor != "control")
 		floor = z - elevator.floor_offset
 		elevator.buttons[floor] = src
+	#endif
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
@@ -402,12 +404,14 @@
 
 /obj/structure/machinery/computer/security_blocker/proc/connect_elevator()
 	set waitfor = FALSE
+	#if !defined(UNIT_TESTS)
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	for(var/obj/structure/machinery/siren/S as anything in sirens)
 		S.siren_warning_start("ТРЕВОГА, КРИТИЧЕСКАЯ СИТУАЦИЯ, ЗАПУЩЕН ПРОТОКОЛ МАКСИМАЛЬНОЙ БЕЗОПАСНОСТИ, ЭТАЖ [z - elevator.floor_offset]")
 	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
 		L.change_almenia_state(1)
+	#endif
 
 /obj/structure/machinery/computer/security_blocker/ex_act(severity)
 	return
@@ -821,11 +825,13 @@
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/proc/connect_elevator()
 	set waitfor = FALSE
+	#if !defined(UNIT_TESTS)
 	UNTIL(elevator_id in SSshuttle.scraper_elevators)
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
 	if(floor != "control")
 		floor = src.z
 		elevator.doors["[floor]"] = src
+	#endif
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/try_to_activate_door(mob/user)
 	return
