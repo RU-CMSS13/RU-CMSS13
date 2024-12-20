@@ -1046,7 +1046,7 @@
 	desc = "Далекая поверхность планеты покрытая ядовитым туманом, кажется тут очень высоко, лучше стоять подальше от обрыва"
 
 /turf/closed/shuttle/elevator/window
-	icon = 'icons/turf/elevator.dmi'
+	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "wall_w"
 	opacity = FALSE
 
@@ -1057,7 +1057,7 @@
 	dir = 4
 
 /obj/structure/machinery/gear/sky_scraper
-	icon = 'icons/turf/elevator.dmi'
+	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "w_gear"
 
 /obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
