@@ -169,6 +169,10 @@ SUBSYSTEM_DEF(global_light)
 	animate(global_lighting_color, color = current_color, time = time_to_animate)
 
 /datum/controller/subsystem/global_light/fire(resumed)
+	if(SSmapping.configs[GROUND_MAP].disabled_global_light)
+		can_fire = FALSE
+		return
+
 	if(global_lighting_color)
 		global_lighting_color.name = "GLOBAL_LIGHT_COLOR_[rand()*rand(1,9999999)]" // force rendering refresh because byond is a bitch
 
