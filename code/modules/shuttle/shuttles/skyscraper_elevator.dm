@@ -98,7 +98,6 @@
 		cooldown = FALSE
 		if(next_moving)
 			calc_elevator_order(next_moving)
-			next_moving = 0
 
 	else if(called_floors[offseted_z])
 		sleep(2 SECONDS)
@@ -150,6 +149,8 @@
 			button.update_icon("_animated")
 		called_floors[floor_calc] = TRUE
 		target_floor = floor_calc
+		if(next_moving == target_floor)
+			next_moving = 0
 		moving = offseted_z > target_floor ? "DOWN" : "UP"
 		on_move_actions()
 		move_elevator()
@@ -347,8 +348,8 @@
 	unacidable = TRUE
 	anchored = TRUE
 
-	var/generate_time = 1 MINUTES
-	var/segment_time = 30 SECONDS
+	var/generate_time = 30 SECONDS
+	var/segment_time = 10 SECONDS
 
 	var/total_segments = 5 // total number of times the hack is required
 	var/completed_segments = 0 // what segment we are on, (once this hits total)

@@ -20,7 +20,7 @@ export const Elevator = (props, context) => {
           <Button
             key={button.id}
             disabled={button.disabled}
-            color={ButtonColor(button.called)}
+            color={button.called ? 'green' : 'gray'}
             width={'60px'}
             lineHeight={1.75}
             content={button.title || button.id}
