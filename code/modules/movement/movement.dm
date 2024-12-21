@@ -33,7 +33,11 @@
  * Default behaviour is to send the [COMSIG_ATOM_EXITED]
  */
 /atom/Exited(atom/movable/gone, direction)
-	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
+
+	if(SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction) & COMPONENT_ATOM_BLOCK_EXIT)
+		return FALSE
+
+	return TRUE
 
 /*
  * Checks whether an atom can pass through the calling atom into its target turf.
@@ -90,9 +94,9 @@
 
 	var/atom/old_loc = loc
 	var/old_dir = dir
-	. = ..()
 	if(!old_loc.Exited(src, NewLoc))
 		return
+	. = ..()
 	if(flags_atom & DIRLOCK)
 		setDir(old_dir)
 	else if(old_dir != direction)

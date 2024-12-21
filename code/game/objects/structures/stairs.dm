@@ -25,8 +25,7 @@
 		build_signal_listener()
 
 	var/static/list/loc_connections = list(
-		COMSIG_TURF_EXITED = TYPE_PROC_REF(/obj/structure/stairs, on_move),
-//		COMSIG_TURF_ENTERED = TYPE_PROC_REF(/obj/structure/stairs, on_move_enter)
+		COMSIG_ATOM_EXITED = TYPE_PROC_REF(/obj/structure/stairs, on_move)
 	)
 
 	AddElement(/datum/element/connect_loc, loc_connections)
@@ -44,17 +43,6 @@
 		return
 
 	if(isTerminator() && get_dir(source, direction) == dir)
-		leaving.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
-		INVOKE_ASYNC(src, PROC_REF(stair_ascend), leaving)
-		return COMPONENT_ATOM_BLOCK_EXIT
-
-/obj/structure/stairs/proc/on_move_enter(datum/source, atom/movable/leaving, direction)
-	SIGNAL_HANDLER
-
-	if(leaving == src)
-		return
-
-	if(isTerminator() && get_dir(direction, source) == dir)
 		leaving.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
 		INVOKE_ASYNC(src, PROC_REF(stair_ascend), leaving)
 		return COMPONENT_ATOM_BLOCK_EXIT

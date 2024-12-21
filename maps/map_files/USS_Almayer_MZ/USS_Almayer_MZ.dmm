@@ -26798,8 +26798,7 @@
 /obj/structure/stairs{
 	dir = 1;
 	terminator_mode = 0;
-	icon_state = "ramptop";
-	opacity = 1
+	icon_state = "ramptop"
 	},
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
@@ -26919,6 +26918,14 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/lifeboat_pumps/north1)
+"eat" = (
+/obj/structure/stairs{
+	dir = 8;
+	terminator_mode = 0;
+	opacity = 1
+	},
+/turf/open/floor/almayer/no_build/plate,
+/area/almayer/stair_clone)
 "eau" = (
 /obj/item/storage/backpack/marine/satchel{
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!";
@@ -38606,8 +38613,7 @@
 /obj/structure/stairs{
 	dir = 1;
 	terminator_mode = 0;
-	icon_state = "ramptop";
-	opacity = 1
+	icon_state = "ramptop"
 	},
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
@@ -45673,6 +45679,14 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/engineering/upper_engineering/starboard)
+"nlK" = (
+/obj/structure/stairs{
+	dir = 4;
+	terminator_mode = 0;
+	opacity = 1
+	},
+/turf/open/floor/almayer/no_build/plate,
+/area/almayer/stair_clone)
 "nms" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S";
@@ -47057,6 +47071,14 @@
 /obj/item/tool/pen,
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_a_p)
+"nTN" = (
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 0;
+	icon_state = "ramptop"
+	},
+/turf/open/floor/almayer/aicore/glowing/no_build/ai_floor3,
+/area/almayer/command/airoom)
 "nTR" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -47749,6 +47771,15 @@
 /obj/item/device/radio,
 /turf/open/floor/almayer/plate,
 /area/almayer/engineering/lower/workshop)
+"olW" = (
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 0;
+	icon_state = "ramptop";
+	opacity = 1
+	},
+/turf/closed/wall/almayer/outer,
+/area/almayer/command/airoom)
 "ome" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -50438,6 +50469,15 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/maint/hull/upper/u_f_p)
+"pGZ" = (
+/obj/structure/platform/metal/almayer/east,
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 0;
+	icon_state = "ramptop"
+	},
+/turf/open/floor/almayer/aicore/no_build,
+/area/almayer/command/airoom)
 "pHg" = (
 /obj/structure/closet{
 	name = "backpack storage"
@@ -52685,6 +52725,14 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/shipboard/brig/cells)
+"qRO" = (
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 0;
+	icon_state = "ramptop"
+	},
+/turf/open/floor/almayer/aicore/no_build,
+/area/almayer/command/airoom)
 "qRP" = (
 /obj/structure/machinery/computer/crew,
 /turf/open/floor/almayer/plate,
@@ -60466,6 +60514,15 @@
 /obj/item/device/radio/headset,
 /turf/open/floor/almayer/plate,
 /area/almayer/command/telecomms)
+"uyT" = (
+/obj/structure/platform/metal/almayer/west,
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 0;
+	icon_state = "ramptop"
+	},
+/turf/open/floor/almayer/aicore/no_build,
+/area/almayer/command/airoom)
 "uyW" = (
 /obj/structure/sign/safety/storage{
 	pixel_x = 8;
@@ -78446,9 +78503,9 @@ ccj
 nxm
 aQQ
 aoX
-aSp
-aSp
-aSp
+nlK
+nlK
+nlK
 aoX
 bpZ
 cbm
@@ -78478,9 +78535,9 @@ jjw
 cQR
 jjw
 aoX
-aSp
-aSp
-aSp
+nlK
+nlK
+nlK
 aoX
 frP
 nWC
@@ -82842,9 +82899,9 @@ ovG
 ovG
 ovG
 aoX
-diq
-diq
-diq
+eat
+eat
+eat
 aoX
 adL
 adL
@@ -82914,9 +82971,9 @@ sxy
 sxy
 sxy
 aoX
-diq
-diq
-diq
+eat
+eat
+eat
 aoX
 tUr
 tUr
@@ -108027,8 +108084,8 @@ nQf
 eIW
 bgB
 bdI
-bdI
-bdI
+uyT
+uyT
 dYa
 bxm
 lOO
@@ -108123,9 +108180,9 @@ nQf
 eIW
 bgB
 dFm
-oBT
-dFm
-oBT
+nTN
+qRO
+nTN
 cur
 xoj
 xcK
@@ -108219,8 +108276,8 @@ den
 eIW
 bgB
 bnm
-bnm
-bnm
+pGZ
+pGZ
 jUH
 cur
 pPp
@@ -108314,7 +108371,7 @@ rLR
 den
 xwf
 bgB
-bgB
+olW
 bgB
 bgB
 bgB
@@ -108411,8 +108468,8 @@ tsF
 eIW
 bgB
 oBT
-oBT
-oBT
+nTN
+nTN
 buA
 baj
 uwX
@@ -108507,8 +108564,8 @@ nQf
 eIW
 bgB
 oBT
-oBT
-oBT
+nTN
+nTN
 pGJ
 bxp
 pGJ

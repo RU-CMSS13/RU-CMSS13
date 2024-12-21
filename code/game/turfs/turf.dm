@@ -364,13 +364,6 @@
 		E.on_turf_entered(arrived)
 	return TRUE
 
-/turf/Exited(atom/movable/gone, direction)
-	if(!istype(gone))
-		return
-
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
-
 //zPassIn doesn't necessarily pass an atom!
 //direction is direction of travel of air
 /turf/proc/zPassIn(atom/movable/A, direction, turf/source)

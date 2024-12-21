@@ -62,7 +62,7 @@
 	if(!can_move(direction))
 		if(!z_interactiong_blocked)
 			z_interactiong_blocked = TRUE
-			try_use_stairs(old_turf)
+			try_use_stairs(old_turf, direction)
 		else
 			z_interactiong_blocked = FALSE
 		return FALSE
@@ -103,10 +103,10 @@
 				locs_to_zfall++
 			if(req_locs_to_zfall <= locs_to_zfall)
 				current_loc.zFall(src, falling_from_move = TRUE)
-				update_momentum(dir)
+				update_momentum(direction)
 				interior_crash_effect()
 			else
-				try_use_stairs(current_loc)
+				try_use_stairs(current_loc, direction, old_turf)
 		else
 			z_interactiong_blocked = FALSE
 
@@ -115,7 +115,7 @@
 	return TRUE
 
 // So we fucking step on stairs
-/obj/vehicle/multitile/proc/try_use_stairs(turf/current_loc)
+/obj/vehicle/multitile/proc/try_use_stairs(turf/current_loc, direction, turf/old_loc)
 	var/req_locs_to_up = round(length(locs) / 3)
 	var/locs_to_up = 0
 	for(var/turf/one_loc as anything in locs)
@@ -125,8 +125,8 @@
 			locs_to_up++
 	if(req_locs_to_up <= locs_to_up)
 		zMove(UP, z_move_flags = ZMOVE_STAIRS_FLAGS)
-		try_move(dir, TRUE)
-		update_momentum(dir)
+		try_move(direction, TRUE)
+		update_momentum(direction)
 		interior_crash_effect()
 
 // Rotates the vehicle by deg degrees if possible
@@ -267,7 +267,7 @@
 		   The root of the vehicle isn't always in the true center of the vehicle,
 		   so simply rotating around the root doesn't work.
 		   Instead, we do a bit of a detour that ultimately makes our life much simpler.
-
+aww
 		   The idea is to find the true center of the vehicle, given in coordinates with the lower left
 		   corner of the vehicle as the origin. Then we find the coordinates of the origin in the same
 		   coordinate system and rotate the origin around the true center.
