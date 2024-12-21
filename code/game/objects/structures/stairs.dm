@@ -26,7 +26,7 @@
 
 	var/static/list/loc_connections = list(
 		COMSIG_TURF_EXITED = TYPE_PROC_REF(/obj/structure/stairs, on_move),
-		COMSIG_TURF_ENTERED = TYPE_PROC_REF(/obj/structure/stairs, on_move_enter)
+//		COMSIG_TURF_ENTERED = TYPE_PROC_REF(/obj/structure/stairs, on_move_enter)
 	)
 
 	AddElement(/datum/element/connect_loc, loc_connections)
