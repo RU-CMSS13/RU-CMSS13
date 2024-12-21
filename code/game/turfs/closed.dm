@@ -247,6 +247,7 @@
 	icon_state = "wall1"
 	icon = 'icons/turf/shuttle.dmi'
 	layer = ABOVE_TURF_LAYER
+	antipierce = INFINITY
 
 /turf/closed/shuttle/weedable = FULLY_WEEDABLE
 

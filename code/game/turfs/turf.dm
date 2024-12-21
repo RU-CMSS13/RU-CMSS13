@@ -167,6 +167,11 @@
 	flags_atom &= ~INITIALIZED
 	..()
 
+/turf/setDir(newDir)
+	..()
+	update_connections(FALSE)
+	update_icon()
+
 /turf/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION(VV_HK_EXPLODE, "Trigger Explosion")

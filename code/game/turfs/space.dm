@@ -184,7 +184,7 @@
 	name = "void"
 	icon = 'icons/turf/floors/space.dmi'
 	icon_state = "black"
-	turf_flags = TURF_WEATHER_PROOF
+	turf_flags = NO_FLAGS
 	mouse_opacity = FALSE
 
 /turf/open/void/Initialize(mapload, ...)

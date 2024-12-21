@@ -19,7 +19,9 @@
 	update_icon()
 
 /turf/open/update_icon()
-	overlays.Cut()
+	. = ..()
+	if(!.)
+		return
 
 	add_cleanable_overlays()
 
@@ -1200,6 +1202,7 @@
 	icon_state = "floor"
 	icon = 'icons/turf/shuttle.dmi'
 	allow_construction = FALSE
+	antipierce = INFINITY
 
 /turf/open/shuttle/can_surgery
 	allow_construction = TRUE

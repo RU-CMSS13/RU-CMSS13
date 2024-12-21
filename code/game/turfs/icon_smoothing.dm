@@ -17,7 +17,7 @@
 
 	update_overlays()
 
-	return
+	return TRUE
 
 /turf/proc/update_connections(propagate = FALSE)
 	var/list/turf_dirs = list()

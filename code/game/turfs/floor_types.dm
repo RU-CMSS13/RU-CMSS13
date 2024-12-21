@@ -88,6 +88,8 @@
 	return ..()
 
 /turf/open/floor/plating/make_plating()
+	if(prob(20))
+		ScrapeAway()
 	return
 
 /turf/open/floor/plating/burnt_platingdmg3
@@ -1013,7 +1015,7 @@
 	base_icon = "roof"
 	name = "roof"
 
-	blend_turfs = list(/turf/closed/wall)
+	blend_turfs = list(/turf/closed/wall, /turf/open/floor/roof)
 	noblend_turfs = list(/turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment)
 
 	special_icon = FALSE
@@ -1022,6 +1024,8 @@
 	icon = 'icons/turf/roofs/roof_ship.dmi'
 	name = "hull"
 	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
+
+	antipierce = 100 // Very tuf
 
 /turf/open/floor/roof/ship_hull/lab
 	icon = 'icons/turf/roofs/roof_lab_ship.dmi'

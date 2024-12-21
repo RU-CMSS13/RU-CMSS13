@@ -41,22 +41,22 @@
 	custom_ceiling = /turf/open/floor/roof/ship_hull/lab
 
 	var/disabled_elevator = TRUE // Fix of auto mode, when shuttle got in troubles or loading
-	var/total_floors = 39
+	var/total_floors = 39 // Number or relative floors we can go
 	var/visual_floors_offset = 0 // Cool effect of underground floors? Yeah... useles, but cool.
-	var/target_floor = 0
-	var/floor_offset = 0
-	var/offseted_z = 0
+	var/floor_offset = 0 // For relative coordinates in z dimension, aka we only count or current map, where elevator having fun
+	var/offseted_z = 0 // Already calculated coordinate, so it's totaly relative z coord, not real one
 	var/obj/docking_port/stationary/initial_dock = null // Home of elevator
 	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/door
-	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button
+	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/control_button
 	var/list/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/doors = list()
 	var/list/obj/structure/machinery/gear/gears = list()
 	var/list/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/buttons = list()
-	var/list/disabled_floors
-	var/list/called_floors
-	var/next_moving = 0
-	var/moving = FALSE
-	var/cooldown = FALSE
+	var/list/disabled_floors // Relative list of z coords for elevator where can't go
+	var/list/called_floors // Relative list of z coords for elevator where ordered
+	var/target_floor = 0 // Where currently we heading (final relative z coord)
+	var/next_moving = 0// Where we need to head after (final relative z coord)
+	var/moving = FALSE // Direction we following right now
+	var/cooldown = FALSE // Make sure we don't break shuttles system by multiple moving orders
 	var/move_delay = 3 SECONDS
 	var/max_move_delay = 10 SECONDS
 	var/min_move_delay = 1 SECONDS
@@ -64,7 +64,7 @@
 /obj/docking_port/mobile/sselevator/Destroy()
 	initial_dock = null
 	door = null
-	button = null
+	control_button = null
 
 	for(var/i in gears)
 		gears -= i
@@ -85,26 +85,25 @@
 	initiate_docking(S, force = TRUE)
 
 /obj/docking_port/mobile/sselevator/afterShuttleMove()
-	set waitfor = FALSE
 	set background = TRUE
 
 	if(disabled_elevator || cooldown)
 		return
+
 	cooldown = TRUE
 	offseted_z = z - floor_offset
 	if(offseted_z == target_floor)
-		sleep(2 SECONDS)
+		sleep(move_delay)
 		on_stop_actions()
 		moving = FALSE
-		target_floor = 0
-		sleep(13 SECONDS)
+		sleep(max_move_delay)
 		if(next_moving)
-			calc_elevator_order(next_moving)
+			calc_elevator_order(next_moving, TRUE)
 
 	else if(called_floors[offseted_z])
-		sleep(2 SECONDS)
+		sleep(move_delay)
 		on_stop_actions()
-		sleep(13 SECONDS)
+		sleep(max_move_delay)
 		on_move_actions()
 		move_elevator()
 	else
@@ -112,7 +111,7 @@
 	cooldown = FALSE
 
 /obj/docking_port/mobile/sselevator/proc/on_move_actions()
-	button.update_icon("_animated")
+	control_button.update_icon("_animated")
 	INVOKE_ASYNC(doors["[z]"], TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
 	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
 	for(var/obj/structure/machinery/gear/gear as anything in gears)
@@ -122,7 +121,7 @@
 	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[z]"]
 	if(button)
 		button.update_icon()
-	button.update_icon()
+	control_button.update_icon()
 	called_floors[offseted_z] = FALSE
 	INVOKE_ASYNC(doors["[z]"], TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
 	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
@@ -132,9 +131,9 @@
 /obj/docking_port/mobile/sselevator/proc/move_elevator(message = TRUE)
 	var/floor_to_move = offseted_z > target_floor ? offseted_z - 1 : offseted_z + 1
 	if(message)
-		button.visible_message(SPAN_NOTICE("Лифт отправляется и прибудет на этаж [floor_to_move]. Пожалуйста стойте в стороне от дверей."))
+		control_button.visible_message(SPAN_NOTICE("Лифт отправляется и прибудет на этаж [floor_to_move]. Пожалуйста стойте в стороне от дверей."))
 	playsound(return_center_turf(), ignition_sound, 60, 0, falloff = 4)
-	sleep(4 SECONDS)
+	sleep(move_delay * 2)
 	calculate_move_delay(floor_to_move)
 	SSshuttle.moveShuttleToDock(src, GLOB.ss_elevator_floors["[id]_[floor_to_move + floor_offset]"], move_delay, FALSE)
 
@@ -145,39 +144,38 @@
 		move_delay += 0.2 SECONDS
 	move_delay = clamp(move_delay, max_move_delay, min_move_delay)
 
-/obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc)
-	if(!moving && !cooldown && !next_moving && !target_floor)
-		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
-		if(button)
-			button.update_icon("_animated")
-		called_floors[floor_calc] = TRUE
+/obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc, start_force_move)
+	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
+	if(button)
+		button.update_icon("_animated")
+	called_floors[floor_calc] = TRUE
+
+	// Simply logic make it think where it need to go... and then... we have two directions, so it's easy
+	switch(moving)
+		if("DOWN")
+			if(floor_calc > next_moving)
+				next_moving = floor_calc
+			else if(floor_calc < target_floor)
+				target_floor = floor_calc
+		if("UP")
+			if(floor_calc > target_floor)
+				target_floor = floor_calc
+			else if(floor_calc < next_moving)
+				next_moving = floor_calc
+		else
+			if((floor_calc > next_moving > offseted_z) || (floor_calc < next_moving < offseted_z))
+				next_moving = floor_calc
+			if((floor_calc > target_floor > offseted_z) || (floor_calc < target_floor < offseted_z))
+				target_floor = floor_calc
+
+	if((!moving && !cooldown) || start_force_move)
 		target_floor = floor_calc
 		if(next_moving == target_floor)
 			next_moving = 0
+			return
 		moving = offseted_z > target_floor ? "DOWN" : "UP"
 		on_move_actions()
 		move_elevator()
-	else
-		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
-		if(button)
-			button.update_icon("_animated")
-		called_floors[floor_calc] = TRUE
-		switch(moving)
-			if("DOWN")
-				if(floor_calc > next_moving)
-					next_moving = floor_calc
-				else if(floor_calc < target_floor)
-					target_floor = floor_calc
-			if("UP")
-				if(floor_calc > target_floor)
-					target_floor = floor_calc
-				else if(floor_calc < next_moving)
-					next_moving = floor_calc
-			else
-				if((floor_calc > next_moving > offseted_z) || (floor_calc < next_moving < offseted_z))
-					next_moving = floor_calc
-				if((floor_calc > target_floor > offseted_z) || (floor_calc < target_floor < offseted_z))
-					target_floor = floor_calc
 
 // Reseting elevator if something messed up, because this system is not hard coded, so we can fuck up it easy
 /obj/docking_port/mobile/sselevator/proc/handle_initial_data(obj/docking_port/stationary/target_dock, force_opened = FALSE)
@@ -190,9 +188,6 @@
 	if(initial_dock != get_docked())
 		SSshuttle.moveShuttleToDock(src, initial_dock, move_delay, FALSE)
 
-	disabled_elevator = FALSE
-	moving = FALSE
-	cooldown = FALSE
 	floor_offset = z - total_floors
 	offseted_z = z - floor_offset
 	target_floor = z - offseted_z
@@ -213,6 +208,11 @@
 
 	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
 	INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+
+	disabled_elevator = FALSE
+	moving = FALSE
+	cooldown = FALSE
 
 /obj/docking_port/mobile/sselevator/one
 	id = MOBILE_SHUTTLE_SKY_SCRAPER_ELEVATOR_ONE
@@ -263,7 +263,7 @@
 		if(floor != "control")
 			elevator.buttons["[floor]"] -= src
 		else
-			elevator.button = null
+			elevator.control_button = null
 
 	. = ..()
 
@@ -288,8 +288,8 @@
 		ui.open()
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_data()
-	. = list("buttons" = list())
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	. = list("buttons" = list(), "current_floor" = elevator.offseted_z)
 	if(!elevator)
 		return
 	for(var/i = 1 to elevator.total_floors)
@@ -316,7 +316,7 @@
 	. = ..()
 	if(istype(port, /obj/docking_port/mobile/sselevator))
 		var/obj/docking_port/mobile/sselevator/elevator_port = port
-		elevator_port.button = src
+		elevator_port.control_button = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button
 	desc = "The remote controls for the 'S95 v2' elevator."
@@ -365,7 +365,7 @@
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/elevator_doors = list()
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/move_lock_doors = list()
 	var/list/obj/structure/machinery/light/double/almenia/lights = list()
-	var/list/locked = list("stairs" = FALSE, "elevator" = FALSE)
+	var/list/locked = list("stairs" = TRUE, "elevator" = TRUE)
 	var/current_scraper_link
 
 	var/list/technobabble = list(
@@ -420,7 +420,7 @@
 		return
 
 	deltimer(current_timer)
-	current_timer = null
+	current_timer = 0
 	working = FALSE
 	visible_message("<b>[src]</b> выключается из-за отсутствия питания.")
 	updateUsrDialog()
@@ -530,7 +530,7 @@
 					locked["stairs"] = FALSE
 					locked["elevator"] = FALSE
 
-		current_timer = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, process)), segment_time)
+		current_timer = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, process)), generate_time, TIMER_STOPPABLE)
 
 	else if(href_list["generate"])
 		if(working || current_timer)

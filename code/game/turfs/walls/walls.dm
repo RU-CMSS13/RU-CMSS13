@@ -49,11 +49,6 @@
 	blend_objects = list(/obj/structure/machinery/door, /obj/structure/window_frame, /obj/structure/window/framed) // Objects which to blend with
 	noblend_objects = list(/obj/structure/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
-/turf/closed/wall/setDir(newDir)
-	..()
-	update_connections(FALSE)
-	update_icon()
-
 /turf/closed/wall/ChangeTurf(newtype, ...)
 	QDEL_NULL(acided_hole)
 
