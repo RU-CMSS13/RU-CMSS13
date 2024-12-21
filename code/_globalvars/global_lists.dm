@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(freed_mob_list) // List of mobs freed for ghosts
 
 GLOBAL_LIST_INIT(available_taskbar_icons, setup_taskbar_icons())
 
-GLOBAL_LIST_EMPTY(skyscrapers_sec_comps)
+GLOBAL_LIST_INIT(skyscrapers_sec_comps, list("almea" = list(), "ashwin" = list()))
 GLOBAL_LIST_EMPTY(ss_elevator_floors)
 GLOBAL_LIST_EMPTY(siren_objects)
 

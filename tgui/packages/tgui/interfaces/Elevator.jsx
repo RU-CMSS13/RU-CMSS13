@@ -9,7 +9,7 @@ const ButtonColor = (called) => {
   return 'gray';
 };
 
-export const Elevator = (props) => {
+export const Elevator = (props, context) => {
   const { act, data } = useBackend();
   const { buttons } = data;
 

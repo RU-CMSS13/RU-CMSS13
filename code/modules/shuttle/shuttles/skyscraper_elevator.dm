@@ -322,12 +322,12 @@
 	if(!allowed(user) || !elevator)
 		to_chat(user, SPAN_WARNING("Доступ Запрещен!"))
 		return
-	if(elevator.offseted_z == floor)
+	if(elevator.z == floor)
 		return
-	if(elevator.disabled_floors[floor])
+	if(elevator.disabled_floors[floor - elevator.floor_offset])
 		visible_message(SPAN_WARNING("Лифт не может отправится на этот этаж, обратитесь на ближайший пост службы безопасности!"))
 		return
-	if(elevator.called_floors[floor])
+	if(elevator.called_floors[floor - elevator.floor_offset])
 		visible_message(SPAN_NOTICE("Лифт уже едет на этот этаж, ожидайте."))
 		return
 	call_elevator(user, elevator)
@@ -335,7 +335,7 @@
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/proc/call_elevator(mob/user, obj/docking_port/mobile/sselevator/elevator)
 	playsound(src, 'sound/machines/click.ogg', 15, 1)
 	visible_message(SPAN_NOTICE("Лифт вызван, ожидайте."))
-	elevator.calc_elevator_order(floor)
+	elevator.calc_elevator_order(floor - elevator.floor_offset)
 
 
 /obj/structure/machinery/computer/security_blocker
@@ -346,8 +346,6 @@
 	density = TRUE
 	unacidable = TRUE
 	anchored = TRUE
-
-	var/elevator_id = "sky_scraper_elevator_one"
 
 	var/generate_time = 1 MINUTES
 	var/segment_time = 30 SECONDS
@@ -362,9 +360,9 @@
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/stairs_doors = list()
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/elevator_doors = list()
 	var/list/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/move_lock_doors = list()
-	var/list/obj/structure/machinery/siren/sirens = list()
 	var/list/obj/structure/machinery/light/double/almenia/lights = list()
 	var/list/locked = list("stairs" = FALSE, "elevator" = FALSE)
+	var/current_scraper_link
 
 	var/list/technobabble = list(
 		"Запускаем терминал",
@@ -376,11 +374,19 @@
 
 /obj/structure/machinery/computer/security_blocker/Initialize()
 	. = ..()
-	GLOB.skyscrapers_sec_comps["[z]"] = src
+	var/area/current = get_area(src)
+	if(istype(current, /area/skyscraper/almenia))
+		current_scraper_link = "almea"
+	else if(istype(current, /area/skyscraper/ashwin))
+		current_scraper_link = "ashwin"
+	if(!current_scraper_link)
+		return INITIALIZE_HINT_QDEL
+
+	GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"] = src
 	return INITIALIZE_HINT_ROUNDSTART
 
 /obj/structure/machinery/computer/security_blocker/LateInitialize()
-	for(var/obj/structure/machinery/siren/S as anything in sirens)
+	for(var/obj/structure/machinery/siren/S as anything in GLOB.siren_objects["sky_scraper_[current_scraper_link]_[z]"])
 		S.siren_warning_start("ВНИМАНИЕ, КРИТИЧЕСКАЯ СИТУАЦИЯ, ЗАПУЩЕН РЕЖИМ МАКСИМАЛЬНОЙ БЕЗОПАСНОСТИ, ВНИМАНИЕ, ОСТАВАЙТЕСЬ НА МЕСТАХ И ДОЖИДАЙТЕСЬ СЛУЖБУ БЕЗОПАСНОСТИ")
 	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
 		L.change_almenia_state(1)
@@ -392,12 +398,11 @@
 		elevator_doors -= i
 	for(var/i in move_lock_doors)
 		move_lock_doors -= i
-	for(var/i in sirens)
-		sirens -= i
 	for(var/i in lights)
 		lights -= i
 
-	GLOB.skyscrapers_sec_comps["[z]"] = null
+	if(current_scraper_link)
+		GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"] = null
 
 	. = ..()
 
@@ -427,7 +432,9 @@
 /obj/structure/machinery/computer/security_blocker/interact(mob/user)
 	. = ..()
 	user.set_interaction(src)
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[current_scraper_link == "almea" ? "sky_scraper_elevator_one" : "sky_scraper_elevator_two"]
+	if(!elevator)
+		return
 	var/dat = ""
 	dat += "<div align='center'>Терминал безопасности [z - elevator.floor_offset] этажа</a></div>"
 	dat += "<br/><span><b>Протокол безопасности</b>: [security_protocol ? "включен" : "отключен"]</span>"
@@ -560,10 +567,13 @@
 	visible_message(SPAN_NOTICE("[src] beeps as it program requires attention."))
 
 /obj/structure/machinery/computer/security_blocker/proc/unlock_floor()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[current_scraper_link == "almea" ? "sky_scraper_elevator_one" : "sky_scraper_elevator_two"]
+	if(elevator)
+		visible_message(SPAN_NOTICE("[src] beeps as seems something went wrong."))
+		return
 	elevator.disabled_floors[z - elevator.floor_offset] = FALSE
 	security_protocol = FALSE
-	for(var/obj/structure/machinery/siren/S as anything in sirens)
+	for(var/obj/structure/machinery/siren/S as anything in GLOB.siren_objects["sky_scraper_[current_scraper_link]_[z]"])
 		S.siren_warning_stop()
 	for(var/obj/structure/machinery/light/double/almenia/L as anything in lights)
 		L.change_almenia_state(0)
@@ -572,9 +582,9 @@
 			INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
 	var/obj/structure/machinery/computer/security_blocker/parrent_blocker
 	if((z - elevator.floor_offset) % 2 == 1)
-		parrent_blocker = GLOB.skyscrapers_sec_comps["[z-1]"]
+		parrent_blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z-1]"]
 	else
-		parrent_blocker = GLOB.skyscrapers_sec_comps["[z+1]"]
+		parrent_blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z+1]"]
 	for(var/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/B as anything in parrent_blocker.move_lock_doors)
 		if(B.density)
 			INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
@@ -891,20 +901,21 @@
 /obj/structure/machinery/siren/Initialize()
 	. = ..()
 	if(siren_lt == "sky_scraper")
-		siren_lt = "[siren_lt]_[z]"
-	GLOB.siren_objects["[siren_lt]"] += list(src)
-	return INITIALIZE_HINT_LATELOAD
+		var/area/current = get_area(src)
+		var/current_scraper_link
+		if(istype(current, /area/skyscraper/almenia))
+			current_scraper_link = "almea"
+		else if(istype(current, /area/skyscraper/ashwin))
+			current_scraper_link = "ashwin"
 
-/obj/structure/machinery/siren/LateInitialize()
-	. = ..()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
-	if(blocker)
-		blocker.sirens += src
+		if(!current_scraper_link)
+			return INITIALIZE_HINT_QDEL
+
+		siren_lt = "[siren_lt]_[current_scraper_link]_[z]"
+
+	GLOB.siren_objects["[siren_lt]"] += list(src)
 
 /obj/structure/machinery/siren/Destroy()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
-	if(blocker)
-		blocker.sirens -= src
 	GLOB.siren_objects["[siren_lt]"] -= src
 
 	. = ..()
@@ -946,19 +957,26 @@
 	icon_state = "bptube1"
 	base_state = "bptube"
 	bulb_colour = COLOR_SOFT_BLUE
+	var/current_scraper_link
 
 /obj/structure/machinery/light/double/almenia/Initialize()
 	. = ..()
-	return INITIALIZE_HINT_LATELOAD
+	var/area/current = get_area(src)
+	if(istype(current, /area/skyscraper/almenia))
+		current_scraper_link = "almea"
+	else if(istype(current, /area/skyscraper/ashwin))
+		current_scraper_link = "ashwin"
+	if(current_scraper_link)
+		return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/machinery/light/double/almenia/LateInitialize()
 	. = ..()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"]
 	if(blocker)
 		blocker.lights += src
 
 /obj/structure/machinery/light/double/almenia/Destroy()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	var/obj/structure/machinery/computer/security_blocker/blocker = current_scraper_link ? GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"] : null
 	if(blocker)
 		blocker.lights -= src
 
@@ -988,14 +1006,21 @@
 	var/lock_type = "stairs"
 	density = FALSE
 	xeno_overridable = FALSE
+	var/current_scraper_link
 
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/Initialize()
 	. = ..()
-	return INITIALIZE_HINT_LATELOAD
+	var/area/current = get_area(src)
+	if(istype(current, /area/skyscraper/almenia))
+		current_scraper_link = "almea"
+	else if(istype(current, /area/skyscraper/ashwin))
+		current_scraper_link = "ashwin"
+	if(current_scraper_link)
+		return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/LateInitialize()
 	. = ..()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"]
 	if(!blocker)
 		return
 	if(lock_type == "stairs")
@@ -1006,7 +1031,7 @@
 		blocker.move_lock_doors += src
 
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/Destroy()
-	var/obj/structure/machinery/computer/security_blocker/blocker = GLOB.skyscrapers_sec_comps["[z]"]
+	var/obj/structure/machinery/computer/security_blocker/blocker = current_scraper_link ? GLOB.skyscrapers_sec_comps[current_scraper_link]["[z]"] : null
 	if(blocker)
 		if(lock_type == "stairs")
 			blocker.stairs_doors -= src
@@ -1101,3 +1126,15 @@
 	ambience_exterior = 'sound/ambience/elevator_music.ogg'
 	lightswitch = TRUE
 	unlimited_power = TRUE
+
+/obj/structure/machinery/computer/shuttle/dropship/flight/lz1/sky_scraper/linked_lz()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators["sky_scraper_elevator_one"]
+	if(!elevator)
+		return
+	elevator.handle_initial_data(null, TRUE)
+
+/obj/structure/machinery/computer/shuttle/dropship/flight/lz2/sky_scraper/linked_lz()
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators["sky_scraper_elevator_two"]
+	if(!elevator)
+		return
+	elevator.handle_initial_data(null, TRUE)

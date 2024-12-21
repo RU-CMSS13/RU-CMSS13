@@ -12,6 +12,23 @@
 	icon_state = "oob"
 	static_lighting = FALSE
 
+/area/skyscraper/underground
+	name = "W-Y Interlink"
+	icon_state = "sky_scraper"
+	temperature = 308.7 //kelvin, 35c, 95f
+
+/area/skyscraper/underground/metro_tunnel
+	name = "Metro"
+
+/area/skyscraper/underground/metro_tunnel/north
+	name = "Metro North"
+
+/area/skyscraper/underground/metro_tunnel/south
+	name = "Metro South"
+
+/area/skyscraper/underground/facility_cargo_link
+	name = "Underground Facility Cargo Link"
+
 
 //ALMENIA
 /area/skyscraper/almenia
@@ -30,6 +47,9 @@
 	name = "LZ1 'Sky'"
 	requires_power = FALSE
 
+/area/skyscraper/almenia/subway_station
+	name = "W-Y 'Almea' Subway Station"
+
 /area/skyscraper/almenia/engineering
 	name = "W-Y 'Almea' Engineering"
 
@@ -40,7 +60,7 @@
 	name = "W-Y 'Almea' Eco Emulation Sector"
 
 /area/skyscraper/almenia/internal_cargo_sector
-	name = "W-Y 'Almea' Eco Emulation Sector"
+	name = "W-Y 'Almea' Internal Midway Cargo Sector"
 
 /area/skyscraper/almenia/morgue_sector
 	name = "W-Y 'Almea' Morgue Sector"
@@ -108,6 +128,9 @@
 	icon_state = "sky_scraper"
 	temperature = 308.7 //kelvin, 35c, 95f
 
+/area/skyscraper/ashwin/subway_station
+	name = "W-Y 'Ashwin' Subway Station"
+
 /area/skyscraper/ashwin/landing_zone
 	name = "W-Y 'Ashwin' Landing Zone"
 	icon_state = "lz_pad"
@@ -129,7 +152,7 @@
 	name = "W-Y 'Ashwin' Eco Emulation Sector"
 
 /area/skyscraper/ashwin/internal_cargo_sector
-	name = "W-Y 'Ashwin' Eco Emulation Sector"
+	name = "W-Y 'Ashwin' Internal Midway Cargo Sector"
 
 /area/skyscraper/ashwin/morgue_sector
 	name = "W-Y 'Ashwin' Morgue Sector"

@@ -56,6 +56,9 @@
 			continue
 		. += list(dock)
 
+/obj/structure/machinery/computer/shuttle/dropship/flight/proc/linked_lz()
+	return
+
 /obj/structure/machinery/computer/shuttle/dropship/flight/is_disabled()
 	return disabled
 
