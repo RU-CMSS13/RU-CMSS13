@@ -85,19 +85,19 @@
 	initiate_docking(S, force = TRUE)
 
 /obj/docking_port/mobile/sselevator/afterShuttleMove()
+	set waitfor = FALSE
 	set background = TRUE
 
-	if(disabled_elevator)
+	if(disabled_elevator || cooldown)
 		return
+	cooldown = TRUE
 	offseted_z = z - floor_offset
 	if(offseted_z == target_floor)
-		cooldown = TRUE
 		sleep(2 SECONDS)
 		on_stop_actions()
 		moving = FALSE
 		target_floor = 0
 		sleep(13 SECONDS)
-		cooldown = FALSE
 		if(next_moving)
 			calc_elevator_order(next_moving)
 
@@ -109,6 +109,7 @@
 		move_elevator()
 	else
 		move_elevator(FALSE)
+	cooldown = FALSE
 
 /obj/docking_port/mobile/sselevator/proc/on_move_actions()
 	button.update_icon("_animated")
@@ -145,7 +146,7 @@
 	move_delay = clamp(move_delay, max_move_delay, min_move_delay)
 
 /obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc)
-	if(!moving && !cooldown)
+	if(!moving && !cooldown && !next_moving && !target_floor)
 		var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
 		if(button)
 			button.update_icon("_animated")
