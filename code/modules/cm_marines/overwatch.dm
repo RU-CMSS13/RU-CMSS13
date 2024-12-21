@@ -783,10 +783,6 @@
 		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone appears to be out of bounds. Please check coordinates.")]")
 		return
 
-	if(protected_by_pylon(TURF_PROTECTION_OB, T))
-		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone has strong biological protection. The orbital strike cannot reach here.")]")
-		return
-
 	var/area/A = get_area(T)
 
 	if(istype(A) && CEILING_IS_PROTECTED(A.ceiling, CEILING_DEEP_UNDERGROUND))
@@ -916,12 +912,12 @@
 	name = "Supply Drop Pad"
 	desc = "Place a crate on here to allow bridge Overwatch officers to drop them on people's heads."
 	icon = 'icons/effects/warning_stripes.dmi'
+	plane = FLOOR_PLANE
+	layer = STAIRS_LAYER
 	anchored = TRUE
 	density = FALSE
 	unslashable = TRUE
 	unacidable = TRUE
-	plane = FLOOR_PLANE
-	layer = 2.1 //It's the floor, man
 	var/squad = SQUAD_MARINE_1
 	var/sending_package = 0
 

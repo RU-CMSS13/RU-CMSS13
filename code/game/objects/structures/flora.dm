@@ -170,6 +170,173 @@ PLANT_CUT_MACHETE = 3 = Needs at least a machete to be cut down
 	icon = 'icons/obj/structures/props/ausflora.dmi'
 	density = FALSE
 	fire_flag = FLORA_BURN_NO_SPREAD
+
+
+/*
+
+	TALLGRASS - SPREADS FIRES
+
+*/
+
+/obj/structure/flora/grass/proc/update_overlays()
+	if(QDELETED(src))
+		return
+	if(overlays)
+		overlays.Cut()
+
+/obj/structure/flora/grass/short_grass
+	name = "grass"
+	icon = 'icons/obj/flora/grass.dmi'
+	icon_state = "grass_short1"
+	unslashable = TRUE
+	unacidable = TRUE
+	cut_level = PLANT_CUT_MACHETE
+	layer = UNDER_TURF_LAYER -0.03
+	var/list/image/TallGrassEdgeCache = list()
+
+/obj/structure/flora/grass/short_grass/Initialize()
+	. = ..()
+	if(!TallGrassEdgeCache || !TallGrassEdgeCache.len)
+		TallGrassEdgeCache.len = 10
+		TallGrassEdgeCache[SOUTH] = image(icon, "grass_edge_s")
+		TallGrassEdgeCache[SOUTH].color = color
+		TallGrassEdgeCache[EAST] = image(icon, "grass_edge_e")
+		TallGrassEdgeCache[EAST].color = color
+		TallGrassEdgeCache[WEST] = image(icon, "grass_edge_w")
+		TallGrassEdgeCache[WEST].color = color
+		TallGrassEdgeCache[NORTHEAST] = image(icon, "grass_edges_n-w")
+		TallGrassEdgeCache[NORTHEAST].color = color
+		TallGrassEdgeCache[SOUTHEAST] = image(icon, "grass_edges_s-w")
+		TallGrassEdgeCache[SOUTHEAST].color = color
+		TallGrassEdgeCache[SOUTHWEST] = image(icon, "grass_edges_s-e")
+		TallGrassEdgeCache[SOUTHWEST].color = color
+//	AddElement(/datum/element/mob_overlay_effect, -2, -15)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/flora/grass/short_grass/LateInitialize()
+	. = ..()
+	auto_grass()
+
+/obj/structure/flora/grass/short_grass/Destroy(force)
+	. = ..()
+	var/turf/T = get_turf(src)
+	for(var/i = 0, i <= 3, i++)
+		if(!get_step(src, 2**i))
+			continue
+		T = get_step(src, 2**i)
+		if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+			T.overlays -= TallGrassEdgeCache[2**i]
+	T = get_step(src, NORTHWEST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays -= TallGrassEdgeCache[NORTHWEST]
+	T = get_step(src, SOUTHEAST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays -= TallGrassEdgeCache[SOUTHEAST]
+	T = get_step(src, SOUTHWEST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays -= TallGrassEdgeCache[SOUTHWEST]
+
+/obj/structure/flora/grass/short_grass/proc/auto_grass()
+	set waitfor = FALSE
+	var/turf/T = get_turf(src)
+	for(var/i = 0, i <= 3, i++)
+		if(!get_step(src, 2**i))
+			continue
+		T = get_step(src, 2**i)
+		if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+			T.overlays += TallGrassEdgeCache[2**i]
+	T = get_step(src, NORTHWEST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays += TallGrassEdgeCache[NORTHWEST]
+	T = get_step(src, SOUTHEAST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays += TallGrassEdgeCache[SOUTHEAST]
+	T = get_step(src, SOUTHWEST)
+	if(T && !T.contents.Find(/obj/structure/flora/grass/tall_grass))
+		T.overlays += TallGrassEdgeCache[SOUTHWEST]
+
+/obj/structure/flora/grass/tall_grass
+	name = "tall grass"
+	desc = "Even sprats are invisible in it."
+	icon = 'icons/obj/flora/grass.dmi'
+	icon_state = "grass_tall1"
+	unslashable = TRUE
+	unacidable = TRUE
+	cut_level = PLANT_CUT_MACHETE
+	var/list/diged = list("2" = FALSE, "1" = FALSE, "8" = FALSE, "4" = FALSE)
+
+/obj/structure/flora/grass/tall_grass/Initialize()
+	. = ..()
+	var/randed = rand(1, 3)
+	icon_state = "grass_tall[randed]"
+
+	update_overlays()
+
+//	AddElement(/datum/element/mob_overlay_effect, -4, -10)
+
+/obj/structure/flora/grass/tall_grass/Crossed(atom/movable/arrived)
+	. = ..()
+	if(isliving(arrived))
+		set_diged_ways(GLOB.reverse_dir[arrived.dir])
+
+/obj/structure/flora/grass/tall_grass/Uncrossed(atom/movable/gone)
+	. = ..()
+	if(isliving(gone))
+		set_diged_ways(gone.dir)
+
+/obj/structure/flora/grass/tall_grass/update_overlays()
+	. = ..()
+
+	var/new_overlay = ""
+	for(var/i in diged)
+		if(diged[i])
+			new_overlay += i
+	overlays += "[new_overlay]"
+
+/obj/structure/flora/grass/tall_grass/proc/set_diged_ways(dir)
+	diged["[dir]"] = TRUE
+	update_overlays()
+	spawn(1 MINUTES)
+		diged["[dir]"] = FALSE
+		update_overlays()
+
+// MAP VARIANTS //
+// PARENT FOR COLOR, CORNERS AND CENTERS, BASED ON DIRECTIONS //
+
+//TRIJENT - WHISKEY OUTPOST//
+/obj/structure/flora/grass/tall_grass/desert
+	color = COLOR_G_DES
+	fire_flag = FLORA_BURN_SPREAD_ALL
+
+/obj/structure/flora/grass/short_grass/desert
+	color = COLOR_G_DES
+	fire_flag = FLORA_BURN_SPREAD_ALL
+
+//ICE COLONY - SOROKYNE//
+/obj/structure/flora/grass/tall_grass/ice
+	color = COLOR_G_ICE
+	desc = "A large swathe of bristling snowgrass"
+
+/obj/structure/flora/grass/short_grass/ice
+	color = COLOR_G_ICE
+	desc = "A large swathe of bristling snowgrass"
+
+//LV - JUNGLE MAPS//
+
+/obj/structure/flora/grass/tall_grass/jungle
+	color = COLOR_G_JUNG
+	desc = "A clump of vibrant jungle grasses"
+	fire_flag = FLORA_BURN_SPREAD_ONCE
+
+/obj/structure/flora/grass/short_grass/jungle
+	color = COLOR_G_JUNG
+	desc = "A clump of vibrant jungle grasses"
+	fire_flag = FLORA_BURN_SPREAD_ONCE
+
+//BUSHES
+
+
+
 /*
 
 ICE GRASS

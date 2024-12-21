@@ -62,7 +62,8 @@
 					break
 			if(found_dense)
 				continue
-			if(protected_by_pylon(TURF_PROTECTION_MORTAR, turf))
+			var/turf/roof = turf.get_real_roof()
+			if(!roof.air_strike(2, roof, TRUE))
 				continue
 			valid_turfs += turf
 		var/turf/deploy_turf

@@ -30,6 +30,54 @@
 	if(!isnull(render_relay_plane))
 		relay_render_to_plane(mymob, render_relay_plane)
 
+///Things rendered on "openspace"; holes in multi-z
+/atom/movable/screen/plane_master/openspace_backdrop
+	name = "open space backdrop plane master"
+	plane = OPENSPACE_BACKDROP_PLANE
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_MULTIPLY
+	alpha = 255
+
+//MOJAVE SUN EDIT - Depth Blur & Fixes//
+/atom/movable/screen/plane_master/openspace
+	name = "open space plane master"
+	plane = OPENSPACE_PLANE
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_OVERLAY
+	alpha = 255
+
+/atom/movable/screen/plane_master/openspace/Initialize(mapload) //Increase this if making map larger than 7 Zs
+	. = ..()
+	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
+	add_filter("first_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -10))
+	add_filter("second_stage_openspace", 3, drop_shadow_filter(color = "#04080FAA", size = -15))
+	add_filter("third_stage_openspace", 4, drop_shadow_filter(color = "#04080FAA", size = -20))
+	add_filter("fourth_stage_openspace", 5, drop_shadow_filter(color = "#04080FAA", size = -25))
+	add_filter("fifth_stage_openspace", 6, drop_shadow_filter(color = "#04080FAA", size = -30))
+	add_filter("sixth_stage_openspace", 7, drop_shadow_filter(color = "#04080FAA", size = -35))
+	add_filter("seventh_stage_openspace", 8, drop_shadow_filter(color = "#04080FAA", size = -40))
+	add_filter("eighth_stage_openspace", 9, drop_shadow_filter(color = "#04080FAA", size = -45))
+	add_filter("ninth_stage_openspace", 10, drop_shadow_filter(color = "#04080FAA", size = -50))
+	add_filter("tenth_stage_openspace", 11, drop_shadow_filter(color = "#04080FAA", size = -55))
+	add_filter("eleven_stage_openspace", 12, drop_shadow_filter(color = "#04080FAA", size = -60))
+	add_filter("twelfth_stage_openspace", 13, drop_shadow_filter(color = "#04080FAA", size = -65))
+	add_filter("thirteenth_stage_openspace", 14, drop_shadow_filter(color = "#04080FAA", size = -70))
+
+///For any transparent multi-z tiles we want to render
+/atom/movable/screen/plane_master/transparent
+	name = "transparent plane master"
+	plane = TRANSPARENT_FLOOR_PLANE
+	appearance_flags = PLANE_MASTER
+
+//Contains all sun light objects
+/atom/movable/screen/plane_master/s_light_visual
+	name = "sun light visual plane master"
+	plane = S_LIGHTING_VISUAL_PLANE
+	render_target = S_LIGHTING_VISUAL_RENDER_TARGET
+	render_relay_plane = null
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	blend_mode = BLEND_MULTIPLY
+
 /atom/movable/screen/plane_master/floor
 	name = "floor plane master"
 	plane = FLOOR_PLANE
@@ -109,10 +157,8 @@
 	. = ..()
 	add_filter("emissives", 1, alpha_mask_filter(render_source = EMISSIVE_RENDER_TARGET, flags = MASK_INVERSE))
 	add_filter("object_lighting", 2, alpha_mask_filter(render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE))
-
-/atom/movable/screen/plane_master/lighting/exterior
-	name = "exterior lighting plane master"
-	plane = EXTERIOR_LIGHTING_PLANE
+	if(SSglobal_light.initialized)
+		vis_contents += SSglobal_light.global_lighting_color
 
 /**
  * Handles emissive overlays and emissive blockers.

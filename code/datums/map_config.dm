@@ -66,6 +66,11 @@
 
 	var/nightmare_path
 
+	var/list/map_global_light_modificator = list()
+	var/list/map_global_light_colors = list()
+	var/custom_time_length
+	var/disabled_global_light
+
 	/// If truthy this is config for a round overridden map: search for override maps in data/, instead of using a path in maps/
 	var/override_map
 
@@ -299,12 +304,17 @@
 		log_world("map_config defcon_triggers is not a list!")
 		return
 
-	traits = json["traits"]
-	if(islist(traits))
-		for(var/list/ztraits in traits) // Defaults to ground map if not specified
-			if(!ztraits[ZTRAIT_GROUND] && !ztraits[ZTRAIT_MARINE_MAIN_SHIP])
-				ztraits[ZTRAIT_GROUND] = TRUE
-	else if(traits)
+	if(islist(json["traits"]))
+		var/list/traits_to_set = json["traits"]
+		for(var/list/traits_set in traits_to_set)
+			if(traits_set["Zlevels"])
+				var/potential_zlevels = traits_set["Zlevels"]
+				traits_set.Cut(1, 2)
+				for(var/i=0;i<potential_zlevels;i++)
+					traits += list(traits_set)
+			else
+				traits += list(traits_set)
+	else if(!isnull(json["traits"]))
 		log_world("map_config traits is not a list!")
 		return
 
@@ -356,6 +366,26 @@
 		if(!weather_holder)
 			log_world("map_config weather_holder is not a proper typepath!")
 			return
+
+	if(islist(json["map_global_light_modificator"]))
+		if(!islist(json["map_global_light_modificator"]))
+			log_world("map_config custom day/night modificator is not a list!")
+			return
+		map_global_light_modificator = json["map_global_light_modificator"]
+
+	if(islist(json["map_global_light_colors"]))
+		if(!islist(json["map_global_light_colors"]))
+			log_world("map_config custom day/night colors is not a list!")
+			return
+		map_global_light_colors = json["map_global_light_colors"]
+
+	if(json["custom_time_length"])
+		custom_time_length = json["custom_time_length"]
+	else
+		custom_time_length = 24 HOURS
+
+	if(json["disabled_global_light"])
+		disabled_global_light = json["disabled_global_light"]
 
 	if(json["map_item_type"])
 		map_item_type = text2path(json["map_item_type"])

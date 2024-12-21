@@ -387,6 +387,10 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 	// then auto-delete at the end of the warhead_impact implementation
 
 /obj/structure/ob_ammo/warhead/proc/warhead_impact(turf/target)
+	var/turf/roof = target.get_real_roof()
+	var/randed_penetration = rand(10, 15)
+	roof.air_strike(randed_penetration, target, TRUE)
+
 	// make damn sure everyone hears it
 	playsound(target, 'sound/weapons/gun_orbital_travel.ogg', 100, 1, 75)
 
@@ -427,6 +431,7 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 	if(GLOB.orbital_cannon_cancellation["[cancellation_token]"]) // the cancelling notification is in the topic
 		target.ceiling_debris_check(5)
 		GLOB.orbital_cannon_cancellation["[cancellation_token]"] = null
+		target = roof.air_strike(randed_penetration, target)
 		return TRUE
 	return FALSE
 
@@ -559,11 +564,8 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 	for(var/i = 1 to total_amount)
 		for(var/k = 1 to instant_amount)
 			var/turf/selected_turf = pick(turf_list)
-			if(protected_by_pylon(TURF_PROTECTION_OB, selected_turf))
-				continue
-			var/area/selected_area = get_area(selected_turf)
-			if(CEILING_IS_PROTECTED(selected_area?.ceiling, CEILING_PROTECTION_TIER_4))
-				continue
+			var/turf/roof = selected_turf.get_real_roof()
+			selected_turf = roof.air_strike(rand(10, 15), selected_turf)
 			fire_in_a_hole(selected_turf)
 
 		sleep(delay_between_clusters)

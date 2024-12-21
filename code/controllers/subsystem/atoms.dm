@@ -5,22 +5,20 @@
 
 SUBSYSTEM_DEF(atoms)
 	name = "Atoms"
+	wait = 5
+	priority = SS_PRIORITY_ATOMS
 	init_order = SS_INIT_ATOMS
-	flags = SS_NO_FIRE
+	runlevels = RUNLEVEL_LOBBY|RUNLEVEL_SETUP|RUNLEVEL_GAME|RUNLEVEL_POSTGAME
 
 	var/old_initialized
 	/// A count of how many initalize changes we've made. We want to prevent old_initialize being overridden by some other value, breaking init code
 	var/initialized_changed = 0
 	var/init_start_time
-	var/processing_late_loaders = FALSE
 
 	var/list/late_loaders = list()
 	var/list/roundstart_loaders = list()
 
 	var/list/BadInitializeCalls = list()
-
-	///initAtom() adds the atom its creating to this list iff InitializeAtoms() has been given a list to populate as an argument
-	var/list/created_atoms
 
 	initialized = INITIALIZATION_INSSATOMS
 
@@ -28,6 +26,7 @@ SUBSYSTEM_DEF(atoms)
 	init_start_time = world.time
 	initialized = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
+	fire(FALSE, TRUE)
 	initialized = INITIALIZATION_INNEW_REGULAR
 	old_initialized = initialized
 
@@ -37,7 +36,35 @@ SUBSYSTEM_DEF(atoms)
 	populate_seed_list()
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atoms, list/atoms_to_return)
+/datum/controller/subsystem/atoms/fire(resumed, init_tick_checks)
+	var/worked_length = 0
+
+	//Add our weather particle obj to any new weather screens
+	while(worked_length < length(late_loaders))
+		worked_length++
+
+		var/atom/atom = late_loaders[worked_length]
+		if(QDELETED(atom))
+			continue
+		atom.LateInitialize()
+
+		if(init_tick_checks)
+			if(!TICK_CHECK)
+				continue
+			late_loaders.Cut(1, worked_length+1)
+			worked_length = 0
+			stoplag()
+		else if(MC_TICK_CHECK)
+			break
+
+	if(worked_length)
+		late_loaders.Cut(1, worked_length+1)
+		worked_length = 0
+
+	if(!length(late_loaders))
+		can_fire = FALSE
+
+/datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atoms)
 	if(initialized == INITIALIZATION_INSSATOMS)
 		return
 
@@ -49,37 +76,10 @@ SUBSYSTEM_DEF(atoms)
 	CreateAtoms(atoms)
 	clear_tracked_initalize()
 
-	InitializeLateLoaders()
-
-/// Processes all late_loaders, checking the length each iteration and prevents duplicate calls
-/// This is necessary because of an edge case where there might be simultanious calls to InitializeAtoms
-/datum/controller/subsystem/atoms/proc/InitializeLateLoaders()
-	if(processing_late_loaders) // If we still manage to double this proc, try a ++ here, or solve the root of the problem
-		#ifdef TESTING
-		testing("Ignoring duplicate request to InitializeLateLoaders")
-		#endif
-		return
-
-	processing_late_loaders = TRUE
-
-	for(var/I = 1; I <= length(late_loaders); I++)
-		var/atom/A = late_loaders[I]
-		//I hate that we need this
-		if(QDELETED(A))
-			continue
-		A.LateInitialize()
-
-	#ifdef TESTING
-	testing("Late initialized [length(late_loaders)] atoms")
-	#endif
-	late_loaders.Cut()
-	processing_late_loaders = FALSE
+	can_fire = TRUE
 
 /// Actually creates the list of atoms. Exists soley so a runtime in the creation logic doesn't cause initalized to totally break
-/datum/controller/subsystem/atoms/proc/CreateAtoms(list/atoms, list/atoms_to_return = null)
-	if (atoms_to_return)
-		LAZYINITLIST(created_atoms)
-
+/datum/controller/subsystem/atoms/proc/CreateAtoms(list/atoms)
 	#ifdef TESTING
 	var/count
 	#endif
@@ -102,11 +102,11 @@ SUBSYSTEM_DEF(atoms)
 
 		for(var/atom/A as anything in world)
 			if(!(A.flags_atom & INITIALIZED))
+				CHECK_TICK
 				InitAtom(A, FALSE, mapload_arg)
 				#ifdef TESTING
 				++count
 				#endif
-				CHECK_TICK
 
 	#ifdef TESTING
 	testing("Initialized [count] atoms")
@@ -158,15 +158,18 @@ SUBSYSTEM_DEF(atoms)
 		qdeleted = TRUE
 	else if(!(A.flags_atom & INITIALIZED))
 		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
+	/*
 	else
 		SEND_SIGNAL(A, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
 		if(created_atoms && from_template && ispath(the_type, /atom/movable))//we only want to populate the list with movables
 			created_atoms += A.get_all_contents()
+	*/
 
 	return qdeleted || QDELING(A)
 
 /datum/controller/subsystem/atoms/proc/lateinit_roundstart_atoms()
 	for(var/atom/A as anything in roundstart_loaders)
+		CHECK_TICK
 		A.LateInitialize()
 	roundstart_loaders.Cut()
 
@@ -177,9 +180,11 @@ SUBSYSTEM_DEF(atoms)
 	if(atoms)
 		for(var/atom/movable/A in atoms)
 			A.loc = A.loc
+			CHECK_TICK
 	else
 		for(var/atom/movable/A in world)
 			A.loc = A.loc
+			CHECK_TICK
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin()
 	set_tracked_initalized(INITIALIZATION_INSSATOMS)
