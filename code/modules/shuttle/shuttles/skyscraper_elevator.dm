@@ -309,11 +309,11 @@
 		return
 	return
 
-/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	. = ..()
 	if(istype(port, /obj/docking_port/mobile/sselevator))
-		var/obj/docking_port/mobile/sselevator/L = port
-		L.button = src
+		var/obj/docking_port/mobile/sselevator/elevator_port = port
+		elevator_port.button = src
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button
 	desc = "The remote controls for the 'S95 v2' elevator."
@@ -866,7 +866,7 @@
 				continue
 			INVOKE_ASYNC(atom_movable, TYPE_PROC_REF(/atom/movable, throw_atom), projected, 1, SPEED_FAST, null, FALSE)
 
-/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	. = ..()
 	if(istype(port, /obj/docking_port/mobile/sselevator))
 		var/obj/docking_port/mobile/sselevator/elevator_port = port
@@ -1116,11 +1116,11 @@
 	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "w_gear"
 
-/obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock, idnum, override)
+/obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	. = ..()
 	if(istype(port, /obj/docking_port/mobile/sselevator))
-		var/obj/docking_port/mobile/sselevator/L = port
-		L.gears += src
+		var/obj/docking_port/mobile/sselevator/elevator_port = port
+		elevator_port.gears += src
 
 /area/shuttle/sky_scraper_elevator
 	name = "'S95 v2' Elevator"
