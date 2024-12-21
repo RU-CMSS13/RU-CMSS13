@@ -752,4 +752,6 @@
 
 /mob/living/carbon/on_fall(forced)
 	. = ..()
+	if(!loc)
+		return
 	loc.handle_fall(src, forced)
