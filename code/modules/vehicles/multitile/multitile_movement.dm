@@ -58,7 +58,13 @@
 
 // Attempts to execute the given movement input
 /obj/vehicle/multitile/proc/try_move(direction, force=FALSE)
+	var/turf/old_turf = get_turf(src)
 	if(!can_move(direction))
+		if(!z_interactiong_blocked)
+			z_interactiong_blocked = TRUE
+			try_use_stairs(old_turf)
+		else
+			z_interactiong_blocked = FALSE
 		return FALSE
 
 	if(!force)
@@ -68,7 +74,6 @@
 		if(!should_move)
 			return FALSE
 
-	var/turf/old_turf = get_turf(src)
 	forceMove(get_step(src, direction))
 
 //RUCM START
@@ -119,7 +124,6 @@
 				continue
 			locs_to_up++
 	if(req_locs_to_up <= locs_to_up)
-		current_loc.zFall(src, falling_from_move = TRUE)
 		zMove(UP, z_move_flags = ZMOVE_STAIRS_FLAGS)
 		try_move(dir, TRUE)
 		update_momentum(dir)

@@ -97,11 +97,11 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
  */
 /turf/open/openspace/Enter(atom/movable/movable, atom/oldloc)
 	. = ..()
-	if(.)
-		//higher priority than CURRENTLY_Z_FALLING so the movable doesn't fall on Entered()
-		if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE))
-			zFall(movable, falling_from_move = TRUE)
-		return .
+//	if(.)
+//		//higher priority than CURRENTLY_Z_FALLING so the movable doesn't fall on Entered()
+//		if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE))
+//			zFall(movable, falling_from_move = TRUE)
+//		return .
 
 ///Makes movables fall when forceMove()'d to this turf.
 /turf/open/openspace/Entered(atom/movable/movable)

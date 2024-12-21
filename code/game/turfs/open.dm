@@ -158,6 +158,15 @@
 		return TRUE
 	return FALSE
 
+//direction is direction of travel of A
+/turf/open/zPassOut(atom/movable/A, direction, turf/destination, allow_anchored_movement)
+	if(direction == UP)
+		for(var/obj/O in contents)
+			if(O.flags_obj & OBJ_BLOCK_Z_OUT_UP)
+				return FALSE
+		return TRUE
+	return FALSE
+
 /turf/open/river
 	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
