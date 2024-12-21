@@ -1015,8 +1015,6 @@
 
 	blend_turfs = list(/turf/closed/wall)
 	noblend_turfs = list(/turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment)
-	blend_objects = list(/obj/structure/machinery/door, /obj/structure/window_frame, /obj/structure/window/framed)
-	noblend_objects = list(/obj/structure/machinery/door/window)
 
 	special_icon = FALSE
 
@@ -1032,6 +1030,8 @@
 /turf/open/floor/roof/lab
 	icon = 'icons/turf/roofs/roof_lab.dmi'
 	name = "lab roof"
+
+	blend_turfs = list(/turf/closed/wall, /turf/open/floor)
 
 /turf/open/floor/roof/metal
 	icon = 'icons/turf/roofs/roof_metal.dmi'

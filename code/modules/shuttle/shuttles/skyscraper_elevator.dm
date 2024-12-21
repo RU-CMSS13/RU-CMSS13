@@ -41,7 +41,7 @@
 	custom_ceiling = /turf/open/floor/roof/ship_hull/lab
 
 	var/disabled_elevator = TRUE // Fix of auto mode, when shuttle got in troubles or loading
-	var/total_floors = 100
+	var/total_floors = 39
 	var/visual_floors_offset = 0 // Cool effect of underground floors? Yeah... useles, but cool.
 	var/target_floor = 0
 	var/floor_offset = 0
@@ -198,20 +198,14 @@
 	disabled_floors.len = total_floors
 	called_floors = list()
 	called_floors.len = total_floors
-	var/randomed = prob(20)
 	for(var/i = 1 to total_floors)
-		disabled_floors[i] = !randomed && !force_opened
+		disabled_floors[i] = !force_opened
 		called_floors[i] = FALSE
 
 	disabled_floors[total_floors] = FALSE
-	if(randomed && !force_opened)
-		move_delay = rand(3, 7) SECONDS
-		max_move_delay = rand(10, 20) SECONDS
-		min_move_delay = rand(1, 3) SECONDS
-	else
-		move_delay = 3 SECONDS
-		max_move_delay = 10 SECONDS
-		min_move_delay = 1 SECONDS
+	move_delay = 3 SECONDS
+	max_move_delay = 10 SECONDS
+	min_move_delay = 1 SECONDS
 
 	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
 	INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
