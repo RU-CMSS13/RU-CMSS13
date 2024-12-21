@@ -85,6 +85,8 @@
 	initiate_docking(S, force = TRUE)
 
 /obj/docking_port/mobile/sselevator/afterShuttleMove()
+	set background = TRUE
+
 	if(disabled_elevator)
 		return
 	offseted_z = z - floor_offset
@@ -538,7 +540,6 @@
 			working = FALSE
 			usr.visible_message("[usr] запустил программу для разблокировки консоли.", "Вы запустили программу для разблокировки консоли.")
 			if(!do_after(usr, round(generate_time/5), INTERRUPT_ALL, BUSY_ICON_HOSTILE))
-				working = TRUE
 				return
 
 			unlock_floor()
@@ -569,7 +570,7 @@
 
 /obj/structure/machinery/computer/security_blocker/proc/unlock_floor()
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[current_scraper_link == "almea" ? "sky_scraper_elevator_one" : "sky_scraper_elevator_two"]
-	if(elevator)
+	if(!elevator)
 		visible_message(SPAN_NOTICE("[src] beeps as seems something went wrong."))
 		return
 	elevator.disabled_floors[z - elevator.floor_offset] = FALSE
