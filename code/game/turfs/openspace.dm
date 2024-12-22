@@ -13,7 +13,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/space/openspace
 	icon = 'icons/turf/open_space.dmi'
 	icon_state = "invisible"
-	turf_flags = TURF_MULTIZ
+	turf_flags = TURF_MULTIZ|TURF_TRANSPARENT
 	baseturfs = /turf/open/openspace
 	antipierce = 0
 
@@ -21,7 +21,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	. = ..()
 	overlays += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
 	icon_state = "invisible"
-	turf_flags |= TURF_TRANSPARENT
 	return INITIALIZE_HINT_LATELOAD
 
 /turf/open/space/openspace/LateInitialize()
@@ -65,7 +64,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	name = "open space"
 	desc = "Watch your step!"
 	icon_state = "invisible"
-	turf_flags = TURF_MULTIZ
+	turf_flags = TURF_MULTIZ|TURF_TRANSPARENT
 	weedable = NOT_WEEDABLE
 	baseturfs = /turf/open/openspace
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -74,7 +73,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
 	overlays += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
-	turf_flags |= TURF_TRANSPARENT
 	return INITIALIZE_HINT_LATELOAD
 
 /turf/open/openspace/LateInitialize()

@@ -1,5 +1,5 @@
 import { useBackend } from '../backend';
-import { Button } from '../components';
+import { Button, NoticeBox } from '../components';
 import { Window } from '../layouts';
 
 export const Elevator = (props, context) => {
@@ -9,7 +9,7 @@ export const Elevator = (props, context) => {
   return (
     <Window width={260} height={360}>
       <Window.Content>
-        {current_floor} Floor
+        <NoticeBox info>{current_floor} Floor</NoticeBox>
         {buttons.map((button) => (
           <Button
             key={button.id}
@@ -22,11 +22,12 @@ export const Elevator = (props, context) => {
               borderColor: button.called ? 'green' : 'gray',
               borderStyle: 'solid',
               borderWidth: '1px',
-              color: button.id === current_floor ? 'red' : '#2185d0',
+              color: button.id === current_floor ? '#9e8c39' : '#37bc97',
             }}
             onClick={() => act('click', { id: button.id })}
           />
         ))}
+        <NoticeBox info>(C) W-Y General Elevator Systems</NoticeBox>
       </Window.Content>
     </Window>
   );

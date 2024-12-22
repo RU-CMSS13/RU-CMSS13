@@ -1035,7 +1035,7 @@
 	icon = 'icons/turf/roofs/roof_lab.dmi'
 	name = "lab roof"
 
-	blend_turfs = list(/turf/closed/wall, /turf/open/floor)
+	blend_turfs = list(/turf/closed/wall, /turf/open)
 
 /turf/open/floor/roof/metal
 	icon = 'icons/turf/roofs/roof_metal.dmi'

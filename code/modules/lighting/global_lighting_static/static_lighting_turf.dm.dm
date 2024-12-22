@@ -185,45 +185,41 @@ Global Light System
 
 	//Check yourself (before you wreck yourself)
 	if(istype(src, /turf/closed) || (/obj/structure/window/framed in contents)) //Closed, but we might be transparent
-		skyvisible = turf_flags & TURF_TRANSPARENT // a column of glass should still let the sun in
+		skyvisible = (turf_flags & TURF_TRANSPARENT) // a column of glass should still let the sun in
 		weathervisible = FALSE
 	else
 		if(recursionStarted)
-			// This src is acting as a ceiling - so if we are a floor we TURF_WEATHER_PROOF + block the global light of our down-Z turf
-			skyvisible = turf_flags & TURF_TRANSPARENT //If we are glass floor, we don't block
-			weathervisible = !(turf_flags & TURF_WEATHER_PROOF) //If we are air or space, we aren't TURF_WEATHER_PROOF
-		else //We are open, so assume open to the elements
+			// This src is acting as a ceiling - so if we are a floor we block weather + block the global light of our down-Z turf
+			skyvisible = (turf_flags & TURF_TRANSPARENT)
+			weathervisible = !(turf_flags & TURF_WEATHER_PROOF)
+		else
 			skyvisible = TRUE
 			weathervisible = TRUE
 
-	// Early leave if we can't see the sky - if we are an opaque turf, we already know the results
-	// I can't think of a case where we would have a turf that would block light but let weather effects through - Maybe a vent?
-	// fix this if that is the case
 	if(!skyvisible)
 		ceiling_status = NO_FLAGS
-		if(weathervisible)
-			ceiling_status |= WEATHERVISIBLE
 		return
 
-	//Ceiling Check
+	// Ceiling Check
 	// Psuedo-roof, for the top of the map (no actual turf exists up here) -- We assume these are solid, if you add glass pseudo_roofs then fix this
 	if(pseudo_roof)
 		skyvisible = FALSE
 		weathervisible = FALSE
 	else
-		// EVERY turf must be transparent for sunlight - so &=
-		// ANY turf must be closed for TURF_WEATHER_PROOF - so |=
 		var/turf/ceiling = get_step_multiz(src, UP)
 		if(ceiling)
-			ceiling.update_ceiling_status(TRUE) //Pass TRUE because we are now acting as a ceiling
-			skyvisible &= ceiling.ceiling_status & SKYVISIBLE
-			weathervisible &= ceiling.ceiling_status & WEATHERVISIBLE
+			ceiling.update_ceiling_status(TRUE)
+			if(skyvisible && !(ceiling.ceiling_status & SKYVISIBLE))
+				skyvisible = FALSE
+			if(weathervisible && !(ceiling.ceiling_status & WEATHERVISIBLE))
+				weathervisible = FALSE
 
 		ceiling_status = NO_FLAGS
 		if(skyvisible)
 			ceiling_status |= SKYVISIBLE
 		if(weathervisible)
 			ceiling_status |= WEATHERVISIBLE
+
 /*
 /turf/proc/apply_weather_effect(datum/weather_effect/effect)
 	SIGNAL_HANDLER
