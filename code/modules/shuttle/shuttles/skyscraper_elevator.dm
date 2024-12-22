@@ -42,7 +42,6 @@
 
 	var/disabled_elevator = TRUE // Fix of auto mode, when shuttle got in troubles or loading
 	var/total_floors = 39 // Number or relative floors we can go
-	var/visual_floors_offset = 0 // Cool effect of underground floors? Yeah... useles, but cool.
 	var/floor_offset = 0 // For relative coordinates in z dimension, aka we only count or current map, where elevator having fun
 	var/offseted_z = 0 // Already calculated coordinate, so it's totaly relative z coord, not real one
 	var/obj/docking_port/stationary/initial_dock = null // Home of elevator
@@ -316,7 +315,7 @@
 		return
 	for(var/i = 1 to elevator.total_floors)
 		.["buttons"] += list(list(
-			id = i, title = "Floor [i - elevator.visual_floors_offset]", disabled = elevator.disabled_floors[i], called = elevator.called_floors[i],
+			id = i, title = "Floor [i]", disabled = elevator.disabled_floors[i], called = elevator.called_floors[i],
 		))
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_act(action, list/params)
@@ -438,9 +437,14 @@
 	return
 
 /obj/structure/machinery/computer/security_blocker/attack_hand(mob/user)
-	if(!allowed(user))
-		to_chat(user, SPAN_WARNING("Доступ Запрещен!"))
+	if(inoperable())
+		to_chat(user, SPAN_WARNING("[src] не работает"))
 		return
+
+	if(!allowed(user))
+		to_chat(user, SPAN_WARNING("Доступ запрещен!"))
+		return
+
 	if(!isRemoteControlling(user))
 		user.set_interaction(src)
 	tgui_interact(user)
@@ -450,6 +454,7 @@
 	if(!ui)
 		ui = new(user, src, "SkyScraperSecurity", "Security System")
 		ui.open()
+		ui.set_autoupdate(TRUE)
 
 /obj/structure/machinery/computer/security_blocker/ui_data(mob/user)
 	. = list()
@@ -458,8 +463,8 @@
 		.["security_protocol"]["running"] = working
 		.["security_protocol"]["messages"] = list()
 		if(started_time)
-			.["security_protocol"]["current_progress"] = clamp((world.time - started_time) / time_required_to_unlock * 100, 0, 100)
-			for(var/i = 1 to floor((world.time - started_time) / (time_required_to_unlock / total_segments)))
+			.["security_protocol"]["current_progress"] = clamp((world.time - started_time + time_in) / time_required_to_unlock * 100, 0, 100)
+			for(var/i = 1 to floor((world.time - started_time + time_in) / (time_required_to_unlock / total_segments)))
 				.["security_protocol"]["messages"] += list(list(messages_in_total[i]))
 		else
 			.["security_protocol"]["current_progress"] = time_in ? clamp(time_in / time_required_to_unlock * 100, 0, 100) : 0
@@ -471,7 +476,7 @@
 	. = list()
 	.["current_scraper_link"] = capitalize_first_letters(current_scraper_link)
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[current_scraper_link == "almea" ? "sky_scraper_elevator_one" : "sky_scraper_elevator_two"]
-	.["security_floor"] = elevator ? elevator.offseted_z : "NO LINK"
+	.["security_floor"] = elevator ? z - elevator.floor_offset : "NO LINK"
 
 /obj/structure/machinery/computer/security_blocker/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
@@ -495,9 +500,9 @@
 						INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, close))
 
 				locked["stairs"] = !locked["stairs"]
-				to_chat(usr, SPAN_WARNING("Лестница [locked["elevator"] ? "раз" : "за"]блокирована."))
+				to_chat(ui.user, SPAN_WARNING("Лестница [locked["elevator"] ? "раз" : "за"]блокирована."))
 			else
-				to_chat(usr, SPAN_WARNING("Блокировка лифта не допускает блокировку лестницы!"))
+				to_chat(ui.user, SPAN_WARNING("Блокировка лифта не допускает блокировку лестницы!"))
 				return
 		if("elevator")
 			if(security_protocol)
@@ -511,9 +516,9 @@
 						INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, close))
 
 				locked["elevator"] = !locked["elevator"]
-				to_chat(usr, SPAN_WARNING("Лифт [locked["elevator"] ? "раз" : "за"]блокирован."))
+				to_chat(ui.user, SPAN_WARNING("Лифт [locked["elevator"] ? "раз" : "за"]блокирован."))
 			else
-				to_chat(usr, SPAN_WARNING("Блокировка лестницы не допускает блокировку лифта!"))
+				to_chat(ui.user, SPAN_WARNING("Блокировка лестницы не допускает блокировку лифта!"))
 				return
 		if("unlock")
 			if(security_protocol)
@@ -530,9 +535,9 @@
 				return
 
 			working = TRUE
-			usr.visible_message("[usr] начал заниматься разблокировкой консоли.", "Вы начали разблокировать консоль.")
+			ui.user.visible_message("[ui.user] начал заниматься разблокировкой консоли.", "Вы начали разблокировать консоль.")
 			started_time = world.time
-			var/time_percent = do_after(usr, time_required_to_unlock - time_in, INTERRUPT_ALL, BUSY_ICON_BUILD, src, show_remaining_time = TRUE)
+			var/time_percent = do_after(ui.user, time_required_to_unlock - time_in, INTERRUPT_ALL, BUSY_ICON_BUILD, src, show_remaining_time = TRUE)
 			if(!working)
 				return
 
@@ -544,10 +549,18 @@
 			working = FALSE
 	return
 
+/obj/structure/machinery/computer/security_blocker/ui_state(mob/user)
+	return GLOB.not_incapacitated_and_adjacent_state
+
+/obj/structure/machinery/computer/security_blocker/ui_status(mob/user, datum/ui_state/state)
+	. = ..()
+	if(inoperable())
+		return UI_CLOSE
+
 /obj/structure/machinery/computer/security_blocker/power_change()
 	. = ..()
 	if(inoperable() && working)
-		time_in = world.time - started_time
+		time_in += world.time - started_time
 		if(time_in >= time_required_to_unlock)// Edge case, lets be it here
 			unlock_floor()
 		started_time = 0

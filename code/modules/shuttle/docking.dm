@@ -176,22 +176,10 @@
 
 		var/turf/old_turf = old_turfs[i]
 		var/turf/new_turf = new_turfs[i]
-		var/turf/new_ceiling = get_step_multiz(new_turf, UP)
 		if(new_turf.outdoor_effect)
 			qdel(new_turf.outdoor_effect, TRUE)
 		if(old_turf.outdoor_effect)
 			qdel(old_turf.outdoor_effect, TRUE)
-
-		if(new_ceiling)
-			if(!new_ceiling.baseturfs || !(new_ceiling.turf_flags & TURF_WEATHER_PROOF))
-				new_ceiling.ChangeTurf(custom_ceiling)
-			else
-				if(length(new_ceiling.baseturfs) > 1)
-					new_ceiling.baseturfs = list(new_ceiling.baseturfs[1], custom_ceiling) + new_ceiling.baseturfs.Copy(2, length(new_ceiling.baseturfs))
-				else
-					new_ceiling.baseturfs = list(custom_ceiling) + new_ceiling.baseturfs
-		else
-			new_turf.pseudo_roof = custom_ceiling
 
 		new_turf.afterShuttleMove(old_turf, rotation)
 		GLOB.global_light_queue_work |= new_turf
@@ -231,6 +219,17 @@
 		var/turf/old_turf = old_turfs[i]
 		var/turf/new_turf = new_turfs[i]
 		new_turf.lateShuttleMove(old_turf)
+		var/turf/new_ceiling = get_step_multiz(new_turf, UP)
+		if(new_ceiling)
+			if(!new_ceiling.baseturfs || !(new_ceiling.turf_flags & TURF_WEATHER_PROOF))
+				new_ceiling.ChangeTurf(custom_ceiling)
+			else
+				if(length(new_ceiling.baseturfs) > 1)
+					new_ceiling.baseturfs = list(new_ceiling.baseturfs[1], custom_ceiling) + new_ceiling.baseturfs.Copy(2, length(new_ceiling.baseturfs))
+				else
+					new_ceiling.baseturfs = list(custom_ceiling) + new_ceiling.baseturfs
+		else
+			new_turf.pseudo_roof = custom_ceiling
 		old_turf.get_sky_and_weather_states()
 
 	for(var/i in 1 to length(moved_atoms))
