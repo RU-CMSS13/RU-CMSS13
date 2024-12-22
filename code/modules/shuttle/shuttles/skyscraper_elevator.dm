@@ -890,7 +890,8 @@
 	GLOB.siren_objects["[siren_lt]"] += list(src)
 
 /obj/structure/machinery/siren/Destroy()
-	GLOB.siren_objects["[siren_lt]"] -= src
+	if(GLOB.siren_objects["[siren_lt]"])
+		GLOB.siren_objects["[siren_lt]"] -= src
 
 	. = ..()
 
