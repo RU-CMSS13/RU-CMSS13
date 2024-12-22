@@ -56,12 +56,6 @@
 	add_filter("fifth_stage_openspace", 6, drop_shadow_filter(color = "#04080FAA", size = -30))
 	add_filter("sixth_stage_openspace", 7, drop_shadow_filter(color = "#04080FAA", size = -35))
 	add_filter("seventh_stage_openspace", 8, drop_shadow_filter(color = "#04080FAA", size = -40))
-	add_filter("eighth_stage_openspace", 9, drop_shadow_filter(color = "#04080FAA", size = -45))
-	add_filter("ninth_stage_openspace", 10, drop_shadow_filter(color = "#04080FAA", size = -50))
-	add_filter("tenth_stage_openspace", 11, drop_shadow_filter(color = "#04080FAA", size = -55))
-	add_filter("eleven_stage_openspace", 12, drop_shadow_filter(color = "#04080FAA", size = -60))
-	add_filter("twelfth_stage_openspace", 13, drop_shadow_filter(color = "#04080FAA", size = -65))
-	add_filter("thirteenth_stage_openspace", 14, drop_shadow_filter(color = "#04080FAA", size = -70))
 
 ///For any transparent multi-z tiles we want to render
 /atom/movable/screen/plane_master/transparent

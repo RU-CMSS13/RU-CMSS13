@@ -1036,6 +1036,7 @@
 	name = "lab roof"
 
 	blend_turfs = list(/turf/closed/wall, /turf/open)
+	noblend_turfs = list(/turf/open/openspace, /turf/closed/wall/mineral)
 
 /turf/open/floor/roof/metal
 	icon = 'icons/turf/roofs/roof_metal.dmi'

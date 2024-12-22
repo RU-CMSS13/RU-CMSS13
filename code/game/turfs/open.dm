@@ -1202,7 +1202,7 @@
 	icon_state = "floor"
 	icon = 'icons/turf/shuttle.dmi'
 	allow_construction = FALSE
-	antipierce = INFINITY
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_HULL
 
 /turf/open/shuttle/can_surgery
 	allow_construction = TRUE

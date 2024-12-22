@@ -26,7 +26,7 @@
 
 /turf
 	icon = 'icons/turf/floors/floors.dmi'
-	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE// Important for interaction with and visualization of openspace.
+	vis_flags = VIS_INHERIT_ID|VIS_INHERIT_PLANE// Important for interaction with and visualization of openspace.
 
 	var/turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 	var/ceiling_status = NO_FLAGS
@@ -697,12 +697,7 @@
 
 	if(!checking)
 		if(turf_above && !istype(turf_above, /turf/open/openspace))
-			if(istype(turf_above, /turf/closed/wall))
-				var/turf/closed/wall/turf = turf_above
-				if(turf && !(turf.turf_flags & TURF_HULL))
-					turf_above.ceiling_debris(protection_penetration)
-					turf_above.ChangeTurf(/turf/open/openspace)
-			else
+			if(!(turf_above.turf_flags & TURF_HULL))
 				turf_above.ceiling_debris(protection_penetration)
 				turf_above.ChangeTurf(/turf/open/openspace)
 
@@ -780,18 +775,19 @@
 	var/turf/ceiling = get_step_multiz(src, UP)
 	if(!ceiling || istype(ceiling, /turf/open/openspace) || istype(ceiling, /turf/open/space/openspace))
 		return "It is in the open."
-	else if(ceiling.turf_flags & TURF_TRANSPARENT)
-		return "The ceiling above is glass. That's not going to stop anything."
-	else if(ceiling.antipierce < 3)
-		return "The ceiling above is metal. You can't see through it with a camera from above, but that's not going to stop anything."
-	else if(ceiling.antipierce < 4)
-		return "The roof lies above. Doesn't look like it's going to stop much."
-	else if(ceiling.antipierce < 6)
-		return "The thin roof lies above. Can probably stop most ordnance."
-	else if(ceiling.antipierce < 11)
-		return "The very thin roof lies above. Nothing is getting through that."
-	else if(ceiling.antipierce < 16)
+	if(ceiling.turf_flags & TURF_HULL)
 		return "The ceiling above is made of thick material. Nothing is getting through that."
+	if(ceiling.turf_flags & TURF_TRANSPARENT)
+		return "The ceiling above is glass. That's not going to stop anything."
+	if(ceiling.antipierce < 3)
+		return "The ceiling above is metal. You can't see through it with a camera from above, but that's not going to stop anything."
+	if(ceiling.antipierce < 4)
+		return "The roof lies above. Doesn't look like it's going to stop much."
+	if(ceiling.antipierce < 6)
+		return "The thin roof lies above. Can probably stop most ordnance."
+	if(ceiling.antipierce < 11)
+		return "The very thin roof lies above. Almost nothing is getting through that."
+	return "The ceiling above is made of thick material. Nothing is getting through that."
 
 /turf/proc/wet_floor()
 	return

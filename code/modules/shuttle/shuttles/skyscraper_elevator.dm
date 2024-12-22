@@ -57,9 +57,9 @@
 	var/next_moving = 0// Where we need to head after (final relative z coord)
 	var/moving = FALSE // Direction we following right now
 	var/cooldown = FALSE // Make sure we don't break shuttles system by multiple moving orders
-	var/move_delay = 3 SECONDS
-	var/max_move_delay = 10 SECONDS
-	var/min_move_delay = 1 SECONDS
+	var/move_delay = 4 SECONDS
+	var/max_move_delay = 8 SECONDS
+	var/min_move_delay = 2 SECONDS
 
 /obj/docking_port/mobile/sselevator/Destroy()
 	initial_dock = null
@@ -91,41 +91,38 @@
 	if(disabled_elevator || cooldown)
 		return
 
+	cooldown = TRUE
 	if(offseted_z == target_floor)
-		cooldown = TRUE
-		sleep(move_delay)
-		on_stop_actions()
 		moving = FALSE
-		sleep(max_move_delay)
-		cooldown = FALSE
 		if(next_moving)
 			target_floor = next_moving
 			next_moving = 0
 			moving = offseted_z > target_floor ? "DOWN" : "UP"
-			on_move_actions()
-			move_elevator()
+			INVOKE_ASYNC(src, PROC_REF(move_elevator), TRUE)
 		else
+			cooldown = FALSE
 			// Soft fix, I have no idea, maybe my attempts to fix some mess around caused it, or it has been... but now we don't leave some floors in black list if you for some reason it clicked wrong time.
+			var/found = FALSE
 			for(var/i = 1 to total_floors)
 				if(called_floors[i])
+					found = TRUE
 					calc_elevator_order(i)
 					break
+			if(!found)
+				on_stop_actions()
 
 	else if(called_floors[offseted_z])
-		cooldown = TRUE
-		sleep(move_delay)
-		on_stop_actions()
-		sleep(max_move_delay)
-		cooldown = FALSE
-		on_move_actions()
-		move_elevator()
+		INVOKE_ASYNC(src, PROC_REF(move_elevator), TRUE)
 	else
-		move_elevator(FALSE)
+		INVOKE_ASYNC(src, PROC_REF(move_elevator))
 
 /obj/docking_port/mobile/sselevator/proc/on_move_actions()
 	control_button.update_icon("_animated")
-	INVOKE_ASYNC(doors["[z]"], TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
-	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
+	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
+	if(blastdoor && !blastdoor.density)
+		INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
+	if(door && !door.density)
+		INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
 	for(var/obj/structure/machinery/gear/gear as anything in gears)
 		gear.start_moving()
 
@@ -136,25 +133,34 @@
 		button.update_icon()
 	control_button.update_icon()
 	called_floors[offseted_z] = FALSE
-	INVOKE_ASYNC(doors["[z]"], TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
-	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
+	if(blastdoor && blastdoor.density)
+		INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+	if(door && door.density)
+		INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
 	for(var/obj/structure/machinery/gear/gear as anything in gears)
 		gear.stop_moving()
 
-/obj/docking_port/mobile/sselevator/proc/move_elevator(message = TRUE)
+/obj/docking_port/mobile/sselevator/proc/move_elevator(stopped = FALSE)
+	if(stopped)
+		on_stop_actions()
+		sleep(max_move_delay)
+		control_button.visible_message(SPAN_NOTICE("Лифт отправляется. Пожалуйста стойте в стороне от дверей."))
+
 	var/floor_to_move = offseted_z > target_floor ? offseted_z - 1 : offseted_z + 1
-	if(message)
-		control_button.visible_message(SPAN_NOTICE("Лифт отправляется и прибудет на этаж [floor_to_move]. Пожалуйста стойте в стороне от дверей."))
-	sleep(move_delay * 2)
 	calculate_move_delay(floor_to_move)
-	SSshuttle.moveShuttleToDock(src, GLOB.ss_elevator_floors["[id]_[floor_to_move + floor_offset]"], move_delay, FALSE)
+	sleep(move_delay)
+	on_move_actions()
+	sleep(move_delay)
+	cooldown = FALSE
+	SSshuttle.moveShuttleToDock(src, GLOB.ss_elevator_floors["[id]_[floor_to_move + floor_offset]"], 0)
 
 /obj/docking_port/mobile/sselevator/proc/calculate_move_delay(floor_calc)
 	if(offseted_z > target_floor ? offseted_z - floor_calc > 4 : floor_calc - offseted_z > 4)
-		move_delay--
+		move_delay -= 2
 	else
-		move_delay += 0.2 SECONDS
-	move_delay = clamp(move_delay, max_move_delay, min_move_delay)
+		move_delay += 2
+	move_delay = clamp(move_delay, min_move_delay, max_move_delay)
 
 /obj/docking_port/mobile/sselevator/proc/calc_elevator_order(floor_calc)
 	var/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button = buttons["[floor_calc + floor_offset]"]
@@ -185,8 +191,9 @@
 		if(next_moving == target_floor)
 			next_moving = 0
 		moving = offseted_z > target_floor ? "DOWN" : "UP"
-		on_move_actions()
-		move_elevator()
+		cooldown = TRUE
+		control_button.visible_message(SPAN_NOTICE("Лифт отправляется. Пожалуйста стойте в стороне от дверей."))
+		INVOKE_ASYNC(src, PROC_REF(move_elevator))
 
 // Reseting elevator if something messed up, because this system is not hard coded, so we can fuck up it easy
 /obj/docking_port/mobile/sselevator/proc/handle_initial_data(obj/docking_port/stationary/target_dock, force_opened = FALSE)
@@ -196,8 +203,13 @@
 	if(target_dock)
 		initial_dock = target_dock
 
-	if(initial_dock != get_docked())
-		SSshuttle.moveShuttleToDock(src, initial_dock, move_delay, FALSE)
+		if(initial_dock != get_docked())
+			var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
+			if(blastdoor && !blastdoor.density)
+				INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
+			if(door && !door.density)
+				INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, close_and_lock))
+			SSshuttle.moveShuttleToDock(src, initial_dock, 0)
 
 	floor_offset = z - total_floors
 	offseted_z = z - floor_offset
@@ -213,13 +225,15 @@
 		called_floors[i] = FALSE
 
 	disabled_floors[total_floors] = FALSE
-	move_delay = 3 SECONDS
-	max_move_delay = 10 SECONDS
-	min_move_delay = 1 SECONDS
+	move_delay = initial(move_delay)
+	max_move_delay = initial(max_move_delay)
+	min_move_delay = initial(min_move_delay)
 
 	var/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/blastdoor = doors["[z]"]
-	INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
-	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+	if(blastdoor && blastdoor.density)
+		INVOKE_ASYNC(blastdoor, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
+	if(door && door.density)
+		INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator, unlock_and_open))
 
 	disabled_elevator = FALSE
 	moving = FALSE
@@ -556,13 +570,15 @@
 		if(B.density)
 			INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
 	var/obj/structure/machinery/computer/security_blocker/parrent_blocker
-	if((z - elevator.floor_offset) % 2 == 1)
-		parrent_blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z-1]"]
-	else
-		parrent_blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z+1]"]
-	for(var/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/B as anything in parrent_blocker.move_lock_doors)
-		if(B.density)
-			INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
+	if(parrent_blocker)
+		for(var/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/B as anything in parrent_blocker.move_lock_doors)
+			if(B.density)
+				INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
+	parrent_blocker = GLOB.skyscrapers_sec_comps[current_scraper_link]["[z+1]"]
+	if(parrent_blocker)
+		for(var/obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper/B as anything in parrent_blocker.move_lock_doors)
+			if(B.density)
+				INVOKE_ASYNC(B, TYPE_PROC_REF(/obj/structure/machinery/door, open))
 
 
 /turf/closed/wall/vents
@@ -1090,9 +1106,11 @@
 	icon = 'icons/turf/skyscraper_elevator.dmi'
 	icon_state = "w_gear"
 
-/obj/structure/machinery/gear/sky_scraper/start_moving(direction = NORTH)
+/obj/structure/machinery/gear/sky_scraper/start_moving()
 	icon_state = "w_gear_animated"
-	setDir(direction)
+
+/obj/structure/machinery/gear/sky_scraper/stop_moving()
+	icon_state = "w_gear"
 
 /obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	. = ..()
@@ -1117,3 +1135,6 @@
 	if(!elevator)
 		return
 	elevator.handle_initial_data(null, TRUE)
+
+/turf/open/floor/almayer/mono/indestructible_stairs
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_HULL

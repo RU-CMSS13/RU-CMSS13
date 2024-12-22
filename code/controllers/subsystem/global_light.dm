@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(global_light_queue_corner)
 
 SUBSYSTEM_DEF(global_light)
 	name = "Global Lighting"
-	wait = 2 SECONDS
+	wait = 2.5 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
 
 	var/atom/movable/global_lighting_color
@@ -247,7 +247,6 @@ SUBSYSTEM_DEF(global_light)
 
 		if(MC_TICK_CHECK)
 			break
-
 	if(worked_length)
 		GLOB.global_light_queue_corner.Cut(1, worked_length+1)
 		worked_length = 0
