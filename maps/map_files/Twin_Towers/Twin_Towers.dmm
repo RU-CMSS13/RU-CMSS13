@@ -26,15 +26,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"abx" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/obj/structure/barricade/handrail/wire{
-	layer = 3.5
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "abB" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -156,12 +147,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/building_in_progress_sector/seven)
-"afH" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost)
 "afI" = (
 /obj/structure/stairs{
 	terminator_mode = 2;
@@ -383,15 +368,6 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"alM" = (
-/obj/structure/surface/table/almayer,
-/obj/item/device/flashlight/lamp,
-/obj/structure/machinery/light/double/almenia{
-	dir = 1;
-	pixel_y = 21
-	},
-/turf/open/floor/almayer/dark_sterile,
-/area/skyscraper/almenia/science_sector)
 "alX" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -495,19 +471,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"anO" = (
-/obj/structure/closet/secure_closet/guncabinet/red,
-/obj/item/ammo_magazine/rifle/ap,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/machinery/light/double/almenia{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "anW" = (
 /obj/structure/barricade/metal/wired{
 	dir = 8
@@ -671,17 +634,6 @@
 	},
 /turf/open/openspace,
 /area/skyscraper/almenia/science_sector)
-"atV" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/item/ammo_kit/toxin,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "atZ" = (
 /obj/structure/flora/bush/desert,
 /turf/open/floor/grass,
@@ -722,6 +674,11 @@
 /obj/structure/flora/grass/short_grass/ice,
 /turf/open/gm/dirtgrassborder/grassdirt_corner2/south_west,
 /area/skyscraper/almenia/eco_emulation_sector)
+"avN" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost)
 "avQ" = (
 /obj/structure/machinery/light/double/almenia{
 	dir = 4;
@@ -868,6 +825,12 @@
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"azd" = (
+/obj/structure/machinery/door/airlock/multi_tile/almayer/engidoor/colony{
+	dir = 1
+	},
+/turf/open/floor/kutjevo/tan/multi_tiles,
+/area/skyscraper/almenia/engineering/upper)
 "azr" = (
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/shuttle/elevator/skyscraper/wg,
@@ -1112,12 +1075,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"aFi" = (
-/obj/item/tool/surgery/hemostat,
-/obj/item/tool/surgery/scalpel,
-/obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/almayer/sterile_green_corner/west,
-/area/skyscraper/almenia/science_sector)
 "aFo" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -1600,16 +1557,16 @@
 	},
 /turf/open/floor/almayer,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"aUd" = (
-/obj/structure/surface/rack,
-/obj/item/defenses/handheld/sentry/flamer,
-/obj/item/defenses/handheld/sentry/flamer,
-/obj/item/defenses/handheld/sentry/flamer,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 5
+"aUe" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
 	},
-/turf/open/floor/almayer/cargo,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector)
 "aUo" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgib3"
@@ -1739,6 +1696,11 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector)
+"aWF" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/eco_emulation_sector)
 "aXg" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = 32;
@@ -1787,6 +1749,14 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector)
+"aYf" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "aYo" = (
 /obj/structure/surface/table/almayer,
 /obj/item/tool/hand_labeler,
@@ -1849,6 +1819,19 @@
 	},
 /turf/open/floor/kutjevo/grey/plate,
 /area/skyscraper/almenia/engineering/upper)
+"bbi" = (
+/obj/structure/closet/secure_closet/guncabinet/red,
+/obj/item/ammo_magazine/rifle/ap,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/machinery/light/double/almenia{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "bbz" = (
 /obj/structure/sign/safety/ammunition{
 	pixel_y = -32
@@ -1925,12 +1908,6 @@
 	},
 /turf/open/asphalt/cement,
 /area/skyscraper/ashwin/landing_zone)
-"bdf" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "bdt" = (
 /obj/structure/closet/crate/juice,
 /turf/open/floor/almayer/mono,
@@ -2209,12 +2186,22 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/science_sector)
-"bjT" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/almenia/agro_sector)
 "bkb" = (
 /turf/open/floor/almayer,
+/area/skyscraper/almenia/security_sector/blockpost)
+"bki" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
 /area/skyscraper/almenia/security_sector/blockpost)
 "bkm" = (
 /obj/structure/surface/table/reinforced/prison,
@@ -2888,14 +2875,6 @@
 /obj/structure/closet/bodybag,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/morgue_sector)
-"bCd" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost)
 "bCj" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -2950,6 +2929,10 @@
 "bDv" = (
 /turf/open/floor/almayer/red/west,
 /area/skyscraper/almenia/security_sector/blockpost)
+"bEn" = (
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/morgue_sector)
 "bEA" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = 32;
@@ -3668,20 +3651,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"bVr" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/morgue_sector)
 "bWt" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /turf/open/floor/plating/plating_catwalk,
@@ -3727,17 +3696,6 @@
 /obj/structure/flora/bush/ausbushes/var3/brflowers,
 /turf/open/floor/grass,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"bXV" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/item/ammo_kit/incendiary,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "bYb" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/structure/surface/table/almayer,
@@ -3816,6 +3774,16 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"caX" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "cbg" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -3860,18 +3828,8 @@
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/almenia/security_sector/blockpost)
 "ccR" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
 "cdf" = (
 /obj/structure/barricade/handrail/wire{
@@ -4060,6 +4018,12 @@
 	},
 /turf/open/floor/almayer/dark_sterile,
 /area/skyscraper/almenia/science_sector)
+"chO" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector)
 "cin" = (
 /turf/open/shuttle/elevator/skyscraper/wv,
 /area/skyscraper/ashwin/subway_station)
@@ -4244,16 +4208,11 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"cnm" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
+"cnD" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/building_in_progress_sector/six)
 "cnK" = (
 /obj/structure/surface/table/almayer,
 /obj/structure/machinery/centrifuge{
@@ -4359,9 +4318,10 @@
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
 "csm" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/eco_emulation_sector)
 "cst" = (
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/security_sector/blockpost)
@@ -4411,17 +4371,6 @@
 "cut" = (
 /turf/closed/wall/almayer/white,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"cuH" = (
-/obj/structure/surface/table/almayer,
-/obj/item/folder/white{
-	pixel_x = 6
-	},
-/obj/item/clothing/glasses/science{
-	pixel_x = -4;
-	pixel_y = 7
-	},
-/turf/open/floor/almayer/sterile_green_side,
-/area/skyscraper/almenia/science_sector)
 "cuS" = (
 /obj/structure/surface/rack,
 /obj/effect/decal/warning_stripes{
@@ -5197,17 +5146,6 @@
 	},
 /turf/open/floor/plating/almayer,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"cNw" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/item/ammo_kit/incendiary,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "cOo" = (
 /obj/effect/decal/cleanable/blood/xeno,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -5236,6 +5174,11 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/internal_cargo_sector)
+"cOL" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/morgue_sector)
 "cOO" = (
 /obj/structure/morgue{
 	dir = 2
@@ -5327,6 +5270,16 @@
 /obj/structure/flora/bush/ausbushes/var3/fernybush,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/skyscraper/ashwin/agro_sector)
+"cRA" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector)
 "cRC" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/power/apc/upgraded/power/north,
@@ -5396,16 +5349,6 @@
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
-"cTA" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 1;
-	pixel_y = 14
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
 "cTD" = (
@@ -5774,11 +5717,6 @@
 /obj/structure/barricade/handrail/wire,
 /turf/open/shuttle/elevator/skyscraper/wv,
 /area/skyscraper/almenia/science_sector)
-"deA" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/storage/box/bodybags,
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/ashwin/morgue_sector)
 "deB" = (
 /turf/open/floor/kutjevo/grey/plate,
 /area/skyscraper/almenia/engineering/upper)
@@ -6112,6 +6050,16 @@
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"dnd" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "dnD" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/crew/alt,
@@ -6122,9 +6070,31 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"dok" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "dol" = (
 /turf/closed/wall/r_wall/biodome/biodome_unmeltable,
 /area/skyscraper/ashwin/internal_cargo_sector)
+"dpe" = (
+/obj/structure/surface/rack,
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 5
+	},
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "dpD" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
@@ -6619,6 +6589,12 @@
 /obj/structure/stairs,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/eco_emulation_sector)
+"dAT" = (
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/agro_sector)
 "dAY" = (
 /obj/structure/surface/rack,
 /obj/item/stack/sheet/cardboard{
@@ -6701,6 +6677,12 @@
 /obj/structure/machinery/light/double/almenia,
 /turf/open/floor/almayer/red,
 /area/skyscraper/almenia/engineering/upper)
+"dDV" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/agro_sector)
 "dDY" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -6859,9 +6841,6 @@
 /obj/structure/barricade/metal/wired,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"dIO" = (
-/turf/open/floor/roof/lab,
-/area/space)
 "dIQ" = (
 /obj/structure/machinery/cm_vending/sorted/marine_food,
 /turf/open/floor/wood,
@@ -6895,9 +6874,25 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/almenia/eco_emulation_sector)
+"dJC" = (
+/obj/structure/surface/table/almayer,
+/obj/item/folder/white{
+	pixel_x = 6
+	},
+/obj/item/clothing/glasses/science{
+	pixel_x = -4;
+	pixel_y = 7
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_side,
+/area/skyscraper/almenia/science_sector)
 "dJD" = (
 /turf/open/floor/almayer/redcorner/east,
 /area/skyscraper/almenia/building_in_progress_sector)
+"dJJ" = (
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/engineering/upper)
 "dKl" = (
 /obj/effect/decal/cleanable/blood/xeno,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -6978,6 +6973,20 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"dLD" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector)
 "dLH" = (
 /turf/open/openspace,
 /area/skyscraper/almenia/internal_cargo_sector)
@@ -7140,6 +7149,11 @@
 	},
 /turf/open/floor/almayer/red,
 /area/skyscraper/almenia/building_in_progress_sector)
+"dOv" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/building_in_progress_sector)
 "dOw" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgib6"
@@ -7149,6 +7163,20 @@
 	},
 /turf/open/floor/almayer/red/west,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"dOz" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "dOD" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /turf/open/floor/plating/plating_catwalk,
@@ -7313,6 +7341,12 @@
 /obj/item/clothing/accessory/storage/surg_vest,
 /turf/open/floor/almayer/sterile_green_corner/east,
 /area/skyscraper/almenia/science_sector)
+"dSO" = (
+/obj/structure/surface/table/almayer,
+/obj/item/storage/surgical_tray,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_side/east,
+/area/skyscraper/almenia/science_sector)
 "dSU" = (
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button{
 	elevator_id = "sky_scraper_elevator_one";
@@ -7395,20 +7429,6 @@
 /obj/item/lightstick/red/planted,
 /turf/open/floor/roof/lab,
 /area/skyscraper/almenia/landing_zone)
-"dVL" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/internal_cargo_sector)
 "dVM" = (
 /obj/structure/machinery/door/airlock/almayer/secure/reinforced{
 	dir = 2;
@@ -7680,8 +7700,10 @@
 	},
 /turf/open/floor/almayer,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"ecN" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
+"ecI" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
 	dir = 1
 	},
 /turf/open/floor/almayer/mono,
@@ -7759,20 +7781,6 @@
 "efW" = (
 /turf/open/floor/almayer/sterile_green_side/east,
 /area/skyscraper/ashwin/agro_sector)
-"egd" = (
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/item/storage/box/kit/honorguard,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "egf" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/plating_catwalk,
@@ -7859,6 +7867,20 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/red/southwest,
 /area/skyscraper/ashwin/security_sector)
+"ejj" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "ejk" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -8261,6 +8283,12 @@
 "erV" = (
 /turf/open/floor/almayer/redcorner/west,
 /area/skyscraper/almenia/subway_station)
+"esi" = (
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony{
+	dir = 1
+	},
+/turf/open/floor/roof/ship_hull,
+/area/skyscraper/almenia/science_sector)
 "ess" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -8306,19 +8334,6 @@
 /obj/structure/machinery/computer/crew/alt,
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/almenia/security_sector)
-"euj" = (
-/obj/structure/closet/secure_closet/guncabinet/red,
-/obj/item/weapon/gun/rifle/m41a/elite,
-/obj/item/ammo_magazine/rifle/ap,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "eut" = (
 /obj/effect/decal/cleanable/blood/xeno,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -8498,15 +8513,17 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"exv" = (
+"exw" = (
 /obj/structure/barricade/handrail/wire{
-	layer = 3.5
+	dir = 1;
+	pixel_y = 14
 	},
+/obj/effect/decal/cleanable/dirt,
 /obj/structure/barricade/handrail/wire{
-	dir = 8
+	dir = 4
 	},
 /turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/almenia/internal_cargo_sector)
+/area/skyscraper/almenia/agro_sector)
 "exx" = (
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/plating,
@@ -8528,6 +8545,16 @@
 /obj/effect/landmark/corpsespawner/doctor,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
+"exY" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/blue{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/agro_sector)
 "eyi" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/xeno,
@@ -8554,10 +8581,19 @@
 /turf/open/floor/almayer/sterile_green_corner/east,
 /area/skyscraper/ashwin/agro_sector)
 "ezv" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "ezB" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/mono,
@@ -8712,6 +8748,11 @@
 /obj/structure/pipes/vents/scrubber,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector)
+"eDi" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "eDE" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -9500,10 +9541,6 @@
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/building_in_progress_sector/seven)
-"eXO" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/almenia/morgue_sector)
 "eXQ" = (
 /turf/closed/wall/almayer/white,
 /area/skyscraper/almenia/engineering/upper)
@@ -9840,11 +9877,6 @@
 "fiZ" = (
 /turf/open/gm/coast/beachcorner/south_west,
 /area/skyscraper/ashwin/eco_emulation_sector)
-"fjb" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
 "fjt" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
@@ -10031,6 +10063,25 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/almenia/security_sector/blockpost)
+"fof" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector)
+"fos" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/internal_cargo_sector)
 "foB" = (
 /obj/effect/decal/remains/xeno,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -10123,16 +10174,6 @@
 /obj/structure/largecrate,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/cargo_sector)
-"fra" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
 "frm" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = 32;
@@ -10347,10 +10388,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"fwo" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "fwq" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgibmid1"
@@ -10376,6 +10413,11 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/sterile_green_side/east,
 /area/skyscraper/almenia/science_sector)
+"fxH" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/building_in_progress_sector)
 "fxO" = (
 /obj/effect/landmark/corpsespawner/colonist,
 /turf/open/floor/plating/plating_catwalk,
@@ -10387,6 +10429,16 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"fyk" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/blue{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/building_in_progress_sector/seven)
 "fyw" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 1
@@ -10705,18 +10757,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector)
-"fEJ" = (
-/obj/structure/surface/table/almayer,
-/obj/item/stack/rods/plasteel{
-	amount = 36
-	},
-/obj/item/stack/catwalk{
-	amount = 60;
-	pixel_x = 5;
-	pixel_y = 4
-	},
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "fEL" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -10768,6 +10808,11 @@
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/plating/kutjevo,
 /area/skyscraper/almenia/science_sector)
+"fFm" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "fFE" = (
 /obj/structure/stairs{
 	dir = 8;
@@ -10799,19 +10844,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/landing_zone)
-"fGw" = (
-/obj/structure/stairs{
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/agro_sector)
 "fGA" = (
 /obj/structure/machinery/vending/coffee,
 /turf/open/floor/wood,
@@ -10868,12 +10900,18 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/morgue_sector)
 "fHX" = (
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
 	dir = 1;
-	name = "\improper Medical Research"
+	terminator_mode = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
 	},
 /turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/agro_sector)
+/area/skyscraper/almenia/internal_cargo_sector)
 "fIc" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -10968,14 +11006,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/w_y0/north,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"fJL" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "fJP" = (
 /obj/structure/machinery/cm_vending/sorted/boozeomat,
 /turf/open/floor/almayer/sterile_green,
@@ -11001,6 +11031,20 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
+"fKq" = (
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = 8;
+	pixel_y = 18
+	},
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = -8;
+	pixel_y = 18
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector)
 "fLO" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/cameras/almayer_network{
@@ -11059,18 +11103,14 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"fMT" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector)
 "fNe" = (
 /obj/structure/flora/bush/ausbushes/var3/fernybush,
 /turf/open/floor/grass,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"fNA" = (
+/obj/structure/machinery/door/airlock/almayer/engineering/reinforced/colony,
+/turf/open/floor/kutjevo/tan/multi_tiles,
+/area/skyscraper/almenia/engineering/upper)
 "fNL" = (
 /obj/structure/closet/secure_closet/guncabinet/riot_control,
 /obj/item/weapon/shield/riot,
@@ -11285,6 +11325,11 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"fRI" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/building_in_progress_sector/seven)
 "fRX" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -11293,6 +11338,15 @@
 "fSn" = (
 /turf/open/floor/almayer/plate,
 /area/skyscraper/almenia/subway_station)
+"fSy" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "SW-out"
+	},
+/obj/structure/machinery/door/airlock/almayer/engineering/reinforced/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/engineering/upper)
 "fSL" = (
 /obj/structure/surface/rack,
 /turf/open/floor/almayer/cargo,
@@ -11369,6 +11423,11 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"fVC" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/eco_emulation_sector)
 "fVO" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -11613,6 +11672,15 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"gbe" = (
+/obj/structure/machinery/light/small{
+	dir = 8;
+	pixel_x = -11;
+	pixel_y = 10
+	},
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/plating/prison,
+/area/skyscraper/ashwin/cargo_sector)
 "gbo" = (
 /obj/structure/surface/table/almayer,
 /obj/item/device/radio{
@@ -11650,12 +11718,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/internal_cargo_sector)
-"gcx" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "gcC" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/machinery/light/double/almenia{
@@ -11718,6 +11780,11 @@
 "gdY" = (
 /turf/open/floor/almayer/w_y1/north,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"ged" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "gee" = (
 /obj/structure/pipes/standard/manifold/fourway/hidden/supply,
 /turf/open/floor/almayer/mono,
@@ -12059,6 +12126,17 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
+"gmk" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/item/storage/box/kit/honorguard,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "gmm" = (
 /obj/structure/machinery/siren{
 	pixel_y = -8
@@ -12132,27 +12210,9 @@
 	},
 /turf/closed/wall/almayer/white,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"gnt" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "gnF" = (
 /turf/open/floor/almayer/redcorner/north,
 /area/skyscraper/almenia/security_sector)
-"gnG" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/almenia/internal_cargo_sector)
 "gnU" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/plate,
@@ -12312,11 +12372,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/cargo_sector)
-"gqZ" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost)
 "grg" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -12456,17 +12511,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"gvB" = (
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/item/storage/box/kit/honorguard,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "gvD" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/secdoor/reinforced{
 	dir = 2;
@@ -12617,6 +12661,10 @@
 "gys" = (
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/internal_cargo_sector)
+"gyB" = (
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/science_sector)
 "gyF" = (
 /obj/effect/decal/cleanable/blood/xeno,
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -12745,14 +12793,6 @@
 /obj/effect/landmark/monkey_spawn,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/skyscraper/ashwin/agro_sector)
-"gCo" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "gCD" = (
 /obj/item/stool,
 /turf/open/floor/almayer/plate,
@@ -12915,20 +12955,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
-"gGA" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost)
 "gHb" = (
 /obj/structure/cargo_container/kelland/left,
 /turf/open/floor/plating/plating_catwalk,
@@ -13336,6 +13362,11 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"gRV" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/agro_sector)
 "gSt" = (
 /obj/structure/prop/invuln/pipe_water,
 /turf/open/floor/plating/bare_catwalk,
@@ -13404,20 +13435,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/building_in_progress_sector)
-"gUf" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/internal_cargo_sector)
 "gUm" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -13474,6 +13491,12 @@
 /obj/structure/pipes/standard/manifold/fourway/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"gVj" = (
+/obj/structure/machinery/door/airlock/almayer/engineering/reinforced/colony{
+	dir = 1
+	},
+/turf/open/floor/kutjevo/tan/multi_tiles,
+/area/skyscraper/almenia/engineering/upper)
 "gVk" = (
 /turf/open/floor/wood,
 /area/skyscraper/almenia/security_sector)
@@ -13541,6 +13564,20 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"gYI" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/item/storage/box/kit/honorguard,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "gYP" = (
 /obj/docking_port/stationary/sselevator/one,
 /turf/open/openspace,
@@ -13555,10 +13592,6 @@
 	},
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/almenia/eco_emulation_sector)
-"gZi" = (
-/obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/morgue_sector)
 "gZt" = (
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/ashwin/security_sector/blockpost)
@@ -13582,11 +13615,6 @@
 "gZL" = (
 /turf/open/gm/coast/beachcorner/south_east,
 /area/skyscraper/ashwin/eco_emulation_sector)
-"gZM" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/paper/carbon,
-/turf/open/floor/plating/prison,
-/area/skyscraper/ashwin/cargo_sector)
 "hac" = (
 /obj/structure/machinery/vending/cola,
 /obj/structure/machinery/light/double/almenia,
@@ -13833,11 +13861,6 @@
 /obj/structure/platform/metal/almayer/north,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"hft" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector)
 "hfM" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -13858,12 +13881,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/wv,
 /area/skyscraper/almenia/building_in_progress_sector/seven)
-"hfV" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "hfX" = (
 /obj/structure/machinery/door/airlock/almayer/generic{
 	name = "Bathroom"
@@ -13904,20 +13921,6 @@
 /obj/structure/machinery/computer/emails,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector)
-"hgN" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "hhb" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -14048,20 +14051,6 @@
 /obj/structure/machinery/chem_master,
 /turf/open/floor/almayer/sterile_green_corner/east,
 /area/skyscraper/almenia/science_sector)
-"hlq" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector)
 "hlx" = (
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
@@ -14172,16 +14161,6 @@
 /obj/effect/decal/remains/xeno,
 /turf/open/floor/almayer/sterile_green_side,
 /area/skyscraper/almenia/science_sector)
-"hoj" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "SW-out"
-	},
-/obj/structure/machinery/door/airlock/almayer/engineering/reinforced{
-	dir = 2;
-	name = "Technical Floor"
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/engineering/upper)
 "hoq" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 8
@@ -14304,6 +14283,20 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/almenia/engineering/upper)
+"hsc" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/item/storage/box/kit/honorguard,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "hsp" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /obj/effect/alien/resin/acid_pillar/strong,
@@ -14642,6 +14635,16 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
+"hAy" = (
+/obj/structure/surface/table/almayer,
+/obj/item/device/flashlight/lamp,
+/obj/structure/machinery/light/double/almenia{
+	dir = 1;
+	pixel_y = 21
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/dark_sterile,
+/area/skyscraper/almenia/science_sector)
 "hAA" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/pipes/standard/manifold/hidden/supply{
@@ -14843,6 +14846,16 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"hGu" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "hGx" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = -17;
@@ -14946,6 +14959,15 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
+"hIM" = (
+/obj/structure/machinery/light/double/almenia{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/kutjevo/tan/multi_tiles/north,
+/area/skyscraper/almenia/engineering/upper)
 "hIP" = (
 /obj/structure/largecrate/random/case/small,
 /obj/structure/machinery/light/double/almenia{
@@ -15142,19 +15164,6 @@
 	},
 /turf/open/floor/plating/almayer,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"hNE" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/agro_sector)
 "hNM" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -15336,6 +15345,17 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector)
+"hUl" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/item/ammo_kit/penetrating,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "hUs" = (
 /turf/open/floor/grass,
 /area/skyscraper/ashwin/security_sector)
@@ -15425,6 +15445,16 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper,
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/almenia/security_sector/blockpost)
+"hVW" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/blue{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/internal_cargo_sector)
 "hWb" = (
 /obj/structure/cargo_container/trijent/left/alt,
 /turf/open/floor/almayer/mono,
@@ -15497,14 +15527,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/ashwin/morgue_sector)
-"hYT" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "hYU" = (
 /turf/open/floor/plating/warnplate,
 /area/skyscraper/almenia/landing_zone)
@@ -15690,20 +15712,6 @@
 /obj/effect/landmark/monkey_spawn,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/internal_cargo_sector)
-"icX" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "idc" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/paper_bin/uscm,
@@ -15886,6 +15894,11 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/almenia/subway_station)
+"igy" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/eco_emulation_sector)
 "igB" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/xeno,
@@ -15926,6 +15939,14 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper,
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/ashwin/agro_sector)
+"ihE" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "ihI" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -16126,6 +16147,10 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/almenia/security_sector)
+"ipR" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "iqr" = (
 /obj/structure/prop/invuln/overhead_pipe{
 	dir = 4;
@@ -16155,6 +16180,17 @@
 /obj/structure/machinery/computer/disk_reader,
 /turf/open/floor/almayer/plate,
 /area/skyscraper/almenia/morgue_sector)
+"iqN" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/item/ammo_kit/toxin,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "iqQ" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -16195,6 +16231,16 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/skyscraper/almenia/security_sector/blockpost)
+"isc" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "isl" = (
 /turf/closed/wall/r_wall/biodome/biodome_unmeltable,
 /area/skyscraper/almenia/eco_emulation_sector)
@@ -16627,6 +16673,20 @@
 /obj/structure/window/framed/almayer/white,
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/building_in_progress_sector/ten)
+"iBB" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/internal_cargo_sector)
 "iBM" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/security_blocker{
@@ -16663,16 +16723,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"iCw" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector)
 "iCI" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator{
 	elevator_id = "sky_scraper_elevator_two"
@@ -17239,13 +17289,6 @@
 	},
 /turf/open/asphalt/cement,
 /area/skyscraper/ashwin/landing_zone)
-"iQh" = (
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
-	dir = 4;
-	name = "\improper Medical Research"
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/science_sector)
 "iQl" = (
 /obj/structure/machinery/vending/cola,
 /obj/structure/machinery/light/double/almenia,
@@ -17442,6 +17485,16 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/internal_cargo_sector)
+"iUB" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "iUW" = (
 /obj/structure/surface/table/almayer,
 /obj/item/paper_bin/wy{
@@ -18077,6 +18130,19 @@
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/plating,
 /area/skyscraper/almenia/building_in_progress_sector)
+"jjQ" = (
+/obj/structure/closet/secure_closet/guncabinet/red,
+/obj/item/weapon/gun/rifle/m41a/elite,
+/obj/item/ammo_magazine/rifle/ap,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "jjZ" = (
 /obj/structure/machinery/cm_vending/sorted/boozeomat,
 /turf/open/floor/wood,
@@ -18108,6 +18174,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/internal_cargo_sector)
+"jkC" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/agro_sector)
 "jkD" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -18147,6 +18219,11 @@
 	},
 /turf/open/floor/kutjevo/grey/plate,
 /area/skyscraper/almenia/engineering/upper)
+"jlo" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/building_in_progress_sector/six)
 "jlr" = (
 /obj/structure/machinery/landinglight/ds1/delaythree{
 	dir = 1;
@@ -18558,6 +18635,11 @@
 	},
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"jxr" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "jym" = (
 /turf/open/floor/kutjevo/colors/orange,
 /area/skyscraper/almenia/engineering/upper)
@@ -19229,20 +19311,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector)
-"jMT" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
 "jNa" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/plating_catwalk,
@@ -19965,11 +20033,10 @@
 /turf/open/floor/wood,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
 "kiN" = (
-/obj/structure/machinery/door/airlock/almayer/engineering/reinforced{
-	name = "Technical Floor"
-	},
-/turf/open/floor/almayer/plate,
-/area/skyscraper/almenia/engineering/upper)
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/ashwin/building_in_progress_sector)
 "kiR" = (
 /obj/structure/blocker/invisible_wall,
 /turf/closed/shuttle/ert{
@@ -20464,17 +20531,6 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/plate,
 /area/skyscraper/ashwin/building_in_progress_sector/seven)
-"kxJ" = (
-/obj/structure/surface/rack,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/obj/item/storage/pill_bottle/bicaridine/skillless,
-/turf/open/floor/almayer/sterile_green_corner/east,
-/area/skyscraper/almenia/science_sector)
 "kyf" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -20901,6 +20957,13 @@
 /obj/item/tool/soap/syndie,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"kJl" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/cargo_sector)
 "kJq" = (
 /turf/open/floor/roof/lab,
 /area/skyscraper/almenia/landing_zone)
@@ -20960,6 +21023,17 @@
 /obj/structure/flora/jungle/thickbush,
 /turf/open/floor/grass,
 /area/skyscraper/ashwin/agro_sector)
+"kLg" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/item/storage/box/kit/honorguard,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "kLQ" = (
 /obj/structure/machinery/power/reactor/colony{
 	name = "Reactor Turbine"
@@ -21547,11 +21621,6 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper,
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/almenia/security_sector)
-"ldd" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "ldk" = (
 /obj/structure/sign/safety/ammunition{
 	pixel_y = -32
@@ -21808,13 +21877,6 @@
 "lka" = (
 /turf/open/openspace,
 /area/skyscraper/ashwin/building_in_progress_sector/ten)
-"lkf" = (
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
-	dir = 1;
-	name = "\improper Medical Research"
-	},
-/turf/open/floor/roof/ship_hull,
-/area/skyscraper/almenia/science_sector)
 "lkH" = (
 /obj/effect/landmark/corpsespawner/security,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -22048,11 +22110,29 @@
 /obj/structure/largecrate/random/barrel/green,
 /turf/open/floor/plating,
 /area/skyscraper/almenia/engineering/upper)
+"lsy" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "lsz" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/pipes/vents/scrubber,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
+"lsK" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector/blockpost)
 "lsS" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/cargo_sector)
@@ -22093,10 +22173,6 @@
 "ltK" = (
 /turf/open/floor/almayer/mono/indestructible_stairs,
 /area/skyscraper/ashwin/landing_zone)
-"ltS" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/internal_cargo_sector)
 "lug" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgib6"
@@ -22123,6 +22199,9 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"luD" = (
+/turf/open/floor/roof/lab,
+/area/space)
 "luF" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -22152,6 +22231,16 @@
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"lvK" = (
+/obj/structure/closet/secure_closet/guncabinet/red,
+/obj/item/weapon/gun/launcher/rocket/anti_tank,
+/obj/item/ammo_magazine/rocket/anti_tank,
+/obj/item/ammo_magazine/rocket/anti_tank,
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "lvP" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -22298,6 +22387,10 @@
 /obj/structure/platform_decoration/metal/almayer/north,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/eco_emulation_sector)
+"lAL" = (
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/agro_sector)
 "lAQ" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -22327,18 +22420,31 @@
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/ashwin/morgue_sector)
 "lBr" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/computer/cameras/almayer_network{
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
-/turf/open/floor/almayer/red/southwest,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "lBv" = (
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper{
 	lock_type = "elevator"
 	},
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"lBC" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector)
 "lBK" = (
 /obj/structure/flora/grass/short_grass/ice,
 /turf/open/gm/dirtgrassborder/grassdirt_corner/north_west,
@@ -22378,6 +22484,13 @@
 "lEb" = (
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"lEe" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/power/apc/upgraded/power/north,
+/obj/structure/machinery/computer/emails,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/engineering/upper)
 "lEg" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
@@ -22477,6 +22590,13 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"lGD" = (
+/obj/item/tool/surgery/hemostat,
+/obj/item/tool/surgery/scalpel,
+/obj/structure/surface/table/reinforced/prison,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_corner/west,
+/area/skyscraper/almenia/science_sector)
 "lHg" = (
 /obj/structure/platform_decoration/metal/almayer/north,
 /obj/effect/decal/warning_stripes{
@@ -22567,10 +22687,6 @@
 	},
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"lJY" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "lKa" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -22697,6 +22813,10 @@
 /obj/structure/closet/crate/medical,
 /turf/open/floor/almayer/sterile_green_corner/west,
 /area/skyscraper/almenia/science_sector)
+"lPu" = (
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/morgue_sector)
 "lQa" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -22879,6 +22999,19 @@
 /obj/docking_port/stationary/sselevator/one,
 /turf/open/openspace,
 /area/skyscraper/almenia/building_in_progress_sector/six)
+"lVY" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/agro_sector)
 "lWh" = (
 /turf/open/floor/almayer/redcorner/west,
 /area/skyscraper/ashwin/security_sector/blockpost)
@@ -22889,12 +23022,6 @@
 /obj/item/tool/soap/syndie,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"lWp" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/power/apc/upgraded/power/north,
-/obj/structure/machinery/computer/emails,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/engineering/upper)
 "lWG" = (
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/shuttle/elevator/skyscraper/wg,
@@ -22979,14 +23106,6 @@
 /obj/item/stack/sheet/wood/small_stack,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/agro_sector)
-"lZe" = (
-/obj/structure/surface/rack,
-/obj/item/defenses/handheld/sentry/flamer,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 5
-	},
-/turf/open/floor/almayer/cargo,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "lZh" = (
 /obj/structure/barricade/handrail/wire{
 	layer = 3.5
@@ -23027,11 +23146,6 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/plate,
 /area/skyscraper/almenia/building_in_progress_sector/ten)
-"maz" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector)
 "maJ" = (
 /obj/structure/closet/bodybag,
 /obj/effect/landmark/corpsespawner/colonist/random,
@@ -23294,21 +23408,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"mgU" = (
-/obj/structure/surface/table/almayer,
-/obj/item/storage/box/autoinjectors{
-	pixel_x = -6;
-	pixel_y = 7
-	},
-/obj/item/storage/box/autoinjectors{
-	pixel_x = -6;
-	pixel_y = -1
-	},
-/obj/item/device/mass_spectrometer{
-	pixel_x = 8
-	},
-/turf/open/floor/almayer/sterile_green_corner,
-/area/skyscraper/almenia/science_sector)
 "mgZ" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator{
 	elevator_id = "sky_scraper_elevator_two"
@@ -23357,12 +23456,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"miJ" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/agro_sector)
 "miK" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -23387,15 +23480,6 @@
 /obj/structure/pipes/vents/pump,
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"mkq" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/light/double/blue{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/turf/open/floor/almayer/plate,
-/area/skyscraper/almenia/building_in_progress_sector/seven)
 "mkt" = (
 /obj/structure/surface/rack,
 /turf/open/floor/almayer/cargo,
@@ -23450,6 +23534,12 @@
 /obj/structure/machinery/cm_vending/sorted/medical/chemistry,
 /turf/open/floor/almayer/sterile_green_side/north,
 /area/skyscraper/almenia/science_sector)
+"mmk" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/storage/box/bodybags,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/almenia/morgue_sector)
 "mmy" = (
 /obj/structure/toilet{
 	dir = 4
@@ -23605,14 +23695,11 @@
 /area/skyscraper/almenia/security_sector/blockpost/upper)
 "msI" = (
 /obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 5
 	},
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/item/storage/box/kit/honorguard,
-/turf/open/floor/plating/almayer,
+/turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
 "mte" = (
 /obj/effect/landmark/corpsespawner/pmc,
@@ -23825,10 +23912,6 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/almenia/security_sector)
-"mxQ" = (
-/obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/ashwin/morgue_sector)
 "myl" = (
 /obj/structure/stairs{
 	terminator_mode = 2;
@@ -24032,6 +24115,19 @@
 /obj/effect/mapping_helpers/global_light/pseudo_roof_setter/concrete,
 /turf/open/floor/almayer/mono/indestructible_stairs,
 /area/skyscraper/ashwin/landing_zone)
+"mEg" = (
+/obj/structure/surface/table/almayer,
+/obj/item/stack/rods/plasteel{
+	amount = 36
+	},
+/obj/item/stack/catwalk{
+	amount = 60;
+	pixel_x = 5;
+	pixel_y = 4
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/plating,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "mEh" = (
 /obj/structure/machinery/door/airlock/almayer/security/reinforced{
 	dir = 2;
@@ -24372,6 +24468,16 @@
 	},
 /turf/open/floor/kutjevo/tan/multi_tiles/north,
 /area/skyscraper/almenia/engineering/upper)
+"mML" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 1;
+	pixel_y = 14
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "mMQ" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -24383,6 +24489,12 @@
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"mMW" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/computer/disk_reader,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/science_sector)
 "mNe" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/almayer/sterile_green_side/east,
@@ -24410,6 +24522,17 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/cargo_sector)
+"mOv" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/item/ammo_kit/incendiary,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "mOF" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -24586,20 +24709,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
-"mTg" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "mTi" = (
 /obj/structure/filingcabinet{
 	pixel_x = -8
@@ -24791,6 +24900,12 @@
 	},
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"naH" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/paper/carbon,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/plating/prison,
+/area/skyscraper/ashwin/cargo_sector)
 "nbi" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = -17;
@@ -24850,6 +24965,12 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"nco" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "ncr" = (
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button{
 	elevator_id = "sky_scraper_elevator_one";
@@ -24921,6 +25042,12 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector)
+"nea" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "neu" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -25059,6 +25186,20 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/eco_emulation_sector)
+"nkQ" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/morgue_sector)
 "nkR" = (
 /obj/structure/closet/crate,
 /turf/open/floor/plating/plating_catwalk,
@@ -25187,6 +25328,16 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
+"noD" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/almenia{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/engineering/upper)
 "noH" = (
 /obj/structure/largecrate,
 /turf/open/floor/almayer/mono,
@@ -25416,6 +25567,20 @@
 /obj/structure/flora/bush/ausbushes/var3/brflowers,
 /turf/open/floor/grass,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"nui" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "nur" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -25434,25 +25599,17 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"nuG" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "nuQ" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /obj/effect/alien/resin/acid_pillar/strong,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"nve" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost)
 "nvi" = (
 /obj/structure/ladder{
 	height = 2;
@@ -25471,6 +25628,20 @@
 /obj/structure/machinery/cm_vending/sorted/walkman,
 /turf/open/floor/almayer/sterile_green,
 /area/skyscraper/almenia/science_sector)
+"nwn" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/internal_cargo_sector)
 "nwx" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /turf/open/floor/plating/plating_catwalk,
@@ -25665,16 +25836,6 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/skyscraper/ashwin/morgue_sector)
-"nBD" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost)
 "nCy" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -25718,12 +25879,25 @@
 	},
 /turf/open/floor/almayer,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"nCT" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/ashwin/eco_emulation_sector)
+"nCW" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "nDf" = (
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/almenia/building_in_progress_sector)
 "nDo" = (
 /turf/open/gm/dirtgrassborder/grassdirt_corner/north_east,
 /area/skyscraper/ashwin/eco_emulation_sector)
+"nDv" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/ashwin/internal_cargo_sector)
 "nDz" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -25966,16 +26140,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/agro_sector)
-"nJh" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/light/double/almenia{
-	dir = 8;
-	pixel_x = -10;
-	pixel_y = -3
-	},
-/obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/science_sector)
 "nJp" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/structure/machinery/computer/cameras/almayer_network{
@@ -26361,14 +26525,6 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"nSd" = (
-/obj/structure/machinery/light/double/almenia{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/turf/open/floor/kutjevo/tan/multi_tiles/north,
-/area/skyscraper/almenia/engineering/upper)
 "nSf" = (
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
@@ -26633,14 +26789,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/wv,
 /area/skyscraper/almenia/building_in_progress_sector/six)
-"nYj" = (
-/obj/structure/surface/rack,
-/obj/item/defenses/handheld/sentry/flamer,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 5
-	},
-/turf/open/floor/almayer/cargo,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "nYr" = (
 /obj/structure/machinery/landinglight/ds1{
 	dir = 4;
@@ -26774,6 +26922,12 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/almenia/security_sector/blockpost)
+"obO" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "obP" = (
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/almayer/mono/indestructible_stairs,
@@ -26837,20 +26991,6 @@
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/plating/kutjevo,
 /area/skyscraper/almenia/science_sector)
-"odV" = (
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/item/storage/box/kit/honorguard,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
 "odZ" = (
 /obj/structure/machinery/light/double/almenia{
 	dir = 8;
@@ -26907,6 +27047,14 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"ofp" = (
+/obj/structure/surface/table/almayer,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/pillbottles,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_corner,
+/area/skyscraper/almenia/science_sector)
 "ofq" = (
 /obj/structure/flora/bush/ausbushes/var3/fullgrass,
 /obj/structure/machinery/light/double{
@@ -26978,6 +27126,11 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"ohg" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector)
 "ohl" = (
 /obj/structure/bed/chair/office/light{
 	dir = 4
@@ -27076,12 +27229,11 @@
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost)
 "okN" = (
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
-	dir = 1;
-	name = "\improper Medical Research"
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/science_sector)
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/storage/box/bodybags,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/morgue_sector)
 "okQ" = (
 /obj/structure/flora/grass/short_grass/ice,
 /turf/open/gm/dirtgrassborder/grassdirt_corner/south_west,
@@ -27333,10 +27485,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector)
-"otu" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/cargo_sector)
 "otQ" = (
 /obj/docking_port/stationary/sselevator/one,
 /turf/open/openspace,
@@ -27378,6 +27526,20 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/morgue_sector)
+"ouU" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/almenia/security_sector)
 "ovm" = (
 /obj/structure/largecrate,
 /obj/effect/decal/cleanable/dirt,
@@ -27571,11 +27733,6 @@
 /obj/item/lightstick/red/planted,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/eco_emulation_sector)
-"oxN" = (
-/obj/structure/surface/table/almayer,
-/obj/item/storage/surgical_tray,
-/turf/open/floor/almayer/sterile_green_side/east,
-/area/skyscraper/almenia/science_sector)
 "oxP" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -27601,6 +27758,12 @@
 	},
 /turf/open/floor/almayer/red,
 /area/skyscraper/almenia/security_sector)
+"oyM" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/computer/disk_reader,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/building_in_progress_sector/ten)
 "oyX" = (
 /obj/structure/machinery/cm_vending/sorted/boozeomat,
 /turf/open/floor/wood,
@@ -27883,6 +28046,19 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"oGS" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/morgue_sector)
 "oGZ" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -27998,20 +28174,6 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/almenia/landing_zone)
-"oJF" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "oJT" = (
 /obj/structure/bed/chair/comfy/beige,
 /turf/open/floor/wood,
@@ -28204,20 +28366,6 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"oNJ" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "oNN" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/xeno,
@@ -28446,6 +28594,14 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
+"oTJ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "oTR" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -28650,14 +28806,11 @@
 /turf/closed/wall/almayer/white,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
 "oZI" = (
-/obj/structure/barricade/handrail/wire{
-	layer = 3.5
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony{
+	dir = 1
 	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/almenia/morgue_sector)
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/science_sector)
 "oZL" = (
 /obj/effect/alien/resin/acid_pillar/strong,
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -28743,6 +28896,19 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"pbE" = (
+/obj/structure/closet/secure_closet/guncabinet/red,
+/obj/item/ammo_magazine/rifle/ap,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/machinery/light/double/almenia{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "pbV" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -28826,14 +28992,15 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector)
-"pdN" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
+"pei" = (
+/obj/structure/barricade/handrail/wire{
+	layer = 3.5
 	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/almenia/morgue_sector)
 "pen" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -28950,15 +29117,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"pgj" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/light/double/almenia{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/engineering/upper)
 "pgl" = (
 /obj/structure/machinery/door/poddoor/shutters/almayer/containment/skyscraper{
 	lock_type = "elevator"
@@ -29032,19 +29190,11 @@
 /turf/open/floor/almayer/red,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
 "pho" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
+/obj/structure/machinery/door/airlock/almayer/engineering/reinforced/colony{
 	dir = 1
 	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
+/turf/open/floor/kutjevo/tan/multi_tiles/east,
+/area/skyscraper/almenia/engineering/upper)
 "pht" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 4;
@@ -29095,19 +29245,6 @@
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/agro_sector)
-"pii" = (
-/obj/structure/filingcabinet{
-	density = 0;
-	pixel_x = 8;
-	pixel_y = 18
-	},
-/obj/structure/filingcabinet{
-	density = 0;
-	pixel_x = -8;
-	pixel_y = 18
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector)
 "piy" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/crew/alt{
@@ -29220,13 +29357,6 @@
 	},
 /turf/open/asphalt/cement,
 /area/skyscraper/almenia/engineering/upper)
-"pkx" = (
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
-	dir = 4;
-	name = "\improper Medical Research"
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/agro_sector)
 "pkC" = (
 /obj/structure/largecrate/supply/medicine/blood,
 /turf/open/floor/almayer/cargo,
@@ -29626,14 +29756,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/landing_zone)
-"pwT" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector)
 "pxx" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_x = 32
@@ -29661,6 +29783,22 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/morgue_sector)
+"pzl" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/item/storage/box/kit/honorguard,
+/obj/item/storage/box/kit/honorguard,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "pzu" = (
 /obj/structure/machinery/shower{
 	dir = 4
@@ -29890,6 +30028,22 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"pFD" = (
+/obj/structure/surface/table/almayer,
+/obj/item/storage/box/autoinjectors{
+	pixel_x = -6;
+	pixel_y = 7
+	},
+/obj/item/storage/box/autoinjectors{
+	pixel_x = -6;
+	pixel_y = -1
+	},
+/obj/item/device/mass_spectrometer{
+	pixel_x = 8
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_corner,
+/area/skyscraper/almenia/science_sector)
 "pFH" = (
 /obj/structure/bed/chair/comfy/beige{
 	dir = 1
@@ -30012,12 +30166,6 @@
 	},
 /turf/open/floor/almayer/redcorner/west,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"pIr" = (
-/obj/structure/machinery/door/airlock/almayer/engineering/reinforced{
-	name = "Technical Floor"
-	},
-/turf/open/floor/kutjevo/tan/multi_tiles,
-/area/skyscraper/almenia/engineering/upper)
 "pIu" = (
 /obj/structure/pipes/vents/pump,
 /turf/open/floor/almayer/red/north,
@@ -30206,6 +30354,10 @@
 /obj/structure/closet/crate/trashcart,
 /turf/open/floor/plating,
 /area/skyscraper/almenia/security_sector/blockpost)
+"pMV" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "pNc" = (
 /turf/open/floor/roof/lab,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
@@ -30321,16 +30473,6 @@
 "pPr" = (
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/landing_zone)
-"pPw" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector)
 "pPG" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -30344,6 +30486,14 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/subway_station)
+"pPS" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector)
 "pPU" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -30428,6 +30578,20 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"pQY" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "pRb" = (
 /obj/structure/cargo_container/hd/right,
 /turf/open/floor/plating/plating_catwalk,
@@ -30458,6 +30622,11 @@
 /obj/structure/foamed_metal,
 /turf/open/asphalt/cement,
 /area/skyscraper/ashwin/agro_sector)
+"pSz" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost)
 "pSB" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N"
@@ -30594,19 +30763,6 @@
 	},
 /turf/open/floor/almayer/red/east,
 /area/skyscraper/ashwin/security_sector)
-"pXq" = (
-/obj/structure/closet/secure_closet/guncabinet/red,
-/obj/item/weapon/gun/rifle/m41a/elite,
-/obj/item/ammo_magazine/rifle/ap,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "pXu" = (
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/almayer/mono,
@@ -30622,6 +30778,16 @@
 /obj/structure/cargo_container/grant/rightmid,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
+"pXJ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/barricade/metal/wired{
+	dir = 1
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost)
 "pXU" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -30831,6 +30997,14 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/red/northwest,
 /area/skyscraper/almenia/security_sector)
+"qdi" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/computer/cameras/almayer_network{
+	dir = 4
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/red/southwest,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "qdp" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -30934,14 +31108,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"qhe" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "qhH" = (
 /obj/effect/landmark/corpsespawner/security,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -30959,6 +31125,11 @@
 /obj/structure/machinery/seed_extractor,
 /turf/open/floor/almayer/sterile_green_corner/west,
 /area/skyscraper/ashwin/agro_sector)
+"qhY" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/science_sector)
 "qii" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -31273,6 +31444,14 @@
 /obj/structure/cargo_container/kelland/left,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/internal_cargo_sector)
+"qrM" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "qrU" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -31333,6 +31512,20 @@
 /obj/structure/closet/crate/plastic,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/internal_cargo_sector)
+"qti" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector)
 "qtv" = (
 /obj/structure/surface/table/woodentable/fancy,
 /obj/structure/machinery/computer/emails{
@@ -31561,6 +31754,17 @@
 	},
 /turf/open/floor/plating/bare_catwalk,
 /area/skyscraper/underground/metro_tunnel/north)
+"qAi" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/almenia{
+	dir = 8;
+	pixel_x = -10;
+	pixel_y = -3
+	},
+/obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/science_sector)
 "qAr" = (
 /obj/structure/machinery/door/airlock/almayer/security/reinforced{
 	name = "Security"
@@ -31700,6 +31904,10 @@
 "qDW" = (
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/science_sector)
+"qEe" = (
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/almenia/morgue_sector)
 "qEn" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -31759,20 +31967,6 @@
 "qFK" = (
 /turf/open/gm/coast/west,
 /area/skyscraper/almenia/eco_emulation_sector)
-"qFQ" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector)
 "qGe" = (
 /obj/structure/bed/chair/comfy/beige{
 	dir = 8
@@ -31789,6 +31983,19 @@
 	},
 /turf/open/floor/almayer/red/west,
 /area/skyscraper/ashwin/security_sector)
+"qGj" = (
+/obj/structure/stairs{
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/agro_sector)
 "qGl" = (
 /obj/structure/platform_decoration/metal/almayer,
 /turf/open/asphalt/cement,
@@ -31849,21 +32056,6 @@
 /obj/structure/machinery/light/double/almenia,
 /turf/open/floor/kutjevo/tan/multi_tiles/north,
 /area/skyscraper/almenia/engineering/upper)
-"qIy" = (
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/item/storage/box/kit/honorguard,
-/obj/item/storage/box/kit/honorguard,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "qIM" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N"
@@ -32360,11 +32552,6 @@
 /obj/structure/cargo_container/lockmart/mid,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/cargo_sector)
-"qWI" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "qWX" = (
 /obj/effect/landmark/corpsespawner/security,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -32648,6 +32835,20 @@
 	},
 /turf/open/floor/kutjevo/tan/multi_tiles,
 /area/skyscraper/almenia/engineering/upper)
+"rdX" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/redfull,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "rew" = (
 /turf/open/openspace,
 /area/skyscraper/ashwin/agro_sector)
@@ -32699,6 +32900,17 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/redcorner/east,
 /area/skyscraper/almenia/security_sector)
+"rfg" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/item/ammo_kit/penetrating,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "rfh" = (
 /turf/open/openspace,
 /area/skyscraper/almenia/agro_sector)
@@ -32706,19 +32918,6 @@
 /obj/structure/flora/bush/ausbushes/var3/brflowers,
 /turf/open/floor/grass,
 /area/skyscraper/almenia/security_sector/blockpost)
-"rfJ" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/morgue_sector)
 "rfW" = (
 /obj/effect/landmark/corpsespawner/pmc,
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -33166,20 +33365,6 @@
 /obj/structure/machinery/vending/cigarette,
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"rqt" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
 "rqG" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 4
@@ -33555,6 +33740,11 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/red/southeast,
 /area/skyscraper/ashwin/security_sector)
+"rBb" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "rBj" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator{
 	elevator_id = "sky_scraper_elevator_two"
@@ -33883,20 +34073,6 @@
 /obj/structure/machinery/cm_vending/sorted/marine_food,
 /turf/open/floor/wood,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"rLr" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector)
 "rLU" = (
 /obj/structure/barricade/handrail/wire,
 /obj/structure/barricade/handrail/wire{
@@ -33945,6 +34121,12 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"rMG" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/computer/disk_reader,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/internal_cargo_sector)
 "rMQ" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -33970,6 +34152,12 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/almayer/red/northwest,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"rNS" = (
+/obj/structure/surface/rack,
+/obj/structure/machinery/light/double/blue,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/ashwin/building_in_progress_sector/ten)
 "rOc" = (
 /obj/effect/landmark/corpsespawner/security,
 /turf/open/floor/almayer/sterile_green_side/west,
@@ -34379,6 +34567,15 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
+"sao" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/obj/structure/barricade/handrail/wire{
+	layer = 3.5
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "sat" = (
 /obj/docking_port/stationary/sselevator/one,
 /turf/open/openspace,
@@ -34960,18 +35157,9 @@
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
 "son" = (
-/obj/structure/closet/secure_closet/guncabinet/red,
-/obj/item/ammo_magazine/rifle/ap,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/structure/machinery/light/double/almenia{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/agro_sector)
 "soo" = (
 /obj/structure/prop/invuln/overhead_pipe{
 	dir = 4;
@@ -36048,6 +36236,20 @@
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"sRe" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/agro_sector)
 "sRi" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -36124,17 +36326,6 @@
 	},
 /turf/open/floor/plating/icefloor/warnplate,
 /area/skyscraper/almenia/landing_zone)
-"sVm" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 1;
-	pixel_y = 14
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/almenia/agro_sector)
 "sVo" = (
 /obj/structure/cargo_container/trijent/left,
 /turf/open/floor/almayer/mono,
@@ -36196,11 +36387,6 @@
 	},
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"sXe" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
-/turf/open/floor/almayer/plate,
-/area/skyscraper/ashwin/agro_sector)
 "sXh" = (
 /obj/structure/barricade/handrail/wire,
 /obj/structure/stairs{
@@ -36487,11 +36673,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/w_y0/north,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"tfU" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "tfZ" = (
 /obj/structure/machinery/siren{
 	dir = 1;
@@ -36499,6 +36680,10 @@
 	},
 /turf/closed/wall/r_wall/biodome/biodome_unmeltable,
 /area/skyscraper/almenia/security_sector/blockpost)
+"tgi" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/ashwin/eco_emulation_sector)
 "tgj" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/secdoor/reinforced{
 	dir = 2;
@@ -36646,12 +36831,6 @@
 /obj/structure/pipes/vents/pump,
 /turf/open/floor/almayer/redcorner/north,
 /area/skyscraper/ashwin/security_sector)
-"tiU" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/cargo_sector)
 "tiW" = (
 /obj/structure/prop/invuln/lattice_prop{
 	icon_state = "lattice12";
@@ -37058,6 +37237,10 @@
 "tuG" = (
 /turf/open/floor/plating/warnplate/east,
 /area/skyscraper/almenia/landing_zone)
+"tuI" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/internal_cargo_sector)
 "tuK" = (
 /obj/structure/largecrate/random/secure,
 /obj/structure/machinery/light/double/almenia{
@@ -37314,10 +37497,6 @@
 "tCy" = (
 /turf/open/openspace,
 /area/skyscraper/ashwin/building_in_progress_sector/six)
-"tCB" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "tCD" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -37384,6 +37563,24 @@
 /obj/structure/surface/rack,
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/almenia/internal_cargo_sector)
+"tDP" = (
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = 8;
+	pixel_y = 18
+	},
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = -8;
+	pixel_y = 18
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/security_sector)
+"tEd" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/cargo_sector)
 "tEo" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -37475,11 +37672,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
-"tGe" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/computer/disk_reader,
-/turf/open/floor/almayer/plate,
-/area/skyscraper/almenia/building_in_progress_sector/ten)
 "tGi" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/power/apc/upgraded/power/north,
@@ -37635,11 +37827,18 @@
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
 "tLt" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
+/obj/structure/closet/secure_closet/guncabinet/red,
+/obj/item/weapon/gun/rifle/m41a/elite,
+/obj/item/ammo_magazine/rifle/ap,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
 	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "tLu" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/secdoor/reinforced{
 	dir = 2;
@@ -38079,21 +38278,24 @@
 /turf/open/floor/plating/kutjevo,
 /area/skyscraper/almenia/science_sector)
 "tVJ" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
 	},
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/item/ammo_kit/penetrating,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/almenia/security_sector/blockpost/upper)
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost)
 "tWg" = (
 /obj/structure/largecrate,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/internal_cargo_sector)
+"tWC" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/cargo_sector)
 "tWF" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -38194,20 +38396,10 @@
 "tYi" = (
 /turf/open/floor/almayer,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"tYM" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 2;
-	opacity = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/agro_sector)
+"tYn" = (
+/obj/structure/machinery/door/airlock/multi_tile/almayer/engidoor/colony,
+/turf/open/floor/kutjevo/colors/orange,
+/area/skyscraper/almenia/engineering/upper)
 "tYQ" = (
 /obj/structure/bookcase/manuals/engineering,
 /turf/open/floor/wood,
@@ -38330,17 +38522,6 @@
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost)
-"ubR" = (
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = 30
-	},
-/obj/structure/surface/rack,
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/obj/item/ammo_kit/penetrating,
-/turf/open/floor/plating/almayer,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "ucT" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 8
@@ -38787,12 +38968,10 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/almenia/landing_zone)
-"usl" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
+"urX" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/plating,
+/area/skyscraper/almenia/morgue_sector)
 "usy" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -38866,16 +39045,6 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/ashwin/subway_station)
-"utq" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "uty" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/almayer/red/east,
@@ -39258,12 +39427,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"uCU" = (
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector)
 "uDb" = (
 /turf/open/floor/almayer/redcorner/north,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
@@ -39342,6 +39505,11 @@
 	},
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"uFF" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/ashwin/eco_emulation_sector)
 "uFV" = (
 /obj/structure/window/framed/corsat/cell/security,
 /turf/open/floor/almayer/plate,
@@ -39731,13 +39899,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/red/southwest,
 /area/skyscraper/almenia/security_sector/blockpost)
-"uRm" = (
-/obj/structure/machinery/door/airlock/almayer/engineering/reinforced{
-	dir = 2;
-	name = "Technical Floor"
-	},
-/turf/open/floor/kutjevo/tan/multi_tiles,
-/area/skyscraper/almenia/engineering/upper)
 "uRC" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/mono,
@@ -39836,6 +39997,20 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"uTe" = (
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = 8;
+	pixel_y = 18
+	},
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = -8;
+	pixel_y = 18
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "uTz" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N"
@@ -39880,20 +40055,19 @@
 /turf/open/floor/almayer/red/north,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
 "uUR" = (
-/obj/structure/closet/secure_closet/guncabinet/red,
-/obj/item/weapon/gun/launcher/rocket/anti_tank,
-/obj/item/ammo_magazine/rocket/anti_tank,
-/obj/item/ammo_magazine/rocket/anti_tank,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
 	},
-/turf/open/floor/plating/almayer,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/turf/open/floor/almayer/redfull,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
-"uUW" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/storage/box/bodybags,
-/turf/open/floor/plating/plating_catwalk,
-/area/skyscraper/almenia/morgue_sector)
 "uVe" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -39942,18 +40116,6 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"uWG" = (
-/obj/structure/surface/table/almayer,
-/obj/structure/machinery/camera/autoname/almayer{
-	dir = 4;
-	name = "ship-grade camera"
-	},
-/obj/item/storage/fancy/vials/empty{
-	pixel_y = 10;
-	start_vials = 2
-	},
-/turf/open/floor/almayer/sterile_green_side/west,
-/area/skyscraper/almenia/science_sector)
 "uWL" = (
 /turf/open/floor/almayer/redcorner/west,
 /area/skyscraper/almenia/security_sector/blockpost)
@@ -40125,12 +40287,6 @@
 "vaf" = (
 /turf/open/shuttle/elevator/skyscraper/grating,
 /area/skyscraper/almenia/building_in_progress_sector/six)
-"vao" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/engidoor{
-	dir = 1
-	},
-/turf/open/floor/kutjevo/tan/multi_tiles,
-/area/skyscraper/almenia/engineering/upper)
 "vau" = (
 /turf/closed/wall/vents,
 /area/skyscraper/almenia/science_sector)
@@ -40178,18 +40334,6 @@
 	},
 /turf/open/floor/almayer/red,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
-"vcn" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/obj/structure/stairs{
-	dir = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost)
 "vcD" = (
 /obj/effect/landmark/monkey_spawn,
 /turf/open/floor/almayer/mono,
@@ -40308,11 +40452,6 @@
 	},
 /turf/open/floor/wood,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"ver" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/computer/disk_reader,
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/science_sector)
 "veu" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -40936,6 +41075,18 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/cargo_sector)
+"vvu" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/obj/structure/stairs{
+	dir = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "vvz" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/crew/alt{
@@ -41341,20 +41492,32 @@
 	},
 /turf/open/floor/plating/almayer,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"vFt" = (
-/obj/structure/surface/table/almayer,
-/obj/item/storage/box/pillbottles,
-/obj/item/storage/box/pillbottles,
-/obj/item/storage/box/pillbottles,
-/turf/open/floor/almayer/sterile_green_corner,
-/area/skyscraper/almenia/science_sector)
 "vFA" = (
 /turf/open/floor/plating/warnplate/northeast,
 /area/skyscraper/ashwin/landing_zone)
+"vGg" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/ashwin/building_in_progress_sector/seven)
 "vGq" = (
 /obj/structure/flora/bush/ausbushes/var3/leafybush,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/skyscraper/ashwin/agro_sector)
+"vGB" = (
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = 8;
+	pixel_y = 18
+	},
+/obj/structure/filingcabinet{
+	density = 0;
+	pixel_x = -8;
+	pixel_y = 18
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector)
 "vGU" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 1
@@ -41532,6 +41695,14 @@
 "vLs" = (
 /turf/open/floor/plating/warnplate/northwest,
 /area/skyscraper/ashwin/landing_zone)
+"vLQ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "vMe" = (
 /obj/structure/flora/bush/ausbushes/var3/sparsegrass,
 /turf/open/floor/grass,
@@ -41611,6 +41782,11 @@
 /obj/structure/barricade/metal/wired,
 /turf/open/floor/almayer/test_floor4,
 /area/skyscraper/ashwin/security_sector)
+"vOt" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "vON" = (
 /obj/structure/barricade/handrail/wire{
 	dir = 1;
@@ -42119,6 +42295,11 @@
 	},
 /turf/open/floor/almayer/red/northeast,
 /area/skyscraper/almenia/security_sector/blockpost/upper)
+"wcU" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/eco_emulation_sector)
 "wcY" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgibmid1"
@@ -42182,6 +42363,20 @@
 	},
 /turf/open/floor/almayer/red,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"wfh" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 4
+	},
+/obj/structure/stairs{
+	dir = 1;
+	terminator_mode = 2;
+	opacity = 1
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "wfk" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -42236,6 +42431,12 @@
 /obj/structure/machinery/light/double/blue,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/skyscraper/almenia/agro_sector)
+"wgg" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "wgl" = (
 /obj/structure/sign/safety/restrictedarea{
 	pixel_y = 32
@@ -42409,6 +42610,19 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/wv,
 /area/skyscraper/almenia/engineering/upper)
+"wjT" = (
+/obj/structure/surface/table/almayer,
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 4;
+	name = "ship-grade camera"
+	},
+/obj/item/storage/fancy/vials/empty{
+	pixel_y = 10;
+	start_vials = 2
+	},
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_side/west,
+/area/skyscraper/almenia/science_sector)
 "wjU" = (
 /obj/structure/cargo_container/hd/mid,
 /turf/open/floor/plating/plating_catwalk,
@@ -42442,6 +42656,11 @@
 /obj/structure/machinery/cm_vending/sorted/marine_food,
 /turf/open/floor/wood,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
+"wko" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/eco_emulation_sector)
 "wkJ" = (
 /obj/structure/platform/metal/almayer/west,
 /turf/open/openspace,
@@ -42619,6 +42838,19 @@
 	},
 /turf/open/shuttle/elevator/skyscraper/wg,
 /area/skyscraper/almenia/building_in_progress_sector/ten)
+"wpE" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/structure/machinery/light/double/almenia{
+	dir = 4;
+	pixel_x = 10;
+	pixel_y = 1
+	},
+/obj/effect/landmark/item_pool_spawner/survivor_ammo,
+/obj/effect/landmark/objective_landmark/close{
+	pixel_x = 8
+	},
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/agro_sector)
 "wpG" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/plate,
@@ -42636,6 +42868,11 @@
 /obj/structure/cargo_container/wy/mid,
 /turf/open/floor/plating/plating_catwalk,
 /area/skyscraper/ashwin/internal_cargo_sector)
+"wpZ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "wqp" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
@@ -42821,21 +43058,7 @@
 /obj/effect/decal/cleanable/blood/xeno,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"wtX" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/redfull,
-/area/skyscraper/almenia/security_sector/blockpost)
-"wuf" = (
+"wuc" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
 	},
@@ -42843,12 +43066,17 @@
 	icon_state = "E"
 	},
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/maint,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
 /turf/open/floor/almayer/redfull,
-/area/skyscraper/ashwin/security_sector)
+/area/skyscraper/ashwin/security_sector/blockpost/mid)
+"wuf" = (
+/obj/structure/surface/rack,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/building_in_progress_sector/seven)
 "wuu" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator{
 	elevator_id = "sky_scraper_elevator_two"
@@ -43049,16 +43277,6 @@
 /obj/structure/largecrate/random/barrel/green,
 /turf/open/floor/plating,
 /area/skyscraper/almenia/engineering/upper)
-"wzw" = (
-/obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/light/double/almenia{
-	dir = 4;
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/obj/effect/landmark/item_pool_spawner/survivor_ammo,
-/turf/open/floor/almayer/plate,
-/area/skyscraper/ashwin/agro_sector)
 "wzB" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 9
@@ -43203,6 +43421,17 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/roof/lab,
 /area/skyscraper/almenia/landing_zone)
+"wCR" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = 30
+	},
+/obj/structure/surface/rack,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
+/obj/item/ammo_kit/incendiary,
+/turf/open/floor/plating/almayer,
+/area/skyscraper/almenia/security_sector/blockpost/upper)
 "wEf" = (
 /turf/open/floor/plating/icefloor/warnplate,
 /area/skyscraper/ashwin/landing_zone)
@@ -43365,6 +43594,15 @@
 /obj/effect/landmark/static_comms/net_two,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/eco_emulation_sector)
+"wHC" = (
+/obj/structure/barricade/handrail/wire{
+	layer = 3.5
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 8
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/skyscraper/almenia/internal_cargo_sector)
 "wHI" = (
 /turf/open/floor/plating/bare_catwalk,
 /area/skyscraper/underground/metro_tunnel/north)
@@ -43610,6 +43848,14 @@
 	},
 /turf/open/floor/almayer/cargo,
 /area/skyscraper/ashwin/cargo_sector)
+"wPL" = (
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/item_pool_spawner/survivor_ammo,
+/obj/effect/landmark/objective_landmark/close{
+	pixel_x = 8
+	},
+/turf/open/floor/almayer/plate,
+/area/skyscraper/ashwin/agro_sector)
 "wQa" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/redfull,
@@ -43808,12 +44054,22 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"wTW" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/morgue_sector)
 "wUb" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"wUg" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/machinery/door/airlock/almayer/maint/colony,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector)
 "wUn" = (
 /obj/effect/decal/medical_decals{
 	icon_state = "cryomid"
@@ -44031,10 +44287,6 @@
 	},
 /turf/open/floor/almayer/mono,
 /area/skyscraper/ashwin/security_sector/blockpost/mid)
-"wZp" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/almenia/security_sector/blockpost/mid)
 "wZA" = (
 /obj/structure/flora/grass/short_grass/ice,
 /turf/open/gm/dirtgrassborder/grassdirt_corner/north_east,
@@ -44826,16 +45078,6 @@
 /obj/structure/pipes/vents/scrubber,
 /turf/open/floor/plating,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
-"xvL" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/mid)
 "xvQ" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/almayer/red/east,
@@ -45004,10 +45246,10 @@
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
 "xzY" = (
-/obj/structure/surface/rack,
-/obj/structure/machinery/light/double/blue,
-/turf/open/floor/almayer/cargo,
-/area/skyscraper/ashwin/building_in_progress_sector/ten)
+/obj/structure/surface/table/reinforced/almayer_B,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/mono,
+/area/skyscraper/ashwin/security_sector/blockpost)
 "xAw" = (
 /obj/effect/decal/cleanable/blood/xeno{
 	icon_state = "xgib2"
@@ -45031,6 +45273,12 @@
 	},
 /turf/open/floor/almayer/red,
 /area/skyscraper/ashwin/security_sector/blockpost)
+"xAT" = (
+/obj/structure/machinery/door/airlock/almayer/maint/colony{
+	dir = 1
+	},
+/turf/open/floor/almayer/mono,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "xBf" = (
 /obj/structure/surface/rack,
 /obj/effect/decal/warning_stripes{
@@ -45128,14 +45376,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/mono,
 /area/skyscraper/almenia/security_sector/blockpost)
-"xFw" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/machinery/door/airlock/almayer/research/glass/reinforced{
-	dir = 4;
-	name = "\improper Medical Research"
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/science_sector)
 "xFH" = (
 /obj/structure/bed{
 	can_buckle = 0
@@ -45185,10 +45425,6 @@
 	},
 /turf/open/auto_turf/strata_grass/layer1,
 /area/skyscraper/almenia/eco_emulation_sector)
-"xFS" = (
-/obj/structure/machinery/door/airlock/almayer/maint,
-/turf/open/floor/plating,
-/area/skyscraper/ashwin/eco_emulation_sector)
 "xGL" = (
 /obj/structure/cargo_container/arious/leftmid,
 /turf/open/floor/almayer/mono,
@@ -45481,16 +45717,6 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/plate,
 /area/skyscraper/almenia/building_in_progress_sector/six)
-"xNm" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/barricade/metal/wired{
-	dir = 1
-	},
-/obj/structure/machinery/door/airlock/almayer/maint{
-	dir = 1
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/ashwin/security_sector/blockpost/upper)
 "xNR" = (
 /obj/structure/cargo_container/trijent/mid,
 /obj/effect/decal/cleanable/dirt,
@@ -45728,19 +45954,6 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/skyscraper/ashwin/security_sector)
-"xTP" = (
-/obj/structure/barricade/handrail/wire{
-	dir = 8
-	},
-/obj/structure/stairs{
-	dir = 1;
-	terminator_mode = 1
-	},
-/obj/structure/barricade/handrail/wire{
-	dir = 4
-	},
-/turf/open/floor/almayer/mono,
-/area/skyscraper/almenia/internal_cargo_sector)
 "xTZ" = (
 /obj/structure/barricade/metal/wired{
 	dir = 4
@@ -45960,6 +46173,17 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/skyscraper/almenia/security_sector/blockpost/mid)
+"xYM" = (
+/obj/structure/surface/rack,
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/item/defenses/handheld/sentry/flamer,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/almayer/cargo,
+/area/skyscraper/almenia/security_sector/blockpost/mid)
 "xYQ" = (
 /turf/open/floor/almayer/sterile_green,
 /area/skyscraper/almenia/science_sector)
@@ -46133,6 +46357,18 @@
 	},
 /turf/open/floor/plating,
 /area/skyscraper/almenia/security_sector/blockpost)
+"ydl" = (
+/obj/structure/surface/rack,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/item/storage/pill_bottle/bicaridine/skillless,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/almayer/sterile_green_corner/east,
+/area/skyscraper/almenia/science_sector)
 "ydq" = (
 /obj/structure/barricade/handrail/wire,
 /obj/structure/stairs{
@@ -46234,6 +46470,10 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/almayer/red/east,
 /area/skyscraper/ashwin/security_sector/blockpost/upper)
+"yga" = (
+/obj/structure/machinery/door/airlock/almayer/engineering/reinforced/colony,
+/turf/open/floor/almayer/plate,
+/area/skyscraper/almenia/engineering/upper)
 "ygC" = (
 /obj/structure/barricade/handrail/wire,
 /turf/open/shuttle/elevator/skyscraper/wv,
@@ -93446,7 +93686,7 @@ aJo
 aJo
 gCG
 eeT
-eeT
+fxH
 qda
 eeT
 mkt
@@ -103646,7 +103886,7 @@ vHc
 hJf
 hJf
 hJf
-oyh
+kiN
 lfH
 qCm
 qCm
@@ -114253,7 +114493,7 @@ aJo
 aJo
 gCG
 eeT
-eeT
+fxH
 qda
 eeT
 mkt
@@ -124659,7 +124899,7 @@ vHc
 vHc
 kLT
 vHc
-oyh
+kiN
 vAJ
 qCm
 qCm
@@ -135062,7 +135302,7 @@ gCG
 eeT
 eeT
 qda
-eeT
+fxH
 mkt
 gCG
 aJo
@@ -145463,7 +145703,7 @@ qCm
 qCm
 vAJ
 vHc
-vHc
+dOv
 kLT
 vHc
 oyh
@@ -155660,7 +155900,7 @@ cAk
 cAk
 cAk
 rRs
-jEl
+aWF
 eey
 eey
 eey
@@ -155870,7 +156110,7 @@ jEl
 eey
 eey
 eey
-swh
+fVC
 isl
 cAk
 cAk
@@ -166067,7 +166307,7 @@ grW
 wvg
 wvg
 wvg
-mAi
+uFF
 lmo
 ozW
 ozW
@@ -166269,7 +166509,7 @@ ozW
 ozW
 ozW
 vIH
-grW
+wko
 wvg
 wvg
 wvg
@@ -176673,7 +176913,7 @@ wwO
 wwO
 wwO
 isl
-jEl
+csm
 eey
 eey
 eey
@@ -186870,7 +187110,7 @@ dCj
 dCj
 dCj
 vhA
-grW
+igy
 wvg
 wvg
 wvg
@@ -197072,7 +197312,7 @@ xJo
 eey
 agA
 iBM
-swh
+wcU
 isl
 wwO
 wwO
@@ -207681,7 +207921,7 @@ grW
 wvg
 wvg
 wvg
-mAi
+nCT
 lmo
 dCj
 dCj
@@ -218291,7 +218531,7 @@ jEl
 eey
 eey
 eey
-swh
+wcU
 isl
 wwO
 wwO
@@ -228591,7 +228831,7 @@ wdt
 wvg
 wvg
 wvg
-mAi
+nCT
 lmo
 dCj
 dCj
@@ -238686,7 +238926,7 @@ xJo
 eey
 agA
 iBM
-swh
+wcU
 isl
 cAk
 cAk
@@ -249497,7 +249737,7 @@ ozW
 ozW
 ozW
 vIH
-grW
+igy
 wvg
 wvg
 wvg
@@ -259901,7 +260141,7 @@ wwO
 wwO
 wwO
 isl
-jEl
+csm
 eey
 eey
 eey
@@ -270308,7 +270548,7 @@ grW
 wvg
 wvg
 wvg
-mAi
+nCT
 vIH
 dCj
 dCj
@@ -280403,7 +280643,7 @@ eey
 eey
 eey
 eey
-swh
+wcU
 jgL
 wwO
 wwO
@@ -291111,7 +291351,7 @@ dCj
 dCj
 dCj
 vIH
-grW
+igy
 wvg
 wvg
 wvg
@@ -301515,7 +301755,7 @@ wwO
 wwO
 wwO
 isl
-jEl
+csm
 eey
 eey
 eey
@@ -311819,7 +312059,7 @@ wdt
 wvg
 wvg
 wvg
-mAi
+nCT
 lmo
 dCj
 dCj
@@ -322223,7 +322463,7 @@ tRd
 eey
 eey
 eey
-swh
+wcU
 jgL
 wwO
 wwO
@@ -332725,7 +332965,7 @@ dCj
 dCj
 dCj
 vIH
-grW
+igy
 wvg
 wvg
 wvg
@@ -343026,7 +343266,7 @@ nWa
 ckr
 ckr
 nWa
-tGe
+oyM
 jOr
 jOr
 jOr
@@ -353330,7 +353570,7 @@ wFZ
 xez
 xez
 xez
-xzY
+rNS
 saN
 slk
 slk
@@ -363730,7 +363970,7 @@ hwu
 qOk
 hZG
 roe
-pii
+fKq
 lHB
 kAr
 rQe
@@ -363936,7 +364176,7 @@ oyp
 qOk
 wJl
 aSR
-pii
+fKq
 sFS
 tiY
 sFS
@@ -364449,10 +364689,10 @@ roD
 aSR
 aSR
 aQL
-qFQ
+fof
 rcF
 aPH
-pPw
+cRA
 uRC
 qOk
 oXN
@@ -364551,7 +364791,7 @@ bbz
 qOk
 qOk
 qOk
-rLr
+ouU
 qOk
 jkL
 jmU
@@ -364668,7 +364908,7 @@ qOk
 vKD
 qOk
 qOk
-maz
+wUg
 tJE
 hxv
 qOk
@@ -364763,10 +365003,10 @@ gDO
 jmU
 qOk
 uyy
-pwT
+ecI
 uyy
 wJl
-ecN
+lBC
 voh
 tan
 qOk
@@ -374133,7 +374373,7 @@ dBr
 rTX
 aSO
 kHh
-aKo
+vGB
 dzU
 gee
 kZS
@@ -374236,7 +374476,7 @@ hoq
 rTX
 vXn
 rTX
-cSM
+tDP
 jZT
 bED
 jZT
@@ -374852,10 +375092,10 @@ lyC
 cQi
 cQi
 gGv
-hlq
+qti
 wIZ
 pXu
-iCw
+aUe
 pEq
 rTX
 fsy
@@ -374954,7 +375194,7 @@ hPE
 rTX
 rTX
 rTX
-wuf
+dLD
 rTX
 jtB
 voK
@@ -375071,7 +375311,7 @@ rTX
 sJN
 rTX
 rTX
-hft
+ohg
 pUM
 tJL
 rTX
@@ -375166,10 +375406,10 @@ dXx
 voK
 rTX
 riQ
-fMT
+pPS
 riQ
 ejU
-uCU
+chO
 eAm
 hli
 rTX
@@ -384541,7 +384781,7 @@ eMg
 xpm
 xpm
 xpm
-svw
+wuf
 uFV
 hBH
 hBH
@@ -384745,7 +384985,7 @@ hBH
 iAM
 eMg
 eMg
-mkq
+fyk
 eMg
 svw
 iAM
@@ -395147,10 +395387,10 @@ mQI
 mQI
 wqX
 kxI
-kxI
+fRI
 oHa
 kxI
-vxW
+vGg
 wqX
 mQI
 mQI
@@ -405348,7 +405588,7 @@ xNk
 aLd
 aLd
 aLd
-fCu
+cnD
 slN
 jnP
 jnP
@@ -415954,7 +416194,7 @@ weP
 weP
 bSY
 wpG
-wpG
+jlo
 lJs
 wpG
 fvQ
@@ -426155,7 +426395,7 @@ arc
 iHg
 fWH
 lUk
-jwh
+pSz
 aOx
 tOY
 dZo
@@ -426870,10 +427110,10 @@ sGi
 pgX
 pgX
 dKl
-wtX
+bki
 bOh
 iaG
-nBD
+pXJ
 ezB
 dZo
 dPB
@@ -426972,7 +427212,7 @@ hAb
 dZo
 dZo
 dZo
-gGA
+lsK
 dZo
 qdz
 gDR
@@ -427089,7 +427329,7 @@ dZo
 xIw
 dZo
 dZo
-gqZ
+avN
 dmq
 dkI
 dZo
@@ -427184,10 +427424,10 @@ diX
 gDR
 dZo
 mwY
-bCd
+tVJ
 mwY
 aqG
-afH
+nve
 piG
 rEW
 dZo
@@ -436558,7 +436798,7 @@ mLu
 uoI
 gFd
 rlb
-tiX
+xzY
 eZZ
 qjz
 cut
@@ -436657,7 +436897,7 @@ fCs
 cut
 xct
 cut
-fzj
+uTe
 otV
 fmX
 otV
@@ -437273,10 +437513,10 @@ eQq
 xqE
 xqE
 xKy
-oNJ
+pQY
 mXu
 koR
-utq
+hGu
 dSI
 cut
 cWq
@@ -437375,7 +437615,7 @@ tXj
 cut
 cut
 cut
-mTg
+lBr
 cut
 mZx
 knN
@@ -437492,7 +437732,7 @@ cut
 oph
 cut
 cut
-qWI
+fFm
 vwB
 dld
 cut
@@ -437587,10 +437827,10 @@ wWf
 knN
 cut
 jvX
-qhe
+vLQ
 jvX
 nkG
-tLt
+obO
 bUe
 egf
 cut
@@ -438721,7 +438961,7 @@ cut
 cut
 cut
 cut
-fwo
+ipR
 cut
 cut
 lNv
@@ -438821,11 +439061,11 @@ lNv
 lNv
 lNv
 lNv
-icX
-vcn
-vcn
-abx
-dIO
+wfh
+vvu
+vvu
+sao
+luD
 lNv
 lNv
 lNv
@@ -444694,9 +444934,9 @@ fzH
 fzH
 fzH
 fzH
-tYM
-hNE
-hNE
+sRe
+lVY
+lVY
 cDo
 fzH
 fzH
@@ -444800,7 +445040,7 @@ qpG
 qpG
 qpG
 qpG
-bjT
+son
 qpG
 fzH
 fzH
@@ -446962,7 +447202,7 @@ aAS
 tMJ
 tMJ
 tMJ
-teG
+gRV
 hML
 fHf
 fHf
@@ -447168,7 +447408,7 @@ aAS
 aAS
 asQ
 aAS
-teG
+gRV
 jkO
 xSR
 fHf
@@ -455198,7 +455438,7 @@ fzH
 fzH
 bOf
 bOf
-ltS
+nDv
 bOf
 bOf
 bOf
@@ -457567,9 +457807,9 @@ uYg
 uYg
 uYg
 dol
+fos
 uEz
-uEz
-gzr
+hVW
 uEz
 vKw
 dol
@@ -459524,7 +459764,7 @@ fzH
 fzH
 bOf
 bOf
-ltS
+nDv
 bOf
 bOf
 bOf
@@ -465603,7 +465843,7 @@ fzH
 qpG
 qpG
 qpG
-bjT
+son
 qpG
 qpG
 qpG
@@ -467973,7 +468213,7 @@ mBs
 jkO
 aAS
 aAS
-asQ
+exY
 aAS
 teG
 jkO
@@ -469928,7 +470168,7 @@ fzH
 fzH
 qpG
 qpG
-bjT
+son
 qpG
 qpG
 qpG
@@ -470031,10 +470271,10 @@ fzH
 fzH
 fzH
 fzH
-sVm
+exw
 wFM
 wFM
-fGw
+qGj
 fzH
 fzH
 fzH
@@ -476009,7 +476249,7 @@ bOf
 bOf
 bOf
 bOf
-ltS
+nDv
 bOf
 bOf
 fzH
@@ -478271,7 +478511,7 @@ gcX
 evg
 ooV
 bOf
-kwT
+rMG
 fDQ
 fDQ
 fDQ
@@ -480335,7 +480575,7 @@ bOf
 bOf
 bOf
 bOf
-ltS
+nDv
 bOf
 bOf
 fzH
@@ -480435,7 +480675,7 @@ fzH
 fzH
 fzH
 fzH
-gUf
+iBB
 qfV
 qfV
 qdp
@@ -488275,7 +488515,7 @@ eTB
 dOw
 euy
 iDT
-lBr
+qdi
 bmD
 uNY
 qME
@@ -488576,7 +488816,7 @@ hlJ
 kpm
 gVb
 gzk
-frS
+jxr
 vTi
 tDc
 bmD
@@ -489291,10 +489531,10 @@ oZE
 hiS
 hiS
 eut
-rqt
+ezv
 lvu
 hkC
-fra
+isc
 iII
 bmD
 rzO
@@ -489387,13 +489627,13 @@ pjz
 mkw
 gdY
 dTX
-aUd
+xYM
 bAY
 hCq
 bmD
 bmD
 bmD
-jMT
+dok
 bmD
 opd
 bfr
@@ -489510,7 +489750,7 @@ bmD
 sCl
 bmD
 bmD
-fjb
+eDi
 fBk
 vun
 bmD
@@ -489605,10 +489845,10 @@ hyN
 bfr
 bmD
 pCR
-pdN
+aYf
 pCR
 jiL
-usl
+xAT
 xsL
 dJi
 bmD
@@ -490739,7 +490979,7 @@ bmD
 bmD
 bmD
 bmD
-wZp
+lsy
 bmD
 bmD
 fzH
@@ -497224,7 +497464,7 @@ ivL
 rPe
 ivL
 ivL
-fEJ
+mEg
 qNq
 ivL
 ivL
@@ -498979,7 +499219,7 @@ aNW
 kER
 wXU
 ryj
-dgL
+rBb
 tJa
 pLh
 xMB
@@ -499694,10 +499934,10 @@ rbS
 lTB
 lTB
 qJy
-oJF
+ejj
 jSX
 uBS
-xvL
+caX
 ntj
 xMB
 wtN
@@ -499796,7 +500036,7 @@ ldk
 xMB
 xMB
 xMB
-nuG
+wuc
 xMB
 ccs
 tZg
@@ -499913,7 +500153,7 @@ xMB
 rYo
 xMB
 xMB
-tfU
+vOt
 bjd
 ivL
 xMB
@@ -499992,7 +500232,7 @@ xMB
 xMB
 rcJ
 avQ
-qIy
+pzl
 saM
 aeF
 wQQ
@@ -500008,10 +500248,10 @@ dUB
 tZg
 xMB
 kuv
-gCo
+oTJ
 kuv
 iEn
-hfV
+nco
 lKX
 jNa
 xMB
@@ -501138,7 +501378,7 @@ fzH
 fzH
 xMB
 xMB
-tCB
+pMV
 xMB
 xMB
 xMB
@@ -507114,10 +507354,10 @@ fzH
 fzH
 fzH
 fzH
-bVr
-rfJ
-rfJ
-oZI
+nkQ
+oGS
+oGS
+pei
 fzH
 fzH
 fzH
@@ -507220,7 +507460,7 @@ pwt
 pwt
 pwt
 pwt
-eXO
+urX
 pwt
 pwt
 fzH
@@ -508057,7 +508297,7 @@ pRi
 cOO
 oUg
 oUg
-oUg
+qEe
 pwt
 pwt
 fzH
@@ -510292,7 +510532,7 @@ fzH
 pwt
 dXY
 oUg
-uUW
+mmk
 oUg
 kFB
 wvw
@@ -510601,7 +510841,7 @@ fzH
 fzH
 fzH
 pwt
-gZi
+wTW
 ouT
 ouT
 aDB
@@ -511039,7 +511279,7 @@ fxO
 pRi
 dXY
 oUg
-oUg
+qEe
 oUg
 aDB
 pwt
@@ -518238,7 +518478,7 @@ jbm
 eUO
 eUO
 oRX
-oRX
+bEn
 dOZ
 dOZ
 xPQ
@@ -520695,7 +520935,7 @@ fzH
 dmn
 dDe
 eUO
-deA
+okN
 eUO
 iIu
 jbm
@@ -520901,7 +521141,7 @@ fzH
 fzH
 dmn
 dmn
-mxQ
+cOL
 rFX
 eUO
 eUO
@@ -521441,7 +521681,7 @@ eUO
 nBb
 jcC
 dDe
-eUO
+lPu
 eUO
 eUO
 oRX
@@ -528023,7 +528263,7 @@ fzH
 fzH
 kwc
 kwc
-gnG
+tuI
 kwc
 kwc
 kwc
@@ -532353,7 +532593,7 @@ kwc
 kwc
 kwc
 kwc
-gnG
+tuI
 kwc
 kwc
 fzH
@@ -538431,7 +538671,7 @@ lmo
 lmo
 lmo
 lmo
-xFS
+tgi
 lmo
 fzH
 fzH
@@ -548728,10 +548968,10 @@ fzH
 fzH
 fzH
 fzH
-dVL
-xTP
-xTP
-exv
+nwn
+fHX
+fHX
+wHC
 fzH
 fzH
 fzH
@@ -548834,7 +549074,7 @@ kwc
 kwc
 kwc
 kwc
-gnG
+tuI
 kwc
 kwc
 fzH
@@ -553156,7 +553396,7 @@ fzH
 fzH
 kwc
 kwc
-gnG
+tuI
 kwc
 kwc
 kwc
@@ -559234,7 +559474,7 @@ fzH
 lmo
 lmo
 lmo
-xFS
+tgi
 lmo
 lmo
 lmo
@@ -563559,7 +563799,7 @@ fzH
 fzH
 lmo
 lmo
-xFS
+tgi
 lmo
 lmo
 lmo
@@ -569534,7 +569774,7 @@ fzH
 fzH
 fzH
 fzH
-cTA
+mML
 fzH
 fzH
 fzH
@@ -569637,7 +569877,7 @@ fzH
 fzH
 ugM
 ugM
-lJY
+nCW
 ugM
 wHb
 wHb
@@ -572519,10 +572759,10 @@ kwj
 kmH
 kmH
 wSe
-gnt
+nui
 fbk
 aIp
-cnm
+iUB
 mUT
 ugM
 nNu
@@ -572615,13 +572855,13 @@ wBb
 leD
 tRu
 aAh
-nYj
+dpe
 vxL
 ymg
 ugM
 ugM
 ugM
-hgN
+dOz
 ugM
 tdO
 hXG
@@ -572738,7 +572978,7 @@ ugM
 oVu
 ugM
 ugM
-ldd
+wpZ
 gno
 tIx
 ugM
@@ -572817,13 +573057,13 @@ ugM
 ugM
 fNL
 dih
-odV
-gvB
+hsc
+kLg
 gIb
-tVJ
-bXV
-anO
-euj
+rfg
+wCR
+pbE
+tLt
 aIp
 uCS
 qfT
@@ -572833,10 +573073,10 @@ ouB
 hXG
 ugM
 ePH
-hYT
+qrM
 ePH
 rsG
-gcx
+nea
 sXx
 rOZ
 ugM
@@ -582810,7 +583050,7 @@ vkt
 kRI
 bRa
 ana
-uUR
+lvK
 mfv
 mfv
 cNg
@@ -582922,10 +583162,10 @@ jjt
 kEZ
 kEZ
 gxm
-pho
+rdX
 xDw
 ufo
-xNm
+dnd
 rXc
 hZM
 dmM
@@ -583018,13 +583258,13 @@ qOA
 tIy
 xWd
 pSB
-lZe
+msI
 rxv
 xWk
 hZM
 hZM
 hZM
-ccR
+uUR
 hZM
 qgX
 qaL
@@ -583141,7 +583381,7 @@ hZM
 vMl
 hZM
 hZM
-ezv
+ged
 adv
 phU
 hZM
@@ -583220,13 +583460,13 @@ hZM
 hZM
 dNU
 mid
-egd
-msI
-atV
-ubR
-cNw
-son
-pXq
+gYI
+gmk
+iqN
+hUl
+mOv
+bbi
+jjQ
 ufo
 paF
 jAZ
@@ -583236,10 +583476,10 @@ lmU
 qaL
 hZM
 tmV
-fJL
+ihE
 tmV
 mcT
-bdf
+wgg
 hzA
 nOq
 hZM
@@ -584370,7 +584610,7 @@ hZM
 hZM
 hZM
 hZM
-csm
+ccR
 hZM
 hZM
 fzH
@@ -590649,7 +590889,7 @@ eXQ
 lsb
 lwr
 eXQ
-tmL
+dJJ
 tmL
 tFu
 tmL
@@ -591177,7 +591417,7 @@ sHi
 eXQ
 tmL
 tmL
-tmL
+dJJ
 tmL
 lyA
 nxB
@@ -591875,7 +592115,7 @@ vtG
 vtG
 vtG
 vtG
-pIr
+fNA
 eXQ
 eXQ
 eXQ
@@ -591897,10 +592137,10 @@ eXQ
 vtG
 vtG
 eXQ
-kiN
+yga
 eXQ
 amD
-hoj
+fSy
 kux
 vpi
 eXQ
@@ -592401,7 +592641,7 @@ uJv
 eXQ
 pkj
 vtG
-lWp
+lEe
 eJd
 eJd
 rvh
@@ -592806,7 +593046,7 @@ ouE
 hHw
 nMX
 nBy
-uRm
+gVj
 tmL
 tmL
 tmL
@@ -592815,7 +593055,7 @@ pkj
 vtG
 dlv
 sdD
-pgj
+noD
 eJd
 amD
 vtG
@@ -593444,7 +593684,7 @@ eXQ
 eXQ
 eXQ
 eXQ
-aIR
+xPj
 eXQ
 aCH
 aCH
@@ -593548,7 +593788,7 @@ jym
 jym
 jym
 jym
-jym
+tYn
 rXL
 rXL
 eXQ
@@ -593631,7 +593871,7 @@ hHw
 bPd
 ouE
 hHw
-hHw
+pho
 tiW
 ouE
 ouE
@@ -593737,7 +593977,7 @@ eXQ
 eXQ
 eXQ
 ouE
-vao
+azd
 eXQ
 eXQ
 eXQ
@@ -593753,7 +593993,7 @@ eXQ
 eXQ
 eXQ
 eXQ
-pIr
+fNA
 eXQ
 eXQ
 eXQ
@@ -594049,7 +594289,7 @@ ouE
 ouE
 hHw
 hHw
-uRm
+gVj
 hHw
 hHw
 oan
@@ -594246,7 +594486,7 @@ fzH
 eXQ
 eXQ
 mfH
-nSd
+hIM
 jym
 mfH
 eXQ
@@ -594461,7 +594701,7 @@ ixj
 ouE
 hHw
 hHw
-uRm
+gVj
 hHw
 qdN
 cqM
@@ -595287,7 +595527,7 @@ fzH
 eXQ
 eXQ
 eXQ
-pIr
+fNA
 eXQ
 eXQ
 eXQ
@@ -601466,7 +601706,7 @@ cvE
 jkI
 cvE
 cvE
-ybu
+kJl
 odZ
 tXq
 cvE
@@ -601769,7 +602009,7 @@ buP
 eIL
 oYV
 oYV
-tiU
+tWC
 wEO
 wEO
 sVS
@@ -601784,10 +602024,10 @@ juP
 qxp
 mUG
 buP
-otu
+tEd
 buP
 buP
-otu
+tEd
 buP
 buP
 buP
@@ -601868,7 +602108,7 @@ buP
 buP
 oYV
 oYV
-tiU
+tWC
 oYV
 oYV
 jFd
@@ -601886,7 +602126,7 @@ pXC
 cZP
 jFo
 beb
-tiU
+tWC
 oYV
 oYV
 odZ
@@ -601995,7 +602235,7 @@ tGc
 oYV
 oYV
 gLK
-tiU
+tWC
 oYV
 buP
 vdf
@@ -602287,7 +602527,7 @@ buP
 nfh
 nfh
 buP
-otu
+tEd
 buP
 buP
 rHz
@@ -602295,7 +602535,7 @@ hyE
 vNq
 buP
 buP
-otu
+tEd
 buP
 nfh
 swz
@@ -602408,7 +602648,7 @@ buP
 rxS
 rxS
 buP
-otu
+tEd
 buP
 vdf
 vdf
@@ -602591,7 +602831,7 @@ oYV
 oYV
 buP
 buP
-otu
+tEd
 buP
 buP
 oYV
@@ -602696,7 +602936,7 @@ buP
 oYV
 lsS
 lsS
-tiU
+tWC
 ojY
 oYV
 azH
@@ -602797,7 +603037,7 @@ oYV
 oYV
 buP
 buP
-otu
+tEd
 buP
 buP
 oYV
@@ -603210,7 +603450,7 @@ clS
 oYV
 oYV
 buP
-otu
+tEd
 buP
 iIa
 oYV
@@ -603621,7 +603861,7 @@ ocj
 oYV
 gln
 oYV
-tiU
+tWC
 lsS
 nfh
 nfh
@@ -603725,7 +603965,7 @@ kpp
 oYV
 ixm
 buP
-otu
+tEd
 jdx
 nfh
 buP
@@ -604057,7 +604297,7 @@ oYV
 oYV
 oYV
 oYV
-tiU
+tWC
 kLY
 isN
 vdf
@@ -604134,7 +604374,7 @@ buP
 buP
 buP
 buP
-otu
+tEd
 buP
 buP
 vvq
@@ -604156,7 +604396,7 @@ oYV
 lHl
 buP
 buP
-otu
+tEd
 buP
 buP
 buP
@@ -604342,7 +604582,7 @@ buP
 buP
 lsS
 lsS
-tiU
+tWC
 oYV
 oYV
 oYV
@@ -604360,7 +604600,7 @@ rPG
 oYV
 oYV
 oYV
-tiU
+tWC
 lsS
 lsS
 buP
@@ -604547,7 +604787,7 @@ vdf
 vdf
 vdf
 buP
-otu
+tEd
 buP
 vvq
 oYV
@@ -604567,7 +604807,7 @@ skO
 oYV
 lHl
 buP
-otu
+tEd
 buP
 vdf
 vdf
@@ -604662,7 +604902,7 @@ ixR
 aZI
 xbm
 xbm
-aZI
+gbe
 cHN
 xat
 rsC
@@ -604862,7 +605102,7 @@ oYV
 oYV
 jRa
 hmx
-gZM
+naH
 sLJ
 ikE
 eNI
@@ -611874,7 +612114,7 @@ lKj
 sPO
 uOm
 iTc
-alM
+hAy
 sPO
 iJC
 iTc
@@ -611975,7 +612215,7 @@ sPO
 iTc
 lOn
 sPO
-kxJ
+ydl
 iTc
 uQL
 sPO
@@ -612077,11 +612317,11 @@ veo
 mUa
 iTc
 iTc
-iQh
+gyB
 iTc
 iTc
 iTc
-iQh
+gyB
 iTc
 iTc
 iTc
@@ -612175,7 +612415,7 @@ pId
 onU
 qsl
 xtb
-lkf
+esi
 rbg
 sPO
 iTc
@@ -612390,7 +612630,7 @@ eAL
 iTc
 eUH
 eUH
-iQh
+gyB
 eUH
 iTc
 ase
@@ -612602,7 +612842,7 @@ iTc
 fJP
 uuQ
 sPO
-okN
+oZI
 ekM
 sPO
 tpT
@@ -612698,7 +612938,7 @@ kvs
 eAL
 eUH
 htS
-oxN
+dSO
 mOM
 mYG
 lhH
@@ -613112,7 +613352,7 @@ iTc
 jmN
 lhH
 iTc
-iQh
+gyB
 iTc
 iTc
 kvs
@@ -613210,7 +613450,7 @@ eAL
 lhH
 blS
 qdr
-nJh
+qAi
 oLt
 yhO
 lhH
@@ -613613,14 +613853,14 @@ kvs
 eAL
 iTc
 iTc
-iQh
-iQh
+gyB
+gyB
 iTc
 iTc
 cNc
 eAL
 lhH
-ver
+mMW
 qdr
 eJk
 vJT
@@ -613821,7 +614061,7 @@ eUH
 dzd
 sPO
 sPO
-cuH
+dJC
 eUH
 kvs
 oXy
@@ -613835,10 +614075,10 @@ iTc
 rvG
 sPO
 sPO
-okN
+oZI
 sPO
 sPO
-okN
+oZI
 gmr
 jIO
 amr
@@ -613920,7 +614160,7 @@ iTc
 iTc
 oco
 sPO
-okN
+oZI
 sPO
 vCL
 dAY
@@ -614334,13 +614574,13 @@ eUH
 eUH
 eUH
 eUH
-iQh
+gyB
 eUH
 iTc
 iTc
 iTc
 iTc
-xFw
+qhY
 iTc
 iTc
 iTc
@@ -614354,7 +614594,7 @@ sPO
 sPO
 sPO
 sPO
-okN
+oZI
 xDT
 xDT
 xuB
@@ -614549,7 +614789,7 @@ sPO
 sPO
 sPO
 wUw
-okN
+oZI
 eKu
 hVO
 nvB
@@ -614558,7 +614798,7 @@ eAL
 iTc
 iTc
 iTc
-iQh
+gyB
 iTc
 iTc
 iTc
@@ -614662,7 +614902,7 @@ iTc
 sZF
 nrS
 sPO
-aFi
+lGD
 iTc
 iTc
 iTc
@@ -614744,7 +614984,7 @@ fzH
 fzH
 iTc
 iTc
-mgU
+pFD
 ezN
 sPO
 sPO
@@ -614858,7 +615098,7 @@ sPO
 aYo
 iTc
 shp
-uWG
+wjT
 kfj
 vKn
 asF
@@ -615059,7 +615299,7 @@ iTc
 eUH
 eUH
 iTc
-vFt
+ofp
 kWW
 hlp
 iTc
@@ -622892,11 +623132,11 @@ jCZ
 jCZ
 jCZ
 jCZ
-fHX
+dAT
 jCZ
 jCZ
 jCZ
-fHX
+dAT
 uhz
 pOf
 uhz
@@ -623095,7 +623335,7 @@ vWB
 vWB
 ugQ
 ugQ
-pkx
+lAL
 ugQ
 ugQ
 lvp
@@ -624023,10 +624263,10 @@ nHl
 qOw
 iXB
 vWB
-kWt
-kWt
-wzw
-sXe
+wPL
+wPL
+wpE
+jkC
 lYK
 vWB
 kJy
@@ -624540,7 +624780,7 @@ ibg
 ugQ
 ugQ
 ugQ
-pkx
+lAL
 ugQ
 lvp
 lvp
@@ -624748,11 +624988,11 @@ jCZ
 jCZ
 jCZ
 jCZ
-fHX
+dAT
 jCZ
 jCZ
 jCZ
-fHX
+dAT
 leh
 ycG
 leh
@@ -625170,7 +625410,7 @@ leh
 pZF
 leh
 leh
-miJ
+dDV
 pWt
 fzH
 fzH
