@@ -41,7 +41,7 @@
 	custom_ceiling = /turf/open/floor/roof/ship_hull/lab
 
 	var/disabled_elevator = TRUE // Fix of auto mode, when shuttle got in troubles or loading
-	var/total_floors = 39 // Number or relative floors we can go
+	var/total_floors = 29 // Number or relative floors we can go
 	var/floor_offset = 0 // For relative coordinates in z dimension, aka we only count or current map, where elevator having fun
 	var/offseted_z = 0 // Already calculated coordinate, so it's totaly relative z coord, not real one
 	var/obj/docking_port/stationary/initial_dock = null // Home of elevator

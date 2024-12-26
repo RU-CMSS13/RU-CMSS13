@@ -1016,6 +1016,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 			shadow.forceMove(above)
 		else
 			shadow.forceMove(loc)
+			to_chat(src, SPAN_NOTICE("You can see [above]."))
 
 /// Send src back to the lobby as a `/mob/new_player()`
 /mob/proc/send_to_lobby()

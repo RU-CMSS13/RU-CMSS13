@@ -252,16 +252,17 @@
 
 	stop_pulling()
 
-/mob/living/carbon/human/verb/lookup()
+/mob/verb/lookup()
 	set name = "Look up"
 	set category = "IC"
 
 	if(!shadow)
 		var/turf/above = SSmapping.get_turf_above(loc)
+		to_chat(src, SPAN_NOTICE("You look up."))
+		shadow = new(loc)
+		reset_view(shadow)
 		if(above && above.turf_flags & TURF_TRANSPARENT)
-			to_chat(src, SPAN_NOTICE("You look up."))
-			shadow = new(above)
-			reset_view(shadow)
+			shadow.forceMove(above)
 		else
 			to_chat(src, SPAN_NOTICE("You can see [above]."))
 	else
