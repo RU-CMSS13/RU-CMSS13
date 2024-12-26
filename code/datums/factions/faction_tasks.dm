@@ -90,6 +90,7 @@
 	var/list/bordered_sectors = list()
 	var/list/linked_turfs = list()
 
+//overlay here that we add
 	var/datum/shape/rectangle/range_bounds
 
 	var/initial_faction = null
@@ -206,7 +207,7 @@
 	if(!check_faction)
 		marine_announcement("[name] lost!", FACTION_TASKS_SECTOR_CONTROL, null, faction)
 		faction = null
-//		fog.faction = null
+		//change overlay icon to special type when no faction
 		return
 	var/announce_text = "[name] new controlled by [check_faction]"
 	if(home_sector)
@@ -225,7 +226,7 @@
 		marine_announcement(announce_text, FACTION_TASKS_SECTOR_CONTROL, null, faction)
 		marine_announcement(announce_text, FACTION_TASKS_SECTOR_CONTROL, null, check_faction)
 	faction = check_faction
-//	fog.faction = faction
+	//change overlay icon to current new faction
 
 /obj/structure/prop/sector_center/proc/captured(datum/faction/check_faction)
 	if(faction == check_faction && capture_progress == req_capture_progress)
