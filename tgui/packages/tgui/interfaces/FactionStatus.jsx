@@ -48,8 +48,8 @@ const FactionCollapsible = (props, context) => {
   return (
     <Collapsible
       title={title}
-      backgroundColor={!!faction_color && faction_color}
-      color={!faction_color && 'white'}
+      backgroundColor={faction_color}
+      color={faction_color && 'white'}
       open
     >
       {children}

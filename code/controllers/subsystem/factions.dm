@@ -79,7 +79,7 @@ SUBSYSTEM_DEF(factions)
 						potential_task_list -= task.type
 					if(length(potential_task_list))
 						var/type_to_gen = pick(potential_task_list)
-						faction_task = new type_to_gen(faction, border_sector)
+						faction_task = new type_to_gen(GLOB.faction_datums[faction], border_sector)
 						break
 
 				if(faction_task)
@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(factions)
 		if("game_enders")
 			var/list/potential_task_list = GLOB.task_gen_list_game_enders[picked_gen]
 			var/game_ender_type_to_gen = pick(potential_task_list)
-			faction_task = new game_ender_type_to_gen(faction)
+			faction_task = new game_ender_type_to_gen(GLOB.faction_datums[faction])
 
 	if(faction_task)
 		active_tasks += faction_task

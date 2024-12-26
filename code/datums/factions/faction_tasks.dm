@@ -90,7 +90,6 @@
 	var/list/bordered_sectors = list()
 	var/list/linked_turfs = list()
 
-	var/obj/effect/decal/fog //fog
 	var/datum/shape/rectangle/range_bounds
 
 	var/initial_faction = null
@@ -99,16 +98,16 @@
 /obj/structure/prop/sector_center/Initialize()
 	. = ..()
 	name = "Sector [pick(GLOB.operation_prefixes)]-[pick(GLOB.operation_postfixes)]"
-	owner = new(faction, src)
+	if(owner)
+		owner = new(GLOB.faction_datums[initial_faction], src)
 	range_bounds = RECT(loc.x, loc.y, zone_range * 2, zone_range * 2)
 	update_icon()
 	if(home_sector)
 		capture_progress = req_capture_progress
 
-	fog = new(owner)
-
 	for(var/turf/turf in range(round(zone_range*PYLON_COVERAGE_MULT), loc))
 		turf.linked_sectors += src
+		//add here overlay
 		linked_turfs += turf
 
 	START_PROCESSING(SSslowobj, src)
@@ -116,15 +115,17 @@
 /obj/structure/prop/sector_center/Destroy()
 	. = ..()
 	for(var/turf/turf as anything in linked_turfs)
+		//remmove here overlay
 		turf.linked_sectors -= src
 	range_bounds = null
 	for(var/obj/structure/prop/sector_center/bordered_sector as anything in bordered_sectors)
 		bordered_sectors -= bordered_sector
 
-	owner.sector_center = null
-	owner.grooped_task?.sector_center = null
-	QDEL_NULL(owner.grooped_task)
-	QDEL_NULL(owner)
+	if(owner)
+		owner.sector_center = null
+		owner.grooped_task?.sector_center = null
+		QDEL_NULL(owner.grooped_task)
+		QDEL_NULL(owner)
 	STOP_PROCESSING(SSslowobj, src)
 
 /obj/structure/prop/sector_center/get_examine_text(mob/user)
@@ -300,7 +301,7 @@
 /datum/faction_task/sector_control/occupy/New(datum/faction/faction_to_set, obj/structure/prop/sector_center/sector)
 	. = ..()
 	if(sector.faction)
-		grooped_task = new /datum/faction_task/sector_control/protect(sector.faction, sector)
+		grooped_task = new /datum/faction_task/sector_control/protect(GLOB.faction_datums[sector.faction], sector)
 		SSfactions.active_tasks += grooped_task
 
 /datum/faction_task/sector_control/occupy/check_completion()
@@ -436,10 +437,6 @@
 		else
 			complete(OBJECTIVE_COMPLETE)
 
-/*
-#define FACTION_TASKS_KILL				"Kill Task"
-#define FACTION_TASKS_PROTECT			"Protect Task"
-*/
 #define TASK_STATUS_LIST list(OBJECTIVE_COMPLETE = "complete", OBJECTIVE_FAILED = "failed", OBJECTIVE_IN_PROGRESS = "in progress", OBJECTIVE_ACTIVE = "active", OBJECTIVE_INACTIVE = "inactive")
 #define TGUI_TASK_COLORS list("#b23131" = "red", "#1eb641" = "green", "#1616a0" = "blue")
 
