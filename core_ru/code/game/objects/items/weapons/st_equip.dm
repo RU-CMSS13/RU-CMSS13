@@ -97,7 +97,7 @@
 		)
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"
-	passive_block = 70
+	passive_block = 60
 	readied_block = 100
 	throw_range = 4
 	flags_equip_slot = SLOT_BACK
