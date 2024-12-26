@@ -17,6 +17,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_intelligence_officer, list(
 		list("M41A Extended Magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/extended , null, VENDOR_ITEM_REGULAR),
 //RUCM START
 		list("M41A MK1 AP Magazine(10x24mm)", 10, /obj/item/ammo_magazine/rifle/m41aMK1/ap , null, VENDOR_ITEM_REGULAR),
+		list("M41A MK1 Magazine(10x24mm)", 5, /obj/item/ammo_magazine/rifle/m41aMK1, null, VENDOR_ITEM_REGULAR),
 //RUCM END
 
 		list("SIDEARM AMMUNITION", 0, null, null, null),
