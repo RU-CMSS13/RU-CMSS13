@@ -47,7 +47,7 @@
 	set category = "Admin.Events"
 	if(!admin_holder)
 		return
-	
+
 	var/flag = tgui_input_list(src, "Which flag?", "Whitelist Flags", GLOB.bitfields["whitelist_status"])
 
 	var/list/ckeys = list()
@@ -1000,7 +1000,7 @@
 			return
 
 		message_admins("[key_name(usr)] has fired \an [warhead.name] at ([target.x],[target.y],[target.z]).")
-		warhead.warhead_impact(target)
+		warhead.warhead_impact(target, "admin")
 
 	else
 		warhead.forceMove(target)

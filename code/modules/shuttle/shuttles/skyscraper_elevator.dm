@@ -614,6 +614,9 @@
 /turf/closed/wall/vents/thermitemelt()
 	return FALSE
 
+/turf/closed/wall/vents/attack_alien(mob/living/carbon/xenomorph/user)
+	return
+
 /turf/closed/wall/vents/dismantle_wall()
 	state = 3
 	icon_state = "vent_broken"

@@ -686,7 +686,10 @@
 		return src
 	return turf_above.get_real_roof()
 
-/turf/proc/air_strike(protection_penetration, turf/target_turf, checking = FALSE)
+/turf/proc/air_strike(protection_penetration, turf/target_turf, checking = FALSE, detonation_type = FALSE)
+	if(detonation_type == 1 && src == target_turf)
+		return src
+
 	var/turf/turf_above = SSmapping.get_turf_above(src)
 	if(get_sector_protection() || protection_penetration <= 0)
 		if(checking && turf_above != target_turf)
@@ -697,6 +700,8 @@
 
 	if(!checking)
 		if(turf_above && !istype(turf_above, /turf/open/openspace))
+			if(detonation_type == 2)
+				return turf_above
 			if(!(turf_above.turf_flags & TURF_HULL))
 				turf_above.ceiling_debris(protection_penetration)
 				turf_above.ChangeTurf(/turf/open/openspace)

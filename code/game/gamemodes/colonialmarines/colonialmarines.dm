@@ -235,7 +235,7 @@
 	warhead.standard_falloff = 30
 	warhead.clear_delay = 3
 	warhead.double_explosion_delay = 6
-	warhead.warhead_impact(target) // This is a blocking call
+	warhead.warhead_impact(target, "admin") // This is a blocking call
 	playsound(target, 'sound/effects/smoke.ogg', vol=50, vary=1, sound_range=75)
 
 ///Spawns miasma smoke in landing zones

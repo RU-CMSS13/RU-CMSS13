@@ -773,12 +773,24 @@
 	var/y_coord = deobfuscate_y(y_bomb)
 	var/z_coord = SSmapping.levels_by_trait(ZTRAIT_GROUND)
 	if(length(z_coord))
-		z_coord = z_coord[1]
+		if(user && length(z_coord) > 2)
+			var/our_value = tgui_input_number(user, "Atmosphere entering detonator delay (in seconds, 0 - on ground hit, other value - in air), WARNING, THIS DON'T STOP WARHEAD FROM EXPLODION ON REACHING HIGH DENSE LAYERS", "Explosion in air delay", 0, length(z_coord) - z_coord[1], 0, 30 SECONDS, TRUE)
+			z_coord = length(z_coord) - (our_value + z_coord[1])
+		else
+			z_coord = z_coord[1]
 	else
-		z_coord = 1 // fuck it
+		z_coord = 2 // fuck it
+
+	var/our_warhead_mode = tgui_input_list(user, "If you set up atmosphere detonation delay or want orbital warhead reach as deep as it can, you can turn fail safety on, so if it fails to reach it's destination no explosion occurs (WARNING, it will be armed, if failed to dissasembel via stucking high density layers instruct forces special orders to deactivate it or remain untouched)", "Fail Safety", list("Safe Mode", "Detonation on proximity", "Normal Mode"), 30 SECONDS)
+	switch(our_warhead_mode)
+		if("Safe Mode")
+			our_warhead_mode = "safe"
+		if("Detonation on proximity")
+			our_warhead_mode = "proximity"
+		else
+			our_warhead_mode = "normal"
 
 	var/turf/T = locate(x_coord, y_coord, z_coord)
-
 	if(isnull(T) || istype(T, /turf/open/space))
 		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone appears to be out of bounds. Please check coordinates.")]")
 		return
@@ -796,7 +808,7 @@
 	playsound(T,'sound/effects/alert.ogg', 25, 1)  //Placeholder
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/machinery/computer/overwatch, alert_ob), T), 2 SECONDS)
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/machinery/computer/overwatch, begin_fire)), 6 SECONDS)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/machinery/computer/overwatch, fire_bombard), user, T), 6 SECONDS + 6)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/machinery/computer/overwatch, fire_bombard), user, T, our_warhead_mode), 6 SECONDS + 6)
 
 /obj/structure/machinery/computer/overwatch/proc/begin_fire()
 	for(var/mob/living/carbon/H in GLOB.alive_mob_list)
@@ -807,7 +819,7 @@
 	visible_message("[icon2html(src, viewers(src))] [SPAN_BOLDNOTICE("Orbital bombardment for squad '[current_squad]' has fired! Impact imminent!")]")
 	current_squad.send_message("WARNING! Ballistic trans-atmospheric launch detected! Get outside of Danger Close!")
 
-/obj/structure/machinery/computer/overwatch/proc/fire_bombard(mob/user,turf/T)
+/obj/structure/machinery/computer/overwatch/proc/fire_bombard(mob/user,turf/T,warhead_mode)
 	if(!T)
 		return
 
@@ -820,7 +832,7 @@
 
 	busy = FALSE
 	if(istype(T))
-		current_orbital_cannon.fire_ob_cannon(T, user, current_squad)
+		current_orbital_cannon.fire_ob_cannon(T, user, current_squad, warhead_mode)
 		user.count_niche_stat(STATISTICS_NICHE_OB)
 
 /obj/structure/machinery/computer/overwatch/proc/handle_supplydrop()
