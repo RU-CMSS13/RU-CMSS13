@@ -27,8 +27,8 @@
 	name = "\improper XM52 stock"
 	desc = "A specialized stock designed for XM52 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility."
 	icon = 'core_ru/icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "xm52_folding_a"
-	attach_icon = "xm52_folding_a"
+	//icon_state = "xm52_folding_a" разкоментим когда додумаемся сделать его именно развиджным, а хм52 сделаем отдельный спрайт
+	//attach_icon = "xm52_folding_a"
 	wield_delay_mod = WIELD_DELAY_FAST
 	pixel_shift_x = 31
 	pixel_shift_y = 15

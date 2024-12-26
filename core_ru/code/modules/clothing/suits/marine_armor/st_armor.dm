@@ -21,6 +21,7 @@
 	var/saved_agu = TRUE
 	var/saved_feels = TRUE
 	var/saved_flags = DEFAULT_MOB_STATUS_FLAGS
+	var/processing = FALSE
 
 /obj/item/clothing/suit/storage/marine/m40/verb/enrage()
 	set name = "Activate Enrage"
@@ -48,6 +49,7 @@
 		return
 
 	to_chat(H, SPAN_DANGER("M40 experimental armor beeps, \"You feel adrenaline rush in your blood.\""))
+	H.say("RIP AND TEAR UNTIL IT'S DONE")
 	playsound(H, 'sound/items/hypospray.ogg', 25, TRUE)
 	enrage_active = TRUE
 	enrage_activable = FALSE
@@ -129,3 +131,29 @@
 		return
 
 	armor.enrage()
+
+
+/obj/item/clothing/suit/storage/marine/m40/Initialize()
+	..()
+	START_PROCESSING(SSobj, src)
+	processing = TRUE
+
+/obj/item/clothing/suit/storage/marine/m40/Destroy()
+	if(processing)
+		STOP_PROCESSING(SSobj, src)
+		processing = FALSE
+	..()
+
+/obj/item/clothing/suit/storage/marine/m40/process()
+	if(!ishuman(src.loc))
+		return
+	var/mob/living/carbon/human/H = src.loc
+	if(!(H.wear_suit == src))
+		return
+	if(enrage_active)
+		H.adjust_effect(-4, PARALYZE) //не иммунен, но невозможно застанлочить
+		H.adjust_effect(-4, STUN)
+		H.adjust_effect(-4, WEAKEN)
+		H.adjust_effect(-4, SLOW)
+		H.adjust_effect(-4, SUPERSLOW)
+	return
