@@ -38,7 +38,7 @@
 				SPAN_DANGER("You are splattered with sizzling blood! IT BURNS!"))
 				if(prob(60) && !victim.stat && victim.pain.feels_pain)
 					INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob, emote), "scream") //Topkek
-				if(victim.wear_suit.type == /obj/item/clothing/suit/storage/marine/m40)
+				if(istype(victim.wear_suit, /obj/item/clothing/suit/storage/marine/m40))
 					damage *= 0.20
 				victim.apply_armoured_damage(dmg["damage"], ARMOR_BIO, BURN) //Sizzledam! This automagically burns a random existing body part.
 				victim.add_blood(get_blood_color(), BLOOD_BODY)
