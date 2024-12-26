@@ -265,4 +265,6 @@
 		else
 			to_chat(src, SPAN_NOTICE("You can see [above]."))
 	else
-		handle_watch_above()
+		to_chat(src, SPAN_NOTICE("You stop looking up."))
+		reset_view(0)
+		QDEL_NULL(shadow)

@@ -1012,15 +1012,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 	. = ..()
 	if(shadow)
 		var/turf/above = SSmapping.get_turf_above(loc)
-		handle_watch_above(above)
-
-/mob/proc/handle_watch_above(turf/above)
-	if(above && above.turf_flags & TURF_TRANSPARENT)
-		shadow.forceMove(above)
-	else
-		to_chat(src, SPAN_NOTICE("You stop looking up."))
-		reset_view(0)
-		QDEL_NULL(shadow)
+		if(above && above.turf_flags & TURF_TRANSPARENT)
+			shadow.forceMove(above)
+		else
+			shadow.forceMove(loc)
 
 /// Send src back to the lobby as a `/mob/new_player()`
 /mob/proc/send_to_lobby()
