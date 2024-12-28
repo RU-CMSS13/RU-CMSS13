@@ -37,9 +37,10 @@
 	attachable_allowed = list()
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	map_specific_decoration = FALSE
+	light_system = MOVABLE_LIGHT
 
 /obj/item/attachable/EPR_barrel
-	name = "ERP barrel"
+	name = "EPR barrel"
 	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
 	icon = 'core_ru/icons/obj/items/weapons/guns/attachments/barrel.dmi'
 	icon_state = "EPR_barrel"
@@ -49,6 +50,19 @@
 	flags_attach_features = NO_FLAGS
 	melee_mod = 0 //Integrated attachment for visuals, stats handled on main gun.
 	size_mod = 0
+
+/obj/item/weapon/gun/rifle/EPR/Initialize(mapload, ...)
+	. = ..()
+	set_light_color("#2059af")
+	set_light_range(4)
+	set_light_power(1)
+	set_light_on(TRUE)
+
+/obj/item/weapon/gun/rifle/EPR/Destroy(mapload, ...)
+	set_light_range(null)
+	set_light_power(null)
+	set_light_on(FALSE)
+	return ..()
 
 /obj/item/weapon/gun/rifle/EPR/handle_starting_attachment()
 	..()
@@ -67,6 +81,14 @@
 	accuracy_mult = BASE_ACCURACY_MULT + 2*HIT_ACCURACY_MULT_TIER_8
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_8
 	recoil = RECOIL_AMOUNT_TIER_3
+
+/obj/item/weapon/gun/rifle/EPR/able_to_fire(mob/living/user)
+	. = ..()
+	if (. && istype(user)) //Let's check all that other stuff first.
+		if(!((user.job == JOB_SQUAD_SPECIALIST) ^ ( user.job == JOB_SQUAD_LEADER)) ^ (user.job == JOB_SQUAD_TEAM_LEADER))
+			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
+			to_chat(user, SPAN_WARNING("Only [JOB_SQUAD_SPECIALIST], [JOB_SQUAD_LEADER] and [JOB_SQUAD_TEAM_LEADER] can use \the [src]..."))
+			return FALSE
 
 /obj/item/ammo_magazine/EPR
 	name = "\improper EPR Ammunition (3 rounds)"
@@ -144,7 +166,6 @@
 		H.apply_internal_damage(20, "lungs")
 		H.apply_internal_damage(20, "liver")
 
-/* AFTER TEST
 /datum/tech/repeatable/EPR
 	name = "Experimental Personal Railguns delivery"
 	desc = "Purchase Experimental Personal Railgun kit. Big guns for big problems."
@@ -154,7 +175,7 @@
 	required_points = 20
 	increase_per_purchase = 5
 
-	tier = /datum/tier/four
+	tier = /datum/tier/four/additional
 
 	announce_name = "EXPERIMENTAL ARSENAL ACQUIRED"
 	announce_message = "An Experimental Personal Railgun has been authorized and will be delivered to requisitions via ASRS."
@@ -190,10 +211,10 @@
 	icon = 'core_ru/icons/effects/techtree/tech.dmi'
 	icon_state = "EPR_AP"
 
-	required_points = 5
+	required_points = 4
 	increase_per_purchase = 2
 
-	tier = /datum/tier/four
+	tier = /datum/tier/four/additional
 
 	announce_name = "EXPERIMENTAL ARSENAL ACQUIRED"
 	announce_message = "An Experimental Personal Railgun AP ammo has been authorized and will be delivered to requisitions via ASRS."
@@ -230,10 +251,10 @@
 	icon = 'core_ru/icons/effects/techtree/tech.dmi'
 	icon_state = "EPR_HP"
 
-	required_points = 5
+	required_points = 4
 	increase_per_purchase = 2
 
-	tier = /datum/tier/four
+	tier = /datum/tier/four/additional
 
 	announce_name = "EXPERIMENTAL ARSENAL ACQUIRED"
 	announce_message = "An Experimental Personal Railgun HP ammo has been authorized and will be delivered to requisitions via ASRS."
@@ -263,4 +284,3 @@
 	containertype = /obj/structure/closet/crate/ammo
 	buyable = 0
 	group = "Operations"
-AFTER TEST*/
