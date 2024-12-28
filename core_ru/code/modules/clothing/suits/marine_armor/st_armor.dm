@@ -129,4 +129,3 @@
 		return
 
 	armor.enrage()
-
