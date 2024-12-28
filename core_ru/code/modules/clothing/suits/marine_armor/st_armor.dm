@@ -134,15 +134,12 @@
 
 
 /obj/item/clothing/suit/storage/marine/m40/Initialize()
-	..()
+	. = ..()
 	START_PROCESSING(SSobj, src)
-	processing = TRUE
 
 /obj/item/clothing/suit/storage/marine/m40/Destroy()
-	if(processing)
-		STOP_PROCESSING(SSobj, src)
-		processing = FALSE
-	..()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/clothing/suit/storage/marine/m40/process()
 	if(!ishuman(src.loc))
