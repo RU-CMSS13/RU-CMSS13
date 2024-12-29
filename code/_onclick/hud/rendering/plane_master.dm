@@ -67,7 +67,7 @@
 /atom/movable/screen/plane_master/g_light_visual
 	name = "global light visual plane master"
 	plane = G_LIGHTING_VISUAL_PLANE
-	render_target = G_LIGHTING_VISUAL_RENDER_TARGET
+	render_target = G_LIGHTING_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_MULTIPLY
 
@@ -150,8 +150,8 @@
 	. = ..()
 	add_filter("emissives", 1, alpha_mask_filter(render_source = EMISSIVE_RENDER_TARGET, flags = MASK_INVERSE))
 	add_filter("object_lighting", 2, alpha_mask_filter(render_source = O_LIGHTING_VISUAL_RENDER_TARGET, flags = MASK_INVERSE))
-	if(SSglobal_light.initialized)
-		vis_contents += SSglobal_light.global_lighting_color
+//	if(SSglobal_light.initialized)
+//		vis_contents += SSglobal_light.global_lighting_color
 
 /**
  * Handles emissive overlays and emissive blockers.
