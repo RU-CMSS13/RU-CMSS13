@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(global_light_queue_corner)
 
 SUBSYSTEM_DEF(global_light)
 	name = "Global Lighting"
-	wait = 2.5 SECONDS
+	wait = 5 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
 
 	var/atom/movable/global_lighting_color
@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(global_light)
 	custom_time_offset = rand(0, game_time_length)
 	create_steps()
 	set_time_of_day()
-	global_lighting_color = new /atom/movable()
+global_lighting_color = new /atom/movable()
 	global_lighting_color.color = current_step_datum.color
 	global_lighting_color.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM
 	global_lighting_color.vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
@@ -172,9 +172,6 @@ SUBSYSTEM_DEF(global_light)
 	if(SSmapping.configs[GROUND_MAP].disabled_global_light)
 		can_fire = FALSE
 		return
-
-	if(global_lighting_color)
-		global_lighting_color.name = "GLOBAL_LIGHT_COLOR_[rand()*rand(1,9999999)]" // force rendering refresh because byond is a bitch
 
 	update_color()
 
@@ -304,7 +301,7 @@ SUBSYSTEM_DEF(global_light)
 	appearance.blend_mode = BLEND_OVERLAY
 	appearance.icon = LIGHTING_ICON
 	appearance.icon_state = null
-	appearance.plane = S_LIGHTING_VISUAL_PLANE /* we put this on a lower level than lighting so we dont multiply anything */
+	appearance.plane = G_LIGHTING_VISUAL_PLANE /* we put this on a lower level than lighting so we dont multiply anything */
 	appearance.invisibility = INVISIBILITY_LIGHTING
 
 

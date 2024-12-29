@@ -46,7 +46,7 @@
 	blend_mode = BLEND_OVERLAY
 	alpha = 255
 
-/atom/movable/screen/plane_master/openspace/Initialize(mapload) //Increase this if making map larger than 7 Zs
+/atom/movable/screen/plane_master/openspace/Initialize(mapload)
 	. = ..()
 	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
 	add_filter("first_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -10))
@@ -63,12 +63,11 @@
 	plane = TRANSPARENT_FLOOR_PLANE
 	appearance_flags = PLANE_MASTER
 
-//Contains all sun light objects
-/atom/movable/screen/plane_master/s_light_visual
-	name = "sun light visual plane master"
-	plane = S_LIGHTING_VISUAL_PLANE
-	render_target = S_LIGHTING_VISUAL_RENDER_TARGET
-	render_relay_plane = null
+//Contains all global light objects
+/atom/movable/screen/plane_master/g_light_visual
+	name = "global light visual plane master"
+	plane = G_LIGHTING_VISUAL_PLANE
+	render_target = G_LIGHTING_VISUAL_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_MULTIPLY
 
