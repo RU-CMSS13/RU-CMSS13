@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(battlepass_icons_list, list(
 	name = "gunlineart"
 
 /datum/asset/spritesheet/gun_lineart/ru/register()
-	var/icon_file = 'core_ru/icons/obj/items/weapons/guns/lineart.dmi'
+	var/icon_file = 'core_ru/icons/obj/items/weapons/guns/lineart_ru.dmi'
 	InsertAll("", icon_file)
 
 	for(var/obj/item/weapon/gun/current_gun as anything in subtypesof(/obj/item/weapon/gun))
