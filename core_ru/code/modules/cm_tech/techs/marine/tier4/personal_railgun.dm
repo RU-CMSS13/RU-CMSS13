@@ -38,6 +38,7 @@
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	map_specific_decoration = FALSE
 	light_system = MOVABLE_LIGHT
+	lineart_ru = TRUE
 
 /obj/item/attachable/EPR_barrel
 	name = "EPR barrel"
@@ -78,6 +79,7 @@
 /obj/item/weapon/gun/rifle/EPR/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_AMR)
+	set_burst_amount(0)
 	accuracy_mult = BASE_ACCURACY_MULT + 2*HIT_ACCURACY_MULT_TIER_8
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_8
 	recoil = RECOIL_AMOUNT_TIER_3
