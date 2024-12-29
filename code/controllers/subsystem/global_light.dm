@@ -117,7 +117,7 @@ SUBSYSTEM_DEF(global_light)
 	global_lighting_color.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM
 	global_lighting_color.vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
 	global_lighting_color.blend_mode = BLEND_ADD
-	global_lighting_color.filters += filter(type = "layer", render_source = S_LIGHTING_VISUAL_RENDER_TARGET)
+	global_lighting_color.filters += filter(type = "layer", render_source = G_LIGHTING_VISUAL_RENDER_TARGET)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/global_light/proc/set_game_time_length(new_value)
