@@ -84,6 +84,8 @@ SUBSYSTEM_DEF(global_light)
 	wait = 5 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
 
+	can_fire = FALSE
+
 	var/atom/movable/global_lighting_color
 
 	var/datum/time_of_day/current_step_datum
@@ -168,11 +170,7 @@ SUBSYSTEM_DEF(global_light)
 //		current_color = BlendRGB(current_color, weather_datum.weather_color_offset, min(weather_blend_amount, min_weather_blend_amount))
 	animate(global_lighting_color, color = current_color, time = time_to_animate)
 
-/datum/controller/subsystem/global_light/fire(resumed)
-	if(SSmapping.configs[GROUND_MAP].disabled_global_light)
-		can_fire = FALSE
-		return
-
+/datum/controller/subsystem/global_light/fire()
 	update_color()
 
 	MC_SPLIT_TICK_INIT(3)

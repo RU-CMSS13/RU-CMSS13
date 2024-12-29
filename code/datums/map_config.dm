@@ -69,7 +69,6 @@
 	var/list/map_global_light_modificator = list()
 	var/list/map_global_light_colors = list()
 	var/custom_time_length
-	var/disabled_global_light
 
 	/// If truthy this is config for a round overridden map: search for override maps in data/, instead of using a path in maps/
 	var/override_map
@@ -383,9 +382,6 @@
 		custom_time_length = json["custom_time_length"]
 	else
 		custom_time_length = 24 HOURS
-
-	if(json["disabled_global_light"])
-		disabled_global_light = json["disabled_global_light"]
 
 	if(json["map_item_type"])
 		map_item_type = text2path(json["map_item_type"])
