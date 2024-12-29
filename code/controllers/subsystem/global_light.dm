@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(global_light)
 	custom_time_offset = rand(0, game_time_length)
 	create_steps()
 	set_time_of_day()
-global_lighting_color = new /atom/movable()
+	global_lighting_color = new /atom/movable()
 	global_lighting_color.color = current_step_datum.color
 	global_lighting_color.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM
 	global_lighting_color.vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
