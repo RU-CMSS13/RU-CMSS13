@@ -1,8 +1,7 @@
-/obj/vehicle/walker/proc/exit_walker()
+/obj/vehicle/walker/proc/exit_walker(mob/user_mob)
+
 	set name = "Eject"
 	set category = "Vehicle"
-
-	var/mob/user_mob
 
 	if(!user_mob)
 		user_mob = usr
