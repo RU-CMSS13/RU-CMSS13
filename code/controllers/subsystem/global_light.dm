@@ -84,8 +84,6 @@ SUBSYSTEM_DEF(global_light)
 	wait = 5 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
 
-	can_fire = FALSE
-
 	var/atom/movable/global_lighting_color
 
 	var/datum/time_of_day/current_step_datum
@@ -114,13 +112,13 @@ SUBSYSTEM_DEF(global_light)
 	custom_time_offset = rand(0, game_time_length)
 	create_steps()
 	set_time_of_day()
-	global_lighting_color = new /atom/movable()
-	global_lighting_color.color = current_step_datum.color
-	global_lighting_color.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|KEEP_TOGETHER
-	global_lighting_color.vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
-	global_lighting_color.blend_mode = BLEND_ADD
-	global_lighting_color.render_target = G_LIGHTING_VISUAL_RENDER_TARGET
-	global_lighting_color.filters += filter(type = "layer", render_source = G_LIGHTING_RENDER_TARGET)
+//	global_lighting_color = new /atom/movable()
+//	global_lighting_color.color = current_step_datum.color
+//	global_lighting_color.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|KEEP_TOGETHER
+//	global_lighting_color.vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_LAYER
+//	global_lighting_color.blend_mode = BLEND_ADD
+//	global_lighting_color.render_target = G_LIGHTING_VISUAL_RENDER_TARGET
+//	global_lighting_color.filters += filter(type = "layer", render_source = G_LIGHTING_RENDER_TARGET)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/global_light/proc/set_game_time_length(new_value)
@@ -173,9 +171,9 @@ SUBSYSTEM_DEF(global_light)
 
 //Переделать способ передачи света клиенту, сейчас оно ест говно и крашит, а так же заставляет лагать
 /datum/controller/subsystem/global_light/fire()
-	if(global_lighting_color)
-		global_lighting_color.name = "GLOBAL_LIGHT_COLOR_[rand()*rand(1,9999999)]" // force rendering refresh because byond is a bitch
-	update_color()
+//	if(global_lighting_color)
+//		global_lighting_color.name = "GLOBAL_LIGHT_COLOR_[rand()*rand(1,9999999)]" // force rendering refresh because byond is a bitch
+//	update_color()
 
 	MC_SPLIT_TICK_INIT(3)
 	var/worked_length = 0
@@ -192,6 +190,8 @@ SUBSYSTEM_DEF(global_light)
 		if(worked_length)
 			GLOB.weather_planes_need_vis.Cut(1, worked_length+1)
 			worked_length = 0
+
+	MC_SPLIT_TICK
 */
 	for(worked_length in 1 to length(GLOB.global_light_queue_work))
 		var/turf/turf = GLOB.global_light_queue_work[worked_length]
