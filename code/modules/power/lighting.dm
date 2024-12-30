@@ -147,7 +147,7 @@
 	var/on = 0 // 1 if on, 0 if off
 	var/on_gs = 0
 	var/brightness = 6 // power usage and light range when on
-	var/bulb_power = 0.5 // basically the light_power of the emitted light source
+	var/bulb_power = 1 // basically the light_power of the emitted light source
 	var/bulb_colour = COLOR_WHITE
 	var/status = LIGHT_OK // LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
