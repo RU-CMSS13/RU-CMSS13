@@ -5,7 +5,7 @@
 /obj/structure/stairs
 	name = "Stairs"
 	icon = 'icons/obj/structures/structures.dmi'
-	desc = "Stairs.  You walk up and down them."
+	desc = "Stairs. You walk up and down them."
 	icon_state = "rampbottom"
 	gender = PLURAL
 	unslashable = TRUE
@@ -114,3 +114,69 @@
 #undef STAIR_TERMINATOR_AUTOMATIC
 #undef STAIR_TERMINATOR_NO
 #undef STAIR_TERMINATOR_YES
+
+/obj/structure/stairs/constructed
+	icon = 'icons/obj/structures/building_stairs.dmi'
+	icon_state = "stairs"
+	desc = "Field made stairs. You can climb them up."
+
+	unslashable = FALSE
+	unacidable = FALSE
+	health = 200
+	density = TRUE
+
+/obj/structure/stairs/constructed/attackby(obj/item/tool, mob/living/user)
+	if(HAS_TRAIT(tool, TRAIT_TOOL_WRENCH) && !istype(src, /obj/structure/stairs/constructed/resin))
+		if(do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
+			if(QDELETED(src))
+				return
+			playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
+			new /obj/item/stack/sheet/metal(loc, 25)
+			qdel(src)
+		return
+	. = ..()
+
+/obj/structure/stairs/constructed/attack_hand(mob/living/user)
+	try_to_ascend_mob(user)
+
+/obj/structure/stairs/constructed/attack_alien(mob/living/carbon/xenomorph/user)
+	if(user.a_intent == INTENT_HARM)
+		if(do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
+			if(QDELETED(src))
+				return
+			if(!istype(src, /obj/structure/stairs/constructed/resin))
+				playsound(loc, 'sound/items/Welder.ogg', 25, 1)
+				new /obj/item/stack/sheet/metal(loc, 10)
+			qdel(src)
+	else
+		try_to_ascend_mob(user)
+
+/obj/structure/stairs/constructed/proc/try_to_ascend_mob(mob/living/carbon/user)
+	if(user.is_mob_incapacitated())
+		return
+
+	to_chat(user, SPAN_NOTICE("You start climbing [src]."))
+	if(do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
+		if(QDELETED(src))
+			return
+		var/turf/prev = user.loc
+		user.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
+		stair_ascend(user)
+
+		if(prev != user.loc)
+			to_chat(user, SPAN_NOTICE("You climbed [src]."))
+		else
+			to_chat(user, SPAN_NOTICE("You failed climbing [src]."))
+		return
+	to_chat(user, SPAN_NOTICE("You stopped climbing [src]."))
+
+/obj/structure/stairs/constructed/intercept_zImpact(list/falling_movables, levels = 1)
+	. = ..()
+	if(levels == 1)
+		. |= FALL_INTERCEPTED | FALL_NO_MESSAGE | FALL_RETAIN_PULL
+
+/obj/structure/stairs/constructed/resin
+	icon_state = "resin_stairs"
+	desc = "Thick resin stairs, can help to clim buildings."
+
+	unacidable = TRUE

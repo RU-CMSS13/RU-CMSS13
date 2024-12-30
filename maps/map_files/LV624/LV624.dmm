@@ -13,6 +13,40 @@
 	icon_state = "pwall"
 	},
 /area/space)
+"aad" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 1;
+	pixel_y = 14
+	},
+/obj/structure/barricade/handrail/wire,
+/obj/structure/stairs{
+	dir = 4;
+	icon_state = "ramptop";
+	opacity = 1;
+	terminator_mode = 2
+	},
+/turf/open/shuttle/elevator/skyscraper/grating,
+/area/lv624/lazarus/main_hall)
+"aae" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 1;
+	pixel_y = 14
+	},
+/obj/structure/barricade/handrail/wire,
+/obj/structure/stairs{
+	dir = 4;
+	icon_state = "ramptop";
+	opacity = 1;
+	terminator_mode = 2
+	},
+/turf/open/shuttle/elevator/skyscraper/grating,
+/area/lv624/lazarus/landing_zones/lz2)
+"aaf" = (
+/obj/structure/barricade/sandbags/wired{
+	dir = 8
+	},
+/turf/open/floor/roof/asphalt/noborder,
+/area/lv624/lazarus/main_hall)
 "aag" = (
 /turf/open/gm/dirt,
 /area/lv624/ground/caves/north_east_caves)
@@ -26,6 +60,12 @@
 "aaj" = (
 /turf/open/gm/coast/west,
 /area/lv624/ground/caves/north_central_caves)
+"aak" = (
+/obj/structure/barricade/sandbags/wired{
+	dir = 4
+	},
+/turf/open/floor/roof/asphalt/noborder,
+/area/lv624/lazarus/main_hall)
 "aam" = (
 /obj/structure/flora/bush/ausbushes/var3/fernybush,
 /turf/open/gm/river,
@@ -11090,10 +11130,6 @@
 	},
 /turf/open/floor/whiteyellow/southeast,
 /area/lv624/lazarus/corporate_dome)
-"dwt" = (
-/obj/structure/fence,
-/turf/open/gm/dirtgrassborder/grassdirt_corner2/south_west,
-/area/lv624/lazarus/landing_zones/lz2)
 "dwN" = (
 /obj/structure/bed/sofa/vert/grey/bot,
 /turf/open/floor/whiteyellow/southeast,
@@ -14814,10 +14850,6 @@
 /obj/structure/flora/jungle/planttop1,
 /turf/open/gm/grass/grass1,
 /area/lv624/ground/jungle/south_west_jungle)
-"kJG" = (
-/obj/structure/flora/bush/ausbushes/var3/ppflowers,
-/turf/open/gm/grass/grass1,
-/area/lv624/lazarus/landing_zones/lz2)
 "kKa" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /obj/effect/decal/grass_overlay/grass1/inner{
@@ -19450,10 +19482,6 @@
 /obj/structure/flora/bush/ausbushes/palebush,
 /turf/open/gm/dirtgrassborder/west,
 /area/lv624/ground/jungle/south_east_jungle)
-"twg" = (
-/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
-/turf/open/gm/grass/grass1,
-/area/lv624/lazarus/landing_zones/lz2)
 "twC" = (
 /turf/open/gm/coast/beachcorner2/north_west,
 /area/lv624/ground/barrens/east_barrens)
@@ -32354,10 +32382,10 @@ aDv
 aDv
 aDv
 aDv
-aGh
-aJO
-aJO
-aEs
+aDv
+aDv
+aDv
+aDv
 aOB
 wHp
 wLz
@@ -32582,10 +32610,10 @@ aEs
 bwq
 aDv
 aDv
-aRx
-kJG
-aXX
-aZP
+aDv
+aDv
+aDv
+aDv
 aOB
 wHp
 ncV
@@ -32810,8 +32838,8 @@ aZP
 aDv
 aDv
 aDv
-aRx
-vcY
+aDv
+aDv
 sjq
 xgE
 mgs
@@ -33038,8 +33066,8 @@ aZP
 aDv
 aCI
 bwq
-aRx
-twg
+aDv
+aDv
 sjq
 xgE
 kWH
@@ -33261,13 +33289,13 @@ jIr
 aCk
 ado
 aXX
-aXX
+vcY
 aZP
 oVR
 aDv
 aDv
-aRx
-aXX
+aDv
+aDv
 sjq
 xgE
 kWH
@@ -33494,9 +33522,9 @@ aZP
 aDv
 aDv
 aDv
-aRx
-aXX
-sjq
+aDv
+aDv
+aae
 xgE
 kWH
 bUU
@@ -33722,8 +33750,8 @@ aZP
 aDv
 aDv
 aDv
-dwt
-aJF
+aDv
+aDv
 xgE
 xgE
 xgE
@@ -35088,7 +35116,7 @@ cPV
 bbH
 cPV
 cPV
-cPV
+bwR
 cPV
 cPV
 bbH
@@ -46723,7 +46751,7 @@ aRh
 aGW
 aIh
 aJh
-aJD
+aad
 aKv
 aKL
 aLl
@@ -87079,9 +87107,9 @@ icW
 icW
 icW
 aJG
-aJG
-aJG
-aJG
+aaf
+aaf
+aaf
 aJG
 mBW
 mBW
@@ -90727,9 +90755,9 @@ qKE
 qKE
 qKE
 aJG
-aJG
-aJG
-aJG
+aak
+aak
+aak
 aJG
 aPL
 aPL
