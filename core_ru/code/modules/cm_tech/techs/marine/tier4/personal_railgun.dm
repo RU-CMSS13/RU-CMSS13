@@ -87,10 +87,11 @@
 /obj/item/weapon/gun/rifle/EPR/able_to_fire(mob/living/user)
 	. = ..()
 	if (. && istype(user)) //Let's check all that other stuff first.
-		if(!((user.job == JOB_SQUAD_SPECIALIST) ^ ( user.job == JOB_SQUAD_LEADER)) ^ (user.job == JOB_SQUAD_TEAM_LEADER))
+		if(!(((user.job == JOB_SQUAD_SPECIALIST) |( user.job == JOB_SQUAD_LEADER)) | (user.job == JOB_SQUAD_TEAM_LEADER)))
 			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
 			to_chat(user, SPAN_WARNING("Only [JOB_SQUAD_SPECIALIST], [JOB_SQUAD_LEADER] and [JOB_SQUAD_TEAM_LEADER] can use \the [src]..."))
 			return FALSE
+		return TRUE
 
 /obj/item/ammo_magazine/EPR
 	name = "\improper EPR Ammunition (3 rounds)"
