@@ -84,6 +84,8 @@ SUBSYSTEM_DEF(global_light)
 	wait = 5 SECONDS
 	priority = SS_PRIORITY_GLOBAL_LIGHTING
 
+	can_fire = FALSE
+
 	var/atom/movable/global_lighting_color
 
 	var/datum/time_of_day/current_step_datum
