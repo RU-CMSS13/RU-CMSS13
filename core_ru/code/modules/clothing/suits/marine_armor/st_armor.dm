@@ -68,6 +68,7 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.update_button_icon()
+	START_PROCESSING(SSobj, src)
 	addtimer(CALLBACK(src, PROC_REF(end_enrage), H), 15 SECONDS)
 
 /obj/item/clothing/suit/storage/marine/m40/proc/end_enrage(mob/living/carbon/human/H)
@@ -82,6 +83,7 @@
 	to_chat(H, SPAN_DANGER("M40 experimental armor beeps, \"Protective dialysis has been activated.\""))
 	playsound(H, 'core_ru/sound/effects/hearth_attack.ogg', 25, TRUE)
 	H.remove_filter("enrage_form")
+	STOP_PROCESSING(SSobj, src)
 
 	addtimer(CALLBACK(src, PROC_REF(activable_enrage), H), ENRAGE_CD)
 
@@ -131,11 +133,6 @@
 		return
 
 	armor.enrage()
-
-
-/obj/item/clothing/suit/storage/marine/m40/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/suit/storage/marine/m40/Destroy()
 	STOP_PROCESSING(SSobj, src)
