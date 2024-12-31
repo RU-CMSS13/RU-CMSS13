@@ -1016,7 +1016,7 @@
 	name = "roof"
 
 	blend_turfs = list(/turf/closed/wall, /turf/open/floor/roof)
-	noblend_turfs = list(/turf/open/openspace, /turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment)
+	noblend_turfs = list(/turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment)
 
 	special_icon = FALSE
 
