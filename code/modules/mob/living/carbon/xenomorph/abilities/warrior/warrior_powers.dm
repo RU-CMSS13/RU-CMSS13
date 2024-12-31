@@ -98,6 +98,7 @@
 	apply_cooldown()
 	return ..()
 
+/* RUCM COMMENT STARTS THERE
 /datum/action/xeno_action/activable/warrior_punch/use_ability(atom/affected_atom)
 	var/mob/living/carbon/xenomorph/punch_user = owner
 
@@ -171,3 +172,4 @@
 	warrior.flick_attack_overlay(carbon, "punch")
 	shake_camera(carbon, 2, 1)
 	step_away(carbon, warrior, 2)
+ RUCM COMMENT ends THERE */
