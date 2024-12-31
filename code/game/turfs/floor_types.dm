@@ -1062,6 +1062,8 @@
 /turf/open/floor/roof/asphalt/noborder
 	icon = 'icons/turf/roofs/roof_asphalt_noborder.dmi'
 
+	special_icon = TRUE
+
 /turf/open/floor/roof/wood
 	icon = 'icons/turf/roofs/roof_wood.dmi'
 	name = "wood roof"
