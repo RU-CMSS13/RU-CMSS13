@@ -33,4 +33,3 @@
 
 	for(var/turf/turf as anything in tainted)
 		turf.reconsider_lights()
-		turf.reconsider_global_light()

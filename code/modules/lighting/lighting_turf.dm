@@ -29,29 +29,20 @@
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	var/totallums = 0
-	var/totalGlobalLightFalloff = 0
-	if(static_lighting_object)
+	if (static_lighting_object)
 		var/datum/static_lighting_corner/L
 		L = lighting_corner_NE
-		if(L)
+		if (L)
 			totallums += L.lum_r + L.lum_b + L.lum_g
-			totalGlobalLightFalloff += L.global_light_falloff
 		L = lighting_corner_SE
-		if(L)
+		if (L)
 			totallums += L.lum_r + L.lum_b + L.lum_g
-			totalGlobalLightFalloff += L.global_light_falloff
 		L = lighting_corner_SW
-		if(L)
+		if (L)
 			totallums += L.lum_r + L.lum_b + L.lum_g
-			totalGlobalLightFalloff += L.global_light_falloff
 		L = lighting_corner_NW
-		if(L)
+		if (L)
 			totallums += L.lum_r + L.lum_b + L.lum_g
-			totalGlobalLightFalloff += L.global_light_falloff
-		if(outdoor_effect && outdoor_effect.state) /* SKY_BLOCKED is 0 */
-			totalGlobalLightFalloff = 4
-		/* global light / 4 corners */
-		totallums += totalGlobalLightFalloff / 4
 
 		totallums /= 12 // 4 corners, each with 3 channels, get the average.
 
@@ -91,7 +82,6 @@
 		directional_opacity = ALL_CARDINALS
 		if(. != directional_opacity)
 			reconsider_lights()
-			reconsider_global_light()
 		return
 	directional_opacity = NONE
 	for(var/atom/movable/opacity_source as anything in opacity_sources)
@@ -101,5 +91,4 @@
 			directional_opacity = ALL_CARDINALS
 			break
 	if(. != directional_opacity && (. == ALL_CARDINALS || directional_opacity == ALL_CARDINALS))
-		reconsider_lights()
-		reconsider_global_light()
+		reconsider_lights() //The lighting system only cares whether the tile is fully concealed from all directions or not.

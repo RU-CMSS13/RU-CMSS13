@@ -120,8 +120,6 @@
 		var/area/current_area = loc
 		if(current_area?.lighting_effect)
 			overlays += current_area.lighting_effect
-		else
-			GLOB.global_light_queue_work |= src
 		multiz_turfs()
 		if(!special_icon)
 			update_connections(TRUE)
@@ -134,8 +132,6 @@
 	var/area/current_area = loc
 	if(current_area?.lighting_effect)
 		overlays += current_area.lighting_effect
-	else
-		GLOB.global_light_queue_work |= src
 	multiz_turfs()
 	if(!special_icon)
 		update_connections(FALSE)
@@ -549,10 +545,8 @@
 	var/old_weeds = weeds
 
 	var/list/old_baseturfs = baseturfs
-	var/old_pseudo_roof = pseudo_roof
 	var/old_ceiling_status = ceiling_status
 
-	var/old_outdoor_effect = outdoor_effect //MOJAVE MODULE OUTDOOR_EFFECTS
 	var/old_dynamic_lumcount = dynamic_lumcount
 
 	//static lighting
@@ -581,10 +575,7 @@
 		W.baseturfs = new_baseturfs
 	else
 		W.baseturfs = old_baseturfs
-	W.pseudo_roof = old_pseudo_roof
 	W.ceiling_status = old_ceiling_status
-
-	W.outdoor_effect = old_outdoor_effect
 
 	W.hybrid_lights_affecting = old_hybrid_lights_affecting
 	W.dynamic_lumcount = old_dynamic_lumcount
@@ -610,7 +601,6 @@
 
 	if(W.directional_opacity != old_directional_opacity)
 		W.reconsider_lights()
-		W.reconsider_global_light()
 
 	var/area/thisarea = get_area(W)
 	if(thisarea.lighting_effect)

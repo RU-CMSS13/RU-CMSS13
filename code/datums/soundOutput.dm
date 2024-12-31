@@ -46,9 +46,12 @@
 						return // Invalid location
 					S.falloff /= 2
 					owner_turf = candidate
+			else if (owner_turf.z != T.z)
+				S.falloff /= 2
+
 			S.x = T.x - owner_turf.x
-			S.y = 0
-			S.z = T.y - owner_turf.y
+			S.y = T.y - owner_turf.y
+			S.z = T.z - owner_turf.z
 		S.y += T.y_s_offset
 		S.x += T.x_s_offset
 		S.echo = SOUND_ECHO_REVERB_ON //enable environment reverb for positional sounds

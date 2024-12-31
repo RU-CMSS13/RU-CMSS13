@@ -64,10 +64,6 @@
 
 	var/nightmare_path
 
-	var/list/map_global_light_modificator = list()
-	var/list/map_global_light_colors = list()
-	var/custom_time_length
-
 	/// If truthy this is config for a round overridden map: search for override maps in data/, instead of using a path in maps/
 	var/override_map
 
@@ -360,23 +356,6 @@
 		if(!weather_holder)
 			log_world("map_config weather_holder is not a proper typepath!")
 			return
-
-	if(islist(json["map_global_light_modificator"]))
-		if(!islist(json["map_global_light_modificator"]))
-			log_world("map_config custom day/night modificator is not a list!")
-			return
-		map_global_light_modificator = json["map_global_light_modificator"]
-
-	if(islist(json["map_global_light_colors"]))
-		if(!islist(json["map_global_light_colors"]))
-			log_world("map_config custom day/night colors is not a list!")
-			return
-		map_global_light_colors = json["map_global_light_colors"]
-
-	if(json["custom_time_length"])
-		custom_time_length = json["custom_time_length"]
-	else
-		custom_time_length = 24 HOURS
 
 	if(json["map_item_type"])
 		map_item_type = text2path(json["map_item_type"])

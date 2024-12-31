@@ -25,7 +25,6 @@
 	data["revision_date"] = GLOB.revdata.date
 
 	data["round_duration"] = ROUND_TIME
-	data["zone_time"] = SSglobal_light.game_time_offseted() - GLOB.timezoneOffset
 
 	data["delay"] = SSticker.delay_start
 

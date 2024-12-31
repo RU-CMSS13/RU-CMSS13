@@ -122,6 +122,3 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 
 /proc/game_time_timestamp(format = "hh:mm:ss")
 	return time2text(game_time(), format)
-
-/proc/planet_game_time_timestamp(format = "hh:mm:ss")
-	return time2text(SSglobal_light.game_time_offseted() - GLOB.timezoneOffset, format)
