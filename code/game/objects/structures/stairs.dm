@@ -10,6 +10,7 @@
 	gender = PLURAL
 	unslashable = TRUE
 	unacidable = TRUE
+	anchored = TRUE
 	health = null
 	plane = FLOOR_PLANE
 	layer = STAIRS_LAYER

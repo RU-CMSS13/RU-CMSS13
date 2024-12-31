@@ -26,9 +26,10 @@
 
 /turf
 	icon = 'icons/turf/floors/floors.dmi'
-	vis_flags = VIS_INHERIT_ID// Important for interaction with and visualization of openspace.
+	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID
 
 	var/turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
+	var/turf/pseudo_roof /* our roof turf - may be a path for top z level, or a ref to the turf above*/
 	var/ceiling_status = NO_FLAGS
 	var/weedable = FULLY_WEEDABLE
 	var/base_icon = null
@@ -545,6 +546,7 @@
 	var/old_weeds = weeds
 
 	var/list/old_baseturfs = baseturfs
+	var/old_pseudo_roof = pseudo_roof
 	var/old_ceiling_status = ceiling_status
 
 	var/old_dynamic_lumcount = dynamic_lumcount
@@ -575,6 +577,7 @@
 		W.baseturfs = new_baseturfs
 	else
 		W.baseturfs = old_baseturfs
+	W.pseudo_roof = old_pseudo_roof
 	W.ceiling_status = old_ceiling_status
 
 	W.hybrid_lights_affecting = old_hybrid_lights_affecting
@@ -1074,3 +1077,53 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 /particles/falling_debris/small
 	count = 40
 	spawning = 40
+
+
+
+/* Effect Fuckery */
+/* these bits are to set the roof on a top-z level, as there is no turf above to act as a roof */
+/obj/effect/mapping_helpers
+	icon = 'icons/effects/mapping_helpers.dmi'
+	icon_state = ""
+	var/late = FALSE
+
+/obj/effect/mapping_helpers/Initialize(mapload)
+	..()
+	return late ? INITIALIZE_HINT_LATELOAD : INITIALIZE_HINT_QDEL
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter
+	var/turf/pseudo_roof
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/mountain
+	pseudo_roof = /turf/closed/wall/rock
+	icon_state = "roof_mountain"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/wood
+	pseudo_roof = /turf/open/floor/roof/wood
+	icon_state = "roof_wood"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/concrete
+	pseudo_roof = /turf/open/floor/roof/asphalt
+	icon_state = "roof_concrete"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull
+	pseudo_roof = /turf/open/floor/roof/ship_hull
+	icon_state = "roof_ship_hull"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/glass
+	pseudo_roof = /turf/open/floor/glass
+	icon_state = "roof_glass"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_glass
+	pseudo_roof = /turf/open/floor/glass/reinforced
+	icon_state = "roof_ship_glass"
+
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/Initialize(mapload)
+	. = ..()
+	// Disabled mapload catch - somebody might want to wangle this l8r
+	// if(!mapload)
+	// 	log_mapping("[src] spawned outside of mapload!")
+	// 	return
+	if(isturf(loc))// && !get_step_multiz(loc, UP))
+		var/turf/our_turf = loc
+		our_turf.pseudo_roof = pseudo_roof

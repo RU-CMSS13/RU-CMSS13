@@ -38,22 +38,18 @@
 	blend_mode = BLEND_MULTIPLY
 	alpha = 255
 
-/atom/movable/screen/plane_master/openspace/Initialize(mapload)
-	. = ..()
-	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
-	add_filter("first_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -10))
-	add_filter("second_stage_openspace", 3, drop_shadow_filter(color = "#04080FAA", size = -15))
-	add_filter("third_stage_openspace", 4, drop_shadow_filter(color = "#04080FAA", size = -20))
-	add_filter("fourth_stage_openspace", 5, drop_shadow_filter(color = "#04080FAA", size = -25))
-	add_filter("fifth_stage_openspace", 6, drop_shadow_filter(color = "#04080FAA", size = -30))
-	add_filter("sixth_stage_openspace", 7, drop_shadow_filter(color = "#04080FAA", size = -35))
-	add_filter("seventh_stage_openspace", 8, drop_shadow_filter(color = "#04080FAA", size = -40))
-
 ///For any transparent multi-z tiles we want to render
 /atom/movable/screen/plane_master/transparent
 	name = "transparent plane master"
 	plane = TRANSPARENT_FLOOR_PLANE
 	appearance_flags = PLANE_MASTER
+
+/atom/movable/screen/plane_master/transparent/Initialize(mapload)
+	. = ..()
+	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
+	add_filter("first_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -10))
+	add_filter("second_stage_openspace", 3, drop_shadow_filter(color = "#04080FAA", size = -15))
+	add_filter("third_stage_openspace", 4, drop_shadow_filter(color = "#04080FAA", size = -20))
 
 /atom/movable/screen/plane_master/floor
 	name = "floor plane master"
