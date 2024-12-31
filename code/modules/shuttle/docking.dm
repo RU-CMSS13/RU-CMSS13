@@ -169,6 +169,8 @@
 
 	for(var/i in 1 to length(old_turfs))
 		CHECK_TICK
+		if(!(old_turfs[old_turfs[i]] & MOVE_TURF))
+			continue
 		var/turf/old_turf = old_turfs[i]
 		var/turf/new_turf = new_turfs[i]
 
