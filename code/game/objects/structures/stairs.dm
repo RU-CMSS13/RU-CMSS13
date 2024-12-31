@@ -11,8 +11,8 @@
 	unslashable = TRUE
 	unacidable = TRUE
 	health = null
-	layer = STAIRS_LAYER
 	plane = FLOOR_PLANE
+	layer = STAIRS_LAYER
 	density = FALSE
 	opacity = FALSE
 	var/force_open_above = FALSE // replaces the turf above this stair obj with /turf/open/openspace
@@ -124,6 +124,9 @@
 	unacidable = FALSE
 	health = 200
 	density = TRUE
+
+	plane = GAME_PLANE
+	layer = ABOVE_OBJ_LAYER
 
 /obj/structure/stairs/constructed/attackby(obj/item/tool, mob/living/user)
 	if(HAS_TRAIT(tool, TRAIT_TOOL_WRENCH) && !istype(src, /obj/structure/stairs/constructed/resin))
