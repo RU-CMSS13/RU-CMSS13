@@ -8,7 +8,6 @@
 	layer = WINDOW_LAYER
 	flags_atom = ON_BORDER|FPRINT
 	health = 15
-	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
 	var/state = 2
 	var/reinf = 0
 	var/basestate = "window"

@@ -306,8 +306,8 @@
 	var/turf/target_turf = get_turf(targeted_atom)
 	if(!istype(target_turf))
 		return
-	var/turf/roof = target_turf.get_real_roof()
-	if(!roof.air_strike(14, target_turf, TRUE) && !range_mode)
+	var/turf/roof = get_highest_turf(target_turf)
+	if(target_turf != roof.air_strike(5, target_turf, 1, TRUE) && !range_mode)
 		to_chat(user, SPAN_WARNING("INVALID TARGET: target must be visible from high altitude."))
 		return
 	if(user.action_busy)

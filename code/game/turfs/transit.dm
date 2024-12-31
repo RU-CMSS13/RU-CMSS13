@@ -62,8 +62,8 @@
 					break
 			if(found_dense)
 				continue
-			var/turf/roof = turf.get_real_roof()
-			if(!roof.air_strike(2, roof, TRUE))
+			var/turf/roof = get_highest_turf(turf)
+			if(turf != roof.air_strike(1, turf, 1, TRUE))
 				continue
 			valid_turfs += turf
 		var/turf/deploy_turf

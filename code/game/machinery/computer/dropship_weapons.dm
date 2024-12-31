@@ -702,12 +702,11 @@
 		if(!LT.signal_loc)
 			return FALSE
 		var/turf/signal_loc = get_turf(LT.signal_loc)
-		var/turf/roof = signal_loc.get_real_roof()
-		var/turf/target_turf = roof.air_strike(14, signal_loc, TRUE)
-		if(!target_turf)
+		var/turf/roof = get_highest_turf(signal_loc)
+		if(signal_loc != roof.air_strike(5, signal_loc, 1, TRUE))
 			to_chat(usr, SPAN_WARNING("INVALID TARGET: target must be visible from high altitude."))
 			return
-		if(!DEW.ammo_equipped.can_fire_at(target_turf, weapon_operator))
+		if(!DEW.ammo_equipped.can_fire_at(signal_loc, weapon_operator))
 			return FALSE
 
 		DEW.open_fire(LT.signal_loc)

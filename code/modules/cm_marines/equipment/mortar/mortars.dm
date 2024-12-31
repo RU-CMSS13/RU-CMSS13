@@ -327,9 +327,9 @@
 	invisibility = INVISIBILITY_MAXIMUM
 
 /obj/structure/mortar/proc/handle_shell(turf/target, obj/item/mortar_shell/shell)
-	var/turf/roof = target.get_real_roof()
+	var/turf/roof = get_highest_turf(target)
 	var/penetration = rand(5, 10)
-	target = roof.air_strike(penetration, target, TRUE)
+	target = roof.air_strike(penetration, target, checking = TRUE)
 
 	if(ship_side)
 		var/turf/our_turf = get_turf(src)
@@ -425,8 +425,8 @@
 	if(!skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE))
 		to_chat(user, SPAN_WARNING("You don't have the training to deploy [src]."))
 		return
-	var/turf/roof = deploy_turf.get_real_roof()
-	if(!roof.air_strike(1, deploy_turf.get_real_roof(), TRUE))
+	var/turf/roof = get_highest_turf(deploy_turf)
+	if(deploy_turf != roof.air_strike(1, deploy_turf, 1, TRUE))
 		to_chat(user, SPAN_WARNING("You probably shouldn't deploy [src] indoors."))
 		return
 	user.visible_message(SPAN_NOTICE("[user] starts deploying [src]."), \

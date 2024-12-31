@@ -6,7 +6,6 @@
 	weedable = NOT_WEEDABLE
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
-	vis_flags = VIS_INHERIT_ID
 
 /turf/open/space/Initialize(mapload, ...)
 	SHOULD_CALL_PARENT(FALSE)

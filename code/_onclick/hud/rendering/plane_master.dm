@@ -38,14 +38,6 @@
 	blend_mode = BLEND_MULTIPLY
 	alpha = 255
 
-//MOJAVE SUN EDIT - Depth Blur & Fixes//
-/atom/movable/screen/plane_master/openspace
-	name = "open space plane master"
-	plane = OPENSPACE_PLANE
-	appearance_flags = PLANE_MASTER
-	blend_mode = BLEND_OVERLAY
-	alpha = 255
-
 /atom/movable/screen/plane_master/openspace/Initialize(mapload)
 	. = ..()
 	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))

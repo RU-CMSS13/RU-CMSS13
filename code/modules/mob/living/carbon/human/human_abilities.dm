@@ -257,10 +257,8 @@ CULT
 		to_chat(H, SPAN_WARNING("The droppod cannot land here!"))
 		return
 
-	var/turf/roof = target.get_real_roof()
-	var/penetration = 14
-	target = roof.air_strike(penetration, target, TRUE)
-	if(!roof.air_strike(penetration, target, TRUE))
+	var/turf/roof = get_highest_turf(target)
+	if(target != roof.air_strike(1, target, 1, TRUE))
 		to_chat(H, SPAN_WARNING("The droppod cannot punch through an organic ceiling!"))
 		return
 //RUCM START

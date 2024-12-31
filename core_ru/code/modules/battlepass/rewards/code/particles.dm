@@ -7,7 +7,7 @@
 	name = "particle holder"
 	desc = "How are you reading this? Please make a bug report :)"
 	appearance_flags = KEEP_APART|KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE|LONG_GLIDE //movable appearance_flags plus KEEP_APART and KEEP_TOGETHER
-	vis_flags = VIS_INHERIT_LAYER|VIS_INHERIT_PLANE|VIS_INHERIT_ID
+	vis_flags = VIS_INHERIT_PLANE
 	layer = ABOVE_XENO_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	anchored = TRUE

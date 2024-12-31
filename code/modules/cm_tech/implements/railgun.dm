@@ -166,8 +166,8 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 
 	if(firer)
 		firer.images -= to_remove
-		var/turf/roof = target_turf.get_real_roof()
-		target_turf = roof.air_strike(rand(10, 15), target_turf)
+		var/turf/roof = get_highest_turf(target_turf)
+		target_turf = roof.air_strike(rand(10, 15), target_turf, 1)
 		playsound(target_turf, 'sound/machines/railgun/railgun_impact.ogg', sound_range = 75)
 		cell_explosion(target_turf, power, power/range, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, create_cause_data("railgun", firer.mob))
 
@@ -256,8 +256,8 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 /mob/hologram/railgun/proc/allow_turf_entry(mob/self, turf/to_enter)
 	SIGNAL_HANDLER
 
-	var/turf/roof = to_enter.get_real_roof()
-	if(!roof.air_strike(14, to_enter, TRUE))
+	var/turf/roof = get_highest_turf(to_enter)
+	if(to_enter != roof.air_strike(15, to_enter, 1, TRUE))
 		to_chat(linked_mob, SPAN_WARNING("[icon2html(src)] This area is too reinforced to enter."))
 		return COMPONENT_TURF_DENY_MOVEMENT
 

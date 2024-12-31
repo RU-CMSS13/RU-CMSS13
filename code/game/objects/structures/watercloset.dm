@@ -26,7 +26,7 @@
 	cistern_overlay = new()
 	cistern_overlay.icon = icon
 	cistern_overlay.layer = ABOVE_MOB_LAYER
-	cistern_overlay.vis_flags = VIS_INHERIT_DIR|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE|VIS_INHERIT_ID
+	cistern_overlay.vis_flags = VIS_INHERIT_DIR|VIS_INHERIT_ID
 	vis_contents += cistern_overlay
 	update_icon()
 

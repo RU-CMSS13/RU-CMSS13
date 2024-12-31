@@ -697,7 +697,7 @@
 		state = 0
 		icon_state = "vent"
 
-	var/obj/effect/particle_effect/smoke/chlor/foundsmoke = locate() in get_turf(src)
+	var/obj/effect/particle_effect/smoke/chlor/foundsmoke = locate() in src
 	if(!foundsmoke)
 		foundsmoke = new(src, transfer_pressure, cause_data)
 		foundsmoke.setDir(pick(GLOB.cardinals))

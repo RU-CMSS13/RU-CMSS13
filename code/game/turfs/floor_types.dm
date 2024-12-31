@@ -266,6 +266,7 @@
 	desc = "Cats really don't like these things."
 	icon = 'icons/turf/almayer.dmi'
 	icon_state = "plating_catwalk"
+	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID
 	var/base_state = "plating" //Post mapping
 	var/covered = TRUE
 	var/covered_icon_state = "catwalk"

@@ -220,7 +220,7 @@
 
 	if(can_z_move(DOWN, above_turf, current_turf, ZMOVE_FALL_FLAGS|ventcrawling_flag)) //Will we fall down if we go up?
 		if(buckled)
-			to_chat(src, SPAN_WARNING("[buckled] is is not capable of flight."))
+			to_chat(src, SPAN_WARNING("[buckled] is not capable of flight."))
 		else
 			to_chat(src, SPAN_WARNING("You are not Superman."))
 		return

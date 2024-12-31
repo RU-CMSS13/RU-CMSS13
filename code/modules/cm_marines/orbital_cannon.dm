@@ -433,9 +433,9 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 		if(warhead_mode == "admin")
 			return TRUE
 
-		var/turf/roof = target.get_real_roof()
+		var/turf/roof = get_highest_turf(target)
 		var/initial_target = target.z
-		target = roof.air_strike(rand(10, 20), target, FALSE, warhead_mode == "proximity" ? 2 : 1)
+		target = roof.air_strike(rand(10, 20), target, warhead_mode == "proximity" ? 2 : 1)
 		if(warhead_mode == "safe" && target.z != initial_target && !istype(src, /obj/structure/ob_ammo/warhead/cluster))
 			forceMove(target)
 			armed = TRUE
@@ -574,8 +574,8 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 	for(var/i = 1 to total_amount)
 		for(var/k = 1 to instant_amount)
 			var/turf/selected_turf = pick(turf_list)
-			var/turf/roof = selected_turf.get_real_roof()
-			selected_turf = roof.air_strike(rand(10, 20), selected_turf, FALSE, warhead_mode == "proximity" ? 2 : 1)
+			var/turf/roof = get_highest_turf(selected_turf)
+			selected_turf = roof.air_strike(rand(10, 20), selected_turf, warhead_mode == "proximity" ? 2 : 1)
 			if(warhead_mode == "safe" && selected_turf.z != target.z)
 				fire_in_a_hole(selected_turf, cause_data, 5)
 				continue

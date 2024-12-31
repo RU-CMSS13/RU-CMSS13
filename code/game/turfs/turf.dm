@@ -26,7 +26,7 @@
 
 /turf
 	icon = 'icons/turf/floors/floors.dmi'
-	vis_flags = VIS_INHERIT_ID|VIS_INHERIT_PLANE// Important for interaction with and visualization of openspace.
+	vis_flags = VIS_INHERIT_ID// Important for interaction with and visualization of openspace.
 
 	var/turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 	var/ceiling_status = NO_FLAGS
@@ -670,27 +670,19 @@
 /turf/proc/can_be_dissolved()
 	return 0
 
-/turf/proc/get_real_roof()
-	var/turf/turf_above = SSmapping.get_turf_above(src)
-	if(!turf_above)
-		return src
-	return turf_above.get_real_roof()
-
-/turf/proc/air_strike(protection_penetration, turf/target_turf, checking = FALSE, detonation_type = FALSE)
-	if(detonation_type == 1 && src == target_turf)
+/turf/proc/air_strike(protection_penetration, turf/target_turf, landing_type = 0, checking = FALSE)
+	if(landing_type == 1 && src == target_turf)
 		return src
 
 	var/turf/turf_above = SSmapping.get_turf_above(src)
 	if(get_sector_protection() || protection_penetration <= 0)
-		if(checking && turf_above != target_turf)
-			return FALSE
 		if(turf_above)
 			return turf_above
 		return src
 
 	if(!checking)
 		if(turf_above && !istype(turf_above, /turf/open/openspace))
-			if(detonation_type == 2)
+			if(landing_type == 2)
 				return turf_above
 			if(!(turf_above.turf_flags & TURF_HULL))
 				turf_above.ceiling_debris(protection_penetration)
@@ -706,7 +698,7 @@
 	if(!turf_below)
 		return src
 	else
-		return turf_below.air_strike(protection_penetration, target_turf, checking)
+		return turf_below.air_strike(protection_penetration, target_turf, checking, landing_type)
 
 /turf/proc/ceiling_debris_check(size = 1)
 	return
@@ -1031,10 +1023,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 /turf/proc/handle_transpare_turf(is_openspace)
 	layer = OPENSPACE_LAYER
-	if(is_openspace)
-		plane = OPENSPACE_PLANE
-	else
-		plane = TRANSPARENT_FLOOR_PLANE
+	plane = TRANSPARENT_FLOOR_PLANE
 
 	var/turf/below_turf = below()
 	if(below_turf)
