@@ -130,6 +130,7 @@
 
 	xeno.throw_carbon(human, facing, behavior.fling_distance, SPEED_VERY_FAST, shake_camera = FALSE, immobilize = TRUE)
 
+/* RUCM STARTS THERE,SHIFTED CODE TO CORE_RU
 /datum/action/xeno_action/activable/scissor_cut/use_ability(atom/target_atom)
 	var/mob/living/carbon/xenomorph/ravager_user = owner
 
@@ -214,6 +215,7 @@
 	apply_cooldown()
 	return ..()
 
+RUCM ENDS HERE */
 
 ///////////// BERSERKER POWERS
 

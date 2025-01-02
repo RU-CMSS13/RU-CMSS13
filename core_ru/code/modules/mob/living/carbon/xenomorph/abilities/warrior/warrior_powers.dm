@@ -5,9 +5,6 @@
 	if (!action_cooldown_check())
 		return
 
-	if (!isxeno_human(affected_atom) || punch_user.can_not_harm(affected_atom))
-		return
-
 	if (!punch_user.check_state() || punch_user.agility)
 		return
 
@@ -16,14 +13,17 @@
 	if (distance > 2)
 		return
 
-	if(istype(affected_atom, walker))
+	if(istype(affected_atom, /obj/vehicle/walker))
 		punch_user.visible_message(SPAN_XENOWARNING("[punch_user] hits [affected_atom] with a devastatingly powerful punch!"), \
 		SPAN_XENOWARNING("We hit [affected_atom] with a devastatingly powerful punch!"))
 		var/sound = pick('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg')
-		playsound(walker?.seats[DRIVER], sound, 50, 1)
+		playsound(walker?.seats[VEHICLE_DRIVER], sound, 50, 1)
 		do_base_warrior_punch(0, 0, affected_atom)
 		apply_cooldown()
 		return ..()
+
+	if (!isxeno_human(affected_atom) || punch_user.can_not_harm(affected_atom))
+		return
 
 	var/mob/living/carbon/carbon = affected_atom
 
