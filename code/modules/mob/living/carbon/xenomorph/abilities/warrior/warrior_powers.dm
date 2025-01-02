@@ -172,4 +172,4 @@
 	warrior.flick_attack_overlay(carbon, "punch")
 	shake_camera(carbon, 2, 1)
 	step_away(carbon, warrior, 2)
- RUCM COMMENT ends THERE */
+RUCM COMMENT ends THERE */
