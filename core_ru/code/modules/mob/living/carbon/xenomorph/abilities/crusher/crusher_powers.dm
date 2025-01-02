@@ -15,7 +15,7 @@
 /mob/living/carbon/xenomorph/crusher/proc/rage_bonus()
 	if(!(LAZYISIN(modifier_sources, XENO_FRUIT_SPEED))) //Дабы не стакалось с цветком, иначе это выйдет просто фура
 		new /datum/effects/xeno_speed(src,  ttl = 4 SECONDS, set_speed_modifier = 0.4, set_modifier_source = XENO_FRUIT_SPEED, set_end_message = SPAN_XENONOTICE("We feel ourselves exhausted..."))
-	attack_speed_modifier = (initial(attack_speed_modifier) -= 4)
+	attack_speed_modifier = (initial(attack_speed_modifier) - 4)
 	addtimer(CALLBACK(src, PROC_REF(remove_rage_bonus)), 4 SECONDS)
 
 /mob/living/carbon/xenomorph/crusher/proc/remove_rage_bonus()
