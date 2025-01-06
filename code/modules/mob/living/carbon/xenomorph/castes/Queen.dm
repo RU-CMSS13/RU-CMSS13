@@ -13,7 +13,7 @@
 	plasma_gain = XENO_PLASMA_GAIN_TIER_7
 	plasma_max = XENO_PLASMA_TIER_10
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_10
-	armor_deflection = XENO_ARMOR_TIER_2
+	armor_deflection = XENO_ARMOR_TIER_5
 	evasion = XENO_EVASION_NONE
 	speed = XENO_SPEED_QUEEN
 
@@ -338,6 +338,7 @@
 		/datum/action/xeno_action/onclick/psychic_radiance,
 		/datum/action/xeno_action/activable/gut,
 		/datum/action/xeno_action/onclick/plant_weeds, //first macro, and fits near the resin structure buttons
+		/datum/action/xeno_action/onclick/charger_charge,
 		/datum/action/xeno_action/onclick/choose_resin/queen_macro, //fourth macro
 		/datum/action/xeno_action/activable/secrete_resin/queen_macro, //fifth macro
 		/datum/action/xeno_action/onclick/grow_ovipositor,
