@@ -208,4 +208,4 @@
 
 /datum/action/xeno_action/onclick/charger_charge/queen
 	ability_primacy = XENO_NOT_PRIMARY_ACTION
-	max_momentum = 16
+	max_momentum = 12
