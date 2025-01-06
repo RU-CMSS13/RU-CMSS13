@@ -15,7 +15,7 @@
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_10
 	armor_deflection = XENO_ARMOR_TIER_5
 	evasion = XENO_EVASION_NONE
-	speed = XENO_SPEED_QUEEN
+	speed = XENO_SPEED_TIER_2
 
 	build_time_mult = BUILD_TIME_MULT_BUILDER
 
@@ -993,6 +993,10 @@
 	if(Queen.ovipositor)
 		Queen.icon = Queen.queen_ovipositor_icon
 		Queen.icon_state = "[Queen.get_strain_name()] Queen Ovipositor"
+		return TRUE
+
+	if(HAS_TRAIT(bound_xeno, TRAIT_CHARGING) && bound_xeno.body_position == STANDING_UP)
+		bound_xeno.icon_state = "[Queen.get_strain_name()] Queen Charging"
 		return TRUE
 
 	// Switch icon back and then let normal icon behavior happen
