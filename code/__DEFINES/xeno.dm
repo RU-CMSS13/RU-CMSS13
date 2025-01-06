@@ -375,6 +375,9 @@
 // Facehugger strain flags
 #define FACEHUGGER_WATCHER "Watcher"
 
+// Warrior strain flags
+#define WARRIOR_BOXER "Boxer"
+
 // Drone strain flags
 #define DRONE_HEALER "Healer"
 #define DRONE_GARDENER "Gardener"

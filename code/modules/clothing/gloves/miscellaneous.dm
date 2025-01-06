@@ -76,8 +76,17 @@
 	var/boxing_verb = pick(attack_verb)
 	if (A in range(1, M))
 		if(isliving(A) && M.a_intent == INTENT_HARM)
-			if(isyautja(A) || isxeno(A))
+			if(isyautja(A))
 				return 0
+			if(isxeno(A))
+				var/mob/living/carbon/xenomorph/X = A
+				if(istype(X.strain, /datum/xeno_strain/boxer))
+					M.visible_message(SPAN_DANGER("[M] boxes with [A]!"))
+					var/fisticuff_phrase = pick("Have at ye!", "En guard fuckboy!", "Huttah!", "Take this uncultured cur!", "Have at you little man!")
+					M.say(fisticuff_phrase)//this is probably going to trigger spam filter, but I don't care?
+					return 0
+				else
+					return 0
 			if (ishuman(A))
 				var/mob/living/carbon/human/L = A
 				var/boxing_icon = pick("boxing_up","boxing_down","boxing_left","boxing_right")

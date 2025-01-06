@@ -93,7 +93,7 @@
 	ability_primacy = XENO_PRIMARY_ACTION_1
 
 	// Config vars
-	var/max_momentum = 8
+	var/max_momentum = 10
 	var/steps_to_charge = 4
 	var/speed_per_momentum = XENO_SPEED_FASTMOD_TIER_5 + XENO_SPEED_FASTMOD_TIER_1//2
 	var/plasma_per_step = 3 // charger has 400 plasma atm, this gives a good 100 tiles of crooshing
