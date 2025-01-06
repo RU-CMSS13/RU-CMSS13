@@ -99,7 +99,7 @@
 /obj/structure/prop/sector_center/Initialize()
 	. = ..()
 	name = "Sector [pick(GLOB.operation_prefixes)]-[pick(GLOB.operation_postfixes)]"
-	if(owner)
+	if(initial_faction)
 		owner = new(GLOB.faction_datums[initial_faction], src)
 	range_bounds = RECT(loc.x, loc.y, zone_range * 2, zone_range * 2)
 	update_icon()
