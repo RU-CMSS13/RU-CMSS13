@@ -37,17 +37,17 @@
 	effective_range_max = 7
 	accurate_range = 12
 	damage = 30
-	penetration = ARMOR_PENETRATION_TIER_5
-	pen_armor_punch = 3
-	damage_armor_punch = 1
+	penetration = ARMOR_PENETRATION_TIER_4
+	pen_armor_punch = 2
+	damage_armor_punch = 0.5
 
 /datum/ammo/bullet/smartgun/m56c/holo_target
 	name = "holo smartgun bullet"
 
 	damage = 20
-	penetration = ARMOR_PENETRATION_TIER_3
+	penetration = ARMOR_PENETRATION_TIER_2
 	pen_armor_punch = 1
-	damage_armor_punch = 1
+	damage_armor_punch = 0
 
 	/// inflicts this many holo stacks per bullet hit
 	var/holo_stacks = 20
