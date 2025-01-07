@@ -338,11 +338,12 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 
 	var/image/holder = hud_list[ARMOR_HUD_XENO]
 	var/armor_hud_type = "xenoarmor"
-	if(stat == DEAD || armor_deflection <=0)
+	if(stat == DEAD || armor_deflection <= 0)
 		holder.icon_state = "[armor_hud_type]0"
 	else
 		var/amount = round(armor_integrity*100/armor_integrity_max, 10)
-		if(!amount) amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
+		if(!amount)
+			amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
 		holder.icon_state = "[armor_hud_type][amount]"
 
 /mob/living/carbon/human/med_hud_set_health()
