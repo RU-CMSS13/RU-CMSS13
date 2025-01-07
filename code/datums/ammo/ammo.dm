@@ -38,9 +38,9 @@
 	/// Stun,knockdown,knockout,irradiate,stutter,eyeblur,drowsy,agony
 	var/debilitate[] = null
 	/// how much armor breaking will be done per point of penetration. This is for weapons that penetrate with their shape (like needle bullets)
-	var/pen_armor_punch = 0.5
+	var/pen_armor_punch = 0.25
 	/// how much armor breaking is done by sheer weapon force. This is for big blunt weapons
-	var/damage_armor_punch = 0.5
+	var/damage_armor_punch = 0.25
 	/// if we should play a special sound when firing.
 	var/sound_override = null
 	var/flags_ammo_behavior = NO_FLAGS

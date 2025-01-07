@@ -676,6 +676,14 @@
 	new /obj/item/ammo_magazine/smartgun(src)
 	new /obj/item/ammo_magazine/smartgun(src)
 
+/obj/item/storage/belt/marine/smartgunner/m56c/fill_preset_inventory()
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+	new /obj/item/ammo_magazine/smartgun/m56c(src)
+
 /obj/item/storage/belt/marine/smartgunner/full/fill_preset_inventory()
 	new /obj/item/ammo_magazine/smartgun(src)
 	new /obj/item/ammo_magazine/smartgun(src)

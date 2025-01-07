@@ -100,6 +100,12 @@
 	default_ammo = /datum/ammo/bullet/smartgun
 	gun_type = /obj/item/weapon/gun/smartgun
 
+/obj/item/ammo_magazine/smartgun/m56c
+	name = "smartgun drum"
+	desc = "What at first glance appears to be a standard 500 round M56 Smartgun drum, is actually a drum loaded with special rounds, none of those listed in any documents, but they look cool and do cool explosion on hit."
+	default_ammo = /datum/ammo/bullet/smartgun/m56c
+	gun_type = /obj/item/weapon/gun/smartgun/m56c
+
 /obj/item/ammo_magazine/smartgun/dirty
 	name = "irradiated smartgun drum"
 	desc = "What at first glance appears to be a standard 500 round M56 Smartgun drum, is actually a drum loaded with irradiated rounds, providing an extra 'oomph' to to its bullets. The magazine itself is slightly modified to only fit in M56D or M56T smartguns, and is marked with a red X."

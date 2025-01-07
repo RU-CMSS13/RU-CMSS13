@@ -18,6 +18,9 @@
 	damage_falloff = DAMAGE_FALLOFF_TIER_7
 	max_range = 24 //So S8 users don't have their bullets magically disappaer at 22 tiles (S8 can see 24 tiles)
 
+	pen_armor_punch = 0.5
+	damage_armor_punch = 0.5
+
 /datum/ammo/bullet/rifle/holo_target
 	name = "holo-targeting rifle bullet"
 	damage = 30
@@ -62,6 +65,9 @@
 	damage = 30
 	penetration = ARMOR_PENETRATION_TIER_8
 
+	pen_armor_punch = 1
+	damage_armor_punch = 0.75
+
 // Basically AP but better. Focused at taking out armour temporarily
 /datum/ammo/bullet/rifle/ap/toxin
 	name = "toxic rifle bullet"
@@ -89,6 +95,9 @@
 
 	damage = 35
 	penetration = ARMOR_PENETRATION_TIER_10
+
+	pen_armor_punch = 1.25
+	damage_armor_punch = 1
 
 /datum/ammo/bullet/rifle/ap/penetrating/set_bullet_traits()
 	. = ..()
@@ -207,6 +216,9 @@
 
 	damage = 40
 	penetration = ARMOR_PENETRATION_TIER_10
+
+	pen_armor_punch = 1
+	damage_armor_punch = 0.75
 
 /datum/ammo/bullet/rifle/type71/heap
 	name = "heavy high-explosive armor-piercing rifle bullet"

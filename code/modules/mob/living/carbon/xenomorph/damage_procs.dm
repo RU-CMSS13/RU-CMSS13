@@ -209,19 +209,17 @@
 
 /mob/living/carbon/xenomorph/var/armor_break_to_apply = 0
 /mob/living/carbon/xenomorph/proc/apply_armorbreak(armorbreak = 0)
-	if(GLOB.xeno_general.armor_ignore_integrity)
+	if(GLOB.xeno_general.armor_ignore_integrity || !armorbreak || stat == DEAD)
 		return FALSE
 
-	if(stat == DEAD) return
-
-	if(armor_deflection<=0)
-		return
+	if(armor_deflection <= 0)
+		return FALSE
 
 	//Immunity check
 	if(world.time < armor_integrity_immunity_time && world.time>armor_integrity_last_damage_time + XENO_ARMOR_BREAK_PASS_TIME)
-		return 1
+		return TRUE
 
-	if(world.time>armor_integrity_immunity_time)
+	if(world.time > armor_integrity_immunity_time)
 		armor_integrity_immunity_time = world.time
 		armor_integrity_last_damage_time = world.time
 		armor_break_to_apply = 0
@@ -234,18 +232,18 @@
 	if(armor_integrity_immunity_time - world.time > XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME * 4)
 		armor_integrity_immunity_time = world.time + XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME * 4
 
-	return 1
+	return TRUE
 
 /mob/living/carbon/xenomorph/proc/post_apply_armorbreak()
 	set waitfor = 0
-	if(!caste) return
+	if(!caste)
+		return
 	sleep(XENO_ARMOR_BREAK_PASS_TIME)
-	if(warding_aura && armor_break_to_apply > 0) //Damage to armor reduction
+	if(!caste || !armor_break_to_apply)
+		return
+	if(warding_aura) //Damage to armor reduction
 		armor_break_to_apply = floor(armor_break_to_apply * ((100 - (warding_aura * 15)) / 100))
-	if(caste)
-		armor_integrity -= armor_break_to_apply
-	if(armor_integrity < 0)
-		armor_integrity = 0
+	gain_armor_percent(-armor_break_to_apply / armor_deflection)
 	armor_break_to_apply = 0
 	updatehealth()
 

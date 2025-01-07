@@ -213,7 +213,7 @@
 
 
 /mob/living/carbon/xenomorph/proc/gain_armor_percent(value)
-	armor_integrity = min(armor_integrity + value, 100)
+	armor_integrity = min(armor_integrity + value, armor_integrity_max)
 
 
 //Strip all inherent xeno verbs from your caste. Used in evolution.

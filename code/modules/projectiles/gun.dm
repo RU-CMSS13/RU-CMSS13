@@ -617,6 +617,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 		gun_recoil = recoil_buildup
 
 	var/penetration = 0
+	var/armor_punch = 0
 	var/accuracy = 0
 	var/min_accuracy = 0
 	var/max_range = 0
@@ -624,6 +625,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 	var/scatter = 0
 	var/list/damage_armor_profile_xeno = list()
 	var/list/damage_armor_profile_marine = list()
+	var/list/damage_armor_profile_armorbreak = list()
 	var/list/damage_armor_profile_headers = list()
 
 	var/datum/ammo/in_ammo
@@ -646,6 +648,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 		falloff = in_ammo.damage_falloff * damage_falloff_mult
 
 		penetration = in_ammo.penetration
+		armor_punch = in_ammo.damage_armor_punch
 
 		accuracy = in_ammo.accurate_range
 
@@ -659,6 +662,11 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 			damage_armor_profile_headers.Add(i)
 			damage_armor_profile_marine.Add(floor(armor_damage_reduction(GLOB.marine_ranged_stats, damage, i, penetration)))
 			damage_armor_profile_xeno.Add(floor(armor_damage_reduction(GLOB.xeno_ranged_stats, damage, i, penetration)))
+			if(!GLOB.xeno_general.armor_ignore_integrity)
+				if(i != 0)
+					damage_armor_profile_armorbreak.Add("[round(armor_break_calculation(GLOB.xeno_ranged_stats, damage, i, penetration, in_ammo.pen_armor_punch, armor_punch)/i)]%")
+				else
+					damage_armor_profile_armorbreak.Add("N/A")
 
 	var/rpm = max(fire_delay, 1)
 	var/burst_rpm = max((fire_delay * 1.5 + (burst_amount - 1) * burst_delay)/max(burst_amount, 1), 0.0001)
@@ -687,6 +695,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 	data["damage"] = damage
 	data["falloff"] = falloff
 	data["total_projectile_amount"] = bonus_projectile_amount+1
+	data["armor_punch"] = armor_punch
 	data["penetration"] = penetration
 	data["accuracy"] = accuracy * accuracy_mult
 	data["unwielded_accuracy"] = accuracy * accuracy_mult_unwielded
@@ -699,6 +708,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 	data["damage_armor_profile_headers"] = damage_armor_profile_headers
 	data["damage_armor_profile_marine"] = damage_armor_profile_marine
 	data["damage_armor_profile_xeno"] = damage_armor_profile_xeno
+	data["damage_armor_profile_armorbreak"] = damage_armor_profile_armorbreak
 
 	return data
 
@@ -717,6 +727,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 	data["falloff_max"] = DAMAGE_FALLOFF_TIER_1
 	data["penetration_max"] = ARMOR_PENETRATION_TIER_10
 	data["punch_max"] = 5
+	data["glob_armourbreak"] = GLOB.xeno_general.armor_ignore_integrity
 	data["automatic"] = (GUN_FIREMODE_AUTOMATIC in gun_firemode_list)
 	data["auto_only"] = ((length(gun_firemode_list) == 1) && (GUN_FIREMODE_AUTOMATIC in gun_firemode_list))
 

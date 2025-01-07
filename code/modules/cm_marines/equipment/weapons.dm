@@ -42,10 +42,10 @@
 /obj/item/storage/box/m56c_system/Initialize()
 	. = ..()
 	new /obj/item/clothing/glasses/night/m56_goggles(src)
-	new /obj/item/weapon/gun/smartgun/co(src)
+	new /obj/item/weapon/gun/smartgun/m56c(src)
 	new /obj/item/smartgun_battery(src)
 	new /obj/item/clothing/suit/storage/marine/smartgunner(src)
-	new /obj/item/storage/belt/marine/smartgunner(src)
+	new /obj/item/storage/belt/marine/smartgunner/m56c(src)
 	update_icon()
 
 /obj/item/storage/box/m56c_system/update_icon()

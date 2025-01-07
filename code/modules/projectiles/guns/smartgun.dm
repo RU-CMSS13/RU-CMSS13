@@ -572,35 +572,23 @@
 			STOP_PROCESSING(SSobj, src)
 
 //CO SMARTGUN
-/obj/item/weapon/gun/smartgun/co
+/obj/item/weapon/gun/smartgun/m56c
 	name = "\improper M56C 'Cavalier' smartgun"
-	desc = "The actual firearm in the 4-piece M56C Smartgun system. Back order only. Besides a more robust weapons casing, an ID lock system and a fancy paintjob, the gun's performance is identical to the standard-issue M56B.\nAlt-click it to open the feed cover and allow for reloading."
+	desc = "The actual firearm in the 4-piece M56C Smartgun system. Back order only. Besides a more robust weapons casing, an ID lock system and a fancy paintjob, has special ammunition that developed for team play.\nAlt-click it to open the feed cover and allow for reloading."
 	icon_state = "m56c"
 	item_state = "m56c"
+	current_mag = /obj/item/ammo_magazine/smartgun/m56c
+	ammo = /datum/ammo/bullet/smartgun/m56c
+	ammo_primary = /datum/ammo/bullet/smartgun/m56c
+	ammo_secondary = /datum/ammo/bullet/smartgun/m56c/holo_target
 	var/mob/living/carbon/human/linked_human
 	var/is_locked = TRUE
 
-/obj/item/weapon/gun/smartgun/co/Initialize(mapload, ...)
+/obj/item/weapon/gun/smartgun/m56c/Initialize(mapload, ...)
 	LAZYADD(actions_types, /datum/action/item_action/co_sg/toggle_id_lock)
 	. = ..()
 
-/obj/item/weapon/gun/smartgun/set_gun_config_values()
-	..()
-	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
-	fa_max_scatter = SCATTER_AMOUNT_TIER_9
-	if(accuracy_improvement)
-		accuracy_mult += HIT_ACCURACY_MULT_TIER_3
-	else
-		accuracy_mult += HIT_ACCURACY_MULT_TIER_1
-	if(recoil_compensation)
-		scatter = SCATTER_AMOUNT_TIER_10
-		recoil = RECOIL_OFF
-	else
-		scatter = SCATTER_AMOUNT_TIER_6
-		recoil = RECOIL_AMOUNT_TIER_3
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_5
-
-/obj/item/weapon/gun/smartgun/co/able_to_fire(mob/user)
+/obj/item/weapon/gun/smartgun/m56c/able_to_fire(mob/user)
 	. = ..()
 	if(is_locked && linked_human && linked_human != user)
 		if(linked_human.is_revivable() || linked_human.stat != DEAD)
@@ -616,7 +604,7 @@
 
 /datum/action/item_action/co_sg/action_activate()
 	. = ..()
-	var/obj/item/weapon/gun/smartgun/co/protag_gun = holder_item
+	var/obj/item/weapon/gun/smartgun/m56c/protag_gun = holder_item
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/protagonist = owner
@@ -636,7 +624,7 @@
 
 /datum/action/item_action/co_sg/toggle_id_lock/action_activate()
 	. = ..()
-	var/obj/item/weapon/gun/smartgun/co/protag_gun = holder_item
+	var/obj/item/weapon/gun/smartgun/m56c/protag_gun = holder_item
 	protag_gun.toggle_lock()
 	if(protag_gun.is_locked)
 		action_icon_state = "id_lock_locked"
@@ -645,7 +633,7 @@
 	button.overlays.Cut()
 	button.overlays += image('icons/mob/hud/actions.dmi', button, action_icon_state)
 
-/obj/item/weapon/gun/smartgun/co/proc/toggle_lock(mob/user)
+/obj/item/weapon/gun/smartgun/m56c/proc/toggle_lock(mob/user)
 	if(linked_human && usr != linked_human)
 		to_chat(usr, SPAN_WARNING("[icon2html(src, usr)] Action denied by \the [src]. Unauthorized user."))
 		return
@@ -658,18 +646,18 @@
 
 // action end \\
 
-/obj/item/weapon/gun/smartgun/co/pickup(user)
+/obj/item/weapon/gun/smartgun/m56c/pickup(user)
 	if(!linked_human)
 		src.name_after_co(user, src)
 		to_chat(usr, SPAN_NOTICE("[icon2html(src, usr)] You pick up \the [src], registering yourself as its owner."))
 	..()
 
 
-/obj/item/weapon/gun/smartgun/co/proc/name_after_co(mob/living/carbon/human/H, obj/item/weapon/gun/smartgun/co/I)
+/obj/item/weapon/gun/smartgun/m56c/proc/name_after_co(mob/living/carbon/human/H, obj/item/weapon/gun/smartgun/m56c/I)
 	linked_human = H
 	RegisterSignal(linked_human, COMSIG_PARENT_QDELETING, PROC_REF(remove_idlock))
 
-/obj/item/weapon/gun/smartgun/co/get_examine_text()
+/obj/item/weapon/gun/smartgun/m56c/get_examine_text()
 	. = ..()
 	if(linked_human)
 		if(is_locked)
@@ -681,7 +669,7 @@
 	if(!iff_enabled)
 		. += SPAN_WARNING("Its IFF restrictions are disabled.")
 
-/obj/item/weapon/gun/smartgun/co/proc/remove_idlock()
+/obj/item/weapon/gun/smartgun/m56c/proc/remove_idlock()
 	SIGNAL_HANDLER
 	linked_human = null
 

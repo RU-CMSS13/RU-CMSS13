@@ -91,8 +91,8 @@
 	armor_steps = 5
 	non_null_damage_mult = 4
 	armor_full_deflection_mult = 2
-	armor_integrity_damage_mult = 4
-	armor_ignore_integrity = TRUE
+	armor_integrity_damage_mult = 0.1
+	armor_ignore_integrity = 0
 
 /datum/combat_configuration/xeno/ranged
 
@@ -105,7 +105,7 @@
 	armor_steps = 10
 	armor_minimal_efficiency = 0
 	damage_initial_multiplier = 2
-	armor_integrity_damage_mult = 4
+	armor_integrity_damage_mult = 0.25
 
 /datum/combat_configuration/xeno/explosive/small
 	armor_ignore_integrity = 1

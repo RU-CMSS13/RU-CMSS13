@@ -89,7 +89,6 @@
 	accurate_range = 12
 	damage = 40
 	penetration = ARMOR_PENETRATION_TIER_6
-	damage_armor_punch = 1
 
 /datum/ammo/bullet/tank/minigun/New()
 	..()
