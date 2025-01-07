@@ -399,7 +399,7 @@ Defined in conflicts.dm of the #defines folder.
 	icon_state = "hbarrel"
 	attach_icon = "hbarrel_a"
 	hud_offset_mod = -3
-
+/*
 /obj/item/attachable/heavy_barrel/New()
 	..()
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
@@ -414,7 +414,7 @@ Defined in conflicts.dm of the #defines folder.
 	else
 		damage_mod = BULLET_DAMAGE_MULT_TIER_6
 	..()
-
+*/
 /obj/item/attachable/compensator
 	name = "recoil compensator"
 	desc = "A muzzle attachment that reduces recoil by diverting expelled gasses upwards. \nIncreases accuracy and reduces recoil, at the cost of a small amount of weapon damage."
