@@ -91,7 +91,7 @@
 	armor_steps = 5
 	non_null_damage_mult = 4
 	armor_full_deflection_mult = 2
-	armor_integrity_damage_mult = 0.3
+	armor_integrity_damage_mult = 0.35
 	armor_ignore_integrity = 0
 
 /datum/combat_configuration/xeno/ranged

@@ -361,7 +361,7 @@ Make sure their actual health updates immediately.*/
 				if(body_position == LYING_DOWN || resting)
 					curve_factor *= 1.5
 
-				var/factor = ((armor_deflection / 100) * 1.5 MINUTES) // 100 armor is restored in 4.5 minutes in 2 seconds intervals
+				var/factor = ((armor_deflection / 100) * 2 MINUTES) // 100 armor is restored in 6 minutes in 2 seconds intervals
 				gain_armor_percent(100*curve_factor/factor)
 
 		else if(prob(50) && !current_aura) //Xenos restore plasma VERY slowly off weeds, regardless of health, as long as they are not using special abilities
