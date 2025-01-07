@@ -12,7 +12,7 @@
 	damage_falloff = DAMAGE_FALLOFF_TIER_6
 	max_range = 12
 	accuracy = HIT_ACCURACY_TIER_4
-	damage = 30
+	damage = 35
 	penetration = 0
 	effective_range_max = 5
 
@@ -23,7 +23,7 @@
 	damage_falloff = DAMAGE_FALLOFF_TIER_8
 	accurate_range = 12
 	accuracy = HIT_ACCURACY_TIER_2
-	damage = 20
+	damage = 25
 	penetration = ARMOR_PENETRATION_TIER_8
 	damage_armor_punch = 1
 
