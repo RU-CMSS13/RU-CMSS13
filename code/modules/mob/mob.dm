@@ -1010,13 +1010,19 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/Move()
 	. = ..()
+	if(!.)
+		return
+
 	if(shadow)
-		var/turf/above = SSmapping.get_turf_above(loc)
-		if(above && above.turf_flags & TURF_TRANSPARENT)
-			shadow.forceMove(above)
-		else
-			shadow.forceMove(loc)
-			to_chat(src, SPAN_NOTICE("You can see [above]."))
+		shadow.update_look(src)
+
+/mob/zMove(dir, turf/target, z_move_flags)
+	. = ..()
+	if(!.)
+		return
+
+	if(shadow)
+		shadow.update_look(src)
 
 /// Send src back to the lobby as a `/mob/new_player()`
 /mob/proc/send_to_lobby()
@@ -1035,3 +1041,46 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /obj/shadow/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
 	return FALSE
+
+/obj/shadow/check_eye(mob/living/user)
+	if(user.is_mob_incapacitated() || user.blinded || user.body_position == LYING_DOWN || !user.client)
+		user.lookup()
+
+/obj/shadow/on_set_interaction(mob/living/user)
+	RegisterSignal(user, COMSIG_HUMAN_MOVEMENT_CANCEL_INTERACTION, PROC_REF(interaction_handler))
+	RegisterSignal(user, COMSIG_MOB_RESET_VIEW, PROC_REF(handle_view))
+	RegisterSignal(user, COMSIG_XENO_OVERWATCH_XENO, PROC_REF(on_unset_interaction))
+
+	var/turf/above = SSmapping.get_turf_above(user.loc)
+	to_chat(user, SPAN_NOTICE("You look up."))
+	user.reset_view(src)
+	if(above && above.turf_flags & TURF_TRANSPARENT)
+		forceMove(above)
+	else
+		to_chat(src, SPAN_NOTICE("You can see [above]."))
+
+/obj/shadow/on_unset_interaction(mob/living/user)
+	UnregisterSignal(user, COMSIG_HUMAN_MOVEMENT_CANCEL_INTERACTION)
+	UnregisterSignal(user, COMSIG_MOB_RESET_VIEW)
+
+	to_chat(user, SPAN_NOTICE("You stop looking up."))
+	user.reset_view(0)
+	QDEL_NULL(user.shadow)
+
+/obj/shadow/proc/update_look(mob/living/user)
+	if(user.client?.eye != src)
+		user.reset_view(src)
+
+	var/turf/above = SSmapping.get_turf_above(user.loc)
+	if(above && above.turf_flags & TURF_TRANSPARENT)
+		forceMove(above)
+	else
+		forceMove(user.loc)
+		to_chat(user, SPAN_NOTICE("You can see [above]."))
+
+/obj/shadow/proc/interaction_handler()
+	return COMPONENT_HUMAN_MOVEMENT_KEEP_USING
+
+/obj/shadow/proc/handle_view(datum/owner,atom/target)
+	if(target != src)
+		return COMPONENT_OVERRIDE_VIEW

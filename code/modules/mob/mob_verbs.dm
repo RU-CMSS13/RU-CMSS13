@@ -257,15 +257,9 @@
 	set category = "IC"
 
 	if(!shadow)
-		var/turf/above = SSmapping.get_turf_above(loc)
-		to_chat(src, SPAN_NOTICE("You look up."))
 		shadow = new(loc)
-		reset_view(shadow)
-		if(above && above.turf_flags & TURF_TRANSPARENT)
-			shadow.forceMove(above)
-		else
-			to_chat(src, SPAN_NOTICE("You can see [above]."))
+		set_interaction(shadow)
 	else
-		to_chat(src, SPAN_NOTICE("You stop looking up."))
-		reset_view(0)
+		if(interactee == shadow)
+			unset_interaction()
 		QDEL_NULL(shadow)

@@ -365,6 +365,16 @@
 	if(check_canhit(current_turf, next_turf, ignore_list))
 		return TRUE
 
+	// Simply check if we can continue fly
+	if(current_turf.z != next_turf.z && !next_turf.antipierce)
+		var/turf/below_next_turf = locate(next_turf.x, next_turf.y, current_turf.z)
+		forceMove(below_next_turf)
+		distance_travelled++
+		vis_travelled++
+		ammo.on_hit_turf(below_next_turf, src)
+		below_next_turf.bullet_act(src)
+		return TRUE
+
 	// Actually move
 	forceMove(next_turf)
 	distance_travelled++

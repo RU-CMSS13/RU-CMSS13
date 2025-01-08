@@ -1708,6 +1708,9 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	return 1
 
 /obj/item/weapon/gun/proc/simulate_scatter(obj/projectile/projectile_to_fire, atom/target, turf/curloc, turf/targloc, mob/user, bullets_fired = 1)
+	if(target.z != curloc.z)
+		curloc = locate(curloc.x, curloc.y, target.z)
+
 	var/fire_angle = Get_Angle(curloc, targloc)
 	var/total_scatter_angle = projectile_to_fire.scatter
 
