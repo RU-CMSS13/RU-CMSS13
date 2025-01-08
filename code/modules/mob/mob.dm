@@ -1049,7 +1049,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /obj/shadow/on_set_interaction(mob/living/user)
 	RegisterSignal(user, COMSIG_HUMAN_MOVEMENT_CANCEL_INTERACTION, PROC_REF(interaction_handler))
 	RegisterSignal(user, COMSIG_MOB_RESET_VIEW, PROC_REF(handle_view))
-	RegisterSignal(user, COMSIG_XENO_OVERWATCH_XENO, PROC_REF(on_unset_interaction))
+	RegisterSignal(user, COMSIG_XENO_OVERWATCH_XENO, TYPE_PROC_REF(/atom/movable, on_unset_interaction))
 
 	var/turf/above = SSmapping.get_turf_above(user.loc)
 	to_chat(user, SPAN_NOTICE("You look up."))

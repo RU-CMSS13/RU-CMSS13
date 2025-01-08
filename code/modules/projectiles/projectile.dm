@@ -366,7 +366,7 @@
 		return TRUE
 
 	// Simply check if we can continue fly
-	if(current_turf.z != next_turf.z && !next_turf.antipierce)
+	if(current_turf.z != next_turf.z && next_turf.antipierce)
 		var/turf/below_next_turf = locate(next_turf.x, next_turf.y, current_turf.z)
 		forceMove(below_next_turf)
 		distance_travelled++
