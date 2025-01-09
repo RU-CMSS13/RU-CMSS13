@@ -547,13 +547,13 @@
 	if(observed_xeno)
 		overwatch(observed_xeno, TRUE)
 
-	hive.set_living_xeno_queen(null)
-
 	if(hive && hive.living_xeno_queen == src)
+		var/mob/living/carbon/xenomorph/queen/next_queen = null
 		for(var/mob/living/carbon/xenomorph/queen/queen in hive.totalXenos)
 			if(!should_block_game_interaction(queen) && queen != src && !QDELETED(queen))
-				hive.set_living_xeno_queen(queen)
+				next_queen = queen
 				break
+		hive.set_living_xeno_queen(next_queen) // either null or a queen
 
 	return ..()
 
