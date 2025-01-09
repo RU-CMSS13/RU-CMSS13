@@ -21,4 +21,4 @@
 	var/active = FALSE
 
 /datum/action/xeno_action/onclick/charger_charge/queen
-	ability_primacy = XENO_NOT_PRIMARY_ACTION
+	ability_primacy = XENO_SCREECH
