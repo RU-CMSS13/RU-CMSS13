@@ -60,7 +60,7 @@
 		return
 
 	if(target == xeno)
-		to_chat(xeno, "You can't transfer your life to him!")
+		to_chat(xeno, "You can't transfer your life to yourself!")
 		return
 
 	if(isfacehugger(target) || islesserdrone(target))
