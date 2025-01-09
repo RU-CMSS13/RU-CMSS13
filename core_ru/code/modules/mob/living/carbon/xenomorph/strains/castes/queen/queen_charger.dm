@@ -8,6 +8,7 @@
 	)
 	actions_to_add = list(
 		/datum/action/xeno_action/onclick/charger_charge/queen,
+		/datum/action/xeno_action/activable/fling/charger/queen,
 	)
 
 	behavior_delegate_type = /datum/behavior_delegate/royal_charger
@@ -19,7 +20,9 @@
 	queen.mobile_abilities -= /datum/action/xeno_action/onclick/screech
 
 	queen.mobile_aged_abilities += /datum/action/xeno_action/onclick/charger_charge/queen
+	queen.mobile_aged_abilities += /datum/action/xeno_action/activable/fling/charger/queen
 	queen.mobile_abilities += /datum/action/xeno_action/onclick/charger_charge/queen
+	queen.mobile_abilities += /datum/action/xeno_action/activable/fling/charger/queen
 
 	queen.recalculate_everything()
 

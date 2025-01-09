@@ -22,3 +22,10 @@
 
 /datum/action/xeno_action/onclick/charger_charge/queen
 	ability_primacy = XENO_SCREECH
+
+/datum/action/xeno_action/activable/fling/charger/queen
+	ability_primacy = XENO_NOT_PRIMARY_ACTION
+	fling_distance = 4
+	stun_power = 2
+	weaken_power = 0
+	slowdown = 8
