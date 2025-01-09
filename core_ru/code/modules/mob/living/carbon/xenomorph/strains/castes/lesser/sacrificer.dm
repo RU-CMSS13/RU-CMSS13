@@ -105,7 +105,6 @@
 /datum/action/xeno_action/onclick/lesser_shield
 	name = "Sacrificer shield"
 	action_icon_state = "empower"
-	ability_name = "Sacrificer shield"
 	macro_path = /datum/action/xeno_action/verb/verb_lesser_shield
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_3
