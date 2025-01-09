@@ -162,7 +162,7 @@
 	shield.color = "#cf1d1d"
 	overlays_standing[LESSER_SHIELD_OVERLAY] = shield
 	apply_overlay(LESSER_SHIELD_OVERLAY)
-	addtimer(CALLBACK(src, PROC_REF(remove_overlay), 9), 100)
+	addtimer(CALLBACK(src, PROC_REF(remove_overlay), LESSER_SHIELD_OVERLAY), 100)
 
 
 /datum/action/xeno_action/onclick/lesser_shield/proc/remove_lesser_shield()
