@@ -40,7 +40,6 @@
 /datum/action/xeno_action/activable/lesser_sacrifice
 	name = "Sacrifice"
 	action_icon_state = "warden_heal"
-	ability_name = "sacrifice"
 	macro_path = /datum/action/xeno_action/verb/verb_lesser_sacrifice
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_1
