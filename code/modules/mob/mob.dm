@@ -1016,6 +1016,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(shadow)
 		shadow.update_look(src)
 
+/mob/Move()
+	. = ..()
+	if(!.)
+		return
+
+	if(shadow)
+		shadow.update_look(src)
+
 /mob/zMove(dir, turf/target, z_move_flags)
 	. = ..()
 	if(!.)
