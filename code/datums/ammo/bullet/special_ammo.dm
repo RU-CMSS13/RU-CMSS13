@@ -36,7 +36,9 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	damage = 40
+/* RUCM CHANGE
 	penetration = 0
+*/
 
 /datum/ammo/bullet/smartgun/dirty/armor_piercing
 	debilitate = list(0,0,0,3,0,0,0,1)
@@ -69,6 +71,8 @@
 	accuracy = HIT_ACCURACY_TIER_2
 	damage = 20
 	penetration = ARMOR_PENETRATION_TIER_8
+
+	pen_armor_punch = 1
 	damage_armor_punch = 1
 
 /datum/ammo/bullet/smartgun/m56_fpw
