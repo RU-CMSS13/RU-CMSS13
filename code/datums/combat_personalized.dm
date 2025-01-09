@@ -95,7 +95,7 @@
 	armor_ignore_integrity = TRUE
 
 /datum/combat_configuration/xeno
-	armor_integrity_damage_mult = 0.35
+	armor_integrity_damage_mult = 0.45
 	armor_ignore_integrity = 0
 
 /datum/combat_configuration/xeno/ranged
