@@ -59,7 +59,7 @@
 	var/mob/living/carbon/xenomorph/queen/queen = bound_xeno
 	if(queen.ovipositor)
 		queen.icon = queen.queen_ovipositor_icon
-		queen.icon_state = "[queen.get_strain_name()] Queen Ovipositor"
+		queen.icon_state = "[queen.get_strain_icon()] Queen Ovipositor"
 		return TRUE
 
 	if(HAS_TRAIT(bound_xeno, TRAIT_CHARGING) && queen.body_position == STANDING_UP)
