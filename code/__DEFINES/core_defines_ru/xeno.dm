@@ -4,5 +4,11 @@
 
 #define XENO_COMM_ACQUISITION_TIME (45 MINUTES)
 
+#define XENO_SHIELD_SACRIFICE 12
+
+#define LESSER_BUILD_COLOR "#cbc8fc"
+
+#define LESSER_SHIELD_OVERLAY 9
+
 // Warrior strain flags
 #define WARRIOR_BOXER "Boxer"
