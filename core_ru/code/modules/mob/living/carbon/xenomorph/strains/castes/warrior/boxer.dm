@@ -2,7 +2,6 @@
 	name = WARRIOR_BOXER
 	description = "In exchange for your ability to fling and shield yourself with slashes, you gain KO meter and the ability to resist stuns. Your punches will reset the cooldown of your Jab. Jab lets you close in and confuse your opponents while resetting Punch cooldown. Your slashes and abilities build up KO meter that later lets you deal damage, knockback, heal, and restore your stun resistance depending on how much KO meter you gained with a titanic Uppercut strike."
 	flavor_description = "You will play box around."
-	icon_state_prefix = "Boxer"
 
 	actions_to_remove = list(
 		/datum/action/xeno_action/activable/fling,
