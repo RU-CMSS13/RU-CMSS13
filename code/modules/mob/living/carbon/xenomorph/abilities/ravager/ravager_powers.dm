@@ -130,7 +130,6 @@
 
 	xeno.throw_carbon(human, facing, behavior.fling_distance, SPEED_VERY_FAST, shake_camera = FALSE, immobilize = TRUE)
 
-/* RUCM STARTS THERE,SHIFTED CODE TO CORE_RU
 /datum/action/xeno_action/activable/scissor_cut/use_ability(atom/target_atom)
 	var/mob/living/carbon/xenomorph/ravager_user = owner
 
@@ -211,11 +210,17 @@
 
 			if(should_sslow)
 				new /datum/effects/xeno_slow/superslow(carbon_target, ravager_user, ttl = superslow_duration)
+		//RUCM STARTS THERE
+		for(var/obj/vehicle/walker/walker in target_turf)
+			walker.health = max(0, walker.health - (damage * 2))
+			walker.healthcheck()
+			ravager_user.visible_message(SPAN_XENOWARNING("[ravager_user] hits [walker] with a devastatingly powerful swing!"), \
+			SPAN_XENOWARNING("We hit [walker] with a devastatingly powerful swing!"))
+		//RUCM ENDS THERE
 
 	apply_cooldown()
 	return ..()
 
-RUCM ENDS HERE */
 
 ///////////// BERSERKER POWERS
 
