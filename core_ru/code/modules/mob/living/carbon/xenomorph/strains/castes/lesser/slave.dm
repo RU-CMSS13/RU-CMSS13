@@ -42,7 +42,8 @@
 
 //  Смерть вне травы
 /datum/behavior_delegate/lesser_slave/on_life()
-	if(bound_xeno.body_position == STANDING_UP && !(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno)))
+	var/turf/own_turf = get_turf(bound_xeno)
+	if(bound_xeno.body_position == STANDING_UP && !(own_turf.weeds && own_turf.weeds.linked_hive.hivenumber == bound_xeno.hivenumber))
 		bound_xeno.adjustBruteLoss(20)
 
 //	Способности
