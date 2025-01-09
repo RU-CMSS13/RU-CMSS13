@@ -1008,7 +1008,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/update_stat()
 	return
 
-/mob/Move()
+/mob/forceMove()
 	. = ..()
 	if(!.)
 		return
