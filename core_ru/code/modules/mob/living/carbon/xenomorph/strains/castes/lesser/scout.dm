@@ -33,7 +33,6 @@
 /datum/action/xeno_action/onclick/lesser_run
 	name = "On four paws"
 	action_icon_state = "agility_on"
-	ability_name = "On four paws"
 	macro_path = /datum/action/xeno_action/verb/verb_lesser_shield
 	ability_primacy = XENO_PRIMARY_ACTION_1
 	plasma_cost = 100
