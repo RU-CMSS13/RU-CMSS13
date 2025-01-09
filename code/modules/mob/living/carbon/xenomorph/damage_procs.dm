@@ -249,6 +249,7 @@
 	armor_break_to_apply = 0
 	updatehealth()
 
+/*RUCM FILE CHANGE
 /mob/living/carbon/xenomorph/proc/check_blood_splash(damage = 0, damtype = BRUTE, chancemod = 0, radius = 1)
 	if(!damage || !acid_blood_damage || world.time < acid_splash_last + acid_splash_cooldown || SSticker?.mode?.hardcore)
 		return FALSE
@@ -294,6 +295,7 @@
 				handle_blood_splatter(get_dir(src, victim), 1 SECONDS)
 				playsound(victim, "acid_sizzle", 25, TRUE)
 				animation_flash_color(victim, "#FF0000") //pain hit flicker
+RUCM ENDS HERE*/
 
 /mob/living/carbon/xenomorph/get_target_lock(access_to_check)
 	if(isnull(access_to_check))
