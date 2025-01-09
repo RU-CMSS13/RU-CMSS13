@@ -1038,13 +1038,17 @@ note dizziness decrements automatically in the mob's Life() proc.
 /obj/shadow
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
+	var/high = 1
+	var/max_high = 3
 
 /obj/shadow/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
 	return FALSE
 
 /obj/shadow/check_eye(mob/living/user)
 	if(user.is_mob_incapacitated() || user.blinded || user.body_position == LYING_DOWN || !user.client)
-		user.lookup()
+		if(user.interactee == src)
+			user.unset_interaction()
+		QDEL_NULL(user.shadow)
 
 /obj/shadow/on_set_interaction(mob/living/user)
 	RegisterSignal(user, COMSIG_HUMAN_MOVEMENT_CANCEL_INTERACTION, PROC_REF(interaction_handler))
@@ -1071,12 +1075,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(user.client?.eye != src)
 		user.reset_view(src)
 
-	var/turf/above = SSmapping.get_turf_above(user.loc)
-	if(above && above.turf_flags & TURF_TRANSPARENT)
-		forceMove(above)
-	else
-		forceMove(user.loc)
-		to_chat(user, SPAN_NOTICE("You can see [above]."))
+	for(var/i in 1 to high)
+		var/turf/above = SSmapping.get_turf_above(user.loc)
+		if(above && above.turf_flags & TURF_TRANSPARENT)
+			forceMove(above)
+		else
+			if(i == 1)
+				forceMove(user.loc)
+			to_chat(user, SPAN_NOTICE("You can see [above] in [i] floors."))
 
 /obj/shadow/proc/interaction_handler()
 	return COMPONENT_HUMAN_MOVEMENT_KEEP_USING

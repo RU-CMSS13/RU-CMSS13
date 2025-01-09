@@ -253,13 +253,27 @@
 	stop_pulling()
 
 /mob/verb/lookup()
-	set name = "Look up"
+	set name = "Look Up"
 	set category = "IC"
 
 	if(!shadow)
 		shadow = new(loc)
 		set_interaction(shadow)
+
+	if(shadow.high >= shadow.max_high)
+		to_chat(src, SPAN_NOTICE("You can't look up more."))
 	else
+		shadow.high++
+
+
+/mob/verb/stoplookup()
+	set name = "Look Down"
+	set category = "IC"
+
+	if(!shadow || shadow.high == 0)
 		if(interactee == shadow)
 			unset_interaction()
 		QDEL_NULL(shadow)
+		to_chat(src, SPAN_NOTICE("You can't look down more."))
+	else
+		shadow.high--
