@@ -60,7 +60,7 @@
 		return TRUE
 
 	if(HAS_TRAIT(bound_xeno, TRAIT_CHARGING) && queen.body_position == STANDING_UP)
-		bound_xeno.icon_state = "[queen.get_strain_icon()] Crusher Charging"
+		bound_xeno.icon_state = "[queen.get_strain_icon()] Queen Charging"
 		return TRUE
 
 	// Switch icon back and then let normal icon behavior happen
