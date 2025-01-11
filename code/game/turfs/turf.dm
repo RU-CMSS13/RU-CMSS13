@@ -396,14 +396,20 @@
 
 	if(falling.can_paradrop() && levels > 2)
 		playsound(get_turf(falling), "rustle", 50, 1, 6)
-		sleep(5)
-
-	if(istype(falling, /mob))
-		var/mob/mob = falling
-		mob.trainteleport(target)
+		spawn(5)
+			if(istype(falling, /mob))
+				var/mob/mob = falling
+				mob.trainteleport(target)
+			else
+				falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
+			target.zImpact(falling, levels, src)
 	else
-		falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
-	target.zImpact(falling, levels, src)
+		if(istype(falling, /mob))
+			var/mob/mob = falling
+			mob.trainteleport(target)
+		else
+			falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
+		target.zImpact(falling, levels, src)
 
 ///Called each time the target falls down a z level possibly making their trajectory come to a halt. see __DEFINES/movement.dm.
 /turf/proc/zImpact(atom/movable/falling, levels = 1, turf/prev_turf)
