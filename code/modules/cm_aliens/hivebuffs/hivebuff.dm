@@ -397,7 +397,7 @@
 	desc = "A huge behemoth of a Xenomorph which can tear its way through defences and flesh alike. Requires open space to grow."
 	tier = HIVEBUFF_TIER_MAJOR
 	radial_icon = "king"
-
+	
 	is_reusable = TRUE
 	cost = 0
 	special_fail_message = "Only one hatchery may exist at a time."

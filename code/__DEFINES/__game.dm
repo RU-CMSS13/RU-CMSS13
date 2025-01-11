@@ -33,7 +33,6 @@
 #define MAP_RUNTIME "USS Runtime"
 #define MAP_LV522_CHANCES_CLAIM "LV-522 Chance's Claim"
 #define MAP_NEW_VARADERO "New Varadero"//ice colony underground but as its own map
-#define MAP_SKY_SCRAPER "Sky Scraper"
 #define MAP_CHINOOK "Chinook 91 GSO" //admin level
 
 #define GAMEMODE_WHISKEY_OUTPOST "Whiskey Outpost"

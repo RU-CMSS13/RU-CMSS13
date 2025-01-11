@@ -110,7 +110,7 @@
 #define MOBILE_SHUTTLE_LIFEBOAT_PORT "lifeboat-port"
 #define MOBILE_SHUTTLE_LIFEBOAT_STARBOARD "lifeboat-starboard"
 #define MOBILE_SHUTTLE_VEHICLE_ELEVATOR "vehicle_elevator"
-#define MOBILE_SHUTTLE_SKY_SCRAPER_ELEVATOR "normal_elevator"
+#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR "normal_elevator"
 
 #define DROPSHIP_ALAMO "dropship_alamo"
 #define DROPSHIP_NORMANDY "dropship_normandy"

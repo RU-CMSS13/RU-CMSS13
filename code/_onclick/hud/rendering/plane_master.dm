@@ -40,9 +40,6 @@
 
 /atom/movable/screen/plane_master/openspace_backdrop/Initialize(mapload)
 	. = ..()
-	add_filter("first_stage_openspace", 1, drop_shadow_filter(color = "#04080FAA", size = -10))
-	add_filter("second_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -15))
-	add_filter("third_stage_openspace", 3, drop_shadow_filter(color = "#04080FAA", size = -20))
 
 ///For any transparent multi-z tiles we want to render
 /atom/movable/screen/plane_master/transparent
@@ -53,6 +50,9 @@
 /atom/movable/screen/plane_master/transparent/Initialize(mapload)
 	. = ..()
 	add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
+	add_filter("first_stage_openspace", 2, drop_shadow_filter(color = "#04080FAA", size = -10))
+	add_filter("second_stage_openspace", 3, drop_shadow_filter(color = "#04080FAA", size = -15))
+	add_filter("third_stage_openspace", 4, drop_shadow_filter(color = "#04080FAA", size = -20))
 
 /atom/movable/screen/plane_master/floor
 	name = "floor plane master"
@@ -137,7 +137,6 @@
 /atom/movable/screen/plane_master/lighting/exterior
 	name = "exterior lighting plane master"
 	plane = EXTERIOR_LIGHTING_PLANE
-
 
 /**
  * Handles emissive overlays and emissive blockers.

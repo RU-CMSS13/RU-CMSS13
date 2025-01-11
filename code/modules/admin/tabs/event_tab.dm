@@ -47,7 +47,7 @@
 	set category = "Admin.Events"
 	if(!admin_holder)
 		return
-
+	
 	var/flag = tgui_input_list(src, "Which flag?", "Whitelist Flags", GLOB.bitfields["whitelist_status"])
 
 	var/list/ckeys = list()

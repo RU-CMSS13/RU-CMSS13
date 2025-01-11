@@ -42,7 +42,7 @@
 
 /obj/structure/ship_ammo/update_icon()
 	. = ..()
-
+	
 	var/ammo_stage = ammo_count / ammo_used_per_firing
 	icon_state = "[initial(icon_state)]_[ammo_stage]"
 

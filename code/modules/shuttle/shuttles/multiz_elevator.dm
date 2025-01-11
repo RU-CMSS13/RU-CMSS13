@@ -1,7 +1,7 @@
 // -- Docks
 /obj/docking_port/stationary/sselevator
-	name = "Sky Scraper Elevator Floor"
-	id = MOBILE_SHUTTLE_SKY_SCRAPER_ELEVATOR
+	name = "'S95 v2' Elevator Floor"
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
 	width = 7
 	height = 7
 
@@ -20,8 +20,8 @@
 // -- Shuttles
 
 /obj/docking_port/mobile/sselevator
-	name = "sky scraper elevator"
-	id = MOBILE_SHUTTLE_SKY_SCRAPER_ELEVATOR
+	name = "'S95 v2' elevator"
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
 	width = 7
 	height = 7
 
@@ -233,7 +233,7 @@
 
 
 /obj/docking_port/stationary/sselevator/floor_roof
-	roundstart_template = /datum/map_template/shuttle/sky_scraper_elevator
+	roundstart_template = /datum/map_template/shuttle/multiz_elevator
 
 //Console
 
@@ -422,38 +422,38 @@
 		elevator_port.door = src
 
 
-/datum/map_template/shuttle/sky_scraper_elevator
-	shuttle_id = MOBILE_SHUTTLE_SKY_SCRAPER_ELEVATOR
+/datum/map_template/shuttle/multiz_elevator
+	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
 	name = "S95 v2 Elevator"
 
-/turf/open/shuttle/elevator/skyscraper
-	icon = 'icons/turf/skyscraper_elevator.dmi'
+/turf/open/shuttle/elevator/multiz
+	icon = 'icons/turf/multiz_elevator.dmi'
 	icon_state = "floor_w"
 
-/turf/open/shuttle/elevator/skyscraper/grating
+/turf/open/shuttle/elevator/multiz/grating
 	icon_state = "floor_grating_w"
 
-/turf/open/shuttle/elevator/skyscraper/wv
+/turf/open/shuttle/elevator/multiz/wv
 	icon_state = "floor_w_v"
 
-/turf/open/shuttle/elevator/skyscraper/wg
+/turf/open/shuttle/elevator/multiz/wg
 	icon_state = "floor_w_g"
 
-/turf/closed/shuttle/elevator/scraper
-	icon = 'icons/turf/skyscraper_elevator.dmi'
+/turf/closed/shuttle/elevator/multiz
+	icon = 'icons/turf/multiz_elevator.dmi'
 	icon_state = "wall_w"
 
-/turf/closed/shuttle/elevator/scraper/north
+/turf/closed/shuttle/elevator/multiz/north
 	dir = NORTH
 
-/turf/closed/shuttle/elevator/scraper/east
+/turf/closed/shuttle/elevator/multiz/east
 	dir = EAST
 
-/turf/closed/shuttle/elevator/scraper/west
+/turf/closed/shuttle/elevator/multiz/west
 	dir = WEST
 
 /turf/closed/shuttle/elevator/window
-	icon = 'icons/turf/skyscraper_elevator.dmi'
+	icon = 'icons/turf/multiz_elevator.dmi'
 	icon_state = "wall_window_w"
 	opacity = FALSE
 
@@ -485,45 +485,33 @@
 	dir = SOUTHWEST
 
 /turf/closed/shuttle/elevator/gears/sci
-	icon = 'icons/turf/skyscraper_elevator.dmi'
+	icon = 'icons/turf/multiz_elevator.dmi'
 	icon_state = "wall_w_gear"
 
 /turf/closed/shuttle/elevator/gears/sci/west
 	dir = WEST
 
-/obj/structure/machinery/gear/sky_scraper
-	icon = 'icons/turf/skyscraper_elevator.dmi'
+/obj/structure/machinery/gear/elevator
+	icon = 'icons/turf/multiz_elevator.dmi'
 	icon_state = "w_gear"
 
-/obj/structure/machinery/gear/sky_scraper/start_moving()
+/obj/structure/machinery/gear/elevator/start_moving()
 	icon_state = "w_gear_animated"
 
-/obj/structure/machinery/gear/sky_scraper/stop_moving()
+/obj/structure/machinery/gear/elevator/stop_moving()
 	icon_state = "w_gear"
 
-/obj/structure/machinery/gear/sky_scraper/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
+/obj/structure/machinery/gear/elevator/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	. = ..()
 	if(istype(port, /obj/docking_port/mobile/sselevator))
 		var/obj/docking_port/mobile/sselevator/elevator_port = port
 		elevator_port.gears += src
 
-/area/shuttle/sky_scraper_elevator
+/area/shuttle/multiz_elevator
 	name = "'S95 v2' Elevator"
 	ambience_exterior = 'sound/ambience/elevator_music.ogg'
 	lightswitch = TRUE
 	unlimited_power = TRUE
-
-/obj/structure/machinery/computer/shuttle/dropship/flight/lz1/sky_scraper/linked_lz()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators["sky_scraper_elevator_one"]
-	if(!elevator)
-		return
-	elevator.handle_initial_data(null, TRUE)
-
-/obj/structure/machinery/computer/shuttle/dropship/flight/lz2/sky_scraper/linked_lz()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators["sky_scraper_elevator_two"]
-	if(!elevator)
-		return
-	elevator.handle_initial_data(null, TRUE)
 
 /turf/open/floor/almayer/mono/indestructible_stairs
 	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_HULL
