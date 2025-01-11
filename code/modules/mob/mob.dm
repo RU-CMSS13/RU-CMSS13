@@ -1046,7 +1046,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /obj/shadow
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
-	var/high = 1
+	var/high = 0
 	var/max_high = 3
 
 /obj/shadow/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)

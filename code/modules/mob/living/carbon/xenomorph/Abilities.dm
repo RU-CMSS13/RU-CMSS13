@@ -143,22 +143,32 @@
 	xeno.visible_message(SPAN_XENOHIGHDANGER("[xeno] emits an ear-splitting guttural roar!"))
 	xeno.create_shriekwave(14) //Adds the visual effect. Wom wom wom, 14 shriekwaves
 
-	FOR_DVIEW(var/mob/mob, world.view, owner, HIDE_INVISIBLE_OBSERVER)
-		if(mob && mob.client)
-			if(isxeno(mob))
-				shake_camera(mob, 10, 1)
-			else
-				shake_camera(mob, 30, 1) //50 deciseconds, SORRY 5 seconds was way too long. 3 seconds now
-	FOR_DVIEW_END
+	var/list/target_refs = list(owner)
+	var/turf/next = get_step_multiz(owner, UP)
+	if(next)
+		target_refs += next
+	next = get_step_multiz(owner, DOWN)
+	if(next)
+		target_refs += next
+	for(var/atom/target_ref as anything in target_refs)
+		FOR_DVIEW(var/mob/mob, owner != target_ref ? floor(world.view/2) : world.view, owner, HIDE_INVISIBLE_OBSERVER)
+			if(mob && mob.client)
+				if(isxeno(mob))
+					shake_camera(mob, 10, 1)
+				else
+					shake_camera(mob, 30, 1) //50 deciseconds, SORRY 5 seconds was way too long. 3 seconds now
+		FOR_DVIEW_END
 
 	var/list/mobs_in_view = list()
-	FOR_DOVIEW(var/mob/living/carbon/M, 7, xeno, HIDE_INVISIBLE_OBSERVER)
-		mobs_in_view += M
-	FOR_DOVIEW_END
-	for(var/mob/living/carbon/M in orange(10, xeno))
-		if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, xeno) & COMPONENT_SCREECH_ACT_CANCEL)
-			continue
-		M.handle_queen_screech(xeno, mobs_in_view)
+	for(var/atom/target_ref as anything in target_refs)
+		FOR_DOVIEW(var/mob/living/carbon/M, owner != target_ref ? 4 : 7, target_ref, HIDE_INVISIBLE_OBSERVER)
+			mobs_in_view += M
+		FOR_DOVIEW_END
+	for(var/atom/target_ref as anything in target_refs)
+		for(var/mob/living/carbon/M in orange(owner != target_ref ? 6 : 10, target_ref))
+			if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, xeno) & COMPONENT_SCREECH_ACT_CANCEL)
+				continue
+			M.handle_queen_screech(xeno, mobs_in_view)
 
 	apply_cooldown()
 

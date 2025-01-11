@@ -135,9 +135,14 @@
 //
 // This is a copy-and-paste of the Enter() proc for turfs with tweaks related to the applications
 // of LinkBlocked
-/proc/LinkBlocked(atom/movable/mover, turf/start_turf, turf/target_turf, list/atom/forget)
+/proc/LinkBlocked(atom/movable/mover, turf/start_turf, turf/target_turf, turf/prev_turf, list/atom/forget)
 	if (!mover)
 		return null
+
+	if(prev_turf && target_turf.z != prev_turf.z)
+		var/turf/stoping_us = target_turf.z < prev_turf.z ? prev_turf : target_turf
+		if(stoping_us.antipierce > 1)
+			return stoping_us
 
 	/// the actual dir between the start and target turf
 	var/fdir = get_dir(start_turf, target_turf)

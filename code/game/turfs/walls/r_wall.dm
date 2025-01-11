@@ -5,7 +5,7 @@
 	opacity = TRUE
 	density = TRUE
 
-	antipierce = 3
+	antipierce = 5
 
 	damage_cap = HEALTH_WALL_REINFORCED
 

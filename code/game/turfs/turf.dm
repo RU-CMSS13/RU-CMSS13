@@ -59,7 +59,7 @@
 	 */
 	var/list/obj/effect/decal/cleanable/cleanables
 
-	var/antipierce = 1
+	var/antipierce = 2
 
 	var/list/baseturfs = /turf/baseturf_bottom
 	var/changing_turf = FALSE

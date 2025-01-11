@@ -13,7 +13,7 @@
 	var/melting = FALSE
 	var/claws_minimum = CLAW_TYPE_SHARP
 
-	antipierce = 2
+	antipierce = 3
 
 	baseturfs = /turf/open/floor/plating
 

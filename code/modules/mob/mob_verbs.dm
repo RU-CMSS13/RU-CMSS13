@@ -270,7 +270,7 @@
 	set name = "Look Down"
 	set category = "IC"
 
-	if(!shadow || shadow.high == 0)
+	if(!shadow || shadow.high == 1)
 		if(interactee == shadow)
 			unset_interaction()
 		QDEL_NULL(shadow)

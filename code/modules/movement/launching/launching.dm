@@ -184,7 +184,7 @@
 
 	var/turf/start_turf = get_step_towards(src, LM.target)
 	var/list/turf/path = get_line(start_turf, LM.target)
-	var/last_loc = loc
+	var/turf/last_loc = loc
 
 	var/early_exit = FALSE
 	LM.dist = 0
@@ -196,6 +196,10 @@
 			break
 		if (LM.dist >= LM.range)
 			break
+		if(T.z != last_loc.z)
+			var/turf/stoping_us = T.z < last_loc.z ? last_loc : T
+			if(stoping_us.antipierce > 0)
+				break
 		if (!Move(T)) // If this returns FALSE, then a collision happened
 			break
 		last_loc = loc
