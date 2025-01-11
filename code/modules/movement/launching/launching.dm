@@ -198,7 +198,7 @@
 			break
 		if(T.z != last_loc.z)
 			var/turf/stoping_us = T.z < last_loc.z ? last_loc : T
-			if(stoping_us.antipierce > 0)
+			if(stoping_us.antipierce > 0 || istype(src, /mob/living))
 				break
 		if (!Move(T)) // If this returns FALSE, then a collision happened
 			break

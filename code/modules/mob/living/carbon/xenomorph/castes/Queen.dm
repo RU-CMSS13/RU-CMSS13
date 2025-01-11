@@ -164,7 +164,7 @@
 	SIGNAL_HANDLER
 	name = "[initial(src.name)] ([new_name])"
 
-/mob/hologram/queen/proc/allow_turf_entry(mob/self, turf/crossing_turf)
+/mob/hologram/queen/allow_turf_entry(mob/self, turf/crossing_turf)
 	SIGNAL_HANDLER
 
 	if(!crossing_turf)
