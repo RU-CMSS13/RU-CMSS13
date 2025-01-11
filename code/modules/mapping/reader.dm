@@ -320,10 +320,10 @@
 	if(TICK_CHECK) { \
 		if(loading) { \
 			SSatoms.map_loader_stop(REF(src)); \
-			stoplag(2); \
+			stoplag(); \
 			SSatoms.map_loader_begin(REF(src)); \
 		} else { \
-			stoplag(2); \
+			stoplag(); \
 		} \
 	}
 
@@ -468,7 +468,6 @@
 			WARNING("Z-level expansion occurred without no_changeturf set, this may cause problems when /turf/AfterChange is called")
 
 	for(var/datum/grid_set/gset as anything in target_grid_sets)
-		MAPLOADING_CHECK_TICK
 		var/true_xcrd = gset.xcrd + x_relative_to_absolute
 
 		// any cutoff of x means we just shouldn't iterate this gridset
@@ -490,12 +489,12 @@
 		var/ycrd = highest_y
 		// Everything following this line is VERY hot.
 		for(var/i in 1 + y_starting_skip to line_count - y_ending_skip)
-			MAPLOADING_CHECK_TICK
 			if(gset.gridLines[i] == space_key && no_afterchange)
 				#ifdef TESTING
 				++turfsSkipped
 				#endif
 				ycrd--
+				MAPLOADING_CHECK_TICK
 				continue
 
 			var/list/cache = modelCache[gset.gridLines[i]]
@@ -510,6 +509,7 @@
 				first_y = ycrd
 			last_y = ycrd
 			ycrd--
+			MAPLOADING_CHECK_TICK
 
 		// The x coord never changes, so not tracking first x is safe
 		// If no ycrd is found, we assume this row is totally empty and just continue on

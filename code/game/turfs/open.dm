@@ -177,7 +177,7 @@
 	name = "grass"
 	icon = 'icons/turf/floors/floors.dmi'
 	icon_state = "grass1"
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 	antipierce = 5
 
@@ -193,7 +193,7 @@
 	icon_state = "mars_sand_1"
 	is_groundmap_turf = TRUE
 	minimap_color = MINIMAP_MARS_DIRT
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 	antipierce = 5
 
@@ -294,7 +294,7 @@
 	icon = 'icons/turf/floors/bigred.dmi'
 	icon_state = "mars_dirt_1"
 	minimap_color = MINIMAP_DIRT
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 	antipierce = 5
 
 /turf/open/mars_dirt/Initialize(mapload, ...)
@@ -389,7 +389,7 @@
 /turf/open/beach/sand
 	name = "Sand"
 	icon_state = "sand"
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 /turf/open/beach/coastline
 	name = "Coastline"
@@ -430,7 +430,7 @@
 	icon = 'icons/turf/ground_map.dmi'
 	icon_state = "desert"
 	is_groundmap_turf = TRUE
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_EFFECT_AFFECTABLE|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_EFFECT_AFFECTABLE|TURF_WEATHER_PROOF
 	antipierce = 10
 
 /turf/open/gm/attackby(obj/item/I, mob/user)
@@ -914,7 +914,7 @@
 	icon = 'icons/turf/ice.dmi'
 	icon_state = "ice_floor"
 	baseturfs = /turf/open/ice
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 	antipierce = 5
 
 
@@ -1037,7 +1037,7 @@
 	icon_state = "grass1"
 	var/icon_spawn_state = "grass1"
 	baseturfs = /turf/open/jungle
-	turf_flags = TURF_MULTIZ|TURF_TRENCHING|TURF_WEATHER_PROOF
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
 	antipierce = 10
 

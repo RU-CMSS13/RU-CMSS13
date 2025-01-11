@@ -6,14 +6,9 @@
 	var/homes_sector_occupation = TRUE
 	var/latejoin_enabled = TRUE
 
-	var/datum/faction_task_ui/task_interface
-
 	var/desc = "Neutral Faction"
 	var/orders = "Остаться в живых"
 	var/ui_color = "#22888a"
-
-/datum/faction/New()
-	task_interface = new(src)
 
 /datum/faction/proc/modify_hud_holder(image/holder, mob/living/carbon/human/H)
 	return
@@ -61,7 +56,7 @@
 //		if("relations")
 //			relations_datum.tgui_interact(usr)
 		if("tasks")
-			task_interface.tgui_interact(usr)
+//			task_interface.tgui_interact(usr)
 		if("clues")
 			if(!skillcheck(usr, SKILL_INTEL, SKILL_INTEL_TRAINED))
 				to_chat(usr, SPAN_WARNING("You have no access to the [name] intel network."))

@@ -167,7 +167,7 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 	if(firer)
 		firer.images -= to_remove
 		var/turf/roof = get_highest_turf(target_turf)
-		target_turf = roof.air_strike(rand(10, 15), target_turf, 1)
+		target_turf = roof.air_strike(15, target_turf, 1)
 		playsound(target_turf, 'sound/machines/railgun/railgun_impact.ogg', sound_range = 75)
 		cell_explosion(target_turf, power, power/range, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, create_cause_data("railgun", firer.mob))
 

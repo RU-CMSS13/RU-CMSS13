@@ -89,14 +89,14 @@
 
 	var/datum/space_level/level = SSmapping.add_new_zlevel(name, list(), contain_turfs = FALSE)
 	var/datum/parsed_map/parsed = load_map(
-file(mappath),
+		file(mappath),
 		x,
 		y,
-level.z_value,
-no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
+		level.z_value,
+		no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
 		place_on_top = should_place_on_top,
 		new_z = TRUE,
-)
+	)
 	var/list/bounds = parsed.bounds
 	if(!bounds)
 		return FALSE
@@ -129,14 +129,14 @@ no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
 	UNSETEMPTY(turf_blacklist)
 	parsed.turf_blacklist = turf_blacklist
 	if(!parsed.load(
-T.x,
-T.y,
-T.z,
-crop_map = TRUE,
-no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
-place_on_top = should_place_on_top,
-delete = delete
-))
+		T.x,
+		T.y,
+		T.z,
+		crop_map = TRUE,
+		no_changeturf = (SSatoms.initialized == INITIALIZATION_INSSATOMS),
+		place_on_top = should_place_on_top,
+		delete = delete
+	))
 		return
 
 	var/list/bounds = parsed.bounds

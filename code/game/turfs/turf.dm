@@ -45,7 +45,6 @@
 
 	var/intact_tile = 1 //used by floors to distinguish floor with/without a floortile(e.g. plating).
 
-	var/list/linked_sectors = list()
 	var/list/linked_pylons
 	var/obj/effect/alien/weeds/weeds
 
@@ -183,9 +182,6 @@
 /turf/proc/update_overlays()
 	if(QDELETED(src))
 		return
-
-//	if(turf_flags & TURF_WEATHER)
-//		overlays += SSsunlighting.get_weather_overlay()
 
 /turf/ex_act(severity)
 	return 0
@@ -541,7 +537,6 @@
 	//if(src.type == new_turf_path) // Put this back if shit starts breaking
 	// return src
 
-	var/sectors = linked_sectors
 	var/pylons = linked_pylons
 	var/old_weeds = weeds
 
@@ -569,7 +564,6 @@
 		var/datum/A = i
 		SEND_SIGNAL(A, COMSIG_ATOM_TURF_CHANGE, src)
 
-	W.linked_sectors = sectors
 	W.linked_pylons = pylons
 	W.weeds = old_weeds
 
@@ -678,7 +672,7 @@
 		return src
 
 	var/turf/turf_above = SSmapping.get_turf_above(src)
-	if(get_sector_protection() || protection_penetration <= 0)
+	if(protection_penetration <= 0)
 		if(turf_above)
 			return turf_above
 		return src
@@ -880,15 +874,6 @@
 			linked_pylons -= pylon
 
 	return protection_level
-
-/turf/proc/get_sector_protection()
-	for(var/atom/sector in linked_sectors)
-		if(sector.loc != null)
-			if(istype(sector, /obj/structure/prop/sector_center))
-				return TRUE
-		else
-			linked_sectors -= sector
-	return FALSE
 
 GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	/turf/open/space,
