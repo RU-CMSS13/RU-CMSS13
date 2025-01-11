@@ -5,6 +5,14 @@
 #define UNUSED_RESERVATION_TURF (1<<1)
 /// If a turf is a reserved turf
 #define RESERVATION_TURF (1<<2)
+#define TURF_DEBRISED					(1<<3)
+#define TURF_MULTIZ						(1<<4)
+#define TURF_WEATHER_PROOF				(1<<5)
+#define TURF_EFFECT_AFFECTABLE			(1<<6)
+#define TURF_HULL						(1<<7)
+#define TURF_BURNABLE					(1<<8)
+#define TURF_BREAKABLE					(1<<9)
+#define TURF_TRANSPARENT				(1<<10)
 
 //ChangeTurf options to change its behavior
 #define CHANGETURF_DEFER_CHANGE (1<<0)

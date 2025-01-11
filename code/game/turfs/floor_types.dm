@@ -87,7 +87,35 @@
 		return
 	return ..()
 
+//TODO (MULTIZ): IMPROVE IT
 /turf/open/floor/plating/make_plating()
+	if(prob(20))
+		var/turf/below_turf = SSmapping.get_turf_below(src)
+		if(below_turf)
+			playsound(below_turf, "metalbang", 50, 1)
+			below_turf.visible_message(SPAN_DANGER("Roof above [src] caving in!"), SPAN_DANGER("Roof above [src] caving in!"))
+			spawn(1 SECONDS)
+				var/obj/item/shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/rods(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				for(var/mob/living/unlucky in below_turf)
+					unlucky.adjustBruteLoss(30)
+
+		for(var/obj/structure/locked_stuff in contents)
+			if(istype(locked_stuff, /obj/structure/pipes))
+				new /obj/item/pipe(loc, null, null, locked_stuff)
+				qdel(locked_stuff)
+				continue
+			if(istype(locked_stuff, /obj/structure/disposalpipe))
+				locked_stuff.deconstruct(TRUE)
+				continue
+			locked_stuff.anchored = FALSE
+		ScrapeAway()
 	return
 
 /turf/open/floor/plating/burnt_platingdmg3
@@ -219,6 +247,7 @@
 /turf/open/floor/plating/icefloor
 	icon_state = "plating"
 	name = "ice colony plating"
+	antipierce = 5
 
 /turf/open/floor/plating/icefloor/Initialize(mapload, ...)
 	. = ..()
@@ -323,8 +352,7 @@
 /turf/open/floor/plating/plating_catwalk/aicore
 	icon = 'icons/turf/floors/aicore.dmi'
 	icon_state = "ai_plating_catwalk"
-	breakable_tile = FALSE // platingdmg# icon_state does not exist in this icon
-	burnable_tile = FALSE // panelscorched icon_state does not exist in this icon
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 	covered_icon_state = "ai_catwalk"
 
 /turf/open/floor/plating/plating_catwalk/aicore/white
@@ -345,8 +373,7 @@
 	icon_state = "catwalk0"
 	name = "catwalk"
 	desc = "Cats really don't like these things."
-	breakable_tile = FALSE // platingdmg# icon_state does not exist in this icon
-	burnable_tile = FALSE // panelscorched icon_state does not exist in this icon
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 
 /turf/open/floor/almayer
 	icon = 'icons/turf/almayer.dmi'
@@ -720,7 +747,7 @@
 	icon = 'icons/turf/almayer.dmi'
 	icon_state = "plating"
 	plating_type = /turf/open/floor/tdome
-	hull_floor = TRUE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_HULL
 
 /turf/open/floor/tdome/w_y0
 	icon_state = "w-y0"
@@ -761,9 +788,9 @@
 	desc = "There seems to be an awful lot of machinery down below..."
 	icon = 'icons/turf/floors/floors.dmi'
 	icon_state = "black"
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF
 
-/turf/open/floor/almayer/empty/is_weedable()
-	return NOT_WEEDABLE
+/turf/open/floor/almayer/empty/weedable = NOT_WEEDABLE
 
 /turf/open/floor/almayer/empty/ex_act(severity) //Should make it indestructible
 	return
@@ -873,7 +900,7 @@
 
 /turf/open/floor/almayer/no_build
 	allow_construction = FALSE
-	hull_floor = TRUE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
 
 /turf/open/floor/almayer/no_build/ai_floors
 	icon_state = "ai_floors"
@@ -911,7 +938,7 @@
 
 /turf/open/floor/almayer/aicore/no_build
 	allow_construction = FALSE
-	hull_floor = TRUE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
 
 /turf/open/floor/almayer/aicore/no_build/ai_arrow
 	icon_state = "ai_arrow"
@@ -942,7 +969,7 @@
 
 /turf/open/floor/almayer/aicore/glowing/no_build
 	allow_construction = FALSE
-	hull_floor = TRUE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
 
 /turf/open/floor/almayer/aicore/glowing/no_build/ai_floor3_4range
 	icon_state = "ai_floor3"
@@ -1006,13 +1033,79 @@
 
 
 
+//Roofs
+
+/turf/open/floor/roof
+	icon = 'icons/turf/roofs/roof_asphalt.dmi'
+	icon_state = "roof"
+	base_icon = "roof"
+	name = "roof"
+
+	blend_turfs = list(/turf/closed/wall, /turf/open/floor/roof)
+	noblend_turfs = list(/turf/closed/wall/mineral, /turf/closed/wall/almayer/research/containment)
+
+	special_icon = FALSE
+
+/turf/open/floor/roof/ship_hull
+	icon = 'icons/turf/roofs/roof_ship.dmi'
+	name = "hull"
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
+
+	antipierce = 100 // Very tuf
+
+/turf/open/floor/roof/ship_hull/lab
+	icon = 'icons/turf/roofs/roof_lab_ship.dmi'
+	name = "ship lab roof"
+
+/turf/open/floor/roof/lab
+	icon = 'icons/turf/roofs/roof_lab.dmi'
+	name = "lab roof"
+
+	blend_turfs = list(/turf/closed/wall, /turf/open)
+	noblend_turfs = list(/turf/open/openspace, /turf/closed/wall/mineral)
+
+/turf/open/floor/roof/metal
+	icon = 'icons/turf/roofs/roof_metal.dmi'
+	name = "metal roof"
+
+/turf/open/floor/roof/metal/rusty
+	icon = 'icons/turf/roofs/roof_rusty.dmi'
+	name = "rusty metal roof"
+
+/turf/open/floor/roof/sheet
+	icon = 'icons/turf/roofs/roof_sheet.dmi'
+	name = "sheet roof"
+
+/turf/open/floor/roof/sheet/noborder
+	icon = 'icons/turf/roofs/roof_sheet_noborder.dmi'
+
+	special_icon = TRUE
+
+/turf/open/floor/roof/asphalt
+	icon = 'icons/turf/roofs/roof_asphalt.dmi'
+	name = "asphalt roof"
+
+/turf/open/floor/roof/asphalt/noborder
+	icon = 'icons/turf/roofs/roof_asphalt_noborder.dmi'
+
+	special_icon = TRUE
+
+/turf/open/floor/roof/wood
+	icon = 'icons/turf/roofs/roof_wood.dmi'
+	name = "wood roof"
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+
 //Outerhull
 
 /turf/open/floor/almayer_hull
 	icon = 'icons/turf/almayer.dmi'
 	icon_state = "outerhull"
 	name = "hull"
-	hull_floor = TRUE
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
 
 /turf/open/floor/almayer_hull/outerhull_dir
 	icon_state = "outerhull_dir"
@@ -1133,9 +1226,8 @@
 /turf/open/floor/engine
 	name = "reinforced floor"
 	icon_state = "engine"
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 	intact_tile = 0
-	breakable_tile = FALSE
-	burnable_tile = FALSE
 	baseturfs = /turf/open/floor
 
 /turf/open/floor/engine/simulator_center
@@ -1215,6 +1307,8 @@
 	icon_state = "grass1"
 	tile_type = /obj/item/stack/tile/grass
 	tool_flags = null
+
+	antipierce = 5
 
 /turf/open/floor/grass/Initialize(mapload, ...)
 	. = ..()
@@ -2101,8 +2195,7 @@
 	name = "wooden floor"
 	icon_state = "oldwood1"
 	tile_type = /obj/item/stack/tile/wood
-	breakable_tile = FALSE // wood-broken icon_state does not exist in this icon
-	burnable_tile = FALSE // wood-broken icon_state does not exist in this icon
+	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE
 
 /turf/open/floor/interior/wood/is_wood_floor()
 	return TRUE

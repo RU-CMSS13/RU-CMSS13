@@ -3,7 +3,7 @@
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_6"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ab" = (
 /obj/structure/interior_wall/apc{
@@ -11,7 +11,7 @@
 	pixel_x = -4;
 	pixel_y = -4
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ac" = (
 /obj/structure/interior_wall/apc{
@@ -23,19 +23,19 @@
 	pixel_x = -4;
 	pixel_y = -4
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ad" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "wall"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ae" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "door_back"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "af" = (
 /obj/structure/interior_wall/apc{
@@ -53,7 +53,7 @@
 	pixel_x = 4;
 	pixel_y = -4
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ah" = (
 /obj/structure/interior_wall/apc{
@@ -61,13 +61,13 @@
 	pixel_x = 1;
 	pixel_y = -4
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ai" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_6"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aj" = (
 /obj/structure/interior_wall/apc{
@@ -76,21 +76,21 @@
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_5"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ak" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "wall";
 	opacity = 0
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "al" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "corner_inverse_L";
 	opacity = 0
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "am" = (
 /obj/structure/machinery/cm_vending/sorted/vehicle_supply{
@@ -102,6 +102,7 @@
 /obj/structure/bed/chair/vehicle{
 	pixel_x = 8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "an" = (
@@ -109,7 +110,7 @@
 	icon_state = "corner_inverse_R";
 	opacity = 0
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ao" = (
 /obj/structure/interior_wall/apc{
@@ -118,62 +119,62 @@
 /obj/structure/interior_wall/apc{
 	icon_state = "front_5"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ap" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_4"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aq" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_4"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ar" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_3"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "as" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_3"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "at" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_2"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "au" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_2"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "av" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_1"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aw" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_wheel_L"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ax" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "rear_wheel_R";
 	opacity = 0
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "ay" = (
 /obj/effect/landmark/interior/spawn/entrance{
@@ -184,6 +185,7 @@
 	pixel_y = 32;
 	tag = "left"
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "az" = (
@@ -196,6 +198,7 @@
 	icon_state = "triagedecaltop";
 	pixel_y = -2
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aA" = (
@@ -203,22 +206,22 @@
 	icon_state = "front_wheel_L";
 	opacity = 0
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aB" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_wheel_R"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aC" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "front_1"
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aD" = (
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "aE" = (
 /obj/structure/machinery/cm_vending/sorted/medical/blood/vehicle{
@@ -237,6 +240,7 @@
 /obj/effect/decal/medical_decals/permanent{
 	icon_state = "triagedecalbottomright"
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aF" = (
@@ -245,6 +249,7 @@
 	pixel_x = -14;
 	pixel_y = 38
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aH" = (
@@ -254,6 +259,7 @@
 /obj/structure/bed/chair/vehicle{
 	pixel_x = -8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aI" = (
@@ -272,6 +278,7 @@
 	pixel_x = -8;
 	pixel_y = 28
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aJ" = (
@@ -281,6 +288,7 @@
 /obj/effect/landmark/interior/spawn/vehicle_gunner_seat/armor{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aK" = (
@@ -290,6 +298,7 @@
 /obj/effect/decal/medical_decals/permanent{
 	icon_state = "triagedecalbottom"
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aL" = (
@@ -302,10 +311,12 @@
 /obj/effect/decal/medical_decals/permanent{
 	icon_state = "triagedecaltopright"
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aO" = (
 /obj/effect/landmark/interior/spawn/weapons_loader,
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aP" = (
@@ -322,30 +333,36 @@
 	layer = 2.81;
 	pixel_y = 4
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aQ" = (
 /obj/structure/bed/chair/comfy{
 	dir = 8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aS" = (
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aU" = (
 /obj/effect/landmark/interior/spawn/vehicle_driver_seat/armor{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aV" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/structure/machinery/prop/almayer/CICmap,
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aW" = (
 /obj/structure/prop/vehicle/sensor_equipment,
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aX" = (
@@ -355,6 +372,7 @@
 	name = "Right M56 FPW handle";
 	pixel_y = 2
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aY" = (
@@ -362,6 +380,7 @@
 	dir = 1;
 	pixel_x = 8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "aZ" = (
@@ -378,6 +397,7 @@
 	pixel_x = 5;
 	pixel_y = 8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "ba" = (
@@ -387,6 +407,7 @@
 	name = "Right APC door";
 	tag = "right"
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "bc" = (
@@ -398,6 +419,7 @@
 	dir = 1;
 	pixel_x = -8
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 "bd" = (
@@ -407,7 +429,7 @@
 	layer = 5.2;
 	pixel_y = 32
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "be" = (
 /obj/structure/interior_wall/apc{
@@ -416,7 +438,7 @@
 	layer = 5.2;
 	pixel_y = 32
 	},
-/turf/open/void/vehicle,
+/turf/open/void/densy,
 /area/space)
 "Ty" = (
 /obj/effect/landmark/interior/spawn/vehicle_support_gunner_seat{
@@ -427,6 +449,7 @@
 	name = "Left M56 FPW handle";
 	pixel_y = 17
 	},
+/obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/shuttle/vehicle/apc,
 /area/interior/vehicle)
 

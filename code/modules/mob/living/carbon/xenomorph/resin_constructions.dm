@@ -25,7 +25,7 @@ GLOBAL_VAR_INIT(resin_lz_allowed, FALSE)
 		to_chat(X, SPAN_WARNING("Can't do that with [blocker] in the way!"))
 		return FALSE
 
-	if(!istype(T) || T.is_weedable() < FULLY_WEEDABLE)
+	if(!istype(T) || T.weedable < FULLY_WEEDABLE)
 		to_chat(X, SPAN_WARNING("You can't do that here."))
 		return FALSE
 
@@ -350,3 +350,12 @@ GLOBAL_VAR_INIT(resin_lz_allowed, FALSE)
 
 	build_path = /obj/effect/alien/weeds/node
 	build_overlay_icon = /obj/effect/warning/alien/weak
+
+/datum/resin_construction/resin_obj/stair
+	name = "Stairs"
+	desc = "A thick resin stair, can help to get up."
+	construction_name = "resin stairs"
+	cost = XENO_RESIN_STAIRS
+
+	build_path = /obj/structure/stairs/constructed/resin
+	build_animation_effect = /obj/effect/resin_construct/thick

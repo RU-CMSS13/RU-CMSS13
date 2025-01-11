@@ -36,6 +36,8 @@ GLOBAL_LIST_EMPTY(freed_mob_list) // List of mobs freed for ghosts
 
 GLOBAL_LIST_INIT(available_taskbar_icons, setup_taskbar_icons())
 
+GLOBAL_LIST_EMPTY(ss_elevator_floors)
+
 GLOBAL_LIST_EMPTY(minimap_icons)
 
 GLOBAL_LIST_EMPTY(mainship_pipes)
@@ -73,7 +75,8 @@ GLOBAL_LIST_INIT(resin_build_order_drone, list(
 	/datum/resin_construction/resin_obj/door,
 	/datum/resin_construction/resin_obj/sticky_resin,
 	/datum/resin_construction/resin_obj/fast_resin,
-	/datum/resin_construction/resin_obj/resin_spike
+	/datum/resin_construction/resin_obj/resin_spike,
+	/datum/resin_construction/resin_obj/stair
 ))
 
 GLOBAL_LIST_INIT(resin_build_order_hivelord, list(
@@ -84,7 +87,8 @@ GLOBAL_LIST_INIT(resin_build_order_hivelord, list(
 	/datum/resin_construction/resin_obj/acid_pillar,
 	/datum/resin_construction/resin_obj/sticky_resin,
 	/datum/resin_construction/resin_obj/fast_resin,
-	/datum/resin_construction/resin_obj/resin_spike
+	/datum/resin_construction/resin_obj/resin_spike,
+	/datum/resin_construction/resin_obj/stair
 ))
 
 GLOBAL_LIST_INIT(resin_build_order_hivelord_whisperer, list(
@@ -105,7 +109,8 @@ GLOBAL_LIST_INIT(resin_build_order_ovipositor, list(
 	/datum/resin_construction/resin_obj/acid_pillar,
 	/datum/resin_construction/resin_obj/sticky_resin,
 	/datum/resin_construction/resin_obj/fast_resin,
-	/datum/resin_construction/resin_obj/resin_spike
+	/datum/resin_construction/resin_obj/resin_spike,
+	/datum/resin_construction/resin_obj/stair
 ))
 
 //Xeno Leader Mark Meanings

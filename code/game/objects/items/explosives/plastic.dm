@@ -21,7 +21,7 @@
 	var/atom/plant_target = null //which atom the plstique explosive is planted on
 	var/overlay_image = "plastic-explosive2"
 	var/image/overlay
-	var/list/breachable = list(/obj/structure/window, /turf/closed, /obj/structure/machinery/door, /obj/structure/mineral_door , /obj/structure/cargo_container)
+	var/list/breachable = list(/obj/structure/window, /turf, /obj/structure/machinery/door, /obj/structure/mineral_door , /obj/structure/cargo_container)
 	antigrief_protection = TRUE //Should it be checked by antigrief?
 
 	var/req_skill = SKILL_ENGINEER
@@ -55,13 +55,23 @@
 		if(istimer(detonator.a_right) || istimer(detonator.a_left))
 			detonator.attack_self(user)
 		return
-	var/new_time = tgui_input_number(usr, "Please set the timer.", "Timer", min_timer, 60, min_timer)
-	if(new_time < min_timer)
-		new_time = min_timer
-	else if(new_time > 60)
-		new_time = 60
-	timer = new_time
-	to_chat(user, SPAN_NOTICE("Timer set for [timer] seconds."))
+
+	var/action = tgui_input_list(usr, "Select action to do with it", "C4 Interaction", list("Plant on roof", "Set timer"))
+	switch(action)
+		if("Plant on roof")
+			var/turf/roof = get_step_multiz(user, UP)
+			if(!roof || !roof.antipierce)
+				to_chat(user, SPAN_NOTICE("There nothing above."))
+				return
+			afterattack(roof, user, 1)
+		if("Set timer")
+			var/new_time = tgui_input_number(usr, "Please set the timer.", "Timer", min_timer, 60, min_timer)
+			if(new_time < min_timer)
+				new_time = min_timer
+			else if(new_time > 60)
+				new_time = 60
+			timer = new_time
+			to_chat(user, SPAN_NOTICE("Timer set for [timer] seconds."))
 
 /obj/item/explosive/plastic/afterattack(atom/target, mob/user, flag)
 	setDir(get_dir(user, target))
@@ -173,7 +183,7 @@
 	update_icon()
 
 /obj/item/explosive/plastic/proc/can_place(mob/user, atom/target)
-	if(istype(target, /obj/structure/ladder) || istype(target, /obj/item) || istype(target, /turf/open) || istype(target, /obj/structure/barricade) || istype(target, /obj/structure/closet/crate))
+	if(istype(target, /obj/structure/ladder) || istype(target, /obj/item) || istype(target, /obj/structure/barricade) || istype(target, /obj/structure/closet/crate))
 		return FALSE
 
 	if(istype(target, /obj/structure/closet))
@@ -195,9 +205,9 @@
 		if(O.unacidable)
 			return FALSE
 
-	if(istype(target, /turf/closed/wall))
-		var/turf/closed/wall/W = target
-		if(W.hull)
+	if(istype(target, /turf))
+		var/turf/W = target
+		if(W.turf_flags & TURF_HULL)
 			to_chat(user, SPAN_WARNING("You are unable to stick [src] to [W]!"))
 			return FALSE
 
@@ -281,7 +291,7 @@
 	plant_target.ex_act(2000, dir, temp_cause)
 
 	for(var/turf/closed/wall/W in orange(1, target_turf))
-		if(W.hull)
+		if(W.turf_flags & TURF_HULL)
 			continue
 		W.ex_act(1000 * penetration, , cause_data)
 
@@ -344,7 +354,7 @@
 
 	if(istype(target, /turf/closed/wall))
 		var/turf/closed/wall/targeted_wall = target
-		if(targeted_wall.hull)
+		if(targeted_wall.turf_flags & TURF_HULL)
 			to_chat(user, SPAN_WARNING("You are unable to stick [src] to [targeted_wall]!"))
 			return FALSE
 

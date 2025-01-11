@@ -18,7 +18,7 @@
 			if(JOB_SQUAD_SPECIALIST) marine_rk = "spec"
 			if(JOB_SQUAD_TEAM_LEADER) marine_rk = "tl"
 			if(JOB_SQUAD_MEDIC)
-				if(current_human.rank_fallback == "medk9") 
+				if(current_human.rank_fallback == "medk9")
 					marine_rk = "medk9" //We don't need Medics to lose their job when converting to K9 Handlers as it would duplicate JOB_SQUAD_MEDIC
 				else 
 					marine_rk = "med"
