@@ -394,6 +394,10 @@
 	// So it doesn't trigger other zFall calls. Cleared on zMove.
 	falling.set_currently_z_moving(CURRENTLY_Z_FALLING)
 
+	if(falling.can_paradrop() && levels > 2)
+		playsound(get_turf(falling), "rustle", 50, 1, 6)
+		sleep(5)
+
 	if(istype(falling, /mob))
 		var/mob/mob = falling
 		mob.trainteleport(target)

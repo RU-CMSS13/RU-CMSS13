@@ -134,7 +134,7 @@
 
 /turf/open/space/Entered(atom/movable/arrived, old_loc)
 	..()
-	if((!(arrived) || src != arrived.loc))
+	if((!(arrived) || src != arrived.loc) || !length(SSmapping.levels_by_trait(ZTRAIT_GROUND)))
 		return
 
 	inertial_drift(arrived)
