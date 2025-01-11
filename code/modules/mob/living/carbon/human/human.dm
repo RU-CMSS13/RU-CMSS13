@@ -1809,6 +1809,12 @@
 	if(SEND_SIGNAL(src, COMSIG_LIVING_Z_IMPACT, levels, T) & NO_Z_IMPACT_DAMAGE)
 		return
 
+	on_fall(TRUE)
+	if(can_paradrop() && levels > 2)
+		KnockDown(levels * 2)
+		to_chat(src, SPAN_DANGER("You land safely"))
+		return
+
 	var/damage = rand(10, 20)
 	var/obj/limb/affecting
 
@@ -1834,6 +1840,7 @@
 	else
 		to_chat(src, SPAN_DANGER("You land heavily!"))
 		apply_damage(damage, BRUTE)
+	KnockDown(levels * 2)
 
 	UpdateDamageIcon()
 	updatehealth()
