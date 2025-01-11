@@ -254,7 +254,7 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 	return COMPONENT_OVERRIDE_UPDATE_SIGHT
 
 /mob/hologram/railgun/allow_turf_entry(mob/self, turf/crossing_turf)
-	SIGNAL_HANDLER
+	. = ..()
 
 	var/turf/roof = get_highest_turf(crossing_turf)
 	if(crossing_turf != roof.air_strike(15, crossing_turf, 1, TRUE))
@@ -265,6 +265,3 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 		var/turf/closed/wall/W = crossing_turf
 		if(W.turf_flags & TURF_HULL)
 			return COMPONENT_TURF_DENY_MOVEMENT
-
-	return COMPONENT_TURF_ALLOW_MOVEMENT
-

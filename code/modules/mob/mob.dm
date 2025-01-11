@@ -1077,6 +1077,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 	to_chat(user, SPAN_NOTICE("You stop looking up."))
 	user.reset_view(0)
+	user.client?.change_view(GLOB.world_view_size, src)
 	QDEL_NULL(user.shadow)
 
 /obj/shadow/proc/update_look(mob/living/user)

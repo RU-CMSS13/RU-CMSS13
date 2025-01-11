@@ -264,7 +264,7 @@
 		to_chat(src, SPAN_NOTICE("You can't look up more."))
 	else
 		shadow.high++
-
+		client.change_view(GLOB.world_view_size - shadow.high, shadow)
 
 /mob/verb/stoplookup()
 	set name = "Look Down"
@@ -273,7 +273,8 @@
 	if(!shadow || shadow.high == 1)
 		if(interactee == shadow)
 			unset_interaction()
-		QDEL_NULL(shadow)
+		else
+			QDEL_NULL(shadow)
 		to_chat(src, SPAN_NOTICE("You can't look down more."))
 	else
 		shadow.high--

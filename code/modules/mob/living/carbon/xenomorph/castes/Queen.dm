@@ -165,7 +165,7 @@
 	name = "[initial(src.name)] ([new_name])"
 
 /mob/hologram/queen/allow_turf_entry(mob/self, turf/crossing_turf)
-	SIGNAL_HANDLER
+	. = ..()
 
 	if(!crossing_turf)
 		return COMPONENT_TURF_DENY_MOVEMENT
@@ -178,13 +178,12 @@
 	var/list/turf_area = range(3, crossing_turf)
 
 	var/obj/effect/alien/weeds/nearby_weeds = locate() in turf_area
-	if(nearby_weeds && HIVE_ALLIED_TO_HIVE(nearby_weeds.hivenumber, hivenumber))
-		var/obj/effect/alien/crossing_turf_weeds = locate() in crossing_turf
-		if(crossing_turf_weeds)
-			crossing_turf_weeds.update_icon() //randomizes the icon of the turf when crossed over*/
-		return COMPONENT_TURF_ALLOW_MOVEMENT
+	if(!nearby_weeds || !HIVE_ALLIED_TO_HIVE(nearby_weeds.hivenumber, hivenumber))
+		return COMPONENT_TURF_DENY_MOVEMENT
 
-	return COMPONENT_TURF_DENY_MOVEMENT
+	var/obj/effect/alien/crossing_turf_weeds = locate() in crossing_turf
+	if(crossing_turf_weeds)
+		crossing_turf_weeds.update_icon() //randomizes the icon of the turf when crossed over*/
 
 /mob/hologram/queen/proc/handle_overwatch(mob/living/carbon/xenomorph/queen/Q, atom/A, mods)
 	SIGNAL_HANDLER
