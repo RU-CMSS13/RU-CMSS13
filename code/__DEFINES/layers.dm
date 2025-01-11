@@ -253,11 +253,6 @@
 
 #define RENDER_PLANE_MASTER 50
 
-#define HIGHEST_EVER_PLANE RENDER_PLANE_MASTER
-/// The range unique planes can be in
-/// Try and keep this to a nice whole number, so it's easy to look at a plane var and know what's going on
-#define PLANE_RANGE (HIGHEST_EVER_PLANE - LOWEST_EVER_PLANE)
-
 
 //-------------------- HUD ---------------------
 
