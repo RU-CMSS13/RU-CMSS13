@@ -1083,14 +1083,16 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(user.client?.eye != src)
 		user.reset_view(src)
 
+	var/turf/above = get_turf(user)
 	for(var/i in 1 to high)
-		var/turf/above = SSmapping.get_turf_above(user.loc)
+		above = SSmapping.get_turf_above(above)
 		if(above && above.turf_flags & TURF_TRANSPARENT)
 			forceMove(above)
 		else
 			if(i == 1)
 				forceMove(user.loc)
 			to_chat(user, SPAN_NOTICE("You can see [above] in [i] floors."))
+			break
 
 /obj/shadow/proc/interaction_handler()
 	return COMPONENT_HUMAN_MOVEMENT_KEEP_USING

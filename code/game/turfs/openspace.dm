@@ -24,7 +24,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 
 /turf/open/space/openspace/LateInitialize()
 	. = ..()
-	handle_transpare_turf(is_openspace = TRUE)
+	handle_transpare_turf()
 
 /turf/open/space/openspace/ex_act(severity, explosion_direction)
 	return
@@ -76,7 +76,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/openspace/LateInitialize()
 	SHOULD_CALL_PARENT(FALSE)
 	multiz_turfs()
-	handle_transpare_turf(is_openspace = TRUE)
+	handle_transpare_turf()
 
 /turf/open/openspace/multiz_turfs()
 	var/turf/turf = SSmapping.get_turf_above(src)

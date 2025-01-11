@@ -191,6 +191,38 @@
 		apply_cooldown()
 	return ..()
 
+/datum/action/xeno_action/activable/break_roof
+	name = "Break Roof"
+	action_icon_state = "gut"
+	plasma_cost = 0
+	xeno_cooldown = 1 MINUTES
+
+/datum/action/xeno_action/activable/break_roof/use_ability(atom/A)
+	var/mob/living/carbon/xenomorph/queen/xeno = owner
+	if(!action_cooldown_check())
+		return
+
+	var/action = tgui_input_list(usr, "What turf you want to break", "Clear Turf", list("Above", "Below"))
+	var/turf/target_turf
+	switch(action)
+		if("Above")
+			target_turf = SSmapping.get_turf_above(xeno)
+		if("Below")
+			target_turf = SSmapping.get_turf_below(xeno)
+
+	if(!target_turf)
+		to_chat(src, SPAN_XENOWARNING("There no turf!"))
+		return
+
+	if(target_turf.antipierce > 5 && islist(target_turf.baseturfs) ? !istype(target_turf.baseturfs[1], /turf/open/openspace) : !istype(target_turf.baseturfs, /turf/open/openspace))
+		to_chat(src, SPAN_XENOWARNING("[target_turf] is too strong for our claws to break!"))
+		return
+
+	if(do_after(src, 15, INTERRUPT_ALL, BUSY_ICON_HOSTILE, target_turf))
+		target_turf.ChangeTurf(/turf/open/openspace, list())
+		apply_cooldown()
+	return ..()
+
 /datum/action/xeno_action/onclick/psychic_whisper
 	name = "Psychic Whisper"
 	action_icon_state = "psychic_whisper"

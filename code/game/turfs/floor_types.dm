@@ -87,8 +87,34 @@
 		return
 	return ..()
 
+//TODO (MULTIZ): IMPROVE IT
 /turf/open/floor/plating/make_plating()
 	if(prob(20))
+		var/turf/below_turf = SSmapping.get_turf_below(src)
+		if(below_turf)
+			playsound(below_turf, "metalbang", 50, 1)
+			below_turf.visible_message(SPAN_DANGER("Roof above [src] caving in!"), SPAN_DANGER("Roof above [src] caving in!"))
+			spawn(1 SECONDS)
+				var/obj/item/shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/sheet/metal(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				shard = new /obj/item/stack/rods(below_turf)
+				shard.explosion_throw(5, pick(GLOB.cardinals))
+				for(var/mob/living/unlucky in below_turf)
+					unlucky.adjustBruteLoss(30)
+
+		for(var/obj/structure/locked_stuff in contents)
+			if(istype(locked_stuff, /obj/structure/pipes))
+				new /obj/item/pipe(loc, null, null, locked_stuff)
+				qdel(locked_stuff)
+				continue
+			if(istype(locked_stuff, /obj/structure/disposalpipe))
+				locked_stuff.deconstruct(TRUE)
+				continue
+			locked_stuff.anchored = FALSE
 		ScrapeAway()
 	return
 

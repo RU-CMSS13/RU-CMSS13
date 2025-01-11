@@ -801,6 +801,12 @@
 		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The target zone is deep underground. The orbital strike cannot reach here.")]")
 		return
 
+	if(busy)
+		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("The [name] is busy processing another action!")]")
+		return
+
+	if(!current_orbital_cannon.chambered_tray || !current_orbital_cannon.loaded_tray || !current_orbital_cannon.tray || !current_orbital_cannon.tray.warhead || current_orbital_cannon.ob_cannon_busy)
+		return
 
 	//All set, let's do this.
 	busy = TRUE

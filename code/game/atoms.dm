@@ -408,6 +408,9 @@ Parameters are passed from New.
 		initialize_pass_flags()
 	Decorate(mapload)
 
+	if(loc)
+		loc.Entered(src)
+
 	return INITIALIZE_HINT_NORMAL
 
 //called if Initialize returns INITIALIZE_HINT_LATELOAD

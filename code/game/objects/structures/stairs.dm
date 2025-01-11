@@ -45,16 +45,16 @@
 
 	if(isTerminator() && get_dir(source, direction) == dir)
 		leaving.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
-		INVOKE_ASYNC(src, PROC_REF(stair_ascend), leaving)
+		INVOKE_ASYNC(src, PROC_REF(stair_ascend), leaving, dir)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
-/obj/structure/stairs/proc/stair_ascend(atom/movable/climber)
+/obj/structure/stairs/proc/stair_ascend(atom/movable/climber, direction)
 	var/turf/checking = get_step_multiz(get_turf(src), UP)
 	if(!istype(checking))
 		return
 	if(!checking.zPassIn(climber, UP, get_turf(src)))
 		return
-	var/turf/target = get_step_multiz(get_turf(src), (dir|UP))
+	var/turf/target = get_step_multiz(get_turf(src), (direction|UP))
 	if(istype(target) && !climber.can_z_move(DOWN, target, z_move_flags = ZMOVE_FALL_FLAGS)) //Don't throw them into a tile that will just dump them back down.
 		if(istype(climber, /mob))
 			var/mob/mob = climber
@@ -165,7 +165,7 @@
 			return
 		var/turf/prev = user.loc
 		user.set_currently_z_moving(CURRENTLY_Z_ASCENDING)
-		stair_ascend(user)
+		stair_ascend(user, get_dir(user, src))
 
 		if(prev != user.loc)
 			to_chat(user, SPAN_NOTICE("You climbed [src]."))

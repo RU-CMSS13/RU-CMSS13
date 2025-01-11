@@ -1009,7 +1009,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 /turf/proc/on_atom_created(atom/created_atom)
 	return
 
-/turf/proc/handle_transpare_turf(is_openspace)
+/turf/proc/handle_transpare_turf()
 	layer = OPENSPACE_LAYER
 	plane = TRANSPARENT_FLOOR_PLANE
 	vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.

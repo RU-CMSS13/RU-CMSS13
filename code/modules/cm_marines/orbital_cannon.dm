@@ -244,8 +244,9 @@ GLOBAL_LIST_EMPTY(orbital_cannon_cancellation)
 
 	var/obj/structure/ob_ammo/warhead/warhead = tray.warhead
 	tray.warhead = null
-	warhead.moveToNullspace()
-	warhead.warhead_impact(target, warhead_mode)
+	if(warhead)
+		warhead.moveToNullspace()
+		warhead.warhead_impact(target, warhead_mode)
 
 	sleep(OB_CRASHING_DOWN)
 

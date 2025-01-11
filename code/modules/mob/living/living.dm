@@ -740,10 +740,12 @@
 /mob/living/proc/ZImpactDamage(turf/T, levels)
 	if(SEND_SIGNAL(src, COMSIG_LIVING_Z_IMPACT, levels, T) & NO_Z_IMPACT_DAMAGE)
 		return
+
+	var/damage = rand(10, 20)
 	visible_message(SPAN_DANGER("[src] crashes into [T] with a sickening noise!"), \
 					usr, SPAN_DANGER("You crash into [T] with a sickening noise!"))
-	adjustBruteLoss((levels * 5) ** 1.5)
-	KnockDown(levels * 4)
+	apply_damage((damage * levels) ** 1.5, BRUTE)
+	KnockDown(levels * 2)
 	on_fall(TRUE)
 
 /mob/proc/on_fall(forced)
