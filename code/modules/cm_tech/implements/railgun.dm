@@ -253,16 +253,16 @@ GLOBAL_DATUM(railgun_eye_location, /datum/coords)
 	H.see_invisible = SEE_INVISIBLE_MINIMUM
 	return COMPONENT_OVERRIDE_UPDATE_SIGHT
 
-/mob/hologram/railgun/proc/allow_turf_entry(mob/self, turf/to_enter)
+/mob/hologram/railgun/allow_turf_entry(mob/self, turf/crossing_turf)
 	SIGNAL_HANDLER
 
-	var/turf/roof = get_highest_turf(to_enter)
-	if(to_enter != roof.air_strike(15, to_enter, 1, TRUE))
+	var/turf/roof = get_highest_turf(crossing_turf)
+	if(crossing_turf != roof.air_strike(15, crossing_turf, 1, TRUE))
 		to_chat(linked_mob, SPAN_WARNING("[icon2html(src)] This area is too reinforced to enter."))
 		return COMPONENT_TURF_DENY_MOVEMENT
 
-	if(istype(to_enter, /turf/closed/wall))
-		var/turf/closed/wall/W = to_enter
+	if(istype(crossing_turf, /turf/closed/wall))
+		var/turf/closed/wall/W = crossing_turf
 		if(W.turf_flags & TURF_HULL)
 			return COMPONENT_TURF_DENY_MOVEMENT
 
