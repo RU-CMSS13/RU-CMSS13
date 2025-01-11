@@ -478,31 +478,25 @@
 		return A.lightswitch
 	return A.lightswitch && A.power_light
 
-/obj/structure/machinery/light/proc/flicker(amount = rand(1, 20))
-	set waitfor = FALSE
-	if(flickering)
-		return
-	flickering = TRUE
-	for(var/i = 0; i < amount; i++)
-		if(status != LIGHT_OK)
-			break
-		flik_light()
-		playsound(src, pick('sound/effects/light/blinks1.ogg', 'sound/effects/light/blinks2.ogg', 'sound/effects/light/blinks3.ogg'), 12, TRUE, 8, VOLUME_SFX, 0, falloff = 5)
-	flickering = FALSE
 
-/obj/structure/machinery/light/proc/flik_light()
-	on = FALSE
-	update()
-	update_icon()
-	sleep(rand(5, 50))
-	on = has_power()
-	update()
-	update_icon()
+/obj/structure/machinery/light/proc/flicker(amount = rand(10, 20))
+	if(flickering) return
+	flickering = 1
+	spawn(0)
+		if(on && status == LIGHT_OK)
+			for(var/i = 0; i < amount; i++)
+				if(status != LIGHT_OK) break
+				on = !on
+				update(0)
+				sleep(rand(5, 15))
+			on = (status == LIGHT_OK)
+			update(0)
+		flickering = 0
 
 // ai attack - make lights flicker, because why not
 
 /obj/structure/machinery/light/attack_remote(mob/user)
-	flicker(1)
+	src.flicker(1)
 	return
 
 /obj/structure/machinery/light/AIShiftClick()

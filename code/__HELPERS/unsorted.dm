@@ -1249,7 +1249,7 @@ GLOBAL_LIST_INIT(WALLITEMS, list(
 	var/step_x = (end_turf.x - start_turf.x) / step_count + 1e-5
 	var/step_y = (end_turf.y - start_turf.y) / step_count + 1e-5
 	var/step_z = end_turf.z - start_turf.z
-	if(step_z || step_count_z)
+	if(step_z)
 		step_z = step_z / (step_count_z ? step_count_z : step_count) + 1e-5
 
 	//locate() truncates the fraction, adding 0.5 so its effectively rounding to nearest coords for free

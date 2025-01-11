@@ -42,8 +42,6 @@ All ShuttleMove procs go here
 				// Ordered by most likely:
 				if(istype(thing, /obj/structure/machinery/landinglight))
 					continue
-				if(istype(thing, /atom/movable/outdoor_effect))
-					continue
 				if(istype(thing, /obj/docking_port))
 					continue
 				if(istype(thing, /obj/structure/machinery/camera))
@@ -272,9 +270,6 @@ All ShuttleMove procs go here
 */
 
 /* ***********************************Misc move procs************************************/
-
-/atom/movable/outdoor_effect/onShuttleMove()
-	return FALSE
 
 /atom/movable/lighting_object/onShuttleMove()
 	return FALSE

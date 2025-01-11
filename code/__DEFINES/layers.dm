@@ -230,8 +230,9 @@
 
 ///--------------- FULLSCREEN RUNECHAT BUBBLES ------------
 #define LIGHTING_PLANE 20
-#define NVG_PLANE 21
-#define O_LIGHTING_VISUAL_PLANE 22
+#define EXTERIOR_LIGHTING_PLANE 21
+#define NVG_PLANE 22
+#define O_LIGHTING_VISUAL_PLANE 23
 #define ABOVE_LIGHTING_PLANE 25
 
 /// Plane for balloon text (text that fades up)
