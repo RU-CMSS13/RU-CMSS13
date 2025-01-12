@@ -129,6 +129,7 @@
 #include "modules\cm_preds\yaut_actions.dm"
 #include "modules\gear_presets\usmc.dm"
 #include "modules\gear_presets\uscm_ship.dm"
+#include "modules\gear_presets\commissarpreset.dm"
 #include "modules\reagents\chemistry_reagents\medical.dm"
 #include "modules\mob\mod_defines.dm"
 #include "modules\mob\say.dm"
@@ -166,4 +167,3 @@
 #include "modules\vehicles\multitile\hardpoints\support\smoke.dm"
 #include "modules\vehicles\multitile\tank\tank.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\queen\queen_powers.dm"
-#include "modules\gear_presets\commissarpreset.dm"
