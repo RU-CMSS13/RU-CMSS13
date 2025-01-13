@@ -70,6 +70,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	antipierce = 0
 
 /turf/open/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
+//TODO (MULTIZ): IMPROVE IT, REMOVE THAT AND DO IT OTHER WAY, LIKE PROC [ON_OPENSPACE_UNDERNEATH] THAT WE CALL TO ALL SHIT ON THIS TURF WHEN IT"S CREATED
 	for(var/obj/structure/locked_stuff in contents)
 		if(!locked_stuff.anchored)
 			continue

@@ -87,12 +87,12 @@
 		return
 	return ..()
 
-//TODO (MULTIZ): IMPROVE IT
 /turf/open/floor/plating/make_plating()
 	if(prob(20))
 		var/turf/below_turf = SSmapping.get_turf_below(src)
 		if(below_turf)
 			playsound(below_turf, "metalbang", 50, 1)
+//TODO (MULTIZ): IMPROVE IT ADD VISUAL EFFECT ON BELOW
 			below_turf.visible_message(SPAN_DANGER("Roof above [src] caving in!"), SPAN_DANGER("Roof above [src] caving in!"))
 			spawn(1 SECONDS)
 				var/obj/item/shard = new /obj/item/stack/sheet/metal(below_turf)
