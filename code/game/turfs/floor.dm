@@ -108,7 +108,7 @@
 		icon_state = "grass[pick("1", "2", "3")]"
 
 /turf/open/floor/proc/burn_tile()
-	if(!(turf_flags & TURF_BURNABLE)|| turf_flags & TURF_HULL)
+	if(!(turf_flags & TURF_BURNABLE) || turf_flags & TURF_HULL)
 		return
 	if(broken || burnt)
 		return
