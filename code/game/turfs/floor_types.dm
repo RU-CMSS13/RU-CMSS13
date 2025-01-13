@@ -106,15 +106,6 @@
 				for(var/mob/living/unlucky in below_turf)
 					unlucky.adjustBruteLoss(30)
 
-		for(var/obj/structure/locked_stuff in contents)
-			if(istype(locked_stuff, /obj/structure/pipes))
-				new /obj/item/pipe(loc, null, null, locked_stuff)
-				qdel(locked_stuff)
-				continue
-			if(istype(locked_stuff, /obj/structure/disposalpipe))
-				locked_stuff.deconstruct(TRUE)
-				continue
-			locked_stuff.anchored = FALSE
 		ScrapeAway()
 	return
 

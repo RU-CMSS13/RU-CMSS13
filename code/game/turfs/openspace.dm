@@ -70,13 +70,54 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	antipierce = 0
 
 /turf/open/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
+	for(var/obj/structure/locked_stuff in contents)
+		if(!locked_stuff.anchored)
+			continue
+
+		if(istype(locked_stuff, /obj/structure/pipes))
+			new /obj/item/pipe(src, null, null, locked_stuff)
+			qdel(locked_stuff)
+			continue
+
+		if(istype(locked_stuff, /obj/structure/disposalpipe))
+			locked_stuff.deconstruct(FALSE)
+			continue
+
+		if(locked_stuff.wrenchable)
+			locked_stuff.anchored = FALSE
+			locked_stuff.ex_act(50, DOWN)
+		else
+			locked_stuff.ex_act(200, DOWN)
+
 	. = ..()
+
 	return INITIALIZE_HINT_LATELOAD
 
 /turf/open/openspace/LateInitialize()
 	SHOULD_CALL_PARENT(FALSE)
 	multiz_turfs()
 	handle_transpare_turf()
+
+/turf/open/openspace/attackby(obj/item/using_obj, mob/user)
+	if(istype(using_obj, /obj/item/stack/sheet/metal))
+		var/obj/structure/lattice/support_structure = locate(/obj/structure/lattice) in src
+		if(!support_structure)
+			to_chat(user, SPAN_DANGER("The plating is going to need some support."))
+			return
+
+		if(ishuman(user) && !skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_ENGI))
+			to_chat(user, SPAN_DANGER("You are not trained to build turfs from scratch..."))
+			return
+
+		var/obj/item/stack/sheet/metal/metal_sheet = using_obj
+		if(metal_sheet.get_amount() < 5)
+			return
+		qdel(support_structure)
+		playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
+		ChangeTurf(/turf/open/floor/plating)
+		metal_sheet.use(5)
+		return
+	return
 
 /turf/open/openspace/multiz_turfs()
 	var/turf/turf = SSmapping.get_turf_above(src)
