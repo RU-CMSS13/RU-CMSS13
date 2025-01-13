@@ -1,5 +1,4 @@
 
-/* RUCM SHIFT TO CORE_RU STARTS THERE
 /datum/action/xeno_action/activable/pounce/crusher_charge/additional_effects_always()
 	var/mob/living/carbon/xenomorph/X = owner
 	if (!istype(X))
@@ -11,7 +10,11 @@
 
 		new /datum/effects/xeno_slow(H, X, null, null, 3.5 SECONDS)
 		to_chat(H, SPAN_XENODANGER("You are slowed as the impact of [X] shakes the ground!"))
-RUCM ends here */
+
+//RUCM STARTS THERE
+	X.crusher_rage_bonus()
+	to_chat(X, SPAN_XENODANGER("You feel yourself ANGRY!"))
+//RUCM ends here
 
 /datum/action/xeno_action/activable/pounce/crusher_charge/additional_effects(mob/living/L)
 	if (!isxeno_human(L))
