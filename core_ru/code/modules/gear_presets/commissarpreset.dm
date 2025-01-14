@@ -10,7 +10,7 @@
 	languages = list(LANGUAGE_ENGLISH)
 	skills = /datum/skills/commissar/commissar
 	minimap_icon = "cmsr"
-	minimap_background = "background_command"
+	minimap_background = "background_cmsr"
 
 /datum/equipment_preset/uscm/commissar/New()
 	. = ..()
