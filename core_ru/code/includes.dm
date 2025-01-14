@@ -64,6 +64,7 @@
 #include "game\machinery\nuke_disk_generator.dm"
 #include "game\machinery\rechargestation.dm"
 #include "game\machinery\doors\poddoor.dm"
+#include "game\machinery\vending\vendor_types\crew\commissar_vendor.dm"
 #include "game\objects\items\devices\_defibrillator.dm"
 #include "game\objects\items\devices\defibrillator_paddles.dm"
 #include "game\objects\items\devices\pinpointer.dm"
