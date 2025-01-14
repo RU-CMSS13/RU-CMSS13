@@ -197,7 +197,3 @@
 /obj/item/storage/belt/marine/smartgunner/m56c/fill_preset_inventory()
 	new /obj/item/ammo_magazine/smartgun/m56c(src)
 	new /obj/item/ammo_magazine/smartgun/m56c(src)
-	new /obj/item/ammo_magazine/smartgun/m56c(src)
-	new /obj/item/ammo_magazine/smartgun/m56c(src)
-	new /obj/item/ammo_magazine/smartgun/m56c(src)
-	new /obj/item/ammo_magazine/smartgun/m56c(src)
