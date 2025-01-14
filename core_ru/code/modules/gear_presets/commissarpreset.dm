@@ -9,7 +9,7 @@
 	minimum_age = 23
 	languages = list(LANGUAGE_ENGLISH)
 	skills = /datum/skills/commissar/commissar
-	minimap_icon = "co"
+	minimap_icon = "cmsr"
 	minimap_background = "background_command"
 
 /datum/equipment_preset/uscm/commissar/New()

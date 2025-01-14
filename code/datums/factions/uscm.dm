@@ -18,9 +18,9 @@
 			if(JOB_SQUAD_SPECIALIST) marine_rk = "spec"
 			if(JOB_SQUAD_TEAM_LEADER) marine_rk = "tl"
 			if(JOB_SQUAD_MEDIC)
-				if(current_human.rank_fallback == "medk9") 
+				if(current_human.rank_fallback == "medk9")
 					marine_rk = "medk9" //We don't need Medics to lose their job when converting to K9 Handlers as it would duplicate JOB_SQUAD_MEDIC
-				else 
+				else
 					marine_rk = "med"
 			if(JOB_SQUAD_SMARTGUN) marine_rk = "gun"
 			if(JOB_XO) marine_rk = "xo"
@@ -31,6 +31,7 @@
 			if(JOB_TANK_CREW) marine_rk = "tc"
 //RUCM START
 			if(JOB_WALKER) marine_rk = "tc"
+			if(JOB_WALKER) marine_rk = "cmsr"
 //RUCM END
 			if(JOB_INTEL) marine_rk = "io"
 			if(JOB_DROPSHIP_CREW_CHIEF) marine_rk = "dcc"
@@ -92,6 +93,11 @@
 			if(JOB_AUXILIARY_OFFICER)
 				marine_rk = "aso"
 				border_rk = "command"
+//RUCM START
+			if(JOB_COMMISSAR)
+				marine_rk = "cmsr"
+				border_rk = "command"
+//RUCM END
 			if(JOB_GENERAL, JOB_COLONEL, JOB_ACMC, JOB_CMC)
 				marine_rk = "general"
 				border_rk = "command"
