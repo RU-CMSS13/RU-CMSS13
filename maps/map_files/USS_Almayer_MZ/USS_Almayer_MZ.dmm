@@ -12973,8 +12973,7 @@
 "bAs" = (
 /obj/structure/surface/rack,
 /obj/effect/decal/cleanable/cobweb{
-	dir = 8;
-	plane = -6
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/reagent_container/spray/cleaner{
@@ -13542,8 +13541,7 @@
 "bCZ" = (
 /obj/structure/window/framed/almayer/aicore/hull/black/hijack_bustable,
 /obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown{
-	dir = 4;
-	plane = -6
+	dir = 4
 	},
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
@@ -39884,9 +39882,7 @@
 	req_access = null;
 	req_one_access_txt = "91;92"
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	plane = -6
-	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
