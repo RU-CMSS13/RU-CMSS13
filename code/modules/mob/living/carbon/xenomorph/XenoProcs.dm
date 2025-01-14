@@ -217,7 +217,7 @@
 	armor_integrity = min(armor_integrity + value, 100)
 */
 //RUCM START
-	armor_integrity = min(armor_integrity + value, armor_integrity_max)
+	armor_integrity = clamp(armor_integrity + value, 0, armor_integrity_max)
 //RUCM END
 
 //Strip all inherent xeno verbs from your caste. Used in evolution.
