@@ -193,6 +193,10 @@
 	else
 		return attack_hand(user)
 
+/obj/structure/stairs/constructed/resin/bullet_act(obj/projectile/P)
+	. = ..()
+	take_damage(P.damage)
+
 /obj/structure/stairs/constructed/resin/proc/take_damage(damage)
 	health -= damage
 	if(health <= 0)
