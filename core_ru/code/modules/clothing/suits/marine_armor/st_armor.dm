@@ -21,6 +21,7 @@
 	var/saved_agu = TRUE
 	var/saved_feels = TRUE
 	var/saved_flags = DEFAULT_MOB_STATUS_FLAGS
+	var/processing = FALSE
 
 /obj/item/clothing/suit/storage/marine/m40/verb/enrage()
 	set name = "Activate Enrage"
@@ -48,6 +49,7 @@
 		return
 
 	to_chat(H, SPAN_DANGER("M40 experimental armor beeps, \"You feel adrenaline rush in your blood.\""))
+	H.say("RIP AND TEAR UNTIL IT'S DONE")
 	playsound(H, 'sound/items/hypospray.ogg', 25, TRUE)
 	enrage_active = TRUE
 	enrage_activable = FALSE
@@ -66,6 +68,7 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.update_button_icon()
+	START_PROCESSING(SSobj, src)
 	addtimer(CALLBACK(src, PROC_REF(end_enrage), H), 15 SECONDS)
 
 /obj/item/clothing/suit/storage/marine/m40/proc/end_enrage(mob/living/carbon/human/H)
@@ -80,6 +83,7 @@
 	to_chat(H, SPAN_DANGER("M40 experimental armor beeps, \"Protective dialysis has been activated.\""))
 	playsound(H, 'core_ru/sound/effects/hearth_attack.ogg', 25, TRUE)
 	H.remove_filter("enrage_form")
+	STOP_PROCESSING(SSobj, src)
 
 	addtimer(CALLBACK(src, PROC_REF(activable_enrage), H), ENRAGE_CD)
 
@@ -129,3 +133,21 @@
 		return
 
 	armor.enrage()
+
+/obj/item/clothing/suit/storage/marine/m40/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/clothing/suit/storage/marine/m40/process()
+	if(!ishuman(src.loc))
+		return
+	var/mob/living/carbon/human/H = src.loc
+	if(!(H.wear_suit == src))
+		return
+	if(enrage_active)
+		H.adjust_effect(-4, PARALYZE) //не иммунен, но невозможно застанлочить
+		H.adjust_effect(-4, STUN)
+		H.adjust_effect(-4, WEAKEN)
+		H.adjust_effect(-4, SLOW)
+		H.adjust_effect(-4, SUPERSLOW)
+	return
