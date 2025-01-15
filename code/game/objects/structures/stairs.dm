@@ -131,7 +131,7 @@
 
 /obj/structure/stairs/constructed/attackby(obj/item/tool, mob/living/user)
 	if(HAS_TRAIT(tool, TRAIT_TOOL_WRENCH) && !istype(src, /obj/structure/stairs/constructed/resin))
-		if(do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
+		if(do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 			if(QDELETED(src))
 				return
 			playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
@@ -145,7 +145,7 @@
 
 /obj/structure/stairs/constructed/attack_alien(mob/living/carbon/xenomorph/user)
 	if(user.a_intent == INTENT_HARM)
-		if(do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
+		if(do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 			if(QDELETED(src))
 				return
 			if(!istype(src, /obj/structure/stairs/constructed/resin))
@@ -184,3 +184,18 @@
 	desc = "Thick resin stairs, can help to clim buildings."
 
 	unacidable = TRUE
+
+/obj/structure/stairs/constructed/resin/attackby(obj/item/W, mob/living/user)
+	if(!(W.flags_item & NOBLUDGEON))
+		user.animation_attack_on(src)
+		take_damage(W.force*RESIN_MELEE_DAMAGE_MULTIPLIER*W.demolition_mod, user)
+		playsound(src, "alien_resin_break", 25)
+	else
+		return attack_hand(user)
+
+/obj/structure/stairs/constructed/resin/proc/take_damage(damage)
+	health -= damage
+	if(health <= 0)
+		qdel(src)
+	else
+		update_icon()
