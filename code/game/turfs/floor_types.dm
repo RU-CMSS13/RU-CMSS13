@@ -1096,7 +1096,7 @@
 	icon = 'icons/turf/almayer.dmi'
 	icon_state = "outerhull"
 	name = "hull"
-	turf_flags = TURF_MULTIZ|TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
+	turf_flags = TURF_WEATHER_PROOF|TURF_EFFECT_AFFECTABLE|TURF_HULL
 
 /turf/open/floor/almayer_hull/outerhull_dir
 	icon_state = "outerhull_dir"

@@ -13,7 +13,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/space/openspace
 	icon = 'icons/turf/open_space.dmi'
 	icon_state = "invisible"
-	turf_flags = TURF_MULTIZ|TURF_TRANSPARENT
+	turf_flags = TURF_TRANSPARENT
 	baseturfs = /turf/open/openspace
 	antipierce = 0
 
