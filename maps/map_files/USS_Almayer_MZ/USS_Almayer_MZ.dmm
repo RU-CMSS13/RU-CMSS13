@@ -20,6 +20,32 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/medical/hydroponics)
+"aad" = (
+/obj/structure/painting_table,
+/turf/open/floor/almayer,
+/area/almayer/hallways/lower/port_midship_hallway)
+"aae" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	pixel_y = 1
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 1
+	},
+/obj/structure/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/techpod_vendor{
+	pixel_x = 32;
+	density = 0
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/almayer/command/cic)
 "aah" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/machinery/door/airlock/almayer/security{
@@ -8937,8 +8963,7 @@
 /obj/effect/step_trigger/ares_alert/mainframe,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES Mainframe Left";
-	name = "\improper ARES Mainframe Shutters";
-	
+	name = "\improper ARES Mainframe Shutters"
 	},
 /obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /obj/effect/mapping_helpers/global_light/pseudo_roof_setter/ship_hull,
@@ -15154,7 +15179,7 @@
 	pixel_x = -32;
 	pixel_y = 2
 	},
-/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep,
+/obj/structure/techpod_vendor,
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha_bravo_shared)
 "bOU" = (
@@ -25489,6 +25514,7 @@
 /obj/structure/machinery/status_display{
 	pixel_y = 30
 	},
+/obj/structure/painting_table,
 /turf/open/floor/almayer,
 /area/almayer/hallways/lower/starboard_midship_hallway)
 "dph" = (
@@ -25819,7 +25845,7 @@
 	pixel_x = -32;
 	pixel_y = 2
 	},
-/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep,
+/obj/structure/techpod_vendor,
 /turf/open/floor/almayer,
 /area/almayer/squads/charlie_delta_shared)
 "dxy" = (
@@ -82830,7 +82856,7 @@ saT
 acE
 bTG
 cWw
-ilo
+aad
 dgt
 kuG
 deL
@@ -100391,7 +100417,7 @@ cqF
 dII
 aWf
 vRB
-bfL
+aae
 dzN
 aWf
 cVV
