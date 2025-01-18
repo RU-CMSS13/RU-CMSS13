@@ -195,6 +195,10 @@
 		magazines--
 
 
+
+
+
+
 /obj/item/storage/belt/gun/m44/cspr
 	name = "\improper M276 pattern CSPR holster rig"
 	desc = "The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay"
