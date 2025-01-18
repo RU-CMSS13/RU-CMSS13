@@ -20,3 +20,4 @@
 
 	if(player.check_whitelist_status(WHITELIST_COMMANDER))
 		return get_desired_status(player.prefs.commander_status, WHITELIST_NORMAL)
+
