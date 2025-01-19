@@ -27,7 +27,12 @@
 	if(extra_build_dist != IGNORE_BUILD_DISTANCE && get_dist(src, A) > src.caste.max_build_dist + extra_build_dist) // Hivelords and eggsac carriers have max_build_dist of 1, drones and queens 0
 		to_chat(src, SPAN_XENOWARNING("We can't build from that far!"))
 		return SECRETE_RESIN_FAIL
+/*RUCM EDIT
 	else if(thick) //hivelords can thicken existing resin structures.
+*/
+//RUCM START
+	else
+//RUCM END
 		var/thickened = FALSE
 		if(istype(A, /turf/closed/wall/resin))
 			var/turf/closed/wall/resin/WR = A
@@ -44,6 +49,7 @@
 				to_chat(src, SPAN_XENOWARNING("[WR] doesn't belong to your hive!"))
 				return SECRETE_RESIN_FAIL
 
+/*RUCM EDIT
 			if(WR.type == /turf/closed/wall/resin)
 				WR.ChangeTurf(/turf/closed/wall/resin/thick)
 				total_resin_cost = XENO_THICKEN_WALL_COST
@@ -54,8 +60,47 @@
 				to_chat(src, SPAN_XENOWARNING("[WR] can't be made thicker."))
 				return SECRETE_RESIN_FAIL
 			thickened = TRUE
+*/
+//RUCM START
+			total_resin_cost = 0
+			switch(WR.type)
+				if(/turf/closed/wall/resin)
+					if(thick)
+						WR.ChangeTurf(/turf/closed/wall/resin/thick)
+						total_resin_cost = XENO_THICKEN_WALL_COST
 
+				if(/turf/closed/wall/resin/lesser_slave)
+					if(thick)
+						WR.ChangeTurf(/turf/closed/wall/resin/thick)
+						total_resin_cost = XENO_THICKEN_WALL_COST
+					else if(!istype(src, /mob/living/carbon/xenomorph/lesser_drone))
+						WR.ChangeTurf(/turf/closed/wall/resin)
+						total_resin_cost = XENO_RESIN_BASE_COST
+
+				if(/turf/closed/wall/resin/membrane)
+					if(thick)
+						WR.ChangeTurf(/turf/closed/wall/resin/membrane/thick)
+						total_resin_cost = XENO_THICKEN_MEMBRANE_COST
+
+				if(/turf/closed/wall/resin/membrane/lesser_slave)
+					if(thick)
+						WR.ChangeTurf(/turf/closed/wall/resin/membrane/thick)
+						total_resin_cost = XENO_THICKEN_MEMBRANE_COST
+					else if(!istype(src, /mob/living/carbon/xenomorph/lesser_drone))
+						WR.ChangeTurf(/turf/closed/wall/resin/membrane)
+						total_resin_cost = XENO_RESIN_BASE_COST
+			if(!total_resin_cost)
+				to_chat(src, SPAN_XENOWARNING("[WR] can't be made thicker."))
+				return SECRETE_RESIN_FAIL
+			thickened = TRUE
+//RUCM END
+
+/*
 		else if(istype(A, /obj/structure/mineral_door/resin))
+*/
+//RUCM START
+		else if(istype(A, /obj/structure/mineral_door/resin) || istype(A, /obj/structure/mineral_door/resin/lesser_slave))
+//RUCM END
 			var/obj/structure/mineral_door/resin/DR = A
 			if (DR.hivenumber != hivenumber)
 				to_chat(src, SPAN_XENOWARNING("[DR] doesn't belong to your hive!"))
@@ -65,11 +110,25 @@
 				to_chat(src, SPAN_XENOWARNING("The extra resin is preventing us from reinforcing [DR]. Wait until it elapse."))
 				return SECRETE_RESIN_FAIL
 
+/*
 			if(DR.hardness == 1.5) //non thickened
 				var/oldloc = DR.loc
 				qdel(DR)
 				new /obj/structure/mineral_door/resin/thick (oldloc, DR.hivenumber)
 				total_resin_cost = XENO_THICKEN_DOOR_COST
+*/
+//RUCM START
+			if((DR.hardness == 1.5 || DR.hardness == 1) && thick) // Hivelord door
+				var/oldloc = DR.loc
+				qdel(DR)
+				new /obj/structure/mineral_door/resin/thick (oldloc, DR.hivenumber)
+				total_resin_cost = XENO_THICKEN_DOOR_COST
+			else if(DR.hardness == 1 && !istype(src, /mob/living/carbon/xenomorph/lesser_drone))
+				var/oldloc = DR.loc
+				qdel(DR)
+				new /obj/structure/mineral_door/resin (oldloc, DR.hivenumber)
+				total_resin_cost = XENO_THICKEN_DOOR_COST
+//RUCM END
 			else
 				to_chat(src, SPAN_XENOWARNING("[DR] can't be made thicker."))
 				return SECRETE_RESIN_FAIL
@@ -85,7 +144,7 @@
 			A.add_hiddenprint(src) //so admins know who thickened the walls
 			return TRUE
 
-	if (!RC.can_build_here(current_turf, src))
+	if(!RC.can_build_here(current_turf, src))
 		return SECRETE_RESIN_FAIL
 
 	var/wait_time = RC.build_time * caste.build_time_mult * add_build_mod
