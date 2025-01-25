@@ -127,6 +127,9 @@
 		. += "Active Order: FOCUS"
 
 	if(SShijack)
+//RUCM START
+		. += "Operation Stage: [SShijack.get_ship_operation_stage_status_panel_eta()]"
+//RUCM END
 		var/eta_status = SShijack.get_evac_eta()
 		if(eta_status)
 			. += "Evacuation Goals: [eta_status]"
@@ -1771,7 +1774,7 @@
 
 /// generates realistic-ish pulse output based on preset levels.
 /// method == GETPULSE_HAND is for hands, GETPULSE_TOOL is for machines, more accurate
-/mob/living/carbon/human/proc/get_pulse(method) 
+/mob/living/carbon/human/proc/get_pulse(method)
 	var/temp = 0 //see setup.dm:694
 
 	if(species && species.flags & NO_BLOOD)
