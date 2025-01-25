@@ -95,7 +95,7 @@
 			continue
 		if(creature.stat != CONSCIOUS)
 			continue
-		if(!is_mainship_level(creature.z))
+		if(!is_mainship_level(creature.z) && !(creature.status_flags & XENO_HOST))
 			return FALSE
 	return TRUE
 
