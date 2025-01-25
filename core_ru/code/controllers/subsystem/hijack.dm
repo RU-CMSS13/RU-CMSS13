@@ -81,6 +81,10 @@
 	for(var/mob/living/carbon/human/creature as anything in GLOB.human_mob_list)
 		if(creature.faction != faction)
 			continue
+		if(should_block_game_interaction(creature))
+			continue
+		if(!(creature.job in GLOB.ROLES_MARINES))
+			continue
 		if(creature.stat == DEAD)
 			dead++
 		else
