@@ -1504,6 +1504,7 @@ const Emergency = (props) => {
     nuketimelock,
     nuke_available,
     operation_reason,
+    canLeave,
   } = data;
   const minimumEvacTime = worldtime > distresstimelock;
   const distressCooldown = worldtime < distresstime;
