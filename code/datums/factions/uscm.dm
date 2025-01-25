@@ -31,7 +31,7 @@
 			if(JOB_TANK_CREW) marine_rk = "tc"
 //RUCM START
 			if(JOB_WALKER) marine_rk = "tc"
-			if(JOB_WALKER) marine_rk = "cmsr"
+			if(JOB_COMMISSAR) marine_rk = "cmsr"
 //RUCM END
 			if(JOB_INTEL) marine_rk = "io"
 			if(JOB_DROPSHIP_CREW_CHIEF) marine_rk = "dcc"
