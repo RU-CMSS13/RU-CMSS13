@@ -2,16 +2,26 @@ GLOBAL_LIST_INIT_TYPED(all_faxmachines, /obj/structure/machinery/faxmachine, lis
 GLOBAL_LIST_EMPTY(all_fax_departments)
 GLOBAL_LIST_EMPTY(all_faxcodes)
 
-#define DEPARTMENT_WY "Weyland-Yutani"
-#define DEPARTMENT_HC "USCM High Command"
-#define DEPARTMENT_CMB "CMB Incident Command Center, Local Operations"
-#define DEPARTMENT_PROVOST "USCM Provost Office"
-#define DEPARTMENT_PRESS "Various Press Organizations"
-#define DEPARTMENT_TWE "Three World Empire"
-#define DEPARTMENT_UPP "Union of Progress Peoples"
-#define DEPARTMENT_CLF "Colonial Liberation Front"
-#define DEPARTMENT_TARGET "Specific Machine Code"//Used to send to a single specific machine.
-#define HIGHCOM_DEPARTMENTS list(DEPARTMENT_WY, DEPARTMENT_HC, DEPARTMENT_CMB, DEPARTMENT_PROVOST, DEPARTMENT_PRESS, DEPARTMENT_TWE, DEPARTMENT_UPP, DEPARTMENT_CLF)
+GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
+
+#define FAX_DEPARTMENT_WY "Weyland-Yutani"
+#define FAX_DEPARTMENT_HC "USCM High Command"
+#define FAX_DEPARTMENT_CMB "CMB Incident Command Center, Local Operations"
+#define FAX_DEPARTMENT_PROVOST "USCM Provost Office"
+#define FAX_DEPARTMENT_PRESS "Various Press Organizations"
+#define FAX_DEPARTMENT_TWE "Three World Empire"
+#define FAX_DEPARTMENT_UPP "Union of Progress Peoples"
+#define FAX_DEPARTMENT_CLF "Colonial Liberation Front"
+#define FAX_DEPARTMENT_SPECIFIC_CODE "Specific Machine Code"//Used to send to a single specific machine.
+#define FAX_HIGHCOM_DEPARTMENTS list(FAX_DEPARTMENT_WY, FAX_DEPARTMENT_HC, FAX_DEPARTMENT_CMB, FAX_DEPARTMENT_PROVOST, FAX_DEPARTMENT_PRESS, FAX_DEPARTMENT_TWE, FAX_DEPARTMENT_UPP, FAX_DEPARTMENT_CLF)
+
+#define FAX_DEPARTMENT_ALMAYER "USS Almayer"
+#define FAX_DEPARTMENT_ALMAYER_COMMAND "USS Almayer Command"
+#define FAX_DEPARTMENT_ALMAYER_BRIG "USS Almayer Brig"
+#define FAX_DEPARTMENT_ALMAYER_AICORE "USS Almayer AI Core"
+#define FAX_DEPARTMENT_GENERAL_PUBLIC "General Public"
+#define FAX_DEPARTMENT_ALMAYER_REQUISITION "USS Almayer Requisitions"
+#define FAX_DEPARTMENT_ALMAYER_SEA "USS Almayer SEA"
 
 #define FAX_NET_USCM "USCM Encrypted Network"
 #define FAX_NET_USCM_HC "USCM High Command Quantum Relay"
@@ -612,9 +622,25 @@ GLOBAL_LIST_EMPTY(all_faxcodes)
 /obj/structure/machinery/faxmachine/uscm/command/capt
 	department = "Commanding Officer"
 
-/obj/structure/machinery/faxmachine/uscm/command/highcom
-	department = DEPARTMENT_HC
-	target_department = "Commanding Officer"
+/obj/structure/machinery/faxmachine/uscm/almayer/requistion
+	department = FAX_DEPARTMENT_ALMAYER_REQUISITION
+	sub_name = "Requisitions"
+	gender = "female"
+	radio_alert_tag = ":U"
+
+/obj/structure/machinery/faxmachine/uscm/almayer/sea
+	department = FAX_DEPARTMENT_ALMAYER_SEA
+
+/obj/structure/machinery/faxmachine/uscm/almayer/command
+	department = FAX_DEPARTMENT_ALMAYER_COMMAND
+
+/obj/structure/machinery/faxmachine/uscm/almayer/command/capt
+	sub_name = "Commanding Officer"
+	can_send_priority = TRUE
+
+/obj/structure/machinery/faxmachine/uscm/highcom
+	department = FAX_DEPARTMENT_HC
+	target_department = FAX_DEPARTMENT_ALMAYER_COMMAND
 	network = FAX_NET_USCM_HC
 
 /obj/structure/machinery/faxmachine/uscm/brig
