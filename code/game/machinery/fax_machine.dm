@@ -620,6 +620,9 @@ GLOBAL_LIST_EMPTY(all_faxcodes)
 /obj/structure/machinery/faxmachine/uscm/command/capt
 	department = "Commanding Officer"
 
+/obj/structure/machinery/faxmachine/uscm/almayer/ai_core
+	department = FAX_DEPARTMENT_ALMAYER_AICORE
+
 /obj/structure/machinery/faxmachine/uscm/almayer/requistion
 	department = FAX_DEPARTMENT_ALMAYER_REQUISITION
 	gender = "female"
