@@ -632,20 +632,20 @@ GLOBAL_LIST_EMPTY(all_faxcodes)
 
 /obj/structure/machinery/faxmachine/uscm/almayer/command/capt
 
-/obj/structure/machinery/faxmachine/uscm/highcom
+/obj/structure/machinery/faxmachine/uscm/almayer/highcom
 	department = FAX_DEPARTMENT_HC
 	target_department = FAX_DEPARTMENT_ALMAYER_COMMAND
 	network = FAX_NET_USCM_HC
 
-/obj/structure/machinery/faxmachine/uscm/brig
+/obj/structure/machinery/faxmachine/uscm/almayer/brig
 	name = "\improper USCM Provost Fax Machine"
 	department = "Brig"
 	target_department = FAX_DEPARTMENT_PROVOST
 
-/obj/structure/machinery/faxmachine/uscm/brig/chief
+/obj/structure/machinery/faxmachine/uscm/almayer/brig/chief
 	department = "Chief MP"
 
-/obj/structure/machinery/faxmachine/uscm/brig/provost
+/obj/structure/machinery/faxmachine/uscm/almayer/brig/provost
 	department = FAX_DEPARTMENT_PROVOST
 	target_department = "Brig"
 	network = FAX_NET_USCM_HC
