@@ -7,23 +7,6 @@
 	var/shuttles_to_check = list(DROPSHIP_ALAMO, DROPSHIP_NORMANDY)
 	var/ship_evacuating = FALSE
 
-/datum/controller/subsystem/hijack/fire(resumed = FALSE)
-	if(SSticker.mode && SShijack.ship_operation_stage_status == OPERATION_DECRYO && ROUND_TIME > DECRYO_STAGE_TIME)
-		SShijack.ship_operation_stage_status = OPERATION_BRIEFING
-
-	if(ship_evacuating)
-		if(SHIP_ESCAPE_ESTIMATE_DEPARTURE <= 0 && ship_operation_stage_status == OPERATION_LEAVING_OPERATION_PLACE)
-			SSticker.mode.round_finished = "Marine Minor Victory"
-			ship_operation_stage_status = OPERATION_DEBRIEFING
-			ship_evacuating = FALSE
-
-		var/shuttles_report = shuttels_onboard()
-		if(shuttles_report)
-			shuttles_report += " sended against protocol, wait respond of operator..."
-			cancel_ship_evacuation(shuttles_report)
-
-	. = ..()
-
 /datum/controller/subsystem/hijack/proc/get_ship_operation_stage_status_panel_eta()
 	switch(ship_operation_stage_status)
 		if(OPERATION_DECRYO) . = "decryo"
