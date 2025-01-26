@@ -167,11 +167,11 @@ CULT
 		to_chat(H, SPAN_WARNING("The droppod cannot punch through an organic ceiling!"))
 		return
 //RUCM START
-	if(isclosedturf(T))
+	if(isclosedturf(target))
 		to_chat(H, SPAN_WARNING("The droppod cannot land in walls!"))
 		return
 
-	if(locate(/obj/structure/droppod/tech) in T)
+	if(locate(/obj/structure/droppod/tech) in target)
 		to_chat(H, SPAN_WARNING("Other droppod is already here!"))
 		return
 //RUCM END

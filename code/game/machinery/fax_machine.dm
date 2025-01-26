@@ -2,8 +2,6 @@ GLOBAL_LIST_INIT_TYPED(all_faxmachines, /obj/structure/machinery/faxmachine, lis
 GLOBAL_LIST_EMPTY(all_fax_departments)
 GLOBAL_LIST_EMPTY(all_faxcodes)
 
-GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
-
 #define FAX_DEPARTMENT_WY "Weyland-Yutani"
 #define FAX_DEPARTMENT_HC "USCM High Command"
 #define FAX_DEPARTMENT_CMB "CMB Incident Command Center, Local Operations"
@@ -61,7 +59,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	var/department = "General Public"
 
 	///Target department
-	var/target_department = DEPARTMENT_WY
+	var/target_department = FAX_DEPARTMENT_WY
 	var/target_machine_id = "No ID Selected"
 
 	// list for img and their photo reference to be stored into the admin's cache.
@@ -85,7 +83,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	update_departments()
 	generate_id_tag()
 
-	if(mapload && (department in HIGHCOM_DEPARTMENTS))
+	if(mapload && (department in FAX_HIGHCOM_DEPARTMENTS))
 		for(var/datum/fax/fax as anything in GLOB.fax_contents)
 			if(fax.department != department)
 				continue
@@ -224,26 +222,26 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	return
 
 /obj/structure/machinery/faxmachine/proc/update_departments()
-	if(!(DEPARTMENT_TARGET in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_TARGET
+	if(!(FAX_DEPARTMENT_SPECIFIC_CODE in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_SPECIFIC_CODE
 	if( !("[department]" in GLOB.all_fax_departments) ) //Initialize departments. This will work with multiple fax machines.
 		GLOB.all_fax_departments += department
-	if(!(DEPARTMENT_WY in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_WY
-	if(!(DEPARTMENT_HC in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_HC
-	if(!(DEPARTMENT_PROVOST in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_PROVOST
-	if(!(DEPARTMENT_CMB in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_CMB
-	if(!(DEPARTMENT_PRESS in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_PRESS
-	if(!(DEPARTMENT_TWE in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_TWE
-	if(!(DEPARTMENT_UPP in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_UPP
-	if(!(DEPARTMENT_CLF in GLOB.all_fax_departments))
-		GLOB.all_fax_departments += DEPARTMENT_CLF
+	if(!(FAX_DEPARTMENT_WY in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_WY
+	if(!(FAX_DEPARTMENT_HC in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_HC
+	if(!(FAX_DEPARTMENT_PROVOST in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_PROVOST
+	if(!(FAX_DEPARTMENT_CMB in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_CMB
+	if(!(FAX_DEPARTMENT_PRESS in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_PRESS
+	if(!(FAX_DEPARTMENT_TWE in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_TWE
+	if(!(FAX_DEPARTMENT_UPP in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_UPP
+	if(!(FAX_DEPARTMENT_CLF in GLOB.all_fax_departments))
+		GLOB.all_fax_departments += FAX_DEPARTMENT_CLF
 
 // TGUI SHIT \\
 
@@ -281,10 +279,10 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	data["authenticated"] = authenticated
 
 	data["target_department"] = target_department
-	if(target_department == DEPARTMENT_TARGET)
+	if(target_department == FAX_DEPARTMENT_SPECIFIC_CODE)
 		data["target_department"] = target_machine_id
 
-	if(target_department in HIGHCOM_DEPARTMENTS)
+	if(target_department in FAX_HIGHCOM_DEPARTMENTS)
 		data["highcom_dept"] = TRUE
 	else
 		data["highcom_dept"] = FALSE
@@ -381,7 +379,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 			target_department = tgui_input_list(ui.user, "Which department?", "Choose a department", GLOB.all_fax_departments)
 			if(!target_department)
 				target_department = last_target_department
-			if(target_department == DEPARTMENT_TARGET)
+			if(target_department == FAX_DEPARTMENT_SPECIFIC_CODE)
 				var/new_target_machine_id = tgui_input_list(ui.user, "Which machine?", "Choose a machine code", GLOB.all_faxcodes)
 				if(!new_target_machine_id)
 					target_department = last_target_department
@@ -455,37 +453,37 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 
 	var/scan_department = target_department
 	var/the_target_department = target_department
-	if(department in HIGHCOM_DEPARTMENTS)
+	if(department in FAX_HIGHCOM_DEPARTMENTS)
 		scan_department = department
-	else if(target_department == DEPARTMENT_TARGET)
+	else if(target_department == FAX_DEPARTMENT_SPECIFIC_CODE)
 		the_target_department = "Fax Machine [target_machine_id]"
 
 	var/msg_admin = SPAN_STAFF_IC("<b><font color='#006100'>[the_target_department]: </font>[key_name(user, 1)] ")
 	msg_admin += "[CC_MARK(user)] [ADMIN_PP(user)] [ADMIN_VV(user)] [ADMIN_SM(user)] [ADMIN_JMP_USER(user)] "
 
 	switch(scan_department)
-		if(DEPARTMENT_HC)
+		if(FAX_DEPARTMENT_HC)
 			GLOB.USCMFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];USCMFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];USCMFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_PROVOST)
+		if(FAX_DEPARTMENT_PROVOST)
 			GLOB.ProvostFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];USCMFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];USCMFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_CMB)
+		if(FAX_DEPARTMENT_CMB)
 			GLOB.CMBFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];CMBFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];CMBFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_WY)
+		if(FAX_DEPARTMENT_WY)
 			GLOB.WYFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];WYFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];WYFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_PRESS)
+		if(FAX_DEPARTMENT_PRESS)
 			GLOB.PressFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];PressFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];PressFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_TWE)
+		if(FAX_DEPARTMENT_TWE)
 			GLOB.TWEFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];TWEFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];TWEFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_UPP)
+		if(FAX_DEPARTMENT_UPP)
 			GLOB.UPPFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];UPPFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];UPPFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
-		if(DEPARTMENT_CLF)
+		if(FAX_DEPARTMENT_CLF)
 			GLOB.CLFFaxes.Add("<a href='byond://?FaxView=\ref[faxcontents]'>\['[original_fax.name]' from [key_name(usr)], [scan] at [time2text(world.timeofday, "hh:mm:ss")]\]</a> <a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];CLFFaxReply=\ref[user];originfax=\ref[src]'>REPLY</a>")
 			msg_admin += "(<a href='byond://?_src_=admin_holder;[HrefToken(forceGlobal = TRUE)];CLFFaxReply=\ref[user];originfax=\ref[src]'>RPLY</a>)</b>: "
 		else
@@ -528,7 +526,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 /obj/structure/machinery/faxmachine/proc/send_fax(datum/fax/faxcontents)
 	var/list/target_machines = list()
 	for(var/obj/structure/machinery/faxmachine/pos_target in GLOB.all_faxmachines)
-		if(target_department == DEPARTMENT_TARGET)
+		if(target_department == FAX_DEPARTMENT_SPECIFIC_CODE)
 			if(pos_target != src && pos_target.machine_id_tag == target_machine_id)
 				target_machines += pos_target
 		else
@@ -595,7 +593,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 /obj/structure/machinery/faxmachine/cmb
 	name = "\improper CMB Incident Command Center Fax Machine"
 	network = FAX_NET_CMB
-	department = DEPARTMENT_CMB
+	department = FAX_DEPARTMENT_CMB
 
 /obj/structure/machinery/faxmachine/corporate
 	name = "\improper W-Y Corporate Fax Machine"
@@ -606,7 +604,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	department = "W-Y Liaison"
 
 /obj/structure/machinery/faxmachine/corporate/highcom
-	department = DEPARTMENT_WY
+	department = FAX_DEPARTMENT_WY
 	target_department = "W-Y Liaison"
 	network = FAX_NET_WY_HC
 
@@ -614,7 +612,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	name = "\improper USCM Military Fax Machine"
 	department = "USCM Local Operations"
 	network = FAX_NET_USCM
-	target_department = DEPARTMENT_HC
+	target_department = FAX_DEPARTMENT_HC
 
 /obj/structure/machinery/faxmachine/uscm/command
 	department = "CIC"
@@ -624,9 +622,7 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 
 /obj/structure/machinery/faxmachine/uscm/almayer/requistion
 	department = FAX_DEPARTMENT_ALMAYER_REQUISITION
-	sub_name = "Requisitions"
 	gender = "female"
-	radio_alert_tag = ":U"
 
 /obj/structure/machinery/faxmachine/uscm/almayer/sea
 	department = FAX_DEPARTMENT_ALMAYER_SEA
@@ -635,8 +631,6 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	department = FAX_DEPARTMENT_ALMAYER_COMMAND
 
 /obj/structure/machinery/faxmachine/uscm/almayer/command/capt
-	sub_name = "Commanding Officer"
-	can_send_priority = TRUE
 
 /obj/structure/machinery/faxmachine/uscm/highcom
 	department = FAX_DEPARTMENT_HC
@@ -646,13 +640,13 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 /obj/structure/machinery/faxmachine/uscm/brig
 	name = "\improper USCM Provost Fax Machine"
 	department = "Brig"
-	target_department = DEPARTMENT_PROVOST
+	target_department = FAX_DEPARTMENT_PROVOST
 
 /obj/structure/machinery/faxmachine/uscm/brig/chief
 	department = "Chief MP"
 
 /obj/structure/machinery/faxmachine/uscm/brig/provost
-	department = DEPARTMENT_PROVOST
+	department = FAX_DEPARTMENT_PROVOST
 	target_department = "Brig"
 	network = FAX_NET_USCM_HC
 
@@ -660,10 +654,10 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	name = "\improper UPP Military Fax Machine"
 	department = "UPP Local Operations"
 	network = FAX_NET_UPP
-	target_department = DEPARTMENT_UPP
+	target_department = FAX_DEPARTMENT_UPP
 
 /obj/structure/machinery/faxmachine/upp/highcom
-	department = DEPARTMENT_UPP
+	department = FAX_DEPARTMENT_UPP
 	network = FAX_NET_UPP_HC
 	target_department = "UPP Local Operations"
 
@@ -671,10 +665,10 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	name = "\improper Hacked General Purpose Fax Machine"
 	department = "CLF Local Operations"
 	network = FAX_NET_CLF
-	target_department = DEPARTMENT_CLF
+	target_department = FAX_DEPARTMENT_CLF
 
 /obj/structure/machinery/faxmachine/clf/highcom
-	department = DEPARTMENT_CLF
+	department = FAX_DEPARTMENT_CLF
 	network = FAX_NET_CLF_HC
 	target_department = "CLF Local Operations"
 
@@ -682,15 +676,15 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 	name = "\improper TWE Military Fax Machine"
 	department = "TWE Local Operations"
 	network = FAX_NET_TWE
-	target_department = DEPARTMENT_TWE
+	target_department = FAX_DEPARTMENT_TWE
 
 /obj/structure/machinery/faxmachine/twe/highcom
-	department = DEPARTMENT_TWE
+	department = FAX_DEPARTMENT_TWE
 	network = FAX_NET_TWE_HC
 	target_department = "TWE Local Operations"
 
 /obj/structure/machinery/faxmachine/press/highcom
-	department = DEPARTMENT_PRESS
+	department = FAX_DEPARTMENT_PRESS
 	network = FAX_NET_PRESS_HC
 	target_department = "General Public"
 
@@ -807,25 +801,25 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 
 
 /obj/structure/machinery/faxmachine/proc/is_department_responder_awake(target_department)
-	if(!(target_department in HIGHCOM_DEPARTMENTS))
+	if(!(target_department in FAX_HIGHCOM_DEPARTMENTS))
 		return FALSE
 	var/target_job = JOB_FAX_RESPONDER
 	switch(target_department)
-		if(DEPARTMENT_CLF)
+		if(FAX_DEPARTMENT_CLF)
 			target_job = JOB_FAX_RESPONDER_CLF
-		if(DEPARTMENT_CMB)
+		if(FAX_DEPARTMENT_CMB)
 			target_job = JOB_FAX_RESPONDER_CMB
-		if(DEPARTMENT_HC)
+		if(FAX_DEPARTMENT_HC)
 			target_job = JOB_FAX_RESPONDER_USCM_HC
-		if(DEPARTMENT_PRESS)
+		if(FAX_DEPARTMENT_PRESS)
 			target_job = JOB_FAX_RESPONDER_PRESS
-		if(DEPARTMENT_PROVOST)
+		if(FAX_DEPARTMENT_PROVOST)
 			target_job = JOB_FAX_RESPONDER_USCM_PVST
-		if(DEPARTMENT_TWE)
+		if(FAX_DEPARTMENT_TWE)
 			target_job = JOB_FAX_RESPONDER_TWE
-		if(DEPARTMENT_UPP)
+		if(FAX_DEPARTMENT_UPP)
 			target_job = JOB_FAX_RESPONDER_UPP
-		if(DEPARTMENT_WY)
+		if(FAX_DEPARTMENT_WY)
 			target_job = JOB_FAX_RESPONDER_WY
 
 	for(var/mob/living/carbon/human/responder in SSticker.mode.fax_responders)
