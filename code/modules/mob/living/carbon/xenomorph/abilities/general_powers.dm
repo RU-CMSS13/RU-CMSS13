@@ -733,7 +733,6 @@
 			return FALSE
 	return TRUE
 
-/*RUCM перевел в core_ru из-за необходимости немного изменить внутреннюю компоновку
 /datum/action/xeno_action/activable/xeno_spit/use_ability(atom/atom)
 	var/mob/living/carbon/xenomorph/xeno = owner
 	var/spit_target = aim_turf ? get_turf(atom) : atom
@@ -771,6 +770,15 @@
 			to_chat(xeno, SPAN_XENODANGER("We decide to cancel our spit."))
 			spitting = FALSE
 			return
+	//RUCM STARTS THERE
+	var/list/new_vars = list("damage" = xeno.ammo.damage, "penetration" = xeno.ammo.penetration, "shell_speed" = xeno.ammo.shell_speed, "spit_cost" = xeno.ammo.spit_cost)
+	SEND_SIGNAL(xeno, COMSIG_XENO_PRE_SPIT, new_vars)
+	var/datum/ammo/xeno/new_ammo = new xeno.ammo.type
+	new_ammo.damage = new_vars["damage"]
+	new_ammo.penetration = new_vars["penetration"]
+	new_ammo.shell_speed = new_vars["shell_speed"]
+	new_ammo.spit_cost = new_vars["spit_cost"]
+	//RUCM ENDS HERE
 	plasma_cost = xeno.ammo.spit_cost
 
 	if(!check_and_use_plasma_owner())
@@ -795,8 +803,6 @@
 
 	apply_cooldown()
 	return ..()
-
-RUCM*/
 
 /datum/action/xeno_action/activable/bombard/use_ability(atom/A)
 	var/mob/living/carbon/xenomorph/X = owner
