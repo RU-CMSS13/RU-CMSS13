@@ -341,7 +341,12 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield0")
 
 /mob/living/carbon/xenomorph/med_hud_set_armor()
-	if(GLOB.xeno_general.armor_ignore_integrity || !tier)
+/*
+	if(GLOB.xeno_general.armor_ignore_integrity)
+*/
+//RUCM START
+	if(GLOB.xeno_general.armor_ignore_integrity || !armor_deflection)
+//RUCM END
 		return FALSE
 
 	var/image/holder = hud_list[ARMOR_HUD_XENO]
@@ -351,7 +356,7 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 */
 //RUCM START
 	var/armor_hud_type = "xenoarmor"
-	if(stat == DEAD || armor_deflection <= 0)
+	if(stat == DEAD)
 		holder.icon_state = "[armor_hud_type]0"
 //RUCM END
 	else
