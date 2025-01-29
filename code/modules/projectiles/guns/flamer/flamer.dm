@@ -6,15 +6,24 @@
 /obj/item/weapon/gun/flamer
 	name = "\improper M240A1 incinerator unit"
 	desc = "M240A1 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly."
-	icon = 'icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
+	icon = 'icons/obj/items/weapons/guns/guns_by_faction/USCM/flamers.dmi'
 	icon_state = "m240"
 	item_state = "m240"
+	item_icons = list(
+		WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/flamers.dmi',
+		WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/flamers.dmi',
+		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_lefthand.dmi',
+		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_righthand.dmi'
+	)
+	mouse_pointer = 'icons/effects/mouse_pointer/flamer_mouse.dmi'
+
+	unload_sound = 'sound/weapons/handling/flamer_unload.ogg'
+	reload_sound = 'sound/weapons/handling/flamer_reload.ogg'
+	fire_sound = ""
+
 	flags_equip_slot = SLOT_BACK
 	w_class = SIZE_LARGE
 	force = 15
-	fire_sound = ""
-	unload_sound = 'sound/weapons/handling/flamer_unload.ogg'
-	reload_sound = 'sound/weapons/handling/flamer_reload.ogg'
 	aim_slowdown = SLOWDOWN_ADS_INCINERATOR
 	current_mag = /obj/item/ammo_magazine/flamer_tank
 	var/fuel_pressure = 1 //Pressure setting of the attached fueltank, controls how much fuel is used per tile
@@ -68,11 +77,12 @@
 	else
 		. += "There's no tank in [src]!"
 
-/obj/item/weapon/gun/flamer/update_icon()
+/obj/item/weapon/gun/flamer/update_icon(mob/user)
 	..()
 
 	// Have to redo this here because we don't want the empty sprite when the tank is empty (just when it's not in the gun)
 	var/new_icon_state = base_gun_icon
+
 	if(has_empty_icon && !current_mag)
 		new_icon_state += "_e"
 	icon_state = new_icon_state
@@ -570,6 +580,9 @@
 	//Fire duration increases with fuel usage
 	firelevel = R.durationfire + fuel_pressure*R.durationmod
 	burnlevel = R.intensityfire
+//RUCM START
+	friendlydetection = R.friendlydetection
+//RUCM END
 
 	//are we in weather??
 	update_in_weather_status()
@@ -647,15 +660,34 @@
 		if(!(sig_result & COMPONENT_NO_IGNITE))
 			switch(fire_variant)
 				if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire, super easy to pat out. 50 duration -> 10 stacks (1 pat/resist)
+/*
 					ignited_morb.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent)
 				else
 					ignited_morb.TryIgniteMob(tied_reagent.durationfire, tied_reagent)
+*/
+//RUCM START
+					ignited_morb.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent, src)
+				else
+					ignited_morb.TryIgniteMob(tied_reagent.durationfire, tied_reagent, src)
+//RUCM END
 
 		if(sig_result & COMPONENT_NO_BURN)
 			continue
 
+/*
 		ignited_morb.last_damage_data = weapon_cause_data
 		ignited_morb.apply_damage(firedamage, BURN)
+*/
+//RUCM START
+		if(!friendlydetection)
+			ignited_morb.last_damage_data = weapon_cause_data
+			ignited_morb.apply_damage(firedamage, BURN)
+		else
+			var/mob/living/user = weapon_cause_data.resolve_mob()
+			if(!(istype(user) && user.ally_of_hivenumber(ignited_morb.hivenumber)) && ignited_morb.getFireLoss() < 400)// We don't want fire rav do nasty dirty gameplay
+				ignited_morb.last_damage_data = weapon_cause_data
+				ignited_morb.apply_damage(firedamage, BURN) //This makes fire stronk.
+//RUCM END
 		animation_flash_color(ignited_morb, tied_reagent.burncolor) //pain hit flicker
 
 		var/msg = "Augh! You are roasted by the flames!"
@@ -664,10 +696,20 @@
 		else
 			to_chat(ignited_morb, SPAN_HIGHDANGER(msg))
 
+/*
 		if(weapon_cause_data)
 			var/mob/SM = weapon_cause_data.resolve_mob()
 			if(istype(SM))
 				SM.track_shot_hit(weapon_cause_data.cause_name)
+*/
+//RUCM START
+		var/mob/shoot_mob = weapon_cause_data?.resolve_mob()
+		if(shoot_mob)
+			if(shoot_mob.faction == ignited_morb.faction)
+				shoot_mob.track_friendly_damage(weapon_cause_data.cause_name, ignited_morb, firedamage)
+			else
+				shoot_mob.track_damage(weapon_cause_data.cause_name, ignited_morb, firedamage)
+//RUCM END
 
 	RegisterSignal(SSdcs, COMSIG_GLOB_WEATHER_CHANGE, PROC_REF(update_in_weather_status))
 
@@ -724,9 +766,16 @@
 	if(!(sig_result & COMPONENT_NO_IGNITE) && burn_damage)
 		switch(fire_variant)
 			if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire, super easy to pat out. 50 duration -> 10 stacks (1 pat/resist)
+/*
 				M.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent)
 			else
 				M.TryIgniteMob(tied_reagent.durationfire, tied_reagent)
+*/
+//RUCM START
+				M.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent, src)
+			else
+				M.TryIgniteMob(tied_reagent.durationfire, tied_reagent, src)
+//RUCM END
 
 	if(sig_result & COMPONENT_NO_BURN && !tied_reagent.fire_penetrating)
 		burn_damage = 0
@@ -735,8 +784,20 @@
 		to_chat(M, SPAN_DANGER("[isxeno(M) ? "We" : "You"] step over the flames."))
 		return
 
+/*
 	M.last_damage_data = weapon_cause_data
 	M.apply_damage(burn_damage, BURN) //This makes fire stronk.
+*/
+//RUCM START
+	if(!friendlydetection)
+		M.last_damage_data = weapon_cause_data
+		M.apply_damage(burn_damage, BURN) //This makes fire stronk.
+	else
+		var/mob/living/user = weapon_cause_data.resolve_mob()
+		if(!(istype(user) && user.ally_of_hivenumber(M.hivenumber)) && M.getFireLoss() < 400)// We don't want fire rav do nasty dirty gameplay
+			M.last_damage_data = weapon_cause_data
+			M.apply_damage(burn_damage, BURN) //This makes fire stronk.
+//RUCM END
 
 	var/variant_burn_msg = null
 	switch(fire_variant) //Fire variant special message appends.
@@ -776,7 +837,12 @@
 		qdel(src)
 		return PROCESS_KILL
 	var/damage = burnlevel*delta_time
+/*
 	T.flamer_fire_act(damage)
+*/
+//RUCM START
+	T.flamer_fire_act(damage, weapon_cause_data, src)
+//RUCM END
 
 	if(!firelevel)
 		qdel(src)

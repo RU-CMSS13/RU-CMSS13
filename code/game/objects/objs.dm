@@ -366,15 +366,6 @@
 
 	return ..()
 
-/obj/bullet_act(obj/projectile/P)
-	//Tasers and the like should not damage objects.
-	if(P.ammo.damage_type == HALLOSS || P.ammo.damage_type == TOX || P.ammo.damage_type == CLONE || P.damage == 0)
-		return 0
-	bullet_ping(P)
-	if(P.ammo.damage)
-		update_health(floor(P.ammo.damage / 2))
-	return 1
-
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot, default_bodytype = "Default")
 	var/bodytype = default_bodytype
 	var/mob/living/carbon/human/user_human
@@ -421,6 +412,23 @@
 
 	return overlay_img
 
+/// Generates an image overlay based on the provided override_icon_state
+/// (handles prefixing for PREFIX_HAT_GARB_OVERRIDE and PREFIX_HELMET_GARB_OVERRIDE)
+/obj/item/proc/get_garb_overlay(override_icon_state)
+	var/image/overlay_img = get_mob_overlay(slot=WEAR_AS_GARB, default_bodytype="Human")
+
+	switch(override_icon_state)
+		if(NO_GARB_OVERRIDE)
+			return overlay_img // No modifications to make
+		if(PREFIX_HAT_GARB_OVERRIDE)
+			overlay_img.icon_state = "hat_[overlay_img.icon_state]"
+		if(PREFIX_HELMET_GARB_OVERRIDE)
+			overlay_img.icon_state = "helmet_[overlay_img.icon_state]"
+		else
+			overlay_img.icon_state = override_icon_state
+
+	return overlay_img
+
 /obj/item/proc/use_spritesheet(bodytype, slot, icon_state)
 	if(!LAZYISIN(sprite_sheets, bodytype))
 		return FALSE
@@ -451,7 +459,12 @@
 
 /obj/handle_flamer_fire(obj/flamer_fire/fire, damage, delta_time)
 	. = ..()
+/*
 	flamer_fire_act(damage, fire.weapon_cause_data)
+*/
+//RUCM START
+	flamer_fire_act(damage, fire.weapon_cause_data, fire)
+//RUCM END
 
 ///returns time or -1 if unmeltable
 /obj/proc/get_applying_acid_time()
