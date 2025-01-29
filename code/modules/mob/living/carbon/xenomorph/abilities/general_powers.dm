@@ -803,6 +803,7 @@
 	/*
 	plasma_cost = xeno.ammo.spit_cost
 	*/
+
 	plasma_cost = new_ammo.spit_cost
 	//RUCM ENDS here
 	if(!check_and_use_plasma_owner())
