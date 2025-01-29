@@ -53,7 +53,6 @@ Additional game mode variables.
 	var/xeno_required_num = 0 //We need at least one. You can turn this off in case we don't care if we spawn or don't spawn xenos.
 	var/xeno_starting_num = 0 //To clamp starting xenos.
 	var/xeno_bypass_timer = 0 //Bypass the five minute timer before respawning.
-	var/xeno_queen_deaths = 0 //How many times the alien queen died.
 	var/surv_starting_num = 0 //To clamp starting survivors.
 	var/merc_starting_num = 0 //PMC clamp.
 	var/marine_starting_num = 0 //number of players not in something special
@@ -104,7 +103,10 @@ Additional game mode variables.
 	var/evolution_ovipositor_threshold = FALSE
 
 	var/flags_round_type = NO_FLAGS
-	var/toggleable_flags = NO_FLAGS
+	///List of references to all non-abstract /datum/gamemode_modifiers
+	var/round_modifiers = list()
+	///List of typepaths of all /datum/gamemode_modifiers that start enabled
+	var/starting_round_modifiers = list()
 
 
 /datum/game_mode/proc/get_roles_list()
@@ -176,7 +178,9 @@ Additional game mode variables.
 			if(player.client.prefs.get_job_priority(JOB_PREDATOR) > 0) //Are their prefs turned on?
 				if(!player.mind) //They have to have a key if they have a client.
 					player.mind_initialize() //Will work on ghosts too, but won't add them to active minds.
+/* RUCM REMOVE
 				player.mind.setup_human_stats()
+*/
 				player.faction = FACTION_YAUTJA
 				player.faction_group = FACTION_LIST_YAUTJA
 				players += player.mind
@@ -308,23 +312,14 @@ Additional game mode variables.
 	var/list/options = get_fax_responder_slots(responder_candidate)
 	if(!options || !options.len)
 		to_chat(responder_candidate, SPAN_WARNING("No Available Slot!"))
-		if(from_lobby)
-			var/mob/new_player/lobbied = responder_candidate
-			lobbied.new_player_panel()
 		return FALSE
 
 	var/choice = tgui_input_list(responder_candidate, "What Fax Responder do you want to join as?", "Which Responder?", options, 30 SECONDS)
 	if(!(choice in FAX_RESPONDER_JOB_LIST))
 		to_chat(responder_candidate, SPAN_WARNING("Error: No valid responder selected."))
-		if(from_lobby)
-			var/mob/new_player/lobbied = responder_candidate
-			lobbied.new_player_panel()
 		return FALSE
 
 	if(!transform_fax_responder(responder_candidate, choice))
-		if(from_lobby)
-			var/mob/new_player/lobbied = responder_candidate
-			lobbied.new_player_panel()
 		return FALSE
 
 	if(responder_candidate)
@@ -339,9 +334,8 @@ Additional game mode variables.
 		log_debug("Null client attempted to transform_fax_responder")
 		return FALSE
 	if(!loaded_fax_base)
-		loaded_fax_base = SSmapping.lazy_load_template(/datum/lazy_template/fax_response_base, force = TRUE)
+		load_fax_base()
 		if(!loaded_fax_base)
-			log_debug("Error loading fax response base!")
 			return FALSE
 
 	responder_candidate.client.prefs.find_assigned_slot(JOB_FAX_RESPONDER)
@@ -362,9 +356,16 @@ Additional game mode variables.
 	GLOB.RoleAuthority.equip_role(new_responder, fax_responder_job, new_responder.loc)
 	SSticker.minds += new_responder.mind
 
-	message_admins(FONT_SIZE_XL(SPAN_RED("([new_responder.key]) joined as a [sub_job], [new_responder.real_name].")))
+	message_admins(FONT_SIZE_XL(SPAN_RED("[key_name(new_responder)] joined as a [sub_job].")))
 	new_responder.add_fax_responder()
 
+	return TRUE
+
+/datum/game_mode/proc/load_fax_base()
+	loaded_fax_base = SSmapping.lazy_load_template(/datum/lazy_template/fax_response_base, force = TRUE)
+	if(!loaded_fax_base)
+		log_debug("Error loading fax response base!")
+		return FALSE
 	return TRUE
 
 
@@ -451,7 +452,9 @@ Additional game mode variables.
 // Helper proc to set some constants
 /proc/setup_new_xeno(datum/mind/new_xeno)
 	new_xeno.roundstart_picked = TRUE
+/* RUCM REMOVE
 	new_xeno.setup_xeno_stats()
+*/
 
 /datum/game_mode/proc/check_xeno_late_join(mob/xeno_candidate)
 	if(jobban_isbanned(xeno_candidate, JOB_XENOMORPH)) // User is jobbanned
@@ -778,11 +781,6 @@ Additional game mode variables.
 	else
 		hive = GLOB.hive_datum[last_active_hive]
 
-	for(var/mob_name in hive.banished_ckeys)
-		if(hive.banished_ckeys[mob_name] == xeno_candidate.ckey)
-			to_chat(xeno_candidate, SPAN_WARNING("You are banished from the [hive], you may not rejoin unless the Queen re-admits you or dies."))
-			return FALSE
-
 	var/list/selection_list = list()
 	var/list/selection_list_structure = list()
 
@@ -798,7 +796,7 @@ Additional game mode variables.
 			var/pylon_selection_name = pylon_name
 			while(pylon_selection_name in selection_list)
 				pylon_selection_name = "[pylon_name] ([pylon_number])"
-				pylon_number ++
+				pylon_number++
 			selection_list += pylon_selection_name
 			selection_list_structure += cycled_pylon
 
@@ -844,7 +842,9 @@ Additional game mode variables.
 	new_xeno.SetSleeping(0) // ghosting sleeps, but they got a new mind! wake up! (/mob/living/verb/ghost())
 
 	new_xeno.mind_initialize()
+/* RUCM REMOVE
 	new_xeno.mind.player_entity = setup_player_entity(xeno_candidate_mind.ckey)
+*/
 	new_xeno.statistic_tracked = FALSE
 
 	// Let the round recorder know that the key has changed
@@ -882,6 +882,8 @@ Additional game mode variables.
 		while(spawn_list_map[spawn_name])
 			spawn_name = "[area_name] [++spawn_counter]"
 		spawn_list_map[spawn_name] = T
+
+	original.sight = BLIND
 
 	var/selected_spawn = tgui_input_list(original, "Where do you want you and your hive to spawn?", "Queen Spawn", spawn_list_map, QUEEN_SPAWN_TIMEOUT, theme="hive_status")
 	if(hive.living_xeno_queen)
@@ -1156,7 +1158,15 @@ Additional game mode variables.
 
 // for the toolbox
 /datum/game_mode/proc/end_round_message()
+/*
 	return "Extended round has ended."
+*/
+//RUCM START
+	if(round_finished)
+		return "Round has ended. [round_finished]."
+	else
+		return "Round has ended due to technical reasons."
+//RUCM END
 
 /datum/game_mode/proc/get_escape_menu()
 	return "On the [SSmapping.configs[SHIP_MAP].map_name], orbiting..."
@@ -1198,24 +1208,24 @@ Additional game mode variables.
 			to_chat(joe_candidate, SPAN_WARNING("You are not whitelisted! You may apply on the forums to be whitelisted as a synth."))
 		return
 
-	if(MODE_HAS_TOGGLEABLE_FLAG(MODE_DISABLE_JOE_RESPAWN) && (joe_candidate.ckey in joes)) // No joe respawns if already a joe before
+	if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/disable_wj_respawns) && (joe_candidate.ckey in joes)) // No joe respawns if already a joe before
 		to_chat(joe_candidate, SPAN_WARNING("Working Joe respawns are disabled!"))
 		return FALSE
 
 	var/deathtime = world.time - joe_candidate.timeofdeath
-	if((deathtime < JOE_JOIN_DEAD_TIME && (joe_candidate.ckey in joes)) && !MODE_HAS_TOGGLEABLE_FLAG(MODE_BYPASS_JOE))
+	if((deathtime < JOE_JOIN_DEAD_TIME && (joe_candidate.ckey in joes)) && !MODE_HAS_MODIFIER(/datum/gamemode_modifier/ignore_wj_restrictions))
 		to_chat(joe_candidate, SPAN_WARNING("You have been dead for [DisplayTimeText(deathtime)]. You need to wait <b>[DisplayTimeText(JOE_JOIN_DEAD_TIME - deathtime)]</b> before rejoining as a Working Joe!"))
 		return FALSE
 
 	// council doesn't count towards this conditional.
 	if(joe_job.get_whitelist_status(joe_candidate.client) == WHITELIST_NORMAL)
 		var/joe_max = joe_job.total_positions
-		if((joe_job.current_positions >= joe_max) && !MODE_HAS_TOGGLEABLE_FLAG(MODE_BYPASS_JOE))
+		if((joe_job.current_positions >= joe_max) && !MODE_HAS_MODIFIER(/datum/gamemode_modifier/ignore_wj_restrictions))
 			if(show_warning)
 				to_chat(joe_candidate, SPAN_WARNING("Only [joe_max] Working Joes may spawn per round."))
 			return
 
-	if(!GLOB.enter_allowed && !MODE_HAS_TOGGLEABLE_FLAG(MODE_BYPASS_JOE))
+	if(!GLOB.enter_allowed && !MODE_HAS_MODIFIER(/datum/gamemode_modifier/ignore_wj_restrictions))
 		if(show_warning)
 			to_chat(joe_candidate, SPAN_WARNING("There is an administrative lock from entering the game."))
 		return

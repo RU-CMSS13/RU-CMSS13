@@ -103,7 +103,7 @@
 			if(JOB_SO)
 				marine_rk = "so"
 				border_rk = "command"
-			if(JOB_AUXILIARY_OFFICER)
+			if(JOB_AUXILIARY_OFFICER, JOB_CIA_LIAISON)
 				marine_rk = "aso"
 				border_rk = "command"
 //RUCM START
@@ -197,11 +197,6 @@
 			if(JOB_PROVOST_MARSHAL, JOB_PROVOST_CMARSHAL, JOB_PROVOST_SMARSHAL)
 				marine_rk = "pvm"
 				border_rk = "command"
-			// TIS
-			if(JOB_TIS_IO)
-				marine_rk = "tisio"
-			if(JOB_TIS_SA)
-				marine_rk = "tissa"
 			// Riot MPs
 			if(JOB_RIOT)
 				marine_rk = "rmp"
@@ -230,22 +225,6 @@
 				marine_rk = "wo_ro"
 			if(JOB_WO_PILOT)
 				marine_rk = "wo_mcrew"
-			// Colonial Marshals
-			if(JOB_CMB_TL)
-				marine_rk = "mar"
-				icon_prefix = "cmb_"
-			if(JOB_CMB)
-				marine_rk = "dep"
-				icon_prefix = "cmb_"
-			if(JOB_CMB_SYN)
-				marine_rk = "syn"
-				icon_prefix = "cmb_"
-			if(JOB_CMB_ICC)
-				marine_rk = "icc"
-				icon_prefix = "cmb_"
-			if(JOB_CMB_OBS)
-				marine_rk = "obs"
-				icon_prefix = "cmb_"
 			// Check squad marines here too, for the unique ones
 			if(JOB_SQUAD_ENGI)
 				marine_rk = "engi"

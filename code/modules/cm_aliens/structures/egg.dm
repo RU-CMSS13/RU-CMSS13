@@ -24,7 +24,7 @@
 /obj/effect/alien/egg/Initialize(mapload, hive)
 	. = ..()
 	create_egg_triggers()
-	if (hive)
+	if(hive)
 		hivenumber = hive
 
 	if(hivenumber == XENO_HIVE_NORMAL)
@@ -37,6 +37,10 @@
 	var/turf/my_turf = get_turf(src)
 	if(my_turf?.weeds && !isnull(weed_strength_required))
 		RegisterSignal(my_turf.weeds, COMSIG_PARENT_QDELETING, PROC_REF(on_weed_deletion))
+
+	var/area/area = get_area(src)
+	if(area && area.linked_lz)
+		AddComponent(/datum/component/resin_cleanup)
 
 /obj/effect/alien/egg/proc/forsaken_handling()
 	SIGNAL_HANDLER
@@ -299,6 +303,8 @@
 	health -= damage
 	healthcheck()
 
+	return ATTACKBY_HINT_UPDATE_NEXT_MOVE
+
 /obj/effect/alien/egg/proc/healthcheck()
 	if(health <= 0)
 		Burst(TRUE)
@@ -312,7 +318,13 @@
 			return
 		Burst(FALSE, TRUE, null)
 
-/obj/effect/alien/egg/flamer_fire_act() // gotta kill the egg + hugger
+/obj/effect/alien/egg/flamer_fire_act(dam, datum/cause_data/flame_cause_data, obj/flamer_fire/fire) // gotta kill the egg + hugger
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = flame_cause_data.resolve_mob()
+		if(istype(user) && HIVE_ALLIED_TO_HIVE(user.hivenumber, hivenumber))
+			return
+//RUCM END
 	Burst(TRUE)
 
 /obj/effect/alien/egg/alpha

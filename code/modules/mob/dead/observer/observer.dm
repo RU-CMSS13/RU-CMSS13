@@ -441,6 +441,7 @@ Works together with spawning an observer, noted above.
 /mob/proc/ghostize(can_reenter_corpse = TRUE, aghosted = FALSE)
 	if(isaghost(src) || !key)
 		return
+
 	if(aghosted)
 		src.aghosted = TRUE
 
@@ -468,19 +469,27 @@ Works together with spawning an observer, noted above.
 
 	if(!can_reenter_corpse)
 		away_timer = 300 //They'll never come back, so we can max out the timer right away.
+/*
 		if(GLOB.round_statistics)
 			GLOB.round_statistics.update_panel_data()
+*/
 		track_death_calculations() //This needs to be done before mind is nullified
 		if(ghost.mind)
 			ghost.mind.original = ghost
+/*
 	else if(ghost.mind && ghost.mind.player_entity) //Use else here because track_death_calculations() already calls this.
 		ghost.mind.player_entity.update_panel_data(GLOB.round_statistics)
+*/
+//RUCM START
+	else if(ghost.client)
+//RUCM END
 		ghost.mind.original = src
 
 	mind = null
 
 	// Larva queue: We use the larger of their existing queue time or the new timeofdeath except for facehuggers or lesser drone
-	var/new_tod = (isfacehugger(src) || islesserdrone(src)) ? 1 : ghost.timeofdeath
+	var/exempt_tod = isfacehugger(src) || islesserdrone(src) || should_block_game_interaction(src, include_hunting_grounds=TRUE)
+	var/new_tod = exempt_tod ? 1 : ghost.timeofdeath
 
 	// if they died as facehugger or lesser drone, bypass typical TOD checks
 	ghost.bypass_time_of_death_checks = (isfacehugger(src) || islesserdrone(src))
@@ -499,8 +508,8 @@ Works together with spawning an observer, noted above.
 		if(ghost.client.player_data)
 			ghost.client.player_data.load_timestat_data()
 
+	if(ghost.client?.player_details)
 		ghost.client.player_details.larva_queue_time = max(ghost.client.player_details.larva_queue_time, new_tod)
-
 	else if(persistent_ckey)
 		var/datum/player_details/details = GLOB.player_details[persistent_ckey]
 		if(details)
@@ -522,8 +531,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/living/proc/do_ghost()
 	if(stat == DEAD)
+/*
 		if(mind && mind.player_entity)
 			mind.player_entity.update_panel_data(GLOB.round_statistics)
+*/
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
@@ -547,7 +558,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		log_game("[key_name_admin(client)] has ghosted.")
 		var/mob/dead/observer/ghost = ghostize((is_nested && nest && !QDELETED(nest))) //FALSE parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		SEND_SIGNAL(src, COMSIG_LIVING_GHOSTED, ghost)
-		if(ghost && !should_block_game_interaction(src))
+		if(ghost && !should_block_game_interaction(src, include_hunting_grounds=TRUE))
 			ghost.timeofdeath = world.time
 
 			// Larva queue: We use the larger of their existing queue time or the new timeofdeath except for facehuggers or lesser drone
@@ -875,10 +886,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/verb/view_manifest()
 	set name = "View Crew Manifest"
 	set category = "Ghost.View"
-
-	var/dat = GLOB.data_core.get_manifest()
-
-	show_browser(src, dat, "Crew Manifest", "manifest", "size=450x750")
+	GLOB.crew_manifest.open_ui(src)
 
 /mob/dead/verb/hive_status()
 	set name = "Hive Status"
@@ -1209,14 +1217,26 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ref = WEAKREF(H)
 		GLOB.data_core.manifest_modify(name, ref, null, null, "*Deceased*")
 
-
+/*
 /mob/dead/observer/verb/view_kill_feed()
 	set category = "Ghost.View"
 	set name = "View Kill Feed"
 	set desc = "View global kill statistics tied to the game."
-
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.show_kill_feed(src)
+*/
+//RUCM START
+/mob/dead/observer/verb/view_stats()
+	set category = "Ghost.View"
+	set name = "View Statistics"
+	set desc = "View global and player statistics tied to the game."
+
+	if(client?.player_data?.player_entity)
+		client.player_data.player_entity.try_recalculate()
+		client.player_data.player_entity.tgui_interact(src)
+	else
+		to_chat(src, SPAN_INFO("Statistic not loaded, try again later!"))
+//RUCM END
 
 /mob/dead/observer/get_status_tab_items()
 	. = ..()
@@ -1246,6 +1266,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			. += "Hijack Over"
 
 	if(SShijack)
+//RUCM START
+		. += "Operation Stage: [SShijack.get_ship_operation_stage_status_panel_eta()]"
+//RUCM END
 		var/eta_status = SShijack.get_evac_eta()
 		if(eta_status)
 			. += "Evacuation Goal: [eta_status]"
@@ -1274,11 +1297,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(ismob(target))
 		if(!jump_tag)
 			jump_tag = "FLW"
-		return "(<a href='?src=\ref[src];track=\ref[target]'>[jump_tag]</a>)"
+		return "(<a href='byond://?src=\ref[src];track=\ref[target]'>[jump_tag]</a>)"
 	if(!jump_tag)
 		jump_tag = "JMP"
 	var/turf/turf = get_turf(target)
-	return "(<a href='?src=\ref[src];jumptocoord=1;X=[turf.x];Y=[turf.y];Z=[turf.z]'>[jump_tag]</a>)"
+	return "(<a href='byond://?src=\ref[src];jumptocoord=1;X=[turf.x];Y=[turf.y];Z=[turf.z]'>[jump_tag]</a>)"
 
 /mob/dead/observer/point_to(atom/A in view())
 	if(!(client?.prefs?.toggles_chat & CHAT_DEAD))

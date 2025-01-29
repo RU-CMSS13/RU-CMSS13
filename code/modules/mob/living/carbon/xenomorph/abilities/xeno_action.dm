@@ -62,9 +62,14 @@
 	if(!owner)
 		return
 	var/mob/living/carbon/xenomorph/xeno = owner
+/*
 	if (name && GLOB.round_statistics)
 		GLOB.round_statistics.track_ability_usage(name)
+*/
+//RUCM START
+	if(name)
 		xeno.track_ability_usage(name, xeno.caste_type)
+//RUCM END
 
 /datum/action/xeno_action/can_use_action()
 	if(!owner)
@@ -266,7 +271,7 @@
 
 // Checks whether the action is on cooldown. Should not be overridden.
 // Returns TRUE if the action can be used and FALSE otherwise.
-/datum/action/xeno_action/proc/action_cooldown_check()
+/datum/action/xeno_action/action_cooldown_check()
 	return (cooldown_timer_id == TIMER_ID_NULL) && (!charge_time || charge_ready)
 
 // What occurs when a cooldown ends NATURALLY. Ties into ability_cooldown_over, which tells the source Xeno

@@ -91,6 +91,8 @@
 	damage = 30
 	penetration = ARMOR_PENETRATION_TIER_10
 
+	damage_armor_punch = 0.75
+
 /datum/ammo/bullet/smg/ap/penetrating/set_bullet_traits()
 	. = ..()
 	LAZYADD(traits_to_give, list(
@@ -142,6 +144,26 @@
 	damage = 35
 	accurate_range = 7
 	effective_range_max = 10
+	penetration = ARMOR_PENETRATION_TIER_4
+	damage_falloff = DAMAGE_FALLOFF_TIER_6
+	scatter = SCATTER_AMOUNT_TIER_6
+
+/datum/ammo/bullet/smg/p90
+	name = "submachinegun bullet"
+
+	damage = 22
+	accurate_range = 5
+	effective_range_max = 8
+	penetration = ARMOR_PENETRATION_TIER_2
+	damage_falloff = DAMAGE_FALLOFF_TIER_6
+	scatter = SCATTER_AMOUNT_TIER_6
+
+/datum/ammo/bullet/smg/p90/twe_ap
+	name = "armor-piercing submachinegun bullet"
+
+	damage = 26
+	accurate_range = 5
+	effective_range_max = 8
 	penetration = ARMOR_PENETRATION_TIER_4
 	damage_falloff = DAMAGE_FALLOFF_TIER_6
 	scatter = SCATTER_AMOUNT_TIER_6
