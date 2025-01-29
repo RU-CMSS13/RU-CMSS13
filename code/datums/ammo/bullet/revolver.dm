@@ -117,6 +117,9 @@
 
 	penetration = ARMOR_PENETRATION_TIER_3
 
+/datum/ammo/bullet/revolver/small/cmb
+	damage = 60
+
 /datum/ammo/bullet/revolver/small/hollowpoint
 	name = "small hollowpoint revolver bullet"
 	headshot_state = HEADSHOT_OVERLAY_MEDIUM
@@ -143,6 +146,8 @@
 	name = ".454 heavy high-impact armor piercing revolver bullet"
 	penetration = ARMOR_PENETRATION_TIER_10
 	damage = 45
+
+	damage_armor_punch = 1.5
 
 /datum/ammo/bullet/revolver/mateba/highimpact/New()
 	..()

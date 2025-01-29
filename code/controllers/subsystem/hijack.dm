@@ -100,6 +100,21 @@ SUBSYSTEM_DEF(hijack)
 	return ..()
 
 /datum/controller/subsystem/hijack/fire(resumed = FALSE)
+//RUCM START
+	if(SSticker.mode && SShijack.ship_operation_stage_status == OPERATION_DECRYO && ROUND_TIME > DECRYO_STAGE_TIME)
+		SShijack.ship_operation_stage_status = OPERATION_BRIEFING
+
+	if(ship_evacuating)
+		if(SHIP_ESCAPE_ESTIMATE_DEPARTURE <= 0 && ship_operation_stage_status == OPERATION_LEAVING_OPERATION_PLACE)
+			SSticker.mode.round_finished = "Marine Minor Victory"
+			ship_operation_stage_status = OPERATION_DEBRIEFING
+			ship_evacuating = FALSE
+
+		var/shuttles_report = shuttels_onboard()
+		if(shuttles_report)
+			shuttles_report += " sended against protocol, wait respond of operator..."
+			cancel_ship_evacuation(shuttles_report)
+//RUCM END
 	if(!SSticker?.mode?.is_in_endgame)
 		return
 
@@ -218,7 +233,7 @@ SUBSYSTEM_DEF(hijack)
 
 	switch(announce)
 		if(1)
-			marine_announcement("Emergency fuel replenishment is at 25 percent. Lifeboat emergency early launch is now available.[marine_warning_areas ? "\nTo increase speed, restore power to the following areas: [marine_warning_areas]" : " All fueling areas operational."]", HIJACK_ANNOUNCE)
+			marine_announcement("Emergency fuel replenishment is at 25 percent. Lifeboat early launch is now available. Recommendation: wait for 100% fuel for safety purposes.[marine_warning_areas ? "\nTo increase speed, restore power to the following areas: [marine_warning_areas]" : " All fueling areas operational."]", HIJACK_ANNOUNCE)
 		if(2)
 			marine_announcement("Emergency fuel replenishment is at 50 percent.[marine_warning_areas ? "\nTo increase speed, restore power to the following areas: [marine_warning_areas]" : " All fueling areas operational."]", HIJACK_ANNOUNCE)
 		if(3)

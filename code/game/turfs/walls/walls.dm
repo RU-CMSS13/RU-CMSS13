@@ -103,7 +103,7 @@
 		var/list/turf/cardinal_neighbors = list(get_step(src, NORTH), get_step(src, SOUTH), get_step(src, EAST), get_step(src, WEST))
 		for(var/turf/cardinal_turf as anything in cardinal_neighbors)
 			for(var/obj/structure/bed/nest/found_nest in cardinal_turf)
-				if(found_nest.dir == get_dir(found_nest, src))
+				if(found_nest.dir == get_dir(found_nest, src) && !density)
 					qdel(found_nest) //nests are built on walls, no walls, no nest
 
 /turf/closed/wall/MouseDrop_T(mob/current_mob, mob/user)
@@ -205,7 +205,12 @@
 
 	if(damage >= damage_cap)
 		if(M && istype(M))
+/*
 			M.count_niche_stat(STATISTICS_NICHE_DESTRUCTION_WALLS, 1)
+*/
+//RUCM START
+			M.count_statistic_stat(STATISTICS_DESTRUCTION_WALLS)
+//RUCM END
 			SEND_SIGNAL(M, COMSIG_MOB_DESTROY_WALL, src)
 		// Xenos used to be able to crawl through the wall, should suggest some structural damage to the girder
 		if (acided_hole)

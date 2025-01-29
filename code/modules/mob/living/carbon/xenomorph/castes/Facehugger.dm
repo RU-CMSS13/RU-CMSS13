@@ -58,8 +58,8 @@
 		/mob/living/carbon/xenomorph/proc/vent_crawl,
 	)
 
-	icon_xeno = 'icons/mob/xenos/facehugger.dmi'
-	icon_xenonid = 'icons/mob/xenonids/facehugger.dmi'
+	icon_xeno = 'icons/mob/xenos/castes/tier_0/facehugger.dmi'
+	icon_xenonid = 'icons/mob/xenonids/castes/tier_0/xenonid_crab.dmi'
 
 	weed_food_icon = 'icons/mob/xenos/weeds_48x48.dmi'
 	weed_food_states = list("Facehugger_1","Facehugger_2","Facehugger_3")
@@ -165,8 +165,13 @@
 	if(!did_hug)
 		qdel(hugger)
 		return
+/*
 	if(client)
 		client.player_data?.adjust_stat(PLAYER_STAT_FACEHUGS, STAT_CATEGORY_XENO, 1)
+*/
+//RUCM START
+	track_ability_usage(STATISTICS_FACEHUGGE, caste_type, 1)
+//RUCM END
 	hug_successful = TRUE
 	timeofdeath = world.time
 	qdel(src)
@@ -183,7 +188,14 @@
 
 	age = XENO_NORMAL
 
+/*
 	total_facehugs = get_client_stat(client, PLAYER_STAT_FACEHUGS)
+*/
+//RUCM START
+	var/datum/entity/statistic/statistic = client?.player_data?.player_entity?.get_statistic(faction, STATISTIC_TYPE_CASTE_ABILITIES, caste_type, STATISTICS_FACEHUGGE)
+	if(statistic)
+		total_facehugs = statistic.value
+//RUCM END
 	switch(total_facehugs)
 		if(FACEHUG_TIER_1 to FACEHUG_TIER_2)
 			age = XENO_MATURE

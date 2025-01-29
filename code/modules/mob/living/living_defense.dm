@@ -40,8 +40,10 @@
 	var/impact_damage = (1 + O.throwforce*THROWFORCE_COEFF)*O.throwforce*THROW_SPEED_IMPACT_COEFF*O.cur_speed
 
 	var/datum/launch_metadata/LM = O.launch_metadata
+	var/launch_meta_valid = istype(LM)
+
 	var/dist = 2
-	if(istype(LM))
+	if(launch_meta_valid)
 		dist = LM.dist
 	var/miss_chance = min(15*(dist - 2), 0)
 
@@ -65,12 +67,22 @@
 	O.throwing = 0 //it hit, so stop moving
 
 	var/mob/M
-	if(ismob(LM.thrower))
+	if(launch_meta_valid && ismob(LM.thrower))
 		M = LM.thrower
+/*
 		if(damage_done > 5)
 			M.track_hit(initial(O.name))
 			if (M.faction == faction)
 				M.track_friendly_fire(initial(O.name))
+*/
+//RUCM START
+		if(M.faction == faction)
+			M.track_friendly_hit(initial(O.name))
+			M.track_friendly_damage(initial(O.name), src, damage_done)
+		else
+			M.track_hit(initial(O.name))
+			M.track_damage(initial(O.name), src, damage_done)
+//RUCM END
 		var/client/assailant = M.client
 		if(assailant)
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with \a [O], thrown by [key_name(M)]</font>")
@@ -84,11 +96,13 @@
 		last_damage_data = create_cause_data(last_damage_source, M)
 
 /mob/living/mob_launch_collision(mob/living/L)
-	L.Move(get_step_away(L, src))
+	if(!L.anchored)
+		L.Move(get_step_away(L, src))
 
 /mob/living/obj_launch_collision(obj/O)
 	var/datum/launch_metadata/LM = launch_metadata
-	if(!rebounding && LM.thrower != src)
+	var/launch_meta_valid = istype(LM)
+	if(!rebounding && (!launch_meta_valid || LM.thrower != src))
 		var/impact_damage = (1 + MOB_SIZE_COEFF/(mob_size + 1))*THROW_SPEED_DENSE_COEFF*cur_speed
 		apply_damage(impact_damage)
 		visible_message(SPAN_DANGER("\The [name] slams into [O]!"), null, null, 5) //feedback to know that you got slammed into a wall and it hurt
@@ -98,7 +112,8 @@
 //This is called when the mob or human is thrown into a dense turf or wall
 /mob/living/turf_launch_collision(turf/T)
 	var/datum/launch_metadata/LM = launch_metadata
-	if(!rebounding && LM.thrower != src)
+	var/launch_meta_valid = istype(LM)
+	if(!rebounding && (!launch_meta_valid || LM.thrower != src))
 		if(LM.thrower)
 			last_damage_data = create_cause_data("wall tossing", LM.thrower)
 		var/impact_damage = (1 + MOB_SIZE_COEFF/(mob_size + 1))*THROW_SPEED_DENSE_COEFF*cur_speed
@@ -193,7 +208,13 @@
 /mob/living/fire_act()
 	TryIgniteMob(2)
 
-/mob/living/proc/TryIgniteMob(fire_stacks, datum/reagent/R)
+/mob/living/proc/TryIgniteMob(fire_stacks, datum/reagent/R, obj/flamer_fire/fire)
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = fire.weapon_cause_data.resolve_mob()
+		if(istype(user) && user.ally_of_hivenumber(hivenumber))
+			return FALSE
+//RUCM END
 	adjust_fire_stacks(fire_stacks, R)
 	if (!IgniteMob())
 		adjust_fire_stacks(-fire_stacks)
@@ -220,8 +241,24 @@
 
 /mob/living/handle_flamer_fire(obj/flamer_fire/fire, damage, delta_time)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+	if(fire.friendlydetection)
+		var/mob/living/user = fire.weapon_cause_data.resolve_mob()
+		if(istype(user) && user.ally_of_hivenumber(hivenumber))
+			return FALSE
+//RUCM END
 	fire.set_on_fire(src)
 
 /mob/living/handle_flamer_fire_crossed(obj/flamer_fire/fire)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+	if(fire.friendlydetection)
+		var/mob/living/user = fire.weapon_cause_data.resolve_mob()
+		if(istype(user) && user.ally_of_hivenumber(hivenumber))
+			return FALSE
+//RUCM END
 	fire.set_on_fire(src)

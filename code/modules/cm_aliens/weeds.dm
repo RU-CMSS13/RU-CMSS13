@@ -229,6 +229,7 @@
 			continue
 		if(!spread_on_semiweedable && is_weedable < FULLY_WEEDABLE)
 			continue
+		T.clean_cleanables()
 
 		var/obj/effect/alien/resin/fruit/old_fruit
 
@@ -396,7 +397,7 @@
 	user.animation_attack_on(src)
 
 	take_damage(damage)
-	return TRUE //don't call afterattack
+	return (ATTACKBY_HINT_NO_AFTERATTACK|ATTACKBY_HINT_UPDATE_NEXT_MOVE)
 
 /obj/effect/alien/weeds/proc/take_damage(damage)
 	if(explo_proof)
@@ -406,9 +407,16 @@
 	if(health <= 0)
 		deconstruct(FALSE)
 
-/obj/effect/alien/weeds/flamer_fire_act(dam)
+/obj/effect/alien/weeds/flamer_fire_act(dam, datum/cause_data/flame_cause_data, obj/flamer_fire/fire)
 	if(explo_proof)
 		return
+
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = flame_cause_data.resolve_mob()
+		if(istype(user) && (linked_hive && HIVE_ALLIED_TO_HIVE(user.hivenumber, linked_hive.hivenumber)))
+			return
+//RUCM END
 
 	. = ..()
 	if(!QDELETED(src))
