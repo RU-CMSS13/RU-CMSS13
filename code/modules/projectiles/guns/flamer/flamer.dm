@@ -586,6 +586,10 @@
 	burnlevel = R.intensityfire
 //RUCM START
 	friendlydetection = R.friendlydetection
+
+	if(istype(loc, /turf/open/openspace))
+		var/turf/current_loc = loc
+		forceMove(current_loc.air_strike(0, current_loc, 0, TRUE))
 //RUCM END
 
 	//are we in weather??
