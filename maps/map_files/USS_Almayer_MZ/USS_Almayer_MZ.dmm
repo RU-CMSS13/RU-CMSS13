@@ -1042,6 +1042,11 @@
 /obj/structure/machinery/door/airlock/almayer/maint,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/maint/hull/lower/s_bow)
+"acV" = (
+/obj/structure/machinery/light,
+/obj/structure/painting_table,
+/turf/open/floor/almayer,
+/area/almayer/hallways/lower/port_midship_hallway)
 "acW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -1061,6 +1066,13 @@
 	},
 /turf/open/floor/almayer/red/west,
 /area/almayer/shipboard/brig/chief_mp_office)
+"acZ" = (
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/obj/structure/painting_table,
+/turf/open/floor/almayer,
+/area/almayer/hallways/lower/starboard_midship_hallway)
 "ada" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -17139,7 +17151,7 @@
 	pixel_x = -32;
 	pixel_y = 2
 	},
-/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep,
+/obj/structure/techpod_vendor,
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha_bravo_shared)
 "bXK" = (
@@ -19508,6 +19520,10 @@
 "cqG" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 9
+	},
+/obj/structure/techpod_vendor{
+	pixel_x = 32;
+	density = 0
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -54404,7 +54420,7 @@
 	pixel_x = -32;
 	pixel_y = 2
 	},
-/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep,
+/obj/structure/techpod_vendor,
 /turf/open/floor/almayer,
 /area/almayer/squads/charlie_delta_shared)
 "rAy" = (
@@ -83542,7 +83558,7 @@ bXR
 bXR
 bXR
 bXR
-bej
+acZ
 cdF
 bnp
 cdP
@@ -83570,7 +83586,7 @@ ilo
 hjj
 hOb
 cWw
-iKW
+acV
 dbg
 dbg
 dbg
