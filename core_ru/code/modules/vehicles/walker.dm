@@ -652,10 +652,8 @@
 	playsound(src, 'sound/effects/metalhit.ogg', 50, TRUE)
 	xeno.visible_message(SPAN_XENOWARNING("\The [xeno] strikes \the [src] with its tail!"), SPAN_XENOWARNING("You strike \the [src] with your tail!"))
 	xeno.emote("tail")
-	var/damage = xeno.melee_damage_upper //Можно, но не слишком эффективно
-	take_damage_type()
-	health = max(0, health-damage)
-	healthcheck()
+	var/damage = xeno.melee_damage_upper
+	take_damage_type(damage*1.2, "slash", xeno)
 	return TAILSTAB_COOLDOWN_NORMAL
 
 /obj/vehicle/walker/Collided(atom/A)
