@@ -653,6 +653,7 @@
 	xeno.visible_message(SPAN_XENOWARNING("\The [xeno] strikes \the [src] with its tail!"), SPAN_XENOWARNING("You strike \the [src] with your tail!"))
 	xeno.emote("tail")
 	var/damage = xeno.melee_damage_upper //Можно, но не слишком эффективно
+	take_damage_type()
 	health = max(0, health-damage)
 	healthcheck()
 	return TAILSTAB_COOLDOWN_NORMAL
@@ -669,7 +670,6 @@
 			take_damage_type(250, "slash", crusher)
 			visible_message(SPAN_DANGER("\The [crusher] rams \the [src]!"))
 			Move(get_step(src, crusher.dir))
-			healthcheck()
 		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
 
 /obj/vehicle/walker/handle_charge_collision(mob/living/carbon/xenomorph/xeno, datum/action/xeno_action/onclick/charger_charge/charger_ability)
@@ -680,7 +680,6 @@
 	visible_message(SPAN_DANGER("\The [xeno] rams \the [src]!"))
 	Move(get_step(src, xeno.dir))
 	take_damage_type(charger_ability.momentum * 20, "slash", xeno)
-	healthcheck()
 
 	charger_ability.stop_momentum()
 

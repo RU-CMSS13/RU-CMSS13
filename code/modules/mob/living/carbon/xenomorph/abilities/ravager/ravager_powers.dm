@@ -215,8 +215,7 @@
 				new /datum/effects/xeno_slow/superslow(carbon_target, ravager_user, ttl = superslow_duration)
 		//RUCM STARTS THERE
 		for(var/obj/vehicle/walker/walker in target_turf)
-			walker.health = max(0, walker.health - (damage * 2))
-			walker.healthcheck()
+			walker.take_damage_type(damage*2, "slash", owner)
 			ravager_user.visible_message(SPAN_XENOWARNING("[ravager_user] hits [walker] with a devastatingly powerful swing!"), \
 			SPAN_XENOWARNING("We hit [walker] with a devastatingly powerful swing!"))
 		//RUCM ENDS THERE
