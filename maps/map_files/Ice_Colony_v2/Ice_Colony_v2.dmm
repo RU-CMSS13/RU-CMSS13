@@ -115,6 +115,10 @@
 "aax" = (
 /turf/open/auto_turf/snow/layer2,
 /area/ice_colony/exterior/surface/clearing/north)
+"aay" = (
+/obj/structure/pipes/standard/simple/hidden/green,
+/turf/open/floor/plating,
+/area/ice_colony/surface/research)
 "aaz" = (
 /obj/structure/ice/thin/single,
 /turf/open/ice,
@@ -10789,7 +10793,6 @@
 /area/ice_colony/surface/research)
 "aNU" = (
 /obj/structure/machinery/light/small,
-/obj/structure/pipes/standard/simple/hidden/green,
 /turf/open/floor/plating,
 /area/ice_colony/surface/research)
 "aNW" = (
@@ -10874,6 +10877,7 @@
 	dir = 1;
 	name = "\improper Omicron Custodial Storage"
 	},
+/obj/structure/pipes/standard/simple/hidden/green,
 /turf/open/floor/plating,
 /area/ice_colony/surface/research)
 "aOu" = (
@@ -11412,12 +11416,12 @@
 /turf/open/floor/darkbrown2/west,
 /area/ice_colony/surface/research)
 "aQk" = (
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 6
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
+	},
+/obj/structure/pipes/standard/manifold/hidden/green{
+	dir = 8
 	},
 /turf/open/floor/dark2,
 /area/ice_colony/surface/research)
@@ -26303,7 +26307,9 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/pipes/standard/manifold/hidden/green,
+/obj/structure/pipes/standard/simple/hidden/green{
+	dir = 4
+	},
 /turf/open/floor/dark2,
 /area/ice_colony/surface/research)
 "cBQ" = (
@@ -26483,10 +26489,6 @@
 	},
 /turf/open/floor/plating/icefloor,
 /area/ice_colony/exterior/surface/landing_pad2)
-"gXP" = (
-/obj/structure/pipes/standard/simple/hidden/green,
-/turf/open/floor/darkbrown2/north,
-/area/ice_colony/surface/research)
 "hfj" = (
 /obj/structure/blocker/forcefield/multitile_vehicles,
 /turf/open/ice,
@@ -26654,10 +26656,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/dark2,
 /area/ice_colony/surface/dorms)
-"kRw" = (
-/obj/structure/pipes/standard/simple/hidden/green,
-/turf/closed/wall,
-/area/ice_colony/surface/research)
 "lqY" = (
 /obj/structure/window/framed/colony,
 /turf/open/floor/plating/icefloor,
@@ -75352,10 +75350,10 @@ asi
 asi
 aLN
 aMD
-aNj
-aNj
+aNk
+aay
 aOp
-aPl
+aUg
 aQk
 aRf
 aRV
@@ -75519,10 +75517,10 @@ asi
 asi
 aLN
 aME
-aNk
+aNj
 aNU
-kRw
-gXP
+aOo
+aPm
 csl
 aPl
 aPl
