@@ -39,7 +39,7 @@
 		to_chat(user, SPAN_WARNING("You can't climb here!"))
 		return
 
-	user.zMove(target = checking, z_move_flags = ZMOVE_STAIRS_FLAGS)
+	user.trainteleport(checking, z_move_flags = ZMOVE_STAIRS_FLAGS)
 	user.visible_message(SPAN_WARNING("[user] climbs up \the [src]."),\
 		SPAN_WARNING("You climb up \the [src]."))
 	return
