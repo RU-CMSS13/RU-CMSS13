@@ -267,7 +267,7 @@
 	set category = "IC"
 
 	if(!isliving(src))
-		continue
+		return
 
 	if(!shadow)
 		shadow = new(loc)
@@ -284,7 +284,7 @@
 	set category = "IC"
 
 	if(!isliving(src))
-		continue
+		return
 
 	if(!shadow || shadow.high == 1)
 		if(interactee == shadow)
