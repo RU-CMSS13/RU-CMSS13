@@ -551,7 +551,6 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 		return FALSE
 
 /obj/structure/machinery/computer/supply_drop_console/proc/handle_supplydrop()
-	SHOULD_NOT_SLEEP(TRUE)
 	var/obj/structure/closet/crate/crate = check_pad()
 	if(!crate)
 		to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("No crate was detected on the drop pad. Get Requisitions on the line!")]")
@@ -561,9 +560,21 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	var/y_coord = deobfuscate_y(y_supply)
 	var/z_coord = SSmapping.levels_by_trait(ZTRAIT_GROUND)
 	if(length(z_coord))
-		z_coord = z_coord[1]
+		if(usr && length(z_coord) > 2)
+			var/zlevel_offset = 0
+			if(SSmapping.configs[GROUND_MAP])
+				zlevel_offset = SSmapping.configs[GROUND_MAP].zlevel_visual_offset
+			var/our_value = tgui_input_number(usr, "Target approx heigh for supply (used for pre launch scan for reach)", "Aprox Destination", zlevel_offset, length(z_coord) - z_coord[1] + zlevel_offset, 0, 30 SECONDS, TRUE)
+			z_coord = length(z_coord) - (our_value + z_coord[1] - zlevel_offset)
+		else
+			z_coord = z_coord[1]
 	else
-		z_coord = 1 // fuck it
+		z_coord = 2 // fuck it
+
+	crate = check_pad()
+	if(!crate)
+		to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("No crate was detected on the drop pad. Get Requisitions on the line!")]")
+		return
 
 	var/turf/target = locate(x_coord, y_coord, z_coord)
 	if(!target)

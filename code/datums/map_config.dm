@@ -66,6 +66,8 @@
 
 	var/nightmare_path
 
+	var/zlevel_visual_offset = 0
+
 	/// If truthy this is config for a round overridden map: search for override maps in data/, instead of using a path in maps/
 	var/override_map
 
@@ -370,6 +372,9 @@
 
 	if(json["nightmare_path"])
 		nightmare_path = json["nightmare_path"]
+
+	if(json["zlevel_visual_offset"])
+		zlevel_visual_offset = json["zlevel_visual_offset"]
 
 	if(islist(json["environment_traits"]))
 		environment_traits = json["environment_traits"]
