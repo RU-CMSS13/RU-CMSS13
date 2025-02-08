@@ -266,6 +266,9 @@
 	set name = "Look Up"
 	set category = "IC"
 
+	if(!isliving(src))
+		continue
+
 	if(!shadow)
 		shadow = new(loc)
 		set_interaction(shadow)
@@ -279,6 +282,9 @@
 /mob/verb/stoplookup()
 	set name = "Look Down"
 	set category = "IC"
+
+	if(!isliving(src))
+		continue
 
 	if(!shadow || shadow.high == 1)
 		if(interactee == shadow)
