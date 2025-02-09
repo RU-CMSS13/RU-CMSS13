@@ -582,7 +582,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 		return
 
 	var/turf/roof = get_highest_turf(target)
-	if(target != roof.air_strike(5, target, 1, TRUE))
+	if(target != roof.air_strike(1, target, 1, TRUE))
 		to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("The landing zone is underground. The supply drop cannot reach here.")]")
 		return
 
@@ -610,7 +610,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	playsound(crate.loc,'sound/effects/bamf.ogg', 50, 1)  //Ehh
 	var/obj/structure/droppod/supply/pod = new(null, crate)
 	crate.forceMove(pod)
-	roof.air_strike(5, target, 1)
+	roof.air_strike(1, target, 1)
 	pod.launch(target)
 	log_ares_requisition("Supply Drop", "Launch [crate.name] to X[x_supply], Y[y_supply].", usr.real_name)
 	log_game("[key_name(usr)] launched supply drop '[crate.name]' to X[x_coord], Y[y_coord].")

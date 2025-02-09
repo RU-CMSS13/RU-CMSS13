@@ -487,11 +487,10 @@
 			if(!sig)
 				to_chat(user, SPAN_WARNING("No signal chosen."))
 				return FALSE
-			var/turf/location = get_turf(sig.signal_loc)
-			var/area/location_area = get_area(location)
-			if(CEILING_IS_PROTECTED(location_area.ceiling, CEILING_PROTECTION_TIER_1))
+			var/turf/roof = get_highest_turf(sig.signal_loc)
+			if(sig.signal_loc != roof.air_strike(1, sig.signal_loc, 1, TRUE))
 				to_chat(user, SPAN_WARNING("Target is obscured."))
-				return FALSE
+				return
 			var/equipment_tag = params["equipment_id"]
 			for(var/obj/structure/dropship_equipment/equipment as anything in shuttle.equipments)
 				var/mount_point = equipment.ship_base.attach_id
@@ -881,8 +880,8 @@
 	var/turf/shootloc = locate(tt_turf.x + sx*firemission_envelope.recorded_offset, tt_turf.y + sy*firemission_envelope.recorded_offset,tt_turf.z)
 	if(!shootloc)
 		return
-	var/area/laser_area = get_area(shootloc)
-	if(!istype(laser_area) || CEILING_IS_PROTECTED(laser_area.ceiling, CEILING_PROTECTION_TIER_1))
+	var/turf/roof = get_highest_turf(shootloc)
+	if(shootloc != roof.air_strike(1, shootloc, 1, TRUE))
 		if(firemission_envelope.user_is_guided(user))
 			to_chat(user, SPAN_WARNING("Vision Obstructed. You have to go in blind."))
 		firemission_envelope.change_current_loc()
