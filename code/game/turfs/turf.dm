@@ -246,7 +246,7 @@
 		if(!(turf_inform.turf_flags & TURF_NO_MULTIZ_SUPPORT) && !(turf_flags & TURF_NO_MULTIZ_SUPPORT))
 			var/list/baseturfsold = list(/turf/open/openspace)
 			baseturfsold |= baseturfs
-			baseturfs = baseturfsold - turf_inform.type
+			baseturfs = baseturfsold - type
 
 /turf/proc/add_cleanable_overlays()
 	for(var/cleanable_type in cleanables)
