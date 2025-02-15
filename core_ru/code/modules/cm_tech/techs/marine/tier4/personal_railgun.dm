@@ -1,18 +1,18 @@
 
-/obj/item/storage/box/kit/EPR
+/obj/item/storage/box/kit/personal_railgun
 	name = "\improper Experimental Personal Railgun(EPR) Kit"
 	storage_slots = 3
 
-/obj/item/storage/box/kit/EPR/New()
+/obj/item/storage/box/kit/personal_railgun/New()
 	..()
 	pro_case_overlay = "hmg"
 
-/obj/item/storage/box/kit/EPR/fill_preset_inventory()
-	new /obj/item/weapon/gun/rifle/EPR(src)
-	new /obj/item/ammo_magazine/EPR/AP(src)
-	new /obj/item/ammo_magazine/EPR/HP(src)
+/obj/item/storage/box/kit/personal_railgun/fill_preset_inventory()
+	new /obj/item/weapon/gun/rifle/personal_railgun(src)
+	new /obj/item/ammo_magazine/personal_railgun/AP(src)
+	new /obj/item/ammo_magazine/personal_railgun/HP(src)
 
-/obj/item/weapon/gun/rifle/EPR
+/obj/item/weapon/gun/rifle/personal_railgun
 	name = "\improper Experimental Personal Railgun"
 	desc = "An Experimental railgun capable of being weared in person, IFF excluded, inevadable LETHAL to HUMAN targets."
 	icon = 'core_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
@@ -30,7 +30,7 @@
 
 	w_class = SIZE_LARGE
 	fire_sound = 'core_ru/sound/weapons/railgun.ogg'
-	current_mag = /obj/item/ammo_magazine/EPR/AP
+	current_mag = /obj/item/ammo_magazine/personal_railgun/AP
 	force = 12
 	wield_delay = WIELD_DELAY_HORRIBLE
 	aim_slowdown = SLOWDOWN_ADS_SPECIALIST
@@ -40,8 +40,8 @@
 	light_system = MOVABLE_LIGHT
 	lineart_ru = TRUE
 
-/obj/item/attachable/EPR_barrel
-	name = "EPR barrel"
+/obj/item/attachable/personal_railgun_barrel
+	name = "Experimental Personal Railgun barrel"
 	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
 	icon = 'core_ru/icons/obj/items/weapons/guns/attachments/barrel.dmi'
 	icon_state = "EPR_barrel"
@@ -52,31 +52,31 @@
 	melee_mod = 0 //Integrated attachment for visuals, stats handled on main gun.
 	size_mod = 0
 
-/obj/item/weapon/gun/rifle/EPR/Initialize(mapload, ...)
+/obj/item/weapon/gun/rifle/personal_railgun/Initialize(mapload, ...)
 	. = ..()
 	set_light_color("#2059af")
 	set_light_range(4)
 	set_light_power(1)
 	set_light_on(TRUE)
 
-/obj/item/weapon/gun/rifle/EPR/Destroy(mapload, ...)
+/obj/item/weapon/gun/rifle/personal_railgun/Destroy(mapload, ...)
 	set_light_range(null)
 	set_light_power(null)
 	set_light_on(FALSE)
 	return ..()
 
-/obj/item/weapon/gun/rifle/EPR/handle_starting_attachment()
+/obj/item/weapon/gun/rifle/personal_railgun/handle_starting_attachment()
 	..()
-	var/obj/item/attachable/EPR_barrel/integrated = new(src)
+	var/obj/item/attachable/personal_railgun_barrel/integrated = new(src)
 	integrated.flags_attach_features &= ~ATTACH_REMOVABLE
 	integrated.Attach(src)
 	update_attachable(integrated.slot)
 
-/obj/item/weapon/gun/rifle/EPR/set_gun_attachment_offsets()
+/obj/item/weapon/gun/rifle/personal_railgun/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 43, "muzzle_y" = 17,"rail_x" = 18, "rail_y" = 23, "under_x" = 30, "under_y" = 13, "stock_x" = 24, "stock_y" = 13, "special_x" = 48, "special_y" = 16)
 	//оффсэты я не настраивал кроме специального, не должны подходить
 
-/obj/item/weapon/gun/rifle/EPR/set_gun_config_values()
+/obj/item/weapon/gun/rifle/personal_railgun/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_AMR)
 	set_burst_amount(0)
@@ -84,7 +84,7 @@
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_8
 	recoil = RECOIL_AMOUNT_TIER_3
 
-/obj/item/weapon/gun/rifle/EPR/able_to_fire(mob/living/user)
+/obj/item/weapon/gun/rifle/personal_railgun/able_to_fire(mob/living/user)
 	. = ..()
 	if (. && istype(user)) //Let's check all that other stuff first.
 		if(!(((user.job == JOB_SQUAD_SPECIALIST) |( user.job == JOB_SQUAD_LEADER)) | (user.job == JOB_SQUAD_TEAM_LEADER)))
@@ -93,8 +93,8 @@
 			return FALSE
 		return TRUE
 
-/obj/item/ammo_magazine/EPR
-	name = "\improper EPR Ammunition (3 rounds)"
+/obj/item/ammo_magazine/personal_railgun
+	name = "\improper Experimental Personal Railgun Ammunition (3 rounds)"
 	desc = "A magazine ammo for the poggers Railgun."
 	caliber = "14mm"
 	icon = 'core_ru/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi'
@@ -102,23 +102,23 @@
 	w_class = SIZE_MEDIUM
 	max_rounds = 3
 	default_ammo = /datum/ammo/bullet/sniper/railgun
-	gun_type = /obj/item/weapon/gun/rifle/EPR
+	gun_type = /obj/item/weapon/gun/rifle/personal_railgun
 
-/obj/item/ammo_magazine/EPR/AP
-	name = "\improper EPR AP Ammunition (3 rounds)"
+/obj/item/ammo_magazine/personal_railgun/AP
+	name = "\improper Experimental Personal Railgun AP Ammunition (3 rounds)"
 	desc = "An AP magazine ammo for the Railgun."
 	caliber = "14mm"
 	icon_state = "EPR_AP"
-	default_ammo = /datum/ammo/bullet/sniper/EPR/AP
+	default_ammo = /datum/ammo/bullet/sniper/personal_railgun/AP
 
-/obj/item/ammo_magazine/EPR/HP
-	name = "\improper EPR HP Ammunition (3 rounds)"
+/obj/item/ammo_magazine/personal_railgun/HP
+	name = "\improper Experimental Personal Railgun HP Ammunition (3 rounds)"
 	desc = "A HP magazine ammo for the Railgun."
 	caliber = "14mm"
 	icon_state = "EPR_HP"
-	default_ammo = /datum/ammo/bullet/sniper/EPR/HP
+	default_ammo = /datum/ammo/bullet/sniper/personal_railgun/HP
 
-/datum/ammo/bullet/sniper/EPR
+/datum/ammo/bullet/sniper/personal_railgun
 	name = "railgun bullet"
 	damage_falloff = 0
 	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_SNIPER|AMMO_IGNORE_COVER
@@ -133,13 +133,13 @@
 	shell_speed = AMMO_SPEED_TIER_6
 	damage_falloff = 0
 
-/datum/ammo/bullet/sniper/EPR/AP
+/datum/ammo/bullet/sniper/personal_railgun/AP
 	name = "railgun AP bullet"
 
 	damage = 2.5*100
 	penetration= ARMOR_PENETRATION_TIER_10
 
-/datum/ammo/bullet/sniper/EPR/AP/on_hit_mob(mob/M, _unused)
+/datum/ammo/bullet/sniper/personal_railgun/AP/on_hit_mob(mob/M, _unused)
 	if(isxeno(M))
 		var/mob/living/carbon/xenomorph/X = M
 		X.apply_effect(0.4, STUN)
@@ -152,12 +152,12 @@
 		H.apply_internal_damage(10, "lungs")
 		H.apply_internal_damage(10, "liver")
 
-/datum/ammo/bullet/sniper/EPR/HP
+/datum/ammo/bullet/sniper/personal_railgun/HP
 	name = "railgun HP bullet"
 	damage = 3.5*100
 	penetration = -ARMOR_PENETRATION_TIER_3 //Очень хреновый урон по бронированным взамен на более внушительное останавливающее действие, ну или разрывное )
 
-/datum/ammo/bullet/sniper/EPR/HP/on_hit_mob(mob/M, _unused)
+/datum/ammo/bullet/sniper/personal_railgun/HP/on_hit_mob(mob/M, _unused)
 	if(isxeno(M))
 		var/mob/living/carbon/xenomorph/X = M
 		X.apply_effect(1, STUN)
@@ -169,7 +169,7 @@
 		H.apply_internal_damage(20, "lungs")
 		H.apply_internal_damage(20, "liver")
 
-/datum/tech/repeatable/EPR
+/datum/tech/repeatable/personal_railgun
 	name = "Experimental Personal Railguns delivery"
 	desc = "Purchase Experimental Personal Railgun kit. Big guns for big problems."
 	icon = 'core_ru/icons/effects/techtree/tech.dmi'
@@ -185,7 +185,7 @@
 
 	flags = TREE_FLAG_MARINE
 
-/datum/tech/repeatable/EPR/on_unlock()
+/datum/tech/repeatable/personal_railgun/on_unlock()
 	. = ..()
 
 	var/datum/supply_order/new_order = new()
@@ -201,14 +201,14 @@
 	name = "Experimental Personal Railgun"
 	containername = "Experimental Personal Railgun kit crate"
 	contains = list(
-		/obj/item/storage/box/kit/EPR,
+		/obj/item/storage/box/kit/personal_railgun,
 	)
 	cost = 0
 	containertype = /obj/structure/closet/crate/supply
 	buyable = 0
 	group = "Operations"
 
-/datum/tech/repeatable/EPR_AP
+/datum/tech/repeatable/personal_railgun_AP_delievery
 	name = "Experimental Personal Railguns AP magazine delivery"
 	desc = "Purchase TWO Experimental Personal Railgun AP magazines. Big guns for big problems."
 	icon = 'core_ru/icons/effects/techtree/tech.dmi'
@@ -224,7 +224,7 @@
 
 	flags = TREE_FLAG_MARINE
 
-/datum/tech/repeatable/EPR_AP/on_unlock()
+/datum/tech/repeatable/personal_railgun_AP_delievery/on_unlock()
 	. = ..()
 
 	var/datum/supply_order/new_order = new()
@@ -240,15 +240,15 @@
 	name = "Experimental Personal Railgun AP Ammo"
 	containername = "Experimental Personal Railgun AP magazine crate"
 	contains = list(
-		/obj/item/ammo_magazine/EPR/AP,
-		/obj/item/ammo_magazine/EPR/AP,
+		/obj/item/ammo_magazine/personal_railgun/AP,
+		/obj/item/ammo_magazine/personal_railgun/AP,
 	)
 	cost = 0
 	containertype = /obj/structure/closet/crate/ammo
 	buyable = 0
 	group = "Operations"
 
-/datum/tech/repeatable/EPR_HP
+/datum/tech/repeatable/personal_railgun_HP_delievery
 	name = "Experimental Personal Railguns HP magazine delivery"
 	desc = "Purchase TWO Experimental Personal Railgun HP magazine. Big guns for big problems."
 	icon = 'core_ru/icons/effects/techtree/tech.dmi'
@@ -264,7 +264,7 @@
 
 	flags = TREE_FLAG_MARINE
 
-/datum/tech/repeatable/EPR_HP/on_unlock()
+/datum/tech/repeatable/personal_railgun_HP_delievery/on_unlock()
 	. = ..()
 
 	var/datum/supply_order/new_order = new()
@@ -276,12 +276,12 @@
 
 	GLOB.supply_controller.shoppinglist += new_order
 
-/datum/supply_packs/eprHP
+/datum/supply_packs/personal_railgun_HP
 	name = "Experimental Personal Railgun HP Ammo"
 	containername = "Experimental Personal Railgun HP magazine crate"
 	contains = list(
-		/obj/item/ammo_magazine/EPR/HP,
-		/obj/item/ammo_magazine/EPR/HP,
+		/obj/item/ammo_magazine/personal_railgun/HP,
+		/obj/item/ammo_magazine/personal_railgun/HP,
 	)
 	cost = 0
 	containertype = /obj/structure/closet/crate/ammo
