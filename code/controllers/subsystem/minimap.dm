@@ -754,7 +754,7 @@ SUBSYSTEM_DEF(minimaps)
 	if(!map_holder)
 		var/level = SSmapping.levels_by_trait(targeted_ztrait)
 		if(!level[target_z])
-			return
+			target_z = 1
 		map_holder = SSminimaps.fetch_tacmap_datum(level[target_z], allowed_flags)
 
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -785,7 +785,7 @@ SUBSYSTEM_DEF(minimaps)
 	if(use_live_map && !map_holder)
 		var/level = SSmapping.levels_by_trait(targeted_ztrait)
 		if(!level[target_z])
-			return
+			target_z = 1
 		map_holder = SSminimaps.fetch_tacmap_datum(level[target_z], allowed_flags)
 
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -962,14 +962,17 @@ SUBSYSTEM_DEF(minimaps)
 
 		if("changeZ")
 			var/amount = params["amount"]
-			if(!SSmapping.level_trait(target_z, amount > 0 ? ZTRAIT_UP : ZTRAIT_DOWN))
+			var/level = SSmapping.levels_by_trait(targeted_ztrait)
+			if(!level[target_z])
+				target_z = 1
+			if(!SSmapping.level_trait(level[target_z], amount > 0 ? ZTRAIT_UP : ZTRAIT_DOWN))
 				return
 
 			target_z += amount
 			if(user.client)
 				user.client.clear_map(map_holder.map.name)
 
-			map_holder = SSminimaps.fetch_tacmap_datum(target_z, allowed_flags)
+			map_holder = SSminimaps.fetch_tacmap_datum(level[target_z], allowed_flags)
 			resend_current_map_png(user)
 
 			if(user.client)
