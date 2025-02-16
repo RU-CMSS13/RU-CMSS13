@@ -805,10 +805,10 @@
 	xeno.create_shriekwave(14) //Adds the visual effect. Wom wom wom, 14 shriekwaves
 
 	var/list/target_refs = list(owner)
-	var/turf/next = get_step_multiz(owner, UP)
+	var/turf/next = SSmapping.get_turf_above(get_turf(owner))
 	if(next)
 		target_refs += next
-	next = get_step_multiz(owner, DOWN)
+	next = SSmapping.get_turf_below(get_turf(owner))
 	if(next)
 		target_refs += next
 	for(var/atom/target_ref as anything in target_refs)

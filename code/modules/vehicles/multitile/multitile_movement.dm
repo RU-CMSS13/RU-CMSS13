@@ -90,7 +90,7 @@
 			var/req_locs_to_zfall = round(length(locs) / 1.5)
 			var/locs_to_zfall = 0
 			for(var/turf/one_loc as anything in locs)
-				var/turf/target = get_step_multiz(current_loc, DOWN)
+				var/turf/target = SSmapping.get_turf_below(current_loc)
 				if(!can_z_move(DOWN, one_loc, target, ZMOVE_FALL_FLAGS))
 					continue
 				locs_to_zfall++

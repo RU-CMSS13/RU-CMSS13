@@ -230,6 +230,7 @@
 /turf/closed/wall/almayer/aicore/hull
 	name = "ultra reinforced hull"
 	desc = "An extremely reinforced metal wall used to isolate potentially dangerous areas"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = TRUE
 	icon_state = "hull"
 
@@ -246,6 +247,7 @@
 /turf/closed/wall/almayer/aicore/white/hull
 	name = "ultra reinforced hull"
 	desc = "An extremely reinforced metal wall used to isolate potentially dangerous areas"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = TRUE
 	icon_state = "hull"
 
@@ -264,6 +266,7 @@
 /turf/closed/wall/sulaco/hull
 	name = "outer hull"
 	desc = "A reinforced outer hull, probably to prevent breaches"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = 1
 	walltype = WALL_SULACO
 
@@ -271,6 +274,7 @@
 /turf/closed/wall/sulaco/unmeltable
 	name = "outer hull"
 	desc = "A reinforced outer hull, probably to prevent breaches"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = 1
 	walltype = WALL_SULACO
 
@@ -282,6 +286,7 @@
 	icon = 'icons/turf/walls/walls.dmi'
 	icon_state = "riveted"
 	opacity = TRUE
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = 1
 
 
@@ -426,6 +431,7 @@
 	name = "skeletal resin"
 	icon = 'icons/turf/walls/prison/bone_resin.dmi'
 	icon_state = "bone_resin"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	walltype = WALL_BONE_RESIN
 	hull_tile = 1
 	desc = "A wall made of molted old resin. This place is more alive than you are."

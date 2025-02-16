@@ -191,7 +191,8 @@
 
 /turf/proc/update_overlays()
 	if(QDELETED(src))
-		return
+		return FALSE
+	return TRUE
 
 /turf/ex_act(severity)
 	return 0
@@ -763,7 +764,7 @@
 		else
 			return "The ceiling above is made of thick resin. Nothing is getting through that."
 
-	var/turf/ceiling = get_step_multiz(src, UP)
+	var/turf/ceiling = SSmapping.get_turf_above(src)
 	if(!ceiling || istype(ceiling, /turf/open/openspace) || istype(ceiling, /turf/open/space/openspace))
 		return "It is in the open."
 	if(ceiling.hull_tile)
@@ -1055,14 +1056,14 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	layer = OPENSPACE_LAYER
 	plane = TRANSPARENT_FLOOR_PLANE
 
-	var/turf/below_turf = get_step_multiz(src, DOWN)
+	var/turf/below_turf = SSmapping.get_turf_below(src)
 	if(below_turf)
 		vis_contents += below_turf
 	update_multi_z()
 
 ///Updates the viscontents or underlays below this tile.
 /turf/proc/update_multi_z()
-	var/turf/below_turf = get_step_multiz(src, DOWN)
+	var/turf/below_turf = SSmapping.get_turf_below(src)
 	if(!below_turf)
 		vis_contents.Cut()
 		var/turf/path = SSmapping.level_trait(z, ZTRAIT_BASETURF) || /turf/open/space

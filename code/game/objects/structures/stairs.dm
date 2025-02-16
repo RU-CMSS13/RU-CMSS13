@@ -57,7 +57,7 @@
 
 /obj/structure/stairs/proc/stair_ascend(atom/movable/climber, direction)
 	var/turf/our_loc = get_turf(src)
-	var/turf/checking = get_step_multiz(our_loc, UP)
+	var/turf/checking = SSmapping.get_turf_above(our_loc)
 	if(!istype(checking) || !checking.zPassIn(climber, UP, our_loc))
 		return
 	our_loc = checking
@@ -74,12 +74,12 @@
 /obj/structure/stairs/proc/build_signal_listener()
 	if(listening_to)
 		UnregisterSignal(listening_to, COMSIG_TURF_MULTIZ_NEW)
-	var/turf/open/openspace/above = get_step_multiz(get_turf(src), UP)
+	var/turf/open/openspace/above = SSmapping.get_turf_above(get_turf(src))
 	RegisterSignal(above, COMSIG_TURF_MULTIZ_NEW, PROC_REF(on_multiz_new))
 	listening_to = above
 
 /obj/structure/stairs/proc/force_open_above()
-	var/turf/open/openspace/above = get_step_multiz(get_turf(src), UP)
+	var/turf/open/openspace/above = SSmapping.get_turf_above(get_turf(src))
 	if(above && !istype(above))
 		above.ChangeTurf(/turf/open/openspace)
 
@@ -87,7 +87,7 @@
 	SIGNAL_HANDLER
 
 	if(dir == UP)
-		var/turf/open/openspace/above = get_step_multiz(get_turf(src), UP)
+		var/turf/open/openspace/above = SSmapping.get_turf_above(get_turf(src))
 		if(above && !istype(above))
 			above.ChangeTurf(/turf/open/openspace)
 

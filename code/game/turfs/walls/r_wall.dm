@@ -186,6 +186,7 @@
 
 /turf/closed/wall/r_wall/dense
 	icon_state = "iron0"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	walltype = WALL_REINFORCED_IRON
 	hull_tile = 1
 
@@ -262,6 +263,7 @@
 	name = "heavy reinforced wall"
 	desc = "A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible."
 	icon_state = "h_dome"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	hull_tile = TRUE
 
 /turf/closed/wall/r_wall/biodome/biodome_unmeltable/ex_act(severity) //Should make it indestructible

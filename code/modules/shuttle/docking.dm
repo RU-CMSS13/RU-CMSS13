@@ -176,12 +176,9 @@
 
 		new_turf.afterShuttleMove(old_turf, rotation)
 
-		var/turf/old_ceiling = get_step_multiz(old_turf, UP)
+		var/turf/old_ceiling = SSmapping.get_turf_above(old_turf)
 		if(old_ceiling)
-			if(istype(old_ceiling, custom_ceiling))
-				old_ceiling.ScrapeAway()
-			else
-				old_ceiling.baseturfs -= custom_ceiling
+			old_ceiling.remove_shuttle_roof(custom_ceiling)
 
 	for(var/i in 1 to length(moved_atoms))
 		CHECK_TICK
@@ -209,7 +206,7 @@
 		var/turf/new_turf = new_turfs[i]
 		new_turf.lateShuttleMove(old_turf)
 		if(move_mode & MOVE_TURF)
-			var/turf/new_ceiling = get_step_multiz(new_turf, UP)
+			var/turf/new_ceiling = SSmapping.get_turf_above(new_turf)
 			if(new_ceiling)
 				new_ceiling.add_shuttle_roof(custom_ceiling)
 
@@ -231,6 +228,15 @@
 	// Assume here is openspace somwhere, so we work, in other case just skip
 	if(new_legnth != initial_length)
 		baseturfs = list(/turf/open/openspace, custom_ceiling) + baseturfs
+
+/turf/proc/remove_shuttle_roof(custom_ceiling)
+	if(!islist(baseturfs))
+		return
+
+	if(istype(src, custom_ceiling))
+		ScrapeAway()
+	else
+		baseturfs -= custom_ceiling
 
 /turf/open/openspace/add_shuttle_roof(custom_ceiling)
 	ChangeTurf(custom_ceiling)

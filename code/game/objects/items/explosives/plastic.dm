@@ -63,7 +63,7 @@
 	var/action = tgui_input_list(usr, "Select action to do with it", "C4 Interaction", list("Plant on roof", "Set timer"))
 	switch(action)
 		if("Plant on roof")
-			var/turf/roof = get_step_multiz(user, UP)
+			var/turf/roof = SSmapping.get_turf_above(get_turf(user))
 			if(!roof || !roof.antipierce)
 				to_chat(user, SPAN_NOTICE("There nothing above."))
 				return

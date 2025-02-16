@@ -11,7 +11,7 @@
 		return
 
 	var/turf/our_loc = get_turf(user)
-	var/turf/checking = get_step_multiz(our_loc, UP)
+	var/turf/checking = SSmapping.get_turf_above(our_loc)
 	if(!istype(checking) || !checking.zPassIn(user, UP, our_loc))
 		to_chat(user, SPAN_WARNING("You can't climb here!"))
 		return
@@ -29,7 +29,7 @@
 		return
 
 	our_loc = get_turf(user)
-	checking = get_step_multiz(our_loc, UP)
+	checking = SSmapping.get_turf_above(our_loc)
 	if(!istype(checking) || !checking.zPassIn(user, UP, our_loc))
 		to_chat(user, SPAN_WARNING("You can't climb here!"))
 		return
