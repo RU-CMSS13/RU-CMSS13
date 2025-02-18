@@ -2,9 +2,57 @@
 "aaa" = (
 /turf/open/ice,
 /area/ice_colony/exterior/underground/caves/dig)
+"aab" = (
+/obj/structure/surface/table/woodentable,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/wood,
+/area/ice_colony/underground/crew/leisure)
 "aac" = (
 /turf/closed/wall/rock,
 /area/ice_colony/exterior/surface/cliff)
+"aad" = (
+/obj/structure/surface/table,
+/obj/structure/bedsheetbin,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/darkbrown2/north,
+/area/ice_colony/underground/crew/lavatory)
+"aae" = (
+/obj/structure/surface/table/reinforced,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/darkpurple2,
+/area/ice_colony/underground/research/work)
+"aaf" = (
+/obj/structure/surface/table/reinforced,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/darkpurple2/west,
+/area/ice_colony/underground/research)
+"aag" = (
+/obj/structure/surface/table/reinforced,
+/obj/effect/landmark/objective_landmark/science,
+/turf/open/floor/dark2,
+/area/ice_colony/underground/research)
+"aah" = (
+/obj/structure/pipes/standard/simple/hidden/green{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/surface/table,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/dark2,
+/area/ice_colony/underground/engineering)
+"aai" = (
+/obj/structure/surface/table,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/dark2,
+/area/ice_colony/underground/engineering)
+"aaj" = (
+/obj/structure/surface/table,
+/obj/item/storage/box/bodybags,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/dark2,
+/area/ice_colony/underground/crew/morgue)
 "aak" = (
 /obj/structure/ice/thin/end{
 	dir = 8
@@ -34,12 +82,22 @@
 	},
 /turf/open/floor/plating/icefloor,
 /area/ice_colony/exterior/surface/landing_pad2)
+"aap" = (
+/obj/structure/surface/table/woodentable,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/carpet,
+/area/ice_colony/underground/crew/chapel)
 "aaq" = (
 /obj/structure/ice/thin/straight{
 	dir = 4
 	},
 /turf/open/ice,
 /area/ice_colony/exterior/surface/clearing/north)
+"aar" = (
+/obj/structure/surface/table,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/darkyellow2/east,
+/area/ice_colony/surface/garage/repair)
 "aas" = (
 /obj/structure/ice/thin/corner{
 	dir = 4
@@ -79,6 +137,11 @@
 /obj/item/lightstick/planted,
 /turf/open/auto_turf/snow/layer2,
 /area/ice_colony/exterior/surface/clearing/north)
+"aaB" = (
+/obj/structure/closet/wardrobe/mixed,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/darkbrown2,
+/area/ice_colony/surface/dorms/lavatory)
 "aaC" = (
 /turf/closed/wall/shiva/ice,
 /area/ice_colony/exterior/surface/cliff)
@@ -95,6 +158,12 @@
 	},
 /turf/open/auto_turf/snow/layer3,
 /area/ice_colony/exterior/surface/valley/north)
+"aaG" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/under/colonist,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/wood,
+/area/ice_colony/surface/dorms)
 "aaH" = (
 /obj/structure/ice/thin/straight,
 /turf/open/ice,
@@ -128,6 +197,10 @@
 	},
 /turf/open/floor/plating/icefloor/warnplate/east,
 /area/ice_colony/exterior/surface/landing_pad2)
+"aaP" = (
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/plating/icefloor,
+/area/ice_colony/surface/requesitions)
 "aaT" = (
 /obj/structure/ice/thin/end{
 	dir = 1
@@ -5101,6 +5174,7 @@
 "ato" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/under/schoolgirl,
+/obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/wood,
 /area/ice_colony/surface/dorms)
 "atp" = (
@@ -11918,6 +11992,7 @@
 "aQO" = (
 /obj/structure/surface/table,
 /obj/item/device/flashlight,
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/darkbrown2/east,
 /area/ice_colony/surface/hangar/beta)
 "aQP" = (
@@ -12961,6 +13036,7 @@
 /obj/structure/surface/table,
 /obj/effect/spawner/random/bomb_supply,
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
+/obj/effect/landmark/objective_landmark/science,
 /turf/open/floor/darkyellow2/northwest,
 /area/ice_colony/surface/research/tech_storage)
 "aVn" = (
@@ -13162,6 +13238,7 @@
 /obj/structure/surface/table,
 /obj/item/device/flashlight,
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/darkbrown2/east,
 /area/ice_colony/surface/hangar/alpha)
 "aWg" = (
@@ -18446,6 +18523,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/darkred2,
 /area/ice_colony/underground/reception/checkpoint_north)
 "btW" = (
@@ -20294,6 +20372,7 @@
 	pixel_y = -1
 	},
 /obj/item/tool/pen/blue,
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/wood,
 /area/ice_colony/underground/security/detective)
 "bAU" = (
@@ -21611,6 +21690,7 @@
 /area/ice_colony/underground/command/pv2)
 "bGk" = (
 /obj/structure/surface/table,
+/obj/effect/landmark/objective_landmark/science,
 /turf/open/floor/darkyellow2/southeast,
 /area/ice_colony/surface/research/field_gear)
 "bGm" = (
@@ -24626,6 +24706,7 @@
 /obj/item/paper_bin,
 /obj/item/tool/pen/blue,
 /obj/structure/surface/table/reinforced,
+/obj/effect/landmark/objective_landmark/far,
 /turf/open/floor/darkyellow2/north,
 /area/ice_colony/underground/security/brig)
 "bRE" = (
@@ -26188,6 +26269,7 @@
 "bXE" = (
 /obj/structure/surface/table,
 /obj/item/device/camera,
+/obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/dark2,
 /area/ice_colony/underground/crew/morgue)
 "bXF" = (
@@ -26240,6 +26322,7 @@
 /obj/structure/surface/table/woodentable,
 /obj/item/restraint/handcuffs,
 /obj/item/weapon/baton,
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/wood,
 /area/ice_colony/underground/security/marshal)
 "bXS" = (
@@ -26289,6 +26372,7 @@
 	dir = 8
 	},
 /obj/structure/surface/table/reinforced,
+/obj/effect/landmark/objective_landmark/science,
 /turf/open/floor/darkpurple2/west,
 /area/ice_colony/underground/research/work)
 "bYc" = (
@@ -26536,6 +26620,7 @@
 /area/ice_colony/surface/hangar/alpha)
 "gDb" = (
 /obj/structure/surface/table,
+/obj/effect/landmark/objective_landmark/medium,
 /turf/open/floor/darkred2/north,
 /area/ice_colony/underground/reception/checkpoint_north)
 "gHI" = (
@@ -29302,7 +29387,7 @@ bHX
 bHX
 bJh
 bHX
-bYd
+aae
 bGX
 bmT
 bmU
@@ -29796,7 +29881,7 @@ bBD
 bBD
 bBD
 bCk
-bFM
+aaf
 bXW
 bFM
 bFM
@@ -30460,7 +30545,7 @@ byM
 bBf
 bBc
 bBE
-bCM
+aag
 bCM
 bEo
 bBE
@@ -36272,7 +36357,7 @@ bgH
 bkD
 bkR
 bkR
-blB
+aap
 blT
 bmx
 blB
@@ -36778,7 +36863,7 @@ blV
 bkS
 bmZ
 bnu
-bnZ
+aaj
 bkE
 bnz
 bkr
@@ -39328,7 +39413,7 @@ bMc
 bpu
 bNc
 bNv
-bOg
+aad
 bOL
 bOL
 bOL
@@ -42505,7 +42590,7 @@ bOn
 bOn
 bPi
 bOn
-bPh
+aab
 juq
 bQu
 bRO
@@ -46968,7 +47053,7 @@ bnK
 box
 box
 bpn
-bXF
+aai
 bqe
 bqJ
 box
@@ -47470,7 +47555,7 @@ box
 box
 bpo
 bXF
-bqe
+aah
 bqK
 box
 box
@@ -66967,7 +67052,7 @@ aaI
 abD
 acU
 acg
-abE
+aaP
 abE
 abE
 acg
@@ -68311,7 +68396,7 @@ abE
 abE
 abE
 acg
-abE
+aaP
 abE
 ahD
 abE
@@ -81380,7 +81465,7 @@ arE
 axl
 axK
 ayt
-azc
+aaB
 axl
 azN
 aqS
@@ -83881,7 +83966,7 @@ aqS
 arF
 arQ
 arQ
-asu
+aaG
 axn
 axU
 ayz
@@ -86897,7 +86982,7 @@ abL
 azR
 aBl
 aOv
-aOv
+aar
 aCM
 aBN
 aDN
