@@ -243,16 +243,14 @@
 	set name = "Move Down"
 	set category = "IC"
 
-	var/ventcrawling_flag = is_ventcrawling ? ZMOVE_VENTCRAWLING : 0
-	if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
-		to_chat(src, SPAN_NOTICE("You move down."))
-		return
-
 	if(action_busy)
 		return
 
 	var/turf/checking = get_step(src, dir)
 	if(!istype(checking, /turf/open/openspace))
+		var/ventcrawling_flag = is_ventcrawling ? ZMOVE_VENTCRAWLING : 0
+		if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
+			to_chat(src, SPAN_NOTICE("You move down."))
 		return
 
 	var/turf/target_loc = SSmapping.get_turf_below(checking)

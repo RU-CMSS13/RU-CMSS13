@@ -909,7 +909,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(!destination || anchored)
 		return FALSE //Gotta go somewhere and be able to move
 	if(!pulling)
-		return zMove(target = destination, z_move_flags = ZMOVE_STAIRS_FLAGS) //No need for a special proc if there's nothing being pulled.
+		return zMove(target = destination, z_move_flags) //No need for a special proc if there's nothing being pulled.
 
 	var/list/conga_line = list()
 	var/end_of_conga = FALSE
@@ -951,7 +951,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				conga_line += B.buckled_bodybag
 			end_of_conga = TRUE //Only mobs can continue the cycle.
 	for(var/atom/movable/AM in conga_line)
-		AM.zMove(target = destination, z_move_flags = ZMOVE_STAIRS_FLAGS)
+		AM.zMove(target = destination, z_move_flags)
 
 	return TRUE
 
