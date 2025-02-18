@@ -50,22 +50,26 @@
 				break
 
 // Attempt to get the turf below the provided one according to Z traits
-/datum/controller/subsystem/mapping/proc/get_turf_below(turf/T)
-	if (!T)
+/datum/controller/subsystem/mapping/proc/get_turf_below(turf/our_turf)
+	if(!our_turf)
 		return
-	var/offset = level_trait(T.z, ZTRAIT_DOWN)
-	if (!offset)
+
+	var/offset = level_trait(our_turf.z, ZTRAIT_DOWN)
+	if(!offset)
 		return
-	return locate(T.x, T.y, T.z + offset)
+
+	return locate(our_turf.x, our_turf.y, our_turf.z + offset)
 
 // Attempt to get the turf above the provided one according to Z traits
-/datum/controller/subsystem/mapping/proc/get_turf_above(turf/T)
-	if (!T)
+/datum/controller/subsystem/mapping/proc/get_turf_above(turf/our_turf)
+	if(!our_turf)
 		return
-	var/offset = level_trait(T.z, ZTRAIT_UP)
-	if (!offset)
+
+	var/offset = level_trait(our_turf.z, ZTRAIT_UP)
+	if(!offset)
 		return
-	return locate(T.x, T.y, T.z + offset)
+
+	return locate(our_turf.x, our_turf.y, our_turf.z + offset)
 
 // Prefer not to use this one too often
 /datum/controller/subsystem/mapping/proc/get_station_center()

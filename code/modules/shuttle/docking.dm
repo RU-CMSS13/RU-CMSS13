@@ -171,17 +171,22 @@
 		CHECK_TICK
 		if(!(old_turfs[old_turfs[i]] & MOVE_TURF))
 			continue
-		var/turf/oldT = old_turfs[i]
-		var/turf/newT = new_turfs[i]
-		newT.afterShuttleMove(oldT, rotation) //turfs
+		var/turf/old_turf = old_turfs[i]
+		var/turf/new_turf = new_turfs[i]
+
+		new_turf.afterShuttleMove(old_turf, rotation)
+
+		var/turf/old_ceiling = SSmapping.get_turf_above(old_turf)
+		if(old_ceiling)
+			old_ceiling.remove_shuttle_roof(custom_ceiling)
 
 	for(var/i in 1 to length(moved_atoms))
 		CHECK_TICK
 		var/atom/movable/moved_object = moved_atoms[i]
 		if(QDELETED(moved_object))
 			continue
-		var/turf/oldT = moved_atoms[moved_object]
-		moved_object.afterShuttleMove(oldT, movement_force, dir, preferred_direction, movement_direction, rotation)//atoms
+		var/turf/old_turf = moved_atoms[moved_object]
+		moved_object.afterShuttleMove(old_turf, movement_force, dir, preferred_direction, movement_direction, rotation)//atoms
 
 	// lateShuttleMove (There had better be a really good reason for additional stages beyond this)
 
@@ -194,17 +199,44 @@
 
 	for(var/i in 1 to length(old_turfs))
 		CHECK_TICK
-		if(!(old_turfs[old_turfs[i]] & (MOVE_CONTENTS|MOVE_TURF)))
+		var/move_mode = old_turfs[old_turfs[i]]
+		if(!(move_mode & (MOVE_CONTENTS|MOVE_TURF)))
 			continue
-		var/turf/oldT = old_turfs[i]
-		var/turf/newT = new_turfs[i]
-		newT.lateShuttleMove(oldT)
+		var/turf/old_turf = old_turfs[i]
+		var/turf/new_turf = new_turfs[i]
+		new_turf.lateShuttleMove(old_turf)
+		if(move_mode & MOVE_TURF)
+			var/turf/new_ceiling = SSmapping.get_turf_above(new_turf)
+			if(new_ceiling)
+				new_ceiling.add_shuttle_roof(custom_ceiling)
 
 	for(var/i in 1 to length(moved_atoms))
 		CHECK_TICK
 		var/atom/movable/moved_object = moved_atoms[i]
 		if(QDELETED(moved_object))
 			continue
-		var/turf/oldT = moved_atoms[moved_object]
-		moved_object.lateShuttleMove(oldT, movement_force, movement_direction)
+		var/turf/old_turf = moved_atoms[moved_object]
+		moved_object.lateShuttleMove(old_turf, movement_force, movement_direction)
 
+/turf/proc/add_shuttle_roof(custom_ceiling)
+	if(!islist(baseturfs))
+		return
+
+	var/initial_length = length(baseturfs)
+	baseturfs -= /turf/open/openspace
+	var/new_legnth = length(baseturfs)
+	// Assume here is openspace somwhere, so we work, in other case just skip
+	if(new_legnth != initial_length)
+		baseturfs = list(/turf/open/openspace, custom_ceiling) + baseturfs
+
+/turf/proc/remove_shuttle_roof(custom_ceiling)
+	if(!islist(baseturfs))
+		return
+
+	if(istype(src, custom_ceiling))
+		ScrapeAway()
+	else
+		baseturfs -= custom_ceiling
+
+/turf/open/openspace/add_shuttle_roof(custom_ceiling)
+	ChangeTurf(custom_ceiling)

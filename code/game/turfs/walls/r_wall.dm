@@ -5,6 +5,8 @@
 	opacity = TRUE
 	density = TRUE
 
+	antipierce = 5
+
 	damage_cap = HEALTH_WALL_REINFORCED
 
 	walltype = WALL_REINFORCED
@@ -12,7 +14,7 @@
 	claws_minimum = CLAW_TYPE_VERY_SHARP
 
 /turf/closed/wall/r_wall/attackby(obj/item/W, mob/user)
-	if(hull)
+	if(hull_tile)
 		return
 
 	//get the user's location
@@ -21,7 +23,7 @@
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting walls and the relevant effects
 	if(thermite)
 		if(W.heat_source >= 1000)
-			if(hull)
+			if(hull_tile)
 				to_chat(user, SPAN_WARNING("[src] is much too tough for you to do anything to it with [W]."))
 			else
 				if(iswelder(W))
@@ -171,7 +173,7 @@
 
 
 /turf/closed/wall/r_wall/can_be_dissolved()
-	if(hull)
+	if(hull_tile)
 		return 0
 	else
 		return 2
@@ -184,15 +186,16 @@
 
 /turf/closed/wall/r_wall/dense
 	icon_state = "iron0"
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
 	walltype = WALL_REINFORCED_IRON
-	hull = 1
+	hull_tile = 1
 
 /turf/closed/wall/r_wall/unmeltable
 	name = "heavy reinforced wall"
 	desc = "A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible."
 	icon_state = "heavy_r_wall_mapicon"
 	walltype = WALL_REINFORCED
-	hull = 1
+	hull_tile = 1
 
 /turf/closed/wall/r_wall/unmeltable/attackby() //This should fix everything else. No cables, etc
 	return
@@ -237,7 +240,7 @@
 	icon = 'icons/turf/walls/prison.dmi'
 	icon_state = "hwall"
 	walltype = WALL_REINFORCED
-	hull = 1
+	hull_tile = 1
 
 /turf/closed/wall/r_wall/prison_unmeltable/ex_act(severity) //Should make it indestructible
 		return
@@ -260,7 +263,8 @@
 	name = "heavy reinforced wall"
 	desc = "A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible."
 	icon_state = "h_dome"
-	hull = TRUE
+	turf_flags = parent_type::turf_flags|TURF_NO_MULTIZ_SUPPORT
+	hull_tile = TRUE
 
 /turf/closed/wall/r_wall/biodome/biodome_unmeltable/ex_act(severity) //Should make it indestructible
 		return

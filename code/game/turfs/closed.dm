@@ -3,6 +3,46 @@
 	density = TRUE
 	opacity = TRUE
 
+/turf/closed/attack_alien(mob/user)
+	attack_hand(user)
+
+/turf/closed/attack_hand(mob/user)
+	if(user.action_busy || user.a_intent == INTENT_HARM)
+		return
+
+	var/turf/our_loc = get_turf(user)
+	var/turf/checking = SSmapping.get_turf_above(our_loc)
+	if(!istype(checking) || !checking.zPassIn(user, UP, our_loc))
+		to_chat(user, SPAN_WARNING("You can't climb here!"))
+		return
+
+	our_loc = checking
+	checking = SSmapping.get_turf_above(src)
+	if(!checking.zPassIn(user, UP, our_loc))
+		to_chat(user, SPAN_WARNING("You can't climb here!"))
+		return
+
+	user.visible_message(SPAN_WARNING("[user] starts climbing up \the [src]."), SPAN_WARNING("You start climbing up the \the [src]."))
+	if(!do_after(user, isxeno(user) ? user.mob_size * 5 SECONDS : 10 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+		to_chat(user, SPAN_WARNING("You were interrupted!"))
+		return
+
+	our_loc = get_turf(user)
+	checking = SSmapping.get_turf_above(our_loc)
+	if(!istype(checking) || !checking.zPassIn(user, UP, our_loc))
+		to_chat(user, SPAN_WARNING("You can't climb here!"))
+		return
+
+	our_loc = checking
+	checking = SSmapping.get_turf_above(src)
+	if(!checking.zPassIn(user, UP, our_loc))
+		to_chat(user, SPAN_WARNING("You can't climb here!"))
+		return
+
+	user.trainteleport(checking, z_move_flags = ZMOVE_STAIRS_FLAGS)
+	user.visible_message(SPAN_WARNING("[user] climbs up \the [src]."), SPAN_WARNING("You climb up \the [src]."))
+	return
+
 /turf/closed/insert_self_into_baseturfs()
 	return
 
