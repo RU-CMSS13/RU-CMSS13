@@ -1,5 +1,5 @@
-#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE "mz_elevator_one"
-#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO "mz_elevator_two"
+#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE "elevator_mz_one"
+#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO "elevator_mz_two"
 
 // -- Docks
 /obj/docking_port/stationary/sselevator
