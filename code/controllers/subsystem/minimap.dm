@@ -841,7 +841,6 @@ SUBSYSTEM_DEF(minimaps)
 	data["mapRef"] = map_holder?.map_ref
 	data["canDraw"] = FALSE
 	data["canViewTacmap"] = TRUE
-	data["canChangeZ"] = FALSE
 	data["canViewCanvas"] = FALSE
 	data["isxeno"] = FALSE
 
@@ -854,7 +853,6 @@ SUBSYSTEM_DEF(minimaps)
 	data["mapRef"] = map_holder?.map_ref
 	data["canDraw"] = FALSE
 	data["mapFallback"] = wiki_map_fallback
-	data["canChangeZ"] = TRUE
 
 	var/mob/living/carbon/xenomorph/xeno = user
 	var/is_xeno = istype(xeno)

@@ -37,7 +37,6 @@ interface TacMapProps {
   canvasCooldown: any;
   exportedTacMapImage: any;
   tacmapReady: boolean;
-  canChangeZ: boolean;
 }
 
 const PAGES = [
@@ -121,10 +120,6 @@ export const TacticalMap = (props) => {
   };
 
   const getZTabs = () => {
-    if (!data.canChangeZ) {
-      return;
-    }
-
     return (
       <>
         <Tabs.Tab
