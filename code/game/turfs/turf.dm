@@ -422,7 +422,7 @@
 		var/mob/mob = falling
 		mob.trainteleport(target)
 	else
-		falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
+		falling.zMove(null, target, NO_FLAGS)
 	target.zImpact(falling, levels, src)
 
 ///Called each time the target falls down a z level possibly making their trajectory come to a halt. see __DEFINES/movement.dm.

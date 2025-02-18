@@ -218,7 +218,7 @@
 		to_chat(src, SPAN_WARNING("There's nowhere to go in that direction!"))
 		return
 
-	if(can_z_move(DOWN, above_turf, current_turf, ZMOVE_FALL_FLAGS|ventcrawling_flag)) //Will we fall down if we go up?
+	if(can_z_move(UP, above_turf, current_turf, ZMOVE_FALL_FLAGS|ventcrawling_flag)) //Will we fall down if we go up?
 		if(buckled)
 			to_chat(src, SPAN_WARNING("[buckled] is not capable of flight."))
 		else
@@ -227,6 +227,16 @@
 
 	if(zMove(UP, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
 		to_chat(src, SPAN_NOTICE("You move upwards."))
+	else if(!action_busy)
+		var/turf/checking = get_step(src, dir)
+		if(!istype(checking, /turf/closed))
+			to_chat(src, SPAN_NOTICE("There nothing to support you!"))
+			return
+
+		var/intent_memory = a_intent
+		a_intent = INTENT_HELP
+		INVOKE_ASYNC(checking, TYPE_PROC_REF(/atom, attack_hand), src)
+		a_intent = intent_memory
 
 ///Moves a mob down a z level
 /mob/verb/down()
@@ -236,5 +246,29 @@
 	var/ventcrawling_flag = is_ventcrawling ? ZMOVE_VENTCRAWLING : 0
 	if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
 		to_chat(src, SPAN_NOTICE("You move down."))
-	return FALSE
+		return
 
+	if(action_busy)
+		return
+
+	var/turf/checking = get_step(src, dir)
+	if(!istype(checking, /turf/open/openspace))
+		return
+
+	var/turf/target_loc = SSmapping.get_turf_below(checking)
+	if(!istype(checking) || !checking.zPassIn(src, DOWN, target_loc) || !target_loc.zPassIn(src, DOWN, checking))
+		to_chat(src, SPAN_WARNING("You can't climb down here!"))
+		return
+
+	visible_message(SPAN_WARNING("[src] starts climbing down."), SPAN_WARNING("You start climbing down."))
+	if(!do_after(src, isxeno(src) ? mob_size * 5 SECONDS : 10 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+		to_chat(src, SPAN_WARNING("You were interrupted!"))
+		return
+
+	if(!istype(checking) || !checking.zPassIn(src, DOWN, target_loc) || !target_loc.zPassIn(src, DOWN, checking))
+		to_chat(src, SPAN_WARNING("You can't climb down here!"))
+		return
+
+	trainteleport(target_loc, z_move_flags = ZMOVE_STAIRS_FLAGS)
+	visible_message(SPAN_WARNING("[src] climbs down."), SPAN_WARNING("You climb down."))
+	return

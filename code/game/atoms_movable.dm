@@ -393,15 +393,6 @@
 		movable.currently_z_moving = currently_z_moving || CURRENTLY_Z_MOVING_GENERIC
 		movable.forceMove(target)
 		movable.set_currently_z_moving(FALSE, TRUE)
-	// This is run after ALL movables have been moved, so pulls don't get broken unless they are actually out of range.
-	if(z_move_flags & ZMOVE_CHECK_PULLS)
-		for(var/atom/movable/moved_mov as anything in moving_movs)
-			if(z_move_flags & ZMOVE_CHECK_PULLEDBY && moved_mov.pulledby && (moved_mov.z != moved_mov.pulledby.z || get_dist(moved_mov, moved_mov.pulledby) > 1))
-				moved_mov.pulledby.stop_pulling()
-			if(z_move_flags & ZMOVE_CHECK_PULLING)
-				var/atom/movable/pullee = moved_mov.pulling
-				if(pullee && (get_dist(src, pullee) > 1 || pullee.anchored || (!isturf(pulling.loc) && pullee.loc != loc))) //Is the pullee adjacent?
-					moved_mov.stop_pulling()
 	return TRUE
 
 /// Returns a list of movables that should also be affected when src moves through zlevels, and src.
