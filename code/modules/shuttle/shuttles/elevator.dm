@@ -1,14 +1,16 @@
+#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE "mz_elevator_one"
+#define MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO "mz_elevator_two"
+
 // -- Docks
 /obj/docking_port/stationary/sselevator
 	name = "'S95 v2' Elevator Floor"
-	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
 	width = 7
 	height = 7
 
 /obj/docking_port/stationary/sselevator/register()
 	id = "[id]_[src.z]"
 	. = ..()
-	GLOB.ss_elevator_floors["[id]"] = src
 
 /obj/docking_port/stationary/sselevator/load_roundstart()
 	. = ..()
@@ -16,12 +18,22 @@
 	if(elevator)
 		elevator.handle_initial_data(src)
 
+/obj/docking_port/stationary/sselevator/one
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
+
+/obj/docking_port/stationary/sselevator/one/floor_roof
+	roundstart_template = /datum/map_template/shuttle/multiz_elevator_one
+
+/obj/docking_port/stationary/sselevator/two
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+
+/obj/docking_port/stationary/sselevator/two/floor_roof
+	roundstart_template = /datum/map_template/shuttle/multiz_elevator_two
 
 // -- Shuttles
 
 /obj/docking_port/mobile/sselevator
 	name = "'S95 v2' elevator"
-	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
 	width = 7
 	height = 7
 
@@ -52,6 +64,16 @@
 	var/max_move_delay = 8 SECONDS
 	var/min_move_delay = 2 SECONDS
 
+/obj/docking_port/mobile/sselevator/one
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
+	total_floors = 3
+	floor_offset = 1
+
+/obj/docking_port/mobile/sselevator/two
+	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+	total_floors = 2
+	floor_offset = 1
+
 /obj/docking_port/mobile/sselevator/Destroy()
 	initial_dock = null
 	door = null
@@ -65,12 +87,6 @@
 		buttons -= i
 
 	. = ..()
-
-	SSshuttle.scraper_elevators[id] = null
-
-/obj/docking_port/mobile/sselevator/register()
-	. = ..()
-	SSshuttle.scraper_elevators[id] = src
 
 /obj/docking_port/mobile/sselevator/request(obj/docking_port/stationary/S) //No transit, no ignition, just a simple up/down platform
 	initiate_docking(S, force = TRUE)
@@ -136,7 +152,7 @@
 	if(stopped)
 		on_stop_actions()
 		sleep(max_move_delay)
-		control_button.visible_message(SPAN_NOTICE("Лифт отправляется. Пожалуйста стойте в стороне от дверей."))
+		control_button.visible_message(SPAN_NOTICE("Lift starting moving. Please stay away from doors."))
 
 	var/floor_to_move = offseted_z > target_floor ? offseted_z - 1 : offseted_z + 1
 	calculate_move_delay(floor_to_move)
@@ -144,7 +160,7 @@
 	on_move_actions()
 	sleep(move_delay)
 	cooldown = FALSE
-	SSshuttle.moveShuttleToDock(src, GLOB.ss_elevator_floors["[id]_[floor_to_move + floor_offset]"], 0)
+	SSshuttle.moveShuttleToDock(src, SSshuttle.getDock("[id]_[floor_to_move + floor_offset]"), 0)
 
 /obj/docking_port/mobile/sselevator/proc/calculate_move_delay(floor_calc)
 	if(offseted_z > target_floor ? offseted_z - floor_calc > 4 : floor_calc - offseted_z > 4)
@@ -183,7 +199,7 @@
 			next_moving = 0
 		moving = offseted_z > target_floor ? "DOWN" : "UP"
 		cooldown = TRUE
-		control_button.visible_message(SPAN_NOTICE("Лифт отправляется. Пожалуйста стойте в стороне от дверей."))
+		control_button.visible_message(SPAN_NOTICE("Lift starting moving. Please stay away from doors."))
 		INVOKE_ASYNC(src, PROC_REF(move_elevator))
 
 // Reseting elevator if something messed up, because this system is not hard coded, so we can fuck up it easy
@@ -226,10 +242,6 @@
 	moving = FALSE
 	cooldown = FALSE
 
-
-/obj/docking_port/stationary/sselevator/floor_roof
-	roundstart_template = /datum/map_template/shuttle/multiz_elevator
-
 //Console
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator
@@ -238,8 +250,8 @@
 	icon = 'icons/obj/structures/machinery/computer.dmi'
 	icon_state = "elevator_screen"
 
-	var/elevator_id = "normal_elevator"
-	var/floor
+	var/elevator_id
+	var/floor = "control"
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Initialize(mapload, ...)
 	. = ..()
@@ -249,21 +261,15 @@
 	#endif
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/LateInitialize()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	if(!elevator)
 		return
 
 	floor = z
 	elevator.buttons["[floor]"] = src
 
-/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
-	. = ..()
-	if(istype(port, /obj/docking_port/mobile/sselevator))
-		var/obj/docking_port/mobile/sselevator/elevator_port = port
-		elevator_port.gears += src
-
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/Destroy()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	if(elevator)
 		if(floor != "control")
 			elevator.buttons["[floor]"] -= src
@@ -290,7 +296,7 @@
 		ui.open()
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_data(mob/user)
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	. = list("buttons" = list(), "current_floor" = elevator.offseted_z)
 	if(!elevator)
 		return
@@ -320,8 +326,16 @@
 		var/obj/docking_port/mobile/sselevator/elevator_port = port
 		elevator_port.control_button = src
 
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/one
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
+
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/two
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+
+
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button
 	desc = "The remote controls for the 'S95 v2' elevator."
+	floor = null
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/attack_hand(mob/user)
 	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
@@ -340,6 +354,14 @@
 	visible_message(SPAN_NOTICE("Лифт вызван, ожидайте."))
 	elevator.calc_elevator_order(floor - elevator.floor_offset)
 
+
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/one
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
+
+/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/two
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+
+
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator
 	name = "'S95 v2' Elevator Door"
 	desc = "A heavyset bulkhead for a elevator."
@@ -352,7 +374,7 @@
 
 	var/throw_dir = SOUTH
 
-	var/elevator_id = "normal_elevator"
+	var/elevator_id
 	var/floor
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Initialize(mapload, ...)
@@ -418,6 +440,18 @@
 	if(istype(port, /obj/docking_port/mobile/sselevator))
 		var/obj/docking_port/mobile/sselevator/elevator_port = port
 		elevator_port.door = src
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/one
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/one/control
+	floor = "control"
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/two
+	elevator_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/two/control
+	floor = "control"
 
 
 /datum/map_template/shuttle/multiz_elevator_one
