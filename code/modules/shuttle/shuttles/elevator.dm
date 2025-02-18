@@ -67,12 +67,10 @@
 /obj/docking_port/mobile/sselevator/one
 	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
 	total_floors = 3
-	floor_offset = 1
 
 /obj/docking_port/mobile/sselevator/two
 	id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
 	total_floors = 2
-	floor_offset = 1
 
 /obj/docking_port/mobile/sselevator/Destroy()
 	initial_dock = null
@@ -456,11 +454,15 @@
 
 /datum/map_template/shuttle/multiz_elevator_one
 	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
-	name = "S95 v2 Elevator"
+	name = "S95 v2 Elevator One"
+	width = 7
+	height = 7
 
 /datum/map_template/shuttle/multiz_elevator_two
 	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
-	name = "S95 v2 Elevator"
+	name = "S95 v2 Elevator Two"
+	width = 7
+	height = 7
 
 
 /turf/open/shuttle/elevator/multiz
