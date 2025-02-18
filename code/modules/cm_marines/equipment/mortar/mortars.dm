@@ -328,8 +328,7 @@
 
 /obj/structure/mortar/proc/handle_shell(turf/target, obj/item/mortar_shell/shell)
 	var/turf/roof = get_highest_turf(target)
-	var/penetration = rand(5, 10)
-	target = roof.air_strike(penetration, target, checking = TRUE)
+	target = roof.air_strike(10, target, checking = TRUE)
 
 	if(ship_side)
 		var/turf/our_turf = get_turf(src)
@@ -365,7 +364,7 @@
 	if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/mortar_laser_warning))
 		new /obj/effect/overlay/temp/blinking_laser(target)
 	sleep(2 SECONDS) // Wait out the rest of the landing time
-	shell.detonate(roof.air_strike(penetration, target))
+	shell.detonate(roof.air_strike(10, target))
 	qdel(shell)
 	firing = FALSE
 

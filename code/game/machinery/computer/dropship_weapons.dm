@@ -488,7 +488,7 @@
 				to_chat(user, SPAN_WARNING("No signal chosen."))
 				return FALSE
 			var/turf/roof = get_highest_turf(sig.signal_loc)
-			if(sig.signal_loc != roof.air_strike(1, sig.signal_loc, 1, TRUE))
+			if(sig.signal_loc != roof.air_strike(5, sig.signal_loc, 1, TRUE))
 				to_chat(user, SPAN_WARNING("Target is obscured."))
 				return
 			var/equipment_tag = params["equipment_id"]

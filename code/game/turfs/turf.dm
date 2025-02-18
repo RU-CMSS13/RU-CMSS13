@@ -697,7 +697,7 @@
 	protection_penetration -= get_pylon_protection_level()
 	if(hull_tile)
 		protection_penetration -= 10
-	else
+	else if(antipierce > 1 && protection_penetration)
 		protection_penetration -= antipierce
 
 	if(protection_penetration < 0)

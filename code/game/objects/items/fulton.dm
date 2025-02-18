@@ -84,7 +84,7 @@ GLOBAL_LIST_EMPTY(deployed_fultons)
 		return
 
 	var/turf/roof = get_highest_turf(target_atom.loc)
-	if(target_atom.loc != roof.air_strike(5, target_atom.loc, 1, TRUE))
+	if(target_atom.loc != roof.air_strike(1, target_atom.loc, 1, TRUE))
 		to_chat(usr, SPAN_WARNING("You can't attach [src] to something when underground!"))
 		return
 
