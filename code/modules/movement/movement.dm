@@ -261,7 +261,7 @@
 		return
 
 	visible_message(SPAN_WARNING("[src] starts climbing down."), SPAN_WARNING("You start climbing down."))
-	if(!do_after(src, isxeno(src) ? mob_size * 5 SECONDS : 10 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+	if(!do_after(src, isxeno(src) ? mob_size * 5 SECONDS : 5 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
 		to_chat(src, SPAN_WARNING("You were interrupted!"))
 		return
 
