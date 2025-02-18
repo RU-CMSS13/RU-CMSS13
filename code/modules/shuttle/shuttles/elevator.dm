@@ -43,7 +43,6 @@
 	var/list/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/doors = list()
 	var/list/obj/structure/machinery/gear/gears = list()
 	var/list/obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/buttons = list()
-	var/list/disabled_floors // Relative list of z coords for elevator where can't go
 	var/list/called_floors // Relative list of z coords for elevator where ordered
 	var/target_floor = 0 // Where currently we heading (final relative z coord)
 	var/next_moving = 0// Where we need to head after (final relative z coord)
@@ -208,15 +207,11 @@
 	target_floor = offseted_z
 	next_moving = 0
 
-	disabled_floors = list()
-	disabled_floors.len = total_floors
 	called_floors = list()
 	called_floors.len = total_floors
 	for(var/i = 1 to total_floors)
-		disabled_floors[i] = !force_opened
 		called_floors[i] = FALSE
 
-	disabled_floors[total_floors] = FALSE
 	move_delay = initial(move_delay)
 	max_move_delay = initial(max_move_delay)
 	min_move_delay = initial(min_move_delay)
@@ -301,7 +296,7 @@
 		return
 	for(var/i = 1 to elevator.total_floors)
 		.["buttons"] += list(list(
-			id = i, title = "Floor [i]", disabled = elevator.disabled_floors[i], called = elevator.called_floors[i],
+			id = i, title = "Floor [i]", called = elevator.called_floors[i],
 		))
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/ui_act(action, list/params)
@@ -311,7 +306,7 @@
 
 	if(action == "click")
 		var/target_floor = params["id"]
-		var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+		var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 		if(elevator.offseted_z == target_floor || elevator.called_floors[target_floor])
 			return
 		playsound(src, 'sound/machines/click.ogg', 15, 1)
@@ -329,14 +324,11 @@
 	desc = "The remote controls for the 'S95 v2' elevator."
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/sselevator/button/attack_hand(mob/user)
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	if(!allowed(user) || !elevator)
-		to_chat(user, SPAN_WARNING("Доступ Запрещен!"))
+		to_chat(user, SPAN_WARNING("Acces denied!"))
 		return
 	if(elevator.z == floor)
-		return
-	if(elevator.disabled_floors[floor - elevator.floor_offset])
-		visible_message(SPAN_WARNING("Лифт не может отправится на этот этаж, обратитесь на ближайший пост службы безопасности!"))
 		return
 	if(elevator.called_floors[floor - elevator.floor_offset])
 		visible_message(SPAN_NOTICE("Лифт уже едет на этот этаж, ожидайте."))
@@ -371,7 +363,7 @@
 	#endif
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/LateInitialize()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	if(!elevator)
 		return
 
@@ -379,7 +371,7 @@
 	elevator.doors["[floor]"] = src
 
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/blastdoor/elevator/Destroy()
-	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.scraper_elevators[elevator_id]
+	var/obj/docking_port/mobile/sselevator/elevator = SSshuttle.getShuttle(elevator_id)
 	if(elevator)
 		if(floor != "control")
 			elevator.doors["[floor]"] = null
@@ -428,9 +420,14 @@
 		elevator_port.door = src
 
 
-/datum/map_template/shuttle/multiz_elevator
-	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR
+/datum/map_template/shuttle/multiz_elevator_one
+	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_ONE
 	name = "S95 v2 Elevator"
+
+/datum/map_template/shuttle/multiz_elevator_two
+	shuttle_id = MOBILE_SHUTTLE_MULTIZ_ELEVATOR_TWO
+	name = "S95 v2 Elevator"
+
 
 /turf/open/shuttle/elevator/multiz
 	icon = 'icons/turf/multiz_elevator.dmi'
