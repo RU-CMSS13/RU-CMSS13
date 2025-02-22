@@ -6011,9 +6011,7 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/machinery/prop/almayer/CICmap{
-	layer = 3.1
-	},
+/obj/structure/machinery/prop/almayer/CICmap,
 /obj/structure/surface/table/reinforced/almayer_B,
 /turf/open/floor/almayer/mono,
 /area/almayer/command/cic)
@@ -10104,11 +10102,10 @@
 /area/almayer/command/corporateliaison)
 "aRE" = (
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
-/obj/structure/machinery/computer/crew{
-	layer = 3.1
-	},
+/obj/structure/machinery/computer/crew,
 /turf/open/floor/almayer/silver/north,
 /area/almayer/command/cic)
 "aRF" = (
@@ -11585,9 +11582,7 @@
 /area/almayer/hallways/hangar)
 "bcd" = (
 /obj/structure/machinery/computer/cameras/hangar,
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.215
-	},
+/obj/structure/surface/table/reinforced/black,
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "bcm" = (
@@ -16023,10 +16018,7 @@
 	pixel_x = 7;
 	pixel_y = 5
 	},
-/obj/item/device/cotablet{
-	pixel_x = -1;
-	layer = 3.4
-	},
+/obj/item/device/cotablet,
 /obj/structure/machinery/door/window/southleft{
 	desc = "A window, that is also a door. A windoor if you will. This one is stronger.";
 	health = 500;
@@ -21708,30 +21700,18 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/command/lifeboat)
 "cYK" = (
+/obj/structure/surface/rack,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/item/device/whistle,
+/obj/item/device/whistle,
+/obj/item/device/whistle,
+/obj/item/device/whistle,
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
-/obj/structure/surface/rack{
-	layer = 3
-	},
-/obj/item/device/megaphone{
-	layer = 3.525
-	},
-/obj/item/device/megaphone{
-	layer = 3.525
-	},
-/obj/item/device/whistle{
-	layer = 3.525
-	},
-/obj/item/device/whistle{
-	layer = 3.525
-	},
-/obj/item/device/whistle{
-	layer = 3.525
-	},
-/obj/item/device/whistle{
-	layer = 3.525
-	},
+/obj/item/device/whistle,
 /turf/open/floor/almayer/silver/north,
 /area/almayer/command/cic)
 "cYO" = (
@@ -22067,23 +22047,20 @@
 /area/almayer/lifeboat_pumps/south2)
 "deD" = (
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
 /obj/structure/machinery/computer/card{
-	layer = 3.125;
 	pixel_x = -15
 	},
 /obj/structure/machinery/computer/squad_changer{
-	layer = 3.125;
 	pixel_x = -32
 	},
 /obj/item/device/flashlight/lamp{
 	pixel_y = 8;
-	layer = 3.1;
 	pixel_x = 3
 	},
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.01;
 	pixel_y = -4
 	},
 /turf/open/floor/almayer/silver/north,
@@ -26772,8 +26749,7 @@
 /obj/structure/machinery/computer/crew/alt{
 	dir = 4;
 	pixel_y = -17;
-	pixel_x = 2;
-	layer = 3.1
+	pixel_x = 2
 	},
 /obj/structure/machinery/keycard_auth{
 	pixel_x = 7;
@@ -30428,8 +30404,7 @@
 	},
 /obj/structure/machinery/computer/cameras/almayer/vehicle{
 	dir = 4;
-	pixel_y = -4;
-	layer = 2.97
+	pixel_y = -4
 	},
 /obj/structure/transmitter/rotary{
 	name = "Alpha Overwatch Telephone";
@@ -30515,6 +30490,7 @@
 /area/almayer/shipboard/port_missiles)
 "gKJ" = (
 /obj/structure/window/reinforced/toughened,
+/obj/structure/machinery/computer/supply,
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "gKR" = (
@@ -34198,14 +34174,13 @@
 /area/almayer/command/airoom)
 "itZ" = (
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
 /obj/structure/machinery/computer/working_joe{
-	layer = 3.2;
 	pixel_x = -17
 	},
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.01;
 	pixel_y = -4
 	},
 /turf/open/floor/almayer/silver/north,
@@ -36581,6 +36556,10 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/lower/starboard_aft_hallway)
+"jwN" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/almayer/squads/charlie)
 "jwP" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -41697,13 +41676,10 @@
 	pixel_x = 15
 	},
 /obj/item/device/radio/intercom/alamo{
-	layer = 3.5;
 	pixel_x = -2;
 	pixel_y = 2
 	},
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.215
-	},
+/obj/structure/surface/table/reinforced/black,
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "lQu" = (
@@ -47331,23 +47307,21 @@
 /area/almayer/command/airoom)
 "osz" = (
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
 /obj/structure/machinery/light{
 	dir = 8
 	},
 /obj/item/storage/box/ids{
 	pixel_y = 10;
-	pixel_x = -2;
-	layer = 3.2
+	pixel_x = -2
 	},
 /obj/item/storage/box/ids{
 	pixel_y = 3;
-	pixel_x = -2;
-	layer = 3.2
+	pixel_x = -2
 	},
 /obj/structure/surface/table/reinforced/black{
-	layer = 3.01;
 	pixel_y = -4
 	},
 /turf/open/floor/almayer/silver/northwest,
@@ -49871,6 +49845,10 @@
 	},
 /turf/open/floor/almayer/greencorner/west,
 /area/almayer/hallways/lower/port_midship_hallway)
+"pBK" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/alpha_delta_shared)
 "pBS" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/pipes/standard/manifold/hidden/supply{
@@ -52243,17 +52221,16 @@
 /turf/open/floor/almayer/cargo,
 /area/almayer/living/tankerbunks)
 "qDN" = (
-/obj/structure/platform/metal/almayer{
-	dir = 1
-	},
 /obj/structure/machinery/light{
 	dir = 4
 	},
-/obj/structure/machinery/disposal{
-	layer = 3.5
-	},
+/obj/structure/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 2
+	},
+/obj/structure/platform/metal/almayer{
+	dir = 1;
+	layer = 2.79
 	},
 /turf/open/floor/almayer/silver/northeast,
 /area/almayer/command/cic)
@@ -54090,22 +54067,18 @@
 /turf/open/floor/almayer,
 /area/almayer/engineering/upper_engineering/starboard)
 "rtt" = (
-/obj/structure/surface/table/reinforced/black{
-	layer = 3.215
-	},
+/obj/structure/surface/table/reinforced/black,
 /obj/structure/machinery/computer/shuttle/dropship/flight/remote_control{
 	name = "Normandy Remote Control Console";
 	shuttleId = "dropship_normandy";
 	pixel_x = -15
 	},
 /obj/item/device/radio/intercom/normandy{
-	layer = 3.5;
 	pixel_x = 3;
 	pixel_y = 2
 	},
 /obj/structure/window/reinforced/toughened{
-	dir = 4;
-	layer = 3.22
+	dir = 4
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -57417,6 +57390,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/lower/starboard_midship_hallway)
+"sXh" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/bravo_charlie_shared)
 "sXr" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -60705,12 +60682,13 @@
 	},
 /obj/structure/machinery/computer/overwatch/almayer{
 	dir = 8;
-	pixel_y = 12
+	pixel_y = 12;
+	layer = 2.981
 	},
 /obj/structure/machinery/computer/crew/alt{
 	dir = 4;
 	pixel_y = -2;
-	layer = 2.99
+	layer = 2.982
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/cic)
@@ -61427,6 +61405,10 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/lower/repair_bay)
+"uFS" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/almayer/squads/alpha)
 "uGa" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/almayer/cargo,
@@ -64037,19 +64019,17 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/groundside_operations{
 	pixel_y = 23;
-	layer = 3.1;
 	dir = 4;
 	pixel_x = 2
 	},
 /obj/structure/machinery/computer/almayer_control{
-	layer = 3.4;
+	layer = 2.981;
 	pixel_y = -9;
 	dir = 4;
 	pixel_x = 2
 	},
 /obj/structure/machinery/computer/overwatch/almayer{
 	dir = 8;
-	layer = 3.2;
 	pixel_y = 6;
 	pixel_x = 2
 	},
@@ -64249,15 +64229,15 @@
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/structure/machinery/computer/cameras/almayer_network/vehicle{
 	pixel_y = -16;
-	layer = 3.3;
 	dir = 4;
-	pixel_x = 2
+	pixel_x = 2;
+	layer = 2.982
 	},
 /obj/structure/machinery/computer/overwatch/almayer{
-	layer = 3.2;
 	pixel_y = -2;
 	pixel_x = 2;
-	dir = 8
+	dir = 8;
+	layer = 2.981
 	},
 /obj/structure/window/reinforced/toughened{
 	dir = 8
@@ -64310,29 +64290,16 @@
 /area/almayer/maint/upper/u_a_p)
 "vSl" = (
 /obj/structure/platform/metal/almayer{
-	dir = 1
+	dir = 1;
+	layer = 2.79
 	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/item/clothing/glasses/hud/health{
-	layer = 3.525
-	},
-/obj/structure/surface/rack{
-	layer = 3
-	},
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/structure/surface/rack,
 /turf/open/floor/almayer/silver/north,
 /area/almayer/command/cic)
 "vSn" = (
@@ -64488,7 +64455,7 @@
 	},
 /obj/structure/surface/table/almayer,
 /obj/item/device/radio/intercom/normandy{
-	layer = 3.5
+	layer = 2.9
 	},
 /turf/open/floor/almayer/redfull,
 /area/almayer/living/offices/flight)
@@ -107842,13 +107809,13 @@ fKl
 qSq
 duM
 vlS
-kdR
+pBK
 aEY
 fyC
 vlN
 fyC
 tVn
-kdR
+pBK
 vlS
 duM
 nQS
@@ -107886,13 +107853,13 @@ lkA
 aWy
 eVp
 uDg
-pZD
+sXh
 uIz
 pXn
 pRo
 pXn
 rpQ
-pZD
+sXh
 uDg
 eVp
 ycM
@@ -113123,7 +113090,7 @@ hNF
 xSW
 aLT
 msa
-bdC
+uFS
 nrB
 bSJ
 nFR
@@ -113167,7 +113134,7 @@ iDk
 qTG
 sIW
 rSE
-iTN
+jwN
 lbZ
 mni
 qnp
