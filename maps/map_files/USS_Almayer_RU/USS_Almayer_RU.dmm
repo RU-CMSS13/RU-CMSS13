@@ -11583,6 +11583,10 @@
 "bcd" = (
 /obj/structure/machinery/computer/cameras/hangar,
 /obj/structure/surface/table/reinforced/black,
+/obj/structure/window/reinforced/toughened{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "bcm" = (
@@ -13966,12 +13970,6 @@
 /obj/effect/landmark/crap_item,
 /turf/open/floor/almayer/red/north,
 /area/almayer/shipboard/brig/starboard_hallway)
-"bvb" = (
-/obj/structure/window/reinforced/toughened{
-	pixel_y = -9
-	},
-/turf/open/floor/almayer/silvercorner,
-/area/almayer/command/cic)
 "bvc" = (
 /obj/structure/bed/chair{
 	dir = 1
@@ -41680,6 +41678,10 @@
 	pixel_y = 2
 	},
 /obj/structure/surface/table/reinforced/black,
+/obj/structure/window/reinforced/toughened{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "lQu" = (
@@ -54080,6 +54082,10 @@
 /obj/structure/window/reinforced/toughened{
 	dir = 4
 	},
+/obj/structure/window/reinforced/toughened{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
 "rtx" = (
@@ -56634,12 +56640,6 @@
 	},
 /turf/open/floor/almayer/bluefull,
 /area/almayer/living/briefing)
-"sCP" = (
-/obj/structure/window/reinforced/toughened{
-	pixel_y = -9
-	},
-/turf/open/floor/almayer/silvercorner/west,
-/area/almayer/command/cic)
 "sCQ" = (
 /obj/structure/machinery/light,
 /turf/open/floor/almayer/silver,
@@ -89459,7 +89459,7 @@ lgK
 dMr
 rKd
 wlE
-bvb
+ays
 lQq
 oyZ
 fOC
@@ -89662,7 +89662,7 @@ lgK
 rzn
 rKd
 wlE
-sCP
+aPD
 bcd
 gLT
 paL
@@ -89865,7 +89865,7 @@ gkK
 aEB
 rKd
 vuY
-bvb
+ays
 rtt
 abk
 vrG
