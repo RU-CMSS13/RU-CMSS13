@@ -80,7 +80,7 @@
 		src << browse_rsc(file)
 
 //Потом можно будет избавляться от лишней фигни в зависимости от содержимого
-/client/proc/filter_file_name(var/list/listy)
+/client/proc/filter_file_name(list/listy)
 	for(var/file_name in listy)
 		if(findtext(file_name, "config_error"))
 			listy.Remove(file_name)
