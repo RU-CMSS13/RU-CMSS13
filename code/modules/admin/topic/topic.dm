@@ -126,78 +126,15 @@
 			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
 RUCM REMOVE END*/
 //RUCM START
-	else if(href_list["JobBanRu3"])
-		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
-
-		var/datum/entity/player/P1 = get_player_from_key(href_list["ckey"])
-		if(!P1)
+	if(((href_list["sticky_ru"])&&(href_list["ckey"])))
+		if(href_list["new_sticky"])
+			src.do_stickyban_ru(href_list["ckey"])
 			return
-		var/ckey = P1.ckey
-
-			/*
-			if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_BAN)) //they can ban too. So we can't ban them
-				alert("You cannot perform this action. You must be of a higher administrative rank!")
-				return
-			*/
-
-		if(!GLOB.RoleAuthority)
-			to_chat(usr, "Role Authority has not been set up!")
+		if(href_list["find_sticky"])
+			src.do_stickyban_search_ru(href_list["ckey"])
 			return
-
-		//get jobs for department if specified, otherwise just returnt he one job in a list.
-		var/list/joblist = list()
-		switch(href_list["JobBanRu3"])
-			if("CICdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_COMMAND)
-			if("Supportdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_AUXIL_SUPPORT)
-			if("Policedept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_POLICE)
-			if("Engineeringdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_ENGINEERING)
-			if("Requisitiondept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_REQUISITION)
-			if("Medicaldept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_MEDICAL)
-			if("Marinesdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_MARINES)
-			if("Miscdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_MISC)
-			if("Xenosdept")
-				joblist += get_job_titles_from_list(GLOB.ROLES_XENO)
-			else
-				joblist += href_list["JobBanRu3"]
-
-		var/list/notbannedlist = list()
-		for(var/job in joblist)
-			if(!jobban_isbanned_ru(ckey, job, P1))
-				notbannedlist += job
-
-		//Banning comes first
-		if(length(notbannedlist))
-			if(!check_rights(R_BAN))  return
-			var/reason = input(usr,"Reason?","Please State Reason","") as text|null
-			if(reason)
-				P1.add_job_ban(reason, notbannedlist)
-
-				href_list["jobban2"] = 1 // lets it fall through and refresh
-				return 1
-
-		//Unbanning joblist
-		//all jobs in joblist are banned already OR we didn't give a reason (implying they shouldn't be banned)
-		if(length(joblist)) //at least 1 banned job exists in joblist so we have stuff to unban.
-			for(var/job in joblist)
-				var/reason = jobban_isbanned_ru(ckey, job, P1)
-				if(!reason) continue //skip if it isn't jobbanned anyway
-				switch(alert("Job: '[job]' Reason: '[reason]' Un-jobban?","Please Confirm","Yes","No"))
-					if("Yes")
-						P1.remove_job_ban(job)
-					else
-						continue
-			href_list["jobban2"] = 1 // lets it fall through and refresh
-
-			return 1
-		return 0 //we didn't do anything!
+	if(href_list["JobBanRu3"])
+		job_ban_ru_2(href_list["JobBanRu3"], href_list["ckey"])
 	if(href_list["csdeny"])
 		var/mob/ref_person = locate(href_list["csdeny"])
 		log_game("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]")

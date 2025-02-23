@@ -39,9 +39,7 @@
 		var/list/choices = sortList(flist(path))
 		if(path != root)
 			choices.Insert(1,"/")
-		for(var/file_name in choices)
-			if(findtext(file_name, "config_error"))
-				choices.Remove(file_name)
+		choices = filter_file_name(choices)
 
 		var/choice = tgui_input_list(src,"Choose a file to access:","Download",choices)
 		switch(choice)
@@ -80,3 +78,9 @@
 
 	for(var/file in args)
 		src << browse_rsc(file)
+
+//Потом можно будет избавляться от лишней фигни в зависимости от содержимого
+/client/proc/filter_file_name(var/list/listy)
+	for(var/file_name in listy)
+		if(findtext(file_name, "config_error"))
+			listy.Remove(file_name)

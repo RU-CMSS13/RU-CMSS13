@@ -1,31 +1,4 @@
 
-/datum/admins/proc/DB_ban_panel(key as text)
-
-	if (!istype(src,/datum/admins))
-		src = usr.client.admin_holder
-	if (!istype(src,/datum/admins) || !(src.rights & R_MOD))
-		to_chat(usr, "Error: you are not an admin!")
-		return
-
-	var/datum/entity/player/P = get_player_from_key(key)
-
-	var/dat = {"<meta charset="UTF-8"><div align='center'><table width='90%'><tr>"}
-
-	dat += "<div align='center'><width='90%'> <h1>Banning panel</h1></div><tr>"
-
-	dat += "Checked key:[key]<br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];CheckPlaytimesRu=1;ckey=[P.ckey]'>Check Playtimes</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];add_player_info=[P.ckey]'>Add Note</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];add_player_info_confidential=[P.ckey]'>Add Confidential Note</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];player_notes_all=[P.ckey]'>Show Complete Record</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];check_ckey=[P.ckey];ckey=[P.ckey]'>Check Ckey</A><br>"
-	dat += "<a href='byond://?src=\ref[src];[HrefToken()];sticky=1;new_sticky=1'>Add Sticky Ban</a>"
-	dat += "<a href='byond://?src=\ref[src];[HrefToken()];sticky=1;find_sticky=1'>Find Sticky Ban</a><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];BanRu=1;ckey=[P.ckey]'>Temporal Ban</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];BanPermaRu=1;ckey=[P.ckey]'>Permanent Ban</A><br>"
-	dat += "<A href='byond://?src=\ref[src];[HrefToken()];JobBanRu=1;ckey=[P.ckey]'>Job ban</A><br>"
-	show_browser(usr, dat, "Ban Panel", "adminplayerinfo", "size=480x480")
-
 /client/proc/DB_ban_panel()
 	set category = "Admin.Panels"
 	set name = "Banning Panel"
@@ -43,14 +16,45 @@
 		admin_holder.DB_ban_panel(ckey)
 	return
 
+/datum/admins/proc/DB_ban_panel(key as text)
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.admin_holder
+	if (!istype(src,/datum/admins) || !(src.rights & R_MOD))
+		to_chat(usr, "Error: you are not an admin!")
+		return
+
+	var/datum/entity/player/P = get_player_from_key(key)
+
+	var/dat = {"<meta charset="UTF-8"><div align='center'><table width='90%'><tr>"}
+
+	dat += "<div align='center'><width='90%'> <h1>Banning panel</h1></div><tr>"
+
+	dat += "Checked key:[key]<br>"
+	dat += "Is banned temporal:[P.is_time_banned == 1?"Yes":"No"]<br>"
+	dat += "Is banned permanent:[P.is_permabanned == 1?"Yes":"No"]<br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];CheckPlaytimesRu=1;ckey=[P.ckey]'>Check Playtimes</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];add_player_info=[P.ckey]'>Add Note</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];add_player_info_confidential=[P.ckey]'>Add Confidential Note</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];player_notes_all=[P.ckey]'>Show Complete Record</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];check_ckey=[P.ckey];ckey=[P.ckey]'>Check Ckey</A><br>"
+	dat += "<a href='byond://?src=\ref[src];[HrefToken()];sticky_ru=1;new_sticky=1;ckey=[P.ckey]'>Add Sticky Ban</a>"
+	dat += "<a href='byond://?src=\ref[src];[HrefToken()];sticky_ru=1;find_sticky=1;ckey=[P.ckey]'>Find Sticky Ban</a><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];BanRu=1;ckey=[P.ckey]'>Temporal Ban</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];BanPermaRu=1;ckey=[P.ckey]'>Permanent Ban</A><br>"
+	dat += "<A href='byond://?src=\ref[src];[HrefToken()];JobBanRu=1;ckey=[P.ckey]'>Job ban</A><br>"
+	show_browser(usr, dat, "Ban Panel", "adminplayerinfo", "size=480x480")
+
 /datum/admins/proc/job_ban_ru(ckey)
+
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
+	if(!player)
+		to_chat(usr, "Database lookup failed.No file was found.")
+		return
 
 	var/datum/entity/player/P = get_player_from_key(ckey)
 	if(!GLOB.RoleAuthority)
 		to_chat(usr, "The Role Authority is not set up!")
-		return
-
-	if(!P)
 		return
 
 	var/dat = ""
@@ -124,7 +128,8 @@ WARNING!*/
 	return
 
 /proc/jobban_isbanned_ru(ckey, rank, datum/entity/player/P = null)
-	P = get_player_from_key(ckey)
+	if(!P)
+		P = get_player_from_key(ckey)
 	if(!rank)
 		return "Non-existant job"
 	rank = ckey(rank)
@@ -136,6 +141,11 @@ WARNING!*/
 		return PJB ? PJB.text : null
 
 /datum/admins/proc/generate_job_ban_list_ru(ckey, datum/entity/player/P, list/roles, department, color = "ccccff")
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
+	if(!player)
+		to_chat(usr, "Database lookup failed.No file was found.")
+		return
+
 	var/counter = 0
 
 	var/dat = ""
@@ -162,6 +172,12 @@ WARNING!*/
 	return dat
 
 /datum/admins/proc/ban_temp_ru(ckey)
+
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
+	if(!player)
+		to_chat(usr, "Database lookup failed.No file was found.")
+		return
+
 	var/mins = tgui_input_number(usr,"How long (in minutes)? \n 180 = 3 hours \n 1440 = 1 day \n 4320 = 3 days \n 10080 = 7 days \n 43800 = 1 Month","Ban time", 1440, 262800, 1)
 	if(!mins)
 		return
@@ -177,6 +193,12 @@ WARNING!*/
 	P.add_timed_ban(reason, mins)
 
 /datum/admins/proc/ban_perma_ru(ckey)
+
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
+	if(!player)
+		to_chat(usr, "Database lookup failed.No file was found.")
+		return
+
 	var/reason = tgui_input_text(owner, "What message should be given to the permabanned user?", "Permanent Ban", encode = FALSE)
 	if(!reason)
 		return
@@ -192,3 +214,139 @@ WARNING!*/
 
 	if(!target_entity.add_perma_ban(reason, internal_reason, owner.player_data))
 		to_chat(owner, SPAN_ADMIN("The user is already permabanned! If necessary, you can remove the permaban, and place a new one."))
+
+/datum/admins/proc/job_ban_ru_2(ban_job, key)
+	if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
+
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, key))
+	if(!player)
+		to_chat(usr, "Database lookup failed. No file was found.")
+		return
+	var/datum/entity/player/P1 = get_player_from_key(key)
+	var/ckey = P1.ckey
+
+			/*
+			if(M.client && M.client.admin_holder && (M.client.admin_holder.rights & R_BAN)) //they can ban too. So we can't ban them
+				alert("You cannot perform this action. You must be of a higher administrative rank!")
+				return
+			*/
+
+	if(!GLOB.RoleAuthority)
+		to_chat(usr, "Role Authority has not been set up!")
+		return
+
+		//get jobs for department if specified, otherwise just returnt he one job in a list.
+	var/list/joblist = list()
+	switch(ban_job)
+		if("CICdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_COMMAND)
+		if("Supportdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_AUXIL_SUPPORT)
+		if("Policedept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_POLICE)
+		if("Engineeringdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_ENGINEERING)
+		if("Requisitiondept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_REQUISITION)
+		if("Medicaldept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_MEDICAL)
+		if("Marinesdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_MARINES)
+		if("Miscdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_MISC)
+		if("Xenosdept")
+			joblist += get_job_titles_from_list(GLOB.ROLES_XENO)
+		else
+			joblist += ban_job
+
+	var/list/notbannedlist = list()
+	for(var/job in joblist)
+		if(!jobban_isbanned_ru(ckey, job, P1))
+			notbannedlist += job
+
+		//Banning comes first
+	if(length(notbannedlist))
+		if(!check_rights(R_BAN))  return
+		var/reason = input(usr,"Reason?","Please State Reason","") as text|null
+		if(reason)
+			P1.add_job_ban(reason, notbannedlist)
+
+			//href_list["jobban2"] = 1 // lets it fall through and refresh
+			return 1
+
+		//Unbanning joblist
+		//all jobs in joblist are banned already OR we didn't give a reason (implying they shouldn't be banned)
+	if(length(joblist)) //at least 1 banned job exists in joblist so we have stuff to unban.
+		for(var/job in joblist)
+			var/reason = jobban_isbanned_ru(ckey, job, P1)
+			if(!reason) continue //skip if it isn't jobbanned anyway
+			switch(alert("Job: '[job]' Reason: '[reason]' Un-jobban?","Please Confirm","Yes","No"))
+				if("Yes")
+					P1.remove_job_ban(job)
+				else
+					continue
+		//href_list["jobban2"] = 1 // lets it fall through and refresh
+
+		return 1
+	return 0 //we didn't do anything!
+
+/datum/admins/proc/do_stickyban_search_ru(key)
+	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, key))
+	if(!player)
+		to_chat(usr, "Database lookup failed. No file was found.")
+		return
+
+	var/list/datum/view_record/stickyban/stickies = SSstickyban.check_for_sticky_ban(key)
+	if(!stickies)
+		to_chat(owner, SPAN_ADMIN("Could not locate any stickbans impacting [key]."))
+		return
+
+	var/list/impacting_stickies = list()
+
+	for(var/datum/view_record/stickyban/sticky as anything in stickies)
+		impacting_stickies += sticky.identifier
+
+	to_chat(owner, SPAN_ADMIN("Found the following stickybans for [key]: [english_list(impacting_stickies)]"))
+
+/datum/admins/proc/do_stickyban_ru(key, reason, message, list/impacted_ckeys, list/impacted_cids, list/impacted_ips)
+	if(!key)
+		return
+
+	if(!message)
+		message = tgui_input_text(usr, "What message should be given to the impacted users?", "BuildABan", encode = FALSE)
+	if(!message)
+		return
+
+	if(!reason)
+		reason = tgui_input_text(usr, "What's the reason for the ban? This is shown internally, and not displayed in public notes and ban messages. Include as much detail as necessary.", "BuildABan", multiline = TRUE, encode = FALSE)
+	if(!reason)
+		return
+
+	if(!length(impacted_ckeys))
+		impacted_ckeys = splittext(tgui_input_text(usr, "Which CKEYs should be impacted by this ban? Include the primary ckey, separated by semicolons.", "BuildABan", "player1;player2;player3"), ";")
+
+	if(!length(impacted_cids))
+		impacted_cids = splittext(tgui_input_text(usr, "Which CIDs should be impacted by this ban? Separate with semicolons.", "BuildABan", "12345678;87654321"), ";")
+
+	if(!length(impacted_ips))
+		impacted_ips = splittext(tgui_input_text(src, "Which IPs should be impacted by this ban? Separate with semicolons.", "BuildABan", "1.1.1.1;8.8.8.8"), ";")
+
+	var/datum/entity/stickyban/new_sticky = SSstickyban.add_stickyban(key, reason, message, owner.player_data)
+
+	if(!new_sticky)
+		to_chat(src, SPAN_ADMIN("Failed to apply stickyban."))
+		return
+
+	for(var/ckey in impacted_ckeys)
+		SSstickyban.add_matched_ckey(new_sticky.id, ckey)
+
+	for(var/cid in impacted_cids)
+		SSstickyban.add_matched_cid(new_sticky.id, cid)
+
+	for(var/ip in impacted_ips)
+		SSstickyban.add_matched_ip(new_sticky.id, ip)
+
+	log_admin("STICKYBAN: Identifier: [key] Reason: [reason] Message: [message] CKEYs: [english_list(impacted_ckeys)] IPs: [english_list(impacted_ips)] CIDs: [english_list(impacted_cids)]")
+	message_admins("[key_name_admin(src)] has added a new stickyban with the identifier '[key]'.")
+	var/datum/tgs_chat_embed/field/reason_embed = new("Stickyban Reason", reason)
+	important_message_external("[src] has added a new stickyban with the identifier '[key]'.", "Stickyban Placed", list(reason_embed))
