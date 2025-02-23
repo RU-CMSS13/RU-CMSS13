@@ -113,12 +113,15 @@
 	NW.invisibility = INVISIBILITY_ABSTRACT
 	NE.invisibility = INVISIBILITY_ABSTRACT
 
+	setup_animation_stuff()	// RUCM ADDITION
+
 // Make the elevator shaft visible when the elevator leaves.
 /obj/docking_port/stationary/vehicle_elevator/almayer/on_departure(obj/docking_port/mobile/departing_shuttle)
 	SW.invisibility = 0
 	SE.invisibility = 0
 	NW.invisibility = 0
 	NE.invisibility = 0
+	animate_on_departure()	// RUCM ADDITION
 
 // And make it invisible again when the elevator returns.
 /obj/docking_port/stationary/vehicle_elevator/almayer/on_arrival(obj/docking_port/mobile/arriving_shuttle)

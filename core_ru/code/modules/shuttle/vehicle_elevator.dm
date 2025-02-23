@@ -10,8 +10,7 @@
 		for (var/turf/open/floor/plating/plating_catwalk/wrong_catwalk in elevator)
 			wrong_catwalk.ChangeTurf(/turf/open/floor/plating/bare_catwalk)
 
-/obj/docking_port/stationary/vehicle_elevator/almayer/Initialize(mapload)
-	. = ..()
+/obj/docking_port/stationary/vehicle_elevator/almayer/proc/setup_animation_stuff()
 	elevator_animation = new()
 	SW.layer = UNDER_TURF_LAYER - 0.01
 	SE.layer = UNDER_TURF_LAYER - 0.01
@@ -23,8 +22,7 @@
 	NE.vis_contents += elevator_animation
 
 // Elevator leaves (stuff already moved)
-/obj/docking_port/stationary/vehicle_elevator/almayer/on_departure(obj/docking_port/mobile/departing_shuttle)
-	..()
+/obj/docking_port/stationary/vehicle_elevator/almayer/proc/animate_on_departure(obj/docking_port/mobile/departing_shuttle)
 	var/list/obj/effect/abstract/shit_hack_list = list()
 	for (var/area/away_area in departing_shuttle.shuttle_areas)
 		for(var/turf/T in away_area)

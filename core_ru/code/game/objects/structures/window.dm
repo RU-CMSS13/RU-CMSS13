@@ -1,14 +1,6 @@
 /obj/structure/window
 	var/obj/effect/abstract/smart_window_overlay
 
-/obj/structure/window/Initialize(mapload, ...)
-	. = ..()
-	make_smart_window_overlay()
-
-/obj/structure/window/update_icon(loc, direction)
-	. = ..()
-	make_smart_window_overlay()
-
 /obj/structure/window/proc/make_smart_window_overlay()
 	var/turf/monitored = get_turf(src)
 	if (!monitored)
