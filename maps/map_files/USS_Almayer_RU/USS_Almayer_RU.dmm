@@ -1285,6 +1285,10 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/almayer/mono,
 /area/almayer/lifeboat_pumps/north1)
+"ads" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/bravo_charlie_shared)
 "adt" = (
 /obj/item/reagent_container/glass/bucket/janibucket{
 	pixel_x = -1;
@@ -1538,6 +1542,10 @@
 /obj/structure/closet/firecloset,
 /turf/open/floor/almayer/cargo,
 /area/almayer/lifeboat_pumps/north1)
+"aea" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/almayer/squads/charlie)
 "aeb" = (
 /obj/structure/machinery/door/poddoor/shutters/almayer/open{
 	dir = 4;
@@ -1546,6 +1554,15 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/almayer/hallways/lower/starboard_midship_hallway)
+"aec" = (
+/obj/structure/machinery/gear{
+	id = "vehicle_elevator_gears"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "NW-out"
+	},
+/turf/open/floor/almayer/mono,
+/area/almayer/hallways/lower/vehiclehangar)
 "aed" = (
 /obj/structure/machinery/scoreboard_button{
 	id = "basketball";
@@ -1554,6 +1571,18 @@
 	},
 /turf/open/floor/almayer/blue/west,
 /area/almayer/living/basketball)
+"aee" = (
+/obj/structure/machinery/gear{
+	id = "vehicle_elevator_gears"
+	},
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "SW-out"
+	},
+/turf/open/floor/almayer/mono,
+/area/almayer/hallways/lower/vehiclehangar)
 "aef" = (
 /turf/open/floor/almayer,
 /area/almayer/living/basketball)
@@ -1572,6 +1601,16 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/offices/flight)
+"aei" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/effect/decal/warning_stripes{
+	icon_state = "NE-out";
+	pixel_y = 1;
+	pixel_x = 1
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/squads/req)
 "aej" = (
 /turf/closed/wall/almayer,
 /area/almayer/living/officer_study)
@@ -2034,6 +2073,14 @@
 	},
 /turf/open/floor/almayer/silver/north,
 /area/almayer/command/cic)
+"afp" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "NW-out";
+	pixel_x = -1;
+	pixel_y = 1
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/almayer/squads/req)
 "afq" = (
 /obj/effect/step_trigger/clone_cleaner,
 /obj/effect/decal/warning_stripes{
@@ -2411,6 +2458,10 @@
 	},
 /turf/open/floor/plating,
 /area/almayer/living/basketball)
+"agB" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/alpha_delta_shared)
 "agC" = (
 /obj/structure/machinery/light{
 	unacidable = 1;
@@ -2499,6 +2550,10 @@
 /obj/structure/machinery/door/firedoor/border_only/almayer,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/living/officer_study)
+"agP" = (
+/obj/structure/machinery/computer/supply,
+/turf/open/floor/almayer/plate,
+/area/almayer/squads/alpha)
 "agQ" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer,
 /turf/open/floor/almayer/test_floor4,
@@ -18136,14 +18191,6 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/almayer/plate,
-/area/almayer/squads/req)
-"bXL" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "NW-out";
-	pixel_x = -1;
-	pixel_y = 1
-	},
-/turf/open/floor/almayer/plating/northeast,
 /area/almayer/squads/req)
 "bXO" = (
 /obj/effect/landmark/start/tank_crew,
@@ -36559,10 +36606,6 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/lower/starboard_aft_hallway)
-"jwN" = (
-/obj/structure/machinery/computer/supply,
-/turf/open/floor/almayer/plate,
-/area/almayer/squads/charlie)
 "jwP" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -37586,7 +37629,7 @@
 	id = "vehicle_elevator_gears"
 	},
 /obj/effect/decal/warning_stripes{
-	icon_state = "NW-out"
+	icon_state = "NE-out"
 	},
 /turf/open/floor/almayer/mono,
 /area/almayer/hallways/lower/vehiclehangar)
@@ -49855,10 +49898,6 @@
 	},
 /turf/open/floor/almayer/greencorner/west,
 /area/almayer/hallways/lower/port_midship_hallway)
-"pBK" = (
-/obj/structure/machinery/computer/supply,
-/turf/open/floor/almayer/plate,
-/area/rumayer/squads/alpha_delta_shared)
 "pBS" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/pipes/standard/manifold/hidden/supply{
@@ -51893,15 +51932,6 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/lifeboat_pumps/south2)
-"qvR" = (
-/obj/structure/machinery/gear{
-	id = "vehicle_elevator_gears"
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "NE-out"
-	},
-/turf/open/floor/almayer/mono,
-/area/almayer/hallways/lower/vehiclehangar)
 "qwo" = (
 /obj/structure/machinery/washing_machine,
 /obj/structure/machinery/washing_machine{
@@ -53882,18 +53912,6 @@
 /obj/structure/filingcabinet,
 /turf/open/floor/carpet,
 /area/almayer/living/commandbunks)
-"rpH" = (
-/obj/structure/machinery/gear{
-	id = "vehicle_elevator_gears"
-	},
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "SW-out"
-	},
-/turf/open/floor/almayer/mono,
-/area/almayer/hallways/lower/vehiclehangar)
 "rpK" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/comdoor/reinforced{
 	name = "\improper Cryogenics Bay";
@@ -57424,10 +57442,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/lower/starboard_midship_hallway)
-"sXh" = (
-/obj/structure/machinery/computer/supply,
-/turf/open/floor/almayer/plate,
-/area/rumayer/squads/bravo_charlie_shared)
 "sXr" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -59446,16 +59460,6 @@
 /obj/structure/surface/table/almayer,
 /turf/open/floor/almayer/bluefull,
 /area/almayer/maint/hull/lower/l_a_s)
-"tOY" = (
-/obj/structure/disposalpipe/segment,
-/obj/structure/pipes/standard/simple/hidden/supply,
-/obj/effect/decal/warning_stripes{
-	icon_state = "NE-out";
-	pixel_y = 1;
-	pixel_x = 1
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/squads/req)
 "tPj" = (
 /obj/structure/machinery/door/airlock/almayer/marine/requisitions{
 	access_modified = 1;
@@ -61453,10 +61457,6 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/lower/repair_bay)
-"uFS" = (
-/obj/structure/machinery/computer/supply,
-/turf/open/floor/almayer/plate,
-/area/almayer/squads/alpha)
 "uGa" = (
 /obj/structure/closet/emcloset,
 /turf/open/floor/almayer/cargo,
@@ -83331,7 +83331,7 @@ jjs
 jjs
 jjs
 jjs
-qvR
+jYd
 bSv
 fbV
 nRM
@@ -84543,13 +84543,13 @@ iFQ
 izg
 bNp
 fsd
-rpH
+aee
 eGg
 eGg
 eGg
 eGg
 eGg
-jYd
+aec
 wRI
 bSv
 bTV
@@ -107857,13 +107857,13 @@ fKl
 qSq
 duM
 vlS
-pBK
+agB
 aEY
 fyC
 vlN
 fyC
 tVn
-pBK
+agB
 vlS
 duM
 nQS
@@ -107901,13 +107901,13 @@ lkA
 aWy
 eVp
 uDg
-sXh
+ads
 uIz
 pXn
 pRo
 pXn
 rpQ
-sXh
+ads
 uDg
 eVp
 ycM
@@ -111540,7 +111540,7 @@ bNL
 bNL
 bNL
 bNL
-tOY
+aei
 bXH
 bYw
 nDM
@@ -113138,7 +113138,7 @@ hNF
 xSW
 aLT
 msa
-uFS
+agP
 nrB
 bSJ
 nFR
@@ -113164,7 +113164,7 @@ lMw
 jeO
 nQv
 ltb
-bXL
+afp
 bKA
 dyx
 hGN
@@ -113182,7 +113182,7 @@ iDk
 qTG
 sIW
 rSE
-jwN
+aea
 lbZ
 mni
 qnp
