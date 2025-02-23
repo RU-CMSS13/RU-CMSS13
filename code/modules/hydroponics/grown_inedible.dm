@@ -19,7 +19,12 @@
 		if(!S || !S.chems)
 			return
 
+/* RUCM CHANGE
 		potency = S.potency
+*/
+//RUCM START
+		potency = S.potency * 1.2 // Lazy potency change
+//RUCM END
 
 		for(var/rid in S.chems)
 			var/list/reagent_data = S.chems[rid]
