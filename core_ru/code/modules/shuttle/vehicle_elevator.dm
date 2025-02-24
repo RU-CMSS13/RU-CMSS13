@@ -23,16 +23,20 @@
 
 // Elevator leaves (stuff already moved)
 /obj/docking_port/stationary/vehicle_elevator/almayer/proc/animate_on_departure(obj/docking_port/mobile/departing_shuttle)
-	var/list/obj/effect/abstract/shit_hack_list = list()
+	var/icon/turf_underlay = icon('icons/effects/effects.dmi', "nothing")
+	// Maybe redo this later
+	var/x_center_offset = departing_shuttle.x -2
+	var/y_center_offset = departing_shuttle.y -2
+	var/pixel_size = world.icon_size
+	turf_underlay.Scale(pixel_size*5, pixel_size*5)
 	for (var/area/away_area in departing_shuttle.shuttle_areas)
 		for(var/turf/T in away_area)
-			var/obj/effect/abstract/why_should_i_do_this = new (T)
+			// Do not draw us above tiles near the elevator
 			T.layer = UNDER_TURF_LAYER - 0.01
-			why_should_i_do_this.icon = T.icon
-			why_should_i_do_this.icon_state = T.icon_state
-			why_should_i_do_this.layer = UNDER_TURF_LAYER
-			shit_hack_list += why_should_i_do_this
+			// T.icon not working. No idea, why. Maybe plane issue
+			turf_underlay.Blend(icon(T.icon, T.icon_state), ICON_OVERLAY, (T.x - x_center_offset)*pixel_size + 1, (T.y - y_center_offset)*pixel_size + 1)
 			elevator_animation.vis_contents += T
+	elevator_animation.icon = turf_underlay
 
 	for(var/turf/vis_turf in elevator_animation.vis_contents)
 		for(var/atom/movable/vis_content in vis_turf.contents)
@@ -53,21 +57,26 @@
 			vis_content.update_emissive_block()
 
 	elevator_animation.vis_contents.Cut()
-	QDEL_LIST(shit_hack_list)
+	// We redraw it in case of turf changes on our elevator
+	elevator_animation.icon = null
 
 // Elevator arrives (/obj/docking_port/mobile/vehicle_elevator::ignition_time -> 5 SECONDS)
 /obj/docking_port/stationary/vehicle_elevator/almayer/on_prearrival(obj/docking_port/mobile/arriving_shuttle)
 	..()
-	var/list/obj/effect/abstract/shit_hack_list = list()
+	var/icon/turf_underlay = icon('icons/effects/effects.dmi', "nothing")
+	// Maybe refactor this later
+	var/x_center_offset = arriving_shuttle.x -2
+	var/y_center_offset = arriving_shuttle.y -2
+	var/pixel_size = world.icon_size
+	turf_underlay.Scale(pixel_size*5, pixel_size*5)
 	for (var/area/away_area in arriving_shuttle.shuttle_areas)
 		for(var/turf/T in away_area)
-			var/obj/effect/abstract/why_should_i_do_this = new (T)
+			// Do not draw us above tiles near the elevator
 			T.layer = UNDER_TURF_LAYER - 0.01
-			why_should_i_do_this.icon = T.icon
-			why_should_i_do_this.icon_state = T.icon_state
-			why_should_i_do_this.layer = UNDER_TURF_LAYER
-			shit_hack_list += why_should_i_do_this
+			// T.icon not working. No idea, why. Maybe plane issue
+			turf_underlay.Blend(icon(T.icon, T.icon_state), ICON_OVERLAY, (T.x - x_center_offset)*pixel_size + 1, (T.y - y_center_offset)*pixel_size + 1)
 			elevator_animation.vis_contents += T
+	elevator_animation.icon = turf_underlay
 
 	for(var/turf/vis_turf in elevator_animation.vis_contents)
 		for(var/atom/movable/vis_content in vis_turf.contents)
@@ -87,5 +96,5 @@
 			vis_content.blocks_emissive = initial(vis_content.blocks_emissive)
 			vis_content.update_emissive_block()
 
-	elevator_animation.vis_contents.Cut()
-	QDEL_LIST(shit_hack_list)
+	// We redraw it in case of turf changes on our elevator
+	elevator_animation.icon = null
