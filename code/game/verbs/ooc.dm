@@ -98,6 +98,26 @@
 //RUCM START
 	if(player_data.donator_info?.patreon_function_available("badge"))
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "Donator")]"
+	if(isSenator(src))
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "WhitelistSenator")]"
+	if(admin_holder.rank == "Assistant Manager")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "AssistantManager")]"
+	if(admin_holder.rank == "Senior Admin")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "SeniorAdmin")]"
+	if(admin_holder.rank == "Trial Admin")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "TrialAdmin")]"
+	if(admin_holder.rank == "Trial Maintainer")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "TrialMaintainer")]"
+	if(admin_holder.rank == "Admin Manager")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "AdminManager")]"
+	if(admin_holder.rank == "Maintainer Manager")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "MaintainerManager")]"
+	if(admin_holder.rank == "Xeno Mentor")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "XenoMentor")]"
+	if(admin_holder.rank == "Marine Mentor")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "MarineMentor")]"
+	if(admin_holder.rank == "Senior Mentor")
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "SeniorMentor")]"
 //RUCM END
 	if(isCouncil(src))
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "WhitelistCouncil")]"
