@@ -2,6 +2,7 @@
 	name = "Stalker"
 	description = "You lose your ability to slowing hosts, but you gain ability to be invisible when you stalk."
 	flavor_description = "I T   W A N T   E A T . . ."
+	icon_state_prefix = "Lurker"
 
 	actions_to_remove = list(
 		/datum/action/xeno_action/activable/pounce/lurker,
