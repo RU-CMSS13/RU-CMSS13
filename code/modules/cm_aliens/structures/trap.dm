@@ -32,14 +32,11 @@
 	if(hivenumber == XENO_HIVE_NORMAL)
 		RegisterSignal(SSdcs, COMSIG_GLOB_GROUNDSIDE_FORSAKEN_HANDLING, PROC_REF(forsaken_handling))
 
-/obj/effect/alien/resin/trap/Initialize()
-	. = ..()
-
-	var/obj/effect/alien/weeds/node/WD = locate() in loc
-	if(WD)
-		WD.RegisterSignal(src, COMSIG_PARENT_PREQDELETED, /obj/effect/alien/weeds/node/proc/trap_destroyed)
-		WD.overlay_node = FALSE
-		WD.overlays.Cut()
+	var/obj/effect/alien/weeds/node/weed = locate() in loc
+	if(weed)
+		weed.RegisterSignal(src, COMSIG_PARENT_PREQDELETED, /obj/effect/alien/weeds/node/proc/trap_destroyed)
+		weed.overlay_node = FALSE
+		weed.overlays.Cut()
 
 /obj/effect/alien/resin/trap/get_examine_text(mob/user)
 	if(!isxeno(user))
@@ -69,7 +66,13 @@
 	trap_type = RESIN_TRAP_EMPTY
 	icon_state = "trap0"
 
-/obj/effect/alien/resin/trap/flamer_fire_act()
+/obj/effect/alien/resin/trap/flamer_fire_act(dam, datum/cause_data/flame_cause_data, obj/flamer_fire/fire)
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = flame_cause_data.resolve_mob()
+		if(istype(user) && HIVE_ALLIED_TO_HIVE(user.hivenumber, hivenumber))
+			return
+//RUCM END
 	switch(trap_type)
 		if(RESIN_TRAP_HUGGER)
 			burn_trap()

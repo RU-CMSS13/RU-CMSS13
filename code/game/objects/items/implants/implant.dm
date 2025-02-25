@@ -155,8 +155,8 @@ Implant Specifics:<BR>"}
 <b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 	return dat
 
-/obj/item/implant/explosive/hear_talk(mob/M as mob, msg, tts_heard_list)
-	hear(msg)
+/obj/item/implant/explosive/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	hear(message)
 	return
 
 /obj/item/implant/explosive/hear(msg)
@@ -267,6 +267,7 @@ Implant Specifics:<BR>"}
 /obj/item/implant/chem/Initialize()
 	. = ..()
 	GLOB.chem_implant_list += src
+	create_reagents(50)
 
 /obj/item/implant/chem/Destroy()
 	GLOB.chem_implant_list -= src
@@ -325,10 +326,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 	spawn(20)
 		malfunction--
-
-/obj/item/implant/chem/Initialize()
-	. = ..()
-	create_reagents(50)
 
 /obj/item/implant/loyalty
 	name = "loyalty implant"

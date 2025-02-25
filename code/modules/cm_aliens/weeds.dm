@@ -86,6 +86,10 @@
 	if(hivenumber == XENO_HIVE_NORMAL)
 		RegisterSignal(SSdcs, COMSIG_GLOB_GROUNDSIDE_FORSAKEN_HANDLING, PROC_REF(forsaken_handling))
 
+	var/area/area = get_area(src)
+	if(area && area.linked_lz)
+		AddComponent(/datum/component/resin_cleanup)
+
 /obj/effect/alien/weeds/proc/set_turf_weeded(datum/source, turf/T)
 	SIGNAL_HANDLER
 	if(weeded_turf)
@@ -225,6 +229,7 @@
 			continue
 		if(!spread_on_semiweedable && is_weedable < FULLY_WEEDABLE)
 			continue
+		T.clean_cleanables()
 
 		var/obj/effect/alien/resin/fruit/old_fruit
 
@@ -392,7 +397,7 @@
 	user.animation_attack_on(src)
 
 	take_damage(damage)
-	return TRUE //don't call afterattack
+	return (ATTACKBY_HINT_NO_AFTERATTACK|ATTACKBY_HINT_UPDATE_NEXT_MOVE)
 
 /obj/effect/alien/weeds/proc/take_damage(damage)
 	if(explo_proof)
@@ -402,9 +407,16 @@
 	if(health <= 0)
 		deconstruct(FALSE)
 
-/obj/effect/alien/weeds/flamer_fire_act(dam)
+/obj/effect/alien/weeds/flamer_fire_act(dam, datum/cause_data/flame_cause_data, obj/flamer_fire/fire)
 	if(explo_proof)
 		return
+
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = flame_cause_data.resolve_mob()
+		if(istype(user) && (linked_hive && HIVE_ALLIED_TO_HIVE(user.hivenumber, linked_hive.hivenumber)))
+			return
+//RUCM END
 
 	. = ..()
 	if(!QDELETED(src))
@@ -445,7 +457,7 @@
 	if(istype(loc, /turf/closed/wall))
 		var/turf/closed/wall/W = loc
 		wall_connections = W.wall_connections
-		icon_state = ""
+		icon_state = null
 		var/image/I
 		for(var/i = 1 to 4)
 			I = image(icon, "weedwall[wall_connections[i]]", dir = 1<<(i-1))
