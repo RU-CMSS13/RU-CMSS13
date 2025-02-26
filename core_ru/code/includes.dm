@@ -30,6 +30,7 @@
 #include "datums\entities\discord_link.dm"
 #include "datums\entities\donaters.dm"
 #include "datums\entities\player.dm"
+#include "datums\research_upgrade_datum.dm"
 #include "datums\redis\callbacks\ooc.dm"
 #include "datums\skills\civilan.dm"
 #include "datums\supply_packs\ammo.dm"
