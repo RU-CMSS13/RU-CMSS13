@@ -32,3 +32,6 @@
 /datum/action/xeno_action/activable/pounce/lurker/stalker/knockdown = TRUE
 
 /datum/action/xeno_action/activable/pounce/lurker/stalker/knockdown_duration = 1.6
+
+/mob/living/carbon/xenomorph/lurker
+	icon_xeno = 'core_ru/icons/mob/xenos/lurker.dmi'
