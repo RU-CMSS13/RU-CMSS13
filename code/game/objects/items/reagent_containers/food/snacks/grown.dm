@@ -36,7 +36,7 @@
 		name = S.seed_name //Copies the name from the seed, important for renamed plants
 		if(!S.chems)
 			return
-		potency = S.potency
+		potency = S.potency * 1.2
 
 		for(var/rid in S.chems)
 			var/list/reagent_data = S.chems[rid]
