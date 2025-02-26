@@ -71,6 +71,23 @@
 		biomass_points += (food.potency * 5) // ~7500 points per 1.5h
 		qdel(attacked_item)
 		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+	if(istype(attacked_item, /obj/item/storage))
+		var/obj/item/storage/container = attacked_item
+		if(length(container.contents) == 0)
+			to_chat(user, SPAN_NOTICE("[container] is empty."))
+			return
+
+		to_chat(user, SPAN_NOTICE("You start dumping the contents of [container] into [src]."))
+		if(!do_after(user, 1.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+			return
+
+		for(var/obj/item/reagent_container/food/snacks/grown/food as anything in container)
+			to_chat(user, SPAN_NOTICE("You dissolve [food]"))
+			container.remove_from_storage(food)
+			food.moveToNullspace()
+			biomass_points += (food.potency * 5)
+
+		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
 //RUCM END
 	if(istype(attacked_item, /obj/item/clothing/accessory/health/research_plate))
 		var/obj/item/clothing/accessory/health/research_plate/plate = attacked_item
