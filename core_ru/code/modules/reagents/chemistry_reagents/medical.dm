@@ -5,8 +5,8 @@
 	reagent_state = LIQUID
 	color = "#e07823"
 	custom_metabolism = AMOUNT_PER_TIME(15, 3 MINUTES) //15 units will last approximately 3 minutes
-	overdose = LOWH_REAGENTS_OVERDOSE
-	overdose_critical = LOWH_REAGENTS_OVERDOSE_CRITICAL
+	overdose = REAGENTS_OVERDOSE
+	overdose_critical = REAGENTS_OVERDOSE_CRITICAL
 	chemclass = CHEM_CLASS_COMMON
 	properties = list(PROPERTY_MUSCLESTIMULATING = 2, PROPERTY_CARDIOTOXIC = 1)
 	flags = REAGENT_TYPE_MEDICAL | REAGENT_NO_GENERATION
@@ -25,8 +25,8 @@
 	reagent_state = LIQUID
 	color = "#7dc0ff"
 	custom_metabolism = AMOUNT_PER_TIME(15, 3 MINUTES) //15 units will last approximately 3 minutes
-	overdose = LOWH_REAGENTS_OVERDOSE
-	overdose_critical = LOWH_REAGENTS_OVERDOSE_CRITICAL
+	overdose = REAGENTS_OVERDOSE
+	overdose_critical = REAGENTS_OVERDOSE_CRITICAL
 	chemclass = CHEM_CLASS_COMMON
 	properties = list(PROPERTY_NERVESTIMULATING = 2, PROPERTY_NEUROTOXIC = 1)
 	flags = REAGENT_TYPE_MEDICAL | REAGENT_NO_GENERATION
