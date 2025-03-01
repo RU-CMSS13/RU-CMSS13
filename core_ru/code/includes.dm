@@ -68,6 +68,7 @@
 #include "game\objects\items\devices\_defibrillator.dm"
 #include "game\objects\items\devices\defibrillator_paddles.dm"
 #include "game\objects\items\devices\pinpointer.dm"
+#include "game\objects\items\reagent_containers\autoinjectors.dm"
 #include "game\objects\items\storage\backpack.dm"
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\items\storage\briefcase.dm"
