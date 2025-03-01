@@ -1,9 +1,19 @@
+/datum/research_upgrades/item/nanosplints
+	name = "Reinforced Fiber Splints"
+	desc = "A set of splints made from durable carbon fiber sheets reinforced with flexible titanium lattice, comes in a stack of five."
+	value_upgrade = 800
+	clearance_req = 3
+	change_purchase = -100
+	minimum_price = 400
+	behavior = RESEARCH_UPGRADE_ITEM
+	upgrade_type = ITEM_ACCESSORY_UPGRADE
+
 /datum/research_upgrades/item/advbruise
 	name = "Advanced Bruise Pack"
 	desc = "Advanced Bruise Pack, heal brute damage more efficent."
 	value_upgrade = 1000
 	clearance_req = 3
-	change_purchase = -200
+	change_purchase = -100
 	minimum_price = 400
 	behavior = RESEARCH_UPGRADE_ITEM
 	upgrade_type = ITEM_ACCESSORY_UPGRADE
@@ -16,7 +26,7 @@
 	desc = "Advanced Burn Kit, heal burn damage more efficent."
 	value_upgrade = 1000
 	clearance_req = 3
-	change_purchase = -200
+	change_purchase = -100
 	minimum_price = 400
 	behavior = RESEARCH_UPGRADE_ITEM
 	upgrade_type = ITEM_ACCESSORY_UPGRADE
@@ -33,6 +43,17 @@
 	upgrade_type = ITEM_ACCESSORY_UPGRADE
 	item_reference = /obj/item/device/defibrillator/upgraded
 
+/datum/research_upgrades/item/advinjector
+	name = "Advanced Emergency Injector"
+	desc = "Injector with improved cocktail of chemicals"
+	value_upgrade = 500
+	clearance_req = 1
+	behavior = RESEARCH_UPGRADE_ITEM
+	upgrade_type = ITEM_ACCESSORY_UPGRADE
+	change_purchase = -50
+	minimum_price = 300
+	item_reference = /obj/item/reagent_container/hypospray/autoinjector/emergency/advanced
+
 /datum/research_upgrades/armor/metal
 	name = "Metal Armor Plate"
 	desc = "Plate against sharp things, have a large durability and can be restored by same plate."
@@ -41,7 +62,7 @@
 	behavior = RESEARCH_UPGRADE_ITEM
 	upgrade_type = ITEM_ARMOR_UPGRADE
 	change_purchase = -50
-	minimum_price = 200
+	minimum_price = 300
 	item_reference = /obj/item/clothing/accessory/health
 
 /datum/research_upgrades/armor/ceramic
@@ -49,6 +70,7 @@
 
 /datum/research_upgrades/item/research_credits
 	value_upgrade = 3000
+	maximum_price = 10000
 	clearance_req = 1
 
 
