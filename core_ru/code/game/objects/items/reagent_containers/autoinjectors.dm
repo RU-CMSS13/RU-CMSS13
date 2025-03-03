@@ -11,7 +11,7 @@
 	injectVOL = 70//limited-supply emergency injector with v.large injection of drugs. Variable sfx freq sometimes rolls too quiet.
 	display_maptext = TRUE //see anaesthetic injector
 	maptext_label = "!!!"
-	skilllock = SKILL_MEDICAL_MEDIC
+	skilllock = SKILL_MEDICAL_TRAINED
 
 /obj/item/reagent_container/hypospray/autoinjector/emergency/advanced/Initialize()
 	. = ..()
