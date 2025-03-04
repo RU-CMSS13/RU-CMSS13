@@ -3,7 +3,7 @@
 	desc = "An auto-injector loaded with a special cocktail of basic and enchanced chemicals, to be used in life-threatening situations. Doesn't require any training to use."
 	icon_state = "adv_emergency"
 	chemname = "emergency"
-	amount_per_transfer_from_this = (REAGENTS_OVERDOSE-1)*4 + (MED_REAGENTS_OVERDOSE-1) + (LOWH_REAGENTS_OVERDOSE-1) * 3
+	amount_per_transfer_from_this = (REAGENTS_OVERDOSE-1)*4 + (MED_REAGENTS_OVERDOSE-1) + (LOWH_REAGENTS_OVERDOSE-1) * 5
 	volume = (REAGENTS_OVERDOSE-1)*4 + (MED_REAGENTS_OVERDOSE-1) + (LOWH_REAGENTS_OVERDOSE-1) * 3
 	mixed_chem = TRUE
 	uses_left = 1
@@ -17,9 +17,11 @@
 	. = ..()
 	reagents.add_reagent("tricordrazine", REAGENTS_OVERDOSE-1)
 	reagents.add_reagent("anti_toxin", REAGENTS_OVERDOSE-1)
+	reagents.add_reagent("arithrazine", LOWH_REAGENTS_OVERDOSE-1)
 	reagents.add_reagent("meralyne", LOWH_REAGENTS_OVERDOSE-1)
 	reagents.add_reagent("dermaline", LOWH_REAGENTS_OVERDOSE-1)
 	reagents.add_reagent("peridaxon", LOWH_REAGENTS_OVERDOSE-1)
+	reagents.add_reagent("dexalinp", LOWH_REAGENTS_OVERDOSE-1)
 	update_icon()
 
 // TODO: Make OD restriction and injection adjust
