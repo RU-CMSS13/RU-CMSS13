@@ -85,7 +85,7 @@
 			to_chat(user, SPAN_NOTICE("You dissolve [food]"))
 			container.remove_from_storage(food)
 			food.moveToNullspace()
-			biomass_points += (food.potency * 5)
+			biomass_points += (food.potency * 3)
 
 		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
 //RUCM END
