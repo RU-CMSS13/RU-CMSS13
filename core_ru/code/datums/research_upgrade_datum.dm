@@ -70,7 +70,8 @@
 
 /datum/research_upgrades/item/research_credits
 	value_upgrade = 3000
-	maximum_price = 10000
+	change_purchase = 1000
+	maximum_price = 15000
 	clearance_req = 1
 
 
