@@ -68,7 +68,7 @@
 			to_chat(user, SPAN_WARNING("You were interupted!"))
 			return
 		to_chat(user, SPAN_NOTICE("You dissolve [attacked_item]"))
-		biomass_points += (food.potency * 5) // ~7500 points per 1.5h
+		biomass_points += (food.potency * 3)
 		qdel(attacked_item)
 		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
 	if(istype(attacked_item, /obj/item/storage))
