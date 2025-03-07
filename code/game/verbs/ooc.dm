@@ -98,6 +98,8 @@
 //RUCM START
 	if(player_data.donator_info?.patreon_function_available("badge"))
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "Donator")]"
+	if(isSenator(src))
+		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "WhitelistSenator")]"
 //RUCM END
 	if(isCouncil(src))
 		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "WhitelistCouncil")]"
