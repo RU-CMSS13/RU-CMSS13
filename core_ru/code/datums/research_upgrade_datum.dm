@@ -79,5 +79,15 @@
 	maximum_price = 15000
 	clearance_req = 1
 
+/datum/research_upgrades/item/toxic_ammo
+	name = "Toxic ammo kit"
+	desc = "Converts magazines into toxin ammo. Toxin ammo will poison your target, weakening their defences."
+	value_upgrade = 2000
+	behavior = RESEARCH_UPGRADE_ITEM
+	upgrade_type = ITEM_ACCESSORY_UPGRADE
+	change_purchase = -100
+	minimum_price = 1000
+	clearance_req = 4
 
-
+/datum/research_upgrades/item/toxic_ammo/on_purchase(turf/machine_loc)
+	new /obj/item/ammo_kit/toxin(machine_loc, 5)
