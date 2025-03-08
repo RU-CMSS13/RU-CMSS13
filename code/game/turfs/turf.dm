@@ -91,7 +91,7 @@
 
 	if(above)
 		above.multiz_new(dir=DOWN)
-	
+
 	if(below)
 		below.multiz_new(dir=UP)
 
@@ -182,7 +182,7 @@
 	var/turf/below = SSmapping.get_turf_below(src)
 	if(above)
 		above.multiz_del(dir=DOWN)
-	
+
 	if(below)
 		below.multiz_del(dir=UP)
 
@@ -345,6 +345,14 @@
 		if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
 			if(!mover.Collide(A))
 				return FALSE
+
+	if(mover.move_intentionally && istype(src, /turf/open_space) && istype(mover,/mob/living))
+		var/turf/open_space/space = src
+		var/mob/living/climber = mover
+		if(climber.a_intent == INTENT_HARM)
+			return TRUE
+		space.climb_down(climber)
+		return FALSE
 
 	return TRUE //Nothing found to block so return success!
 
@@ -949,9 +957,9 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 /turf/proc/on_throw_end(atom/movable/thrown_atom)
 	return TRUE
 
-/turf/proc/z_impact(mob/living/victim, height, stun_modifier = 1, damage_modifier = 1, fracture_modifier = 1)
+/turf/proc/z_impact(mob/living/victim, height, stun_modifier = 1, damage_modifier = 1, fracture_modifier = 0)
 	if(ishuman_strict(victim))
-		var/mob/living/carbon/human/human_victim = victim 
+		var/mob/living/carbon/human/human_victim = victim
 		if (stun_modifier > 0)
 			human_victim.KnockDown(5 * height * stun_modifier)
 			human_victim.Stun(5 * height * stun_modifier)
@@ -968,15 +976,14 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 			found_rleg?.fracture(100 * fracture_modifier)
 			found_lleg?.fracture(100 * fracture_modifier)
 
-	if(isxeno(victim) && victim.mob_size >= MOB_SIZE_BIG)
+	if(isxeno(victim))
 		var/mob/living/carbon/xenomorph/xeno_victim = victim
 		if(stun_modifier > 0)
-			xeno_victim.KnockDown(5 * height * stun_modifier)
-			xeno_victim.Stun(5 * height * stun_modifier)
-
-		if (damage_modifier > 0)
-			var/total_damage = ((60 * height) ** 1.3) * damage_modifier
-			xeno_victim.apply_damage(total_damage / 2, BRUTE)
+			var/base_stun_duration = 2
+			if(xeno_victim.mob_size >= MOB_SIZE_BIG)
+				base_stun_duration = 5
+			xeno_victim.KnockDown(base_stun_duration * height * stun_modifier)
+			xeno_victim.Stun(base_stun_duration * height * stun_modifier)
 
 	if(damage_modifier > 0.5)
 		playsound(loc, "slam", 50, 1)
