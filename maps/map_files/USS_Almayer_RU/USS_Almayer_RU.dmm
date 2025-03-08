@@ -3740,12 +3740,12 @@
 /turf/open/gm/grass/grass1,
 /area/almayer/medical/upper_medical)
 "aks" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/machinery/camera/autoname/almayer{
 	dir = 4;
 	name = "ship-grade camera"
+	},
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 5
 	},
 /turf/open/floor/almayer/floor,
 /area/almayer/living/auxiliary_officer_office)
@@ -27658,15 +27658,6 @@
 	},
 /turf/open/floor/plating,
 /area/almayer/shipboard/brig/mp_bunks)
-"eRy" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/maint/hull/lower/s_bow)
 "eRF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -38586,9 +38577,14 @@
 /turf/open/floor/almayer,
 /area/almayer/living/starboard_emb)
 "juF" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
-/turf/open/floor/almayer/flooredge/east,
-/area/almayer/living/auxiliary_officer_office)
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/maint/hull/lower/s_bow)
 "juN" = (
 /obj/structure/surface/table/woodentable/fancy,
 /obj/structure/disposalpipe/segment,
@@ -41042,10 +41038,8 @@
 /turf/open/floor/almayer/plating/northeast,
 /area/almayer/squads/req)
 "kFV" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/turf/closed/wall/almayer,
+/obj/structure/pipes/standard/simple/hidden/supply,
+/turf/open/floor/almayer/floor,
 /area/almayer/living/auxiliary_officer_office)
 "kFY" = (
 /obj/structure/sign/safety/cryo{
@@ -51724,9 +51718,6 @@
 /turf/open/floor/almayer/red/north,
 /area/almayer/maint/upper/u_a_p)
 "ppe" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 5
-	},
 /obj/structure/sign/poster/corporate{
 	pixel_x = 32
 	},
@@ -57380,6 +57371,9 @@
 /obj/structure/machinery/door/airlock/almayer/generic{
 	name = "\improper Auxiliary Support Officer office";
 	req_access_txt = "1"
+	},
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
 	},
 /turf/open/floor/almayer,
 /area/almayer/living/auxiliary_officer_office)
@@ -97379,8 +97373,8 @@ eCb
 vJM
 ocl
 tAs
-fEp
-juF
+fsw
+mfJ
 ppe
 mfJ
 bcP
@@ -97584,7 +97578,7 @@ ocl
 kcp
 rHo
 kcp
-kFV
+kcp
 kcp
 kcp
 kcp
@@ -97782,11 +97776,11 @@ uId
 uId
 uId
 tAV
-eRy
+juF
 ocl
 nWn
-bcP
-bcP
+fEp
+kFV
 aks
 bcP
 cQQ
