@@ -370,18 +370,10 @@
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/research/secret/testing)
 "aaZ" = (
-/obj/item/broken_device{
-	pixel_x = -5;
-	pixel_y = 5
-	},
-/obj/item/stock_parts/manipulator{
-	pixel_x = -3;
-	pixel_y = 5
-	},
-/obj/item/stack/cable_coil/orange{
-	icon_state = "coil2";
-	pixel_x = -2;
-	pixel_y = -2
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/paper_bin{
+	pixel_x = 3;
+	pixel_y = 7
 	},
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/research/secret/testing)
@@ -444,7 +436,7 @@
 /area/prison/research/secret/testing)
 "abh" = (
 /obj/structure/surface/table/reinforced/prison,
-/obj/item/trash/burger,
+/obj/item/trash/eat,
 /turf/open/floor/prison/whitepurplefull,
 /area/prison/research/secret/testing)
 "abi" = (
@@ -14231,6 +14223,14 @@
 "aXf" = (
 /turf/open/floor/prison/darkbrowncorners2/north,
 /area/prison/intake)
+"aXi" = (
+/obj/structure/xenoautopsy/jar_shelf{
+	layer = 4;
+	pixel_y = 12
+	},
+/obj/structure/xenoautopsy,
+/turf/closed/wall/r_wall/prison,
+/area/prison/research/secret/bioengineering)
 "aXj" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -36075,6 +36075,12 @@
 	},
 /turf/closed/wall/prison,
 /area/prison/cellblock/highsec/south/north)
+"doR" = (
+/obj/effect/landmark/nightmare{
+	insert_tag = "contaimed_WY_lab"
+	},
+/turf/closed/wall/r_wall/prison_unmeltable,
+/area/prison/research/secret/testing)
 "dpQ" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -36584,10 +36590,6 @@
 /obj/effect/decal/cleanable/dirt/greenglow,
 /turf/open/floor/plating/prison,
 /area/prison/maintenance/residential/nw)
-"dNC" = (
-/obj/structure/cargo_container/hybrisa/containersextended/blackwyleft,
-/turf/open/floor/prison/whitepurple,
-/area/prison/research/secret/testing)
 "dNM" = (
 /obj/structure/largecrate/random,
 /obj/structure/largecrate/random/case/small{
@@ -37743,6 +37745,11 @@
 /obj/item/bedsheet/orange,
 /turf/open/floor/prison/floor_plate,
 /area/prison/cellblock/mediumsec/east)
+"ffX" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cargo_container/hybrisa/containersextended/greywyleft,
+/turf/open/floor/prison/whitepurple,
+/area/prison/research/secret/testing)
 "fhb" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -38379,6 +38386,22 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
 /area/prison/engineering)
+"fVS" = (
+/obj/item/broken_device{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/item/stock_parts/manipulator{
+	pixel_x = -3;
+	pixel_y = 5
+	},
+/obj/item/stack/cable_coil/orange{
+	icon_state = "coil2";
+	pixel_x = -2;
+	pixel_y = -2
+	},
+/turf/open/floor/prison/sterile_white/southwest,
+/area/prison/research/secret/testing)
 "fVU" = (
 /obj/effect/decal/hefa_cult_decals/d32,
 /turf/open/floor/prison,
@@ -39718,12 +39741,6 @@
 /obj/item/trash/boonie,
 /turf/open/floor/prison/whitegreen,
 /area/prison/medbay)
-"hqB" = (
-/obj/effect/landmark/nightmare{
-	insert_tag = "contaimed_WY_lab"
-	},
-/turf/closed/wall/r_wall/prison_unmeltable,
-/area/prison/research/secret/testing)
 "hqJ" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
@@ -41471,6 +41488,13 @@
 /obj/structure/surface/table/reinforced/prison,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/vip)
+"iUo" = (
+/obj/structure/xenoautopsy/jar_shelf{
+	layer = 4;
+	pixel_y = 12
+	},
+/turf/closed/wall/r_wall/prison,
+/area/prison/research/secret/bioengineering)
 "iUU" = (
 /obj/structure/pipes/vents/pump{
 	dir = 8
@@ -41754,11 +41778,6 @@
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/cellblock/mediumsec/south)
-"jfR" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/plating/prison,
-/area/prison/research/secret/testing)
 "jgp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -42329,11 +42348,6 @@
 	},
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
-"jHF" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/trash/eat,
-/turf/open/floor/prison/whitepurplefull,
-/area/prison/research/secret/testing)
 "jIP" = (
 /obj/structure/machinery/vending/security,
 /turf/open/floor/prison,
@@ -43811,10 +43825,6 @@
 	},
 /turf/open/floor/wood,
 /area/prison/quarters/research)
-"lff" = (
-/obj/structure/cargo_container/hybrisa/containersextended/blackwyright,
-/turf/open/floor/prison/whitepurple,
-/area/prison/research/secret/testing)
 "lfI" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -44059,14 +44069,6 @@
 	},
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prison/cellblock/highsec/south/south)
-"lwa" = (
-/obj/effect/decal/medical_decals{
-	dir = 1;
-	icon_state = "triagedecaldir";
-	color = "#d3d3d3"
-	},
-/turf/open/floor/hybrisa/metal/stripe_red,
-/area/prison/research/secret)
 "lwm" = (
 /obj/structure/largecrate/random/mini/med,
 /turf/open/floor/plating/prison,
@@ -44934,13 +44936,6 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/prison,
 /area/prison/canteen)
-"moP" = (
-/obj/structure/xenoautopsy/jar_shelf{
-	layer = 4;
-	pixel_y = 12
-	},
-/turf/closed/wall/r_wall/prison,
-/area/prison/research/secret/bioengineering)
 "mpg" = (
 /turf/closed/wall/mineral/bone_resin,
 /area/prison/maintenance/residential/nw)
@@ -45298,11 +45293,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/cell_stripe/north,
 /area/prison/cellblock/highsec/north/south)
-"mFk" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cargo_container/hybrisa/containersextended/greywyleft,
-/turf/open/floor/prison/whitepurple,
-/area/prison/research/secret/testing)
 "mFu" = (
 /obj/structure/sign/safety/medical{
 	pixel_y = -8;
@@ -45614,6 +45604,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/prison,
 /area/prison/intake)
+"mUa" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating/prison,
+/area/prison/research/secret/testing)
 "mUY" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -46501,6 +46496,10 @@
 /obj/structure/reagent_dispensers/water_cooler/stacks,
 /turf/open/floor/prison/darkred2,
 /area/prison/security/monitoring/highsec)
+"nTH" = (
+/obj/structure/machinery/recharge_station,
+/turf/open/floor/prison/whitepurple/east,
+/area/prison/research/secret/testing)
 "nTV" = (
 /obj/structure/coatrack{
 	pixel_x = 12
@@ -47011,13 +47010,6 @@
 	},
 /turf/open/floor/prison/darkyellow2/east,
 /area/prison/hanger/main)
-"ovb" = (
-/obj/structure/xenoautopsy/jar_shelf{
-	layer = 4;
-	pixel_y = 31
-	},
-/turf/open/floor/prison/whitepurple/north,
-/area/prison/research/secret/bioengineering)
 "ovc" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -47044,14 +47036,6 @@
 /obj/structure/surface/table/reinforced/prison,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/maxsec)
-"owd" = (
-/obj/structure/xenoautopsy/jar_shelf{
-	layer = 4;
-	pixel_y = 12
-	},
-/obj/structure/xenoautopsy,
-/turf/closed/wall/r_wall/prison,
-/area/prison/research/secret/bioengineering)
 "owj" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/r_wall/prison,
@@ -47672,14 +47656,6 @@
 /obj/item/ammo_magazine/rifle/mar40,
 /turf/open/floor/plating/prison,
 /area/prison/cellblock/mediumsec/east)
-"peP" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/paper_bin{
-	pixel_x = 3;
-	pixel_y = 7
-	},
-/turf/open/floor/prison/sterile_white/southwest,
-/area/prison/research/secret/testing)
 "peW" = (
 /obj/structure/bed,
 /obj/item/bedsheet/orange,
@@ -47937,6 +47913,10 @@
 	},
 /turf/open/floor/prison/blue/west,
 /area/prison/residential/north)
+"ppc" = (
+/obj/structure/cargo_container/hybrisa/containersextended/blackwyleft,
+/turf/open/floor/prison/whitepurple,
+/area/prison/research/secret/testing)
 "pph" = (
 /obj/structure/machinery/light/small/blue,
 /obj/item/storage/box/lights,
@@ -48272,10 +48252,6 @@
 /obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/prison/cell_stripe/west,
 /area/prison/cellblock/maxsec/north)
-"pCT" = (
-/obj/structure/machinery/recharge_station,
-/turf/open/floor/prison/whitepurple/east,
-/area/prison/research/secret/testing)
 "pDk" = (
 /obj/effect/decal/cleanable/liquid_fuel,
 /turf/open/floor/chapel/west,
@@ -48584,6 +48560,13 @@
 /obj/item/stack/rods,
 /turf/open/floor/plating/prison,
 /area/prison/cellblock/mediumsec/east)
+"pTd" = (
+/obj/structure/xenoautopsy/jar_shelf{
+	layer = 4;
+	pixel_y = 31
+	},
+/turf/open/floor/prison/whitepurple/north,
+/area/prison/research/secret/bioengineering)
 "pTo" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/effect/decal/cleanable/dirt,
@@ -49156,6 +49139,11 @@
 	},
 /turf/open/floor/prison/darkpurplecorners2/north,
 /area/prison/hanger/research)
+"qBN" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/trash/burger,
+/turf/open/floor/prison/whitepurplefull,
+/area/prison/research/secret/testing)
 "qCf" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/effect/decal/cleanable/dirt,
@@ -51914,15 +51902,13 @@
 /turf/open/floor/wood,
 /area/prison/residential/south)
 "tJD" = (
-/obj/structure/machinery/door/poddoor/almayer/open{
-	dir = 4;
-	name = "Civilian Residences Emergency Access";
-	explo_proof = 1;
-	id = "civilian block lockdown"
+/obj/effect/decal/medical_decals{
+	dir = 1;
+	icon_state = "triagedecaldir";
+	color = "#d3d3d3"
 	},
-/turf/open/space/basic,
-/turf/open/floor/plating/prison,
-/area/prison/maintenance/residential/access/north)
+/turf/open/floor/hybrisa/metal/stripe_red,
+/area/prison/research/secret)
 "tJN" = (
 /obj/structure/largecrate/random/barrel/red,
 /turf/open/floor/prison/darkyellow2/west,
@@ -52077,6 +52063,10 @@
 	},
 /turf/open/floor/prison/blue_plate/east,
 /area/prison/residential/north)
+"tRk" = (
+/obj/structure/cargo_container/hybrisa/containersextended/blackwyright,
+/turf/open/floor/prison/whitepurple,
+/area/prison/research/secret/testing)
 "tRx" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
@@ -52662,11 +52652,6 @@
 /obj/structure/surface/table/reinforced/prison,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
-"uAz" = (
-/obj/structure/surface/rack,
-/obj/item/weapon/gun/smg/p90,
-/turf/open/floor/prison/darkred2/east,
-/area/prison/security/armory/lethal)
 "uAO" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/prison/blue/north,
@@ -53792,6 +53777,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
 /area/prison/hallway/entrance)
+"vHb" = (
+/obj/structure/surface/rack,
+/obj/item/weapon/gun/smg/p90,
+/turf/open/floor/prison/darkred2/east,
+/area/prison/security/armory/lethal)
 "vHV" = (
 /obj/structure/machinery/door/airlock/prison_hatch/autoname{
 	dir = 1
@@ -68270,7 +68260,7 @@ axI
 axP
 ayF
 axP
-tJD
+axP
 jPd
 xVA
 avy
@@ -85813,15 +85803,15 @@ acE
 acE
 acE
 acE
-hqB
+doR
 acE
 aaE
 aaJ
 aaT
-abh
+qBN
 abs
 abB
-jHF
+abh
 acv
 agJ
 adq
@@ -86458,7 +86448,7 @@ abi
 aaK
 aaK
 gHy
-dNC
+ppc
 agJ
 agJ
 agJ
@@ -86670,7 +86660,7 @@ abj
 abu
 abu
 abX
-lff
+tRk
 agJ
 agK
 agX
@@ -86882,7 +86872,7 @@ aaK
 aaK
 aaK
 abY
-mFk
+ffX
 agJ
 agJ
 agJ
@@ -87084,7 +87074,7 @@ aac
 acF
 acF
 aac
-jfR
+mUa
 aai
 aat
 aaF
@@ -87937,8 +87927,8 @@ acX
 aay
 aaF
 aaK
-peP
 aaZ
+fVS
 aaK
 aaK
 abZ
@@ -89422,7 +89412,7 @@ aaB
 aaI
 aaQ
 abg
-pCT
+nTH
 aby
 abC
 abC
@@ -90699,7 +90689,7 @@ aeZ
 aeZ
 acf
 acf
-owd
+aXi
 acd
 acV
 aee
@@ -91335,8 +91325,8 @@ aeZ
 aeZ
 acg
 acJ
-moP
-ovb
+iUo
+pTd
 adM
 aeh
 acV
@@ -91769,7 +91759,7 @@ acV
 afU
 agd
 qaX
-lwa
+tJD
 ahL
 agw
 kAW
@@ -104391,7 +104381,7 @@ cga
 chs
 pvA
 cOM
-uAz
+vHb
 dlD
 clN
 hEA
