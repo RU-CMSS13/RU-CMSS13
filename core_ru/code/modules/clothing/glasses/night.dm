@@ -7,7 +7,7 @@
 	desc = "A headset and thermal-night vision goggles system for commanding officer. Allows highlighted imaging of surroundings, as well as the ability to view the suit sensor health status readouts of other marines. Click it to toggle."
 	icon_state = "m4ra_goggles"
 	deactive_state = "m4ra_goggles_0"
-	vision_flags = (SEE_TURFS|SEE_MOBS)
+	vision_flags = SEE_TURFS
 	hud_type = MOB_HUD_MEDICAL_ADVANCED
 	toggleable = TRUE
 	fullscreen_vision = null
