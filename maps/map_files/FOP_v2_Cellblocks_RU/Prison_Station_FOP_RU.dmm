@@ -12825,6 +12825,15 @@
 /obj/structure/machinery/prop/almayer/computer/PC{
 	dir = 1
 	},
+/obj/item/trash/cigbutt/cigarbutt{
+	pixel_x = -3;
+	pixel_y = 19
+	},
+/obj/item/ashtray/bronze{
+	icon_state = "ashtray_half_br";
+	pixel_x = -8;
+	pixel_y = 7
+	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/southeast,
 /area/prison/command/secretary_office)
 "aQH" = (
@@ -14378,7 +14387,6 @@
 /turf/open/floor/hybrisa/carpet/blue_grey,
 /area/prison/command/quarters)
 "aWd" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/west,
 /area/prison/command/quarters)
 "aWe" = (
@@ -14754,7 +14762,6 @@
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/south,
 /area/prison/command/quarters)
 "aXs" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/north,
 /area/prison/command/quarters)
 "aXt" = (
@@ -15855,10 +15862,6 @@
 	},
 /turf/open/floor/prison,
 /area/prison/security/monitoring/highsec)
-"bbb" = (
-/obj/structure/closet/crate/freezer,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
-/area/prison/kitchen)
 "bbc" = (
 /obj/structure/toilet,
 /turf/open/floor/prison/cell_stripe/north,
@@ -15866,17 +15869,14 @@
 "bbd" = (
 /turf/open/floor/prison/cell_stripe/north,
 /area/prison/cellblock/highsec/north/south)
-"bbe" = (
-/turf/open/floor/hybrisa/tile/supermartfloor2,
-/area/prison/kitchen)
 "bbf" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bbh" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bbi" = (
 /obj/structure/machinery/light/double/blue{
@@ -15887,7 +15887,7 @@
 /obj/structure/machinery/vending/dinnerware{
 	pixel_x = 3
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bbj" = (
 /obj/structure/pipes/vents/pump/on,
@@ -16282,7 +16282,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "SW-out"
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bcs" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -16292,7 +16292,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bct" = (
 /obj/structure/pipes/standard/manifold/hidden/supply,
@@ -16301,7 +16301,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bcu" = (
 /obj/effect/landmark/objective_landmark,
@@ -16311,7 +16311,7 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 10
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bcw" = (
 /obj/effect/decal/warning_stripes{
@@ -16346,7 +16346,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "SE-out"
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bcC" = (
 /obj/structure/window/framed/prison/reinforced/hull,
@@ -16801,7 +16801,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "ben" = (
 /obj/effect/decal/cleanable/dirt,
@@ -16810,7 +16810,7 @@
 "beo" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/structure/machinery/gibber,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bep" = (
 /obj/structure/surface/table/reinforced/prison,
@@ -16818,7 +16818,7 @@
 	pixel_x = 8;
 	pixel_y = 8
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "beq" = (
 /turf/open/floor/prison/floor_plate/southwest,
@@ -16883,7 +16883,7 @@
 "bez" = (
 /obj/structure/machinery/reagentgrinder,
 /obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "beB" = (
 /obj/structure/machinery/light/double/blue{
@@ -16913,20 +16913,14 @@
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 8
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "beG" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
-/area/prison/kitchen)
-"beH" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "beI" = (
 /obj/structure/machinery/door/poddoor/shutters/almayer{
@@ -17381,23 +17375,23 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bgg" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bgh" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 5
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bgi" = (
 /obj/structure/pipes/vents/pump{
 	dir = 8
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bgj" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -17620,34 +17614,34 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "NW-out"
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bgZ" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/effect/landmark/corpsespawner/chef,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bha" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhb" = (
 /obj/structure/disposalpipe/junction{
 	dir = 8;
 	icon_state = "pipe-j2"
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhe" = (
 /obj/structure/machinery/vending/security,
@@ -17903,19 +17897,19 @@
 	pixel_x = -10
 	},
 /obj/item/reagent_container/food/condiment/enzyme,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhV" = (
 /obj/structure/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhW" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "bhX" = (
 /obj/structure/bed/chair/comfy{
@@ -36795,13 +36789,11 @@
 /turf/open/floor/prison/darkred2,
 /area/prison/security/monitoring/medsec/south)
 "czI" = (
-/obj/structure/machinery/big_computers/messaging_server/brown{
-	dir = 4
-	},
 /obj/item/prop/almayer/flight_recorder/colony{
 	pixel_x = -6;
 	pixel_y = 10
 	},
+/obj/structure/machinery/blackbox_recorder,
 /turf/open/floor/prison/darkred2/southeast,
 /area/prison/security/monitoring/medsec/south)
 "czJ" = (
@@ -37608,7 +37600,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "diO" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -39151,7 +39143,7 @@
 /area/prison/cellblock/lowsec/nw)
 "exH" = (
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "exZ" = (
 /obj/structure/pipes/standard/manifold/visible/purple,
@@ -39676,9 +39668,8 @@
 /turf/open/floor/prison/red/east,
 /area/prison/cellblock/highsec/south/north)
 "eXB" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
-/area/prison/kitchen)
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
+/area/prison/store)
 "eXH" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/effect/decal/cleanable/dirt,
@@ -40497,7 +40488,7 @@
 	dir = 4
 	},
 /obj/item/prop/alien/hugger,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "fOT" = (
 /obj/effect/decal/cleanable/dirt,
@@ -41164,7 +41155,7 @@
 "gwm" = (
 /obj/structure/machinery/processor,
 /obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "gwG" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -41343,11 +41334,6 @@
 /obj/structure/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/item/prop/almayer/flight_recorder/colony{
-	pixel_x = -6;
-	pixel_y = 10
-	},
-/obj/structure/machinery/blackbox_recorder,
 /turf/open/floor/prison/darkyellow2/north,
 /area/prison/telecomms)
 "gFq" = (
@@ -41733,16 +41719,6 @@
 "gQT" = (
 /turf/closed/wall/r_wall/prison,
 /area/prison/hallway/central/south)
-"gRd" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
-/area/prison/kitchen)
 "gRf" = (
 /turf/closed/shuttle/lifeboat/transparent,
 /area/prison/monorail/east)
@@ -42166,7 +42142,7 @@
 "hkg" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/flour,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "hkL" = (
 /obj/structure/barricade/handrail/type_b{
@@ -43166,7 +43142,7 @@
 /area/prison/research/secret/containment)
 "hXe" = (
 /obj/structure/window/framed/prison/reinforced,
-/turf/closed/wall/prison,
+/turf/open/floor/plating/prison,
 /area/prison/command/quarters)
 "hXh" = (
 /obj/effect/decal/cleanable/dirt,
@@ -43909,10 +43885,6 @@
 	},
 /turf/open/floor/prison/redfull,
 /area/prison/hallway/central/west)
-"ixP" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
-/area/prison/kitchen)
 "iyw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/storage/firstaid/regular/empty,
@@ -45052,7 +45024,7 @@
 "jsF" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/storage/box/enzyme,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "jsM" = (
 /obj/structure/bed/chair,
@@ -45539,7 +45511,7 @@
 "jLA" = (
 /obj/structure/machinery/microwave,
 /obj/structure/surface/table/reinforced/prison,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "jMa" = (
 /obj/effect/decal/cleanable/dirt/greenglow{
@@ -47008,7 +46980,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "kSJ" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -49124,7 +49096,7 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hallway/central/west)
 "mHt" = (
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "mHz" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -49731,7 +49703,7 @@
 /area/prison/security/monitoring/lowsec/sw)
 "nfP" = (
 /obj/structure/closet/crate/freezer,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "nfS" = (
 /obj/effect/decal/cleanable/blood,
@@ -51464,7 +51436,7 @@
 /obj/structure/machinery/reagentgrinder,
 /obj/structure/surface/table/reinforced/prison,
 /obj/item/reagent_container/glass/beaker,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "oLc" = (
 /obj/effect/decal/cleanable/dirt,
@@ -53070,11 +53042,6 @@
 /obj/effect/sentry_landmark/lz_1/top_left,
 /turf/open/floor/strata/multi_tiles/southeast,
 /area/prison/hanger/main)
-"pYg" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/reagent_container/food/condiment/enzyme,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
-/area/prison/kitchen)
 "pZl" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison,
@@ -54593,7 +54560,6 @@
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prison/cellblock/highsec/south/north)
 "rwY" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/curtain/colorable_transparent{
 	color = "#5a5a5a";
 	alpha = 220;
@@ -55760,7 +55726,7 @@
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "sFw" = (
 /obj/effect/decal/cleanable/dirt,
@@ -56665,7 +56631,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "NE-out"
 	},
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "tvO" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -57170,7 +57136,7 @@
 /area/prison/maintenance/residential/sw)
 "tQN" = (
 /obj/structure/closet/crate/plastic,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "tQO" = (
 /obj/effect/decal/siding{
@@ -59447,7 +59413,7 @@
 /area/prison/cellblock/mediumsec/south)
 "vPT" = (
 /obj/effect/decal/cleanable/flour,
-/turf/open/floor/hybrisa/tile/supermartfloor2,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "vQn" = (
 /obj/structure/largecrate/random/barrel,
@@ -60327,7 +60293,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/surface/table/reinforced/prison,
 /obj/structure/machinery/chem_master/industry_mixer,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "wJZ" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
@@ -61390,7 +61356,7 @@
 "xDH" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/reagent_container/food/condiment/enzyme,
-/turf/open/floor/hybrisa/tile/lightbeige_bigtile,
+/turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/kitchen)
 "xDM" = (
 /obj/structure/bed/chair/office/dark{
@@ -102126,12 +102092,12 @@ bad
 bqg
 bqE
 bvb
-bvb
-bvb
-bvb
-bvb
-bvb
-bvb
+eXB
+eXB
+eXB
+eXB
+eXB
+eXB
 bxY
 bzy
 bEI
@@ -102338,12 +102304,12 @@ aYu
 eWi
 bmF
 brx
-bvb
-bvb
-bvb
-bvb
-bvb
-bvb
+eXB
+eXB
+eXB
+eXB
+eXB
+eXB
 bxY
 bmn
 bEI
@@ -104865,12 +104831,12 @@ fxf
 aYS
 aZA
 bdl
-bbb
-gRd
+nfP
+bcs
 vPT
-ixP
+bgg
 fOE
-eXB
+bbh
 bdl
 bkj
 bly
@@ -105082,7 +105048,7 @@ diK
 beo
 gwm
 bha
-pYg
+xDH
 bdl
 bmH
 bmH
@@ -105289,8 +105255,8 @@ mJK
 aQB
 aOb
 baf
-bbe
-gRd
+mHt
+bcs
 bep
 jLA
 bhb
@@ -105713,7 +105679,7 @@ aOr
 aOr
 uCd
 oHN
-bbb
+nfP
 sFp
 bez
 oKj
@@ -106137,11 +106103,11 @@ aXU
 aYV
 aZB
 bdl
-pYg
+xDH
 mHt
 beG
 bgi
-bbe
+mHt
 bhW
 bdl
 bko
@@ -106352,7 +106318,7 @@ bdl
 bbi
 bcB
 kSF
-beH
+kSF
 kSF
 tvM
 bdl
