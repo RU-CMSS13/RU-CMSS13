@@ -213,37 +213,8 @@
 
 
 /mob/living/carbon/xenomorph/proc/gain_armor_percent(value)
-/*
 	armor_integrity = min(armor_integrity + value, 100)
-*/
-//RUCM START
-	armor_integrity = clamp(armor_integrity + value, 0, armor_integrity_max)
-//RUCM END
-/mob/living/carbon/xenomorph/animation_attack_on(atom/A, pixel_offset)
-	if(hauled_mob?.resolve())
-		return
-	. = ..()
 
-/mob/living/carbon/xenomorph/Move(NewLoc, direct)
-	. = ..()
-	var/mob/user = hauled_mob?.resolve()
-	if(user)
-		user.forceMove(loc)
-
-/mob/living/carbon/xenomorph/forceMove(atom/destination)
-	. = ..()
-	var/mob/user = hauled_mob?.resolve()
-	if(user)
-		if(!isturf(destination))
-			user.forceMove(src)
-		else
-			user.forceMove(loc)
-
-/mob/living/carbon/xenomorph/relaymove(mob/user, direction)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_HAULED))
-		var/mob/living/carbon/human/hauled_mob = user
-		hauled_mob.handle_haul_resist()
 
 //Strip all inherent xeno verbs from your caste. Used in evolution.
 /mob/living/carbon/xenomorph/proc/remove_inherent_verbs()
