@@ -82,7 +82,6 @@ GLOBAL_LIST_INIT(cm_vending_gear_engi, list(
 		list("Whistle", 3, /obj/item/device/whistle, null, VENDOR_ITEM_REGULAR),
 		list("Synthetic Reset Key", 10, /obj/item/device/defibrillator/synthetic, null, VENDOR_ITEM_REGULAR),
 
-
 		list("BINOCULARS", 0, null, null, null),
 		list("Binoculars", 5, /obj/item/device/binoculars, null, VENDOR_ITEM_REGULAR),
 		list("Range Finder", 10, /obj/item/device/binoculars/range, null, VENDOR_ITEM_REGULAR),
