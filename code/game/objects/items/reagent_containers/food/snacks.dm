@@ -78,6 +78,10 @@
 			return FALSE
 		if(issynth(C))
 			fullness = 200 //Synths never get full
+// RUCM START
+		if(isyautja(C))
+			fullness = 200
+// RUCM END
 
 		if(HAS_TRAIT(M, TRAIT_CANNOT_EAT)) //Do not feed the Working Joes
 			to_chat(user, SPAN_DANGER("[user == M ? "You are" : "[M] is"] unable to eat!"))
