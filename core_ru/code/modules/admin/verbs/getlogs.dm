@@ -5,6 +5,7 @@
 
 	var/path = usr.client.browse_files_ru("data/logs/")
 	if(!path)
+		to_chat(src, "Could not find a file.")
 		return
 
 	if(usr.client.file_spam_check())
@@ -41,7 +42,7 @@
 			choices.Insert(1,"/")
 		choices = filter_file_name(choices)
 
-		var/choice = tgui_input_list(src,"Choose a file to access:","Download",choices)
+		var/choice = tgui_input_list(usr, "Choose a file to access:", "Download", choices)
 		switch(choice)
 			if(null)
 				return
@@ -84,3 +85,4 @@
 	for(var/file_name in listy)
 		if(findtext(file_name, "config_error"))
 			listy.Remove(file_name)
+	return listy

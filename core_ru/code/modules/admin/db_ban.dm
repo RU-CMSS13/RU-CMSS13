@@ -5,13 +5,13 @@
 	set desc = "Data Ban Panel"
 
 	if(admin_holder)
-		var/ckey = input("Enter ACCURATE Ckey for future manipulations","Enter ACCURATE CKEY", null) as null|text
+		var/ckey = ckey(input("Enter ACCURATE Ckey for future manipulations","Enter ACCURATE CKEY", null) as null|text)
 		var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
 		if(!player)
 			to_chat(usr, "Database lookup failed.No file was found.")
 			return
 		if(ckey in GLOB.db_admin_datums)
-			to_chat(usr, "Ckey belong to admin.Aborting search.")
+			to_chat(usr, "Ckey belong to server staff. Aborting search.")
 			return
 		admin_holder.DB_ban_panel(ckey)
 	return
