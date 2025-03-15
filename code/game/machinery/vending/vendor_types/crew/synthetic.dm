@@ -94,6 +94,14 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 */
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/mcom/synth, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
 
+		list("SYNTHETIC SPECIALTY EQUIPMENT", 0, null, null, null),
+		list("PK-130 SIMI Wrist-Mounted Computer", 0, /obj/item/clothing/gloves/synth, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+		list("Smartpack, Blue", 0, /obj/item/storage/backpack/marine/smartpack, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+		list("Smartpack, Green", 0, /obj/item/storage/backpack/marine/smartpack/green, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+		list("Smartpack, Tan", 0, /obj/item/storage/backpack/marine/smartpack/tan, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+		list("Smartpack, White", 0, /obj/item/storage/backpack/marine/smartpack/white, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+		list("Smartpack, Black", 0, /obj/item/storage/backpack/marine/smartpack/black, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+
 		list("UNIFORM (CHOOSE 1)", 0, null, null, null),
 		list("Uniform, Outdated Synth", 0, /obj/item/clothing/under/rank/synthetic/old, MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 		list("Uniform, Standard Synth", 0, /obj/item/clothing/under/rank/synthetic, MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_MANDATORY),
@@ -620,6 +628,14 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Telescopic Baton", 10, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
 	list("Experimental Meson Goggles", 10, /obj/item/clothing/glasses/night/experimental_mesons, null, VENDOR_ITEM_REGULAR),
 	list("Backpack Firefighting Watertank", 5, /obj/item/reagent_container/glass/watertank/atmos, null, VENDOR_ITEM_REGULAR),
+
+	list("SIMI CHIPS", 0, null, null, null),
+	list("PK-130", 0, null, null, null),
+	list("PK-130 Repair Mode", 12, /obj/item/device/simi_chip/repair, null, VENDOR_ITEM_RECOMMENDED),
+	list("PK-130 Protection Mode", 12, /obj/item/device/simi_chip/protect, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Anchor Mode", 6, /obj/item/device/simi_chip/anchor, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Motion Detector", 6, /obj/item/device/simi_chip/motion_detector, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Tactical Map", 6, /obj/item/device/simi_chip/tactical_map, null, VENDOR_ITEM_REGULAR),
 ))
 //RUCM END
 
