@@ -101,6 +101,8 @@
 	if(player_data.donator_info?.patreon_function_available("badge"))
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
 //RUCM END
+	if(isSenator(src))
+		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "WhitelistSenator")]"
 	if(isCouncil(src))
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "WhitelistCouncil")]"
 	var/comm_award = find_community_award_icons()
