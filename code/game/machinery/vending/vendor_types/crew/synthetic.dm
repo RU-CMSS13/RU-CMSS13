@@ -91,11 +91,6 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 		list("SYNTHETIC SPECIALTY EQUIPMENT", 0, null, null, null),
 		list("PK-130 SIMI Wrist-Mounted Computer", 0, /obj/item/clothing/gloves/synth, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-		list("Smartpack, Blue", 0, /obj/item/storage/backpack/marine/smartpack, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-		list("Smartpack, Green", 0, /obj/item/storage/backpack/marine/smartpack/green, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-		list("Smartpack, Tan", 0, /obj/item/storage/backpack/marine/smartpack/tan, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-		list("Smartpack, White", 0, /obj/item/storage/backpack/marine/smartpack/white, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-		list("Smartpack, Black", 0, /obj/item/storage/backpack/marine/smartpack/black, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 
 		list("RADIO (TAKE ALL)", 0, null, null, null),
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/mcom/cdrcom, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
