@@ -285,8 +285,6 @@
 			phone_status = "dnd"
 		else if(internal_transmitter.attached_to.loc != internal_transmitter)
 			phone_status = "listening"
-		else if(internal_transmitter.caller)
-			phone_status = "ringing"
 
 	var/image/phone_image = image(icon, src, "phone_[phone_status]")
 	phone_image.appearance_flags = RESET_COLOR|KEEP_APART
