@@ -145,26 +145,27 @@
 				break
 
 	if(bound_xeno.health > 0)
-		switch(shield.amount)
-			if(0 to 30)
-				armor_state = 0
-			if(31 to 150)
-				armor_state = 1
-			if(151 to 300)
-				armor_state = 2
-			if(301 to 450)
-				armor_state = 3
-			if(451 to 600)
-				armor_state = 4
+		if(shield)
+			switch(shield.amount)
+				if(0 to 30)
+					armor_state = 0
+				if(31 to 150)
+					armor_state = 1
+				if(151 to 300)
+					armor_state = 2
+				if(301 to 450)
+					armor_state = 3
+				if(451 to 600)
+					armor_state = 4
 
-		if(bound_xeno.body_position == LYING_DOWN)
-			if(!HAS_TRAIT(bound_xeno, TRAIT_INCAPACITATED) && !HAS_TRAIT(bound_xeno, TRAIT_FLOORED))
-				bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Sleeping[armor_state > 0 ? " Armor[armor_state]" : ""]"
+			if(bound_xeno.body_position == LYING_DOWN)
+				if(!HAS_TRAIT(bound_xeno, TRAIT_INCAPACITATED) && !HAS_TRAIT(bound_xeno, TRAIT_FLOORED))
+					bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Sleeping[armor_state > 0 ? " Armor[armor_state]" : ""]"
+				else
+					bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Knocked Down[armor_state > 0 ? " Armor[armor_state]" : ""]"
 			else
-				bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Knocked Down[armor_state > 0 ? " Armor[armor_state]" : ""]"
-		else
-			bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Running[armor_state > 0 ? " Armor[armor_state]" : ""]"
-		return TRUE
+				bound_xeno.icon_state = "[bound_xeno.get_strain_icon()] Warrior Running[armor_state > 0 ? " Armor[armor_state]" : ""]"
+			return TRUE
 
 ////////////////
 // Тики жизни //
