@@ -1,5 +1,8 @@
 /datum/caste_datum/warrior
-	available_strains = list(/datum/xeno_strain/boxer)
+	available_strains = list(
+		/datum/xeno_strain/boxer,
+		/datum/xeno_strain/knight,
+		)
 
 /mob/living/carbon/xenomorph/warrior/proc/handle_warrior_effects()
 	var/datum/behavior_delegate/boxer/behavior_boxer = behavior_delegate
