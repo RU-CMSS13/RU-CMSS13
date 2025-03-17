@@ -51,6 +51,12 @@
 
 	if (reagents.total_volume > 0)
 		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
+		if(issynth(C))
+			fullness = 200 //Synths never get full
+// RUCM START
+		if(isyautja(C))
+			fullness = 200
+// RUCM END
 		if(fullness > NUTRITION_HIGH)
 			to_chat(user, SPAN_WARNING("[user == M ? "You" : "They"] don't feel like eating more right now."))
 			return
