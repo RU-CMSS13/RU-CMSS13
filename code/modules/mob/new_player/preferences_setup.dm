@@ -302,8 +302,6 @@
 		if(JOB_SHIP_SYNTH) // RU CM ADDITION START
 			var/datum/job/J = GLOB.RoleAuthority.roles_by_name[JOB_SHIP_SYNTH]
 			return J.gear_preset_whitelist["[JOB_SHIP_SYNTH][J.get_whitelist_status(owner)]"] // RU CM ADDITION END
-			var/datum/job/J = GLOB.RoleAuthority.roles_by_name[JOB_SHIP_SYNTH]
-			return J.gear_preset_whitelist["[JOB_SHIP_SYNTH][J.get_whitelist_status(owner)]"]
 		if(JOB_WORKING_JOE)
 			return /datum/equipment_preset/synth/working_joe
 		if(JOB_POLICE)
