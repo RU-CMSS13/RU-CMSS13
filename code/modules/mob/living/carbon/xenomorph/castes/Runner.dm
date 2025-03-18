@@ -19,8 +19,8 @@
 	evolves_to = list(XENO_CASTE_LURKER)
 	deevolves_to = list(XENO_CASTE_LARVA)
 
-	tackle_min = 5
-	tackle_max = 6
+	tackle_min = 4
+	tackle_max = 5
 	tackle_chance = 25
 	tacklestrength_min = 4
 	tacklestrength_max = 4
