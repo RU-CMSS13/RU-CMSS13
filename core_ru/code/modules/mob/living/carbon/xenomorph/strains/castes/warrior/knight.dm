@@ -108,7 +108,7 @@
 				target_carbon.adjust_effect(2, SUPERSLOW)	// Замедление сильное
 				target_carbon.apply_effect(8, DAZE) 		// Сотрясение - ограничение обзора
 				target_carbon.apply_effect(8, EYE_BLUR) 	// Мыльцо
-				target_carbon.apply_effect(1, WEAKEN) 		// Опрокидывание
+				target_carbon.apply_effect(0.5, WEAKEN) 	// Опрокидывание
 				target_carbon.make_jittery(180)				// Тряска персонажа
 				target_carbon.make_dizzy(180)				// Тряска экрана
 
@@ -225,11 +225,11 @@
 	macro_path = /datum/action/xeno_action/verb/verb_onslaught
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_2
-	xeno_cooldown = 6 SECONDS
+	xeno_cooldown = 15 SECONDS
 
 //	var/damage = 4
-	var/stun_power = 0.5
-	var/weaken_power = 0.5
+	var/stun_power = 0
+	var/weaken_power = 0
 	var/slowdown = 2
 	var/base_damage = 20
 
@@ -289,7 +289,7 @@
 
 	var/datum/behavior_delegate/warrior_knight/behavior = fling_user.behavior_delegate
 
-	var/damage = (rand(base_damage, base_damage + 5) + 10 * behavior.armor_state)
+	var/damage = (rand(base_damage, base_damage + 5) + 5 * behavior.armor_state)
 
 	carbon.apply_armoured_damage(get_xeno_damage_slash(carbon, damage), ARMOR_MELEE, BRUTE)
 
@@ -310,9 +310,9 @@
 	macro_path = /datum/action/xeno_action/verb/verb_skull_breaker
 	ability_primacy = XENO_PRIMARY_ACTION_1
 	action_type = XENO_ACTION_ACTIVATE
-	xeno_cooldown = 10 SECONDS
+	xeno_cooldown = 15 SECONDS
 
-	var/buff_duration = 10 SECONDS
+	var/buff_duration = 5 SECONDS
 
 // Макрос
 /datum/action/xeno_action/verb/verb_skull_breaker()

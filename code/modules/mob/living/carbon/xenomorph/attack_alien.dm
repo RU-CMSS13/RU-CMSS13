@@ -412,7 +412,7 @@
 				M.visible_message(SPAN_DANGER("[M] проглатывает лист [src]!"), \
 				SPAN_DANGER("Мы пожираем лист [src]!"), null, 5, CHAT_TYPE_XENO_COMBAT)
 				playsound(src, 'core_ru/Feline/sound/mettal_rattle_5.ogg', 25, 1)
-				M.add_xeno_shield((sheettype == "metal")? 40 : 80, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = knight.shield_limit)
+				M.add_xeno_shield((sheettype == "metal")? 30 : 80, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = knight.shield_limit)
 				M.overlay_shields()
 				use(1)
 				return XENO_ATTACK_ACTION
