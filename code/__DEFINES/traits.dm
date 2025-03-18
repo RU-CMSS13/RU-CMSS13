@@ -169,7 +169,7 @@
 #define TRAIT_VALKYRIE_ARMORED "trait_valkyrie_armored"
 
 
-/// RUCM - Уязвимость к огню - огонь игнорирует щит
+/// RUCM - Уязвимость к огню - на 50% выше урон, огонь игнорирует щит, больно тушить
 #define TRAIT_WEAK_TO_FLAME "weak_to_flame"
 
 // SPECIES TRAITS

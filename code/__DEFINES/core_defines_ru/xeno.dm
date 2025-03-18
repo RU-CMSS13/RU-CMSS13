@@ -14,6 +14,16 @@
 
 #define LESSER_SHIELD_OVERLAY 9
 
+// Тайминги усиления щита воина-рыцаря
+// Воин доступен с 9 минуты и у него 200 щита
+
+#define KNIGHT_SHIELD_LIMIT_300 (15 MINUTES)
+
+#define KNIGHT_SHIELD_LIMIT_400 (30 MINUTES)
+
+#define KNIGHT_SHIELD_LIMIT_500 (35 MINUTES)
+
+#define KNIGHT_SHIELD_LIMIT_600 (40 MINUTES)
 
 // Queen strain flags
 #define ROYAL_CHARGER "Royal Charger"

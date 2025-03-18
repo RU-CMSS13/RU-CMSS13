@@ -41,6 +41,7 @@
 	var/datum/xeno_shield/shield
 	var/armor_state
 	var/shield_passive_regen = 1
+	var/shield_limit = 200 			// Стартовый лимит. Увеличивается со временем
 
 	// Способности
 	var/charged_attack_base = 5
@@ -80,8 +81,8 @@
 				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Глаза заволакивает поволока боли когда [bound_xeno] наносит мне страшный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_9.ogg')
 				original_damage += charged_attack_advanced	// Заряженный удар усиленный +
-				target_carbon.adjust_effect(6, SLOW)		// Замедление слабое
-				target_carbon.apply_effect(6, DAZE) 		// Сотрясение - ограничение обзора
+				target_carbon.adjust_effect(5, SLOW)		// Замедление слабое
+				target_carbon.apply_effect(5, DAZE) 		// Сотрясение - ограничение обзора
 				target_carbon.apply_effect(4, EYE_BLUR) 	// Мыльцо
 				target_carbon.make_jittery(140)				// Тряска персонажа
 				target_carbon.make_dizzy(140)				// Тряска экрана
@@ -91,11 +92,10 @@
 				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Теряю ориентацию в пространстве и падаю когда [bound_xeno] наносит мне страшный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_12.ogg')
 				original_damage += charged_attack_advanced	// Заряженный удар усиленный +
-				target_carbon.adjust_effect(8, SLOW)		// Замедление слабое
-				target_carbon.adjust_effect(4, SUPERSLOW)	// Замедление сильное
-				target_carbon.apply_effect(8, DAZE) 		// Сотрясение - ограничение обзора
+				target_carbon.adjust_effect(6, SLOW)		// Замедление слабое
+				target_carbon.adjust_effect(2, SUPERSLOW)	// Замедление сильное
+				target_carbon.apply_effect(6, DAZE) 		// Сотрясение - ограничение обзора
 				target_carbon.apply_effect(6, EYE_BLUR) 	// Мыльцо
-				target_carbon.apply_effect(1, WEAKEN) 		// Опрокидывание
 				target_carbon.make_jittery(160)				// Тряска персонажа
 				target_carbon.make_dizzy(160)				// Тряска экрана
 
@@ -104,11 +104,11 @@
 				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Сознание меркнет когда [bound_xeno] наносит мне чудовищный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_15.ogg')
 				original_damage += charged_attack_maximum	// Заряженный удар максимальный ++
-				target_carbon.adjust_effect(10, SLOW)		// Замедление слабое
-				target_carbon.adjust_effect(6, SUPERSLOW)	// Замедление сильное
-				target_carbon.apply_effect(10, DAZE) 		// Сотрясение - ограничение обзора
+				target_carbon.adjust_effect(8, SLOW)		// Замедление слабое
+				target_carbon.adjust_effect(2, SUPERSLOW)	// Замедление сильное
+				target_carbon.apply_effect(8, DAZE) 		// Сотрясение - ограничение обзора
 				target_carbon.apply_effect(8, EYE_BLUR) 	// Мыльцо
-				target_carbon.apply_effect(1, PARALYZE) 	// Потеря сознания
+				target_carbon.apply_effect(1, WEAKEN) 		// Опрокидывание
 				target_carbon.make_jittery(180)				// Тряска персонажа
 				target_carbon.make_dizzy(180)				// Тряска экрана
 
@@ -172,13 +172,26 @@
 /datum/behavior_delegate/warrior_knight/on_life()
 	if(!bound_xeno)
 		return
+
+	switch(ROUND_TIME)
+		if(0 to KNIGHT_SHIELD_LIMIT_300)
+			shield_limit = 200
+		if(KNIGHT_SHIELD_LIMIT_300 to KNIGHT_SHIELD_LIMIT_400)
+			shield_limit = 300
+		if(KNIGHT_SHIELD_LIMIT_400 to KNIGHT_SHIELD_LIMIT_500)
+			shield_limit = 400
+		if(KNIGHT_SHIELD_LIMIT_500 to KNIGHT_SHIELD_LIMIT_600)
+			shield_limit = 500
+		else
+			shield_limit = 600
+
 	if(bound_xeno.stat == DEAD)
 		return
 	if(shield)
 		if(shield.amount <= 0)
 			shield = null
 	if(bound_xeno.health == bound_xeno.maxHealth)
-		bound_xeno.add_xeno_shield(shield_passive_regen, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = 600)
+		bound_xeno.add_xeno_shield(shield_passive_regen, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = shield_limit)
 		bound_xeno.overlay_shields()
 
 ////////////
@@ -195,8 +208,8 @@
 				sheet = new /obj/item/stack/sheet/plasteel(bound_xeno.loc)
 			sheet.throw_random_direction(rand(1, 4), SPEED_FAST, spin = TRUE)
 
-	shield.amount = 0
-	bound_xeno.overlay_shields()
+		shield.amount = 0
+		bound_xeno.overlay_shields()
 
 
 /////////////////
