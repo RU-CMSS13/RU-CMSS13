@@ -360,13 +360,8 @@ const Range = (props) => {
 };
 
 const ArmourPen = (props) => {
-<<<<<<< HEAD:tgui/packages/tgui/interfaces/WeaponStats.jsx
-  const { data } = useBackend();
-  const { penetration, penetration_max, armor_punch, punch_max } = data;
-=======
   const { data } = useBackend<Data>();
   const { penetration, penetration_max } = data;
->>>>>>> CM-SS13/master:tgui/packages/tgui/interfaces/WeaponStats.tsx
   return (
     <>
       <ProgressBar value={penetration / penetration_max} ranges={RedGreenRange}>
