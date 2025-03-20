@@ -93,7 +93,6 @@
 /obj/item/device/implanter/attack_self(mob/user)
 	..()
 
-//RUCM START
 	if(!uses || !implant_type)
 		return ..()
 
@@ -104,7 +103,6 @@
 	if(length(user.implants) >= user.max_implants)
 		to_chat(user, SPAN_WARNING("You can't take any more implants!"))
 		return
-//RUCM END
 
 	implant(user, TRUE)
 
@@ -112,9 +110,7 @@
 	if(uses <= 0)
 		return
 
-//RUCM START
 	M.count_statistic_stat(STATISTICS_IMPLANTS_IMPLANTED)
-//RUCM END
 
 	if(LAZYISIN(M.implants, implant_type))
 		QDEL_NULL(M.implants[implant_type])
@@ -214,13 +210,9 @@
 		INVOKE_ASYNC(src, PROC_REF(revive), M)
 
 /obj/item/device/internal_implant/rejuv/proc/revive(mob/living/M)
-//RUCM START
 	M.track_revive()
-//RUCM END
 	M.heal_all_damage()
-//RUCM START
 	M.count_statistic_stat(STATISTICS_REVIVED_BY_IMPLANT)
-//RUCM END
 
 	for(var/i in stimulant_to_inject)
 		var/reagent_id = i

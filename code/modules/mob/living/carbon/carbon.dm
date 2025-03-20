@@ -37,11 +37,44 @@
 			nutrition -= HUNGER_FACTOR/5
 
 /mob/living/carbon/relaymove(mob/user, direction)
-	if(user.is_mob_incapacitated(TRUE))
-		return
-	if(!chestburst && (status_flags & XENO_HOST) && islarva(user))
-		var/mob/living/carbon/xenomorph/larva/larva_burst = user
-		larva_burst.chest_burst(src)
+	if(user.is_mob_incapacitated(TRUE)) return
+	if(user in src.stomach_contents)
+		if(user.client)
+			user.client.next_movement = world.time + 20
+		if(prob(30))
+			for(var/mob/M in hearers(4, src))
+				if(M.client)
+					M.show_message(SPAN_DANGER("You hear something rumbling inside [src]'s stomach..."), SHOW_MESSAGE_AUDIBLE)
+		var/obj/item/I = user.get_active_hand()
+		if(I && I.force)
+			var/d = rand(floor(I.force / 4), I.force)
+			if(istype(src, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = src
+				var/organ = H.get_limb("chest")
+				if(istype(organ, /obj/limb))
+					var/obj/limb/temp = organ
+					if(temp.take_damage(d, 0))
+						H.UpdateDamageIcon()
+				H.updatehealth()
+			else
+				src.take_limb_damage(d)
+			for(var/mob/M as anything in viewers(user, null))
+				if(M.client)
+					M.show_message(text(SPAN_DANGER("<B>[user] attacks [src]'s stomach wall with the [I.name]!")), SHOW_MESSAGE_AUDIBLE)
+			if(user.faction == faction)
+				user.track_friendly_hit(initial(I.name))
+				user.track_friendly_damage(initial(I.name), src, d)
+			else
+				user.track_hit(initial(I.name))
+				user.track_damage(initial(I.name), src, d)
+			playsound(user.loc, 'sound/effects/attackblob.ogg', 25, 1)
+
+			if(prob(max(4*(100*getBruteLoss()/maxHealth - 75),0))) //4% at 24% health, 80% at 5% health
+				last_damage_data = create_cause_data("chestbursting", user)
+				gib(last_damage_data)
+	else if(!chestburst && (status_flags & XENO_HOST) && islarva(user))
+		var/mob/living/carbon/xenomorph/larva/L = user
+		L.chest_burst(src)
 
 /mob/living/carbon/ex_act(severity, direction, datum/cause_data/cause_data)
 	last_damage_data = istype(cause_data) ? cause_data : create_cause_data(cause_data)
@@ -233,12 +266,7 @@
 			apply_effect(6, STUN)//This should work for now, more is really silly and makes you lay there forever
 			apply_effect(6, WEAKEN)
 
-/*
-		count_niche_stat(STATISTICS_NICHE_SHOCK)
-*/
-//RUCM START
 		count_statistic_stat(STATISTICS_SHOCK)
-//RUCM END
 
 	else
 		src.visible_message(
