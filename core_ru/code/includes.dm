@@ -39,7 +39,6 @@
 #include "game\gamemodes\colonialmarines\crash.dm"
 #include "game\gamemodes\colonialmarines\crash\equipping.dm"
 #include "game\gamemodes\colonialmarines\crash\gear.dm"
-#include "game\jobs\role_authority.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\jobs\job\command\auxiliary\tankcrew.dm"
 #include "game\jobs\job\marine\squads.dm"
