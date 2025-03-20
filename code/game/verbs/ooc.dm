@@ -99,7 +99,7 @@
 */
 //RUCM START
 	if(player_data.donator_info.patreon_function_available("badge"))
-		prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, "Donator")]"
+		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
 //RUCM END
 	if(isCouncil(src))
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "WhitelistCouncil")]"
