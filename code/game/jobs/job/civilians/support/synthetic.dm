@@ -101,5 +101,5 @@
 	var/survivor_synth = GLOB.RoleAuthority.roles_by_path[/datum/job/civilian/survivor/synth]
 	if(survivor_synth)
 		var/datum/job/civilian/survivor/synth/survivor = survivor_synth
-		positions -= survivor_synth.current_positions
+		positions = survivor.current_positions
 	return max(positions, 0)
