@@ -940,13 +940,8 @@
 
 	busy = FALSE
 	if(istype(T))
-<<<<<<< HEAD
-		current_orbital_cannon.fire_ob_cannon(T, user, current_squad)
-		user.count_statistic_stat(STATISTICS_OB)
-=======
 		GLOB.almayer_orbital_cannon.fire_ob_cannon(T, user, current_squad)
 		user.count_niche_stat(STATISTICS_NICHE_OB)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /obj/structure/machinery/computer/overwatch/proc/handle_supplydrop()
 	SHOULD_NOT_SLEEP(TRUE)

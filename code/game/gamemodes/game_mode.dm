@@ -173,30 +173,7 @@ GLOBAL_VAR_INIT(cas_tracking_id_increment, 0) //this var used to assign unique t
 		log_game("Round end - total: [surviving_total]")
 
 
-<<<<<<< HEAD
-	var/list/winners_info = get_winners_states()
-
-	if(GLOB.round_statistics)
-		var/datum/entity/statistic_round/round = GLOB.round_statistics
-		round.game_mode = name
-		round.round_length = world.time
-		round.round_result = round_finished
-		if(!length(round.current_map.victories))
-			round.current_map.victories = list()
-		round.current_map.victories[round_finished]++
-		round.end_round_player_population = length(GLOB.clients)
-
-		round.log_round_statistics()
-		round.track_round_end()
-
-	calculate_end_statistics()
-	show_end_statistics(winners_info[1])
-
-/datum/game_mode/proc/get_winners_states()
-	return list("draw")
-=======
 	return 0
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /datum/game_mode/proc/calculate_end_statistics()
 	for(var/i in GLOB.alive_mob_list)

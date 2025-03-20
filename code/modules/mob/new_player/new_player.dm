@@ -32,8 +32,6 @@
 		GLOB.readied_players--
 	return ..()
 
-<<<<<<< HEAD
-=======
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	if(client && client.player_entity)
@@ -79,7 +77,6 @@
 	show_browser(src, output, null, "playersetup", "size=240x[round_start ? 500 : 610];can_close=0;can_minimize=0")
 	return
 
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 /mob/new_player/Topic(href, href_list[])
 	. = ..()
 	if(.)
@@ -88,8 +85,6 @@
 		return
 
 	switch(href_list["lobby_choice"])
-<<<<<<< HEAD
-=======
 		if("show_preferences")
 			// Otherwise the preview dummy will runtime
 			// because atoms aren't initialized yet
@@ -216,7 +211,6 @@
 		if("hiveleaders")
 			ViewHiveLeaders()
 
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		if("SelectedJob")
 			if(!GLOB.enter_allowed)
 				to_chat(usr, SPAN_WARNING("There is an administrative lock on entering the game! (The dropship likely crashed into the Almayer. This should take at most 20 minutes.)"))

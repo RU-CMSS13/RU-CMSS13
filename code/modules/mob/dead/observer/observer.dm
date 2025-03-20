@@ -529,11 +529,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/living/proc/do_ghost()
 	if(stat == DEAD)
-<<<<<<< HEAD
-=======
 		if(mind && mind.player_entity)
 			mind.player_entity.update_panel_data(GLOB.round_statistics)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
@@ -1349,13 +1346,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		GLOB.data_core.manifest_modify(name, ref, null, null, "*Deceased*")
 
 
-<<<<<<< HEAD
-	if(client?.player_data?.player_entity)
-		client.player_data.player_entity.try_recalculate()
-		client.player_data.player_entity.tgui_interact(src)
-	else
-		to_chat(src, SPAN_INFO("Statistic not loaded, try again later!"))
-=======
 /mob/dead/observer/verb/view_kill_feed()
 	set category = "Ghost.View"
 	set name = "View Kill Feed"
@@ -1363,7 +1353,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.show_kill_feed(src)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /mob/dead/observer/get_status_tab_items()
 	. = ..()

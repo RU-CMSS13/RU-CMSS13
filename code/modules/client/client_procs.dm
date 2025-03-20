@@ -566,12 +566,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		return
 	if(GLOB.player_entities["[ckey]"])
 		return GLOB.player_entities["[ckey]"]
-<<<<<<< HEAD
-	var/datum/player_entity/p_entity = new()
-	p_entity.ckey = ckey
-	GLOB.player_entities["[ckey]"] = p_entity
-	return p_entity
-=======
 	var/datum/entity/player_entity/P = new()
 	P.ckey = ckey
 	P.name = ckey
@@ -585,7 +579,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		// P.save_statistics()
 	log_debug("STATISTICS: Statistics saving complete.")
 	message_admins("STATISTICS: Statistics saving complete.")
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /client/proc/clear_chat_spam_mute(warn_level = 1, message = FALSE, increase_warn = FALSE)
 	if(talked > warn_level)

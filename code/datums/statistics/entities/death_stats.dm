@@ -31,17 +31,6 @@
 	var/y
 	var/z
 
-<<<<<<< HEAD
-BSQL_PROTECT_DATUM(/datum/entity/statistic_death)
-
-/datum/entity/statistic_death/Destroy()
-	if(GLOB.round_statistics)
-		GLOB.round_statistics.death_stats_list -= src
-
-	. = ..()
-
-=======
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 /datum/entity_meta/statistic_death
 	entity_type = /datum/entity/statistic/death
 	table_name = "log_player_statistic_death"
@@ -148,30 +137,7 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_death)
 	new_death.total_ib_fixed = life_ib_total
 
 	if(GLOB.round_statistics)
-<<<<<<< HEAD
-		GLOB.round_statistics.track_dead_participant(new_death.faction_name)
-		if(ff_type)
-			GLOB.round_statistics.total_friendly_kills++
-
-	if(cause_player)
-		if(isxeno(cause_mob))
-			track_statistic_earned(new_death.cause_faction_name, STATISTIC_TYPE_CASTE, new_death.cause_role_name, ff_type ? STATISTICS_KILL_FF : STATISTICS_KILL, 1, cause_player)
-		else if(ishuman(cause_mob))
-			track_statistic_earned(new_death.cause_faction_name, STATISTIC_TYPE_JOB, new_death.cause_role_name, ff_type ? STATISTICS_KILL_FF : STATISTICS_KILL, 1, cause_player)
-			if(new_death.cause_role_name)
-				track_statistic_earned(new_death.cause_faction_name, STATISTIC_TYPE_WEAPON, new_death.cause_role_name, ff_type ? STATISTICS_KILL_FF : STATISTICS_KILL, 1, cause_player)
-
-	if(player_entity)
-		if(isxeno(src))
-			track_statistic_earned(new_death.faction_name, STATISTIC_TYPE_CASTE, new_death.role_name, ff_type ? STATISTICS_DEATH_FF : STATISTICS_DEATH, 1, player_entity)
-		else if(ishuman(src))
-			track_statistic_earned(new_death.faction_name, STATISTIC_TYPE_JOB, new_death.cause_name, ff_type ? STATISTICS_DEATH_FF : STATISTICS_DEATH, 1, player_entity)
-
-	if(GLOB.round_statistics && new_death.cause_name != "existing")
-		GLOB.round_statistics.death_stats_list += new_death
-=======
 		GLOB.round_statistics.track_death(new_death)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 	new_death.save()
 	return new_death

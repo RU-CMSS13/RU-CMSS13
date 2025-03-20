@@ -304,13 +304,9 @@
 		M.ghostize()
 
 	if(M.mind)
-<<<<<<< HEAD
-		M.track_death_calculations()
-=======
 		if(M.mind.player_entity)
 			M.track_death_calculations()
 		M.mind.player_entity = setup_player_entity(src.ckey)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		M.statistic_tracked = FALSE
 
 	usr.mind.transfer_to(M, TRUE)

@@ -36,9 +36,6 @@
 	var/list/weapon_stats_list = list() // list of types /datum/entity/weapon_stats
 	var/list/job_stats_list = list() // list of types /datum/entity/job_stats
 
-<<<<<<< HEAD
-BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
-=======
 	// nanoui data
 	var/list/round_data = list()
 	var/list/death_data = list()
@@ -54,7 +51,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 	QDEL_LIST_ASSOC_VAL(caste_stats_list)
 	QDEL_LIST_ASSOC_VAL(weapon_stats_list)
 	QDEL_LIST_ASSOC_VAL(job_stats_list)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /datum/entity_meta/statistic_round
 	entity_type = /datum/entity/statistic/round
@@ -93,26 +89,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 		operation_name += "-[pick(GLOB.operation_postfixes)]"
 
 		// Round stats
-<<<<<<< HEAD
-		var/datum/entity/statistic_round/round = DB_ENTITY(/datum/entity/statistic_round)
-		round.round_name = operation_name
-		round.map_name = SSmapping.configs[GROUND_MAP].map_name
-		var/datum/entity/statistic_map/new_map = DB_EKEY(/datum/entity/statistic_map, round.map_name)
-		round.current_map = new_map
-		round.current_map.save()
-		round.round_id = SSperf_logging.round?.id
-		round.game_mode = name
-		round.real_time_start = world.realtime
-		round.save()
-		START_PROCESSING(SSobj, round)
-		GLOB.round_statistics = round
-
-/datum/entity/statistic_round/Destroy()
-	QDEL_NULL_LIST(death_stats_list)
-	QDEL_NULL(current_map)
-
-	. = ..()
-=======
 		round_stats = DB_ENTITY(/datum/entity/statistic/round)
 		round_stats.round_name = operation_name
 		round_stats.round_id = mc_round.id
@@ -120,7 +96,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 		round_stats.game_mode = name
 		round_stats.real_time_start = world.realtime
 		round_stats.save()
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 		// Setup the global reference
 		GLOB.round_statistics = round_stats
@@ -248,13 +223,7 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 	var/datum/entity/statistic/S = final_participants["[faction]"]
 	S.value += amount
 
-<<<<<<< HEAD
-	final_participants[faction]++
-
-/datum/entity/statistic_round/proc/track_round_end()
-=======
 /datum/entity/statistic/round/proc/track_round_end()
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	real_time_end = world.realtime
 	for(var/i in GLOB.alive_mob_list)
 		var/mob/M = i
@@ -277,10 +246,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 		var/mob/M = i
 		if(M.mind)
 			track_hijack_participant(M.faction)
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	round_hijack_time = world.time
 	save()
 
@@ -301,10 +266,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 		death_stats_list.Insert(1, new_death)
 		var/list/damage_list = list()
 
-<<<<<<< HEAD
-/datum/entity/statistic_round/proc/log_round_statistics()
-	save()
-=======
 		if(new_death.total_brute > 0)
 			damage_list += list(list("name" = "brute", "value" = new_death.total_brute))
 		if(new_death.total_burn > 0)
@@ -345,7 +306,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_round)
 	track_dead_participant(new_death.faction_name)
 
 /datum/entity/statistic/round/proc/log_round_statistics()
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	if(!GLOB.round_stats)
 		return
 	var/total_xenos_created = 0

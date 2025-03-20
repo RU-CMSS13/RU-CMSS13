@@ -40,12 +40,7 @@ SUBSYSTEM_DEF(perf_logging)
 /datum/controller/subsystem/perf_logging/proc/start_logging()
 	SHOULD_NOT_SLEEP(TRUE)
 	var/datum/map_config/ground = SSmapping.configs[GROUND_MAP]
-<<<<<<< HEAD
-	if(!ground)
-		return
-=======
 	if(!ground) return
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	ord = 0
 	round = SSentity_manager.round
 	round.map_name = ground.map_name

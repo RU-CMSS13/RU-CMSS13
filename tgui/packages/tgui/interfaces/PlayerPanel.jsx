@@ -131,18 +131,6 @@ export const PlayerPanel = (props) => {
                 View Playtimes
               </Button>
             </Stack.Item>
-<<<<<<< HEAD
-            <Stack.Item>
-              <Button
-                icon="window-restore"
-                disabled={!hasPermission(data, 'show_notes')}
-                onClick={() => act('access_statistics')}
-              >
-                View Statistic
-              </Button>
-            </Stack.Item>
-=======
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
           </Stack>
           <Stack mt={1}>
             <Stack.Item width="80px" color="label">

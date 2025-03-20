@@ -93,11 +93,6 @@
 
 /obj/item/storage/backpack/marine/smartpack/dropped(mob/living/synthetic)
 
-<<<<<<< HEAD
-	if(light_on && loc != synthetic)
-		turn_light(synthetic, toggle_on = FALSE)
-	..()
-=======
 	if(battery_charge < PROTECTIVE_COST)
 		to_chat(user, SPAN_DANGER("There is a lack of charge for that action. Charge: [battery_charge]/[PROTECTIVE_COST]"))
 		return
@@ -223,7 +218,6 @@
 /obj/item/storage/backpack/marine/smartpack/proc/repair_form_cooldown(mob/user)
 	repairing = FALSE
 	update_icon(user)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 
 /obj/item/storage/backpack/marine/smartpack/green

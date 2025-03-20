@@ -420,8 +420,6 @@
 		to_world("<FONT size = 3><B>There was a winner, but they died before they could receive the prize!! Bummer.</B></FONT>")
 		world << 'sound/misc/sadtrombone.ogg'
 
-<<<<<<< HEAD
-=======
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.game_mode = name
 		GLOB.round_statistics.round_length = world.time
@@ -432,7 +430,6 @@
 
 	return 1
 
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 /datum/game_mode/proc/auto_declare_completion_huntergames()
 	return
 

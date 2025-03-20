@@ -581,11 +581,6 @@
 //////////////////////////////////////////////////////////////////////
 //Announces the end of the game with all relevant information stated//
 //////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-
-/datum/game_mode/colonialmarines/declare_completion()
-	. = ..()
-=======
 #define MAJORITY 0.5 // What percent do we consider a 'majority?'
 
 /datum/game_mode/colonialmarines/declare_completion()
@@ -652,7 +647,6 @@
 
 	calculate_end_statistics()
 	show_end_statistics(end_icon)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 	declare_completion_announce_fallen_soldiers()
 	declare_completion_announce_xenomorphs()
@@ -838,8 +832,4 @@
 #undef HIJACK_EXPLOSION_COUNT
 #undef MAJORITY
 #undef MARINE_MAJOR_ROUND_END_DELAY
-<<<<<<< HEAD
-#undef GROUNDSIDE_XENO_MULTIPLIER
-=======
 #undef MAJORITY
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))

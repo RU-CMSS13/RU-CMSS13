@@ -278,22 +278,6 @@
 				GLOB.round_statistics.current_map.total_xeno_victories++
 				GLOB.round_statistics.current_map.total_xeno_majors++
 
-<<<<<<< HEAD
-/datum/game_mode/whiskey_outpost/get_winners_states()
-	var/end_icon = "draw"
-	var/musical_track
-	switch(round_finished)
-		if(MODE_WISKEY_OUTPOST_M_MAJOR)
-			musical_track = 'sound/misc/hell_march.ogg'
-			end_icon = "marine_major"
-		if(MODE_WISKEY_OUTPOST_X_MAJOR)
-			musical_track = 'sound/misc/Game_Over_Man.ogg'
-			end_icon = "xeno_major"
-		else
-			musical_track = 'sound/misc/sadtrombone.ogg'
-			if(GLOB.round_statistics)
-				GLOB.round_statistics.round_result = MODE_INFESTATION_DRAW_DEATH
-=======
 	else if(finished == 2)
 		log_game("Round end result - marines won")
 		to_world(SPAN_ROUND_HEADER("Against the onslaught, the marines have survived."))
@@ -306,7 +290,6 @@
 			if(GLOB.round_statistics.current_map)
 				GLOB.round_statistics.current_map.total_marine_victories++
 				GLOB.round_statistics.current_map.total_marine_majors++
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 	else
 		log_game("Round end result - no winners")

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/datum/entity/statistic_medal
-=======
 /datum/entity/statistic/medal
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	var/player_id
 	var/round_id
 
@@ -14,17 +10,9 @@
 	var/giver_name
 	var/giver_player_id
 
-<<<<<<< HEAD
-BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
-
-/datum/entity_meta/statistic_medal
-	entity_type = /datum/entity/statistic_medal
-	table_name = "player_statistic_medal"
-=======
 /datum/entity_meta/statistic_medal
 	entity_type = /datum/entity/statistic/medal
 	table_name = "log_player_statistic_medal"
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	field_types = list(
 		"player_id" = DB_FIELDTYPE_BIGINT,
 		"round_id" = DB_FIELDTYPE_BIGINT,
@@ -49,15 +37,9 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
 	var/giver_player_id
 	var/id
 
-<<<<<<< HEAD
-/datum/entity_view_meta/statistic_medal_ordered
-	root_record_type = /datum/entity/statistic_medal
-	destination_entity = /datum/view_record/statistic_medal
-=======
 /datum/entity_view_meta/medal_view
 	root_record_type = /datum/entity/statistic/medal
 	destination_entity = /datum/view_record/medal_view
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	fields = list(
 		"player_id",
 		"round_id",
@@ -74,13 +56,8 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
 	if(!new_medal_type || !new_recipient || new_recipient.statistic_exempt || !new_recipient_role || !new_citation || !giver)
 		return
 
-<<<<<<< HEAD
-	var/datum/entity/statistic_medal/new_medal = DB_ENTITY(/datum/entity/statistic_medal)
-	var/datum/entity/player/player_entity = get_player_from_key(new_recipient.ckey)
-=======
 	var/datum/entity/statistic/medal/new_medal = DB_ENTITY(/datum/entity/statistic/medal)
 	var/datum/entity/player/player_entity = get_player_from_key(new_recipient.persistent_ckey)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	if(player_entity)
 		new_medal.player_id = player_entity.id
 
@@ -96,14 +73,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
 	if(giver_player)
 		new_medal.giver_player_id = giver_player.id
 
-<<<<<<< HEAD
-	var/datum/entity/player/recipient_player = get_player_from_key(new_recipient.ckey)
-	if(recipient_player)
-		track_statistic_earned(new_recipient.faction, STATISTICS_MEDALS, 1, recipient_player)
-
-	statistics_medals += new_medal
-=======
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	new_medal.save()
 	new_medal.detach()
 
@@ -123,19 +92,6 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
 	if(!check_rights(R_MOD))
 		return FALSE
 
-<<<<<<< HEAD
-
-	var/datum/entity/player/recipient_player = get_player_from_key(recipient.ckey)
-	if(recipient_player)
-		track_statistic_earned(recipient.faction, STATISTICS_MEDALS, 1, recipient_player)
-
-	var/round_id = SSperf_logging.round?.id
-	for(var/datum/entity/statistic_medal/new_medal as anything in statistics_medals)
-		if(new_medal.round_id == round_id && new_medal.recipient_name == recipient.real_name && new_medal.medal_type == medal_type && new_medal.citation == citation)
-			statistics_medals -= new_medal
-			new_medal.delete()
-			break
-=======
 	// Remove the stats for the job/caste, individual, and the stat's list of medals
 	var/round_id = SSperf_logging.round.id
 	if (isxeno(recipient))
@@ -168,6 +124,5 @@ BSQL_PROTECT_DATUM(/datum/entity/statistic_medal)
 				medal.delete()
 				break
 
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 	return TRUE
 

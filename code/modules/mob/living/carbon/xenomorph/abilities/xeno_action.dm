@@ -68,16 +68,10 @@
 /datum/action/xeno_action/proc/track_xeno_ability_stats()
 	if(!owner)
 		return
-<<<<<<< HEAD
-	var/mob/living/carbon/xenomorph/xeno = owner
-	if(name)
-		xeno.track_ability_usage(name, xeno.caste_type)
-=======
 	var/mob/living/carbon/xenomorph/X = owner
 	if (ability_name && GLOB.round_statistics)
 		GLOB.round_statistics.track_ability_usage(ability_name)
 		X.track_ability_usage(ability_name, X.caste_type)
->>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /datum/action/xeno_action/can_use_action()
 	if(!owner)
