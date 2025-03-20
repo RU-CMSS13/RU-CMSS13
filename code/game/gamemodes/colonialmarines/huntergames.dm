@@ -86,8 +86,8 @@
 //Digging through this is a pain. I'm leaving it mostly alone until a full rework takes place.
 
 /datum/game_mode/huntergames
-	name = MODE_NAME_HUNTER_GAMES
-	config_tag = MODE_NAME_HUNTER_GAMES
+	name = "Hunter Games"
+	config_tag = "Hunter Games"
 	required_players = 1
 	flags_round_type = MODE_NO_LATEJOIN
 	latejoin_larva_drop = 0 //You never know
@@ -420,6 +420,19 @@
 		to_world("<FONT size = 3><B>There was a winner, but they died before they could receive the prize!! Bummer.</B></FONT>")
 		world << 'sound/misc/sadtrombone.ogg'
 
+<<<<<<< HEAD
+=======
+	if(GLOB.round_statistics)
+		GLOB.round_statistics.game_mode = name
+		GLOB.round_statistics.round_length = world.time
+		GLOB.round_statistics.end_round_player_population = count_humans()
+
+		GLOB.round_statistics.log_round_statistics()
+
+
+	return 1
+
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 /datum/game_mode/proc/auto_declare_completion_huntergames()
 	return
 

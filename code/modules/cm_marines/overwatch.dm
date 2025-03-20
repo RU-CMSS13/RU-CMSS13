@@ -940,8 +940,13 @@
 
 	busy = FALSE
 	if(istype(T))
+<<<<<<< HEAD
 		current_orbital_cannon.fire_ob_cannon(T, user, current_squad)
 		user.count_statistic_stat(STATISTICS_OB)
+=======
+		GLOB.almayer_orbital_cannon.fire_ob_cannon(T, user, current_squad)
+		user.count_niche_stat(STATISTICS_NICHE_OB)
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /obj/structure/machinery/computer/overwatch/proc/handle_supplydrop()
 	SHOULD_NOT_SLEEP(TRUE)
@@ -989,7 +994,7 @@
 	COOLDOWN_START(current_squad, next_supplydrop, 500 SECONDS)
 	if(ismob(usr))
 		var/mob/M = usr
-		M.count_statistic_stat(STATISTICS_CRATES)
+		M.count_niche_stat(STATISTICS_NICHE_CRATES)
 
 	playsound(crate.loc,'sound/effects/bamf.ogg', 50, 1)  //Ehh
 	var/obj/structure/droppod/supply/pod = new(null, crate)

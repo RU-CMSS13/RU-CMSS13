@@ -263,6 +263,7 @@
 
 
 	//At this point, the defibrillator is ready to work
+<<<<<<< HEAD
 	target.apply_damage(-damage_heal_threshold, BRUTE)
 	target.apply_damage(-damage_heal_threshold, BURN)
 	target.apply_damage(-damage_heal_threshold, TOX)
@@ -270,6 +271,14 @@
 	target.apply_damage(-target.getOxyLoss(), OXY)
 	user.track_heal_damage(initial(name), H, damage_heal_threshold * 3)
 	target.updatehealth() //Needed for the check to register properly
+=======
+	H.apply_damage(-damage_heal_threshold, BRUTE)
+	H.apply_damage(-damage_heal_threshold, BURN)
+	H.apply_damage(-damage_heal_threshold, TOX)
+	H.apply_damage(-damage_heal_threshold, CLONE)
+	H.apply_damage(-H.getOxyLoss(), OXY)
+	H.updatehealth() //Needed for the check to register properly
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 	if(!(target.species?.flags & NO_CHEM_METABOLIZATION))
 		for(var/datum/reagent/R in target.reagents.reagent_list)

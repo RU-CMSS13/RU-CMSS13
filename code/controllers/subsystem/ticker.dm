@@ -357,6 +357,19 @@ SUBSYSTEM_DEF(ticker)
 	if(mode)
 		GLOB.master_mode = SSmapping.configs[GROUND_MAP].force_mode ? SSmapping.configs[GROUND_MAP].force_mode : mode
 	else
+<<<<<<< HEAD
+=======
+		GLOB.master_mode = "Extended"
+	log_game("Saved mode is '[GLOB.master_mode]'")
+*/
+//RUCM START
+	var/cfg_mode = trim(file2text("data/mode.txt"))
+	if(SSmapping?.configs?[GROUND_MAP].force_mode)
+		GLOB.master_mode = SSmapping.configs[GROUND_MAP].force_mode
+	else if(cfg_mode)
+		GLOB.master_mode = cfg_mode
+	else
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		GLOB.master_mode = "Extended"
 	log_game("Saved mode is '[GLOB.master_mode]'")
 

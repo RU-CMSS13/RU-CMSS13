@@ -474,10 +474,13 @@ Works together with spawning an observer, noted above.
 
 	if(!can_reenter_corpse)
 		away_timer = 300 //They'll never come back, so we can max out the timer right away.
+		if(GLOB.round_statistics)
+			GLOB.round_statistics.update_panel_data()
 		track_death_calculations() //This needs to be done before mind is nullified
 		if(ghost.mind)
 			ghost.mind.original = ghost
-	else if(ghost.client)
+	else if(ghost.mind && ghost.mind.player_entity) //Use else here because track_death_calculations() already calls this.
+		ghost.mind.player_entity.update_panel_data(GLOB.round_statistics)
 		ghost.mind.original = src
 
 	mind = null
@@ -526,6 +529,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/living/proc/do_ghost()
 	if(stat == DEAD)
+<<<<<<< HEAD
+=======
+		if(mind && mind.player_entity)
+			mind.player_entity.update_panel_data(GLOB.round_statistics)
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
@@ -1340,16 +1348,22 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ref = WEAKREF(H)
 		GLOB.data_core.manifest_modify(name, ref, null, null, "*Deceased*")
 
-/mob/dead/observer/verb/view_stats()
-	set category = "Ghost.View"
-	set name = "View Statistics"
-	set desc = "View global and player statistics tied to the game."
 
+<<<<<<< HEAD
 	if(client?.player_data?.player_entity)
 		client.player_data.player_entity.try_recalculate()
 		client.player_data.player_entity.tgui_interact(src)
 	else
 		to_chat(src, SPAN_INFO("Statistic not loaded, try again later!"))
+=======
+/mob/dead/observer/verb/view_kill_feed()
+	set category = "Ghost.View"
+	set name = "View Kill Feed"
+	set desc = "View global kill statistics tied to the game."
+
+	if(GLOB.round_statistics)
+		GLOB.round_statistics.show_kill_feed(src)
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 /mob/dead/observer/get_status_tab_items()
 	. = ..()

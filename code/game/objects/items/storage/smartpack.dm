@@ -93,9 +93,137 @@
 
 /obj/item/storage/backpack/marine/smartpack/dropped(mob/living/synthetic)
 
+<<<<<<< HEAD
 	if(light_on && loc != synthetic)
 		turn_light(synthetic, toggle_on = FALSE)
 	..()
+=======
+	if(battery_charge < PROTECTIVE_COST)
+		to_chat(user, SPAN_DANGER("There is a lack of charge for that action. Charge: [battery_charge]/[PROTECTIVE_COST]"))
+		return
+
+	activated_form = TRUE
+	flags_item |= NODROP
+	flags_inventory |= CANTSTRIP
+	LAZYSET(user.brute_mod_override, src, 0.2)
+	LAZYSET(user.burn_mod_override, src, 0.2)
+	saved_melee_allowed = user.melee_allowed
+	saved_gun_allowed = user.allow_gun_usage
+	saved_throw_allowed = user.throw_allowed
+	user.melee_allowed = FALSE
+	user.allow_gun_usage = FALSE
+	user.throw_allowed = FALSE
+	to_chat(user, SPAN_DANGER("[name] beeps, \"You are now protected, but unable to attack.\""))
+	battery_charge -= PROTECTIVE_COST
+	playsound(loc, 'sound/mecha/mechmove04.ogg', 25, TRUE)
+	to_chat(user, SPAN_INFO("The current charge reads [battery_charge]/[SMARTPACK_MAX_POWER_STORED]"))
+	update_icon(user)
+
+	var/filter_color = PROTECTIVE_FORM_COLOR
+	var/filter_size = EXOSKELETON_OFF_FILTER_SIZE
+	if(show_exoskeleton)
+		filter_size = EXOSKELETON_ON_FILTER_SIZE
+	user.add_filter("synth_protective_form", priority = 1, params = list("type" = "outline", "color" = filter_color, "size" = filter_size))
+
+	addtimer(CALLBACK(src, PROC_REF(protective_form_cooldown), user), protective_form_cooldown)
+
+/obj/item/storage/backpack/marine/smartpack/proc/protective_form_cooldown(mob/living/carbon/human/user)
+	activated_form = FALSE
+	flags_item &= ~NODROP
+	flags_inventory &= ~CANTSTRIP
+	user.melee_allowed = saved_melee_allowed
+	user.throw_allowed = saved_throw_allowed
+	user.allow_gun_usage = saved_gun_allowed
+	LAZYREMOVE(user.brute_mod_override, src)
+	LAZYREMOVE(user.burn_mod_override, src)
+	to_chat(user, SPAN_DANGER("[name] beeps, \"The protection wears off.\""))
+	playsound(loc, 'sound/mecha/mechmove04.ogg', 25, TRUE)
+	update_icon(user)
+	user.remove_filter("synth_protective_form")
+
+
+/obj/item/storage/backpack/marine/smartpack/proc/immobile_form(mob/living/user)
+	if(activated_form)
+		return
+
+	if(battery_charge < IMMOBILE_COST && !immobile_form)
+		to_chat(user, SPAN_DANGER("There is a lack of charge for that action. Charge: [battery_charge]/[IMMOBILE_COST]"))
+		return
+
+	immobile_form = !immobile_form
+	if(immobile_form)
+		battery_charge -= IMMOBILE_COST
+		user.status_flags &= ~CANPUSH
+		user.anchored = TRUE
+		ADD_TRAIT(user, TRAIT_IMMOBILIZED, TRAIT_SOURCE_EQUIPMENT(WEAR_BACK))
+		to_chat(user, SPAN_DANGER("[name] beeps, \"You are anchored in place and cannot be moved.\""))
+		to_chat(user, SPAN_INFO("The current charge reads [battery_charge]/[SMARTPACK_MAX_POWER_STORED]"))
+
+		var/filter_color = IMMOBILE_FORM_COLOR
+		var/filter_size = EXOSKELETON_OFF_FILTER_SIZE
+		if(show_exoskeleton)
+			filter_size = EXOSKELETON_ON_FILTER_SIZE
+		user.add_filter("synth_immobile_form", priority = 1, params = list("type" = "outline", "color" = filter_color, "size" = filter_size))
+	else
+		user.status_flags |= CANPUSH
+		user.anchored = FALSE
+		REMOVE_TRAIT(user, TRAIT_IMMOBILIZED, TRAIT_SOURCE_EQUIPMENT(WEAR_BACK))
+		to_chat(user, SPAN_DANGER("[name] beeps, \"You can now move again.\""))
+		user.remove_filter("synth_immobile_form")
+
+	playsound(loc, 'sound/mecha/mechmove04.ogg', 25, TRUE)
+	update_icon(user)
+	activated_form = TRUE
+
+	addtimer(CALLBACK(src, PROC_REF(immobile_form_cooldown), user), immobile_form_cooldown)
+
+/obj/item/storage/backpack/marine/smartpack/proc/immobile_form_cooldown(mob/user)
+	activated_form = FALSE
+
+
+/obj/item/storage/backpack/marine/smartpack/proc/repair_form(mob/user)
+	if(!ishuman(user) || activated_form || repairing)
+		return
+
+	if(battery_charge < REPAIR_COST)
+		to_chat(user, SPAN_DANGER("There is a lack of charge for that action. Charge: [battery_charge]/[REPAIR_COST]"))
+		return
+
+	var/mob/living/carbon/human/H = user
+
+	if(H.getBruteLoss() <= 0 && H.getFireLoss() <= 0)
+		to_chat(user, SPAN_DANGER("[name] beeps, \"No noticeable damage. Procedure cancelled.\""))
+		return
+
+	repair_form = TRUE
+	repairing = TRUE
+	update_icon(user)
+
+	H.visible_message(SPAN_WARNING("[name] beeps, \"Engaging the repairing process.\""), \
+		SPAN_WARNING("[name] beeps, \"Beginning to carefully examine your sustained damage.\""))
+	playsound(loc, 'sound/mecha/mechmove04.ogg', 25, TRUE)
+	if(!do_after(H, 100, INTERRUPT_ALL, BUSY_ICON_FRIENDLY))
+		repair_form = FALSE
+		repairing = FALSE
+		update_icon(user)
+		to_chat(user, SPAN_DANGER("[name] beeps, \"Repair process was cancelled.\""))
+		return
+
+	playsound(loc, 'sound/items/Welder2.ogg', 25, TRUE)
+	battery_charge -= REPAIR_COST
+	H.heal_overall_damage(50, 50, TRUE)
+	H.pain.recalculate_pain()
+	repair_form = FALSE
+	update_icon(user)
+	to_chat(user, SPAN_INFO("The current charge reads [battery_charge]/[SMARTPACK_MAX_POWER_STORED]"))
+	H.visible_message(SPAN_DANGER("[name] beeps, \"Completed the repairing process. Charge now reads [battery_charge]/[SMARTPACK_MAX_POWER_STORED].\""))
+
+	addtimer(CALLBACK(src, PROC_REF(repair_form_cooldown), user), repair_form_cooldown)
+
+/obj/item/storage/backpack/marine/smartpack/proc/repair_form_cooldown(mob/user)
+	repairing = FALSE
+	update_icon(user)
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 
 
 /obj/item/storage/backpack/marine/smartpack/green

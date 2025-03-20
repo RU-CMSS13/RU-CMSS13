@@ -720,7 +720,6 @@
 
 	X.use_plasma(400)
 	X.place_construction(T, structure_template)
-	X.count_statistic_stat(STATISTIC_XENO_STRUCTURES_BUILD)
 
 	return ..()
 

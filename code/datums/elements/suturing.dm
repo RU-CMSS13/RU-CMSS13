@@ -155,12 +155,16 @@ YOU TO 200 DAMAGE. I ASK NOT FOR MY OWN MEDIC EGOSTROKING, BUT FOR THE GOOD OF T
 	//Add the sutures.
 	var/added_sutures = SEND_SIGNAL(target_limb, COMSIG_LIMB_ADD_SUTURES, suture_brute, suture_burn)
 	if(!added_sutures) //No suture datum to answer the signal
+<<<<<<< HEAD
 /*
 		new /datum/suture_handler(target_limb)
 */
 //RUCM START
 		new /datum/suture_handler(target_limb, suturing_item, user, target)
 //RUCM END
+=======
+		new /datum/suture_handler(target_limb)
+>>>>>>> parent of 35de48867e (Squash my asss (STATISTIC))
 		added_sutures = SEND_SIGNAL(target_limb, COMSIG_LIMB_ADD_SUTURES, suture_brute, suture_burn) //This time, with feeling.
 
 	if(added_sutures & SUTURED_FULLY)
@@ -186,15 +190,8 @@ YOU TO 200 DAMAGE. I ASK NOT FOR MY OWN MEDIC EGOSTROKING, BUT FOR THE GOOD OF T
 	var/remaining_brute
 	var/remaining_burn
 
-	var/obj/suturing_item
-	var/mob/healing
-	var/mob/healed
-
-/datum/suture_handler/New(obj/limb/target_limb, obj/item, mob/user, mob/target)
+/datum/suture_handler/New(obj/limb/target_limb)
 	. = ..()
-	suturing_item = item
-	healing = user
-	healed = target
 	remaining_brute = target_limb.brute_dam
 	remaining_burn = target_limb.burn_dam
 	RegisterSignal(target_limb, COMSIG_LIMB_TAKEN_DAMAGE, PROC_REF(update_sutures))
@@ -288,7 +285,6 @@ maximum_heal = total amount of each damage type that can be healed - IE TRUE/TRU
 					W.salved |= WOUND_SUTURED
 
 	target_limb.heal_damage(brute_to_heal, burn_to_heal)
-	healing.track_heal_damage(initial(suturing_item.name), healed, brute_to_heal + burn_to_heal)
 
 	if(!suture_brute && !suture_burn)
 		return SUTURED_FULLY
