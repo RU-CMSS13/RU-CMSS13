@@ -1,4 +1,3 @@
-/* RUCM CHANGE
 /obj/item/device/defibrillator
 	name = "emergency defibrillator"
 	desc = "A handheld emergency defibrillator, used to restore fibrillating patients. Can optionally bring people back from the dead."
@@ -320,8 +319,8 @@
 	base_icon_state = "compact_defib"
 	w_class = SIZE_SMALL
 	charge_cost = 99
-*/
-/* RUCM REMOVE
+
+
 /obj/item/device/defibrillator/synthetic
 	name = "W-Y synthetic reset key"
 	desc = "Result of collaboration between Hyperdyne and Weyland-Yutani, this device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset."
@@ -417,5 +416,3 @@
 	icon_state = "makeshift_key"
 	should_spark = TRUE
 	sound_success = "sparks"
-
-*/
