@@ -240,7 +240,7 @@
 		dat += "<a href='byond://?src=\ref[src];lobby_choice=SelectedJob;antag=0;job_selected=[J.title]'>[J.disp_title] ([J.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	show_browser(src, dat, "Late Join", "latechoices", width = 420, height = 700)
+	show_browser(src, dat, "Late Join", "latechoices", "size=420x700")
 
 /mob/new_player/proc/late_choices_upp()
 	var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
@@ -303,7 +303,7 @@
 		dat += "<a href='byond://?src=\ref[src];lobby_choice=SelectedJob;antag=1;job_selected=[J.title]'>[J.disp_title] ([J.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	show_browser(src, dat, "Late Join", "latechoices", width = 420, height = 700)
+	show_browser(src, dat, "Late Join", "latechoices", "size=420x700")
 
 
 /mob/new_player/proc/create_character(is_late_join = FALSE)
@@ -387,7 +387,7 @@
 /mob/new_player/is_ready()
 	return ready && ..()
 
-/mob/new_player/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null)
+/mob/new_player/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, tts_heard_list)
 	return
 
 /mob/new_player/hear_radio(message, verb, datum/language/language, part_a, part_b, mob/speaker, hard_to_hear, vname, command, no_paygrade = FALSE)
