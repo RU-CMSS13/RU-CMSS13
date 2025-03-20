@@ -359,16 +359,6 @@ SUBSYSTEM_DEF(ticker)
 	else
 		GLOB.master_mode = "Extended"
 	log_game("Saved mode is '[GLOB.master_mode]'")
-*/
-//RUCM START
-	var/cfg_mode = trim(file2text("data/mode.txt"))
-	if(SSmapping?.configs?[GROUND_MAP].force_mode)
-		GLOB.master_mode = SSmapping.configs[GROUND_MAP].force_mode
-	else if(cfg_mode)
-		GLOB.master_mode = cfg_mode
-	else
-		GLOB.master_mode = "Extended"
-	log_game("Saved mode is '[GLOB.master_mode]'")
 
 
 /datum/controller/subsystem/ticker/proc/save_mode(the_mode)

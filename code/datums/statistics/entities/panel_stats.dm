@@ -728,7 +728,7 @@
 	round_data["round"] = list(
 		"name" = name,
 		"game_mode" = game_mode,
-		"map_name" = current_map?.map_name,
+		"map_name" = map_name,
 		"round_result" = round_result,
 		"real_time_start" = new_time_start,
 		"real_time_end" = new_time_end,
