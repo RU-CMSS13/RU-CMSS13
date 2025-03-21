@@ -241,7 +241,6 @@
 		var/mob/living/carbon/human/hauled_mob = user
 		hauled_mob.handle_haul_resist()
 
-
 //Strip all inherent xeno verbs from your caste. Used in evolution.
 /mob/living/carbon/xenomorph/proc/remove_inherent_verbs()
 	if(inherent_verbs)
