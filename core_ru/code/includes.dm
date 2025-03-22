@@ -132,6 +132,7 @@
 #include "modules\mob\living\carbon\xenomorph\strains\castes\warrior\boxer.dm"
 #include "modules\mob\new_player\login.dm"
 #include "modules\objectives\communications.dm"
+#include "modules\override.dm"
 #include "modules\projectiles\gun_attachables.dm"
 #include "modules\projectiles\magazines\magazines_assorted.dm"
 #include "modules\projectiles\guns\rifles.dm"
