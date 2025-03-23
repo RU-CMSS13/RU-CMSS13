@@ -79,6 +79,7 @@
 #include "game\turfs\closed.dm"
 #include "game\turfs\open.dm"
 #include "modules\admin\db_ban.dm"
+#include "modules\admin\rank_panel.dm"
 #include "modules\admin\verbs\getlogs.dm"
 #include "modules\asset_cache\asset_list_items.dm"
 #include "modules\battlepass\challenges\_battlepass_challenge.dm"

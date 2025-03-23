@@ -20,7 +20,7 @@
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.admin_holder
-	if (!istype(src,/datum/admins) || !(src.rights & R_MOD))
+	if (!istype(src,/datum/admins) || !(src.rights & R_BAN))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
@@ -46,6 +46,7 @@
 	show_browser(usr, dat, "Ban Panel", "adminplayerinfo", "size=480x480")
 
 /datum/admins/proc/job_ban_ru(ckey)
+	if(!check_rights(R_BAN))  return
 
 	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
 	if(!player)
@@ -141,6 +142,8 @@ WARNING!*/
 		return PJB ? PJB.text : null
 
 /datum/admins/proc/generate_job_ban_list_ru(ckey, datum/entity/player/P, list/roles, department, color = "ccccff")
+	if(!check_rights(R_BAN))  return
+
 	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
 	if(!player)
 		to_chat(usr, "Database lookup failed.No file was found.")
@@ -172,6 +175,7 @@ WARNING!*/
 	return dat
 
 /datum/admins/proc/ban_temp_ru(ckey)
+	if(!check_rights(R_BAN))  return
 
 	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
 	if(!player)
@@ -193,6 +197,7 @@ WARNING!*/
 	P.add_timed_ban(reason, mins)
 
 /datum/admins/proc/ban_perma_ru(ckey)
+	if(!check_rights(R_BAN))  return
 
 	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, ckey))
 	if(!player)
@@ -216,7 +221,7 @@ WARNING!*/
 		to_chat(owner, SPAN_ADMIN("The user is already permabanned! If necessary, you can remove the permaban, and place a new one."))
 
 /datum/admins/proc/job_ban_ru_2(ban_job, key)
-	if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
+	if(!check_rights(R_BAN))  return
 
 	var/datum/view_record/players/player = locate() in DB_VIEW(/datum/view_record/players, DB_COMP("ckey", DB_EQUALS, key))
 	if(!player)
@@ -309,6 +314,7 @@ WARNING!*/
 	to_chat(owner, SPAN_ADMIN("Found the following stickybans for [key]: [english_list(impacting_stickies)]"))
 
 /datum/admins/proc/do_stickyban_ru(key, reason, message, list/impacted_ckeys, list/impacted_cids, list/impacted_ips)
+	if(!check_rights(R_BAN))  return
 	if(!key)
 		return
 

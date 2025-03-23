@@ -3,6 +3,8 @@
 	set desc = "View/retrieve logfiles."
 	set category = "Server"
 
+	if(!check_rights(R_BAN))  return
+	
 	var/path = usr.client.browse_files_ru("data/logs/")
 	if(!path)
 		to_chat(src, "Could not find a file.")
