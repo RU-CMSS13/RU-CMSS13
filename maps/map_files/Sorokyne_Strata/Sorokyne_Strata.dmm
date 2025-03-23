@@ -127,6 +127,10 @@
 	},
 /turf/open/floor/strata/floor3,
 /area/strata/interior/outpost/canteen)
+"aau" = (
+/obj/structure/largecrate/random/barrel/yellow,
+/turf/open/floor/almayer/test_floor5,
+/area/strata/interior/outpost/engi/drome/shuttle_MK3)
 "aaw" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "xgibdown1"
@@ -188,9 +192,15 @@
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
 "aaE" = (
-/obj/structure/largecrate/random/barrel/yellow,
-/turf/open/floor/almayer/test_floor5,
-/area/strata/interior/outpost/engi/drome/shuttle_MK3)
+/obj/structure/surface/table/reinforced/prison{
+	color = "#98a3ab"
+	},
+/obj/item/storage/box/mre/upp{
+	pixel_x = -1;
+	pixel_y = 7
+	},
+/turf/open/floor/strata/orange_cover,
+/area/strata/interior/outpost/canteen)
 "aaF" = (
 /obj/structure/largecrate/random/barrel/brown,
 /turf/open/auto_turf/strata_grass/layer1,
@@ -205,15 +215,15 @@
 /turf/open/auto_turf/strata_grass/layer0_mud,
 /area/strata/interior/bball_cave)
 "aaH" = (
-/obj/structure/surface/table/reinforced/prison{
+/obj/structure/surface/rack{
 	color = "#98a3ab"
 	},
-/obj/item/storage/box/mre/upp{
-	pixel_x = -1;
-	pixel_y = 7
+/obj/item/clothing/head/helmet/marine/veteran/UPP/firefighter{
+	pixel_x = -2;
+	pixel_y = 10
 	},
-/turf/open/floor/strata/orange_cover,
-/area/strata/interior/outpost/canteen)
+/turf/open/floor/strata/multi_tiles/west,
+/area/strata/interior/mining_outpost/maintenance)
 "aaI" = (
 /obj/effect/blocker/sorokyne_hot_water,
 /obj/structure/platform/stone/soro,
@@ -244,16 +254,6 @@
 	},
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
-"aaN" = (
-/obj/structure/surface/rack{
-	color = "#98a3ab"
-	},
-/obj/item/clothing/head/helmet/marine/veteran/UPP/firefighter{
-	pixel_x = -2;
-	pixel_y = 10
-	},
-/turf/open/floor/strata/multi_tiles/west,
-/area/strata/interior/mining_outpost/maintenance)
 "aaO" = (
 /obj/structure/surface/rack{
 	color = "#98a3ab"
@@ -57423,7 +57423,7 @@ gZp
 aXM
 aWN
 mKX
-aaE
+aau
 cXU
 aUn
 aTx
@@ -64185,7 +64185,7 @@ ajt
 ajt
 bGv
 aqD
-aaN
+aaH
 ajt
 bGT
 bGs
@@ -80651,7 +80651,7 @@ nap
 ckN
 nGk
 jBG
-aaH
+aaE
 xSL
 ffS
 aJe
