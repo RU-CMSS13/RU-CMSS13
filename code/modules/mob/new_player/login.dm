@@ -62,9 +62,6 @@
 	.["xeno_postfix"] = postfix_text
 
 	.["tutorials_ready"] = SSticker?.current_state == GAME_STATE_PLAYING
-// RUCM START
-	.["battlepass_ready"] = !!GLOB.current_battlepass
-// RUCM END
 	.["round_start"] = !SSticker || !SSticker.mode || SSticker.current_state <= GAME_STATE_PREGAME
 	.["readied"] = ready
 
@@ -74,6 +71,8 @@
 	.["xenomorph_enabled"] = GLOB.master_mode == /datum/game_mode/colonialmarines::name && client.prefs && (client.prefs.get_job_priority(JOB_XENOMORPH) || client.prefs.get_job_priority(JOB_XENOMORPH_QUEEN))
 	.["predator_enabled"] = SSticker.mode?.flags_round_type & MODE_PREDATOR && SSticker.mode.check_predator_late_join(src, FALSE)
 	.["fax_responder_enabled"] = SSticker.mode?.check_fax_responder_late_join(src, FALSE)
+
+	.["preference_issues"] = client.prefs.errors
 
 /mob/new_player/ui_static_data(mob/user)
 	. = ..()
@@ -110,29 +109,6 @@
 
 			client.prefs.ShowChoices(src)
 			return TRUE
-
-//RUCM START
-		if("battlepass")
-			if(!client.player_data?.battlepass)
-				return FALSE
-
-			if(!GLOB.current_battlepass)
-				to_chat(src, SPAN_WARNING("Please wait for battlepasses to initialize first."))
-				return FALSE
-
-			client.player_data.battlepass.tgui_interact(src)
-			return TRUE
-
-		if("statistic")
-			if(!SSentity_manager.ready)
-				to_chat(src, SPAN_WARNING("DB is still starting up, please wait"))
-				return FALSE
-
-			if(client?.player_data?.player_entity)
-				client.player_data.player_entity.try_recalculate()
-				client.player_data.player_entity.tgui_interact(src)
-			return TRUE
-//RUCM END
 
 		if("playtimes")
 			if(!SSentity_manager.ready)
@@ -262,6 +238,10 @@
 		if("unconfirm")
 			lobby_confirmation_message = null
 			execute_on_confirm = null
+			return TRUE
+
+		if("poll")
+			SSpolls.tgui_interact(src)
 			return TRUE
 
 		if("keyboard")

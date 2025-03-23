@@ -124,10 +124,14 @@ GLOBAL_LIST_EMPTY(shuttle_controls)
 
 	var/shuttle_state
 	switch(shuttle.moving_status)
-		if(SHUTTLE_IDLE) shuttle_state = "idle"
-		if(SHUTTLE_WARMUP) shuttle_state = "warmup"
-		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
-		if(SHUTTLE_CRASHED) shuttle_state = "crashed"
+		if(SHUTTLE_IDLE)
+			shuttle_state = "idle"
+		if(SHUTTLE_WARMUP)
+			shuttle_state = "warmup"
+		if(SHUTTLE_INTRANSIT)
+			shuttle_state = "in_transit"
+		if(SHUTTLE_CRASHED)
+			shuttle_state = "crashed"
 
 	var/shuttle_status
 	switch (shuttle.process_state)
@@ -301,12 +305,7 @@ GLOBAL_LIST_EMPTY(shuttle_controls)
 					message_all_yautja("The serpent Queen has commanded the landing shuttle to depart.")
 					playsound(src, 'sound/misc/queen_alarm.ogg')
 
-/*
 					Q.count_niche_stat(STATISTICS_NICHE_FLIGHT)
-*/
-//RUCM START
-					Q.count_statistic_stat(STATISTICS_FLIGHT)
-//RUCM END
 
 					if(Q.hive)
 						addtimer(CALLBACK(Q.hive, TYPE_PROC_REF(/datum/hive_status, abandon_on_hijack)), DROPSHIP_WARMUP_TIME + 5 SECONDS, TIMER_UNIQUE) //+ 5 seconds catch standing in doorways
@@ -330,15 +329,11 @@ GLOBAL_LIST_EMPTY(shuttle_controls)
 				to_chat(M, SPAN_WARNING("Hrm, that didn't work. Maybe try the one on the ship?"))
 				return
 			else
-				if(is_ground_level(z)) shuttle.transit_gun_mission = 0 //remote launch always do transport flight.
+				if(is_ground_level(z))
+					shuttle.transit_gun_mission = 0 //remote launch always do transport flight.
 				shuttle.launch(src)
 				if(onboard && !shuttle.iselevator)
-/*
 					M.count_niche_stat(STATISTICS_NICHE_FLIGHT)
-*/
-//RUCM START
-					M.count_statistic_stat(STATISTICS_FLIGHT)
-//RUCM END
 			msg_admin_niche("[M] ([M.key]) launched \a [shuttle.iselevator? "elevator" : "shuttle"] using [src].")
 
 	ui_interact(usr)

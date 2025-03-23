@@ -31,24 +31,14 @@
 	to_chat(usr, SPAN_DANGER("This mob type cannot throw items."))
 	return
 
-/*
 /mob/verb/view_stats()
-*/
-//RUCM START
-/mob/verb/view_playtimes()
-//RUCM END
 	set category = "OOC.Records"
 	set name = "View Playtimes"
 	set desc = "View your playtimes."
 	if(!SSentity_manager.ready)
 		to_chat(src, "DB is still starting up, please wait")
 		return
-/*
 	if(client && client.player_entity)
-*/
-//RUCM START
-	if(client?.player_data)
-//RUCM END
 		client.player_data.tgui_interact(src)
 
 /mob/verb/toggle_high_toss()
@@ -164,7 +154,8 @@
 		return
 
 	M.key = key
-	if(M.client) M.client.change_view(GLOB.world_view_size)
+	if(M.client)
+		M.client.change_view(GLOB.world_view_size)
 // M.Login() //wat
 	return
 
@@ -254,3 +245,23 @@
 				//so we must undo it here so the victim can move right away
 				M.client.next_movement = world.time
 			M.update_transform(TRUE)
+
+/mob/living/verb/look_up()
+	set name = "Look Up"
+	set category = "IC"
+
+	if(observed_atom)
+		var/atom/to_delete = observed_atom
+		observed_atom = null
+		qdel(to_delete)
+		return
+
+	var/turf/above = locate(x, y, z+1)
+
+	if(!istransparentturf(above))
+		to_chat(src, SPAN_WARNING("You cannot look up here."))
+		return
+
+	var/mob/hologram/look_up/observed_hologram = new(above, src)
+
+	observed_atom = observed_hologram

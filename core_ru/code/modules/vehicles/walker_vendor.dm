@@ -1,5 +1,5 @@
 GLOBAL_LIST_INIT(cm_vending_walker, list(
-	list("WEAPONS (choose 2)", 0, null, null, null),
+	list("WEAPONS, DO NOT PICK SIMILAR (choose 2)", 0, null, null, null),
 	list("M88 Mounted Automated Anti-Material rifle", 0, /obj/item/walker_gun/wm88, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M56 Double-Barrel Mounted Smartgun", 0, /obj/item/walker_gun/smartgun, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M32 Mounted Shotgun", 0,/obj/item/walker_gun/shotgun8g, MECH_GUN, VENDOR_ITEM_REGULAR),
@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 
 	unslashable = TRUE
 
-	vend_delay = 4 SECONDS
+	vend_delay = 1 SECONDS
 	vend_sound = 'sound/machines/medevac_extend.ogg'
 
 	vend_flags = VEND_CLUTTER_PROTECTION|VEND_CATEGORY_CHECK|VEND_TO_HAND|VEND_USE_VENDOR_FLAGS
@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_walker, list(
 		list("M50 Walker Helmet", 0, /obj/item/clothing/head/helmet/marine/tech/tanker/walker, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
 		list("Medical Helmet Optic", 0, /obj/item/device/helmet_visor/medical, MARINE_CAN_BUY_GLASSES, VENDOR_ITEM_MANDATORY),
 		list("Welding Kit", 0, /obj/item/tool/weldpack, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_MANDATORY),
-		list("MRE", 0, /obj/item/storage/box/MRE, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
+		list("MRE", 0, /obj/item/storage/box/mre, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 
 		list("PERSONAL SIDEARM (CHOOSE 1)", 0, null, null, null),
 		list("88 Mod 4 Combat Pistol", 0, /obj/item/weapon/gun/pistol/mod88, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_REGULAR),

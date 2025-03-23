@@ -59,12 +59,7 @@
 				if(human_mob.has_limb_for_slot(WEAR_HANDCUFFS))
 					user.drop_inv_item_on_ground(src)
 					human_mob.equip_to_slot_if_possible(src, WEAR_HANDCUFFS, 1, 0, 1, 1)
-/*
 					user.count_niche_stat(STATISTICS_NICHE_HANDCUFF)
-*/
-//RUCM START
-					user.count_statistic_stat(STATISTICS_HANDCUFF)
-//RUCM END
 
 	else if(ismonkey(target))
 		user.visible_message(SPAN_NOTICE("[user] tries to put [src] on [target]."))
@@ -194,7 +189,8 @@
 				return
 
 		spawn(30)
-			if(!carbon_mob) return
+			if(!carbon_mob)
+				return
 			if(p_loc == user.loc && p_loc_m == carbon_mob.loc)
 				carbon_mob.handcuffed = new /obj/item/restraint/handcuffs(carbon_mob)
 				carbon_mob.handcuff_update()
@@ -230,7 +226,8 @@
 		for(var/mob/O in viewers(user, null))
 			O.show_message(SPAN_DANGER("<B>[user] is trying to put restraints on [C]!</B>"), SHOW_MESSAGE_VISIBLE)
 		spawn(30)
-			if(!C) return
+			if(!C)
+				return
 			if(p_loc == user.loc && p_loc_m == C.loc)
 				C.handcuffed = new /obj/item/xeno_restraints(C)
 				C.handcuff_update()
