@@ -304,9 +304,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		next_external_rsc = WRAP(next_external_rsc+1, 1, length(external_rsc_urls)+1)
 		preload_rsc = external_rsc_urls[next_external_rsc]
 
-/*
 	player_entity = setup_player_entity(ckey)
-*/
 
 	if(check_localhost_status())
 /*
@@ -427,8 +425,11 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 			CEI.show_player_event_info(src)
 
 	connection_time = world.time
+
 	winset(src, null, "command=\".configure graphics-hwmode on\"")
 	winset(src, "map", "style=\"[MAP_STYLESHEET]\"")
+
+	acquire_dpi()
 
 	send_assets()
 
@@ -563,12 +564,20 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
 		addtimer(CALLBACK(SSassets.transport, TYPE_PROC_REF(/datum/asset_transport, send_assets_slow), src, SSassets.transport.preload), 5 SECONDS)
 
+/client/proc/acquire_dpi()
+	set waitfor = FALSE
+
+	// Remove with 516
+	if(byond_version < 516)
+		return
+
+	window_scaling = text2num(winget(src, null, "dpi"))
+
 /proc/setup_player_entity(ckey)
 	if(!ckey)
 		return
 	if(GLOB.player_entities["[ckey]"])
 		return GLOB.player_entities["[ckey]"]
-/*
 	var/datum/entity/player_entity/P = new()
 	P.ckey = ckey
 	P.name = ckey
@@ -582,13 +591,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		// P.save_statistics()
 	log_debug("STATISTICS: Statistics saving complete.")
 	message_admins("STATISTICS: Statistics saving complete.")
-*/
-//RUCM START
-	var/datum/player_entity/p_entity = new()
-	p_entity.ckey = ckey
-	GLOB.player_entities["[ckey]"] = p_entity
-	return p_entity
-//RUCM END
 
 /client/proc/clear_chat_spam_mute(warn_level = 1, message = FALSE, increase_warn = FALSE)
 	if(talked > warn_level)
@@ -856,12 +858,11 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	total_xeno_playtime += get_job_playtime(src, JOB_XENOMORPH)
 
-/*
 	if(player_entity)
 		var/past_xeno_playtime = player_entity.get_playtime(STATISTIC_XENO)
 		if(past_xeno_playtime)
 			total_xeno_playtime += past_xeno_playtime
-*/
+
 
 	cached_xeno_playtime = total_xeno_playtime
 
@@ -972,7 +973,16 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		winset(src, "default.Shift", "is-disabled=true")
 		winset(src, "default.ShiftUp", "is-disabled=true")
 
+GLOBAL_VAR(ooc_rank_dmi)
+GLOBAL_LIST_INIT(ooc_rank_iconstates, setup_ooc_rank_icons())
 GLOBAL_LIST_INIT(community_awards, get_community_awards())
+
+/proc/setup_ooc_rank_icons()
+	var/ooc_dmi_path = "config/ooc.dmi"
+	if(!fexists(ooc_dmi_path))
+		return list()
+	GLOB.ooc_rank_dmi = icon(file(ooc_dmi_path))
+	return icon_states(GLOB.ooc_rank_dmi)
 
 /proc/get_community_awards()
 	var/list/awards_file = file2list("config/community_awards.txt")
@@ -1008,5 +1018,5 @@ GLOBAL_LIST_INIT(community_awards, get_community_awards())
 	if(GLOB.community_awards[ckey])
 		var/full_prefix = ""
 		for(var/award in GLOB.community_awards[ckey])
-			full_prefix += "[icon2html('icons/ooc.dmi', GLOB.clients, award)]"
+			full_prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, award)]"
 		return full_prefix

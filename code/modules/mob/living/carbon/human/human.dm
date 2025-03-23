@@ -128,9 +128,6 @@
 		. += "Active Order: FOCUS"
 
 	if(SShijack)
-//RUCM START
-		. += "Operation Stage: [SShijack.get_ship_operation_stage_status_panel_eta()]"
-//RUCM END
 		var/eta_status = SShijack.get_evac_eta()
 		if(eta_status)
 			. += "Evacuation Goals: [eta_status]"
@@ -140,8 +137,6 @@
 /mob/living/carbon/human/ex_act(severity, direction, datum/cause_data/cause_data)
 	if(body_position == LYING_DOWN && direction)
 		severity *= EXPLOSION_PRONE_MULTIPLIER
-
-
 
 	var/b_loss = 0
 	var/f_loss = 0
@@ -159,6 +154,10 @@
 		create_shrapnel(oldloc, rand(5, 9), direction, 45, /datum/ammo/bullet/shrapnel/light/human, last_damage_data)
 		create_shrapnel(oldloc, rand(5, 9), direction, 30, /datum/ammo/bullet/shrapnel/light/human/var1, last_damage_data)
 		create_shrapnel(oldloc, rand(5, 9), direction, 45, /datum/ammo/bullet/shrapnel/light/human/var2, last_damage_data)
+		return
+
+	if(HAS_TRAIT(src, TRAIT_HAULED)) // We still probably wanna gib them as well if they were supposed to be gibbed by the explosion in the first place
+		visible_message(SPAN_WARNING("[src] is shielded from the blast!"), SPAN_WARNING("You are shielded from the blast!"))
 		return
 
 	if(!HAS_TRAIT(src, TRAIT_EAR_PROTECTION))
@@ -1719,7 +1718,7 @@
 	HTML += "<hr />"
 	HTML +="<a href='byond://?src=\ref[src];flavor_change=done'>\[Done\]</a>"
 	HTML += "<tt>"
-	show_browser(src, HTML, "Update Flavor Text", "flavor_changes", "size=430x300")
+	show_browser(src, HTML, "Update Flavor Text", "flavor_changes", width = 430, height = 300)
 
 /mob/living/carbon/human/throw_item(atom/target)
 	if(!throw_allowed)
@@ -1758,9 +1757,7 @@
 	if(new_player.mind)
 		new_player.mind_initialize()
 		new_player.mind.transfer_to(target, TRUE)
-/*
 		new_player.mind.setup_human_stats()
-*/
 
 	target.sec_hud_set_ID()
 	target.hud_set_squad()
