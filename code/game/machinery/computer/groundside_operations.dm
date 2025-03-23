@@ -25,7 +25,7 @@
 	var/show_command_squad = FALSE
 
 	var/list/concurrent_users = list()
-	
+
 	var/minimap_flag = MINIMAP_FLAG_USCM
 
 /obj/structure/machinery/computer/groundside_operations/Initialize()
@@ -223,10 +223,6 @@
 
 	usr.set_interaction(src)
 	switch(href_list["operation"])
-		if("mapview")
-			var/mob/user = usr
-			var/datum/component/tacmap/tacmap_component = GetComponent(/datum/component/tacmap)
-			tacmap_component.show_tacmap(user)
 		if("announce")
 			var/mob/living/carbon/human/human_user = usr
 			var/obj/item/card/id/idcard = human_user.get_active_hand()

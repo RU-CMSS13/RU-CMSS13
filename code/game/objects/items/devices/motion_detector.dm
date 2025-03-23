@@ -14,24 +14,6 @@
 /obj/effect/detector_blip/m717
 	icon_state = "tracker_blip"
 
-/obj/effect/temp_visual//ported (pasted) from TG13
-	icon_state = null
-	anchored = TRUE
-	layer = ABOVE_MOB_LAYER
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	var/duration = 1 SECONDS
-	///if true, will pick a random direction when created.
-	var/randomdir = TRUE
-	///id of the deletion timer
-	var/timerid
-
-/obj/effect/temp_visual/Initialize(mapload)
-	. = ..()
-	if(randomdir)
-		setDir(pick(GLOB.cardinals))
-
-	timerid = QDEL_IN(src, duration)
-
 /obj/effect/temp_visual/minimap_pulse
 	icon = null
 	duration = 0.75 SECONDS
@@ -76,6 +58,8 @@
 	var/long_range_cooldown = 2
 	var/blip_type = "detector"
 	var/iff_signal = FACTION_MARINE
+	///Flag for minimap icon
+	var/minimap_flag = MINIMAP_FLAG_USCM
 	///Flag for minimap icon
 	var/minimap_flag = MINIMAP_FLAG_USCM
 	actions_types = list(/datum/action/item_action/toggle)
@@ -248,6 +232,7 @@
 
 /obj/item/device/motiondetector/proc/scan()
 	set waitfor = 0
+	new /obj/effect/temp_visual/minimap_pulse(get_turf(src), minimap_flag, detector_mode)
 	if(scanning)
 		return
 	scanning = TRUE
@@ -337,6 +322,7 @@
 		DB.screen_loc = "[clamp(c_view + 1 - view_x_offset + (target.x - user.x), 1, 2*c_view+1)],[clamp(c_view + 1 - view_y_offset + (target.y - user.y), 1, 2*c_view+1)]"
 		user.client.add_to_screen(DB)
 		new /obj/effect/temp_visual/minimap_blip(get_turf(target), minimap_flag)
+		new /obj/effect/temp_visual/minimap_blip(get_turf(target), minimap_flag)
 		addtimer(CALLBACK(src, PROC_REF(clear_pings), user, DB), 1 SECONDS)
 
 /obj/item/device/motiondetector/proc/clear_pings(mob/user, obj/effect/detector_blip/DB)
@@ -359,11 +345,13 @@
 	desc = "This prototype motion detector sacrifices versatility, having only the long-range mode, for size, being so small it can even fit in pockets. This one has been modified with an after-market IFF sensor to filter out Vanguard's Arrow Incorporated signals instead of USCM ones. Fight fire with fire!"
 	iff_signal = FACTION_CONTRACTOR
 	minimap_flag = MINIMAP_FLAG_CLF
+	minimap_flag = MINIMAP_FLAG_CLF
 
 /obj/item/device/motiondetector/hacked
 	name = "hacked motion detector"
 	desc = "A device that usually picks up non-USCM signals, but this one's been hacked to detect all non-UPP movement instead. Fight fire with fire!"
 	iff_signal = FACTION_UPP
+	minimap_flag = MINIMAP_FLAG_UPP
 	minimap_flag = MINIMAP_FLAG_UPP
 
 /obj/item/device/motiondetector/hacked/elite_merc
@@ -375,6 +363,7 @@
 	name = "corporate motion detector"
 	desc = "A device that usually picks up non-USCM signals, but this one's been reprogrammed to detect all non-PMC movement instead. Very corporate."
 	iff_signal = FACTION_PMC
+	minimap_flag = MINIMAP_FLAG_PMC
 	minimap_flag = MINIMAP_FLAG_PMC
 
 /obj/item/device/motiondetector/hacked/dutch

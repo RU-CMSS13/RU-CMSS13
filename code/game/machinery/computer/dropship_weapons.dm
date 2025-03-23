@@ -24,6 +24,9 @@
 	var/datum/simulator/simulation
 	var/datum/cas_fire_mission/configuration
 
+	// groundside maps
+	var/minimap_type = MINIMAP_FLAG_USCM
+
 	// Cameras
 	var/camera_target_id
 	var/camera_width = 11
@@ -62,7 +65,7 @@
 
 /obj/structure/machinery/computer/dropship_weapons/on_unset_interaction(mob/user)
 	. = ..()
-	
+
 	var/datum/component/tacmap/tacmap_component = GetComponent(/datum/component/tacmap)
 	tacmap_component.on_unset_interaction(user)
 
