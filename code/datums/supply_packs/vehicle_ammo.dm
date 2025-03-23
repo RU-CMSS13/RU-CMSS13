@@ -2,7 +2,6 @@
 //Vehicle Ammo
 //*******************************************************************************/
 
-/* RUCM EDIT START
 /datum/supply_packs/ammo_ltb_cannon
 	name = "LTB Cannon magazines (x6)"
 	contains = list(
@@ -17,7 +16,6 @@
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "LTB cannon ammo crate"
 	group = "Vehicle Ammo"
-*/ //RUCM EDIT ENDS
 
 /datum/supply_packs/ammo_ltaaap_minigun
 	name = "LTAA-AP Minigun magazines (x3)"
@@ -97,15 +95,22 @@
 	containername = "M34A2-A Multipurpose Turret smoke screen ammo crate"
 	group = "Vehicle Ammo"
 
-/* RUCM EDIT START
 /datum/supply_packs/ammo_towlauncher
 	name = "TOW Launcher magazines (x3)"
+//RUCM EDIT START
+/*
 	contains = list(/obj/item/hardpoint/secondary/towlauncher)
+*/
+	contains = list(
+		/obj/item/ammo_magazine/hardpoint/towlauncher,
+		/obj/item/ammo_magazine/hardpoint/towlauncher,
+		/obj/item/ammo_magazine/hardpoint/towlauncher,
+	)
+//RUCM EDIT ENDS
 	cost = 30
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "TOW launcher ammo crate"
 	group = "Vehicle Ammo"
-*/ //RUCM EDIT ENDS
 
 /datum/supply_packs/ammo_m56_cupola
 	name = "M56 Cupola magazines (x2)"
