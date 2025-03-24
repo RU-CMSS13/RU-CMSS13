@@ -68,9 +68,32 @@
 	paygrades = list(PAY_SHORT_ME8 = JOB_PLAYTIME_TIER_0)
 
 /datum/equipment_preset/synth/uscm/load_gear(mob/living/carbon/human/new_human)
+<<<<<<< HEAD
+	/* RUCM CHANGE
 	var/back_item = /obj/item/storage/backpack/marine/satchel
+=======
+    /* RUCM CHANGE
+	var/back_item = /obj/item/storage/backpack/satchel
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+	*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel/chestrig
+	//RUCM END
 	if (new_human.client && new_human.client.prefs && (new_human.client.prefs.backbag == 1))
+	/* RUCM CHANGE
+<<<<<<< HEAD
 		back_item = /obj/item/storage/backpack/industrial
+		*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel
+		//RUCM END
+=======
+	back_item = /obj/item/storage/backpack/industrial
+	*/
+	//RUCM START
+	back_item = /obj/item/storage/backpack/marine/satchel/intel
+	//RUCM END
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
 
 	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcom/synth(new_human), WEAR_L_EAR)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/rank/synthetic(new_human), WEAR_BODY)
@@ -92,9 +115,19 @@
 	paygrades = list(PAY_SHORT_ME9 = JOB_PLAYTIME_TIER_0)
 
 /datum/equipment_preset/synth/uscm/councillor/load_gear(mob/living/carbon/human/new_human)
-	var/back_item = /obj/item/storage/backpack/satchel
+	/* RUCM CHANGE
+	var/back_item = /obj/item/storage/backpack/marine/satchel
+	*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel/chestrig
+	//RUCM END
 	if (new_human.client && new_human.client.prefs && (new_human.client.prefs.backbag == 1))
+	/* RUCM CHANGE
 		back_item = /obj/item/storage/backpack/industrial
+		*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel
+		//RUCM END
 
 	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcom/synth(new_human), WEAR_L_EAR)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/rank/synthetic/councillor(new_human), WEAR_BODY)
