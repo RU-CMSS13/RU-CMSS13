@@ -69,6 +69,64 @@
 
 /datum/equipment_preset/synth/uscm/load_gear(mob/living/carbon/human/new_human)
 <<<<<<< HEAD
+<<<<<<< HEAD
+	/* RUCM CHANGE
+	var/back_item = /obj/item/storage/backpack/marine/satchel
+=======
+    /* RUCM CHANGE
+	var/back_item = /obj/item/storage/backpack/satchel
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+=======
+    /* RUCM CHANGE
+	var/back_item = /obj/item/storage/backpack/satchel
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+	*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel/chestrig
+	//RUCM END
+	if (new_human.client && new_human.client.prefs && (new_human.client.prefs.backbag == 1))
+	/* RUCM CHANGE
+<<<<<<< HEAD
+<<<<<<< HEAD
+		back_item = /obj/item/storage/backpack/industrial
+		*/
+	//RUCM START
+	var/back_item = /obj/item/storage/backpack/marine/satchel/intel
+		//RUCM END
+=======
+=======
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+	back_item = /obj/item/storage/backpack/industrial
+	*/
+	//RUCM START
+	back_item = /obj/item/storage/backpack/marine/satchel/intel
+	//RUCM END
+<<<<<<< HEAD
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+=======
+>>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
+
+	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcom/synth(new_human), WEAR_L_EAR)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/rank/synthetic(new_human), WEAR_BODY)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(new_human), WEAR_FEET)
+	new_human.equip_to_slot_or_del(new /obj/item/storage/belt/utility/full(new_human), WEAR_WAIST)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow(new_human), WEAR_HANDS)
+	new_human.equip_to_slot_or_del(new back_item(new_human), WEAR_BACK)
+
+//*****************************************************************************************************/
+
+/datum/equipment_preset/synth/uscm/councillor
+	name = "USCM Synthetic Councillor"
+	flags = EQUIPMENT_PRESET_START_OF_ROUND|EQUIPMENT_PRESET_MARINE
+	faction = FACTION_MARINE
+	idtype = /obj/item/card/id/gold
+	assignment = JOB_SYNTH
+	rank = "Synthetic"
+	role_comm_title = "Syn"
+	paygrades = list(PAY_SHORT_ME9 = JOB_PLAYTIME_TIER_0)
+
+/datum/equipment_preset/synth/uscm/councillor/load_gear(mob/living/carbon/human/new_human)
+<<<<<<< HEAD
 	/* RUCM CHANGE
 	var/back_item = /obj/item/storage/backpack/marine/satchel
 =======
@@ -94,40 +152,6 @@
 	back_item = /obj/item/storage/backpack/marine/satchel/intel
 	//RUCM END
 >>>>>>> 666c849608dbf7957c1033e7ab66c5bd86a8e02c
-
-	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcom/synth(new_human), WEAR_L_EAR)
-	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/rank/synthetic(new_human), WEAR_BODY)
-	new_human.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(new_human), WEAR_FEET)
-	new_human.equip_to_slot_or_del(new /obj/item/storage/belt/utility/full(new_human), WEAR_WAIST)
-	new_human.equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow(new_human), WEAR_HANDS)
-	new_human.equip_to_slot_or_del(new back_item(new_human), WEAR_BACK)
-
-//*****************************************************************************************************/
-
-/datum/equipment_preset/synth/uscm/councillor
-	name = "USCM Synthetic Councillor"
-	flags = EQUIPMENT_PRESET_START_OF_ROUND|EQUIPMENT_PRESET_MARINE
-	faction = FACTION_MARINE
-	idtype = /obj/item/card/id/gold
-	assignment = JOB_SYNTH
-	rank = "Synthetic"
-	role_comm_title = "Syn"
-	paygrades = list(PAY_SHORT_ME9 = JOB_PLAYTIME_TIER_0)
-
-/datum/equipment_preset/synth/uscm/councillor/load_gear(mob/living/carbon/human/new_human)
-	/* RUCM CHANGE
-	var/back_item = /obj/item/storage/backpack/marine/satchel
-	*/
-	//RUCM START
-	var/back_item = /obj/item/storage/backpack/marine/satchel/intel/chestrig
-	//RUCM END
-	if (new_human.client && new_human.client.prefs && (new_human.client.prefs.backbag == 1))
-	/* RUCM CHANGE
-		back_item = /obj/item/storage/backpack/industrial
-		*/
-	//RUCM START
-	var/back_item = /obj/item/storage/backpack/marine/satchel/intel
-		//RUCM END
 
 	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcom/synth(new_human), WEAR_L_EAR)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/rank/synthetic/councillor(new_human), WEAR_BODY)
