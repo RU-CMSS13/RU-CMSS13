@@ -129,12 +129,7 @@
 							to_chat(user, SPAN_NOTICE("You applied a composite upgrade."))
 
 					metal.use(2)
-/*
 					user.count_niche_stat(STATISTICS_NICHE_UPGRADE_CADES)
-*/
-//RUCM START
-					user.count_statistic_stat(STATISTICS_UPGRADE_CADES)
-//RUCM END
 					update_icon()
 					return
 				else
@@ -174,12 +169,7 @@
 							to_chat(user, SPAN_NOTICE("You applied a composite upgrade."))
 
 					metal.use(2)
-/*
 					user.count_niche_stat(STATISTICS_NICHE_UPGRADE_CADES)
-*/
-//RUCM START
-					user.count_statistic_stat(STATISTICS_UPGRADE_CADES)
-//RUCM END
 					update_icon()
 					return
 
@@ -245,6 +235,10 @@
 					if(B != src && B.dir == dir)
 						to_chat(user, SPAN_WARNING("There's already a barricade here."))
 						return
+				var/area/area = get_area(src)
+				if(!area.allow_construction)
+					to_chat(user, SPAN_WARNING("[src] must be secured on a proper surface!"))
+					return
 				var/turf/open/turf = loc
 				if(!(istype(turf) && turf.allow_construction))
 					to_chat(user, SPAN_WARNING("[src] must be secured on a proper surface!"))

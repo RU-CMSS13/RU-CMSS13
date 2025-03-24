@@ -69,9 +69,7 @@
 	var/xeno_postfix = ""
 	var/xeno_name_ban = FALSE
 
-/*
 	var/datum/entity/player_entity/player_entity = null
-*/
 
 	//Asset cache
 	// List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
@@ -132,3 +130,6 @@
 
 	///datum that controls the displaying and hiding of tooltips
 	var/datum/tooltip/tooltips
+
+	/// If this client has any windows scaling applied
+	var/window_scaling

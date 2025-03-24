@@ -77,7 +77,8 @@
 	permissions_required = R_ADMIN
 
 /datum/player_action/force_say/act(client/user, mob/target, list/params)
-	if(!params["to_say"]) return
+	if(!params["to_say"])
+		return
 
 	target.say(params["to_say"])
 
@@ -92,7 +93,8 @@
 	permissions_required = R_ADMIN
 
 /datum/player_action/force_emote/act(client/user, mob/target, list/params)
-	if(!params["to_emote"]) return
+	if(!params["to_emote"])
+		return
 
 	target.manual_emote(params["to_emote"])
 
@@ -209,10 +211,10 @@
 	action_tag = "access_variables"
 	name = "Access Variables"
 
+
 /datum/player_action/access_variables/act(client/user, mob/target, list/params)
 	user.debug_variables(target)
 	return TRUE
-
 
 /datum/player_action/access_playtimes
 	action_tag = "access_playtimes"
@@ -222,18 +224,6 @@
 	target?.client?.player_data.tgui_interact(user.mob)
 
 	return TRUE
-
-
-//RUCM START
-/datum/player_action/access_statistics
-	action_tag = "access_statistics"
-	name = "Access Statistics"
-
-/datum/player_action/access_statistics/act(client/user, mob/target, list/params)
-	target?.client?.player_data?.player_entity.tgui_interact(user.mob)
-
-	return TRUE
-//RUCM END
 
 
 /datum/player_action/access_admin_datum
