@@ -50,12 +50,7 @@
 	if(health != maxhealth) //Update cades mapped with a custom health
 		update_health(0, TRUE)
 	if(user)
-/*
 		user.count_niche_stat(STATISTICS_NICHE_CADES)
-*/
-//RUCM START
-		user.count_statistic_stat(STATISTICS_CADES)
-//RUCM END
 	addtimer(CALLBACK(src, PROC_REF(update_icon)), 0)
 	starting_maxhealth = maxhealth
 
@@ -366,10 +361,14 @@
 /obj/structure/barricade/proc/update_damage_state()
 	var/health_percent = floor(health/maxhealth * 100)
 	switch(health_percent)
-		if(0 to 25) damage_state = BARRICADE_DMG_HEAVY
-		if(25 to 50) damage_state = BARRICADE_DMG_MODERATE
-		if(50 to 75) damage_state = BARRICADE_DMG_SLIGHT
-		if(75 to INFINITY) damage_state = BARRICADE_DMG_NONE
+		if(0 to 25)
+			damage_state = BARRICADE_DMG_HEAVY
+		if(25 to 50)
+			damage_state = BARRICADE_DMG_MODERATE
+		if(50 to 75)
+			damage_state = BARRICADE_DMG_SLIGHT
+		if(75 to INFINITY)
+			damage_state = BARRICADE_DMG_NONE
 
 /obj/structure/barricade/proc/try_weld_cade(obj/item/tool/weldingtool/welder, mob/user, repeat = TRUE, skip_check = FALSE)
 	if(!skip_check && !can_weld(welder, user))
@@ -388,12 +387,7 @@
 
 	user.visible_message(SPAN_NOTICE("[user] repairs some damage on [src]."),
 	SPAN_NOTICE("You repair [src]."))
-/*
 	user.count_niche_stat(STATISTICS_NICHE_REPAIR_CADES)
-*/
-//RUCM START
-	user.count_statistic_stat(STATISTICS_REPAIR_CADES)
-//RUCM END
 	update_health(-200)
 	playsound(src.loc, 'sound/items/Welder2.ogg', 25, TRUE)
 

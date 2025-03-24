@@ -240,7 +240,7 @@
 	if(overloaded)
 		xeno.animation_attack_on(src)
 		playsound(src, 'sound/effects/metalhit.ogg', 25, 1)
-		xeno.visible_message(SPAN_DANGER("[xeno] [xeno.slashes_verb] [src], stopping its overload process!"), \
+		xeno.visible_message(SPAN_DANGER("[xeno] [xeno.slashes_verb] [src], stopping its overload process!"),
 		SPAN_DANGER("You [xeno.slash_verb] [src], stopping its overload process!"), null, 5, CHAT_TYPE_XENO_COMBAT)
 		set_overloading(FALSE)
 		return
@@ -332,9 +332,6 @@
 			return
 		playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
 		buildstate = BUILDSTATE_FUNCTIONAL
-//RUCM START
-		user.count_statistic_stat(STATISTICS_REPAIR_GENERATOR)
-//RUCM END
 		update_icon()
 		return
 

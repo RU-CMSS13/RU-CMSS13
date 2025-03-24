@@ -30,18 +30,10 @@
 	drop_sound = "armorequip"
 
 /obj/item/clothing/shoes/marine/update_icon()
-/*
 	if(stored_item)
 		icon_state = "[initial(icon_state)]-1"
 	else
 		icon_state = initial(icon_state)
-*/
-//RUCM START
-	if(stored_item)
-		icon_state = "[base_icon_state]-1"
-	else
-		icon_state = base_icon_state
-//RUCM END
 
 /obj/item/clothing/shoes/marine/knife
 	spawn_item_type = /obj/item/attachable/bayonet
@@ -58,6 +50,20 @@
 	desc = "Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are brown."
 
 /obj/item/clothing/shoes/marine/brown/knife
+	spawn_item_type = /obj/item/attachable/bayonet
+
+/obj/item/clothing/shoes/marine/grey
+	icon_state = "marine_grey"
+	desc = "Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are grey."
+
+/obj/item/clothing/shoes/marine/grey/knife
+	spawn_item_type = /obj/item/attachable/bayonet
+
+/obj/item/clothing/shoes/marine/urban
+	icon_state = "marine_grey_alt"
+	desc = "Don't go walkin' slow, the devil's on the loose."
+
+/obj/item/clothing/shoes/marine/urban/knife
 	spawn_item_type = /obj/item/attachable/bayonet
 
 /obj/item/clothing/shoes/marine/monkey
@@ -236,6 +242,7 @@
 	name = "\improper L10 pattern combat boots"
 	desc = "Standard issue combat boots for combat scenarios or combat situations. Used by the three world empires royal marines commando units."
 	icon_state = "rmc_boots"
+	item_state = "rmc_boots"
 	armor_melee = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_laser = CLOTHING_ARMOR_LOW
@@ -260,3 +267,8 @@
 
 /obj/item/clothing/shoes/royal_marine/knife
 	spawn_item_type = /obj/item/attachable/bayonet/rmc
+
+/obj/item/clothing/shoes/dress/rmc
+	name = "\improper RMC dress shoes"
+	desc = "Polished fancy dress shoes. You can see your reflection in them."
+	icon_state = "rmc_laceups"
