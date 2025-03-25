@@ -102,6 +102,7 @@
 // Reskinned rubber bullet used for the ES-4 CL pistol.
 /datum/ammo/bullet/pistol/rubber/stun
 	name = "stun pistol bullet"
+	icon_state = "cm_laser"
 	sound_override = null
 
 	accuracy = HIT_ACCURACY_TIER_4
@@ -245,6 +246,13 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
+/datum/ammo/bullet/pistol/squash/rubber
+	name = "rubber squash-head pistol bullet"
+	damage_type = BURN
+	shrapnel_chance = 0
+	sound_override = 'sound/weapons/gun_c99.ogg'
+	damage = 2
+	stamina_damage = 40
 
 /datum/ammo/bullet/pistol/mankey
 	name = "live monkey"

@@ -691,7 +691,7 @@
 	unload_sound = 'sound/weapons/gun_88m4_unload.ogg'
 	current_mag = /obj/item/ammo_magazine/pistol/es4
 	force = 8
-	muzzle_flash = "muzzle_flash_blue"
+	muzzle_flash = "muzzle_energy"
 	muzzle_flash_color = COLOR_MUZZLE_BLUE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER
 	attachable_allowed = list(
@@ -769,6 +769,9 @@
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 	recoil = RECOIL_AMOUNT_TIER_5
 	recoil_unwielded = RECOIL_AMOUNT_TIER_4
+
+/obj/item/weapon/gun/pistol/vp78/whiteout
+	starting_attachment_types = list(/obj/item/attachable/heavy_barrel, /obj/item/attachable/reflex)
 
 
 //-------------------------------------------------------

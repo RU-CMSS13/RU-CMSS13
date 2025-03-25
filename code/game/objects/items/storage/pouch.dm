@@ -164,6 +164,10 @@
 	new /obj/item/device/radio(src)
 	new /obj/item/attachable/bayonet(src)
 	new /obj/item/stack/medical/splint(src)
+
+/obj/item/storage/pouch/survival/full/black
+	icon_state = "soctools"
+
 /obj/item/storage/pouch/survival/synth
 	name = "synth survival pouch"
 	desc = "An emergency pouch given to synthetics in the event of an emergency."
@@ -240,6 +244,9 @@
 	new /obj/item/reagent_container/hypospray/autoinjector/emergency(src)
 	new /obj/item/stack/medical/bruise_pack(src)
 
+/obj/item/storage/pouch/firstaid/ert/wy
+	name = "W-Y first-aid pouch"
+	icon_state = "wy_firstaid"
 
 ///Pistol pouch.
 /obj/item/storage/pouch/pistol
@@ -426,6 +433,9 @@
 	icon_state = "large_ammo_mag"
 	storage_slots = 4
 
+/obj/item/storage/pouch/magazine/large/black //evil dark pouch for evil corporation
+	icon_state = "wy_ammo_mag"
+
 /obj/item/storage/pouch/magazine/pistol
 	name = "pistol magazine pouch"
 	desc = "It can carry pistol magazines and revolver speedloaders."
@@ -485,37 +495,49 @@
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/type71(src)
 
-/obj/item/storage/pouch/magazine/large/pmc_m39/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy
+	icon_state = "wy_ammo_mag"
+
+/obj/item/storage/pouch/magazine/large/wy/pmc_m39/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/smg/m39/ap(src)
 
-/obj/item/storage/pouch/magazine/large/nsg_ap/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/nsg_ap/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/nsg23/ap(src)
 
-/obj/item/storage/pouch/magazine/large/nsg_ext/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/nsg_ext/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
 
-/obj/item/storage/pouch/magazine/large/nsg_heap/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/nsg_heap/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/nsg23/heap(src)
 
-/obj/item/storage/pouch/magazine/large/pmc_p90/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/pmc_p90/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/smg/fp9000(src)
 
-/obj/item/storage/pouch/magazine/large/pmc_lmg/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/pmc_lmg/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/lmg(src)
 
-/obj/item/storage/pouch/magazine/large/pmc_sniper/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/pmc_sniper/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/sniper/elite(src)
 
-/obj/item/storage/pouch/magazine/large/pmc_rifle/fill_preset_inventory()
+/obj/item/storage/pouch/magazine/large/wy/pmc_rifle/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/ap(src)
+
+/obj/item/storage/pouch/magazine/large/wy/smg_heap/fill_preset_inventory()
+	for(var/i = 1 to storage_slots)
+		new /obj/item/ammo_magazine/smg/m39/heap(src)
+
+/obj/item/storage/pouch/magazine/large/pmc_sg
+	name = "smartgun drum pouch"
+	desc = "A heavy pouch designed for carrying a surplus of smargun drums."
+	icon_state = "wy_sgdrums_ammo"
 
 /obj/item/storage/pouch/magazine/large/pmc_sg/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
@@ -529,13 +551,12 @@
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/m16/ap(src)
 
+/obj/item/storage/pouch/magazine/large/rifle_heap
+	icon_state = "wy_ammo_mag"
+
 /obj/item/storage/pouch/magazine/large/rifle_heap/fill_preset_inventory()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/ammo_magazine/rifle/heap(src)
-
-/obj/item/storage/pouch/magazine/large/smg_heap/fill_preset_inventory()
-	for(var/i = 1 to storage_slots)
-		new /obj/item/ammo_magazine/smg/m39/heap(src)
 
 /obj/item/storage/pouch/magazine/large/m60/fill_preset_inventory()
 	for(var/i in 1 to storage_slots)
@@ -693,6 +714,22 @@
 	new /obj/item/reagent_container/hypospray/autoinjector/stimulant/redemption_stimulant(src)
 	new /obj/item/reagent_container/hypospray/autoinjector/stimulant/speed_stimulant(src)
 
+/obj/item/storage/pouch/medical/socmed/commando/fill_preset_inventory()
+	new /obj/item/device/healthanalyzer(src)
+	new /obj/item/stack/medical/splint/nano(src)
+	new /obj/item/stack/medical/advanced/bruise_pack/upgraded(src)
+	new /obj/item/stack/medical/advanced/bruise_pack/upgraded(src)
+	new /obj/item/stack/medical/advanced/ointment/upgraded(src)
+	new /obj/item/stack/medical/advanced/ointment/upgraded(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/bicaridine(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/meralyne(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/kelotane(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/dermaline(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/oxycodone(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/tricord(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/emergency(src)
+	new /obj/item/reagent_container/hypospray/autoinjector/stimulant/redemption_stimulant(src)
+
 /obj/item/storage/pouch/medical/socmed/not_op/fill_preset_inventory()
 	new /obj/item/device/healthanalyzer(src)
 	new /obj/item/stack/medical/splint(src)
@@ -800,6 +837,9 @@
 	new /obj/item/reagent_container/hypospray/autoinjector/tramadol(src)
 	new /obj/item/reagent_container/hypospray/autoinjector/tramadol(src)
 	new /obj/item/reagent_container/hypospray/autoinjector/emergency(src)
+
+/obj/item/storage/pouch/autoinjector/full/wy
+	icon_state = "wy_medicpack"
 
 /obj/item/storage/pouch/syringe
 	name = "syringe pouch"
@@ -916,6 +956,18 @@
 	new /obj/item/stack/medical/splint(src)
 	new /obj/item/stack/medical/advanced/bruise_pack(src)
 	new /obj/item/stack/medical/advanced/ointment(src)
+
+/obj/item/storage/pouch/medkit/wy
+	icon_state = "wy_medkit"
+
+/obj/item/storage/pouch/medkit/wy/full_advanced/fill_preset_inventory()
+	new /obj/item/reagent_container/hypospray/autoinjector/tricord(src)
+	new /obj/item/stack/medical/advanced/bruise_pack(src)
+	new /obj/item/stack/medical/advanced/bruise_pack(src)
+	new /obj/item/stack/medical/advanced/bruise_pack(src)
+	new /obj/item/stack/medical/advanced/ointment(src)
+	new /obj/item/stack/medical/advanced/ointment(src)
+	new /obj/item/stack/medical/splint(src)
 
 /obj/item/storage/pouch/pressurized_reagent_canister
 	name = "Pressurized Reagent Canister Pouch"
@@ -1259,10 +1311,16 @@
 	new /obj/item/stack/sheet/metal(src, 50)
 	new /obj/item/stack/sandbags_empty(src, 50)
 
+/obj/item/storage/pouch/construction/full/wy
+	icon_state = "wy_construction"
+
 /obj/item/storage/pouch/construction/full_barbed_wire/fill_preset_inventory()
 	new /obj/item/stack/sheet/plasteel(src, 50)
 	new /obj/item/stack/sheet/metal(src, 50)
 	new /obj/item/stack/barbed_wire(src, 20)
+
+/obj/item/storage/pouch/construction/full_barbed_wire/wy
+	icon_state = "wy_construction"
 
 /obj/item/storage/pouch/construction/low_grade_full/fill_preset_inventory()
 	new /obj/item/stack/sheet/plasteel(src, 30)

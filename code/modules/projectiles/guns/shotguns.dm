@@ -45,7 +45,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_5)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_BASE)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -213,9 +213,9 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/merc/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_6*2)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_COMBAT) // 2 tick nerf, but brings it in line with other combat shotties.
 	set_burst_amount(BURST_AMOUNT_TIER_2)
-	set_burst_delay(FIRE_DELAY_TIER_11)
+	set_burst_delay(FIRE_DELAY_TIER_11) // Still has its wacky burst fire mode
 	accuracy_mult = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_4
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -236,7 +236,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/merc/damaged/set_gun_config_values()
 	..()
-	set_fire_delay(1.5 SECONDS)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_BASE)
 	set_burst_amount(BURST_AMOUNT_TIER_1)
 	accuracy_mult = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_6
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
@@ -246,6 +246,66 @@ can cause issues with ammo types getting mixed up during the burst.
 	damage_mult = BASE_BULLET_DAMAGE_MULT - BULLET_DAMAGE_MULT_TIER_2
 	recoil = RECOIL_AMOUNT_TIER_3
 	recoil_unwielded = RECOIL_AMOUNT_TIER_1
+
+//-------------------------------------------------------------
+//SHOCKGUN - Non-Lethal Fast firing shotgun
+/obj/item/weapon/gun/shotgun/es7
+	name = "\improper ES-7 Supernova Electrostatic Shockgun"
+	desc = "An archaic electrostatic 20ga shotgun design based on old Earth designs, albeit modernized for its time period. Being a dual-mode system, it is capable of firing semi-auto and pump-action modes, although this particular model is strictly semi-auto only. It can only accept X21 slugs."
+	desc_lore = "Despite receiving very little upgrades over its service period both within the Weyland Corporation and later the Weyland-Yutani Corporation, it remains popular with mercenaries and security firms because it was designed with security and law enforcement use in mind. "
+	icon_state = "es7"
+	item_state = "es7"
+	icon = 'icons/obj/items/weapons/guns/guns_by_faction/WY/shotguns.dmi'
+	gauge = "20g"
+	hud_offset = -5
+	pixel_x = -5
+	muzzle_flash = "muzzle_energy"
+	muzzle_flash_color = COLOR_MUZZLE_BLUE
+	flags_equip_slot = SLOT_BACK
+	fire_sound = "gun_shockgun"
+	firesound_volume = 20
+	current_mag = /obj/item/ammo_magazine/internal/shotgun/combat/es7
+	attachable_allowed = list(
+		/obj/item/attachable/bayonet,
+		/obj/item/attachable/bayonet/upp,
+		/obj/item/attachable/bayonet/co2,
+		/obj/item/attachable/reddot,
+		/obj/item/attachable/reflex,
+		/obj/item/attachable/flashlight,
+		/obj/item/attachable/extended_barrel,
+		/obj/item/attachable/compensator,
+		/obj/item/attachable/magnetic_harness,
+		/obj/item/attachable/lasersight,
+		/obj/item/attachable/angledgrip,
+		/obj/item/attachable/verticalgrip,
+	)
+
+/obj/item/weapon/gun/shotgun/es7/Initialize(mapload, spawn_empty)
+	. = ..()
+	if(current_mag && current_mag.current_rounds > 0)
+		load_into_chamber()
+
+/obj/item/weapon/gun/shotgun/es7/set_gun_attachment_offsets()
+	attachable_offset = list("muzzle_x" = 41, "muzzle_y" = 19, "rail_x" = 17, "rail_y" = 21, "under_x" = 34, "under_y" = 13, "stock_x" = 11, "stock_y" = 13.)
+
+/obj/item/weapon/gun/shotgun/es7/set_gun_config_values()
+	..()
+	set_fire_delay(FIRE_DELAY_TIER_11*2)
+	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
+	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
+	scatter = SCATTER_AMOUNT_TIER_8
+	burst_scatter_mult = SCATTER_AMOUNT_TIER_6
+	scatter_unwielded = SCATTER_AMOUNT_TIER_2
+	damage_mult = BASE_BULLET_DAMAGE_MULT
+	recoil = RECOIL_AMOUNT_TIER_5
+	recoil_unwielded = RECOIL_AMOUNT_TIER_3
+
+/obj/item/weapon/gun/shotgun/es7/get_examine_text(mob/user)
+	. = ..()
+	if(in_chamber) . += "It has a chambered round."
+
+/obj/item/weapon/gun/shotgun/es7/tactical
+	starting_attachment_types = list(/obj/item/attachable/magnetic_harness, /obj/item/attachable/verticalgrip)
 
 //-------------------------------------------------------
 //TACTICAL SHOTGUN
@@ -306,7 +366,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/combat/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_5*2)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_COMBAT)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -375,7 +435,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/combat/marsoc/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_6)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_DEATHSQUAD)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3 - HIT_ACCURACY_MULT_TIER_5
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -426,7 +486,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/type23/set_gun_config_values()
 	..()
-	set_fire_delay(2.5 SECONDS)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_SLOW)
 	accuracy_mult = BASE_ACCURACY_MULT
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_4
@@ -524,7 +584,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 //-------------------------------------------------------
 //DOUBLE SHOTTY
-
+//
 /obj/item/weapon/gun/shotgun/double
 	name = "\improper Spearhead Rival 78"
 	desc = "A double barrel shotgun produced by Spearhead. Archaic, sturdy, affordable. Only holds two 12g shells at a time."
@@ -559,7 +619,6 @@ can cause issues with ammo types getting mixed up during the burst.
 	)
 
 	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
-	burst_delay = 0 //So doubleshotty can doubleshot
 	has_open_icon = TRUE
 	civilian_usable_override = TRUE // Come on. It's THE survivor shotgun.
 	additional_fire_group_delay = 1.5 SECONDS
@@ -569,8 +628,8 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/double/set_gun_config_values()
 	..()
-	set_burst_amount(BURST_AMOUNT_TIER_2)
-	set_fire_delay(FIRE_DELAY_TIER_11)
+	set_burst_amount(BURST_AMOUNT_TIER_1)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_COMBAT) // Fires .6 seconds faster than an m37, but only two bullets. Same as MK221.
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -682,7 +741,7 @@ can cause issues with ammo types getting mixed up during the burst.
 /obj/item/weapon/gun/shotgun/double/damaged/set_gun_config_values()
 	..()
 	set_burst_amount(BURST_AMOUNT_TIER_1)
-	set_fire_delay(0.9 SECONDS)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_SLOW)
 	accuracy_mult = BASE_ACCURACY_MULT
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_7
@@ -704,15 +763,16 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/double/sawn/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_11)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_COMBAT)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3 - HIT_ACCURACY_MULT_TIER_5
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
-	scatter = SCATTER_AMOUNT_TIER_6
+	scatter = SCATTER_AMOUNT_TIER_2
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_7
-	recoil = RECOIL_AMOUNT_TIER_3
+	damage_mult = BASE_BULLET_DAMAGE_MULT // Less barrel = less velocity
+	recoil = RECOIL_AMOUNT_TIER_1
 	recoil_unwielded = RECOIL_AMOUNT_TIER_1
+	wield_delay = WIELD_DELAY_FAST
 
 // COULDN'T THINK OF ANOTHER WAY SORRY!!!! SOMEONE ADD A GUN COMPONENT!!
 
@@ -1183,11 +1243,11 @@ can cause issues with ammo types getting mixed up during the burst.
 /obj/item/weapon/gun/shotgun/pump/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 32, "muzzle_y" = 19,"rail_x" = 10, "rail_y" = 20, "under_x" = 20, "under_y" = 14, "stock_x" = 20, "stock_y" = 14)
 
-
+//
 /obj/item/weapon/gun/shotgun/pump/set_gun_config_values()
 	..()
 	set_burst_amount(BURST_AMOUNT_TIER_1)
-	set_fire_delay(FIRE_DELAY_TIER_7 * 4)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_BASE)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -1401,7 +1461,7 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/set_gun_config_values()
 	..()
-	set_fire_delay(1.6 SECONDS)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_COLONY)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
 	scatter = SCATTER_AMOUNT_TIER_6

@@ -42,6 +42,15 @@
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
 		living_mob.apply_stamina_damage(fired_projectile.ammo.damage, fired_projectile.def_zone, ARMOR_BULLET)
 
+/datum/ammo/bullet/shotgun/slug/es7
+	name = "electrostatic solid slug"
+	icon_state = "bullet_iff"
+	handful_state = "es7_slug"
+	sound_override = 'sound/weapons/gun_es7lethal.ogg'
+	damage = 55
+	penetration = ARMOR_PENETRATION_TIER_6
+	accuracy = HIT_ACCURACY_TIER_5
+
 /datum/ammo/bullet/shotgun/beanbag
 	name = "beanbag slug"
 	headshot_state = HEADSHOT_OVERLAY_LIGHT //It's not meant to kill people... but if you put it in your mouth, it will.
@@ -65,6 +74,20 @@
 		var/mob/living/carbon/human/H = M
 		shake_camera(H, 2, 1)
 
+/datum/ammo/bullet/shotgun/beanbag/electric
+	name = "electrostatic shock slug"
+	headshot_state = HEADSHOT_OVERLAY_LIGHT //Electric version of the bean bag.
+	handful_state = "shock_slug"
+	icon_state = "cm_laser"
+	sound_override = 'sound/weapons/gun_es7.ogg'
+	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_IGNORE_RESIST
+	max_range = 12
+	shrapnel_chance = 0
+	damage = 0
+	stamina_damage = 45
+	accuracy = HIT_ACCURACY_TIER_3
+	shell_speed = AMMO_SPEED_TIER_3
+	handful_state = "shock_slug"
 
 /datum/ammo/bullet/shotgun/incendiary
 	name = "incendiary slug"
@@ -174,6 +197,9 @@
 	bonus_projectiles_type = /datum/ammo/bullet/shotgun/spread/masterkey
 
 	damage = 55
+
+/datum/ammo/bullet/shotgun/buckshot/masterkey/on_hit_mob(mob/M,obj/projectile/P)
+	knockback(M,P,1)
 
 /datum/ammo/bullet/shotgun/spread
 	name = "additional buckshot"

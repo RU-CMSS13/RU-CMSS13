@@ -883,9 +883,18 @@
 /turf/open/desert/rock/deep/rock3,
 /area/desert_dam/interior/dam_interior/north_tunnel)
 "adG" = (
-/obj/structure/machinery/power/apc/no_power/west,
-/turf/open/floor/plating,
-/area/desert_dam/building/substation/northwest)
+/obj/effect/decal/sand_overlay/sand1{
+	dir = 8
+	},
+/obj/structure/machinery/power/apc/no_power/north,
+/turf/open/floor/prison/bright_clean2/southwest,
+/area/desert_dam/exterior/valley/valley_hydro)
+"adH" = (
+/obj/effect/landmark/nightmare{
+	insert_tag = "clfpods"
+	},
+/turf/closed/wall/rock/orange,
+/area/desert_dam/exterior/rock)
 "adI" = (
 /turf/open/desert/rock/deep,
 /area/desert_dam/interior/dam_interior/north_tunnel_entrance)
@@ -77962,7 +77971,7 @@ clE
 dTs
 dTs
 dTs
-dTs
+adH
 dTs
 dTs
 dTs
