@@ -1,6 +1,8 @@
 
 // Called when the item is in the active hand, and clicked; alternately, there is an 'activate held object' verb or you can hit pagedown.
 /obj/item/proc/attack_self(mob/user)
+	if(HAS_TRAIT(user, TRAIT_HAULED))
+		return
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user)
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_SELF, src)
@@ -35,6 +37,8 @@
 		else if(initiate_surgery_moment(I, src, null, user))
 			return TRUE
 	*/
+	if(HAS_TRAIT(user, TRAIT_HAULED))
+		return
 	if(istype(I) && ismob(user))
 		return I.attack(src, user)
 
@@ -72,7 +76,7 @@
 
 	if (user.a_intent == INTENT_HELP && ((user.client?.prefs && user.client?.prefs?.toggle_prefs & TOGGLE_HELP_INTENT_SAFETY) || (user.mob_flags & SURGERY_MODE_ON)))
 		playsound(loc, 'sound/effects/pop.ogg', 25, 1)
-		user.visible_message(SPAN_NOTICE("[M] has been poked with [src][showname]"),\
+		user.visible_message(SPAN_NOTICE("[M] has been poked with [src][showname]"),
 			SPAN_NOTICE("You poke [M == user ? "yourself":M] with [src]."), null, 4)
 
 		return FALSE
@@ -93,7 +97,7 @@
 		var/used_verb = "attacked"
 		if(LAZYLEN(attack_verb))
 			used_verb = pick(attack_verb)
-		user.visible_message(SPAN_DANGER("[M] has been [used_verb] with [src][showname]."), \
+		user.visible_message(SPAN_DANGER("[M] has been [used_verb] with [src][showname]."),
 			SPAN_DANGER("You [used_verb] [M == user ? "yourself":M] with [src]."), null, 5, CHAT_TYPE_MELEE_HIT)
 
 		user.animation_attack_on(M)
@@ -111,24 +115,11 @@
 			if("fire")
 				M.apply_damage(power,BURN)
 				to_chat(M, SPAN_WARNING("It burns!"))
-
-//RUCM START
-		if(user.faction == M.faction)
-			user.track_friendly_hit(initial(name))
-			user.track_friendly_damage(initial(name), M, power)
-		else
-			user.track_hit(initial(name))
-			user.track_damage(initial(name), M, power)
-//RUCM END
-
 		if(power > 5)
 			M.last_damage_data = create_cause_data(initial(name), user)
-/* RUCM CHANGE
 			user.track_hit(initial(name))
 			if(user.faction == M.faction)
 				user.track_friendly_fire(initial(name))
-*/
-
 		M.updatehealth()
 	else
 		var/mob/living/carbon/human/H = M

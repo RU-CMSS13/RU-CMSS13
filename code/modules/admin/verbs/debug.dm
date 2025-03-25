@@ -183,7 +183,8 @@
 /client/proc/cmd_debug_make_powernets()
 	set category = "Debug"
 	set name = "Generate Powernets"
-	if(alert("Are you sure you want to do this?",, "Yes", "No") != "Yes") return
+	if(alert("Are you sure you want to do this?",, "Yes", "No") != "Yes")
+		return
 	makepowernets()
 	message_admins("[key_name_admin(src)] has remade the powernets. makepowernets() called.", 0)
 
@@ -303,14 +304,9 @@
 		M.ghostize()
 
 	if(M.mind)
-/*
 		if(M.mind.player_entity)
 			M.track_death_calculations()
 		M.mind.player_entity = setup_player_entity(src.ckey)
-*/
-//RUCM START
-		M.track_death_calculations()
-//RUCM END
 		M.statistic_tracked = FALSE
 
 	usr.mind.transfer_to(M, TRUE)

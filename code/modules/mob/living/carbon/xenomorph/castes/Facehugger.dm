@@ -145,7 +145,7 @@
 			to_chat(src, SPAN_WARNING("You can't infect \the [human]..."))
 			return
 		visible_message(SPAN_WARNING("\The [src] starts climbing onto \the [human]'s face..."), SPAN_XENONOTICE("You start climbing onto \the [human]'s face..."))
-		if(!do_after(src, FACEHUGGER_WINDUP_DURATION, INTERRUPT_ALL, BUSY_ICON_HOSTILE, human, INTERRUPT_MOVED, BUSY_ICON_HOSTILE))
+		if(!do_after(src, FACEHUGGER_CLIMB_DURATION, INTERRUPT_ALL, BUSY_ICON_HOSTILE, human, INTERRUPT_MOVED, BUSY_ICON_HOSTILE))
 			return
 		if(human.body_position != LYING_DOWN)
 			to_chat(src, SPAN_WARNING("You can't reach \the [human], they need to be lying down."))
@@ -165,15 +165,8 @@
 	if(!did_hug)
 		qdel(hugger)
 		return
-/*
 	if(client)
 		client.player_data?.adjust_stat(PLAYER_STAT_FACEHUGS, STAT_CATEGORY_XENO, 1)
-*/
-//RUCM START
-	track_ability_usage(STATISTICS_FACEHUGGE, caste_type, 1)
-//RUCM END
-	hug_successful = TRUE
-	timeofdeath = world.time
 	qdel(src)
 	return did_hug
 
@@ -188,14 +181,7 @@
 
 	age = XENO_NORMAL
 
-/*
 	total_facehugs = get_client_stat(client, PLAYER_STAT_FACEHUGS)
-*/
-//RUCM START
-	var/datum/entity/statistic/statistic = client?.player_data?.player_entity?.get_statistic(faction, STATISTIC_TYPE_CASTE_ABILITIES, caste_type, STATISTICS_FACEHUGGE)
-	if(statistic)
-		total_facehugs = statistic.value
-//RUCM END
 	switch(total_facehugs)
 		if(FACEHUG_TIER_1 to FACEHUG_TIER_2)
 			age = XENO_MATURE
@@ -276,5 +262,5 @@
 	name = "Base Facehugger Behavior Delegate"
 
 /datum/behavior_delegate/facehugger_base/on_life()
-	if(bound_xeno.body_position == STANDING_UP && !(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno)))
-		bound_xeno.adjustBruteLoss(1)
+	if(!(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno)))
+		bound_xeno.adjustBruteLoss(2)

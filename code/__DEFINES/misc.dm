@@ -198,9 +198,7 @@
 #define STATISTIC_XENO "xeno"
 #define STATISTIC_HUMAN "human"
 
-/* RUCM CHANGE
 #define STATISTICS_DEATH_LIST_LEN 10
-*/
 
 #define STATISTICS_NICHE_EXECUTION   "Executions Made"
 #define STATISTICS_NICHE_MEDALS  "Medals Received"
@@ -302,6 +300,7 @@
 //ghost vision mode pref settings
 #define GHOST_VISION_LEVEL_NO_NVG "No Night Vision"
 #define GHOST_VISION_LEVEL_MID_NVG "Half Night Vision"
+#define GHOST_VISION_LEVEL_HIGH_NVG "Three Quarters Night Vision"
 #define GHOST_VISION_LEVEL_FULL_NVG "Full Night Vision"
 
 //Ghost orbit types:

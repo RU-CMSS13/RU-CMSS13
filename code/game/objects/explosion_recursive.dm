@@ -63,10 +63,12 @@ explosion resistance exactly as much as their health
 			new_explosion_cause_data = create_cause_data("Explosion")
 	explosion_cause_data = new_explosion_cause_data
 
-	if(power0 <= 1) return
+	if(power0 <= 1)
+		return
 	power = power0
 	epicenter = get_turf(epicenter)
-	if(!epicenter) return
+	if(!epicenter)
+		return
 
 	falloff = max(falloff0, power/100) //prevent explosions with a range larger than 100 tiles
 	minimum_spread_power = -power * reflection_amplification_limit
@@ -219,7 +221,8 @@ explosion resistance exactly as much as their health
 	var/num_tiles_affected = 0
 
 	for(var/turf/T in explosion_turfs)
-		if(!T) continue
+		if(!T)
+			continue
 		if(explosion_turfs[T] >= 0)
 			num_tiles_affected++
 
@@ -231,7 +234,8 @@ explosion resistance exactly as much as their health
 	var/increment = min(50, sqrt(num_tiles_affected)*3 )//how many tiles we damage per tick
 
 	for(var/turf/T in explosion_turfs)
-		if(!T) continue
+		if(!T)
+			continue
 
 		var/severity = explosion_turfs[T] + damage_addon
 		if (severity <= 0)
@@ -271,37 +275,21 @@ explosion resistance exactly as much as their health
 							if(M.stat == DEAD)
 								ff_living = FALSE
 							msg_admin_ff(ff_msg, ff_living)
-/*
 							if(ishuman(firingMob))
 								var/mob/living/carbon/human/H = firingMob
 								H.track_friendly_fire(explosion_source)
-*/
-//RUCM START
-							firingMob.track_friendly_damage(initial(name), M, severity)
-							firingMob.count_statistic_stat(STATISTICS_EXPLODED_MOBS)
-//RUCM END
 						else
 							M.attack_log += "\[[time_stamp()]\] <b>[firingMob]/[firingMob.ckey]</b> blew up <b>[M]/[M.ckey]</b> with \a <b>[explosion_source]</b> in [get_area(firingMob)]."
 							firingMob:attack_log += "\[[time_stamp()]\] <b>[firingMob]/[firingMob.ckey]</b> blew up <b>[M]/[M.ckey]</b> with \a <b>[explosion_source]</b> in [get_area(firingMob)]."
 							msg_admin_attack("[firingMob] ([firingMob.ckey]) blew up [M] ([M.ckey]) with \a [explosion_source] in [get_area(firingMob)] ([location_of_mob.z],[location_of_mob.y],[location_of_mob.z])", location_of_mob.x, location_of_mob.y, location_of_mob.z)
-//RUCM START
-							firingMob.track_damage(initial(name), M, severity)
-							firingMob.count_statistic_stat(STATISTICS_EXPLODED_MOBS)
-//RUCM END
 					else if(explosion_source_mob)
 						var/mob/firingMob = explosion_source_mob
 						var/turf/location_of_mob = get_turf(firingMob)
-/*
 						if(ishuman(firingMob))
 							var/mob/living/carbon/human/H = firingMob
 							H.track_shot_hit(initial(name), M)
-*/
 						M.attack_log += "\[[time_stamp()]\] <b>[firingMob]</b> blew up <b>[M]/[M.ckey]</b> with a <b>[explosion_source]</b> in [get_area(firingMob)]."
 						msg_admin_attack("[firingMob] ([firingMob.ckey]) blew up [M] ([M.ckey]) with \a [explosion_source] in [get_area(firingMob)] ([location_of_mob.z],[location_of_mob.y],[location_of_mob.z])", location_of_mob.x, location_of_mob.y, location_of_mob.z)
-//RUCM START
-						firingMob.track_damage(initial(name), M, severity)
-						firingMob.count_statistic_stat(STATISTICS_EXPLODED_MOBS)
-//RUCM END
 					else if(explosion_source)
 						M.attack_log += "\[[time_stamp()]\] <b>[M]/[M.ckey]</b> was blown up with a <b>[explosion_source]</b> in [get_area(M)].</b>"
 					else

@@ -1,7 +1,7 @@
-#define SUNKEN_DELAY_PER_RANGE 0.1 SECONDS
+#define SUNKEN_DELAY_PER_RANGE 0.2 SECONDS
 #define SUNKEN_MAX_RANGE 12
 #define SUNKEN_MIN_RANGE 2
-#define SUNKEN_COOLDOWN 4 SECONDS
+#define SUNKEN_COOLDOWN 6 SECONDS
 
 /datum/construction_template/xenomorph/sunken_colony
 	name = XENO_STRUCTURE_SUNKEN
@@ -14,7 +14,7 @@
 
 /datum/construction_template/xenomorph/sunken_colony/on_template_creation(turf/T, mob/living/carbon/xenomorph/X)
 	if(range_between_sunken)
-		for(var/i in urange(range_between_sunken, T))
+		for(var/i in orange(range_between_sunken, T))
 			var/atom/A = i
 			if(A.type == build_type)
 				xeno_message(SPAN_XENOWARNING("This is too close to other sunken."), 7, XENO_HIVE_NORMAL)
@@ -103,7 +103,7 @@
 	. = ..()
 	visible_message(SPAN_HIGHDANGER("Ground starts to rumble!"))
 	playsound(loc, appearing_sound, 25, 1)
-	var/image/J = new(icon = 'core_ru/icons/obj/structures/alien/Buildings.dmi', icon_state = "warning", layer = ABOVE_FLY_LAYER)
+	var/image/J = new(icon = 'icons/effects/alert.dmi', icon_state = "techpod_lz_marker", layer = ABOVE_FLY_LAYER)
 	overlays += J
 
 	addtimer(CALLBACK(src, PROC_REF(strike), damage), strike_delay)
