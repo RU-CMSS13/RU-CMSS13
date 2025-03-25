@@ -1057,6 +1057,19 @@
 	ready_ability()
 	return TRUE
 
+/obj/item/weapon/twohanded/yautja/glaive/dropped()
+	. = ..()
+	if(uphit)
+		uphit = FALSE
+		user.remove_filter(ABILITY_UPHIT_NAME)
+		force = MELEE_FORCE_TIER_3
+
+/obj/item/weapon/twohanded/yautja/glaive/try_to_throw(mob/living/user)
+	. = ..()
+	if(uphit)
+		to_chat(user, SPAN_WARNING("You cant throw your [src] in tight grab!"))
+		return
+
 /obj/item/weapon/twohanded/yautja/glaive/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
 	if(!.)
@@ -1064,7 +1077,7 @@
 	if(uphit)
 		uphit = FALSE
 		user.remove_filter(ABILITY_UPHIT_NAME)
-		force = force_wielded
+		force = MELEE_FORCE_TIER_9
 
 	if((human_adapted || isyautja(user)) && isxeno(target))
 		var/mob/living/carbon/xenomorph/xenomorph = target
