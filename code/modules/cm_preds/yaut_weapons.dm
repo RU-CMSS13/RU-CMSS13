@@ -1057,7 +1057,7 @@
 	ready_ability()
 	return TRUE
 
-/obj/item/weapon/twohanded/yautja/glaive/dropped()
+/obj/item/weapon/twohanded/yautja/glaive/dropped(mob/living/user)
 	. = ..()
 	if(uphit)
 		uphit = FALSE
