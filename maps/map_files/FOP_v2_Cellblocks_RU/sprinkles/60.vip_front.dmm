@@ -75,6 +75,15 @@
 	},
 /turf/open/floor/prison/damaged3,
 /area/prison/security/monitoring/highsec)
+"fI" = (
+/obj/structure/machinery/door/poddoor/almayer/open{
+	dir = 4;
+	name = "Civilian Residences Emergency Access";
+	explo_proof = 1;
+	id = "civilian block lockdown"
+	},
+/turf/open_space,
+/area/space)
 "fP" = (
 /turf/open/floor/prison/damaged2/southwest,
 /area/prison/security/monitoring/highsec)
@@ -438,6 +447,9 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/plating/prison,
 /area/prison/security/monitoring/highsec)
+"KA" = (
+/turf/closed/wall/r_wall/prison_unmeltable,
+/area/space)
 "KL" = (
 /obj/item/device/flashlight,
 /turf/open/floor/plating/prison,
@@ -838,16 +850,16 @@ wn
 "}
 
 (1,1,2) = {"
-PG
-PG
-PG
-PG
-PG
-PG
-PG
-PG
-PG
-PG
+KA
+KA
+KA
+fI
+fI
+fI
+fI
+KA
+KA
+KA
 "}
 (2,1,2) = {"
 PG
@@ -859,7 +871,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (3,1,2) = {"
 PG
@@ -871,7 +883,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (4,1,2) = {"
 PG
@@ -883,7 +895,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (5,1,2) = {"
 PG
@@ -895,7 +907,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (6,1,2) = {"
 PG
@@ -907,7 +919,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (7,1,2) = {"
 PG
@@ -919,7 +931,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (8,1,2) = {"
 PG
@@ -931,7 +943,7 @@ PG
 PG
 PG
 PG
-PG
+KA
 "}
 (9,1,2) = {"
 PG
