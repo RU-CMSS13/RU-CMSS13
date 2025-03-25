@@ -415,3 +415,20 @@
 	if(istype(held_item))
 		held_item.fold_combistick()
 	return TRUE
+
+/datum/keybinding/yautja/weapon_ability
+	hotkey_keys = list("Unbound")
+	classic_keys = list("Unbound")
+	name = "Weapon ability"
+	full_name = "Use weapon ability"
+	keybind_signal = COMSIG_KB_YAUTJA_FOLD_COMBISTICK
+
+/datum/keybinding/yautja/weapon_ability/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/carbon/human/human = user.mob
+	var/obj/item/weapon/yautja/held_item = human.get_held_item()
+	if(istype(held_item))
+		held_item.weapon_ability()
+	return TRUE

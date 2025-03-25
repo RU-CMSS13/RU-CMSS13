@@ -2,6 +2,27 @@
 #define FLAY_STAGE_STRIP 2
 #define FLAY_STAGE_SKIN 3
 
+#define ABILITY_MAX_CHARGE_COMBI 2
+#define ABILITY_MAX_CHARGE_CHAIN 4
+#define ABILITY_MAX_CHARGE_SCYTHE 5
+#define ABILITY_MAX_CHARGE_SWORD 0
+#define ABILITY_MAX_CHARGE_GLAIVE 5
+#define ABILITY_MAX_CHARGE_NO_ABILITY 0
+
+#define ABILITY_COST_COMBI 1
+#define ABILITY_COST_CHAIN 3
+#define ABILITY_COST_SCYTHE 3
+#define ABILITY_COST_SWORD 0
+#define ABILITY_COST_GLAIVE 4
+#define ABILITY_COST_NO_ABILITY 0
+
+#define ABILITY_CHARGE_SMALL 0.5
+#define ABILITY_CHARGE_NORMAL 1
+#define ABILITY_CHARGE_LARGE 2
+
+#define ABILITY_FILTER_NAME "ability_charge"
+#define ABILITY_UPHIT_NAME "ability_uphit"
+
 /*#########################################
 ########### Weapon Reused Procs ###########
 #########################################*/
@@ -139,6 +160,7 @@
 	attack_verb = list("sliced", "slashed", "jabbed", "torn", "gored")
 	force = MELEE_FORCE_TIER_5
 	speed_bonus_amount = -0.4 SECONDS
+	flags_item = NOSHIELD|NODROP|ITEM_PREDATOR
 
 /obj/item/weapon/bracer_attachment/scimitar/alt
 	name = "wrist scimitar"
@@ -162,6 +184,74 @@
 	)
 	flags_item = ITEM_PREDATOR|ADJACENT_CLICK_DELAY
 	var/human_adapted = FALSE
+	///The amount of charges towards use of special abilities.
+	var/ability_charge = 0
+	var/ability_charge_max = ABILITY_MAX_CHARGE_NO_ABILITY
+	var/ability_charge_rate = ABILITY_CHARGE_NORMAL
+	var/ability_cost = ABILITY_COST_NO_ABILITY
+	///Whether the ability is ready to trigger
+	var/ability_primed = FALSE
+
+/obj/item/weapon/yautja/dropped()
+	if(ability_primed)
+		ability_primed = FALSE
+	..()
+
+/obj/item/weapon/yautja/attack(mob/living/target, mob/living/carbon/human/user)
+	. = ..()
+	if(!.)
+		return
+	if((human_adapted || isspeciesyautja(user)) && isxeno(target))
+		var/mob/living/carbon/xenomorph/xenomorph = target
+		xenomorph.AddComponent(/datum/component/status_effect/interference, 30, 30)
+
+	if(!ability_cost || !(HAS_TRAIT(user, TRAIT_YAUTJA_TECH)))
+		return
+
+	progress_ability(target, user)
+
+/obj/item/weapon/yautja/proc/progress_ability(mob/living/target, mob/living/carbon/human/user)
+	if(target == user || target.stat == DEAD || isanimal(target))
+		to_chat(user, SPAN_DANGER("You think you're smart?")) //very funny
+		return FALSE
+
+	if(ability_charge < ability_charge_max)
+		ability_charge = min(ability_charge_max, ability_charge + ability_charge_rate)
+		to_chat(user, SPAN_DANGER("[src]'s reservoir fills up with your opponent's blood!"))
+
+	if(ability_charge >= ability_cost)
+		ready_ability(target, user)
+	return TRUE
+
+/obj/item/weapon/yautja/weapon_ability(mob/living/user)
+	if(user.get_active_hand() != src)
+		return
+	return TRUE
+
+/obj/item/weapon/yautja/get_examine_text(mob/user)
+	. = ..()
+	if(isyautja(user) && ability_cost)
+		. += SPAN_WARNING("It currently has <b>[ability_charge]/[ability_charge_max]</b> blood charge(s).")
+		. += SPAN_ORANGE("It requires <b>[ability_cost]</b> blood charge(s) to use its ability.")
+
+/obj/item/weapon/yautja/proc/ready_ability(mob/living/target as mob, mob/living/carbon/human/user as mob)
+	if(ability_charge >= ability_cost)
+		var/color = target.get_blood_color()
+		var/alpha = 70
+		color += num2text(alpha, 2, 16)
+		add_filter(ABILITY_FILTER_NAME, 1, list("type" = "outline", "color" = color, "size" = 2))
+		return TRUE
+	else
+		remove_filter(ABILITY_FILTER_NAME)
+	return FALSE
+
+/obj/item/weapon/yautja/verb/use_weapon_ability()
+	set category = "Weapons"
+	set name = "Use weapon ability"
+	set desc = "Make shoo and whoo"
+	set src = usr.contents
+
+	weapon_ability(usr)
 
 /obj/item/weapon/yautja/chain
 	name = "chainwhip"
@@ -245,6 +335,9 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unacidable = TRUE
+	ability_cost = ABILITY_COST_SCYTHE
+	ability_charge_max = ABILITY_MAX_CHARGE_SCYTHE
+	ability_charge_rate = ABILITY_CHARGE_NORMAL
 
 /obj/item/weapon/yautja/scythe/attack(mob/living/target as mob, mob/living/carbon/human/user as mob)
 	. = ..()
@@ -256,6 +349,48 @@
 		user.visible_message(SPAN_DANGER("An opening in combat presents itself!"),SPAN_DANGER("You manage to strike at your foe once more!"))
 		user.spin(5, 1)
 		..() //Do it again! CRIT! This will be replaced by a bleed effect.
+
+/obj/item/weapon/yautja/scythe/attack_self(mob/living/user)
+	..()
+	ability_primed = !ability_primed
+	var/message = "You tighten your grip on [src], preparing to whirl it in a spin."
+	if(!ability_primed)
+		message = "You relax your grip on [src]."
+	to_chat(user, SPAN_WARNING(message))
+
+/obj/item/weapon/yautja/scythe/weapon_ability(mob/living/user)
+	. = ..()
+	if(ability_charge < ability_cost)
+		to_chat(user, SPAN_WARNING("The blood reservoir is not full enough to do this! You need [ability_cost - ability_charge] more blood in your reservoir"))
+		return FALSE
+	if(user.get_active_hand() != src)
+		to_chat(user, SPAN_WARNING("You need hold scythe in your hand!"))
+		return
+	if(!ability_primed)
+		to_chat(user, SPAN_WARNING("You need a stronger grip for this!"))
+		return FALSE
+	user.spin_circle(2)
+	for(var/mob/living/carbon/target in orange(1, user) - user)
+		if(target.stat == DEAD)
+			continue
+
+		if(!check_clear_path_to_target(user, target))
+			continue
+
+		user.visible_message(SPAN_WARNING("[user] slices open the guts of [target]!"), SPAN_WARNING("You slice open the guts of [target]!"))
+		target.spawn_gibs()
+		playsound(get_turf(target), 'sound/weapons/alien_tail_attack.ogg', 30, 1)
+		user.flick_attack_overlay(target, "slam")
+		target.Slow(get_xeno_stun_duration(target, 3))
+		target.apply_armoured_damage(get_xeno_damage_slash(target, (force * 1.5)), ARMOR_MELEE, BRUTE, user.zone_selected, 25)
+
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>[key_name(user)] sliced [key_name(target)] with their whirling scythe.</font>")
+		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>[key_name(target)] was sliced by [key_name(user)] whirling their scythe.</font>")
+		log_attack("[key_name(target)] was sliced by [key_name(user)] whirling their scythe.")
+
+	ability_charge -= ability_cost
+	ready_ability()
+	return TRUE
 
 /obj/item/weapon/yautja/scythe/alt
 	name = "double war scythe"
@@ -293,6 +428,10 @@
 	var/force_unwielded = MELEE_FORCE_TIER_2
 	var/force_storage = MELEE_FORCE_TIER_1
 
+	ability_cost = ABILITY_COST_COMBI
+	ability_charge_max = ABILITY_MAX_CHARGE_COMBI
+	ability_charge_rate = ABILITY_CHARGE_SMALL
+
 /obj/item/weapon/yautja/chained
 	var/on = TRUE
 	var/charged = FALSE
@@ -312,12 +451,14 @@
 		setup_chain(user)
 
 /obj/item/weapon/yautja/chained/try_to_throw(mob/living/user)
-	if(!charged)
+	if(ability_charge < ability_cost)
 		to_chat(user, SPAN_WARNING("Your [src] refuses to leave your hand. You must charge it with blood from prey before throwing it."))
 		return FALSE
-	charged = FALSE
-	remove_filter("combistick_charge")
 	unwield(user) //Otherwise stays wielded even when thrown
+	ability_charge -= ability_cost
+
+	ready_ability()
+
 	return TRUE
 
 /obj/item/weapon/yautja/chained/proc/setup_chain(mob/living/user)
@@ -481,20 +622,6 @@
 	if((human_adapted || isspeciesyautja(user)) && isxeno(target))
 		var/mob/living/carbon/xenomorph/xenomorph = target
 		xenomorph.AddComponent(/datum/component/status_effect/interference, 30, 30)
-
-	if(target == user || target.stat == DEAD)
-		to_chat(user, SPAN_DANGER("You think you're smart?")) //very funny
-		return
-	if(isanimal(target))
-		return
-
-	if(!charged)
-		to_chat(user, SPAN_DANGER("Your [src]'s reservoir fills up with your opponent's blood! You may now throw it!"))
-		charged = TRUE
-		var/color = target.get_blood_color()
-		var/alpha = 70
-		color += num2text(alpha, 2, 16)
-		add_filter("combistick_charge", 1, list("type" = "outline", "color" = color, "size" = 2))
 
 /obj/item/weapon/yautja/chained/attack_hand(mob/user) //Prevents marines from instantly picking it up via pickup macros.
 	if(!human_adapted && !HAS_TRAIT(user, TRAIT_SUPER_STRONG))
@@ -753,6 +880,74 @@
 	edge = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	var/human_adapted = FALSE
+	///The amount of charges towards use of special abilities.
+	var/ability_charge = 0
+	var/ability_charge_max = ABILITY_MAX_CHARGE_NO_ABILITY
+	var/ability_charge_rate = ABILITY_CHARGE_NORMAL
+	var/ability_cost = ABILITY_COST_NO_ABILITY
+	///Whether the ability is ready to trigger
+	var/ability_primed = FALSE
+
+/obj/item/weapon/twohanded/yautja/dropped()
+	if(ability_primed)
+		ability_primed = FALSE
+	..()
+
+/obj/item/weapon/twohanded/yautja/attack(mob/living/target, mob/living/carbon/human/user)
+	. = ..()
+	if(!.)
+		return
+	if((human_adapted || isspeciesyautja(user)) && isxeno(target))
+		var/mob/living/carbon/xenomorph/xenomorph = target
+		xenomorph.AddComponent(/datum/component/status_effect/interference, 30, 30)
+
+	if(!ability_cost || !(HAS_TRAIT(user, TRAIT_YAUTJA_TECH)))
+		return
+
+	progress_ability(target, user)
+
+/obj/item/weapon/twohanded/yautja/proc/progress_ability(mob/living/target, mob/living/carbon/human/user)
+	if(target == user || target.stat == DEAD || isanimal(target))
+		to_chat(user, SPAN_DANGER("You think you're smart?")) //very funny
+		return FALSE
+
+	if(ability_charge < ability_charge_max)
+		ability_charge = min(ability_charge_max, ability_charge + ability_charge_rate)
+		to_chat(user, SPAN_DANGER("[src]'s reservoir fills up with your opponent's blood!"))
+
+	if(ability_charge >= ability_cost)
+		ready_ability(target, user)
+	return TRUE
+
+/obj/item/weapon/twohanded/yautja/weapon_ability(mob/living/user)
+	if(user.get_active_hand() != src)
+		return
+	return TRUE
+
+/obj/item/weapon/twohanded/yautja/get_examine_text(mob/user)
+	. = ..()
+	if(isyautja(user) && ability_cost)
+		. += SPAN_WARNING("It currently has <b>[ability_charge]/[ability_charge_max]</b> blood charge(s).")
+		. += SPAN_ORANGE("It requires <b>[ability_cost]</b> blood charge(s) to use its ability.")
+
+/obj/item/weapon/twohanded/yautja/proc/ready_ability(mob/living/target as mob, mob/living/carbon/human/user as mob)
+	if(ability_charge >= ability_cost)
+		var/color = target.get_blood_color()
+		var/alpha = 70
+		color += num2text(alpha, 2, 16)
+		add_filter(ABILITY_FILTER_NAME, 1, list("type" = "outline", "color" = color, "size" = 2))
+		return TRUE
+	else
+		remove_filter(ABILITY_FILTER_NAME)
+	return FALSE
+
+/obj/item/weapon/twohanded/yautja/verb/use_weapon_ability()
+	set category = "Weapons"
+	set name = "Use weapon ability"
+	set desc = "Make shoo and whoo"
+	set src = usr.contents
+
+	weapon_ability(usr)
 
 /obj/item/weapon/twohanded/yautja/spear
 	name = "hunter spear"
@@ -825,12 +1020,52 @@
 	attack_verb = list("sliced", "slashed", "carved", "diced", "gored")
 	attack_speed = 14 //Default is 7.
 	var/skull_attached = FALSE
+	var/time_to_uphit = 30
+	var/uphit = FALSE
+	ability_cost = ABILITY_COST_GLAIVE
+	ability_charge_max = ABILITY_MAX_CHARGE_GLAIVE
+	ability_charge_rate = ABILITY_CHARGE_NORMAL
 
+/obj/item/weapon/twohanded/yautja/glaive/attack_self(mob/living/user)
+	..()
+	if(WIELDED)
+		uphit = FALSE
+		user.remove_filter(ABILITY_UPHIT_NAME)
+		force = force_wielded
+
+/obj/item/weapon/twohanded/yautja/glaive/weapon_ability(mob/living/user)
+	. = ..()
+	if(ability_charge < ability_cost)
+		to_chat(user, SPAN_WARNING("The blood reservoir is not full enough to do this! You need [ability_cost - ability_charge] more blood in your reservoir"))
+		return
+	if(user.get_active_hand() != src)
+		to_chat(user, SPAN_WARNING("You need hold [src] in your hand!"))
+		return
+	if(user.get_active_hand() != src)
+		to_chat(user, SPAN_WARNING("You need hold [src] in two hands!"))
+		return
+	to_chat(user, SPAN_WARNING("You up your [src] above your head!"))
+	if(!do_after(user, time_to_uphit, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE, null, null, FALSE, 1, FALSE, 1))
+		to_chat(user, SPAN_WARNING("You cancel your action."))
+		return
+	uphit = TRUE
+	force = force_wielded * 2
+	user.emote("roar")
+	to_chat(user, SPAN_WARNING("You ready to strong hit!"))
+	user.add_filter(ABILITY_UPHIT_NAME, priority = 1, params = list("type" = "outline", "color" = "#be020265", "size" = 1))
+	ability_charge -= ability_cost
+	ready_ability()
+	return TRUE
 
 /obj/item/weapon/twohanded/yautja/glaive/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
 	if(!.)
 		return
+	if(uphit)
+		uphit = FALSE
+		user.remove_filter(ABILITY_UPHIT_NAME)
+		force = force_wielded
+
 	if((human_adapted || isyautja(user)) && isxeno(target))
 		var/mob/living/carbon/xenomorph/xenomorph = target
 		xenomorph.AddComponent(/datum/component/status_effect/interference, 30, 30)
