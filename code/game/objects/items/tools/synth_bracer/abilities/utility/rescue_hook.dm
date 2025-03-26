@@ -1,14 +1,15 @@
 /datum/action/human_action/activable/synth_bracer/rescue_hook
 	name = "Rescue Hook"
 	action_icon_state = "hook"
-	cooldown = 5 SECONDS
-	charge_cost = 65
+	cooldown = 2 SECONDS
+	charge_cost = 30
+	var/current_charge_cost = 0
 
 	handles_cooldown = TRUE
 	handles_charge_cost = TRUE
 
 	// Config
-	var/max_distance = 3
+	var/max_distance = 6
 	var/windup = 10
 	human_adaptable = TRUE
 	ability_tag = SIMI_SECONDARY_HOOK
@@ -56,6 +57,10 @@
 			break
 
 		turflist += T
+		current_charge_cost = charge_cost * turflist.len
+		if(synth_bracer.battery_charge < current_charge_cost)
+			to_chat(synth, SPAN_WARNING("You don't have enough charge to to do this! Charge: <b>[synth_bracer.battery_charge]/[synth_bracer.battery_charge_max]</b> You need [charge_cost] per tile!"))
+			return FALSE
 		facing = get_dir(T, atom_target)
 		telegraph_atom_list += new /obj/effect/simi_hook(T, windup)
 
@@ -85,7 +90,7 @@
 		return FALSE
 
 	enter_cooldown()
-	synth_bracer.drain_charge(synth, charge_cost)
+	synth_bracer.drain_charge(synth, current_charge_cost)
 
 	if(!pre_frozen)
 		REMOVE_TRAIT(synth, TRAIT_IMMOBILIZED, TRAIT_SOURCE_EQUIPMENT(WEAR_HANDS))
