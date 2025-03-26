@@ -129,13 +129,6 @@
 
 			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
 //RUCM START
-	if(((href_list["modify_rank"])&&(href_list["holder"])))
-		to_chat(usr, "modifying rank with[href_list["holder"]]")
-		src.rank_modify_ru(href_list["holder"])
-	if(href_list["rank_view"])
-		src.Rank_types_view_panel()
-	if(href_list["admin_view"])
-		src.view_current_admins_ru()
 	if(((href_list["sticky_ru"])&&(href_list["ckey"])))
 		if(href_list["new_sticky"])
 			src.do_stickyban_ru(href_list["ckey"])

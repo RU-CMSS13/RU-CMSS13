@@ -10,7 +10,7 @@
 		if(!player)
 			to_chat(usr, "Database lookup failed.No file was found.")
 			return
-		if(ckey in GLOB.db_admin_datums)
+		if(ckey in GLOB.admin_datums)
 			to_chat(usr, "Ckey belong to server staff. Aborting search.")
 			return
 		admin_holder.DB_ban_panel(ckey)

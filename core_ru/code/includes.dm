@@ -58,7 +58,6 @@
 #include "game\turfs\closed.dm"
 #include "game\turfs\open.dm"
 #include "modules\admin\db_ban.dm"
-#include "modules\admin\rank_panel.dm"
 #include "modules\admin\verbs\getlogs.dm"
 #include "modules\clothing\glasses\night.dm"
 #include "modules\clothing\suits\marine_armor\st_armor.dm"
