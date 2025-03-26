@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 	MOB_HUD_FACTION_PMC = new /datum/mob_hud/faction/pmc(),
 	MOB_HUD_FACTION_CMB = new /datum/mob_hud/faction/cmb(),
 	MOB_HUD_FACTION_NSPA = new /datum/mob_hud/faction/nspa(),
+	MOB_HUD_FACTION_WO = new /datum/mob_hud/faction/wo(),
 	MOB_HUD_HUNTER = new /datum/mob_hud/hunter_hud(),
 	MOB_HUD_HUNTER_CLAN = new /datum/mob_hud/hunter_clan(),
 	MOB_HUD_EXECUTE = new /datum/mob_hud/execute_hud(),
@@ -218,6 +219,9 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 /datum/mob_hud/faction/pmc
 	faction_to_check = FACTION_PMC
 
+/datum/mob_hud/faction/wo
+	faction_to_check = FACTION_WY_DEATHSQUAD
+
 /datum/mob_hud/faction/nspa
 	faction_to_check = FACTION_NSPA
 
@@ -341,36 +345,16 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield0")
 
 /mob/living/carbon/xenomorph/med_hud_set_armor()
-/*
 	if(GLOB.xeno_general.armor_ignore_integrity)
-*/
-//RUCM START
-	if(GLOB.xeno_general.armor_ignore_integrity || !armor_deflection)
-//RUCM END
 		return FALSE
 
 	var/image/holder = hud_list[ARMOR_HUD_XENO]
-/*
 	if(stat == DEAD || armor_deflection <=0)
 		holder.icon_state = "xenoarmor0"
-*/
-//RUCM START
-	var/armor_hud_type = "xenoarmor"
-	if(stat == DEAD)
-		holder.icon_state = "[armor_hud_type]0"
-//RUCM END
 	else
 		var/amount = round(armor_integrity*100/armor_integrity_max, 10)
-/*
-		if(!amount)
-			amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
+		if(!amount) amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
 		holder.icon_state = "xenoarmor[amount]"
-*/
-//RUCM START
-		if(!amount)
-			amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
-		holder.icon_state = "[armor_hud_type][amount]"
-//RUCM END
 
 /mob/living/carbon/human/med_hud_set_health()
 	var/image/holder = hud_list[HEALTH_HUD]
@@ -392,9 +376,6 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 	return
 
 /mob/living/carbon/xenomorph/med_hud_set_status()
-//RUCM START
-	med_hud_set_armor()
-//RUCM END
 	hud_set_plasma()
 	hud_set_pheromone()
 
