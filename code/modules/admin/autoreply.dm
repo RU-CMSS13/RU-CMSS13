@@ -1,5 +1,7 @@
 GLOBAL_REFERENCE_LIST_INDEXED(adminreplies, /datum/autoreply/admin, title)
-// RUCM CHANGE GLOBAL_REFERENCE_LIST_INDEXED(mentorreplies, /datum/autoreply/mentor, title)
+/* RUCM CHANGE
+GLOBAL_REFERENCE_LIST_INDEXED(mentorreplies, /datum/autoreply/mentor, title)
+*/
 
 /datum/autoreply
 	/// What shows up in the list of replies, and the big red header on the reply itself.
@@ -64,11 +66,11 @@ ON_CONFIG_LOAD(/datum/autoreply/admin/whitelist)
 	title = "Cryo and Ghost to Lobby"
 	message = "Staff have approved your request to be returned to the lobby. In order to do so, you must enter a cryogenics bay and ghost. You will be then manually returned to the lobby by staff."
 	closer = FALSE
-// RUCM CHANGE
 ////////////////////////////
 /////   MENTOR HELPS   /////
 ////////////////////////////
-/*
+
+/* RUCM CHANGE
 /datum/autoreply/mentor/staff_issue
 	title = "A: Staff Issue"
 	message = "This is not something that mentors can help with, please contact the staff team via AdminHelp."
