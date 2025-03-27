@@ -670,6 +670,18 @@
 	},
 /turf/open/floor/almayer/cargo,
 /area/almayer/maint/upper/u_m_p)
+"abW" = (
+/obj/effect/step_trigger/clone_cleaner,
+/obj/structure/machinery/door_control{
+	id = "laddersoutheast";
+	name = "South East Ladders Shutters";
+	req_one_access_txt = "2;3;12;19";
+	throw_range = 15;
+	pixel_y = 24;
+	pixel_x = -5
+	},
+/turf/open/floor/plating/almayer/no_build,
+/area/almayer/hallways/lower/port_midship_hallway)
 "abX" = (
 /obj/structure/machinery/light,
 /obj/effect/decal/warning_stripes{
@@ -3484,6 +3496,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/sterile_green_corner/west,
 /area/almayer/medical/upper_medical)
+"ajo" = (
+/obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "laddersoutheast";
+	name = "\improper South East Ladders Shutters"
+	},
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/bravo_charlie_shared)
 "ajp" = (
 /obj/structure/surface/table/almayer,
 /obj/structure/dropship_equipment/fuel/cooling_system{
@@ -3688,6 +3708,16 @@
 	},
 /turf/open/floor/almayer/sterile_green_side/east,
 /area/almayer/medical/upper_medical)
+"ajR" = (
+/obj/structure/machinery/door/firedoor/border_only/almayer{
+	dir = 2
+	},
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "laddersoutheast";
+	name = "\improper South East Ladders Shutters"
+	},
+/turf/open/floor/almayer/test_floor4,
+/area/rumayer/squads/bravo_charlie_shared)
 "ajS" = (
 /obj/effect/step_trigger/clone_cleaner,
 /turf/open/floor/almayer/red/east,
@@ -33885,16 +33915,6 @@
 /obj/effect/landmark/start/working_joe,
 /turf/open/floor/plating/plating_catwalk/aicore,
 /area/almayer/command/airoom)
-"gHc" = (
-/obj/structure/machinery/door/firedoor/border_only/almayer{
-	dir = 2
-	},
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "laddersoutheast";
-	name = "\improper South East Ladders Shutters"
-	},
-/turf/open/floor/almayer/test_floor4,
-/area/rumayer/squads/bravo_charlie_shared)
 "gHl" = (
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/bed/chair/comfy/alpha{
@@ -44653,18 +44673,6 @@
 	},
 /turf/open/floor/almayer/floor,
 /area/almayer/living/auxiliary_officer_office)
-"lIB" = (
-/obj/effect/step_trigger/clone_cleaner,
-/obj/structure/machinery/door_control{
-	id = "laddersoutheast";
-	name = "South East Ladders Shutters";
-	req_one_access_txt = "2;3;12;19";
-	throw_range = 15;
-	pixel_y = 24;
-	pixel_x = -5
-	},
-/turf/open/floor/plating/almayer/no_build,
-/area/almayer/hallways/lower/port_midship_hallway)
 "lIE" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
@@ -62564,14 +62572,6 @@
 "tLy" = (
 /turf/open/floor/almayer/orange/southeast,
 /area/almayer/engineering/lower/engine_core)
-"tLJ" = (
-/obj/structure/window/framed/almayer,
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "laddersoutheast";
-	name = "\improper South East Ladders Shutters"
-	},
-/turf/open/floor/almayer/plate,
-/area/rumayer/squads/bravo_charlie_shared)
 "tLM" = (
 /obj/structure/sign/safety/storage{
 	pixel_x = -17
@@ -111042,7 +111042,7 @@ dQJ
 raI
 pmr
 rtX
-tLJ
+ajo
 mYZ
 mqm
 lQQ
@@ -111448,7 +111448,7 @@ eVp
 eVp
 eVp
 nKV
-gHc
+ajR
 mqc
 bfc
 vte
@@ -111651,7 +111651,7 @@ hBL
 toi
 eVp
 mVH
-tLJ
+ajo
 cmd
 cmh
 wAR
@@ -111855,7 +111855,7 @@ aNf
 pZD
 aVm
 lkA
-lIB
+abW
 vDr
 vDr
 nHH
