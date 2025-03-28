@@ -54,9 +54,6 @@
 
 	last_damage_data = istype(cause_data) ? cause_data : create_cause_data(cause_data)
 
-	if(severity > EXPLOSION_THRESHOLD_LOW && length(stomach_contents))
-		for(var/mob/M in stomach_contents)
-			M.ex_act(severity - EXPLOSION_THRESHOLD_LOW, last_damage_data, pierce)
 
 	var/b_loss = 0
 	var/f_loss = 0
@@ -199,9 +196,6 @@
 	last_hit_time = world.time
 	if(damagetype != HALLOSS && damage > 0)
 		life_damage_taken_total += damage
-		//RUCM START
-		SEND_SIGNAL(src, COMSIG_DAMAGE_TAKEN, damage)
-		//RUCM END
 
 	return 1
 
@@ -210,17 +204,10 @@
 
 /mob/living/carbon/xenomorph/var/armor_break_to_apply = 0
 /mob/living/carbon/xenomorph/proc/apply_armorbreak(armorbreak = 0)
-/*
 	if(GLOB.xeno_general.armor_ignore_integrity)
 		return FALSE
 
-	if(stat == DEAD)
-		return
-*/
-//RUCM START
-	if(GLOB.xeno_general.armor_ignore_integrity || !armorbreak || stat == DEAD)
-		return FALSE
-//RUCM END
+	if(stat == DEAD) return
 
 	if(armor_deflection<=0)
 		return
@@ -249,24 +236,12 @@
 	if(!caste)
 		return
 	sleep(XENO_ARMOR_BREAK_PASS_TIME)
-/*
 	if(warding_aura && armor_break_to_apply > 0) //Damage to armor reduction
-*/
-//RUCM START
-	if(!caste || !armor_break_to_apply)
-		return
-	if(warding_aura) //Damage to armor reduction
-//RUCM END
 		armor_break_to_apply = floor(armor_break_to_apply * ((100 - (warding_aura * 15)) / 100))
-/*
 	if(caste)
 		armor_integrity -= armor_break_to_apply
 	if(armor_integrity < 0)
 		armor_integrity = 0
-*/
-//RUCM START
-	gain_armor_percent(-armor_break_to_apply / armor_deflection)
-//RUCM END
 	armor_break_to_apply = 0
 	updatehealth()
 
@@ -296,6 +271,8 @@
 
 		for(var/mob/living/carbon/human/victim in orange(radius, src)) //Loop through all nearby victims, including the tile.
 			splash_chance = 65 - (i * 5)
+			if(HAS_TRAIT(victim, TRAIT_HAULED))
+				continue
 			if(victim.loc == loc)
 				splash_chance += 30 //Same tile? BURN
 			if(victim.species?.acid_blood_dodge_chance)
@@ -305,12 +282,6 @@
 				var/dmg = list("damage" = acid_blood_damage)
 				if(SEND_SIGNAL(src, COMSIG_XENO_DEAL_ACID_DAMAGE, victim, dmg) & COMPONENT_BLOCK_DAMAGE)
 					continue
-//RUCM START
-				if(faction == victim.faction)
-					track_friendly_damage("Acid", victim, acid_blood_damage)
-				else
-					track_damage("Acid", victim, acid_blood_damage)
-//RUCM END
 				i++
 				victim.visible_message(SPAN_DANGER("\The [victim] is scalded with hissing green blood!"),
 				SPAN_DANGER("You are splattered with sizzling blood! IT BURNS!"))

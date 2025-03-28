@@ -411,6 +411,9 @@
 				if("Faction CLF HUD")
 					the_hud= GLOB.huds[MOB_HUD_FACTION_CLF]
 					the_hud.add_hud_to(src, src)
+				if("Faction WO HUD")
+					the_hud= GLOB.huds[MOB_HUD_FACTION_WO]
+					the_hud.add_hud_to(src, src)
 				if(HUD_MENTOR_SIGHT)
 					the_hud= GLOB.huds[MOB_HUD_NEW_PLAYER]
 					the_hud.add_hud_to(src, src)
@@ -474,20 +477,13 @@ Works together with spawning an observer, noted above.
 
 	if(!can_reenter_corpse)
 		away_timer = 300 //They'll never come back, so we can max out the timer right away.
-/*
 		if(GLOB.round_statistics)
 			GLOB.round_statistics.update_panel_data()
-*/
 		track_death_calculations() //This needs to be done before mind is nullified
 		if(ghost.mind)
 			ghost.mind.original = ghost
-/*
 	else if(ghost.mind && ghost.mind.player_entity) //Use else here because track_death_calculations() already calls this.
 		ghost.mind.player_entity.update_panel_data(GLOB.round_statistics)
-*/
-//RUCM START
-	else if(ghost.client)
-//RUCM END
 		ghost.mind.original = src
 
 	mind = null
@@ -536,10 +532,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/living/proc/do_ghost()
 	if(stat == DEAD)
-/*
 		if(mind && mind.player_entity)
 			mind.player_entity.update_panel_data(GLOB.round_statistics)
-*/
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
@@ -984,7 +978,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to Weyland-Yutani", "wyfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to Weyland-Yutani", "wyfaxviewer", width = 300, height = 600)
 
 		if("High Command")
 			var/body = "<body>"
@@ -994,7 +988,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to High Command", "uscmfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to High Command", "uscmfaxviewer", width = 300, height = 600)
 
 		if("Provost")
 			var/body = "<body>"
@@ -1004,7 +998,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to the Provost Office", "provostfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to the Provost Office", "provostfaxviewer", width = 300, height = 600)
 
 		if("Press")
 			var/body = "<body>"
@@ -1014,7 +1008,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to Press organizations", "pressfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to Press organizations", "pressfaxviewer", width = 300, height = 600)
 
 		if("Colonial Marshal Bureau")
 			var/body = "<body>"
@@ -1024,7 +1018,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to the Colonial Marshal Bureau", "cmbfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to the Colonial Marshal Bureau", "cmbfaxviewer", width = 300, height = 600)
 
 		if("Union of Progressive Peoples")
 			var/body = "<body>"
@@ -1034,7 +1028,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to the Union of Progressive Peoples", "uppfaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to the Union of Progressive Peoples", "uppfaxviewer", width = 300, height = 600)
 
 		if("Three World Empire")
 			var/body = "<body>"
@@ -1044,7 +1038,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to the Three World Empire", "twefaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to the Three World Empire", "twefaxviewer", width = 300, height = 600)
 
 		if("Colonial Liberation Front")
 			var/body = "<body>"
@@ -1054,7 +1048,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Faxes to the Colonial Liberation Front", "clffaxviewer", "size=300x600")
+			show_browser(src, body, "Faxes to the Colonial Liberation Front", "clffaxviewer", width = 300, height = 600)
 
 		if("Other")
 			var/body = "<body>"
@@ -1064,7 +1058,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				body += "<br><br>"
 
 			body += "<br><br></body>"
-			show_browser(src, body, "Inter-machine Faxes", "otherfaxviewer", "size=300x600")
+			show_browser(src, body, "Inter-machine Faxes", "otherfaxviewer", width = 300, height = 600)
 		if("Cancel")
 			return
 
@@ -1354,26 +1348,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ref = WEAKREF(H)
 		GLOB.data_core.manifest_modify(name, ref, null, null, "*Deceased*")
 
-/*
+
 /mob/dead/observer/verb/view_kill_feed()
 	set category = "Ghost.View"
 	set name = "View Kill Feed"
 	set desc = "View global kill statistics tied to the game."
+
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.show_kill_feed(src)
-*/
-//RUCM START
-/mob/dead/observer/verb/view_stats()
-	set category = "Ghost.View"
-	set name = "View Statistics"
-	set desc = "View global and player statistics tied to the game."
-
-	if(client?.player_data?.player_entity)
-		client.player_data.player_entity.try_recalculate()
-		client.player_data.player_entity.tgui_interact(src)
-	else
-		to_chat(src, SPAN_INFO("Statistic not loaded, try again later!"))
-//RUCM END
 
 /mob/dead/observer/get_status_tab_items()
 	. = ..()
@@ -1403,9 +1385,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			. += "Hijack Over"
 
 	if(SShijack)
-//RUCM START
-		. += "Operation Stage: [SShijack.get_ship_operation_stage_status_panel_eta()]"
-//RUCM END
 		var/eta_status = SShijack.get_evac_eta()
 		if(eta_status)
 			. += "Evacuation Goal: [eta_status]"

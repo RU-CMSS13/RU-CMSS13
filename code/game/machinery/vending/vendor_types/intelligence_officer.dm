@@ -11,6 +11,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_intelligence_officer, list(
 
 		list("PRIMARY AMMUNITION", 0, null, null, null),
 		list("M4RA AP Magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/m4ra/ap, null, VENDOR_ITEM_REGULAR),
+		list("M4RA Extended Magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/m4ra/extended, null, VENDOR_ITEM_REGULAR),
 		list("M39 AP Magazine (10x20mm)", 10, /obj/item/ammo_magazine/smg/m39/ap , null, VENDOR_ITEM_REGULAR),
 		list("M39 Extended Magazine (10x20mm)", 10, /obj/item/ammo_magazine/smg/m39/extended , null, VENDOR_ITEM_REGULAR),
 		list("M41A AP Magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/ap , null, VENDOR_ITEM_REGULAR),
@@ -27,6 +28,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_intelligence_officer, list(
 		list("RESTRICTED FIREARMS", 0, null, null, null),
 		list("VP78 Pistol", 15, /obj/item/storage/box/guncase/vp78, null, VENDOR_ITEM_REGULAR),
 		list("SU-6 Smart Pistol", 15, /obj/item/storage/box/guncase/smartpistol, null, VENDOR_ITEM_REGULAR),
+
+		list("RESTRICTED GEAR", 0, null, null, null),
+		list("M276 Pattern Combat Toolbelt Rig", 15, /obj/item/storage/belt/gun/utility, null, VENDOR_ITEM_RECOMMENDED),
 
 		list("POUCHES", 0, null, null, null),
 		list("Large Magazine Pouch", 10, /obj/item/storage/pouch/magazine/large, null, VENDOR_ITEM_REGULAR),
@@ -129,12 +133,12 @@ GLOBAL_LIST_INIT(cm_vending_clothing_intelligence_officer, list(
 		list("Drop Pouch", 0, /obj/item/clothing/accessory/storage/droppouch, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 //RUCM START
 		list("PONCHO (CHOOSE 1)", 0, null, null, null),
-		list("USCM Poncho (Mission-Specific Camo)", 12, /obj/item/clothing/accessory/poncho, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
-		list("USCM Poncho (Green)", 12, /obj/item/clothing/accessory/poncho/green, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
-		list("USCM Poncho (Brown)", 12, /obj/item/clothing/accessory/poncho/brown, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
-		list("USCM Poncho (Black)", 12, /obj/item/clothing/accessory/poncho/black, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
-		list("USCM Poncho (Blue)", 12, /obj/item/clothing/accessory/poncho/blue, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
-		list("USCM Poncho (Purple)", 12, /obj/item/clothing/accessory/poncho/purple, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Mission-Specific Camo)", 0, /obj/item/clothing/accessory/poncho, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Green)", 0, /obj/item/clothing/accessory/poncho/green, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Brown)", 0, /obj/item/clothing/accessory/poncho/brown, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Black)", 0, /obj/item/clothing/accessory/poncho/black, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Blue)", 0, /obj/item/clothing/accessory/poncho/blue, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
+		list("USCM Poncho (Purple)", 0, /obj/item/clothing/accessory/poncho/purple, MARINE_CAN_BUY_PONCHO, VENDOR_ITEM_REGULAR),
 //RUCM END
 		list("MASK (CHOOSE 1)", 0, null, null, null),
 		list("Gas Mask", 0, /obj/item/clothing/mask/gas, MARINE_CAN_BUY_MASK, VENDOR_ITEM_REGULAR),
