@@ -27,7 +27,7 @@
 			H.activate_order_buff(current_aura, order_level, 3 SECONDS)
 
 //////////////////////////////////
-// Обработка приказов в life.dm //
+// Активная способность приказа //
 /datum/action/human_action/issue_order_feline
 	name = "Отдать Приказ"
 	icon_file = 'core_ru/Feline/icons/order.dmi'
@@ -72,15 +72,15 @@
 				return
 			if("Марш!")
 				my_owner.current_aura = COMMAND_ORDER_MOVE
-				my_owner.visible_message(SPAN_BOLDNOTICE("[src] отдаёт приказ на походный порядок!"), SPAN_BOLDNOTICE("Отдаю приказ на походный порядок!"))
+				my_owner.visible_message(SPAN_BOLDNOTICE("[my_owner] отдаёт приказ на походный порядок!"), SPAN_BOLDNOTICE("Отдаю приказ на походный порядок!"))
 				my_owner.say(pick("Марш!","Отряд, Бегом Марш!","Бегом!","Ходу!"))
 			if("Цельсь!")
 				my_owner.current_aura = COMMAND_ORDER_FOCUS
-				my_owner.visible_message(SPAN_BOLDNOTICE("[src] отдаёт приказ на готовность к стрельбе!"), SPAN_BOLDNOTICE("Отдаю приказ на готовность к стрельбе!"))
+				my_owner.visible_message(SPAN_BOLDNOTICE("[my_owner] отдаёт приказ на готовность к стрельбе!"), SPAN_BOLDNOTICE("Отдаю приказ на готовность к стрельбе!"))
 				my_owner.say(pick("Цельсь!","К Бою!","В Атаку!","К Оружию!","Внимание, Враг!", "Найти и Уничтожить!"))
 			if("Держать Строй!")
 				my_owner.current_aura = COMMAND_ORDER_HOLD
-				my_owner.visible_message(SPAN_BOLDNOTICE("[src] отдаёт приказ на удержание позиции!"), SPAN_BOLDNOTICE("Отдаю приказ на удержание позиции!"))
+				my_owner.visible_message(SPAN_BOLDNOTICE("[my_owner] отдаёт приказ на удержание позиции!"), SPAN_BOLDNOTICE("Отдаю приказ на удержание позиции!"))
 				my_owner.say(pick("Держать Строй!","Стоять Насмерть!","Держать Линию!","Держать Рубеж!","Не Сдавать Позиций","Держаться!","К Обороне!"))
 
 		if(!new_aura || !my_owner.current_aura)
