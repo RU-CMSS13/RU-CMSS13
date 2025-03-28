@@ -371,6 +371,8 @@
 	/// An item which should be inserted when the shoes are spawned.
 	var/obj/item/spawn_item_type
 	var/shoes_blood_amt = 0
+	var/shoes_size = 0
+	time_to_equip = 2 SECONDS
 
 /obj/item/clothing/shoes/Initialize(mapload, ...)
 	. = ..()
@@ -378,6 +380,7 @@
 		allowed_items_typecache = typecacheof(allowed_items_typecache)
 	if(spawn_item_type)
 		_insert_item(new spawn_item_type(src))
+	shoes_size = rand(33, 50)
 
 /// Returns a boolean indicating if `item_to_insert` can be inserted into the shoes.
 /obj/item/clothing/shoes/proc/can_be_inserted(obj/item/item_to_insert)
@@ -439,6 +442,10 @@
 	if(stored_item)
 		. += "\nIt is storing \a [stored_item]."
 
+/obj/item/clothing/shoes/get_examine_text(mob/user)
+	. = ..()
+	. += SPAN_WARNING("Its have a tag - <b>[shoes_size]</b> size of shoes <small><small>by kelvin klyain</small></small>")
+
 /obj/item/clothing/shoes/attack_hand(mob/living/user)
 	// Only allow someone to take out the `stored_item` if it's being worn or held, so that you can pick them up off the floor.
 	if(!stored_item || loc != user || user.is_mob_incapacitated())
@@ -482,3 +489,8 @@
 		return TRUE
 
 	return ..()
+
+/obj/item/clothing/shoes/equipped(mob/living/carbon/user, slot, silent)
+	. = ..()
+	if(shoes_size != user.size_of_shoes)
+		slowdown = 2.5

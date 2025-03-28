@@ -49,7 +49,7 @@
 	key_third_person = "claps"
 	message = "claps."
 	hands_use_check = TRUE
-	audio_cooldown = 5 SECONDS
+	audio_cooldown = 3
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 	sound = 'sound/misc/clap.ogg'
 

@@ -288,3 +288,6 @@
 		to_chat(usr, "Removed [rem_organ] from [src].")
 		qdel(rem_organ)
 
+/mob/living/carbon/human/get_examine_text(mob/user)
+	. = ..()
+	. += SPAN_BLUE("I think [src] has [max(0, size_of_shoes + rand(-3, 2))] size of shoes.")

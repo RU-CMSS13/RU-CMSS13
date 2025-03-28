@@ -31,3 +31,15 @@
 				return 'core_ru/sound/voice/clf_warcry/warcry_male_1.ogg' // ( ͡° ͜ʖ ͡°)
 			else
 				return get_sfx("female_warcry")
+
+/datum/emote/living/carbon/flip
+	key = "flip"
+	key_third_person = "flip"
+	message = "ДЕЛАЕТ ФЛИП."
+	alt_message = "ФЛИПУЕТ"
+	cooldown = 3
+	emote_type = EMOTE_VISIBLE
+
+/datum/emote/living/carbon/flip/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+	user.SpinAnimation(3,1)

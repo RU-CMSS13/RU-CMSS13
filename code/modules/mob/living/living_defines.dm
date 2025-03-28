@@ -13,6 +13,7 @@
 	var/cloneloss = 0 //Damage caused by being cloned or ejected from the cloner early
 	var/brainloss = 0 //'Retardation' damage caused by someone hitting you in the head with a bible or being infected with brainrot.
 	var/halloss = 0 //Hallucination damage. 'Fake' damage obtained through hallucinating or the holodeck. Sleeping should cause it to wear off.
+	var/size_of_shoes = 0
 
 	// please don't use these directly, use the procs
 	var/dazed = 0

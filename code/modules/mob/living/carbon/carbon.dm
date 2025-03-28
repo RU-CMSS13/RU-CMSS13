@@ -3,6 +3,7 @@
 	hunter_data = new /datum/huntdata
 	hunter_data.name = "[src.real_name]'s Hunter Data"
 	hunter_data.owner = src
+	size_of_shoes = rand(33,50)
 
 /mob/living/carbon/Life(delta_time)
 	..()
