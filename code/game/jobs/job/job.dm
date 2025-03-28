@@ -135,6 +135,10 @@
 
 	return TRUE
 
+/// Whether the client passes requirements for the scenario
+/datum/job/proc/can_play_role_in_scenario(client/client)
+	return TRUE
+
 /datum/job/proc/get_role_requirements(client/C)
 	var/list/return_requirements = list()
 	for(var/prereq in minimum_playtimes)
@@ -246,10 +250,6 @@
 	new_character.lastarea = get_area(NP.loc)
 
 	setup_human(new_character, NP)
-
-//RUCM START
-	addtimer(CALLBACK(src, PROC_REF(add_to_battlepass_earners), new_character), BATTLEPASS_TIME_TO_EARN_REWARD)
-//RUCM END
 
 	return new_character
 

@@ -66,7 +66,7 @@
 		display_colour = prefs.ooccolor
 */
 //RUCM START
-	else if(player_data.donator_info?.patreon_function_available("ooc_color"))
+	else if(player_data?.donator_info.patreon_function_available("ooc_color"))
 		display_colour = prefs.ooccolor
 //RUCM END
 	if(!display_colour) // if invalid R_COLOR choice
@@ -98,7 +98,7 @@
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
 */
 //RUCM START
-	if(player_data.donator_info?.patreon_function_available("badge"))
+	if(player_data.donator_info.patreon_function_available("badge"))
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
 //RUCM END
 	if(isCouncil(src))
@@ -107,11 +107,6 @@
 	if(comm_award)
 		prefix += comm_award
 	if(admin_holder)
-		var/list/rank_icons = icon_states(GLOB.ooc_rank_dmi)
-		var/rankname = trim(admin_holder.rank)
-		if(rankname in rank_icons)
-			prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, admin_holder.rank)]"
-
 		if(length(admin_holder.extra_titles))
 			var/extra_title_state
 			for(var/extra_title in admin_holder.extra_titles)

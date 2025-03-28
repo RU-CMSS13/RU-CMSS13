@@ -304,12 +304,9 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		next_external_rsc = WRAP(next_external_rsc+1, 1, length(external_rsc_urls)+1)
 		preload_rsc = external_rsc_urls[next_external_rsc]
 
-/*
 	player_entity = setup_player_entity(ckey)
-*/
 
 	if(check_localhost_status())
-/*
 		var/datum/admins/admin = new("!localhost!", RL_HOST, ckey)
 		admin.associate(src)
 
@@ -317,10 +314,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	admin_holder = GLOB.admin_datums[ckey]
 	if(admin_holder)
 		admin_holder.associate(src)
-*/
-//RUCM START
-		check_localhost_admin_datum()
-//RUCM END
 
 	add_pref_verbs()
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
@@ -427,8 +420,11 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 			CEI.show_player_event_info(src)
 
 	connection_time = world.time
+
 	winset(src, null, "command=\".configure graphics-hwmode on\"")
 	winset(src, "map", "style=\"[MAP_STYLESHEET]\"")
+
+	acquire_dpi()
 
 	send_assets()
 
@@ -563,12 +559,20 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
 		addtimer(CALLBACK(SSassets.transport, TYPE_PROC_REF(/datum/asset_transport, send_assets_slow), src, SSassets.transport.preload), 5 SECONDS)
 
+/client/proc/acquire_dpi()
+	set waitfor = FALSE
+
+	// Remove with 516
+	if(byond_version < 516)
+		return
+
+	window_scaling = text2num(winget(src, null, "dpi"))
+
 /proc/setup_player_entity(ckey)
 	if(!ckey)
 		return
 	if(GLOB.player_entities["[ckey]"])
 		return GLOB.player_entities["[ckey]"]
-/*
 	var/datum/entity/player_entity/P = new()
 	P.ckey = ckey
 	P.name = ckey
@@ -582,13 +586,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		// P.save_statistics()
 	log_debug("STATISTICS: Statistics saving complete.")
 	message_admins("STATISTICS: Statistics saving complete.")
-*/
-//RUCM START
-	var/datum/player_entity/p_entity = new()
-	p_entity.ckey = ckey
-	GLOB.player_entities["[ckey]"] = p_entity
-	return p_entity
-//RUCM END
 
 /client/proc/clear_chat_spam_mute(warn_level = 1, message = FALSE, increase_warn = FALSE)
 	if(talked > warn_level)
@@ -856,12 +853,11 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	total_xeno_playtime += get_job_playtime(src, JOB_XENOMORPH)
 
-/*
 	if(player_entity)
 		var/past_xeno_playtime = player_entity.get_playtime(STATISTIC_XENO)
 		if(past_xeno_playtime)
 			total_xeno_playtime += past_xeno_playtime
-*/
+
 
 	cached_xeno_playtime = total_xeno_playtime
 
