@@ -606,6 +606,7 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
     list("Compact Nailgun kit", 15, /obj/effect/essentials_set/cnailgun, null, VENDOR_ITEM_REGULAR),
     list("Telescopic Baton", 15, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
 */
+
 /* RUCM REMOVAL
     list("Surgical Webbing Vest", 15, /obj/item/clothing/accessory/storage/surg_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
     list("Surgical Webbing Vest (Blue)", 15, /obj/item/clothing/accessory/storage/surg_vest/blue, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
@@ -615,6 +616,8 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
     list("Tool Webbing", 15, /obj/item/clothing/accessory/storage/tool_webbing/equipped, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
     list("Logistics IMP Backpack", 15, /obj/item/storage/backpack/marine/satchel/big, null, VENDOR_ITEM_REGULAR),
     list("Expedition Chestrig", 15, /obj/item/storage/backpack/marine/satchel/intel/chestrig, null, VENDOR_ITEM_REGULAR),
+
+))
 */
 //RUCM START
 	list("Autocompressor", 10, /obj/item/clothing/suit/auto_cpr, null, VENDOR_ITEM_REGULAR),
@@ -627,8 +630,9 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Telescopic Baton", 10, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
 	list("Experimental Meson Goggles", 10, /obj/item/clothing/glasses/night/experimental_mesons, null, VENDOR_ITEM_REGULAR),
 	list("Backpack Firefighting Watertank", 5, /obj/item/reagent_container/glass/watertank/atmos, null, VENDOR_ITEM_REGULAR),
-//RUCM END
 ))
+//RUCM END
+
 
 /*
 //------------EXPERIMENTAL TOOL KITS---------------
