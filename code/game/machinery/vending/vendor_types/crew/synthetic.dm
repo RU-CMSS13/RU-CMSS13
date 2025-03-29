@@ -600,12 +600,16 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 	return GLOB.cm_vending_synth_tools
 
 GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
+
 /* RUCM CHANGE
     list("Breaching Hammer", 15, /obj/item/weapon/twohanded/breacher/synth, null, VENDOR_ITEM_REGULAR),
     list("Compact Defibrillator", 15, /obj/item/device/defibrillator/compact, null, VENDOR_ITEM_REGULAR),
     list("Compact Nailgun kit", 15, /obj/effect/essentials_set/cnailgun, null, VENDOR_ITEM_REGULAR),
     list("Telescopic Baton", 15, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
+
+))
 */
+
 
 /* RUCM REMOVAL
     list("Surgical Webbing Vest", 15, /obj/item/clothing/accessory/storage/surg_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
