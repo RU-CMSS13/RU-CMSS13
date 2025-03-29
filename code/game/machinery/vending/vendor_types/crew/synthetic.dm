@@ -630,9 +630,8 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Telescopic Baton", 10, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
 	list("Experimental Meson Goggles", 10, /obj/item/clothing/glasses/night/experimental_mesons, null, VENDOR_ITEM_REGULAR),
 	list("Backpack Firefighting Watertank", 5, /obj/item/reagent_container/glass/watertank/atmos, null, VENDOR_ITEM_REGULAR),
-))
 //RUCM END
-
+	))
 
 /*
 //------------EXPERIMENTAL TOOL KITS---------------
