@@ -1,3 +1,13 @@
+/**
+ * RUCM "Стрейн Воина - Рыцарь" copyright Feline
+ * Затронутые файлы:
+ * code\__DEFINES\xeno.dm
+ * code\datums\mob_hud.dm
+ * code\modules\mob\living\carbon\carbon.dm
+ * code\modules\mob\living\carbon\xenomorph\attack_alien.dm
+ * code\modules\mob\living\carbon\xenomorph\damage_procs.dm
+ */
+
 ///////////////////
 // Мутация Воина //
 /mob/living/carbon/xenomorph/warrior
@@ -31,7 +41,7 @@
 /datum/xeno_strain/knight/apply_strain(mob/living/carbon/xenomorph/warrior/warrior)
 	ADD_TRAIT(warrior, TRAIT_WEAK_TO_FLAME, TRAIT_SOURCE_STRAIN)
 	warrior.health_modifier -= XENO_HEALTH_MOD_VERY_LARGE
-	warrior.armor_modifier += XENO_ARMOR_MOD_SMALL
+//	warrior.armor_modifier += XENO_ARMOR_MOD_SMALL
 	warrior.recalculate_everything()
 	warrior.desc = "Чужой с отливающей металлом псевдоплотью. Пусть он выглядит не таким проворным как обычный, но зато явно прочнее."
 
@@ -42,6 +52,7 @@
 	var/armor_state
 	var/shield_passive_regen = 1
 	var/shield_limit = 200 			// Стартовый лимит. Увеличивается со временем
+	var/shield_limit_old = 0		// Ячейка памяти
 
 	// Способности
 	var/charged_attack_base = 5
@@ -168,31 +179,59 @@
 			return TRUE
 
 ////////////////
+// Объявление //
+/datum/behavior_delegate/warrior_knight/proc/add_limit()
+	if(shield_limit_old != shield_limit)
+		shield_limit_old = shield_limit
+		playsound_client(bound_xeno.client, get_sfx("evo_screech"), bound_xeno.loc, 70, "minor")
+		to_chat(bound_xeno, SPAN_XENOBOLDNOTICE("Наш максимум усвоения металла достиг [shield_limit] единиц!"))
+
+////////////////
 // Тики жизни //
 /datum/behavior_delegate/warrior_knight/on_life()
 	if(!bound_xeno)
 		return
 
-	switch(ROUND_TIME)
-		if(0 to KNIGHT_SHIELD_LIMIT_300)
+	switch(ROUND_TIME)	// Воин доступен с 9 минуты
+		if(0 to 15 MINUTES)				// 1 полная, 2 слабая стадия
 			shield_limit = 200
-		if(KNIGHT_SHIELD_LIMIT_300 to KNIGHT_SHIELD_LIMIT_400)
+		if(15 MINUTES to 30 MINUTES)	// 1-2 полная стадия
 			shield_limit = 300
-		if(KNIGHT_SHIELD_LIMIT_400 to KNIGHT_SHIELD_LIMIT_500)
+		if(30 MINUTES to 45 MINUTES)	// 1-2 полная, 3 средняя стадия
 			shield_limit = 400
-		if(KNIGHT_SHIELD_LIMIT_500 to KNIGHT_SHIELD_LIMIT_600)
+		if(45 MINUTES to 60 MINUTES)	// 1-3 полная, 4 слабая стадия
 			shield_limit = 500
 		else
-			shield_limit = 600
+			shield_limit = 600			// 1-4 полная стадия
 
 	if(bound_xeno.stat == DEAD)
 		return
+
+	switch(armor_state)
+		if(0 to 1)
+			if(bound_xeno.speed_modifier != 0)
+				bound_xeno.speed_modifier = 0
+				bound_xeno.recalculate_speed()
+		if(2)
+			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_6)
+				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_6
+				bound_xeno.recalculate_speed()
+		if(3)
+			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_8)
+				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_8
+				bound_xeno.recalculate_speed()
+		if(4)
+			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_10)
+				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_10
+				bound_xeno.recalculate_speed()
+
 	if(shield)
 		if(shield.amount <= 0)
 			shield = null
 	if(bound_xeno.health == bound_xeno.maxHealth)
 		bound_xeno.add_xeno_shield(shield_passive_regen, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = shield_limit)
 		bound_xeno.overlay_shields()
+	add_limit()
 
 ////////////
 // Смерть //
