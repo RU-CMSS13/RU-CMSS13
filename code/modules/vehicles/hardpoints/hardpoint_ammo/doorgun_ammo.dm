@@ -5,6 +5,6 @@
 	icon_state = "doorgun-ammo"
 	icon = 'icons/obj/vehicles/blackfoot_peripherals.dmi'
 	w_class = SIZE_LARGE
-	default_ammo = /datum/ammo/grenade_container/doorgun
+	default_ammo = /datum/ammo/grenade_container/tank_glauncher
 	max_rounds = 10
 	gun_type = /obj/item/hardpoint/secondary/doorgun
