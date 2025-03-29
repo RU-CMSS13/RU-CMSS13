@@ -670,6 +670,18 @@
 	},
 /turf/open/floor/almayer/cargo,
 /area/almayer/maint/upper/u_m_p)
+"abW" = (
+/obj/effect/step_trigger/clone_cleaner,
+/obj/structure/machinery/door_control{
+	id = "laddersoutheast";
+	name = "South East Ladders Shutters";
+	req_one_access_txt = "2;3;12;19";
+	throw_range = 15;
+	pixel_y = 24;
+	pixel_x = -5
+	},
+/turf/open/floor/plating/almayer/no_build,
+/area/almayer/hallways/lower/port_midship_hallway)
 "abX" = (
 /obj/structure/machinery/light,
 /obj/effect/decal/warning_stripes{
@@ -3484,6 +3496,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/sterile_green_corner/west,
 /area/almayer/medical/upper_medical)
+"ajo" = (
+/obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "laddersoutheast";
+	name = "\improper South East Ladders Shutters"
+	},
+/turf/open/floor/almayer/plate,
+/area/rumayer/squads/bravo_charlie_shared)
 "ajp" = (
 /obj/structure/surface/table/almayer,
 /obj/structure/dropship_equipment/fuel/cooling_system{
@@ -3688,6 +3708,16 @@
 	},
 /turf/open/floor/almayer/sterile_green_side/east,
 /area/almayer/medical/upper_medical)
+"ajR" = (
+/obj/structure/machinery/door/firedoor/border_only/almayer{
+	dir = 2
+	},
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "laddersoutheast";
+	name = "\improper South East Ladders Shutters"
+	},
+/turf/open/floor/almayer/test_floor4,
+/area/rumayer/squads/bravo_charlie_shared)
 "ajS" = (
 /obj/effect/step_trigger/clone_cleaner,
 /turf/open/floor/almayer/red/east,
@@ -14221,6 +14251,14 @@
 	pixel_x = -2;
 	pixel_y = -2
 	},
+/obj/structure/machinery/door_control{
+	id = "laddersoutheast";
+	name = "South East Ladders Shutters";
+	req_one_access_txt = "2;3;12;19";
+	throw_range = 15;
+	pixel_y = -21;
+	pixel_x = -5
+	},
 /turf/open/floor/almayer/emeraldfull,
 /area/rumayer/squads/bravo_charlie_shared)
 "aVo" = (
@@ -17148,12 +17186,15 @@
 	pixel_x = -5;
 	pixel_y = 4
 	},
-/obj/structure/machinery/door_control/cl/quarter/windows{
-	pixel_x = -5;
-	pixel_y = -3
-	},
 /obj/structure/machinery/computer/corporate/button{
 	pixel_x = 7
+	},
+/obj/structure/machinery/door_control{
+	id = "RoomDivider";
+	name = "Room Divider";
+	pixel_x = -5;
+	pixel_y = -3;
+	req_access_txt = "200"
 	},
 /turf/open/floor/carpet,
 /area/almayer/command/corporateliaison)
@@ -21668,9 +21709,6 @@
 /area/almayer/living/grunt_rnr)
 "bWV" = (
 /obj/structure/machinery/power/apc/almayer/hardened/north,
-/obj/structure/sign/safety/rewire{
-	pixel_x = -18
-	},
 /turf/open/floor/almayer/orange/east,
 /area/almayer/hallways/lower/port_aft_hallway)
 "bWZ" = (
@@ -27896,11 +27934,12 @@
 /obj/item/tool/lighter/zippo/gold{
 	pixel_x = 2
 	},
-/obj/structure/machinery/computer/cameras/wooden_tv/broadcast{
+/obj/structure/machinery/door_display/research_cell{
 	dir = 4;
-	layer = 3.2;
+	id = "Containment Cell 4";
+	name = "Control Panel";
 	pixel_x = -15;
-	pixel_y = 1
+	req_access_txt = "200"
 	},
 /turf/open/floor/carpet,
 /area/almayer/command/corporateliaison)
@@ -30217,9 +30256,6 @@
 	pixel_x = 7;
 	pixel_y = -2
 	},
-/obj/structure/window/reinforced/toughened{
-	dir = 8
-	},
 /obj/structure/transmitter/rotary{
 	name = "Combat Information Center Telephone";
 	phone_category = "Command";
@@ -30233,6 +30269,13 @@
 	phone_id = "Combat Information Center Second Line";
 	pixel_y = 2;
 	pixel_x = -5
+	},
+/obj/structure/machinery/door/window/southleft{
+	desc = "A window, that is also a door. A windoor if you will. This one is stronger.";
+	health = 500;
+	name = "Reinforced Glass door";
+	req_one_access_txt = "2;35";
+	dir = 8
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -31575,6 +31618,10 @@
 /obj/structure/machinery/door/airlock/multi_tile/almayer/marine/shared/charlie_delta{
 	dir = 8;
 	req_one_access = list(9,2,21,15,16,17,18)
+	},
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "laddersoutheast";
+	name = "\improper South East Ladders Shutters"
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/rumayer/squads/bravo_charlie_shared)
@@ -43899,12 +43946,6 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/almayer/shipboard/weapon_room)
-"ltb" = (
-/obj/structure/sign/safety/rewire{
-	pixel_x = -18
-	},
-/turf/open/floor/almayer/plating_striped/west,
-/area/almayer/squads/req)
 "ltA" = (
 /obj/item/tool/weldingtool,
 /turf/open/floor/almayer,
@@ -54447,14 +54488,7 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/upper/u_f_p)
 "qgH" = (
-/obj/item/storage/backpack/marine/satchel{
-	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!";
-	icon = 'icons/obj/janitor.dmi';
-	icon_state = "trashbag3";
-	name = "trash bag";
-	pixel_x = -4;
-	pixel_y = 6
-	},
+/obj/item/storage/backpack/marine/satchel,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/lower/l_m_p)
 "qgK" = (
@@ -60107,21 +60141,9 @@
 "sHg" = (
 /obj/structure/surface/rack,
 /obj/item/storage/backpack/marine/satchel{
-	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!";
-	icon = 'icons/obj/janitor.dmi';
-	icon_state = "trashbag3";
-	name = "trash bag";
-	pixel_x = -4;
-	pixel_y = 6
+	pixel_y = 9
 	},
-/obj/item/storage/backpack/marine/satchel{
-	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!";
-	icon = 'icons/obj/janitor.dmi';
-	icon_state = "trashbag3";
-	name = "trash bag";
-	pixel_x = 3;
-	pixel_y = -2
-	},
+/obj/item/storage/backpack/marine/satchel,
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_m_p)
 "sHh" = (
@@ -111020,7 +111042,7 @@ dQJ
 raI
 pmr
 rtX
-qwU
+ajo
 mYZ
 mqm
 lQQ
@@ -111426,7 +111448,7 @@ eVp
 eVp
 eVp
 nKV
-tjP
+ajR
 mqc
 bfc
 vte
@@ -111629,7 +111651,7 @@ hBL
 toi
 eVp
 mVH
-qwU
+ajo
 cmd
 cmh
 wAR
@@ -111833,7 +111855,7 @@ aNf
 pZD
 aVm
 lkA
-vDr
+abW
 vDr
 vDr
 nHH
@@ -116069,7 +116091,7 @@ nwG
 lMw
 jeO
 nQv
-ltb
+bNQ
 bmD
 bKA
 dyx
