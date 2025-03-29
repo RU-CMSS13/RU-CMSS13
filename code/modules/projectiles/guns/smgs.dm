@@ -72,6 +72,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -81,14 +82,6 @@
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
-		/obj/item/attachable/bayonet/custom,
-		/obj/item/attachable/bayonet/custom/red,
-		/obj/item/attachable/bayonet/custom/blue,
-		/obj/item/attachable/bayonet/custom/black,
-		/obj/item/attachable/bayonet/tanto,
-		/obj/item/attachable/bayonet/tanto/blue,
-		/obj/item/attachable/bayonet/rmc_replica,
-		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/heavy_barrel,
 //RUCM START
 		/obj/item/attachable/heavy_barrel/upgraded,
@@ -151,7 +144,7 @@
 	)
 	random_spawn_muzzle = list(
 		/obj/item/attachable/suppressor,
-		/obj/item/attachable/bayonet,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/extended_barrel,
 	)
 
@@ -215,6 +208,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -279,6 +273,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -352,6 +347,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
