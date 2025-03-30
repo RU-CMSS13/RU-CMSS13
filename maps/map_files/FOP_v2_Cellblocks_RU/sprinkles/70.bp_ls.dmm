@@ -1,7 +1,63 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/filingcabinet,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/prison,
+/area/prison/security/checkpoint/highsec/n)
+"ab" = (
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
+/obj/effect/landmark/good_item,
+/obj/item/stack/rods,
+/obj/item/trash/cigbutt{
+	pixel_x = -10;
+	pixel_y = 14
+	},
+/turf/open/floor/prison,
+/area/prison/hallway/central/west)
 "ac" = (
 /turf/open/floor/prison/redfull,
 /area/prison/hallway/central/west)
+"ad" = (
+/obj/structure/filingcabinet,
+/obj/effect/landmark/objective_landmark/medium,
+/turf/open/floor/prison,
+/area/prison/security/checkpoint/highsec/n)
+"ae" = (
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
+/obj/item/trash/buritto,
+/turf/open/floor/prison,
+/area/prison/hallway/central/west)
+"af" = (
+/obj/structure/filingcabinet,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/prison/darkred2/north,
+/area/prison/security/checkpoint/highsec/n)
+"ag" = (
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
+/obj/item/clothing/head/hardhat/dblue{
+	pixel_x = 5;
+	pixel_y = 7
+	},
+/obj/effect/landmark/good_item,
+/turf/open/floor/prison,
+/area/prison/hallway/central/west)
+"ah" = (
+/obj/structure/window/framed/prison/reinforced,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters,
+/turf/open/floor/plating/prison,
+/area/prison/security/checkpoint/highsec/n)
 "am" = (
 /obj/structure/machinery/light/small/blue{
 	dir = 8
@@ -21,17 +77,20 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "aB" = (
-/obj/structure/stairs/perspective{
-	dir = 8;
-	icon_state = "p_stair_ew_full_cap";
-	layer = 3.1
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
+	pixel_y = 26
 	},
-/obj/structure/platform{
-	dir = 1
+/obj/structure/stairs{
+	color = "#a6aeab";
+	dir = 8
 	},
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
@@ -39,7 +98,7 @@
 /turf/open/floor/prison/darkred2/southeast,
 /area/prison/security/checkpoint/highsec/n)
 "ca" = (
-/obj/structure/platform_decoration,
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco,
 /turf/open/floor/prison/red/southeast,
 /area/prison/hallway/central/west)
 "dh" = (
@@ -100,13 +159,13 @@
 /area/prison/hallway/central/west)
 "hN" = (
 /obj/structure/largecrate/random/barrel/white,
-/obj/structure/platform{
-	dir = 8
-	},
 /obj/item/shard{
 	icon_state = "medium";
 	pixel_x = -10;
 	pixel_y = -8
+	},
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
+	dir = 8
 	},
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
@@ -186,7 +245,7 @@
 /area/prison/security/checkpoint/highsec/n)
 "mD" = (
 /obj/structure/largecrate/random/barrel/white,
-/obj/structure/platform{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
 /turf/open/floor/prison,
@@ -227,7 +286,11 @@
 /obj/structure/machinery/recharger,
 /obj/item/ammo_magazine/rifle/mar40,
 /obj/item/ammo_magazine/rifle/mar40,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkred2,
 /area/prison/security/checkpoint/highsec/n)
 "nx" = (
@@ -254,7 +317,7 @@
 /area/prison/security/checkpoint/highsec/n)
 "oV" = (
 /obj/structure/largecrate/random/case/small,
-/obj/structure/platform{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
 /turf/open/floor/prison,
@@ -263,7 +326,8 @@
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
-	flipped = 1
+	flipped = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
@@ -302,7 +366,7 @@
 /turf/open/floor/prison/darkred2/north,
 /area/prison/security/checkpoint/highsec/n)
 "sz" = (
-/obj/structure/platform_decoration{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
 	dir = 4
 	},
 /turf/open/floor/prison,
@@ -341,7 +405,8 @@
 "ud" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
-	flipped = 1
+	flipped = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
@@ -374,27 +439,44 @@
 /obj/structure/bed/chair/office{
 	dir = 4
 	},
-/obj/structure/platform_decoration{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
 	dir = 8
 	},
 /turf/open/floor/prison/red/northeast,
 /area/prison/hallway/central/west)
 "wk" = (
 /obj/structure/machinery/recharger,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkred2/north,
 /area/prison/security/checkpoint/highsec/n)
 "wF" = (
 /obj/structure/window/framed/prison/reinforced,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
+	dir = 4
+	},
 /turf/open/floor/plating/prison,
 /area/prison/security/checkpoint/highsec/n)
 "xg" = (
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
+/obj/effect/landmark/good_item,
+/obj/item/trash/hybrisa/cuppa_joes/empty_cup,
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
 "xx" = (
 /obj/structure/machinery/computer/secure_data,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "xS" = (
@@ -410,9 +492,9 @@
 /turf/open/floor/prison/darkred2/northeast,
 /area/prison/security/checkpoint/highsec/n)
 "yC" = (
-/obj/structure/stairs/perspective{
-	dir = 4;
-	icon_state = "p_stair_full"
+/obj/structure/stairs{
+	color = "#a6aeab";
+	dir = 8
 	},
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
@@ -469,7 +551,7 @@
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "CB" = (
-/obj/structure/platform_decoration{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
 	dir = 1
 	},
 /turf/open/floor/prison,
@@ -494,7 +576,7 @@
 /area/prison/cellblock/highsec/north/south)
 "DN" = (
 /obj/structure/largecrate/random,
-/obj/structure/platform{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
 /turf/open/floor/prison,
@@ -518,20 +600,20 @@
 /turf/open/floor/plating/prison,
 /area/prison/hallway/central/west)
 "Jh" = (
-/obj/structure/stairs/perspective{
-	dir = 4;
-	icon_state = "p_stair_full"
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/stairs{
+	color = "#a6aeab";
+	dir = 8
+	},
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
 "Jw" = (
-/obj/structure/platform{
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
 /turf/open/floor/prison,
@@ -545,7 +627,11 @@
 	network = list("PRISON")
 	},
 /obj/effect/landmark/objective_landmark/far,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "KB" = (
@@ -585,6 +671,7 @@
 /area/prison/security/checkpoint/highsec/n)
 "Mw" = (
 /obj/structure/filingcabinet,
+/obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/prison,
 /area/prison/security/checkpoint/highsec/n)
 "Oa" = (
@@ -594,18 +681,22 @@
 /turf/open/floor/prison/darkred2,
 /area/prison/security/checkpoint/highsec/n)
 "OD" = (
-/obj/structure/stairs/perspective{
-	dir = 4;
-	icon_state = "p_stair_full"
+/obj/structure/prop/hybrisa/fakeplatforms/platform4,
+/obj/structure/stairs{
+	color = "#a6aeab";
+	dir = 8
 	},
-/obj/structure/platform,
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
 "OL" = (
 /obj/structure/machinery/computer/cameras{
 	network = list("PRISON")
 	},
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "Pc" = (
@@ -622,7 +713,8 @@
 /obj/item/ammo_casing,
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
-	flipped = 1
+	flipped = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
@@ -642,10 +734,10 @@
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
 	},
-/obj/structure/platform{
+/obj/item/stack/rods,
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
-/obj/item/stack/rods,
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
 "QF" = (
@@ -708,7 +800,11 @@
 /area/prison/hallway/central/west)
 "Uz" = (
 /obj/item/device/flashlight/lamp,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "UD" = (
@@ -725,7 +821,11 @@
 	dir = 1
 	},
 /obj/effect/landmark/item_pool_spawner/prison_lock,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	flipped = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/highsec/n)
 "Vf" = (
@@ -788,10 +888,10 @@
 /area/prison/security/checkpoint/highsec/n)
 "Zg" = (
 /obj/structure/largecrate/random/barrel/red,
-/obj/structure/platform{
+/obj/item/stack/rods,
+/obj/structure/prop/hybrisa/fakeplatforms/platform4{
 	dir = 8
 	},
-/obj/item/stack/rods,
 /turf/open/floor/prison,
 /area/prison/hallway/central/west)
 
@@ -835,8 +935,8 @@ pq
 zW
 TP
 iG
-sV
-Mw
+af
+ad
 Mw
 iG
 Rc
@@ -929,7 +1029,7 @@ ns
 iG
 su
 Pc
-Mw
+aa
 iG
 yX
 "}
@@ -938,12 +1038,12 @@ ib
 yx
 aP
 OL
-wF
+ah
 uV
 ac
 uM
 ca
-wF
+ah
 JH
 AY
 rp
@@ -973,9 +1073,9 @@ Ps
 Ps
 wF
 iG
-xg
-xg
-xg
+ag
+ae
+ab
 xg
 yX
 "}
