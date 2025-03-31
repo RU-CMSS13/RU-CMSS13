@@ -223,11 +223,6 @@
 		ready_ability(target, user)
 	return TRUE
 
-/obj/item/weapon/yautja/weapon_ability(mob/living/user)
-	if(user.get_active_hand() != src)
-		return
-	return TRUE
-
 /obj/item/weapon/yautja/get_examine_text(mob/user)
 	. = ..()
 	if(isyautja(user) && ability_cost)
@@ -363,9 +358,6 @@
 	if(ability_charge < ability_cost)
 		to_chat(user, SPAN_WARNING("The blood reservoir is not full enough to do this! You need [ability_cost - ability_charge] more blood in your reservoir"))
 		return FALSE
-	if(user.get_active_hand() != src)
-		to_chat(user, SPAN_WARNING("You need hold scythe in your hand!"))
-		return
 	if(!ability_primed)
 		to_chat(user, SPAN_WARNING("You need a stronger grip for this!"))
 		return FALSE
