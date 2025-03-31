@@ -493,4 +493,4 @@
 /obj/item/clothing/shoes/equipped(mob/living/carbon/user, slot, silent)
 	. = ..()
 	if(shoes_size != user.size_of_shoes)
-		slowdown = 2.5
+		slowdown = 1.5

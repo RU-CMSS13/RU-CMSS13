@@ -34,12 +34,24 @@
 
 /datum/emote/living/carbon/flip
 	key = "flip"
-	key_third_person = "flip"
-	message = "ДЕЛАЕТ ФЛИП."
-	alt_message = "ФЛИПУЕТ"
+	key_third_person = "flips"
+	message = "flipping!"
+	alt_message = "Changes his gravity and makes flip!"
 	cooldown = 3
 	emote_type = EMOTE_VISIBLE
 
 /datum/emote/living/carbon/flip/run_emote(mob/living/user, params, type_override, intentional)
 	. = ..()
-	user.SpinAnimation(3,1)
+	user.SpinAnimation(5,1)
+
+/datum/emote/living/carbon/spin
+	key = "spin"
+	key_third_person = "spins"
+	message = "spinning!"
+	alt_message = "Makes a trick like mickle jackson"
+	cooldown = 3
+	emote_type = EMOTE_VISIBLE
+
+/datum/emote/living/carbon/spin/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+	user.spin(5, 1)
