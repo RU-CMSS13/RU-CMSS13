@@ -380,7 +380,7 @@
 		allowed_items_typecache = typecacheof(allowed_items_typecache)
 	if(spawn_item_type)
 		_insert_item(new spawn_item_type(src))
-	shoes_size = rand(33, 50)
+	shoes_size = rand(42, 45)
 
 /// Returns a boolean indicating if `item_to_insert` can be inserted into the shoes.
 /obj/item/clothing/shoes/proc/can_be_inserted(obj/item/item_to_insert)
@@ -493,4 +493,4 @@
 /obj/item/clothing/shoes/equipped(mob/living/carbon/user, slot, silent)
 	. = ..()
 	if(shoes_size != user.size_of_shoes)
-		slowdown = 1.5
+		slowdown = 0.1
