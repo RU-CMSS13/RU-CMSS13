@@ -494,4 +494,6 @@
 	. = ..()
 	if(shoes_size != user.size_of_shoes)
 		to_chat(user, SPAN_HIGHDANGER("Whoops! Thats not my size."))
-		shoes.slowdown = -0.5
+		src.slowdown = -0.5
+	else
+		src.slowdown = -1
