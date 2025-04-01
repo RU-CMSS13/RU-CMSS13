@@ -493,4 +493,5 @@
 /obj/item/clothing/shoes/equipped(mob/living/carbon/user, slot, silent)
 	. = ..()
 	if(shoes_size != user.size_of_shoes)
-		slowdown = 0.1
+		to_chat(user, SPAN_HIGHDANGER("Whoops! Thats not my size."))
+		slowdown = -0.5
