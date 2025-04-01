@@ -11,6 +11,7 @@
 	item_state = "m240"
 	item_icons = list(
 		WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/flamers.dmi',
+		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/guns.dmi',
 		WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/flamers.dmi',
 		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_lefthand.dmi',
 		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_righthand.dmi'
@@ -422,26 +423,6 @@
 /obj/item/weapon/gun/flamer/underextinguisher
 	starting_attachment_types = list(/obj/item/attachable/attached_gun/extinguisher)
 
-/obj/item/weapon/gun/flamer/deathsquad //w-y deathsquad waist flamer
-	name = "\improper M240A3 incinerator unit"
-	desc = "A next-generation incinerator unit, the M240A3 is much lighter and dextrous than its predecessors thanks to the ceramic alloy construction. It can be slinged over a belt and usually comes equipped with EX-type fuel."
-	attachable_allowed = list(
-		/obj/item/attachable/flashlight,
-		/obj/item/attachable/magnetic_harness,
-		/obj/item/attachable/attached_gun/extinguisher,
-	)
-	starting_attachment_types = list(/obj/item/attachable/attached_gun/extinguisher/pyro, /obj/item/attachable/magnetic_harness)
-	flags_equip_slot = SLOT_BACK | SLOT_WAIST
-	auto_retrieval_slot = WEAR_WAIST
-	current_mag = /obj/item/ammo_magazine/flamer_tank/EX
-	flags_gun_features = GUN_WY_RESTRICTED|GUN_WIELDED_FIRING_ONLY
-
-/obj/item/weapon/gun/flamer/deathsquad/nolock
-	flags_gun_features = GUN_WIELDED_FIRING_ONLY
-
-/obj/item/weapon/gun/flamer/deathsquad/standard
-	current_mag = /obj/item/ammo_magazine/flamer_tank
-
 /obj/item/weapon/gun/flamer/M240T
 	name = "\improper M240-T incinerator unit"
 	desc = "An improved version of the M240A1 incinerator unit, the M240-T model is capable of dispersing a larger variety of fuel types."
@@ -640,9 +621,6 @@
 	//Fire duration increases with fuel usage
 	firelevel = R.durationfire + fuel_pressure*R.durationmod
 	burnlevel = R.intensityfire
-//RUCM START
-	friendlydetection = R.friendlydetection
-//RUCM END
 
 	//are we in weather??
 	update_in_weather_status()
@@ -720,34 +698,15 @@
 		if(!(sig_result & COMPONENT_NO_IGNITE))
 			switch(fire_variant)
 				if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire, super easy to pat out. 50 duration -> 10 stacks (1 pat/resist)
-/*
 					ignited_morb.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent)
 				else
 					ignited_morb.TryIgniteMob(tied_reagent.durationfire, tied_reagent)
-*/
-//RUCM START
-					ignited_morb.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent, src)
-				else
-					ignited_morb.TryIgniteMob(tied_reagent.durationfire, tied_reagent, src)
-//RUCM END
 
 		if(sig_result & COMPONENT_NO_BURN)
 			continue
 
-/*
 		ignited_morb.last_damage_data = weapon_cause_data
 		ignited_morb.apply_damage(firedamage, BURN)
-*/
-//RUCM START
-		if(!friendlydetection)
-			ignited_morb.last_damage_data = weapon_cause_data
-			ignited_morb.apply_damage(firedamage, BURN)
-		else
-			var/mob/living/user = weapon_cause_data.resolve_mob()
-			if(!(istype(user) && user.ally_of_hivenumber(ignited_morb.hivenumber)) && ignited_morb.getFireLoss() < 400)// We don't want fire rav do nasty dirty gameplay
-				ignited_morb.last_damage_data = weapon_cause_data
-				ignited_morb.apply_damage(firedamage, BURN) //This makes fire stronk.
-//RUCM END
 		animation_flash_color(ignited_morb, tied_reagent.burncolor) //pain hit flicker
 
 		var/msg = "Augh! You are roasted by the flames!"
@@ -821,16 +780,9 @@
 	if(!(sig_result & COMPONENT_NO_IGNITE) && burn_damage)
 		switch(fire_variant)
 			if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire, super easy to pat out. 50 duration -> 10 stacks (1 pat/resist)
-/*
 				M.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent)
 			else
 				M.TryIgniteMob(tied_reagent.durationfire, tied_reagent)
-*/
-//RUCM START
-				M.TryIgniteMob(floor(tied_reagent.durationfire / 5), tied_reagent, src)
-			else
-				M.TryIgniteMob(tied_reagent.durationfire, tied_reagent, src)
-//RUCM END
 
 	if(sig_result & COMPONENT_NO_BURN && !tied_reagent.fire_penetrating)
 		burn_damage = 0
@@ -842,20 +794,8 @@
 			to_chat(M, SPAN_DANGER("[isxeno(M) ? "We" : "You"] step over the flames."))
 		return
 
-/*
 	M.last_damage_data = weapon_cause_data
 	M.apply_damage(burn_damage, BURN) //This makes fire stronk.
-*/
-//RUCM START
-	if(!friendlydetection)
-		M.last_damage_data = weapon_cause_data
-		M.apply_damage(burn_damage, BURN) //This makes fire stronk.
-	else
-		var/mob/living/user = weapon_cause_data.resolve_mob()
-		if(!(istype(user) && user.ally_of_hivenumber(M.hivenumber)) && M.getFireLoss() < 400)// We don't want fire rav do nasty dirty gameplay
-			M.last_damage_data = weapon_cause_data
-			M.apply_damage(burn_damage, BURN) //This makes fire stronk.
-//RUCM END
 
 	var/variant_burn_msg = null
 	switch(fire_variant) //Fire variant special message appends.
@@ -895,12 +835,7 @@
 		qdel(src)
 		return PROCESS_KILL
 	var/damage = burnlevel*delta_time
-/*
 	T.flamer_fire_act(damage)
-*/
-//RUCM START
-	T.flamer_fire_act(damage, weapon_cause_data, src)
-//RUCM END
 
 	if(!firelevel)
 		qdel(src)
@@ -1012,17 +947,9 @@
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/colony/flamers.dmi'
 	icon_state = "flamer"
 	item_state = "flamer"
-	item_icons = list(
-		WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/flamers.dmi',
-		WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/flamers.dmi',
-		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_lefthand.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/flamers_righthand.dmi'
-	)
 	ignite_sound = 'sound/weapons/surv_flamer_ignite.ogg'
 	extinguish_sound = 'sound/weapons/surv_flamer_extinguish.ogg'
-
-	fire_sound = ""
-
+	accepted_ammo = list(/obj/item/ammo_magazine/flamer_tank/survivor)
 	current_mag = /obj/item/ammo_magazine/flamer_tank/survivor
 
 	attachable_allowed = list(
@@ -1036,3 +963,52 @@
 		'sound/weapons/surv_flamer_fire3.ogg',
 		'sound/weapons/surv_flamer_fire4.ogg')
 	return pick(fire_sounds)
+
+/obj/item/weapon/gun/flamer/flammenwerfer3
+	name = "\improper Flammenwerfer 3 Heavy Incineration Unit"
+	desc = "A heavy industrial incineration unit produced by Weyland Corporation and later by Weyland-Yutani Corporation. Often found among foliage cleaning missions on frontier colonies, usually aren't seen in combat, but devastating when actually used."
+	desc_lore = "This century-old is seeing a comeback in flamethrower is seeing a comeback on Frontier colonies. Heavy Incinerator Units are often used for clearing out dead foliage and burning disease ridden corpses. Current market price of is 2000$."
+	icon = 'icons/obj/items/weapons/guns/guns_by_faction/WY/flamers.dmi'
+	icon_state = "fl3"
+	item_state = "fl3"
+	hud_offset = -6
+	pixel_x = -6
+	ignite_sound = 'sound/weapons/wy_flamer_ignite.ogg'
+	extinguish_sound = 'sound/weapons/wy_flamer_extinguish.ogg'
+	unload_sound = 'sound/weapons/handling/wy_flamer_unload.ogg'
+	reload_sound = 'sound/weapons/handling/wy_flamer_reload.ogg'
+	dry_fire_sound = list('sound/weapons/wy_flamer_dryfire.ogg')
+	accepted_ammo = list(
+		/obj/item/ammo_magazine/flamer_tank/flammenwerfer,
+		/obj/item/ammo_magazine/flamer_tank/flammenwerfer/whiteout,
+	)
+	current_mag = /obj/item/ammo_magazine/flamer_tank/flammenwerfer
+
+	attachable_allowed = null
+
+/obj/item/weapon/gun/flamer/flammenwerfer3/get_fire_sound()
+	var/list/fire_sounds = list(
+		'sound/weapons/wy_flamethrower1.ogg',
+		'sound/weapons/wy_flamethrower2.ogg',
+		'sound/weapons/wy_flamethrower3.ogg')
+	return pick(fire_sounds)
+
+/obj/item/weapon/gun/flamer/flammenwerfer3/deathsquad
+	flags_equip_slot = SLOT_BACK | SLOT_WAIST
+	auto_retrieval_slot = WEAR_WAIST
+	current_mag = /obj/item/ammo_magazine/flamer_tank/flammenwerfer/whiteout
+	flags_gun_features = GUN_WY_RESTRICTED|GUN_WIELDED_FIRING_ONLY
+
+/obj/item/weapon/gun/flamer/flammenwerfer3/deathsquad/handle_starting_attachment()
+	..()
+	var/obj/item/attachable/magnetic_harness/Integrated = new(src)
+	Integrated.hidden = TRUE
+	Integrated.flags_attach_features &= ~ATTACH_REMOVABLE
+	Integrated.Attach(src)
+	update_attachable(Integrated.slot)
+
+/obj/item/weapon/gun/flamer/flammenwerfer3/deathsquad/nolock
+	flags_gun_features = GUN_WIELDED_FIRING_ONLY
+
+/obj/item/weapon/gun/flamer/flammenwerfer3/deathsquad/standard
+	current_mag = /obj/item/ammo_magazine/flamer_tank/flammenwerfer

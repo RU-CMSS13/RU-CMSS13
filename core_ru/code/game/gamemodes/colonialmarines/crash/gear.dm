@@ -59,7 +59,7 @@
 	var/sidearm = "Mateba"
 	var/kit = null
 	var/sidearmpath = /obj/item/storage/belt/gun/mateba/cmateba/full
-	var/backItem = /obj/item/storage/backpack/satchel/lockable
+	//var/backItem = /obj/item/storage/backpack/satchel/lockable
 
 	if(new_human.client && new_human.client.prefs)
 		sidearm = new_human.client.prefs.commander_sidearm
@@ -76,11 +76,11 @@
 				sidearmpath = /obj/item/storage/belt/gun/m4a3/heavy/co_golden
 			if("M4A3 Custom")
 				sidearmpath = /obj/item/storage/belt/gun/m4a3/commander
-			if("VP78")
-				sidearmpath = /obj/item/storage/belt/gun/m4a3/vp78
+			/*if("VP78")
+				sidearmpath = /obj/item/storage/belt/gun/m4a3/vp78*/
 
 	//back
-	new_human.equip_to_slot_or_del(new backItem(new_human), WEAR_BACK)
+	//new_human.equip_to_slot_or_del(new backItem(new_human), WEAR_BACK)
 	if(kit)
 		new_human.equip_to_slot_or_del(new kit(new_human), WEAR_IN_BACK)
 	//head
@@ -223,7 +223,7 @@
 	new_human.equip_to_slot_or_del(new /obj/item/attachable/magnetic_harness(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/spec_kit, WEAR_R_HAND)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/marine(new_human), WEAR_HEAD)
-	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/magazine/large/pmc_m39(new_human), WEAR_L_STORE)
+//	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/magazine/large/pmc_m39(new_human), WEAR_L_STORE)
 
 	add_common_wo_equipment(new_human)
 

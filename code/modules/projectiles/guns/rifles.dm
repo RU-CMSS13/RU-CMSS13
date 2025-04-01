@@ -59,6 +59,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -77,9 +78,6 @@
 		/obj/item/attachable/bipod,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/stock/rifle,
 		/obj/item/attachable/stock/rifle/collapsible,
@@ -149,6 +147,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -167,13 +166,15 @@
 		/obj/item/attachable/attached_gun/flamer/advanced,
 		/obj/item/attachable/attached_gun/grenade,
 		/obj/item/attachable/scope/mini/nsg23,
+		/obj/item/attachable/suppressor/nsg,
+		/obj/item/attachable/attached_gun/shotgun/af13,
 	)
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER|GUN_WY_RESTRICTED
 
 	random_spawn_muzzle = list(
-		/obj/item/attachable/suppressor,
-		/obj/item/attachable/bayonet,
+		/obj/item/attachable/suppressor/nsg,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/extended_barrel,
 	)
 	starting_attachment_types = list(
@@ -188,7 +189,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/rifle/nsg23/set_gun_attachment_offsets()
-	attachable_offset = list("muzzle_x" = 32, "muzzle_y" = 16,"rail_x" = 13, "rail_y" = 22, "under_x" = 21, "under_y" = 10, "stock_x" = 5, "stock_y" = 17)
+	attachable_offset = list("muzzle_x" = 32, "muzzle_y" = 16,"rail_x" = 9, "rail_y" = 22, "under_x" = 21, "under_y" = 10, "stock_x" = 5, "stock_y" = 17)
 
 /obj/item/weapon/gun/rifle/nsg23/set_gun_config_values()
 	..()
@@ -212,6 +213,13 @@
 	S.flags_attach_features &= ~ATTACH_REMOVABLE
 	S.Attach(src)
 	update_attachable(S.slot)
+
+/obj/item/weapon/gun/rifle/nsg23/cqc
+	starting_attachment_types = list(
+		/obj/item/attachable/attached_gun/shotgun/af13,
+		/obj/item/attachable/suppressor/nsg,
+		/obj/item/attachable/reflex,
+	)
 
 //has no scope or underbarrel
 /obj/item/weapon/gun/rifle/nsg23/stripped
@@ -259,12 +267,9 @@
 	)
 	random_spawn_muzzle = list(
 		/obj/item/attachable/suppressor,
-		/obj/item/attachable/bayonet,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 	)
 
 
@@ -279,6 +284,10 @@
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_4
 	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_5
+
+/obj/item/weapon/gun/rifle/m41a/elite/commando //special version for commandos, has preset attachments.
+
+	starting_attachment_types = list(/obj/item/attachable/stock/rifle, /obj/item/attachable/magnetic_harness, /obj/item/attachable/angledgrip, /obj/item/attachable/heavy_barrel)
 
 /obj/item/weapon/gun/rifle/m41a/elite/whiteout //special version for whiteout, has preset attachments and HEAP mag loaded.
 	current_mag = /obj/item/ammo_magazine/rifle/heap
@@ -311,11 +320,11 @@
 	)
 	random_spawn_muzzle = list(
 		/obj/item/attachable/suppressor,
-		/obj/item/attachable/bayonet,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/extended_barrel,
 	)
 
-	starting_attachment_types = list(/obj/item/attachable/stock/rifle/collapsible, /obj/item/attachable/attached_gun/flamer/advanced)
+	starting_attachment_types = list(/obj/item/attachable/stock/rifle/collapsible, /obj/item/attachable/lasersight)
 
 //-------------------------------------------------------
 //M40-SD AKA SOF RIFLE FROM HELL (It's actually an M41A, don't tell!)
@@ -414,6 +423,7 @@
 		/obj/item/attachable/bayonet,
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
@@ -506,6 +516,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -705,6 +716,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -796,6 +808,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -813,9 +826,6 @@
 		/obj/item/attachable/bipod,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/attached_gun/grenade,
 		/obj/item/attachable/attached_gun/flamer,
@@ -904,21 +914,11 @@
 /obj/item/weapon/gun/rifle/mar40/lmg/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_LMG)
-/*
 	set_burst_amount(BURST_AMOUNT_TIER_5)
-*/
-//RUCM START
-	set_burst_amount(BURST_AMOUNT_TIER_6)
-//RUCM END
 	set_burst_delay(FIRE_DELAY_TIER_LMG)
 	accuracy_mult = BASE_ACCURACY_MULT
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_7
-/*
 	scatter = SCATTER_AMOUNT_TIER_6
-*/
-//RUCM START
-	scatter = SCATTER_AMOUNT_TIER_7
-//RUCM END
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_8
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
 	damage_mult = BASE_BULLET_DAMAGE_MULT
@@ -952,6 +952,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1034,6 +1035,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -1094,6 +1096,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1251,6 +1254,7 @@
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
 		/obj/item/attachable/bayonet/tanto,
@@ -1410,9 +1414,6 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/bipod,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/burstfire_assembly,
 		/obj/item/attachable/magnetic_harness,
@@ -1427,31 +1428,16 @@
 /obj/item/weapon/gun/rifle/lmg/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_LMG)
-/*
 	set_burst_amount(BURST_AMOUNT_TIER_5)
-*/
-//RUCM START
-	set_burst_amount(BURST_AMOUNT_TIER_6)
-//RUCM END
 	set_burst_delay(FIRE_DELAY_TIER_LMG)
 	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_3
 	fa_max_scatter = SCATTER_AMOUNT_TIER_4
 	accuracy_mult = BASE_ACCURACY_MULT
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_10
-/*
 	scatter = SCATTER_AMOUNT_TIER_6
-*/
-//RUCM START
-	scatter = SCATTER_AMOUNT_TIER_7
-//RUCM END
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_5
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-/*
 	damage_mult = BASE_BULLET_DAMAGE_MULT
-*/
-//RUCM START
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_2
-//RUCM END
 	recoil_unwielded = RECOIL_AMOUNT_TIER_1
 
 
@@ -1460,12 +1446,7 @@
 	starting_attachment_types = list(/obj/item/attachable/magnetic_harness, /obj/item/attachable/suppressor, /obj/item/attachable/angledgrip)
 /obj/item/weapon/gun/rifle/lmg/tactical/set_gun_config_values()
 	..()
-/*
 	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_2//equal to m41a dmg
-*/
-//RUCM START
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_4
-//RUCM END
 //-------------------------------------------------------
 
 
@@ -1496,6 +1477,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1506,9 +1488,6 @@
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/verticalgrip, // Underbarrel
 		/obj/item/attachable/flashlight/grip,
 		/obj/item/attachable/lasersight,
@@ -1613,6 +1592,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1623,9 +1603,6 @@
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 	)
 
 /obj/item/weapon/gun/rifle/type71/flamer/handle_starting_attachment()
@@ -1670,6 +1647,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1680,9 +1658,6 @@
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/verticalgrip, // Underbarrel
 		/obj/item/attachable/burstfire_assembly,
 		)
@@ -1795,6 +1770,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1881,6 +1857,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1948,6 +1925,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -1997,6 +1975,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -2054,6 +2033,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -2068,9 +2048,6 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
-//RUCM START
-		/obj/item/attachable/heavy_barrel/upgraded,
-//RUCM END
 		/obj/item/attachable/magnetic_harness,
 	)
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
@@ -2500,6 +2477,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
