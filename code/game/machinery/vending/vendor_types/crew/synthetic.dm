@@ -42,10 +42,16 @@
 		list("Blood", 5, /obj/item/reagent_container/blood/OMinus, null, VENDOR_ITEM_REGULAR),
 		list("Surgical Bed", 10, /obj/structure/bed/portable_surgery, null, VENDOR_ITEM_REGULAR),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 //RUCM START
 		list("Surgical Kit", 30, /obj/item/storage/surgical_tray, null, VENDOR_ITEM_REGULAR),
 //RUCM END
+=======
+	//RUCM START
+		list("Surgical Kit", 30, /obj/item/storage/surgical_tray, null, VENDOR_ITEM_REGULAR),
+	//RUCM END
+>>>>>>> Stashed changes
 =======
 	//RUCM START
 		list("Surgical Kit", 30, /obj/item/storage/surgical_tray, null, VENDOR_ITEM_REGULAR),
@@ -112,7 +118,11 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("Webbing", 0, /obj/item/clothing/accessory/storage/webbing, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Black Webbing", 0, /obj/item/clothing/accessory/storage/webbing/black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //RUCM START
+=======
+		//RUCM START
+>>>>>>> Stashed changes
 =======
 		//RUCM START
 >>>>>>> Stashed changes
@@ -123,7 +133,11 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("Surgical Drop Pouch (Black)", 0, /obj/item/clothing/accessory/storage/surg_vest/drop_black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Tool Webbing", 0, /obj/item/clothing/accessory/storage/tool_webbing/equipped, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //RUCM END
+=======
+		//RUCM END
+>>>>>>> Stashed changes
 =======
 		//RUCM END
 >>>>>>> Stashed changes
@@ -163,15 +177,21 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("S-V42A1 Smartpack, Black", 0, /obj/item/storage/backpack/marine/smartpack/a1/black, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 		list("S-V42A1 Smartpack, White", 0, /obj/item/storage/backpack/marine/smartpack/a1/white, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //RUCM START
 		list("Logistics IMP Backpack", 0, /obj/item/storage/backpack/marine/satchel/big, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 		list("Expedition Chestrig", 0, /obj/item/storage/backpack/marine/satchel/intel/chestrig, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 //RUCM END
 =======
+=======
+>>>>>>> Stashed changes
 	//RUCM START
 		list("Logistics IMP Backpack", 0, /obj/item/storage/backpack/marine/satchel/big, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 		list("Expedition Chestrig", 0, /obj/item/storage/backpack/marine/satchel/intel/chestrig, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 	//RUCM END
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 		list("BELT (CHOOSE 1)", 0, null, null, null),
