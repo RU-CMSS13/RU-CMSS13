@@ -47,8 +47,6 @@
 
 	minimap_icon = "xenoqueen"
 
-	 = "xeno_ruler"
-
 	royal_caste = TRUE
 
 
@@ -901,8 +899,6 @@
 	for(var/path in immobile_abilities)
 		give_action(src, path)
 
-	add_verb(src, /mob/living/carbon/xenomorph/proc/xeno_tacmap)
-
 	ADD_TRAIT(src, TRAIT_ABILITY_NO_PLASMA_TRANSFER, TRAIT_SOURCE_ABILITY("Ovipositor"))
 	ADD_TRAIT(src, TRAIT_ABILITY_OVIPOSITOR, TRAIT_SOURCE_ABILITY("Ovipositor"))
 
@@ -955,8 +951,6 @@
 	extra_build_dist = prev_extra_build_dist
 //RUCM END
 	give_combat_abilities()
-
-	remove_verb(src, /mob/living/carbon/xenomorph/proc/xeno_tacmap)
 
 	REMOVE_TRAIT(src, TRAIT_ABILITY_NO_PLASMA_TRANSFER, TRAIT_SOURCE_ABILITY("Ovipositor"))
 	REMOVE_TRAIT(src, TRAIT_ABILITY_OVIPOSITOR, TRAIT_SOURCE_ABILITY("Ovipositor"))
