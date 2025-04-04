@@ -374,13 +374,12 @@
 	
 	if(wearer.stat == DEAD)
 		if(wearer.undefibbable)
-			background.overlays += image('icons/ui_icons/map_blips.dmi', null, "undefibbable", ABOVE_FLOAT_LAYER)
-		else
-			background.overlays += image('icons/ui_icons/map_blips.dmi', null, "defibbable", ABOVE_FLOAT_LAYER)
+			background.overlays += image('icons/ui_icons/map_blips_large.dmi', null, "undefibbable", ABOVE_FLOAT_LAYER)
 		if(!wearer.mind)
 			var/mob/dead/observer/ghost = wearer.get_ghost(TRUE)
 			if(!ghost?.can_reenter_corpse)
-				background.overlays += image('icons/ui_icons/map_blips.dmi', null, "undefibbable", ABOVE_FLOAT_LAYER)
+				background.overlays += image('icons/ui_icons/map_blips_large.dmi', null, "undefibbable", ABOVE_FLOAT_LAYER)
+		background.overlays += image('icons/ui_icons/map_blips.dmi', null, "defibbable", ABOVE_FLOAT_LAYER)
 	if(wearer.assigned_squad)
 		var/image/underlay = image('icons/ui_icons/map_blips.dmi', null, "squad_underlay")
 		var/image/overlay = image('icons/ui_icons/map_blips.dmi', null, wearer.assigned_equipment_preset.minimap_icon)
@@ -646,7 +645,6 @@
 	initial_keys = list(/obj/item/device/encryptionkey/cmpcom/cdrcom)
 	additional_hud_types = list(MOB_HUD_FACTION_WY, MOB_HUD_FACTION_CMB)
 	volume = RADIO_VOLUME_CRITICAL
-	minimap_type = /datum/action/minimap/marine/live
 
 /obj/item/device/radio/headset/almayer/mcom/sea
 	name = "marine senior enlisted advisor headset"
@@ -1201,7 +1199,6 @@
 	desc = "A special headset used by small groups of trained operatives. Or terrorists. To access the colony channel use :o."
 	frequency = CLF_FREQ
 	initial_keys = list(/obj/item/device/encryptionkey/colony)
-	minimap_flag = MINIMAP_FLAG_CLF
 	has_hud = TRUE
 	hud_type = MOB_HUD_FACTION_CLF
 
