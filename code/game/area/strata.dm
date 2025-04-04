@@ -77,11 +77,11 @@
 //-Caves (how are these caves?)
 
 /area/strata/exterior/shed_five_caves
-	name = "Terminal Five Topside Caves"
+	name = "Terminal Five Topside Pathway"
 	icon_state = "lzcaves"
 
 /area/strata/exterior/lz_caves
-	name = "External Mining Aerodrome Caves"
+	name = "External Mining Aerodrome Pathway"
 	linked_lz = DROPSHIP_LZ1
 	icon_state = "lzcaves"
 
@@ -136,7 +136,11 @@
 	icon_state = "garage"
 
 /area/strata/exterior/tcomms_mining_caves
-	name = "Mining Caves Relay"
+	name = "Mining Pathway Relay"
+	icon_state = "tcomms1"
+
+/area/strata/exterior/tcomms_vehicle_yard
+	name = "Vehicle Yard Relay"
 	icon_state = "tcomms1"
 
 //-Outpost
@@ -214,6 +218,11 @@
 
 /area/strata/interior/shuttle_sof
 	name = "UPP-DS-3 'Voron'"
+	icon_state = "outpost_engi_3"
+	ambience_exterior = AMBIENCE_SHIP_ALT
+
+/area/strata/interior/supply_shuttle_sof
+	name = "UPP-DS-3 'Volk'"
 	icon_state = "outpost_engi_3"
 	ambience_exterior = AMBIENCE_SHIP_ALT
 
@@ -361,7 +370,7 @@
 	soundscape_playlist = SCAPE_PL_LV759_CAVES
 	ceiling_muffle = FALSE
 
-//-Underground Dorms
+//-Deep Jungle Dorms
 
 /area/strata/interior/underground_dorms
 	name = "Do not use."
@@ -371,34 +380,34 @@
 	ceiling_muffle = FALSE
 
 /area/strata/interior/underground_dorms/sec1
-	name = "Underground Security Dorm #1"
+	name = "Deep Jungle - Security Dorm #1"
 	unoviable_timer = FALSE
 
 /area/strata/interior/underground_dorms/sec2
-	name = "Underground Security Dorm #2"
+	name = "Deep Jungle - Security Dorm #2"
 	unoviable_timer = FALSE
 
 /area/strata/interior/underground_dorms/admin1
-	name = "Underground General Staff Dorm #1"
+	name = "Deep Jungle - General Staff Dorm #1"
 
 /area/strata/interior/underground_dorms/admin2
-	name = "Underground General Staff Dorm #2"
+	name = "Deep Jungle - General Staff Dorm #2"
 	unoviable_timer = FALSE
 
 /area/strata/interior/underground_dorms/admin3
-	name = "Underground General Staff Dorm #3"
+	name = "Deep Jungle - General Staff Dorm #3"
 	unoviable_timer = FALSE
 
 /area/strata/interior/underground_dorms/admin4
-	name = "Underground General Staff Dorm #4"
+	name = "Deep Jungle - General Staff Dorm #4"
 	unoviable_timer = FALSE
 
 /area/strata/interior/underground_dorms/med1
-	name = "Underground Medical Dorm #1"
+	name = "Deep Jungle - Medical Dorm #1"
 	requires_power = 1
 
 /area/strata/interior/underground_dorms/med2
-	name = "Underground Medical Dorm #2"
+	name = "Deep Jungle - Medical Dorm #2"
 	requires_power = TRUE
 
 /area/strata/interior/underground_dorms/botany
@@ -408,7 +417,7 @@
 //-Platform
 
 /area/strata/exterior/outpost_platform
-	name = "Underground Platform"
+	name = "Deep Jungle - Platform"
 	icon_state = "ug_jung_1"
 	minimap_color = MINIMAP_AREA_MEDBAY_CAVE
 
@@ -435,12 +444,12 @@
 	icon_state = "ug_jung_5"
 
 /area/strata/exterior/deep_jungle/platform
-	name = "Deep Jungle - South of Underground Platform"
+	name = "Deep Jungle - South of the Platform"
 	icon_state = "ug_jung_4"
 	unoviable_timer = FALSE
 
 /area/strata/exterior/deep_jungle/platform_east
-	name = "Deep Jungle - East of Underground Platform"
+	name = "Deep Jungle - East of the Platform"
 	icon_state = "ug_jung_0"
 	unoviable_timer = FALSE
 	ceiling = CEILING_NONE

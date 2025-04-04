@@ -71,7 +71,7 @@
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/engineerpack/ert/black(new_human), WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/stack/sheet/metal/med_small_stack(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/welding(new_human), WEAR_EYES)
-	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/tools/tactical/full(new_human), WEAR_R_STORE)
+	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/tools/tactical/sof/full(new_human), WEAR_R_STORE)
 	..()
 
 // /obj/effect/landmark/survivor_spawner/SOF_survivor/medic
@@ -113,9 +113,7 @@
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/faction/UPP/SOF_armor/heavy, WEAR_JACKET)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/lightpack/black, WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/rocket/upp/at(new_human), WEAR_IN_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/rocket/upp(new_human), WEAR_IN_BACK)
 	..()
-
 
 // /obj/effect/landmark/survivor_spawner/SOF_survivor/squad_leader
 
