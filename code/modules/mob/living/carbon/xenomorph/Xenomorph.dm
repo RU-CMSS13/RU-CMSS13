@@ -78,9 +78,7 @@
 	//////////////////////////////////////////////////////////////////
 	var/datum/caste_datum/caste // Used to extract determine ALL Xeno stats.
 	var/speaking_key = "x"
-/* RUCM CHANGE
 	var/speaking_noise = "alien_talk"
-*/
 	slash_verb = "slash"
 	slashes_verb = "slashes"
 	var/slash_sound = "alien_claw_flesh"
@@ -182,8 +180,7 @@
 	/// this is the resin mark that is currently being tracked by the xeno
 	var/obj/effect/alien/resin/marker/tracked_marker
 	///The type of minimap this xeno has access too
-	var/datum/action/minimap/minimap_type = /datum/action/minimap/xeno
-	var/datum/weakref/minimap_ref
+	var/datum/action/minimap/minimap_type = /datum/action/minimap
 
 	//////////////////////////////////////////////////////////////////
 	//
@@ -353,6 +350,8 @@
 	var/atom/movable/vis_obj/xeno_pack/backpack_icon_holder
 	/// If TRUE, the xeno cannot slash anything
 	var/cannot_slash = FALSE
+	/// The world.time when the xeno was created. Carries over between strains and evolving
+	var/creation_time = 0
 
 /mob/living/carbon/xenomorph/Initialize(mapload, mob/living/carbon/xenomorph/old_xeno, hivenumber)
 	if(old_xeno && old_xeno.hivenumber)
@@ -377,14 +376,9 @@
 	wound_icon_holder = new(null, src)
 	vis_contents += wound_icon_holder
 
-	set_languages(list(LANGUAGE_XENOMORPH, LANGUAGE_HIVEMIND))
-
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	AddComponent(/datum/component/deevolve_cooldown, old_xeno)
 	if(old_xeno)
-		//RUCM SART
-		tts_voice = old_xeno.tts_voice
-		//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total
@@ -488,7 +482,7 @@
 	time_of_birth = world.time
 
 	//Minimap
-	if(hivenumber != XENO_HIVE_TUTORIAL)
+	if(z && hivenumber != XENO_HIVE_TUTORIAL)
 		INVOKE_NEXT_TICK(src, PROC_REF(add_minimap_marker))
 
 	//Sight
@@ -516,9 +510,10 @@
 	// This can happen if a xeno gets made before the game starts
 	if (hive && hive.hive_ui)
 		hive.hive_ui.update_all_xeno_data()
-	minimap_ref = WEAKREF(new minimap_type)
-	var/datum/action/minimap/ref = minimap_ref.resolve()
-	ref.give_to(src, ref)
+	var/datum/action/minimap/mini = new minimap_type
+	mini.give_to(src, mini)
+
+	creation_time = world.time
 
 	Decorate()
 
@@ -535,16 +530,13 @@
 /mob/living/carbon/xenomorph/proc/add_minimap_marker(flags)
 	if(!flags)
 		flags = get_minimap_flag_for_faction(hivenumber)
-	
-	var/image/background = image('icons/ui_icons/map_blips.dmi', null, caste.minimap_background)
 	var/image/xeno = image('icons/ui_icons/map_blips.dmi', null, caste.minimap_icon)
-	background.overlays += xeno
 	if(IS_XENO_LEADER(src))
 		var/image/overlay = image('icons/ui_icons/map_blips.dmi', null, "xenoleader")
-		background.overlays += overlay
-		SSminimaps.add_marker(src, flags, background)
+		xeno.overlays += overlay
+		SSminimaps.add_marker(src, flags, xeno)
 		return
-	SSminimaps.add_marker(src, flags, background)
+	SSminimaps.add_marker(src, flags, xeno)
 
 /mob/living/carbon/xenomorph/initialize_pass_flags(datum/pass_flags_container/PF)
 	..()
@@ -604,9 +596,6 @@
 	if(client)
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
-		//RUCM START
-		init_voice()
-		//RUCM END
 		age_xeno()
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 	if(!HAS_TRAIT(src, TRAIT_NO_COLOR))
@@ -913,12 +902,7 @@
 	tacklestrength_max = caste.tacklestrength_max
 
 /mob/living/carbon/xenomorph/proc/recalculate_health()
-/* RUCM CHANGE
 	var/new_max_health = nocrit ? health_modifier + maxHealth : health_modifier + caste.max_health
-*/
-//RUCM START
-	var/new_max_health = nocrit ? health_modifier + maxHealth : round((health_modifier + caste.max_health) * hive.healthstack)
-//RUCM END
 	if (new_max_health == maxHealth)
 		return
 	var/currentHealthRatio = 1
@@ -1038,12 +1022,7 @@
 
 /mob/living/carbon/xenomorph/resist_fire()
 	adjust_fire_stacks(XENO_FIRE_RESIST_AMOUNT, min_stacks = 0)
-/* RUCM CHANGE
 	apply_effect(4, WEAKEN)
-*/
-//RUCM START
-	apply_effect(hive.resist_xeno_countdown, WEAKEN)
-//RUCM END
 	visible_message(SPAN_DANGER("[src] rolls on the floor, trying to put themselves out!"),
 		SPAN_NOTICE("You stop, drop, and roll!"), null, 5)
 

@@ -18,7 +18,7 @@
 #define MINIMAP_FLAG_ALL (1<<17) - 1
 
 ///The minimap zoom scale
-#define MINIMAP_SCALE 1.5
+#define MINIMAP_SCALE 2
 ///Converts the overworld x and y to minimap x and y values
 #define MINIMAP_PIXEL_FROM_WORLD(val) (val * MINIMAP_SCALE - 3)
 
@@ -29,8 +29,6 @@
 
 GLOBAL_LIST_INIT(all_minimap_flags, bitfield2list(MINIMAP_FLAG_ALL))
 
-#define MINIMAP_DRAWING_BLACK "#000000"
-#define MINIMAP_DRAWING_GREEN "#67d692"
 #define MINIMAP_DRAWING_RED "#ff0000"
 #define MINIMAP_DRAWING_YELLOW "#FFFF00"
 #define MINIMAP_DRAWING_PURPLE "#A020F0"
