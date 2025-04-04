@@ -36,6 +36,8 @@
 			// T.icon not working. No idea, why. Maybe plane issue
 			turf_underlay.Blend(icon(T.icon, T.icon_state), ICON_OVERLAY, (T.x - x_center_offset)*pixel_size + 1, (T.y - y_center_offset)*pixel_size + 1)
 			elevator_animation.vis_contents += T
+			// TODO IT WORKS, BUT I HAVE NO IDEA WHY
+			T.overlays.Cut()
 	elevator_animation.icon = turf_underlay
 
 	for(var/turf/vis_turf in elevator_animation.vis_contents)
@@ -76,6 +78,8 @@
 			// T.icon not working. No idea, why. Maybe plane issue
 			turf_underlay.Blend(icon(T.icon, T.icon_state), ICON_OVERLAY, (T.x - x_center_offset)*pixel_size + 1, (T.y - y_center_offset)*pixel_size + 1)
 			elevator_animation.vis_contents += T
+			// TODO IT WORKS, BUT I HAVE NO IDEA WHY
+			T.overlays.Cut()
 	elevator_animation.icon = turf_underlay
 
 	for(var/turf/vis_turf in elevator_animation.vis_contents)
@@ -96,5 +100,6 @@
 			vis_content.blocks_emissive = initial(vis_content.blocks_emissive)
 			vis_content.update_emissive_block()
 
+	elevator_animation.vis_contents.Cut()
 	// We redraw it in case of turf changes on our elevator
 	elevator_animation.icon = null
