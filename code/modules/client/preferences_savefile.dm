@@ -391,6 +391,7 @@
 	S["job_loadout_names"] >> loadout_slot_names
 
 	S["show_cooldown_messages"] >> show_cooldown_messages
+	S["quick_cast"] >> quick_cast
 
 	//Sanitize
 	ooccolor = sanitize_hexcolor(ooccolor, CONFIG_GET(string/ooc_color_default))
@@ -494,6 +495,7 @@
 	loadout_slot_names = sanitize_islist(loadout_slot_names, list())
 
 	show_cooldown_messages = sanitize_integer(show_cooldown_messages, FALSE, TRUE, FALSE)
+	quick_cast = sanitize_integer(quick_cast, FALSE, TRUE, FALSE)
 
 	check_keybindings()
 	S["key_bindings"] << key_bindings
@@ -660,6 +662,7 @@
 	S["window_scale"] << window_scale
 
 	S["show_cooldown_messages"] << show_cooldown_messages
+	S["quick_cast"] << quick_cast
 
 	return TRUE
 
