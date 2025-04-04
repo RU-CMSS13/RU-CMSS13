@@ -389,8 +389,8 @@ SUBSYSTEM_DEF(minimaps)
  * * zlevel: zlevel to fetch map for
  * * flags: map flags to fetch from
  */
-/datum/controller/subsystem/minimaps/proc/fetch_minimap_object(zlevel, flags, shifting = FALSE, live=TRUE)
-	var/hash = "[zlevel]-[flags]-[shifting]-[live]"
+/datum/controller/subsystem/minimaps/proc/fetch_minimap_object(zlevel, flags, shifting = FALSE)
+	var/hash = "[zlevel]-[flags]-[shifting]"
 	if(hashed_minimaps[hash])
 		return hashed_minimaps[hash]
 	var/atom/movable/screen/minimap/map = new(null, null, zlevel, flags, shifting)
@@ -419,7 +419,6 @@ SUBSYSTEM_DEF(minimaps)
 	icon = null
 	icon_state = ""
 	layer = TACMAP_LAYER
-	plane = TACMAP_PLANE
 	screen_loc = "1,1"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = TILE_BOUND
@@ -451,9 +450,6 @@ SUBSYSTEM_DEF(minimaps)
 	stop_polling = list()
 	icon = SSminimaps.minimaps_by_z["[target]"].hud_image
 	SSminimaps.add_to_updaters(src, flags, target)
-	src.flags = flags
-	src.target = target
-	src.live = live
 
 	x_max = SSminimaps.minimaps_by_z["[target]"].x_max
 	y_max = SSminimaps.minimaps_by_z["[target]"].y_max
@@ -779,18 +775,6 @@ SUBSYSTEM_DEF(minimaps)
 
 /datum/action/minimap/xeno
 	minimap_flags = MINIMAP_FLAG_XENO
-	live = TRUE
-
-/datum/action/minimap/xeno/action_activate()
-	var/mob/living/carbon/xenomorph/xeno = owner
-	if(!istype(xeno))
-		return
-
-	if(!xeno?.hive?.living_xeno_queen?.ovipositor && xeno != xeno?.hive?.living_xeno_queen)
-		to_chat(xeno, SPAN_WARNING("You cannot access that right now, The Queen has shed her ovipositor."))
-		return
-
-	. = ..()
 
 /datum/action/minimap/marine
 	minimap_flags = MINIMAP_FLAG_USCM
