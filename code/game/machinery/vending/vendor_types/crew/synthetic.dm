@@ -41,7 +41,9 @@
 		list("MS-11 Smart Refill Tank", 6, /obj/item/reagent_container/glass/minitank, null, VENDOR_ITEM_REGULAR),
 		list("Blood", 5, /obj/item/reagent_container/blood/OMinus, null, VENDOR_ITEM_REGULAR),
 		list("Surgical Bed", 10, /obj/structure/bed/portable_surgery, null, VENDOR_ITEM_REGULAR),
-
+//RUCM START
+		list("Surgical Kit", 30, /obj/item/storage/surgical_tray, null, VENDOR_ITEM_REGULAR),
+//RUCM END
 		list("Pillbottle (Bicaridine)", 5, /obj/item/storage/pill_bottle/bicaridine, null, VENDOR_ITEM_RECOMMENDED),
 		list("Pillbottle (Dexalin)", 5, /obj/item/storage/pill_bottle/dexalin, null, VENDOR_ITEM_REGULAR),
 		list("Pillbottle (Dylovene)", 5, /obj/item/storage/pill_bottle/antitox, null, VENDOR_ITEM_REGULAR),
@@ -91,6 +93,9 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("Synthetic Reset Key", 0, /obj/item/device/defibrillator/synthetic, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/mcom/synth, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
 
+		list("SYNTHETIC SPECIALTY EQUIPMENT", 0, null, null, null),
+		list("PK-130 SIMI Wrist-Mounted Computer", 0, /obj/item/clothing/gloves/synth, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+
 		list("UNIFORM (CHOOSE 1)", 0, null, null, null),
 		list("Uniform, Outdated Synth", 0, /obj/item/clothing/under/rank/synthetic/old, MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 		list("Uniform, Standard Synth", 0, /obj/item/clothing/under/rank/synthetic, MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_MANDATORY),
@@ -102,6 +107,14 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("Brown Webbing Vest", 0, /obj/item/clothing/accessory/storage/black_vest/brown_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_RECOMMENDED),
 		list("Webbing", 0, /obj/item/clothing/accessory/storage/webbing, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Black Webbing", 0, /obj/item/clothing/accessory/storage/webbing/black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+//RUCM START
+		list("Surgical Webbing Vest", 0, /obj/item/clothing/accessory/storage/surg_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Surgical Webbing Vest (Blue)", 0, /obj/item/clothing/accessory/storage/surg_vest/blue, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Surgical Drop Pouch", 0, /obj/item/clothing/accessory/storage/surg_vest/drop_green, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Surgical Drop Pouch (Blue)", 0, /obj/item/clothing/accessory/storage/surg_vest/drop_blue, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Surgical Drop Pouch (Black)", 0, /obj/item/clothing/accessory/storage/surg_vest/drop_black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Tool Webbing", 0, /obj/item/clothing/accessory/storage/tool_webbing/equipped, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+//RUCM END
 		list("Drop Pouch", 0, /obj/item/clothing/accessory/storage/droppouch, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 
 		list("SHOES (CHOOSE 1)", 0, null, null, null),
@@ -137,6 +150,10 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("S-V42A1 Smartpack, Tan", 0, /obj/item/storage/backpack/marine/smartpack/a1/tan, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 		list("S-V42A1 Smartpack, Black", 0, /obj/item/storage/backpack/marine/smartpack/a1/black, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
 		list("S-V42A1 Smartpack, White", 0, /obj/item/storage/backpack/marine/smartpack/a1/white, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
+//RUCM START
+		list("Logistics IMP Backpack", 0, /obj/item/storage/backpack/marine/satchel/big, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
+		list("Expedition Chestrig", 0, /obj/item/storage/backpack/marine/satchel/intel/chestrig, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
+//RUCM END
 
 		list("BELT (CHOOSE 1)", 0, null, null, null),
 		list("G8-A General Utility Pouch", 0, /obj/item/storage/backpack/general_belt, MARINE_CAN_BUY_BELT, VENDOR_ITEM_REGULAR),
@@ -585,15 +602,29 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 	return GLOB.cm_vending_synth_tools
 
 GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
-/*
+
+/* RUCM CHANGE
 	list("Breaching Hammer", 15, /obj/item/weapon/twohanded/breacher/synth, null, VENDOR_ITEM_REGULAR),
 	list("Compact Defibrillator", 15, /obj/item/device/defibrillator/compact, null, VENDOR_ITEM_REGULAR),
 	list("Compact Nailgun kit", 15, /obj/effect/essentials_set/cnailgun, null, VENDOR_ITEM_REGULAR),
 	list("Telescopic Baton", 15, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
+))
+*/
 
+
+/* RUCM REMOVAL
+	list("Surgical Webbing Vest", 15, /obj/item/clothing/accessory/storage/surg_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Surgical Webbing Vest (Blue)", 15, /obj/item/clothing/accessory/storage/surg_vest/blue, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Surgical Drop Pouch", 15, /obj/item/clothing/accessory/storage/surg_vest/drop_green, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Surgical Drop Pouch (Blue)", 15, /obj/item/clothing/accessory/storage/surg_vest/drop_blue, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Surgical Drop Pouch (Black)", 15, /obj/item/clothing/accessory/storage/surg_vest/drop_black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Tool Webbing", 15, /obj/item/clothing/accessory/storage/tool_webbing/equipped, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+	list("Logistics IMP Backpack", 15, /obj/item/storage/backpack/marine/satchel/big, null, VENDOR_ITEM_REGULAR),
+	list("Expedition Chestrig", 15, /obj/item/storage/backpack/marine/satchel/intel/chestrig, null, VENDOR_ITEM_REGULAR),
 ))
 */
 //RUCM START
+	list("SYNTHETIC GEAR", 0, null, null, null),
 	list("Autocompressor", 10, /obj/item/clothing/suit/auto_cpr, null, VENDOR_ITEM_REGULAR),
 	list("Portable Dialysis Machine", 10, /obj/item/tool/portadialysis, null, VENDOR_ITEM_REGULAR),
 	list("Medic Upgraded Kit", 15, /obj/item/storage/box/combat_zone_support_package, null, VENDOR_ITEM_REGULAR),
@@ -604,6 +635,14 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Telescopic Baton", 10, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
 	list("Experimental Meson Goggles", 10, /obj/item/clothing/glasses/night/experimental_mesons, null, VENDOR_ITEM_REGULAR),
 	list("Backpack Firefighting Watertank", 5, /obj/item/reagent_container/glass/watertank/atmos, null, VENDOR_ITEM_REGULAR),
+
+	list("PK-130 CHIPS", 0, null, null, null),
+	list("PK-130 Repair Mode", 10, /obj/item/device/simi_chip/repair, null, VENDOR_ITEM_RECOMMENDED),
+	list("PK-130 Protection Mode", 10, /obj/item/device/simi_chip/protect, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Rescue Hook", 15, /obj/item/device/simi_chip/rescue_hook, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Anchor Mode", 5, /obj/item/device/simi_chip/anchor, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Motion Detector", 5, /obj/item/device/simi_chip/motion_detector, null, VENDOR_ITEM_REGULAR),
+	list("PK-130 Tactical Map", 5, /obj/item/device/simi_chip/tactical_map, null, VENDOR_ITEM_REGULAR),
 ))
 //RUCM END
 
