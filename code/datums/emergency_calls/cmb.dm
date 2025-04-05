@@ -22,7 +22,7 @@
 	objectives = "Investigate the distress signal aboard the [MAIN_SHIP_NAME], and assist the crew with rescue if possible. If necessary, a contingent of our Colonial Marines may be ready to act as a QRF to reinforce you."
 	*/
 	//RUCM START
-	arrival_message = "Входящая передача: [MAIN_SHIP_NAME], это станция «Анкорпойнт», с Колониальным Маршальским Бюро. Мы получили ваш сигнал бедствия и немедленно отправляем к вам ближайший отряд. Ожидайте."
+	arrival_message = "Входящая передача: [MAIN_SHIP_NAME], это станция «Анкорпойнт», с Колониальным Бюро Маршалов. Мы получили ваш сигнал бедствия и немедленно отправляем к вам ближайший отряд. Ожидайте."
 	objectives = "Investigate the distress signal aboard the [MAIN_SHIP_NAME], and assist the crew with rescue if possible. If necessary, a contingent of our Colonial Marines may be ready to act as a QRF to reinforce you."
 	//RUCM END
 
