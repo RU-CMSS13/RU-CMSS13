@@ -167,22 +167,21 @@
 /turf/open/space/basic,
 /area/space)
 "ay" = (
-/obj/structure/bed/chair/comfy{
-	dir = 8
-	},
-/obj/structure/machinery/computer/overwatch/almayer/small{
+/obj/structure/barricade/handrail/medical,
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/device/defibrillator,
+/obj/structure/machinery/recharger,
+/obj/structure/barricade/handrail/medical{
 	dir = 4;
-	layer = 3.23;
-	pixel_x = -13;
-	pixel_y = 10
+	pixel_x = 2
 	},
-/obj/structure/machinery/computer/intel/disk_reader{
-	dir = 4;
-	layer = 3.24;
-	pixel_x = -13;
-	pixel_y = -3
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecalbottom"
 	},
-/turf/open/shuttle/vehicle/floor_3_6,
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecaltopright"
+	},
+/turf/open/shuttle/vehicle/dark_sterile_green_14,
 /area/interior/vehicle/apc)
 "az" = (
 /obj/effect/landmark/interior/spawn/interior_camera{
@@ -190,22 +189,24 @@
 	pixel_x = -14;
 	pixel_y = 38
 	},
-/obj/structure/machinery/prop/almayer/CICmap/computer{
+/obj/structure/machinery/medical_pod/autodoc/unskilled{
+	name = "\improper autodoc emergency medical system"
+	},
+/obj/structure/barricade/handrail/medical{
 	dir = 4;
-	layer = 3.21;
-	pixel_x = -13;
-	pixel_y = 4
+	pixel_x = 2
 	},
-/obj/structure/machinery/computer/groundside_operations/arc{
-	dir = 4;
-	layer = 3.22;
-	pixel_x = -13;
-	pixel_y = -9
+/obj/structure/barricade/handrail/medical{
+	dir = 1
 	},
-/obj/structure/bed/chair/comfy{
-	dir = 8
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecaltop";
+	pixel_y = -2
 	},
-/turf/open/shuttle/vehicle/floor_3_6,
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecalbottomright"
+	},
+/turf/open/shuttle/vehicle/med,
 /area/interior/vehicle/apc)
 "aA" = (
 /obj/structure/interior_wall/apc{
@@ -238,16 +239,20 @@
 	},
 /obj/structure/extinguisher_cabinet/lifeboat{
 	icon = 'icons/obj/vehicles/interiors/general.dmi';
-	pixel_x = -8;
+	pixel_x = 18;
 	pixel_y = 28
 	},
 /obj/structure/transmitter{
-	pixel_x = 5;
+	pixel_x = 7;
 	pixel_y = 30;
 	phone_id = "M888 Armored Personnel Carrier";
 	name = "APC Telephone";
 	icon = 'icons/obj/vehicles/interiors/general.dmi';
 	phone_category = "Vehicles"
+	},
+/obj/structure/machinery/computer/supply/tent{
+	pixel_y = 28;
+	pixel_x = -6
 	},
 /turf/open/shuttle/vehicle/floor_3_13,
 /area/interior/vehicle/apc)
@@ -260,7 +265,7 @@
 	name = "Left M56 FPW handle";
 	pixel_y = 17
 	},
-/turf/open/shuttle/vehicle/floor_3_11,
+/turf/open/shuttle/vehicle/floor_3,
 /area/interior/vehicle/apc)
 "aH" = (
 /obj/effect/landmark/interior/spawn/weapons_loader,
@@ -272,11 +277,7 @@
 	pixel_y = 23
 	},
 /obj/structure/machinery/optable,
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecaltop";
-	pixel_y = -2
-	},
-/turf/open/shuttle/vehicle/dark_sterile_green_12,
+/turf/open/shuttle/vehicle/med,
 /area/interior/vehicle/apc)
 "aL" = (
 /obj/structure/machinery/cm_vending/sorted/medical/blood/vehicle{
@@ -287,15 +288,13 @@
 	pixel_x = 2;
 	pixel_y = 23
 	},
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecaltop";
-	pixel_y = -2
+/obj/structure/machinery/autodoc_console{
+	upgrades = list(1, 2, 3, 4);
+	desc = "The control interface used to operate the adjoining autodoc. Requires training to use properly. That one has multiple advanced operations already included!";
+	dir = 1
 	},
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/device/defibrillator,
-/obj/structure/machinery/recharger,
-/obj/structure/window/reinforced/ultra{
-	dir = 4
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecaltopright"
 	},
 /turf/open/shuttle/vehicle/med,
 /area/interior/vehicle/apc)
@@ -308,22 +307,38 @@
 	pixel_y = 32;
 	tag = "left"
 	},
+/obj/effect/landmark/interior/spawn/interior_viewport{
+	dir = 8;
+	pixel_x = 5;
+	pixel_y = 8
+	},
 /turf/open/shuttle/vehicle/floor_1_11,
 /area/interior/vehicle/apc)
 "aP" = (
 /obj/structure/machinery/iv_drip,
-/turf/open/shuttle/vehicle/dark_sterile_green_6,
+/obj/structure/machinery/prop/almayer/CICmap/computer{
+	dir = 4;
+	layer = 3.21;
+	pixel_x = -14;
+	pixel_y = 4
+	},
+/obj/structure/machinery/computer/groundside_operations/arc{
+	dir = 4;
+	layer = 3.22;
+	pixel_x = -14;
+	pixel_y = -9
+	},
+/obj/structure/barricade/handrail/medical,
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecalbottom"
+	},
+/turf/open/shuttle/vehicle/dark_sterile_green_5,
 /area/interior/vehicle/apc)
 "aQ" = (
 /obj/effect/decal/medical_decals/permanent{
-	icon_state = "docdecal1";
-	pixel_x = -5;
-	pixel_y = 16
+	icon_state = "triagedecalbottom"
 	},
-/obj/structure/window/reinforced/ultra{
-	dir = 4
-	},
-/turf/open/shuttle/vehicle/dark_sterile_green_8,
+/turf/open/shuttle/vehicle/dark_sterile_green_5,
 /area/interior/vehicle/apc)
 "aS" = (
 /turf/open/shuttle/vehicle/floor_1_14,
@@ -332,29 +347,33 @@
 /turf/open/shuttle/vehicle/floor_1_6,
 /area/interior/vehicle/apc)
 "aV" = (
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecalbottom"
+/obj/structure/machinery/computer/overwatch/almayer/small{
+	dir = 4;
+	layer = 3.23;
+	pixel_x = -14;
+	pixel_y = 10
 	},
-/obj/structure/machinery/medical_pod/autodoc/unskilled{
-	dir = 1;
-	name = "\improper autodoc emergency medical system"
+/obj/structure/machinery/computer/intel/disk_reader{
+	dir = 4;
+	layer = 3.24;
+	pixel_x = -14;
+	pixel_y = -3
 	},
-/turf/open/shuttle/vehicle/dark_sterile_green_11,
+/obj/structure/bed/chair/comfy{
+	dir = 8
+	},
+/obj/structure/machinery/computer/view_objectives{
+	dir = 4;
+	pixel_x = -14;
+	pixel_y = -16;
+	layer = 3.25;
+	icon = 'icons/obj/vehicles/interiors/arc.dmi';
+	icon_state = "cicmap_computer"
+	},
+/turf/open/shuttle/vehicle/floor_1_13,
 /area/interior/vehicle/apc)
 "aW" = (
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "docdecal2";
-	pixel_x = -5;
-	pixel_y = 16
-	},
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecalbottom"
-	},
-/obj/structure/machinery/autodoc_console{
-	upgrades = list(1, 2, 3, 4);
-	desc = "The control interface used to operate the adjoining autodoc. Requires training to use properly. That one has multiple advanced operations already included!"
-	},
-/turf/open/shuttle/vehicle/dark_sterile_green_14,
+/turf/open/shuttle/vehicle/floor_1_5,
 /area/interior/vehicle/apc)
 "aX" = (
 /obj/effect/landmark/interior/spawn/vehicle_support_gunner_seat/second,
@@ -363,7 +382,7 @@
 	name = "Right M56 FPW handle";
 	pixel_y = 2
 	},
-/turf/open/shuttle/vehicle/floor_3_12,
+/turf/open/shuttle/vehicle/floor_3,
 /area/interior/vehicle/apc)
 "aY" = (
 /obj/effect/landmark/interior/spawn/vehicle_driver_seat/armor{
@@ -371,15 +390,17 @@
 	},
 /turf/open/shuttle/vehicle/floor_3_9_1,
 /area/interior/vehicle/apc)
-"aZ" = (
-/turf/open/shuttle/vehicle/floor_3_6,
-/area/interior/vehicle/apc)
 "ba" = (
 /obj/effect/landmark/interior/spawn/entrance{
 	alpha = 50;
 	exit_type = /obj/structure/interior_exit/vehicle/apc;
 	name = "Right APC door";
 	tag = "right"
+	},
+/obj/effect/landmark/interior/spawn/interior_viewport{
+	dir = 8;
+	pixel_x = 5;
+	pixel_y = 1
 	},
 /turf/open/shuttle/vehicle/floor_1_12,
 /area/interior/vehicle/apc)
@@ -448,7 +469,7 @@ ad
 aF
 az
 ay
-aZ
+aS
 aX
 be
 "}
