@@ -980,11 +980,6 @@
 /obj/structure/prop/invuln/ice_prefab,
 /turf/open/auto_turf/shale/layer1,
 /area/lv522/outdoors/colony_streets/north_west_street)
-"alu" = (
-/obj/effect/landmark/structure_spawner/setup/distress/xeno_nest,
-/obj/effect/landmark/xeno_spawn,
-/turf/open/floor/corsat/brown/west,
-/area/lv522/atmos/east_reactor)
 "alx" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/corsat/brown/north,
@@ -1417,11 +1412,6 @@
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/prison,
 /area/lv522/indoors/c_block/mining)
-"aCu" = (
-/obj/effect/landmark/structure_spawner/setup/distress/xeno_nest,
-/obj/effect/landmark/xeno_spawn,
-/turf/open/floor/corsat/plate,
-/area/lv522/atmos/east_reactor)
 "aCw" = (
 /obj/item/prop/alien/hugger,
 /turf/open/floor/prison,
@@ -7846,8 +7836,11 @@
 "efy" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_nest,
 /obj/effect/landmark/xeno_spawn,
-/turf/open/floor/corsat,
-/area/lv522/atmos/east_reactor)
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/corsat/plate,
+/area/lv522/atmos/east_reactor/south)
 "efK" = (
 /obj/item/stack/tile/plasteel{
 	name = "ceiling tile";
@@ -8270,8 +8263,12 @@
 /turf/open/floor/corsat/plate,
 /area/lv522/atmos/east_reactor/south)
 "eoA" = (
-/obj/item/clothing/head/helmet/marine/grenadier,
-/turf/open/floor/corsat/squares,
+/obj/effect/landmark/structure_spawner/setup/distress/xeno_nest,
+/obj/effect/landmark/xeno_spawn,
+/obj/structure/pipes/standard/simple/hidden/green{
+	dir = 4
+	},
+/turf/open/floor/corsat/plate,
 /area/lv522/atmos/east_reactor/south)
 "eoZ" = (
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
@@ -70239,7 +70236,7 @@ cpy
 cpy
 tiQ
 yjL
-aCu
+yjL
 mbq
 mbq
 mbq
@@ -70286,7 +70283,7 @@ rGD
 yaC
 woU
 gIH
-eoA
+oiW
 aaL
 xLi
 yaC
@@ -72095,7 +72092,7 @@ ame
 pxN
 pxN
 pxN
-alu
+pxN
 pxN
 mAC
 pxN
@@ -72951,7 +72948,7 @@ cRD
 uvt
 dTW
 tiQ
-yaC
+qqN
 yaC
 vDw
 saC
@@ -73157,9 +73154,9 @@ dIX
 dOt
 tiQ
 tiQ
-iFk
+efy
 rCz
-vDw
+eoA
 saC
 saC
 saC
@@ -73330,7 +73327,7 @@ mrL
 hwt
 hwt
 atz
-aCu
+yjL
 yjL
 yjL
 yjL
@@ -73365,7 +73362,7 @@ tiQ
 tiQ
 yaC
 rCz
-vDw
+eoA
 yaC
 saC
 saC
@@ -73774,7 +73771,7 @@ saC
 saC
 saC
 tiQ
-yaC
+qqN
 woU
 abZ
 vAX
@@ -73946,7 +73943,7 @@ saC
 mrL
 ahJ
 mbq
-efy
+mbq
 mbq
 mbq
 arh
@@ -75018,7 +75015,7 @@ xZE
 xZE
 xZE
 xZE
-shD
+xZE
 gRV
 gRV
 gRV
@@ -75600,7 +75597,7 @@ saC
 yjL
 yjL
 yjL
-efy
+mbq
 arh
 mbq
 mbq
