@@ -21,11 +21,20 @@
 /datum/emergency_call/upp/New()
 	. = ..()
 	hostility = pick(50;FALSE,50;TRUE)
+	/* RUCM CHANGE
 	arrival_message = "[MAIN_SHIP_NAME] t*is i* UP* d^sp^*ch`. STr*&e teaM, #*u are cLe*% for a*pr*%^h. Pr*mE a*l wE*p^ns and pR*epr# t% r@nd$r a(tD."
 	if(hostility)
 		objectives = "Eliminate the UA Forces to ensure the UPP prescence in this sector is continued. Listen to your superior officers and take over the [MAIN_SHIP_NAME] at all costs."
 	else
 		objectives = "Render assistance towards the UA Forces, do not engage UA forces. Listen to your superior officers."
+	*/
+	//RUCM START
+	arrival_message = "[MAIN_SHIP_NAME], г@вр%т д#сптч&р ЮПП... Уд@рн@я гр!пп@, в%м р@зрш3н0 с#бл!ж&н!е... Пр!в^д!т# в$с# о&уж%н!е в гт0вн*с# и п@дг@т0вьт&сь к ок@з@н!ю п@м@щ`..."
+	if(hostility)
+		objectives = "Уничтожьте силы UA, чтобы удержать влияние UPP в этом секторе. Слушайте своих старших офицеров и захватите [MAIN_SHIP_NAME] любой ценой."
+	else
+		objectives = "Оказывайте помощь силам UA, и не вступайте с ними в бой. Слушайте своих старших офицеров"
+	//RUCM END
 
 /datum/emergency_call/upp/print_backstory(mob/living/carbon/human/M)
 	if(ishuman_strict(M))

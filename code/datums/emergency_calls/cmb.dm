@@ -17,8 +17,14 @@
 
 /datum/emergency_call/cmb/New()
 	..()
+	/* RUCM CHANGE
 	arrival_message = "Incoming Transmission: [MAIN_SHIP_NAME], this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby team to board with you now. Standby."
 	objectives = "Investigate the distress signal aboard the [MAIN_SHIP_NAME], and assist the crew with rescue if possible. If necessary, a contingent of our Colonial Marines may be ready to act as a QRF to reinforce you."
+	*/
+	//RUCM START
+	arrival_message = "Входящая передача: [MAIN_SHIP_NAME], это станция «Анкорпойнт», с Колониальным Маршальским Бюро. Мы получили ваш сигнал бедствия и немедленно отправляем к вам ближайший отряд. Ожидайте."
+	objectives = "Investigate the distress signal aboard the [MAIN_SHIP_NAME], and assist the crew with rescue if possible. If necessary, a contingent of our Colonial Marines may be ready to act as a QRF to reinforce you."
+	//RUCM END
 
 	will_spawn_icc_liaison = prob(50)
 	will_spawn_cmb_observer = prob(20)
