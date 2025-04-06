@@ -51,6 +51,7 @@
 #include "game\objects\items\storage\backpack.dm"
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\items\storage\briefcase.dm"
+#include "game\objects\items\storage\flamer_backpack.dm"
 #include "game\objects\items\storage\pouch.dm"
 #include "game\objects\items\weapons\st_equip.dm"
 #include "game\objects\items\weapons\st_hammer_stacks.dm"

@@ -3490,8 +3490,19 @@ Defined in conflicts.dm of the #defines folder.
 		return
 	. += SPAN_WARNING("It's empty.")
 
+/* CM Original
 /obj/item/attachable/attached_gun/extinguisher/handle_attachment_description(slot)
 	return "It has a [icon2html(src)] [name] ([floor(internal_extinguisher.reagents.total_volume)]/[internal_extinguisher.max_water]) mounted underneath.<br>"
+*/
+
+// RUCM Start
+/obj/item/attachable/attached_gun/extinguisher/handle_attachment_description(slot)
+	var/obj/item/storage/backpack/marine/feline_flamer_backpack/flamer_backpack = usr.back
+	if(flamer_backpack && istype(flamer_backpack) && flamer_backpack.linked_flamer)
+		return "На нижней планке установлен <b>подствольный огнетушитель</b>, соединённый шлангом с топливным ранцем. Суммарно в них <b>([floor(internal_extinguisher.reagents.total_volume + flamer_backpack.reagents.total_volume)]/[internal_extinguisher.max_water + 200])</b> единиц воды.<br>"
+	else
+		return "На нижней планке установлен <b>подствольный огнетушитель</b>. В нём <b>([floor(internal_extinguisher.reagents.total_volume)]/[internal_extinguisher.max_water])</b> единиц воды.<br>"
+// RUCM End
 
 /obj/item/attachable/attached_gun/extinguisher/New()
 	..()
