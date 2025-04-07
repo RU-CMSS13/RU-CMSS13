@@ -42,7 +42,7 @@
 
 	switch(pick("flamethrower", "mk2"))
 		if("flamethrower")
-			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/underextinguisher(new_human), WEAR_J_STORE)
+			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/underextinguisher(new_human), WEAR_J_STORE)
 /* CM Original
 			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(new_human), WEAR_BACK)
 */
@@ -94,7 +94,7 @@
 
 	switch(pick("flamethrower", "mk2"))
 		if("flamethrower")
-			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/underextinguisher(new_human), WEAR_J_STORE)
+			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/underextinguisher(new_human), WEAR_J_STORE)
 /* CM Original
 			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(new_human), WEAR_BACK)
 */
@@ -174,7 +174,7 @@
 /datum/equipment_preset/uscm/cbrn/leader/load_gear(mob/living/carbon/human/new_human)
 	. = ..()
 
-	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/underextinguisher(new_human), WEAR_J_STORE)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/underextinguisher(new_human), WEAR_J_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/rifle/m41aMK1(new_human), WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/belt/marine/m41amk1(new_human), WEAR_WAIST)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/flamertank(new_human), WEAR_L_STORE)
@@ -228,7 +228,7 @@
 
 /*
 	new_human.equip_to_slot_or_del(new /obj/item/storage/large_holster/fuelpack(new_human), WEAR_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/M240T(new_human), WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/spec(new_human), WEAR_IN_BACK)
 */
 // RUCM Start
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(new_human), WEAR_BACK)

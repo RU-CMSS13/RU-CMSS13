@@ -162,7 +162,7 @@
 	new /obj/item/clothing/head/helmet/marine/pyro(src)
 /* CM Original
 	new /obj/item/storage/large_holster/fuelpack(src)
-	new /obj/item/weapon/gun/flamer/M240T(src)
+	new /obj/item/weapon/gun/flamer/m240/spec(src)
 */
 // RUCM Start
 	new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(src)
@@ -415,7 +415,7 @@
 
 /obj/item/storage/box/kit/mini_pyro/fill_preset_inventory()
 	new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(src)
-	new /obj/item/weapon/gun/flamer/underextinguisher(src)
+	new /obj/item/weapon/gun/flamer/m240/underextinguisher(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank/gellied(src)

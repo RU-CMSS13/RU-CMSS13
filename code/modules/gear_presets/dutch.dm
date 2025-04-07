@@ -138,7 +138,7 @@
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/pistol/m1911(new_human), WEAR_IN_ACCESSORY)
 /*
 	new_human.equip_to_slot_or_del(new /obj/item/storage/large_holster/fuelpack(new_human), WEAR_BACK)
-	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/M240T(new_human), WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/spec(new_human), WEAR_IN_BACK)
 */
 // RUCM Start
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(new_human), WEAR_BACK)
