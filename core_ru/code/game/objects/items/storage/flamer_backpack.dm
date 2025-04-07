@@ -37,6 +37,12 @@
 	var/zlevel_transfer_timer = TIMER_ID_NULL
 	var/zlevel_transfer_timeout = 5 SECONDS
 
+/obj/item/weapon/gun/flamer/m240
+	name = "Огнемёт M240A1 \"Испепелитель\""
+	desc = "Огнемёт M240A1 зарекомендовал себя как одно из самых эффективных средств уничтожения органических целей. \
+		Пусть он довольно громоздкий и устаревший, однако его всё ещё следует бояться и уважать - огонь пощады не знает. \
+		Можно подключить к огнемётному ранцу F7-3 \"Буратино\""
+
 /////////////////////
 // Топливный Ранец //
 /obj/item/storage/backpack/marine/feline_flamer_backpack
@@ -268,7 +274,7 @@
 
 /obj/item/storage/box/guncase/feline_flamer_sl_pyro/fill_preset_inventory()
 	new /obj/item/storage/backpack/marine/feline_flamer_backpack(src)
-	new /obj/item/weapon/gun/flamer(src)
+	new /obj/item/weapon/gun/flamer/m240(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank/gellied(src)
@@ -407,7 +413,7 @@
 // Линк ранца //
 /obj/item/weapon/gun/flamer/attackby(obj/item/A as obj, mob/user as mob)
 	var/obj/item/flamer_hose/FH = A
-	if(istype(FH) && !fuel_backpack && !(istype(src, /obj/item/weapon/gun/flamer/M240T)))
+	if(istype(FH) && !fuel_backpack && !(istype(src, /obj/item/weapon/gun/flamer/m240/spec)))
 		if(istype(user.back, /obj/item/storage/backpack/marine/feline_flamer_backpack))
 			if(user.get_inactive_hand() != src)
 				to_chat(user, SPAN_WARNING("Для подключения топливного рукава к огнемёту необходимо держать его в руках!"))
