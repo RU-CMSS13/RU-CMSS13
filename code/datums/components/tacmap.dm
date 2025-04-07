@@ -10,8 +10,6 @@
 		/atom/movable/screen/minimap_tool/draw_tool/yellow,
 		/atom/movable/screen/minimap_tool/draw_tool/purple,
 		/atom/movable/screen/minimap_tool/draw_tool/blue,
-		/atom/movable/screen/minimap_tool/draw_tool/green,
-		/atom/movable/screen/minimap_tool/draw_tool/black,
 		/atom/movable/screen/minimap_tool/draw_tool/erase,
 		/atom/movable/screen/minimap_tool/label,
 		/atom/movable/screen/minimap_tool/clear,
@@ -65,10 +63,9 @@
 /datum/component/tacmap/proc/on_unset_interaction(mob/user)
 	interactees -= user
 	user?.client?.screen -= map
-	user?.client?.screen -= scroll_toggle
-	
 	if(has_drawing_tools)
 		user?.client?.screen -= drawing_actions
+		user?.client?.screen -= scroll_toggle
 		user?.client?.screen -= close_button
 		user?.client?.mouse_pointer_icon = null
 
@@ -84,9 +81,9 @@
 
 	if(has_drawing_tools)
 		user.client.screen += drawing_actions
+		user.client.screen += scroll_toggle
 		user.client.screen += close_button
 
-	user.client.screen += scroll_toggle
 	user.client.screen += map
 	interactees += user
 
