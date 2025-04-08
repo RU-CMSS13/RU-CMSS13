@@ -113,6 +113,10 @@ Radiochat range: 1441 to 1489 (most devices refuse to be tune to other frequency
 #define FAX_USCM_HC_FREQ 1297
 #define FAX_USCM_PVST_FREQ 1298
 
+//Hyperdyne channels (1331-1399)
+
+#define HDC_FREQ 1331
+
 //General Radio
 #define MIN_FREQ 1460 // ------------------------------------------------------
 #define PUB_FREQ 1461
@@ -191,6 +195,7 @@ GLOBAL_LIST_INIT(radiochannels, list(
 
 	RADIO_CHANNEL_COLONY = COLONY_FREQ,
 
+	RADIO_CHANNEL_HYPERDYNE = HDC_FREQ,
 
 	RADIO_CHANNEL_WY = WY_FREQ,
 	RADIO_CHANNEL_PMC_GEN = PMC_FREQ,
