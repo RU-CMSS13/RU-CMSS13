@@ -363,8 +363,11 @@
 	pixel_y = -4
 	},
 /obj/item/weapon/yautja/knife{
-	pixel_y = 16;
-	pixel_x = -3
+	pixel_y = 6;
+	pixel_x = -2
+	},
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -444,18 +447,6 @@
 	},
 /turf/open/floor/corsat/squareswood/north,
 /area/yautja_grounds/north_east)
-"fl" = (
-/obj/structure/prop/ice_colony/tiger_rug{
-	icon_state = "Plain";
-	color = "#63594d";
-	pixel_x = -15;
-	pixel_y = -22;
-	layer = 2.9;
-	name = "animal pelt";
-	desc = "A pelt of a fearsome dead creature."
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south_east)
 "ft" = (
 /obj/structure/surface/table/reinforced/prison{
 	color = "#6b675e"
@@ -1609,12 +1600,20 @@
 "sA" = (
 /obj/structure/prop/tanning_rack{
 	layer = 2;
-	pixel_x = 16;
 	pixel_y = 7
 	},
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_x = 13;
 	pixel_y = 28
+	},
+/obj/structure/prop/ice_colony/tiger_rug{
+	icon_state = "Plain";
+	color = "#63594d";
+	layer = 2.9;
+	name = "animal pelt";
+	desc = "A pelt of a fearsome dead creature.";
+	pixel_x = 1;
+	pixel_y = 10
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -1768,10 +1767,8 @@
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "uC" = (
-/obj/structure/prop/tanning_rack{
-	layer = 2;
-	pixel_x = 16;
-	pixel_y = 7
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -1945,12 +1942,15 @@
 /area/yautja_grounds/north_west)
 "wV" = (
 /obj/item/skull/boiler{
-	pixel_x = 24;
-	pixel_y = -6
+	pixel_x = 39;
+	pixel_y = -1
 	},
 /obj/item/skull/boiler{
-	pixel_x = 10;
-	pixel_y = -6
+	pixel_x = -6;
+	pixel_y = -1
+	},
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -3625,17 +3625,18 @@
 /turf/closed/wall/cult/hunting_grounds,
 /area/yautja_grounds/north_west)
 "Qu" = (
-/obj/structure/surface/table/reinforced/prison{
-	color = "#6b675e";
+/obj/structure/prop/tanning_rack{
 	layer = 2;
-	pixel_x = -1;
-	pixel_y = -18
+	pixel_y = 7
 	},
-/obj/structure/surface/table/reinforced/prison{
-	color = "#6b675e";
-	layer = 2;
-	pixel_x = 29;
-	pixel_y = -18
+/obj/structure/prop/ice_colony/tiger_rug{
+	icon_state = "Plain";
+	color = "#63594d";
+	layer = 2.9;
+	name = "animal pelt";
+	desc = "A pelt of a fearsome dead creature.";
+	pixel_x = 1;
+	pixel_y = 10
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -3745,7 +3746,8 @@
 "Ru" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/item/storage/large_holster/ceremonial_sword/full{
-	pixel_y = -12
+	pixel_y = -27;
+	pixel_x = 2
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -4320,12 +4322,6 @@
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_x = 5;
 	pixel_y = 23
-	},
-/obj/structure/surface/table/reinforced/prison{
-	color = "#6b675e";
-	layer = 2;
-	pixel_x = 17;
-	pixel_y = 24
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
@@ -18017,7 +18013,7 @@ Vh
 zi
 Vh
 zb
-FA
+Vh
 sA
 Vh
 BH
@@ -18139,7 +18135,7 @@ Vh
 Vh
 Vh
 zb
-fl
+Vh
 vQ
 Vh
 cP
@@ -18265,7 +18261,7 @@ wV
 YU
 xo
 kQ
-Qu
+Vh
 eh
 Vh
 Vh
@@ -18383,12 +18379,12 @@ Vh
 Vh
 Vh
 zb
-Vh
 uC
+Vh
 hi
 Lj
 Ru
-Vh
+uC
 zb
 KL
 Vh
@@ -18505,8 +18501,8 @@ Ux
 Vh
 Vh
 zb
-fl
 Vh
+Qu
 KV
 CB
 Vh
