@@ -127,6 +127,10 @@
 	},
 /turf/open/floor/strata/floor3,
 /area/strata/interior/outpost/canteen)
+"aau" = (
+/obj/structure/largecrate/random/barrel/yellow,
+/turf/open/floor/almayer/test_floor5,
+/area/strata/interior/outpost/engi/drome/shuttle_MK3)
 "aaw" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "xgibdown1"
@@ -188,9 +192,15 @@
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
 "aaE" = (
-/obj/structure/largecrate/random/barrel/yellow,
-/turf/open/floor/almayer/test_floor5,
-/area/strata/interior/outpost/engi/drome/shuttle_MK3)
+/obj/structure/surface/table/reinforced/prison{
+	color = "#98a3ab"
+	},
+/obj/item/storage/box/mre/upp{
+	pixel_x = -1;
+	pixel_y = 7
+	},
+/turf/open/floor/strata/orange_cover,
+/area/strata/interior/outpost/canteen)
 "aaF" = (
 /obj/structure/largecrate/random/barrel/brown,
 /turf/open/auto_turf/strata_grass/layer1,
@@ -205,15 +215,15 @@
 /turf/open/auto_turf/strata_grass/layer0_mud,
 /area/strata/interior/bball_cave)
 "aaH" = (
-/obj/structure/surface/table/reinforced/prison{
+/obj/structure/surface/rack{
 	color = "#98a3ab"
 	},
-/obj/item/storage/box/mre/upp{
-	pixel_x = -1;
-	pixel_y = 7
+/obj/item/clothing/head/helmet/marine/veteran/UPP/firefighter{
+	pixel_x = -2;
+	pixel_y = 10
 	},
-/turf/open/floor/strata/orange_cover,
-/area/strata/interior/outpost/canteen)
+/turf/open/floor/strata/multi_tiles/west,
+/area/strata/interior/mining_outpost/maintenance)
 "aaI" = (
 /obj/effect/blocker/sorokyne_hot_water,
 /obj/structure/platform/stone/soro,
@@ -244,16 +254,6 @@
 	},
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
-"aaN" = (
-/obj/structure/surface/rack{
-	color = "#98a3ab"
-	},
-/obj/item/clothing/head/helmet/marine/veteran/UPP/firefighter{
-	pixel_x = -2;
-	pixel_y = 10
-	},
-/turf/open/floor/strata/multi_tiles/west,
-/area/strata/interior/mining_outpost/maintenance)
 "aaO" = (
 /obj/structure/surface/rack{
 	color = "#98a3ab"
@@ -23074,7 +23074,7 @@
 /turf/open/auto_turf/strata_grass/layer0_mud,
 /area/strata/exterior/marsh/river)
 "bqP" = (
-/obj/item/trash/pistachios,
+/obj/item/trash/semki,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/strata/exterior/marsh/center)
 "bqQ" = (
@@ -23349,10 +23349,22 @@
 	pixel_x = -1;
 	pixel_y = 7
 	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/item/trash/kepler/flamehot,
 /turf/open/gm/dirt/brown,
 /area/strata/exterior/marsh/center)
 "brL" = (
 /obj/item/trash/sosjerky,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/item/trash/kepler/flamehot,
 /turf/open/auto_turf/strata_grass/layer1,
 /area/strata/exterior/marsh/center)
 "brM" = (
@@ -41192,6 +41204,14 @@
 "haN" = (
 /obj/structure/largecrate/random,
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/largecrate/random,
+/obj/item/trash/semki,
+/obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /turf/open/floor/prison/darkyellowfull2,
 /area/strata/interior/outpost/engi)
 "haU" = (
@@ -41908,6 +41928,13 @@
 	},
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/decal/cleanable/blood,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/item/trash/kepler/flamehot,
+/obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/strata,
 /area/strata/interior/parts_storage)
 "ibP" = (
@@ -53152,6 +53179,15 @@
 	},
 /turf/open/floor/strata/floor2,
 /area/strata/interior/outpost/med)
+"wsj" = (
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/item/trash/semki,
+/turf/open/floor/prison/darkyellowfull2,
+/area/strata/interior/outpost/engi)
 "wsm" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/strata/floor3/east,
@@ -57461,7 +57497,7 @@ gZp
 aXM
 aWM
 mKX
-aaE
+aau
 cXU
 aUm
 aTw
@@ -64223,7 +64259,7 @@ ajt
 ajt
 bGF
 aqD
-aaN
+aaH
 ajt
 bHa
 bGB
@@ -72631,7 +72667,7 @@ bGj
 brT
 bCQ
 axe
-aUV
+wsj
 qJi
 dgB
 aMZ
@@ -80689,7 +80725,7 @@ nap
 ckN
 nGk
 jBG
-aaH
+aaE
 xSL
 ffS
 aJe

@@ -88,6 +88,7 @@
 					junction |= dirn
 		icon_state = "[basestate][junction]"
 	..()
+	make_smart_window_overlay()	// RUCM ADDITION
 
 /obj/structure/window/Move()
 	var/ini_dir = dir
@@ -328,7 +329,7 @@
 	deconstruct(FALSE)
 
 /obj/structure/window/clicked(mob/user, list/mods)
-	if(mods["alt"])
+	if(mods[ALT_CLICK])
 		revrotate(user)
 		return TRUE
 

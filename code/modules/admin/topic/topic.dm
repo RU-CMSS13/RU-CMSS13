@@ -39,7 +39,6 @@
 		show_player_panel(M)
 		return
 
-/*RUCM REMOVE START
 	if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
 			message_admins("[key_name_admin(usr)] attempted to edit the admin permissions without sufficient rights.")
@@ -129,7 +128,6 @@
 			D.rights ^= permissionlist[new_permission]
 
 			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
-RUCM REMOVE END*/
 //RUCM START
 	if(href_list["csdeny"])
 		var/mob/ref_person = locate(href_list["csdeny"])
@@ -2021,10 +2019,10 @@ RUCM REMOVE END*/
 		var/mob/ref_person = locate(href_list["nukeapprove"])
 		if(!istype(ref_person))
 			return FALSE
-		var/nukename = "Encrypted Operational Nuke"
+		var/nukename = "Encrypted Operational Blockbuster"
 		var/prompt = tgui_alert(usr, "Do you want the nuke to be Encrypted?", "Nuke Type", list("Encrypted", "Decrypted"), 20 SECONDS)
 		if(prompt == "Decrypted")
-			nukename = "Decrypted Operational Nuke"
+			nukename = "Decrypted Operational Blockbuster"
 		prompt = tgui_alert(usr, "Are you sure you want to authorize '[nukename]' to the marines? This will greatly affect the round!", "DEFCON 1", list("No", "Yes"))
 		if(prompt != "Yes")
 			return
