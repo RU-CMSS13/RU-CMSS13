@@ -121,15 +121,15 @@
 		new_icon_state += "_e"
 	icon_state = new_icon_state
 
-	var/obj/item/ammo_magazine/flamer_tank/flamtank = current_mag
-	if(flamtank.stripe_icon)
-		if(fuel_backpack)
-			if(current_mag && current_mag.reagents)
-				var/image/I = image('core_ru/Feline/icons/flamer_backpack.dmi', icon_state="[base_gun_icon][spec_item ? "" : "_backpack"]_strip")
-				I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
-				overlays += I
-		else
-			if(current_mag && current_mag.reagents)
+	if(fuel_backpack)
+		if(current_mag && current_mag.reagents)
+			var/image/I = image('core_ru/Feline/icons/flamer_backpack.dmi', icon_state="[base_gun_icon][spec_item ? "" : "_backpack"]_strip")
+			I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
+			overlays += I
+	else
+		if(current_mag && current_mag.reagents)
+			var/obj/item/ammo_magazine/flamer_tank/flamtank = current_mag
+			if(flamtank.stripe_icon)
 				var/image/I = image(icon, icon_state="[base_gun_icon]_strip")
 				I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
 				overlays += I
