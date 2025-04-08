@@ -487,8 +487,9 @@
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/north_east)
 "gg" = (
-/mob/living/carbon/xenomorph/hellhound{
-	name = "E084"
+/mob/living/simple_animal/alien_slug{
+	dir = 1;
+	name = "Exclusive084"
 	},
 /turf/open/floor/strata/grey_multi_tiles/southwest,
 /area/yautja_grounds/north_west)
@@ -652,7 +653,7 @@
 /area/yautja_grounds/north_east)
 "ia" = (
 /obj/item/skull/king{
-	pixel_x = 1;
+	pixel_x = 3;
 	pixel_y = 33;
 	anchored = 1
 	},
@@ -662,15 +663,15 @@
 	pixel_x = 14
 	},
 /obj/item/skull/ravager{
-	pixel_x = -14;
-	pixel_y = 30;
+	pixel_x = -11;
+	pixel_y = 28;
 	anchored = 1
 	},
 /obj/item/weapon/shield/riot/yautja/ancient{
 	anchored = 1;
 	layer = 2.9;
 	pixel_y = 32;
-	pixel_x = 1
+	pixel_x = 3
 	},
 /turf/open/floor/engine/cult,
 /area/yautja_grounds/north_west)
@@ -2260,14 +2261,8 @@
 /turf/closed/wall/rock/brown,
 /area/yautja_grounds/south_west)
 "Bp" = (
-/obj/item/weapon/sword/katana/sharp{
-	anchored = 1
-	},
-/obj/structure/window/phoronreinforced/full{
-	health = 5000;
-	alpha = 50
-	},
-/turf/open/gm/grass/grass1,
+/obj/structure/machinery/prop/yautja/bubbler,
+/turf/open/floor/strata/grey_multi_tiles/southwest,
 /area/yautja_grounds/north_west)
 "Bq" = (
 /obj/structure/flora/jungle/vines/light_3,
@@ -3467,6 +3462,16 @@
 /obj/structure/prop/hybrisa/boulders/large_boulderdark/boulder_dark3,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_west)
+"Oo" = (
+/obj/structure/surface/rack{
+	color = "#6b675e";
+	layer = 2.79
+	},
+/obj/item/weapon/twohanded/lungemine/damaged,
+/obj/item/weapon/twohanded/lungemine/damaged,
+/obj/item/weapon/twohanded/lungemine/damaged,
+/turf/open/floor/strata/grey_multi_tiles/southwest,
+/area/yautja_grounds/north_west)
 "Op" = (
 /obj/structure/platform_decoration/metal/kutjevo/north,
 /turf/open/floor/strata/grey_multi_tiles,
@@ -4071,6 +4076,12 @@
 "VL" = (
 /turf/open/gm/coast/beachcorner/south_east,
 /area/yautja_grounds/south)
+"VO" = (
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
+	},
+/turf/open/floor/strata/grey_multi_tiles/southwest,
+/area/yautja_grounds/north_west)
 "VU" = (
 /obj/structure/flora/jungle/planttop1,
 /turf/open/gm/coast/north,
@@ -4312,6 +4323,16 @@
 /area/yautja_grounds/north_east)
 "YR" = (
 /obj/structure/reagent_dispensers/fueltank/yautja,
+/turf/open/floor/strata/grey_multi_tiles/southwest,
+/area/yautja_grounds/north_west)
+"YT" = (
+/obj/structure/surface/rack{
+	color = "#6b675e";
+	layer = 2.79
+	},
+/obj/item/weapon/twohanded/yautja/glaive/damaged,
+/obj/item/weapon/twohanded/yautja/glaive/damaged,
+/obj/item/weapon/twohanded/yautja/glaive/damaged,
 /turf/open/floor/strata/grey_multi_tiles/southwest,
 /area/yautja_grounds/north_west)
 "YU" = (
@@ -8032,7 +8053,7 @@ DI
 DI
 gY
 gY
-Bp
+IV
 IV
 iL
 IV
@@ -9011,7 +9032,7 @@ gY
 gY
 IV
 gF
-jj
+YT
 Wt
 Co
 Wt
@@ -9131,7 +9152,7 @@ DI
 gY
 gY
 gY
-IV
+UO
 gF
 jj
 vM
@@ -10963,7 +10984,7 @@ yq
 yq
 DT
 gF
-jj
+Oo
 Wt
 Ym
 Rf
@@ -11582,7 +11603,7 @@ gF
 jj
 jj
 gF
-jj
+VO
 Wt
 Wt
 Wt
@@ -11705,7 +11726,7 @@ gF
 gF
 gF
 kW
-jj
+Bp
 Wt
 Wt
 Wt
