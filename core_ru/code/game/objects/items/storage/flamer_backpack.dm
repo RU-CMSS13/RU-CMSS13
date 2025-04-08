@@ -47,15 +47,16 @@
 // Топливный Ранец //
 /obj/item/storage/backpack/marine/feline_flamer_backpack
 	name = "Огнемётный ранец ЮСКМ F7-3 \"Буратино\""
-	desc = "Продвинутая версия базового огнемётного ранца ЮСКМ. Главным отличием являются изолированные друг от друга топливные баллоны, \
+	desc = "Военный огнемётный ранец хранящий в себе до трех типов топлива и воду. Подача к огнемёту осуществляется посредством топливного \
+		рукава через управляемый редуктор. Повышенное давление усиливает эффективность огнемёта и навесного оборудования."
+	desc_lore = "Продвинутая версия базового огнемётного ранца ЮСКМ. Главным отличием являются изолированные друг от друга топливные баллоны, \
 		что позволяет переключаться между разными типами огнесмеси через встроенный редуктор. Первые два баллона специализированы \
 		для заправки стандартным напалмом UT-N и B-Gel соответственно. Третий предназначен для заправки кастомным топливом или же \
 		в качестве альтернативы сварочным топливом, что позволит заряжать сварочный аппарат. Для подключения третьего баллона к \
-		редуктору сначала необходимо переключить клапан скрытый за панелью ПКМ. Повышенное давление, выдаваемое редуктором, немного \
+		редуктору сначала необходимо переключить клапан скрытый за панелью <b>ПКМ</b>. Повышенное давление, выдаваемое редуктором, немного \
 		повышает скорость подачи огнесмеси как через стандартную форсунку, так и метательную форсунку, увеличивая у последней дальность \
 		стрельбы. При подключении подствольного огнетушителя, вода забирается напрямую из встроенного пожарного бака, так же способного \
-		заряжать стандартные огнетушители. Для подключения к огнемёту воспользуйтесь топливным рукавом в верхней консоли ранца."
-
+		заряжать стандартные огнетушители. Для подключения к огнемёту воспользуйтесь топливным рукавом в <b>верхней консоли</b> ранца."
 	icon = 'icons/obj/items/clothing/backpack/backpacks_by_faction/UA.dmi'
 	icon_state = "flamethrower_backpack"
 	item_icons = list(
@@ -88,7 +89,6 @@
 	var/obj/item/weapon/gun/flamer/linked_flamer		// Линк на Огнемёт
 
 	var/image/flamer_overlay
-//	var/toggling = FALSE
 
 	actions_types = list(
 		/datum/action/item_action/specialist/toggle_fuel_backpack,		// Кнопка переключения топлива
@@ -139,15 +139,7 @@
 	icon_state = "flamethrower_broiler"
 	item_state = "flamethrower_broiler"
 
-//		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/belts.dmi',
-//		WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/belts.dmi',
-//		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/jungle_lefthand.dmi',
-//		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/jungle_righthand.dmi'
-
 	can_hold = list(/obj/item/weapon/gun/flamer/pyro_spec, /obj/item/ammo_magazine/flamer_tank, /obj/item/tool/extinguisher, /obj/item/storage/toolkit)
-
-//	storage_flags = STORAGE_FLAGS_DEFAULT|STORAGE_USING_DRAWING_METHOD|STORAGE_ALLOW_QUICKDRAW
-//	storage_flags = STORAGE_FLAGS_DEFAULT|STORAGE_USING_DRAWING_METHOD|STORAGE_ALLOW_QUICKDRAW
 	storage_flags = STORAGE_FLAGS_POUCH|STORAGE_ALLOW_QUICKDRAW
 
 	max_w_class = SIZE_LARGE
@@ -386,11 +378,6 @@
 	fuel_custom = new /obj/item/ammo_magazine/flamer_tank/internal/custom/pyro_spec()
 	active_fuel = fuel_standart
 	flamer_overlay = overlay_image('icons/obj/items/clothing/backpack/backpacks_by_map/jungle.dmi', "+m240t")
-
-/*
-	create_reagents(max_water)
-	reagents.add_reagent("water", max_water)
-*/
 
 /////////////////////////
 // Обновления спрайтов //
@@ -861,7 +848,7 @@
 
 // Меню переключения топлива
 /obj/item/storage/backpack/marine/feline_flamer_backpack/verb/toggle_fuel()
-	set name = "Переключать тип топлива"
+	set name = "Переключить тип топлива"
 	set desc = "Цикличное переключение редуктора между различными видами топлива."
 	set category = "Object"
 	set src in usr

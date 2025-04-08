@@ -29,7 +29,10 @@
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
 	var/power = BASE_EXTINGUISHER_PWR
-	power = 14 //RUCM Edit
+// RUCM  Start
+	max_water = 100
+	power = 14
+//	RUCM End
 
 /obj/item/tool/extinguisher/mini
 	name = "fire extinguisher"
