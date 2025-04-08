@@ -47,6 +47,7 @@
 		)
 	flags_atom = FPRINT|NO_GAMEMODE_SKIN
 	gun_has_gamemode_skin = FALSE
+	has_RUCM_holster_skin = TRUE
 	holster_mode = FALSE
 	storage_slots = 10
 	max_w_class = 5
@@ -85,6 +86,15 @@
 	new /obj/item/stack/sheet/metal/medium_stack(src)
 	new /obj/item/stack/sheet/plasteel/med_large_stack(src)
 
+/obj/item/storage/belt/gun/repairbelt/synth/fill_preset_inventory()
+	new /obj/item/weapon/gun/smg/nailgun/compact(src)
+	new /obj/item/ammo_magazine/smg/nailgun(src)
+	new /obj/item/tool/weldingtool/hugetank(src)
+	new /obj/item/tool/shovel/etool(src)
+	new /obj/item/stack/sheet/metal/large_stack(src)
+	new /obj/item/stack/sheet/plasteel/med_large_stack(src)
+	new /obj/item/stack/sandbags_empty/full(src)
+
 /obj/item/storage/belt/gun/repairbelt/can_be_inserted(obj/item/item, mob/user, stop_messages = FALSE) // проверка на добавление
 	. = ..()
 	if(mats >= maxmats && istype(item, /obj/item/stack))
@@ -116,7 +126,6 @@
 /obj/item/storage/box/guncase/repairbelt/fill_preset_inventory()
 	new /obj/item/weapon/gun/smg/nailgun(src)
 	new /obj/item/ammo_magazine/smg/nailgun(src)
-	new /obj/item/ammo_magazine/smg/nailgun(src)
 	new /obj/item/tool/weldingtool/hugetank(src)
 	new /obj/item/tool/shovel/etool(src)
 	new /obj/item/stack/sheet/metal/med_small_stack(src)
@@ -124,10 +133,17 @@
 	new /obj/item/storage/belt/gun/repairbelt(src)
 
 /obj/item/storage/box/guncase/repairbelt/synth/fill_preset_inventory()
-	new /obj/item/weapon/gun/smg/nailgun(src)
+	new /obj/item/weapon/gun/smg/nailgun/compact(src)
 	new /obj/item/ammo_magazine/smg/nailgun(src)
-	new /obj/item/ammo_magazine/smg/nailgun(src)
-	new /obj/item/storage/belt/gun/repairbelt/full(src)
+	new /obj/item/tool/weldingtool/hugetank(src)
+	new /obj/item/tool/shovel/etool(src)
+	new /obj/item/stack/sheet/metal/large_stack(src)
+	new /obj/item/stack/sheet/plasteel/med_large_stack(src)
+	new /obj/item/stack/sandbags_empty/full(src)
+	new /obj/item/storage/belt/gun/repairbelt(src)
+
+/obj/item/tool/weldingtool/hugetank
+	icon_state = "welder_c"
 
 /datum/supply_packs/repairbelt
 	name = "F1X Nailgun Create (х2)"
