@@ -252,6 +252,8 @@
 	name = "\improper Yard"
 	icon_state = "thunder"
 
+//HALLWAYS
+
 /area/prison/hallway/entrance
 	name = "\improper Entrance Hallway"
 	icon_state = "entry"
@@ -285,6 +287,8 @@
 	icon_state = "dk_yellow"
 	minimap_color = MINIMAP_AREA_ENGI
 
+//QUARTERS
+
 /area/prison/quarters/staff
 	name = "\improper Staff Quarters"
 	icon_state = "crew_quarters"
@@ -297,6 +301,8 @@
 	name = "\improper Research Dorms"
 	icon_state = "purple"
 	minimap_color = MINIMAP_AREA_SEC
+
+//CELLBLOCKS
 
 /area/prison/cellblock/lowsec
 	minimap_color = MINIMAP_AREA_CELL_LOW
@@ -378,9 +384,13 @@
 	icon_state = "cells_protective"
 	minimap_color = MINIMAP_AREA_CELL_VIP
 
+//DISPSOSAL
+
 /area/prison/disposal
 	name = "\improper Disposals"
 	icon_state = "disposal"
+
+//MEDBAY
 
 /area/prison/medbay
 	name = "\improper Infirmary"
@@ -398,37 +408,58 @@
 	name = "\improper Morgue"
 	icon_state = "morgue"
 
+// [RU-CMSS13 ADD]
+
+// RESEARCH
 /area/prison/research
 	name = "\improper Biological Research Department"
 	icon_state = "research"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/RD
 	name = "\improper Research Director's office"
 	icon_state = "disposal"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret
 	name = "\improper Classified Research"
 	icon_state = "toxlab"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/dissection
 	name = "\improper Dissection"
 	icon_state = "toxmix"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/chemistry
 	name = "\improper Chemistry"
 	icon_state = "chem"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/bioengineering
 	name = "\improper Bioengineering"
 	icon_state = "toxmisc"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/containment
 	name = "\improper Test Subject Containment"
 	icon_state = "xeno_f_store"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/testing
 	name = "\improper Biological Testing"
 	icon_state = "toxtest"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+
+// [RU-CMSS13 ADD-END]
 
 /area/prison/residential/central
 	name = "\improper Civilian Residences Central"
