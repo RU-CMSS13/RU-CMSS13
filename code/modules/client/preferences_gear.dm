@@ -387,6 +387,12 @@ GLOBAL_LIST_EMPTY(roles_with_gear)
 	display_name = "USCM beret, white"
 	path = /obj/item/clothing/head/beret/cm/white
 
+//RUCM START
+/datum/gear/headwear/uscm/beret_blue
+	display_name = "USCM beret, blue"
+	path = /obj/item/clothing/head/beret/beret_blue
+//RUCM END
+
 /datum/gear/headwear/uscm/boonie_olive
 	display_name = "USCM boonie hat, olive"
 	path = /obj/item/clothing/head/cmcap/boonie
