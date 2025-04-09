@@ -24,7 +24,7 @@
 			if(!(H.get_target_lock(src.faction_group)))
 				continue
 
-			H.activate_order_buff(current_aura, order_level, 3 SECONDS)
+			H.activate_order_buff(current_aura, max(1, order_level), 3 SECONDS)
 
 //////////////////////////////////
 // Активная способность приказа //
