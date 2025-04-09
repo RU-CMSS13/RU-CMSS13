@@ -4,14 +4,10 @@
 /datum/emergency_call/clf
 	name = "Colonial Liberation Front (Squad)"
 	mob_max = 10
-	/* RUCM CHANGE
+
 	arrival_message = "'Attention, you are trespassing on our sovereign territory. Expect no forgiveness.'"
 	objectives = "Assault the USCM, and sabotage as much as you can. Ensure any survivors escape in your custody."
-	*/
-	//RUCM START
-	arrival_message = "'Внимание, вы вторглись на нашу суверенную территорию. Не рассчитывайте на пощаду.'"
-	objectives = "Атакуйте USCM, и саботируйте как можно больше. Убедитесь, что вы спасли всех Выживших."
-	//RUCM END
+
 	probability = 20
 	hostility = TRUE
 	home_base = /datum/lazy_template/ert/clf_station

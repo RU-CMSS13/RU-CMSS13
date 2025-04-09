@@ -18,14 +18,10 @@
 
 /datum/emergency_call/pmc/New()
 	..()
-	/* RUCM CHANGE
+
 	arrival_message = "[MAIN_SHIP_NAME], this is USCSS Royce responding to your distress call. We are boarding. Any hostile actions will be met with lethal force."
 	objectives = "Secure the Corporate Liaison and the [MAIN_SHIP_NAME]'s Commanding Officer, and eliminate any hostile threats. Do not damage Wey-Yu property."
-	*/
-	// RUCM START
-	arrival_message = "[MAIN_SHIP_NAME], это USCSS Royce, отвечаем на ваш сигнал бедствия. Мы высаживаемся. Любой агрессор - будет устранён, без предупреждения."
-	objectives = "Обеспечьте безопасность Корпоративного представителя и Командующего [MAIN_SHIP_NAME]'s, устраните любые враждебные угрозы. Не повреждайте имущество Вей-Ю."
-	// RUCM END
+
 
 /datum/emergency_call/pmc/create_member(datum/mind/M, turf/override_spawn_loc)
 	var/turf/spawn_loc = override_spawn_loc ? override_spawn_loc : get_spawn_point()
