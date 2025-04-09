@@ -10,7 +10,7 @@
 	entry_message_body = "Your job is to operate and maintain thee ship's combat walkers. While you are an officer, your authority is limited to your own vehicle."
 
 /datum/job/command/walker/set_spawn_positions(count)
-	if (length(GLOB.clients) >= 20)
+	if (length(GLOB.clients) >= 50)
 		spawn_positions = 1
 	else
 		spawn_positions = 0
