@@ -18,7 +18,7 @@
 /datum/job/command/walker/get_total_positions(latejoin = FALSE)
 	if(SStechtree.trees[TREE_MARINE].get_node(/datum/tech/arc).unlocked)
 		return 0
-	if(length(GLOB.clients) >= 20 || total_positions_so_far > 0)
+	if(length(GLOB.clients) >= 50 || total_positions_so_far > 0)
 		return 1
 
 	return 0
