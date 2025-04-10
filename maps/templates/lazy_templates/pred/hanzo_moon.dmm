@@ -9,30 +9,6 @@
 	},
 /turf/open/floor/wood,
 /area/yautja_grounds/prep_room/inside)
-"ap" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-9";
-	layer = 5;
-	pixel_x = 18;
-	pixel_y = -10
-	},
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "2-6";
-	layer = 5;
-	pixel_x = 3;
-	pixel_y = 20
-	},
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-6";
-	layer = 5;
-	pixel_x = -9;
-	pixel_y = 26
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
 "av" = (
 /obj/structure/surface/rack{
 	color = "#6b675e";
@@ -89,25 +65,12 @@
 	},
 /turf/closed/wall/wood,
 /area/yautja_grounds/south)
-"aV" = (
-/obj/effect/spawner/random/gun/upp_secondary/highchance,
-/turf/open/floor/wood,
-/area/yautja_grounds/prep_room/inside)
 "aX" = (
 /obj/structure/flora/grass/tallgrass/jungle,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "bg" = (
 /obj/structure/prop/dam/drill,
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
-"bi" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "2-6";
-	layer = 5;
-	pixel_x = 14
-	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "bm" = (
@@ -494,7 +457,7 @@
 /area/yautja_grounds/north_west)
 "gr" = (
 /obj/effect/landmark/ert_spawns/distress/hunt_spawner/xeno,
-/turf/open/gm/grass/grass1,
+/turf/open/gm/dirtgrassborder/weedable/grass1,
 /area/yautja_grounds/caves)
 "gx" = (
 /obj/structure/bed/chair/comfy/yautja{
@@ -668,16 +631,6 @@
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
-"ij" = (
-/obj/effect/decal/cleanable/blood/splatter{
-	pixel_y = 23
-	},
-/obj/item/weapon/gun/rifle/type71{
-	pixel_y = 42;
-	pixel_x = 1
-	},
-/turf/open/floor/wood,
-/area/yautja_grounds/south)
 "il" = (
 /obj/structure/flora/bush/desert,
 /turf/open/gm/dirt,
@@ -755,11 +708,16 @@
 /area/yautja_grounds/north_east)
 "iT" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "9-10";
-	layer = 6;
-	pixel_x = 30;
-	pixel_y = -11
+	icon_state = "2-4";
+	level = 2;
+	pixel_y = 17;
+	pixel_x = 2
+	},
+/obj/structure/cable/white{
+	icon_state = "1-2";
+	level = 2;
+	pixel_x = 2;
+	pixel_y = -15
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -820,12 +778,13 @@
 /turf/open/floor/strata/grey_multi_tiles,
 /area/yautja_grounds/north_east)
 "jO" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 6
+/obj/structure/cable/white{
+	icon_state = "5-10";
+	level = 2;
+	pixel_y = -6
 	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
+/turf/open/gm/grass/grass1,
+/area/yautja_grounds/south)
 "jS" = (
 /obj/structure/surface/table/reinforced/prison{
 	color = "#6b675e"
@@ -910,9 +869,6 @@
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
-"kt" = (
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/prep_room/inside)
 "kA" = (
 /obj/structure/flora/jungle/vines/heavy{
 	pixel_y = 26
@@ -1286,7 +1242,7 @@
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/jungle)
 "ox" = (
-/turf/open/gm/grass/grass1,
+/turf/open/gm/dirtgrassborder/weedable/grass1,
 /area/yautja_grounds/caves)
 "oE" = (
 /obj/structure/flora/jungle/vines/light_1,
@@ -1315,9 +1271,6 @@
 /obj/structure/platform_decoration/metal/kutjevo/west,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/north_east)
-"pF" = (
-/turf/closed/wall/strata_ice/jungle,
-/area/yautja_grounds/prep_room/inside)
 "pH" = (
 /obj/structure/flora/jungle/vines/light_1,
 /obj/structure/flora/jungle/vines/light_1,
@@ -1472,13 +1425,6 @@
 /obj/structure/prop/brazier,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/north_west)
-"rD" = (
-/obj/structure/ladder{
-	id = "outpost1";
-	height = 1
-	},
-/turf/open/floor/wood,
-/area/yautja_grounds/south)
 "rE" = (
 /obj/effect/decal/cleanable/blood/writing{
 	dir = 4
@@ -1566,7 +1512,7 @@
 "sF" = (
 /obj/structure/surface/rack,
 /obj/effect/spawner/random/gun/upp_primary/midchance,
-/turf/open/floor/wood,
+/turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "sG" = (
 /obj/structure/barricade/handrail/strata,
@@ -1693,11 +1639,10 @@
 /area/yautja_grounds/south_east)
 "uA" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "4-8";
-	layer = 5;
+	icon_state = "5-9";
 	level = 2;
-	pixel_x = -12
+	pixel_x = -3;
+	pixel_y = -6
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -1768,12 +1713,10 @@
 /area/yautja_grounds/south)
 "vA" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "8-9";
-	layer = 5;
+	icon_state = "1-8";
 	level = 2;
-	pixel_x = 13;
-	pixel_y = 17
+	pixel_x = 7;
+	layer = 2
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -1944,9 +1887,10 @@
 	pixel_x = 35
 	},
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-8";
-	layer = 5
+	color = "#007740";
+	icon_state = "1-10";
+	layer = 5;
+	level = 2
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -2126,16 +2070,6 @@
 	},
 /turf/open/floor/light,
 /area/yautja_grounds/north_east)
-"zT" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-2";
-	layer = 5;
-	pixel_x = -12;
-	pixel_y = 21
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
 "Ap" = (
 /obj/item/prop/colony/canister,
 /obj/item/prop/colony/canister,
@@ -2176,10 +2110,6 @@
 /obj/structure/flora/jungle/thickbush,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/north_east)
-"AM" = (
-/obj/effect/spawner/random/gun/upp_primary/midchance,
-/turf/open/floor/wood,
-/area/yautja_grounds/prep_room/inside)
 "AX" = (
 /obj/structure/bed/chair/wood/normal{
 	pixel_y = -11;
@@ -2351,14 +2281,6 @@
 /obj/structure/shuttle/engine/router,
 /turf/open/floor/strata/grey_multi_tiles,
 /area/yautja_grounds/north_east)
-"CL" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 5;
-	dir = 8
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "CP" = (
 /obj/structure/flora/jungle/vines/light_3,
 /turf/open/gm/dirtgrassborder/west,
@@ -2540,16 +2462,6 @@
 "Eq" = (
 /turf/open/gm/dirtgrassborder/grassdirt_corner/north_east,
 /area/yautja_grounds/north_west)
-"Eu" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-8";
-	layer = 5;
-	pixel_x = 20;
-	pixel_y = -11
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
 "Ez" = (
 /obj/structure/flora/grass/tallgrass/jungle/corner,
 /obj/structure/flora/grass/tallgrass/jungle,
@@ -2594,17 +2506,22 @@
 /area/yautja_grounds/south_east)
 "Fk" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "4-8";
-	layer = 5;
+	icon_state = "2-6";
 	level = 2;
-	pixel_x = -12
+	pixel_x = -13;
+	pixel_y = 18
 	},
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-8";
-	layer = 5;
-	pixel_x = 14
+	icon_state = "1-5";
+	level = 2;
+	pixel_x = -13;
+	pixel_y = -12
+	},
+/obj/structure/cable/white{
+	icon_state = "5-9";
+	level = 2;
+	pixel_x = 18;
+	pixel_y = -11
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -2777,7 +2694,7 @@
 /area/yautja_grounds/prep_room/inside)
 "HD" = (
 /obj/effect/decal/remains/xeno,
-/turf/open/gm/grass/grass1,
+/turf/open/gm/dirtgrassborder/weedable/grass1,
 /area/yautja_grounds/caves)
 "HK" = (
 /obj/structure/platform_decoration/metal/kutjevo/east,
@@ -2799,7 +2716,7 @@
 /area/yautja_grounds/north_west)
 "Ir" = (
 /obj/effect/alien/weeds/node/feral,
-/turf/open/gm/grass/grass1,
+/turf/open/gm/dirtgrassborder/weedable/grass1,
 /area/yautja_grounds/caves)
 "It" = (
 /obj/structure/flora/jungle/vines/light_3,
@@ -2811,19 +2728,9 @@
 /area/yautja_grounds/jungle/east)
 "IB" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "4-6";
-	layer = 5;
+	icon_state = "2-5";
 	level = 2;
-	pixel_x = -18
-	},
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "4-8";
-	layer = 5;
-	level = 2;
-	pixel_x = 21;
-	pixel_y = -11
+	pixel_x = 7
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -2845,14 +2752,6 @@
 /obj/effect/landmark/corpsespawner/upp/burst,
 /turf/open/floor/wood,
 /area/yautja_grounds/south)
-"IT" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 6;
-	dir = 1
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "IU" = (
 /obj/structure/flora/jungle/vines/light_3,
 /turf/open/gm/grass/grass1,
@@ -2949,28 +2848,16 @@
 /area/yautja_grounds/north_east)
 "JT" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-10";
-	layer = 5;
+	icon_state = "1-2";
 	level = 2;
-	pixel_x = 15
+	pixel_x = 2;
+	pixel_y = 15
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "JW" = (
 /turf/open/gm/dirtgrassborder/desert3,
 /area/yautja_grounds/north_west)
-"JZ" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 6
-	},
-/obj/structure/barricade/metal/plasteel{
-	layer = 5;
-	dir = 4
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "Kb" = (
 /turf/open/gm/coast/north,
 /area/yautja_grounds/south)
@@ -3175,13 +3062,6 @@
 /obj/structure/machinery/door/poddoor/yautja/hunting_grounds,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south_east)
-"LA" = (
-/obj/effect/decal/cleanable/blood/drip{
-	pixel_y = 4;
-	pixel_x = -8
-	},
-/turf/open/floor/wood,
-/area/yautja_grounds/south)
 "LC" = (
 /turf/open/gm/dirtgrassborder/grassdirt_corner2/south_west,
 /area/yautja_grounds/north_west)
@@ -3216,13 +3096,6 @@
 /obj/structure/flora/jungle/vines/light_3,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/jungle/east)
-"Me" = (
-/obj/structure/ladder{
-	id = "outpost1";
-	height = 2
-	},
-/turf/open/floor/wood,
-/area/yautja_grounds/prep_room/inside)
 "Mh" = (
 /obj/structure/stairs/perspective{
 	color = "#6b675e";
@@ -3395,16 +3268,6 @@
 /obj/structure/blocker/preserve_edge,
 /turf/open/gm/grass/grass2,
 /area/yautja_grounds/south_east)
-"Ox" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "1-2";
-	layer = 5;
-	pixel_x = 14;
-	pixel_y = -9
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
 "OD" = (
 /obj/structure/barricade/handrail/strata{
 	dir = 4;
@@ -3412,17 +3275,6 @@
 	},
 /turf/open/floor/strata/grey_multi_tiles/southwest,
 /area/yautja_grounds/north_west)
-"OE" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 6
-	},
-/obj/structure/barricade/metal/plasteel{
-	layer = 5;
-	dir = 8
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "OK" = (
 /obj/structure/flora/jungle/vines/heavy,
 /turf/open/gm/grass/grass1,
@@ -3522,9 +3374,8 @@
 	pixel_y = 14
 	},
 /obj/structure/cable/white{
-	color = "#550d0d";
 	icon_state = "1-2";
-	layer = 5
+	level = 2
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -3633,17 +3484,6 @@
 "Rj" = (
 /turf/open/gm/dirtgrassborder/south,
 /area/yautja_grounds/north_west)
-"Rm" = (
-/obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "5-6";
-	layer = 5;
-	level = 2;
-	pixel_x = 1;
-	pixel_y = -15
-	},
-/turf/open/gm/grass/grass1,
-/area/yautja_grounds/south)
 "Rp" = (
 /obj/structure/bed/chair/hunter{
 	dir = 8
@@ -3700,7 +3540,7 @@
 	id = "outpost2";
 	height = 1
 	},
-/turf/open/floor/wood,
+/turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
 "RR" = (
 /obj/structure/prop/hybrisa/boulders/smallboulderdark/boulder_dark3,
@@ -3742,21 +3582,6 @@
 	},
 /turf/open/gm/grass/grass2,
 /area/yautja_grounds/north_west)
-"Sp" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 3
-	},
-/obj/structure/barricade/metal/plasteel{
-	layer = 9;
-	dir = 8
-	},
-/obj/structure/barricade/metal/plasteel{
-	layer = 6;
-	dir = 1
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "Sq" = (
 /obj/structure/flora/bush/desert{
 	pixel_y = -14
@@ -3934,11 +3759,12 @@
 	anchored = 1
 	},
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "2-6";
+	color = "#007740";
+	icon_state = "1-10";
 	layer = 5;
-	pixel_x = -12;
-	pixel_y = -11
+	level = 2;
+	pixel_y = -8;
+	pixel_x = -2
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -4021,18 +3847,6 @@
 	},
 /turf/open/shuttle/red,
 /area/yautja_grounds/north_east)
-"VX" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 9;
-	dir = 4
-	},
-/obj/structure/barricade/metal/plasteel{
-	layer = 6;
-	dir = 1
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "Wc" = (
 /obj/structure/window/framed/colony/reinforced/hull/yautja,
 /turf/open/floor/strata/grey_multi_tiles/southwest,
@@ -4051,14 +3865,6 @@
 "Wt" = (
 /turf/open/floor/engine/cult,
 /area/yautja_grounds/north_west)
-"Wu" = (
-/obj/structure/roof,
-/obj/structure/barricade/metal/plasteel{
-	layer = 5;
-	dir = 4
-	},
-/turf/open_space,
-/area/yautja_grounds/prep_room/inside)
 "Wv" = (
 /obj/item/tool/pickaxe/jackhammer{
 	pixel_y = 10
@@ -4074,20 +3880,19 @@
 /obj/structure/flora/jungle/vines/heavy,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/jungle)
-"WN" = (
-/obj/effect/decal/cleanable/blood/drip{
-	pixel_y = 4;
-	pixel_x = 13
-	},
-/turf/open/floor/wood,
-/area/yautja_grounds/south)
 "WO" = (
 /obj/structure/cable/white{
-	color = "#550d0d";
-	icon_state = "4-8";
-	layer = 5;
+	icon_state = "1-8";
 	level = 2;
-	pixel_x = -9
+	pixel_x = -2;
+	layer = 2;
+	pixel_y = -15
+	},
+/obj/structure/cable/white{
+	icon_state = "2-4";
+	level = 2;
+	pixel_x = -3;
+	pixel_y = 10
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
@@ -4117,12 +3922,16 @@
 /turf/closed/wall/strata_ice/jungle,
 /area/yautja_grounds/jungle/north)
 "XF" = (
-/obj/structure/ladder{
-	id = "outpost2";
-	height = 2
+/obj/structure/computerframe{
+	pixel_x = 1;
+	pixel_y = 14
 	},
-/turf/open/floor/wood,
-/area/yautja_grounds/prep_room/inside)
+/obj/structure/cable/white{
+	icon_state = "11-6";
+	level = 2
+	},
+/turf/open/gm/grass/grass1,
+/area/yautja_grounds/south)
 "XK" = (
 /turf/open/gm/coast/east,
 /area/yautja_grounds/south)
@@ -4990,7 +4799,7 @@ GO
 GO
 GO
 GO
-GO
+ox
 ox
 ox
 ox
@@ -5603,7 +5412,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -5723,7 +5532,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -5978,7 +5787,7 @@ ox
 Ir
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -6095,7 +5904,7 @@ ox
 ox
 HD
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -6108,7 +5917,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 GO
 GO
@@ -6342,7 +6151,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -6453,11 +6262,11 @@ GO
 ox
 Ir
 ox
-ox
+Ir
 ox
 Ir
 ox
-ox
+Ir
 ox
 ox
 Ir
@@ -6584,7 +6393,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -6715,8 +6524,8 @@ ox
 ox
 ox
 ox
-ox
-ox
+Ir
+Ir
 ox
 ox
 ox
@@ -6941,7 +6750,7 @@ GO
 GO
 GO
 ox
-ox
+Ir
 ox
 Ir
 ox
@@ -6950,7 +6759,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -7074,7 +6883,7 @@ ox
 ox
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -7321,7 +7130,7 @@ ox
 Ir
 ox
 ox
-ox
+Ir
 ox
 ox
 ox
@@ -9996,11 +9805,11 @@ XY
 Ej
 Ej
 Ej
-Nj
-Nj
-Nj
-Nj
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -10118,11 +9927,11 @@ XY
 Ej
 Ej
 Ej
-Nj
-rD
-oF
-oF
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -10240,11 +10049,11 @@ XY
 Ej
 Ej
 Ej
-Nj
-oF
-WN
-LA
-bB
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -10362,11 +10171,11 @@ XY
 Ej
 Ej
 Ej
-Nj
-IO
-ij
-oF
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -10484,11 +10293,11 @@ Uz
 Ej
 Ej
 Ej
-Nj
-Nj
-Nj
-Nj
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -11968,7 +11777,7 @@ mW
 mW
 mW
 Ej
-RJ
+XF
 nt
 Ee
 eo
@@ -12333,7 +12142,7 @@ vz
 vz
 UM
 vz
-bi
+Ej
 Fk
 nt
 Ee
@@ -12576,8 +12385,8 @@ Ej
 Ej
 Ej
 ks
+jO
 Ej
-Eu
 Ej
 nt
 Ee
@@ -12693,13 +12502,13 @@ Ej
 bg
 Yd
 ny
-Rm
+Ej
 iT
-Ox
+Ej
 JT
 UU
-ap
-zT
+Ej
+Ej
 Ej
 nt
 il
@@ -16231,11 +16040,11 @@ Ej
 Da
 Ej
 Ej
-Nj
-Nj
-Nj
-Nj
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -16353,11 +16162,11 @@ Da
 Da
 Ej
 Ej
-Nj
+Ej
 RQ
-oF
-oF
-Nj
+Ej
+Ej
+Ej
 df
 Ej
 Ej
@@ -16475,10 +16284,10 @@ Ej
 Da
 Ej
 Ej
-Nj
-oF
-oF
-oF
+Ej
+Ej
+Ej
+Ej
 bB
 Ej
 Ej
@@ -16597,11 +16406,11 @@ Ej
 Da
 Ej
 Ej
-Nj
+Ej
 sF
-oF
-oF
-Nj
+Ej
+Ej
+Ej
 df
 Ej
 Ej
@@ -16719,11 +16528,11 @@ Ej
 Da
 Ej
 Ej
-Nj
-Nj
-Nj
-Nj
-Nj
+Ej
+Ej
+Ej
+Ej
+Ej
 Ej
 Ej
 Ej
@@ -23156,31 +22965,31 @@ sY
 sY
 sY
 sY
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
 sY
 sY
 sY
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23278,31 +23087,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23400,31 +23209,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23522,31 +23331,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-Sp
-CL
-CL
-CL
-OE
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-Sp
-CL
-CL
-CL
-OE
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23644,31 +23453,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-XF
-Pd
-aV
-jO
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-Me
-Pd
-Pd
-jO
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23766,31 +23575,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-Pd
-Pd
-Pd
-jO
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-Pd
-Pd
-EH
-jO
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -23888,31 +23697,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-Pd
-EH
-Pd
-jO
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-IT
-AM
-Pd
-aV
-jO
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -24010,31 +23819,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-VX
-Wu
-Wu
-Wu
-JZ
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-VX
-Wu
-Wu
-Wu
-JZ
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -24132,31 +23941,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -24254,31 +24063,31 @@ sY
 sY
 sY
 sY
-DI
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-DI
 sY
 sY
 sY
-DI
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-pF
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
@@ -24376,31 +24185,31 @@ sY
 sY
 sY
 sY
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
 sY
 sY
 sY
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
-DI
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
+sY
 sY
 sY
 sY
