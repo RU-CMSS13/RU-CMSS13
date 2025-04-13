@@ -31,9 +31,6 @@
 	AddComponent(/datum/component/tacmap, has_drawing_tools=TRUE, minimap_flag=minimap_flag, has_update=TRUE)
 	return ..()
 
-/obj/item/device/cotablet/Destroy()
-	return ..()
-
 /obj/item/device/cotablet/proc/disable_pmc()
 	if(MODE_HAS_FLAG(MODE_FACTION_CLASH))
 		add_pmcs = FALSE
@@ -127,7 +124,11 @@
 
 		if("mapview")
 			var/datum/component/tacmap/tacmap_component = GetComponent(/datum/component/tacmap)
-			tacmap_component.show_tacmap(user)
+
+			if(user in tacmap_component.interactees)
+				tacmap_component.on_unset_interaction(user)
+			else
+				tacmap_component.show_tacmap(user)
 			. = TRUE
 
 		if("evacuation_start")
