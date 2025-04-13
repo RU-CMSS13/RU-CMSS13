@@ -2,8 +2,8 @@
 	name = "Blue beret"
 	desc = "The regular blue beret ... What is doing in USMC force?!"
 	icon_state = "beret_blue"
-	icon = 'icons/obj/items/clothing/hats/berets.dmi'
+	icon = 'core_ru/icons/obj/items/clothing/hats/berets.dmi'
 	item_icons = list(
-		WEAR_HEAD = 'icons/mob/humans/onmob/clothing/head/berets.dmi'
+		WEAR_HEAD = 'core_ru/icons/mob/humans/onmob/clothing/head/berets.dmi'
 	)
 	flags_atom = NO_GAMEMODE_SKIN

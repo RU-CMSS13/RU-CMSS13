@@ -630,18 +630,6 @@ GLOBAL_LIST_INIT(allowed_hat_items, list(
 	desc = "A beret with the USCM insignia emblazoned on it. It radiates respect and authority."
 	icon_state = "beret_badge"
 
-//RUCM START
-/obj/item/clothing/head/beret/beret_blue
-	name = "Blue beret"
-	desc = "The regular blue beret ... What is doing in USMC force?!"
-	icon_state = "beret_blue"
-	icon = 'icons/obj/items/clothing/hats/berets.dmi'
-	item_icons = list(
-		WEAR_HEAD = 'icons/mob/humans/onmob/clothing/head/berets.dmi'
-	)
-	flags_atom = NO_GAMEMODE_SKIN
-//RUCM END
-
 /obj/item/clothing/head/beret/marine/mp
 	name = "\improper USCM MP beret"
 	icon_state = "beretred"
