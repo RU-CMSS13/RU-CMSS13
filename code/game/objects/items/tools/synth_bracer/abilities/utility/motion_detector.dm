@@ -17,10 +17,6 @@
 	if(!motion_detector_active)
 		STOP_PROCESSING(SSobj, src)
 		return
-	if(battery_charge <= 1)
-		motion_detector_active = FALSE
-		STOP_PROCESSING(SSobj, src)
-		return
 	if(motion_detector_active)
 		motion_detector_recycle--
 		if(!motion_detector_recycle)
@@ -64,7 +60,6 @@
 	action_icon_state = "motion_detector"
 	handles_charge_cost = TRUE
 	handles_cooldown = TRUE
-	charge_cost = 2
 
 /datum/action/human_action/synth_bracer/motion_detector/action_activate()
 	..()
