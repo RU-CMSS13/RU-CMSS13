@@ -2,9 +2,8 @@
 #define SIMI_COLOR_DEFAULT "default"
 #define SIMI_COLOR_WHITE "white"
 
-/// Loads/Reloads the available actions on the computer itself.
+/// Loads/Reloads the available actions.
 #define SIMI_ACTIONS_LOAD "load"
-#define SIMI_ACTIONS_RELOAD "reload"
 /// Cleans and then adds actions to the user.
 #define SIMI_ACTIONS_ADD "add"
 /// Removes actions from the user.
