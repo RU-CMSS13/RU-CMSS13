@@ -300,13 +300,12 @@
 /turf/open/shuttle/vehicle/med,
 /area/interior/vehicle/apc)
 "aQ" = (
-/obj/structure/machinery/sleep_console{
-	dir = 4;
-	pixel_x = -8
-	},
 /obj/effect/decal/medical_decals/permanent{
 	dir = 4;
 	icon_state = "triagedecaldir"
+	},
+/obj/structure/machinery/body_scanconsole{
+	pixel_x = -8
 	},
 /turf/open/shuttle/vehicle/dark_sterile_green_8,
 /area/interior/vehicle/apc)
@@ -433,7 +432,6 @@
 /area/space)
 "HL" = (
 /obj/structure/machinery/autodoc_console{
-	desc = "The control interface used to operate the adjoining autodoc. Requires training to use properly. That one has multiple advanced operations already included!";
 	pixel_x = -8
 	},
 /obj/effect/decal/medical_decals/permanent{
