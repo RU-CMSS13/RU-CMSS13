@@ -600,4 +600,3 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		/obj/item/ammo_magazine/smg/nailgun,
 		/obj/item/storage/belt/gun/m4a3/nailgun,
 	)
-*/
