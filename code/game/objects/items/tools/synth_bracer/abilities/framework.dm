@@ -116,7 +116,7 @@
 	icon_file = 'icons/obj/items/synth/bracer.dmi'
 	var/mob/living/carbon/human/synth
 	var/obj/item/clothing/gloves/synth/synth_bracer
-	ability_used_time = 0
+	var/ability_used_time = 0
 	var/charge_cost = 0
 	var/handles_cooldown = FALSE // whether the cooldown gets handled by the child, or should be done automatically here
 	var/handles_charge_cost = FALSE
@@ -150,6 +150,11 @@
 
 /datum/action/human_action/synth_bracer/action_cooldown_check()
 	return ability_used_time <= world.time
+
+/datum/action/human_action/synth_bracer/proc/enter_cooldown(amount = cooldown)
+	ability_used_time = world.time + amount
+	update_button_icon()
+	addtimer(CALLBACK(src, PROC_REF(update_button_icon)), amount)
 
 /datum/action/human_action/synth_bracer/update_button_icon()
 	if(!button)
