@@ -45,9 +45,8 @@
 
 /obj/item/clothing/gloves/synth/dropped(mob/user)
 	. = ..()
-	if(internal_transmitter)
-		internal_transmitter.phone_id = "[src]"
-		internal_transmitter.enabled = FALSE
+	internal_transmitter.phone_id = "[src]"
+	internal_transmitter.enabled = FALSE
 
 /obj/item/clothing/gloves/synth/attackby(obj/item/W, mob/user)
 	if(internal_transmitter.attached_to == W)
