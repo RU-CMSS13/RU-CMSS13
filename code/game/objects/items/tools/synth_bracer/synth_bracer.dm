@@ -14,6 +14,7 @@
 	)
 
 	siemens_coefficient = 0
+	permeability_coefficient = 0.05
 	flags_cold_protection = BODY_FLAG_HANDS
 	flags_heat_protection = BODY_FLAG_HANDS
 	flags_armor_protection = BODY_FLAG_HANDS
