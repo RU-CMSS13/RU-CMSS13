@@ -819,6 +819,9 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, list(
 
 	add_fingerprint(user)
 
+	if(SEND_SIGNAL(user, COMSIG_MOB_APC_ATTACK_HAND, src) & COMPONENT_APC_HANDLED_HAND)
+		return FALSE
+
 	//Human mob special interaction goes here.
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -846,7 +849,6 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, list(
 			else
 				beenhit++
 			return
-
 
 	if(usr == user && opened && (!isRemoteControlling(user)))
 		if(cell)

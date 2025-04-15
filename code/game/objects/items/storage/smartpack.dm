@@ -97,7 +97,6 @@
 		M.status_flags |= CANPUSH
 		M.anchored = FALSE
 		M.unfreeze()
-	..()
 
 	return ..()
 
