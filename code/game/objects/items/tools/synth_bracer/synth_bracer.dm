@@ -68,8 +68,6 @@
 	var/saved_throw_allowed
 	var/saved_gun_allowed
 
-	var/mob/living/carbon/human/wearer
-
 	/// Cooldown on abilities that play sounds (and don't internally handle it)
 	COOLDOWN_DECLARE(sound_cooldown)
 
@@ -107,15 +105,15 @@
 		flick("bracer_[bracer_color]_startup", src)
 
 		if(ishuman(user))
-			var/mob/living/carbon/human/wearer = user
-			if(wearer.comm_title)
-				internal_transmitter.phone_id = "[wearer.comm_title] [wearer]"
-			else if(wearer.job)
-				internal_transmitter.phone_id = "[wearer.job] [wearer]"
+			var/mob/living/carbon/human/human_user = user
+			if(human_user.comm_title)
+				internal_transmitter.phone_id = "[human_user.comm_title] [human_user]"
+			else if(human_user.job)
+				internal_transmitter.phone_id = "[human_user.job] [human_user]"
 			else
-				internal_transmitter.phone_id = "[wearer]"
-			if(wearer.assigned_squad)
-				internal_transmitter.phone_id += " ([wearer.assigned_squad.name])"
+				internal_transmitter.phone_id = "[human_user]"
+			if(human_user.assigned_squad)
+				internal_transmitter.phone_id += " ([human_user.assigned_squad.name])"
 		else
 			internal_transmitter.phone_id = "[user]"
 		internal_transmitter.enabled = TRUE
@@ -123,9 +121,6 @@
 	update_icon()
 
 /obj/item/clothing/gloves/synth/dropped(mob/user)
-	disable_anchor()
-	disable_shield()
-
 	update_actions(SIMI_ACTIONS_REMOVE, user)
 
 	if(bracer_charging)
@@ -136,7 +131,6 @@
 		internal_transmitter.phone_id = "[src]"
 		internal_transmitter.enabled = FALSE
 
-	wearer = null
 	return ..()
 
 /obj/item/clothing/gloves/synth/MouseDrop(obj/over_object as obj)
@@ -227,22 +221,6 @@
 		internal_transmitter.set_tether_holder(src)
 	else
 		internal_transmitter.set_tether_holder(loc)
-
-/obj/item/clothing/gloves/synth/proc/set_active(category = SIMI_SECONDARY_ACTION, set_ability = SIMI_ACTIVE_NONE)
-	switch(category)
-		if(SIMI_PRIMARY_ACTION)
-			active_ability = set_ability
-		if(SIMI_SECONDARY_ACTION)
-			active_utility = set_ability
-	if((active_ability == SIMI_ACTIVE_NONE) && (active_utility == SIMI_ACTIVE_NONE))
-		flags_item &= ~NODROP
-	else
-		flags_item |= NODROP
-	update_icon()
-
-/obj/item/clothing/gloves/synth/proc/set_inactive(category = SIMI_SECONDARY_ACTION)
-	set_active(category, SIMI_ACTIVE_NONE)
-
 //#############################
 //###### ICON HANDLING ########
 //#############################
