@@ -11,7 +11,6 @@
 	var/max_distance = 3
 	var/windup = 10
 	human_adaptable = TRUE
-	ability_tag = SIMI_SECONDARY_HOOK
 
 /datum/action/human_action/activable/synth_bracer/rescue_hook/use_ability(atom/atom_target)
 	. = ..()
@@ -24,7 +23,7 @@
 	if(!action_cooldown_check() || synth.action_busy)
 		return FALSE
 
-	set_active(category, ability_tag)
+	set_active(category, SIMI_SECONDARY_HOOK)
 	// Build our turflist
 	var/list/turf/turflist = list()
 	var/list/telegraph_atom_list = list()
