@@ -27,10 +27,7 @@
 
 	var/battery_charge = SMARTPACK_MAX_POWER_STORED
 
-	var/list/bracer_actions = list(
-		/datum/action/human_action/activable/synth_bracer/rescue_hook,
-		/datum/action/human_action/synth_bracer/reflex_overclock
-	)
+	var/list/bracer_actions = list(/datum/action/human_action/activable/synth_bracer/rescue_hook)
 
 /obj/item/clothing/gloves/synth/examine(mob/user)
 	..()
@@ -96,4 +93,4 @@
 
 /obj/item/clothing/gloves/synth/proc/drain_charge(var/mob/user, var/cost)
 	battery_charge -= cost
-	to_chat(user, SPAN_WARNING("\The [src]'s charge now reads: <b>[battery_charge]/[initial(battery_charge)]</b>."))
+	to_chat(user, SPAN_WARNING("\The [src] now has <b>[battery_charge]/[initial(battery_charge)]</b>."))
