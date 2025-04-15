@@ -385,10 +385,9 @@
 	update_icon()
 	user.update_inv_gloves()
 
-/obj/item/clothing/gloves/synth/proc/drain_charge(mob/user, cost, report_charge = TRUE)
+/obj/item/clothing/gloves/synth/proc/drain_charge(mob/user, cost)
 	battery_charge = max(0, battery_charge -= cost)
-	if(report_charge)
-		to_chat(user, SPAN_WARNING("\The [src]'s charge now reads: <b>[battery_charge]/[battery_charge_max]</b>."))
+	to_chat(user, SPAN_WARNING("\The [src]'s charge now reads: <b>[battery_charge]/[battery_charge_max]</b>."))
 	update_icon()
 
 //#############################
