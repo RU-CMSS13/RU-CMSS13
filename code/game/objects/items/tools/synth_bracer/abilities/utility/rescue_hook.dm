@@ -23,7 +23,8 @@
 	if(!action_cooldown_check() || synth.action_busy)
 		return FALSE
 
-	set_active(category, SIMI_SECONDARY_HOOK)
+	synth_bracer.active_utility = SIMI_SECONDARY_HOOK
+	synth_bracer.update_icon()
 	// Build our turflist
 	var/list/turf/turflist = list()
 	var/list/telegraph_atom_list = list()
@@ -60,37 +61,35 @@
 
 	if(!length(turflist))
 		to_chat(synth, SPAN_WARNING("You don't have any room to launch your hook!"))
-		set_inactive(category)
+		synth_bracer.active_utility = SIMI_ACTIVE_NONE
+		synth_bracer.update_icon()
 		return FALSE
 
 	synth.visible_message(SPAN_DANGER("[synth] prepares to launch a rescue hook at [atom_target]!"), SPAN_DANGER("You prepare to launch a rescue hook at [atom_target]!"))
 
 	var/throw_target_turf = get_step(synth.loc, facing)
-	var/pre_frozen = FALSE
-	if(synth.frozen)
-		pre_frozen = TRUE
-	else
-		synth.frozen = TRUE
-		synth.update_canmove()
+
+	synth.frozen = TRUE
+	synth.update_canmove()
 	if(!do_after(synth, windup, INTERRUPT_NO_NEEDHAND, BUSY_ICON_HOSTILE, null, null, FALSE, 1, FALSE, 1))
 		to_chat(synth, SPAN_WARNING("You cancel your launch."))
 
 		for (var/obj/effect/xenomorph/xeno_telegraph/XT in telegraph_atom_list)
 			telegraph_atom_list -= XT
 			qdel(XT)
-		if(!pre_frozen)
-			synth.frozen = FALSE
-			synth.update_canmove()
-		set_inactive(category)
+
+		synth.frozen = FALSE
+		synth.update_canmove()
+		synth_bracer.active_utility = SIMI_ACTIVE_NONE
+		synth_bracer.update_icon()
 
 		return FALSE
 
 	enter_cooldown()
 	synth_bracer.drain_charge(synth, charge_cost)
 
-	if(!pre_frozen)
-		synth.frozen = FALSE
-		synth.update_canmove()
+	synth.frozen = FALSE
+	synth.update_canmove()
 
 	playsound(get_turf(synth), 'sound/items/rappel.ogg', 75, FALSE)
 
@@ -105,7 +104,8 @@
 		marine_target.KnockDown(0.2)
 		shake_camera(marine_target, 10, 1)
 		marine_target.throw_atom(throw_target_turf, get_dist(throw_target_turf, marine_target)-1, SPEED_VERY_FAST)
-	set_inactive(category)
+	synth_bracer.active_utility = SIMI_ACTIVE_NONE
+	synth_bracer.update_icon()
 
 /obj/effect/simi_hook
 	icon = 'icons/obj/items/synth/bracer.dmi'

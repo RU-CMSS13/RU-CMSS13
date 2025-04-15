@@ -27,7 +27,5 @@
 
 /datum/action/human_action/synth_bracer/crew_monitor/action_activate()
 	..()
-	if(COOLDOWN_FINISHED(synth_bracer, sound_cooldown))
-		COOLDOWN_START(synth_bracer, sound_cooldown, 5 SECONDS)
-		playsound(synth_bracer, 'sound/machines/terminal_processing.ogg', 35, TRUE)
+	playsound(synth_bracer, 'sound/machines/terminal_processing.ogg', 35, TRUE)
 	radar.tgui_interact(usr)
