@@ -314,7 +314,7 @@
 	SIGNAL_HANDLER
 	update_overlays()
 
-/obj/item/clothing/gloves/synth/get_mob_overlay(mob/user_mob, slot, default_bodytype = "Default")
+/obj/item/clothing/gloves/synth/get_mob_overlay(mob/user_mob, slot)
 	var/image/overlay = ..()
 
 	if((slot != WEAR_HANDS) || !underglove)
