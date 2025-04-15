@@ -3,20 +3,14 @@
 	var/motion_detector_active = FALSE
 	var/motion_detector_recycle = 120
 	var/motion_detector_cooldown = 2
-	var/motion_detector_cost = 2
 
 /obj/item/clothing/gloves/synth/Initialize(mapload, ...)
 	. = ..()
 	motion_detector = new(src)
-	motion_detector.iff_signal = faction
 
 /obj/item/clothing/gloves/synth/process()
-	if(!ishuman(loc))
-		STOP_PROCESSING(SSobj, src)
-		return
 	if(!motion_detector_active)
 		STOP_PROCESSING(SSobj, src)
-		return
 	if(motion_detector_active)
 		motion_detector_recycle--
 		if(!motion_detector_recycle)
@@ -28,7 +22,7 @@
 			return
 		motion_detector_cooldown = initial(motion_detector_cooldown)
 		motion_detector.scan()
-		drain_charge(loc, 2)
+		battery_charge -= 2
 
 /obj/item/clothing/gloves/synth/dropped(mob/user)
 	. = ..()
@@ -58,8 +52,6 @@
 /datum/action/human_action/synth_bracer/motion_detector
 	name = "Toggle Motion Detector"
 	action_icon_state = "motion_detector"
-	handles_charge_cost = TRUE
-	handles_cooldown = TRUE
 
 /datum/action/human_action/synth_bracer/motion_detector/action_activate()
 	..()
