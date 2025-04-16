@@ -31,7 +31,7 @@
 	uniform.attach_accessory(new_human,pin)
 	uniform.attach_accessory(new_human,patch_forecon)
 	new_human.equip_to_slot_or_del(uniform, WEAR_BODY)
-	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/webbing(new_human), WEAR_JACKET)
+//	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/webbing(new_human), WEAR_JACKET)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/satchel(new_human), WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/firstaid/full(new_human), WEAR_R_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/firstaid/full/alternate(new_human), WEAR_L_STORE)
@@ -47,6 +47,19 @@
 
 /datum/equipment_preset/survivor/forecon/add_survivor_weapon_security(mob/living/carbon/human/new_human)
 	return
+
+//RUCM START
+/datum/equipment_preset/survivor/forecon/proc/add_forecon_jacket(mob/living/carbon/human/new_human)
+	var/random_jacket = rand(1 , 4)
+	switch(random_jacket)
+		if(1, 2)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/webbing(new_human), WEAR_JACKET)
+		if(3)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/light(new_human), WEAR_JACKET)
+		if(4)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/medium(new_human), WEAR_JACKET)
+
+//RUCM END
 
 /datum/equipment_preset/survivor/forecon/proc/add_forecon_weapon(mob/living/carbon/human/new_human)
 	var/random_gun = rand(1,3)
@@ -112,6 +125,9 @@
 
 /datum/equipment_preset/survivor/forecon/standard/load_gear(mob/living/carbon/human/new_human)
 	..()
+//RUCM START
+	add_forecon_jacket(new_human)
+//RUCM END
 	add_forecon_weapon_pistol(new_human)
 	add_forecon_weapon(new_human)
 	spawn_random_headgear(new_human)
@@ -136,6 +152,9 @@
 	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/firstaid/adv(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/device/healthanalyzer(new_human), WEAR_IN_BACK)
+//RUCM START
+	add_forecon_jacket(new_human)
+//RUCM END
 	add_forecon_weapon(new_human)
 	spawn_random_headgear(new_human)
 	add_forecon_equipment(new_human)
@@ -238,6 +257,9 @@
 	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/shotgun/pump(new_human), WEAR_R_HAND)
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/shotgun/slugs(new_human), WEAR_L_HAND)
 	..()
+//RUCM START
+	add_forecon_jacket(new_human)
+//RUCM END
 	add_forecon_weapon_pistol(new_human)
 	spawn_random_headgear(new_human)
 	add_forecon_equipment(new_human)

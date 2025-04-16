@@ -269,8 +269,8 @@
 	equip_state = "redy_minigun"
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
-	fire_delay = 2
-	scatter_value = 25
+	fire_delay = 2.7
+	scatter_value = 40
 
 	projectile_traits = list()
 
