@@ -513,7 +513,7 @@
 	max_range = 12
 	damage = 45
 	penetration= ARMOR_PENETRATION_TIER_5
-	accuracy = -HIT_ACCURACY_TIER_3
+	accuracy = -HIT_ACCURACY_TIER_2
 
 /datum/ammo/bullet/walker/shotgun8g
 	name = "8 gauge buckshot shell"
