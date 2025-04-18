@@ -1,5 +1,5 @@
 /**
- * RUCM "Огнемётный ранец 2.0" copyright by Feline
+ * RUCM Feline "Огнемётный ранец 2.0"
  *
  * Заменяет стандартный бак для топлива огнемёта на профелированную станцию с возможнотью переключения режимов огня, другой системой заправки,
  * 3-мя баллонами для топлива в том числе кастомного, позволяет заправлять сварочники и огнетушители, усиливает огнемёт и его насадки. Огнемёт
@@ -163,12 +163,14 @@
 /obj/item/flamer_hose/on_enter_storage(obj/item/storage/S)
 	. = ..()
 	playsound(src, 'sound/weapons/flipblade.ogg', 25, TRUE)
-	qdel(src)
+	if(!QDELETED(src))
+		QDEL_NULL(src)
 
-/obj/item/flamer_hose/dropped(mob/user)
+/obj/item/flamer_hose/dropped()
 	. = ..()
 	playsound(src, 'sound/weapons/flipblade.ogg', 25, TRUE)
-	qdel(src)
+	if(!QDELETED(src))
+		QDEL_NULL(src)
 
 ////////////////////////
 // Связанные предметы //
@@ -381,12 +383,12 @@
 
 /////////////////////////
 // Обновления спрайтов //
-/obj/item/weapon/gun/flamer/dropped(mob/user)
+/obj/item/weapon/gun/flamer/dropped()
 	if(fuel_backpack)
 		update_icon()
 	. = ..()
 
-/obj/item/weapon/gun/flamer/pickup(mob/user)
+/obj/item/weapon/gun/flamer/pickup()
 	if(fuel_backpack)
 		update_icon()
 	. = ..()
@@ -406,9 +408,10 @@
 				to_chat(user, SPAN_WARNING("Для подключения топливного рукава к огнемёту необходимо держать его в руках!"))
 				return
 			var/obj/item/storage/backpack/marine/feline_flamer_backpack/FP = user.back
-			if(FP && (FP.spec_item && src.spec_item) || (!FP.spec_item && !src.spec_item))
+			if(FP && (FP.spec_item && src.spec_item) || (!FP.spec_item && !src.spec_item) && !(istype(src, /obj/item/weapon/gun/flamer/flammenwerfer3)) && !(istype(src, /obj/item/weapon/gun/flamer/survivor)))
 				link_fuelpack(user)
-				qdel(FH)
+				if(!QDELETED(FH))
+					QDEL_NULL(FH)
 				to_chat(user, SPAN_NOTICE("Подключаю топливный рукав к огнемёту!"))
 				if(current_mag && !(current_mag in list(FP.fuel_standart, FP.fuel_green, FP.fuel_custom)))
 					to_chat(user, SPAN_WARNING("Отсоединяю [current_mag] и подключаю взамен [FP.active_fuel]!"))
@@ -458,7 +461,11 @@
 
 ///////////////////////////////////////////
 // Сброс линка || снятие рюкзака со спины //
-/obj/item/storage/backpack/marine/feline_flamer_backpack/dropped(mob/user)
+/obj/item/storage/backpack/marine/feline_flamer_backpack/dropped()
+	drop_link()
+	..()
+
+/obj/item/storage/backpack/marine/feline_flamer_backpack/proc/drop_link()
 	if(linked_flamer)
 		playsound(linked_flamer, 'sound/weapons/handling/flamer_unload.ogg', 25, 1)
 		linked_flamer.fuel_backpack = null
@@ -481,7 +488,6 @@
 
 		linked_flamer.update_icon()
 		linked_flamer = null
-	..()
 
 //////////////////////////////////////////
 //  Сброс прибавок || при снятии обвеса //
@@ -520,7 +526,7 @@
 // Уничтожение //
 /obj/item/storage/backpack/marine/feline_flamer_backpack/Destroy()
 	if(linked_flamer)
-		dropped()
+		drop_link()
 	QDEL_NULL(active_fuel)
 	QDEL_NULL(fuel_standart)
 	QDEL_NULL(fuel_green)
@@ -530,7 +536,7 @@
 
 /obj/item/weapon/gun/flamer/Destroy()
 	if(fuel_backpack)
-		fuel_backpack.dropped()
+		fuel_backpack.drop_link()
 	. = ..()
 
 ///////////////////////////////
@@ -933,19 +939,20 @@
 		return
 
 	if(get_dist(fuel_backpack, src) > fuel_backpack.range)
-		fuel_backpack.dropped()
+		fuel_backpack.drop_link()
+		return
 
 	var/atom/tether_to = src
 
 	if(loc != get_turf(src))
 		tether_to = loc
 		if(tether_to.loc != get_turf(tether_to))
-			fuel_backpack.dropped()
+			fuel_backpack.drop_link()
 			return
 
 	var/atom/tether_from = fuel_backpack
 
-	if(fuel_backpack.tether_holder)
+	if(fuel_backpack && fuel_backpack.tether_holder)
 		tether_from = fuel_backpack.tether_holder
 
 	if(tether_from == tether_to)
