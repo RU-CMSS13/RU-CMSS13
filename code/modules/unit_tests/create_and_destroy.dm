@@ -31,6 +31,9 @@ GLOBAL_VAR_INIT(create_and_destroy_ignore_paths, generate_ignore_paths())
 	// fuck interiors
 	. += typesof(/obj/vehicle)
 	. += typesof(/obj/effect/vehicle_spawner)
+//RUCM START
+	. += typesof(/atom/movable/screen)
+//RUCM END
 	// Always ought to have an associated escape menu. Any references it could possibly hold would need one regardless.
 	. += subtypesof(/atom/movable/screen/escape_menu)
 	. += typesof(/obj/effect/timed_event)

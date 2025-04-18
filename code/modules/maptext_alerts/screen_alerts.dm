@@ -7,11 +7,17 @@
  * enqueues it if a screen text is running and plays i otherwise
  * Arguments:
  * * text: text we want to be displayed
- * * alert_type: typepath for screen text type we want to play here
+ * * alert_type: typepath OR atom for screen text type we want to play here
  * * override_color: the color of the text to use
  */
 /mob/proc/play_screen_text(text, alert_type = /atom/movable/screen/text/screen_text, override_color = "#FFFFFF")
+//RUCM CHANGE
+/*
 	var/atom/movable/screen/text/screen_text/text_box = new alert_type()
+*/
+//RUCM START
+	var/atom/movable/screen/text/screen_text/text_box = isatom(alert_type) ? alert_type : new alert_type()
+//RUCM END
 	text_box.text_to_play = text
 	text_box.player = client
 	if(override_color)
@@ -70,6 +76,8 @@
 	fade_out_delay = 2.5 SECONDS
 	fade_out_time = 0.5 SECONDS
 
+//RUCM CHANGE
+/*
 /atom/movable/screen/text/screen_text/command_order/tutorial/end_play()
 	if(!player)
 		qdel(src)
@@ -83,6 +91,7 @@
 		qdel(tutorial_message)
 
 	return ..()
+*/
 
 /atom/movable/screen/text/screen_text/command_order/yautja
 	letters_per_update = 2

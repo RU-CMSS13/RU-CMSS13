@@ -310,6 +310,8 @@ GLOBAL_LIST_INIT(mentor_verbs, list(
 	/client/proc/toggle_newplayer_ic_hud
 ))
 
+//RUCM CHANGE
+/*
 /client/proc/add_admin_verbs()
 	if(!admin_holder)
 		return
@@ -347,7 +349,10 @@ GLOBAL_LIST_INIT(mentor_verbs, list(
 		add_verb(src, GLOB.admin_verbs_stealth)
 	if(check_whitelist_status(WHITELIST_YAUTJA_LEADER))
 		add_verb(src, GLOB.clan_verbs)
+*/
 
+//RUCM CHANGE
+/*
 /client/proc/remove_admin_verbs()
 	remove_verb(src, list(
 		GLOB.admin_verbs_default,
@@ -370,6 +375,7 @@ GLOBAL_LIST_INIT(mentor_verbs, list(
 		GLOB.debug_verbs,
 		GLOB.admin_verbs_stealth,
 	))
+*/
 
 /client/proc/jobbans()
 	set name = "Display Job Bans"
