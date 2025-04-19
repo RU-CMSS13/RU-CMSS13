@@ -30,6 +30,9 @@
 //#define SOUND_CHANNEL_ADMIN_MIDI 1022
 #define SOUND_CHANNEL_LOBBY 1023
 #define SOUND_CHANNEL_Z 1024
+//CM START
+#define CHANNEL_ANNOUNCEMENTS 1025 // IC priority announcements, hivemind messages etc
+//CM END
 
 
 //default byond sound echo list index positions.
