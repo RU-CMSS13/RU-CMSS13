@@ -167,6 +167,7 @@
 	if(damage > 0 && stat == DEAD)
 		return
 
+/* CM Original
 	var/shielded = FALSE
 	if(length(xeno_shields) != 0 && damage > 0)
 		shielded = TRUE
@@ -190,6 +191,34 @@
 			adjustBruteLoss(damage)
 		if(BURN)
 			adjustFireLoss(damage)
+*/
+// RUCM Start
+	if(!(HAS_TRAIT(src, TRAIT_WEAK_TO_FLAME) && damagetype == BURN))
+		var/shielded = FALSE
+		if(length(xeno_shields) != 0 && damage > 0)
+			shielded = TRUE
+			for(var/datum/xeno_shield/XS in xeno_shields)
+				damage = XS.on_hit(damage)
+				if(damage > 0)
+					XS.on_removal()
+					QDEL_NULL(XS)
+				if(damage == 0)
+					return
+
+			overlay_shields()
+
+		if(shielded) // We were shielded, but damage went through.
+			playsound(src, "shield_shatter", 50, 1)
+
+	switch(damagetype)
+		if(BRUTE)
+			adjustBruteLoss(damage)
+		if(BURN)
+			if(HAS_TRAIT(src, TRAIT_WEAK_TO_FLAME))
+				adjustFireLoss(damage * 1.5)
+			else
+				adjustFireLoss(damage)
+// RUCM End
 
 	updatehealth()
 
