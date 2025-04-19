@@ -10,7 +10,7 @@
 	entry_message_body = "Your job is to operate and maintain thee ship's combat walkers. While you are an officer, your authority is limited to your own vehicle."
 
 /datum/job/command/walker/set_spawn_positions(count)
-	if (length(GLOB.clients) >= 20)
+	if (length(GLOB.clients) >= 50)
 		spawn_positions = 1
 	else
 		spawn_positions = 0
@@ -18,7 +18,7 @@
 /datum/job/command/walker/get_total_positions(latejoin = FALSE)
 	if(SStechtree.trees[TREE_MARINE].get_node(/datum/tech/arc).unlocked)
 		return 0
-	if(length(GLOB.clients) >= 20 || total_positions_so_far > 0)
+	if(length(GLOB.clients) >= 50 || total_positions_so_far > 0)
 		return 1
 
 	return 0
