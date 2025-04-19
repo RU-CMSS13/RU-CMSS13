@@ -149,7 +149,7 @@
 /datum/ammo/energy/yautja/caster/sphere
 	name = "plasma eradicator"
 	icon_state = "bluespace"
-	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_HITS_TARGET_TURF
+	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_HITS_TARGET_TURF|AMMO_HITS_TARGET_TURF
 	shell_speed = AMMO_SPEED_TIER_4
 	accuracy = HIT_ACCURACY_TIER_8
 
@@ -183,7 +183,7 @@
 /datum/ammo/energy/yautja/caster/sphere/stun
 	name = "plasma immobilizer"
 	damage = 0
-	flags_ammo_behavior = AMMO_ENERGY|AMMO_IGNORE_RESIST
+	flags_ammo_behavior = AMMO_ENERGY|AMMO_IGNORE_RESIST|AMMO_HITS_TARGET_TURF
 	accurate_range = 20
 	max_range = 20
 
