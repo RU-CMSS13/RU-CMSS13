@@ -1,5 +1,5 @@
 /**
- * RUCM "Стрейн Воина - Рыцарь" copyright Feline
+ * RUCM Feline "Стрейн Воина - Рыцарь"
  * Затронутые файлы:
  * code\__DEFINES\xeno.dm
  * code\datums\mob_hud.dm
