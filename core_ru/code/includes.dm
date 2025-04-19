@@ -57,6 +57,8 @@
 #include "game\objects\items\pamphlets.dm"
 #include "game\turfs\closed.dm"
 #include "modules\admin\autoreply.dm"
+#include "modules\admin\db_ban.dm"
+#include "modules\admin\verbs\getlogs.dm"
 #include "modules\clothing\suits\marine_armor\st_armor.dm"
 #include "modules\clothing\gloves\marine_gloves.dm"
 #include "modules\clothing\head\helmet.dm"
