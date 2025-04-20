@@ -157,8 +157,15 @@
 	//Taken from update_icons
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/hardcore = FALSE //If TRUE, removes the body upon unrevivable death (for WO)
+//RUCM CHANGE
+/*
 	appearance_flags = KEEP_TOGETHER | TILE_BOUND
+*/
+//RUCM START
+	appearance_flags = KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE|LONG_GLIDE
+//RUCM END
 	throw_range = 4 // Humans can't be thrown that far
+
 
 	var/datum/action/human_action/activable/selected_ability
 
