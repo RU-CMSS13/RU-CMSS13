@@ -23894,13 +23894,20 @@
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
-"bnM" = (
+"bnL" = (
 /obj/structure/sign/safety/biolab{
 	pixel_x = 16;
 	pixel_y = 24
 	},
 /turf/open/floor/prison/darkpurple2,
 /area/prison/research/secret)
+"bnM" = (
+/obj/structure/xenoautopsy/tank/larva,
+/obj/effect/decal/warning_stripes{
+	icon_state = "cargo"
+	},
+/turf/open/floor/bluegrid,
+/area/prison/research/secret/bioengineering)
 "bnN" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
@@ -24023,7 +24030,7 @@
 /turf/open/floor/prison/red/east,
 /area/prison/security/monitoring/highsec)
 "bof" = (
-/obj/structure/xenoautopsy/tank/larva,
+/obj/structure/xenoautopsy/tank/broken,
 /obj/effect/decal/warning_stripes{
 	icon_state = "cargo"
 	},
@@ -24150,12 +24157,16 @@
 /turf/open/floor/prison,
 /area/prison/toilet/canteen)
 "box" = (
-/obj/structure/xenoautopsy/tank/broken,
-/obj/effect/decal/warning_stripes{
-	icon_state = "cargo"
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalertblank{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_y = 32
 	},
-/turf/open/floor/bluegrid,
-/area/prison/research/secret/bioengineering)
+/turf/open/floor/prison/darkpurple2/north,
+/area/prison/research/secret/containment)
 "boy" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/ammo_casing/bullet,
@@ -24193,16 +24204,14 @@
 /turf/open/floor/prison/green/northeast,
 /area/prison/monorail/west)
 "boE" = (
-/obj/effect/decal/hybrisa/dirt,
-/obj/structure/prop/hybrisa/misc/machinery/screens/redalertblank{
-	light_color = "#FF0000";
-	light_on = 1;
-	light_power = 3;
-	light_range = 5;
-	pixel_y = 32
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
 	},
-/turf/open/floor/prison/darkpurple2/north,
-/area/prison/research/secret/containment)
+/obj/item/newspaper,
+/obj/item/folder/black,
+/turf/open/floor/prison/whitepurple/west,
+/area/prison/research/secret/bioengineering)
 "boF" = (
 /obj/structure/machinery/vending/snack,
 /turf/open/floor/prison/greenfull/northwest,
@@ -24285,13 +24294,11 @@
 /turf/open/floor/prison/cell_stripe/north,
 /area/prison/cellblock/vip)
 "boS" = (
-/obj/structure/surface/table/reinforced/prison{
-	dir = 1;
-	color = "#8e98a0"
+/obj/item/shard,
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
 	},
-/obj/item/newspaper,
-/obj/item/folder/black,
-/turf/open/floor/prison/whitepurple/west,
+/turf/open/floor/hybrisa/tile/tilewhite,
 /area/prison/research/secret/bioengineering)
 "boT" = (
 /obj/item/tool/pen{
@@ -24328,7 +24335,6 @@
 /turf/open/floor/prison/greenfull,
 /area/prison/cellblock/lowsec/sw)
 "boY" = (
-/obj/item/shard,
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
 	},
@@ -24350,21 +24356,6 @@
 /turf/open/floor/prison,
 /area/prison/yard)
 "bpb" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/turf/open/floor/hybrisa/tile/tilewhite,
-/area/prison/research/secret/bioengineering)
-"bpc" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/reagent_container/food/condiment/saltshaker,
-/obj/structure/surface/table/reinforced/prison{
-	dir = 1;
-	color = "#8e98a0"
-	},
-/turf/open/floor/prison,
-/area/prison/canteen)
-"bpd" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
 	color = "#8e98a0"
@@ -24383,6 +24374,19 @@
 	pixel_y = 8
 	},
 /turf/open/floor/prison/whitepurple/west,
+/area/prison/research/secret/bioengineering)
+"bpc" = (
+/obj/effect/decal/cleanable/blood,
+/obj/item/reagent_container/food/condiment/saltshaker,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/turf/open/floor/prison,
+/area/prison/canteen)
+"bpd" = (
+/obj/structure/machinery/big_computers/messaging_server/brown,
+/turf/open/floor/prison/sterile_white/southwest,
 /area/prison/research/secret/bioengineering)
 "bpe" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
@@ -24420,7 +24424,11 @@
 /turf/open/floor/prison/darkred2,
 /area/prison/execution)
 "bpj" = (
-/obj/structure/machinery/big_computers/messaging_server/brown,
+/obj/structure/pipes/standard/simple/hidden/dark,
+/obj/item/paper/crumpled{
+	pixel_x = 6;
+	pixel_y = 24
+	},
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/research/secret/bioengineering)
 "bpk" = (
@@ -24457,14 +24465,6 @@
 /turf/open/floor/prison/greenfull/northwest,
 /area/prison/monorail/west)
 "bpp" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
-/obj/item/paper/crumpled{
-	pixel_x = 6;
-	pixel_y = 24
-	},
-/turf/open/floor/prison/sterile_white/southwest,
-/area/prison/research/secret/bioengineering)
-"bpq" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
 	},
@@ -24472,6 +24472,12 @@
 	icon_state = "NE-out"
 	},
 /turf/open/floor/corsat/spiralplate,
+/area/prison/research/secret/bioengineering)
+"bpq" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/turf/open/floor/hybrisa/tile/tilewhite,
 /area/prison/research/secret/bioengineering)
 "bpr" = (
 /obj/structure/pipes/vents/scrubber{
@@ -24560,12 +24566,6 @@
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prison/hallway/entrance)
 "bpF" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/turf/open/floor/hybrisa/tile/tilewhite,
-/area/prison/research/secret/bioengineering)
-"bpG" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
 	color = "#8e98a0"
@@ -24573,13 +24573,23 @@
 /obj/effect/landmark/good_item,
 /turf/open/floor/prison/whitepurple/west,
 /area/prison/research/secret/bioengineering)
-"bpH" = (
+"bpG" = (
 /obj/structure/filingcabinet{
 	density = 0;
 	pixel_x = -8;
 	pixel_y = 1
 	},
 /turf/open/floor/prison/whitepurple/west,
+/area/prison/research/secret/bioengineering)
+"bpH" = (
+/obj/item/shard,
+/obj/effect/decal/warning_stripes{
+	icon_state = "S"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "N"
+	},
+/turf/open/floor/hybrisa/tile/tilewhite,
 /area/prison/research/secret/bioengineering)
 "bpI" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
@@ -24594,14 +24604,11 @@
 /turf/open/floor/strata/floor3,
 /area/prison/hanger/main)
 "bpK" = (
-/obj/item/shard,
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
+/obj/item/paper/crumpled{
+	pixel_x = 10;
+	pixel_y = -1
 	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "N"
-	},
-/turf/open/floor/hybrisa/tile/tilewhite,
+/turf/open/floor/prison/whitepurple/north,
 /area/prison/research/secret/bioengineering)
 "bpL" = (
 /obj/effect/alien/weeds/node,
@@ -24631,20 +24638,13 @@
 /turf/open/floor/prison,
 /area/prison/security/monitoring/highsec)
 "bpQ" = (
-/obj/item/paper/crumpled{
-	pixel_x = 10;
-	pixel_y = -1
-	},
-/turf/open/floor/prison/whitepurple/north,
-/area/prison/research/secret/bioengineering)
-"bpR" = (
 /obj/structure/largecrate/random/barrel/black{
 	pixel_x = 4;
 	pixel_y = 4
 	},
 /turf/open/floor/prison/whitepurple/southeast,
 /area/prison/research/secret/testing)
-"bpS" = (
+"bpR" = (
 /obj/structure/prop/hybrisa/misc/machinery/screens/redalertblank{
 	pixel_x = -32
 	},
@@ -100032,7 +100032,7 @@ doR
 acE
 aaE
 aaJ
-bpS
+bpR
 qBN
 abs
 abB
@@ -101112,7 +101112,7 @@ agt
 agJ
 agJ
 agJ
-boE
+box
 utW
 agJ
 agJ
@@ -103672,7 +103672,7 @@ aaI
 aaQ
 abg
 nTH
-bpR
+bpQ
 abC
 abC
 abC
@@ -104318,10 +104318,10 @@ aeZ
 abE
 acc
 acC
-bpH
 bpG
-bpd
-boS
+bpF
+bpb
+boE
 aeV
 afv
 afJ
@@ -104962,7 +104962,7 @@ acf
 acf
 aXi
 acd
-bpj
+bpd
 aee
 acV
 rZM
@@ -105398,7 +105398,7 @@ acV
 afR
 acg
 lrz
-bnM
+bnL
 bde
 gLt
 ahl
@@ -105818,7 +105818,7 @@ ach
 acT
 adj
 ady
-bpp
+bpj
 qwn
 aeX
 afy
@@ -106028,7 +106028,7 @@ wjg
 wjg
 aeZ
 abK
-bpQ
+bpK
 acV
 elq
 acV
@@ -106674,7 +106674,7 @@ acl
 efw
 mPy
 abN
-bpq
+bpp
 adl
 afb
 afC
@@ -106886,13 +106886,13 @@ aeZ
 dGx
 acm
 dGx
-bpK
+bpH
 dGx
-bpF
-boY
-box
-acm
+bpq
+boS
 bof
+acm
+bnM
 acg
 ibG
 euy
@@ -107098,15 +107098,15 @@ wjg
 wjg
 aeZ
 ppL
-bpK
+bpH
 dGx
 acm
 ppL
-bpF
-bpb
-box
-acm
+bpq
+boY
 bof
+acm
+bnM
 acg
 agg
 beu
@@ -107313,14 +107313,14 @@ wjg
 aeZ
 dGx
 pUN
-box
+bof
 acm
-box
-bpF
-boY
+bof
+bpq
+boS
 afi
 acm
-box
+bof
 acg
 agh
 bey
@@ -107530,11 +107530,11 @@ acm
 dGx
 adm
 dGx
-bpF
-bpb
-bof
+bpq
+boY
+bnM
 adm
-bof
+bnM
 acg
 agi
 dLd
