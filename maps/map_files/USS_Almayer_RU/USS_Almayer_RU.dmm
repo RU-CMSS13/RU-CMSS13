@@ -20667,16 +20667,16 @@
 	pixel_x = 7;
 	pixel_y = 5
 	},
-/obj/item/device/cotablet{
-	pixel_x = -1;
-	layer = 3.4
-	},
 /obj/structure/machinery/door/window/southleft{
 	desc = "A window, that is also a door. A windoor if you will. This one is stronger.";
 	health = 500;
 	name = "Reinforced Glass door";
 	req_one_access_txt = "2;35";
 	dir = 8
+	},
+/obj/item/device/cotablet{
+	pixel_x = -1;
+	layer = 3.4
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -67714,12 +67714,6 @@
 /area/almayer/hallways/upper/starboard)
 "vNW" = (
 /obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/computer/groundside_operations{
-	pixel_y = 23;
-	layer = 3.1;
-	dir = 4;
-	pixel_x = 2
-	},
 /obj/structure/machinery/computer/almayer_control{
 	layer = 3.4;
 	pixel_y = -9;
@@ -67734,6 +67728,11 @@
 	},
 /obj/structure/window/reinforced/toughened{
 	dir = 8
+	},
+/obj/structure/machinery/computer/overwatch/groundside_operations{
+	dir = 4;
+	pixel_x = 2;
+	pixel_y = 23
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
