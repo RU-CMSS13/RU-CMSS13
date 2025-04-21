@@ -194,7 +194,8 @@
 "cy" = (
 /obj/structure/ladder{
 	id = "upp1";
-	height = 1
+	height = 1;
+	climb_delay = 35
 	},
 /turf/open/floor/wood,
 /area/yautja_grounds/prep_room/inside)
@@ -439,6 +440,10 @@
 	},
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
+"fD" = (
+/obj/item/weapon/gun/rifle/ar10,
+/turf/closed/wall/cult/hunting_grounds,
+/area/yautja_grounds/north_west)
 "fJ" = (
 /obj/structure/stairs/perspective{
 	color = "#6b675e";
@@ -660,9 +665,6 @@
 	dir = 8;
 	layer = 3
 	},
-/obj/structure/barricade/handrail/strata{
-	dir = 1
-	},
 /turf/open/floor/engine/cult,
 /area/yautja_grounds/north_west)
 "if" = (
@@ -719,6 +721,10 @@
 	},
 /turf/open/floor/wood,
 /area/yautja_grounds/south)
+"iz" = (
+/obj/item/weapon/gun/rifle/ar10,
+/turf/open/gm/grass/grass1,
+/area/yautja_grounds/jungle/north)
 "iA" = (
 /obj/structure/flora/jungle/vines/heavy,
 /obj/structure/flora/jungle/vines/light_3,
@@ -1319,6 +1325,22 @@
 /obj/structure/flora/bush/ausbushes/palebush,
 /turf/open/gm/grass/grass1,
 /area/yautja_grounds/south)
+"oP" = (
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
+	},
+/obj/structure/showcase{
+	desc = "A console equipped with a radar used by the Hunters to detect gear and good hunting grounds.";
+	dir = 4;
+	icon = 'icons/obj/structures/machinery/yautja_machines.dmi';
+	icon_state = "terminal";
+	name = "Radar Console";
+	pixel_x = 16;
+	pixel_y = 10;
+	layer = 3.1
+	},
+/turf/open/floor/corsat/squares,
+/area/yautja_grounds/north_east)
 "oU" = (
 /obj/structure/flora/jungle/vines/light_2,
 /turf/open/gm/grass/grass1,
@@ -1545,7 +1567,8 @@
 "sa" = (
 /obj/structure/ladder{
 	id = "upp1";
-	height = 2
+	height = 2;
+	climb_delay = 35
 	},
 /turf/open/floor/wood,
 /area/yautja_grounds/south)
@@ -1673,6 +1696,30 @@
 	color = "#999999"
 	},
 /turf/open/gm/grass/grass1,
+/area/yautja_grounds/north_east)
+"tj" = (
+/obj/structure/showcase{
+	desc = "A console equipped with a radar used by the Hunters to detect gear and good hunting grounds.";
+	dir = 4;
+	icon = 'icons/obj/structures/machinery/yautja_machines.dmi';
+	icon_state = "terminal";
+	name = "Radar Console";
+	pixel_x = 16;
+	pixel_y = 4
+	},
+/obj/structure/showcase{
+	desc = "A console equipped with a radar used by the Hunters to detect gear and good hunting grounds.";
+	dir = 4;
+	icon = 'icons/obj/structures/machinery/yautja_machines.dmi';
+	icon_state = "terminal";
+	name = "Radar Console";
+	pixel_x = 16;
+	pixel_y = -9
+	},
+/obj/structure/surface/table/reinforced/prison{
+	color = "#6b675e"
+	},
+/turf/open/floor/corsat/squares,
 /area/yautja_grounds/north_east)
 "to" = (
 /obj/structure/blocker/preserve_edge,
@@ -2314,6 +2361,16 @@
 	},
 /turf/open/floor/engine/cult,
 /area/yautja_grounds/north_west)
+"Ch" = (
+/obj/structure/cable/white{
+	icon_state = "2-6";
+	level = 2;
+	pixel_x = -20;
+	pixel_y = -9;
+	layer = 2
+	},
+/turf/open/gm/grass/grass1,
+/area/yautja_grounds/south)
 "Ci" = (
 /obj/structure/prop/ice_colony/tiger_rug{
 	icon_state = "White";
@@ -2454,10 +2511,11 @@
 /area/yautja_grounds/jungle/west)
 "Dl" = (
 /obj/structure/surface/rack,
-/obj/item/ammo_magazine/rifle/type71/heap,
-/obj/item/ammo_magazine/rifle/type71/heap,
-/obj/item/ammo_magazine/rifle/type71/heap,
-/obj/item/ammo_magazine/rifle/type71/heap,
+/obj/item/ammo_magazine/rifle/type71,
+/obj/item/ammo_magazine/rifle/type71,
+/obj/item/ammo_magazine/rifle/type71,
+/obj/item/ammo_magazine/rifle/type71,
+/obj/item/ammo_magazine/rifle/type71,
 /turf/open/floor/wood,
 /area/yautja_grounds/prep_room/inside)
 "Dr" = (
@@ -3409,6 +3467,20 @@
 /obj/structure/window/framed/colony/reinforced/hull/yautja,
 /turf/open/floor/plating,
 /area/yautja_grounds/north_east)
+"NO" = (
+/obj/structure/barricade/handrail/strata{
+	dir = 4;
+	layer = 4.12
+	},
+/obj/structure/barricade/handrail/strata{
+	dir = 1
+	},
+/obj/structure/barricade/handrail/strata{
+	dir = 8;
+	layer = 3
+	},
+/turf/open/floor/engine/cult,
+/area/yautja_grounds/north_west)
 "NW" = (
 /obj/structure/flora/grass/tallgrass/ice/corner{
 	dir = 4;
@@ -3429,9 +3501,12 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
-/obj/item/weapon/twohanded/lungemine/damaged,
-/obj/item/weapon/twohanded/lungemine/damaged,
-/obj/item/weapon/twohanded/lungemine/damaged,
+/obj/item/weapon/gun/rifle/ar10,
+/obj/item/ammo_magazine/rifle/ar10,
+/obj/item/ammo_magazine/rifle/ar10,
+/obj/item/ammo_magazine/rifle/ar10,
+/obj/item/ammo_magazine/rifle/ar10,
+/obj/item/ammo_magazine/rifle/ar10,
 /turf/open/floor/strata/grey_multi_tiles/southwest,
 /area/yautja_grounds/north_west)
 "Op" = (
@@ -8888,7 +8963,7 @@ OD
 OD
 OD
 xh
-OD
+jj
 yD
 gF
 gF
@@ -9009,8 +9084,8 @@ Co
 Wt
 Wt
 Wt
-Wt
 vM
+xh
 xh
 jj
 gF
@@ -10962,7 +11037,7 @@ Rf
 Rf
 Rf
 Rf
-Rf
+NO
 ib
 jj
 gF
@@ -11201,7 +11276,7 @@ wg
 DT
 DT
 gF
-gF
+fD
 gF
 gF
 gF
@@ -11323,7 +11398,7 @@ wg
 wg
 DT
 DT
-DT
+iz
 DT
 gF
 jj
@@ -12380,7 +12455,7 @@ vz
 vz
 UM
 vz
-Ej
+Ch
 Fk
 nt
 Ee
@@ -21700,10 +21775,10 @@ JG
 OK
 fM
 Uu
-ek
-ex
-ex
-ek
+Uu
+tj
+oP
+Uu
 Uu
 fM
 fM
