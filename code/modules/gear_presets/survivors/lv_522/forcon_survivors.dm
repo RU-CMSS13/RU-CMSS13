@@ -288,7 +288,7 @@
 /datum/equipment_preset/survivor/forecon/major
 	name = "Survivor - USCM Reconnaissance Major"
 	assignment = JOB_FORECON_CO
-	skills = /datum/skills/commander
+	skills = /datum/skills/forecon/commander
 	paygrades = list(PAY_SHORT_MO4 = JOB_PLAYTIME_TIER_0)
 	idtype = /obj/item/card/id/gold
 	role_comm_title = "FORECON CO"
