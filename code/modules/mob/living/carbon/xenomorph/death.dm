@@ -1,5 +1,8 @@
 #define DELETE_TIME 1800
 
+/// Doesn't count tier 0
+GLOBAL_VAR_INIT(total_dead_xenos, 0)
+
 /mob/living/carbon/xenomorph/death(cause, gibbed)
 	var/msg = "lets out a waning guttural screech, green blood bubbling from its maw."
 	. = ..(cause, gibbed, msg)
