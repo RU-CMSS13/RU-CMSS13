@@ -76,6 +76,7 @@
 		qdel(src)
 
 #define FLAMER_SENTRY_SNIPER_RANGE 10
+/* RUCM CHANGE
 /obj/structure/machinery/defenses/sentry/flamer/plasma
 	name = "UA 60-FP Plasma Sentry"
 	defense_type = "Plasma"
@@ -99,7 +100,7 @@
 			range_bounds = SQUARE(x, y - (FLAMER_SENTRY_SNIPER_RANGE/2), FLAMER_SENTRY_SNIPER_RANGE)
 
 #undef FLAMER_SENTRY_SNIPER_RANGE
-
+*/
 
 /obj/structure/machinery/defenses/sentry/flamer/wy
 	name = "WY 406-FE2 Smart Sentry"

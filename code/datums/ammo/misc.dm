@@ -80,6 +80,7 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
+/* RUCM CHANGE
 /datum/ammo/flamethrower/sentry_flamer/glob
 	max_range = 14
 	accurate_range = 10
@@ -98,6 +99,7 @@
 /datum/ammo/flamethrower/sentry_flamer/glob/Destroy()
 	qdel(smoke)
 	return ..()
+*/
 
 /datum/ammo/flamethrower/sentry_flamer/mini
 	name = "normal fire"
