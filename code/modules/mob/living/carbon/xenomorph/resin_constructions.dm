@@ -64,6 +64,13 @@
 		to_chat(X, SPAN_WARNING("This area is too unstable to support a construction"))
 		return FALSE
 
+// RUCM Start (Feline "Ксено-чертежи")
+	var/obj/effect/alien/resin/blueprint/alien_blueprint = locate() in T
+	if(alien_blueprint)
+		alien_blueprint.fill_plasma(X)
+		return FALSE
+// RUCM End (Feline "Ксено-чертежи")
+
 	if(!X.check_alien_construction(T, check_doors = !can_build_on_doors))
 		return FALSE
 
