@@ -99,8 +99,8 @@
 		if(SOUTH)
 			range_bounds = SQUARE(x, y - (FLAMER_SENTRY_SNIPER_RANGE/2), FLAMER_SENTRY_SNIPER_RANGE)
 
-
 #undef FLAMER_SENTRY_SNIPER_RANGE
+
 */
 
 /obj/structure/machinery/defenses/sentry/flamer/wy
