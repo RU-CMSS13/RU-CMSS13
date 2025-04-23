@@ -83,6 +83,8 @@
 
 /mob/living/carbon/xenomorph/warrior/stop_pulling()
 	var/datum/behavior_delegate/warrior_base/warrior_delegate = behavior_delegate
+	if(!istype(warrior_delegate))
+		return ..()
 	if(isliving(pulling) && warrior_delegate.lunging)
 		warrior_delegate.lunging = FALSE // To avoid extreme cases of stopping a lunge then quickly pulling and stopping to pull someone else
 		var/mob/living/lunged = pulling
@@ -92,6 +94,8 @@
 
 /mob/living/carbon/xenomorph/warrior/start_pulling(atom/movable/movable_atom, lunge)
 	var/datum/behavior_delegate/warrior_base/warrior_delegate = behavior_delegate
+	if(!istype(warrior_delegate))
+		return ..()
 	if (!check_state())
 		return FALSE
 
@@ -126,6 +130,8 @@
 
 /mob/living/carbon/xenomorph/warrior/proc/stop_lunging(world_time)
 	var/datum/behavior_delegate/warrior_base/warrior_delegate = behavior_delegate
+	if(!istype(warrior_delegate))
+		return FALSE
 	warrior_delegate.lunging = FALSE
 
 /mob/living/carbon/xenomorph/warrior/hitby(atom/movable/movable_atom)
