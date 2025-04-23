@@ -1060,6 +1060,15 @@
 "acK" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prison/cellblock/maxsec/north)
+"acL" = (
+/obj/structure/monorail{
+	dir = 4
+	},
+/obj/effect/landmark/nightmare{
+	insert_tag = "no_CLF_ship"
+	},
+/turf/open/space/basic,
+/area/space)
 "acM" = (
 /obj/structure/pipes/vents/scrubber,
 /obj/structure/machinery/light/double/blue{
@@ -27838,10 +27847,6 @@
 "bBw" = (
 /turf/open/floor/prison/green/southeast,
 /area/prison/monorail/west)
-"bBx" = (
-/obj/structure/machinery/light/double/blue,
-/turf/closed/wall/prison,
-/area/prison/cellblock/mediumsec/north)
 "bBy" = (
 /obj/structure/machinery/light/small/blue{
 	dir = 8
@@ -33752,8 +33757,8 @@
 /turf/open/floor/prison/darkred2/east,
 /area/prison/intake)
 "bUK" = (
-/obj/effect/landmark/corpsespawner/ua_riot,
 /obj/item/clothing/head/helmet/marine/veteran/ua_riot,
+/obj/effect/landmark/corpsespawner/ua_riot/burst,
 /turf/open/floor/prison/ramptop,
 /area/prison/security)
 "bUM" = (
@@ -36407,7 +36412,7 @@
 /turf/open/floor/prison/darkred2,
 /area/prison/security)
 "cdV" = (
-/obj/effect/landmark/corpsespawner/ua_riot,
+/obj/effect/landmark/corpsespawner/ua_riot/burst,
 /turf/open/floor/prison/darkred2,
 /area/prison/security)
 "cdW" = (
@@ -99615,7 +99620,7 @@ wjg
 wjg
 wjg
 lxE
-cvk
+acL
 wjg
 wjg
 wjg
@@ -99779,7 +99784,7 @@ eBd
 ceB
 hZU
 cdC
-bBx
+ccV
 cae
 kzS
 ccV
