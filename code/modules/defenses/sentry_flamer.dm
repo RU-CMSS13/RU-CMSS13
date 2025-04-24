@@ -101,6 +101,7 @@
 
 #undef FLAMER_SENTRY_SNIPER_RANGE
 
+
 /obj/structure/machinery/defenses/sentry/flamer/wy
 	name = "WY 406-FE2 Smart Sentry"
 	icon = 'icons/obj/structures/machinery/defenses/wy_defenses.dmi'
