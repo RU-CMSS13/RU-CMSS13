@@ -145,6 +145,8 @@
 			var/obj/structure/bed/chair/C = null
 			if(istype(user.buckled, /obj/structure/bed/chair))
 				C = user.buckled
+			if(!C)
+				return
 			var/obj/B = user.buckled
 			var/movementdirection = turn(direction,180)
 			if(C)
