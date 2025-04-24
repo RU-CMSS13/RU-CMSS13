@@ -6,8 +6,7 @@
 	burncolor = COLOR_PURPLE
 	burn_sprite = "dynamic"
 	properties = list(
-		PROPERTY_INTENSITY = BURN_LEVEL_TIER_3,
+		PROPERTY_INTENSITY = BURN_LEVEL_TIER_4,
 		PROPERTY_DURATION = BURN_TIME_TIER_3,
 		PROPERTY_RADIUS = 6,
 	)
-	fire_type = FIRE_VARIANT_TYPE_B //Armor Shredding Greenfire
