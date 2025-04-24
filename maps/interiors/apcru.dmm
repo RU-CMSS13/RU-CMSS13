@@ -32,28 +32,22 @@
 /turf/open/void/vehicle,
 /area/space)
 "ae" = (
+/obj/structure/bed/chair/vehicle{
+	dir = 4;
+	pixel_y = 16;
+	pixel_x = -2
+	},
+/obj/structure/bed/chair/vehicle{
+	dir = 4;
+	pixel_x = -2
+	},
+/turf/open/shuttle/vehicle/floor_3_13,
+/area/interior/vehicle/apc)
+"ag" = (
 /obj/structure/interior_wall/apc{
 	icon_state = "door_back"
 	},
-/turf/open/void/vehicle,
-/area/space)
-"af" = (
-/obj/structure/interior_wall/apc{
-	icon_state = "wall"
-	},
 /turf/open/space/basic,
-/area/space)
-"ag" = (
-/obj/structure/interior_wall/apc{
-	icon_state = "corner_small_R";
-	opacity = 0
-	},
-/obj/structure/interior_wall/apc{
-	icon_state = "wheel_front_top_2";
-	pixel_x = 4;
-	pixel_y = -4
-	},
-/turf/open/void/vehicle,
 /area/space)
 "ah" = (
 /obj/structure/interior_wall/apc{
@@ -93,16 +87,14 @@
 /turf/open/void/vehicle,
 /area/space)
 "am" = (
-/obj/structure/machinery/cm_vending/sorted/vehicle_supply{
-	pixel_y = 20
+/obj/structure/vehicle_locker{
+	pixel_y = 28;
+	pixel_x = 6
 	},
-/obj/structure/bed/chair/vehicle{
-	pixel_x = -8
+/obj/effect/landmark/interior/spawn/vehicle_gunner_seat/armor{
+	dir = 4
 	},
-/obj/structure/bed/chair/vehicle{
-	pixel_x = 8
-	},
-/turf/open/shuttle/vehicle/floor_1_8,
+/turf/open/shuttle/vehicle/floor_3_8_1,
 /area/interior/vehicle/apc)
 "an" = (
 /obj/structure/interior_wall/apc{
@@ -176,27 +168,24 @@
 /turf/open/space/basic,
 /area/space)
 "ay" = (
-/obj/effect/landmark/interior/spawn/entrance{
-	alpha = 50;
-	dir = 1;
-	exit_type = /obj/structure/interior_exit/vehicle/apc;
-	name = "Left APC door";
-	pixel_y = 32;
-	tag = "left"
-	},
-/turf/open/shuttle/vehicle/floor_1_2,
+/turf/open/shuttle/vehicle/floor_1_13,
 /area/interior/vehicle/apc)
 "az" = (
-/obj/effect/landmark/interior/spawn/interior_viewport{
-	pixel_x = -6;
-	pixel_y = 23
+/obj/effect/landmark/interior/spawn/interior_camera{
+	dir = 10;
+	pixel_x = -14;
+	pixel_y = 38
 	},
-/obj/structure/machinery/optable,
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecaltop";
-	pixel_y = -2
+/obj/structure/bed/chair/vehicle{
+	dir = 4;
+	pixel_y = 16;
+	pixel_x = -2
 	},
-/turf/open/shuttle/vehicle/med,
+/obj/structure/bed/chair/vehicle{
+	dir = 4;
+	pixel_x = -2
+	},
+/turf/open/shuttle/vehicle/floor_3_10_1,
 /area/interior/vehicle/apc)
 "aA" = (
 /obj/structure/interior_wall/apc{
@@ -221,6 +210,50 @@
 /turf/open/void/vehicle,
 /area/space)
 "aE" = (
+/obj/structure/extinguisher_cabinet/lifeboat{
+	icon = 'icons/obj/vehicles/interiors/general.dmi';
+	pixel_x = 22;
+	pixel_y = 28
+	},
+/obj/structure/machinery/cm_vending/sorted/vehicle_supply{
+	pixel_y = 24
+	},
+/turf/open/shuttle/vehicle/floor_3_13,
+/area/interior/vehicle/apc)
+"aF" = (
+/obj/structure/surface/table/reinforced/toc/west{
+	pixel_y = 4;
+	density = 0
+	},
+/obj/structure/machinery/computer/overwatch/toc{
+	pixel_y = 24;
+	layer = 2.97;
+	density = 0
+	},
+/obj/structure/machinery/computer/groundside_operations/toc{
+	pixel_x = 7;
+	pixel_y = 24
+	},
+/turf/open/shuttle/vehicle/floor_3_7_1,
+/area/interior/vehicle/apc)
+"aH" = (
+/obj/effect/landmark/interior/spawn/weapons_loader,
+/obj/structure/prop/ice_colony/hula_girl{
+	pixel_x = 8;
+	pixel_y = 11;
+	layer = 3.1
+	},
+/turf/open/shuttle/vehicle/floor_3_6,
+/area/interior/vehicle/apc)
+"aK" = (
+/obj/effect/landmark/interior/spawn/interior_viewport{
+	pixel_x = -6;
+	pixel_y = 23
+	},
+/obj/structure/machinery/optable,
+/turf/open/shuttle/vehicle/med,
+/area/interior/vehicle/apc)
+"aL" = (
 /obj/structure/machinery/cm_vending/sorted/medical/blood/vehicle{
 	pixel_x = -20;
 	pixel_y = 23
@@ -229,7 +262,6 @@
 	pixel_x = 2;
 	pixel_y = 23
 	},
-/obj/structure/machinery/iv_drip,
 /obj/effect/decal/medical_decals/permanent{
 	icon_state = "triagedecaltop";
 	pixel_y = -2
@@ -237,152 +269,75 @@
 /obj/effect/decal/medical_decals/permanent{
 	icon_state = "triagedecalbottomright"
 	},
-/turf/open/shuttle/vehicle/med,
-/area/interior/vehicle/apc)
-"aF" = (
-/obj/effect/landmark/interior/spawn/interior_camera{
-	dir = 10;
-	pixel_x = -14;
-	pixel_y = 38
-	},
-/turf/open/shuttle/vehicle,
-/area/interior/vehicle/apc)
-"aH" = (
-/obj/structure/bed/chair/vehicle{
-	pixel_x = 8
-	},
-/obj/structure/bed/chair/vehicle{
-	pixel_x = -8
-	},
-/turf/open/shuttle/vehicle,
-/area/interior/vehicle/apc)
-"aI" = (
-/obj/structure/bed/chair/vehicle{
-	pixel_x = -8
-	},
-/obj/structure/bed/chair/vehicle{
-	pixel_x = 8
-	},
-/obj/structure/extinguisher_cabinet/lifeboat{
-	icon = 'icons/obj/vehicles/interiors/general.dmi';
-	pixel_x = -8;
-	pixel_y = 28
-	},
-/obj/structure/transmitter{
-	pixel_x = 5;
-	pixel_y = 30;
-	phone_id = "M888 Armored Personnel Carrier";
-	name = "APC Telephone";
-	icon = 'icons/obj/vehicles/interiors/general.dmi';
-	phone_category = "Vehicles"
-	},
-/turf/open/shuttle/vehicle/floor_1_2,
-/area/interior/vehicle/apc)
-"aJ" = (
-/obj/structure/vehicle_locker{
-	pixel_y = 28
-	},
-/obj/effect/landmark/interior/spawn/vehicle_gunner_seat/armor{
-	dir = 4
-	},
-/turf/open/shuttle/vehicle/floor_1_6,
-/area/interior/vehicle/apc)
-"aK" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/structure/machinery/recharger,
-/obj/item/device/defibrillator,
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecalbottom"
-	},
-/turf/open/shuttle/vehicle/med,
-/area/interior/vehicle/apc)
-"aL" = (
-/obj/structure/bed/chair/comfy{
-	dir = 8
-	},
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecalbottom"
-	},
-/obj/effect/decal/medical_decals/permanent{
-	icon_state = "triagedecaltopright"
-	},
-/turf/open/shuttle/vehicle/med,
+/obj/structure/machinery/iv_drip,
+/turf/open/shuttle/vehicle/dark_sterile_green_13,
 /area/interior/vehicle/apc)
 "aO" = (
-/obj/effect/landmark/interior/spawn/weapons_loader,
-/turf/open/shuttle/vehicle/floor_1_6,
+/obj/structure/surface/table/reinforced/toc/east{
+	pixel_y = 4;
+	density = 0
+	},
+/obj/effect/landmark/interior/spawn/telephone/toc{
+	pixel_x = 11;
+	pixel_y = 23
+	},
+/obj/structure/bed/chair/vehicle/white{
+	dir = 1;
+	pixel_x = -16;
+	pixel_y = -4
+	},
+/obj/structure/machinery/prop/almayer/CICmap/toc{
+	pixel_y = 23;
+	pixel_x = -7
+	},
+/turf/open/shuttle/vehicle/floor_3_11,
 /area/interior/vehicle/apc)
 "aP" = (
-/obj/structure/surface/table/reinforced/prison{
-	pixel_y = -3
+/obj/structure/machinery/medical_pod/bodyscanner{
+	pixel_y = 4;
+	pixel_x = -8
 	},
-/obj/structure/machinery/computer/groundside_operations{
-	dir = 4;
-	layer = 2.82;
-	pixel_y = -10
-	},
-/obj/structure/machinery/computer/overwatch/almayer{
-	dir = 8;
-	layer = 2.81;
-	pixel_y = 4
-	},
-/turf/open/shuttle/vehicle/floor_1_3_3,
+/turf/open/shuttle/vehicle/med,
 /area/interior/vehicle/apc)
 "aQ" = (
-/obj/structure/bed/chair/comfy{
-	dir = 8
+/obj/effect/decal/medical_decals/permanent{
+	dir = 4;
+	icon_state = "triagedecaldir"
 	},
-/turf/open/shuttle/vehicle,
+/obj/structure/machinery/body_scanconsole{
+	pixel_x = -8
+	},
+/turf/open/shuttle/vehicle/dark_sterile_green_8,
 /area/interior/vehicle/apc)
 "aS" = (
-/turf/open/shuttle/vehicle,
+/turf/open/shuttle/vehicle/floor_1_14,
 /area/interior/vehicle/apc)
 "aU" = (
-/obj/effect/landmark/interior/spawn/vehicle_driver_seat/armor{
-	dir = 4
-	},
 /turf/open/shuttle/vehicle/floor_1_6,
 /area/interior/vehicle/apc)
 "aV" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/structure/machinery/prop/almayer/CICmap,
-/turf/open/shuttle/vehicle/floor_1_3_3,
-/area/interior/vehicle/apc)
-"aW" = (
-/obj/structure/prop/vehicle/sensor_equipment,
-/turf/open/shuttle/vehicle/floor_1_1,
-/area/interior/vehicle/apc)
-"aX" = (
-/obj/effect/landmark/interior/spawn/vehicle_support_gunner_seat/second,
-/obj/structure/prop/vehicle/firing_port_weapon{
-	layer = 4.1;
-	name = "Right M56 FPW handle";
-	pixel_y = 2
-	},
-/turf/open/shuttle/vehicle/floor_1_1,
-/area/interior/vehicle/apc)
-"aY" = (
-/obj/structure/bed/chair/vehicle{
+/obj/structure/machinery/medical_pod/autodoc/unskilled{
+	name = "\improper autodoc emergency medical system";
 	dir = 1;
-	pixel_x = 8
-	},
-/turf/open/shuttle/vehicle/floor_1_6,
-/area/interior/vehicle/apc)
-"aZ" = (
-/obj/structure/bed/chair/vehicle{
-	dir = 1;
-	pixel_x = 8
-	},
-/obj/structure/bed/chair/vehicle{
-	dir = 1;
+	pixel_y = 4;
 	pixel_x = -8
 	},
-/obj/effect/landmark/interior/spawn/interior_viewport{
-	dir = 8;
-	pixel_x = 5;
-	pixel_y = 8
+/turf/open/shuttle/vehicle/med,
+/area/interior/vehicle/apc)
+"aW" = (
+/turf/open/shuttle/vehicle/floor_1_5,
+/area/interior/vehicle/apc)
+"aX" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/structure/machinery/recharger,
+/obj/item/device/defibrillator,
+/turf/open/shuttle/vehicle/floor_3,
+/area/interior/vehicle/apc)
+"aY" = (
+/obj/effect/landmark/interior/spawn/vehicle_driver_seat/armor{
+	dir = 4
 	},
-/turf/open/shuttle/vehicle/floor_1_1,
+/turf/open/shuttle/vehicle/floor_3_9_1,
 /area/interior/vehicle/apc)
 "ba" = (
 /obj/effect/landmark/interior/spawn/entrance{
@@ -391,18 +346,15 @@
 	name = "Right APC door";
 	tag = "right"
 	},
-/turf/open/shuttle/vehicle/floor_1_1,
+/obj/effect/landmark/interior/spawn/interior_viewport{
+	dir = 8;
+	pixel_x = 5;
+	pixel_y = 1
+	},
+/turf/open/shuttle/vehicle/floor_1_12,
 /area/interior/vehicle/apc)
 "bc" = (
-/obj/structure/bed/chair/vehicle{
-	dir = 1;
-	pixel_x = 8
-	},
-/obj/structure/bed/chair/vehicle{
-	dir = 1;
-	pixel_x = -8
-	},
-/turf/open/shuttle/vehicle,
+/turf/open/shuttle/vehicle/floor_3_13,
 /area/interior/vehicle/apc)
 "bd" = (
 /obj/structure/interior_wall/apc{
@@ -422,23 +374,116 @@
 	},
 /turf/open/void/vehicle,
 /area/space)
-"Ty" = (
-/obj/effect/landmark/interior/spawn/vehicle_support_gunner_seat{
-	dir = 1
+"fq" = (
+/obj/effect/landmark/interior/spawn/interior_viewport{
+	dir = 8;
+	pixel_x = 5;
+	pixel_y = 8
 	},
-/obj/structure/prop/vehicle/firing_port_weapon{
+/obj/effect/landmark/interior/spawn/entrance{
+	alpha = 50;
 	dir = 1;
-	name = "Left M56 FPW handle";
-	pixel_y = 17
+	exit_type = /obj/structure/interior_exit/vehicle/apc;
+	name = "Left APC door";
+	pixel_y = 32;
+	tag = "left"
 	},
-/turf/open/shuttle/vehicle/floor_1_7,
+/obj/structure/barricade/handrail{
+	dir = 8;
+	pixel_x = -2;
+	pixel_y = 7
+	},
+/turf/open/shuttle/vehicle/floor_1_11,
 /area/interior/vehicle/apc)
+"kv" = (
+/obj/structure/machinery/sentry_holder/almayer/mini{
+	base_icon_state = "nothing";
+	icon_state = "nothing";
+	icon = 'icons/effects/effects.dmi';
+	name = "hidden lever";
+	require_red_alert = 0;
+	desc = "A some kind of toggle, well integrated into floor design."
+	},
+/turf/open/shuttle/vehicle/floor_0_1_15,
+/area/interior/vehicle/apc)
+"oO" = (
+/obj/structure/bed/chair/vehicle{
+	dir = 8;
+	pixel_x = 2;
+	pixel_y = 16
+	},
+/obj/structure/bed/chair/vehicle{
+	dir = 8;
+	pixel_x = 2
+	},
+/turf/open/shuttle/vehicle/floor_3_9_1,
+/area/interior/vehicle/apc)
+"rQ" = (
+/obj/structure/interior_wall/apc{
+	icon_state = "wheel_front_top_2";
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/obj/structure/interior_wall/apc{
+	icon_state = "corner_small_R";
+	opacity = 0
+	},
+/turf/open/void/vehicle,
+/area/space)
+"HL" = (
+/obj/structure/machinery/autodoc_console{
+	pixel_x = -8
+	},
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecalbottom"
+	},
+/obj/effect/decal/medical_decals/permanent{
+	icon_state = "triagedecaltopright"
+	},
+/obj/structure/bed/roller,
+/turf/open/shuttle/vehicle/dark_sterile_green_14,
+/area/interior/vehicle/apc)
+"Nl" = (
+/obj/structure/bed/chair/vehicle{
+	dir = 8;
+	pixel_x = 2;
+	pixel_y = 16
+	},
+/obj/structure/bed/chair/vehicle{
+	dir = 8;
+	pixel_x = 2
+	},
+/turf/open/shuttle/vehicle/floor_3_8_1,
+/area/interior/vehicle/apc)
+"Rb" = (
+/obj/structure/interior_wall/apc{
+	icon_state = "wall_door_front"
+	},
+/turf/open/void/vehicle,
+/area/space)
+"Ty" = (
+/obj/effect/landmark/interior/spawn/vehicle_support_gunner_seat/second,
+/obj/structure/prop/vehicle/firing_port_weapon{
+	layer = 4.1;
+	name = "Right M56 FPW handle";
+	pixel_y = 2
+	},
+/turf/open/shuttle/vehicle/floor_3_12,
+/area/interior/vehicle/apc)
+"YB" = (
+/obj/structure/interior_wall/apc{
+	icon_state = "wall";
+	alpha = 100;
+	layer = 5.2;
+	pixel_y = 32
+	},
+/turf/open/void/vehicle,
+/area/space)
 
 (1,1,1) = {"
 aa
 aj
 ap
-ar
 ar
 at
 av
@@ -447,7 +492,6 @@ aD
 (2,1,1) = {"
 ab
 ak
-az
 aK
 aP
 aV
@@ -457,48 +501,43 @@ aD
 (3,1,1) = {"
 ac
 al
-aE
 aL
 aQ
-aW
+HL
 ax
 aD
 "}
 (4,1,1) = {"
-ad
-Ty
+Rb
 aF
-aS
-aS
-aS
+az
+ay
+ae
 aX
 be
 "}
 (5,1,1) = {"
-ae
-ay
-aS
-aS
-aS
-aS
+ad
+aO
+oO
+aW
+Nl
+Ty
+YB
+"}
+(6,1,1) = {"
+ag
+fq
+aU
+kv
+aU
 ba
 bd
 "}
-(6,1,1) = {"
-af
-am
-aH
-aS
-aS
-bc
-aZ
-be
-"}
 (7,1,1) = {"
-ag
+rQ
 an
-aI
-aS
+aE
 aS
 bc
 aA
@@ -507,9 +546,8 @@ aD
 (8,1,1) = {"
 ah
 ak
-aJ
-aO
-aU
+am
+aH
 aY
 aB
 aD
@@ -519,7 +557,6 @@ ai
 ao
 aq
 as
-au
 au
 aC
 aD
