@@ -87,7 +87,7 @@
 	fire_delay = 7 SECONDS
 */
 //RUCM START
-	fire_delay = 8 SECONDS
+	fire_delay = 10 SECONDS
 //RUCM END
 	sentry_range = FLAMER_SENTRY_SNIPER_RANGE
 	handheld_type = /obj/item/defenses/handheld/sentry/flamer/plasma
