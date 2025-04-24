@@ -22,6 +22,16 @@
 		leader = mob
 		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Corporate Security Lead!"))
 		arm_equipment(mob, /datum/equipment_preset/goon/lead, TRUE, TRUE)
+// [RU-CMSS13 ADD]
+	else if(medics < max_medics && HAS_FLAG(mob.client.prefs.toggles_ert, PLAY_MEDIC) && check_timelock(mob.client, JOB_SQUAD_MEDIC, time_required_for_job))
+		medics++
+		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Security Medic!"))
+		arm_equipment(mob, /datum/equipment_preset/goon/medic, TRUE, TRUE)
+	else if(engineers < max_engineers && HAS_FLAG(mob.client.prefs.toggles_ert, PLAY_ENGINEER) && check_timelock(mob.client, JOB_SQUAD_ENGI))
+		engineers++
+		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Security Technical!"))
+		arm_equipment(mob, /datum/equipment_preset/goon/engineer, TRUE, TRUE)
+// [RU-CMSS13 ADD-END]
 	else
 		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Corporate Security Officer!"))
 		arm_equipment(mob, /datum/equipment_preset/goon/standard, TRUE, TRUE)
