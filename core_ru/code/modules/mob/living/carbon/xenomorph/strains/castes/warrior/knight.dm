@@ -41,7 +41,7 @@
 /datum/xeno_strain/knight/apply_strain(mob/living/carbon/xenomorph/warrior/warrior)
 	ADD_TRAIT(warrior, TRAIT_WEAK_TO_FLAME, TRAIT_SOURCE_STRAIN)
 	warrior.health_modifier -= XENO_HEALTH_MOD_VERY_LARGE
-//	warrior.armor_modifier += XENO_ARMOR_MOD_SMALL
+	warrior.armor_modifier += XENO_ARMOR_MOD_SMALL
 	warrior.recalculate_everything()
 	warrior.desc = "Чужой с отливающей металлом псевдоплотью. Пусть он выглядит не таким проворным как обычный, но зато явно прочнее."
 
@@ -71,7 +71,7 @@
 		switch(armor_state)
 			if(0)
 				to_chat(bound_xeno, SPAN_XENOHIGHDANGER("Мы атакуем [target_carbon] заряженной атакой!"))
-				to_chat(target_carbon, SPAN_XENOHIGHDANGER("По телу проносится волна боли когда [bound_xeno] наносит мне размашистый удар!"))
+				to_chat(target_carbon, SPAN_XENOHIGHDANGER("По телу проносится волна боли, когда [bound_xeno] наносит мне размашистый удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_3.ogg')
 				original_damage += charged_attack_base		// Заряженный удар базовый
 				target_carbon.make_jittery(100)				// Тряска персонажа
@@ -79,7 +79,7 @@
 
 			if(1)
 				to_chat(bound_xeno, SPAN_XENOHIGHDANGER("Мы атакуем [target_carbon] заряженной атакой!"))
-				to_chat(target_carbon, SPAN_XENOHIGHDANGER("В глазах темнеет когда [bound_xeno] наносит мне размашистый удар!"))
+				to_chat(target_carbon, SPAN_XENOHIGHDANGER("В глазах темнеет, когда [bound_xeno] наносит мне размашистый удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_6.ogg')
 				original_damage += charged_attack_base		// Заряженный удар базовый
 				target_carbon.adjust_effect(4, SLOW)		// Замедление слабое
@@ -89,7 +89,7 @@
 
 			if(2)
 				to_chat(bound_xeno, SPAN_XENOHIGHDANGER("Мы атакуем [target_carbon] заряженной атакой!"))
-				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Глаза заволакивает поволока боли когда [bound_xeno] наносит мне страшный удар!"))
+				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Глаза заволакивает поволока боли, когда [bound_xeno] наносит мне страшный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_9.ogg')
 				original_damage += charged_attack_advanced	// Заряженный удар усиленный +
 				target_carbon.adjust_effect(5, SLOW)		// Замедление слабое
@@ -100,7 +100,7 @@
 
 			if(3)
 				to_chat(bound_xeno, SPAN_XENOHIGHDANGER("Мы атакуем [target_carbon] заряженной атакой!"))
-				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Теряю ориентацию в пространстве и падаю когда [bound_xeno] наносит мне страшный удар!"))
+				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Теряю ориентацию в пространстве, когда [bound_xeno] наносит мне страшный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_12.ogg')
 				original_damage += charged_attack_advanced	// Заряженный удар усиленный +
 				target_carbon.adjust_effect(6, SLOW)		// Замедление слабое
@@ -112,7 +112,7 @@
 
 			if(4)
 				to_chat(bound_xeno, SPAN_XENOHIGHDANGER("Мы атакуем [target_carbon] заряженной атакой!"))
-				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Сознание меркнет когда [bound_xeno] наносит мне чудовищный удар!"))
+				to_chat(target_carbon, SPAN_XENOHIGHDANGER("Теряю ориентацию в пространстве и падаю, когда [bound_xeno] наносит мне чудовищный удар!"))
 				sound_to(target_carbon, 'core_ru/Feline/sound/tinnitus_15.ogg')
 				original_damage += charged_attack_maximum	// Заряженный удар максимальный ++
 				target_carbon.adjust_effect(8, SLOW)		// Замедление слабое
@@ -195,11 +195,11 @@
 	switch(ROUND_TIME)	// Воин доступен с 9 минуты
 		if(0 to 15 MINUTES)				// 1 полная, 2 слабая стадия
 			shield_limit = 200
-		if(15 MINUTES to 30 MINUTES)	// 1-2 полная стадия
+		if(15 MINUTES to 25 MINUTES)	// 1-2 полная стадия
 			shield_limit = 300
-		if(30 MINUTES to 45 MINUTES)	// 1-2 полная, 3 средняя стадия
+		if(25 MINUTES to 40 MINUTES)	// 1-2 полная, 3 средняя стадия
 			shield_limit = 400
-		if(45 MINUTES to 60 MINUTES)	// 1-3 полная, 4 слабая стадия
+		if(40 MINUTES to 50 MINUTES)	// 1-3 полная, 4 слабая стадия
 			shield_limit = 500
 		else
 			shield_limit = 600			// 1-4 полная стадия
@@ -208,22 +208,33 @@
 		return
 
 	switch(armor_state)
-		if(0 to 1)
+		if(0 to 2)
 			if(bound_xeno.speed_modifier != 0)
 				bound_xeno.speed_modifier = 0
 				bound_xeno.recalculate_speed()
-		if(2)
+/*
 			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_6)
 				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_6
 				bound_xeno.recalculate_speed()
+*/
 		if(3)
+			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_6)
+				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_6
+				bound_xeno.recalculate_speed()
+/*
 			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_8)
 				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_8
 				bound_xeno.recalculate_speed()
+*/
 		if(4)
+			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_8)
+				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_8
+				bound_xeno.recalculate_speed()
+/*
 			if(bound_xeno.speed_modifier != XENO_SPEED_SLOWMOD_TIER_10)
 				bound_xeno.speed_modifier = XENO_SPEED_SLOWMOD_TIER_10
 				bound_xeno.recalculate_speed()
+*/
 
 	if(shield)
 		if(shield.amount <= 0)
@@ -351,7 +362,7 @@
 	action_type = XENO_ACTION_ACTIVATE
 	xeno_cooldown = 15 SECONDS
 
-	var/buff_duration = 5 SECONDS
+	var/buff_duration = 10 SECONDS
 
 // Макрос
 /datum/action/xeno_action/verb/verb_skull_breaker()
