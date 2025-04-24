@@ -55,6 +55,7 @@
 #include "game\objects\items\weapons\st_equip.dm"
 #include "game\objects\items\weapons\st_hammer_stacks.dm"
 #include "game\objects\items\pamphlets.dm"
+#include "game\objects\structures\props.dm"
 #include "game\turfs\closed.dm"
 #include "modules\admin\autoreply.dm"
 #include "modules\clothing\suits\marine_armor\st_armor.dm"
