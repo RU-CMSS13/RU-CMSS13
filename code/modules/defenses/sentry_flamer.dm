@@ -83,12 +83,7 @@
 	ammo = new /obj/item/ammo_magazine/sentry_flamer/glob
 	health = 150
 	health_max = 150
-/* RUCM CHANGE
 	fire_delay = 7 SECONDS
-*/
-//RUCM START
-	fire_delay = 10 SECONDS
-//RUCM END
 	sentry_range = FLAMER_SENTRY_SNIPER_RANGE
 	handheld_type = /obj/item/defenses/handheld/sentry/flamer/plasma
 	disassemble_time = 1.5 SECONDS
