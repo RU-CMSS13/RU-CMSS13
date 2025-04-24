@@ -78,8 +78,6 @@
 	var/iff_signal = FACTION_MARINE
 	///Flag for minimap icon
 	var/minimap_flag = MINIMAP_FLAG_USCM
-	///Flag for minimap icon
-	var/minimap_flag = MINIMAP_FLAG_USCM
 	actions_types = list(/datum/action/item_action/toggle)
 	var/scanning = FALSE // controls if MD is in process of scan
 	var/datum/shape/rectangle/square/range_bounds
