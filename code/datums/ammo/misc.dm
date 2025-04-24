@@ -80,12 +80,18 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
-/* RUCM CHANGE
+
 /datum/ammo/flamethrower/sentry_flamer/glob
 	max_range = 14
 	accurate_range = 10
+/* RUCM CHANGE
 	var/datum/effect_system/smoke_spread/phosphorus/smoke
+*/
+//RUCM START
+	flamer_reagent_id = "napalmp"
+//RUCM END
 
+/* RUCM CHANGE
 /datum/ammo/flamethrower/sentry_flamer/glob/New()
 	. = ..()
 	smoke = new()

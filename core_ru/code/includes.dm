@@ -153,5 +153,3 @@
 #include "modules\character_trait\character_trait.dm"
 #include "modules\character_trait\skills.dm"
 #include "modules\reagents\chemistry_reagents\other.dm"
-#include "datums\ammo\misc.dm"
-#include "modules\defenses\sentry_flamer.dm"
