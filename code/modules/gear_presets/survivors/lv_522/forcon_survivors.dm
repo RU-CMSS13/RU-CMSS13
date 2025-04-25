@@ -272,8 +272,10 @@
 	uniform.attach_accessory(new_human,pin)
 	uniform.attach_accessory(new_human,patch_forecon)
 	new_human.equip_to_slot_or_del(uniform, WEAR_BODY)
-//	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/shotgun/pump(new_human), WEAR_R_HAND)
-//	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/shotgun/slugs(new_human), WEAR_L_HAND)
+/*
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/shotgun/pump(new_human), WEAR_R_HAND)
+	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/shotgun/slugs(new_human), WEAR_L_HAND)
+*/
 	..()
 //RUCM START
 	add_forecon_jacket(new_human)
