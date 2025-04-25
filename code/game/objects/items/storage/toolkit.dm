@@ -25,9 +25,9 @@
 		/obj/item/device/assembly,
 		/obj/item/stock_parts,
 		/obj/item/explosive/plastic,
-/* RUCM REMOVE
 		/obj/item/device/defibrillator/synthetic,
-*/
+		/obj/item/stack/repairable/gunlube,
+		/obj/item/stack/repairable/gunkit,
 	)
 	storage_flags = STORAGE_FLAGS_BOX
 	required_skill_for_nest_opening = SKILL_ENGINEER
@@ -55,12 +55,13 @@
 	new /obj/item/circuitboard/apc(src)
 	new /obj/item/circuitboard/apc(src)
 	new /obj/item/cell/high(src)
-	new /obj/item/cell/high(src)
-	new /obj/item/clothing/glasses/welding(src)
+	new /obj/item/explosive/plastic/breaching_charge(src)
+	new /obj/item/explosive/plastic/breaching_charge(src)
 
 
 /obj/item/storage/toolkit/empty/fill_preset_inventory()
 	return
+
 
 /obj/item/storage/toolkit/tactical
 	name = "breaching engineer kit"
@@ -72,4 +73,16 @@
 	new /obj/item/explosive/plastic/breaching_charge/rubber(src)
 	new /obj/item/explosive/plastic(src)
 	new /obj/item/circuitboard/apc(src)
+	new /obj/item/cell/high(src)
+
+
+/obj/item/storage/toolkit/rmc
+
+/obj/item/storage/toolkit/rmc/fill_preset_inventory()
+	new /obj/item/stack/cable_coil/random(src)
+	new /obj/item/circuitboard/apc(src)
+	new /obj/item/circuitboard/apc(src)
+	new /obj/item/circuitboard/apc(src)
+	new /obj/item/cell/high(src)
+	new /obj/item/cell/high(src)
 	new /obj/item/cell/high(src)

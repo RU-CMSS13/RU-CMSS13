@@ -91,10 +91,6 @@
 		if(log.user == last_login)
 			active_convo = log.conversation
 			active_ref = "\ref[log]"
-//RUCM START
-	data["operation_reason"] = SShijack.ship_evac_blocked()
-	data["canLeave"] = SShijack.ship_evac_blocked() ? 0 : SShijack.ship_operation_stage_status > 3
-//RUCM END
 	data["local_active_convo"] = active_convo
 	data["local_active_ref"] = active_ref
 
@@ -435,6 +431,14 @@
 				to_chat(user, SPAN_WARNING("The ordnance request frequency is garbled, wait for reset!"))
 				playsound(src, 'sound/machines/buzz-two.ogg', 15, 1)
 				return FALSE
+			var/nuclear_lock = CONFIG_GET(number/nuclear_lock_marines_percentage)
+			if(nuclear_lock > 0 && nuclear_lock != 100)
+				var/marines_count = SSticker.mode.count_marines() // Counting marines on land and on the ship
+				var/marines_peak = GLOB.peak_humans * nuclear_lock / 100
+				if(marines_count >= marines_peak)
+					to_chat(user, SPAN_WARNING("There are still too many Marines and USCM crew alive on this operation!"))
+					playsound(src, 'sound/machines/buzz-two.ogg', 15, 1)
+					return FALSE
 			if(GLOB.security_level == SEC_LEVEL_DELTA || SSticker.mode.is_in_endgame)
 				to_chat(user, SPAN_WARNING("The mission has failed catastrophically, what do you want a nuke for?!"))
 				playsound(src, 'sound/machines/buzz-two.ogg', 15, 1)
@@ -480,21 +484,17 @@
 			aicore_lockdown(user)
 			return TRUE
 
-//RUCM START
-		if("operation_zone_leave")
-			if(GLOB.security_level < SEC_LEVEL_RED)
-				to_chat(usr, SPAN_WARNING("The ship must be under red alert in order to enact evacuation procedures."))
-				playsound(src, 'sound/machines/buzz-two.ogg', 15, 1)
+		if("update_sentries")
+			var/new_iff = params["chosen_iff"]
+			if(!new_iff)
+				to_chat(user, SPAN_WARNING("ERROR: Unknown setting."))
 				return FALSE
+			if(new_iff == link.faction_label)
+				return FALSE
+			link.change_iff(new_iff)
+			message_admins("ARES: [key_name(user)] updated ARES Sentry IFF to [new_iff].")
+			to_chat(user, SPAN_WARNING("Sentry IFF settings updated!"))
+			return TRUE
 
-			if(SShijack.initiate_ship_evacuation())
-				to_chat(usr, SPAN_WARNING("[MAIN_SHIP_NAME] will be out of signal range with colony in: [gameTimestamp("hh:mm:ss", SHIP_EVACUATION_AUTOMATIC_DEPARTURE)], [MAIN_AI_SYSTEM] still has the right to stop the completion of an operation in the event of a protocol violation!"))
-				log_game("[key_name(usr)] began shutting down the operation.")
-				message_admins("[key_name_admin(usr)] began shutting down the operation [SPAN_ORANGE("(via ARES)")].")
-				. = TRUE
-			else
-				to_chat(usr, SPAN_WARNING("ERROR, [MAIN_AI_SYSTEM] CANNOT CONFIRM THIS ACTION!"))
-				. = TRUE
-//RUCM END
 	if(playsound)
 		playsound(src, "keyboard_alt", 15, 1)

@@ -145,6 +145,8 @@
 	playsound(new_drone, 'sound/effects/xeno_newlarva.ogg', 25, TRUE)
 	new_drone.generate_name()
 
+	msg_admin_niche("[key_name(new_drone)] has joined as a lesser drone at ([x],[y],[z]).")
+
 	return TRUE
 
 /obj/effect/alien/resin/special/pylon/endgame
@@ -338,10 +340,6 @@
 		if(new_xeno.client)
 			if(new_xeno.client.prefs.toggles_flashing & FLASH_POOLSPAWN)
 				window_flash(new_xeno.client)
-//RUCM START
-			if(new_xeno.client?.player_data?.battlepass)
-				SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
-//RUCM END
 
 		linked_hive.stored_larva--
 		linked_hive.hive_ui.update_burrowed_larva()

@@ -22,6 +22,16 @@
 		leader = mob
 		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Corporate Security Lead!"))
 		arm_equipment(mob, /datum/equipment_preset/goon/lead, TRUE, TRUE)
+// [RU-CMSS13 ADD]
+	else if(medics < max_medics && HAS_FLAG(mob.client.prefs.toggles_ert, PLAY_MEDIC) && check_timelock(mob.client, JOB_SQUAD_MEDIC, time_required_for_job))
+		medics++
+		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Security Medic!"))
+		arm_equipment(mob, /datum/equipment_preset/goon/medic, TRUE, TRUE)
+	else if(engineers < max_engineers && HAS_FLAG(mob.client.prefs.toggles_ert, PLAY_ENGINEER) && check_timelock(mob.client, JOB_SQUAD_ENGI))
+		engineers++
+		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Security Technical!"))
+		arm_equipment(mob, /datum/equipment_preset/goon/engineer, TRUE, TRUE)
+// [RU-CMSS13 ADD-END]
 	else
 		to_chat(mob, SPAN_ROLE_HEADER("You are a Weyland-Yutani Corporate Security Officer!"))
 		arm_equipment(mob, /datum/equipment_preset/goon/standard, TRUE, TRUE)
@@ -82,7 +92,7 @@
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), mob, SPAN_BOLD("Objectives:</b> [objectives]")), 1 SECONDS)
 
 /datum/emergency_call/goon/chem_retrieval/print_backstory(mob/living/carbon/human/backstory_human)
-	if(backstory_human.job == JOB_WY_GOON_RESEARCHER)
+	if(backstory_human.job == JOB_WY_RESEARCHER)
 		to_chat(backstory_human, SPAN_BOLD("You were born [pick(75;"in Europe", 15;"in Asia", 10;"on Mars")] to a wealthy family."))
 		to_chat(backstory_human, SPAN_BOLD("Joining the ranks of Weyland-Yutani was the perfect way to further your research goals."))
 		to_chat(backstory_human, SPAN_BOLD("You have a very in depth understanding of xenomorphs."))

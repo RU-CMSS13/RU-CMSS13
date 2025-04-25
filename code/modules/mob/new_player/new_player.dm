@@ -119,10 +119,13 @@
 	if(!GLOB.enter_allowed)
 		to_chat(usr, SPAN_WARNING("There is an administrative lock on entering the game! (The dropship likely crashed into the Almayer. This should take at most 20 minutes.)"))
 		return
+
+	if(!client?.prefs.update_slot(player_rank.title))
+		return
+
 	if(!GLOB.RoleAuthority.assign_role(src, player_rank, latejoin = TRUE))
 		to_chat(src, SPAN_WARNING("[rank] is not available. Please try another."))
 		return
-
 
 	spawning = TRUE
 	close_spawn_windows()
@@ -161,17 +164,9 @@
 					hive.stored_larva++
 					hive.hive_ui.update_burrowed_larva()
 
-/*
 	if(character.mind && character.mind.player_entity)
 		var/datum/entity/player_entity/player = character.mind.player_entity
 		if(player.get_playtime(STATISTIC_HUMAN) == 0 && player.get_playtime(STATISTIC_XENO) == 0)
-*/
-//RUCM START
-	if(character.mind && character.client.player_data)
-		var/list/xeno_playtimes = LAZYACCESS(character.client.player_data.playtime_data, "stored_xeno_playtime")
-		var/list/marine_playtimes = LAZYACCESS(character.client.player_data.playtime_data, "stored_human_playtime")
-		if(!xeno_playtimes && !marine_playtimes)
-//RUCM END
 			msg_admin_niche("NEW JOIN: <b>[key_name(character, 1, 1, 0)]</b>. IP: [character.lastKnownIP], CID: [character.computer_id]")
 		if(character.client)
 			var/client/client = character.client
@@ -181,10 +176,6 @@
 				msg_sea("NEW PLAYER: <b>[key_name(character, 0, 1, 0)]</b> only has [(round(client.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1))] hours as a human. Current role: [get_actual_job_name(character)] - Current location: [get_area(character)]")
 
 	character.client.init_verbs()
-//RUCM START
-	if(character.client?.player_data?.battlepass)
-		SSbattlepass.marine_battlepass_earners |= character.client.player_data.battlepass
-//RUCM END
 	qdel(src)
 
 
@@ -249,7 +240,7 @@
 		dat += "<a href='byond://?src=\ref[src];lobby_choice=SelectedJob;antag=0;job_selected=[J.title]'>[J.disp_title] ([J.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	show_browser(src, dat, "Late Join", "latechoices", "size=420x700")
+	show_browser(src, dat, "Late Join", "latechoices", width = 420, height = 700)
 
 /mob/new_player/proc/late_choices_upp()
 	var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
@@ -312,7 +303,7 @@
 		dat += "<a href='byond://?src=\ref[src];lobby_choice=SelectedJob;antag=1;job_selected=[J.title]'>[J.disp_title] ([J.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	show_browser(src, dat, "Late Join", "latechoices", "size=420x700")
+	show_browser(src, dat, "Late Join", "latechoices", width = 420, height = 700)
 
 
 /mob/new_player/proc/create_character(is_late_join = FALSE)
@@ -380,6 +371,9 @@
 	close_browser(src, "latechoices") //closes late choices window
 	close_browser(src, "playersetup") //closes the player setup window
 	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = SOUND_CHANNEL_LOBBY) // Stops lobby music.
+
+	client?.prefs.close_all_pickers()
+
 	if(src.open_uis)
 		for(var/datum/nanoui/ui in src.open_uis)
 			if(ui.allowed_user_stat == -1)
