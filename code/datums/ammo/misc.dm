@@ -88,7 +88,7 @@
 	var/datum/effect_system/smoke_spread/phosphorus/smoke
 */
 //RUCM START
-	flamer_reagent_id = "napalmp"
+	flamer_reagent_id = "napalmb"
 //RUCM END
 
 /* RUCM CHANGE
