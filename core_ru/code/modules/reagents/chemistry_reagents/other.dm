@@ -6,7 +6,7 @@
 	burncolor = COLOR_PURPLE
 	burn_sprite = "dynamic"
 	properties = list(
-		PROPERTY_INTENSITY = BURN_LEVEL_TIER_4,
+		PROPERTY_INTENSITY = BURN_LEVEL_TIER_5,
 		PROPERTY_DURATION = BURN_TIME_TIER_1,
 		PROPERTY_RADIUS = 6,
 	)
