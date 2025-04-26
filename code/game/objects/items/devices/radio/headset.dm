@@ -630,7 +630,18 @@
 
 /obj/item/device/radio/headset/almayer/mcl/Initialize()
 	. = ..()
-	spy_bug.nametag = "CL Radio"
+	if(spy_bug)
+		spy_bug.nametag = "CL Radio"
+
+/obj/item/device/radio/headset/almayer/mcl/sec
+	name = "corporate security radio headset"
+	spy_bug_type = null
+
+	misc_tracking = TRUE
+	locate_setting = TRACKER_CL
+	inbuilt_tracking_options = list(
+		"Corporate Liaison" = TRACKER_CL
+	)
 
 /obj/item/device/radio/headset/almayer/reporter
 	name = "reporter radio headset"
@@ -1040,6 +1051,14 @@
 	initial_keys = list(/obj/item/device/encryptionkey/colony, /obj/item/device/encryptionkey/WY)
 	has_hud = TRUE
 	hud_type = MOB_HUD_FACTION_WY
+
+/obj/item/device/radio/headset/distress/WY/guard
+	misc_tracking = TRUE
+	locate_setting = TRACKER_CL
+	inbuilt_tracking_options = list(
+		"Corporate Liaison" = TRACKER_CL
+	)
+	additional_hud_types = list(MOB_HUD_FACTION_WY)
 
 /obj/item/device/radio/headset/distress/dutch
 	name = "Dutch's Dozen headset"

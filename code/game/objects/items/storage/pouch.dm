@@ -165,8 +165,17 @@
 	new /obj/item/attachable/bayonet(src)
 	new /obj/item/stack/medical/splint(src)
 
-/obj/item/storage/pouch/survival/full/black
+/obj/item/storage/pouch/survival/full/wy
 	icon_state = "soctools"
+
+/obj/item/storage/pouch/survival/full/wy/fill_preset_inventory()
+	new /obj/item/device/flashlight/combat(src)
+	new /obj/item/tool/crowbar/tactical(src)
+	new /obj/item/storage/pill_bottle/packet/tricordrazine(src)
+	new /obj/item/stack/medical/bruise_pack(src)
+	new /obj/item/device/radio(src)
+	new /obj/item/attachable/bayonet/wy(src)
+	new /obj/item/stack/medical/splint(src)
 
 /obj/item/storage/pouch/survival/synth
 	name = "synth survival pouch"
@@ -221,6 +230,10 @@
 /obj/item/storage/pouch/firstaid/full/alternate
 	desc = "Contains a first-aid autoinjector, bandages, ointment, and splints."
 
+/obj/item/storage/pouch/firstaid/full/alternate/wy
+	name = "W-Y first-aid pouch"
+	icon_state = "wy_firstaid"
+
 /obj/item/storage/pouch/firstaid/full/alternate/fill_preset_inventory()
 	new /obj/item/reagent_container/hypospray/autoinjector/tricord(src)
 	new /obj/item/stack/medical/splint(src)
@@ -229,6 +242,10 @@
 
 /obj/item/storage/pouch/firstaid/full/pills
 	desc = "Contains a variety of pill packets for treating many injuries."
+
+/obj/item/storage/pouch/firstaid/full/pills/wy
+	name = "W-Y first-aid pouch"
+	icon_state = "wy_firstaid"
 
 /obj/item/storage/pouch/firstaid/full/pills/fill_preset_inventory()
 	new /obj/item/storage/pill_bottle/packet/bicaridine(src)
