@@ -10045,27 +10045,21 @@
 	},
 /obj/structure/machinery/door_control/cl/office/office_window{
 	pixel_x = -6;
-	pixel_y = -3;
 	name = "Office Internal Windows Shutters";
 	id = "cl_office_windows2"
 	},
 /obj/structure/machinery/door_control/cl/office/office_window{
 	pixel_x = -6;
-	pixel_y = 4;
+	pixel_y = 7;
 	name = "Office External Windows Shutters"
 	},
 /obj/structure/machinery/door_control/cl/office/office_door{
 	pixel_x = -16;
-	pixel_y = 4
+	pixel_y = 7
 	},
 /obj/structure/surface/table/reinforced/black,
 /obj/structure/machinery/door_control/cl/office/office_door_remote{
-	pixel_x = -16;
-	pixel_y = -3
-	},
-/obj/item/spacecash/c500{
-	pixel_y = 12;
-	pixel_x = -13
+	pixel_x = -16
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/west,
 /area/almayer/command/corporateliaison)
@@ -11802,6 +11796,10 @@
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "aDb" = (
+/obj/item/spacecash/c500{
+	pixel_y = 12;
+	pixel_x = -13
+	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/southwest,
 /area/almayer/command/corporateliaison)
 "aDc" = (
@@ -29567,6 +29565,14 @@
 	pixel_x = 8;
 	pixel_y = 9
 	},
+/obj/item/paper_bin{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/tool/pen/clicky{
+	pixel_x = -1;
+	pixel_y = 2
+	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/east,
 /area/almayer/command/corporateliaison)
 "ecR" = (
@@ -34833,15 +34839,14 @@
 "guC" = (
 /obj/structure/machinery/door_control/cl/office/lobby_door{
 	pixel_x = -4;
-	pixel_y = -11
+	pixel_y = -8
 	},
 /obj/structure/machinery/door_control/cl/office/lobby_window{
 	pixel_x = 6;
-	pixel_y = -11
+	pixel_y = -8
 	},
 /obj/structure/machinery/door_control/cl/office/office_door{
-	pixel_x = 6;
-	pixel_y = -18
+	pixel_x = 6
 	},
 /obj/structure/surface/table/almayer{
 	color = "#848484"
@@ -34853,27 +34858,22 @@
 	pixel_x = -27;
 	pixel_y = 8
 	},
-/obj/item/paper_bin{
-	pixel_x = -4;
-	pixel_y = 8
-	},
 /obj/structure/sign/calendar/wy{
 	pixel_y = 23;
 	layer = 4.13;
 	wrenchable = 1
 	},
-/obj/item/device/flashlight/lamp/green{
-	pixel_y = -2;
-	layer = 4.13;
-	pixel_x = 5
-	},
-/obj/item/tool/pen/clicky{
-	pixel_x = -1;
-	pixel_y = 2
-	},
 /obj/structure/machinery/door_control/cl/office/office_door_remote{
-	pixel_x = -4;
-	pixel_y = -18
+	pixel_x = -4
+	},
+/obj/item/device/flashlight/lamp/green{
+	pixel_y = -14;
+	layer = 4.13;
+	pixel_x = -4
+	},
+/obj/item/reagent_container/food/drinks/coffeecup/wy{
+	pixel_x = -5;
+	pixel_y = 10
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/southeast,
 /area/almayer/command/corporateliaison)
