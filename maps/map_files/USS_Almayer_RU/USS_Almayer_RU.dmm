@@ -34859,14 +34859,6 @@
 	pixel_x = -5;
 	pixel_y = 10
 	},
-/obj/structure/machinery/door_control{
-	id = "cl_office_door";
-	name = "Door Control";
-	normaldoorcontrol = 1;
-	req_access_txt = "200";
-	pixel_x = 6;
-	pixel_y = 7
-	},
 /obj/structure/machinery/door_control/cl/office/evac{
 	pixel_x = -27;
 	pixel_y = 8
@@ -59366,6 +59358,12 @@
 	pixel_y = 12;
 	anchored = 1;
 	layer = 4.13
+	},
+/obj/structure/machinery/door_control{
+	id = "cl_office_door";
+	name = "Door Control";
+	normaldoorcontrol = 1;
+	req_access_txt = "200"
 	},
 /turf/open/floor/hybrisa/carpet/carpet_colorable/blue_grey,
 /area/almayer/command/corporateliaison)
