@@ -6579,7 +6579,6 @@
 /obj/structure/machinery/light{
 	dir = 8
 	},
-/obj/structure/surface/table/woodentable/fancy,
 /obj/item/storage/fancy/cigar/tarbacks{
 	pixel_y = 8
 	},
@@ -6589,6 +6588,7 @@
 /obj/item/tool/stamp/denied{
 	pixel_x = 5
 	},
+/obj/structure/surface/table/woodentable/fancy,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "arm" = (
@@ -10054,19 +10054,15 @@
 	pixel_y = 4;
 	name = "Office External Windows Shutters"
 	},
-/obj/structure/machinery/door_control{
-	id = "cl_office_door";
-	name = "Office Door Control";
-	normaldoorcontrol = 1;
-	pixel_y = -3;
-	req_one_access_txt = "200";
-	pixel_x = -16
-	},
 /obj/structure/machinery/door_control/cl/office/office_door{
 	pixel_x = -16;
 	pixel_y = 4
 	},
 /obj/structure/surface/table/reinforced/black,
+/obj/structure/machinery/door_control/cl/office/office_door_remote{
+	pixel_x = -16;
+	pixel_y = -3
+	},
 /obj/item/spacecash/c500{
 	pixel_y = 12;
 	pixel_x = -13
@@ -34843,14 +34839,6 @@
 	pixel_x = 6;
 	pixel_y = -11
 	},
-/obj/structure/machinery/door_control{
-	id = "cl_office_door";
-	name = "Office Door Control";
-	normaldoorcontrol = 1;
-	pixel_y = -18;
-	req_one_access_txt = "200";
-	pixel_x = -4
-	},
 /obj/structure/machinery/door_control/cl/office/office_door{
 	pixel_x = 6;
 	pixel_y = -18
@@ -34882,6 +34870,10 @@
 /obj/item/tool/pen/clicky{
 	pixel_x = -1;
 	pixel_y = 2
+	},
+/obj/structure/machinery/door_control/cl/office/office_door_remote{
+	pixel_x = -4;
+	pixel_y = -18
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/southeast,
 /area/almayer/command/corporateliaison)
@@ -68977,11 +68969,11 @@
 /obj/structure/machinery/newscaster/security_unit{
 	pixel_x = 32
 	},
-/obj/structure/surface/table/woodentable/fancy,
 /obj/item/device/flashlight/lamp{
 	pixel_x = 4;
 	pixel_y = 4
 	},
+/obj/structure/surface/table/woodentable/fancy,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "vZx" = (
