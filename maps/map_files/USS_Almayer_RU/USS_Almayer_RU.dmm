@@ -6748,12 +6748,11 @@
 /turf/open/floor/almayer/dark_sterile,
 /area/almayer/medical/lower_medical_medbay)
 "arE" = (
-/obj/structure/machinery/light{
-	dir = 4;
-	invisibility = 101
-	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
+	},
+/obj/structure/machinery/light/small{
+	dir = 4
 	},
 /turf/open/floor/almayer/dark_sterile,
 /area/almayer/command/corporateliaison)
@@ -7469,6 +7468,9 @@
 	},
 /obj/structure/window/reinforced/tinted/frosted,
 /obj/item/tool/soap/deluxe,
+/obj/structure/machinery/light/small{
+	dir = 1
+	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/command/corporateliaison)
 "atl" = (
@@ -9643,8 +9645,8 @@
 	pixel_y = -3
 	},
 /obj/item/spacecash/c500{
-	pixel_y = 12;
-	pixel_x = -13
+	pixel_y = 20;
+	pixel_x = -16
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/west,
 /area/almayer/command/corporateliaison)
@@ -14123,9 +14125,9 @@
 	pixel_x = 6;
 	pixel_y = -10
 	},
-/obj/structure/machinery/computer/corporate/button{
-	pixel_x = -5;
-	pixel_y = 6
+/obj/item/folder/black_random{
+	pixel_y = 6;
+	pixel_x = -7
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/northeast,
 /area/almayer/command/corporateliaison)
@@ -24672,13 +24674,17 @@
 	pixel_x = 3;
 	pixel_y = 7
 	},
-/obj/item/tool/pen/clicky{
-	pixel_x = 6;
-	pixel_y = 1
-	},
 /obj/structure/machinery/recharger{
 	pixel_x = -13;
 	pixel_y = 7
+	},
+/obj/item/clipboard{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/obj/item/tool/pen/clicky{
+	pixel_x = 6;
+	pixel_y = 1
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -34563,6 +34569,10 @@
 	pixel_x = 8;
 	pixel_y = 4
 	},
+/obj/item/ammo_box/magazine/misc/mre/wy{
+	pixel_y = 5;
+	pixel_x = 5
+	},
 /turf/open/floor/hybrisa/metal/bluemetal1/north,
 /area/almayer/command/corporateliaison)
 "gnR" = (
@@ -36442,16 +36452,14 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_m_s)
 "hfm" = (
-/obj/structure/machinery/atm{
-	pixel_y = 32
-	},
 /obj/structure/machinery/light{
 	dir = 4
 	},
-/obj/structure/coatrack{
-	pixel_x = 11
+/obj/structure/machinery/photocopier/wyphotocopier,
+/obj/structure/sign/poster/safety{
+	pixel_y = 32
 	},
-/turf/open/hybrisa/dropship/dropship4,
+/turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
 "hfw" = (
 /obj/structure/flora/pottedplant{
@@ -36802,9 +36810,6 @@
 	req_one_access_txt = "200"
 	},
 /obj/structure/surface/table/reinforced/black,
-/obj/item/folder/black_random{
-	pixel_y = 22
-	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "hpk" = (
@@ -49949,8 +49954,8 @@
 	pixel_x = 1;
 	color = "#b54b3d"
 	},
-/obj/structure/machinery/newscaster{
-	pixel_y = 30
+/obj/structure/machinery/atm{
+	pixel_y = 32
 	},
 /turf/open/floor/hybrisa/carpet/carpetreddeco,
 /area/almayer/command/corporateliaison)
