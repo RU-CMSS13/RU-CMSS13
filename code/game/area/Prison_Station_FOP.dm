@@ -429,6 +429,16 @@
 	ambience_exterior = AMBIENCE_LAB
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
+// [RU-CMSS13 ADD]
+
+/area/prison/research/secret/WYLab
+	name = "\improper WY Research Laboratory"
+	icon_state = "wy"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+
+// [RU-CMSS13 ADD-END]
+
 /area/prison/research/secret/dissection
 	name = "\improper Dissection"
 	icon_state = "toxmix"
