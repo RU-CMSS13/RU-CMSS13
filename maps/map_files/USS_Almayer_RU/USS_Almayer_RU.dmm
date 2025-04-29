@@ -6612,6 +6612,7 @@
 /obj/structure/machinery/light{
 	dir = 4
 	},
+/obj/effect/landmark/start/corp_sec,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "arl" = (
@@ -7225,6 +7226,7 @@
 /obj/structure/machinery/light{
 	dir = 4
 	},
+/obj/effect/landmark/start/liaison,
 /turf/open/floor/kutjevo/fake_wood,
 /area/almayer/command/corporateliaison)
 "asJ" = (
@@ -7423,12 +7425,11 @@
 /turf/open/floor/almayer/cargo,
 /area/almayer/engineering/lower/workshop/hangar)
 "atf" = (
-/obj/structure/extinguisher_cabinet/alt{
-	pixel_y = 30;
-	pixel_x = 9
-	},
 /obj/structure/bedsheetbin{
 	pixel_y = 6
+	},
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_y = 32
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -23597,7 +23598,8 @@
 /area/almayer/medical/lower_medical_medbay)
 "bXx" = (
 /obj/structure/disposalpipe/junction{
-	dir = 4
+	dir = 8;
+	icon_state = "pipe-j2"
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -36801,13 +36803,6 @@
 /obj/structure/machinery/door_control/cl/quarter/windows{
 	pixel_y = -12;
 	pixel_x = -4
-	},
-/obj/structure/machinery/door_control{
-	id = "RoomDivider";
-	pixel_y = -12;
-	pixel_x = 4;
-	name = "Room Divider";
-	req_one_access_txt = "200"
 	},
 /obj/structure/surface/table/reinforced/black,
 /turf/open/floor/hybrisa/wood/blackwood,
@@ -69279,6 +69274,7 @@
 /obj/structure/bed/chair/comfy/hybrisa/black{
 	dir = 8
 	},
+/obj/effect/landmark/start/liaison,
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/southwest,
 /area/almayer/command/corporateliaison)
 "wfE" = (
@@ -69403,6 +69399,10 @@
 "whZ" = (
 /obj/structure/sign/safety/refridgeration{
 	pixel_y = -32
+	},
+/obj/structure/extinguisher_cabinet/alt{
+	pixel_y = -31;
+	pixel_x = 7
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
