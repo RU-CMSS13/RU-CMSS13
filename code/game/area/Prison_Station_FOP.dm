@@ -526,8 +526,6 @@
 	name = "\improper Secret Room"
 	icon_state = "tcomsatcham"
 
-// [RU-CMSS13 ADD]
-
 //LZ CODE
 //LZ 1
 
