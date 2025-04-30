@@ -55,7 +55,3 @@ GLOBAL_LIST_EMPTY(spawned_survivors)
 /datum/job/civilian/survivor
 	var/static/total_spawned = 0
 
-/datum/job/civilian/survivor/spawn_in_player(mob/new_player/NP)
-	. = ..()
-	var/mob/living/carbon/human/H = .
-	GLOB.spawned_survivors += WEAKREF(H)
