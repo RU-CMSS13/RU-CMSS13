@@ -21,9 +21,6 @@
 	flags_round_type = MODE_INFESTATION|MODE_FOG_ACTIVATED|MODE_NEW_SPAWN
 	static_comms_amount = 1
 	var/round_status_flags
-
-	var/research_allocation_interval = 10 MINUTES
-	var/next_research_allocation = 0
 	var/next_stat_check = 0
 	var/list/running_round_stats = list()
 	var/list/lz_smoke = list()
@@ -36,12 +33,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-/* RUCM CHANGE
 /* Pre-pre-startup */
 /datum/game_mode/colonialmarines/can_start(bypass_checks = FALSE)
 	initialize_special_clamps()
 	return TRUE
-*/
 
 /datum/game_mode/colonialmarines/announce()
 	to_chat_spaced(world, type = MESSAGE_TYPE_SYSTEM, html = SPAN_ROUNDHEADER("The current map is - [SSmapping.configs[GROUND_MAP].map_name]!"))
@@ -140,6 +135,8 @@
 	addtimer(CALLBACK(src, PROC_REF(map_announcement)), 20 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(start_lz_hazards)), DISTRESS_LZ_HAZARD_START)
 	addtimer(CALLBACK(src, PROC_REF(ares_command_check)), 2 MINUTES)
+	addtimer(CALLBACK(SSentity_manager, TYPE_PROC_REF(/datum/controller/subsystem/entity_manager, select), /datum/entity/survivor_survival), 7 MINUTES)
+	GLOB.chemical_data.reroll_chemicals()
 
 	return ..()
 
@@ -435,9 +432,8 @@
 		check_hijack_explosions()
 		check_ground_humans()
 
-	if(next_research_allocation < world.time)
-		GLOB.chemical_data.update_credits(GLOB.chemical_data.research_allocation_amount)
-		next_research_allocation = world.time + research_allocation_interval
+	if(GLOB.chemical_data.next_reroll < world.time)
+		GLOB.chemical_data.reroll_chemicals()
 
 	if(!round_finished)
 		var/datum/hive_status/hive
@@ -552,6 +548,8 @@
 /datum/game_mode/colonialmarines/ds_first_drop(obj/docking_port/mobile/marine_dropship)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(show_blurb_uscm)), DROPSHIP_DROP_MSG_DELAY)
 	addtimer(CALLBACK(src, PROC_REF(warn_resin_clear), marine_dropship), DROPSHIP_DROP_FIRE_DELAY)
+	DB_ENTITY(/datum/entity/survivor_survival) // Record surv survival right now
+	addtimer(CALLBACK(SSentity_manager, TYPE_PROC_REF(/datum/controller/subsystem/entity_manager, select), /datum/entity/survivor_survival), 7 MINUTES) // And 7 minutes after drop. By then, marines will have found them, most likely
 
 	add_current_round_status_to_end_results("First Drop")
 	clear_lz_hazards()
@@ -720,6 +718,8 @@
 
 	add_current_round_status_to_end_results("Round End")
 	handle_round_results_statistics_output()
+
+	GLOB.round_statistics?.save()
 
 	return 1
 
@@ -895,3 +895,4 @@
 #undef HIJACK_EXPLOSION_COUNT
 #undef MAJORITY
 #undef MARINE_MAJOR_ROUND_END_DELAY
+#undef GROUNDSIDE_XENO_MULTIPLIER
