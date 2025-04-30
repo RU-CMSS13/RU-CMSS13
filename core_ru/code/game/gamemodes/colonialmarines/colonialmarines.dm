@@ -11,9 +11,6 @@
 		if(possible_xenomorphs.len + possible_queens.len < xeno_required_num) //We don't have enough aliens, we don't consider people rolling for only Queen.
 			to_world("Not enough players have chosen to be a xenomorph in their character setup. <b>Aborting</b>.")
 			return FALSE
-	initialize_special_clamps()
-	return TRUE
-
 		var/players = 0
 		for(var/mob/new_player/player in GLOB.new_player_list)
 			if(player.client && player.ready)
