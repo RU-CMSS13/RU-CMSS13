@@ -190,12 +190,6 @@
 	var/ability_charge_rate = ABILITY_CHARGE_NORMAL
 	var/ability_cost = ABILITY_COST_NO_ABILITY
 	///Whether the ability is ready to trigger
-	var/ability_primed = FALSE
-
-/obj/item/weapon/yautja/dropped()
-	if(ability_primed)
-		ability_primed = FALSE
-	..()
 
 /obj/item/weapon/yautja/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
@@ -205,10 +199,8 @@
 		var/mob/living/carbon/xenomorph/xenomorph = target
 		xenomorph.AddComponent(/datum/component/status_effect/interference, 30, 30)
 
-	if(!ability_cost)
-		return
-
-	progress_ability(target, user)
+	if(ability_cost)
+		progress_ability(target, user)
 
 /obj/item/weapon/yautja/proc/progress_ability(mob/living/target, mob/living/carbon/human/user)
 	if(target == user || target.stat == DEAD || isanimal(target))
@@ -296,7 +288,7 @@
 	var/parrying
 	var/parrying_duration = 1 SECONDS
 	var/cur_parrying_cooldown
-	var/parrying_delay = 5 SECONDS
+	var/parrying_delay = 3 SECONDS
 
 /obj/item/weapon/yautja/sword/attack(mob/living/target, mob/living/carbon/human/user, riposte)
 	if(parrying && !riposte)
@@ -479,21 +471,10 @@
 		user.spin(5, 1)
 		..() //Do it again! CRIT! This will be replaced by a bleed effect.
 
-/obj/item/weapon/yautja/scythe/attack_self(mob/living/user)
-	..()
-	ability_primed = !ability_primed
-	var/message = "You tighten your grip on [src], preparing to whirl it in a spin."
-	if(!ability_primed)
-		message = "You relax your grip on [src]."
-	to_chat(user, SPAN_WARNING(message))
-
 /obj/item/weapon/yautja/scythe/weapon_ability(mob/living/user)
 	. = ..()
 	if(ability_charge < ability_cost)
 		to_chat(user, SPAN_WARNING("The blood reservoir is not full enough to do this! You need [ability_cost - ability_charge] more blood in your reservoir"))
-		return FALSE
-	if(!ability_primed)
-		to_chat(user, SPAN_WARNING("You need a stronger grip for this!"))
 		return FALSE
 	user.spin_circle(2)
 	for(var/mob/living/carbon/target in orange(1, user) - user)
@@ -535,7 +516,7 @@
 	name = "combi-stick"
 	desc = "A compact yet deadly personal weapon. Can be concealed when folded. Functions well as a throwing weapon or defensive tool. A common sight in Yautja packs due to its versatility."
 	icon_state = "combistick"
-	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT
+	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT|ITEM_UNCATCHABLE
 	flags_equip_slot = SLOT_BACK
 	flags_item = TWOHANDED|ITEM_PREDATOR|ADJACENT_CLICK_DELAY
 	w_class = SIZE_LARGE
@@ -769,7 +750,7 @@
 	name = "war axe"
 	desc = "A swift weapon designed to gouge and gore the hunter's prey. A chain is attached to the hilt, allowing for a quick retrieval."
 	icon_state = "war_axe"
-	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT
+	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT|ITEM_UNCATCHABLE
 	flags_equip_slot = SLOT_BACK
 	flags_item = ITEM_PREDATOR|ADJACENT_CLICK_DELAY
 	w_class = SIZE_LARGE
@@ -1012,12 +993,6 @@
 	var/ability_charge_rate = ABILITY_CHARGE_NORMAL
 	var/ability_cost = ABILITY_COST_NO_ABILITY
 	///Whether the ability is ready to trigger
-	var/ability_primed = FALSE
-
-/obj/item/weapon/twohanded/yautja/dropped()
-	if(ability_primed)
-		ability_primed = FALSE
-	..()
 
 /obj/item/weapon/twohanded/yautja/attack(mob/living/target, mob/living/carbon/human/user)
 	. = ..()
@@ -1034,7 +1009,7 @@
 
 /obj/item/weapon/twohanded/yautja/proc/progress_ability(mob/living/target, mob/living/carbon/human/user)
 	if(target == user || target.stat == DEAD || isanimal(target))
-		to_chat(user, SPAN_DANGER("You think you're smart?")) //very funny
+		to_chat(user, SPAN_DANGER("That's blood not suitable for reservoir"))
 		return FALSE
 
 	if(ability_charge < ability_charge_max)
