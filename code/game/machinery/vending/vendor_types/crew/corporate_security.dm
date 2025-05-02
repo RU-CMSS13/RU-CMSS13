@@ -43,8 +43,9 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_security, list(
 	list("M41A Pulse Rifle MK2", 0, /obj/effect/essentials_set/wy_m41a, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
 	list("M39 Submachine Gun", 0, /obj/effect/essentials_set/wy_m39, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
 	list("NSG23 Assault Rifle", 0, /obj/effect/essentials_set/wy_nsg23, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
-	list("W-Y FN2000 Assault Rifle", 0, /obj/item/weapon/gun/smg/fp9000/pmc, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
+	list("W-Y FP9000 Assault Rifle", 0, /obj/item/weapon/gun/smg/fp9000/pmc, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
 	list("P90 Submachine Gun", 0, /obj/item/weapon/gun/smg/p90, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
+	list("Supernova Shotgun", 0, /obj/item/weapon/gun/shotgun/es7, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
 
 	list("SIDEARM (CHOOSE 1)", 0, null, null, null),
 	list("ES-4 Electrostatic Pistol", 0, /obj/item/storage/belt/gun/m4a3/wy/es4, MARINE_CAN_BUY_BELT, VENDOR_ITEM_RECOMMENDED),
@@ -61,6 +62,10 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_security, list(
 	list("NSG 23 magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/nsg23, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 extended magazine (10x24mm)", 8, /obj/item/ammo_magazine/rifle/nsg23/extended, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 armor-piercing magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/nsg23/ap, null, VENDOR_ITEM_REGULAR),
+	list("FP9000 magazine (10x24mm)", 10, /obj/item/weapon/gun/smg/fp9000/pmc, null, VENDOR_ITEM_REGULAR),
+	list("P90 magazine (10x24mm)", 8, /obj/item/ammo_magazine/smg/p90, null, VENDOR_ITEM_REGULAR),
+	list("electrostatic shock slugs (20g)", 6, /obj/item/ammo_magazine/shotgun/beanbag/es7, null, VENDOR_ITEM_REGULAR),
+	list("electrostatic solid slugs (20g)", 8, /obj/item/ammo_magazine/shotgun/beanbag/es7/slug, null, VENDOR_ITEM_REGULAR),
 
 	list("SIDEARM AMMUNITION", 0, null, null, null),
 	list("ES-4 Stun Magazine (9mm)", 4, /obj/item/ammo_magazine/pistol/es4, null, VENDOR_ITEM_REGULAR),
