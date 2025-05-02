@@ -165,6 +165,12 @@
 	new /obj/item/attachable/bayonet(src)
 	new /obj/item/stack/medical/splint(src)
 
+/obj/item/storage/pouch/survival/black
+	icon_state = "soctools"
+
+/obj/item/storage/pouch/survival/full/black
+	icon_state = "soctools"
+
 /obj/item/storage/pouch/survival/full/wy
 	icon_state = "soctools"
 

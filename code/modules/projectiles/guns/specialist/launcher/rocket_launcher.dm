@@ -362,6 +362,7 @@
 	pixel_x = -7
 	hud_offset = -7
 
+	flags_gun_features = GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY
 
 	flags_item = TWOHANDED|NO_CRYO_STORE
 

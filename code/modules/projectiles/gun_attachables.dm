@@ -2000,6 +2000,69 @@ Defined in conflicts.dm of the #defines folder.
 	gun.recalculate_attachment_bonuses()
 	gun.update_overlays(src, "stock")
 
+/obj/item/attachable/stock/rifle/collapsible/ak4047
+	name = "\improper AK-4047 folding stock"
+	desc =  "The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors."
+	slot = "stock"
+	melee_mod = 5
+	size_mod = 1
+	icon_state = "ak4047_folding"
+	attach_icon = "ak4047_folding_a"
+	pixel_shift_x = 29
+	hud_offset_mod = 3
+	collapsible = TRUE
+	stock_activated = FALSE
+	wield_delay_mod = WIELD_DELAY_NONE //starts collapsed so no delay mod
+	collapse_delay = 0.5 SECONDS
+	flags_attach_features = ATTACH_REMOVABLE|ATTACH_ACTIVATION
+	attachment_action_type = /datum/action/item_action/toggle
+
+/obj/item/attachable/stock/rifle/collapsible/ak4047/New()
+	..()
+
+	//rifle stock starts collapsed so we zero out everything
+	accuracy_mod = 0
+	recoil_mod = 0
+	scatter_mod = 0
+	movement_onehanded_acc_penalty_mod = 0
+	accuracy_unwielded_mod = 0
+	recoil_unwielded_mod = 0
+	scatter_unwielded_mod = 0
+	aim_speed_mod = 0
+	wield_delay_mod = WIELD_DELAY_NONE
+
+/obj/item/attachable/stock/rifle/collapsible/ak4047/apply_on_weapon(obj/item/weapon/gun/gun)
+	if(stock_activated)
+		accuracy_mod = HIT_ACCURACY_MULT_TIER_2
+		recoil_mod = -RECOIL_AMOUNT_TIER_5
+		scatter_mod = -SCATTER_AMOUNT_TIER_9
+		//it makes stuff worse when one handed
+		movement_onehanded_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_5
+		accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_3
+		recoil_unwielded_mod = RECOIL_AMOUNT_TIER_4
+		scatter_unwielded_mod = SCATTER_AMOUNT_TIER_8
+		aim_speed_mod = CONFIG_GET(number/slowdown_med)
+		hud_offset_mod = 5
+		icon_state = "ak4047_folding_on"
+		attach_icon = "ak4047_folding_a_on"
+		wield_delay_mod = WIELD_DELAY_VERY_FAST //added 0.2 seconds for wield, basic solid stock adds 0.4
+
+	else
+		accuracy_mod = 0
+		recoil_mod = 0
+		scatter_mod = 0
+		movement_onehanded_acc_penalty_mod = 0
+		accuracy_unwielded_mod = 0
+		recoil_unwielded_mod = 0
+		scatter_unwielded_mod = 0
+		aim_speed_mod = 0
+		hud_offset_mod = 3
+		icon_state = "ak4047_folding"
+		attach_icon = "ak4047_folding_a"
+		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay
+
+	gun.recalculate_attachment_bonuses()
+	gun.update_overlays(src, "stock")
 
 /obj/item/attachable/stock/xm177
 	name = "\improper collapsible M16 stock"
@@ -2059,8 +2122,6 @@ Defined in conflicts.dm of the #defines folder.
 	icon_state = "car_folding"
 	attach_icon = "car_folding"
 	base_icon = "car_folding"
-
-
 
 /obj/item/attachable/stock/xm51
 	name = "\improper XM51 stock"
@@ -2189,270 +2250,6 @@ Defined in conflicts.dm of the #defines folder.
 	desc = "A special issue stock made of sturdy, yet lightweight materials. Attaches to the L42A3 Battle Rifle. Not effective as a blunt force weapon."
 
 	wield_delay_mod = WIELD_DELAY_FAST
-
-/obj/item/attachable/stock/rifle/marksman
-	name = "\improper M41A marksman stock"
-	icon_state = "m4markstock"
-	attach_icon = "m4markstock"
-	flags_attach_features = NO_FLAGS
-	hud_offset_mod = 2
-
-/obj/item/attachable/stock/twobore
-	name = "heavy wooden stock"
-	icon_state = "twobore_stock"
-	attach_icon = "twobore_stock"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0 //Integrated attachment for visuals, stats handled on main gun.
-	size_mod = 0
-	pixel_shift_x = 24
-	pixel_shift_y = 16
-	hud_offset_mod = 10 //A sprite long enough to touch the Moon.
-
-/obj/item/attachable/m4ra_barrel
-	name = "M4RA barrel"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon_state = "m4ra_barrel"
-	attach_icon = "m4ra_barrel"
-	slot = "special"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0 //Integrated attachment for visuals, stats handled on main gun.
-	size_mod = 0
-
-/obj/item/attachable/m4ra_barrel/New()
-	..()
-	select_gamemode_skin(type)
-
-/obj/item/attachable/m4ra_barrel/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
-	. = ..() // We are forcing attach_icon skin
-	var/new_attach_icon
-	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
-		if("snow")
-			attach_icon = new_attach_icon ? new_attach_icon : "s_" + attach_icon
-			. = TRUE
-		if("desert")
-			attach_icon = new_attach_icon ? new_attach_icon : "d_" + attach_icon
-			. = TRUE
-		if("classic")
-			attach_icon = new_attach_icon ? new_attach_icon : "c_" + attach_icon
-			. = TRUE
-		if("urban")
-			attach_icon = new_attach_icon ? new_attach_icon : "u_" + attach_icon
-			. = TRUE
-	return .
-
-/obj/item/attachable/m4ra_barrel_custom
-	name = "custom M4RA barrel"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon_state = "m4ra_custom_barrel"
-	attach_icon = "m4ra_custom_barrel"
-	slot = "special"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0 //Integrated attachment for visuals, stats handled on main gun.
-	size_mod = 0
-
-/obj/item/attachable/m4ra_barrel_custom/New()
-	..()
-	select_gamemode_skin(type)
-
-/obj/item/attachable/m4ra_barrel_custom/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
-	. = ..() // We are forcing attach_icon skin
-	var/new_attach_icon
-	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
-		if("snow")
-			attach_icon = new_attach_icon ? new_attach_icon : "s_" + attach_icon
-			. = TRUE
-		if("desert")
-			attach_icon = new_attach_icon ? new_attach_icon : "d_" + attach_icon
-			. = TRUE
-		if("classic")
-			attach_icon = new_attach_icon ? new_attach_icon : "c_" + attach_icon
-			. = TRUE
-		if("urban")
-			attach_icon = new_attach_icon ? new_attach_icon : "u_" + attach_icon
-			. = TRUE
-	return .
-
-/obj/item/attachable/upp_rpg_breech
-	name = "HJRA-12 Breech"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "hjra_breech"
-	attach_icon = "hjra_breech"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0
-	size_mod = 0
-
-/obj/item/attachable/pkpbarrel
-	name = "QYJ-72 Barrel"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/barrel.dmi'
-	icon_state = "uppmg_barrel"
-	attach_icon = "uppmg_barrel"
-	slot = "muzzle"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0
-	size_mod = 0
-
-/obj/item/attachable/ak4047_barrel
-	name = "AK-4047 barrel"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/barrel.dmi'
-	icon_state = "ak4047_barrel"
-	attach_icon = "ak4047_barrel"
-	slot = "special"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0
-	size_mod = 0
-
-/obj/item/attachable/stock/pkpstock
-	name = "QYJ-72 Stock"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "uppmg_stock"
-	attach_icon = "uppmg_stock"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 20 //the thought of a upp spec beating people to death with a pk makes me laugh
-	size_mod = 0
-
-/obj/item/attachable/type88_barrel
-	name = "Type-88 Barrel"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/barrel.dmi'
-	icon_state = "type88_barrel"
-	attach_icon = "type88_barrel"
-	slot = "special"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0
-	size_mod = 0
-
-/obj/item/attachable/type73suppressor
-	name = "Type 73 Integrated Suppressor"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/barrel.dmi'
-	icon_state = "type73_suppressor"
-	attach_icon = "type73_suppressor"
-	slot = "muzzle"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 0
-	size_mod = 0
-
-/obj/item/attachable/stock/type71
-	name = "Type 71 Stock"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "type71_stock"
-	attach_icon = "type71_stock"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 15
-	size_mod = 0
-
-/obj/item/attachable/stock/type71/New()
-	..()
-
-/obj/item/attachable/stock/rifle/collapsible/ak4047
-	name = "\improper AK-4047 folding stock"
-	desc =  "The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors."
-	slot = "stock"
-	melee_mod = 5
-	size_mod = 1
-	icon_state = "ak4047_folding"
-	attach_icon = "ak4047_folding_a"
-	pixel_shift_x = 29
-	hud_offset_mod = 3
-	collapsible = TRUE
-	stock_activated = FALSE
-	wield_delay_mod = WIELD_DELAY_NONE //starts collapsed so no delay mod
-	collapse_delay = 0.5 SECONDS
-	flags_attach_features = ATTACH_REMOVABLE|ATTACH_ACTIVATION
-	attachment_action_type = /datum/action/item_action/toggle
-
-/obj/item/attachable/stock/rifle/collapsible/ak4047/New()
-	..()
-
-	//rifle stock starts collapsed so we zero out everything
-	accuracy_mod = 0
-	recoil_mod = 0
-	scatter_mod = 0
-	movement_onehanded_acc_penalty_mod = 0
-	accuracy_unwielded_mod = 0
-	recoil_unwielded_mod = 0
-	scatter_unwielded_mod = 0
-	aim_speed_mod = 0
-	wield_delay_mod = WIELD_DELAY_NONE
-
-/obj/item/attachable/stock/rifle/collapsible/ak4047/apply_on_weapon(obj/item/weapon/gun/gun)
-	if(stock_activated)
-		accuracy_mod = HIT_ACCURACY_MULT_TIER_2
-		recoil_mod = -RECOIL_AMOUNT_TIER_5
-		scatter_mod = -SCATTER_AMOUNT_TIER_9
-		//it makes stuff worse when one handed
-		movement_onehanded_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_5
-		accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_3
-		recoil_unwielded_mod = RECOIL_AMOUNT_TIER_4
-		scatter_unwielded_mod = SCATTER_AMOUNT_TIER_8
-		aim_speed_mod = CONFIG_GET(number/slowdown_med)
-		hud_offset_mod = 5
-		icon_state = "ak4047_folding_on"
-		attach_icon = "ak4047_folding_a_on"
-		wield_delay_mod = WIELD_DELAY_VERY_FAST //added 0.2 seconds for wield, basic solid stock adds 0.4
-
-	else
-		accuracy_mod = 0
-		recoil_mod = 0
-		scatter_mod = 0
-		movement_onehanded_acc_penalty_mod = 0
-		accuracy_unwielded_mod = 0
-		recoil_unwielded_mod = 0
-		scatter_unwielded_mod = 0
-		aim_speed_mod = 0
-		hud_offset_mod = 3
-		icon_state = "ak4047_folding"
-		attach_icon = "ak4047_folding_a"
-		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay
-
-	gun.recalculate_attachment_bonuses()
-	gun.update_overlays(src, "stock")
-
-/obj/item/attachable/stock/m60
-	name = "M60 stock"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "m60_stock"
-	attach_icon = "m60_stock"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 15
-	size_mod = 0
-
-
-/obj/item/attachable/stock/ppsh
-	name = "PPSh-17b stock"
-	desc = "This isn't supposed to be separated from the gun, how'd this happen?"
-	icon = 'icons/obj/items/weapons/guns/attachments/stock.dmi'
-	icon_state = "ppsh17b_stock"
-	attach_icon = "ppsh17b_stock"
-	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_NONE
-	flags_attach_features = NO_FLAGS
-	melee_mod = 10
-	size_mod = 0
-
-
 
 /obj/item/attachable/stock/smg
 	name = "submachinegun stock"
