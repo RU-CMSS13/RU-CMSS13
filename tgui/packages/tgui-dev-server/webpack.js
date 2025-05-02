@@ -43,10 +43,6 @@ class RspackCompiler {
 
     // Inject the HMR plugin into the config if we're using it
     if (options.hot) {
-      config.plugins.push(new rspack.HotModuleReplacementPlugin());
-    }
-    this.rspack = rspack;
-    this.config = config;
       mergedConfig.plugins.push(new rspack.HotModuleReplacementPlugin());
     }
     this.rspack = rspack;
