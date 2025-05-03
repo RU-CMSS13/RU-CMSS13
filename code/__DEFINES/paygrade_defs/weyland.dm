@@ -115,8 +115,5 @@
 /// WY-SEC-PSS Personal Protection Specialist
 #define PAY_SHORT_WY_SEC_PPS "WY-SEC-PPS"
 
-/// WY-SEC-PSS Personal Security Sergeant
-#define PAY_SHORT_WY_SEC_PSSGT "WY_SEC_PSSGT"
-
 /// WY-SEC-PSSGT Personal Protection Coordinator
 #define PAY_SHORT_WY_SEC_PPC "WY-SEC-PPC"
