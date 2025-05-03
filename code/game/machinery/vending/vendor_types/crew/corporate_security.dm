@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_security, list(
 	list("NSG 23 extended magazine (10x24mm)", 8, /obj/item/ammo_magazine/rifle/nsg23/extended, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 armor-piercing magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/nsg23/ap, null, VENDOR_ITEM_REGULAR),
 	list("FN FP9000 magazine (5.7X28mm)", 10, /obj/item/ammo_magazine/smg/fp9000, null, VENDOR_ITEM_REGULAR),
-	list("P90 magazine (10x24mm)", 8, /obj/item/ammo_magazine/smg/p90, null, VENDOR_ITEM_REGULAR),
+	list("FN P90 magazine (5.7x28mm)", 8, /obj/item/ammo_magazine/smg/p90, null, VENDOR_ITEM_REGULAR),
 	list("electrostatic shock slugs (20g)", 6, /obj/item/ammo_magazine/shotgun/beanbag/es7, null, VENDOR_ITEM_REGULAR),
 	list("electrostatic solid slugs (20g)", 8, /obj/item/ammo_magazine/shotgun/beanbag/es7/slug, null, VENDOR_ITEM_REGULAR),
 
