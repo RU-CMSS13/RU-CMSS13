@@ -164,10 +164,10 @@
 	new /obj/item/storage/large_holster/fuelpack(src)
 	new /obj/item/weapon/gun/flamer/m240/spec(src)
 */
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 	new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(src)
 	new /obj/item/weapon/gun/flamer/pyro_spec(src)
-// RUCM End
+// RUCM End (Feline "Буратино")
 	new /obj/item/ammo_magazine/flamer_tank/large(src)
 	new /obj/item/storage/pouch/flamertank(src)
 	new /obj/item/tool/extinguisher(src)

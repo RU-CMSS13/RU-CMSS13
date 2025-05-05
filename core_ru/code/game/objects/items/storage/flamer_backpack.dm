@@ -234,6 +234,17 @@
 /datum/ammo/flamethrower/feline_flamer_backpack
 	max_range = 7
 
+/datum/ammo/flamethrower
+	flags_ammo_behavior = AMMO_IGNORE_ARMOR|AMMO_HITS_TARGET_TURF|AMMO_IGNORE_COVER
+
+// Перезапись параметров
+/obj/item/tool/extinguisher
+	max_water = 100
+	power = 14
+
+/obj/item/tool/extinguisher/mini
+	power = 7
+
 // Коробка карго
 /obj/item/storage/box/guncase/feline_flamer
 	name = "Огнемётный ранец \"Буратино\""
@@ -301,18 +312,71 @@
 // Включение Носа
 /obj/item/attachable/attached_gun/flamer_nozzle/pyro/activate_attachment(obj/item/weapon/gun/G, mob/living/user, turn_off)
 	if(G.active_attachable && G.active_attachable != src)
-		to_chat(user, SPAN_WARNING("Одновременно можно использовать только что-то одно!"))
-		return
+		G.active_attachable.activate_attachment(G, user)
+	if(G.active_attachable && G.active_attachable == src)
+		if(user)
+			to_chat(user, SPAN_NOTICE("Отключаю метательную форсунку."))
+			playsound(user, gun_deactivate_sound, 30, 1)
+		G.active_attachable = null
+		icon_state = initial(icon_state)
+		UnregisterSignal(G, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+		G.recalculate_attachment_bonuses()
 	else
-		..()
+		if(user)
+			to_chat(user, SPAN_NOTICE("Подключаю метательную форсунку."))
+			playsound(user, 'core_ru/Feline/sound/Flamer_nozzle.ogg', 30, 1)
+		G.active_attachable = src
+		G.damage_mult = 1
+		RegisterSignal(G, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES, PROC_REF(reset_damage_mult))
+		icon_state = initial(icon_state)
+		icon_state += "-on"
+
+	attach_icon = "flamer_nozzle_a_[G.active_attachable == src ? 0 : 1]"
+	G.update_icon()
+
+	SEND_SIGNAL(G, COMSIG_GUN_INTERRUPT_FIRE)
+
+	for(var/X in G.actions)
+		var/datum/action/A = X
+		A.update_button_icon()
+	return 1
 
 // Включение Огнетушителя
+/obj/item/attachable/attached_gun/extinguisher/activate_attachment(obj/item/weapon/gun/G, mob/living/user, turn_off)
+	. = ..()
+	if(G.active_attachable)
+		if(user)
+			playsound(user, 'core_ru/Feline/sound/Flamer_ext.ogg', 30, 1)
+
+
 /obj/item/attachable/attached_gun/extinguisher/pyro/activate_attachment(obj/item/weapon/gun/G, mob/living/user, turn_off)
 	if(G.active_attachable && G.active_attachable != src)
-		to_chat(user, SPAN_WARNING("Одновременно можно использовать только что-то одно!"))
-		return
+		G.active_attachable.activate_attachment(G, user)
+
+	if(G.active_attachable && G.active_attachable == src)
+		if(user)
+			to_chat(user, SPAN_NOTICE("Отключаю огнетушитель."))
+			playsound(user, gun_deactivate_sound, 30, 1)
+		G.active_attachable = null
+		icon_state = initial(icon_state)
+		UnregisterSignal(G, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+		G.recalculate_attachment_bonuses()
 	else
-		..()
+		if(user)
+			to_chat(user, SPAN_NOTICE("Подключаю огнетушитель."))
+			playsound(user, 'core_ru/Feline/sound/Flamer_ext.ogg', 20, 1)
+		G.active_attachable = src
+		G.damage_mult = 1
+		RegisterSignal(G, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES, PROC_REF(reset_damage_mult))
+		icon_state = initial(icon_state)
+		icon_state += "-on"
+
+	SEND_SIGNAL(G, COMSIG_GUN_INTERRUPT_FIRE)
+
+	for(var/X in G.actions)
+		var/datum/action/A = X
+		A.update_button_icon()
+	return 1
 
 // Бинд Носа
 /obj/item/weapon/gun/flamer/pyro_spec/use_toggle_burst()
@@ -330,6 +394,7 @@
 			to_chat(user, SPAN_WARNING("Я не знаю как этим пользоваться..."))
 			return FALSE
 
+// Магнитка
 /obj/item/weapon/gun/flamer/pyro_spec/retrieval_check(mob/living/carbon/human/user, retrieval_slot)
 	if(retrieval_slot == WEAR_IN_BACK)
 		var/obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec/FP = user.back
@@ -343,6 +408,15 @@
 		if(..(user, WEAR_IN_BACK))
 			return TRUE
 	return ..()
+
+// Экипировка в ранец
+/obj/item/weapon/gun/flamer/pyro_spec/equipped(mob/user, slot, silent)
+	. = ..()
+	if(slot == WEAR_J_STORE)
+		if(fuel_backpack)
+			user.equip_to_slot_if_possible(src, WEAR_IN_BACK, disable_warning = TRUE)
+			playsound(src, 'sound/weapons/gun_rifle_draw.ogg', 15, TRUE)
+	update_icon()
 
 /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec/update_icon()
 	. = ..()
@@ -397,6 +471,10 @@
 	if(fuel_backpack)
 		update_icon()
 	. = ..()
+
+/obj/item/weapon/gun/flamer/equipped(mob/user, slot, silent)
+	. = ..()
+	update_icon()
 
 ////////////////
 // Линк ранца //

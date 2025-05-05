@@ -29,10 +29,6 @@
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
 	var/power = BASE_EXTINGUISHER_PWR
-// RUCM  Start
-	max_water = 100
-	power = 14
-//	RUCM End
 
 /obj/item/tool/extinguisher/mini
 	name = "fire extinguisher"
@@ -46,7 +42,6 @@
 	force = 3
 	max_water = 30
 	sprite_name = "miniFE"
-	power = 7 //RUCM Edit
 
 /obj/item/tool/extinguisher/mini/integrated_flamer
 	max_water = 60
@@ -87,9 +82,9 @@
 		return ..()
 
 /obj/item/tool/extinguisher/afterattack(atom/target, mob/user , flag)
-//  RUCM Start
+//  RUCM Start (Feline "Буратино")
 	var/obj/item/storage/backpack/marine/feline_flamer_backpack/flamer_backpack = user.back
-//  RUCM End
+//  RUCM End (Feline "Буратино")
 
 	if(istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(user,target) <= 1)
 		var/obj/object = target
@@ -127,7 +122,7 @@
 		reagents.total_volume -= EXTINGUISHER_WATER_USE_AMT
 */
 
-//  RUCM Start
+//  RUCM Start (Feline "Буратино")
 		if(flamer_backpack && ((istype(src, /obj/item/tool/extinguisher/mini/integrated_flamer)) || (istype(src, /obj/item/tool/extinguisher/pyro))) && istype(flamer_backpack) && flamer_backpack.linked_flamer)	// Если есть рюкзак и линк
 			if(flamer_backpack.reagents.total_volume > 0)					// И он не пуст ==> забрать из него
 				flamer_backpack.reagents.total_volume -= 5
@@ -135,7 +130,7 @@
 				reagents.total_volume -= 5									// Иначе забрать из огнетушителя
 		else
 			reagents.total_volume -= 5
-//	RUCM End
+//	RUCM End (Feline "Буратино")
 		return
 
 	var/direction = get_dir(user, target)
@@ -191,12 +186,12 @@
 		unpicked_targets -= TT
 		INVOKE_ASYNC(src, PROC_REF(release_liquid), TT, user)
 
-//	RUCM Start Верб использования
+//	RUCM Start (Feline "Буратино") Верб использования
 	if(flamer_backpack && ((istype(src, /obj/item/tool/extinguisher/mini/integrated_flamer)) || (istype(src, /obj/item/tool/extinguisher/pyro))) && istype(flamer_backpack) && flamer_backpack.linked_flamer)
 		to_chat(user, SPAN_NOTICE("В огнетушителе осталось <b>([floor(reagents.total_volume + flamer_backpack.reagents.total_volume)]/[max_water + 200])</b> единиц воды."))
 	else
 		to_chat(user, SPAN_NOTICE("В огнетушителе осталось <b>([floor(reagents.total_volume)]/[max_water])</b> единиц воды."))
-//	RUCM End
+//	RUCM End (Feline "Буратино")
 
 	if(istype(user.loc, /turf/open/space))
 		user.inertia_dir = get_dir(target, user)
@@ -211,7 +206,7 @@
 /*	CM Original
 	reagents.trans_to(W, 1)
 */
-//	RUCM Start
+//	RUCM Start (Feline "Буратино")
 	var/obj/item/storage/backpack/marine/feline_flamer_backpack/flamer_backpack = user.back
 	if(flamer_backpack && ((istype(src, /obj/item/tool/extinguisher/mini/integrated_flamer)) || (istype(src, /obj/item/tool/extinguisher/pyro))) && istype(flamer_backpack) && flamer_backpack.linked_flamer)	// Если есть рюкзак и линк
 		if(flamer_backpack.reagents.total_volume > 0)					// И он не пуст ==> забрать из него
@@ -220,7 +215,7 @@
 			reagents.trans_to(W, 1)										// Иначе забрать из огнетушителя
 	else
 		reagents.trans_to(W, 1)
-//  RUCM End
+//  RUCM End (Feline "Буратино")
 
 	for(var/b in 0 to (5-1))
 		step_towards(W, target)

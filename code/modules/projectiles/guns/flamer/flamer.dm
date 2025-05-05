@@ -106,7 +106,7 @@
 			I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
 			overlays += I
 */
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 	var/new_icon_state = base_gun_icon
 	if(fuel_backpack)
 		icon = 'core_ru/Feline/icons/flamer_backpack.dmi'
@@ -133,7 +133,7 @@
 				var/image/I = image(icon, icon_state="[base_gun_icon]_strip")
 				I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
 				overlays += I
-// RUCM End
+// RUCM End (Feline "Буратино")
 
 	if(!(flags_gun_features & GUN_TRIGGER_SAFETY))
 		var/obj/item/attachable/attached_gun/flamer_nozzle/nozzle = locate() in contents

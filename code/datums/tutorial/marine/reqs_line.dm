@@ -82,9 +82,9 @@
 		/obj/item/storage/box/guncase/m56d = list("M56D", "HMG", "M56"),
 		/obj/item/storage/box/guncase/m2c = list("M2C"),
 		/obj/item/storage/box/guncase/flamer = list("Flamer", "Flamer kit", "Incinerator"),
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 		/obj/item/storage/box/guncase/feline_flamer = list("Pyro pack", "Pyro backpack", "\"Буратино\"", "Flamer backpack", "Огнемётный ранец"),
-// RUCM End
+// RUCM End (Feline "Буратино")
 		/obj/item/storage/box/guncase/m79 = list("GL", "Grenade launcher", "M79", "M79 Grenade launcher"),
 		/obj/item/storage/box/guncase/xm51 = list("XM51", "Breaching Shotty", "Breaching Shotgun", "Breaching Scattergun"),
 		/obj/item/clothing/accessory/storage/black_vest = list("Black webbing", "Black webbing vest"),

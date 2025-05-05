@@ -3071,14 +3071,14 @@ Defined in conflicts.dm of the #defines folder.
 	return "It has a [icon2html(src)] [name] ([floor(internal_extinguisher.reagents.total_volume)]/[internal_extinguisher.max_water]) mounted underneath.<br>"
 */
 
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 /obj/item/attachable/attached_gun/extinguisher/handle_attachment_description(slot)
 	var/obj/item/storage/backpack/marine/feline_flamer_backpack/flamer_backpack = usr.back
 	if(flamer_backpack && istype(flamer_backpack) && flamer_backpack.linked_flamer)
 		return "На нижней планке установлен <b>подствольный огнетушитель</b>, соединённый шлангом с топливным ранцем. Суммарно в них <b>([floor(internal_extinguisher.reagents.total_volume + flamer_backpack.reagents.total_volume)]/[internal_extinguisher.max_water + 200])</b> единиц воды.<br>"
 	else
 		return "На нижней планке установлен <b>подствольный огнетушитель</b>. В нём <b>([floor(internal_extinguisher.reagents.total_volume)]/[internal_extinguisher.max_water])</b> единиц воды.<br>"
-// RUCM End
+// RUCM End (Feline "Буратино")
 
 /obj/item/attachable/attached_gun/extinguisher/New()
 	..()
@@ -3139,6 +3139,11 @@ Defined in conflicts.dm of the #defines folder.
 	. = ..()
 	attach_icon = "flamer_nozzle_a_[G.active_attachable == src ? 0 : 1]"
 	G.update_icon()
+// RUCM Start (Feline "Буратино")
+	if(G.active_attachable)
+		if(user)
+			playsound(user, 'core_ru/Feline/sound/Flamer_nozzle.ogg', 30, 1)
+// RUCM End (Feline "Буратино")
 
 /obj/item/attachable/attached_gun/flamer_nozzle/fire_attachment(atom/target, obj/item/weapon/gun/gun, mob/living/user)
 	. = ..()

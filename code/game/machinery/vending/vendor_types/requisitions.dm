@@ -41,10 +41,10 @@
 		list("M56D Heavy Machine Gun", floor(scale * 2), /obj/item/storage/box/guncase/m56d, VENDOR_ITEM_REGULAR),
 		list("M2C Heavy Machine Gun", floor(scale * 2), /obj/item/storage/box/guncase/m2c, VENDOR_ITEM_REGULAR),
 		list("M240 Incinerator Unit", floor(scale * 2), /obj/item/storage/box/guncase/flamer, VENDOR_ITEM_REGULAR),
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 		list("Огнеметный ранец \"Буратино\"", floor(scale * 2), /obj/item/storage/box/guncase/feline_flamer, VENDOR_ITEM_REGULAR),
 		list("Промышленный гвоздомёт F1X", round(scale * 2), /obj/item/storage/box/guncase/repairbelt, VENDOR_ITEM_REGULAR),
-// RUCM End
+// RUCM End (Feline "Буратино")
 		list("M79 Grenade Launcher", floor(scale * 3), /obj/item/storage/box/guncase/m79, VENDOR_ITEM_REGULAR),
 		list("XM51 Breaching Scattergun", floor(scale * 3), /obj/item/storage/box/guncase/xm51, VENDOR_ITEM_REGULAR),
 
@@ -302,9 +302,9 @@
 		list("VP78 Magazine", 11, /obj/item/ammo_magazine/pistol/vp78, VENDOR_ITEM_REGULAR),
 		list("SU-6 Smartpistol Magazine (.45)", 13, /obj/item/ammo_magazine/pistol/smart, VENDOR_ITEM_REGULAR),
 		list("M240 Incinerator Tank", floor(scale * 3), /obj/item/ammo_magazine/flamer_tank, VENDOR_ITEM_REGULAR),
-// RUCM Start
+// RUCM Start (Feline "Буратино")
 		list("M240 Incinerator B-Gel Tank", floor(scale * 2), /obj/item/ammo_magazine/flamer_tank/gellied, VENDOR_ITEM_REGULAR),
-// RUCM End
+// RUCM End (Feline "Буратино")
 		list("M41AE2 Box Magazine (10x24mm)", floor(scale * 3), /obj/item/ammo_magazine/rifle/lmg, VENDOR_ITEM_REGULAR),
 		list("M41A MK1 Magazine (10x24mm)", 4.5, /obj/item/ammo_magazine/rifle/m41aMK1, VENDOR_ITEM_REGULAR),
 		list("M41A MK1 AP Magazine (10x24mm)", floor(scale * 2), /obj/item/ammo_magazine/rifle/m41aMK1/ap, VENDOR_ITEM_REGULAR),
