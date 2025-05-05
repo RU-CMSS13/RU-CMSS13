@@ -1,5 +1,5 @@
 /**
- * RUCM "Приказы" copyright Feline
+ * RUCM Feline "Бегающие флаги"
  * Затронутые файлы:
  * code\datums\elements\traitbound\leadership.dm
  * code\modules\mob\living\carbon\human\life.dm

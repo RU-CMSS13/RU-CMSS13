@@ -17,7 +17,7 @@
 	return ..()
 */
 
-// RUCM Start
+// RUCM Start (Feline "Бегающие флаги")
 /datum/element/traitbound/leadership/Attach(datum/target)
 	. = ..()
 	if(. & ELEMENT_INCOMPATIBLE)
@@ -29,4 +29,4 @@
 	for(var/datum/action/human_action/issue_order_feline/O in H.actions)
 		O.remove_from(H)
 	return ..()
-// RUCM End
+// RUCM End (Feline "Бегающие флаги")
