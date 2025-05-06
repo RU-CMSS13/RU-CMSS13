@@ -37,7 +37,10 @@
 	)
 	assignment = JOB_CMO
 	rank = JOB_CMO
+/*
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_1)
+*/
+	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_1, PAY_SHORT_MO3 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "CMO"
 	skills = /datum/skills/CMO
 
@@ -67,7 +70,10 @@
 
 	assignment = JOB_DOCTOR
 	rank = JOB_DOCTOR
+/*
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0)
+*/
+	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Doc"
 	skills = /datum/skills/doctor
 
@@ -131,7 +137,10 @@
 
 	assignment = JOB_NURSE
 	rank = JOB_NURSE
+/*
 	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_1)
+*/
+	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME6 = 50 HOURS, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Nurse"
 	skills = /datum/skills/nurse
 
@@ -161,7 +170,10 @@
 	access = list(ACCESS_MARINE_MEDBAY, ACCESS_MARINE_RESEARCH, ACCESS_MARINE_CHEMISTRY, ACCESS_MARINE_MORGUE)
 	assignment = JOB_RESEARCHER
 	rank = JOB_RESEARCHER
+/*
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0)
+*/
+	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Rsr"
 	skills = /datum/skills/researcher
 
