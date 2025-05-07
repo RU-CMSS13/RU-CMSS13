@@ -112,7 +112,10 @@
 
 	assignment = JOB_FIELD_DOCTOR
 	rank = JOB_FIELD_DOCTOR
+/*
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0)
+*/
+	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Fld Doc"
 	skills = /datum/skills/doctor
 
@@ -140,7 +143,7 @@
 /*
 	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_1)
 */
-	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME6 = 50 HOURS, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_3)
+	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME6 = JOB_PLAYTIME_TIER_3, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_4)
 	role_comm_title = "Nurse"
 	skills = /datum/skills/nurse
 
