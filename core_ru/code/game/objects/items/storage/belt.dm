@@ -92,6 +92,11 @@
 	new /obj/item/stack/sheet/plasteel/med_large_stack(src)
 	new /obj/item/stack/sandbags_empty/full(src)
 
+/obj/item/storage/belt/gun/repairbelt/can_be_inserted(obj/item/W, mob/user, stop_messages = FALSE)
+	if(has_room(W))
+		return TRUE
+	. = ..()
+
 // Кейсы и заказы
 /obj/item/storage/box/guncase/repairbelt
 	name = "F1X Nailgun"
