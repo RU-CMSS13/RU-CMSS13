@@ -76,7 +76,6 @@
 		qdel(src)
 
 #define FLAMER_SENTRY_SNIPER_RANGE 10
-
 /obj/structure/machinery/defenses/sentry/flamer/plasma
 	name = "UA 60-FP Plasma Sentry"
 	defense_type = "Plasma"
