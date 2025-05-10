@@ -46,6 +46,8 @@
 	. = ..()
 	var/mob/living/carbon/human/H = .
 
+	GLOB.spawned_survivors += WEAKREF(H)
+
 	var/list/potential_spawners = list()
 	for(var/priority = 1 to LOWEST_SPAWN_PRIORITY)
 		if(length(GLOB.survivor_spawns_by_priority["[priority]"]))

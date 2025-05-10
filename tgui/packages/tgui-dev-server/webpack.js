@@ -32,10 +32,6 @@ class RspackCompiler {
     const requireFromRoot = createRequire(import.meta.dirname + '/../../..');
     /** @type {typeof import('@rspack/core')} */
     const rspack = await requireFromRoot('@rspack/core');
-
-    const createConfig = await requireFromRoot('./rspack.config.cjs');
-    const createDevConfig = await requireFromRoot('./rspack.config-dev.cjs');
-
     const config = createConfig({}, options);
     const devConfig = createDevConfig({}, options);
 

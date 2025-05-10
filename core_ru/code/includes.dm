@@ -11,6 +11,7 @@
 #include "datums\shuttles.dm"
 #include "datums\vehicles.dm"
 #include "datums\skills.dm"
+#include "datums\survivor_survival.dm"
 #include "datums\world_topic.dm"
 #include "datums\ammo\tank.dm"
 #include "datums\ammo\xeno.dm"
