@@ -82,146 +82,127 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 /*
 	switch(rand(1,6))
 */
-	switch(rand(1,7))
+	switch(rand(1,18))
 		if(1) //pmc
+			new /obj/item/clothing/under/marine/veteran/pmc(src)
+			new /obj/item/clothing/head/helmet/marine/veteran/pmc(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/pmc/light(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/clothing/mask/gas/pmc(src)
+			new /obj/item/storage/backpack/pmc(src)
 //RUCM Start
-			switch(rand(1,3))
-				if(1)
+		if(2) //pmc standart
+			new /obj/item/clothing/under/marine/veteran/pmc(src)
+			new /obj/item/clothing/head/helmet/marine/veteran/pmc/enclosed(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/pmc(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/clothing/mask/gas/pmc(src)
+			new /obj/item/storage/backpack/pmc(src)
+		if(3) //pmc leader
+			new /obj/item/clothing/under/marine/veteran/pmc(src)
+			new /obj/item/clothing/head/helmet/marine/veteran/pmc/leader(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/pmc/leader(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/clothing/mask/gas/pmc(src)
+			new /obj/item/storage/backpack/pmc(src)
 //RUCM End
-					new /obj/item/clothing/under/marine/veteran/pmc(src)
-					new /obj/item/clothing/head/helmet/marine/veteran/pmc(src)
-					new /obj/item/clothing/suit/storage/marine/veteran/pmc/light(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/clothing/mask/gas/pmc(src)
-					new /obj/item/storage/backpack/pmc(src)
-//RUCM Start
-				if(2)
-					new /obj/item/clothing/under/marine/veteran/pmc(src)
-					new /obj/item/clothing/head/helmet/marine/veteran/pmc/enclosed(src)
-					new /obj/item/clothing/suit/storage/marine/veteran/pmc(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/clothing/mask/gas/pmc(src)
-					new /obj/item/storage/backpack/pmc(src)
-				if(3)
-					new /obj/item/clothing/under/marine/veteran/pmc(src)
-					new /obj/item/clothing/head/helmet/marine/veteran/pmc/leader(src)
-					new /obj/item/clothing/suit/storage/marine/veteran/pmc/leader(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/clothing/mask/gas/pmc(src)
-					new /obj/item/storage/backpack/pmc(src)
-//RUCM End
-		if(2) //pizza
+		if(4) //pizza
 			new /obj/item/clothing/under/pizza(src)
 			new /obj/item/clothing/head/soft/red(src)
-		if(3) //clf
+		if(5) //clf
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia(src)
+			new /obj/item/clothing/head/militia(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM Start
-			switch(rand(1,4))
-				if(1)
+		if(6) //clf bucket
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/partial(src)
+			new /obj/item/clothing/head/militia/bucket(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(7) //clf brace
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/brace(src)
+			new /obj/item/clothing/head/headband/rebel(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(8) //clf leader
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/vest(src)
+			new /obj/item/clothing/head/beret/sec/hos(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM End
-					new /obj/item/clothing/under/colonist/clf(src)
-					new /obj/item/clothing/suit/storage/militia(src)
-					new /obj/item/clothing/head/militia(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(9) //upp
+			new /obj/item/clothing/head/helmet/marine/veteran/UPP(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM Start
-				if(2)
-					new /obj/item/clothing/under/colonist/clf(src)
-					new /obj/item/clothing/suit/storage/militia/partial(src)
-					new /obj/item/clothing/head/militia/bucket(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-				if(3)
-					new /obj/item/clothing/under/colonist/clf(src)
-					new /obj/item/clothing/suit/storage/militia/brace(src)
-					new /obj/item/clothing/head/headband/rebel(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-				if(4)
-					new /obj/item/clothing/under/colonist/clf(src)
-					new /obj/item/clothing/suit/storage/militia/vest(src)
-					new /obj/item/clothing/head/beret/sec/hos(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(10) //upp engi
+			new /obj/item/clothing/head/helmet/marine/veteran/UPP/engi(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(11) //upp heavy
+			new /obj/item/clothing/head/helmet/marine/veteran/UPP/heavy(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(12) //upp leader
+			new /obj/item/clothing/head/uppcap/beret(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM End
-		if(4) //upp
+		if(13) //freelancer
+			new /obj/item/clothing/under/marine/veteran/freelancer(src)
+			new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM Start
-			switch(rand(1,4))
-				if(1)
+		if(14) //freelancer with armored cap
+			new /obj/item/clothing/head/freelancer(src)
+			new /obj/item/clothing/under/marine/veteran/freelancer(src)
+			new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(15) //freelancer warlord
+			new /obj/item/clothing/head/freelancer/beret(src)
+			new /obj/item/clothing/under/marine/veteran/freelancer(src)
+			new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
 //RUCM End
-					new /obj/item/clothing/head/helmet/marine/veteran/UPP(src)
-					new /obj/item/clothing/under/marine/veteran/UPP(src)
-					new /obj/item/clothing/suit/storage/marine/faction/UPP(src)
-					new /obj/item/clothing/shoes/marine/upp/knife(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-//RUCM Start
-				if(2)
-					new /obj/item/clothing/head/helmet/marine/veteran/UPP/engi(src)
-					new /obj/item/clothing/under/marine/veteran/UPP(src)
-					new /obj/item/clothing/suit/storage/marine/faction/UPP(src)
-					new /obj/item/clothing/shoes/marine/upp/knife(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-				if(3)
-					new /obj/item/clothing/head/helmet/marine/veteran/UPP/heavy(src)
-					new /obj/item/clothing/under/marine/veteran/UPP(src)
-					new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
-					new /obj/item/clothing/shoes/marine/upp/knife(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-				if(4)
-					new /obj/item/clothing/head/uppcap/beret(src)
-					new /obj/item/clothing/under/marine/veteran/UPP(src)
-					new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
-					new /obj/item/clothing/shoes/marine/upp/knife(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-//RUCM End
-		if(5) //freelancer
-//RUCM Start
-			switch(rand(1,3))
-				if(1)
-					new /obj/item/clothing/head/helmet/skullcap(src)
-//RUCM End
-					new /obj/item/clothing/under/marine/veteran/freelancer(src)
-					new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-//RUCM Start
-				if(2)
-					new /obj/item/clothing/head/freelancer(src)
-					new /obj/item/clothing/under/marine/veteran/freelancer(src)
-					new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-				if(3)
-					new /obj/item/clothing/head/freelancer/beret(src)
-					new /obj/item/clothing/under/marine/veteran/freelancer(src)
-					new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
-					new /obj/item/clothing/gloves/marine/veteran(src)
-					new /obj/item/storage/backpack/lightpack/five_slot(src)
-//RUCM End
-		if(6) //VAIPO
+		if(16) //VAIPO
 			new /obj/item/clothing/glasses/sunglasses/big(src)
 			new /obj/item/clothing/suit/storage/marine/light/vest(src)
 			new /obj/item/clothing/under/tshirt/gray_blu(src)
 //RUCM Start
-		if(7) //RMC
-			switch(rand(1, 2))
-				if(1)
-					new /obj/item/clothing/head/helmet/marine/veteran/royal_marine(src)
-					new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light(src)
-					new /obj/item/clothing/under/marine/veteran/royal_marine(src)
-					new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
-					new /obj/item/clothing/shoes/royal_marine/knife(src)
-					new /obj/item/storage/backpack/pmc(src)
-				if(2)
-					new /obj/item/clothing/head/beret/royal_marine/team_leader(src)
-					new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light/team_leader(src)
-					new /obj/item/clothing/under/marine/veteran/royal_marine(src)
-					new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
-					new /obj/item/clothing/shoes/royal_marine/knife(src)
-					new /obj/item/storage/backpack/pmc(src)
+		if(17) //RMC
+			new /obj/item/clothing/head/helmet/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light(src)
+			new /obj/item/clothing/under/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/shoes/royal_marine/knife(src)
+			new /obj/item/storage/backpack/pmc(src)
+		if(18) //RMC leader
+			new /obj/item/clothing/head/beret/royal_marine/team_leader(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light/team_leader(src)
+			new /obj/item/clothing/under/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/shoes/royal_marine/knife(src)
+			new /obj/item/storage/backpack/pmc(src)
 //RUCM End
 
 /datum/supply_packs/contraband/seized/confiscated_weaponry
@@ -240,35 +221,31 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 /*
 	switch(rand(1, 5))
 */
-	switch(rand(1,6))
+	switch(rand(1, 10))
 		if(1) //pmc
+			new /obj/item/weapon/gun/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
 //RUCM Start
-			switch(rand(1, 3))
-				if(1)
+		if(2)
+			new /obj/item/weapon/gun/smg/fp9000/pmc(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+		if(3)
+			new /obj/item/weapon/gun/rifle/nsg23/no_lock(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/ap(src)
+			new /obj/item/ammo_magazine/rifle/nsg23(src)
 //RUCM End
-					new /obj/item/weapon/gun/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-//RUCM Start
-				if(2)
-					new /obj/item/weapon/gun/smg/fp9000/pmc(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-					new /obj/item/ammo_magazine/smg/fp9000(src)
-				if(3)
-					new /obj/item/weapon/gun/rifle/nsg23/no_lock(src)
-					new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
-					new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
-					new /obj/item/ammo_magazine/rifle/nsg23/ap(src)
-					new /obj/item/ammo_magazine/rifle/nsg23(src)
-//RUCM End
-		if(2) //pizza
+		if(4) //pizza
 			new /obj/item/weapon/gun/pistol/holdout(src)
 			new /obj/item/ammo_magazine/pistol/holdout(src)
-		if(3) //clf
+		if(5) //clf
 /*
 			switch(rand(1, 2))
 */
@@ -293,43 +270,36 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 					new /obj/item/weapon/gun/rifle/mar40/lmg(src)
 					new /obj/item/ammo_magazine/rifle/mar40/lmg(src)
 //RUCM End
-		if(4) //upp
+		if(6) //upp
+			new /obj/item/weapon/gun/shotgun/type23/riot_control(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/beanbag(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/beanbag(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/flechette(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/flechette(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/slug(src)
+			new /obj/item/ammo_magazine/handful/shotgun/heavy/slug(src) //NO buckshot!
 //RUCM Start
-			switch(rand(1, 2))
-				if (1)
+		if(7)
+			new /obj/item/weapon/gun/rifle/type71(src)
+			new /obj/item/ammo_magazine/rifle/type71(src)
+			new /obj/item/ammo_magazine/rifle/type71(src)
 //RUCM End
-					new /obj/item/weapon/gun/shotgun/type23/riot_control(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/beanbag(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/beanbag(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/flechette(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/flechette(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/slug(src)
-					new /obj/item/ammo_magazine/handful/shotgun/heavy/slug(src) //NO buckshot!
+		if(8) //freelancer
+			new /obj/item/weapon/gun/rifle/mar40(src)
+			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
+			new /obj/item/ammo_magazine/rifle/mar40(src)
+			new /obj/item/ammo_magazine/rifle/mar40(src)
 //RUCM Start
-				if(2)
-					new /obj/item/weapon/gun/rifle/type71(src)
-					new /obj/item/ammo_magazine/rifle/type71(src)
-					new /obj/item/ammo_magazine/rifle/type71(src)
-//RUCM End
-		if(5) //freelancer
-//RUCM Start
-			switch(rand(1, 2))
-				if (1)
-//RUCM End
-					new /obj/item/weapon/gun/rifle/mar40(src)
-					new /obj/item/ammo_magazine/rifle/mar40/extended(src)
-					new /obj/item/ammo_magazine/rifle/mar40(src)
-					new /obj/item/ammo_magazine/rifle/mar40(src)
-//RUCM Start
-				if (2)
-					new /obj/item/weapon/gun/rifle/mar40/carbine(src)
-					new /obj/item/ammo_magazine/rifle/mar40/extended(src)
-					new /obj/item/ammo_magazine/rifle/mar40/extended(src)
-					new /obj/item/ammo_magazine/rifle/mar40(src)
-		if(6) //RMC
+		if(9)
+			new /obj/item/weapon/gun/rifle/mar40/carbine(src)
+			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
+			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
+			new /obj/item/ammo_magazine/rifle/mar40(src)
+		if(10) //RMC
 			new /obj/item/weapon/gun/smg/p90/twe(src)
 			new /obj/item/ammo_magazine/smg/p90/twe(src)
 			new /obj/item/ammo_magazine/smg/p90/twe(src)
+//RUCM End
 
 
 /* Misc. Individual Guns */
@@ -1473,17 +1443,8 @@ Things that don't fit anywhere else. If they're meant for shipside use, they pro
 			new /obj/effect/essentials_set/random/clf_head(loc)
 			new /obj/effect/essentials_set/random/clf_belt(loc)
 			loot_message = SPAN_NOTICE("It's a spare set of CLF equipment. You probably shouldn't wear this...")
-//RUCM Start
-		if (46 to 50)
-			new /obj/item/weapon/gun/m60(loc)
-			new /obj/item/ammo_magazine/m60(loc)
-			loot_message = SPAN_NOTICE("That's a BIG weapon right here!")
-//RUCM End
 		// That was the good 50%. Now it's time for the bad.
-/*
 		if(46 to 50)
-*/
-		if(51 to 55)
 		// Random junk
 			new /obj/effect/essentials_set/random/clf_bonus_item(loc)
 			new /obj/effect/essentials_set/random/clf_bonus_item(loc)
@@ -1491,10 +1452,7 @@ Things that don't fit anywhere else. If they're meant for shipside use, they pro
 			new /obj/effect/essentials_set/random/clf_bonus_item(loc)
 			new /obj/effect/essentials_set/random/clf_bonus_item(loc)
 			loot_message = SPAN_NOTICE("It's a bunch of random junk...")
-/*
 		if(51 to 70)
-*/
-		if(56 to 70)
 			new /obj/effect/spawner/random/bomb_supply(loc)
 			new /obj/effect/spawner/random/bomb_supply(loc)
 			new /obj/effect/spawner/random/toolbox(loc)
