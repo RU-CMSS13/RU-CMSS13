@@ -39,7 +39,12 @@
 	comp.vehicles = list(
 		new /datum/vehicle_order/arc()
 	)
+	/* RUCM CHANGE
 	comp.allowed_roles = list(JOB_SYNTH, JOB_SEA, JOB_SO, JOB_XO, JOB_CO, JOB_GENERAL)
+	*/
+	//RUCM START
+	comp.allowed_roles = list(JOB_SYNTH, JOB_SEA, JOB_INTEL, JOB_SO, JOB_XO, JOB_CO, JOB_GENERAL)
+	//RUCM END
 	comp.req_access = list(ACCESS_MARINE_COMMAND)
 	comp.req_one_access = list()
 	comp.spent = FALSE

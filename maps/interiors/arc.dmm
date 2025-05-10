@@ -24,38 +24,35 @@
 /turf/open/floor,
 /area/interior/vehicle/arc)
 "Dn" = (
-/obj/structure/machinery/prop/almayer/CICmap/computer{
-	dir = 4;
-	layer = 2.98;
-	pixel_x = -13;
-	pixel_y = 4
+/obj/structure/machinery/reagent_analyzer/skilless{
+	pixel_y = 1;
+	pixel_x = -11
 	},
-/obj/structure/machinery/computer/groundside_operations/arc{
-	dir = 4;
-	layer = 2.981;
-	pixel_x = -13;
-	pixel_y = -9
+/obj/structure/machinery/computer/intel{
+	pixel_y = -3;
+	dir = 2;
+	pixel_x = 9
 	},
 /obj/structure/bed/chair/comfy/arc{
-	dir = 8
+	dir = 8;
+	pixel_y = -11
 	},
 /turf/open/floor,
 /area/interior/vehicle/arc)
 "DG" = (
-/obj/structure/machinery/computer/overwatch/almayer/small{
-	dir = 4;
-	layer = 2.982;
-	pixel_x = -13;
-	pixel_y = 10
-	},
 /obj/structure/machinery/computer/intel/disk_reader{
 	dir = 4;
-	layer = 2.983;
-	pixel_x = -13;
-	pixel_y = -3
+	pixel_y = 3;
+	pixel_x = -13
 	},
-/obj/structure/bed/chair/comfy/arc{
-	dir = 8
+/obj/structure/machinery/prop/almayer/CICmap/computer{
+	pixel_y = 18;
+	dir = 4;
+	pixel_x = -13
+	},
+/obj/structure/machinery/recharger{
+	pixel_y = -9;
+	pixel_x = -13
 	},
 /turf/open/floor,
 /area/interior/vehicle/arc)
@@ -69,7 +66,8 @@
 /obj/effect/landmark/interior/spawn/interior_viewport{
 	layer = 2.98;
 	pixel_x = 8;
-	pixel_y = 4
+	pixel_y = 4;
+	dir = 2
 	},
 /obj/structure/bed/chair/vehicle{
 	pixel_x = -7
