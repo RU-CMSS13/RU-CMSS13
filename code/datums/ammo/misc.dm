@@ -80,7 +80,6 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
-
 /datum/ammo/flamethrower/sentry_flamer/glob
 	max_range = 14
 	accurate_range = 10
