@@ -139,7 +139,7 @@
 	//RUCM START
 	if(!length(tts_heard_list))
 		tts_heard_list = list(list(), list(), list())
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(handle_r[3]), tts_voice, handle_r[4], tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(handle_r[3]), tts_voice, handle_r[4], tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaks)
 	//RUCM END
 
 	for(var/message_mode in parsed["modes"])

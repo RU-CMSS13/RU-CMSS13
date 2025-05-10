@@ -564,7 +564,7 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	/// Text to speech pitch. Used to determine the pitch of the voice.
 	var/tts_voice_pitch = 0
 
-	var/speaking_noise
+	var/speaks
 	var/has_tts_voice = TRUE
 
 /client/verb/adjust_volume_tts()
