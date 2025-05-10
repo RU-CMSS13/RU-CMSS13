@@ -1,8 +1,8 @@
 /datum/specialist_set/stormtropper
-	name = "Stormtrooper Set"
-	role_name = "Stormtrooper"
-	skill_to_give = SKILL_SPEC_ST
-	kit_typepath = /obj/item/storage/box/spec/stormtrooper
+	name = "Breacher Set"
+	role_name = "Breacher"
+	skill_to_give = SKILL_SPEC_BREACHER
+	kit_typepath = /obj/item/storage/box/spec/breacher
 
 /datum/specialist_set/stormtropper/redeem_set(mob/living/redeemer, kit)
 	. = ..()

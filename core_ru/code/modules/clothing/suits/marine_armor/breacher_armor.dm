@@ -3,7 +3,7 @@
 
 /obj/item/clothing/suit/storage/marine/m40
 	name = "\improper M40 experimental armor"
-	desc = "A custom set of M40 armor designed for use by USCM stormtrooper. Contains thick kevlar shielding and integrated experimental injectors of adrenaline with portative-protective dialysis device."
+	desc = "A custom set of M40 armor designed for use by USCM breacher. Contains thick kevlar shielding and integrated experimental injectors of adrenaline with portative-protective dialysis device."
 	item_icons = list(WEAR_JACKET = 'core_ru/icons/mob/humans/onmob/suit_1.dmi')
 	icon = 'core_ru/icons/obj/items/clothing/cm_suits.dmi'
 	icon_state = "st_armor"
@@ -14,7 +14,7 @@
 	flags_cold_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_heat_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
-	specialty = "M40 stormtrooper"
+	specialty = "M40 breacher"
 	actions_types = list(/datum/action/item_action/toggle, /datum/action/item_action/specialist/enrage)
 	unacidable = TRUE
 	var/enrage_active = FALSE
@@ -26,7 +26,7 @@
 /obj/item/clothing/suit/storage/marine/m40/verb/enrage()
 	set name = "Activate Enrage"
 	set desc = "Activate your M40 experimental armor protocol, give you rush of adrenaline for a short duration."
-	set category = "Stormtrooper"
+	set category = "Breacher"
 	set src in usr
 	if(!ishuman(usr))
 		return
@@ -36,7 +36,7 @@
 		to_chat(H, SPAN_WARNING("You must be wearing the M40 experimental armor to activate ENRAGE protocol!"))
 		return
 
-	if(!skillcheck(H, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ST)
+	if(!skillcheck(H, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_BREACHER)
 		to_chat(H, SPAN_WARNING("You don't seem to know how to use [src]..."))
 		return
 
@@ -105,7 +105,7 @@
 	name = "Activate Enrage"
 	button.name = name
 	button.overlays.Cut()
-	var/image/IMG = image('core_ru/icons/mob/hud/actions.dmi', button, "Stormtrooper")
+	var/image/IMG = image('core_ru/icons/mob/hud/actions.dmi', button, "breacher")
 	button.overlays += IMG
 
 /datum/action/item_action/specialist/enrage/action_cooldown_check()
