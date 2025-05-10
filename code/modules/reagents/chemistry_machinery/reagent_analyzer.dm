@@ -124,3 +124,9 @@
 	if(sample_number)
 		report.info += "<B>Results for sample:</B> #[sample_number]<BR>\n"
 	report.generate(src, admin_spawned)
+
+//RUCM START
+/obj/structure/machinery/reagent_analyzer/skilless/arc
+	icon = 'icons/obj/vehicles/interiors/arc.dmi'
+	dir = 4
+//RUCM END
