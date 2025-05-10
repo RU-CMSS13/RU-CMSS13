@@ -825,6 +825,42 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, list(
 
 		if(grabber.a_intent == INTENT_GRAB)
 
+//RUCM START
+			if((grabber.species.flags & IS_SYNTHETIC) && istype(grabber.gloves, /obj/item/clothing/gloves/synth))
+				var/obj/item/clothing/gloves/synth/bracer = grabber.gloves
+				if(istype(bracer))
+					if(grabber.action_busy)
+						return FALSE
+					to_chat(user, SPAN_NOTICE("You rest your bracer against the APC interface and begin to siphon off some of the stored energy."))
+					if(!do_after(grabber, 20, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+						return FALSE
+
+					if(stat & BROKEN)
+						var/datum/effect_system/spark_spread/spark = new()
+						spark.set_up(3, 1, src)
+						spark.start()
+						to_chat(grabber, SPAN_DANGER("The APC's power currents surge eratically, super-heating your bracer!"))
+						playsound(src.loc, 'sound/effects/sparks2.ogg', 25, 1)
+						grabber.apply_damage(10,0, BURN)
+						return FALSE
+					if(!cell || cell.charge <= 0)
+						to_chat(user, SPAN_WARNING("There is no charge to draw from that APC."))
+						return FALSE
+
+				if(bracer.battery_charge_max <= bracer.battery_charge)
+					to_chat(user, SPAN_WARNING("[bracer.name] is already fully charged."))
+					return FALSE
+
+				var/charge_to_use = min(cell.charge, bracer.battery_charge_max - bracer.battery_charge)
+				if(!(cell.use(charge_to_use)))
+					return FALSE
+				playsound(src.loc, 'sound/effects/sparks2.ogg', 25, 1)
+				bracer.battery_charge += charge_to_use
+				to_chat(grabber, SPAN_BOLD("[icon2html(bracer)] \The <b>[bracer]</b> beep: Power siphon complete. Charge at [bracer.battery_charge]/[bracer.battery_charge_max]."))
+
+				return TRUE
+//RUCM END
+
 			// Yautja Bracer Recharge
 			var/obj/item/clothing/gloves/yautja/bracer = grabber.gloves
 			if(istype(bracer))

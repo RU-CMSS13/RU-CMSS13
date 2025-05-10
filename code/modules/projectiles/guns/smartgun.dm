@@ -89,7 +89,12 @@
 	var/range = 7
 	var/angle = 2
 	var/list/angle_list = list(180,135,90,60,30)
+/*RUCM CHANGE
 	var/obj/item/device/motiondetector/sg/MD
+*/
+//RUCM START
+	var/obj/item/device/motiondetector/integrated/MD
+//RUCM END
 	var/long_range_cooldown = 2
 	var/recycletime = 120
 	var/cover_open = FALSE
