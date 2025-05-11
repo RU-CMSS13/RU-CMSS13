@@ -1091,6 +1091,10 @@
 	pixel_x = -32
 	},
 /obj/structure/closet/cabinet/hybrisa/metal/alt,
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 2
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "acQ" = (
@@ -1192,7 +1196,7 @@
 /turf/open/floor/plating/almayer/no_build,
 /area/almayer/stair_clone/upper/starboard_fore)
 "adc" = (
-/turf/open/floor/hybrisa/carpet/blue_grey,
+/turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
 "add" = (
 /turf/open/floor/almayer/mono,
@@ -6575,9 +6579,6 @@
 	},
 /turf/open/floor/almayer/research/containment/floor2,
 /area/almayer/medical/containment/cell/cl)
-"arh" = (
-/turf/open/floor/kutjevo/fake_wood,
-/area/almayer/command/corporateliaison)
 "ari" = (
 /obj/item/device/flashlight/lamp/green{
 	pixel_y = 4;
@@ -6604,6 +6605,10 @@
 	pixel_x = 5
 	},
 /obj/structure/surface/table/woodentable/fancy,
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 2
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "ark" = (
@@ -6613,6 +6618,11 @@
 	dir = 4
 	},
 /obj/effect/landmark/start/corp_sec,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	pixel_x = -1;
+	pixel_y = 1
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "arl" = (
@@ -7214,7 +7224,7 @@
 /obj/item/storage/secure/briefcase/corpsec{
 	pixel_y = -5
 	},
-/turf/open/floor/kutjevo/fake_wood,
+/turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "asI" = (
 /obj/structure/bed,
@@ -7227,7 +7237,7 @@
 	dir = 4
 	},
 /obj/effect/landmark/start/liaison,
-/turf/open/floor/kutjevo/fake_wood,
+/turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "asJ" = (
 /obj/structure/machinery/light{
@@ -7248,6 +7258,10 @@
 /area/almayer/command/telecomms)
 "asL" = (
 /obj/structure/machinery/cm_vending/clothing/corporate_security,
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 2
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "asM" = (
@@ -7430,6 +7444,11 @@
 	},
 /obj/structure/reagent_dispensers/peppertank{
 	pixel_y = 32
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	pixel_x = -1;
+	pixel_y = 1
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -8656,12 +8675,8 @@
 /turf/open/floor/plating,
 /area/almayer/command/corporateliaison)
 "avO" = (
-/obj/structure/bookcase{
-	icon_state = "book-5";
-	name = "law and engineering manuals bookcase";
-	opacity = 0;
-	density = 0;
-	pixel_y = 2
+/obj/structure/sign/poster/safety{
+	pixel_y = 7
 	},
 /turf/closed/wall/almayer,
 /area/almayer/command/corporateliaison)
@@ -9618,37 +9633,6 @@
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/east,
 /area/almayer/command/corporateliaison)
 "axW" = (
-/obj/structure/transmitter/rotary{
-	name = "CL Office Telephone";
-	phone_category = "Offices";
-	phone_id = "CL Office";
-	pixel_x = 5;
-	pixel_y = 6
-	},
-/obj/structure/machinery/door_control/cl/office/office_window{
-	pixel_x = -6;
-	pixel_y = -3;
-	name = "Office Internal Windows Shutters";
-	id = "cl_office_windows2"
-	},
-/obj/structure/machinery/door_control/cl/office/office_window{
-	pixel_x = -6;
-	pixel_y = 4;
-	name = "Office External Windows Shutters"
-	},
-/obj/structure/machinery/door_control/cl/office/office_door{
-	pixel_x = -16;
-	pixel_y = 4
-	},
-/obj/structure/surface/table/reinforced/black,
-/obj/structure/machinery/door_control/cl/office/office_door_remote{
-	pixel_x = -16;
-	pixel_y = -3
-	},
-/obj/item/spacecash/c500{
-	pixel_y = 20;
-	pixel_x = -16
-	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/west,
 /area/almayer/command/corporateliaison)
 "axX" = (
@@ -10974,6 +10958,10 @@
 /obj/structure/machinery/status_display{
 	pixel_x = -32
 	},
+/obj/structure/machinery/light/double{
+	dir = 8;
+	pixel_y = -5
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "aBc" = (
@@ -11639,10 +11627,10 @@
 /area/almayer/maint/upper/u_a_s)
 "aCv" = (
 /obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/office_window,
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	dir = 2
 	},
-/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/office_window,
 /turf/open/floor/plating,
 /area/almayer/command/corporateliaison)
 "aCw" = (
@@ -13645,7 +13633,9 @@
 /turf/closed/wall/almayer,
 /area/almayer/command/corporateliaison)
 "aHs" = (
-/obj/structure/machinery/disposal,
+/obj/structure/machinery/disposal{
+	pixel_x = -3
+	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
@@ -13823,7 +13813,7 @@
 "aHM" = (
 /obj/structure/filingcabinet/chestdrawer{
 	pixel_y = 3;
-	pixel_x = -13;
+	pixel_x = -16;
 	density = 0
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
@@ -14065,12 +14055,6 @@
 /obj/structure/machinery/door_control/cl/office/office_door{
 	pixel_x = -24
 	},
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_29"
-	},
-/obj/structure/machinery/light{
-	dir = 8
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
@@ -14111,52 +14095,80 @@
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/lifeboat_pumps/north1)
 "aIx" = (
-/obj/item/paper_bin/wy{
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/filingcabinet/chestdrawer{
+	density = 0;
+	pixel_x = -8;
+	pixel_y = 23;
+	layer = 4.13
+	},
+/obj/structure/filingcabinet/chestdrawer{
+	density = 0;
 	pixel_x = 7;
-	pixel_y = 6
-	},
-/obj/item/tool/pen/clicky{
-	pixel_x = 6;
-	pixel_y = 6
-	},
-/obj/item/tool/pen/clicky{
-	pixel_x = 6
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
+	pixel_y = 24;
+	layer = 4.13
 	},
 /obj/structure/surface/table/reinforced/black,
-/obj/item/ashtray/plastic{
-	pixel_x = 6;
-	pixel_y = -10
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 4
 	},
-/obj/item/folder/black_random{
-	pixel_y = 6;
-	pixel_x = -7
+/obj/item/reagent_container/food/drinks/coffee/cuppa_joes{
+	pixel_x = 10;
+	desc = "Have you got the Cuppa Joe Smile? Stay perky! Big Boss like`s Cuppa Joe."
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/northeast,
 /area/almayer/command/corporateliaison)
 "aIy" = (
-/obj/structure/machinery/computer/cameras/wooden_tv/broadcast{
-	pixel_y = 18;
-	network = list("Combat Correspondent Live","WY");
+/obj/structure/machinery/door_control/cl/office/office_door{
+	pixel_x = -5;
 	layer = 3.2;
-	pixel_x = -7
+	pixel_y = -5
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/machinery/door_control/cl/office/office_door_remote{
+	pixel_x = -13;
+	layer = 3.2;
+	pixel_y = -5
+	},
+/obj/item/paper_bin/wy{
+	pixel_x = 6;
+	pixel_y = 7
+	},
+/obj/item/tool/pen/clicky{
+	pixel_x = 7;
+	pixel_y = 2
+	},
+/obj/structure/filingcabinet/filingcabinet{
+	pixel_x = 7;
+	pixel_y = 25;
+	layer = 4.13
+	},
+/obj/structure/machinery/computer/cameras/wooden_tv/broadcast{
+	pixel_y = 32;
+	network = list("Combat Correspondent Live","WY");
+	layer = 4.14;
+	pixel_x = -27
+	},
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/machinery/photocopier/wyphotocopier{
+	density = 0;
+	pixel_y = 26;
+	pixel_x = -6;
+	layer = 4.12
 	},
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 6
 	},
-/obj/structure/surface/table/reinforced/black,
-/obj/structure/filingcabinet/filingcabinet{
-	pixel_x = -13;
-	pixel_y = 2
+/obj/item/tool/pen/clicky{
+	pixel_x = 1;
+	pixel_y = 6
 	},
-/obj/structure/filingcabinet/filingcabinet{
-	pixel_x = 3;
-	pixel_y = 2
+/obj/structure/transmitter/rotary{
+	name = "CL Office Telephone";
+	phone_category = "Offices";
+	phone_id = "CL Office";
+	pixel_x = -8;
+	pixel_y = 8;
+	layer = 2.9
 	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/north,
 /area/almayer/command/corporateliaison)
@@ -14269,6 +14281,11 @@
 	pixel_x = 8;
 	pixel_y = 20
 	},
+/obj/item/clock{
+	pixel_y = 36;
+	layer = 4.15;
+	anchored = 1
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "aIJ" = (
@@ -14333,6 +14350,15 @@
 	},
 /turf/open/floor/hybrisa/carpet/carpetreddeco,
 /area/almayer/command/corporateliaison)
+"aIN" = (
+/obj/structure/machinery/light/small{
+	dir = 1
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/maint/hull/upper/u_m_p)
+"aIO" = (
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/almayer/maint/upper/u_m_p)
 "aIP" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
@@ -14361,6 +14387,21 @@
 	},
 /turf/open/floor/almayer/silver,
 /area/almayer/command/cichallway)
+"aIR" = (
+/obj/structure/machinery/door_control/cl/quarter/office_door{
+	pixel_x = 26;
+	pixel_y = 8
+	},
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/almayer/command/corporateliaison)
+"aIS" = (
+/obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer/cl/quarter/window{
+	dir = 4
+	},
+/obj/item/device/flashlight/lamp/on,
+/turf/open/floor/plating,
+/area/almayer/command/corporateliaison)
 "aIT" = (
 /obj/structure/machinery/computer/telecomms/server{
 	pixel_y = 11
@@ -14403,6 +14444,12 @@
 /obj/item/ammo_magazine/smg/m39,
 /turf/open/floor/almayer/redfull,
 /area/almayer/engineering/upper_engineering)
+"aIW" = (
+/obj/structure/machinery/door_control/cl/quarter/backdoor{
+	pixel_x = -24
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/hull/upper/u_m_p)
 "aIX" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -14410,6 +14457,13 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/tankerbunks)
+"aIY" = (
+/obj/structure/machinery/alarm/almayer{
+	dir = 1;
+	pixel_y = 4
+	},
+/turf/closed/wall/almayer,
+/area/almayer/command/corporateliaison)
 "aIZ" = (
 /turf/open/floor/plating,
 /area/almayer/maint/upper/u_m_s)
@@ -14420,6 +14474,15 @@
 	},
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/hallways/upper/port)
+"aJb" = (
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/sign/calendar/wy{
+	pixel_y = 32;
+	layer = 4.14;
+	wrenchable = 1
+	},
+/turf/open/floor/hybrisa/carpet/carpetblack,
+/area/almayer/command/corporateliaison)
 "aJc" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 26;
@@ -14449,6 +14512,12 @@
 	},
 /turf/open/floor/almayer/red/north,
 /area/almayer/hallways/upper/port)
+"aJe" = (
+/obj/structure/machinery/door/firedoor/border_only/almayer{
+	layer = 1.9
+	},
+/turf/closed/wall/almayer,
+/area/almayer/maint/upper/u_m_p)
 "aJf" = (
 /obj/structure/machinery/floodlight,
 /turf/open/floor/almayer/plate,
@@ -16458,10 +16527,10 @@
 /area/almayer/maint/upper/mess)
 "aYp" = (
 /obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/lobby_window,
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	dir = 2
 	},
-/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/lobby_window,
 /turf/open/floor/plating,
 /area/almayer/command/corporateliaison)
 "aYr" = (
@@ -16725,31 +16794,65 @@
 /area/almayer/hallways/hangar)
 "baa" = (
 /obj/structure/surface/table/reinforced/black,
-/obj/structure/machinery/hybrisa/coffee_machine{
-	pixel_y = 9;
-	pixel_x = -3;
-	layer = 3.20
+/obj/item/folder/black{
+	pixel_x = -7
 	},
-/obj/item/reagent_container/food/drinks/coffee{
-	pixel_x = 12;
-	pixel_y = -2
+/obj/item/folder/black{
+	pixel_x = 4
 	},
-/obj/item/reagent_container/food/drinks/coffeecup/wy{
-	pixel_x = -5;
-	pixel_y = -1
+/obj/item/folder/black{
+	pixel_x = 7
 	},
-/obj/structure/machinery/alarm/almayer{
-	dir = 1;
-	pixel_x = -32;
-	pixel_y = 2
+/obj/item/folder/white{
+	pixel_x = -7
 	},
-/turf/open/floor/hybrisa/carpet/carpetblack,
-/area/almayer/command/corporateliaison)
-"bac" = (
-/obj/structure/surface/table/reinforced/black,
-/obj/item/device/flashlight/lamp/green{
-	pixel_x = 4;
-	pixel_y = 7
+/obj/item/folder/blue{
+	pixel_x = -8;
+	pixel_y = 5
+	},
+/obj/item/folder/yellow{
+	pixel_x = 7;
+	pixel_y = 3
+	},
+/obj/structure/filingcabinet/chestdrawer{
+	pixel_x = 3;
+	pixel_y = 22;
+	layer = 3.20;
+	density = 0
+	},
+/obj/item/clipboard{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/obj/item/paper_bin/wy{
+	pixel_x = -9;
+	pixel_y = 5
+	},
+/obj/item/clipboard{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/obj/item/tool/pen/clicky{
+	pixel_x = 6;
+	pixel_y = 1
+	},
+/obj/structure/reagent_dispensers/water_cooler/walk_past{
+	pixel_x = -9;
+	pixel_y = 21;
+	layer = 4.13
+	},
+/obj/structure/filingcabinet/chestdrawer{
+	pixel_x = 3;
+	pixel_y = 22;
+	layer = 3.20;
+	density = 0
+	},
+/obj/structure/machinery/light/double{
+	dir = 8;
+	pixel_y = 3
+	},
+/obj/item/storage/box/drinkingglasses{
+	pixel_x = 9
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -19473,20 +19576,7 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/hangar)
 "bvl" = (
-/obj/item/storage/fancy/cigarettes/wypacket{
-	pixel_x = -5;
-	pixel_y = 7
-	},
-/obj/item/storage/fancy/cigarettes/blackpack{
-	pixel_x = -4;
-	pixel_y = 4
-	},
 /obj/structure/pipes/standard/simple/hidden/supply,
-/obj/structure/surface/table/reinforced/black,
-/obj/item/tool/lighter/zippo/gold{
-	pixel_x = 1;
-	pixel_y = 3
-	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/northwest,
 /area/almayer/command/corporateliaison)
 "bvn" = (
@@ -19537,13 +19627,6 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_m_p)
-"bvY" = (
-/obj/structure/machinery/door_control/cl/quarter/backdoor{
-	pixel_x = -25;
-	pixel_y = 23
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/maint/hull/upper/u_m_p)
 "bwb" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer,
 /obj/structure/disposalpipe/segment{
@@ -20016,13 +20099,9 @@
 	pixel_x = 14;
 	pixel_y = 9
 	},
-/obj/item/storage/box/drinkingglasses{
-	pixel_x = -4;
-	pixel_y = 18
-	},
 /obj/item/reagent_container/food/drinks/bottle/sake{
 	pixel_x = -4;
-	pixel_y = 8
+	pixel_y = 15
 	},
 /obj/item/reagent_container/food/drinks/drinkingglass{
 	icon_state = "shotglass";
@@ -24646,51 +24725,13 @@
 /area/almayer/squads/bravo)
 "ceo" = (
 /obj/structure/surface/table/reinforced/black,
-/obj/item/folder/black{
-	pixel_x = -7
-	},
-/obj/item/folder/black{
-	pixel_x = 4
-	},
-/obj/item/folder/black{
-	pixel_x = 7
-	},
-/obj/item/folder/white{
-	pixel_x = -7
-	},
-/obj/item/folder/blue{
-	pixel_x = -8;
-	pixel_y = 5
-	},
-/obj/item/folder/yellow{
-	pixel_x = 7;
-	pixel_y = 3
-	},
-/obj/structure/filingcabinet/chestdrawer{
-	pixel_x = 3;
-	pixel_y = 22;
-	layer = 3.20;
-	density = 0
-	},
-/obj/item/clipboard{
-	pixel_x = 1;
-	pixel_y = 5
-	},
-/obj/item/paper_bin/wy{
-	pixel_x = 3;
-	pixel_y = 7
-	},
 /obj/structure/machinery/recharger{
 	pixel_x = -13;
 	pixel_y = 7
 	},
-/obj/item/clipboard{
-	pixel_x = 1;
-	pixel_y = 5
-	},
-/obj/item/tool/pen/clicky{
-	pixel_x = 6;
-	pixel_y = 1
+/obj/item/ashtray/plastic{
+	pixel_x = 14;
+	pixel_y = 9
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -27242,25 +27283,9 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/engineering/upper_engineering/starboard)
 "dbM" = (
-/obj/structure/surface/rack,
-/obj/item/reagent_container/food/drinks/bottle/sake{
-	pixel_y = -3;
-	pixel_x = 4
-	},
-/obj/item/reagent_container/food/drinks/bottle/sake{
-	pixel_x = 4;
-	pixel_y = 5
-	},
-/obj/item/reagent_container/food/drinks/bottle/sake{
-	pixel_x = -4;
-	pixel_y = -3
-	},
-/obj/item/reagent_container/food/drinks/bottle/sake{
-	pixel_x = -4;
-	pixel_y = 5
-	},
 /obj/structure/machinery/light,
-/turf/open/floor/hybrisa/metal/bluemetal1/north,
+/obj/structure/surface/table/reinforced/black,
+/turf/open/floor/hybrisa/tile/tilegrey,
 /area/almayer/command/corporateliaison)
 "dbQ" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer{
@@ -29583,8 +29608,7 @@
 	phone_category = "Offices";
 	phone_id = "CL Security";
 	pixel_x = 3;
-	pixel_y = -1;
-	do_not_disturb = 1
+	pixel_y = -1
 	},
 /obj/structure/surface/table/almayer{
 	color = "#848484"
@@ -30899,12 +30923,38 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/living/bridgebunks)
 "eHj" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
-/obj/structure/surface/table/reinforced/black,
 /obj/structure/machinery/computer/wy_intranet/liaison{
 	dir = 4;
-	pixel_y = -9
+	pixel_y = 4;
+	pixel_x = -1
 	},
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/machinery/door_control/cl/office/office_window{
+	pixel_x = -7;
+	name = "Office External Windows Shutters";
+	layer = 3.2;
+	pixel_y = -5
+	},
+/obj/structure/machinery/door_control/cl/office/office_window{
+	pixel_x = 3;
+	name = "Office Internal Windows Shutters";
+	id = "cl_office_windows2";
+	layer = 3.2;
+	pixel_y = -5
+	},
+/obj/structure/filingcabinet/chestdrawer{
+	pixel_y = -13;
+	pixel_x = -8;
+	density = 0;
+	layer = 3.2
+	},
+/obj/structure/filingcabinet/chestdrawer{
+	pixel_y = -13;
+	pixel_x = 7;
+	density = 0;
+	layer = 3.2
+	},
+/obj/structure/pipes/standard/simple/hidden/supply,
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
 "eHq" = (
@@ -32816,6 +32866,39 @@
 /turf/open/floor/almayer/red/northwest,
 /area/almayer/living/offices/flight)
 "fAo" = (
+/obj/structure/safe/floor,
+/obj/item/storage/beer_pack,
+/obj/item/reagent_container/food/snacks/monkeycube/wrapped/stokcube{
+	pixel_x = -4;
+	pixel_y = 2
+	},
+/obj/item/reagent_container/food/snacks/monkeycube/wrapped/yirencube{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/reagent_container/food/snacks/monkeycube/wrapped/neaeracube{
+	pixel_x = -4;
+	pixel_y = 10
+	},
+/obj/item/reagent_container/food/snacks/monkeycube/wrapped/farwacube{
+	pixel_x = 4;
+	pixel_y = 10
+	},
+/obj/item/storage/xeno_tag_case/full{
+	pixel_y = -6
+	},
+/obj/item/storage/fancy/cigarettes/wypacket{
+	pixel_x = -5;
+	pixel_y = 7
+	},
+/obj/item/storage/fancy/cigarettes/blackpack{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/tool/lighter/zippo/gold{
+	pixel_x = 1;
+	pixel_y = 4
+	},
 /obj/structure/machinery/door_control/cl/quarter/office_door{
 	pixel_x = 24;
 	pixel_y = 8
@@ -34560,7 +34643,6 @@
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/lifeboat_pumps/south1)
 "gnQ" = (
-/obj/structure/surface/table/almayer,
 /obj/item/storage/firstaid/regular{
 	pixel_y = 6
 	},
@@ -34579,7 +34661,8 @@
 	pixel_y = 5;
 	pixel_x = 5
 	},
-/turf/open/floor/hybrisa/metal/bluemetal1/north,
+/obj/structure/surface/table/reinforced/black,
+/turf/open/floor/hybrisa/tile/tilegrey,
 /area/almayer/command/corporateliaison)
 "gnR" = (
 /obj/structure/pipes/standard/manifold/hidden/supply{
@@ -35416,10 +35499,10 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/engineering/upper_engineering/port)
 "gEK" = (
+/obj/structure/surface/table/reinforced/black,
 /obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/structure/surface/table/reinforced/black,
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
 "gES" = (
@@ -36458,12 +36541,14 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_m_s)
 "hfm" = (
-/obj/structure/machinery/light{
-	dir = 4
+/obj/structure/machinery/light/double{
+	dir = 4;
+	pixel_y = 3
 	},
-/obj/structure/machinery/photocopier/wyphotocopier,
-/obj/structure/sign/poster/safety{
-	pixel_y = 32
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/machinery/computer/skills{
+	req_one_access_txt = "200";
+	pixel_x = -1
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -37652,6 +37737,7 @@
 	req_one_access = null
 	},
 /obj/structure/machinery/door/poddoor/shutters/almayer/cl/quarter/backdoor,
+/obj/structure/machinery/door/firedoor/border_only/almayer,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/command/corporateliaison)
 "hJb" = (
@@ -38727,7 +38813,6 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/upper/u_m_p)
 "ijn" = (
-/obj/structure/surface/rack,
 /obj/item/reagent_container/food/snacks/monkeycube/wrapped/farwacube{
 	pixel_x = 4;
 	pixel_y = 10
@@ -38747,7 +38832,10 @@
 /obj/item/storage/xeno_tag_case/full{
 	pixel_y = -6
 	},
-/turf/open/floor/hybrisa/metal/bluemetal1/north,
+/obj/structure/surface/rack{
+	color = "#848484"
+	},
+/turf/open/floor/hybrisa/tile/tilegrey,
 /area/almayer/command/corporateliaison)
 "ijp" = (
 /obj/structure/machinery/door/airlock/almayer/generic{
@@ -40581,8 +40669,12 @@
 /turf/open/floor/wood/ship,
 /area/almayer/living/grunt_rnr)
 "jcp" = (
-/obj/structure/machinery/light{
-	dir = 4
+/obj/structure/machinery/light/double{
+	dir = 4;
+	pixel_y = -1
+	},
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_29"
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -51001,7 +51093,8 @@
 /area/almayer/squads/alpha)
 "nTm" = (
 /obj/structure/machinery/chem_dispenser/soda{
-	pixel_y = 20
+	pixel_y = 20;
+	density = 0
 	},
 /obj/effect/decal/hybrisa/road/lines3,
 /obj/structure/prop/hybrisa/misc/pole{
@@ -58275,9 +58368,21 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/engineering/upper_engineering/port)
 "rjH" = (
-/obj/structure/surface/rack,
-/obj/item/storage/beer_pack,
-/turf/open/floor/hybrisa/metal/bluemetal1/north,
+/obj/structure/surface/table/reinforced/black,
+/obj/structure/machinery/hybrisa/coffee_machine{
+	pixel_y = -2;
+	pixel_x = -6;
+	layer = 3.20
+	},
+/obj/item/reagent_container/food/drinks/coffeecup/wy{
+	pixel_x = 9;
+	pixel_y = -3
+	},
+/obj/item/reagent_container/food/drinks/coffeecup/wy{
+	pixel_x = 21;
+	pixel_y = 7
+	},
+/turf/open/floor/hybrisa/tile/tilegrey,
 /area/almayer/command/corporateliaison)
 "rjU" = (
 /obj/structure/machinery/door/airlock/almayer/maint,
@@ -58463,6 +58568,7 @@
 /obj/structure/bed/chair/comfy/hybrisa/red{
 	dir = 4
 	},
+/obj/effect/landmark/start/corp_sec,
 /turf/open/floor/hybrisa/carpet/rug_colorable/grey_blue/northwest,
 /area/almayer/command/corporateliaison)
 "rnH" = (
@@ -68982,6 +69088,11 @@
 	pixel_y = 4
 	},
 /obj/structure/surface/table/woodentable/fancy,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	pixel_x = -1;
+	pixel_y = 1
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "vZx" = (
@@ -69272,13 +69383,13 @@
 /turf/open/floor/almayer/blue/northeast,
 /area/almayer/squads/delta)
 "wft" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
-	dir = 9
-	},
+/obj/effect/landmark/start/liaison,
 /obj/structure/bed/chair/comfy/hybrisa/black{
 	dir = 8
 	},
-/obj/effect/landmark/start/liaison,
+/obj/structure/pipes/standard/simple/hidden/supply{
+	dir = 9
+	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/southwest,
 /area/almayer/command/corporateliaison)
 "wfE" = (
@@ -106711,11 +106822,11 @@ aFf
 mmN
 ayT
 tKO
-avj
+avm
 awE
 awE
 avN
-awE
+aIY
 bqo
 awE
 bYj
@@ -106914,7 +107025,7 @@ aSl
 vOy
 aTL
 tKO
-avm
+avj
 awE
 awE
 aII
@@ -107322,7 +107433,7 @@ atV
 pKe
 avj
 aCv
-bac
+ilv
 dWz
 aIu
 aGz
@@ -107524,8 +107635,8 @@ vOy
 vIN
 tKO
 avj
-aCv
-ilv
+awE
+aJb
 dWz
 aIx
 gEK
@@ -107929,13 +108040,13 @@ nzA
 amD
 ajr
 tKO
-avm
-awE
+avj
+aCv
 hfm
 aIJ
 aIz
 fAo
-bYj
+aIR
 bYj
 jcp
 qyz
@@ -108132,13 +108243,13 @@ ayT
 akT
 amC
 bKe
-avj
+avm
 awE
 awE
 awE
 aIA
 aHr
-axX
+aIS
 axX
 avO
 awE
@@ -108751,11 +108862,11 @@ bYj
 bYj
 bYj
 emO
-arh
-arh
-arh
+bYj
+bYj
+bYj
 awE
-kuO
+aIN
 kuO
 kuO
 xxG
@@ -108960,7 +109071,7 @@ ari
 awE
 ijj
 jer
-qdR
+kuO
 xxG
 mLX
 aaa
@@ -109354,8 +109465,8 @@ ijj
 ijj
 kuO
 fXd
-bvY
-ijj
+kuO
+aIW
 ijj
 kuO
 fXd
@@ -109364,9 +109475,9 @@ ijj
 ijj
 ijj
 gYS
-vXb
-ijj
 kuO
+ijj
+qdR
 iYr
 iYr
 iYr
@@ -109767,7 +109878,7 @@ aGP
 jZj
 aGP
 aGP
-aGP
+aIO
 aGP
 jZj
 wYA
@@ -110568,7 +110679,7 @@ vvg
 jFq
 ioX
 wYA
-wYA
+aJe
 acb
 wYA
 wYA
