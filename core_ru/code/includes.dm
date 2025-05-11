@@ -115,6 +115,7 @@
 #include "modules\mob\living\carbon\xenomorph\hive_status.dm"
 #include "modules\mob\living\carbon\xenomorph\xeno_helpers.dm"
 #include "modules\mob\living\carbon\xenomorph\xeno_verbs.dm"
+#include "modules\mob\living\carbon\xenomorph\castes\Queen.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\crusher\crusher_abilities.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\queen\queen_abilities.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_abilities.dm"
