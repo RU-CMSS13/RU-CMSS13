@@ -6632,6 +6632,7 @@
 	pixel_x = -1;
 	pixel_y = 1
 	},
+/obj/item/reagent_container/food/drinks/flask/weylandyutani/poison,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "arm" = (
@@ -7575,6 +7576,7 @@
 	pixel_x = -1;
 	pixel_y = 1
 	},
+/obj/item/reagent_container/food/drinks/flask/weylandyutani/poison,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
 "atB" = (
@@ -10962,9 +10964,11 @@
 /obj/structure/machinery/status_display{
 	pixel_x = -32
 	},
-/obj/structure/machinery/light/double{
+/obj/structure/machinery/light{
 	dir = 8;
-	pixel_y = -5
+	invisibility = 101;
+	unacidable = 1;
+	unslashable = 1
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -11833,21 +11837,6 @@
 	},
 /turf/open/floor/almayer/silver/northwest,
 /area/almayer/command/computerlab)
-"aDa" = (
-/obj/structure/machinery/door_control/cl/quarter/office_door{
-	pixel_x = 26;
-	pixel_y = 8
-	},
-/turf/open/floor/hybrisa/wood/blackwood,
-/area/almayer/command/corporateliaison)
-"aDb" = (
-/obj/structure/window/framed/almayer,
-/obj/structure/machinery/door/poddoor/shutters/almayer/cl/quarter/window{
-	dir = 4
-	},
-/obj/item/device/flashlight/lamp/on,
-/turf/open/floor/plating,
-/area/almayer/command/corporateliaison)
 "aDc" = (
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /obj/structure/disposalpipe/segment{
@@ -14457,6 +14446,10 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/tankerbunks)
+"aIY" = (
+/obj/item/reagent_container/food/drinks/flask/weylandyutani/poison,
+/turf/closed/wall/almayer,
+/area/almayer/command/corporateliaison)
 "aIZ" = (
 /turf/open/floor/plating,
 /area/almayer/maint/upper/u_m_s)
@@ -16803,7 +16796,7 @@
 	pixel_y = 5
 	},
 /obj/item/paper_bin/wy{
-	pixel_x = -9;
+	pixel_x = -10;
 	pixel_y = 5
 	},
 /obj/item/clipboard{
@@ -16825,12 +16818,11 @@
 	layer = 3.20;
 	density = 0
 	},
-/obj/structure/machinery/light/double{
-	dir = 8;
-	pixel_y = 3
-	},
 /obj/item/storage/box/drinkingglasses{
 	pixel_x = 9
+	},
+/obj/structure/machinery/light{
+	dir = 8
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -36535,14 +36527,13 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/lower/l_m_s)
 "hfm" = (
-/obj/structure/machinery/light/double{
-	dir = 4;
-	pixel_y = 3
-	},
 /obj/structure/surface/table/reinforced/black,
 /obj/structure/machinery/computer/skills{
 	req_one_access_txt = "200";
 	pixel_x = -1
+	},
+/obj/structure/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/almayer/command/corporateliaison)
@@ -38807,25 +38798,6 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/upper/u_m_p)
 "ijn" = (
-/obj/item/reagent_container/food/snacks/monkeycube/wrapped/farwacube{
-	pixel_x = 4;
-	pixel_y = 10
-	},
-/obj/item/reagent_container/food/snacks/monkeycube/wrapped/neaeracube{
-	pixel_x = -4;
-	pixel_y = 10
-	},
-/obj/item/reagent_container/food/snacks/monkeycube/wrapped/stokcube{
-	pixel_x = -4;
-	pixel_y = 2
-	},
-/obj/item/reagent_container/food/snacks/monkeycube/wrapped/yirencube{
-	pixel_x = 4;
-	pixel_y = 2
-	},
-/obj/item/storage/xeno_tag_case/full{
-	pixel_y = -6
-	},
 /obj/structure/surface/rack{
 	color = "#848484"
 	},
@@ -40668,12 +40640,11 @@
 /turf/open/floor/wood/ship,
 /area/almayer/living/grunt_rnr)
 "jcp" = (
-/obj/structure/machinery/light/double{
-	dir = 4;
-	pixel_y = -1
-	},
 /obj/structure/flora/pottedplant{
 	icon_state = "pottedplant_29"
+	},
+/obj/structure/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/almayer/command/corporateliaison)
@@ -106222,8 +106193,8 @@ bsd
 nDh
 auH
 awE
-awE
-awE
+aIY
+aIY
 awE
 awE
 acO
@@ -108045,7 +108016,7 @@ hfm
 aIN
 aIF
 fAo
-aDa
+ari
 ari
 jcp
 qyz
@@ -108248,7 +108219,7 @@ awE
 awE
 aIG
 aIq
-aDb
+azd
 azd
 avP
 awE
