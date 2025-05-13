@@ -143,9 +143,6 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("M276 Lifesaver Bag", 0, /obj/item/storage/belt/medical/lifesaver/full, MARINE_CAN_BUY_BELT, VENDOR_ITEM_REGULAR),
 		list("M276 Medical Storage Belt", 0, /obj/item/storage/belt/medical/full, MARINE_CAN_BUY_BELT, VENDOR_ITEM_REGULAR),
 		list("M276 Toolbelt Rig (Full)", 0, /obj/item/storage/belt/utility/full, MARINE_CAN_BUY_BELT, VENDOR_ITEM_REGULAR),
-// RUCM Start
-		list("M276 Ремонтный пояс (полный)", 0, /obj/item/storage/belt/gun/repairbelt/synth, MARINE_CAN_BUY_BELT, VENDOR_ITEM_REGULAR),
-// RUCM End
 
 		list("POUCHES (CHOOSE 2)", 0, null, null, null),
 		list("Autoinjector Pouch", 0, /obj/item/storage/pouch/autoinjector, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
@@ -609,6 +606,7 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Portable Dialysis Machine", 10, /obj/item/tool/portadialysis, null, VENDOR_ITEM_REGULAR),
 	list("Medic Upgraded Kit", 15, /obj/item/storage/box/combat_zone_support_package, null, VENDOR_ITEM_REGULAR),
 	list("Upgraded Compact Defibrillator", 5, /obj/item/device/defibrillator/compact_adv, null, VENDOR_ITEM_REGULAR),
+	list("Engineer Upgraded Kit", 15, /obj/item/storage/box/guncase/repairbelt/synth, null, VENDOR_ITEM_REGULAR),
 	list("Breaching Hammer", 10, /obj/item/weapon/twohanded/breacher/synth, null, VENDOR_ITEM_REGULAR),
 	list("Maintenance Jack", 5, /obj/item/maintenance_jack, null, VENDOR_ITEM_REGULAR),
 	list("Telescopic Baton", 10, /obj/item/weapon/telebaton, null, VENDOR_ITEM_REGULAR),
