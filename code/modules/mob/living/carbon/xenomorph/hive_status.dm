@@ -2,7 +2,7 @@
 	var/name = "Normal Hive"
 
 	// Used for the faction of the xenomorph. Not recommended to modify.
-	var/internal_faction = FACTION_XENOMORPH
+	var/internal_faction
 
 	/// Short Hive ID as string used in stats reporting
 	var/reporting_id = "normal"
@@ -915,6 +915,11 @@
 		return FALSE
 
 	if(!user.bypass_time_of_death_checks_hugger)
+		var/mob/living/carbon/human/original_human = user.mind?.original
+		if(istype(original_human) && !original_human.undefibbable && !original_human.chestburst && HAS_TRAIT_FROM(original_human, TRAIT_NESTED, TRAIT_SOURCE_BUCKLE))
+			to_chat(user, SPAN_WARNING("You cannot become a facehugger until you are no longer alive in a nest."))
+			return FALSE
+
 		if(world.time - user.client?.player_details.larva_queue_time < XENO_JOIN_DEAD_TIME)
 			var/time_left = floor((user.client.player_details.larva_queue_time + XENO_JOIN_DEAD_TIME - world.time) / 10)
 			to_chat(user, SPAN_WARNING("You ghosted too recently. You cannot become a facehugger until [XENO_JOIN_DEAD_TIME / 600] minutes have passed ([time_left] seconds remaining)."))
@@ -989,6 +994,11 @@
 		if(banished_ckeys[mob_name] == user.ckey)
 			to_chat(user, SPAN_WARNING("You are banished from the [src], you may not rejoin unless the Queen re-admits you or dies."))
 			return FALSE
+
+	var/mob/living/carbon/human/original_human = user.mind?.original
+	if(istype(original_human) && !original_human.undefibbable && !original_human.chestburst && HAS_TRAIT_FROM(original_human, TRAIT_NESTED, TRAIT_SOURCE_BUCKLE))
+		to_chat(user, SPAN_WARNING("You cannot become a lesser drone until you are no longer alive in a nest."))
+		return FALSE
 
 	if(world.time - user.client?.player_details.larva_queue_time < XENO_JOIN_DEAD_TIME)
 		var/time_left = floor((user.client.player_details.larva_queue_time + XENO_JOIN_DEAD_TIME - world.time) / 10)
@@ -1068,7 +1078,6 @@
 	name = "Corrupted Hive"
 	reporting_id = "corrupted"
 	hivenumber = XENO_HIVE_CORRUPTED
-	internal_faction = FACTION_XENOMORPH_CORRPUTED
 	prefix = "Corrupted "
 	color = "#80ff80"
 	ui_color ="#4d994d"
@@ -1096,7 +1105,6 @@
 	name = "Alpha Hive"
 	reporting_id = "alpha"
 	hivenumber = XENO_HIVE_ALPHA
-	internal_faction = FACTION_XENOMORPH_ALPHA
 	prefix = "Alpha "
 	color = "#ff4040"
 	ui_color = "#992626"
@@ -1108,7 +1116,6 @@
 	name = "Bravo Hive"
 	reporting_id = "bravo"
 	hivenumber = XENO_HIVE_BRAVO
-	internal_faction = FACTION_XENOMORPH_BRAVO
 	prefix = "Bravo "
 	color = "#ffff80"
 	ui_color = "#99994d"
@@ -1120,7 +1127,6 @@
 	name = "Charlie Hive"
 	reporting_id = "charlie"
 	hivenumber = XENO_HIVE_CHARLIE
-	internal_faction = FACTION_XENOMORPH_CHARLIE
 	prefix = "Charlie "
 	color = "#bb40ff"
 	ui_color = "#702699"
@@ -1132,7 +1138,6 @@
 	name = "Delta Hive"
 	reporting_id = "delta"
 	hivenumber = XENO_HIVE_DELTA
-	internal_faction = FACTION_XENOMORPH_DELTA
 	prefix = "Delta "
 	color = "#8080ff"
 	ui_color = "#4d4d99"
@@ -1144,7 +1149,6 @@
 	name = "Feral Hive"
 	reporting_id = "feral"
 	hivenumber = XENO_HIVE_FERAL
-	internal_faction = FACTION_XENOMORPH_FERAL
 	prefix = "Feral "
 	color = "#828296"
 	ui_color = "#828296"
@@ -1161,7 +1165,6 @@
 	name = "Forsaken Hive"
 	reporting_id = "forsaken"
 	hivenumber = XENO_HIVE_FORSAKEN
-	internal_faction = FACTION_XENOMORPH_FORSAKEN
 	prefix = "Forsaken "
 	color = "#cc8ec4"
 	ui_color = "#cc8ec4"
