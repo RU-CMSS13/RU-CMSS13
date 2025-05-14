@@ -792,7 +792,7 @@
 			to_chat(xeno, SPAN_XENODANGER("We decide to cancel our spit."))
 			spitting = FALSE
 			return
-	//RUCM STARTS THERE
+	//RUCM EDIT START
 	var/list/new_vars = list("damage" = xeno.ammo.damage, "penetration" = xeno.ammo.penetration, "shell_speed" = xeno.ammo.shell_speed, "spit_cost" = xeno.ammo.spit_cost)
 	SEND_SIGNAL(xeno, COMSIG_XENO_PRE_SPIT, new_vars)
 	var/datum/ammo/xeno/new_ammo = new xeno.ammo.type
@@ -800,12 +800,11 @@
 	new_ammo.penetration = new_vars["penetration"]
 	new_ammo.shell_speed = new_vars["shell_speed"]
 	new_ammo.spit_cost = new_vars["spit_cost"]
-	/*
+	/* RUCM REMOVE START
 	plasma_cost = xeno.ammo.spit_cost
-	*/
-
+	*/// RUCM REMOVE END
 	plasma_cost = new_ammo.spit_cost
-	//RUCM ENDS here
+	//RUCM EDIT END
 	if(!check_and_use_plasma_owner())
 		spitting = FALSE
 		return
@@ -817,17 +816,18 @@
 	playsound(xeno.loc, sound_to_play, 25, 1)
 
 	var/obj/projectile/proj = new (current_turf, create_cause_data(xeno.ammo.name, xeno))
-	/* RUCM
+	/* RUCM REMOVE START
 	proj.generate_bullet(xeno.ammo)
-	*/
+	*/// RUCM REMOVE END
 	proj.generate_bullet(new_ammo)
-	//RUCM ENDS
+	//RUCM EDIT END
 	proj.permutated += xeno
 	proj.def_zone = xeno.get_limbzone_target()
-	/* RUCM
+	/* RUCM REMOVE START/RUCM EDIT START
 	proj.fire_at(spit_target, xeno, xeno, xeno.ammo.max_range, xeno.ammo.shell_speed)
-	ENDS THERE*/
+	*///RUCM REMOVE END
 	proj.fire_at(spit_target, xeno, xeno, new_ammo.max_range, new_ammo.shell_speed)
+	//RUCM EDIT END
 
 	spitting = FALSE
 
