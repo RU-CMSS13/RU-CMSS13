@@ -802,8 +802,8 @@
 	new_ammo.spit_cost = new_vars["spit_cost"]
 	/* RUCM REMOVE START
 	plasma_cost = xeno.ammo.spit_cost
+
 	*/// RUCM REMOVE END
-	
 	plasma_cost = new_ammo.spit_cost
 	//RUCM EDIT END
 	if(!check_and_use_plasma_owner())
