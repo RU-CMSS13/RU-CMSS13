@@ -586,6 +586,18 @@
 /obj/structure/machinery/power/apc/almayer/hardened/north,
 /turf/open/floor/almayer,
 /area/almayer/living/offices/flight)
+"abI" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 1
+	},
+/obj/structure/machinery/autodoc_console{
+	dir = 8;
+	pixel_y = 1;
+	upgrades = list(1,2,3,4)
+	},
+/turf/open/floor/almayer/dark_sterile,
+/area/almayer/medical/lower_medical_medbay)
 "abJ" = (
 /obj/structure/bed/sofa/vert/grey,
 /obj/structure/bed/sofa/vert/grey{
@@ -17172,14 +17184,14 @@
 /turf/open/floor/almayer/orange/north,
 /area/almayer/engineering/lower)
 "bky" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "E";
-	pixel_x = 1
-	},
 /obj/structure/machinery/autodoc_console{
 	dir = 8;
 	pixel_y = 1;
 	upgrades = list(1,2,3,4)
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 1
 	},
 /turf/open/floor/almayer/dark_sterile,
 /area/almayer/medical/lower_medical_medbay)
@@ -52951,18 +52963,6 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/living/briefing)
-"pfQ" = (
-/obj/structure/machinery/autodoc_console{
-	dir = 8;
-	pixel_y = 1;
-	upgrades = list(1,2,3,4)
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E";
-	pixel_x = 1
-	},
-/turf/open/floor/almayer/dark_sterile,
-/area/almayer/medical/lower_medical_medbay)
 "pfS" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	dir = 2
@@ -103459,9 +103459,9 @@ xMs
 akQ
 aqR
 avE
-bky
+abI
 dBH
-pfQ
+bky
 ryt
 aqX
 wYS
