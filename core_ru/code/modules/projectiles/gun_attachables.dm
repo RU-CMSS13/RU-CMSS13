@@ -28,7 +28,7 @@
 	desc = "A specialized stock designed for XM52 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility."
 	icon = 'core_ru/icons/obj/items/weapons/guns/attachments/stock.dmi'
 	icon_state = "xm52_folding_a"
-	//attach_icon = "xm52_folding_a" //Разкоменчу когда отдашь спрайт хм52
+	attach_icon = "xm52_folding_a"
 	wield_delay_mod = WIELD_DELAY_FAST
 	pixel_shift_x = 31
 	pixel_shift_y = 15
@@ -64,7 +64,7 @@
 		//and makes you slower
 		aim_speed_mod = CONFIG_GET(number/slowdown_med)
 		icon_state = "xm52_folding_a_on"
-		//attach_icon = "xm52_folding_a_on"
+		attach_icon = "xm52_folding_a_on"
 		pixel_shift_x = 29
 		size_mod = 2
 		wield_delay_mod = WIELD_DELAY_VERY_FAST //added 0.2 seconds for wield, basic solid stock adds 0.4
@@ -79,7 +79,7 @@
 		scatter_unwielded_mod = 0
 		aim_speed_mod = 0
 		icon_state = "xm52_folding_a"
-		//attach_icon = "xm52_folding_a"
+		attach_icon = "xm52_folding_a"
 		pixel_shift_x = 31
 		size_mod = 1
 		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay

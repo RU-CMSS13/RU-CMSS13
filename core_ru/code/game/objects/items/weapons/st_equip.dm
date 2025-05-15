@@ -12,9 +12,9 @@
 	)
 	pickup_sound = "gunequip"
 	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
-	force = MELEE_FORCE_STRONG
+	force = MELEE_FORCE_TIER_6
 	flags_item = TWOHANDED
-	force_wielded = MELEE_FORCE_TIER_8
+	force_wielded = MELEE_FORCE_STRONG
 	throwforce = MELEE_FORCE_NORMAL
 	w_class = SIZE_LARGE
 	sharp = IS_SHARP_ITEM_BIG
@@ -98,7 +98,7 @@
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"
 	passive_block = 60
-	readied_block = 100
+	readied_block = 80
 	throw_range = 4
 	flags_equip_slot = SLOT_BACK
 	force = MELEE_FORCE_TIER_1
