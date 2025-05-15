@@ -1,10 +1,19 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/closed/wall/r_wall,
+/area/varadero/exterior/comms4)
 "ab" = (
 /obj/structure/bed/chair/wood/normal{
 	dir = 1
 	},
 /turf/open/floor/carpet,
 /area/varadero/interior/library)
+"ac" = (
+/obj/structure/closet/crate,
+/obj/item/stack/sheet/plasteel/med_small_stack,
+/obj/item/stack/sheet/metal/medium_stack,
+/turf/open/floor/shiva/floor3,
+/area/varadero/interior/cargo)
 "ad" = (
 /obj/structure/machinery/light,
 /obj/structure/barricade/metal/wired{
@@ -92,12 +101,6 @@
 /obj/structure/platform_decoration/metal/kutjevo/west,
 /turf/open/floor/shiva/yellow/north,
 /area/varadero/interior/cargo)
-"aK" = (
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 4
-	},
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/interior/maintenance/research)
 "aM" = (
 /obj/structure/prop/invuln/minecart_tracks,
 /obj/structure/platform_decoration/metal/kutjevo/west,
@@ -713,13 +716,8 @@
 /obj/structure/pipes/standard/simple/hidden/green{
 	dir = 4
 	},
-/obj/structure/prop/invuln/lattice_prop{
-	icon_state = "lattice1";
-	pixel_x = -16;
-	pixel_y = -8
-	},
 /turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/interior/maintenance/research)
+/area/varadero/exterior/comms4)
 "fJ" = (
 /turf/open/floor/asteroidwarning,
 /area/varadero/interior/comms1)
@@ -2464,8 +2462,14 @@
 /turf/open/floor/shiva/yellowfull/west,
 /area/varadero/interior/hall_N)
 "tF" = (
-/turf/closed/wall/r_wall,
-/area/varadero/interior/maintenance/research)
+/obj/structure/machinery/power/apc/power/south,
+/obj/structure/prop/invuln/lattice_prop{
+	icon_state = "lattice1";
+	pixel_x = -16;
+	pixel_y = -8
+	},
+/turf/open/floor/plating/icefloor/asteroidplating,
+/area/varadero/exterior/comms4)
 "tK" = (
 /turf/open/floor/plating/bare_catwalk,
 /area/varadero/exterior/pontoon_beach)
@@ -3358,9 +3362,6 @@
 	},
 /turf/open/floor/carpet,
 /area/varadero/interior/library)
-"Be" = (
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/interior/maintenance/research)
 "Bg" = (
 /turf/open/floor/plating/icefloor/asteroidplating,
 /area/varadero/interior/hall_N)
@@ -6453,11 +6454,11 @@ xm
 KW
 Sl
 Sl
-Be
-Be
+cF
+cF
 fH
 tF
-Rs
+aa
 Rs
 Rs
 GT
@@ -6516,11 +6517,11 @@ nW
 nW
 nW
 al
-Be
-Be
-aK
-tF
-Rs
+cF
+cF
+fH
+aa
+aa
 Rs
 Rs
 gA
@@ -6579,10 +6580,10 @@ KS
 KS
 KS
 KS
-Be
-Be
-aK
-tF
+cF
+cF
+fH
+aa
 Rs
 Rs
 gA
@@ -6766,7 +6767,7 @@ VF
 NJ
 oi
 hd
-mm
+ac
 qP
 lm
 iW

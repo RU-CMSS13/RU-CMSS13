@@ -249,6 +249,34 @@
 /obj/effect/landmark/spycam_start,
 /turf/open/floor/asteroidfloor/north,
 /area/varadero/exterior/lz1_near)
+"aaV" = (
+/obj/structure/machinery/light/small,
+/obj/structure/prop/invuln/lattice_prop{
+	icon_state = "lattice3";
+	pixel_x = 16;
+	pixel_y = 24
+	},
+/turf/open/floor/plating/icefloor/asteroidplating,
+/area/varadero/exterior/comms4)
+"aaW" = (
+/obj/structure/machinery/power/apc/power/south,
+/obj/structure/prop/invuln/lattice_prop{
+	icon_state = "lattice1";
+	pixel_x = -16;
+	pixel_y = -8
+	},
+/turf/open/floor/plating/icefloor/asteroidplating,
+/area/varadero/exterior/comms4)
+"aaX" = (
+/obj/structure/closet/crate,
+/obj/item/stack/sheet/plasteel/med_small_stack,
+/obj/item/stack/sheet/metal/medium_stack,
+/turf/open/floor/shiva/floor3,
+/area/varadero/interior/cargo)
+"aaY" = (
+/obj/structure/closet/crate,
+/turf/open/floor/shiva/floor3,
+/area/varadero/interior/cargo)
 "abf" = (
 /obj/structure/pipes/standard/manifold/hidden/green{
 	dir = 4
@@ -13200,9 +13228,7 @@
 /obj/structure/barricade/handrail/wire{
 	dir = 4
 	},
-/obj/item/stack/sheet/metal/medium_stack,
-/obj/item/stack/sheet/plasteel/med_small_stack,
-/obj/structure/closet/crate,
+/obj/structure/largecrate/random,
 /turf/open/floor/plating/icefloor/asteroidplating,
 /area/varadero/exterior/comms4)
 "kwB" = (
@@ -15007,18 +15033,6 @@
 	},
 /turf/open/floor/shiva/floor3,
 /area/varadero/interior/hall_N)
-"lWB" = (
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 4
-	},
-/obj/structure/machinery/light/small,
-/obj/structure/prop/invuln/lattice_prop{
-	icon_state = "lattice3";
-	pixel_x = 16;
-	pixel_y = 24
-	},
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/exterior/comms4)
 "lWJ" = (
 /obj/structure/machinery/firealarm{
 	dir = 1;
@@ -21319,10 +21333,6 @@
 	},
 /turf/open/floor/shiva/red/north,
 /area/varadero/interior/security)
-"qUj" = (
-/obj/structure/machinery/power/apc/power/south,
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/exterior/comms4)
 "qUK" = (
 /obj/structure/surface/rack,
 /obj/item/storage/toolbox/mechanical,
@@ -21723,11 +21733,6 @@
 /obj/item/ammo_magazine/revolver/cmb,
 /turf/open/floor/shiva/purple,
 /area/varadero/interior/research)
-"rki" = (
-/obj/item/stack/sheet/metal/med_large_stack,
-/obj/structure/closet/crate,
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/exterior/comms4)
 "rkA" = (
 /obj/structure/closet/secure_closet/engineering_welding,
 /turf/open/floor/asteroidfloor/north,
@@ -30360,17 +30365,6 @@
 	},
 /turf/open/floor/shiva/purplefull/west,
 /area/varadero/interior/research)
-"ybj" = (
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 4
-	},
-/obj/structure/prop/invuln/lattice_prop{
-	icon_state = "lattice1";
-	pixel_x = -16;
-	pixel_y = -8
-	},
-/turf/open/floor/plating/icefloor/asteroidplating,
-/area/varadero/exterior/comms4)
 "ybm" = (
 /obj/structure/surface/table/woodentable,
 /obj/item/device/flashlight/lamp,
@@ -35130,7 +35124,7 @@ ifB
 ifB
 ifB
 gVd
-qUj
+ifB
 qIs
 qIs
 qul
@@ -35312,7 +35306,7 @@ ifB
 ifB
 xNA
 gVd
-qIs
+ifB
 qIs
 qul
 uHY
@@ -35487,15 +35481,15 @@ iwx
 fmG
 vNF
 rCN
-rki
+ifB
 lCK
 ifB
 lCK
 dii
 fwF
-lWB
+tHj
+aaV
 qIs
-qul
 qul
 uHY
 qHc
@@ -35675,9 +35669,9 @@ rGE
 rGE
 ifB
 ifB
-ybj
+gVd
+aaW
 qIs
-qul
 qul
 qul
 qHc
@@ -35859,7 +35853,7 @@ ifB
 ifB
 gVd
 qIs
-qul
+qIs
 qul
 qul
 xCn
@@ -36581,7 +36575,7 @@ xOx
 haV
 oke
 baN
-wGl
+aaX
 ykc
 pkG
 nsn
@@ -36941,7 +36935,7 @@ sGY
 pxg
 syl
 nYL
-oke
+aaY
 oRx
 hsF
 rLW
