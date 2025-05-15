@@ -586,18 +586,6 @@
 /obj/structure/machinery/power/apc/almayer/hardened/north,
 /turf/open/floor/almayer,
 /area/almayer/living/offices/flight)
-"abI" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "E";
-	pixel_x = 1
-	},
-/obj/structure/machinery/autodoc_console{
-	dir = 8;
-	pixel_y = 1;
-	upgrades = list(1,2,3,4)
-	},
-/turf/open/floor/almayer/dark_sterile,
-/area/almayer/medical/lower_medical_medbay)
 "abJ" = (
 /obj/structure/bed/sofa/vert/grey,
 /obj/structure/bed/sofa/vert/grey{
@@ -2529,6 +2517,10 @@
 	dir = 4
 	},
 /obj/item/storage/fancy/cigar/tarbacks,
+/obj/item/reagent_container/food/snacks/mre_pack/xmas3{
+	pixel_x = -4;
+	pixel_y = 12
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/grunt_rnr)
 "agI" = (
@@ -3955,14 +3947,14 @@
 /obj/structure/closet/secure_closet{
 	name = "Field Doctor's locker"
 	},
+/obj/item/clothing/shoes/marine{
+	layer = 4.1
+	},
 /obj/item/clothing/suit/storage/marine/light/vest,
+/obj/item/clothing/head/helmet/marine/medic,
 /obj/item/storage/box/mre,
 /obj/item/device/radio/marine,
 /obj/item/clothing/accessory/patch/medic_patch,
-/obj/item/storage/backpack/marine/medic,
-/obj/item/clothing/shoes/marine/knife,
-/obj/item/storage/belt/gun/smartpistol/full,
-/obj/item/clothing/head/helmet/marine/medic/white,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
 "akF" = (
@@ -9514,7 +9506,6 @@
 	icon_state = "N";
 	pixel_y = 2
 	},
-/obj/structure/machinery/iv_drip,
 /turf/open/floor/almayer/plating/northeast,
 /area/almayer/medical/lower_medical_medbay)
 "ayD" = (
@@ -11589,7 +11580,7 @@
 /obj/structure/machinery/door/airlock/almayer/command{
 	name = "\improper Senior Enlisted Advisor's Office";
 	req_access = null;
-	req_one_access = list(19,29)
+	req_one_access = list(19, 29)
 	},
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -11728,7 +11719,7 @@
 /area/almayer/shipboard/sea_office)
 "aDJ" = (
 /obj/structure/machinery/door/airlock/almayer/maint{
-	req_one_access = list(19,29);
+	req_one_access = list(19, 29);
 	req_access = null
 	},
 /turf/open/floor/almayer/test_floor4,
@@ -12258,6 +12249,7 @@
 "aFb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/surface/table/reinforced/almayer_B,
+/obj/item/reagent_container/food/snacks/mre_pack/meal4,
 /obj/item/reagent_container/food/drinks/tea{
 	pixel_x = -7;
 	pixel_y = 10
@@ -12270,6 +12262,10 @@
 /area/almayer/living/intel)
 "aFc" = (
 /obj/structure/surface/table/reinforced/almayer_B,
+/obj/item/reagent_container/food/snacks/mre_pack/meal5{
+	pixel_y = 14;
+	pixel_x = 4
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/intel)
 "aFd" = (
@@ -13800,6 +13796,7 @@
 /area/almayer/living/numbertwobunks)
 "aJL" = (
 /obj/structure/surface/table/almayer,
+/obj/item/reagent_container/food/snacks/mre_pack/meal5,
 /obj/item/device/flashlight/lamp{
 	pixel_x = 3;
 	pixel_y = 12
@@ -15763,16 +15760,31 @@
 "aYR" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/item/tool/portadialysis{
-	pixel_x = 2;
-	pixel_y = -2;
-	layer = 3.03
+	pixel_x = -3;
+	pixel_y = 11
+	},
+/obj/item/clothing/accessory/storage/surg_vest/blue/equipped,
+/obj/item/clothing/accessory/storage/surg_vest/equipped,
+/obj/item/prop{
+	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
+	icon = 'icons/obj/items/bloodpack.dmi';
+	icon_state = "bloodpack";
+	name = "blood bag"
+	},
+/obj/item/prop{
+	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
+	icon = 'icons/obj/items/bloodpack.dmi';
+	icon_state = "bloodpack";
+	name = "blood bag"
+	},
+/obj/item/prop{
+	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
+	icon = 'icons/obj/items/bloodpack.dmi';
+	icon_state = "bloodpack";
+	name = "blood bag"
 	},
 /obj/structure/machinery/light/small{
 	dir = 1
-	},
-/obj/item/storage/firstaid/limbs{
-	pixel_y = 14;
-	pixel_x = 4
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
@@ -16395,9 +16407,9 @@
 /area/almayer/medical/operating_room_one)
 "bcV" = (
 /obj/structure/largecrate/machine/bodyscanner,
-/obj/item/folded_tent/bigmed{
-	pixel_y = 5;
-	layer = 3.03
+/obj/item/folded_tent/med{
+	pixel_x = -3;
+	pixel_y = 10
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
@@ -17186,8 +17198,7 @@
 "bky" = (
 /obj/structure/machinery/autodoc_console{
 	dir = 8;
-	pixel_y = 1;
-	upgrades = list(1,2,3,4)
+	pixel_y = 1
 	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -22778,8 +22789,8 @@
 	pixel_x = -8
 	},
 /obj/item/reagent_container/glass/minitank{
-	pixel_x = -14;
-	pixel_y = 4
+	pixel_x = -16;
+	pixel_y = 5
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
@@ -23917,6 +23928,7 @@
 /obj/structure/machinery/status_display{
 	pixel_y = 30
 	},
+/obj/structure/machinery/part_fabricator/dropship,
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/lower/repair_bay)
 "ceR" = (
@@ -29136,9 +29148,7 @@
 	icon_state = "N";
 	pixel_y = 2
 	},
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/clothing/accessory/storage/surg_vest/blue/equipped,
-/obj/item/clothing/accessory/storage/surg_vest/equipped,
+/obj/structure/machinery/iv_drip,
 /turf/open/floor/almayer/plating/northeast,
 /area/almayer/medical/lower_medical_medbay)
 "eiE" = (
@@ -38483,9 +38493,6 @@
 	pixel_y = 8;
 	pixel_x = 1
 	},
-/obj/item/device/defibrillator/synthetic{
-	pixel_x = 13
-	},
 /turf/open/floor/almayer/sterile_green_side/northeast,
 /area/almayer/medical/lockerroom)
 "ixq" = (
@@ -38802,7 +38809,7 @@
 /obj/structure/machinery/door/airlock/almayer/command{
 	name = "\improper Senior Enlisted Advisor's Quarters";
 	req_access = null;
-	req_access_txt = list(19,29);
+	req_access_txt = list(19, 29);
 	dir = 1
 	},
 /turf/open/floor/almayer/test_floor4,
@@ -46117,6 +46124,7 @@
 /area/almayer/medical/lower_medical_lobby)
 "maL" = (
 /obj/structure/surface/table/almayer,
+/obj/item/reagent_container/food/snacks/protein_pack,
 /turf/open/floor/almayer/plate,
 /area/almayer/living/gym)
 "maQ" = (
@@ -49323,6 +49331,9 @@
 /obj/structure/closet/crate/freezer{
 	desc = "A freezer crate. Someone has written 'open on christmas' in marker on the top."
 	},
+/obj/item/reagent_container/food/snacks/mre_pack/xmas2,
+/obj/item/reagent_container/food/snacks/mre_pack/xmas1,
+/obj/item/reagent_container/food/snacks/mre_pack/xmas3,
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/s_stern)
 "nwv" = (
@@ -62898,10 +62909,10 @@
 /area/almayer/shipboard/brig/processing)
 "tGh" = (
 /obj/structure/medical_supply_link,
+/obj/structure/machinery/cm_vending/sorted/medical/marinemed,
 /obj/structure/machinery/light{
 	dir = 8
 	},
-/obj/structure/machinery/cm_vending/sorted/medical/marinemed/plus,
 /turf/open/floor/almayer/sterile_green,
 /area/almayer/medical/lower_medical_lobby)
 "tGi" = (
@@ -65698,6 +65709,8 @@
 /obj/item/storage/belt/medical/full{
 	layer = 3.525
 	},
+/obj/item/storage/box/kit/mini_medic,
+/obj/item/storage/box/kit/mini_medic,
 /turf/open/floor/almayer/redfull,
 /area/almayer/command/cic)
 "uTx" = (
@@ -69739,6 +69752,8 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/securecom,
+/obj/item/storage/box/kit/honorguard,
+/obj/item/storage/box/kit/honorguard,
 /turf/open/floor/almayer/redfull,
 /area/almayer/command/cic)
 "wIb" = (
@@ -103459,7 +103474,7 @@ xMs
 akQ
 aqR
 avE
-abI
+bky
 dBH
 bky
 ryt
