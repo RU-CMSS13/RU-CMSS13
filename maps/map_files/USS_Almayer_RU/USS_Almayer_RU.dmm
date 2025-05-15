@@ -3947,14 +3947,14 @@
 /obj/structure/closet/secure_closet{
 	name = "Field Doctor's locker"
 	},
-/obj/item/clothing/shoes/marine{
-	layer = 4.1
-	},
 /obj/item/clothing/suit/storage/marine/light/vest,
-/obj/item/clothing/head/helmet/marine/medic,
 /obj/item/storage/box/mre,
 /obj/item/device/radio/marine,
 /obj/item/clothing/accessory/patch/medic_patch,
+/obj/item/storage/backpack/marine/medic,
+/obj/item/clothing/shoes/marine/knife,
+/obj/item/storage/belt/gun/smartpistol/full,
+/obj/item/clothing/head/helmet/marine/medic/white,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
 "akF" = (
@@ -9506,6 +9506,7 @@
 	icon_state = "N";
 	pixel_y = 2
 	},
+/obj/structure/machinery/iv_drip,
 /turf/open/floor/almayer/plating/northeast,
 /area/almayer/medical/lower_medical_medbay)
 "ayD" = (
@@ -15759,32 +15760,17 @@
 /area/almayer/medical/operating_room_two)
 "aYR" = (
 /obj/structure/surface/table/reinforced/prison,
-/obj/item/tool/portadialysis{
-	pixel_x = -3;
-	pixel_y = 11
-	},
-/obj/item/clothing/accessory/storage/surg_vest/blue/equipped,
-/obj/item/clothing/accessory/storage/surg_vest/equipped,
-/obj/item/prop{
-	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
-	icon = 'icons/obj/items/bloodpack.dmi';
-	icon_state = "bloodpack";
-	name = "blood bag"
-	},
-/obj/item/prop{
-	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
-	icon = 'icons/obj/items/bloodpack.dmi';
-	icon_state = "bloodpack";
-	name = "blood bag"
-	},
-/obj/item/prop{
-	desc = "A blood bag with a hole in it. The rats must have gotten to it first.";
-	icon = 'icons/obj/items/bloodpack.dmi';
-	icon_state = "bloodpack";
-	name = "blood bag"
-	},
 /obj/structure/machinery/light/small{
 	dir = 1
+	},
+/obj/item/storage/firstaid/limbs{
+	pixel_y = 14;
+	pixel_x = 4
+	},
+/obj/item/tool/portadialysis{
+	pixel_x = 2;
+	pixel_y = -2;
+	layer = 3.03
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
@@ -16407,9 +16393,9 @@
 /area/almayer/medical/operating_room_one)
 "bcV" = (
 /obj/structure/largecrate/machine/bodyscanner,
-/obj/item/folded_tent/med{
-	pixel_x = -3;
-	pixel_y = 10
+/obj/item/folded_tent/bigmed{
+	pixel_y = 5;
+	layer = 3.03
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/lower_medical_medbay)
@@ -17198,7 +17184,8 @@
 "bky" = (
 /obj/structure/machinery/autodoc_console{
 	dir = 8;
-	pixel_y = 1
+	pixel_y = 1;
+	upgrades = list(1,2,3,4)
 	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -29148,7 +29135,9 @@
 	icon_state = "N";
 	pixel_y = 2
 	},
-/obj/structure/machinery/iv_drip,
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/clothing/accessory/storage/surg_vest/equipped,
+/obj/item/clothing/accessory/storage/surg_vest/equipped,
 /turf/open/floor/almayer/plating/northeast,
 /area/almayer/medical/lower_medical_medbay)
 "eiE" = (
@@ -62909,10 +62898,10 @@
 /area/almayer/shipboard/brig/processing)
 "tGh" = (
 /obj/structure/medical_supply_link,
-/obj/structure/machinery/cm_vending/sorted/medical/marinemed,
 /obj/structure/machinery/light{
 	dir = 8
 	},
+/obj/structure/machinery/cm_vending/sorted/medical/marinemed/plus,
 /turf/open/floor/almayer/sterile_green,
 /area/almayer/medical/lower_medical_lobby)
 "tGi" = (
