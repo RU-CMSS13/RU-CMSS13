@@ -65,7 +65,7 @@
 
 #ifdef OBJECTS_PROXY_SPEECH
 // Transfers speech to occupant
-/obj/structure/machinery/medical_pod/bodyscanner/hear_talk(mob/living/sourcemob, message, verb, language, italics, tts_heard_list)
+/obj/structure/machinery/medical_pod/bodyscanner/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	if(!QDELETED(occupant) && istype(occupant) && occupant.stat != DEAD)
 		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics, tts_heard_list = tts_heard_list)
 	else
@@ -127,12 +127,12 @@
 	..()
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
+		return
+	if(stat & NOPOWER)
+		spawn(rand(0, 15))
+			icon_state = "body_scannerconsole-p"
 	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "body_scannerconsole-p"
-		else
-			icon_state = initial(icon_state)
+		icon_state = initial(icon_state)
 
 
 
@@ -390,3 +390,9 @@
 	dat += "</body></html>"
 	return dat
 
+/obj/structure/machinery/medical_pod/bodyscanner/yautja
+	icon = 'icons/obj/structures/machinery/yautja_machines.dmi'
+
+/obj/structure/machinery/body_scanconsole/yautja
+	icon = 'icons/obj/structures/machinery/yautja_machines.dmi'
+	icon_state = "sleeperconsole"

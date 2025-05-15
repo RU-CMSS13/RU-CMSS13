@@ -1,23 +1,3 @@
-
-#define QUEEN_DEATH_COUNTDOWN  10 MINUTES //10 minutes. Can be changed into a variable if it needs to be manipulated later.
-
-#define MODE_INFESTATION_X_MAJOR "Xenomorph Major Victory"
-#define MODE_INFESTATION_M_MAJOR "Marine Major Victory"
-#define MODE_INFESTATION_X_MINOR "Xenomorph Minor Victory"
-#define MODE_INFESTATION_M_MINOR "Marine Minor Victory"
-#define MODE_INFESTATION_DRAW_DEATH "DRAW: Mutual Annihilation"
-
-#define MODE_INFECTION_ZOMBIE_WIN "Major Zombie Victory"
-
-#define MODE_BATTLEFIELD_W_MAJOR "Wey-Yu PMC Major Success"
-#define MODE_BATTLEFIELD_M_MAJOR "Marine Major Success"
-#define MODE_BATTLEFIELD_W_MINOR "Wey-Yu PMC Minor Success"
-#define MODE_BATTLEFIELD_M_MINOR "Marine Minor Success"
-#define MODE_BATTLEFIELD_DRAW_STALEMATE "DRAW: Stalemate"
-#define MODE_BATTLEFIELD_DRAW_DEATH "DRAW: My Friends Are Dead"
-
-#define MODE_GENERIC_DRAW_NUKE "DRAW: Nuclear Explosion"
-
 /*
 Like with cm_initialize.dm, these procs exist to quickly populate classic CM game modes.
 Specifically for processing, announcing completion, and so on. Simply plug in these procs
@@ -106,38 +86,6 @@ of predators), but can be added to include variant game modes (like humans vs. h
 
 /datum/game_mode/proc/declare_fun_facts()
 	set waitfor = 0
-
-//RUCM START
-	switch(round_finished)
-		if(MODE_INFESTATION_X_MAJOR)
-			if(GLOB.current_battlepass?.mapped_point_sources["end_round"])
-				SSbattlepass.give_sides_points(GLOB.current_battlepass.mapped_point_sources["end_round"]["marine"][1] / 2, GLOB.current_battlepass.mapped_point_sources["end_round"]["xeno"][2] * 2)
-			else
-				SSbattlepass.give_sides_points(0, 2)
-
-		if(MODE_INFESTATION_M_MAJOR)
-			if(GLOB.current_battlepass?.mapped_point_sources["end_round"])
-				SSbattlepass.give_sides_points(GLOB.current_battlepass.mapped_point_sources["end_round"]["marine"][2] * 2, GLOB.current_battlepass.mapped_point_sources["end_round"]["xeno"][1] / 2)
-			else
-				SSbattlepass.give_sides_points(2, 0)
-		if(MODE_INFESTATION_X_MINOR)
-			if(GLOB.current_battlepass?.mapped_point_sources["end_round"])
-				SSbattlepass.give_sides_points(GLOB.current_battlepass.mapped_point_sources["end_round"]["marine"][1], GLOB.current_battlepass.mapped_point_sources["end_round"]["xeno"][2])
-			else
-				SSbattlepass.give_sides_points(0, 1)
-		if(MODE_INFESTATION_M_MINOR)
-			if(GLOB.current_battlepass?.mapped_point_sources["end_round"])
-				SSbattlepass.give_sides_points(GLOB.current_battlepass.mapped_point_sources["end_round"]["marine"][2], GLOB.current_battlepass.mapped_point_sources["end_round"]["xeno"][1])
-			else
-				SSbattlepass.give_sides_points(1, 0)
-
-		if(MODE_INFESTATION_DRAW_DEATH)
-			if(GLOB.current_battlepass?.mapped_point_sources["end_round"])
-				SSbattlepass.give_sides_points(GLOB.current_battlepass.mapped_point_sources["end_round"]["marine"][1], GLOB.current_battlepass.mapped_point_sources["end_round"]["xeno"][1])
-			else
-				SSbattlepass.give_sides_points(0, 0)
-//RUCM END
-
 	sleep(2 SECONDS)
 	to_chat_spaced(world, margin_bottom = 0, html = SPAN_ROLE_BODY("|______________________|"))
 	to_world(SPAN_ROLE_HEADER("FUN FACTS"))
@@ -218,7 +166,7 @@ GLOBAL_VAR_INIT(next_admin_bioscan, 30 MINUTES)
 	var/num_xenos = 0
 	for(var/i in GLOB.living_xeno_list)
 		var/mob/M = i
-		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space)) //If they have a z var, they are on a turf.
+		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space) && !istype(M.loc, /area/adminlevel/ert_station/fax_response_station)) //If they have a z var, they are on a turf.
 			num_xenos++
 	return num_xenos
 
@@ -227,7 +175,7 @@ GLOBAL_VAR_INIT(next_admin_bioscan, 30 MINUTES)
 	var/num_xenos = 0
 
 	for(var/mob/M in GLOB.player_list)
-		if(M.z && (M.z in z_levels) && M.stat != DEAD && !istype(M.loc, /turf/open/space)) //If they have a z var, they are on a turf.
+		if(M.z && (M.z in z_levels) && M.stat != DEAD && !istype(M.loc, /turf/open/space) && !istype(M.loc, /area/adminlevel/ert_station/fax_response_station)) //If they have a z var, they are on a turf.
 			if(ishuman(M) && !isyautja(M) && !(M.status_flags & XENO_HOST) && !iszombie(M))
 				var/mob/living/carbon/human/H = M
 				if(((H.species && H.species.name == "Human") || (H.is_important)) && !H.hivenumber) //only real humans count, or those we have set to also be included
@@ -257,7 +205,7 @@ GLOBAL_VAR_INIT(next_admin_bioscan, 30 MINUTES)
 
 	for(var/i in GLOB.alive_human_list)
 		var/mob/M = i
-		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space))
+		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space) && !istype(M.loc, /area/adminlevel/ert_station/fax_response_station))
 			if(M.faction in FACTION_LIST_WY)
 				num_pmcs++
 			else if(M.faction == FACTION_MARINE)
@@ -270,7 +218,7 @@ GLOBAL_VAR_INIT(next_admin_bioscan, 30 MINUTES)
 
 	for(var/i in GLOB.alive_human_list)
 		var/mob/M = i
-		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space))
+		if(M.z && (M.z in z_levels) && !istype(M.loc, /turf/open/space) && !istype(M.loc, /area/adminlevel/ert_station/fax_response_station))
 			if(M.faction == FACTION_MARINE)
 				num_marines++
 
@@ -284,9 +232,9 @@ GLOBAL_VAR_INIT(next_admin_bioscan, 30 MINUTES)
 	var/num_headcount = 0
 
 	for(var/mob/living/carbon/human/current_human as anything in GLOB.alive_human_list)
-		if(!(current_human.z && (current_human.z in z_levels) && !istype(current_human.loc, /turf/open/space)))
+		if(!(current_human.z && (current_human.z in z_levels) && !istype(current_human.loc, /turf/open/space) && !istype(current_human.loc, /area/adminlevel/ert_station/fax_response_station)))
 			continue
-		if(current_human.faction in FACTION_LIST_WY || current_human.job == "Corporate Liaison") //The CL is assigned the USCM faction for gameplay purposes
+		if(current_human.faction in FACTION_LIST_WY)
 			num_WY++
 			num_headcount++
 			continue

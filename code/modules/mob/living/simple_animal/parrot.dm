@@ -191,7 +191,8 @@
 //Humans, monkeys, aliens
 /mob/living/simple_animal/parrot/attack_hand(mob/living/carbon/M as mob)
 	..()
-	if(client) return
+	if(client)
+		return
 	if(!stat && M.a_intent == INTENT_HARM)
 
 		icon_state = "parrot_fly" //It is going to be flying regardless of whether it flees or attacks
@@ -211,7 +212,8 @@
 
 //Simple animals
 /mob/living/simple_animal/parrot/attack_animal(mob/living/M as mob)
-	if(client) return
+	if(client)
+		return
 
 
 	if(parrot_state == PARROT_PERCH)
@@ -705,8 +707,8 @@
 	message = capitalize(trim_left(message))
 
 	//RUCM START
-	var/list/tts_heard_list = list(list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, speaking_noise)
+	var/list/tts_heard_list = list(list(), list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
 	//RUCM END
 
 	if(message_mode)

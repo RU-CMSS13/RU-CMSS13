@@ -3,6 +3,10 @@
 	desc = "A beacon used by a teleporter."
 	icon_state = "beacon"
 	item_state = "signaller"
+	item_icons = list(
+		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/equipment/devices_lefthand.dmi',
+		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/equipment/devices_righthand.dmi',
+	)
 	var/code = "electronic"
 
 /obj/item/device/radio/beacon/Initialize()
@@ -14,7 +18,7 @@
 	GLOB.radio_beacon_list -= src
 	return ..()
 
-/obj/item/device/radio/beacon/hear_talk(tts_heard_list)
+/obj/item/device/radio/beacon/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	return
 
 

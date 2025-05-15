@@ -206,10 +206,12 @@
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = FALSE, tts_heard_list)
-	if(!on) return // the device has to be on
+/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG, tts_heard_list)
+	if(!on)
+		return // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return
+	if(!M || !message)
+		return
 
 	//  Uncommenting this. To the above comment:
 	// The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
@@ -226,6 +228,9 @@
 		the signal gets processed and logged, and an audible transmission gets sent
 		to each individual headset.
 	*/
+
+	if(should_block_game_interaction(M))
+		return
 
 	//#### Grab the connection datum ####//
 	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
@@ -322,10 +327,10 @@
 				return null
 	return target_zs
 
-/obj/item/device/radio/hear_talk(mob/M as mob, msg, verb = "says", datum/language/speaking = null, tts_heard_list)
+/obj/item/device/radio/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	if (broadcasting)
-		if(get_dist(src, M) <= canhear_range)
-			talk_into(M, msg,null,verb,speaking, tts_heard_list = tts_heard_list)
+		if(get_dist(src, sourcemob) <= canhear_range)
+			talk_into(sourcemob, message, null, verb, language, tts_heard_list = tts_heard_list)
 
 
 /*
@@ -416,7 +421,8 @@
 			//Foreach goto(83)
 		add_fingerprint(user)
 		return
-	else return
+	else
+		return
 
 /obj/item/device/radio/emp_act(severity)
 	. = ..()

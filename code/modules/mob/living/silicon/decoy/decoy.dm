@@ -64,13 +64,16 @@
 	var/message_mode = parse_message_mode(message) //I really prefer my rewrite of all this.
 
 	switch(message_mode)
-		if("headset") message = copytext(message, 2)
-		if("broadcast") message_mode = "headset"
-		else message = copytext(message, 3)
+		if("headset")
+			message = copytext(message, 2)
+		if("broadcast")
+			message_mode = "headset"
+		else
+			message = copytext(message, 3)
 
 	//RUCM START
-	var/list/tts_heard_list = list(list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, speaking_noise)
+	var/list/tts_heard_list = list(list(), list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
 	//RUCM END
 
 	ai_headset.talk_into(src, message, message_mode, "states", languages[1], tts_heard_list = tts_heard_list)
@@ -85,7 +88,8 @@
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
 		channel_prefix = GLOB.department_radio_keys[channel_prefix]
-		if(channel_prefix) return channel_prefix
+		if(channel_prefix)
+			return channel_prefix
 
 
 /*Specific communication to a terminal.

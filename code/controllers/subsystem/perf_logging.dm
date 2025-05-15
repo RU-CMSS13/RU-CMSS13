@@ -77,6 +77,8 @@ SUBSYSTEM_DEF(perf_logging)
 	timing_info.save() && timing_info.detach()
 
 /datum/controller/subsystem/perf_logging/stat_entry(msg)
-	if(round) msg = "ACTIVE | Round: [round.id] | Time: #[ord]"
-	else msg = "INACTIVE"
+	if(round)
+		msg = "ACTIVE | Round: [round.id] | Time: #[ord]"
+	else
+		msg = "INACTIVE"
 	return ..()

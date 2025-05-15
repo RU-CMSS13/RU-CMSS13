@@ -1,3 +1,5 @@
+// [RU-CMSS13 ADD]
+
 //Base Instance
 /area/prison
 	name = "Fiorina Orbital Penitentiary - Main Cellblock"
@@ -10,7 +12,6 @@
 /area/prison/security
 	name = "\improper Security Department"
 	icon_state = "security"
-	is_resin_allowed = FALSE
 	minimap_color = MINIMAP_AREA_SEC
 
 /area/prison/security/briefing
@@ -35,7 +36,6 @@
 
 /area/prison/security/monitoring
 	icon_state = "sec_prison"
-	is_resin_allowed = TRUE
 
 /area/prison/security/monitoring/lowsec/ne
 	name = "\improper Northeast Low-Security Monitoring"
@@ -64,7 +64,6 @@
 
 /area/prison/security/checkpoint
 	icon_state = "checkpoint1"
-	is_resin_allowed = TRUE
 
 /area/prison/security/checkpoint/medsec
 	name = "\improper Medium-Security Checkpoint"
@@ -86,11 +85,6 @@
 
 /area/prison/security/checkpoint/maxsec_highsec
 	name = "\improper Maximum-to-High-Security Checkpoint"
-
-/area/prison/security/checkpoint/hangar
-	name = "\improper Main Hangar Traffic Control"
-	is_resin_allowed = FALSE
-	is_landing_zone = TRUE
 
 /area/prison/storage
 	icon_state = "engine_storage"
@@ -168,10 +162,15 @@
 
 /area/prison/toilet/security
 	name = "\improper Security Restooms"
-	is_resin_allowed = FALSE
+
+// [RU-CMSS13 ADD]
 
 /area/prison/toilet/research
 	name = "\improper Research Restooms"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+
+// [RU-CMSS13 ADD-END]
 
 /area/prison/toilet/staff
 	name = "\improper Staff Restooms"
@@ -202,7 +201,6 @@
 /area/prison/maintenance/staff_research
 	name = "\improper Staff-Research Maintenance"
 	icon_state = "maint_research_starboard"
-	is_resin_allowed = FALSE
 
 /area/prison/maintenance/research_medbay
 	name = "\improper Research-Infirmary Maintenance"
@@ -211,7 +209,6 @@
 /area/prison/maintenance/hangar_barracks
 	name = "\improper Hangar-Barracks Maintenance"
 	icon_state = "maint_e_shuttle"
-	is_resin_allowed = FALSE
 	is_landing_zone = TRUE
 
 /area/prison/canteen
@@ -259,10 +256,11 @@
 	name = "\improper Yard"
 	icon_state = "thunder"
 
+//HALLWAYS
+
 /area/prison/hallway/entrance
 	name = "\improper Entrance Hallway"
 	icon_state = "entry"
-	is_resin_allowed = FALSE
 
 /area/prison/hallway/central
 	name = "\improper Central Ring"
@@ -293,22 +291,32 @@
 	icon_state = "dk_yellow"
 	minimap_color = MINIMAP_AREA_ENGI
 
-/area/prison/quarters/staff
+//QUARTERS
+
+/area/prison/quarters/staff //In SCI
 	name = "\improper Staff Quarters"
 	icon_state = "crew_quarters"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
-/area/prison/quarters/security
+/area/prison/quarters/research //In SCI
+	name = "\improper Research Dorms"
+	icon_state = "purple"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_SEC
+
+
+/area/prison/quarters/security //In SEC room
 	name = "\improper Security Barracks"
 	icon_state = "sec_backroom"
 
-/area/prison/quarters/research
-	name = "\improper Research Dorms"
-	icon_state = "purple"
-	minimap_color = MINIMAP_AREA_SEC
+//CELLBLOCKS
 
 /area/prison/cellblock/lowsec
 	minimap_color = MINIMAP_AREA_CELL_LOW
 
+//Start of Central Cell's ring
 /area/prison/cellblock/lowsec/nw
 	name = "\improper Northwest Low-Security Cellblock"
 	icon_state = "cells_low_nw"
@@ -324,7 +332,9 @@
 /area/prison/cellblock/lowsec/se
 	name = "\improper Southeast Low-Security Cellblock"
 	icon_state = "cells_low_se"
+//End of central ring
 
+//Start of South Cell Blocks
 /area/prison/cellblock/mediumsec
 	name = "\improper Medium-Security Cellblock"
 	icon_state = "cells_med"
@@ -345,7 +355,9 @@
 /area/prison/cellblock/mediumsec/west
 	name = "\improper Medium-Security Cellblock West"
 	icon_state = "cells_med_w"
+//End of South Cell Blocks
 
+//Start of West-North Cell Blocks
 /area/prison/cellblock/highsec
 	minimap_color = MINIMAP_AREA_CELL_HIGH
 
@@ -356,7 +368,9 @@
 /area/prison/cellblock/highsec/north/south
 	name = "\improper North High-Security Cellblock South"
 	icon_state = "cells_high_ns"
+//End of West-North Cell Blocks
 
+//Start of West-South Cell Blocks
 /area/prison/cellblock/highsec/south/north
 	name = "\improper South High-Security Cellblock North"
 	icon_state = "cells_high_sn"
@@ -364,7 +378,9 @@
 /area/prison/cellblock/highsec/south/south
 	name = "\improper South High-Security Cellblock South"
 	icon_state = "cells_high_ss"
+//End of West-South Cell Blocks
 
+//Start North Cell's Blocks
 /area/prison/cellblock/maxsec
 	minimap_color = MINIMAP_AREA_CELL_MAX
 
@@ -375,7 +391,9 @@
 /area/prison/cellblock/maxsec/south
 	name = "\improper Maximum-Security Suspended Cellblock"
 	icon_state = "cells_max_s"
+//End North Cell Blocks
 
+//Start VIP Cell blocks
 /area/prison/cellblock/vip
 	name = "\improper VIP Cells"
 	icon_state = "cells_vip"
@@ -385,10 +403,15 @@
 	name = "\improper Protective Custody"
 	icon_state = "cells_protective"
 	minimap_color = MINIMAP_AREA_CELL_VIP
+	//End VIP Cell blocks
+
+//DISPSOSAL
 
 /area/prison/disposal
 	name = "\improper Disposals"
 	icon_state = "disposal"
+
+//MEDBAY
 
 /area/prison/medbay
 	name = "\improper Infirmary"
@@ -405,41 +428,64 @@
 /area/prison/medbay/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
+
+// RESEARCH
 /area/prison/research
 	name = "\improper Biological Research Department"
 	icon_state = "research"
-	is_resin_allowed = FALSE
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/RD
 	name = "\improper Research Director's office"
 	icon_state = "disposal"
-	is_resin_allowed = FALSE
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret
 	name = "\improper Classified Research"
 	icon_state = "toxlab"
-	is_resin_allowed = TRUE
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+
+/area/prison/research/secret/WYLab
+	name = "\improper WY Research Laboratory"
+	icon_state = "purple"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/dissection
 	name = "\improper Dissection"
 	icon_state = "toxmix"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/chemistry
 	name = "\improper Chemistry"
 	icon_state = "chem"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/bioengineering
 	name = "\improper Bioengineering"
 	icon_state = "toxmisc"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/containment
 	name = "\improper Test Subject Containment"
 	icon_state = "xeno_f_store"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/testing
 	name = "\improper Biological Testing"
 	icon_state = "toxtest"
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/residential/central
 	name = "\improper Civilian Residences Central"
@@ -456,36 +502,12 @@
 /area/prison/monorail
 	icon_state = "purple"
 
-/area/prison/monorail/east
-	name = "\improper East Monorail Station"
-	is_resin_allowed = FALSE
-	is_landing_zone = TRUE
-
 /area/prison/monorail/west
 	name = "\improper West Monorail Station"
-
-/area/prison/hanger
-	is_resin_allowed = FALSE
-
-/area/prison/hanger/main
-	name = "\improper Main Hanger"
-	icon_state = "hangar_alpha"
-	is_landing_zone = TRUE
-
-/area/prison/hanger/research
-	name = "\improper Research Hanger"
-	icon_state = "hangar_beta"
-	is_landing_zone = TRUE
 
 /area/prison/hangar_storage/main
 	name = "\improper Main Hangar Storage"
 	icon_state = "quartstorage"
-
-/area/prison/hangar_storage/research
-	name = "\improper Research Hangar Storage"
-	icon_state = "toxstorage"
-	is_resin_allowed = FALSE
-	is_landing_zone = TRUE
 
 /area/prison/hangar_storage/research/shuttle
 	name = "Corporate Shuttle"
@@ -494,7 +516,6 @@
 /area/prison/telecomms
 	name = "\improper Telecommunications"
 	icon_state = "tcomsatcham"
-	is_resin_allowed = FALSE
 
 /area/prison/pirate
 	name = "Tramp Freighter \"Rocinante\""
@@ -505,17 +526,63 @@
 	name = "\improper Secret Room"
 	icon_state = "tcomsatcham"
 
+//LZ CODE
+//LZ 1
+
+/area/prison/hanger/main
+	name = "\improper Main Hanger"
+	icon_state = "hangar_alpha"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ1
+	minimap_color = MINIMAP_AREA_LZ
+
 /area/prison/landing/console
 	name = "\improper LZ1 'Admin'"
 	icon_state = "tcomsatcham"
 	requires_power = 0
+	linked_lz = DROPSHIP_LZ1
+	minimap_color = MINIMAP_AREA_LZ
+
+/area/prison/security/checkpoint/hangar
+	name = "\improper Main Hangar Traffic Control"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ1
+	minimap_color = MINIMAP_AREA_LZ
+
+/area/prison/monorail/east
+	name = "\improper East Monorail Station"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ1
+	minimap_color = MINIMAP_AREA_LZ
+
+//LZ 2
+
+/area/prison/hanger/research
+	name = "\improper Research Hanger"
+	icon_state = "hangar_beta"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ2
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_LZ
 
 /area/prison/landing/console2
 	name = "\improper LZ2 'Research'"
 	icon_state = "tcomsatcham"
 	requires_power = 0
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ2
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_LZ
 
-/area/prison/landing/console3
-	name = "\improper LZ1 'Civilian'"
-	icon_state = "tcomsatcham"
-	requires_power = 0
+/area/prison/hangar_storage/research
+	name = "\improper Research Hangar Storage"
+	icon_state = "toxstorage"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ2
+	ambience_exterior = AMBIENCE_LAB
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_LZ
+
+// [RU-CMSS13 ADD-END]

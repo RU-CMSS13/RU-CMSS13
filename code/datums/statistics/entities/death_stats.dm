@@ -114,10 +114,6 @@
 	if(cause_mob)
 		cause_mob.life_kills_total += life_value
 
-//RUCM START
-		SEND_SIGNAL(cause_mob, COMSIG_MOB_KILL_TOTAL_INCREASED, src, cause_data)
-//RUCM END
-
 	if(getBruteLoss())
 		new_death.total_brute = floor(getBruteLoss())
 	if(getFireLoss())
@@ -144,7 +140,6 @@
 		GLOB.round_statistics.track_death(new_death)
 
 	new_death.save()
-	new_death.detach()
 	return new_death
 
 /mob/living/carbon/human/track_mob_death(datum/cause_data/cause_data, turf/death_loc)

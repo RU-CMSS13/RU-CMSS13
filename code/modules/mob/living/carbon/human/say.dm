@@ -98,8 +98,14 @@
 	if(!speaking)
 		speaking = get_default_language()
 
-	var/ending = copytext(message, length(message))
 	if (speaking)
+		var/ending = copytext(message, length(message))
+		if(ending=="!")
+			verb = pick(speaking.exclaim_verb)
+		else if(ending=="?")
+			verb = pick(speaking.ask_verb)
+		else
+			verb = pick(speaking.speech_verb)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
 		if(speaking.flags & HIVEMIND)
@@ -109,20 +115,19 @@
 			speaking.broadcast(src, trim(message))
 			return
 		//If we've gotten this far, keep going!
-		verb = speaking.get_spoken_verb(ending)
 	else
-		if(ending=="!")
-			verb=pick("exclaims","shouts","yells")
-		if(ending=="?")
-			verb="asks"
+		verb = "says"
 
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
+		return
+
+	if (istype(wear_mask, /obj/item/clothing/mask/facehugger))
 		return
 
 	message = capitalize(trim(message))
 	message = process_chat_markup(message, list("~", "_"))
 
-	var/list/handle_r = handle_speech_problems(message)
+	var/list/handle_r = handle_speech_problems(message, verb)
 	message = handle_r[1]
 	verb = handle_r[2]
 	if(!message)
@@ -135,8 +140,8 @@
 
 	//RUCM START
 	if(!length(tts_heard_list))
-		tts_heard_list = list(list(), list())
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(handle_r[3]), tts_voice, handle_r[4], tts_heard_list, FALSE, 0, tts_voice_pitch, speaking_noise)
+		tts_heard_list = list(list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(handle_r[3]), tts_voice, handle_r[4], tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
 	//RUCM END
 
 	for(var/message_mode in parsed["modes"])
@@ -260,19 +265,15 @@ for it but just ignore it.
 	var/verb = "says"
 	var/ending = copytext(message, length(message))
 
-	if(speaking)
-		verb = speaking.get_spoken_verb(ending)
-	else
-		if(ending == "!")
-			verb=pick("exclaims","shouts","yells")
-		else if(ending == "?")
-			verb="asks"
+	if(ending == "!")
+		verb = pick("exclaims","shouts","yells")
+	if(ending == "?")
+		verb = "asks"
 
 	return verb
 
-/mob/living/carbon/human/proc/handle_speech_problems(message)
+/mob/living/carbon/human/proc/handle_speech_problems(message, verb)
 	var/list/returns[4]
-	var/verb = "says"
 	//RUCM START
 	var/tts_message = message
 	var/tts_filter = ""

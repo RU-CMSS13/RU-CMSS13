@@ -2,7 +2,7 @@
 	{
 		"type": "map_insert",
 		"landmark": "clfship",
-		"chance": 0.2,
+		"chance": 0.3,
 		"path": "standalone/clfship.dmm",
 		"when": { "lvevent": "fallen_ship" }
 	},
@@ -47,8 +47,17 @@
 		"file": "mapgen_variations.json"
 	},
 	{
-        "type": "map_sprinkle",
-        "path": "crash/",
-        "when": { "gamemode": "Crash" }
-    }
+		"type": "map_insert",
+		"landmark": "hvhupplz1",
+		"chance": 1.0,
+		"path": "standalone/landingzone_624_upp_lz1.dmm",
+		"when": { "$gamemode": "Faction Clash UPP CM" }
+	},
+	{
+		"type": "map_insert",
+		"landmark": "hvhuscmlz1",
+		"chance": 1.0,
+		"path": "standalone/landingzone_624_uscm_lz1.dmm",
+		"when": { "$gamemode": "Faction Clash UPP CM" }
+	}
 ]
