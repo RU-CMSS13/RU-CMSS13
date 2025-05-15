@@ -39,15 +39,15 @@
 		return
 
 	var/datum/effects/hammer_stacks/HS = null
-	for (var/datum/effects/hammer_stacks/hammer_stacks in M.effects_list)
+	for (var/datum/effects/hammer_stacks/hammer_stacks in target.effects_list)
 		HS = hammer_stacks
 		break
 
 	if (HS == null)
-		HS = new /datum/effects/hammer_stacks(M)
+		HS = new /datum/effects/hammer_stacks(target)
 	HS.increment_stack_count(1, user)
 
-	if(M.stat != CONSCIOUS) // haha xeno-cricket
+	if(target.stat != CONSCIOUS) // haha xeno-cricket
 		HS.increment_stack_count(4, user)
 
 /obj/item/weapon/twohanded/st_hammer/pickup(mob/user)

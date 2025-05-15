@@ -267,6 +267,7 @@
 					decal.icon_state = pick(decal.random_icon_states)
 
 		var/splash_chance = 40 //Base chance of getting splashed. Decreases with # of victims.
+		var/acid_blood_damage_new
 		var/i = 0 //Tally up our victims.
 
 		for(var/mob/living/carbon/human/victim in orange(radius, src)) //Loop through all nearby victims, including the tile.
@@ -281,7 +282,7 @@
 			if(splash_chance > 0 && prob(splash_chance)) //Success!
 				//RUCM EDIT START
 				if(istype(victim.wear_suit, /obj/item/clothing/suit/storage/marine/m40))
-					var/acid_blood_damage_new = (acid_blood_damage*0.25)
+					acid_blood_damage_new = (acid_blood_damage*0.25)
 				/* RUCM REMOVE START
 				var/dmg = list("damage" = acid_blood_damage)
 				*///RUCM REMOVE END

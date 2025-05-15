@@ -35,6 +35,7 @@
 	hud_offset_mod = 3
 	melee_mod = 10
 	flags_attach_features = ATTACH_ACTIVATION
+	size_mod = 0
 
 /obj/item/attachable/stock/rifle/collapsible/xm52/New()
 	..()
@@ -81,7 +82,7 @@
 		icon_state = "xm52_folding_a"
 		attach_icon = "xm52_folding_a"
 		pixel_shift_x = 31
-		size_mod = 1
+		size_mod = 0
 		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay
 
 	gun.recalculate_attachment_bonuses()

@@ -166,16 +166,6 @@
 	var/obj/item/weapon/gun/rifle/xm52/magneted_xm
 	var/magnetic_range = 2
 
-/obj/item/storage/belt/gun/xm52/attackby(obj/item/item, mob/user)
-	if(istype(item, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots))
-/* TODO - fix handful sprites for dump_ammo_to
-		var/obj/item/ammo_magazine/shotgun/light/breaching/sparkshots/ammo_box = item
-		dump_ammo_to(ammo_box, user, ammo_box.transfer_handful_amount)
-*/
-		to_chat(user, SPAN_WARNING("You can't dump sparkshots in [src], sparkshots too explosive..."))
-	else
-		return ..()
-
 /obj/item/storage/belt/gun/xm52/dump_ammo_to(obj/item/ammo_magazine/ammo_dumping, mob/user, amount_to_dump)
 	if(user.action_busy)
 		return
@@ -205,6 +195,44 @@
 				ammo_dumping.update_icon()
 			else
 				to_chat(user, SPAN_WARNING("[src] is full."))
+
+/obj/item/storage/belt/gun/xm52/update_gun_icon(slot) //We do not want to use regular update_icon as it's called for every item inserted. Not worth the icon math.
+	var/mob/living/carbon/human/user = loc
+	var/obj/item/weapon/gun/current_gun = holster_slots[slot]["gun"]
+	if(current_gun)
+		/*
+		Have to use a workaround here, otherwise images won't display properly at all times.
+		Reason being, transform is not displayed when right clicking/alt+clicking an object,
+		so it's necessary to pre-load the potential states so the item actually shows up
+		correctly without having to rotate anything. Preloading weapon icons also makes
+		sure that we don't have to do any extra calculations.
+		*/
+		playsound(src, drawSound, 7, TRUE)
+		var/image/gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+		if(current_gun.type == /obj/item/weapon/gun/rifle/xm52)
+			gun_underlay = image('core_ru/icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+		gun_underlay.pixel_x = holster_slots[slot]["icon_x"]
+		gun_underlay.pixel_y = holster_slots[slot]["icon_y"]
+		gun_underlay.color = current_gun.color
+		gun_underlay.transform = holster_slots[slot]["underlay_transform"]
+		holster_slots[slot]["underlay_sprite"] = gun_underlay
+		underlays += gun_underlay
+
+		icon_state += "_g"
+		item_state = icon_state
+	else
+		playsound(src, sheatheSound, 7, TRUE)
+		underlays -= holster_slots[slot]["underlay_sprite"]
+		holster_slots[slot]["underlay_sprite"] = null
+
+		icon_state = copytext(icon_state,1,-2)
+		item_state = icon_state
+
+	if(istype(user))
+		if(src == user.belt)
+			user.update_inv_belt()
+		else if(src == user.s_store)
+			user.update_inv_s_store()
 
 /obj/item/storage/belt/gun/xm52/can_be_inserted(obj/item/item, mob/user, stop_messages = FALSE)
 	. = ..()
