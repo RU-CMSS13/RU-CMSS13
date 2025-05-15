@@ -66,6 +66,7 @@
 	else
 		. += "It seems to be lacking a ammo drum."
 
+/* CM Original (Feline "Фоботы")
 /obj/item/device/m56d_gun/update_icon() //Lets generate the icon based on how much ammo it has.
 	var/icon_name = "M56D_gun"
 	if(has_mount)
@@ -74,6 +75,19 @@
 		icon_name += "_e"
 	icon_state = icon_name
 	return
+*/
+
+// RUCM Start (Feline "Фоботы")
+/obj/item/device/m56d_gun/update_icon()
+	var/icon_name = "M56D_gun"
+	if(has_mount)
+		icon_name += "_mount"
+	if(broken_gun)
+		icon_name += "_broken"
+	if(!rounds)
+		icon_name += "_e"
+	icon_state = icon_name
+// RUCM End (Feline "Фоботы")
 
 /obj/item/device/m56d_gun/attackby(obj/item/O as obj, mob/user as mob)
 	if(!ishuman(user) && !HAS_TRAIT(user, TRAIT_OPPOSABLE_THUMBS))
@@ -92,8 +106,45 @@
 			to_chat(usr, "The M56D already has a ammo drum mounted on it!")
 		return
 
+// RUCM Start (Feline "Фоботы")
+	if(!iswelder(O) || user.action_busy)
+		return
+
+	if(!HAS_TRAIT(O, TRAIT_TOOL_BLOWTORCH))
+		to_chat(user, SPAN_WARNING("Тут потребуется инструмент помощнее!"))
+		return
+
+	if(!broken_gun)
+		to_chat(user, SPAN_WARNING("Пулемёт не настолько поломан, чтобы потребовался полевой ремонт."))
+		return
+
+	var/obj/item/tool/weldingtool/weldingtool = O
+
+	if(weldingtool.remove_fuel(2, user))
+		user.visible_message(SPAN_NOTICE("[user] начинает полевой ремонт пулемёта."),
+			SPAN_NOTICE("Начинаю полевой ремонт пулемёта."))
+		playsound(src.loc, 'sound/items/Welder2.ogg', 25, 1)
+		if(!do_after(user, field_recovery * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL, BUSY_ICON_FRIENDLY, src))
+			return
+		user.visible_message(SPAN_NOTICE("[user] успешно завершает полевой ремонт пулемёта."),
+			SPAN_NOTICE("Успешно завершаю полевой ремонт пулемёта."))
+		broken_gun = FALSE
+		health = 200
+		unacidable = TRUE
+		update_icon()
+		return
+	else
+		to_chat(user, SPAN_WARNING("Мне понадобиться больше топлива для ремонта пулемёта."))
+// RUCM End (Feline "Фоботы")
+
 /obj/item/device/m56d_gun/attack_self(mob/user)
 	..()
+// RUCM Start (Feline "Фоботы")
+	if(broken_gun)
+		to_chat(user, SPAN_WARNING("Пулемёт критически сломан и его нельзя установить!"))
+		return FALSE
+// RUCM End (Feline "Фоботы")
+
 	for(var/obj/structure/machinery/machine in long_range(defense_check_range, loc))
 		if(istype(machine, /obj/structure/machinery/m56d_hmg) || istype(machine, /obj/structure/machinery/m56d_post))
 			to_chat(user, SPAN_WARNING("This is too close to [machine]!"))
@@ -679,6 +730,7 @@
 		return
 	return ..()
 
+/*	CM Original (Feline "Фоботы")
 /obj/structure/machinery/m56d_hmg/update_health(amount) //Negative values restores health.
 	health -= amount
 	if(health <= 0)
@@ -695,6 +747,29 @@
 		health = health_max
 	update_damage_state()
 	update_icon()
+*/
+
+// RUCM Start (Feline "Фоботы")
+/obj/structure/machinery/m56d_hmg/update_health(amount)
+	health -= amount
+	if(health <= 0)
+		playsound(src.loc, 'sound/items/Welder2.ogg', 25, 1)
+		visible_message(SPAN_WARNING("Пулемёт получил критические повреждения и сломался!"))
+		var/obj/item/device/m56d_gun/mounted/HMG = new(loc)
+		HMG.rounds = rounds
+		HMG.broken_gun = TRUE
+		HMG.unacidable = FALSE
+		HMG.health = 0
+		HMG.update_icon()
+		transfer_label_component(HMG)
+		qdel(src)
+		return
+
+	if(health > health_max)
+		health = health_max
+	update_damage_state()
+	update_icon()
+// RUCM End (Feline "Фоботы")
 
 /obj/structure/machinery/m56d_hmg/ex_act(severity)
 	update_health(severity)
@@ -938,6 +1013,22 @@
 /obj/structure/machinery/m56d_hmg/on_set_interaction(mob/user)
 	ADD_TRAIT(user, TRAIT_IMMOBILIZED, INTERACTION_TRAIT)
 	give_action(user, /datum/action/human_action/mg_exit)
+
+// RUCM Start (Feline "Фоботы")
+	if((!istype(src, /obj/structure/machinery/m56d_hmg/mg_turret)) && (!istype(src, /obj/structure/machinery/m56d_hmg/auto)))
+		give_action(user, /datum/action/human_action/mg_scope)
+		give_action(user, /datum/action/human_action/mg_turn_left)
+		give_action(user, /datum/action/human_action/mg_turn_right)
+		RegisterSignal(user, COMSIG_MOB_MG_SCOPE, PROC_REF(scope_activate))
+		RegisterSignal(user, COMSIG_MOB_MG_TURN_LEFT, PROC_REF(activate_turn_left))
+		RegisterSignal(user, COMSIG_MOB_MG_TURN_RIGHT, PROC_REF(activate_turn_right))
+
+		if(skillcheck(user, SKILL_MACHINGUNNER, SKILL_MACHINGUNNER_TRAINED))
+			to_chat(user, SPAN_NOTICE("Конструкция пулемёта хорошо мне знакома!"))
+			set_fire_delay(2.25)
+			ammo.flags_ammo_behavior = AMMO_BALLISTIC | AMMO_IGNORE_COVER
+// RUCM End (Feline "Фоботы")
+
 	user.forceMove(src.loc)
 	user.setDir(dir)
 	user.reset_view(src)
@@ -959,6 +1050,22 @@
 /obj/structure/machinery/m56d_hmg/on_unset_interaction(mob/user)
 	REMOVE_TRAIT(user, TRAIT_IMMOBILIZED, INTERACTION_TRAIT)
 	remove_action(user, /datum/action/human_action/mg_exit)
+
+// RUCM Start (Feline "Фоботы")
+	if((!istype(src, /obj/structure/machinery/m56d_hmg/mg_turret)) && (!istype(src, /obj/structure/machinery/m56d_hmg/auto)))
+		remove_action(user, /datum/action/human_action/mg_scope)
+		remove_action(user, /datum/action/human_action/mg_turn_left)
+		remove_action(user, /datum/action/human_action/mg_turn_right)
+		UnregisterSignal(user, list(
+			COMSIG_MOB_MG_SCOPE,
+			COMSIG_MOB_MG_TURN_LEFT,
+			COMSIG_MOB_MG_TURN_RIGHT,
+		))
+		zoom = FALSE
+		set_fire_delay(3)
+		ammo.flags_ammo_behavior = AMMO_BALLISTIC
+// RUCM End (Feline "Фоботы")
+
 	user.Move(get_step(src, reverse_direction(src.dir)))
 	user.setDir(dir) //set the direction of the player to the direction the gun is facing
 	user.reset_view(null)
@@ -984,6 +1091,44 @@
 		operator = null
 	flags_atom &= ~RELAY_CLICK
 
+
+// RUCM Start (Feline "Фоботы")
+// Прицел
+/obj/structure/machinery/m56d_hmg/proc/scope_activate()
+	SIGNAL_HANDLER
+	zoom = !zoom
+	if(operator)
+		to_chat(operator, "[zoom ? "Прикладываюсь к прицелу." : "Отвожу взгляд от прицела."]")
+		update_pixels(operator)
+
+// Поворот налево
+/obj/structure/machinery/m56d_hmg/proc/activate_turn_left()
+	SIGNAL_HANDLER
+
+	if(operator)
+		if(locked)
+			to_chat(operator, "Пулемёт закреплен стационарно и не может быть повёрнут.")
+			return
+		else
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 25, 1)
+			operator.visible_message("[operator] поворачивает пулемёт против часовой стрелки.", "Поворачиваю пулемёт против часовой стрелки.")
+			setDir(turn(dir, 90))
+			update_pixels(operator)
+
+// Поворот направо
+/obj/structure/machinery/m56d_hmg/proc/activate_turn_right()
+	SIGNAL_HANDLER
+
+	if(operator)
+		if(locked)
+			to_chat(operator, "Пулемёт закреплен стационарно и не может быть повёрнут.")
+			return
+		else
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 25, 1)
+			operator.visible_message("[operator] поворачивает пулемёт по часовой стрелке.", "Поворачиваю пулемёт по часовой стрелке.")
+			setDir(turn(dir, -90))
+			update_pixels(operator)
+// RUCM End (Feline "Фоботы")
 
 /obj/structure/machinery/m56d_hmg/proc/update_pixels(mob/user, mounting = TRUE)
 	if(mounting)

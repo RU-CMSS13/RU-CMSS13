@@ -523,6 +523,11 @@
 /obj/structure/machinery/cm_vending/sorted/medical/populate_product_list_and_boxes(scale)
 	. = ..()
 
+// RUCM Start (Feline "Фоботы")
+	if(no_unstock)
+		return
+// RUCM End (Feline "Фоботы")
+
 	// If this is groundside and isn't dynamically changing we will spawn with stock randomly removed from it
 	if(vend_flags & VEND_STOCK_DYNAMIC)
 		return
