@@ -1060,6 +1060,10 @@
 "acK" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prison/cellblock/maxsec/north)
+"acL" = (
+/obj/structure/window/framed/prison/reinforced,
+/turf/open/floor/plating/prison,
+/area/prison/library)
 "acM" = (
 /obj/structure/pipes/vents/scrubber,
 /obj/structure/machinery/light/double/blue{
@@ -1583,6 +1587,14 @@
 /obj/structure/machinery/big_computers/computerwhite/computer4,
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/research/secret/bioengineering)
+"aeg" = (
+/obj/structure/bookcase,
+/obj/structure/machinery/light/double/blue{
+	dir = 8;
+	pixel_x = -10
+	},
+/turf/open/floor/wood,
+/area/prison/library)
 "aeh" = (
 /obj/structure/machinery/big_computers/computerwhite/computer5,
 /turf/open/floor/prison/sterile_white/southwest,
@@ -2345,6 +2357,7 @@
 	},
 /obj/structure/closet/secure_closet/security,
 /obj/effect/spawner/random/gun/pistol/midchance,
+/obj/item/stack/sheet/metal/medium_stack,
 /turf/open/floor/prison/whitepurplefull,
 /area/prison/research/secret)
 "agh" = (
@@ -2354,6 +2367,7 @@
 /obj/structure/closet/secure_closet/security,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/gun/pistol/midchance,
+/obj/item/stack/sheet/plasteel/med_small_stack,
 /turf/open/floor/prison/whitepurplefull,
 /area/prison/research/secret)
 "agi" = (
@@ -3773,6 +3787,7 @@
 /turf/open/floor/plating/prison,
 /area/prison/research/secret/chemistry)
 "ajN" = (
+/obj/effect/fobots_landmark/lz_2/supplies,
 /turf/open/floor/prison/floor_marked/southwest,
 /area/prison/hanger/research)
 "ajO" = (
@@ -6116,7 +6131,6 @@
 /obj/structure/machinery/landinglight/ds2/delaythree{
 	dir = 4
 	},
-/obj/effect/sentry_landmark/lz_2/top_left,
 /turf/open/floor/strata/floor3/east,
 /area/prison/hanger/research)
 "aqk" = (
@@ -6980,6 +6994,10 @@
 	color = "#8e98a0"
 	},
 /obj/item/bodybag/cryobag,
+/obj/item/device/defibrillator/synthetic{
+	pixel_x = 15;
+	pixel_y = 12
+	},
 /turf/open/floor/prison/whitegreenfull/southwest,
 /area/prison/medbay)
 "asq" = (
@@ -9559,6 +9577,10 @@
 	},
 /turf/open/floor/hybrisa/tile/tileblue,
 /area/prison/research)
+"azv" = (
+/obj/structure/window/framed/prison,
+/turf/open/floor/plating/prison,
+/area/prison/residential/central)
 "azw" = (
 /obj/structure/machinery/light/double/blue,
 /turf/open/floor/prison/darkpurple2,
@@ -10950,6 +10972,16 @@
 	},
 /turf/open/floor/prison,
 /area/prison/medbay/foyer)
+"aDj" = (
+/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	layer = 3.33;
+	pixel_y = 2
+	},
+/obj/effect/sentry_landmark/lz_1/top_right,
+/turf/open/floor/strata/floor3,
+/area/prison/hanger/main)
 "aDk" = (
 /obj/structure/sink{
 	pixel_y = 15
@@ -11550,6 +11582,9 @@
 	},
 /turf/open/floor/hybrisa/tile/tilered,
 /area/prison/quarters/research)
+"aEJ" = (
+/turf/open/space,
+/area/space)
 "aEK" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -14410,37 +14445,16 @@
 "aMP" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prison/command/office)
-"aMQ" = (
-/obj/structure/bookcase{
-	icon_state = "book-5"
-	},
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	pixel_y = 32;
-	layer = 3.2
-	},
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	layer = 3.2;
-	pixel_x = -32
-	},
-/turf/open/floor/hybrisa/wood/blackwood,
-/area/prison/command/office)
 "aMR" = (
 /obj/structure/pipes/vents/scrubber,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/coatrack{
-	pixel_x = -12;
-	pixel_y = -3
-	},
 /obj/structure/curtain/colorable_transparent{
 	color = "#5a5a5a";
 	alpha = 220;
 	pixel_y = 32;
 	layer = 3.2
 	},
+/obj/structure/surface/table/reinforced/black,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
 "aMS" = (
@@ -15006,6 +15020,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/secretary_office)
+"aOt" = (
+/obj/structure/window/framed/prison/reinforced/hull,
+/obj/structure/blocker/invisible_wall,
+/turf/open/floor/plating/prison,
+/area/space)
 "aOu" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
@@ -15029,9 +15048,13 @@
 /turf/open/floor/strata/multi_tiles/southwest,
 /area/prison/cellblock/maxsec/south)
 "aOy" = (
-/obj/structure/machinery/power/apc/no_power/west,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/bed/chair/comfy/hybrisa/black,
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	layer = 3.2;
+	pixel_x = -32
+	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
 "aOz" = (
@@ -15044,11 +15067,6 @@
 /turf/open/floor/strata/multi_tiles/southwest,
 /area/prison/cellblock/maxsec/south)
 "aOA" = (
-/obj/structure/surface/table/reinforced/black,
-/obj/effect/landmark/objective_landmark/far,
-/obj/item/phone{
-	pixel_x = 8
-	},
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/northeast,
 /area/prison/command/office)
 "aOB" = (
@@ -15304,10 +15322,28 @@
 "aPl" = (
 /turf/open/floor/prison/greenfull,
 /area/prison/quarters/staff)
+"aPm" = (
+/obj/structure/prop/invuln/lattice_prop,
+/turf/open/space,
+/area/space)
 "aPn" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/prison/greenfull,
 /area/prison/quarters/staff)
+"aPo" = (
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	pixel_y = -33;
+	layer = 3.2
+	},
+/obj/structure/machinery/light/double/blue{
+	dir = 8;
+	pixel_x = -10
+	},
+/obj/structure/machinery/photocopier,
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/prison/command/office)
 "aPp" = (
 /turf/closed/wall/prison,
 /area/prison/toilet/staff)
@@ -15493,17 +15529,11 @@
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/secretary_office)
 "aPS" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
+/obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/machinery/door/airlock/hybrisa/generic/autoname,
-/turf/open/floor/hybrisa/wood/blackwood,
-/area/prison/command/office)
-"aPT" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
-	dir = 4
-	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
 "aPU" = (
@@ -15524,30 +15554,25 @@
 /turf/open/floor/prison,
 /area/prison/quarters/security)
 "aPW" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 4
-	},
-/obj/structure/pipes/standard/manifold/hidden/dark{
+/obj/structure/pipes/standard/manifold/hidden/supply{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/hybrisa/carpet/rug_colorable/black/south,
+/obj/structure/surface/table/reinforced/black,
+/obj/effect/landmark/objective_landmark/far,
+/turf/open/floor/hybrisa/carpet/carpetblack,
 /area/prison/command/office)
 "aPX" = (
-/obj/item/paper/prison_station/warden_note,
-/obj/item/tool/pen,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/prop/alien/hugger,
-/obj/structure/surface/table/reinforced/black,
+/obj/structure/bed/chair/comfy/hybrisa/black{
+	dir = 8
+	},
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/prison/command/office)
 "aPY" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/item/clothing/head/helmet/warden,
 /obj/effect/decal/cleanable/blood,
-/obj/structure/bed/chair/comfy/hybrisa/black{
-	dir = 8
-	},
+/obj/item/prop/alien/hugger,
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/southwest,
 /area/prison/command/office)
 "aPZ" = (
@@ -15846,25 +15871,30 @@
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/secretary_office)
 "aQL" = (
-/obj/structure/machinery/light/double/blue{
-	dir = 8;
-	pixel_x = -10
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	layer = 3.2;
+	pixel_x = -32
 	},
-/obj/structure/machinery/photocopier,
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
 "aQM" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
+/obj/structure/pipes/standard/simple/hidden/supply,
 /obj/item/trash/cigbutt,
-/turf/open/floor/hybrisa/carpet/rug_colorable/black/south,
+/obj/structure/surface/table/reinforced/black,
+/obj/item/phone{
+	pixel_x = 8
+	},
+/turf/open/floor/hybrisa/carpet/rug_colorable/black/northeast,
 /area/prison/command/office)
 "aQN" = (
-/obj/structure/surface/table/reinforced/black,
 /obj/item/paper_bin{
 	pixel_x = -3;
 	pixel_y = 7
 	},
 /obj/item/coin/gold,
+/obj/structure/surface/table/reinforced/black,
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/northwest,
 /area/prison/command/office)
 "aQO" = (
@@ -15877,6 +15907,7 @@
 /area/prison/hallway/central/west)
 "aQQ" = (
 /obj/effect/decal/cleanable/blood,
+/obj/item/clothing/head/helmet/warden,
 /turf/open/floor/hybrisa/carpet/rug_colorable/black/west,
 /area/prison/command/office)
 "aQR" = (
@@ -16234,23 +16265,16 @@
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/secretary_office)
 "aRX" = (
-/obj/structure/surface/rack{
-	color = "#8e98a0"
-	},
-/obj/item/weapon/sword/katana/replica,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/explosive/mine/pmc,
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	layer = 3.2;
-	pixel_x = -32
-	},
 /obj/structure/curtain/colorable_transparent{
 	color = "#5a5a5a";
 	alpha = 220;
 	pixel_y = -33;
 	layer = 3.2
+	},
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_25";
+	pixel_x = -8
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
@@ -16264,10 +16288,6 @@
 	alpha = 220;
 	pixel_y = -33;
 	layer = 3.2
-	},
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_25";
-	pixel_x = -8
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
@@ -21023,6 +21043,10 @@
 	},
 /turf/open/floor/plating/prison,
 /area/prison/storage/vip)
+"bfr" = (
+/obj/structure/window/framed/prison/reinforced,
+/turf/open/floor/plating/prison,
+/area/prison/command/office)
 "bfs" = (
 /obj/structure/machinery/floodlight{
 	needs_power = 0
@@ -21368,10 +21392,6 @@
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/floor/hybrisa/tile/tilewhitecheckered,
 /area/prison/kitchen)
-"bge" = (
-/obj/effect/sentry_landmark/lz_1/bottom_left,
-/turf/open/floor/prison/darkyellow2,
-/area/prison/hanger/main)
 "bgf" = (
 /obj/structure/disposalpipe/junction{
 	dir = 1;
@@ -21443,6 +21463,16 @@
 	},
 /turf/open/floor/hybrisa/metal/bluemetal1/west,
 /area/prison/residential/central)
+"bgn" = (
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	pixel_y = 32;
+	layer = 3.2
+	},
+/obj/structure/bed/chair/comfy/hybrisa/black,
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/prison/command/office)
 "bgo" = (
 /obj/structure/machinery/washing_machine,
 /obj/effect/landmark/crap_item,
@@ -21468,6 +21498,20 @@
 "bgs" = (
 /turf/open/floor/prison/darkred2/west,
 /area/prison/security/monitoring/highsec)
+"bgt" = (
+/obj/structure/machinery/power/apc/no_power/west,
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	pixel_y = 32;
+	layer = 3.2
+	},
+/obj/structure/coatrack{
+	pixel_x = -12;
+	pixel_y = -15
+	},
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/prison/command/office)
 "bgu" = (
 /turf/open/floor/prison/darkredcorners2/north,
 /area/prison/security/monitoring/highsec)
@@ -21616,7 +21660,7 @@
 	dir = 1;
 	pixel_y = 13
 	},
-/obj/effect/sentry_landmark/lz_1/bottom_left,
+/obj/effect/fobots_landmark/lz_1/turret,
 /turf/open/floor/prison/darkyellow2/north,
 /area/prison/hanger/main)
 "bgV" = (
@@ -26238,6 +26282,20 @@
 	},
 /turf/open/floor/prison/darkyellow2/north,
 /area/prison/hanger/main)
+"bty" = (
+/obj/structure/curtain/colorable_transparent{
+	color = "#5a5a5a";
+	alpha = 220;
+	pixel_y = 32;
+	layer = 3.2
+	},
+/obj/structure/surface/rack{
+	color = "#8e98a0"
+	},
+/obj/item/weapon/sword/katana/replica,
+/obj/item/explosive/mine/pmc,
+/turf/open/floor/hybrisa/wood/blackwood,
+/area/prison/command/office)
 "btz" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison,
@@ -26252,6 +26310,28 @@
 	},
 /turf/open/floor/prison/whitepurple/southwest,
 /area/prison/research/secret/testing)
+"btB" = (
+/obj/structure/closet/crate,
+/obj/item/stack/sheet/metal/med_large_stack,
+/obj/item/stack/sheet/plasteel/med_small_stack,
+/turf/open/floor/prison/floor_marked/southwest,
+/area/prison/hangar_storage/main)
+"btC" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/siding{
+	icon_state = "siding8"
+	},
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/obj/effect/landmark/crap_item,
+/obj/structure/machinery/camera/autoname{
+	dir = 4;
+	network = list("PRISON")
+	},
+/turf/open/floor/prison/blue/west,
+/area/prison/residential/north)
 "btD" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/bullet,
@@ -26378,6 +26458,14 @@
 /obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prison/store)
+"btV" = (
+/obj/structure/flora/bush/desert,
+/obj/structure/barricade/handrail/type_b{
+	dir = 1;
+	pixel_y = 13
+	},
+/turf/open/auto_turf/sand/layer1,
+/area/prison/hanger/research)
 "btW" = (
 /obj/structure/toilet{
 	dir = 4
@@ -26470,10 +26558,36 @@
 	},
 /turf/open/floor/prison/cell_stripe/east,
 /area/prison/hanger/main)
+"buj" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/desert/cactus,
+/obj/structure/barricade/handrail/type_b{
+	dir = 1;
+	pixel_y = 13
+	},
+/turf/open/auto_turf/sand/layer1,
+/area/prison/hanger/research)
+"buk" = (
+/obj/structure/flora/bush/ausbushes,
+/obj/structure/barricade/handrail/type_b{
+	dir = 1;
+	pixel_y = 13
+	},
+/obj/structure/barricade/handrail/type_b{
+	dir = 4;
+	layer = 3.5
+	},
+/turf/open/auto_turf/sand/layer1,
+/area/prison/hanger/research)
 "bul" = (
 /obj/item/trash/buritto,
 /turf/open/floor/prison,
 /area/prison/cellblock/mediumsec/south)
+"bum" = (
+/obj/structure/machinery/floodlight/landing/floor,
+/obj/effect/sentry_landmark/lz_2/bottom_left,
+/turf/open/floor/strata/multi_tiles/southwest,
+/area/prison/hanger/research)
 "bun" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
@@ -26486,6 +26600,11 @@
 	dir = 1
 	},
 /area/prison/hallway/central/west)
+"bup" = (
+/obj/structure/machinery/floodlight/landing/floor,
+/obj/effect/sentry_landmark/lz_2/bottom_right,
+/turf/open/floor/strata/multi_tiles/southwest,
+/area/prison/hanger/research)
 "buq" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
@@ -26635,6 +26754,10 @@
 /obj/item/trash/cheesie,
 /turf/open/floor/prison,
 /area/prison/hanger/main)
+"buH" = (
+/obj/effect/fobots_landmark/lz_2/turret,
+/turf/open/floor/prison,
+/area/prison/hanger/research)
 "buI" = (
 /obj/effect/decal/hybrisa/trash{
 	icon_state = "trash_5";
@@ -26740,6 +26863,10 @@
 "buY" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prison/maintenance/residential/se)
+"buZ" = (
+/obj/effect/fobots_landmark/lz_2/fort,
+/turf/open/floor/prison,
+/area/prison/hanger/research)
 "bva" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/prison/darkred2,
@@ -26755,6 +26882,16 @@
 "bvd" = (
 /turf/open/floor/wood/wood_broken,
 /area/prison/library)
+"bve" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E"
+	},
+/obj/structure/machinery/landinglight/ds2{
+	dir = 4
+	},
+/obj/effect/sentry_landmark/lz_2/top_left,
+/turf/open/floor/strata/floor3/east,
+/area/prison/hanger/research)
 "bvf" = (
 /obj/structure/sign/safety/elevator,
 /turf/closed/shuttle/elevator{
@@ -28851,6 +28988,8 @@
 	color = "#8e98a0"
 	},
 /obj/item/maintenance_jack,
+/obj/item/stack/sheet/plasteel/med_small_stack,
+/obj/item/stack/sheet/metal/med_large_stack,
 /turf/open/floor/prison/darkyellow2,
 /area/prison/maintenance/research_medbay)
 "bDo" = (
@@ -31188,6 +31327,11 @@
 	pixel_x = 10;
 	pixel_y = -1
 	},
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/obj/effect/landmark/good_item,
 /turf/open/floor/prison/darkyellow2/north,
 /area/prison/telecomms)
 "bKG" = (
@@ -31622,6 +31766,10 @@
 	dir = 4
 	},
 /obj/effect/decal/siding,
+/obj/structure/machinery/light/double/blue{
+	dir = 1;
+	pixel_y = 21
+	},
 /turf/open/floor/prison/blue/northeast,
 /area/prison/residential/south)
 "bLV" = (
@@ -32662,16 +32810,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/prison/blue/northeast,
 /area/prison/cellblock/protective)
-"bPH" = (
-/obj/structure/machinery/light/double/blue{
-	dir = 8;
-	pixel_x = -10
-	},
-/obj/structure/bed/chair/comfy{
-	dir = 1
-	},
-/turf/open/floor/wood,
-/area/prison/library)
 "bPI" = (
 /turf/open/floor/wood,
 /area/prison/library)
@@ -33204,13 +33342,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/prison/blue/east,
 /area/prison/cellblock/protective)
-"bRm" = (
-/obj/structure/machinery/light/double/blue{
-	dir = 8;
-	pixel_x = -10
-	},
-/turf/open/floor/wood,
-/area/prison/library)
 "bRn" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/bookcase,
@@ -36474,6 +36605,8 @@
 /obj/item/ammo_magazine/smg/nailgun,
 /obj/item/weapon/gun/smg/nailgun,
 /obj/item/weapon/gun/smg/nailgun,
+/obj/item/stack/sheet/metal/med_large_stack,
+/obj/item/stack/sheet/plasteel/med_small_stack,
 /turf/open/floor/prison/darkyellowfull2/east,
 /area/prison/engineering)
 "ccl" = (
@@ -37990,9 +38123,6 @@
 /area/prison/parole/protective_custody)
 "chI" = (
 /turf/closed/wall/r_wall/prison,
-/area/prison/relay)
-"chJ" = (
-/turf/closed/wall/prison,
 /area/prison/relay)
 "chK" = (
 /obj/structure/bed/chair,
@@ -43654,14 +43784,6 @@
 /obj/structure/largecrate/random/barrel/white,
 /turf/open/floor/prison/darkyellowfull2/east,
 /area/prison/hallway/central/south)
-"dcQ" = (
-/obj/structure/monorail,
-/obj/structure/machinery/landinglight/ds1/delaythree{
-	dir = 8
-	},
-/obj/effect/sentry_landmark/lz_1/top_right,
-/turf/open/floor/strata/multi_tiles/southeast,
-/area/prison/hanger/main)
 "ddR" = (
 /obj/item/stack/sheet/wood{
 	amount = 2
@@ -43671,6 +43793,7 @@
 	pixel_x = -3;
 	pixel_y = -1
 	},
+/obj/effect/sentry_landmark/lz_1/bottom_left,
 /turf/open/floor/strata/floor3,
 /area/prison/hanger/main)
 "ddS" = (
@@ -43729,14 +43852,6 @@
 /obj/item/trash/chips,
 /turf/open/floor/prison/red/west,
 /area/prison/cellblock/highsec/north/north)
-"dhg" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "S"
-	},
-/obj/structure/machinery/landinglight/ds1/delaytwo,
-/obj/effect/sentry_landmark/lz_1/top_right,
-/turf/open/floor/strata/multi_tiles/west,
-/area/prison/hanger/main)
 "dhi" = (
 /obj/effect/decal/hefa_cult_decals/d32,
 /turf/open/floor/chapel/west,
@@ -43809,22 +43924,10 @@
 /turf/open/floor/strata/floor3,
 /area/prison/hanger/main)
 "djZ" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
+/obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	pixel_y = -33;
-	layer = 3.2
-	},
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	pixel_y = 32;
-	layer = 3.2
-	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
 "dkz" = (
@@ -43845,12 +43948,6 @@
 /obj/item/paper_bin,
 /turf/open/floor/prison,
 /area/prison/engineering)
-"dkT" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/sentry_landmark/lz_2/bottom_right,
-/turf/open/floor/prison/darkpurple2/east,
-/area/prison/hanger/research)
 "dli" = (
 /obj/item/prop/alien/hugger,
 /turf/open/floor/prison/floor_plate/southwest,
@@ -45824,6 +45921,12 @@
 /turf/open/floor/plating/prison,
 /area/prison/yard)
 "eMW" = (
+/obj/item/stack/sheet/plasteel/med_small_stack,
+/obj/item/stack/sheet/metal/med_large_stack,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/darkyellow2/southeast,
 /area/prison/telecomms)
 "eNj" = (
@@ -47519,11 +47622,9 @@
 /turf/open/floor/prison/darkpurple2/east,
 /area/prison/hanger/research)
 "gpx" = (
-/obj/structure/surface/table/reinforced/prison{
-	dir = 1;
-	color = "#8e98a0"
+/obj/structure/bed/chair/office/dark{
+	dir = 4
 	},
-/obj/effect/landmark/good_item,
 /turf/open/floor/prison/darkyellowfull2/east,
 /area/prison/telecomms)
 "gpG" = (
@@ -47947,12 +48048,6 @@
 	},
 /turf/open/floor/strata/floor3,
 /area/prison/hanger/main)
-"gGu" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 1
-	},
-/turf/open/floor/prison/darkyellow2/north,
-/area/prison/telecomms)
 "gGD" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
@@ -49329,7 +49424,7 @@
 /turf/open/floor/kutjevo/fake_wood,
 /area/prison/residential/south)
 "hGO" = (
-/turf/open/floor/hybrisa/wood/blackwood,
+/turf/open/floor/hybrisa/carpet/rug_colorable/black/south,
 /area/prison/command/office)
 "hHs" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
@@ -49563,6 +49658,10 @@
 "hQm" = (
 /obj/structure/bookcase,
 /obj/item/newspaper,
+/obj/structure/machinery/light/double/blue{
+	dir = 8;
+	pixel_x = -10
+	},
 /turf/open/floor/wood,
 /area/prison/library)
 "hQp" = (
@@ -52146,14 +52245,14 @@
 /turf/open/floor/prison/red/east,
 /area/prison/security/briefing)
 "jCV" = (
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_29";
-	pixel_y = 10
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
+	dir = 4
 	},
-/obj/structure/prop/hybrisa/fakeplatforms/platform4{
-	dir = 8
+/obj/structure/barricade/handrail/type_b{
+	dir = 1;
+	pixel_y = 13
 	},
-/turf/open/floor/prison/darkpurple2/southwest,
+/turf/open/auto_turf/sand/layer1,
 /area/prison/hanger/research)
 "jDa" = (
 /obj/structure/sign/safety/north{
@@ -52813,10 +52912,6 @@
 	},
 /turf/open/floor/prison/darkyellow2/north,
 /area/prison/hallway/engineering)
-"jXd" = (
-/obj/effect/sentry_landmark/lz_2/bottom_right,
-/turf/open/floor/prison/darkpurple2/north,
-/area/prison/hanger/research)
 "jXg" = (
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/maintenance/research_medbay)
@@ -53168,6 +53263,10 @@
 	alpha = 220;
 	layer = 3.2;
 	pixel_x = 32
+	},
+/obj/structure/bookcase{
+	density = 0;
+	icon_state = "book-5"
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
@@ -54079,6 +54178,7 @@
 /obj/structure/barricade/handrail/type_b{
 	dir = 4
 	},
+/obj/effect/fobots_landmark/lz_1/fort,
 /turf/open/floor/prison/darkyellow2/east,
 /area/prison/hanger/main)
 "kTv" = (
@@ -54853,10 +54953,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison/blue/north,
 /area/prison/residential/south)
-"lBx" = (
-/obj/effect/sentry_landmark/lz_2/top_left,
-/turf/open/floor/prison,
-/area/prison/hanger/research)
 "lBC" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -55697,12 +55793,15 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hanger/research)
 "mku" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
+/obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/hybrisa/wood/blackwood,
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/open/floor/hybrisa/carpet/rug_colorable/black/southeast,
 /area/prison/command/office)
 "mkN" = (
 /obj/effect/decal/cleanable/dirt,
@@ -57119,6 +57218,7 @@
 	dir = 1;
 	pixel_y = 13
 	},
+/obj/effect/fobots_landmark/lz_1/supplies,
 /turf/open/floor/prison/darkyellow2/northeast,
 /area/prison/hanger/main)
 "nnE" = (
@@ -58401,10 +58501,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/siding{
 	icon_state = "siding8"
-	},
-/obj/structure/machinery/camera/autoname{
-	dir = 4;
-	network = list("PRISON")
 	},
 /turf/open/floor/prison/blue/west,
 /area/prison/residential/north)
@@ -60238,13 +60334,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/red,
 /area/prison/recreation/highsec/s)
-"pKK" = (
-/obj/effect/sentry_landmark/lz_2/bottom_left,
-/obj/structure/prop/hybrisa/fakeplatforms/platform4{
-	dir = 8
-	},
-/turf/open/floor/prison/darkpurple2/west,
-/area/prison/hanger/research)
 "pKM" = (
 /obj/structure/largecrate/random/secure,
 /obj/effect/decal/cleanable/dirt/greenglow,
@@ -60928,20 +61017,8 @@
 /turf/open/floor/strata/floor3,
 /area/prison/hanger/main)
 "qqb" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
+/obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
-	},
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	pixel_y = -33;
-	layer = 3.2
-	},
-/obj/structure/curtain/colorable_transparent{
-	color = "#5a5a5a";
-	alpha = 220;
-	pixel_y = 32;
-	layer = 3.2
 	},
 /turf/open/floor/hybrisa/wood/blackwood,
 /area/prison/command/office)
@@ -65190,8 +65267,11 @@
 /turf/open/floor/prison/whitepurple/east,
 /area/prison/research)
 "tWn" = (
-/obj/structure/pipes/standard/simple/hidden/dark,
-/turf/open/floor/hybrisa/carpet/rug_colorable/black/east,
+/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/surface/table/reinforced/black,
+/obj/item/paper/prison_station/warden_note,
+/obj/item/tool/pen,
+/turf/open/floor/hybrisa/carpet/rug_colorable/black/northwest,
 /area/prison/command/office)
 "tWw" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
@@ -65793,11 +65873,6 @@
 	},
 /turf/open/floor/wood,
 /area/prison/laundry)
-"uxt" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/wall/prison,
-/area/prison/residential/north)
 "uxJ" = (
 /turf/closed/wall/r_wall/prison,
 /area/prison/hanger/research)
@@ -67641,10 +67716,6 @@
 "vRB" = (
 /turf/open/floor/hybrisa/wood/darkerwood,
 /area/prison/security)
-"vRP" = (
-/obj/effect/sentry_landmark/lz_2/bottom_left,
-/turf/open/floor/prison/darkpurple2,
-/area/prison/hanger/research)
 "vSe" = (
 /obj/effect/landmark/objective_landmark/close,
 /obj/structure/bed/hybrisa/bunkbed4{
@@ -70532,7 +70603,7 @@
 /area/prison/cellblock/mediumsec/east)
 "ykW" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/hybrisa/wood/blackwood,
+/turf/open/floor/hybrisa/carpet/rug_colorable/black/east,
 /area/prison/command/office)
 "ylf" = (
 /obj/structure/largecrate/random/barrel{
@@ -76017,7 +76088,7 @@ eoP
 byD
 gPb
 gPb
-avN
+ruu
 aHG
 gPb
 avN
@@ -76225,12 +76296,12 @@ gPb
 lto
 fAl
 nme
-uxt
+ruu
 azG
 uJj
 dFV
 qzR
-dFV
+btC
 otx
 aHH
 gPb
@@ -76298,7 +76369,7 @@ beO
 pUp
 qla
 bUP
-bGU
+oZV
 qqI
 lNP
 dNU
@@ -77303,7 +77374,7 @@ ruu
 aFe
 aGx
 awI
-avN
+ruu
 mBB
 dUI
 axG
@@ -77323,7 +77394,7 @@ aZS
 hoT
 aZS
 aZS
-aWr
+azv
 akH
 nhh
 nvE
@@ -77340,7 +77411,7 @@ bgc
 bgc
 bgc
 bqJ
-aWr
+azv
 aZS
 xcp
 aZS
@@ -78859,7 +78930,7 @@ bKX
 uyA
 bMD
 bGU
-bCb
+bLW
 bMR
 sNC
 ozs
@@ -79463,7 +79534,7 @@ laF
 bsi
 mSe
 tHC
-aWr
+azv
 akH
 yft
 bxO
@@ -79480,7 +79551,7 @@ eOz
 yft
 yft
 bqJ
-aWr
+azv
 awF
 nTV
 bsi
@@ -79500,8 +79571,8 @@ bGU
 bKU
 wBp
 tgP
-bGU
-bLW
+oZV
+bCb
 oxc
 nUL
 gJT
@@ -79722,7 +79793,7 @@ neS
 cHL
 hzM
 awq
-bGU
+oZV
 bKo
 ewT
 bKo
@@ -79928,7 +79999,7 @@ lOj
 rjV
 qqI
 xkg
-bGU
+oZV
 bMa
 xCv
 bCc
@@ -80361,7 +80432,7 @@ bLT
 bGU
 bGU
 bGU
-bSj
+xvB
 gIy
 bSj
 bGU
@@ -104112,6 +104183,7 @@ lxE
 lxE
 bOD
 bNU
+acL
 bPZ
 bPZ
 bPZ
@@ -104119,8 +104191,7 @@ bPZ
 bPZ
 bPZ
 bPZ
-bPZ
-bNU
+acL
 kJb
 bPZ
 bNU
@@ -104326,15 +104397,15 @@ wjg
 wjg
 bOD
 bNV
-bPH
-bSO
+bgI
+aeg
 bSO
 kvy
 bSO
 bSO
 kvy
 hQm
-bRm
+bPI
 bUi
 bSO
 bNU
@@ -104980,8 +105051,8 @@ bPI
 bUi
 bSO
 chI
-chJ
-chJ
+chI
+chI
 chI
 ciO
 fkk
@@ -105196,7 +105267,7 @@ vuA
 chI
 rJf
 cfl
-chJ
+chI
 aPu
 fkk
 ckP
@@ -105410,7 +105481,7 @@ bPI
 cdF
 iCp
 qpg
-chJ
+chI
 ciP
 fkk
 cmx
@@ -105624,7 +105695,7 @@ bPI
 dyX
 iQS
 pmi
-chJ
+chI
 alP
 fkk
 cht
@@ -105838,7 +105909,7 @@ xKq
 chI
 uaN
 kTD
-chJ
+chI
 alP
 fkk
 cmx
@@ -106049,10 +106120,10 @@ bPI
 bPI
 bPI
 bSO
-chJ
+chI
 cfm
 cgz
-chJ
+chI
 ciQ
 cjU
 ckP
@@ -106263,10 +106334,10 @@ kvy
 guq
 bPI
 lhD
-chJ
+chI
 cfn
 oPW
-chJ
+chI
 alP
 fkk
 cmx
@@ -106477,10 +106548,10 @@ bPI
 vxJ
 bpC
 lhD
-chJ
+chI
 fqs
 cgA
-chJ
+chI
 pcd
 fkk
 cht
@@ -106691,10 +106762,10 @@ uob
 bPI
 pNS
 kvy
-chJ
+chI
 uDU
 cfo
-chJ
+chI
 wtU
 fkk
 cmx
@@ -106906,8 +106977,8 @@ cbC
 dyb
 bNU
 chI
-chJ
-chJ
+chI
+chI
 chI
 ciR
 fkk
@@ -108737,10 +108808,10 @@ jRH
 wZu
 lnA
 cVS
-ajO
+buZ
 ajN
 amS
-ajO
+buH
 qwg
 aro
 arH
@@ -108952,7 +109023,7 @@ ajO
 ajO
 saL
 azW
-lBx
+ajO
 ajO
 ajO
 sIA
@@ -108964,7 +109035,7 @@ dxF
 kkA
 kkA
 kkA
-pKK
+kkA
 kkA
 kkA
 jEa
@@ -109182,7 +109253,7 @@ wFh
 wFh
 wev
 ajO
-uaW
+btV
 aDz
 pEZ
 aDy
@@ -109378,7 +109449,7 @@ aoi
 apf
 apA
 aqj
-aoi
+bve
 lAp
 ase
 qBC
@@ -109396,7 +109467,7 @@ qlh
 dmG
 axx
 dHr
-jdi
+buj
 aDz
 iZy
 aDy
@@ -109607,10 +109678,10 @@ sUB
 sUB
 mkq
 pBl
-sZb
+bum
 jjS
 jDr
-uaW
+buk
 aDz
 aDy
 aDy
@@ -109824,7 +109895,7 @@ amQ
 sUB
 axz
 jDr
-vRP
+uaW
 paB
 gzz
 aDs
@@ -111747,9 +111818,9 @@ sUB
 sUB
 mkq
 pBl
-sZb
+bup
 uwx
-jXd
+jDr
 uaW
 aDA
 tcY
@@ -112026,7 +112097,7 @@ vkK
 bIy
 bIW
 qpq
-gGu
+bEJ
 hdw
 guR
 bQj
@@ -112171,7 +112242,7 @@ dHr
 asI
 atk
 gpq
-dkT
+gpq
 auT
 pXk
 awG
@@ -116036,7 +116107,7 @@ wjg
 aFV
 aJV
 aJf
-aGo
+btB
 aHp
 lWL
 omS
@@ -118182,11 +118253,11 @@ wjg
 wjg
 wjg
 lxE
-lxE
+aPm
 aLE
-aMP
+bfr
 aPS
-aMP
+bfr
 aLE
 aLF
 aLE
@@ -118396,13 +118467,13 @@ wjg
 wjg
 wjg
 wjg
-lxE
-wjg
+aPm
 bmD
+bgn
 djZ
-bmD
-wjg
-wjg
+aMS
+aLG
+aEJ
 wjg
 aUV
 rwY
@@ -118610,13 +118681,13 @@ wjg
 wjg
 wjg
 wjg
-lxE
-wjg
+aPm
 bmD
+bgn
 qqb
-bmD
-wjg
-wjg
+aMS
+aLG
+aEJ
 wjg
 aUU
 aWe
@@ -118824,13 +118895,13 @@ wjg
 wjg
 wjg
 wjg
-lxE
+aOt
 aMP
-aMP
+bfr
 aPS
+bfr
 aMP
-aMP
-wjg
+aOt
 wjg
 aUU
 aUS
@@ -119039,11 +119110,11 @@ wjg
 wjg
 wjg
 bmD
-aLG
+bgt
 aOy
-aPT
+qqb
 aQL
-aLG
+aPo
 bmD
 lxE
 aUU
@@ -119253,7 +119324,7 @@ wjg
 wjg
 wjg
 bmD
-aMQ
+mEM
 hGO
 mku
 ykW
@@ -119681,7 +119752,7 @@ wjg
 wjg
 wjg
 bmD
-mEM
+bty
 aOA
 aPX
 aQN
@@ -120142,7 +120213,7 @@ bXv
 nXA
 fbX
 btp
-bge
+biU
 nBP
 ddR
 bwS
@@ -120322,13 +120393,13 @@ wjg
 wjg
 wjg
 wjg
-wjg
+aEJ
 bmD
 bmD
 bmD
 bmD
 bmD
-lxE
+aPm
 lxE
 aXu
 qLN
@@ -121188,7 +121259,7 @@ wjg
 wjg
 aXt
 xxd
-aDe
+aDj
 aYj
 syR
 hyX
@@ -122045,7 +122116,7 @@ wjg
 aXu
 lqy
 dIw
-dhg
+aYj
 syR
 syR
 syR
@@ -122691,7 +122762,7 @@ baJ
 bbE
 slK
 tFB
-dcQ
+bcG
 bcG
 bcG
 bcG
