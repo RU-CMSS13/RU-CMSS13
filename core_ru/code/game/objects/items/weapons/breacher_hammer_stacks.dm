@@ -1,5 +1,5 @@
 /datum/effects/hammer_stacks
-	effect_name = "Stormtrooper hammer combo stack"
+	effect_name = "Breacher hammer combo stack"
 	duration = null
 	flags = INF_DURATION // We always clean ourselves up
 

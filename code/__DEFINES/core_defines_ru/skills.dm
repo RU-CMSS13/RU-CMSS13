@@ -16,7 +16,7 @@
 /// Can use heavy flamers
 #define SKILL_SPEC_PYRO 6
 /// Can use Heavy-Shield and N45
-#define SKILL_SPEC_ST 7
+#define SKILL_SPEC_BREACHER 7
 /// Can use smartguns
 #define SKILL_SPEC_SMARTGUN 8
 /// UPP special training
