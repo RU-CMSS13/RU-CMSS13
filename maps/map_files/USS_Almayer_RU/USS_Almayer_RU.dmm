@@ -55,6 +55,17 @@
 	},
 /turf/open/space/basic,
 /area/space)
+"aal" = (
+/obj/structure/machinery/cryopod{
+	pixel_y = 6
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/living/synthcloset)
 "aam" = (
 /obj/structure/stairs,
 /obj/effect/step_trigger/teleporter_vector{
@@ -525,6 +536,9 @@
 	},
 /turf/open/floor/carpet,
 /area/almayer/living/intel)
+"abA" = (
+/turf/open/floor/almayer/plate,
+/area/almayer/living/synthcloset)
 "abB" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -8096,9 +8110,6 @@
 /turf/open/floor/almayer/mono,
 /area/almayer/command/cic)
 "auR" = (
-/obj/structure/machinery/light/small{
-	dir = 4
-	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "N";
 	pixel_y = 1
@@ -8111,7 +8122,7 @@
 	icon_state = "S"
 	},
 /obj/structure/techpod_vendor{
-	pixel_x = 32;
+	pixel_x = 27;
 	density = 0
 	},
 /turf/open/floor/almayer/plating/northeast,
@@ -8607,15 +8618,19 @@
 /turf/open/floor/almayer/orange/north,
 /area/almayer/engineering/lower/workshop/hangar)
 "avU" = (
-/obj/structure/flora/pottedplant{
-	icon_state = "pottedplant_27";
-	layer = 3.1;
-	pixel_x = -2;
-	pixel_y = 10
+/obj/structure/machinery/cryopod{
+	pixel_y = 6
 	},
-/obj/structure/machinery/power/apc/almayer/north,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/machinery/light/small{
+	dir = 4
+	},
 /turf/open/floor/almayer/plate,
-/area/almayer/shipboard/brig/mp_bunks)
+/area/almayer/living/synthcloset)
 "avV" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -9049,11 +9064,16 @@
 /turf/open/floor/almayer,
 /area/almayer/command/cic)
 "awY" = (
-/obj/structure/machinery/cryopod{
-	pixel_y = 6
+/obj/structure/stairs{
+	dir = 4;
+	icon_state = "ramptop"
 	},
-/turf/open/floor/almayer/plate,
-/area/almayer/shipboard/brig/mp_bunks)
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 1;
+	name = "ship-grade camera"
+	},
+/turf/open/floor/plating,
+/area/almayer/living/synthcloset)
 "awZ" = (
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	dir = 2
@@ -12697,11 +12717,23 @@
 /turf/open/floor/wood/ship,
 /area/almayer/living/numbertwobunks)
 "aFh" = (
+/obj/structure/machinery/door/airlock/almayer/maint/reinforced{
+	access_modified = 1;
+	name = "\improper Synthetic Storage";
+	req_one_access = list(36)
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/living/synthcloset)
+"aFi" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_27";
+	layer = 3.1;
+	pixel_x = -2;
+	pixel_y = 10
+	},
+/obj/structure/machinery/power/apc/almayer/north,
 /turf/open/floor/almayer/plate,
 /area/almayer/shipboard/brig/mp_bunks)
-"aFi" = (
-/turf/closed/wall/almayer,
-/area/almayer/living/synthcloset)
 "aFj" = (
 /obj/structure/sign/prop1{
 	pixel_y = 32
@@ -13154,12 +13186,7 @@
 /turf/open/floor/almayer/orange/west,
 /area/almayer/command/telecomms)
 "aGz" = (
-/obj/structure/machinery/door/airlock/almayer/maint/reinforced{
-	access_modified = 1;
-	name = "\improper Synthetic Storage";
-	req_one_access = list(36)
-	},
-/turf/open/floor/almayer/plate,
+/turf/closed/wall/almayer,
 /area/almayer/living/synthcloset)
 "aGA" = (
 /turf/open/floor/almayer/orange/northwest,
@@ -13524,17 +13551,6 @@
 /turf/closed/wall/almayer,
 /area/almayer/command/computerlab)
 "aHr" = (
-/obj/structure/stairs{
-	dir = 4;
-	icon_state = "ramptop"
-	},
-/obj/structure/machinery/camera/autoname/almayer{
-	dir = 1;
-	name = "ship-grade camera"
-	},
-/turf/open/floor/plating,
-/area/almayer/living/synthcloset)
-"aHs" = (
 /obj/structure/platform{
 	layer = 2.9
 	},
@@ -13542,6 +13558,19 @@
 	layer = 2.8
 	},
 /turf/open/floor/almayer/cargo,
+/area/almayer/living/synthcloset)
+"aHs" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/platform_decoration/metal/almayer/north,
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	pixel_x = 1
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	pixel_y = 0
+	},
+/turf/open/floor/almayer/plate,
 /area/almayer/living/synthcloset)
 "aHt" = (
 /obj/structure/disposalpipe/segment,
@@ -13709,17 +13738,10 @@
 /turf/open/floor/almayer/silver/west,
 /area/almayer/command/securestorage)
 "aHM" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/platform_decoration/metal/almayer/north,
-/obj/effect/decal/warning_stripes{
-	icon_state = "E";
-	pixel_x = 1
+/obj/structure/machinery/cryopod{
+	dir = 1
 	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "S";
-	pixel_y = 0
-	},
-/turf/open/floor/almayer/plate,
+/turf/open/floor/almayer/cargo,
 /area/almayer/living/synthcloset)
 "aHN" = (
 /obj/structure/platform_decoration/metal/almayer/west,
@@ -13946,11 +13968,10 @@
 /turf/open/floor/almayer/cargo,
 /area/almayer/command/securestorage)
 "aIq" = (
-/obj/structure/machinery/cryopod{
-	dir = 1
-	},
-/turf/open/floor/almayer/cargo,
-/area/almayer/living/synthcloset)
+/obj/effect/landmark/start/police,
+/obj/effect/landmark/late_join/police,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/shipboard/brig/cryo)
 "aIr" = (
 /obj/structure/platform_decoration/metal/almayer/east,
 /turf/open/floor/almayer/red/north,
@@ -13966,10 +13987,16 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/p_bow)
 "aIu" = (
-/obj/effect/landmark/start/police,
-/obj/effect/landmark/late_join/police,
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/shipboard/brig/cryo)
+/obj/structure/machinery/light{
+	dir = 8
+	},
+/obj/structure/largecrate/random/mini/wooden{
+	pixel_x = -7;
+	pixel_y = 10;
+	can_block_movement = 0
+	},
+/turf/open/floor/almayer/cargo,
+/area/almayer/living/synthcloset)
 "aIv" = (
 /obj/structure/platform_decoration/metal/almayer/west,
 /turf/open/floor/almayer/red/north,
@@ -13981,17 +14008,6 @@
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/lifeboat_pumps/north1)
 "aIx" = (
-/obj/structure/machinery/light{
-	dir = 8
-	},
-/obj/structure/largecrate/random/mini/wooden{
-	pixel_x = -7;
-	pixel_y = 10;
-	can_block_movement = 0
-	},
-/turf/open/floor/almayer/cargo,
-/area/almayer/living/synthcloset)
-"aIy" = (
 /obj/effect/decal/cleanable/generic,
 /obj/effect/decal/warning_stripes{
 	icon_state = "E";
@@ -13999,7 +14015,7 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/synthcloset)
-"aIz" = (
+"aIy" = (
 /obj/structure/closet/secure_closet/surgical{
 	pixel_x = 30
 	},
@@ -14010,11 +14026,11 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/living/synthcloset)
-"aIA" = (
+"aIz" = (
 /obj/structure/machinery/cm_vending/own_points/experimental_tools,
 /turf/open/floor/almayer/cargo,
 /area/almayer/living/synthcloset)
-"aIB" = (
+"aIA" = (
 /obj/structure/machinery/cm_vending/clothing/synth,
 /obj/structure/machinery/light{
 	dir = 1
@@ -21037,16 +21053,16 @@
 	pixel_x = 7;
 	pixel_y = 5
 	},
-/obj/item/device/cotablet{
-	pixel_x = -1;
-	layer = 3.4
-	},
 /obj/structure/machinery/door/window/southleft{
 	desc = "A window, that is also a door. A windoor if you will. This one is stronger.";
 	health = 500;
 	name = "Reinforced Glass door";
 	req_one_access_txt = "2;35";
 	dir = 8
+	},
+/obj/item/device/cotablet{
+	pixel_x = -1;
+	layer = 3.4
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -40952,7 +40968,7 @@
 "jvz" = (
 /obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep{
 	req_access = list(1);
-	pixel_x = -32;
+	pixel_x = -27;
 	density = 0
 	},
 /obj/effect/decal/warning_stripes{
@@ -41000,6 +41016,9 @@
 	pixel_y = 12
 	},
 /obj/item/roller/surgical,
+/obj/structure/machinery/light/small{
+	dir = 4
+	},
 /turf/open/floor/almayer/redfull,
 /area/almayer/command/cic)
 "jvY" = (
@@ -41795,12 +41814,12 @@
 "jUG" = (
 /obj/structure/platform/metal/almayer/north,
 /obj/structure/platform/metal/almayer/west,
-/obj/structure/platform_decoration/metal/almayer/northeast,
 /obj/structure/flora/pottedplant{
 	icon_state = "pottedplant_22";
 	pixel_y = 6;
 	pixel_x = 2
 	},
+/obj/structure/platform_decoration/metal/almayer/northeast,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/medical/upper_medical)
 "jUM" = (
@@ -47036,6 +47055,9 @@
 /obj/structure/machinery/vending/security{
 	req_one_access_txt = "3;1";
 	req_access = null
+	},
+/obj/structure/machinery/light/small{
+	dir = 4
 	},
 /turf/open/floor/almayer/redfull,
 /area/almayer/command/cic)
@@ -57140,6 +57162,20 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/rumayer/squads/alpha_delta_shared)
+"qSJ" = (
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/machinery/door/airlock/almayer/maint/reinforced{
+	access_modified = 1;
+	dir = 1;
+	name = "\improper Synthetic Storage";
+	req_one_access = list(36)
+	},
+/turf/closed/wall/almayer/reinforced,
+/area/almayer/living/synthcloset)
 "qSK" = (
 /obj/item/stack/sheet/metal{
 	layer = 2.9;
@@ -67886,12 +67922,6 @@
 /area/almayer/hallways/upper/starboard)
 "vNW" = (
 /obj/structure/surface/table/reinforced/almayer_B,
-/obj/structure/machinery/computer/groundside_operations{
-	pixel_y = 23;
-	layer = 3.1;
-	dir = 4;
-	pixel_x = 2
-	},
 /obj/structure/machinery/computer/almayer_control{
 	layer = 3.4;
 	pixel_y = -9;
@@ -67906,6 +67936,11 @@
 	},
 /obj/structure/window/reinforced/toughened{
 	dir = 8
+	},
+/obj/structure/machinery/computer/overwatch/groundside_operations{
+	dir = 4;
+	pixel_x = 2;
+	pixel_y = 23
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/command/cic)
@@ -70120,7 +70155,7 @@
 "wPf" = (
 /obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep{
 	req_access = list(1);
-	pixel_x = -32;
+	pixel_x = -27;
 	density = 0
 	},
 /obj/effect/decal/warning_stripes{
@@ -89473,7 +89508,7 @@ rtT
 jnI
 vxM
 dFC
-aIu
+aIq
 nXY
 vxM
 aTk
@@ -96174,10 +96209,10 @@ kcH
 kcH
 kcH
 kcH
-aGz
+aFh
 kcH
-bLb
-bLb
+aFh
+kcH
 bLb
 aJc
 aKa
@@ -96374,13 +96409,13 @@ adB
 hhA
 kcH
 hmO
-aIx
+aIu
 veY
-aHs
+aHr
 tAL
-kcH
-awY
-awY
+qSJ
+avU
+aal
 bLb
 awz
 vlB
@@ -96576,14 +96611,14 @@ add
 add
 add
 kcH
-aIA
-aIy
+aIz
+aIx
 wyn
-aHM
-aHr
-aFi
-aFh
-aFh
+aHs
+awY
+aGz
+kcH
+abA
 bLb
 kOB
 fwH
@@ -96779,13 +96814,13 @@ aeZ
 aka
 aoI
 kcH
-aIB
+aIA
 eqN
 ilQ
 aIa
 cJu
+aGz
 aFi
-avU
 jUb
 bLb
 bLb
@@ -96983,11 +97018,11 @@ akc
 buc
 kcH
 eie
-aIz
+aIy
 nnc
-aIq
+aHM
 lyi
-aFi
+aGz
 iuu
 wQJ
 apo
