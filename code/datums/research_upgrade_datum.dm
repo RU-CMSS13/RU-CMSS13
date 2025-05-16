@@ -89,6 +89,7 @@
 	name = "Items"
 	behavior = RESEARCH_UPGRADE_CATEGORY
 
+/* RU CM REMOVE
 /datum/research_upgrades/item/research_credits
 	name = "Research Credits"
 	desc = "Sell the data acquired to the nearest Weyland-Yutani Science division team for 8 or 9 points."
@@ -99,6 +100,7 @@
 	change_purchase = 500
 	maximum_price = 5000
 	clearance_req = 5
+*/
 
 /datum/research_upgrades/item/laser_scalpel
 	name = "Laser Scalpel"
