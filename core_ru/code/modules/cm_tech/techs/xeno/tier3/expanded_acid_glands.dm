@@ -12,7 +12,7 @@
 	var/acid_damage_mult = 1.25
 	var/acid_penetration = 5
 	var/acid_speed_bonus = 1
-	var/plasma_cost_increase = 2
+	var/plasma_cost_increase_mult = 2
 
 /datum/tech/xeno/expanded_glands/ui_static_data(mob/user)
 	. = ..()
