@@ -8,6 +8,7 @@
 	icon = 'core_ru/icons/obj/items/clothing/cm_suits.dmi'
 	icon_state = "st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGH
+	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROT
 	flags_atom = NO_GAMEMODE_SKIN
 	flags_armor_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET

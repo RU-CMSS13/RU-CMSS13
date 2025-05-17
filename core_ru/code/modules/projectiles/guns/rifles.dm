@@ -52,6 +52,30 @@
 	recoil_unwielded = RECOIL_AMOUNT_TIER_2
 	scatter = SCATTER_AMOUNT_TIER_6
 
+
+/obj/item/weapon/gun/rifle/xm52/setup_firemodes()
+	var/old_firemode = gun_firemode
+	gun_firemode_list.len = 0
+
+	if(burst_amount > BURST_AMOUNT_TIER_1) //кручу верчу, бёрст первым поставить хочу
+		gun_firemode_list |= GUN_FIREMODE_BURSTFIRE
+
+	if(start_automatic)
+		gun_firemode_list |= GUN_FIREMODE_AUTOMATIC
+
+	if(start_semiauto)
+		gun_firemode_list |= GUN_FIREMODE_SEMIAUTO
+
+
+	if(!length(gun_firemode_list))
+		CRASH("[src] called setup_firemodes() with an empty gun_firemode_list")
+
+	else if(old_firemode in gun_firemode_list)
+		gun_firemode = old_firemode
+
+	else
+		gun_firemode = gun_firemode_list[1]
+
 /obj/item/weapon/gun/rifle/xm52/Initialize(mapload, spawn_empty)
 	. = ..()
 	if(gun_firemode == GUN_FIREMODE_BURSTFIRE)
