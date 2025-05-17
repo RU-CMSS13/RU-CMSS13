@@ -12,9 +12,9 @@
 	)
 	pickup_sound = "gunequip"
 	hitsound = "core_ru/sound/weapons/hammer_swing.ogg"
-	force = MELEE_FORCE_STRONG
+	force = MELEE_FORCE_TIER_6
 	flags_item = TWOHANDED
-	force_wielded = MELEE_FORCE_TIER_8
+	force_wielded = MELEE_FORCE_STRONG
 	throwforce = MELEE_FORCE_NORMAL
 	w_class = SIZE_LARGE
 	sharp = IS_SHARP_ITEM_BIG
@@ -38,14 +38,17 @@
 	if(!isxeno(target))
 		return
 
-	if(flags_item & WIELDED)
-		var/datum/effects/hammer_stacks/hammer_effect = locate() in target.effects_list
-		if(!hammer_effect)
-			hammer_effect = new /datum/effects/hammer_stacks(target)
+	var/datum/effects/hammer_stacks/HS = null
+	for (var/datum/effects/hammer_stacks/hammer_stacks in target.effects_list)
+		HS = hammer_stacks
+		break
 
-		hammer_effect.increment_stack_count(1, user)
-		if(target.stat != CONSCIOUS) // haha xeno-cricket
-			hammer_effect.increment_stack_count(4, user)
+	if (HS == null)
+		HS = new /datum/effects/hammer_stacks(target)
+	HS.increment_stack_count(1, user)
+
+	if(target.stat != CONSCIOUS) // haha xeno-cricket
+		HS.increment_stack_count(4, user)
 
 /obj/item/weapon/twohanded/st_hammer/pickup(mob/user)
 	RegisterSignal(user, COMSIG_HUMAN_POST_MOVE_DELAY, PROC_REF(handle_movedelay))
@@ -88,7 +91,9 @@
 	name = "N30 montage shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
 	icon = 'core_ru/icons/obj/items/st_spec.dmi'
+	base_icon_state = "metal_st"
 	icon_state = "metal_st"
+	item_state = "metal_st"
 	item_icons = list(
 		WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 		WEAR_R_HAND = 'core_ru/icons/mob/humans/onmob/items_righthand_1.dmi',
@@ -96,8 +101,8 @@
 		)
 	attack_verb = list("shoved", "bashed")
 	pickup_sound = "gunequip"
-	passive_block = 70
-	readied_block = 100
+	passive_block = 60
+	readied_block = 80
 	throw_range = 4
 	flags_equip_slot = SLOT_BACK
 	force = MELEE_FORCE_TIER_1
@@ -111,6 +116,10 @@
 
 /obj/item/weapon/shield/montage/IsShield()
 	return TRUE
+
+/obj/item/weapon/shield/montage/attack_self(mob/user)
+	..()
+	toggle_shield(user)
 
 /obj/item/weapon/shield/montage/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon))
@@ -145,5 +154,7 @@
 	name = "N30-2 standard defensive shield"
 	desc = "A heavy shield adept at blocking blunt or sharp objects from connecting with the shield wielder."
 	icon_state = "marine_shield"
+	item_state = "marine_shield"
+	base_icon_state = "marine_shield"
 	passive_block = 45
 	readied_block = 80
