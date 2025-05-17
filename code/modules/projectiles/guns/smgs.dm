@@ -69,6 +69,7 @@
 		/obj/item/attachable/angledgrip,
 		/obj/item/attachable/verticalgrip,
 		/obj/item/attachable/flashlight/grip,
+		/obj/item/attachable/attached_gun/extinguisher,
 		/obj/item/attachable/stock/smg,
 		/obj/item/attachable/stock/smg/collapsible,
 		/obj/item/attachable/compensator,
@@ -80,6 +81,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -89,14 +91,6 @@
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
-		/obj/item/attachable/bayonet/custom,
-		/obj/item/attachable/bayonet/custom/red,
-		/obj/item/attachable/bayonet/custom/blue,
-		/obj/item/attachable/bayonet/custom/black,
-		/obj/item/attachable/bayonet/tanto,
-		/obj/item/attachable/bayonet/tanto/blue,
-		/obj/item/attachable/bayonet/rmc_replica,
-		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/heavy_barrel,
 //RUCM START
 		/obj/item/attachable/heavy_barrel/upgraded,
@@ -159,7 +153,7 @@
 	)
 	random_spawn_muzzle = list(
 		/obj/item/attachable/suppressor,
-		/obj/item/attachable/bayonet,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/extended_barrel,
 	)
 
@@ -173,6 +167,21 @@
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_6
 	damage_mult =  BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_7
+
+/obj/item/weapon/gun/smg/m39/elite/compact
+	starting_attachment_types = list(/obj/item/attachable/stock/smg/collapsible, /obj/item/attachable/suppressor, /obj/item/attachable/reflex, /obj/item/attachable/lasersight)
+	current_mag = /obj/item/ammo_magazine/smg/m39/ap
+	random_spawn_under = null
+
+/obj/item/weapon/gun/smg/m39/elite/compact/heap
+	starting_attachment_types = list(/obj/item/attachable/stock/smg/collapsible, /obj/item/attachable/suppressor, /obj/item/attachable/reflex, /obj/item/attachable/lasersight)
+	current_mag = /obj/item/ammo_magazine/smg/m39/heap
+	random_spawn_under = null
+
+/obj/item/weapon/gun/smg/m39/elite/heavy
+	starting_attachment_types = list(/obj/item/attachable/stock/smg, /obj/item/attachable/extended_barrel, /obj/item/attachable/magnetic_harness, /obj/item/attachable/angledgrip)
+	current_mag = /obj/item/ammo_magazine/smg/m39/ap
+	random_spawn_under = null
 
 /obj/item/weapon/gun/smg/m39/corporate
 	desc = "A Weyland-Yutani creation, this M-39 comes equipped in corporate white. Uses 10x20mm caseless ammunition."
@@ -213,6 +222,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -238,6 +248,7 @@
 		/obj/item/attachable/bipod,
 		/obj/item/attachable/burstfire_assembly,
 		/obj/item/attachable/attached_gun/grenade/m203,
+		/obj/item/attachable/attached_gun/extinguisher,
 		)
 
 	flags_gun_features = GUN_CAN_POINTBLANK|GUN_ANTIQUE
@@ -277,6 +288,7 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
 		/obj/item/attachable/bayonet/custom/black,
@@ -300,6 +312,7 @@
 		/obj/item/attachable/flashlight/grip,
 		/obj/item/attachable/burstfire_assembly,
 		/obj/item/attachable/attached_gun/grenade/m203,
+		/obj/item/attachable/attached_gun/extinguisher,
 		/obj/item/attachable/stock/smg/collapsible/mp5a5,
 		)
 
@@ -350,6 +363,7 @@
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
 		/obj/item/attachable/bayonet/custom/blue,
@@ -371,6 +385,7 @@
 		/obj/item/attachable/gyro,
 		/obj/item/attachable/bipod,
 		/obj/item/attachable/burstfire_assembly,
+		/obj/item/attachable/attached_gun/extinguisher,
 		)
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK
@@ -403,10 +418,12 @@
 	icon_state = "ppsh17b"
 	item_state = "ppsh17b"
 
+	pixel_x = -3
+	hud_offset = -3
+
 	fire_sound = 'sound/weapons/smg_heavy.ogg'
 	current_mag = /obj/item/ammo_magazine/smg/ppsh
 	flags_gun_features = GUN_CAN_POINTBLANK|GUN_ANTIQUE
-	starting_attachment_types = list(/obj/item/attachable/stock/ppsh)
 
 /obj/item/weapon/gun/smg/ppsh/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 33, "muzzle_y" = 17,"rail_x" = 15, "rail_y" = 19, "under_x" = 26, "under_y" = 15, "stock_x" = 18, "stock_y" = 15)
@@ -724,8 +741,10 @@
 /obj/item/weapon/gun/smg/fp9000/pmc/set_gun_config_values()
 	..()
 	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_4
-	scatter = SCATTER_AMOUNT_TIER_9
+	scatter = SCATTER_AMOUNT_TIER_7
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_7
+	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_2
+	fa_max_scatter = SCATTER_AMOUNT_TIER_10
 
 //-------------------------------------------------------
 
@@ -740,9 +759,10 @@
 	item_icons = list(
 		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/guns.dmi',
 		WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/misc_weapons.dmi',
-		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/pistols_lefthand.dmi',
-		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/pistols_righthand.dmi'
+		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/misc_weapons_lefthand.dmi',
+		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/weapons/guns/misc_weapons_righthand.dmi'
 	)
+	flags_equip_slot = SLOT_WAIST
 
 	reload_sound = 'sound/weapons/handling/smg_reload.ogg'
 	unload_sound = 'sound/weapons/handling/smg_unload.ogg'

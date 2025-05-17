@@ -76,6 +76,8 @@
 	move_turn_momentum_loss_factor = 0.8
 
 	vehicle_ram_multiplier = VEHICLE_TRAMPLE_DAMAGE_APC_REDUCTION
+	//Interior phone. For renaming
+	var/obj/structure/transmitter/interior_phone
 
 /obj/vehicle/multitile/apc_max/Initialize()
 	. = ..()
@@ -153,13 +155,17 @@
 	if(!camera)
 		camera = new /obj/structure/machinery/camera/vehicle(src)
 	if(change_tag)
-		camera.c_tag = "#[rand(1,100)] M777 \"[nickname]\" APC"
+		camera.c_tag = "#[rand(1,100)] M888 \"[nickname]\" APC"
 		if(camera_int)
 			camera_int.c_tag = camera.c_tag + " interior"
+		if(interior_phone)
+			interior_phone.phone_id = "M888 \"[nickname]\" APC"
 	else
-		camera.c_tag = "#[rand(1,100)] M777 APC"
+		camera.c_tag = "#[rand(1,100)] M888 APC"
 		if(camera_int)
 			camera_int.c_tag = camera.c_tag + " interior"
+		if(interior_phone)
+			interior_phone.phone_id = "M888 APC"
 
 /*
 ** PRESETS SPAWNERS

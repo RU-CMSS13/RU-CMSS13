@@ -7,11 +7,36 @@
 /obj/item/ammo_casing/bullet,
 /turf/open/floor/prison,
 /area/prison/canteen)
+"ab" = (
+/obj/item/stack/sheet/metal,
+/obj/structure/barricade/handrail/wire{
+	dir = 8;
+	pixel_x = 1
+	},
+/turf/open/floor/prison,
+/area/prison/canteen)
+"ac" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8;
+	pixel_x = 2
+	},
+/obj/effect/decal/siding{
+	icon_state = "siding8"
+	},
+/turf/open/floor/prison,
+/area/prison/canteen)
+"ad" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8;
+	pixel_x = 1
+	},
+/turf/open/floor/prison,
+/area/prison/canteen)
 "ag" = (
 /obj/structure/sink{
 	pixel_y = 15
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 10
 	},
 /obj/effect/decal/warning_stripes{
@@ -22,17 +47,6 @@
 "at" = (
 /obj/item/prop/helmetgarb/spent_buckshot,
 /turf/open/floor/prison/damaged1,
-/area/prison/canteen)
-"aB" = (
-/obj/item/trash/plate{
-	pixel_x = 1;
-	pixel_y = 3
-	},
-/obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
-	},
-/turf/open/floor/prison,
 /area/prison/canteen)
 "aO" = (
 /obj/structure/bed/chair,
@@ -48,12 +62,12 @@
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "bm" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "bp" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 9
 	},
 /turf/open/floor/prison,
@@ -85,7 +99,10 @@
 /area/prison/canteen)
 "cK" = (
 /obj/item/reagent_container/food/snacks/candiedapple,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "cX" = (
@@ -129,7 +146,7 @@
 /obj/structure/sink{
 	pixel_y = 15
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /turf/open/floor/prison/sterile_white/southwest,
@@ -151,18 +168,18 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "ga" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
+/obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 4
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "gb" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "gm" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 5
 	},
 /obj/structure/disposalpipe/segment,
@@ -178,7 +195,10 @@
 	pixel_y = 3
 	},
 /obj/item/ammo_casing/bullet,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "gI" = (
@@ -248,10 +268,6 @@
 	},
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
-"ig" = (
-/obj/structure/window_frame/prison/reinforced,
-/turf/open/floor/prison/greenfull,
-/area/prison/canteen)
 "ij" = (
 /obj/structure/bed/chair,
 /obj/effect/decal/cleanable/blood,
@@ -269,7 +285,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "iG" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -317,12 +333,8 @@
 /obj/effect/landmark/corpsespawner/prisoner,
 /turf/open/floor/prison,
 /area/prison/canteen)
-"jZ" = (
-/obj/structure/window/framed/prison/reinforced,
-/turf/open/floor/prison/greenfull,
-/area/prison/canteen)
 "kr" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/item/stack/sheet/metal,
@@ -333,7 +345,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "kN" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
+/obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 4
 	},
 /obj/item/stack/sheet/metal,
@@ -349,7 +361,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "le" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/landmark/corpsespawner/prisoner,
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -376,11 +388,14 @@
 	pixel_x = 1;
 	pixel_y = 3
 	},
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "nR" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -391,7 +406,7 @@
 /turf/open/floor/prison/kitchen,
 /area/prison/kitchen)
 "om" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 9
 	},
 /obj/structure/disposalpipe/segment{
@@ -416,7 +431,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "pD" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/machinery/flasher{
@@ -434,7 +449,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "qq" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -478,7 +493,7 @@
 "rr" = (
 /obj/structure/bed/chair,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/corpsespawner/prison_security,
+/obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "rw" = (
@@ -494,7 +509,10 @@
 /area/prison/canteen)
 "rR" = (
 /obj/item/reagent_container/food/snacks/appletart,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "se" = (
@@ -504,7 +522,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "si" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/item/prop/helmetgarb/spent_buckshot,
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
@@ -544,7 +562,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "uc" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -553,8 +571,8 @@
 "uf" = (
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -568,7 +586,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "vz" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -578,7 +596,7 @@
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "vB" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/junction{
 	icon_state = "pipe-j2"
 	},
@@ -599,7 +617,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "wi" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
 /obj/structure/machinery/door/airlock/prison_hatch/autoname{
 	dir = 1
@@ -610,7 +628,7 @@
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "ww" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "wz" = (
@@ -624,7 +642,7 @@
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "wT" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 10
 	},
 /turf/open/floor/prison,
@@ -649,7 +667,10 @@
 /area/prison/canteen)
 "xF" = (
 /obj/item/reagent_container/food/condiment/saltshaker,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison,
 /area/prison/canteen)
 "xG" = (
@@ -688,14 +709,17 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Ah" = (
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "As" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -711,12 +735,12 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "AD" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "AM" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -739,7 +763,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Bj" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/bed/chair{
 	dir = 1
 	},
@@ -766,7 +790,7 @@
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/kitchen)
 "BK" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/junction{
 	icon_state = "pipe-y"
 	},
@@ -787,7 +811,7 @@
 /turf/open/floor/plating/prison,
 /area/prison/canteen)
 "CF" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -820,7 +844,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "DF" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -831,8 +855,8 @@
 	pixel_y = 3
 	},
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -845,8 +869,8 @@
 /obj/item/reagent_container/food/condiment/saltshaker,
 /obj/item/ammo_casing/bullet,
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -898,7 +922,7 @@
 /turf/open/floor/prison/damaged2,
 /area/prison/canteen)
 "FR" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -923,7 +947,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 9
 	},
 /obj/effect/decal/warning_stripes{
@@ -937,10 +961,13 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Hy" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/kitchen)
+"HE" = (
+/turf/closed/wall/r_wall/prison_unmeltable,
+/area/space)
 "In" = (
 /obj/structure/bed/chair,
 /turf/open/floor/prison/damaged2,
@@ -985,7 +1012,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "JH" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/item/stack/sheet/metal,
 /obj/item/stack/sheet/metal,
 /obj/effect/decal/cleanable/blood,
@@ -994,11 +1021,16 @@
 "JM" = (
 /obj/item/reagent_container/food/condiment/saltshaker,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/surface/table/reinforced/prison,
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "Ko" = (
-/obj/structure/pipes/standard/manifold/fourway/hidden/supply,
+/obj/structure/pipes/standard/manifold/fourway/hidden/cyan{
+	color = "#a6aeab"
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -1014,7 +1046,7 @@
 /obj/structure/sink{
 	pixel_y = 15
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 6
 	},
 /obj/structure/machinery/light/small{
@@ -1022,6 +1054,9 @@
 	},
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/kitchen)
+"KF" = (
+/turf/open_space,
+/area/space)
 "KI" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -1060,7 +1095,7 @@
 /area/prison/kitchen)
 "LS" = (
 /obj/structure/bed/chair,
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/item/stack/sheet/metal,
@@ -1075,14 +1110,16 @@
 /area/prison/canteen)
 "LY" = (
 /obj/effect/decal/cleanable/blood,
-/obj/structure/pipes/standard/manifold/fourway/hidden/supply,
+/obj/structure/pipes/standard/manifold/fourway/hidden/cyan{
+	color = "#a6aeab"
+	},
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
 	},
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/kitchen)
 "Mo" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/item/prop/alien/hugger,
@@ -1092,7 +1129,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/junction{
@@ -1109,12 +1146,14 @@
 /turf/closed/wall/r_wall/prison,
 /area/prison/canteen)
 "Ne" = (
-/obj/structure/pipes/standard/manifold/fourway/hidden/supply,
+/obj/structure/pipes/standard/manifold/fourway/hidden/cyan{
+	color = "#a6aeab"
+	},
 /obj/structure/disposalpipe/junction{
 	dir = 4;
 	icon_state = "pipe-j2"
 	},
-/obj/effect/landmark/corpsespawner/prison_security,
+/obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Ns" = (
@@ -1134,18 +1173,11 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "NB" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /turf/open/floor/prison/kitchen,
 /area/prison/kitchen)
-"NC" = (
-/obj/structure/window_frame/prison/reinforced,
-/obj/item/shard{
-	icon_state = "medium"
-	},
-/turf/open/floor/prison/greenfull,
-/area/prison/canteen)
 "NM" = (
 /obj/item/stack/sheet/metal,
 /turf/open/floor/prison/damaged1,
@@ -1186,18 +1218,20 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Pm" = (
-/obj/structure/pipes/standard/manifold/fourway/hidden/supply,
+/obj/structure/pipes/standard/manifold/fourway/hidden/cyan{
+	color = "#a6aeab"
+	},
 /obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "PS" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
+/obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/effect/landmark/corpsespawner/prison_security,
+/obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
 "Qr" = (
@@ -1212,7 +1246,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "QH" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
+/obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 8
 	},
 /turf/open/floor/prison,
@@ -1222,7 +1256,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "QQ" = (
-/obj/effect/landmark/corpsespawner/prison_security,
+/obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "QT" = (
@@ -1231,7 +1265,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "QV" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /turf/open/floor/prison,
@@ -1357,7 +1391,7 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "WR" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1388,7 +1422,7 @@
 	dir = 8;
 	icon_state = "p_stair_full"
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -1403,8 +1437,8 @@
 /area/prison/canteen)
 "Xg" = (
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
 /area/prison/canteen)
@@ -1430,7 +1464,7 @@
 /turf/open/floor/prison/sterile_white/southwest,
 /area/prison/kitchen)
 "XQ" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -1451,11 +1485,11 @@
 /turf/open/floor/prison,
 /area/prison/canteen)
 "Yc" = (
-/obj/effect/landmark/corpsespawner/prison_security,
+/obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison/bright_clean_marked/southwest,
 /area/prison/canteen)
 "Yj" = (
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 9
 	},
 /obj/item/ammo_casing/bullet,
@@ -1471,15 +1505,15 @@
 /turf/open/floor/prison/bright_clean_marked/southwest,
 /area/prison/canteen)
 "YD" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/structure/pipes/standard/simple/hidden/dark,
 /obj/item/stack/sheet/metal,
 /turf/open/floor/prison,
 /area/prison/canteen)
 "YT" = (
 /obj/item/reagent_container/food/snacks/boiledspagetti,
 /obj/structure/surface/table/reinforced/prison{
-	dir = 4;
-	flipped = 1
+	dir = 1;
+	color = "#8e98a0"
 	},
 /turf/open/floor/prison/damaged1,
 /area/prison/canteen)
@@ -1496,7 +1530,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/structure/pipes/standard/simple/hidden/supply{
+/obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -1511,32 +1545,32 @@
 /area/prison/canteen)
 
 (1,1,1) = {"
-MI
 BV
-MI
 BV
-MI
 BV
-MI
 BV
-MI
 BV
-MI
+BV
+BV
+BV
+BV
+BV
+BV
 zc
 zc
 AM
 zc
-MI
+BV
 BV
 MI
 ZT
 ZT
 MI
-MI
 BV
-MI
 BV
-MI
+BV
+BV
+BV
 "}
 (2,1,1) = {"
 BV
@@ -1556,10 +1590,10 @@ AM
 SG
 hS
 ez
-zc
-zc
-zc
-Bh
+ad
+ac
+ac
+ab
 sv
 Bh
 zc
@@ -1634,7 +1668,7 @@ gH
 Jy
 gX
 LW
-aB
+ni
 ha
 vz
 As
@@ -1707,7 +1741,7 @@ ha
 MN
 "}
 (8,1,1) = {"
-ig
+BV
 Sx
 QV
 xF
@@ -1763,7 +1797,7 @@ zc
 MN
 "}
 (10,1,1) = {"
-ig
+BV
 zc
 QV
 zc
@@ -1819,7 +1853,7 @@ jh
 BV
 "}
 (12,1,1) = {"
-NC
+BV
 gP
 bp
 zc
@@ -1875,7 +1909,7 @@ qC
 BV
 "}
 (14,1,1) = {"
-jZ
+BV
 zc
 zc
 fZ
@@ -1931,7 +1965,7 @@ zc
 MN
 "}
 (16,1,1) = {"
-jZ
+BV
 zc
 zc
 Jn
@@ -1987,7 +2021,7 @@ zc
 Cl
 "}
 (18,1,1) = {"
-jZ
+BV
 un
 Fo
 Bh
@@ -2043,7 +2077,7 @@ zc
 zc
 "}
 (20,1,1) = {"
-jZ
+BV
 qT
 zc
 wv
@@ -2071,7 +2105,7 @@ zc
 Da
 "}
 (21,1,1) = {"
-MN
+BV
 cB
 zc
 wv
@@ -2125,4 +2159,621 @@ BV
 BV
 BV
 MN
+"}
+
+(1,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+HE
+HE
+HE
+HE
+KF
+KF
+KF
+KF
+KF
+"}
+(2,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(3,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(4,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(5,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(6,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(7,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(8,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(9,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(10,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(11,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(12,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(13,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(14,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(15,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(16,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(17,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(18,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(19,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(20,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(21,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+"}
+(22,1,2) = {"
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
 "}

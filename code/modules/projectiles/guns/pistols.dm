@@ -537,6 +537,7 @@
 		/obj/item/attachable/bayonet,
 		/obj/item/attachable/bayonet/upp_replica,
 		/obj/item/attachable/bayonet/upp,
+		/obj/item/attachable/bayonet/wy,
 		/obj/item/attachable/bayonet/antique,
 		/obj/item/attachable/bayonet/custom,
 		/obj/item/attachable/bayonet/custom/red,
@@ -703,7 +704,7 @@
 	unload_sound = 'sound/weapons/gun_88m4_unload.ogg'
 	current_mag = /obj/item/ammo_magazine/pistol/es4
 	force = 8
-	muzzle_flash = "muzzle_flash_blue"
+	muzzle_flash = "muzzle_energy"
 	muzzle_flash_color = COLOR_MUZZLE_BLUE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER
 	attachable_allowed = list(
@@ -725,7 +726,7 @@
 	scatter = SCATTER_AMOUNT_TIER_7
 	scatter_unwielded = SCATTER_AMOUNT_TIER_7
 	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_4
-	durability_loss = GUN_DURABILITY_LOSS_GUARANTEED // see gun description for lore accurate representation
+	durability_loss = GUN_DURABILITY_LOSS_COINFLIP // see gun description for lore accurate representation
 
 //-------------------------------------------------------
 //VP78 - the only pistol viable as a primary.
@@ -782,6 +783,9 @@
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 	recoil = RECOIL_AMOUNT_TIER_5
 	recoil_unwielded = RECOIL_AMOUNT_TIER_4
+
+/obj/item/weapon/gun/pistol/vp78/whiteout
+	starting_attachment_types = list(/obj/item/attachable/heavy_barrel, /obj/item/attachable/reflex)
 
 
 //-------------------------------------------------------
