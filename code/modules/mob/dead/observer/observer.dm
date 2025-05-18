@@ -28,7 +28,7 @@
 	blinded = FALSE
 	anchored = TRUE //  don't get pushed around
 	invisibility = INVISIBILITY_OBSERVER
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	lighting_alpha = LIGHTING_PLANE_ALPHA_SOMEWHAT_INVISIBLE
 	plane = GHOST_PLANE
 	layer = ABOVE_FLY_LAYER
 	stat = DEAD
@@ -156,6 +156,8 @@
 		if(GHOST_VISION_LEVEL_NO_NVG)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 		if(GHOST_VISION_LEVEL_MID_NVG)
+			lighting_alpha = LIGHTING_PLANE_ALPHA_SOMEWHAT_INVISIBLE
+		if(GHOST_VISION_LEVEL_HIGH_NVG)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 		if(GHOST_VISION_LEVEL_FULL_NVG)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
@@ -335,7 +337,8 @@
 	if(isobserver(usr) && usr.client && isliving(A))
 		var/mob/living/M = A
 		usr.client.cmd_admin_ghostchange(M, src)
-	else return ..()
+	else
+		return ..()
 
 
 /mob/dead/observer/Topic(href, href_list)
@@ -388,28 +391,31 @@
 					the_hud = GLOB.huds[MOB_HUD_MEDICAL_OBSERVER]
 					the_hud.add_hud_to(src, src)
 				if("Security HUD")
-					the_hud= GLOB.huds[MOB_HUD_SECURITY_ADVANCED]
+					the_hud = GLOB.huds[MOB_HUD_SECURITY_ADVANCED]
 					the_hud.add_hud_to(src, src)
 				if("Squad HUD")
-					the_hud= GLOB.huds[MOB_HUD_FACTION_OBSERVER]
+					the_hud = GLOB.huds[MOB_HUD_FACTION_OBSERVER]
 					the_hud.add_hud_to(src, src)
 				if("Xeno Status HUD")
-					the_hud= GLOB.huds[MOB_HUD_XENO_STATUS]
+					the_hud = GLOB.huds[MOB_HUD_XENO_STATUS]
 					the_hud.add_hud_to(src, src)
 				if("Faction UPP HUD")
-					the_hud= GLOB.huds[MOB_HUD_FACTION_UPP]
+					the_hud = GLOB.huds[MOB_HUD_FACTION_UPP]
 					the_hud.add_hud_to(src, src)
 				if("Faction Wey-Yu HUD")
-					the_hud= GLOB.huds[MOB_HUD_FACTION_WY]
+					the_hud = GLOB.huds[MOB_HUD_FACTION_WY]
 					the_hud.add_hud_to(src, src)
 				if("Faction TWE HUD")
-					the_hud= GLOB.huds[MOB_HUD_FACTION_TWE]
+					the_hud = GLOB.huds[MOB_HUD_FACTION_TWE]
 					the_hud.add_hud_to(src, src)
 				if("Faction CLF HUD")
-					the_hud= GLOB.huds[MOB_HUD_FACTION_CLF]
+					the_hud = GLOB.huds[MOB_HUD_FACTION_CLF]
+					the_hud.add_hud_to(src, src)
+				if("Faction WO HUD")
+					the_hud= GLOB.huds[MOB_HUD_FACTION_WO]
 					the_hud.add_hud_to(src, src)
 				if(HUD_MENTOR_SIGHT)
-					the_hud= GLOB.huds[MOB_HUD_NEW_PLAYER]
+					the_hud = GLOB.huds[MOB_HUD_NEW_PLAYER]
 					the_hud.add_hud_to(src, src)
 
 	see_invisible = INVISIBILITY_OBSERVER
@@ -429,8 +435,10 @@ Works together with spawning an observer, noted above.
 
 /mob/dead/observer/Life(delta_time)
 	..()
-	if(!loc) return
-	if(!client) return 0
+	if(!loc)
+		return
+	if(!client)
+		return 0
 
 	return TRUE
 
@@ -469,20 +477,13 @@ Works together with spawning an observer, noted above.
 
 	if(!can_reenter_corpse)
 		away_timer = 300 //They'll never come back, so we can max out the timer right away.
-/*
 		if(GLOB.round_statistics)
 			GLOB.round_statistics.update_panel_data()
-*/
 		track_death_calculations() //This needs to be done before mind is nullified
 		if(ghost.mind)
 			ghost.mind.original = ghost
-/*
 	else if(ghost.mind && ghost.mind.player_entity) //Use else here because track_death_calculations() already calls this.
 		ghost.mind.player_entity.update_panel_data(GLOB.round_statistics)
-*/
-//RUCM START
-	else if(ghost.client)
-//RUCM END
 		ghost.mind.original = src
 
 	mind = null
@@ -531,10 +532,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/living/proc/do_ghost()
 	if(stat == DEAD)
-/*
 		if(mind && mind.player_entity)
 			mind.player_entity.update_panel_data(GLOB.round_statistics)
-*/
 		ghostize(TRUE)
 	else
 		var/list/options = list("Ghost", "Stay in body")
@@ -550,7 +549,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(response == "Aghost")
 			client.admin_ghost()
 			return
-		if(response != "Ghost") return //didn't want to ghost after-all
+		if(response != "Ghost")
+			return //didn't want to ghost after-all
 		AdjustSleeping(2) // Sleep so you will be properly recognized as ghosted
 		var/turf/location = get_turf(src)
 		if(location) //to avoid runtime when a mob ends up in nullspace
@@ -661,6 +661,25 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	forceMove(tree.entrance)
 
+/mob/dead/observer/verb/teleport_z_up()
+	set category = "Ghost.Movement"
+	set name = "Move Up"
+	set desc = "Move up a z level"
+
+	var/turf/above = SSmapping.get_turf_above(get_turf(src))
+
+	if(above)
+		usr.forceMove(above)
+
+/mob/dead/observer/verb/teleport_z_down()
+	set category = "Ghost.Movement"
+	set name = "Move Down"
+	set desc = "Move down a z level"
+
+	var/turf/below = SSmapping.get_turf_below(get_turf(src))
+
+	if(below)
+		usr.forceMove(below)
 
 /mob/dead/observer/verb/dead_teleport_area()
 	set category = "Ghost"
@@ -672,7 +691,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	var/area/thearea = tgui_input_list(usr, "Area to jump to", "BOOYEA", return_sorted_areas())
-	if(!thearea) return
+	if(!thearea)
+		return
 
 	var/list/L = list()
 	for(var/turf/T in get_area_turfs(thearea.type))
@@ -815,7 +835,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Analyze Air"
 	set category = "Ghost"
 
-	if(!istype(usr, /mob/dead/observer)) return
+	if(!istype(usr, /mob/dead/observer))
+		return
 
 	// Shamelessly copied from the Gas Analyzers
 	if (!( istype(loc, /turf) ))
@@ -835,7 +856,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	to_chat(src, "<span style='color: blue;'>Gas type: [env_gas]</span>")
 	to_chat(src, "<span style='color: blue;'>Temperature: [round(env_temperature-T0C,0.1)]&deg;C</span>")
-
 
 /mob/dead/observer/verb/toggle_zoom()
 	set name = "Toggle Zoom"
@@ -858,9 +878,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/level_message
 	switch(lighting_alpha)
 		if(LIGHTING_PLANE_ALPHA_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+			lighting_alpha = LIGHTING_PLANE_ALPHA_SOMEWHAT_INVISIBLE
 			level_message = "half night vision"
 			src?.client?.prefs?.ghost_vision_pref = GHOST_VISION_LEVEL_MID_NVG
+		if(LIGHTING_PLANE_ALPHA_SOMEWHAT_INVISIBLE)
+			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+			level_message = "three quarters night vision"
+			src?.client?.prefs?.ghost_vision_pref = GHOST_VISION_LEVEL_HIGH_NVG
 		if(LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
 			level_message = "full night vision"
@@ -932,6 +956,110 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	GLOB.xeno_tacmap_status.tgui_interact(src)
+
+/mob/dead/observer/verb/view_faxes()
+	set name = "View Sent Faxes"
+	set desc = "View faxes from this round"
+	set category = "Ghost.View"
+
+	var/list/options = list(
+		"Weyland-Yutani", "High Command", "Provost", "Press",
+		"Colonial Marshal Bureau", "Union of Progressive Peoples",
+		"Three World Empire", "Colonial Liberation Front",
+		"Other", "Cancel")
+	var/answer = tgui_input_list(src, "Which kind of faxes would you like to see?", "Faxes", options)
+	switch(answer)
+		if("Weyland-Yutani")
+			var/body = "<body>"
+
+			for(var/text in GLOB.WYFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to Weyland-Yutani", "wyfaxviewer", width = 300, height = 600)
+
+		if("High Command")
+			var/body = "<body>"
+
+			for(var/text in GLOB.USCMFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to High Command", "uscmfaxviewer", width = 300, height = 600)
+
+		if("Provost")
+			var/body = "<body>"
+
+			for(var/text in GLOB.ProvostFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to the Provost Office", "provostfaxviewer", width = 300, height = 600)
+
+		if("Press")
+			var/body = "<body>"
+
+			for(var/text in GLOB.PressFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to Press organizations", "pressfaxviewer", width = 300, height = 600)
+
+		if("Colonial Marshal Bureau")
+			var/body = "<body>"
+
+			for(var/text in GLOB.CMBFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to the Colonial Marshal Bureau", "cmbfaxviewer", width = 300, height = 600)
+
+		if("Union of Progressive Peoples")
+			var/body = "<body>"
+
+			for(var/text in GLOB.UPPFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to the Union of Progressive Peoples", "uppfaxviewer", width = 300, height = 600)
+
+		if("Three World Empire")
+			var/body = "<body>"
+
+			for(var/text in GLOB.TWEFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to the Three World Empire", "twefaxviewer", width = 300, height = 600)
+
+		if("Colonial Liberation Front")
+			var/body = "<body>"
+
+			for(var/text in GLOB.CLFFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Faxes to the Colonial Liberation Front", "clffaxviewer", width = 300, height = 600)
+
+		if("Other")
+			var/body = "<body>"
+
+			for(var/text in GLOB.GeneralFaxes)
+				body += text
+				body += "<br><br>"
+
+			body += "<br><br></body>"
+			show_browser(src, body, "Inter-machine Faxes", "otherfaxviewer", width = 300, height = 600)
+		if("Cancel")
+			return
 
 /mob/dead/verb/join_as_alien()
 	set category = "Ghost.Join"
@@ -1098,8 +1226,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/mob/living/carbon/xenomorph/hellhound/Hellhound as anything in GLOB.hellhound_list)
 		if(Hellhound.client)
 			continue
+		if(Hellhound.aghosted)
+			continue
 		hellhound_mob_list[Hellhound.name] = Hellhound
-
 	var/choice = tgui_input_list(usr, "Pick a Hellhound:", "Join as Hellhound", hellhound_mob_list)
 	if(!choice)
 		return
@@ -1191,7 +1320,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/target = null
 
 	for(var/mob/living/M in mobs)
-		if(!istype(M,/mob/living/carbon/human) || M.stat || isyautja(M)) mobs -= M
+		if(!istype(M,/mob/living/carbon/human) || M.stat || isyautja(M))
+			mobs -= M
 
 
 	target = tgui_input_list(usr, "Please, select a contestant!", "Cake Time", mobs)
@@ -1217,26 +1347,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ref = WEAKREF(H)
 		GLOB.data_core.manifest_modify(name, ref, null, null, "*Deceased*")
 
-/*
+
 /mob/dead/observer/verb/view_kill_feed()
 	set category = "Ghost.View"
 	set name = "View Kill Feed"
 	set desc = "View global kill statistics tied to the game."
+
 	if(GLOB.round_statistics)
 		GLOB.round_statistics.show_kill_feed(src)
-*/
-//RUCM START
-/mob/dead/observer/verb/view_stats()
-	set category = "Ghost.View"
-	set name = "View Statistics"
-	set desc = "View global and player statistics tied to the game."
-
-	if(client?.player_data?.player_entity)
-		client.player_data.player_entity.try_recalculate()
-		client.player_data.player_entity.tgui_interact(src)
-	else
-		to_chat(src, SPAN_INFO("Statistic not loaded, try again later!"))
-//RUCM END
 
 /mob/dead/observer/get_status_tab_items()
 	. = ..()

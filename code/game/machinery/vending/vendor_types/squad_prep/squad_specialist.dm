@@ -4,12 +4,13 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("WEAPONS SPECIALIST SETS (CHOOSE 1)", 0, null, null, null),
 		list("Demolitionist Set", 0, /obj/item/storage/box/spec/demolitionist, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("Heavy Grenadier Set", 0, /obj/item/storage/box/spec/heavy_grenadier, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
+		list("SHARP Operator Set", 0, /obj/item/storage/box/spec/sharp_operator, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("Pyro Set", 0, /obj/item/storage/box/spec/pyro, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("Scout Set", 0, /obj/item/storage/box/spec/scout, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("Sniper Set", 0, /obj/item/storage/box/spec/sniper, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
 		list("Anti-Materiel Sniper Set", 0, /obj/item/storage/box/spec/sniper/anti_materiel, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
 //RUCM START
-		list("Stormtrooper Set", 0, /obj/item/storage/box/spec/stormtrooper, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
+		list("Breacher Set", 0, /obj/item/storage/box/spec/breacher, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
 //RUCM END
 
 		list("EXTRA SCOUT AMMUNITION", 0, null, null, null),
@@ -28,6 +29,11 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("84mm High-Explosive Rocket", 40, /obj/item/ammo_magazine/rocket, null, VENDOR_ITEM_REGULAR),
 		list("84mm White-Phosphorus Rocket", 40, /obj/item/ammo_magazine/rocket/wp, null, VENDOR_ITEM_REGULAR),
 
+		list("EXTRA SHARP AMMUNITION", 0, null, null, null),
+		list("SHARP 9X-E Sticky Explosive Dart magazine (darts)", 40, /obj/item/ammo_magazine/rifle/sharp/explosive, null, VENDOR_ITEM_REGULAR),
+		list("SHARP 9X-T Sticky incendiary Dart magazine (darts)", 40, /obj/item/ammo_magazine/rifle/sharp/incendiary, null, VENDOR_ITEM_REGULAR),
+		list("SHARP 9X-F Flechette Dart Magazine (darts)", 40, /obj/item/ammo_magazine/rifle/sharp/flechette, null, VENDOR_ITEM_REGULAR),
+
 		list("EXTRA GRENADES", 0, null, null, null),
 		list("M40 HEDP Grenades x6", 40, /obj/effect/essentials_set/hedp_6_pack, null, VENDOR_ITEM_REGULAR),
 		list("M40 HIDP Incendiary Grenades x6", 40, /obj/effect/essentials_set/hidp_6_pack, null, VENDOR_ITEM_REGULAR),
@@ -43,11 +49,18 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("Large Incinerator Tank (X) (Blue Flame)", 40, /obj/item/ammo_magazine/flamer_tank/large/X, null, VENDOR_ITEM_REGULAR),
 
 //RUCM START
-		list("EXTRA STORMTROOPER SPARKSHOTS", 0, null, null, null),
+		list("EXTRA BREACHER SPARKSHOTS", 0, null, null, null),
 		list("Extra sparkshots magazine", 40, /obj/item/ammo_magazine/rifle/xm52, null, VENDOR_ITEM_REGULAR),
 		list("Extra sparkshots shells", 40, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots, null, VENDOR_ITEM_REGULAR),
 //RUCM END
 	))
+
+GLOBAL_LIST_INIT(cm_vending_gear_spec_heavy, list(
+	list("WEAPONS SPECIALIST SETS (CHOOSE 1)", 0, null, null, null),
+	list("Heavy Armor Set", 0, /obj/item/storage/box/spec/B18, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
+))
+
+
 
 /obj/structure/machinery/cm_vending/gear/spec
 	name = "\improper ColMarTech Squad Weapons Specialist Gear Rack"
@@ -60,6 +73,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 	req_access = list(ACCESS_MARINE_SPECPREP)
 
 /obj/structure/machinery/cm_vending/gear/spec/get_listed_products(mob/user)
+	if(SSticker.mode && MODE_HAS_MODIFIER(/datum/gamemode_modifier/heavy_specialists))
+		return GLOB.cm_vending_gear_spec_heavy
 	return GLOB.cm_vending_gear_spec
 
 
@@ -68,8 +83,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 GLOBAL_LIST_INIT(cm_vending_clothing_specialist, list(
 		list("STANDARD EQUIPMENT (TAKE ALL)", 0, null, null, null),
 		list("Standard Marine Apparel", 0, list(/obj/item/clothing/under/marine, /obj/item/clothing/shoes/marine/knife, /obj/item/clothing/gloves/marine, /obj/item/device/radio/headset/almayer/marine), MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_MANDATORY),
-		list("MRE", 0, /obj/item/storage/box/MRE, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
-		list("Map", 0, /obj/item/map/current_map, MARINE_CAN_BUY_KIT, VENDOR_ITEM_MANDATORY),
+		list("MRE", 0, /obj/item/storage/box/mre, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
+		list("Combat Lubricant", 0, /obj/item/stack/repairable/gunlube, MARINE_CAN_BUY_REPAIRABLE, VENDOR_ITEM_MANDATORY),
+		list("Map", 0, /obj/item/map/current_map, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
 
 		list("BACKPACK (CHOOSE 1)", 0, null, null, null),
 		list("Backpack", 0, /obj/item/storage/backpack/marine, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_REGULAR),
@@ -102,6 +118,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_specialist, list(
 		list("Black Webbing Vest", 0, /obj/item/clothing/accessory/storage/black_vest, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Shoulder Holster", 0, /obj/item/clothing/accessory/storage/holster, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Webbing", 0, /obj/item/clothing/accessory/storage/webbing, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Black Webbing", 0, /obj/item/clothing/accessory/storage/webbing/black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Drop Pouch", 0, /obj/item/clothing/accessory/storage/droppouch, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 
 		list("MASK (CHOOSE 1)", 0, null, null, null),

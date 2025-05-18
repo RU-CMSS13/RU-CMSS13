@@ -151,7 +151,6 @@
 	else
 		new /obj/item/device/binoculars/range/designator/scout(src)
 
-
 /obj/item/storage/box/spec/pyro
 	name = "\improper Pyrotechnician equipment case"
 	desc = "A large case containing M240-T incinerator unit, M35 pyrotechnician armor and helmet, Broiler-T flexible refueling system and additional pieces of equipment.\nDrag this sprite onto yourself to open it up! NOTE: You cannot put items back inside this case."
@@ -161,7 +160,7 @@
 	new /obj/item/clothing/suit/storage/marine/M35(src)
 	new /obj/item/clothing/head/helmet/marine/pyro(src)
 	new /obj/item/storage/large_holster/fuelpack(src)
-	new /obj/item/weapon/gun/flamer/M240T(src)
+	new /obj/item/weapon/gun/flamer/m240/spec(src)
 	new /obj/item/ammo_magazine/flamer_tank/large(src)
 	new /obj/item/storage/pouch/flamertank(src)
 	new /obj/item/tool/extinguisher(src)
@@ -170,7 +169,6 @@
 	new /obj/item/ammo_magazine/pistol/vp78(src)
 	new /obj/item/ammo_magazine/pistol/vp78(src)
 	new /obj/item/device/binoculars(src)
-
 
 /obj/item/storage/box/spec/heavy_grenadier
 	name = "\improper Heavy Grenadier equipment case"
@@ -190,6 +188,30 @@
 	new /obj/item/ammo_magazine/pistol/vp78(src)
 	new /obj/item/device/binoculars(src)
 
+/obj/item/storage/box/spec/sharp_operator
+	name = "\improper SHARP Operator equipment case"
+	desc = "A large case containing a P9 SHARP rifle, M3-G4 Grenadier armor and helmet, and various pieces of additional equipment.\nDrag this sprite onto yourself to open it up!"
+	kit_overlay = "grenadier"
+
+/obj/item/storage/box/spec/sharp_operator/fill_preset_inventory()
+	new /obj/item/weapon/gun/rifle/sharp(src)
+	new /obj/item/storage/belt/marine/sharp(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/explosive(src)
+	new /obj/item/ammo_magazine/rifle/sharp/flechette(src)
+	new /obj/item/ammo_magazine/rifle/sharp/flechette(src)
+	new /obj/item/ammo_magazine/rifle/sharp/incendiary(src)
+	new /obj/item/ammo_magazine/rifle/sharp/incendiary(src)
+	new /obj/item/clothing/gloves/marine/M3G(src)
+	new /obj/item/clothing/suit/storage/marine/M3G(src)
+	new /obj/item/clothing/head/helmet/marine/grenadier(src)
+	new /obj/item/weapon/gun/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/ammo_magazine/pistol/vp78(src)
+	new /obj/item/device/binoculars(src)
+
 
 //maybe put in req for later use?
 /obj/item/storage/box/spec/B18
@@ -201,6 +223,31 @@
 	new /obj/item/clothing/gloves/marine/specialist(src)
 	new /obj/item/clothing/head/helmet/marine/specialist(src)
 	new /obj/item/clothing/suit/storage/marine/specialist(src)
+
+/obj/item/storage/box/spec/mortar
+	name = "\improper Mortar Kit"
+	desc = "Contains the equipment needed for the mortar."
+	kit_overlay = "mortar"
+
+/obj/item/storage/box/spec/mortar/fill_preset_inventory()
+	new /obj/item/mortar_kit(src)
+	new /obj/item/pamphlet/skill/mortar_operator(src)
+	new /obj/item/pamphlet/skill/mortar_operator(src)
+	new /obj/item/storage/belt/gun/mortarbelt(src)
+	new /obj/item/storage/belt/gun/mortarbelt(src)
+	new /obj/item/storage/backpack/marine/mortarpack(src)
+	new /obj/item/mortar_shell/incendiary(src)
+	new /obj/item/mortar_shell/incendiary(src)
+	new /obj/item/mortar_shell/he(src)
+	new /obj/item/mortar_shell/he(src)
+	new /obj/item/mortar_shell/frag(src)
+	new /obj/item/mortar_shell/frag(src)
+	new /obj/item/mortar_shell/flare(src)
+	new /obj/item/mortar_shell/flare(src)
+	new /obj/item/tool/wrench(src)
+	new /obj/item/device/binoculars/range(src)
+	new /obj/item/device/binoculars/range/designator(src)
+
 
 //-----------------SPEC KIT BOX------------------
 //For events/WO, allows the user to choose a specalist kit out of available ones in spec_kit_boxes_left list in gloabl_lists.dm
@@ -384,7 +431,7 @@
 
 /obj/item/storage/box/kit/mini_pyro/fill_preset_inventory()
 	new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(src)
-	new /obj/item/weapon/gun/flamer/underextinguisher(src)
+	new /obj/item/weapon/gun/flamer/m240/underextinguisher(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank(src)
 	new /obj/item/ammo_magazine/flamer_tank/gellied(src)
@@ -532,7 +579,7 @@
 	new /obj/item/weapon/gun/pistol/mod88/flashlight(src)
 	new /obj/item/attachable/bayonet(src)
 	new /obj/item/tool/crowbar/red(src)
-	new /obj/item/reagent_container/food/snacks/packaged_meal(src, pick("boneless pork ribs", "grilled chicken", "pizza square", "spaghetti chunks", "chicken tender"))
+	new /obj/item/mre_food_packet/entree/uscm(src)
 
 /obj/item/storage/box/kit/exp_trooper
 	name = "\improper Experimental Trooper Kit"

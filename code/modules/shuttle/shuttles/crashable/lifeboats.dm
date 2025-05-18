@@ -25,9 +25,6 @@
 				continue
 			survivors++
 			to_chat(survived_human, "<br><br>[SPAN_CENTERBOLD("<big>You have successfully left the [MAIN_SHIP_NAME]. You may now ghost and observe the rest of the round.</big>")]<br>")
-//RUCM START
-			survived_human.count_statistic_stat(STATISTICS_ESCAPE)
-//RUCM END
 
 /// Port Aft Lifeboat (bottom-right, doors on its left side)
 /obj/docking_port/mobile/crashable/lifeboat/port
@@ -40,6 +37,12 @@
 /obj/docking_port/mobile/crashable/lifeboat/starboard
 	name = "starboard-aft lifeboat"
 	id = MOBILE_SHUTTLE_LIFEBOAT_STARBOARD
+	preferred_direction = EAST
+	port_direction = EAST
+
+/obj/docking_port/mobile/crashable/lifeboat/rostock
+	name = "rostock lifeboat"
+	id = MOBILE_SHUTTLE_LIFEBOAT_ROSTOCK
 	preferred_direction = EAST
 	port_direction = EAST
 
@@ -133,6 +136,13 @@
 	id = "almayer-lifeboat2"
 	roundstart_template = /datum/map_template/shuttle/lifeboat_starboard
 
+/// UPP Lifeboat default dock
+/obj/docking_port/stationary/lifeboat_dock/upp
+	name = "Rostock Lifeboat Docking Port"
+	dir = NORTH
+	id = "rostock-lifeboat1"
+	roundstart_template = /datum/map_template/shuttle/lifeboat_rostock
+
 /obj/docking_port/stationary/lifeboat_dock/Initialize(mapload)
 	. = ..()
 	GLOB.lifeboat_almayer_docks += src
@@ -153,3 +163,7 @@
 /datum/map_template/shuttle/lifeboat_starboard
 	name = "Starboard door lifeboat"
 	shuttle_id = MOBILE_SHUTTLE_LIFEBOAT_STARBOARD
+
+/datum/map_template/shuttle/lifeboat_rostock
+	name = "Starboard door lifeboat"
+	shuttle_id = MOBILE_SHUTTLE_LIFEBOAT_ROSTOCK

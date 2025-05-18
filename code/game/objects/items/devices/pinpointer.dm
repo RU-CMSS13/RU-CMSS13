@@ -1,4 +1,4 @@
-/* RUCM MOVE
+
 /obj/item/device/pinpointer
 	name = "pinpointer"
 	icon_state = "pinoff"
@@ -26,7 +26,8 @@
 		to_chat(usr, SPAN_NOTICE(" You deactivate the pinpointer"))
 
 /obj/item/device/pinpointer/proc/workdisk()
-	if(!active) return
+	if(!active)
+		return
 	if(!the_disk)
 		the_disk = locate()
 		if(!the_disk)
@@ -145,4 +146,3 @@
 		if("Disk Recovery")
 			mode = 0
 			return attack_self()
-*/

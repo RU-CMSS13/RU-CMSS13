@@ -90,7 +90,12 @@
 	trait_desc = "Gives the CO information on his smartgun"
 	skill = SKILL_SPEC_WEAPONS
 	skill_cap =  SKILL_SPEC_SMARTGUN
+/*
 	skill_increment = 7
+*/
+//RUCM START
+	skill_increment = SKILL_SPEC_SMARTGUN
+//RUCM END
 
 
 /datum/character_trait/skills/spotter
@@ -104,6 +109,15 @@
 	skill = SKILL_ENDURANCE
 	skill_cap = SKILL_ENDURANCE_TRAINED
 	skill_increment = 1
+
+/datum/character_trait/skills/mortar
+	trait_name = "Mortar Training"
+	trait_desc = "Boosts the engineering skill by 1 and JTAC skill by 2."
+	skill = SKILL_ENGINEER
+	secondary_skill = SKILL_JTAC
+	skill_cap = SKILL_ENGINEER_NOVICE
+	secondary_skill_cap = SKILL_JTAC_TRAINED
+	skill_increment = 2
 
 /datum/character_trait/skills/k9_handler
 	trait_name = "K9 Handler Training"

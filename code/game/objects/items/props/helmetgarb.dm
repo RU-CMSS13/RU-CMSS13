@@ -14,11 +14,6 @@
 	if(garbage)
 		flags_obj |= OBJ_IS_HELMET_GARB
 
-/obj/item/prop/helmetgarb/gunoil
-	name = "gun oil"
-	desc = "It is a bottle of oil, for your gun. Don't fall for the rumors, the M41A is NOT a self-cleaning firearm."
-	icon_state = "gunoil"
-
 /obj/item/prop/helmetgarb/netting
 	name = "combat netting"
 	desc = "Probably combat netting for a helmet. Probably just an extra hairnet that got ordered for the phantom Almayer cooking staff. Probably useless."
@@ -26,6 +21,18 @@
 	item_icons = list(
 		WEAR_AS_GARB = 'icons/mob/humans/onmob/clothing/helmet_garb/helmet_covers.dmi',
 		)
+
+/obj/item/prop/helmetgarb/netting/desert
+	name = "desert combat netting"
+	icon_state = "netting_desert"
+
+/obj/item/prop/helmetgarb/netting/jungle
+	name = "jungle combat netting"
+	icon_state = "netting_jungle"
+
+/obj/item/prop/helmetgarb/netting/urban
+	name = "urban combat netting"
+	icon_state = "netting_urban"
 
 /obj/item/prop/helmetgarb/spent_buckshot
 	name = "spent buckshot"
@@ -76,6 +83,18 @@
 	item_icons = list(
 		WEAR_AS_GARB = 'icons/mob/humans/onmob/clothing/helmet_garb/helmet_covers.dmi',
 	)
+
+/obj/item/prop/helmetgarb/raincover/jungle
+	name = "jungle raincover"
+	icon_state = "raincover_jungle"
+
+/obj/item/prop/helmetgarb/raincover/desert
+	name = "desert raincover"
+	icon_state = "raincover_desert"
+
+/obj/item/prop/helmetgarb/raincover/urban
+	name = "urban raincover"
+	icon_state = "raincover_urban"
 
 /obj/item/prop/helmetgarb/rabbitsfoot
 	name = "Rabbit's Foot"
@@ -147,6 +166,7 @@
 	var/obj/item/clothing/head/attached_item
 	var/mob/living/attached_mob
 	var/lighting_alpha = 100
+	var/matrix_color = NV_COLOR_GREEN
 
 /obj/item/prop/helmetgarb/helmet_nvg/Initialize(mapload, ...)
 	. = ..()
@@ -330,7 +350,9 @@
 
 	RegisterSignal(user, COMSIG_HUMAN_POST_UPDATE_SIGHT, PROC_REF(update_sight))
 
-	user.add_client_color_matrix("nvg", 99, color_matrix_multiply(color_matrix_saturation(0), color_matrix_from_string("#7aff7a")))
+	if(user.client?.prefs?.night_vision_preference)
+		matrix_color = user.client.prefs.nv_color_list[user.client.prefs.night_vision_preference]
+	user.add_client_color_matrix("nvg", 99, color_matrix_multiply(color_matrix_saturation(0), color_matrix_from_string(matrix_color)))
 	user.overlay_fullscreen("nvg", /atom/movable/screen/fullscreen/flash/noise/nvg)
 	user.overlay_fullscreen("nvg_blur", /atom/movable/screen/fullscreen/brute/nvg, 3)
 	playsound(user, 'sound/handling/toggle_nv1.ogg', 25)

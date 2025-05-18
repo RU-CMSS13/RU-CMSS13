@@ -55,9 +55,12 @@
 	return TRUE
 
 /obj/item/device/assembly_holder/proc/attach(obj/item/device/D, obj/item/device/D2, mob/user)
-	if((!D)||(!D2)) return 0
-	if((!isassembly(D))||(!isassembly(D2))) return 0
-	if((D:secured)||(D2:secured)) return 0
+	if((!D)||(!D2))
+		return 0
+	if((!isassembly(D))||(!isassembly(D2)))
+		return 0
+	if((D:secured)||(D2:secured))
+		return 0
 	if(user)
 		user.temp_drop_inv_item(D)
 		if(D2.loc == user)
@@ -192,11 +195,11 @@
 			a_right = null
 		qdel(src)
 
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, tts_heard_list)
+/obj/item/device/assembly_holder/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	if(a_right)
-		a_right.hear_talk(M,msg, tts_heard_list = tts_heard_list)
+		a_right.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 	if(a_left)
-		a_left.hear_talk(M,msg, tts_heard_list = tts_heard_list)
+		a_left.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"

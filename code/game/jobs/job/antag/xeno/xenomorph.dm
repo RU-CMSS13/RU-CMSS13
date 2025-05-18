@@ -26,24 +26,15 @@
 	transform_to_xeno(H, XENO_HIVE_NORMAL)
 
 /datum/job/antag/xenos/proc/transform_to_xeno(mob/living/carbon/human/human_to_transform, hive_index)
-/*
 	var/datum/mind/new_xeno = human_to_transform.mind
 	new_xeno.setup_xeno_stats()
-*/
-//RUCM START
 	var/datum/hive_status/hive = GLOB.hive_datum[hive_index]
-//RUCM END
 
 	human_to_transform.first_xeno = TRUE
 	human_to_transform.set_stat(UNCONSCIOUS)
 	human_to_transform.forceMove(get_turf(pick(GLOB.xeno_spawns)))
 
-	var/list/survivor_types = list(
-		/datum/equipment_preset/survivor/scientist,
-		/datum/equipment_preset/survivor/doctor,
-		/datum/equipment_preset/survivor/security,
-		/datum/equipment_preset/survivor/engineer
-	)
+	var/list/survivor_types = SSmapping.configs[GROUND_MAP].survivor_types
 	arm_equipment(human_to_transform, pick(survivor_types), FALSE, FALSE)
 
 	for(var/obj/item/device/radio/radio in human_to_transform.contents_recursive())

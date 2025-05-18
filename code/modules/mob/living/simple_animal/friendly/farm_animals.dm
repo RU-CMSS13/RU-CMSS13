@@ -143,20 +143,16 @@
 
 /mob/living/simple_animal/cow/death()
 	. = ..()
-	if(!.) return //was already dead
+	if(!.)
+		return //was already dead
 	if(last_damage_data)
 		var/mob/user = last_damage_data.resolve_mob()
 		if(user)
-/*
 			user.count_niche_stat(STATISTICS_NICHE_COW)
-*/
-//RUCM START
-			user.count_statistic_stat(STATISTICS_COW)
-//RUCM END
 
 /mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M as mob)
 	if(!stat && M.a_intent == INTENT_DISARM && icon_state != icon_dead)
-		M.visible_message(SPAN_WARNING("[M] tips over [src]."), \
+		M.visible_message(SPAN_WARNING("[M] tips over [src]."),
 			SPAN_NOTICE("You tip over [src]."))
 		apply_effect(30, WEAKEN)
 		icon_state = icon_dead
@@ -262,12 +258,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 	if(last_damage_data)
 		var/mob/user = last_damage_data.resolve_mob()
 		if(user)
-/*
 			user.count_niche_stat(STATISTICS_NICHE_CHICKEN)
-*/
-//RUCM START
-			user.count_statistic_stat(STATISTICS_CHICKEN)
-//RUCM END
 
 /mob/living/simple_animal/chicken/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/reagent_container/food/snacks/grown/wheat)) //feedin' dem chickens

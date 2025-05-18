@@ -54,9 +54,6 @@
 
 	last_damage_data = istype(cause_data) ? cause_data : create_cause_data(cause_data)
 
-	if(severity > EXPLOSION_THRESHOLD_LOW && length(stomach_contents))
-		for(var/mob/M in stomach_contents)
-			M.ex_act(severity - EXPLOSION_THRESHOLD_LOW, last_damage_data, pierce)
 
 	var/b_loss = 0
 	var/f_loss = 0
@@ -144,7 +141,8 @@
 
 
 	var/list/damagedata = list("damage" = damage)
-	if(SEND_SIGNAL(src, COMSIG_XENO_TAKE_DAMAGE, damagedata, damagetype) & COMPONENT_BLOCK_DAMAGE) return
+	if(SEND_SIGNAL(src, COMSIG_XENO_TAKE_DAMAGE, damagedata, damagetype) & COMPONENT_BLOCK_DAMAGE)
+		return
 	damage = damagedata["damage"]
 
 	//We still want to check for blood splash before we get to the damage application.
@@ -198,9 +196,6 @@
 	last_hit_time = world.time
 	if(damagetype != HALLOSS && damage > 0)
 		life_damage_taken_total += damage
-		//RUCM START
-		SEND_SIGNAL(src, COMSIG_DAMAGE_TAKEN, damage)
-		//RUCM END
 
 	return 1
 
@@ -238,7 +233,8 @@
 
 /mob/living/carbon/xenomorph/proc/post_apply_armorbreak()
 	set waitfor = 0
-	if(!caste) return
+	if(!caste)
+		return
 	sleep(XENO_ARMOR_BREAK_PASS_TIME)
 	if(warding_aura && armor_break_to_apply > 0) //Damage to armor reduction
 		armor_break_to_apply = floor(armor_break_to_apply * ((100 - (warding_aura * 15)) / 100))
@@ -253,7 +249,8 @@
 	if(!damage || !acid_blood_damage || world.time < acid_splash_last + acid_splash_cooldown || SSticker?.mode?.hardcore)
 		return FALSE
 	var/chance = 20 //base chance
-	if(damtype == BRUTE) chance += 5
+	if(damtype == BRUTE)
+		chance += 5
 	chance += chancemod + (damage * 0.33)
 	var/turf/T = loc
 	if(!T || !istype(T))
@@ -274,6 +271,8 @@
 
 		for(var/mob/living/carbon/human/victim in orange(radius, src)) //Loop through all nearby victims, including the tile.
 			splash_chance = 65 - (i * 5)
+			if(HAS_TRAIT(victim, TRAIT_HAULED))
+				continue
 			if(victim.loc == loc)
 				splash_chance += 30 //Same tile? BURN
 			if(victim.species?.acid_blood_dodge_chance)
@@ -283,14 +282,8 @@
 				var/dmg = list("damage" = acid_blood_damage)
 				if(SEND_SIGNAL(src, COMSIG_XENO_DEAL_ACID_DAMAGE, victim, dmg) & COMPONENT_BLOCK_DAMAGE)
 					continue
-//RUCM START
-				if(faction == victim.faction)
-					track_friendly_damage("Acid", victim, acid_blood_damage)
-				else
-					track_damage("Acid", victim, acid_blood_damage)
-//RUCM END
 				i++
-				victim.visible_message(SPAN_DANGER("\The [victim] is scalded with hissing green blood!"), \
+				victim.visible_message(SPAN_DANGER("\The [victim] is scalded with hissing green blood!"),
 				SPAN_DANGER("You are splattered with sizzling blood! IT BURNS!"))
 				if(prob(60) && !victim.stat && victim.pain.feels_pain)
 					INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob, emote), "scream") //Topkek
@@ -316,6 +309,10 @@
 
 /mob/living/carbon/xenomorph/handle_flamer_fire(obj/flamer_fire/fire, damage, delta_time)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+//RUCM END
 	switch(fire.fire_variant)
 		if(FIRE_VARIANT_TYPE_B)
 			if(!armor_deflection_debuff) //Only adds another reset timer if the debuff is currently on 0, so at the start or after a reset has recently occurred.
@@ -324,6 +321,10 @@
 
 /mob/living/carbon/xenomorph/handle_flamer_fire_crossed(obj/flamer_fire/fire)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+//RUCM END
 	switch(fire.fire_variant)
 		if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire
 			if(!armor_deflection_debuff) //Only applies the xeno armor shred reset when the debuff isn't present or was recently removed.

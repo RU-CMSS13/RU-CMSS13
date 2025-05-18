@@ -17,7 +17,7 @@
 	var/lights = FALSE
 	var/lights_power = 8
 	var/zoom = FALSE
-	var/zoom_size = 14
+	var/zoom_size = 11
 
 	pixel_x = -18
 
@@ -126,7 +126,7 @@
 	if(!istype(user) || target != user) //No making other people climb into walker.
 		return
 
-	if(user.skills.get_skill_level(SKILL_POWERLOADER) >= SKILL_POWERLOADER_TRAINED)
+	if(user.skills.get_skill_level(SKILL_POWERLOADER) > SKILL_POWERLOADER_DEFAULT)
 		move_in(user)
 	else
 		to_chat(user, "How to operate it?")
@@ -434,10 +434,14 @@
 	else if(istype(held_item, /obj/item/walker_gun))
 		var/remaining_slots = list()
 		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT, WALKER_HARDPOIN_RIGHT))
+
 			if(module_map[hardpoint_slot])
 				continue
 			remaining_slots += hardpoint_slot
 		var/slot = tgui_alert(user, "On which hardpoint install gun.", "Hardpoint", remaining_slots + "Cancel")
+		if (module_map[WALKER_HARDPOIN_LEFT]?.type == held_item.type || module_map[WALKER_HARDPOIN_RIGHT]?.type == held_item.type)
+			to_chat(user, "You cannot install two of the same type of gun.")
+			return
 		if(slot && slot != "Cancel")
 			install_gun(held_item, user, slot)
 
@@ -595,7 +599,7 @@
 	else if(!health)
 		if(seats[VEHICLE_DRIVER])
 			to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
-			exit_walker(seats[VEHICLE_DRIVER])
+			exit_walker()
 		new /obj/structure/walker_wreckage(src.loc)
 		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
@@ -662,12 +666,12 @@
 			Move(get_step(src, crusher.dir))
 		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
 
-/obj/vehicle/walker/hear_talk(mob/living/M as mob, msg, verb = "says", datum/language/speaking, italics = 0, tts_heard_list)
+/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, tts_heard_list)
 	var/mob/driver = seats[VEHICLE_DRIVER]
 	if (driver == null)
 		return
-	else if (driver != M)
-		driver.hear_say(msg, verb, speaking, "", italics, M, tts_heard_list = tts_heard_list)
+	else if (driver != sourcemob)
+		driver.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list)
 	else
 		var/list/mob/listeners = get_mobs_in_view(9,src)
 
@@ -677,9 +681,9 @@
 			if(!ishumansynth_strict(listener) && !isobserver(listener))
 				listener.show_message("[src] broadcasts something, but you can't understand it.")
 				continue
-			listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[msg]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
+			listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
-		langchat_long_speech(msg, langchat_long_listeners, driver.get_default_language(), tts_heard_list)
+		langchat_long_speech(message, langchat_long_listeners, driver.get_default_language(), tts_heard_list)
 
 //to handle IFF bullets
 /obj/vehicle/walker/proc/get_target_lock(access_to_check)

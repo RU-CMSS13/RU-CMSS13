@@ -4,6 +4,7 @@
 	icon = 'icons/obj/structures/machinery/science_machines.dmi'
 	icon_state = "reagent_analyzer"
 	active_power_usage = 5000 //This is how many watts the big XRF machines usually take
+	health = STRUCTURE_HEALTH_REINFORCED
 
 	var/mob/last_used
 	var/obj/item/reagent_container/sample = null //Object containing our sample
@@ -97,12 +98,7 @@
 			GLOB.chemical_data.save_new_properties(S.properties)
 		if(S.chemclass >= CHEM_CLASS_SPECIAL && !GLOB.chemical_data.chemical_identified_list[S.id])
 			if(last_used)
-/*
 				last_used.count_niche_stat(STATISTICS_NICHE_CHEMS)
-*/
-//RUCM START
-				last_used.count_statistic_stat(STATISTICS_CHEMS)
-//RUCM END
 			var/datum/chem_property/P = S.get_property(PROPERTY_DNA_DISINTEGRATING)
 			if(P)
 				if(GLOB.chemical_data.clearance_level >= S.gen_tier)

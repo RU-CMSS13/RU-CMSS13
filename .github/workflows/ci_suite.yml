@@ -114,6 +114,8 @@ jobs:
           shopt -s extglob
           echo "$(ls -mw0 maps/!(*override*).json)" > maps_output.txt
           sed -i -e s+maps/+\"+g -e s+.json+\"+g maps_output.txt
+          echo "Ignored Maps: $(cat .github/maps_to_ignore.txt)"
+          cat .github/maps_to_ignore.txt | sed -r 's/\s*//g' | xargs -i sed -ri 's/(, "{}")|("{}", )//g' maps_output.txt
           echo "Maps: $(cat maps_output.txt)"
           echo "maps={\"paths\":[$(cat maps_output.txt)]}" >> $GITHUB_OUTPUT
       - name: Find Alternate Tests
@@ -178,6 +180,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - name: Restore BYOND cache
+        uses: actions/cache@v3
+        with:
+          path: C:\\byond
+          key: ${{ runner.os }}-byond-${{ secrets.CACHE_PURGE_KEY }}
       - name: Compile
         run: pwsh tools/ci/build.ps1
         env:

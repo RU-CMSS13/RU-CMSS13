@@ -56,13 +56,14 @@ Additional game mode variables.
 	var/surv_starting_num = 0 //To clamp starting survivors.
 	var/merc_starting_num = 0 //PMC clamp.
 	var/marine_starting_num = 0 //number of players not in something special
-	var/pred_current_num = 0 //How many are there now?
-	var/pred_per_players = 80 //Preds per player
-	var/pred_start_count = 4 //The initial count of predators
-
-	var/pred_additional_max = 0
-	var/pred_leader_count = 0 //How many Leader preds are active
-	var/pred_leader_max = 1 //How many Leader preds are permitted. Currently fixed to 1. May add admin verb to adjust this later.
+	/// How many predators utilize slots currently
+	var/pred_current_num = 0
+	/// How many additional preds per client
+	var/pred_per_players = 80
+	/// The initial count of predators
+	var/pred_start_count = 6
+	/// Modifier on predator count (adjusted via Adjust-Predator-Slots)
+	var/pred_count_modifier = 0
 
 	//Some gameplay variables.
 	var/round_checkwin = 0
@@ -162,14 +163,19 @@ Additional game mode variables.
 
 	var/mob/new_player/new_pred
 	for(var/mob/player in GLOB.player_list)
-		if(!player.client) continue //No client. DCed.
-		if(isyautja(player)) continue //Already a predator. Might be dead, who knows.
+		if(!player.client)
+			continue //No client. DCed.
+		if(isyautja(player))
+			continue //Already a predator. Might be dead, who knows.
 		if(readied) //Ready check for new players.
 			new_pred = player
-			if(!istype(new_pred)) continue //Have to be a new player here.
-			if(!new_pred.ready) continue //Have to be ready.
+			if(!istype(new_pred))
+				continue //Have to be a new player here.
+			if(!new_pred.ready)
+				continue //Have to be ready.
 		else
-			if(!istype(player,/mob/dead)) continue //Otherwise we just want to grab the ghosts.
+			if(!istype(player,/mob/dead))
+				continue //Otherwise we just want to grab the ghosts.
 
 		if(player?.client.check_whitelist_status(WHITELIST_PREDATOR))  //Are they whitelisted?
 			if(!player.client.prefs)
@@ -178,9 +184,7 @@ Additional game mode variables.
 			if(player.client.prefs.get_job_priority(JOB_PREDATOR) > 0) //Are their prefs turned on?
 				if(!player.mind) //They have to have a key if they have a client.
 					player.mind_initialize() //Will work on ghosts too, but won't add them to active minds.
-/* RUCM REMOVE
 				player.mind.setup_human_stats()
-*/
 				player.faction = FACTION_YAUTJA
 				player.faction_group = FACTION_LIST_YAUTJA
 				players += player.mind
@@ -188,17 +192,19 @@ Additional game mode variables.
 
 /datum/game_mode/proc/attempt_to_join_as_predator(mob/pred_candidate)
 	var/mob/living/carbon/human/new_predator = transform_predator(pred_candidate) //Initialized and ready.
-	if(!new_predator) return
+	if(!new_predator)
+		return
 
 	msg_admin_niche("([new_predator.key]) joined as Yautja, [new_predator.real_name].")
 
-	if(pred_candidate) pred_candidate.moveToNullspace() //Nullspace it for garbage collection later.
+	if(pred_candidate)
+		pred_candidate.moveToNullspace() //Nullspace it for garbage collection later.
 
 /datum/game_mode/proc/calculate_pred_max()
-	return floor(length(GLOB.player_list) / pred_per_players) + pred_additional_max + pred_start_count
+	return floor(length(GLOB.player_list) / pred_per_players) + pred_count_modifier + pred_start_count
 
 /datum/game_mode/proc/check_predator_late_join(mob/pred_candidate, show_warning = TRUE)
-	if(!pred_candidate.client)
+	if(!pred_candidate?.client)
 		return
 
 	var/datum/job/pred_job = GLOB.RoleAuthority.roles_by_name[JOB_PREDATOR]
@@ -208,7 +214,7 @@ Additional game mode variables.
 			to_chat(pred_candidate, SPAN_WARNING("Something went wrong!"))
 		return FALSE
 
-	if(!(pred_candidate?.client.check_whitelist_status(WHITELIST_PREDATOR)))
+	if(!pred_candidate.client.check_whitelist_status(WHITELIST_PREDATOR))
 		if(show_warning)
 			to_chat(pred_candidate, SPAN_WARNING("You are not whitelisted! You may apply on the forums to be whitelisted as a predator."))
 		return FALSE
@@ -223,14 +229,15 @@ Additional game mode variables.
 			to_chat(pred_candidate, SPAN_WARNING("You already were a Yautja! Give someone else a chance."))
 		return FALSE
 
-	if(show_warning && tgui_alert(pred_candidate, "Confirm joining the hunt. You will join as \a [lowertext(pred_job.get_whitelist_status(pred_candidate.client))] predator", "Confirmation", list("Yes", "No"), 10 SECONDS) != "Yes")
+	var/pred_rank = pred_job.get_whitelist_status(pred_candidate.client)
+	if(show_warning && tgui_alert(pred_candidate, "Confirm joining the hunt. You will join as \a [lowertext(pred_rank)] predator.", "Confirmation", list("Yes", "No"), 10 SECONDS) != "Yes")
 		return FALSE
 
-	if(pred_job.get_whitelist_status(pred_candidate.client) == WHITELIST_NORMAL)
+	if(pred_rank != CLAN_RANK_LEADER && !pred_candidate.client.check_whitelist_status(WHITELIST_YAUTJA_LEADER|WHITELIST_YAUTJA_COUNCIL))
 		var/pred_max = calculate_pred_max()
 		if(pred_current_num >= pred_max)
 			if(show_warning)
-				to_chat(pred_candidate, SPAN_WARNING("Only [pred_max] predators may spawn this round, but Councillors and Ancients do not count."))
+				to_chat(pred_candidate, SPAN_WARNING("Only [pred_max] predators may spawn this round, but Leaders, Councillors and Ancients do not count."))
 			return FALSE
 
 	return TRUE
@@ -269,6 +276,9 @@ Additional game mode variables.
 		return
 
 	GLOB.RoleAuthority.equip_role(new_predator, J, new_predator.loc)
+
+	if(new_predator.client.check_whitelist_status(WHITELIST_YAUTJA_LEADER) && (tgui_alert(new_predator, "Do you wish to announce your presence?", "Announce Arrival", list("Yes","No"), 10 SECONDS) != "No"))
+		elder_overseer_message("[new_predator.real_name] has joined the hunting party.")
 
 	return new_predator
 
@@ -362,9 +372,11 @@ Additional game mode variables.
 	return TRUE
 
 /datum/game_mode/proc/load_fax_base()
+	loaded_fax_base = "loading"
 	loaded_fax_base = SSmapping.lazy_load_template(/datum/lazy_template/fax_response_base, force = TRUE)
-	if(!loaded_fax_base)
+	if(!loaded_fax_base || (loaded_fax_base == "loading"))
 		log_debug("Error loading fax response base!")
+		loaded_fax_base = null
 		return FALSE
 	return TRUE
 
@@ -452,9 +464,7 @@ Additional game mode variables.
 // Helper proc to set some constants
 /proc/setup_new_xeno(datum/mind/new_xeno)
 	new_xeno.roundstart_picked = TRUE
-/* RUCM REMOVE
 	new_xeno.setup_xeno_stats()
-*/
 
 /datum/game_mode/proc/check_xeno_late_join(mob/xeno_candidate)
 	if(jobban_isbanned(xeno_candidate, JOB_XENOMORPH)) // User is jobbanned
@@ -683,10 +693,6 @@ Additional game mode variables.
 				to_chat(xeno_candidate, SPAN_WARNING("You are banished from this hive, You may not rejoin unless the Queen re-admits you or dies."))
 				return FALSE
 		if(transfer_xeno(xeno_candidate, new_xeno))
-//RUCM START
-			if(new_xeno.client?.player_data?.battlepass)
-				SSbattlepass.xeno_battlepass_earners |= new_xeno.client.player_data.battlepass
-//RUCM END
 			return TRUE
 	to_chat(xeno_candidate, "JAS01: Something went wrong, tell a coder.")
 
@@ -842,9 +848,7 @@ Additional game mode variables.
 	new_xeno.SetSleeping(0) // ghosting sleeps, but they got a new mind! wake up! (/mob/living/verb/ghost())
 
 	new_xeno.mind_initialize()
-/* RUCM REMOVE
 	new_xeno.mind.player_entity = setup_player_entity(xeno_candidate_mind.ckey)
-*/
 	new_xeno.statistic_tracked = FALSE
 
 	// Let the round recorder know that the key has changed
@@ -1081,7 +1085,8 @@ Additional game mode variables.
 			if(length(survivor_multi_story)) //Unlikely.
 				var/datum/mind/another_survivor = pick(current_survivors - survivor) // We don't want them to be picked twice.
 				current_survivors -= another_survivor
-				if(!istype(another_survivor)) continue//If somehow this thing screwed up, we're going to run another pass.
+				if(!istype(another_survivor))
+					continue//If somehow this thing screwed up, we're going to run another pass.
 				story = pick(survivor_multi_story)
 				survivor_multi_story -= story
 				story = replacetext(story, "{name}", "[random_name]")
@@ -1158,15 +1163,7 @@ Additional game mode variables.
 
 // for the toolbox
 /datum/game_mode/proc/end_round_message()
-/*
 	return "Extended round has ended."
-*/
-//RUCM START
-	if(round_finished)
-		return "Round has ended. [round_finished]."
-	else
-		return "Round has ended due to technical reasons."
-//RUCM END
 
 /datum/game_mode/proc/get_escape_menu()
 	return "On the [SSmapping.configs[SHIP_MAP].map_name], orbiting..."

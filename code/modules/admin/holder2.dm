@@ -21,7 +21,6 @@ GLOBAL_PROTECT(href_token)
 	var/datum/filter_editor/filteriffic
 	var/datum/particle_editor/particle_test
 
-/* RUCM CHANGE
 /datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey, list/new_extra_titles)
 	if(!ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
@@ -32,25 +31,19 @@ GLOBAL_PROTECT(href_token)
 	href_token = GenerateToken()
 	GLOB.admin_datums[ckey] = src
 	extra_titles = new_extra_titles
-	if(rights & R_PROFILER)
-		log_debug("Adding [ckey] to APP/admin.")
-		world.SetConfig("APP/admin", ckey, "role=admin")
 
 // Letting admins edit their own permission giver is a poor idea
 /datum/admins/vv_edit_var(var_name, var_value)
 	return FALSE
-*/
 
-/datum/admins/proc/associate(client/C, datum/view_record/admin_holder/db_holder)
+/datum/admins/can_vv_get(var_name)
+	if(var_name == NAMEOF(src, href_token))
+		return FALSE
+	return ..()
+
+/datum/admins/proc/associate(client/C)
 	if(istype(C))
 		owner = C
-//RUCM START
-		if(istype(db_holder))
-			db_holder.ref_vars = vars
-			rank = db_holder.admin_rank.rank_name
-			rights = db_holder.admin_rank.rights
-			extra_titles = db_holder.extra_titles
-//RUCM ENDка
 		owner.admin_holder = src
 		owner.add_admin_verbs()
 		owner.tgui_say.load()
@@ -73,7 +66,8 @@ if it doesn't return 1 and show_msg=1 it will prints a message explaining why th
 generally it would be used like so:
 
 /proc/admin_proc()
-	if(!check_rights(R_ADMIN)) return
+	if(!check_rights(R_ADMIN))
+		return
 	to_world("you have enough rights!")
 
 NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
@@ -130,7 +124,6 @@ you will have to do something like if(client.admin_holder.rights & R_ADMIN) your
 		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
-/* RUCM CHANGE
 /client/proc/deadmin()
 	if(IsAdminAdvancedProcCall())
 		alert_proccall("deadmin")
@@ -144,7 +137,6 @@ you will have to do something like if(client.admin_holder.rights & R_ADMIN) your
 	if(GLOB.admin_datums[ckey])
 		GLOB.admin_datums[ckey].associate(src)
 	return TRUE
-*/
 
 /datum/admins/proc/check_for_rights(rights_required)
 	if(rights_required && !(rights_required & rights))

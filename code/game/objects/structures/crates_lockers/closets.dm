@@ -215,7 +215,8 @@
 /obj/structure/closet/attackby(obj/item/W, mob/living/user)
 	if(src.opened)
 		if(istype(W, /obj/item/grab))
-			if(isxeno(user)) return
+			if(isxeno(user))
+				return
 			var/obj/item/grab/G = W
 			if(G.grabbed_thing)
 				src.MouseDrop_T(G.grabbed_thing, user)   //act like they were dragged onto the closet
@@ -316,8 +317,10 @@
 
 
 /obj/structure/closet/relaymove(mob/user)
-	if(!isturf(src.loc)) return
-	if(user.is_mob_incapacitated(TRUE)) return
+	if(!isturf(src.loc))
+		return
+	if(user.is_mob_incapacitated(TRUE))
+		return
 	user.next_move = world.time + 5
 
 	var/obj/item/I = user.get_active_hand()
@@ -365,16 +368,16 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/hear_talk(mob/M as mob, text, verb, language, italics, tts_heard_list)
+/obj/structure/closet/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text, tts_heard_list = tts_heard_list)
+			O.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 #ifdef OBJECTS_PROXY_SPEECH
 			continue
 		var/mob/living/TM = A
 		if(istype(TM) && TM.stat != DEAD)
-			proxy_object_heard(src, M, TM, text, verb, language, italics, tts_heard_list = tts_heard_list)
+			proxy_object_heard(src, sourcemob, TM, message, verb, language, italics, tts_heard_list = tts_heard_list)
 #endif // ifdef OBJECTS_PROXY_SPEECH
 
 /obj/structure/closet/proc/break_open()
@@ -386,3 +389,8 @@
 	name = "alien closet"
 	desc = "A suspicious dark metal alien closet, what horrors can be stored inside?"
 	icon = 'icons/obj/structures/machinery/yautja_machines.dmi'
+	storage_capacity = 100
+
+/obj/structure/closet/yautja/big
+	icon = 'icons/obj/structures/props/hunter/32x32_hunter_props.dmi'
+	storage_capacity = 100

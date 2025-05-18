@@ -46,7 +46,7 @@
 		node.add_child(src)
 		hivenumber = linked_hive.hivenumber
 		spread_on_semiweedable = node.spread_on_semiweedable
-		if(weed_strength < WEED_LEVEL_HIVE && spread_on_semiweedable)
+		if(weed_strength == WEED_LEVEL_HARDY && spread_on_semiweedable)
 			name = "hardy [name]"
 			health = WEED_HEALTH_HARDY
 		block_structures = node.block_structures
@@ -55,7 +55,7 @@
 		linked_hive = GLOB.hive_datum[hivenumber]
 
 	set_hive_data(src, hivenumber)
-	if(spread_on_semiweedable && weed_strength < WEED_LEVEL_HIVE)
+	if(spread_on_semiweedable && weed_strength == WEED_LEVEL_HARDY)
 		if(color)
 			var/list/RGB = ReadRGB(color)
 			RGB[1] = clamp(RGB[1] + 35, 0, 255)
@@ -180,7 +180,6 @@
 	var/mob/living/crossing_mob = atom_movable
 
 	var/weed_slow = weed_strength
-
 	if(crossing_mob.ally_of_hivenumber(linked_hive.hivenumber))
 		if( (crossing_mob.hivenumber != linked_hive.hivenumber) && prob(7)) // small chance for allied mobs to get a message indicating this
 			to_chat(crossing_mob, SPAN_NOTICE("The weeds seem to reshape themselves around your feet as you walk on them."))
@@ -224,10 +223,9 @@
 		var/turf/T = get_step(src, dirn)
 		if(!istype(T))
 			continue
-		var/is_weedable = T.is_weedable()
-		if(!is_weedable)
+		if(!T.is_weedable)
 			continue
-		if(!spread_on_semiweedable && is_weedable < FULLY_WEEDABLE)
+		if(!spread_on_semiweedable && T.is_weedable < FULLY_WEEDABLE)
 			continue
 		T.clean_cleanables()
 
@@ -364,7 +362,7 @@
 /obj/effect/alien/weeds/attack_alien(mob/living/carbon/xenomorph/attacking_xeno)
 	if(!explo_proof && !HIVE_ALLIED_TO_HIVE(attacking_xeno.hivenumber, hivenumber))
 		attacking_xeno.animation_attack_on(src)
-		attacking_xeno.visible_message(SPAN_DANGER("\The [attacking_xeno] slashes [src]!"), \
+		attacking_xeno.visible_message(SPAN_DANGER("\The [attacking_xeno] slashes [src]!"),
 		SPAN_DANGER("You slash [src]!"), null, 5)
 		playsound(loc, "alien_resin_break", 25)
 		take_damage(attacking_xeno.melee_damage_lower*WEED_XENO_DAMAGEMULT)
@@ -407,9 +405,16 @@
 	if(health <= 0)
 		deconstruct(FALSE)
 
-/obj/effect/alien/weeds/flamer_fire_act(dam)
+/obj/effect/alien/weeds/flamer_fire_act(dam, datum/cause_data/flame_cause_data, obj/flamer_fire/fire)
 	if(explo_proof)
 		return
+
+//RUCM START
+	if(fire && fire.friendlydetection)
+		var/mob/living/user = flame_cause_data.resolve_mob()
+		if(istype(user) && (linked_hive && HIVE_ALLIED_TO_HIVE(user.hivenumber, linked_hive.hivenumber)))
+			return
+//RUCM END
 
 	. = ..()
 	if(!QDELETED(src))

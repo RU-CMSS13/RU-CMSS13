@@ -74,16 +74,16 @@
 	var/maxmats = 5
 	var/mats = 0
 
-/obj/item/storage/belt/gun/repairbelt/synth/full/fill_preset_inventory()
+/obj/item/storage/belt/gun/repairbelt/full/fill_preset_inventory()
 	handle_item_insertion(new /obj/item/weapon/gun/smg/nailgun/compact())
 	new /obj/item/ammo_magazine/smg/nailgun(src)
 	new /obj/item/ammo_magazine/smg/nailgun(src)
 	new /obj/item/tool/weldingtool/hugetank(src)
 	new /obj/item/device/lightreplacer(src)
 	new /obj/item/tool/shovel/etool(src)
-/*	new /obj/item/stack/sheet/metal/large_stack(src)		// Пока оставим так - давать его в обычный вендор еще и с ресурсами это не честно
+	new /obj/item/stack/sheet/metal/large_stack(src)
 	new /obj/item/stack/sheet/metal/medium_stack(src)
-	new /obj/item/stack/sheet/plasteel/med_large_stack(src) */
+	new /obj/item/stack/sheet/plasteel/med_large_stack(src)
 
 /obj/item/storage/belt/gun/repairbelt/can_be_inserted(obj/item/item, mob/user, stop_messages = FALSE) // проверка на добавление
 	. = ..()
@@ -110,15 +110,8 @@
 /obj/item/storage/box/guncase/repairbelt
 	name = "F1X Nailgun"
 	desc = "Кейс, содержащий ремонтно-фортификационный набор. Поставляется с промышленным гвоздометом, магазинами к нему, сваркой, лопатой и комплектом материалов."
-	storage_slots = 7
-	can_hold = list(
-		/obj/item/weapon/gun/smg/nailgun,
-		/obj/item/ammo_magazine/smg/nailgun,
-		/obj/item/tool/weldingtool,
-		/obj/item/tool/shovel/etool,
-		/obj/item/stack/sheet/metal,
-		/obj/item/stack/sandbags_empty,
-		)
+	storage_slots = 8
+	can_hold = list()
 
 /obj/item/storage/box/guncase/repairbelt/fill_preset_inventory()
 	new /obj/item/weapon/gun/smg/nailgun(src)
@@ -129,6 +122,12 @@
 	new /obj/item/stack/sheet/metal/med_small_stack(src)
 	new /obj/item/stack/sandbags_empty/half(src)
 	new /obj/item/storage/belt/gun/repairbelt(src)
+
+/obj/item/storage/box/guncase/repairbelt/synth/fill_preset_inventory()
+	new /obj/item/weapon/gun/smg/nailgun(src)
+	new /obj/item/ammo_magazine/smg/nailgun(src)
+	new /obj/item/ammo_magazine/smg/nailgun(src)
+	new /obj/item/storage/belt/gun/repairbelt/full(src)
 
 /datum/supply_packs/repairbelt
 	name = "F1X Nailgun Create (х2)"
@@ -167,8 +166,11 @@
 
 /obj/item/storage/belt/gun/xm52/attackby(obj/item/item, mob/user)
 	if(istype(item, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots))
+/* TODO - fix handful sprites for dump_ammo_to
 		var/obj/item/ammo_magazine/shotgun/light/breaching/sparkshots/ammo_box = item
 		dump_ammo_to(ammo_box, user, ammo_box.transfer_handful_amount)
+*/
+		to_chat(user, SPAN_WARNING("You can't dump sparkshots in [src], sparkshots too explosive..."))
 	else
 		return ..()
 
