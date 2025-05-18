@@ -17,7 +17,7 @@
 	var/lights = FALSE
 	var/lights_power = 8
 	var/zoom = FALSE
-	var/zoom_size = 14
+	var/zoom_size = 11
 
 	pixel_x = -18
 
@@ -126,7 +126,7 @@
 	if(!istype(user) || target != user) //No making other people climb into walker.
 		return
 
-	if(user.skills.get_skill_level(SKILL_POWERLOADER) >= SKILL_POWERLOADER_TRAINED)
+	if(user.skills.get_skill_level(SKILL_POWERLOADER) > SKILL_POWERLOADER_DEFAULT)
 		move_in(user)
 	else
 		to_chat(user, "How to operate it?")
@@ -599,7 +599,7 @@
 	else if(!health)
 		if(seats[VEHICLE_DRIVER])
 			to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
-			exit_walker(seats[VEHICLE_DRIVER])
+			exit_walker()
 		new /obj/structure/walker_wreckage(src.loc)
 		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
