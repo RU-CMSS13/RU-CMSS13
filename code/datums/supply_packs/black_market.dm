@@ -82,7 +82,7 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 /*
 	switch(rand(1,6))
 */
-	switch(rand(1,18))
+	switch(rand(1,19))
 		if(1) //pmc
 			new /obj/item/clothing/under/marine/veteran/pmc(src)
 			new /obj/item/clothing/head/helmet/marine/veteran/pmc(src)
@@ -213,7 +213,7 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 /*
 	switch(rand(1, 5))
 */
-	switch(rand(1, 10))
+	switch(rand(1, 12))
 		if(1) //pmc
 			new /obj/item/weapon/gun/smg/fp9000(src)
 			new /obj/item/ammo_magazine/smg/fp9000(src)
