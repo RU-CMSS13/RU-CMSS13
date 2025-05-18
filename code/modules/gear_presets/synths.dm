@@ -64,6 +64,7 @@
 
 	minimap_icon = "synth"
 	paygrades = list(PAY_SHORT_ME8 = JOB_PLAYTIME_TIER_0)
+
 /datum/equipment_preset/synth/uscm/load_gear(mob/living/carbon/human/new_human)
 	var/back_item = /obj/item/storage/backpack/marine/satchel
 	if (new_human.client && new_human.client.prefs && (new_human.client.prefs.backbag == 1))
