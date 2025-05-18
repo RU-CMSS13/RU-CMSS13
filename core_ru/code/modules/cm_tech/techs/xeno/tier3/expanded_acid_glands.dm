@@ -39,7 +39,7 @@
 	)
 	.["stats"] += list(
 		list(
-			"content" = "Acid spit Plasma Cost Increase: +[(plasma_cost_increase-1)*100]%",
+			"content" = "Acid spit Plasma Cost Increase: +[(plasma_cost_increase_mult-1)*100]%",
 			"color" = "red",
 			"icon" = "bomb"
 		)
@@ -62,4 +62,4 @@
 	ammospit["damage"] *= acid_damage_mult
 	ammospit["penetration"] += acid_penetration
 	ammospit["shell_speed"] += acid_speed_bonus
-	ammospit["spit_cost"] *= plasma_cost_increase
+	ammospit["spit_cost"] *= plasma_cost_increase_mult
