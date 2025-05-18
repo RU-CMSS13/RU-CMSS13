@@ -55,6 +55,12 @@
 	},
 /turf/open/space/basic,
 /area/space)
+"aal" = (
+/obj/structure/machinery/cryopod{
+	pixel_y = 6
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/shipboard/brig/mp_bunks)
 "aam" = (
 /obj/structure/stairs,
 /obj/effect/step_trigger/teleporter_vector{
@@ -525,6 +531,10 @@
 	},
 /turf/open/floor/carpet,
 /area/almayer/living/intel)
+"abA" = (
+/obj/effect/landmark/start/police,
+/turf/open/floor/almayer/plate,
+/area/almayer/shipboard/brig/mp_bunks)
 "abB" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -1347,8 +1357,7 @@
 /area/almayer/medical/hydroponics)
 "adx" = (
 /obj/structure/machinery/light,
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/wall/almayer/reinforced,
+/turf/open/floor/almayer,
 /area/almayer/lifeboat_pumps/north1)
 "ady" = (
 /obj/effect/step_trigger/clone_cleaner,
@@ -8604,12 +8613,6 @@
 	},
 /turf/open/floor/almayer/orange/north,
 /area/almayer/engineering/lower/workshop/hangar)
-"avU" = (
-/obj/structure/machinery/light/small{
-	dir = 4
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/living/synthcloset)
 "avV" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
@@ -12711,6 +12714,9 @@
 	pixel_y = 10
 	},
 /obj/structure/machinery/power/apc/almayer/north,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/shipboard/brig/mp_bunks)
 "aFj" = (
@@ -13947,7 +13953,6 @@
 /turf/open/floor/almayer/cargo,
 /area/almayer/command/securestorage)
 "aIq" = (
-/obj/effect/landmark/start/police,
 /obj/effect/landmark/late_join/police,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/shipboard/brig/cryo)
@@ -28110,7 +28115,6 @@
 /obj/structure/machinery/light{
 	dir = 1
 	},
-/obj/effect/landmark/start/police,
 /obj/effect/landmark/late_join/police,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/shipboard/brig/cryo)
@@ -38650,9 +38654,6 @@
 /turf/open/floor/almayer,
 /area/almayer/living/officer_study)
 "iuu" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
 /obj/structure/machinery/firealarm{
 	pixel_y = 28
 	},
@@ -41749,6 +41750,9 @@
 /area/almayer/maint/hull/lower/s_bow)
 "jUb" = (
 /obj/structure/machinery/light,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W"
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/shipboard/brig/mp_bunks)
 "jUn" = (
@@ -50732,8 +50736,8 @@
 /area/almayer/squads/req)
 "nXY" = (
 /obj/structure/machinery/light,
-/obj/effect/landmark/start/police,
 /obj/effect/landmark/late_join/police,
+/obj/effect/landmark/start/police,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/shipboard/brig/cryo)
 "nYd" = (
@@ -51956,9 +51960,6 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "S";
 	layer = 3.3
-	},
-/obj/structure/machinery/light{
-	dir = 4
 	},
 /turf/open/floor/almayer/red,
 /area/almayer/lifeboat_pumps/north1)
@@ -57144,15 +57145,6 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/rumayer/squads/alpha_delta_shared)
-"qSJ" = (
-/obj/structure/machinery/door/airlock/almayer/maint/reinforced{
-	access_modified = 1;
-	dir = 1;
-	name = "\improper Synthetic Storage";
-	req_one_access = list(36)
-	},
-/turf/open/floor/almayer/test_floor4,
-/area/almayer/living/synthcloset)
 "qSK" = (
 /obj/item/stack/sheet/metal{
 	layer = 2.9;
@@ -62929,7 +62921,7 @@
 	layer = 4.1;
 	pixel_y = 18
 	},
-/turf/open/floor/almayer/cargo_arrow,
+/turf/open/floor/almayer/cargo_arrow/west,
 /area/almayer/living/synthcloset)
 "tAR" = (
 /obj/structure/machinery/cryopod/right{
@@ -67042,12 +67034,6 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/lifeboat_pumps/north2)
-"vtT" = (
-/obj/structure/sign/safety/distribution_pipes{
-	pixel_x = 32
-	},
-/turf/open/floor/almayer/blue/east,
-/area/almayer/command/cichallway)
 "vub" = (
 /turf/closed/wall/almayer,
 /area/almayer/shipboard/sea_office)
@@ -70207,12 +70193,6 @@
 	},
 /turf/open/floor/almayer/orange/west,
 /area/almayer/maint/upper/u_a_s)
-"wQJ" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "W"
-	},
-/turf/open/floor/almayer,
-/area/almayer/shipboard/brig/mp_bunks)
 "wRm" = (
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4
@@ -72763,9 +72743,6 @@
 /turf/open/floor/almayer/tcomms,
 /area/almayer/command/telecomms)
 "xRU" = (
-/obj/structure/sign/safety/maint{
-	pixel_x = -17
-	},
 /turf/open/floor/almayer/green/southwest,
 /area/almayer/hallways/upper/fore_hallway)
 "xSw" = (
@@ -95992,7 +95969,7 @@ rfo
 aic
 bYz
 bYz
-vtT
+bYz
 rqb
 and
 rHZ
@@ -96195,10 +96172,10 @@ kcH
 kcH
 kcH
 kcH
-kcH
-kcH
 aFh
 kcH
+bLb
+bLb
 bLb
 aJc
 aKa
@@ -96399,9 +96376,9 @@ aIu
 veY
 aHr
 tAL
-qSJ
-avU
 kcH
+aal
+aal
 bLb
 awz
 vlB
@@ -96603,8 +96580,8 @@ wyn
 aHs
 awY
 aGz
-kcH
-kcH
+abA
+abA
 bLb
 kOB
 fwH
@@ -97010,7 +96987,7 @@ aHM
 lyi
 aGz
 iuu
-wQJ
+lvD
 apo
 auZ
 wDn
@@ -99457,8 +99434,8 @@ bbL
 bbL
 pwk
 afv
-yfv
 bbL
+yfv
 bbL
 bbL
 bbL

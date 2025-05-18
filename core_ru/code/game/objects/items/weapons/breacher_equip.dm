@@ -1,9 +1,9 @@
-/obj/item/weapon/twohanded/st_hammer
+/obj/item/weapon/twohanded/breacher_hammer
 	name = "N45 battle hammer"
 	desc = "RIP AND TEAR."
 	icon = 'core_ru/icons/obj/items/weapons/weapons.dmi'
-	icon_state = "st_hammer"
-	item_state = "st_hammer"
+	icon_state = "breacher_hammer"
+	item_state = "breacher_hammer"
 	item_icons = list(
 		WEAR_J_STORE = 'core_ru/icons/mob/humans/onmob/suit_slot.dmi',
 		WEAR_WAIST = 'core_ru/icons/mob/humans/onmob/belt.dmi',
@@ -28,8 +28,8 @@
 	var/speed_penalty = 0.85 // 15%
 	var/retrieval_slot = WEAR_J_STORE
 
-/obj/item/weapon/twohanded/st_hammer/attack(mob/target, mob/user)
-	if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ST)
+/obj/item/weapon/twohanded/breacher_hammer/attack(mob/target, mob/user)
+	if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_BREACHER)
 		to_chat(user, SPAN_HIGHDANGER("[src] is too heavy for you to use!"))
 		return
 
@@ -47,15 +47,15 @@
 		if(target.stat != CONSCIOUS) // haha xeno-cricket
 			hammer_effect.increment_stack_count(4, user)
 
-/obj/item/weapon/twohanded/st_hammer/pickup(mob/user)
+/obj/item/weapon/twohanded/breacher_hammer/pickup(mob/user)
 	RegisterSignal(user, COMSIG_HUMAN_POST_MOVE_DELAY, PROC_REF(handle_movedelay))
 	. = ..()
 
-/obj/item/weapon/twohanded/st_hammer/proc/handle_movedelay(mob/user, list/movedata)
+/obj/item/weapon/twohanded/breacher_hammer/proc/handle_movedelay(mob/user, list/movedata)
 	SIGNAL_HANDLER
 	movedata["move_delay"] += speed_penalty
 
-/obj/item/weapon/twohanded/st_hammer/dropped(mob/user, silent)
+/obj/item/weapon/twohanded/breacher_hammer/dropped(mob/user, silent)
 	. = ..()
 
 	UnregisterSignal(user, COMSIG_HUMAN_POST_MOVE_DELAY)
@@ -67,7 +67,7 @@
 
 	addtimer(CALLBACK(src, PROC_REF(retrieve_to_slot), user, retrieval_slot), 0.3 SECONDS, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 
-/obj/item/weapon/twohanded/st_hammer/retrieve_to_slot(mob/living/carbon/human/user, retrieval_slot)
+/obj/item/weapon/twohanded/breacher_hammer/retrieve_to_slot(mob/living/carbon/human/user, retrieval_slot)
 	if(!isturf(loc) || !user)
 		return FALSE
 
@@ -87,7 +87,7 @@
 /obj/item/weapon/shield/montage
 	name = "N30 montage shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'core_ru/icons/obj/items/st_spec.dmi'
+	icon = 'core_ru/icons/obj/items/breacher_spec.dmi'
 	icon_state = "metal_st"
 	item_icons = list(
 		WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
