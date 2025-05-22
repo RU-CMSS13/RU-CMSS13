@@ -554,6 +554,19 @@
 /obj/structure/machinery/power/apc/almayer/west,
 /turf/open/floor/plating/almayer/no_build,
 /area/almayer/stair_clone/upper/starboard_aft)
+"abD" = (
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "ARES StairsLower";
+	name = "\improper ARES Core Shutters"
+	},
+/obj/effect/step_trigger/ares_alert/public{
+	alert_id = "AresStairs";
+	alert_message = "Caution: Movement detected in ARES Core.";
+	cooldown_duration = 1200
+	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
+/turf/open/floor/almayer/no_build/test_floor4,
+/area/almayer/command/airoom)
 "abE" = (
 /turf/closed/wall/almayer,
 /area/almayer/living/basketball)
@@ -7127,11 +7140,6 @@
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
 "asG" = (
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "ARES Interior";
-	name = "\improper ARES Inner Chamber Shutters";
-	unacidable = 1
-	},
 /obj/effect/step_trigger/ares_alert/core,
 /obj/structure/sign/safety/terminal{
 	pixel_x = -18;
@@ -7141,8 +7149,10 @@
 	pixel_x = -18;
 	pixel_y = 6
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "ARES Interior";
+	name = "\improper ARES Inner Chamber Shutters"
 	},
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
@@ -20970,12 +20980,9 @@
 /obj/effect/step_trigger/ares_alert/mainframe,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES Mainframe Left";
-	name = "\improper ARES Mainframe Shutters";
-	unacidable = 1
+	name = "\improper ARES Mainframe Shutters"
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
-	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
 "bIs" = (
@@ -22321,8 +22328,7 @@
 /obj/effect/step_trigger/clone_cleaner,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES ReceptStairs2";
-	name = "\improper ARES Reception Shutters";
-	unacidable = 1
+	name = "\improper ARES Reception Shutters"
 	},
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
@@ -35616,8 +35622,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	dir = 4;
 	id = "ARES Operations Right";
-	name = "\improper ARES Operations Shutters";
-	unacidable = 1
+	name = "\improper ARES Operations Shutters"
 	},
 /obj/structure/pipes/standard/simple/hidden/supply/no_boom{
 	dir = 4
@@ -38624,8 +38629,7 @@
 /obj/effect/step_trigger/clone_cleaner,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES ReceptStairs2";
-	name = "\improper ARES Reception Stairway Shutters";
-	unacidable = 1
+	name = "\improper ARES Reception Stairway Shutters"
 	},
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
@@ -40780,11 +40784,6 @@
 /turf/open/floor/almayer/emeraldcorner/east,
 /area/almayer/squads/charlie)
 "jqP" = (
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "ARES Interior";
-	name = "\improper ARES Inner Chamber Shutters";
-	unacidable = 1
-	},
 /obj/effect/step_trigger/ares_alert/core,
 /obj/structure/sign/safety/laser{
 	pixel_x = 32;
@@ -40794,8 +40793,10 @@
 	pixel_x = 32;
 	pixel_y = 6
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "ARES Interior";
+	name = "\improper ARES Inner Chamber Shutters"
 	},
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
@@ -42347,9 +42348,6 @@
 	name = "\improper Security Vault";
 	req_access = null;
 	req_one_access_txt = "91;92"
-	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
 	},
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
@@ -47737,12 +47735,9 @@
 /obj/effect/step_trigger/ares_alert/mainframe,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES Mainframe Right";
-	name = "\improper ARES Mainframe Shutters";
-	unacidable = 1
+	name = "\improper ARES Mainframe Shutters"
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
-	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
 "mFX" = (
@@ -48274,13 +48269,10 @@
 "mRn" = (
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "ARES Interior";
-	name = "\improper ARES Inner Chamber Shutters";
-	unacidable = 1
+	name = "\improper ARES Inner Chamber Shutters"
 	},
 /obj/effect/step_trigger/ares_alert/core,
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
-	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
 "mRq" = (
@@ -58062,8 +58054,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	dir = 4;
 	id = "ARES Operations Left";
-	name = "\improper ARES Operations Shutters";
-	unacidable = 1
+	name = "\improper ARES Operations Shutters"
 	},
 /obj/structure/pipes/standard/simple/hidden/supply/no_boom{
 	dir = 4
@@ -58761,8 +58752,7 @@
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	dir = 4;
 	id = "ARES JoeCryo";
-	name = "\improper ARES Synth Bay Shutters";
-	unacidable = 1
+	name = "\improper ARES Synth Bay Shutters"
 	},
 /obj/structure/pipes/standard/simple/hidden/supply/no_boom{
 	dir = 4
@@ -69000,19 +68990,16 @@
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/medical/medical_science)
 "wkM" = (
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "ARES StairsLower";
-	name = "\improper ARES Core Shutters";
-	unacidable = 1
-	},
 /obj/effect/step_trigger/ares_alert/public{
 	alert_id = "AresStairs";
 	alert_message = "Caution: Movement detected in ARES Core.";
 	cooldown_duration = 1200
 	},
-/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore{
-	unacidable = 1
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "ARES StairsLower";
+	name = "\improper ARES Core Shutters"
 	},
+/obj/structure/machinery/door/poddoor/almayer/blended/ai_lockdown/aicore,
 /turf/open/floor/almayer/no_build/test_floor4,
 /area/almayer/command/airoom)
 "wkT" = (
@@ -131559,7 +131546,7 @@ viB
 dIi
 qLS
 ggF
-wkM
+abD
 fCo
 jvB
 ieF
