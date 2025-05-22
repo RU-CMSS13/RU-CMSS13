@@ -95,7 +95,7 @@
 	accuracy = HIT_ACCURACY_TIER_MAX
 	accurate_range = 12
 	max_range = 7
-	damage = 35
+	damage = 70
 	shell_speed = AMMO_SPEED_TIER_2
 	var/embed_object = /obj/item/sharp/explosive
 	var/mine_level = 0
@@ -232,7 +232,7 @@
 	create_flechette(P.loc, P)
 
 /datum/ammo/rifle/sharp/flechette/proc/create_flechette(loc, obj/projectile/shot_dart)
-	var/shrapnel_count = 8
+	var/shrapnel_count = 9
 	var/dispersion_angle = 20
 	create_shrapnel(loc, shrapnel_count, shot_dart.dir, dispersion_angle, shrapnel_type, shot_dart.weapon_cause_data, FALSE, 1)
 	apply_explosion_overlay(loc)
