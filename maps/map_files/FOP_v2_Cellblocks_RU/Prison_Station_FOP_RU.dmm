@@ -22511,6 +22511,10 @@
 "biZ" = (
 /turf/open/gm/river,
 /area/prison/residential/central)
+"bja" = (
+/obj/structure/machinery/fuelcell_recycler,
+/turf/open/floor/plating/prison,
+/area/prison/cellblock/mediumsec/west)
 "bjb" = (
 /turf/open/floor/prison/whitegreen/north,
 /area/prison/residential/central)
@@ -23042,6 +23046,16 @@
 /obj/item/pelt/drone,
 /turf/open/floor/prison/darkbrown2/east,
 /area/prison/residential/central)
+"bkB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/fuelcell_recycler,
+/turf/open/floor/plating/prison,
+/area/prison/cellblock/mediumsec/west)
+"bkC" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/largecrate/random/case/double,
+/turf/open/floor/plating/prison,
+/area/prison/cellblock/mediumsec/west)
 "bkD" = (
 /obj/effect/alien/weeds/node,
 /turf/open/floor/prison/sterile_white/southwest,
@@ -26990,9 +27004,6 @@
 /area/prison/cellblock/highsec/south/north)
 "bvx" = (
 /obj/effect/spider/spiderling,
-/obj/structure/broken_apc{
-	desc = "A large, armored behemoth capable of ferrying marines around. \nThis one is sitting nonfunctional. Who get it here?"
-	},
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/plating/prison,
 /area/prison/cellblock/mediumsec/west)
@@ -27101,7 +27112,7 @@
 /obj/effect/decal/remains/robot{
 	pixel_y = -12
 	},
-/obj/effect/decal/heavy_cable/cable_horizontal,
+/obj/effect/decal/heavy_cable/node_n_w_e,
 /turf/open/floor/plating/prison,
 /area/prison/cellblock/mediumsec/west)
 "bvS" = (
@@ -27145,6 +27156,7 @@
 /area/prison/hanger/main)
 "bvV" = (
 /obj/item/stack/sheet/metal,
+/obj/effect/decal/heavy_cable/node_n_w,
 /turf/open/floor/plating/prison,
 /area/prison/cellblock/mediumsec/west)
 "bvW" = (
@@ -91291,8 +91303,8 @@ cqM
 cqM
 cqM
 cqK
-cqM
-cqM
+bja
+aEJ
 btB
 bup
 cqM
@@ -91505,7 +91517,7 @@ cqM
 ulD
 cqN
 cqK
-oQy
+bkB
 bvR
 bvg
 buH
@@ -91719,7 +91731,7 @@ bwg
 mZt
 ead
 cqK
-oQy
+bkB
 bvV
 bvh
 cqM
@@ -91933,8 +91945,8 @@ hBy
 cqK
 cqK
 cqK
-oQy
-cqM
+bkC
+kCN
 cqN
 cqN
 btB
