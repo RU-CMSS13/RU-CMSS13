@@ -418,7 +418,7 @@
 	if(LAZYFIND(role_needs_cargo, role_in_charge))
    		//If the role needs cargo access, we need to add it to the ID card
 		var/obj/item/card/id/card = person_in_charge.get_idcard()
-    	if(card)
+		if(card)
 			var/list/access = card.access
 			access.Add(ACCESS_MARINE_CARGO)
 			announce_addendum += "\nReq access added to ID."
@@ -426,7 +426,7 @@
 	if(LAZYFIND(role_needs_id_console, role_in_charge))
    		//If the role needs cargo access, we need to add it to the ID card
 		var/obj/item/card/id/card = person_in_charge.get_idcard()
-    	if(card)
+		if(card)
 			var/list/access = card.access
 			access.Add(ACCESS_MARINE_DATABASE)
 			announce_addendum += "\nID console access added to ID."
