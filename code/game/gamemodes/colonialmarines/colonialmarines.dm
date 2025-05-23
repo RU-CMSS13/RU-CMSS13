@@ -409,6 +409,10 @@
 		if(card)
 			var/list/access = card.access
 			access.Add(ACCESS_MARINE_SENIOR)
+//RUCM START
+            access.Add(ACCESS_MARINE_CARGO)  // for req, if commander needs to give gear to marines
+			access.Add(ACCESS_MARINE_COMMAND) // for id console, if commander needs to give acess to someone who will give gear to marines
+//RUCM END
 			announce_addendum += "\nSenior Command access added to ID."
 
 	//does an announcement to the crew about the commander & alerts admins to that change for logs.
