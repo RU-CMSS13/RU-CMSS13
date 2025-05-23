@@ -416,7 +416,7 @@
 			announce_addendum += "\nSenior Command access added to ID."
 //RUCM START
 	if(LAZYFIND(role_needs_cargo, role_in_charge))
-   		//If the role needs cargo access, we need to add it to the ID card
+//If the role needs cargo access, we need to add it to the ID card
 		var/obj/item/card/id/card = person_in_charge.get_idcard()
 		if(card)
 			var/list/access = card.access
