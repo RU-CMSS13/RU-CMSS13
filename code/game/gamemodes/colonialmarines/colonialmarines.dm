@@ -365,10 +365,10 @@
 	var/mob/living/carbon/human/person_in_charge
 
 	var/list/role_needs_id = list(JOB_SO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
-	//RUCM START
+//RUCM START
 	var/list/role_needs_cargo = list(JOB_SO, JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
 	var/list/role_needs_id_console = list(JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
-	//RUCM END
+//RUCM END
 	var/list/role_needs_comms = list(JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
 	var/announce_addendum
 
