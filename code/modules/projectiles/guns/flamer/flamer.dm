@@ -2,7 +2,10 @@
 
 
 //FLAMETHROWER
-
+/* CM Original
+	name = "\improper M240A1 incinerator unit"
+	desc = "M240A1 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly."
+*/
 /obj/item/weapon/gun/flamer
 	name = "\improper core flamer item"
 	desc = "You shouldn't have this, report how you got this item on GitHub."
@@ -67,8 +70,10 @@
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_5 * 5)
 
+/* CM Original
 /obj/item/weapon/gun/flamer/unique_action(mob/user)
 	toggle_gun_safety()
+*/
 
 /obj/item/weapon/gun/flamer/gun_safety_handle(mob/user)
 	to_chat(user, SPAN_NOTICE("You [SPAN_BOLD(flags_gun_features & GUN_TRIGGER_SAFETY ? "extinguish" : "ignite")] the pilot light."))
@@ -85,6 +90,7 @@
 /obj/item/weapon/gun/flamer/update_icon(mob/user)
 	..()
 
+/*	CM Original
 	// Have to redo this here because we don't want the empty sprite when the tank is empty (just when it's not in the gun)
 	var/new_icon_state = base_gun_icon
 
@@ -93,11 +99,41 @@
 	icon_state = new_icon_state
 
 	if(current_mag && current_mag.reagents)
+
 		var/obj/item/ammo_magazine/flamer_tank/flamtank = current_mag
 		if(flamtank.stripe_icon)
 			var/image/I = image(icon, icon_state="[base_gun_icon]_strip")
 			I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
 			overlays += I
+*/
+// RUCM Start (Feline "Буратино")
+	var/new_icon_state = base_gun_icon
+	if(fuel_backpack)
+		icon = 'core_ru/Feline/icons/flamer_backpack.dmi'
+
+		if(!spec_item)
+			new_icon_state += "_backpack"
+
+		if(loc && istype(loc, /mob/living/carbon))
+			new_icon_state += "_hold"
+
+	if(has_empty_icon && !current_mag)
+		new_icon_state += "_e"
+	icon_state = new_icon_state
+
+	if(fuel_backpack)
+		if(current_mag && current_mag.reagents)
+			var/image/I = image('core_ru/Feline/icons/flamer_backpack.dmi', icon_state="[base_gun_icon][spec_item ? "" : "_backpack"]_strip")
+			I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
+			overlays += I
+	else
+		if(current_mag && current_mag.reagents)
+			var/obj/item/ammo_magazine/flamer_tank/flamtank = current_mag
+			if(flamtank.stripe_icon)
+				var/image/I = image(icon, icon_state="[base_gun_icon]_strip")
+				I.color = mix_color_from_reagents(current_mag.reagents.reagent_list)
+				overlays += I
+// RUCM End (Feline "Буратино")
 
 	if(!(flags_gun_features & GUN_TRIGGER_SAFETY))
 		var/obj/item/attachable/attached_gun/flamer_nozzle/nozzle = locate() in contents
@@ -166,6 +202,12 @@
 	return NONE
 
 /obj/item/weapon/gun/flamer/reload(mob/user, obj/item/ammo_magazine/magazine)
+// RUCM Start
+	if (fuel_backpack)
+		to_chat(user, SPAN_WARNING("К огнемёту уже подключен шланг от ранца!"))
+		return
+// RUCM End
+
 	if(!magazine || !istype(magazine))
 		to_chat(user, SPAN_WARNING("That's not a magazine!"))
 		return
@@ -203,6 +245,36 @@
 	return 1
 
 /obj/item/weapon/gun/flamer/unload(mob/user, reload_override = 0, drop_override = 0)
+// RUCM Start
+	if(fuel_backpack)
+		if (current_mag in list(fuel_backpack.fuel_standart, fuel_backpack.fuel_green, fuel_backpack.fuel_custom))
+			if(user)
+				user.visible_message(
+					SPAN_NOTICE("[user] отсоединил топливный шланг от огнемёта."),
+					SPAN_NOTICE("Отсоединяю топливный шланг от огнемёта."))
+				var/obj/item/flamer_hose/I = new()
+				user.put_in_hands(I)
+				playsound(user, unload_sound, 25, 1)
+
+			// Сброс бонусов
+			set_fire_delay(35)
+			var/obj/item/attachable/attached_gun/flamer_nozzle/nozzle = locate() in contents
+			if(nozzle)
+				nozzle.projectile_type = /datum/ammo/flamethrower
+				nozzle.delay_mod = 0
+
+			var/obj/item/attachable/attached_gun/extinguisher/ext = locate() in contents
+			if(ext)
+				ext.internal_extinguisher.power = 7
+				ext.delay_mod = 0
+
+			fuel_backpack.linked_flamer = null	// убрать линк в рюкзаке
+			current_mag = null					// разрядить
+			fuel_backpack = null				// убрать линк в огнемёте
+			update_icon()
+			return
+// RUCM End
+
 	if(!current_mag)
 		return //no magazine to unload
 	if(drop_override || !user) //If we want to drop it on the ground or there's no user.
@@ -419,9 +491,11 @@
 	if(current_mag)
 		to_chat(user, SPAN_WARNING("The gauge reads: <b>[floor(current_mag.get_ammo_percent())]</b>% fuel remains!"))
 
+/*
 /obj/item/weapon/gun/flamer/m240
 	name = "\improper M240A1 incinerator unit"
 	desc = "M240A1 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly."
+*/
 
 /obj/item/weapon/gun/flamer/m240/underextinguisher
 	starting_attachment_types = list(/obj/item/attachable/attached_gun/extinguisher)
@@ -524,7 +598,12 @@
 			to_chat(user, SPAN_WARNING("You don't seem to know how to use [src]..."))
 			return FALSE
 
+/* CM Original
 /obj/item/weapon/gun/flamer/m240/spec/proc/link_fuelpack(mob/user)
+*/
+// RUCM Start
+/obj/item/weapon/gun/flamer/m240/spec/link_fuelpack(mob/user)
+// RUCM End
 	if (fuelpack)
 		fuelpack.linked_flamer = null
 		fuelpack = null
