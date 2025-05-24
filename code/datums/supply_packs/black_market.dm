@@ -124,11 +124,11 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 			new /obj/item/clothing/mask/gas/pmc(src)
 			new /obj/item/storage/backpack/pmc(src)
 		if(8) //pmc leader
-			new /obj/item/clothing/under/marine/veteran/pmc(src)
+			new /obj/item/clothing/under/marine/veteran/pmc/leader(src)
 			new /obj/item/clothing/head/helmet/marine/veteran/pmc/leader(src)
 			new /obj/item/clothing/suit/storage/marine/veteran/pmc/leader(src)
 			new /obj/item/clothing/gloves/marine/veteran(src)
-			new /obj/item/clothing/mask/gas/pmc(src)
+			new /obj/item/clothing/mask/gas/pmc/leader(src)
 			new /obj/item/storage/backpack/pmc(src)
 		if(9) //clf bucket
 			new /obj/item/clothing/under/colonist/clf(src)
