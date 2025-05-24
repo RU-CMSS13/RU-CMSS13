@@ -57,6 +57,7 @@
 #include "game\objects\items\weapons\breacher_equip.dm"
 #include "game\objects\items\weapons\breacher_hammer_stacks.dm"
 #include "game\objects\items\pamphlets.dm"
+#include "game\objects\structures\props.dm"
 #include "game\objects\structures\table_racks.dm"
 #include "game\objects\structures\window.dm"
 #include "game\turfs\closed.dm"
