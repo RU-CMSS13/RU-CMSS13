@@ -365,6 +365,9 @@
 	var/mob/living/carbon/human/person_in_charge
 
 	var/list/role_needs_id = list(JOB_SO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
+//RUCM START
+	var/list/role_needs_cargo = list(JOB_SO, JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
+//RUCM END
 	var/list/role_needs_comms = list(JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
 	var/announce_addendum
 
@@ -410,6 +413,15 @@
 			var/list/access = card.access
 			access.Add(ACCESS_MARINE_SENIOR)
 			announce_addendum += "\nSenior Command access added to ID."
+//RUCMSTART
+	if(LAZYFIND(role_needs_cargo, role_in_charge))
+//If the role needs cargo access, we need to add it to the ID card
+		var/obj/item/card/id/card = person_in_charge.get_idcard()
+		if(card)
+			var/list/access = card.access
+			access.Add(ACCESS_MARINE_CARGO)
+			announce_addendum += "\nReq access added to ID."
+//RUCM END
 
 	//does an announcement to the crew about the commander & alerts admins to that change for logs.
 	shipwide_ai_announcement("Due to the absence of command staff, commander authority now falls to [role_in_charge] [person_in_charge], who will assume command until further notice. Please direct all inquiries and follow instructions accordingly. [announce_addendum]", MAIN_AI_SYSTEM, 'sound/misc/interference.ogg')
