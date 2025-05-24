@@ -1,3 +1,8 @@
+/**
+ * #DEFINE_SKILL
+ * Дефайны навыков
+ */
+
 //spec_weapons skill
 //hidden. who can and can't use specialist weapons
 #define SKILL_SPEC_DEFAULT 0
@@ -23,3 +28,16 @@
 #define SKILL_SPEC_UPP 9
 /// Can use ALL specialist weapons
 #define SKILL_SPEC_ALL 10
+
+///////////////////////
+// Навык пулемётчика //
+#define SKILL_MACHINGUNNER "machinegunner"
+
+#define SKILL_MACHINGUNNER_DEFAULT 0
+#define SKILL_MACHINGUNNER_TRAINED 1   // Возможность использовать расширенные возможности пулемёта
+#define SKILL_MACHINGUNNER_MAX 1
+
+#define COMSIG_MOB_MG_SCOPE "mob_mg_scope"
+#define COMSIG_MOB_MG_TURN_LEFT "mob_mg_turn_left"
+#define COMSIG_MOB_MG_TURN_RIGHT "mob_mg_turn_right"
+///////////////////////

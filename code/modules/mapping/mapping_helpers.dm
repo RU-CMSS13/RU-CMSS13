@@ -161,3 +161,65 @@ GLOBAL_LIST_INIT_TYPED(sentry_spawns, /obj/effect/sentry_landmark, list())
 
 /obj/effect/sentry_landmark/lz_2/bottom_right
 	position = SENTRY_BOTTOM_RIGHT
+
+// RUCM Start (Feline "Фоботы")
+GLOBAL_LIST_INIT_TYPED(fobots_spawns, /obj/effect/fobots_landmark, list())
+
+//  Ручная установка спавна
+/obj/effect/fobots_landmark
+	icon = 'core_ru/Feline/icons/fobots.dmi'
+	icon_state = "crate_fob_mats_map"
+	var/abstract_type = /obj/effect/fobots_landmark
+	var/landing_zone
+	var/position
+
+
+/obj/effect/fobots_landmark/Initialize(mapload, ...)
+	. = ..()
+
+	if(type == abstract_type)
+		#if !defined(UNIT_TESTS)
+		log_mapping("A [type] was created that should not have been! Use a subtype instead.")
+		#endif
+		return INITIALIZE_HINT_QDEL
+
+	LAZYADDASSOCLIST(GLOB.fobots_spawns[landing_zone], position, get_turf(src))
+
+	return INITIALIZE_HINT_QDEL
+
+/////////////////////////////
+// Картостроительные метки //
+// ЛЗ 1
+/obj/effect/fobots_landmark/lz_1
+	abstract_type = /obj/effect/fobots_landmark/lz_1
+	landing_zone = /obj/docking_port/stationary/marine_dropship/lz1
+
+/obj/effect/fobots_landmark/lz_1/supplies
+	icon_state = "crate_fob_ammo_map"
+	position = FOBOTS_SUPPLIES
+
+/obj/effect/fobots_landmark/lz_1/fort
+	icon_state = "crate_fob_mats_map"
+	position = FOBOTS_FORT
+
+/obj/effect/fobots_landmark/lz_1/turret
+	icon_state = "crate_fob_turret_map"
+	position = FOBOTS_TURRET
+
+// ЛЗ 2
+/obj/effect/fobots_landmark/lz_2
+	abstract_type = /obj/effect/fobots_landmark/lz_2
+	landing_zone = /obj/docking_port/stationary/marine_dropship/lz2
+
+/obj/effect/fobots_landmark/lz_2/supplies
+	icon_state = "crate_fob_ammo_map"
+	position = FOBOTS_SUPPLIES
+
+/obj/effect/fobots_landmark/lz_2/fort
+	icon_state = "crate_fob_mats_map"
+	position = FOBOTS_FORT
+
+/obj/effect/fobots_landmark/lz_2/turret
+	icon_state = "crate_fob_turret_map"
+	position = FOBOTS_TURRET
+// RUCM End (Feline "Фоботы")

@@ -194,6 +194,26 @@
 		options += get_valid_sentry_turfs(right-1, top-7, z, width=2, height=6, structures_to_ignore=structures_to_break)
 	spawn_lz_sentry(pick(options), structures_to_break)
 
+// RUCM Start (Feline "Фоботы")
+	// Фоботы: Припасы
+	options.Cut()
+	if(GLOB.fobots_spawns[dropship_type]?[FOBOTS_SUPPLIES])
+		options += GLOB.fobots_spawns[dropship_type][FOBOTS_SUPPLIES]
+		spawn_fobots_supplies(pick(options), structures_to_break)
+
+	// Фоботы: Строительные материалы
+	options.Cut()
+	if(GLOB.fobots_spawns[dropship_type]?[FOBOTS_FORT])
+		options += GLOB.fobots_spawns[dropship_type][FOBOTS_FORT]
+		spawn_fobots_fort(pick(options), structures_to_break)
+
+	// Фоботы: Турель
+	options.Cut()
+	if(GLOB.fobots_spawns[dropship_type]?[FOBOTS_TURRET])
+		options += GLOB.fobots_spawns[dropship_type][FOBOTS_TURRET]
+		spawn_fobots_turret(pick(options), structures_to_break)
+// RUCM End (Feline "Фоботы")
+
 ///Returns a list of non-dense turfs using the given block arguments ignoring the provided structure types
 /datum/game_mode/colonialmarines/proc/get_valid_sentry_turfs(left, bottom, z, width, height, list/structures_to_ignore)
 	var/valid_turfs = list()
@@ -219,6 +239,29 @@
 	droppod.special_structure_damage = 500
 	droppod.drop_time = 0
 	droppod.launch(target)
+
+// RUCM Start (Feline "Фоботы")
+/datum/game_mode/colonialmarines/proc/spawn_fobots_supplies(turf/target, list/structures_to_break)
+	var/obj/structure/droppod/equipment/droppod_supplies = new(target, /obj/structure/closet/crate/fobots_crate_supplies)
+	droppod_supplies.special_structures_to_damage = structures_to_break
+	droppod_supplies.special_structure_damage = 500
+	droppod_supplies.drop_time = rand(1, 5)
+	droppod_supplies.launch(target)
+
+/datum/game_mode/colonialmarines/proc/spawn_fobots_fort(turf/target, list/structures_to_break)
+	var/obj/structure/droppod/equipment/droppod_fort = new(target, /obj/structure/closet/crate/fobots_crate_fort)
+	droppod_fort.special_structures_to_damage = structures_to_break
+	droppod_fort.special_structure_damage = 500
+	droppod_fort.drop_time = rand(1, 5)
+	droppod_fort.launch(target)
+
+/datum/game_mode/colonialmarines/proc/spawn_fobots_turret(turf/target, list/structures_to_break)
+	var/obj/structure/droppod/equipment/droppod_turret = new(target, /obj/structure/closet/crate/fobots_crate_turret)
+	droppod_turret.special_structures_to_damage = structures_to_break
+	droppod_turret.special_structure_damage = 500
+	droppod_turret.drop_time = rand(1, 5)
+	droppod_turret.launch(target)
+// RUCM End (Feline "Фоботы")
 
 ///Creates an OB warning at each LZ to warn of the miasma and then spawns the miasma
 /datum/game_mode/colonialmarines/proc/start_lz_hazards()
