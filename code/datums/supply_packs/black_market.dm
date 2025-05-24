@@ -79,7 +79,10 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 
 /obj/structure/largecrate/black_market/confiscated_equipment/Initialize()
 	. = ..()
+/*
 	switch(rand(1,6))
+*/
+	switch(rand(1,19))
 		if(1) //pmc
 			new /obj/item/clothing/under/marine/veteran/pmc(src)
 			new /obj/item/clothing/head/helmet/marine/veteran/pmc(src)
@@ -112,6 +115,87 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 			new /obj/item/clothing/glasses/sunglasses/big(src)
 			new /obj/item/clothing/suit/storage/marine/light/vest(src)
 			new /obj/item/clothing/under/tshirt/gray_blu(src)
+//RUCM Start
+		if(7) //pmc standart
+			new /obj/item/clothing/under/marine/veteran/pmc(src)
+			new /obj/item/clothing/head/helmet/marine/veteran/pmc/enclosed(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/pmc(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/clothing/mask/gas/pmc(src)
+			new /obj/item/storage/backpack/pmc(src)
+		if(8) //pmc leader
+			new /obj/item/clothing/under/marine/veteran/pmc/leader(src)
+			new /obj/item/clothing/head/helmet/marine/veteran/pmc/leader(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/pmc/leader(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/clothing/mask/gas/pmc/leader(src)
+			new /obj/item/storage/backpack/pmc(src)
+		if(9) //clf bucket
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/partial(src)
+			new /obj/item/clothing/head/militia/bucket(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(10) //clf brace
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/brace(src)
+			new /obj/item/clothing/head/headband/rebel(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(11) //clf leader
+			new /obj/item/clothing/under/colonist/clf(src)
+			new /obj/item/clothing/suit/storage/militia/vest(src)
+			new /obj/item/clothing/head/beret/sec/hos(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(12) //upp engi
+			new /obj/item/clothing/head/helmet/marine/veteran/UPP/engi(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(13) //upp heavy
+			new /obj/item/clothing/head/helmet/marine/veteran/UPP/heavy(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(14) //upp leader
+			new /obj/item/clothing/head/uppcap/beret(src)
+			new /obj/item/clothing/under/marine/veteran/UPP(src)
+			new /obj/item/clothing/suit/storage/marine/faction/UPP/heavy(src)
+			new /obj/item/clothing/shoes/marine/upp/knife(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(15) //freelancer with armored cap
+			new /obj/item/clothing/head/freelancer(src)
+			new /obj/item/clothing/under/marine/veteran/freelancer(src)
+			new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(16) //freelancer warlord
+			new /obj/item/clothing/head/freelancer/beret(src)
+			new /obj/item/clothing/under/marine/veteran/freelancer(src)
+			new /obj/item/clothing/suit/storage/marine/faction/freelancer(src)
+			new /obj/item/clothing/gloves/marine/veteran(src)
+			new /obj/item/storage/backpack/lightpack/five_slot(src)
+		if(18) //RMC
+			new /obj/item/clothing/head/helmet/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light(src)
+			new /obj/item/clothing/under/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/shoes/royal_marine/knife(src)
+			new /obj/item/storage/backpack/pmc(src)
+		if(19) //RMC leader
+			new /obj/item/clothing/head/beret/royal_marine/team_leader(src)
+			new /obj/item/clothing/suit/storage/marine/veteran/royal_marine/light/team_leader(src)
+			new /obj/item/clothing/under/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/gloves/marine/veteran/royal_marine(src)
+			new /obj/item/clothing/shoes/royal_marine/knife(src)
+			new /obj/item/storage/backpack/pmc(src)
+//RUCM End
 
 /datum/supply_packs/contraband/seized/confiscated_weaponry
 	name = "seized foreign weaponry crate"
@@ -126,7 +210,10 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 	spawn_guns() //the crate gives 2 guns
 
 /obj/structure/largecrate/black_market/confiscated_weaponry/proc/spawn_guns()
+/*
 	switch(rand(1, 5))
+*/
+	switch(rand(1, 12))
 		if(1) //pmc
 			new /obj/item/weapon/gun/smg/fp9000(src)
 			new /obj/item/ammo_magazine/smg/fp9000(src)
@@ -161,6 +248,41 @@ Non-USCM items, from CLF, UPP, colonies, etc. Mostly combat-related.
 			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
 			new /obj/item/ammo_magazine/rifle/mar40(src)
 			new /obj/item/ammo_magazine/rifle/mar40(src)
+//RUCM Start
+		if(6)
+			new /obj/item/weapon/gun/rifle/l42a/abr40(src)
+			new /obj/item/ammo_magazine/rifle/l42a/abr40/holo_target(src)
+			new /obj/item/ammo_magazine/rifle/l42a/abr40(src)
+			new /obj/item/ammo_magazine/rifle/l42a/abr40(src)
+		if(7)
+			new /obj/item/weapon/gun/rifle/mar40/lmg(src)
+			new /obj/item/ammo_magazine/rifle/mar40/lmg(src)
+		if(8)
+			new /obj/item/weapon/gun/rifle/type71(src)
+			new /obj/item/ammo_magazine/rifle/type71(src)
+			new /obj/item/ammo_magazine/rifle/type71(src)
+		if(9)
+			new /obj/item/weapon/gun/smg/fp9000/pmc(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+			new /obj/item/ammo_magazine/smg/fp9000(src)
+		if(10)
+			new /obj/item/weapon/gun/rifle/nsg23/no_lock(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/extended(src)
+			new /obj/item/ammo_magazine/rifle/nsg23/ap(src)
+			new /obj/item/ammo_magazine/rifle/nsg23(src)
+		if(11)
+			new /obj/item/weapon/gun/rifle/mar40/carbine(src)
+			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
+			new /obj/item/ammo_magazine/rifle/mar40/extended(src)
+			new /obj/item/ammo_magazine/rifle/mar40(src)
+		if(12) //RMC
+			new /obj/item/weapon/gun/smg/p90/twe(src)
+			new /obj/item/ammo_magazine/smg/p90/twe(src)
+			new /obj/item/ammo_magazine/smg/p90/twe(src)
+//RUCM End
 
 
 /* Misc. Individual Guns */
