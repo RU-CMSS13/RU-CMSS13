@@ -23,6 +23,11 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_liaison, list(
 	list("Pink Workwear", 0, /obj/item/clothing/under/colonist/workwear/pink, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 	list("Green Workwear", 0, /obj/item/clothing/under/colonist/workwear/green, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 	list("Blue Workwear", 0, /obj/item/clothing/under/colonist/workwear/blue, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
+	list("Expensive Suit", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
+	list("Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/jacket, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
+	list("Black Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/jacket_only, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
+	list("Brown Expensive Suit", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/brown, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
+	list("Brown Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/brown/jacket, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR)
 
 	list("SUIT (CHOOSE 5)", 0, null, null, null),
 	list("Black Suit Jacket", 0, /obj/item/clothing/suit/storage/jacket/marine/corporate/black, CIVILIAN_CAN_BUY_SUIT, VENDOR_ITEM_RECOMMENDED),
