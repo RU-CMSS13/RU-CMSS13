@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_liaison, list(
 	list("Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/jacket, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 	list("Black Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/jacket_only, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 	list("Brown Expensive Suit", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/brown, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
-	list("Brown Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/brown/jacket, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR)
+	list("Brown Expensive Jacket", 0, /obj/item/clothing/under/hybrisa/wy_exec_suit_uniform/brown/jacket, CIVILIAN_CAN_BUY_UNIFORM, VENDOR_ITEM_REGULAR),
 
 	list("SUIT (CHOOSE 5)", 0, null, null, null),
 	list("Black Suit Jacket", 0, /obj/item/clothing/suit/storage/jacket/marine/corporate/black, CIVILIAN_CAN_BUY_SUIT, VENDOR_ITEM_RECOMMENDED),
