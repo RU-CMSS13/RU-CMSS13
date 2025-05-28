@@ -29,7 +29,10 @@
 	name = "Fiorina - Resin Tumor"
 	icon_state = "tumor0"
 	temperature = 309.15 //its uh, gettin' kinda warm in here SL...
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 	unoviable_timer = FALSE
 
 /area/fiorina/tumor/deep

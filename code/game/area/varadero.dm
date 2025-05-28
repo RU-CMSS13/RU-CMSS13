@@ -45,7 +45,10 @@
 
 /area/varadero/interior_protected
 	name = "New Varadero - Interior"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	icon_state = "NV_no_CAS"
 

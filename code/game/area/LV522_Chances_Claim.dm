@@ -452,25 +452,40 @@
 /area/lv522/atmos/east_reactor/north
 	name = "Atmospheric Processor - Outer East Reactor - North"
 	icon_state = "yellow"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/east_reactor/south
 	name = "Atmospheric Processor - Outer East Reactor - south"
 	icon_state = "red"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/east_reactor/south/cas
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/east_reactor/east
 	name = "Atmospheric Processor - Outer East Reactor - east"
 	icon_state = "green"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/east_reactor/west
 	name = "Atmospheric Processor - Outer East Reactor - west"
 	icon_state = "purple"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/west_reactor
 	name = "Atmospheric Processor - Western Reactor"
@@ -479,34 +494,55 @@
 /area/lv522/atmos/cargo_intake
 	name = "Atmospheric Processor - Cargo Intake"
 	icon_state = "yellow"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/command_centre
 	name = "Atmospheric Processor - Central Command"
 	icon_state = "red"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/north_command_centre
 	name = "Atmospheric Processor - North Command Centre Checkpoint"
 	icon_state = "green"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/filt
 	name = "Atmospheric Processor - Filtration System"
 	icon_state = "mechbay"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/way_in_command_centre
 	name = "Atmospheric Processor - North Corpo Reactor Entrance"
 	icon_state = "blue"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/sewer
 	name = "Atmospheric Processor - Sewer"
 	icon_state = "red"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/lv522/atmos/reactor_garage
 	name = "Atmospheric Processor - Garage"
 	icon_state = "green"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS

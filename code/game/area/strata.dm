@@ -401,7 +401,10 @@ EXTERIOR is FUCKING FREEZING, and refers to areas out in the open and or exposed
 	name = "Engineering Parts Storage Exterior"
 	icon_state = "outpost_engi_4"
 	minimap_color = MINIMAP_AREA_ENGI_CAVE
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 
 /area/strata/ag/interior/outside/bball //come on and SLAM.
 	name = "Outpost Basket Ball Court"
@@ -412,7 +415,10 @@ EXTERIOR is FUCKING FREEZING, and refers to areas out in the open and or exposed
 /area/strata/ag/interior/outside/bball/cave //come on BURST AND DIE.
 	name = "Outpost - B-Ball Caves"
 	icon_state = "hive_1"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	minimap_color = MINIMAP_AREA_CAVES_DEEP
 	unoviable_timer = FALSE
 

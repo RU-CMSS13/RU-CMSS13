@@ -257,7 +257,10 @@
 
 // Laboratory proper
 /area/bigredv2/caves/lambda
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_ALMAYER
 	sound_environment = SOUND_ENVIRONMENT_ROOM
@@ -285,7 +288,10 @@
 /area/bigredv2/caves_lambda
 	name = "\improper Lambda Lab Caves"
 	icon_state = "caves_lambda"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -378,7 +384,10 @@
 /area/bigredv2/caves
 	name = "\improper Unknown Area"
 	icon_state = "bluenew"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -394,7 +403,10 @@
 	unoviable_timer = FALSE
 
 /area/bigredv2/caves/eta
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_ALMAYER
 	sound_environment = SOUND_ENVIRONMENT_ROOM
@@ -589,7 +601,10 @@
 /area/bigredv2/caves_virology
 	name = "\improper Virology Caves"
 	icon_state = "caves_virology"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -599,7 +614,10 @@
 /area/bigredv2/caves_sw
 	name = "\improper Southwestern Caves"
 	icon_state = "caves_sw"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -609,7 +627,10 @@
 /area/bigredv2/caves_research
 	name = "\improper Wey-Yu Research Lab Caves"
 	icon_state = "caves_research"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -621,7 +642,10 @@
 /area/bigredv2/caves_se
 	name = "\improper Southeastern Caves"
 	icon_state = "caves_se"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -632,7 +656,10 @@
 /area/bigredv2/caves_east
 	name = "\improper Eastern Caves"
 	icon_state = "caves_east"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE
@@ -643,7 +670,10 @@
 /area/bigredv2/caves_north
 	name = "\improper Northern Caves"
 	icon_state = "caves_north"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	ceiling_muffle = FALSE
 	ambience_exterior = AMBIENCE_CAVE

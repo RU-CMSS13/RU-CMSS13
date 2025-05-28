@@ -170,7 +170,10 @@
 /area/shiva/interior/caves
 	name = "Shiva's Snowball - Caves"
 	icon_state = "caves0"
+/*
 	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/shiva/interior/caves/right_spiders
 	name = "Shiva's Snowball - Forgotten Passage"

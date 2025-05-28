@@ -227,7 +227,10 @@
 	ambience_exterior = AMBIENCE_CAVE
 	soundscape_playlist = SCAPE_PL_CAVE
 	soundscape_interval = 25
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	sound_environment = SOUND_ENVIRONMENT_AUDITORIUM
 	minimap_color = MINIMAP_AREA_CAVES
 	unoviable_timer = FALSE
