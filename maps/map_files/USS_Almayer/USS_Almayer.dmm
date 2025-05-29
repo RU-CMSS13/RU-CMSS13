@@ -11622,6 +11622,12 @@
 /turf/open/floor/almayer/silver/northwest,
 /area/almayer/command/computerlab)
 "aDa" = (
+/obj/structure/machinery/power/apc/almayer/hardened/north{
+	cell_type = /obj/item/cell/hyper
+	},
+/turf/open/floor/plating,
+/area/almayer/command/aist_office)
+"aDb" = (
 /obj/item/device/radio/intercom{
 	frequency = 1500;
 	name = "AI Core Intercom";
@@ -11629,14 +11635,6 @@
 	},
 /turf/open/floor/almayer/silver/west,
 /area/almayer/hallways/upper/midship_hallway)
-"aDb" = (
-/obj/structure/machinery/camera/autoname/almayer/containment/ares{
-	dir = 8;
-	c_tag = "AI - Reception Desk";
-	autoname = 0
-	},
-/turf/open/floor/almayer/aicore/no_build,
-/area/almayer/command/airoom)
 "aDc" = (
 /obj/structure/machinery/vending/coffee,
 /turf/open/floor/almayer/mono,
@@ -11652,11 +11650,13 @@
 /turf/open/floor/almayer/mono,
 /area/almayer/hallways/upper/fore_hallway)
 "aDe" = (
-/obj/structure/machinery/power/apc/almayer/hardened/north{
-	cell_type = /obj/item/cell/hyper
+/obj/structure/machinery/camera/autoname/almayer/containment/ares{
+	dir = 8;
+	c_tag = "AI - Reception Desk";
+	autoname = 0
 	},
-/turf/open/floor/plating,
-/area/almayer/command/aist_office)
+/turf/open/floor/almayer/aicore/no_build,
+/area/almayer/command/airoom)
 "aDf" = (
 /turf/closed/wall/almayer,
 /area/almayer/hallways/upper/fore_hallway)
@@ -111852,7 +111852,7 @@ rpV
 cGO
 cGO
 cGO
-aDa
+aDb
 cGO
 kaO
 cGO
@@ -113882,7 +113882,7 @@ mOi
 mOi
 mOi
 xdA
-aDb
+aDe
 uUB
 aqU
 aBQ
@@ -131795,7 +131795,7 @@ asZ
 vXh
 daz
 daz
-aDe
+aDa
 daz
 ebN
 ebN
