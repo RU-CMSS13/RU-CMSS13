@@ -45,9 +45,9 @@
 		gear_preset = /datum/equipment_preset/uscm_event/ai_tech
 
 /datum/job/special/uscm/ai_tech/check_whitelist_status(mob/user)
-	if(check_rights(R_PERMISSIONS, show_msg = FALSE))
+	if(user.client.check_whitelist_status(WHITELIST_SYNTHETIC_COUNCIL))
 		return TRUE
-	return FALSE
+	return ..()
 
 /datum/job/special/uscm/ai_tech/generate_entry_message()
 	entry_message_body = "You are a [corporate ? FACTION_WY : FACTION_MARINE] AI Service Technician temporarily assigned to the [MAIN_SHIP_NAME]. Your goal is to ensure the onboard AI, [MAIN_AI_SYSTEM], is operating effectively. Your job involves heavy roleplay and requires you to behave like [corporate ? "a senior corporate representative, remaining in character at all times.<br>As a Weyland Yutani Technician you have access to the Corporate Office aboard the USS Almayer. Although you should cooperate with the onboard Liaison, you are not their subordinate nor they yours. You should help The Company interests where applicable but do not abuse your access to the AI Systems." : "an officer and to stay in character at all times. You are required to adhere to and obey <a href='"+LAW_PLACEHOLDER+"'>Marine Law</a>. Failure to do so may result in punitive action against you. Godspeed.\n\nThe access code for APOLLO Interface is [GLOB.ares_link.code_apollo].\nThe access code for ARES Interface is [GLOB.ares_link.code_interface]."]"
