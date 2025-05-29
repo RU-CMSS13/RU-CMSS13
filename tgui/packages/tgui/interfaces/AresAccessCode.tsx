@@ -2,12 +2,16 @@ import { useBackend } from '../backend';
 import { Box, Button, Flex } from '../components';
 import { Window } from '../layouts';
 
+type BackendData = {
+  local_current_menu: keyof typeof PAGES;
+};
+
 const PAGES = {
   login: () => Login,
 };
 
 export const AresAccessCode = (props) => {
-  const { data } = useBackend();
+  const { data } = useBackend<BackendData>();
   const { local_current_menu } = data;
   const PageComponent = PAGES[local_current_menu]();
 
