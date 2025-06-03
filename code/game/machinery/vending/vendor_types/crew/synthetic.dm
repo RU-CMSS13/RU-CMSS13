@@ -114,6 +114,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("Tool Webbing", 0, /obj/item/clothing/accessory/storage/tool_webbing/equipped, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 //RUCM END
 		list("Drop Pouch", 0, /obj/item/clothing/accessory/storage/droppouch, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
+		list("Black Drop Pouch", 0, /obj/item/clothing/accessory/storage/droppouch/black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 
 		list("SHOES (CHOOSE 1)", 0, null, null, null),
 		list("Boots", 0, /obj/item/clothing/shoes/marine/knife, MARINE_CAN_BUY_SHOES, VENDOR_ITEM_REGULAR),
@@ -550,22 +551,22 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 	path = /obj/item/clothing/accessory/armband/medgreen
 
 /datum/gear/synthetic/blue_tie
-	path = /obj/item/clothing/accessory/blue
+	path = /obj/item/clothing/accessory/tie
 
 /datum/gear/synthetic/green_tie
-	path = /obj/item/clothing/accessory/green
+	path = /obj/item/clothing/accessory/tie/green
 
 /datum/gear/synthetic/black_tie
-	path = /obj/item/clothing/accessory/black
+	path = /obj/item/clothing/accessory/tie/black
 
 /datum/gear/synthetic/gold_tie
-	path = /obj/item/clothing/accessory/gold
+	path = /obj/item/clothing/accessory/tie/gold
 
 /datum/gear/synthetic/red_tie
-	path = /obj/item/clothing/accessory/red
+	path = /obj/item/clothing/accessory/tie/red
 
 /datum/gear/synthetic/purple_tie
-	path = /obj/item/clothing/accessory/purple
+	path = /obj/item/clothing/accessory/tie/purple
 
 /datum/gear/synthetic/dress_gloves
 	path = /obj/item/clothing/gloves/marine/dress

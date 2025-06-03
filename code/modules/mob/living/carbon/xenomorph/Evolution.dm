@@ -194,6 +194,10 @@
 	transfer_observers_to(new_xeno)
 	new_xeno._status_traits = _status_traits
 
+	// Freshly evolved xenos emerge standing.
+	// This resets density and resting status traits.
+	set_body_position(STANDING_UP)
+
 	qdel(src)
 	new_xeno.xeno_jitter(25)
 
