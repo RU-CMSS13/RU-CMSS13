@@ -1393,6 +1393,9 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 /obj/structure/machinery/computer/supply/asrs/vehicle/Initialize()
 	. = ..()
 
+	if(!GLOB.VehicleElevatorConsole)
+		GLOB.VehicleElevatorConsole = src
+
 	vehicles = list(
 /*
 		new /datum/vehicle_order/tank/plain
@@ -1400,11 +1403,11 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 //RUCM START
 		new /datum/vehicle_order/tank/plain,
 		new /datum/vehicle_order/apc/max,
-//RUCM END
 	)
 
-	if(!GLOB.VehicleElevatorConsole)
-		GLOB.VehicleElevatorConsole = src
+/datum/vehicle_order/arc/ru/has_vehicle_lock()
+	return
+//RUCM END
 
 /obj/structure/machinery/computer/supply/asrs/vehicle/Destroy()
 	GLOB.VehicleElevatorConsole = null

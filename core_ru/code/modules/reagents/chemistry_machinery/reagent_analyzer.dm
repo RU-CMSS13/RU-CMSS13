@@ -35,3 +35,7 @@
 	else
 		to_chat(user, SPAN_WARNING("[src] only accepts samples in vials."))
 		return
+
+/obj/structure/machinery/reagent_analyzer/skilless/arc
+	icon = 'core_ru/icons/obj/vehicles/interiors/arc.dmi'
+	dir = 4
