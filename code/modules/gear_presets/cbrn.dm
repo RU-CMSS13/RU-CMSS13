@@ -43,7 +43,12 @@
 	switch(pick("flamethrower", "mk2"))
 		if("flamethrower")
 			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/underextinguisher(new_human), WEAR_J_STORE)
+/* CM Original
 			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(new_human), WEAR_BACK)
+*/
+// RUCM Start (Feline "Буратино")
+			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/feline_flamer_backpack(new_human), WEAR_BACK)
+// RUCM End (Feline "Буратино")
 			new_human.equip_to_slot_or_del(new /obj/item/storage/belt/gun/m4a3/mod88(new_human), WEAR_WAIST)
 			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank(new_human), WEAR_IN_BACK)
 			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank(new_human), WEAR_IN_BACK)
@@ -90,7 +95,12 @@
 	switch(pick("flamethrower", "mk2"))
 		if("flamethrower")
 			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/underextinguisher(new_human), WEAR_J_STORE)
+/* CM Original
 			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/engineerpack/flamethrower/kit(new_human), WEAR_BACK)
+*/
+// RUCM Start (Feline "Буратино")
+			new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/feline_flamer_backpack(new_human), WEAR_BACK)
+// RUCM End (Feline "Буратино")
 			new_human.equip_to_slot_or_del(new /obj/item/storage/belt/gun/m4a3/mod88(new_human), WEAR_WAIST)
 			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank(new_human), WEAR_IN_BACK)
 			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank(new_human), WEAR_IN_BACK)
@@ -216,8 +226,14 @@
 	else
 		new_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/hud/health(new_human), WEAR_EYES)
 
+/*
 	new_human.equip_to_slot_or_del(new /obj/item/storage/large_holster/fuelpack(new_human), WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/m240/spec(new_human), WEAR_IN_BACK)
+*/
+// RUCM Start (Feline "Буратино")
+	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(new_human), WEAR_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/flamer/pyro_spec(new_human), WEAR_IN_BACK)
+// RUCM End (Feline "Буратино")
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank/large/X(new_human), WEAR_IN_L_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank/large/X(new_human), WEAR_IN_L_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/flamer_tank/large/B(new_human), WEAR_IN_R_STORE)

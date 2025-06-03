@@ -54,6 +54,7 @@
 		/obj/item/restraint/handcuffs,
 		/obj/item/device/binoculars,
 		/obj/item/storage/large_holster/machete,
+		/obj/item/storage/belt/gun/repairbelt, // RUCM
 		/obj/item/storage/belt/gun/m4a3,
 		/obj/item/storage/belt/gun/m44,
 	)

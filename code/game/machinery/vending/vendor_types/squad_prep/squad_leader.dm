@@ -7,10 +7,13 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 		list("SQUAD KIT (CHOOSE 1, for yourself or your squad)", 0, null, null, null),
 		list("M4RA Sniper Kit", 0, /obj/item/storage/box/kit/mini_sniper, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 		list("M41A Standard Kit", 0, /obj/item/storage/box/kit/m41a_kit	, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-//RUCM START
+//RUCM START (Feline "Буратино")
 		list("M41A MK 1 Kit (No mods)", 0, /obj/item/storage/box/guncase/m41aMK1, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-//RUCM END
+		list("Комплект \"Огнемётчик\"", 0, /obj/item/storage/box/guncase/feline_flamer_sl_pyro, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+//RUCM END (Feline "Буратино")
+/* CM Original
 		list("M240 Pyrotechnician Support Kit", 0, /obj/item/storage/box/kit/mini_pyro, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+*/
 		list("M2C Heavy Machine Gun", 0, /obj/item/storage/box/guncase/m2c, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 		list("M56D Heavy Machine Gun", 0, /obj/item/storage/box/guncase/m56d, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 		list("M79 Grenade Launcher", 0, /obj/item/storage/box/guncase/m79, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
