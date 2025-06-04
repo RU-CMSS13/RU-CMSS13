@@ -302,30 +302,45 @@
 
 /area/kutjevo/interior/colony_north
 	name = "Kutjevo - North Colony Caves"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	icon_state = "colony_caves_1"
 	unoviable_timer = FALSE
 
 /area/kutjevo/interior/colony_southeast
 	name = "Kutjevo - Southeast Colony Caves"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	icon_state = "colony_caves_2"
 	unoviable_timer = FALSE
 
 /area/kutjevo/interior/colony_northeast
 	name = "Kutjevo - Northeast Colony Caves"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	icon_state = "colony_caves_2"
 	unoviable_timer = FALSE
 
 /area/kutjevo/interior/colony_south
 	name = "Kutjevo - South Colony Caves"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	icon_state = "colony_caves_3"
 
 /area/kutjevo/interior/colony_south/power2
 	name = "Kutjevo - South Colony Treatment Plant"
+/*
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+*/
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
 	icon_state = "colony_caves_3"
 	minimap_color = MINIMAP_AREA_ENGI_CAVE
 	unoviable_timer = FALSE
