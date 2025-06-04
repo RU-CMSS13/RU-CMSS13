@@ -203,6 +203,8 @@
 			//CIA
 			if(JOB_CIA_LIAISON)
 				marine_rk = "cialo"
+			if(JOB_AI_TECH)
+				marine_rk = "aist"
 			// Riot MPs
 			if(JOB_RIOT)
 				marine_rk = "rmp"
