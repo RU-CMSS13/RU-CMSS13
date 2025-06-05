@@ -103,7 +103,6 @@
 	key = "status"
 	anonymous = TRUE
 
-/* RUCM CHANGE
 /datum/world_topic/status/Run(list/input)
 	. = ..()
 	data = list()
@@ -151,7 +150,12 @@
 	data["active_players"] = get_active_player_count()
 	if(SSticker.HasRoundStarted())
 		data["real_mode"] = SSticker.mode.name
-*/
+
+	data["testmerges"] = list()
+	for(var/datum/tgs_revision_information/test_merge/test_merge as anything in GLOB.revdata.testmerge)
+		data["testmerges"] += list(
+			list("title" = test_merge.title, "number" = test_merge.number, "url" = test_merge.url, "author" = test_merge.author)
+		)
 
 /datum/world_topic/certify
 	key = "certify"
