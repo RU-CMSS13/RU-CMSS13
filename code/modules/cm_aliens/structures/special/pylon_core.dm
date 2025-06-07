@@ -249,6 +249,22 @@
 	if(hive_ref)
 		hive_ref.set_hive_location(src, linked_hive.hivenumber)
 
+	//RUCM EDIT START
+	if((ROUND_TIME < XENO_ROUNDSTART_PROGRESS_TIME_2) && (linked_hive.killer_zone_created == FALSE))
+		linked_hive.killer_zone_created = TRUE
+		var/datum/hive_status/hive
+		for(var/cur_hive_num in GLOB.hive_datum)
+			hive = GLOB.hive_datum[cur_hive_num]
+			if(!length(hive.totalXenos))
+				continue
+			if(cur_hive_num == linked_hive.hivenumber)
+				xeno_announcement(SPAN_XENOANNOUNCE("Anti-Human protection zone created for 12 minutes around core,there wont be more!"), cur_hive_num, XENO_GENERAL_ANNOUNCE)
+		for(var/turf/A as anything in RANGE_TURFS(25, loc))
+			var/zone_type = /obj/effect/human_killer_zone/alien
+			var/zone_obj = new zone_type(A)
+			addtimer(CALLBACK(zone_obj, TYPE_PROC_REF(/obj/effect/human_killer_zone/alien, destroy), 1), 12 MINUTES) //case-sensetive CALL_PROC issue
+	//RUCM EDIT END
+
 /obj/effect/alien/resin/special/pylon/core/proc/update_minimap_icon()
 	SSminimaps.remove_marker(src)
 	SSminimaps.add_marker(src, z, get_minimap_flag_for_faction(linked_hive?.hivenumber), "core")
