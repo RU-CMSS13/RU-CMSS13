@@ -50,6 +50,7 @@
 #include "game\machinery\rechargestation.dm"
 #include "game\machinery\doors\poddoor.dm"
 #include "game\objects\effects\elevator.dm"
+#include "game\objects\effects\human_killer_zone.dm"
 #include "game\objects\items\storage\backpack.dm"
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\items\storage\briefcase.dm"
