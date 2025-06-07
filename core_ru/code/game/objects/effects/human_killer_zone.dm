@@ -13,6 +13,8 @@
 /obj/effect/human_killer_zone/Crossed(mob/M)
 	if(!ishuman(M))
 		return
+	if(ismonkey(M))
+		return
 	var/mob/living/carbon/human/H = M
 	to_chat(H, SPAN_HIGHDANGER("You better switch your direction, you coming towards your doom"))
 	if(issynth(H))
@@ -25,6 +27,8 @@
 
 /obj/effect/human_killer_zone/alien/Crossed(mob/M)
 	if(!ishuman(M))
+		return
+	if(ismonkey(M))
 		return
 	var/mob/living/carbon/human/H = M
 	if(H.hauling_xeno)
