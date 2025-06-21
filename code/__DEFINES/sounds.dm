@@ -115,6 +115,13 @@
 #define SCAPE_PL_ARES list('sound/soundscape/mother.ogg')
 #define SCAPE_PL_JUNGLE_MOON list('sound/soundscape/alien_creature1.ogg', 'sound/soundscape/alien_creature2.ogg', 'sound/soundscape/alien_creature3.ogg')
 
+// RU-CM CODE START
+//Prison Station RU Sounds
+#define ABMIENCE_PRISON_ALARM 'sound/ambience/prisonstationalarm.ogg'
+
+#define SCAPE_PL_FIORINA_COMMON list('sound/ambience/prisonalarm2.ogg','sound/ambience/prisonalarm1.ogg','sound/ambience/prisonalarm3.ogg','sound/ambience/prisonmachines.ogg')
+// RU-CM CODE END
+
 // Hybrisa Soundscapes
 
 #define AMBIENCE_CITY 'sound/ambience/city_on_fire.ogg'

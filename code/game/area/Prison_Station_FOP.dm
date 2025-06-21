@@ -4,6 +4,7 @@
 /area/prison
 	name = "Fiorina Orbital Penitentiary - Main Cellblock"
 	ceiling = CEILING_GLASS
+	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
 	ambience_exterior = AMBIENCE_ALMAYER
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
@@ -167,7 +168,7 @@
 
 /area/prison/toilet/research
 	name = "\improper Research Restooms"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 // [RU-CMSS13 ADD-END]
@@ -296,13 +297,13 @@
 /area/prison/quarters/staff //In SCI
 	name = "\improper Staff Quarters"
 	icon_state = "crew_quarters"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/quarters/research //In SCI
 	name = "\improper Research Dorms"
 	icon_state = "purple"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_SEC
 
@@ -428,7 +429,7 @@
 /area/prison/medbay/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 
@@ -436,55 +437,55 @@
 /area/prison/research
 	name = "\improper Biological Research Department"
 	icon_state = "research"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/RD
 	name = "\improper Research Director's office"
 	icon_state = "disposal"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret
 	name = "\improper Classified Research"
 	icon_state = "toxlab"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/WYLab
 	name = "\improper WY Research Laboratory"
 	icon_state = "purple"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/dissection
 	name = "\improper Dissection"
 	icon_state = "toxmix"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/chemistry
 	name = "\improper Chemistry"
 	icon_state = "chem"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/bioengineering
 	name = "\improper Bioengineering"
 	icon_state = "toxmisc"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/containment
 	name = "\improper Test Subject Containment"
 	icon_state = "xeno_f_store"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/testing
 	name = "\improper Biological Testing"
 	icon_state = "toxtest"
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/residential/central
@@ -562,7 +563,7 @@
 	icon_state = "hangar_beta"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_LZ
 
@@ -572,7 +573,7 @@
 	requires_power = 0
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_LZ
 
@@ -581,7 +582,7 @@
 	icon_state = "toxstorage"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = AMBIENCE_LAB
+	ambience_exterior = ABMIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_LZ
 
