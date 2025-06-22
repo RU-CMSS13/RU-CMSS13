@@ -4,8 +4,8 @@
 /area/prison
 	name = "Fiorina Orbital Penitentiary - Main Cellblock"
 	ceiling = CEILING_GLASS
+	ambience_exterior = AMBIENCE_PRISON
 	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-	ambience_exterior = AMBIENCE_ALMAYER
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 
@@ -46,6 +46,7 @@
 
 /area/prison/security/monitoring/medsec/south
 	name = "\improper Medium-Security Monitoring"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	ceiling = CEILING_GLASS
 
 /area/prison/security/monitoring/medsec/central
@@ -168,8 +169,7 @@
 
 /area/prison/toilet/research
 	name = "\improper Research Restooms"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 // [RU-CMSS13 ADD-END]
 
@@ -201,14 +201,17 @@
 
 /area/prison/maintenance/staff_research
 	name = "\improper Staff-Research Maintenance"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	icon_state = "maint_research_starboard"
 
 /area/prison/maintenance/research_medbay
 	name = "\improper Research-Infirmary Maintenance"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	icon_state = "maint_research_port"
 
 /area/prison/maintenance/hangar_barracks
 	name = "\improper Hangar-Barracks Maintenance"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	icon_state = "maint_e_shuttle"
 	is_landing_zone = TRUE
 
@@ -297,15 +300,13 @@
 /area/prison/quarters/staff //In SCI
 	name = "\improper Staff Quarters"
 	icon_state = "crew_quarters"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 /area/prison/quarters/research //In SCI
 	name = "\improper Research Dorms"
 	icon_state = "purple"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
-	minimap_color = MINIMAP_AREA_SEC
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	minimap_color = MINIMAP_AREA_RESEARCH
 
 
 /area/prison/quarters/security //In SEC room
@@ -387,6 +388,7 @@
 
 /area/prison/cellblock/maxsec/north
 	name = "\improper Maximum-Security Panopticon Cellblock"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	icon_state = "cells_max_n"
 
 /area/prison/cellblock/maxsec/south
@@ -416,10 +418,12 @@
 
 /area/prison/medbay
 	name = "\improper Infirmary"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	icon_state = "medbay"
 
 /area/prison/medbay/foyer
 	name = "\improper Infirmary Foyer"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	icon_state = "medbay2"
 
 /area/prison/medbay/surgery
@@ -429,63 +433,61 @@
 /area/prison/medbay/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 
 // RESEARCH
 /area/prison/research
 	name = "\improper Biological Research Department"
 	icon_state = "research"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 /area/prison/research/RD
 	name = "\improper Research Director's office"
 	icon_state = "disposal"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret
 	name = "\improper Classified Research"
 	icon_state = "toxlab"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/WYLab
 	name = "\improper WY Research Laboratory"
 	icon_state = "purple"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/dissection
 	name = "\improper Dissection"
 	icon_state = "toxmix"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/chemistry
 	name = "\improper Chemistry"
 	icon_state = "chem"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/bioengineering
 	name = "\improper Bioengineering"
 	icon_state = "toxmisc"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/containment
 	name = "\improper Test Subject Containment"
 	icon_state = "xeno_f_store"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/research/secret/testing
 	name = "\improper Biological Testing"
 	icon_state = "toxtest"
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prison/residential/central
@@ -508,6 +510,7 @@
 
 /area/prison/hangar_storage/main
 	name = "\improper Main Hangar Storage"
+	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
 	icon_state = "quartstorage"
 
 /area/prison/hangar_storage/research/shuttle
@@ -516,6 +519,7 @@
 
 /area/prison/telecomms
 	name = "\improper Telecommunications"
+	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
 	icon_state = "tcomsatcham"
 
 /area/prison/pirate
@@ -546,6 +550,7 @@
 
 /area/prison/security/checkpoint/hangar
 	name = "\improper Main Hangar Traffic Control"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ1
 	minimap_color = MINIMAP_AREA_LZ
@@ -563,8 +568,7 @@
 	icon_state = "hangar_beta"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_LZ
 
 /area/prison/landing/console2
@@ -573,8 +577,7 @@
 	requires_power = 0
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = ABMIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_LZ
 
 /area/prison/hangar_storage/research
@@ -582,7 +585,7 @@
 	icon_state = "toxstorage"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = ABMIENCE_PRISON_ALARM
+	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_LZ
 

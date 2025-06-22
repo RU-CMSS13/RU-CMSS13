@@ -117,9 +117,12 @@
 
 // RU-CM CODE START
 //Prison Station RU Sounds
-#define ABMIENCE_PRISON_ALARM 'sound/ambience/prisonstationalarm.ogg'
+#define AMBIENCE_PRISON_ALARM 'sound/ambience/prisonfopru/prisonalarm.ogg'
 
-#define SCAPE_PL_FIORINA_COMMON list('sound/ambience/prisonalarm2.ogg','sound/ambience/prisonalarm1.ogg','sound/ambience/prisonalarm3.ogg','sound/ambience/prisonmachines.ogg')
+#define SCAPE_PL_FIORINA_COMMON list('sound/ambience/prisonfopru/prisonstationwaterdrop.ogg','sound/ambience/prisonfopru/prisoncommon1.ogg','sound/ambience/prisonfopru/prisoncommon2.ogg','sound/ambience/prisonfopru/prisoncommon3.ogg','sound/ambience/prisonfopru/prisoncommon4.ogg','sound/ambience/prisonfopru/prisoncommon5.ogg',)
+#define SCAPE_PL_FIORINA_NEAR_SCI list('sound/ambience/prisonfopru/prisonalarm2.ogg','sound/ambience/prisonfopru/prisonalarm1.ogg','sound/ambience/prisonfopru/prisonalarm3.ogg',)
+#define SCAPE_PL_FIORINA_MACHINES_ROOM list('sound/ambience/prisonfopru/prisonstationmachines1.ogg','sound/ambience/prisonfopru/prisonstationmachines2.ogg',)
+#define SCAPE_PL_FIORINA_COMPUTERS_ROOM list('sound/ambience/prisonfopru/prisonoldwhirring.ogg',)
 // RU-CM CODE END
 
 // Hybrisa Soundscapes
