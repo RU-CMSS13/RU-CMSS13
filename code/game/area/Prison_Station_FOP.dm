@@ -179,7 +179,9 @@
 /area/prison/maintenance
 	icon_state = "asmaint"
 
+//Civilians tech tunnels
 /area/prison/maintenance/residential
+	ambience_exterior = AMBIENCE_PRISON_MAINTENANCE
 
 /area/prison/maintenance/residential/nw
 	name = "\improper Northwest Civilian Residences Maintenance"
@@ -313,7 +315,7 @@
 	name = "\improper Security Barracks"
 	icon_state = "sec_backroom"
 
-//CELLBLOCKS
+//CELLBLOCKS CODE
 
 /area/prison/cellblock/lowsec
 	minimap_color = MINIMAP_AREA_CELL_LOW
@@ -334,7 +336,6 @@
 /area/prison/cellblock/lowsec/se
 	name = "\improper Southeast Low-Security Cellblock"
 	icon_state = "cells_low_se"
-//End of central ring
 
 //Start of South Cell Blocks
 /area/prison/cellblock/mediumsec
@@ -357,7 +358,6 @@
 /area/prison/cellblock/mediumsec/west
 	name = "\improper Medium-Security Cellblock West"
 	icon_state = "cells_med_w"
-//End of South Cell Blocks
 
 //Start of West-North Cell Blocks
 /area/prison/cellblock/highsec
@@ -370,7 +370,6 @@
 /area/prison/cellblock/highsec/north/south
 	name = "\improper North High-Security Cellblock South"
 	icon_state = "cells_high_ns"
-//End of West-North Cell Blocks
 
 //Start of West-South Cell Blocks
 /area/prison/cellblock/highsec/south/north
@@ -380,7 +379,6 @@
 /area/prison/cellblock/highsec/south/south
 	name = "\improper South High-Security Cellblock South"
 	icon_state = "cells_high_ss"
-//End of West-South Cell Blocks
 
 //Start North Cell's Blocks
 /area/prison/cellblock/maxsec
@@ -394,7 +392,6 @@
 /area/prison/cellblock/maxsec/south
 	name = "\improper Maximum-Security Suspended Cellblock"
 	icon_state = "cells_max_s"
-//End North Cell Blocks
 
 //Start VIP Cell blocks
 /area/prison/cellblock/vip
@@ -406,15 +403,14 @@
 	name = "\improper Protective Custody"
 	icon_state = "cells_protective"
 	minimap_color = MINIMAP_AREA_CELL_VIP
-	//End VIP Cell blocks
 
-//DISPSOSAL
+//DISPSOSAL CODE
 
 /area/prison/disposal
 	name = "\improper Disposals"
 	icon_state = "disposal"
 
-//MEDBAY
+//MEDBAY CODE
 
 /area/prison/medbay
 	name = "\improper Infirmary"
@@ -436,7 +432,7 @@
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 
-// RESEARCH
+// RESEARCH CODE
 /area/prison/research
 	name = "\improper Biological Research Department"
 	icon_state = "research"
@@ -490,6 +486,10 @@
 	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
+//Civilian BLOCK CODE
+/area/prison/residential
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
+
 /area/prison/residential/central
 	name = "\improper Civilian Residences Central"
 	icon_state = "blue-red2"
@@ -502,34 +502,40 @@
 	name = "\improper Civilian Residences South"
 	icon_state = "red2"
 
+//Monorail CODE
 /area/prison/monorail
 	icon_state = "purple"
 
 /area/prison/monorail/west
 	name = "\improper West Monorail Station"
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
+
+/area/prison/monorail/east
+	name = "\improper East Monorail Station"
+	is_landing_zone = TRUE
+	linked_lz = DROPSHIP_LZ1
+	minimap_color = MINIMAP_AREA_LZ
+
+//Telecomms CODE
+/area/prison/telecomms
+	name = "\improper Telecommunications"
+	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
+	icon_state = "tcomsatcham"
 
 /area/prison/hangar_storage/main
 	name = "\improper Main Hangar Storage"
 	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
 	icon_state = "quartstorage"
 
-/area/prison/hangar_storage/research/shuttle
-	name = "Corporate Shuttle"
-	is_landing_zone = FALSE
-
-/area/prison/telecomms
-	name = "\improper Telecommunications"
-	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
+/area/prison/secret
+	name = "\improper Secret Room"
 	icon_state = "tcomsatcham"
 
+//CLF ship CODE
 /area/prison/pirate
 	name = "Tramp Freighter \"Rocinante\""
 	icon_state = "syndie-ship"
 	requires_power = 0
-
-/area/prison/secret
-	name = "\improper Secret Room"
-	icon_state = "tcomsatcham"
 
 //LZ CODE
 //LZ 1
@@ -550,13 +556,8 @@
 
 /area/prison/security/checkpoint/hangar
 	name = "\improper Main Hangar Traffic Control"
+	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
-	is_landing_zone = TRUE
-	linked_lz = DROPSHIP_LZ1
-	minimap_color = MINIMAP_AREA_LZ
-
-/area/prison/monorail/east
-	name = "\improper East Monorail Station"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ1
 	minimap_color = MINIMAP_AREA_LZ
@@ -585,8 +586,7 @@
 	icon_state = "toxstorage"
 	is_landing_zone = TRUE
 	linked_lz = DROPSHIP_LZ2
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_LZ
 
 // [RU-CMSS13 ADD-END]
