@@ -488,7 +488,6 @@
 
 //Civilian BLOCK CODE
 /area/prison/residential
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
 
 /area/prison/residential/central
 	name = "\improper Civilian Residences Central"
@@ -508,7 +507,6 @@
 
 /area/prison/monorail/west
 	name = "\improper West Monorail Station"
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
 
 /area/prison/monorail/east
 	name = "\improper East Monorail Station"

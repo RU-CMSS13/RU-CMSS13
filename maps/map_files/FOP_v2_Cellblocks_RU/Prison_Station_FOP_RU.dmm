@@ -2190,6 +2190,13 @@
 /obj/item/stack/rods,
 /turf/open/floor/prison/whitepurple/west,
 /area/prison/research/secret/bioengineering)
+"afw" = (
+/obj/effect/landmark/xeno_spawn,
+/obj/structure/machinery/light/small/blue{
+	dir = 8
+	},
+/turf/open/floor/plating/prison,
+/area/prison/maintenance/residential/sw)
 "afx" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
@@ -2264,6 +2271,13 @@
 "afG" = (
 /turf/open/floor/prison/darkpurple2/west,
 /area/prison/research/secret/containment)
+"afH" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/light/small/blue{
+	dir = 8
+	},
+/turf/open/floor/plating/prison,
+/area/prison/maintenance/residential/sw)
 "afI" = (
 /obj/structure/window/framed/prison/cell,
 /obj/effect/decal/medical_decals{
@@ -5841,6 +5855,14 @@
 	},
 /turf/open/floor/carpet5_1,
 /area/prison/research/RD)
+"aoL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/xeno_spawn,
+/obj/structure/machinery/light/small/blue{
+	dir = 8
+	},
+/turf/open/floor/plating/prison,
+/area/prison/maintenance/residential/nw)
 "aoM" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /turf/open/floor/carpet9_4,
@@ -8773,6 +8795,13 @@
 	},
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hallway/central/west)
+"awP" = (
+/obj/effect/landmark/xeno_spawn,
+/obj/structure/machinery/light/small/blue{
+	dir = 8
+	},
+/turf/open/floor/plating/prison,
+/area/prison/maintenance/residential/nw)
 "awQ" = (
 /obj/effect/decal/siding,
 /obj/structure/barricade/handrail/wire{
@@ -13232,15 +13261,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hallway/central/north)
-"aJb" = (
-/obj/structure/pipes/standard/simple/hidden/dark{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/prison,
-/area/prison/hallway/central/north)
 "aJc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -13473,7 +13493,7 @@
 	dir = 2;
 	name = "Central Ring"
 	},
-/turf/open/floor/prison,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hallway/central/north)
 "aJJ" = (
 /obj/structure/disposalpipe/segment,
@@ -21202,11 +21222,14 @@
 	needs_power = 0;
 	color = "#8e98a0"
 	},
-/turf/open/floor/almayer/cargo,
+/turf/open/floor/almayer/cargo{
+	color = "#8e98a0"
+	},
 /area/prison/yard)
 "bft" = (
 /obj/structure/reagent_dispensers/water_cooler/stacks{
-	pixel_y = 17
+	pixel_y = 17;
+	density = 0
 	},
 /turf/open/floor/prison,
 /area/prison/cleaning)
@@ -23322,7 +23345,7 @@
 /turf/open/floor/prison/yellow/west,
 /area/prison/hangar_storage/main)
 "bld" = (
-/turf/open/floor/plating/prison,
+/turf/open/floor/prison/bluefull,
 /area/prison/security/checkpoint/vip)
 "ble" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
@@ -32083,7 +32106,7 @@
 	dir = 2;
 	name = "Central Ring"
 	},
-/turf/open/floor/prison,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prison/hallway/central/south)
 "bKy" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
@@ -51074,9 +51097,6 @@
 /area/prison/maintenance/residential/sw)
 "hkO" = (
 /obj/effect/decal/cleanable/blood,
-/obj/structure/machinery/light/small/blue{
-	dir = 8
-	},
 /obj/effect/landmark/xeno_spawn,
 /turf/open/floor/plating/prison,
 /area/prison/maintenance/residential/nw)
@@ -59031,14 +59051,6 @@
 "ndl" = (
 /turf/open/floor/prison/whitered/west,
 /area/prison/cellblock/highsec/south/south)
-"ndO" = (
-/obj/structure/largecrate/random,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/machinery/light/small/blue{
-	dir = 8
-	},
-/turf/open/floor/plating/prison,
-/area/prison/maintenance/residential/nw)
 "ndW" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/effect/decal/siding/wood_siding{
@@ -75963,16 +75975,16 @@ mpg
 aRS
 mpg
 hkO
-ccZ
+awP
 aTu
-jSN
-ccz
+nGt
+aoL
 bQz
 xvJ
 bMP
 bvQ
-kjG
-bMP
+bvQ
+afw
 bMP
 ayn
 ayn
@@ -77246,8 +77258,8 @@ mRz
 hgV
 nGt
 aTu
-ndO
-nGt
+wkq
+jSN
 nGt
 wkq
 wkq
@@ -77255,8 +77267,8 @@ hkM
 sSO
 bvQ
 sSO
-kjG
-bxf
+bvQ
+afH
 bxf
 bxf
 bxf
@@ -102262,7 +102274,7 @@ cOt
 aCT
 aCW
 aKT
-aJb
+aLs
 aJI
 pva
 aNp
@@ -102314,7 +102326,7 @@ bql
 bql
 bql
 izT
-bSF
+vHX
 bKx
 izT
 bNH
