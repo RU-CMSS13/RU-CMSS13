@@ -2190,6 +2190,14 @@
 /obj/item/stack/rods,
 /turf/open/floor/prison/whitepurple/west,
 /area/prison/research/secret/bioengineering)
+"afw" = (
+/obj/structure/prop/almayer/computers/mission_planning_system{
+	pixel_x = 10;
+	name = "Transfer shuttle computer";
+	desc = "The computer for calling transfer shuttle, doesn't seems working."
+	},
+/turf/open/space/basic,
+/area/space)
 "afx" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
@@ -2264,6 +2272,13 @@
 "afG" = (
 /turf/open/floor/prison/darkpurple2/west,
 /area/prison/research/secret/containment)
+"afH" = (
+/obj/structure/prop/almayer/computers/sensor_computer3{
+	name = "Shuttle control console";
+	desc = "The IBM series 10 computer retrofitted to work for controlling transfer shuttle, doesn't seems working."
+	},
+/turf/open/floor/prison/darkredfull2/southwest,
+/area/prison/security/checkpoint/hangar)
 "afI" = (
 /obj/structure/window/framed/prison/cell,
 /obj/effect/decal/medical_decals{
@@ -5841,6 +5856,18 @@
 	},
 /turf/open/floor/carpet5_1,
 /area/prison/research/RD)
+"aoL" = (
+/obj/structure/machinery/door/poddoor/two_tile/four_tile/vertical/secure{
+	name = "Main Hangar Door";
+	explo_proof = 1
+	},
+/obj/structure/blocker/invisible_wall,
+/obj/structure/prop/almayer/computers/sensor_computer3{
+	name = "Shuttle control console";
+	desc = "The IBM series 10 computer retrofitted to work for controlling transfer shuttle, doesn't seems working."
+	},
+/turf/open/floor/plating/prison,
+/area/prison/hanger/main)
 "aoM" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /turf/open/floor/carpet9_4,
@@ -27947,6 +27974,9 @@
 /obj/structure/sign/nosmoking_1{
 	pixel_y = 30
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/entertainment{
+	pixel_x = -32
+	},
 /turf/open/floor/prison/darkred2/northwest,
 /area/prison/security/checkpoint/hangar)
 "byy" = (
@@ -28783,6 +28813,9 @@
 /area/prison/security/checkpoint/hangar)
 "bAX" = (
 /obj/effect/decal/cleanable/blood,
+/obj/structure/prop/hybrisa/misc/machinery/screens/multimonitormedium_on{
+	pixel_x = -30
+	},
 /turf/open/floor/prison/darkred2/southwest,
 /area/prison/security/checkpoint/hangar)
 "bAY" = (
@@ -29408,6 +29441,9 @@
 	dir = 1;
 	color = "#8e98a0"
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	pixel_y = -31
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/landing/console)
 "bCU" = (
@@ -29415,6 +29451,9 @@
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
 	color = "#8e98a0"
+	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/multimonitorsmall_on{
+	pixel_y = -31
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/hangar)
@@ -30444,6 +30483,9 @@
 /obj/effect/decal/hybrisa/trash{
 	icon_state = "trash_5"
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/bluemultimonitorsmall_off{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/plating_catwalk,
 /area/prison/maintenance/hangar_barracks)
 "bFS" = (
@@ -31419,6 +31461,9 @@
 	},
 /obj/item/paper{
 	pixel_x = -5
+	},
+/obj/structure/machinery/computer/cameras{
+	dir = 4
 	},
 /turf/open/floor/almayer/black/west,
 /area/prison/maintenance/hangar_barracks)
@@ -63907,6 +63952,9 @@
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
 	color = "#8e98a0"
+	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/multimonitorbig_on{
+	pixel_y = 32
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prison/security/checkpoint/hangar)
@@ -122431,7 +122479,7 @@ eRP
 bwQ
 rht
 ezU
-bBc
+afH
 bCV
 byL
 wjg
@@ -125201,7 +125249,7 @@ bbF
 bgE
 bgE
 bgE
-bbF
+aoL
 bgE
 bgE
 bgE
@@ -125869,7 +125917,7 @@ wjg
 wjg
 wjg
 wjg
-wjg
+afw
 wjg
 wjg
 wjg
