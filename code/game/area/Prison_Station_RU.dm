@@ -11,6 +11,7 @@
 	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
+	powernet_name = "ground"
 
 //LZ CODE
 
