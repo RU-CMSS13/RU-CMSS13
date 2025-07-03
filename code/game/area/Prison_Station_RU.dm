@@ -1,5 +1,4 @@
 //Areas for Prison_Station_RU - Arom-beep
-// [RU-CMSS13 ADD]
 
 /area/prisonru
 	name = "Fiorina Orbital Penitentiary - Main Cellblock"
@@ -218,12 +217,14 @@
 
 /area/prisonru/station/maintenance/residential/nw
 	name = "Prison - Northwest Civilian Residences Maintenance"
+	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
 
 /area/prisonru/station/maintenance/residential/ne
 	name = "Prison - Northeast Civilian Residences Maintenance"
 
 /area/prisonru/station/maintenance/residential/sw
 	name = "Prison - Southwest Civilian Residences Maintenance"
+	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
 
 /area/prisonru/station/maintenance/residential/se
 	name = "Prison - Southeast Civilian Residences Maintenance"
@@ -238,25 +239,29 @@
 	name = "Prison - Staff-Research Maintenance"
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
-/area/prisonru/station/maintenance/research_medbay
+/area/prisonru/station/maintenance/research_medbay //T-comms tower also can spawn there
 	name = "Prison - Research-Infirmary Maintenance"
-	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
+	minimap_color = MINIMAP_AREA_COMMS
 
 /area/prisonru/station/maintenance/hangar_barracks
 	name = "Prison - Hangar-Barracks Maintenance"
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	linked_lz = DROPSHIP_LZ1
 
-
+//Canteen
 /area/prisonru/station/canteen
 	name = "Prison - Canteen"
 
+//Kitchen
 /area/prisonru/station/kitchen
 	name = "Prison - Kitchen"
 
+//Laundry
 /area/prisonru/station/laundry
 	name = "Prison - Laundry"
 
+//Library
 /area/prisonru/station/library
 	name = "Prison - Library"
 
@@ -269,19 +274,27 @@
 /area/prisonru/station/engineering/atmos
 	name = "Prison - Atmospherics"
 
+//Office under engi
 /area/prisonru/station/parole/protective_custody
 	name = "Prison - Protective Custody Parole"
 
+//Visitations
 /area/prisonru/station/visitation
 	name = "Prison - Visitation"
 
+//Yard
 /area/prisonru/station/yard
 	name = "Prison - Yard"
+
+//Disposal
+/area/prisonru/station/disposal
+	name = "Prison - Disposals"
 
 //HALLWAYS
 
 /area/prisonru/station/hallway
 	icon_state = "station4"
+	minimap_color = MINIMAP_AREA_COLONY_STREETS
 
 /area/prisonru/station/hallway/entrance
 	name = "Prison - Entrance Hallway"
@@ -309,7 +322,6 @@
 
 /area/prisonru/station/hallway/engineering
 	name = "Prison - Engineering Hallway"
-	minimap_color = MINIMAP_AREA_ENGI
 
 //QUARTERS
 
@@ -322,37 +334,18 @@
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_RESEARCH
 
-/area/prisonru/station/disposal
-	name = "Prison - Disposals"
-
-//Civilian BLOCK CODE
-/area/prisonru/station/residential
-
-/area/prisonru/station/residential/central
-	name = "Prison - Civilian Residences Central"
-
-/area/prisonru/station/residential/north
-	name = "Prison - Civilian Residences North"
-
-/area/prisonru/station/residential/south
-	name = "Prison - Civilian Residences South"
-
 //MEDBAY CODE
 
 /area/prisonru/medbay
 	name = "Prison - Infirmary"
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
-
-/area/prisonru/medbay/foyer
-	name = "Prison - Infirmary Foyer"
-	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	minimap_color = MINIMAP_AREA_MEDBAY
 
 /area/prisonru/medbay/surgery
 	name = "Prison - Operating Theatre"
 
 /area/prisonru/medbay/morgue
 	name = "Prison - Morgue"
-	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 //CELLBLOCKS CODE
 
@@ -422,6 +415,7 @@
 /area/prisonru/cellblock/maxsec/north
 	name = "Prison - Maximum-Security Panopticon Cellblock"
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
 
 /area/prisonru/cellblock/maxsec/south
 	name = "Prison - Maximum-Security Suspended Cellblock"
@@ -438,50 +432,38 @@
 // RESEARCH CODE
 /area/prisonru/research
 	name = "Prison - Biological Research Department"
-	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	ambience_exterior = AMBIENCE_PRISON_ALARM
+	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_RESEARCH
 
 /area/prisonru/research/rd
 	name = "Prison - Research Director's office"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
-/area/prisonru/research/secret
+/area/prisonru/research/secret //And T-comms tower can spawn here
 	name = "Prison - Classified Research"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
+	minimap_color = MINIMAP_AREA_COMMS
 
 /area/prisonru/research/secret/WYLab
 	name = "Prison - WY Research Laboratory"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prisonru/research/secret/dissection
 	name = "Prison - Dissection"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prisonru/research/secret/chemistry
 	name = "Prison - Chemistry"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
-
 /area/prisonru/research/secret/bioengineering
 	name = "Prison - Bioengineering"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prisonru/research/secret/containment
 	name = "Prison - Test Subject Containment"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
 /area/prisonru/research/secret/testing
 	name = "Prison - Biological Testing"
-	ambience_exterior = AMBIENCE_PRISON_ALARM
-	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 
-//Civilian BLOCK CODE
+//Civilian block CODE
 /area/prisonru/residential
+	minimap_color = MINIMAP_AREA_COLONY
+	ceiling = CEILING_METAL
 
 /area/prisonru/residential/central
 	name = "Prison - Civilian Residences Central"
@@ -506,6 +488,7 @@
 /area/prisonru/telecomms
 	icon_state = "base_icon"
 	name = "Prison - Telecommunications"
+	minimap_color = MINIMAP_AREA_COMMS
 	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
 
 /area/prisonru/telecomms/hangar_storage/main //Also telecomms tower there
@@ -517,3 +500,4 @@
 //CLF ship CODE
 /area/prisonru/pirate
 	name = "Tramp Freighter \"Rocinante\""
+	minimap_color = MINIMAP_AREA_SHIP
