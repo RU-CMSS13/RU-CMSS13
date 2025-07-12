@@ -1,6 +1,6 @@
-//README: Be aware, what add_verb from vehicle makes src be client,so ensure src is mech and usr is mech-operator,if you're making new verbs
+//README: Be aware, what add_verb from vehicle makes src be client,so ensure src is mech and user is mech-operator,if you're making new verbs
 
-/obj/vehicle/walker/proc/exit_walker(var/mob/pilot)
+/obj/vehicle/walker/proc/exit_walker(mob/pilot)
 	set name = "Eject"
 	set category = "Vehicle"
 
@@ -9,7 +9,9 @@
 		user = pilot
 	if(!istype(src, /obj/vehicle/walker))
 		src = user.interactee
-	mech_link_check(src, user)
+	if(!mech_link_check(src, user))
+		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		return FALSE
 
 	if(zoom)
 		unzoom()
@@ -41,7 +43,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = usr.interactee
 	var/mob/user = usr
-	mech_link_check(src, user)
+	if(!mech_link_check(src, user))
+		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		return FALSE
 
 	if(lights)
 		lights = FALSE
@@ -61,7 +65,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = usr.interactee
 	var/mob/user = usr
-	mech_link_check(src, user)
+	if(!mech_link_check(src, user))
+		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		return FALSE
 
 	var/list/acceptible_modules = list()
 	if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
@@ -91,7 +97,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = usr.interactee
 	var/mob/user = usr
-	mech_link_check(src, user)
+	if(!mech_link_check(src, user))
+		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		return FALSE
 
 	tgui_interact(user)
 	return TRUE
@@ -103,7 +111,9 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = usr.interactee
 	var/mob/user = usr
-	mech_link_check(src, user)
+	if(!mech_link_check(src, user))
+		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		return FALSE
 
 	if(zoom)
 		unzoom()
@@ -111,7 +121,7 @@
 		do_zoom()
 	return TRUE
 
-/obj/vehicle/walker/proc/mech_link_check(obj/vehicle/walker/walker, mob/living/carbon/human/user)
+/obj/vehicle/walker/proc/mech_link_check(obj/vehicle/walker/walker, mob/user)
 	if(!istype(user))
 		return FALSE
 	if(!istype(walker))
