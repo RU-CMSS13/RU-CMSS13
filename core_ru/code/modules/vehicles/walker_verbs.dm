@@ -1,13 +1,15 @@
-/obj/vehicle/walker/proc/exit_walker()
+//README: Be aware, what add_verb from vehicle makes src be client,so ensure src is mech and usr is mech-operator,if you're making new verbs
+
+/obj/vehicle/walker/proc/exit_walker(var/mob/pilot)
 	set name = "Eject"
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
+	if(pilot) //overriding external usr from destroying to internal pilot
+		user = pilot
 	if(!istype(src, /obj/vehicle/walker))
 		src = user.interactee
+	mech_link_check(src, user)
 
 	if(zoom)
 		unzoom()
@@ -18,7 +20,8 @@
 	user.unset_interaction()
 	user.loc = get_turf(src)
 	user.reset_view(null)
-	remove_verb(user.client, verb_list)
+	if(user.client)
+		remove_verb(user.client, verb_list)
 	UnregisterSignal(user, COMSIG_MOB_RESISTED)
 
 	if(module_map[WALKER_HARDPOIN_LEFT])
@@ -35,12 +38,10 @@
 	set name = "Lights on/off"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	mech_link_check(src, user)
 
 	if(lights)
 		lights = FALSE
@@ -57,12 +58,10 @@
 	set name = "Eject Magazine"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	mech_link_check(src, user)
 
 	var/list/acceptible_modules = list()
 	if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
@@ -89,12 +88,10 @@
 	set name = "Status Display"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	mech_link_check(src, user)
 
 	tgui_interact(user)
 	return TRUE
@@ -103,15 +100,21 @@
 	set name = "Zoom on/off"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	mech_link_check(src, user)
 
 	if(zoom)
 		unzoom()
 	else
 		do_zoom()
 	return TRUE
+
+/obj/vehicle/walker/proc/mech_link_check(obj/vehicle/walker/walker, mob/living/carbon/human/user)
+	if(!istype(user))
+		return FALSE
+	if(!istype(walker))
+		return FALSE
+	else
+		return TRUE

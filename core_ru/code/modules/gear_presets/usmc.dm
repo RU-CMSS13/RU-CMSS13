@@ -14,6 +14,7 @@
 		ACCESS_MARINE_ENGPREP
 	)
 	assignment = JOB_WALKER
+	job_title = JOB_WALKER
 	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "CRMN"
 	minimum_age = 30
