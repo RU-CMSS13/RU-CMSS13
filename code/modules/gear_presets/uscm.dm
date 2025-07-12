@@ -32,7 +32,7 @@
 	. = ..()
 	if(!auto_squad_name || (should_block_game_interaction(new_human) && !ert_squad))
 		return
-	if(!GLOB.data_core.manifest_modify(new_human.real_name, WEAKREF(new_human), assignment, rank))
+	if(!GLOB.data_core.manifest_modify(new_human.real_name, WEAKREF(new_human), assignment, manifest_title))
 		GLOB.data_core.manifest_inject(new_human)
 
 	var/obj/item/card/id/ID = new_human.get_idcard()
@@ -66,7 +66,7 @@
 
 	access = list(ACCESS_MARINE_PREP)
 	assignment = JOB_SQUAD_MARINE
-	rank = JOB_SQUAD_MARINE
+	job_title = JOB_SQUAD_MARINE
 	paygrades = list(PAY_SHORT_ME1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "RFN"
 	skills = /datum/skills/pfc
@@ -98,7 +98,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SMARTPREP)
 	assignment = JOB_SQUAD_SMARTGUN
-	rank = JOB_SQUAD_SMARTGUN
+	job_title = JOB_SQUAD_SMARTGUN
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SG"
 	skills = /datum/skills/smartgunner
@@ -157,7 +157,7 @@
 		ACCESS_MARINE_DELTA,
 	)
 	assignment = JOB_TANK_CREW
-	rank = JOB_TANK_CREW
+	job_title = JOB_TANK_CREW
 	paygrades = list(PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "CRMN"
 	minimum_age = 30
@@ -221,7 +221,7 @@
 //RUCM END
 	)
 	assignment = JOB_INTEL
-	rank = JOB_INTEL
+	job_title = JOB_INTEL
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "IO"
 	skills = /datum/skills/intel
@@ -280,7 +280,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SPECPREP)
 	assignment = JOB_SQUAD_SPECIALIST
-	rank = JOB_SQUAD_SPECIALIST
+	job_title = JOB_SQUAD_SPECIALIST
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Spc"
 	skills = /datum/skills/specialist
@@ -339,7 +339,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_MEDBAY)
 	assignment = JOB_SQUAD_MEDIC
-	rank = JOB_SQUAD_MEDIC
+	job_title = JOB_SQUAD_MEDIC
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "HM"
 	skills = /datum/skills/combat_medic
@@ -373,7 +373,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_TL_PREP)
 	assignment = JOB_SQUAD_TEAM_LEADER
-	rank = JOB_SQUAD_TEAM_LEADER
+	job_title = JOB_SQUAD_TEAM_LEADER
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "FTL"
 	skills = /datum/skills/tl
@@ -403,7 +403,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_ENGPREP, ACCESS_CIVILIAN_ENGINEERING)
 	assignment = JOB_SQUAD_ENGI
-	rank = JOB_SQUAD_ENGI
+	job_title = JOB_SQUAD_ENGI
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "ComTech"
 	skills = /datum/skills/combat_engineer
@@ -437,7 +437,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_SQUAD_LEADER
-	rank = JOB_SQUAD_LEADER
+	job_title = JOB_SQUAD_LEADER
 	paygrades = list(PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME6 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SL"
 	minimum_age = 25
@@ -470,7 +470,7 @@
 
 	access = list(ACCESS_MARINE_PREP)
 	assignment = JOB_SQUAD_MARINE
-	rank = JOB_SQUAD_MARINE
+	job_title = JOB_SQUAD_MARINE
 	paygrades = list(PAY_SHORT_ME1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "RFN"
 	skills = /datum/skills/pfc/crafty
@@ -514,7 +514,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_SQUAD_LEADER
-	rank = JOB_SQUAD_LEADER
+	job_title = JOB_SQUAD_LEADER
 	paygrades = list(PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME6 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SL"
 	minimum_age = 25
@@ -556,7 +556,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SMARTPREP)
 	assignment = JOB_SQUAD_SMARTGUN
-	rank = JOB_SQUAD_SMARTGUN
+	job_title = JOB_SQUAD_SMARTGUN
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SG"
 	skills = /datum/skills/smartgunner
@@ -595,7 +595,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_ENGPREP, ACCESS_CIVILIAN_ENGINEERING)
 	assignment = JOB_SQUAD_ENGI
-	rank = JOB_SQUAD_ENGI
+	job_title = JOB_SQUAD_ENGI
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "ComTech"
 	skills = /datum/skills/combat_engineer
@@ -643,7 +643,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_MEDBAY)
 	assignment = JOB_SQUAD_MEDIC
-	rank = JOB_SQUAD_MEDIC
+	job_title = JOB_SQUAD_MEDIC
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "HM"
 	skills = /datum/skills/combat_medic
@@ -699,7 +699,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SPECPREP)
 	assignment = JOB_SQUAD_SPECIALIST
-	rank = JOB_SQUAD_SPECIALIST
+	job_title = JOB_SQUAD_SPECIALIST
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "Spc"
 	skills = /datum/skills/specialist
@@ -771,7 +771,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_TL_PREP)
 	assignment = JOB_SQUAD_TEAM_LEADER
-	rank = JOB_SQUAD_TEAM_LEADER
+	job_title = JOB_SQUAD_TEAM_LEADER
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "TL"
 	skills = /datum/skills/tl
@@ -807,7 +807,7 @@
 	name = "Marine Raider (!DEATHSQUAD!)"
 	flags = EQUIPMENT_PRESET_EXTRA
 	assignment = "Marine Raider"
-	rank = JOB_MARINE_RAIDER
+	job_title = JOB_MARINE_RAIDER
 	role_comm_title = "Op."
 	languages = list(LANGUAGE_TSL, LANGUAGE_ENGLISH)
 	skills = /datum/skills/commando/deathsquad
@@ -880,7 +880,7 @@
 /datum/equipment_preset/uscm/marsoc/sl
 	name = "Marine Raider Team Leader (!DEATHSQUAD!)"
 	assignment = JOB_MARINE_RAIDER_SL
-	rank = JOB_MARINE_RAIDER_SL
+	job_title = JOB_MARINE_RAIDER_SL
 	role_comm_title = "TL."
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_3)
 	skills = /datum/skills/commando/deathsquad/leader
@@ -908,7 +908,7 @@
 /datum/equipment_preset/uscm/marsoc/cmd
 	name = "Marine Raider Officer (!DEATHSQUAD!)"
 	assignment = JOB_MARINE_RAIDER_CMD
-	rank = JOB_MARINE_RAIDER_CMD
+	job_title = JOB_MARINE_RAIDER_CMD
 	role_comm_title = "CMD."
 	minimap_icon = "sof_officer"
 	paygrades = list(PAY_SHORT_MO3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO4 = JOB_PLAYTIME_TIER_3)
@@ -962,7 +962,7 @@
 /datum/equipment_preset/uscm/marsoc/low_threat/sl
 	name = "Marine Raider Team Leader"
 	assignment = JOB_MARINE_RAIDER_SL
-	rank = JOB_MARINE_RAIDER_SL
+	job_title = JOB_MARINE_RAIDER_SL
 	role_comm_title = "TL."
 	paygrades = list(PAY_SHORT_MO1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_MO2 = JOB_PLAYTIME_TIER_3)
 	skills = /datum/skills/commando/deathsquad/leader
@@ -991,7 +991,7 @@
 	flags = EQUIPMENT_PRESET_EXTRA|EQUIPMENT_PRESET_MARINE
 	access = list(ACCESS_MARINE_PREP)
 	assignment = JOB_SQUAD_MARINE
-	rank = JOB_SQUAD_MARINE
+	job_title = JOB_SQUAD_MARINE
 	paygrades = list(PAY_SHORT_ME1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "RFN"
 	skills = /datum/skills/rifleman_pve
@@ -1052,7 +1052,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_MEDBAY)
 	assignment = JOB_PLT_MED
-	rank = JOB_SQUAD_MEDIC
+	job_title = JOB_SQUAD_MEDIC
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "HM"
 	skills = /datum/skills/combat_medic_pve
@@ -1115,7 +1115,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SMARTPREP)
 	assignment = JOB_SQUAD_SMARTGUN
-	rank = JOB_SQUAD_SMARTGUN
+	job_title = JOB_SQUAD_SMARTGUN
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SG"
 	skills = /datum/skills/smartgunner_pve
@@ -1161,7 +1161,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_TL_PREP, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_SQUAD_TEAM_LEADER
-	rank = JOB_SQUAD_TEAM_LEADER
+	job_title = JOB_SQUAD_TEAM_LEADER
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "FTL"
 	skills = /datum/skills/tl_pve
@@ -1217,7 +1217,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_PLT_SL
-	rank = JOB_SQUAD_LEADER
+	job_title = JOB_SQUAD_LEADER
 	paygrades = list(PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME6 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME7 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SL"
 	skills = /datum/skills/sl_pve
@@ -1283,7 +1283,7 @@
 	name = "USCM Solar Devils Rifleman (Hunted)"
 	access = list(ACCESS_MARINE_PREP)
 	assignment = JOB_SQUAD_MARINE
-	rank = JOB_SQUAD_MARINE
+	job_title = JOB_SQUAD_MARINE
 	paygrades = list(PAY_SHORT_ME1 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "RFN"
 	skills = /datum/skills/rifleman_pve
@@ -1330,7 +1330,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_TL_PREP, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_SQUAD_TEAM_LEADER
-	rank = JOB_SQUAD_TEAM_LEADER
+	job_title = JOB_SQUAD_TEAM_LEADER
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "FTL"
 	skills = /datum/skills/tl_pve
@@ -1373,7 +1373,7 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SMARTPREP)
 	assignment = JOB_SQUAD_SMARTGUN
-	rank = JOB_SQUAD_SMARTGUN
+	job_title = JOB_SQUAD_SMARTGUN
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME4 = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_3)
 	role_comm_title = "SG"
 	skills = /datum/skills/smartgunner_pve
