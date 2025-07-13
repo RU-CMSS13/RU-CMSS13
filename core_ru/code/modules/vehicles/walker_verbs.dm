@@ -10,7 +10,7 @@
 	if(!istype(src, /obj/vehicle/walker))
 		src = user.interactee
 	if(!mech_link_check(src, user))
-		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
 		return FALSE
 
 	if(zoom)
@@ -44,7 +44,7 @@
 		src = usr.interactee
 	var/mob/user = usr
 	if(!mech_link_check(src, user))
-		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
 		return FALSE
 
 	if(lights)
@@ -66,7 +66,7 @@
 		src = usr.interactee
 	var/mob/user = usr
 	if(!mech_link_check(src, user))
-		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
 		return FALSE
 
 	var/list/acceptible_modules = list()
@@ -98,7 +98,7 @@
 		src = usr.interactee
 	var/mob/user = usr
 	if(!mech_link_check(src, user))
-		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
 		return FALSE
 
 	tgui_interact(user)
@@ -112,7 +112,7 @@
 		src = usr.interactee
 	var/mob/user = usr
 	if(!mech_link_check(src, user))
-		to_chat(src, "Wrong Mech Parameters detected, contact coders for situation resolve")
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
 		return FALSE
 
 	if(zoom)
