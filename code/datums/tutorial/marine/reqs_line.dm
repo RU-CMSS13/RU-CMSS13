@@ -82,6 +82,9 @@
 		/obj/item/storage/box/guncase/m56d = list("M56D", "HMG", "M56"),
 		/obj/item/storage/box/guncase/m2c = list("M2C"),
 		/obj/item/storage/box/guncase/flamer = list("Flamer", "Flamer kit", "Incinerator"),
+// RUCM Start (Feline "Буратино")
+		/obj/item/storage/box/guncase/feline_flamer = list("Pyro pack", "Pyro backpack", "\"Буратино\"", "Flamer backpack", "Огнемётный ранец"),
+// RUCM End (Feline "Буратино")
 		/obj/item/storage/box/guncase/m79 = list("GL", "Grenade launcher", "M79", "M79 Grenade launcher"),
 		/obj/item/clothing/accessory/storage/black_vest = list("Black webbing", "Black webbing vest"),
 		/obj/item/clothing/accessory/storage/black_vest/brown_vest = list("Brown webbing", "Brown webbing vest"),
@@ -90,7 +93,9 @@
 		/obj/item/clothing/accessory/storage/droppouch = list("Drop Pouch"),
 		/obj/item/clothing/accessory/storage/droppouch/black = list("Black Drop Pouch"),
 		/obj/item/clothing/suit/storage/webbing = list("External webbing"),
+/* CM Original
 		/obj/item/storage/backpack/marine/engineerpack/flamethrower/kit = list("Pyro pack", "Pyro backpack", "G4-1 pack", "Flamer backpack"),
+*/
 		/obj/item/storage/backpack/marine/ammo_rack = list ("IMP Ammo Rack", "Ammo rack", "Ammo IMP Rack"),
 		/obj/item/storage/backpack/marine/satchel/rto = list("Phone pack", "Phone backpack", "Radio pack", "RTO backpack"),
 		/obj/item/parachute = list("Chute", "Parachute"),

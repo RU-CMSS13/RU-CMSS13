@@ -18,6 +18,7 @@
 	containername = "M2C Machine Gun Crate"
 	group = "Weapons"
 
+/* RM Original
 /datum/supply_packs/flamethrower
 	name = "M240 Flamethrower Crate (M240 x2, Broiler-T Fuelback x2)"
 	contains = list(
@@ -30,6 +31,7 @@
 	containertype = /obj/structure/closet/crate/ammo/alt/flame
 	containername = "M240 Incinerator crate"
 	group = "Weapons"
+*/
 
 /datum/supply_packs/grenade_launchers
 	name = "M79 Grenade Launcher Crate (x2 Guncases)"

@@ -159,8 +159,14 @@
 /obj/item/storage/box/spec/pyro/fill_preset_inventory()
 	new /obj/item/clothing/suit/storage/marine/M35(src)
 	new /obj/item/clothing/head/helmet/marine/pyro(src)
+/* CM Original
 	new /obj/item/storage/large_holster/fuelpack(src)
 	new /obj/item/weapon/gun/flamer/m240/spec(src)
+*/
+// RUCM Start (Feline "Буратино")
+	new /obj/item/storage/backpack/marine/feline_flamer_backpack/pyro_spec(src)
+	new /obj/item/weapon/gun/flamer/pyro_spec(src)
+// RUCM End (Feline "Буратино")
 	new /obj/item/ammo_magazine/flamer_tank/large(src)
 	new /obj/item/storage/pouch/flamertank(src)
 	new /obj/item/tool/extinguisher(src)

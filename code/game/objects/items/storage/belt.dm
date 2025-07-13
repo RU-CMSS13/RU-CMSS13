@@ -1368,6 +1368,9 @@
 	///Used to get flap overlay states as inserting a gun changes icon state.
 	var/base_icon
 	var/gun_has_gamemode_skin
+
+	var/has_RUCM_holster_skin = FALSE //RUCM - альтернативный путь отображения кобуры
+
 	can_hold = list(
 		/obj/item/weapon/gun/pistol,
 		/obj/item/ammo_magazine/pistol,
@@ -1466,6 +1469,10 @@
 		*/
 		playsound(src, drawSound, 7, TRUE)
 		var/image/gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+// RUCM Start
+		if(has_RUCM_holster_skin)
+			gun_underlay = image('core_ru/icons/obj/items/nailgun.dmi', current_gun.base_gun_icon)
+// RUCM End
 		if(gun_has_gamemode_skin && current_gun.map_specific_decoration)
 			switch(SSmapping.configs[GROUND_MAP].camouflage_type)
 				if("snow")
