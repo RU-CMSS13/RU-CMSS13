@@ -1,13 +1,17 @@
-/obj/vehicle/walker/proc/exit_walker()
+//README: Be aware, what add_verb from vehicle makes src be client,so ensure src is mech and user is mech-operator,if you're making new verbs
+
+/obj/vehicle/walker/proc/exit_walker(mob/pilot)
 	set name = "Eject"
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
+	if(pilot) //overriding external usr from destroying to internal pilot
+		user = pilot
 	if(!istype(src, /obj/vehicle/walker))
 		src = user.interactee
+	if(!mech_link_check(src, user))
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
+		return FALSE
 
 	if(zoom)
 		unzoom()
@@ -18,7 +22,8 @@
 	user.unset_interaction()
 	user.loc = get_turf(src)
 	user.reset_view(null)
-	remove_verb(user.client, verb_list)
+	if(user.client)
+		remove_verb(user.client, verb_list)
 	UnregisterSignal(user, COMSIG_MOB_RESISTED)
 
 	if(module_map[WALKER_HARDPOIN_LEFT])
@@ -35,12 +40,12 @@
 	set name = "Lights on/off"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	if(!mech_link_check(src, user))
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
+		return FALSE
 
 	if(lights)
 		lights = FALSE
@@ -57,12 +62,12 @@
 	set name = "Eject Magazine"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	if(!mech_link_check(src, user))
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
+		return FALSE
 
 	var/list/acceptible_modules = list()
 	if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
@@ -89,12 +94,12 @@
 	set name = "Status Display"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	if(!mech_link_check(src, user))
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
+		return FALSE
 
 	tgui_interact(user)
 	return TRUE
@@ -103,15 +108,23 @@
 	set name = "Zoom on/off"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	if(!istype(user))
-		return FALSE
-
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		src = usr.interactee
+	var/mob/user = usr
+	if(!mech_link_check(src, user))
+		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
+		return FALSE
 
 	if(zoom)
 		unzoom()
 	else
 		do_zoom()
 	return TRUE
+
+/obj/vehicle/walker/proc/mech_link_check(obj/vehicle/walker/walker, mob/user)
+	if(!istype(user))
+		return FALSE
+	if(!istype(walker))
+		return FALSE
+	else
+		return TRUE
