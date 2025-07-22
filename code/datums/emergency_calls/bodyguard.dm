@@ -68,8 +68,8 @@
 	spawn_header_leader = "You are a Weyland-Yutani PMC Lead Investigator!"
 
 /datum/emergency_call/wy_bodyguard/commando
-	equipment_preset = /datum/equipment_preset/pmc/commando/standard
-	equipment_preset_leader = /datum/equipment_preset/pmc/commando/leader
+	equipment_preset = /datum/equipment_preset/pmc/commando/standard/low_threat
+	equipment_preset_leader = /datum/equipment_preset/pmc/commando/leader/low_threat
 	spawn_header = "You are a Weyland-Yutani Commando!"
 	spawn_header_leader = "You are a Weyland-Yutani Commando Leader!"
 
@@ -87,7 +87,7 @@
 
 /datum/emergency_call/wy_bodyguard/android
 	equipment_preset = /datum/equipment_preset/pmc/w_y_whiteout/low_threat
-	equipment_preset = /datum/equipment_preset/pmc/w_y_whiteout/low_threat/leader
+	equipment_preset_leader = /datum/equipment_preset/pmc/w_y_whiteout/low_threat/leader
 	spawn_header = "You are a Weyland-Yutani Combat Android!"
 	spawn_header_leader = "You are a Weyland-Yutani Combat Android Leading Unit!"
 

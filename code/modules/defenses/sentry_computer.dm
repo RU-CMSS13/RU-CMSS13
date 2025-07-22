@@ -150,6 +150,7 @@
  */
 /obj/item/device/sentry_computer/proc/send_message(message)
 	if(!silent && transceiver)
+		message = strip_improper(message)
 		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY, tts_heard_list = list(list(), list(), list()))
 		voice.say(message)
 

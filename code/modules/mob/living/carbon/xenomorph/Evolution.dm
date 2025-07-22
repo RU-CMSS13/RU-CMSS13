@@ -194,6 +194,10 @@
 	transfer_observers_to(new_xeno)
 	new_xeno._status_traits = _status_traits
 
+	// Freshly evolved xenos emerge standing.
+	// This resets density and resting status traits.
+	set_body_position(STANDING_UP)
+
 	qdel(src)
 	new_xeno.xeno_jitter(25)
 
@@ -216,6 +220,10 @@
 
 	if(!isturf(loc))
 		to_chat(src, SPAN_WARNING("We can't evolve here."))
+		return FALSE
+
+	if(HAS_TRAIT(src, TRAIT_HIVEMIND_INTERFERENCE))
+		to_chat(src, SPAN_WARNING("Our link to the hive is being suppressed...we should wait a bit."))
 		return FALSE
 
 	if(hardcore)
@@ -245,7 +253,7 @@
 		to_chat(src, SPAN_WARNING("We must be at full health to evolve."))
 		return FALSE
 
-	if(agility || fortify || crest_defense)
+	if(agility || fortify || crest_defense || stealth)
 		to_chat(src, SPAN_WARNING("We cannot evolve while in this stance."))
 		return FALSE
 
@@ -271,11 +279,17 @@
 	if(!isturf(loc))
 		to_chat(src, SPAN_XENOWARNING("We can't transmute here."))
 		return
+	if(HAS_TRAIT(src, TRAIT_HIVEMIND_INTERFERENCE))
+		to_chat(src, SPAN_WARNING("Our link to the hive is being suppressed...we should wait a bit."))
+		return FALSE
 	if(health < maxHealth)
 		to_chat(src, SPAN_XENOWARNING("We are too weak to transmute, we must regain our health first."))
 		return
 	if(tier == 0 || tier == 4)
 		to_chat(src, SPAN_XENOWARNING("We can't transmute."))
+		return
+	if(agility || fortify || crest_defense || stealth)
+		to_chat(src, SPAN_XENOWARNING("We can't transmute while in this stance."))
 		return
 	if(lock_evolve)
 		if(banished)
@@ -325,6 +339,9 @@
 	if(health < maxHealth)
 		to_chat(src, SPAN_XENOWARNING("We are too weak to deevolve, we must regain our health first."))
 		return
+	if(HAS_TRAIT(src, TRAIT_HIVEMIND_INTERFERENCE))
+		to_chat(src, SPAN_WARNING("Our link to the hive is being suppressed...we should wait a bit."))
+		return FALSE
 	if(length(caste.deevolves_to) < 1)
 		to_chat(src, SPAN_XENOWARNING("We can't deevolve any further."))
 		return
