@@ -127,10 +127,6 @@
 	},
 /turf/open/floor/strata/floor3,
 /area/strata/interior/outpost/canteen)
-"aau" = (
-/obj/structure/largecrate/random/barrel/yellow,
-/turf/open/floor/almayer/test_floor5,
-/area/strata/interior/outpost/engi/drome/shuttle_MK3)
 "aaw" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "xgibdown1"
@@ -192,15 +188,9 @@
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
 "aaE" = (
-/obj/structure/surface/table/reinforced/prison{
-	color = "#98a3ab"
-	},
-/obj/item/storage/box/mre/upp{
-	pixel_x = -1;
-	pixel_y = 7
-	},
-/turf/open/floor/strata/orange_cover,
-/area/strata/interior/outpost/canteen)
+/obj/structure/largecrate/random/barrel/yellow,
+/turf/open/floor/almayer/test_floor5,
+/area/strata/interior/outpost/engi/drome/shuttle_MK3)
 "aaF" = (
 /obj/structure/largecrate/random/barrel/brown,
 /turf/open/auto_turf/strata_grass/layer1,
@@ -215,11 +205,15 @@
 /turf/open/auto_turf/strata_grass/layer0_mud,
 /area/strata/interior/bball_cave)
 "aaH" = (
-/obj/structure/surface/rack{
+/obj/structure/surface/table/reinforced/prison{
 	color = "#98a3ab"
 	},
-/turf/open/floor/strata/multi_tiles/west,
-/area/strata/interior/mining_outpost/maintenance)
+/obj/item/storage/box/mre/upp{
+	pixel_x = -1;
+	pixel_y = 7
+	},
+/turf/open/floor/strata/orange_cover,
+/area/strata/interior/outpost/canteen)
 "aaI" = (
 /obj/effect/blocker/sorokyne_hot_water,
 /obj/structure/platform/stone/soro,
@@ -250,6 +244,12 @@
 	},
 /turf/open/floor/interior/plastic,
 /area/strata/interior/wooden_hospital)
+"aaN" = (
+/obj/structure/surface/rack{
+	color = "#98a3ab"
+	},
+/turf/open/floor/strata/multi_tiles/west,
+/area/strata/interior/mining_outpost/maintenance)
 "aaO" = (
 /obj/structure/surface/rack{
 	color = "#98a3ab"
@@ -423,9 +423,11 @@
 /turf/open/floor/strata,
 /area/strata/interior/outpost/security)
 "abq" = (
-/obj/effect/landmark/spycam_start,
-/turf/open/floor/plating/asteroidwarning/north,
-/area/strata/exterior/landing_zones/lz2)
+/obj/structure/sign/calendar/upp{
+	pixel_y = 29
+	},
+/turf/open/floor/strata/floor2,
+/area/strata/interior/outpost/med)
 "abr" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/strata_decals/mud_corner{
@@ -466,13 +468,15 @@
 /obj/structure/sign/calendar/upp{
 	pixel_y = 29
 	},
-/turf/open/floor/strata/floor2,
-/area/strata/interior/outpost/med)
+/turf/open/floor/strata/white_cyan1/east,
+/area/strata/interior/outpost/canteen)
 "abx" = (
-/obj/structure/pipes/standard/simple/hidden/cyan,
-/obj/effect/landmark/spycam_start,
-/turf/open/floor/strata/floor3,
-/area/strata/interior/landing_zones/near_lz1)
+/obj/structure/sign/nosmoking_1{
+	pixel_x = -4;
+	pixel_y = 32
+	},
+/turf/open/floor/strata/red1,
+/area/strata/interior/outpost/security)
 "aby" = (
 /obj/structure/machinery/camera/autoname{
 	dir = 8
@@ -529,11 +533,14 @@
 /turf/open/floor/strata/multi_tiles/southwest,
 /area/strata/interior/research)
 "abG" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
 /obj/structure/sign/calendar/upp{
 	pixel_y = 29
 	},
-/turf/open/floor/strata/white_cyan1/east,
-/area/strata/interior/outpost/canteen)
+/turf/open/floor/strata/red1,
+/area/strata/interior/outpost/security)
 "abH" = (
 /obj/structure/surface/rack{
 	color = "#98a3ab"
@@ -602,12 +609,11 @@
 /turf/open/auto_turf/strata_grass/layer0_mud,
 /area/strata/interior/bball_cave)
 "abO" = (
-/obj/structure/sign/nosmoking_1{
-	pixel_x = -4;
-	pixel_y = 32
+/obj/structure/sign/calendar/upp{
+	pixel_y = 29
 	},
-/turf/open/floor/strata/red1,
-/area/strata/interior/outpost/security)
+/turf/open/floor/strata/fake_wood,
+/area/strata/interior/landing_zones/near_lz1)
 "abP" = (
 /obj/structure/barricade/handrail/strata{
 	dir = 8
@@ -621,19 +627,13 @@
 /turf/open/floor/strata/fake_wood,
 /area/strata/exterior/far_north_outpost)
 "abR" = (
-/obj/structure/pipes/standard/simple/hidden/cyan{
-	dir = 4
-	},
-/obj/structure/sign/calendar/upp{
-	pixel_y = 29
-	},
-/turf/open/floor/strata/red1,
-/area/strata/interior/outpost/security)
+/obj/effect/landmark/spycam_start,
+/turf/open/floor/plating/asteroidwarning/north,
+/area/strata/exterior/landing_zones/lz2)
 "abS" = (
-/obj/structure/sign/calendar/upp{
-	pixel_y = 29
-	},
-/turf/open/floor/strata/fake_wood,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/effect/landmark/spycam_start,
+/turf/open/floor/strata/floor3,
 /area/strata/interior/landing_zones/near_lz1)
 "abT" = (
 /obj/structure/surface/rack{
@@ -13035,6 +13035,7 @@
 /obj/structure/machinery/light{
 	dir = 1
 	},
+/obj/item/device/defibrillator/synthetic,
 /turf/open/floor/strata,
 /area/strata/interior/outpost/engi)
 "aLH" = (
@@ -33617,7 +33618,7 @@
 /area/strata/exterior/marsh/center)
 "bVv" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/gun/launcher/grenade/m81/m79,
+/obj/item/weapon/gun/launcher/grenade/m81/m85a1,
 /obj/structure/closet/cabinet,
 /turf/open/floor/wood/wood_broken2,
 /area/strata/interior/wooden_ruins)
@@ -57686,7 +57687,7 @@ gZp
 aYc
 aXm
 mKX
-aau
+aaE
 cXU
 aUI
 aUb
@@ -58169,7 +58170,7 @@ aol
 aol
 aol
 aol
-abx
+abS
 aol
 cso
 aol
@@ -59024,7 +59025,7 @@ bwm
 cnv
 cru
 azx
-abS
+abO
 ard
 arV
 dCq
@@ -64187,7 +64188,7 @@ pAZ
 bvE
 bvE
 aen
-abq
+abR
 bJI
 vsp
 hue
@@ -64448,7 +64449,7 @@ bKq
 bJR
 bHm
 aqD
-aaH
+aaN
 ajt
 bHO
 bHj
@@ -73408,7 +73409,7 @@ blb
 iNi
 boV
 blb
-abw
+abq
 byF
 bBX
 ryK
@@ -77405,7 +77406,7 @@ atJ
 ddK
 bWM
 ijo
-abR
+abG
 gAm
 gAm
 gAm
@@ -78807,7 +78808,7 @@ ijo
 awf
 ceI
 ijo
-abO
+abx
 aCd
 aDf
 cea
@@ -80914,7 +80915,7 @@ nap
 ckN
 nGk
 jBG
-aaE
+aaH
 xSL
 ffS
 aJe
@@ -83358,7 +83359,7 @@ cjn
 cjn
 bFx
 cjn
-abG
+abw
 jnt
 chd
 aFz
