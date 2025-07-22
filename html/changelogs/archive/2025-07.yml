@@ -79,10 +79,10 @@
   realforest2001:
   - rscadd: Infected follow category is now split between hives.
 2025-07-10:
-  Red-byte3D:
-  - code_imp: Xenomorph markers can now be put into different z levels
   Noname995:
   - rscadd: Upstream 08.07
+  Red-byte3D:
+  - code_imp: Xenomorph markers can now be put into different z levels
 2025-07-11:
   matttheficus:
   - bugfix: Field Doctor now counts hours towards the Doctor Roles timelock.
@@ -209,13 +209,24 @@
 2025-07-22:
   Blundir:
   - rscadd: M79 been renamed and resprited into M85A1
+  Noname995:
+  - rscadd: Upstream 22.07
   Red-byte3D:
   - bugfix: Lizards will no longer attack xenos in tunnels
+  - bugfix: Queens can now watch leaders through "watch leaders" properly.
+  - bugfix: Queens can now weed through the queen eye, the same map level they are
+      on regardless of z level.
   Unknownity:
   - bugfix: Fixed bugged survivor spawns due to origins.
   - rscadd: Added three new origins, WY, TWE and the CMBs. WY has three sub origins,
       the corporate default, goon security and the PMCs. Added the origins to the
       respective gear presets that would have them.
+  dadlips:
+  - bugfix: fixes the revolver iff scope bug
   jupyterkat:
   - bugfix: fixed bullets disappearing if you shoot the above or below zlevels from
       some angles
+  - bugfix: you now stop looking up on zlevel transitions
+  - bugfix: you can no longer look up ladders from half a screen away
+  kiVts:
+  - bugfix: Patched a chemical simulator exploit
