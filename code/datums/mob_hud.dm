@@ -353,12 +353,21 @@ GLOBAL_LIST_INIT_TYPED(huds, /datum/mob_hud, list(
 		total_shield_hp += XS.amount
 
 	var/percentage_shield = round(100*XENO_SHIELD_HUD_SCALE_FACTOR*total_shield_hp/maxHealth, 10)
+/* CM Original
 	percentage_shield = min(100, percentage_shield)
 
 	if(percentage_shield > 1)
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield[percentage_shield]")
 	else
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield0")
+*/
+// RUCM Start		Двухслойный спрайт
+	percentage_shield = min(200, percentage_shield)
+	if(HAS_TRAIT(src, TRAIT_WEAK_TO_FLAME))
+		holder.overlays += image('core_ru/Feline/icons/hud.dmi', "xenoshield[percentage_shield > 1 ? "[percentage_shield]" : ""]")
+	else
+		holder.overlays += image('core_ru/Feline/icons/hud_old.dmi', "xenoshield[percentage_shield > 1 ? "[percentage_shield]" : ""]")
+// RUCM End
 
 /mob/living/carbon/xenomorph/med_hud_set_armor()
 	if(GLOB.xeno_general.armor_ignore_integrity)
