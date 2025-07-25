@@ -199,3 +199,10 @@
 /obj/item/storage/belt/marine/smartgunner/m56c/fill_preset_inventory()
 	new /obj/item/ammo_magazine/smartgun/m56c(src)
 	new /obj/item/ammo_magazine/smartgun/m56c(src)
+
+/obj/item/storage/belt/tank/mech
+	name = "\improper M103 EXT pattern vehicle ammo rig"
+	desc = "The M103 EXT is limited-edition modernized product , made specially for mech pilots to carry their walker's ammunition."
+	can_hold = list(
+		/obj/item/ammo_magazine/walker,
+	)
