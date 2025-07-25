@@ -8,6 +8,8 @@
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
+	if(isyautja(user))
+		return pick('sound/voice/pred_laugh1.ogg', 'sound/voice/pred_laugh2.ogg', 'sound/voice/pred_laugh3.ogg', 'sound/voice/pred_laugh4.ogg', 'sound/voice/pred_laugh5.ogg', 'sound/voice/pred_laugh6.ogg')
 	if(ishumansynth_strict(user))
 		if(user.gender == MALE)
 			return pick('core_ru/sound/voice/human_male_laugh_1.ogg', 'core_ru/sound/voice/human_male_laugh_2.ogg')

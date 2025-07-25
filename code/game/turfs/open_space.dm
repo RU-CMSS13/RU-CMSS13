@@ -13,6 +13,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	icon_state = "transparent"
 	baseturfs = /turf/open_space
 	plane = OPEN_SPACE_PLANE_START
+	is_weedable = NOT_WEEDABLE
 
 /turf/open_space/proc/get_projected_turf()
 	return SSmapping.get_turf_below(get_turf(src))
@@ -39,7 +40,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	while(istype(below, /turf/open_space))
 		below = SSmapping.get_turf_below(below)
 		height++
-	
+
 	movable.forceMove(below)
 	movable.onZImpact(below, height)
 
@@ -67,9 +68,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 
 		user.forceMove(below)
 		return
-
-/turf/open_space/is_weedable()
-	return NOT_WEEDABLE
 
 /turf/open_space/blackfoot
 	var/target_x = 1
@@ -111,6 +109,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	while(istype(below, /turf/open_space))
 		below = SSmapping.get_turf_below(below)
 		height++
-	
+
 	movable.forceMove(below)
 	movable.onZImpact(below, height)

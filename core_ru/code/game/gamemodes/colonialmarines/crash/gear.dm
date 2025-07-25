@@ -30,7 +30,6 @@
 	name = "Special Ship Commander"
 
 	assignment = JOB_CRASH_CO
-	rank = JOB_CRASH_CO
 	paygrades = list(PAY_SHORT_NO5 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "CDR"
 	skills = /datum/skills/commander
@@ -76,8 +75,6 @@
 				sidearmpath = /obj/item/storage/belt/gun/m4a3/heavy/co_golden
 			if("M4A3 Custom")
 				sidearmpath = /obj/item/storage/belt/gun/m4a3/commander
-			if("VP78")
-				sidearmpath = /obj/item/storage/belt/gun/m4a3/vp78
 
 	//back
 	new_human.equip_to_slot_or_del(new backItem(new_human), WEAR_BACK)
@@ -89,7 +86,7 @@
 	//uniform
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/marine/officer/command(new_human), WEAR_BODY)
 	//jacket
-	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/MP/SO(new_human), WEAR_JACKET)
+//	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/MP/SO(new_human), WEAR_JACKET)
 	new_human.equip_to_slot_or_del(new /obj/item/weapon/sword/ceremonial(new_human), WEAR_J_STORE)
 	//waist
 	new_human.equip_to_slot_or_del(new sidearmpath(new_human), WEAR_WAIST)
@@ -108,7 +105,6 @@
 
 	access = list(ACCESS_MARINE_CMO, ACCESS_MARINE_MEDBAY, ACCESS_MARINE_RESEARCH, ACCESS_MARINE_CHEMISTRY, ACCESS_MARINE_MORGUE)
 	assignment = JOB_CRASH_CMO
-	rank = JOB_CRASH_CMO
 	paygrades = list(PAY_SHORT_CCMO = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "HS"
 	skills = /datum/skills/CMO
@@ -143,7 +139,6 @@
 
 	access = list(ACCESS_MARINE_CE, ACCESS_MARINE_ENGINEERING, ACCESS_CIVILIAN_ENGINEERING)
 	assignment = JOB_CRASH_CHIEF_ENGINEER
-	rank = JOB_CRASH_CHIEF_ENGINEER
 	paygrades = list(PAY_SHORT_NE8 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "BCM"
 	skills = /datum/skills/CE
@@ -174,7 +169,6 @@
 
 	access = list(ACCESS_MARINE_PREP)
 	assignment = JOB_SQUAD_MARINE
-	rank = JOB_SQUAD_MARINE
 	paygrades = list(PAY_SHORT_ME2 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "RFN"
 	skills = /datum/skills/pfc
@@ -200,7 +194,6 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SPECPREP)
 	assignment = JOB_SQUAD_SPECIALIST
-	rank = JOB_SQUAD_SPECIALIST
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "Spc"
 	skills = /datum/skills/specialist
@@ -223,7 +216,6 @@
 	new_human.equip_to_slot_or_del(new /obj/item/attachable/magnetic_harness(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/spec_kit, WEAR_R_HAND)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/marine(new_human), WEAR_HEAD)
-	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/magazine/large/pmc_m39(new_human), WEAR_L_STORE)
 
 	add_common_wo_equipment(new_human)
 
@@ -234,7 +226,6 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_SMARTPREP)
 	assignment = JOB_SQUAD_SMARTGUN
-	rank = JOB_SQUAD_SMARTGUN
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "SG"
 	skills = /datum/skills/smartgunner
@@ -263,7 +254,6 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_MEDPREP, ACCESS_MARINE_MEDBAY)
 	assignment = JOB_SQUAD_MEDIC
-	rank = JOB_SQUAD_MEDIC
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "HM"
 	skills = /datum/skills/combat_medic
@@ -296,7 +286,6 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP)
 	assignment = JOB_SQUAD_LEADER
-	rank = JOB_SQUAD_LEADER
 	paygrades = list(PAY_SHORT_ME5 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "SL"
 	skills = /datum/skills/SL
@@ -330,7 +319,6 @@
 
 	access = list(ACCESS_MARINE_PREP, ACCESS_MARINE_ENGPREP, ACCESS_CIVILIAN_ENGINEERING)
 	assignment = JOB_SQUAD_ENGI
-	rank = JOB_SQUAD_ENGI
 	paygrades = list(PAY_SHORT_ME3 = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "ComTech"
 	skills = /datum/skills/combat_engineer

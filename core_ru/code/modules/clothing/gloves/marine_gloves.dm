@@ -1,9 +1,9 @@
 /obj/item/clothing/gloves/marine/m40
-	name = "\improper M40 Stormtrooper gloves"
+	name = "\improper M40 Breacher gloves"
 	desc = "A pair of plated, but nimble, gloves."
 	icon = 'core_ru/icons/obj/items/clothing/gloves.dmi'
 	item_icons = list(WEAR_HANDS = 'core_ru/icons/mob/humans/onmob/hands.dmi')
-	icon_state = "stormtrooper"
+	icon_state = "breacher"
 	armor_melee = CLOTHING_ARMOR_HIGH
 	armor_bullet = CLOTHING_ARMOR_MEDIUM
 	armor_internaldamage = CLOTHING_ARMOR_MEDIUM

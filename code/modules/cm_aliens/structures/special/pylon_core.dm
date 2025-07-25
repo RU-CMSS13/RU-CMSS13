@@ -26,7 +26,8 @@
 	/// The maximum amount of lesser drone spawns this pylon can hold
 	var/lesser_drone_spawn_limit = 5
 
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
+	layer = WINDOW_LAYER
 
 /obj/effect/alien/resin/special/pylon/endgame/update_icon()
 	if(protection_level == TURF_PROTECTION_OB)
@@ -145,6 +146,8 @@
 	playsound(new_drone, 'sound/effects/xeno_newlarva.ogg', 25, TRUE)
 	new_drone.generate_name()
 
+	msg_admin_niche("[key_name(new_drone)] has joined as a lesser drone at ([x],[y],[z]).")
+
 	return TRUE
 
 /obj/effect/alien/resin/special/pylon/endgame
@@ -233,6 +236,8 @@
 	var/surge_cooldown = 90 SECONDS
 	var/surge_incremental_reduction = 3 SECONDS
 
+	plane = FLOOR_PLANE
+
 	protection_level = TURF_PROTECTION_OB
 
 	lesser_drone_spawn_limit = 10
@@ -282,7 +287,6 @@
 			// Update everyone's queue status
 			message_alien_candidates(players_with_xeno_pref, dequeued = count_spawned)
 
-/*
 		if(linked_hive.hijack_burrowed_surge && (last_surge_time + surge_cooldown) < world.time)
 			last_surge_time = world.time
 			linked_hive.stored_larva++
@@ -293,21 +297,7 @@
 				surge_cooldown = surge_cooldown - surge_incremental_reduction //ramps up over time
 			if(linked_hive.hijack_burrowed_left < 1)
 				linked_hive.hijack_burrowed_surge = FALSE
-				xeno_message(SPAN_XENOANNOUNCE("The hive's power wanes. We will no longer gain pooled larva over time."), 3, linked_hive.hivenumber)
-*/
-//RUCM START
-		if((linked_hive.hijack_burrowed_surge || crash_mode) && (last_surge_time + surge_cooldown) < world.time)
-			last_surge_time = world.time
-			linked_hive.stored_larva++
-			linked_hive.hijack_burrowed_left--
-			if(GLOB.xeno_queue_candidate_count < 1 + count_spawned)
-				notify_ghosts(header = "Claim Xeno", message = "The Hive has gained another burrowed larva! Click to take it.", source = src, action = NOTIFY_JOIN_XENO, enter_link = "join_xeno=1")
-			if(surge_cooldown > 30 SECONDS) //mostly for sanity purposes
-				surge_cooldown -= surge_incremental_reduction //ramps up over time
-			if(!crash_mode && linked_hive.hijack_burrowed_left < 1)
-				linked_hive.hijack_burrowed_surge = FALSE
-				xeno_message(SPAN_XENOANNOUNCE("The hive's power wanes. We will no longer gain pooled larva over time."), 3, linked_hive.hivenumber)
-//RUCM END
+				xeno_message(SPAN_XENOANNOUNCE("The hive's power wanes. We will no longer gain burrowed larva over time."), 3, linked_hive.hivenumber)
 
 	// Hive core can repair itself over time
 	if(health < maxhealth && last_healed <= world.time)

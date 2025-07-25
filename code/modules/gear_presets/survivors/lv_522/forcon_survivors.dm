@@ -5,8 +5,9 @@
 	idtype = /obj/item/card/id/dogtag
 	role_comm_title = "FORECON"
 	minimap_background = "background_forecon"
-	rank = JOB_SURVIVOR
+	job_title = JOB_SURVIVOR
 	faction_group = list(FACTION_MARINE, FACTION_SURVIVOR)
+	origin_override = ORIGIN_USCM
 	flags = EQUIPMENT_PRESET_START_OF_ROUND
 	access = list(
 		ACCESS_CIVILIAN_PUBLIC,
@@ -31,7 +32,9 @@
 	uniform.attach_accessory(new_human,pin)
 	uniform.attach_accessory(new_human,patch_forecon)
 	new_human.equip_to_slot_or_del(uniform, WEAR_BODY)
+/*
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/webbing(new_human), WEAR_JACKET)
+*/
 	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/marine/satchel(new_human), WEAR_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/firstaid/full(new_human), WEAR_R_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/firstaid/full/alternate(new_human), WEAR_L_STORE)
@@ -48,6 +51,36 @@
 /datum/equipment_preset/survivor/forecon/add_survivor_weapon_security(mob/living/carbon/human/new_human)
 	return
 
+//RUCM START
+/datum/equipment_preset/survivor/forecon/proc/add_forecon_jacket(mob/living/carbon/human/new_human)
+	var/random_jacket = rand(1 , 4)
+	switch(random_jacket)
+		if(1, 2)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/webbing(new_human), WEAR_JACKET)
+			new_human.equip_to_slot_or_del(new /obj/item/device/flashlight(new_human), WEAR_J_STORE)
+			new_human.equip_to_slot_or_del(new /obj/item/tool/crowbar/tactical(new_human), WEAR_IN_JACKET)
+		if(3)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/light(new_human), WEAR_JACKET)
+			new_human.equip_to_slot_or_del(new /obj/item/device/flashlight(new_human), WEAR_J_STORE)
+			new_human.equip_to_slot_or_del(new /obj/item/tool/crowbar/tactical(new_human), WEAR_IN_JACKET)
+		if(4)
+			new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/medium(new_human), WEAR_JACKET)
+			new_human.equip_to_slot_or_del(new /obj/item/device/flashlight(new_human), WEAR_J_STORE)
+			new_human.equip_to_slot_or_del(new /obj/item/tool/crowbar/tactical(new_human), WEAR_IN_JACKET)
+
+/datum/equipment_preset/survivor/forecon/proc/add_forecon_main_weapon(mob/living/carbon/human/new_human)
+	var/random_main_weapon = rand(1, 2)
+	switch(random_main_weapon)
+		if(1)
+			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/rifle/m41aMK1(new_human), WEAR_L_HAND)
+			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/rifle/m41aMK1(new_human), WEAR_IN_BACK)
+			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/rifle/m41aMK1(new_human), WEAR_IN_BACK)
+			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/rifle/m41aMK1(new_human), WEAR_IN_BACK)
+		if(2)
+			new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/shotgun/pump(new_human), WEAR_R_HAND)
+			new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/shotgun/buckshot(new_human), WEAR_L_HAND)
+
+//RUCM END
 /datum/equipment_preset/survivor/forecon/proc/add_forecon_weapon(mob/living/carbon/human/new_human)
 	var/random_gun = rand(1,3)
 	switch(random_gun)
@@ -112,6 +145,9 @@
 
 /datum/equipment_preset/survivor/forecon/standard/load_gear(mob/living/carbon/human/new_human)
 	..()
+//RUCM START
+	add_forecon_jacket(new_human)
+//RUCM END
 	add_forecon_weapon_pistol(new_human)
 	add_forecon_weapon(new_human)
 	spawn_random_headgear(new_human)
@@ -136,6 +172,9 @@
 	new_human.equip_to_slot_or_del(new /obj/item/device/defibrillator(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/firstaid/adv(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/device/healthanalyzer(new_human), WEAR_IN_BACK)
+//RUCM START
+	add_forecon_jacket(new_human)
+//RUCM END
 	add_forecon_weapon(new_human)
 	spawn_random_headgear(new_human)
 	add_forecon_equipment(new_human)
@@ -235,9 +274,15 @@
 	uniform.attach_accessory(new_human,pin)
 	uniform.attach_accessory(new_human,patch_forecon)
 	new_human.equip_to_slot_or_del(uniform, WEAR_BODY)
+/*
 	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/shotgun/pump(new_human), WEAR_R_HAND)
 	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/shotgun/slugs(new_human), WEAR_L_HAND)
+*/
 	..()
+//RUCM START
+	add_forecon_jacket(new_human)
+	add_forecon_main_weapon(new_human)
+//RUCM END
 	add_forecon_weapon_pistol(new_human)
 	spawn_random_headgear(new_human)
 	add_forecon_equipment(new_human)
@@ -247,7 +292,7 @@
 /datum/equipment_preset/survivor/forecon/major
 	name = "Survivor - USCM Reconnaissance Major"
 	assignment = JOB_FORECON_CO
-	skills = /datum/skills/commander
+	skills = /datum/skills/forecon/commander
 	paygrades = list(PAY_SHORT_MO4 = JOB_PLAYTIME_TIER_0)
 	idtype = /obj/item/card/id/gold
 	role_comm_title = "FORECON CO"
@@ -259,6 +304,34 @@
 	dress_hat = list(/obj/item/clothing/head/marine/dress_cover/officer)
 
 /datum/equipment_preset/survivor/forecon/major/load_gear(mob/living/carbon/human/new_human)
+	var/sidearm = /obj/item/weapon/gun/revolver/mateba/cmateba
+	var/sidearmbelt = /obj/item/storage/belt/gun/mateba/cmateba
+	var/sidearmammo = /obj/item/ammo_magazine/revolver/mateba
+
+	if(new_human.client && new_human.client.prefs)
+		sidearm = new_human.client.prefs.commander_sidearm
+		switch(sidearm)
+			if(CO_GUN_MATEBA)
+				sidearm = /obj/item/weapon/gun/revolver/mateba/cmateba
+				sidearmbelt = /obj/item/storage/belt/gun/mateba/cmateba
+				sidearmammo = /obj/item/ammo_magazine/revolver/mateba
+			if(CO_GUN_MATEBA_SPECIAL)
+				sidearm = /obj/item/weapon/gun/revolver/mateba/cmateba
+				sidearmbelt = /obj/item/storage/belt/gun/mateba/cmateba
+				sidearmammo = /obj/item/ammo_magazine/revolver/mateba
+			if(CO_GUN_MATEBA_COUNCIL)
+				sidearm = /obj/item/weapon/gun/revolver/mateba/cmateba
+				sidearmbelt = /obj/item/storage/belt/gun/mateba/cmateba
+				sidearmammo = /obj/item/ammo_magazine/revolver/mateba
+			if(CO_GUN_DEAGLE)
+				sidearm = /obj/item/weapon/gun/pistol/heavy/co
+				sidearmbelt = /obj/item/storage/belt/gun/m4a3
+				sidearmammo = /obj/item/ammo_magazine/pistol/heavy/super
+			if(CO_GUN_DEAGLE_COUNCIL)
+				sidearm = /obj/item/weapon/gun/pistol/heavy/co
+				sidearmbelt = /obj/item/storage/belt/gun/m4a3
+				sidearmammo = /obj/item/ammo_magazine/pistol/heavy/super
+
 	var/obj/item/clothing/under/marine/reconnaissance/uniform = new()
 	var/obj/item/clothing/accessory/storage/droppouch/pouch = new()
 	var/obj/item/clothing/accessory/ranks/marine/o4/pin = new()
@@ -271,11 +344,11 @@
 	new_human.equip_to_slot_or_del(uniform, WEAR_BODY)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/windbreaker/windbreaker_green(new_human), WEAR_JACKET)
 	..()
-	new_human.equip_to_slot_or_del(new /obj/item/storage/belt/gun/mateba/cmateba(new_human), WEAR_WAIST)
-	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/revolver/mateba/cmateba(new_human), WEAR_R_HAND)
-	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/revolver/mateba(new_human), WEAR_IN_BELT)
-	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/revolver/mateba(new_human), WEAR_IN_BELT)
-	new_human.equip_to_slot_or_del(new /obj/item/ammo_magazine/revolver/mateba(new_human), WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new sidearmbelt(new_human), WEAR_WAIST)
+	new_human.equip_to_slot_or_del(new sidearmammo(new_human), WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new sidearmammo(new_human), WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new sidearmammo(new_human), WEAR_IN_BELT)
+	new_human.equip_to_slot_or_del(new sidearm(new_human), WEAR_R_HAND)
 	new_human.equip_to_slot_or_del(new /obj/item/device/binoculars/range/designator(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/clothing/mask/cigarette/cigar(new_human), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/tool/lighter/zippo/gold(new_human), WEAR_IN_BACK)
@@ -288,6 +361,7 @@
 	assignment = JOB_FORECON_SYN
 	faction_group = list(FACTION_MARINE, FACTION_SURVIVOR)
 	idtype = /obj/item/card/id/gold
+	origin_override = ORIGIN_USCM
 
 /datum/equipment_preset/synth/survivor/forecon/load_gear(mob/living/carbon/human/preset_human) //Bishop from Aliens
 	preset_human.equip_to_slot_or_del(new /obj/item/clothing/under/marine/officer/engi, WEAR_BODY)

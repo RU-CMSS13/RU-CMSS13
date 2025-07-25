@@ -2,8 +2,8 @@
 	name = "\improper XM52 experimental breaching scattergun"
 	desc = "An experimental shotgun model going through testing trials in the USCM. Based on the original XM51 version, the XM52 is a mag-fed, burst pump-action shotgun. It utilizes special lighted 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells."
 	icon = 'core_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
-	icon_state = "xm51"
-	item_state = "xm51"
+	icon_state = "xm52"
+	item_state = "xm52"
 	item_icons = list(
 	WEAR_L_HAND = 'core_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'core_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
@@ -65,7 +65,7 @@
 /obj/item/weapon/gun/rifle/xm52/able_to_fire(mob/living/user)
 	. = ..()
 	if (. && istype(user)) //Let's check all that other stuff first.
-		if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ST)
+		if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_BREACHER)
 			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
 			return FALSE
 
