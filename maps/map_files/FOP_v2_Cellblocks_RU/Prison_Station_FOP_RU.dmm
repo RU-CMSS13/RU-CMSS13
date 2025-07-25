@@ -2196,6 +2196,13 @@
 /obj/item/stack/rods,
 /turf/open/floor/prison/whitepurple/west,
 /area/prisonru/research/secret/bioengineering)
+"afw" = (
+/obj/structure/window/framed/prison/reinforced,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
+	dir = 4
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/station/recreation/highsec/s)
 "afx" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
@@ -2270,6 +2277,14 @@
 "afG" = (
 /turf/open/floor/prison/darkpurple2/west,
 /area/prisonru/research/secret/containment)
+"afH" = (
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/obj/item/toy/crayon/blue,
+/turf/open/floor/hybrisa/tile/tilered,
+/area/prisonru/station/recreation/highsec/s)
 "afI" = (
 /obj/structure/window/framed/prison/cell,
 /obj/effect/decal/medical_decals{
@@ -5905,6 +5920,21 @@
 "aoP" = (
 /turf/open/floor/prison/redcorner/north,
 /area/prisonru/cellblock/highsec/north/north)
+"aoQ" = (
+/obj/structure/machinery/light/double/blue{
+	dir = 1;
+	pixel_y = 21
+	},
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/obj/structure/machinery/microwave{
+	pixel_x = 1;
+	pixel_y = 3
+	},
+/turf/open/floor/hybrisa/tile/tilered,
+/area/prisonru/station/recreation/highsec/s)
 "aoR" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison/red/north,
@@ -7683,6 +7713,15 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/yard)
+"atB" = (
+/obj/structure/surface/table/reinforced/prison{
+	dir = 1;
+	color = "#8e98a0"
+	},
+/obj/item/toy/deck/uno,
+/obj/item/toy/dice,
+/turf/open/floor/hybrisa/tile/tilered,
+/area/prisonru/station/recreation/highsec/s)
 "atC" = (
 /obj/structure/stairs{
 	color = "#b7b8b2";
@@ -38473,14 +38512,8 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 10
 	},
+/obj/item/toy/katana,
 /turf/open/floor/plating/plating_catwalk/prison,
-/area/prisonru/station/recreation/highsec/s)
-"cef" = (
-/obj/structure/machinery/light/double/blue{
-	dir = 1;
-	pixel_y = 21
-	},
-/turf/open/floor/hybrisa/tile/tilered,
 /area/prisonru/station/recreation/highsec/s)
 "ceg" = (
 /obj/structure/sink{
@@ -94268,7 +94301,7 @@ bdk
 bdk
 icy
 baw
-tzv
+afH
 bwH
 ccZ
 tzv
@@ -94482,8 +94515,8 @@ bdk
 bdk
 bby
 baw
-tzv
-cef
+aoQ
+bwH
 cda
 tzv
 can
@@ -94696,7 +94729,7 @@ bfc
 bfc
 bfc
 baw
-cbO
+atB
 ceg
 bun
 cbO
@@ -94911,8 +94944,8 @@ bkT
 bqW
 baw
 tzv
-tzv
-tzv
+afw
+afw
 tzv
 tzv
 tzv
