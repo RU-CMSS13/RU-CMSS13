@@ -70,6 +70,7 @@
 #include "modules\cm_marines\equipment\weapons.dm"
 #include "modules\cm_marines\overwatch.dm"
 #include "modules\cm_marines\specialist.dm"
+#include "modules\cm_aliens\structures\blueprints.dm"
 #include "modules\cm_aliens\structures\sunken_colony.dm"
 #include "modules\cm_aliens\structures\special\pylon_core.dm"
 #include "modules\cm_tech\comms_income.dm"
