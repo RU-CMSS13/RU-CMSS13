@@ -100,10 +100,13 @@
 
 /area/prisonru/station/security/monitoring/medsec/south
 	name = "Prison - Medium-Security Monitoring"
-	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 
 /area/prisonru/station/security/monitoring/medsec/central
 	name = "Prison - Central Medium-Security Monitoring"
+
+/area/prisonru/station/security/monitoring/medicalsec
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
+	name = "Prison - Infarmary Foyer"
 
 /area/prisonru/station/security/monitoring/highsec
 	name = "Prison - High-Security Monitoring"

@@ -588,3 +588,7 @@
 	minimap_color = MINIMAP_AREA_LZ
 
 // [RU-CMSS13 ADD-END]
+
+/area/prison/hangar_storage/research/shuttle
+		name = "\improper Research Shuttle"
+
