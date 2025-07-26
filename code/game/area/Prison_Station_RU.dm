@@ -343,6 +343,7 @@
 	name = "Prison - Infirmary"
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_MEDBAY
+	icon_state = "tumor3"
 
 /area/prisonru/medbay/surgery
 	name = "Prison - Operating Theatre"
@@ -356,14 +357,17 @@
 /area/prisonru/cellblock/holdingN
 	name = "Prison - Holding Cell 1"
 	minimap_color = MINIMAP_AREA_SEC
+	icon_state = "tumor2"
 
 /area/prisonru/cellblock/holdingS
 	name = "Prison - Holding Cell 2"
 	minimap_color = MINIMAP_AREA_SEC
+	icon_state = "tumor2"
 
 //Central Cell ring
 /area/prisonru/cellblock/lowsec
 	minimap_color = MINIMAP_AREA_CELL_LOW
+	icon_state = "tumor0"
 
 /area/prisonru/cellblock/lowsec/nw
 	name = "Prison - Northwest Low-Security Cellblock"
@@ -381,6 +385,7 @@
 /area/prisonru/cellblock/mediumsec
 	name = "Prison - Medium-Security Cellblock"
 	minimap_color = MINIMAP_AREA_CELL_MED
+	icon_state = "tumor4"
 
 /area/prisonru/cellblock/mediumsec/north
 	name = "Prison - Medium-Security Cellblock North"
@@ -397,6 +402,7 @@
 //North-West Cell Blocks
 /area/prisonru/cellblock/highsec
 	minimap_color = MINIMAP_AREA_CELL_HIGH
+	icon_state = "tumor3"
 
 /area/prisonru/cellblock/highsec/north/north
 	name = "Prison - North High-Security Cellblock North"
@@ -414,6 +420,7 @@
 //North Cell's Blocks
 /area/prisonru/cellblock/maxsec
 	minimap_color = MINIMAP_AREA_CELL_MAX
+	icon_state = "tumor2"
 
 /area/prisonru/cellblock/maxsec/north
 	name = "Prison - Maximum-Security Panopticon Cellblock"
@@ -438,6 +445,7 @@
 	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_RESEARCH
+	icon_state = "tumor4"
 
 /area/prisonru/research/rd
 	name = "Prison - Research Director's office"
@@ -467,14 +475,71 @@
 /area/prisonru/residential
 	minimap_color = MINIMAP_AREA_COLONY
 	ceiling = CEILING_METAL
+	icon_state = "tumor0"
 
-/area/prisonru/residential/central
+//Civ rooms
+
+/area/prisonru/residential/synthrepstat
+	name = "Prison - Synthetic Repair Station"
+	icon_state = "tumor3"
+
+/area/prisonru/residential/civiliancheckpoint
+	name = "Prison - Civilian Checkpoint"
+	icon_state = "tumor4"
+
+/area/prisonru/residential/botanic
+	name = "Prison - Botanical garden"
+	icon_state = "botany"
+
+/area/prisonru/residential/basketballroom
+	name = "Prison - Basketball Court"
+	icon_state = "base_icon"
+
+//Rooms
+/area/prisonru/residential/room1
+	name = "Prison - Room №1"
+
+/area/prisonru/residential/room2
+	name = "Prison - Room №2"
+
+/area/prisonru/residential/room3
+	name = "Prison - Room №3"
+
+/area/prisonru/residential/room4
+	name = "Prison - Room №4"
+
+/area/prisonru/residential/room5
+	name = "Prison - Room №5"
+
+/area/prisonru/residential/room6
+	name = "Prison - Room №6"
+
+/area/prisonru/residential/room7
+	name = "Prison - Room №7"
+
+/area/prisonru/residential/room8
+	name = "Prison - Room №8"
+
+/area/prisonru/residential/room9
+	name = "Prison - Room №9"
+
+/area/prisonru/residential/room10
+	name = "Prison - Room №10"
+
+/area/prisonru/residential/room11
+	name = "Prison - Room №11"
+
+//Hallways Civ
+/area/prisonru/residential/hallway
+	icon_state = "fiorina"
+
+/area/prisonru/residential/hallway/central
 	name = "Prison - Civilian Residences Central"
 
-/area/prisonru/residential/north
+/area/prisonru/residential/hallway/north
 	name = "Prison - Civilian Residences North"
 
-/area/prisonru/residential/south
+/area/prisonru/residential/hallway/south
 	name = "Prison - Civilian Residences South"
 
 //Monorail CODE
@@ -482,6 +547,7 @@
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
+	icon_state = "power0"
 
 /area/prisonru/monorail/east
 	name = "Prison - East Monorail Station"
