@@ -8,6 +8,7 @@
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
 	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
+	soundscape_interval = 25
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -496,44 +497,48 @@
 	icon_state = "base_icon"
 
 //Rooms
-/area/prisonru/residential/room1
+/area/prisonru/residential/rooms
+	unoviable_timer = FALSE
+
+/area/prisonru/residential/rooms/room1
 	name = "Prison - Room №1"
 
-/area/prisonru/residential/room2
+/area/prisonru/residential/rooms/room2
 	name = "Prison - Room №2"
 
-/area/prisonru/residential/room3
+/area/prisonru/residential/rooms/room3
 	name = "Prison - Room №3"
 
-/area/prisonru/residential/room4
+/area/prisonru/residential/rooms/room4
 	name = "Prison - Room №4"
 
-/area/prisonru/residential/room5
+/area/prisonru/residential/rooms/room5
 	name = "Prison - Room №5"
 
-/area/prisonru/residential/room6
+/area/prisonru/residential/rooms/room6
 	name = "Prison - Room №6"
 
-/area/prisonru/residential/room7
+/area/prisonru/residential/rooms/room7
 	name = "Prison - Room №7"
 
-/area/prisonru/residential/room8
+/area/prisonru/residential/rooms/room8
 	name = "Prison - Room №8"
 
-/area/prisonru/residential/room9
+/area/prisonru/residential/rooms/room9
 	name = "Prison - Room №9"
 
-/area/prisonru/residential/room10
+/area/prisonru/residential/rooms/room10
 	name = "Prison - Room №10"
 
-/area/prisonru/residential/room11
+/area/prisonru/residential/rooms/room11
 	name = "Prison - Room №11"
 
-/area/prisonru/residential/room12
+/area/prisonru/residential/rooms/room12
 	name = "Prison - Room №12"
 
 //Hallways Civ
 /area/prisonru/residential/hallway
+	unoviable_timer = FALSE
 	icon_state = "fiorina"
 
 /area/prisonru/residential/hallway/central
@@ -555,6 +560,7 @@
 /area/prisonru/monorail/east
 	name = "Prison - East Monorail Station"
 	linked_lz = DROPSHIP_LZ1
+	icon_state = "power0"
 
 //Telecomms CODE
 /area/prisonru/telecomms
