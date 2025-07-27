@@ -529,6 +529,9 @@
 /area/prisonru/residential/room11
 	name = "Prison - Room №11"
 
+/area/prisonru/residential/room12
+	name = "Prison - Room №12"
+
 //Hallways Civ
 /area/prisonru/residential/hallway
 	icon_state = "fiorina"
