@@ -730,7 +730,7 @@
 	S["human_voice"] >> voice
 	S["human_pitch"] >> voice_pitch
 	//RUCM END
-	//S["b_type"] >> b_type
+	//S["blood_type"] >> blood_type
 
 	//Jobs
 	S["alternate_option"] >> alternate_option
@@ -824,7 +824,7 @@
 	voice_pitch = sanitize_integer(voice_pitch, -12, 12, 0)
 	//RUCM END
 	night_vision_preference = sanitize_inlist(night_vision_preference, GLOB.nvg_color_list, "Green")
-	//b_type = sanitize_text(b_type, initial(b_type))
+	//blood_type = sanitize_text(blood_type, initial(blood_type))
 
 	alternate_option = sanitize_integer(alternate_option, 0, 3, initial(alternate_option))
 	if(!job_preference_list)
@@ -900,7 +900,7 @@
 	S["human_voice"] << voice
 	S["human_pitch"] << voice_pitch
 	//RUCM END
-	//S["b_type"] << b_type
+	//S["blood_type"] << blood_type
 	S["spawnpoint"] << spawnpoint
 
 	//Jobs
