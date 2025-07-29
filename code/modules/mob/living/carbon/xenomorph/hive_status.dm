@@ -109,6 +109,8 @@
 
 	var/list/resin_marks = list()
 
+	var/list/designer_marks = list()
+
 	var/list/banished_ckeys = list()
 
 	var/hivecore_cooldown = FALSE
