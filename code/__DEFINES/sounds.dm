@@ -121,13 +121,15 @@
 //Prison Station RU Sounds
 #define AMBIENCE_PRISON_ALARM 'sound/ambience/prisonfopru/prisonalarm.ogg'
 #define AMBIENCE_PRISON_LZDISPATCH 'sound/ambience/prisonfopru/prisonbridgeambience.ogg'
-#define AMBIENCE_PRISON_MAINTENANCE 'sound/ambience/prisonfopru/prisonmaintenancehalls.ogg'
+#define AMBIENCE_PRISON_CONTROLROOM 'sound/ambience/prisonfopru/controlroomambience.ogg'
+#define AMBIENCE_PRISON_MAINTENANCE 'sound/ambience/prisonfopru/prisonmaintenancehalls4.ogg'
 
+#define SCAPE_PL_FIORINA_MAINTENANCE list('sound/ambience/prisonfopru/prisonmaintenancehalls.ogg','sound/ambience/prisonfopru/prisonmaintenancehalls2.ogg','sound/ambience/prisonfopru/prisonmaintenancehalls3.ogg',)
 #define SCAPE_PL_FIORINA_COMMON list('sound/ambience/prisonfopru/prisonstationwaterdrop.ogg','sound/ambience/prisonfopru/prisoncommon1.ogg','sound/ambience/prisonfopru/prisoncommon2.ogg','sound/ambience/prisonfopru/prisoncommon3.ogg','sound/ambience/prisonfopru/prisoncommon4.ogg','sound/ambience/prisonfopru/prisoncommon5.ogg',)
 #define SCAPE_PL_FIORINA_NEAR_SCI list('sound/ambience/prisonfopru/prisonalarm2.ogg','sound/ambience/prisonfopru/prisonalarm1.ogg','sound/ambience/prisonfopru/prisonalarm3.ogg',)
-#define SCAPE_PL_FIORINA_MACHINES_ROOM list('sound/ambience/prisonfopru/prisonstationmachines1.ogg','sound/ambience/prisonfopru/prisonstationmachines2.ogg','sound/ambience/prisonfopru/prisonstationmachines3.ogg','sound/ambience/prisonfopru/prisonstationmachines4.ogg',)
-#define SCAPE_PL_FIORINA_COMPUTERS_ROOM list('sound/ambience/prisonfopru/prisoncomputer1.ogg','sound/ambience/prisonfopru/prisoncomputer2.ogg','sound/ambience/prisonfopru/prisoncomputer3.ogg',)
-#define SCAPE_PL_FIORINA_CIVILIAN_AD list('sound/ambience/prisonfopru/prisonintercomseegson.ogg',) //Not in use (for now)
+#define SCAPE_PL_FIORINA_MACHINES_ROOM list('sound/ambience/prisonfopru/prisonstationmachines1.ogg','sound/ambience/prisonfopru/prisonstationmachines2.ogg','sound/ambience/prisonfopru/prisonstationmachines3.ogg','sound/ambience/prisonfopru/prisonstationmachines4.ogg','sound/ambience/prisonfopru/prisonstationmachines5.ogg')
+#define SCAPE_PL_FIORINA_COMPUTERS_ROOM list('sound/ambience/prisonfopru/prisoncomputer1.ogg','sound/ambience/prisonfopru/prisoncomputer2.ogg','sound/ambience/prisonfopru/prisoncomputer3.ogg','sound/ambience/prisonfopru/prisonstationmachines5.ogg','sound/ambience/prisonfopru/prisonstationservers1.ogg')
+#define SCAPE_PL_FIORINA_CIVILIAN_AD list('sound/ambience/prisonfopru/prisonintercomseegson.ogg',)
 // RU-CM CODE END
 
 // Hybrisa Soundscapes

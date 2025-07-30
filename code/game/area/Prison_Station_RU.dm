@@ -13,6 +13,14 @@
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
 
+/area/prisonru/oob
+	name = "Prison - Out Of Bounds"
+	icon_state = "oob"
+	requires_power = FALSE
+	ceiling = CEILING_MAX
+	is_resin_allowed = FALSE
+	flags_area = AREA_NOTUNNEL|AREA_UNWEEDABLE
+
 //LZ CODE
 
 /area/prisonru/lz
@@ -35,6 +43,7 @@
 /area/prisonru/lz/dispatch_lzI
 	name = "Prison - Main Hangar Traffic Control"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
+	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 
 /area/prisonru/lz/near_lzII
@@ -216,6 +225,8 @@
 /area/prisonru/station/maintenance
 	icon_state = "maints"
 	ambience_exterior = AMBIENCE_PRISON_MAINTENANCE
+	ceiling_muffle = TRUE
+	soundscape_playlist = SCAPE_PL_FIORINA_MAINTENANCE
 
 /area/prisonru/station/maintenance/residential
 
@@ -248,9 +259,15 @@
 	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
 	minimap_color = MINIMAP_AREA_COMMS
 
+/area/prisonru/station/maintenance/control_room
+	name = "Prison - Control Room"
+	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
+	linked_lz = DROPSHIP_LZ1
+	ceiling_muffle = TRUE
+
 /area/prisonru/station/maintenance/hangar_barracks
 	name = "Prison - Hangar-Barracks Maintenance"
-	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	linked_lz = DROPSHIP_LZ1
 
 //Canteen
@@ -477,6 +494,7 @@
 	minimap_color = MINIMAP_AREA_COLONY
 	ceiling = CEILING_METAL
 	icon_state = "tumor0"
+	unoviable_timer = FALSE
 
 //Civ rooms
 
@@ -498,7 +516,6 @@
 
 //Rooms
 /area/prisonru/residential/rooms
-	unoviable_timer = FALSE
 
 /area/prisonru/residential/rooms/room1
 	name = "Prison - Room №1"
@@ -538,7 +555,6 @@
 
 //Hallways Civ
 /area/prisonru/residential/hallway
-	unoviable_timer = FALSE
 	icon_state = "fiorina"
 
 /area/prisonru/residential/hallway/central
@@ -552,10 +568,13 @@
 
 //Monorail CODE
 /area/prisonru/monorail
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
+	soundscape_interval = 60
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
 	icon_state = "power0"
+
 
 /area/prisonru/monorail/east
 	name = "Prison - East Monorail Station"
