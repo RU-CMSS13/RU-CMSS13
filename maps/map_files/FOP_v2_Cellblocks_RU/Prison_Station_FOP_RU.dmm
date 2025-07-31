@@ -217,6 +217,12 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/research/secret/testing)
+"aaw" = (
+/obj/effect/landmark/nightmare{
+	insert_tag = "clearLZ1"
+	},
+/turf/closed/wall/r_wall/prison,
+/area/prisonru/station/hallway/entrance)
 "aax" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 1;
@@ -24728,7 +24734,7 @@
 /area/prisonru/cellblock/vip)
 "boS" = (
 /obj/effect/landmark/nightmare{
-	insert_tag = "sci_rest_room"
+	insert_tag = "clearLZ1"
 	},
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prisonru/research)
@@ -45954,10 +45960,6 @@
 /obj/effect/spawner/random/tool,
 /turf/open/auto_turf/sand/layer1,
 /area/prisonru/station/security/monitoring/highsec/sensor_tower)
-"cBW" = (
-/obj/structure/machinery/power/apc/no_power/east,
-/turf/open/auto_turf/sand/layer1,
-/area/prisonru/station/security/monitoring/highsec/sensor_tower)
 "cBX" = (
 /obj/structure/machinery/shower{
 	dir = 4;
@@ -61265,6 +61267,7 @@
 	},
 /obj/item/stock_parts/manipulator/pico,
 /obj/effect/landmark/objective_landmark/science,
+/obj/structure/machinery/power/apc/no_power/east,
 /turf/open/auto_turf/sand/layer1,
 /area/prisonru/station/security/monitoring/highsec/sensor_tower)
 "mnC" = (
@@ -90721,7 +90724,7 @@ lxE
 wjg
 cCh
 sqS
-cBW
+paF
 mnz
 ksu
 cBr
@@ -120709,7 +120712,7 @@ bhX
 bhX
 tuC
 byk
-cjH
+aaw
 bCS
 bEA
 arg
