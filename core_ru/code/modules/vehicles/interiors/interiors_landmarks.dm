@@ -32,3 +32,27 @@
 			exterior.interior_phone = Phone
 
 	qdel(src)
+
+//RU ARC seat spawner
+/obj/effect/landmark/interior/spawn/vehicle_driver_seat/arc
+	name = "ARC driver seat spawner"
+	icon = 'icons/obj/vehicles/interiors/general.dmi'
+	icon_state = "armor_chair"
+	color = "red"
+
+/obj/effect/landmark/interior/spawn/vehicle_driver_seat/arc/on_load(datum/interior/I)
+	var/obj/structure/bed/chair/comfy/vehicle/arc/S = new(loc)
+
+	S.icon = icon
+	S.icon_state = icon_state
+	S.layer = layer
+	S.vehicle = I.exterior
+	S.required_skill = S.vehicle.required_skill
+	S.setDir(dir)
+	S.alpha = alpha
+	S.update_icon()
+	S.handle_rotation()
+	S.pixel_x = pixel_x
+	S.pixel_y = pixel_y
+
+	qdel(src)
