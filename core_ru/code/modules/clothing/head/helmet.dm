@@ -1,7 +1,7 @@
 /obj/item/clothing/head/helmet/marine/m40
 	name = "\improper M40 breacher helmet"
-	item_icons = list(WEAR_HEAD = 'core_ru/icons/mob/humans/onmob/head_1.dmi')
-	icon = 'core_ru/icons/mob/humans/onmob/head_1.dmi'
+	item_icons = list(WEAR_HEAD = 'core_ru/icons/mob/humans/onmob/head/head_1.dmi')
+	icon = 'core_ru/icons/mob/humans/onmob/head/head_1.dmi'
 	icon_state = "breacher_helmet"
 	desc = "A helmet designed for USCM breacher. Contains heavy insulation, covered in nomex weave."
 	armor_melee = CLOTHING_ARMOR_HIGH
