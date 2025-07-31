@@ -217,6 +217,10 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/research/secret/testing)
+"aaw" = (
+/obj/structure/machinery/power/apc/no_power/south,
+/turf/open/floor/prison/cell_stripe,
+/area/prisonru/station/security/monitoring/highsec/sensor_tower)
 "aax" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 1;
@@ -2861,7 +2865,6 @@
 /turf/open/floor/prison/darkpurple2,
 /area/prisonru/research/secret)
 "ahk" = (
-/obj/structure/machinery/power/apc/no_power/north,
 /obj/effect/landmark/good_item,
 /turf/open/floor/prison/darkpurple2,
 /area/prisonru/research/secret)
@@ -4738,10 +4741,10 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -26
 	},
+/obj/structure/machinery/power/apc/no_power/south,
 /turf/open/floor/prison/darkpurplefull2/northwest,
 /area/prisonru/research/secret/chemistry)
 "alT" = (
-/obj/structure/machinery/power/apc/no_power/south,
 /obj/item/stock_parts/matter_bin/adv{
 	pixel_x = 6;
 	pixel_y = 13
@@ -12900,10 +12903,6 @@
 /obj/structure/inflatable/door,
 /turf/open/floor/prison/whitepurple/northwest,
 /area/prisonru/station/quarters/research)
-"aIa" = (
-/obj/structure/machinery/power/apc/no_power/south,
-/turf/open/floor/prison/whitepurple/north,
-/area/prisonru/station/quarters/research)
 "aIb" = (
 /turf/open/floor/prison/whitepurple/north,
 /area/prisonru/station/quarters/research)
@@ -12914,6 +12913,7 @@
 "aId" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/machinery/light/double/blue,
+/obj/structure/machinery/power/apc/no_power/south,
 /turf/open/floor/prison/whitepurple/north,
 /area/prisonru/station/quarters/research)
 "aIe" = (
@@ -24407,11 +24407,6 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/toilet/canteen)
-"bnT" = (
-/obj/structure/machinery/power/apc/no_power/west,
-/obj/structure/largecrate/random/barrel/brown,
-/turf/open/floor/prison/floor_plate/southwest,
-/area/prisonru/station/hallway/entrance)
 "bnU" = (
 /obj/item/ammo_casing/bullet,
 /turf/open/floor/prison/darkbrowncorners2/west,
@@ -61267,7 +61262,6 @@
 	},
 /obj/item/stock_parts/manipulator/pico,
 /obj/effect/landmark/objective_landmark/science,
-/obj/structure/machinery/power/apc/no_power/east,
 /turf/open/auto_turf/sand/layer1,
 /area/prisonru/station/security/monitoring/highsec/sensor_tower)
 "mnC" = (
@@ -67080,6 +67074,7 @@
 /obj/item/ammo_casing/bullet{
 	icon_state = "casing_9_1"
 	},
+/obj/structure/machinery/power/apc/no_power/south,
 /turf/open/floor/prison/darkpurple2/north,
 /area/prisonru/research/secret)
 "rdD" = (
@@ -67301,6 +67296,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood/drip,
+/obj/structure/machinery/power/apc/no_power/west,
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/station/hallway/entrance)
 "rlK" = (
@@ -90512,7 +90508,7 @@ cCh
 cCd
 cBW
 hPt
-cBJ
+aaw
 cBs
 bdE
 cva
@@ -113392,7 +113388,7 @@ aDy
 aBZ
 aDy
 jSB
-aIa
+aIb
 aED
 aED
 aJM
@@ -120698,7 +120694,7 @@ biI
 bhX
 rlG
 bmQ
-bnT
+beq
 beq
 udZ
 bpE
