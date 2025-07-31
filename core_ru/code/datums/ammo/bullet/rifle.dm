@@ -14,3 +14,6 @@
 /datum/ammo/bullet/rifle/ap/cluster/on_hit_mob(mob/M, obj/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/cluster_stack, cluster_addon, damage, world.time)
+
+/datum/ammo/bullet/rifle/m4ra/impact
+	damage = 40

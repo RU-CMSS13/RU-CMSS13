@@ -75,28 +75,11 @@
 	pixel_x = -5
 	hud_offset = -5
 
-
-/obj/item/weapon/gun/rifle/m4ra_custom/set_gun_attachment_offsets()
-	attachable_offset = list("muzzle_x" = 43, "muzzle_y" = 17,"rail_x" = 23, "rail_y" = 21, "under_x" = 30, "under_y" = 11, "stock_x" = 24, "stock_y" = 13, "special_x" = 37, "special_y" = 16)
-
-/* RUCM CHANGE
 /obj/item/weapon/gun/rifle/m4ra_custom/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_6)
-	set_burst_amount(0)
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_2
 	scatter = SCATTER_AMOUNT_TIER_8
 	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_2
 	recoil = RECOIL_AMOUNT_TIER_5
 	damage_falloff_mult = 0
-*/
-
-/obj/item/weapon/gun/rifle/m4ra_custom/able_to_fire(mob/living/user)
-	. = ..()
-	if (. && istype(user)) //Let's check all that other stuff first.
-		if(!skillcheck(user, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && user.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_SCOUT)
-			to_chat(user, SPAN_WARNING("You don't seem to know how to use \the [src]..."))
-			return FALSE
-
-/obj/item/weapon/gun/rifle/m4ra_custom/tactical
-	starting_attachment_types = list(/obj/item/attachable/magnetic_harness, /obj/item/attachable/bayonet, /obj/item/attachable/angledgrip)
