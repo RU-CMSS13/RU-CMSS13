@@ -8,7 +8,7 @@
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
 	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-	soundscape_interval = 25
+	soundscape_interval = 15
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -37,6 +37,8 @@
 /area/prisonru/lz/console_lzI
 	name = "Prison - LZ1 'Admin"
 	icon_state = "lz1"
+	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
+	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 	requires_power = FALSE
 
@@ -62,6 +64,25 @@
 	name = "Prison - Research Hangar Storage"
 	linked_lz = DROPSHIP_LZ2
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+
+//Civ LZ
+/area/prisonru/civ/lz
+	ceiling = CEILING_GLASS
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
+	icon_state = "lz"
+	minimap_color = MINIMAP_AREA_COLONY
+
+/area/prisonru/civ/lz/waiting_room
+	name = "Prison - Civilian Landing Zone"
+
+/area/prisonru/civ/lz/lzdispatch
+	name = "Prison - Canding Zone Dispatch room"
+	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
+	ceiling_muffle = TRUE
+
+/area/prisonru/civ/WYshuttle
+	name = "Prison - Weyland-Yutani PMC ERT Shuttle"
+	requires_power = FALSE
 
 //Station Areas
 /area/prisonru/station
@@ -119,7 +140,22 @@
 	name = "Prison - Infarmary Foyer"
 
 /area/prisonru/station/security/monitoring/highsec
-	name = "Prison - High-Security Monitoring"
+	name = "Prison - High-Security Wait Room"
+
+/area/prisonru/station/security/monitoring/highsec/restroom
+	name = "Prison - High-Security Staff Restroom"
+
+/area/prisonru/station/security/monitoring/highsec/sensor_tower
+	name = "Prison - Sensor Tower"
+	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
+
+/area/prisonru/station/security/monitoring/highsec/monitoring_room_n
+	name = "Prison - North Monitoring Room"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
+
+/area/prisonru/station/security/monitoring/highsec/monitoring_room_s
+	name = "Prison - South Monitoring Room"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 
 /area/prisonru/station/security/monitoring/maxsec
 	name = "Prison - Maximum-Security Monitoring"
@@ -255,8 +291,8 @@
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 
 /area/prisonru/station/maintenance/research_medbay //T-comms tower also can spawn there
-	name = "Prison - Research-Infirmary Maintenance"
-	soundscape_playlist = SCAPE_PL_FIORINA_MACHINES_ROOM
+	name = "Prison - Research Backup Generators"
+	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
 	minimap_color = MINIMAP_AREA_COMMS
 
 /area/prisonru/station/maintenance/control_room
@@ -368,6 +404,10 @@
 
 /area/prisonru/medbay/morgue
 	name = "Prison - Morgue"
+
+/area/prisonru/medbay/high_sec_medbay
+	name = "Prison - South High-Security MedBay Block"
+	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
 
 //CELLBLOCKS CODE
 
@@ -505,6 +545,9 @@
 /area/prisonru/residential/civiliancheckpoint
 	name = "Prison - Civilian Checkpoint"
 	icon_state = "tumor4"
+	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
+	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
+	ceiling_muffle = TRUE
 
 /area/prisonru/residential/botanic
 	name = "Prison - Botanical garden"
@@ -570,6 +613,7 @@
 /area/prisonru/monorail
 	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
 	soundscape_interval = 60
+	ceiling_muffle = TRUE
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
