@@ -13,6 +13,3 @@
 
 // Queen strain flags
 #define ROYAL_CHARGER "Royal Charger"
-
-// Warrior strain flags
-#define WARRIOR_BOXER "Boxer"
