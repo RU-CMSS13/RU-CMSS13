@@ -133,6 +133,7 @@
 #include "modules\mob\living\carbon\xenomorph\strains\castes\queen\queen_charger.dm"
 #include "modules\mob\living\carbon\xenomorph\strains\castes\spitter\suppressor.dm"
 #include "modules\mob\living\carbon\xenomorph\strains\castes\warrior\boxer.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\warrior\knight.dm"
 #include "modules\mob\new_player\login.dm"
 #include "modules\objectives\communications.dm"
 #include "modules\projectiles\gun_attachables.dm"

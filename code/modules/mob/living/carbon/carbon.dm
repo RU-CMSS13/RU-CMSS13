@@ -552,6 +552,12 @@
 
 
 /mob/living/carbon/proc/extinguish_mob(mob/living/carbon/C)
+// RUCM Start
+	if(HAS_TRAIT(src, TRAIT_WEAK_TO_FLAME))
+		C.adjustFireLoss(15)
+		C.visible_message(SPAN_DANGER("[C] пытается потушить [src], но обжигается о его раскаленную псевдоплоть!"), \
+		SPAN_WARNING("Пытаюсь потушить [src], но обжигаюсь о его раскаленную псевдоплоть!"), null, 5)
+// RUCM End
 	adjust_fire_stacks(-5, min_stacks = 0)
 	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 25, 1, 7)
 	C.visible_message(SPAN_DANGER("[C] tries to put out the fire on [src]!"),

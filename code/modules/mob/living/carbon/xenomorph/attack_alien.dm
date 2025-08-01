@@ -339,6 +339,7 @@
 		return XENO_ATTACK_ACTION
 
 //Breaking barricades
+/* CM Original
 /obj/structure/barricade/attack_alien(mob/living/carbon/xenomorph/M)
 	M.animation_attack_on(src)
 	take_damage( rand(M.melee_damage_lower, M.melee_damage_upper) * brute_multiplier)
@@ -355,6 +356,71 @@
 		SPAN_DANGER("The barbed wire slices into us!"), null, 5, CHAT_TYPE_XENO_COMBAT)
 		M.apply_damage(10)
 	return XENO_ATTACK_ACTION
+*/
+// RUCM Start
+/obj/structure/barricade/attack_alien(mob/living/carbon/xenomorph/M)
+	if(M.strain && M.strain.name == WARRIOR_KNIGHT)
+		var/datum/behavior_delegate/warrior_knight/knight = M.behavior_delegate
+		M.animation_attack_on(src)															// Анимация, урон, звук, щит
+		if((stack_type == /obj/item/stack/sheet/metal) || (stack_type == /obj/item/stack/sheet/plasteel) || istype(src,/obj/structure/barricade/deployable))
+			playsound(src, pick('core_ru/Feline/sound/mettal_rattle_1.ogg',
+								'core_ru/Feline/sound/mettal_rattle_2.ogg',
+								'core_ru/Feline/sound/mettal_rattle_3.ogg',
+								'core_ru/Feline/sound/mettal_rattle_4.ogg',), 50, 1)
+			take_damage((rand(M.melee_damage_lower, M.melee_damage_upper) * brute_multiplier) + 20)
+			M.add_xeno_shield((stack_type == /obj/item/stack/sheet/plasteel)? 40 : 20, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = knight.shield_limit)
+			M.overlay_shields()
+
+		else if(barricade_hitsound)
+			playsound(src, barricade_hitsound, 25, 1)
+			take_damage((rand(M.melee_damage_lower, M.melee_damage_upper) * brute_multiplier))
+		if(health <= 0)														// Проверка состояния, вербы
+			M.visible_message(SPAN_DANGER("[M] доедает [src]!"), \
+			SPAN_DANGER("Мы доламываем и сжираем [src]!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+		else
+			M.visible_message(SPAN_DANGER("[M] откусывает часть [src]!"), \
+			SPAN_DANGER("Мы пожираем [src]!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+		if(is_wired)																		// Колючка
+			M.visible_message(SPAN_DANGER("Эта тварь жрет колючую проволоку!"), \
+			SPAN_DANGER("Мы игнорируем острые шипы колючей проволоки!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+		return XENO_ATTACK_ACTION
+
+	else
+		M.animation_attack_on(src)
+		take_damage(rand(M.melee_damage_lower, M.melee_damage_upper) * brute_multiplier)
+		if(barricade_hitsound)
+			playsound(src, barricade_hitsound, 25, 1)
+		if(health <= 0)
+			M.visible_message(SPAN_DANGER("[M] разносит [src] на части!"), \
+			SPAN_DANGER("Мы разносим [src] на части!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+		else
+			M.visible_message(SPAN_DANGER("[M] [M.slashes_verb] [src]!"), \
+			SPAN_DANGER("Мы [M.slash_verb] [src]!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+		if(is_wired)
+			M.visible_message(SPAN_DANGER("Колючая проволока врезается в плоть [M]!"),
+			SPAN_DANGER("Колючая проволока врезается в нашу плоть!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+			M.apply_damage(10)
+		return XENO_ATTACK_ACTION
+
+// Пожирание металла
+/obj/item/stack/sheet/attack_alien(mob/living/carbon/xenomorph/M)
+	if(M.strain && M.strain.name == WARRIOR_KNIGHT)
+		var/datum/behavior_delegate/warrior_knight/knight = M.behavior_delegate
+		if((sheettype == "metal") || (sheettype == "plasteel"))
+			if((knight.shield == null) || (knight.shield.amount < knight.shield_limit))
+				M.animation_attack_on(src)
+				M.visible_message(SPAN_DANGER("[M] проглатывает лист [src]!"), \
+				SPAN_DANGER("Мы пожираем лист [src]!"), null, 5, CHAT_TYPE_XENO_COMBAT)
+				playsound(src, 'core_ru/Feline/sound/mettal_rattle_5.ogg', 25, 1)
+				M.add_xeno_shield((sheettype == "metal")? 30 : 80, XENO_SHIELD_KNIGHT, add_shield_on = TRUE, max_shield = knight.shield_limit)
+				M.overlay_shields()
+				use(1)
+				return XENO_ATTACK_ACTION
+			else
+
+				to_chat(M, SPAN_WARNING("Мы уже сыты![knight.shield_limit < 600 ? " Мы сможем усвоить больше, когда улей станет сильнее." : ""]"))
+				return ..()
+// RUCM End
 
 /obj/structure/barricade/handle_tail_stab(mob/living/carbon/xenomorph/xeno)
 	take_damage((xeno.melee_damage_upper * 1.2) * brute_multiplier)

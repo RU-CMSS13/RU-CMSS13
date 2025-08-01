@@ -656,7 +656,11 @@
 #define XENOMORPH_PRE_SETUP_CUTOFF 20 MINUTES
 
 // Xeno shield HUD scale factor (1.5x so its easier to see, most times)
+/* CM Original
 #define XENO_SHIELD_HUD_SCALE_FACTOR 1.5
+*/
+// RUCM Edit
+#define XENO_SHIELD_HUD_SCALE_FACTOR 1
 
 // Xeno shield sources
 #define XENO_SHIELD_SOURCE_GENERIC 0
