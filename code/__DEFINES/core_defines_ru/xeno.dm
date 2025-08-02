@@ -9,7 +9,3 @@
 #define LESSER_BUILD_COLOR "#cbc8fc"
 
 #define LESSER_SHIELD_OVERLAY 9
-
-
-// Queen strain flags
-#define ROYAL_CHARGER "Royal Charger"
