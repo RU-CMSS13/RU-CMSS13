@@ -74,7 +74,7 @@
 	ability_primacy = XENO_PRIMARY_ACTION_2
 	xeno_cooldown = 10 SECONDS
 
-/datum/action/xeno_action/onclick/fire_shed/use_ability(atom/targer)
+/datum/action/xeno_action/onclick/fire_shed/use_ability(atom/target)
 	set waitfor = 0
 	var/mob/living/carbon/xenomorph/ravager/ravager = owner
 	if(!istype(ravager))
