@@ -354,9 +354,6 @@
 		/datum/action/xeno_action/onclick/screech, //custom macro, Screech
 		/datum/action/xeno_action/activable/xeno_spit/queen_macro, //third macro
 		/datum/action/xeno_action/onclick/shift_spits, //second macro
-//RUCM START
-		/datum/action/xeno_action/onclick/give_tech_points,
-//RUCM END
 	)
 	claw_type = CLAW_TYPE_VERY_SHARP
 
@@ -435,15 +432,7 @@
 		xeno_message(SPAN_XENOANNOUNCE("A new Queen has risen to lead the Hive! Rejoice!"),3,hivenumber)
 		notify_ghosts(header = "New Queen", message = "A new Queen has risen.", source = src, action = NOTIFY_ORBIT)
 	playsound(loc, 'sound/voice/alien_queen_command.ogg', 75, 0)
-/*
 	set_resin_build_order(GLOB.resin_build_order_drone)
-*/
-//RUCM START
-	mobile_build_order = GLOB.resin_build_order_drone
-	immobile_build_order = GLOB.resin_build_order_ovipositor
-
-	set_resin_build_order(mobile_build_order)
-//RUCM END
 	for(var/datum/action/xeno_action/action in actions)
 		// Also update the choose_resin icon since it resets
 		if(istype(action, /datum/action/xeno_action/onclick/choose_resin))
@@ -476,9 +465,6 @@
 	if(!nicknumber)
 		generate_and_set_nicknumber()
 	var/name_prefix = hive.prefix
-	//RUCM START
-	init_voice()
-	//RUCM END
 	if(queen_aged)
 		age_xeno()
 		switch(age)
@@ -910,13 +896,7 @@
 	set_resting(FALSE)
 	ovipositor = TRUE
 
-/*
 	set_resin_build_order(GLOB.resin_build_order_ovipositor) // This needs to occur before we update the abilities so we can update the choose resin icon
-*/
-//RUCM START
-	set_resin_build_order(immobile_build_order) // This needs to occur before we update the abilities so we can update the choose resin icon
-	prev_extra_build_dist = extra_build_dist
-//RUCM END
 	for(var/datum/action/xeno_action/action in actions)
 		action.hide_from(src)
 		// Also update the choose_resin icon since it resets
@@ -924,7 +904,6 @@
 			var/datum/action/xeno_action/onclick/choose_resin/choose_resin_ability = action
 			choose_resin_ability.update_button_icon(selected_resin)
 
-/*
 	var/list/immobile_abilities = list(
 		// These already have their placement locked in:
 		/datum/action/xeno_action/onclick/release_haul,
@@ -948,7 +927,6 @@
 		/datum/action/xeno_action/onclick/queen_tacmap,
 		/datum/action/xeno_action/onclick/eye,
 	)
-*/
 
 	for(var/path in immobile_abilities)
 		give_action(src, path)
@@ -999,13 +977,8 @@
 		overwatch(observed_xeno, TRUE)
 	zoom_out()
 
-/*
 	set_resin_build_order(GLOB.resin_build_order_drone) // This needs to occur before we update the abilities so we can update the choose resin icon
-*/
-//RUCM START
-	set_resin_build_order(mobile_build_order) // This needs to occur before we update the abilities so we can update the choose resin icon
-	extra_build_dist = prev_extra_build_dist
-//RUCM END
+
 	refresh_combat_abilities()
 
 	remove_verb(src, /mob/living/carbon/xenomorph/proc/xeno_tacmap)
@@ -1016,9 +989,7 @@
 	recalculate_actions()
 
 	egg_amount = 0
-/*
 	extra_build_dist = initial(extra_build_dist)
-*/
 	egg_planting_range = initial(egg_planting_range)
 	for(var/datum/action/xeno_action/action in actions)
 		if(istype(action, /datum/action/xeno_action/onclick/grow_ovipositor))
