@@ -264,6 +264,19 @@
 	ceiling_muffle = TRUE
 	soundscape_playlist = SCAPE_PL_FIORINA_MAINTENANCE
 
+/area/prisonru/station/maintenance/hi
+
+/area/prisonru/station/maintenance/hi/south_sec_maint
+	name = "Prison - South High-Security Maintenance"
+
+/area/prisonru/station/maintenance/medium_sec
+
+/area/prisonru/station/maintenance/medium_sec/west_maint
+	name = "Prison - West Medium-Security Maintenance"
+
+/area/prisonru/station/maintenance/medium_sec/east_maint
+	name = "Prison - East Medium-Security Maintenance"
+
 /area/prisonru/station/maintenance/residential
 
 /area/prisonru/station/maintenance/residential/nw
