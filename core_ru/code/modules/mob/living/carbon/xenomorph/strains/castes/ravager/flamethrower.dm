@@ -2,6 +2,7 @@
 	name = "Flamethrower"
 	description = "Youre losing your charge and empower as armor, but gain FLAME! Shall your enemies BURN down to ashes! It's a goddamn dragon! Run! RUUUUN!"
 	flavor_description = "Run, Hide - death will come to every host anyway! It's a goddamn dragon! Run! RUUUUN!"
+	icon_state_prefix = "Flamethower"
 
 	actions_to_remove = list(
 		/datum/action/xeno_action/activable/pounce/charge,
@@ -129,8 +130,8 @@
 	burncolor = "#35298f"
 	burn_sprite = "dynamic"
 	properties = list(
-		PROPERTY_INTENSITY = BURN_LEVEL_TIER_3,
-		PROPERTY_DURATION = BURN_TIME_TIER_1,
+		PROPERTY_INTENSITY = BURN_LEVEL_TIER_5,
+		PROPERTY_DURATION = BURN_TIME_TIER_2,
 		PROPERTY_FRIENDLY_EVADE = 1,
 		PROPERTY_RADIUS = 5,
 	)
@@ -152,3 +153,6 @@
 	holder.friendlydetection = TRUE
 
 	..()
+
+/mob/living/carbon/xenomorph/ravager
+	icon_xeno = 'core_ru/icons/mob/xenos/ravager.dmi'
