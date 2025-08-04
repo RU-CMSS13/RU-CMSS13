@@ -73,7 +73,7 @@
 	macro_path = /datum/action/xeno_action/verb/verb_fire_shed
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_2
-	xeno_cooldown = 20 SECONDS
+	xeno_cooldown = 30 SECONDS
 
 /datum/action/xeno_action/onclick/fire_shed/use_ability(atom/target)
 	set waitfor = 0
