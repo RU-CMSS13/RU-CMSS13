@@ -24,6 +24,19 @@
 /obj/structure/blocker/invisible_wall,
 /turf/open_space,
 /area/space)
+"ag" = (
+/turf/closed/wall/r_wall/prison_unmeltable,
+/area/prisonru/station/maintenance/medium_sec/east_maint)
+"ah" = (
+/turf/open/floor/plating/prison,
+/area/prisonru/station/maintenance/medium_sec/east_maint)
+"ai" = (
+/turf/closed/wall/prison,
+/area/prisonru/station/maintenance/medium_sec/east_maint)
+"aj" = (
+/obj/structure/machinery/power/apc/no_power/north,
+/turf/open/floor/plating/prison,
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "ao" = (
 /obj/structure/sink{
 	dir = 8;
@@ -161,7 +174,7 @@
 	color = "#8e98a0"
 	},
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "eA" = (
 /obj/structure/surface/rack{
 	color = "#8e98a0"
@@ -345,7 +358,7 @@
 "ik" = (
 /obj/structure/largecrate/random/barrel/red,
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "iN" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/trash/c_tube,
@@ -920,7 +933,7 @@
 	},
 /obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "wO" = (
 /obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
 	dir = 4
@@ -941,7 +954,7 @@
 "xS" = (
 /obj/structure/largecrate/random,
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "xT" = (
 /turf/open/floor/prison/yellowfull,
 /area/prisonru/cellblock/protective)
@@ -1550,7 +1563,7 @@
 	dir = 1
 	},
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "Ln" = (
 /turf/open/floor/hybrisa/tile/tilered,
 /area/prisonru/cellblock/mediumsec/north)
@@ -1765,7 +1778,7 @@
 "PK" = (
 /obj/structure/largecrate/random/barrel/yellow,
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "PL" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2/west,
@@ -1895,7 +1908,7 @@
 "SY" = (
 /obj/structure/largecrate/random/barrel/white,
 /turf/open/floor/plating/prison,
-/area/prisonru/cellblock/mediumsec/east)
+/area/prisonru/station/maintenance/medium_sec/east_maint)
 "Td" = (
 /obj/item/prop/alien/hugger,
 /turf/open/floor/prison/cell_stripe/west,
@@ -2194,16 +2207,16 @@ Io
 tp
 Pr
 Io
-tp
-jh
-jh
-jh
-jh
-jh
-jh
+ai
+aj
+ah
+ah
+ah
+ah
+ah
 xS
 xS
-sZ
+ag
 Fa
 Fa
 Fa
@@ -2250,16 +2263,16 @@ hR
 tp
 Os
 hR
-tp
-jh
-jh
-jh
-jh
-jh
+ai
+ah
+ah
+ah
+ah
+ah
 SY
 PK
-sZ
-sZ
+ag
+ag
 Fa
 Fa
 Fa
@@ -2307,14 +2320,14 @@ lV
 lV
 hZ
 Lj
-jh
-jh
-jh
-jh
+ah
+ah
+ah
+ah
 xS
 ik
-sZ
-sZ
+ag
+ag
 Fa
 Fa
 Fa
@@ -2362,14 +2375,14 @@ pG
 pG
 kL
 RW
-tp
-jh
-jh
-jh
+ai
+ah
+ah
+ah
 en
 wJ
-sZ
-sZ
+ag
+ag
 Fa
 Fa
 Fa
@@ -2418,14 +2431,14 @@ hR
 jA
 Os
 hR
-tp
-tp
-tp
-tp
-tp
-tp
-sZ
-sZ
+ai
+ai
+ai
+ai
+ai
+ai
+ag
+ag
 Fa
 Fa
 Fa
