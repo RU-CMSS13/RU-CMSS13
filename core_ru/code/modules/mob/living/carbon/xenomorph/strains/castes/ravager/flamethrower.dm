@@ -91,6 +91,11 @@
 	if(!center)
 		return
 
+	sleep(15)
+
+	if(!ravager || !ravager.check_state())
+		return
+
 	ravager.spin_circle()
 	playsound(center, 'sound/weapons/gun_flamethrower2.ogg', 50, TRUE)
 	ravager.visible_message("<span class='xenowarning'>\The [ravager] sprays out a stream of flame from its mouth!</span>", \
@@ -130,7 +135,7 @@
 	burncolor = "#35298f"
 	burn_sprite = "dynamic"
 	properties = list(
-		PROPERTY_INTENSITY = BURN_LEVEL_TIER_4,
+		PROPERTY_INTENSITY = BURN_LEVEL_TIER_3,
 		PROPERTY_DURATION = BURN_TIME_TIER_1,
 		PROPERTY_FRIENDLY_EVADE = 1,
 		PROPERTY_RADIUS = 5,
