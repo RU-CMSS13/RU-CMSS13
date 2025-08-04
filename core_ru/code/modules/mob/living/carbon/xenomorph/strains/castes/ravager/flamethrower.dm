@@ -91,11 +91,6 @@
 	if(!center)
 		return
 
-	sleep(15)
-
-	if(!ravager || !ravager.check_state())
-		return
-
 	ravager.spin_circle()
 	playsound(center, 'sound/weapons/gun_flamethrower2.ogg', 50, TRUE)
 	ravager.visible_message("<span class='xenowarning'>\The [ravager] sprays out a stream of flame from its mouth!</span>", \
