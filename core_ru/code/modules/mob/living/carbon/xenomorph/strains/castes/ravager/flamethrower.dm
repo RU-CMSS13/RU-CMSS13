@@ -97,6 +97,9 @@
 
 	for (var/dx = -2 to 2)
 		for (var/dy = -2 to 2)
+			if ((abs(dx) == 2 && abs(dy) == 2) || (abs(dx) == 2 && dy == 0) || (dx == 0 && abs(dy) == 2))
+				continue
+
 			var/turf/T = locate(center.x + dx, center.y + dy, center.z)
 			if (!T) continue
 
