@@ -129,6 +129,15 @@
 
 			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
 //RUCM START
+	if(((href_list["sticky_ru"])&&(href_list["ckey"])))
+		if(href_list["new_sticky"])
+			src.do_stickyban_ru(href_list["ckey"])
+			return
+		if(href_list["find_sticky"])
+			src.do_stickyban_search_ru(href_list["ckey"])
+			return
+	if(href_list["JobBanRu3"])
+		job_ban_ru_2(href_list["JobBanRu3"], href_list["ckey"])
 	if(href_list["csdeny"])
 		var/mob/ref_person = locate(href_list["csdeny"])
 		log_game("[key_name_admin(usr)] отклонил вызов корпоративной охраны, запрошенный [key_name_admin(ref_person)]")
@@ -2085,6 +2094,53 @@
 		for(var/client/staff in GLOB.admins)
 			if((R_ADMIN|R_MOD) & staff.admin_holder.rights)
 				to_chat(staff, SPAN_STAFF_IC("<b>ADMINS/MODS: [SPAN_RED("[src.owner] marked [key_name(speaker)]'s ARES message for response.")]</b>"))
+	//RUCM EDIT START
+	else if(href_list["CheckPlaytimesRu"])
+		if(!check_rights(R_ADMIN|R_MOD, TRUE))
+			return
+		if(href_list["ckey"])
+			var/datum/entity/player/data = get_player_from_key(href_list["ckey"])
+			if(!data)
+				return
+			data.tgui_interact(owner.mob)
+	else if(href_list["BanRu"])
+		if(!check_rights(R_ADMIN|R_MOD, TRUE))
+			return
+		if(href_list["ckey"])
+			src.ban_temp_ru(href_list["ckey"])
+	else if(href_list["BanPermaRu"])
+		if(!check_rights(R_ADMIN|R_MOD, TRUE))
+			return
+		if(href_list["ckey"])
+			src.ban_perma_ru(href_list["ckey"])
+	else if(href_list["JobBanRu"])
+		if(!check_rights(R_ADMIN|R_MOD, TRUE))
+			return
+		if(href_list["ckey"])
+			src.job_ban_ru(href_list["ckey"])
+	else if(href_list["check_ckey"])
+		var/mob/user = usr
+		if (!istype(src, /datum/admins))
+			src = user.client.admin_holder
+		if (!istype(src, /datum/admins) || !(rights & R_MOD))
+			to_chat(user, "Error: you are not an admin!")
+			return
+		var/datum/entity/player/P2 = get_player_from_key(href_list["ckey"])
+		if(!P2)
+			return
+		var/target_key = P2.ckey
+		if(!target_key)
+			to_chat(user, "Error: No key detected!")
+			return
+		to_chat(user, SPAN_WARNING("Checking Ckey: [target_key]"))
+		var/list/keys = analyze_ckey(target_key)
+		if(!keys)
+			to_chat(user, SPAN_WARNING("No results for [target_key]."))
+			return
+		to_chat(user, SPAN_WARNING("Check CKey Results: [keys.Join(", ")]"))
+
+		log_admin("[key_name(user)] analyzed ckey '[target_key]'")
+	//RUCM EDIT ENDS
 
 	return
 
