@@ -275,12 +275,11 @@
 		return FALSE
 	var/turf/target_turf = get_turf(A)
 
-	if(!SSmapping.same_z_map(X.loc.z, target_turf.loc.z))
-		to_chat(X, SPAN_XENOWARNING("Our mind cannot reach that far."))
+	if(target_turf.z != X.z)
+		to_chat(X, SPAN_XENOWARNING("This area is too far away to affect!"))
 		return
-
-	if(!X.hive.living_xeno_queen || !SSmapping.same_z_map(X.hive.living_xeno_queen.z, X.z))
-		to_chat(X, SPAN_XENOWARNING("Our psychic link is gone, the Queen is either dead or too far away!"))
+	if(!X.hive.living_xeno_queen || X.hive.living_xeno_queen.z != X.z)
+		to_chat(X, SPAN_XENOWARNING("We have no queen, the psychic link is gone!"))
 		return
 
 	var/tally = 0
@@ -411,6 +410,18 @@
 
 	if (!tracks_target)
 		A = get_turf(A)
+
+	if(A.z != X.z && X.mob_size >= MOB_SIZE_BIG)
+		if (!do_after(X, 2 SECONDS, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+			return
+
+	//everyone gets (extra) timer to pounce up
+	if(A.z > X.z)
+		if (!do_after(X, 0.5 SECONDS, INTERRUPT_NO_NEEDHAND, BUSY_ICON_HOSTILE))
+			return
+
+
+
 
 	apply_cooldown()
 
