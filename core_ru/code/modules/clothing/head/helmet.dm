@@ -12,3 +12,8 @@
 	specialty = "M40 breacher"
 	flags_atom = NO_GAMEMODE_SKIN
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
+
+/obj/item/clothing/head/helmet/marine/leader
+	desc = "A variant of the standard M10 pattern helmet. The front plate is reinforced. The second visor slot is present, and the primary one has a basic medical visor installed. This one contains a small built-in camera and has cushioning to project your fragile brain."
+	built_in_visors = list(new /obj/item/device/helmet_visor, new /obj/item/device/helmet_visor/medical)
+	start_down_visor_type = /obj/item/device/helmet_visor/medical
