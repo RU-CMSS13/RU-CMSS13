@@ -25,7 +25,7 @@ import { Window } from 'tgui/layouts';
 
 import { LoadingScreen } from './common/LoadingToolbox';
 
-type SupplyComputerTabletopData = {
+type SupplyComputerLaptopData = {
   all_items: Pack[];
 
   categories: string[];
@@ -95,7 +95,7 @@ enum MenuOptions {
   BlackMarket,
 }
 
-export const SupplyComputerTabletop = () => {
+export const SupplyComputerLaptop = () => {
   const [menu, setMenu] = useState(MenuOptions.Categories);
 
   const [selectedCategory, setCategory] = useState('Ammo');
@@ -103,7 +103,7 @@ export const SupplyComputerTabletop = () => {
 
   const [theme, setTheme] = useState<string | false>();
 
-  const { data, act } = useBackend<SupplyComputerTabletopData>();
+  const { data, act } = useBackend<SupplyComputerLaptopData>();
 
   const { system_message } = data;
 
@@ -190,7 +190,7 @@ const SideButtons = (props: {
     setTheme,
   } = props;
 
-  const { data, act } = useBackend<SupplyComputerTabletopData>();
+  const { data, act } = useBackend<SupplyComputerLaptopData>();
 
   const {
     pending,
@@ -387,7 +387,7 @@ const Options = (props: {
 }) => {
   const { menu, category } = props;
 
-  const { categories } = useBackend<SupplyComputerTabletopData>().data;
+  const { categories } = useBackend<SupplyComputerLaptopData>().data;
 
   switch (menu) {
     case MenuOptions.Categories:
@@ -418,7 +418,7 @@ const Options = (props: {
 };
 
 const CurrentOrder = () => {
-  const { act, data } = useBackend<SupplyComputerTabletopData>();
+  const { act, data } = useBackend<SupplyComputerLaptopData>();
 
   const { used_points } = data;
 
@@ -468,7 +468,7 @@ const CurrentOrder = () => {
 };
 
 const PendingOrder = () => {
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
 
   const { pending } = data;
 
@@ -484,7 +484,7 @@ const PendingOrder = () => {
 };
 
 const Requests = () => {
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
 
   const { requests } = data;
 
@@ -659,6 +659,19 @@ const RenderPendingOrder = (props: {
                   Call Down Pod
                 </Button>
               </Stack.Item>
+              <Stack.Item>
+                <Button
+                  icon="check"
+                  onClick={() =>
+                    act('call_down_order', {
+                      ordernum: order.order_num,
+                      order_status: 'calldown_pos',
+                    })
+                  }
+                >
+                  Call Down Pod At Specific Position
+                </Button>
+              </Stack.Item>
             </Stack.Item>
             {request && (
               <Stack.Item>
@@ -704,7 +717,7 @@ const RenderPendingOrder = (props: {
 };
 
 const BlackMarketMenu = () => {
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
 
   const { contraband_categories, dollars, mendoza_status, locked_out } = data;
 
@@ -786,7 +799,7 @@ const MendozaDialogue = () => {
   const [firstTime, setSeen] = useSharedState('mendoza', true);
   const [stateFirst] = useState(firstTime);
 
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
 
   const { mendoza_status } = data;
 
@@ -861,7 +874,7 @@ const MendozaDialogue = () => {
 };
 
 const RenderCart = () => {
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
 
   const { current_order } = data;
 
@@ -882,7 +895,7 @@ const RenderCategory = (props: {
 }) => {
   const { category, categories } = props;
 
-  const { data } = useBackend<SupplyComputerTabletopData>();
+  const { data } = useBackend<SupplyComputerLaptopData>();
   const { all_items, categories_to_objects } = data;
 
   const validCategory = categories.includes(category);
@@ -916,7 +929,7 @@ const RenderPack = (props: {
 }) => {
   const { pack: item, orderedQuantity } = props;
 
-  const { act, data } = useBackend<SupplyComputerTabletopData>();
+  const { act, data } = useBackend<SupplyComputerLaptopData>();
 
   const { current_order, points, dollars, used_dollars, used_points } = data;
 
