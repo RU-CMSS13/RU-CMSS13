@@ -6,7 +6,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ab" = (
 /obj/structure/machinery/vending/snack{
 	pixel_y = 16;
@@ -14,7 +14,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ac" = (
 /obj/structure/roof/hybrisa/billboardsandsigns/billboardsmedium/billboard2{
 	dir = 5;
@@ -23,7 +23,7 @@
 	layer = 3
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ad" = (
 /obj/structure/roof/hybrisa/billboardsandsigns/billboardsmedium/billboard2{
 	dir = 1;
@@ -32,7 +32,7 @@
 	layer = 3
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ae" = (
 /obj/structure/machinery/vending/cola{
 	density = 0;
@@ -40,10 +40,23 @@
 	pixel_x = 2
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
+"af" = (
+/turf/closed/wall/r_wall/prison,
+/area/prisonru/station/visitation)
+"ag" = (
+/turf/closed/wall/prison,
+/area/prisonru/station/store)
+"ah" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/closed/wall/prison,
+/area/prisonru/station/store)
+"ai" = (
+/turf/closed/wall/r_wall/prison,
+/area/prisonru/station/toilet/canteen)
 "aI" = (
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "bR" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -54,7 +67,7 @@
 /obj/item/shard/shrapnel,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/prison/darkredcorners2/east,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ch" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 8
@@ -65,34 +78,34 @@
 	pixel_x = -16
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "cu" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 8
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "dW" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "eo" = (
 /obj/structure/pipes/vents/pump{
 	dir = 8
 	},
 /turf/open/floor/prison/darkred2/east,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "eF" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
 	name = "Visitation";
 	welded = 1
 	},
+/obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "eR" = (
 /obj/item/stack/sheet/metal{
 	pixel_x = -13;
@@ -104,17 +117,17 @@
 	},
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison/darkredcorners2/east,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "fj" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "fF" = (
 /obj/structure/bed/chair/office/dark,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ge" = (
 /obj/item/stack/sheet/metal{
 	pixel_x = -13;
@@ -129,36 +142,36 @@
 /obj/effect/decal/cleanable/blood/oil,
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "hJ" = (
 /turf/closed/wall/prison{
 	damage = 200
 	},
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ja" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "jJ" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison/damaged2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "kP" = (
 /turf/open/floor/prison/darkred2/northwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "lb" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 1;
 	pixel_y = 21
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ma" = (
 /obj/item/shard{
 	icon_state = "small"
 	},
 /turf/open/floor/prison/damaged2,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "mg" = (
 /obj/item/shard{
 	icon_state = "medium";
@@ -170,21 +183,21 @@
 	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "mu" = (
 /obj/structure/window_frame/prison/reinforced,
 /obj/item/shard{
 	icon_state = "small"
 	},
 /turf/open/floor/plating/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "mY" = (
 /obj/item/stack/sheet/metal{
 	pixel_x = -13;
 	pixel_y = 14
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "nd" = (
 /obj/structure/machinery/computer/secure_data{
 	dir = 8
@@ -199,50 +212,50 @@
 	pixel_y = -1
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ni" = (
 /obj/item/tool/weldingtool/simple,
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "nN" = (
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "nZ" = (
 /obj/structure/filingcabinet,
 /obj/effect/landmark/objective_landmark/close,
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ol" = (
 /obj/structure/machinery/door/airlock/almayer/security/glass/colony{
 	name = "Security Booth"
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "pN" = (
 /obj/structure/machinery/light/double/blue{
 	pixel_y = -1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "qi" = (
 /turf/open_space,
 /area/space)
 "qt" = (
 /turf/open/floor/prison/darkred2/northeast,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "qy" = (
 /turf/open/floor/prison/darkred2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "rh" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
 /turf/open/floor/prison/darkred2/east,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "rZ" = (
 /turf/closed/wall/r_wall/prison,
-/area/prison/visitation)
+/area/prisonru/station/store)
 "sQ" = (
 /turf/closed/wall/prison,
 /area/space)
@@ -252,11 +265,11 @@
 	},
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison/darkred2/northwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ua" = (
 /obj/item/stack/sheet/metal,
 /turf/open/floor/prison/darkred2/southeast,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "uC" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
@@ -267,20 +280,20 @@
 	welded = 1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "uY" = (
-/obj/structure/pipes/standard/manifold/hidden/supply{
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "vp" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "vw" = (
 /turf/closed/wall/r_wall/prison,
 /area/space)
@@ -294,44 +307,44 @@
 	color = "#8e98a0"
 	},
 /turf/open/floor/prison/damaged2,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "xn" = (
 /turf/open/floor/prison/darkred2,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "yq" = (
 /obj/item/shard{
 	icon_state = "small"
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "yZ" = (
 /obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
 	name = "Visitation";
 	welded = 1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "zJ" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "AG" = (
 /turf/closed/wall/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "BM" = (
 /obj/structure/window_frame/prison/reinforced,
 /turf/open/floor/plating/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "CA" = (
 /obj/item/stack/sheet/metal,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "CM" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Ds" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
@@ -341,45 +354,45 @@
 	pixel_y = 8
 	},
 /turf/open/floor/prison/damaged2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Hu" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "HI" = (
 /turf/open/floor/prison/damaged2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "JK" = (
 /turf/closed/wall/prison{
 	damage = 600
 	},
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "JQ" = (
 /turf/open/floor/prison/damaged2,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "KJ" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Mx" = (
 /obj/structure/window/framed/prison/reinforced,
 /turf/open/floor/plating/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "MD" = (
 /obj/item/stack/cable_coil{
 	amount = 1
 	},
 /turf/open/floor/prison/damaged2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "NL" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
 	color = "#8e98a0"
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "NT" = (
 /obj/item/device/flashlight/lamp,
 /obj/effect/landmark/item_pool_spawner/prison_lock,
@@ -388,34 +401,34 @@
 	color = "#8e98a0"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "OV" = (
 /obj/effect/landmark/corpsespawner/ua_riot,
 /turf/open/floor/prison/darkred2/northwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Ri" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/corpsespawner/prisoner,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "RW" = (
 /obj/structure/pipes/vents/pump{
 	dir = 4
 	},
 /obj/item/shard/shrapnel,
 /turf/open/floor/prison/damaged2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "So" = (
 /obj/structure/pipes/vents/pump{
 	dir = 4
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Tb" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Tz" = (
 /obj/structure/machinery/power/apc{
 	dir = 1;
@@ -423,14 +436,14 @@
 	start_charge = 0
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Vz" = (
 /obj/structure/bed/chair/office/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "XF" = (
 /turf/open/floor/prison/damaged1,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Zh" = (
 /obj/structure/flora/pottedplant,
 /obj/structure/machinery/light/double/blue{
@@ -439,7 +452,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "Zt" = (
 /obj/structure/machinery/computer/cameras{
 	network = list("PRISON");
@@ -450,22 +463,22 @@
 	color = "#8e98a0"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 "ZE" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /turf/open/floor/prison,
-/area/prison/visitation)
+/area/prisonru/station/visitation)
 
 (1,1,1) = {"
 rZ
-CM
-AG
-AG
-AG
-AG
-AG
-AG
-AG
+ah
+ag
+ag
+ag
+ag
+ag
+ag
+ag
 rZ
 "}
 (2,1,1) = {"
@@ -541,7 +554,7 @@ nN
 AG
 "}
 (8,1,1) = {"
-rZ
+ai
 lb
 nN
 fF
@@ -553,7 +566,7 @@ pN
 AG
 "}
 (9,1,1) = {"
-rZ
+ai
 ac
 XF
 nN
@@ -565,7 +578,7 @@ nN
 AG
 "}
 (10,1,1) = {"
-rZ
+ai
 nN
 nN
 fj
@@ -577,7 +590,7 @@ nN
 AG
 "}
 (11,1,1) = {"
-rZ
+ai
 nN
 XF
 Ri
@@ -589,7 +602,7 @@ nN
 AG
 "}
 (12,1,1) = {"
-rZ
+ai
 ad
 CA
 Tb
@@ -601,7 +614,7 @@ aa
 AG
 "}
 (13,1,1) = {"
-rZ
+ai
 nN
 yq
 RW
@@ -610,10 +623,10 @@ nN
 HI
 ol
 Mx
-rZ
+af
 "}
 (14,1,1) = {"
-rZ
+ai
 nN
 nN
 dW
@@ -622,10 +635,10 @@ mY
 we
 kP
 qy
-rZ
+af
 "}
 (15,1,1) = {"
-rZ
+ai
 Tz
 HI
 Ds
@@ -634,10 +647,10 @@ aI
 OV
 bR
 xn
-rZ
+af
 "}
 (16,1,1) = {"
-rZ
+ai
 ae
 nN
 vp
@@ -646,10 +659,10 @@ sW
 eR
 ZE
 xn
-rZ
+af
 "}
 (17,1,1) = {"
-rZ
+ai
 ch
 KJ
 ni
@@ -658,31 +671,31 @@ qt
 rh
 eo
 ua
-rZ
+af
 "}
 (18,1,1) = {"
-rZ
+ai
 Zh
 nN
 dW
-rZ
+af
 Zt
 nd
 NT
 nZ
-rZ
+af
 "}
 (19,1,1) = {"
-rZ
-rZ
+ai
+af
 nN
 uC
-rZ
-rZ
-rZ
-rZ
-rZ
-rZ
+af
+af
+af
+af
+af
+af
 "}
 
 (1,1,2) = {"
