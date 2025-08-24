@@ -77,6 +77,10 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment() //Optimized a good bit.
 
+// RUCM Start (Feline "Бегающие флаги")
+	handle_orders()
+// RUCM End (Feline "Бегающие флаги")
+
 	updatehealth()
 
 	//Status updates, death etc.
