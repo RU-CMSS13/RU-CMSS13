@@ -150,6 +150,7 @@
 #define SS_INIT_PLAYTIME   -29
 #define SS_INIT_STICKY -30
 #define SS_INIT_OBJECTIVES -32
+#define SS_INIT_SENSORS -33
 #define SS_INIT_MINIMAP    -34
 #define SS_INIT_STATPANELS -98
 #define SS_INIT_CHAT    -100 //Should be last to ensure chat remains smooth during init.
@@ -178,6 +179,7 @@
 #define SS_PRIORITY_HIVE_STATUS 112
 #define SS_PRIORITY_SHIELD_PILLAR  111
 #define SS_PRIORITY_VOTE    110
+#define SS_PRIORITY_SUPER_FAST_OBJECTS 106
 #define SS_PRIORITY_FAST_OBJECTS   105
 #define SS_PRIORITY_OBJECTS 104
 #define SS_PRIORITY_DECORATOR    99
