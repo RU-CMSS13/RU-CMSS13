@@ -315,10 +315,7 @@ Make sure their actual health updates immediately.*/
 
 
 /mob/living/carbon/xenomorph/proc/handle_environment()
-	var/turf/current_turf = loc
-	if(!current_turf || !istype(current_turf))
-		return
-
+	var/turf/T = loc
 	var/recoveryActual = (!caste || (caste.fire_immunity & FIRE_IMMUNITY_NO_IGNITE) || !on_fire) ? recovery_aura : 0
 	var/env_temperature = loc.return_temperature()
 	if(caste && !(caste.fire_immunity & FIRE_IMMUNITY_NO_DAMAGE))
@@ -327,6 +324,9 @@ Make sure their actual health updates immediately.*/
 			updatehealth() //Make sure their actual health updates immediately
 			if(prob(20))
 				to_chat(src, SPAN_WARNING("You feel a searing heat!"))
+
+	if(!T || !istype(T))
+		return
 
 	if(caste)
 		if(caste.innate_healing || check_weeds_for_healing())
@@ -420,13 +420,15 @@ Make sure their actual health updates immediately.*/
 			queen_locator()
 		return
 
-	if(tracking_atom.loc.z != loc.z && SSinterior.in_interior(tracking_atom))
+	if(!SSmapping.same_z_map(tracking_atom.loc.z, loc.z) && SSinterior.in_interior(tracking_atom))
 		var/datum/interior/interior = SSinterior.get_interior_by_coords(tracking_atom.x, tracking_atom.y, tracking_atom.z)
 		var/atom/exterior = interior.exterior
 		if(exterior)
 			tracking_atom = exterior
 
-	if(tracking_atom.loc.z != loc.z || get_dist(src, tracking_atom) < 1 || src == tracking_atom)
+	locator.overlays.Cut()
+
+	if( !SSmapping.same_z_map(tracking_atom.loc.z, loc.z) || get_dist(src, tracking_atom) < 1 || src == tracking_atom)
 		locator.icon_state = "trackondirect"
 	else
 		var/area/our_area = get_area(loc)
@@ -434,6 +436,10 @@ Make sure their actual health updates immediately.*/
 		if(our_area.fake_zlevel == target_area.fake_zlevel)
 			locator.setDir(Get_Compass_Dir(src, tracking_atom))
 			locator.icon_state = "trackon"
+			if(tracking_atom.loc.z > loc.z)
+				locator.overlays |= image('icons/mob/hud/alien_standard.dmi', "up")
+			if(tracking_atom.loc.z < loc.z)
+				locator.overlays |= image('icons/mob/hud/alien_standard.dmi', "down")
 		else
 			locator.icon_state = "trackondirect"
 
@@ -450,7 +456,7 @@ Make sure their actual health updates immediately.*/
 
 	ML.overlays.Cut()
 
-	if(tracked_marker_z_level != loc.z) //different z levels
+	if(!SSmapping.same_z_map(tracked_marker_z_level, loc.z)) //different z levels
 		ML.overlays |= image(tracked_marker.seenMeaning, "pixel_y" = 0)
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "center_glow")
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "z_direction")
@@ -465,6 +471,12 @@ Make sure their actual health updates immediately.*/
 		ML.overlays |= image(tracked_marker.seenMeaning, "pixel_y" = 0)
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "center_glow")
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "direction")
+		/*if(tracked_marker_z_level > loc.z)
+			ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "up")
+		if(tracked_marker_z_level < loc.z)
+			ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "down")*/
+
+
 	else //same z level, different fake z levels (decks of almayer)
 		ML.overlays |= image(tracked_marker.seenMeaning, "pixel_y" = 0)
 		ML.overlays |= image('icons/mob/hud/xeno_markers.dmi', "center_glow")
