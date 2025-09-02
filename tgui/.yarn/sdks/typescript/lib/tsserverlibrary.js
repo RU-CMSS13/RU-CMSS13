@@ -28,7 +28,7 @@ const wrapWithUserWrapper = existsSync(absUserWrapperPath)
   ? exports => absRequire(absUserWrapperPath)(exports)
   : exports => exports;
 
-const moduleWrapper = (exports) => {
+const moduleWrapper = exports => {
   return wrapWithUserWrapper(moduleWrapperFn(exports));
 };
 
@@ -37,7 +37,7 @@ const moduleWrapperFn = tsserver => {
     return tsserver;
   }
 
-  const { isAbsolute } = require(`path`);
+  const {isAbsolute} = require(`path`);
   const pnpApi = require(`pnpapi`);
 
   const isVirtual = str => str.match(/\/(\$\$virtual|__virtual__)\//);
@@ -159,9 +159,9 @@ const moduleWrapperFn = tsserver => {
       } break;
 
       case `vscode`:
-        default: {
-          return str.replace(/^\^?(zip:|\/zip(\/ts-nul-authority)?)\/+/, process.platform === `win32` ? `` : `/`)
-        } break;
+      default: {
+        return str.replace(/^\^?(zip:|\/zip(\/ts-nul-authority)?)\/+/, process.platform === `win32` ? `` : `/`)
+      } break;
     }
   }
 

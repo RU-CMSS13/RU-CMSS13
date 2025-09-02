@@ -128,7 +128,7 @@ import { Window } from '../layouts';
 export const SampleInterface = (props) => {
   const { act, data } = useBackend();
   // Extract `health` and `color` variables from the `data` object.
-    const {
+  const {
     health,
     color,
   } = data;
@@ -279,7 +279,7 @@ const HealthStatus = (props) => {
   return (
     <Section title={"Health status of: " + user}>
       <LabeledList>
-       <LabeledList.Item label="Health">
+        <LabeledList.Item label="Health">
           {health}
         </LabeledList.Item>
         <LabeledList.Item label="Color">

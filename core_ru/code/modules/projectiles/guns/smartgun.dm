@@ -72,7 +72,7 @@
 // action end \\
 
 /obj/item/weapon/gun/smartgun/m56c/pickup(user)
-	. = ..()
+	..()
 
 	if(!linked_human)
 		src.name_after_co(user, src)
