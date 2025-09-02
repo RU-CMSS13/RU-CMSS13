@@ -72,11 +72,10 @@
 // action end \\
 
 /obj/item/weapon/gun/smartgun/m56c/pickup(user)
-	..()
-
 	if(!linked_human)
 		src.name_after_co(user, src)
 		to_chat(usr, SPAN_NOTICE("[icon2html(src, usr)] You pick up \the [src], registering yourself as its owner."))
+	..()
 
 /obj/item/weapon/gun/smartgun/m56c/proc/name_after_co(mob/living/carbon/human/H, obj/item/weapon/gun/smartgun/m56c/I)
 	linked_human = H
