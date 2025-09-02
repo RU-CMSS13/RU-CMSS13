@@ -58,6 +58,7 @@
 /obj/item/device/asrs_laptop/Destroy()
 	. = ..()
 	QDEL_NULL(cell)
+	QDEL_NULL(transceiver)
 
 /obj/item/device/asrs_laptop/Move(NewLoc, direct)
 	..()
