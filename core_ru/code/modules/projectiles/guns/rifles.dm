@@ -18,20 +18,18 @@
 		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/reddot,
 		/obj/item/attachable/reflex,
-		/obj/item/attachable/verticalgrip,
-		/obj/item/attachable/angledgrip,
 		/obj/item/attachable/gyro,
 		/obj/item/attachable/flashlight/grip,
 		/obj/item/attachable/flashlight,
-		/obj/item/attachable/magnetic_harness,
 	)
 	starting_attachment_types = list(/obj/item/attachable/stock/rifle/collapsible/xm52)
-	flags_equip_slot = SLOT_BACK
+	flags_equip_slot = SLOT_BACK|SLOT_WAIST
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
 	gun_category = GUN_CATEGORY_SHOTGUN
 	gun_firemode = GUN_FIREMODE_BURSTFIRE
 	aim_slowdown = SLOWDOWN_ADS_SHOTGUN
 	map_specific_decoration = FALSE
+	auto_retrieval_slot = WEAR_WAIST
 
 	var/pump_delay //How long we have to wait before we can pump the shotgun again.
 	var/pump_sound = "shotgunpump"
@@ -54,6 +52,30 @@
 	recoil_unwielded = RECOIL_AMOUNT_TIER_2
 	scatter = SCATTER_AMOUNT_TIER_6
 
+
+/obj/item/weapon/gun/rifle/xm52/setup_firemodes()
+	var/old_firemode = gun_firemode
+	gun_firemode_list.len = 0
+
+	if(burst_amount > BURST_AMOUNT_TIER_1) //кручу верчу, бёрст первым поставить хочу
+		gun_firemode_list |= GUN_FIREMODE_BURSTFIRE
+
+	if(start_automatic)
+		gun_firemode_list |= GUN_FIREMODE_AUTOMATIC
+
+	if(start_semiauto)
+		gun_firemode_list |= GUN_FIREMODE_SEMIAUTO
+
+
+	if(!length(gun_firemode_list))
+		CRASH("[src] called setup_firemodes() with an empty gun_firemode_list")
+
+	else if(old_firemode in gun_firemode_list)
+		gun_firemode = old_firemode
+
+	else
+		gun_firemode = gun_firemode_list[1]
+
 /obj/item/weapon/gun/rifle/xm52/Initialize(mapload, spawn_empty)
 	. = ..()
 	if(gun_firemode == GUN_FIREMODE_BURSTFIRE)
@@ -61,6 +83,21 @@
 	else
 		pump_delay = FIRE_DELAY_TIER_8*1
 	additional_fire_group_delay += pump_delay
+
+/obj/item/weapon/gun/rifle/xm52/dropped(mob/user, silent)
+	. = ..()
+	var/mob/living/carbon/human/H = user
+	if(!istype(H))
+		return
+	if(H.belt == /obj/item/storage/belt/gun/xm52 && istype(H.wear_suit, /obj/item/clothing/suit/storage/marine/m40))
+		addtimer(CALLBACK(src, PROC_REF(retrieve_to_slot), H, WEAR_WAIST), 0.3 SECONDS, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
+
+/obj/item/weapon/gun/rifle/xm52/retrieve_to_slot(mob/living/carbon/human/user, retrieval_slot)
+	if (!loc || !user)
+		return FALSE
+	if (get_dist(src,user) > 1)
+		return FALSE
+	..(user, retrieval_slot)
 
 /obj/item/weapon/gun/rifle/xm52/able_to_fire(mob/living/user)
 	. = ..()
