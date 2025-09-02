@@ -1,12 +1,12 @@
 /obj/item/device/asrs_laptop
 	icon = 'core_ru/icons/obj/structures/props/asrscomp.dmi'
 	icon_state = "asrscomp_cl"
-	name = "laptop"
-	desc = "laptop used for ASRS manipulations from distance."
+	name = "ASRS laptop"
+	desc = "A laptop used for ASRS manipulations from distance."
 	unacidable = TRUE
 	explo_proof = TRUE
 	w_class = SIZE_SMALL
-	req_access = list(ACCESS_MARINE_SENIOR)
+	req_access = list(ACCESS_MARINE_CARGO)
 	has_special_table_placement = TRUE
 
 	/// if the laptop has been opened (the model not tgui)
@@ -25,7 +25,6 @@
 	// radio which broadcasts updates
 	var/obj/item/device/radio/marine/transceiver = new /obj/item/device/radio/marine
 	// the hidden mob which voices updates
-	var/mob/living/voice = new /mob/living/silicon
 
 	var/datum/controller/supply/linked_supply_controller
 	var/faction = FACTION_MARINE
@@ -265,7 +264,6 @@
 			supply_order.orderedby_rank = assignment
 			supply_order.approvedby = id_name
 
-			print_form(supply_order)
 
 			current_order = list()
 
@@ -414,6 +412,7 @@
 					visible_message("[icon2html(src, viewers(src))] [SPAN_BOLDNOTICE("'[container.name]' supply drop launched! Another launch will be available in five minutes.200 credits suspended")]")
 					var/list/shopping_list = linked_supply_controller.shoppinglist
 					shopping_list.Remove(order)
+					ai_silent_announcement("Dropping down [order.ordernum] order", ":u", TRUE)
 					return TRUE
 
 				if("calldown_pos")
@@ -496,6 +495,7 @@
 					visible_message("[icon2html(src, viewers(src))] [SPAN_BOLDNOTICE("'[container.name]' supply drop launched! Another launch will be available in five minutes.200 credits suspended")]")
 					var/list/shopping_list = linked_supply_controller.shoppinglist
 					shopping_list.Remove(order)
+					ai_silent_announcement("Dropping down [order.ordernum] order", ":u", TRUE)
 					return TRUE
 
 		if("force_launch")
@@ -587,7 +587,6 @@
 			supply_order.orderedby_rank = assignment
 			current_order = list()
 
-			print_form(supply_order)
 
 			linked_supply_controller.requestlist += supply_order
 			system_message = "Thanks for your request. The cargo team will process it as soon as possible."
@@ -599,31 +598,6 @@
 
 		if("keyboard")
 			playsound(src, "keyboard", 15, 1)
-
-/obj/item/device/asrs_laptop/proc/print_form(datum/supply_order/order)
-	var/list/accesses = list()
-
-	for(var/datum/supply_packs/pack as anything in order.objects)
-		var/access = get_access_desc(pack.access)
-		if(length(access))
-			accesses += access
-
-	var/obj/item/paper/reqform = new(loc)
-	reqform.name = "Requisition Form - #[order.ordernum]"
-
-	reqform.info += "<h3>[MAIN_SHIP_NAME] Supply Requisition Form</h3><hr>"
-	reqform.info += "INDEX: #[order.ordernum]<br>"
-	reqform.info += "REQUESTED BY: [order.orderedby]<br>"
-	reqform.info += "RANK: [order.orderedby_rank]<br>"
-	reqform.info += "REASON: [order.reason]<br>"
-	reqform.info += "ACCESS RESTRICTION: [english_list(accesses, nothing_text = "None")]<br>"
-	reqform.info += "CONTENTS:<br>"
-	for(var/datum/supply_packs/supply_pack as anything in order.objects)
-		reqform.info += supply_pack.manifest
-	reqform.info += "<hr>"
-	reqform.info += "STAMP BELOW TO APPROVE THIS REQUISITION:<br>"
-
-	reqform.update_icon()
 
 /obj/item/device/asrs_laptop/proc/is_buyable(datum/supply_packs/supply_pack)
 	if(!supply_pack.buyable)
