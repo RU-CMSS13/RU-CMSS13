@@ -638,15 +638,14 @@ const RenderPendingOrder = (props: {
                     ) * 100}
                   </Stack.Item>
                 </Stack>
-              <Stack.Item>
-                <Stack>
-                  <Stack.Item bold>Call Down Cost:</Stack.Item>
-                  <Stack.Item>
-                    $
-                    {200}
-                  </Stack.Item>
-                </Stack>
+                <Stack.Item>
+                  <Stack>
+                    <Stack.Item bold>Call Down Cost:</Stack.Item>
+                    <Stack.Item>${200}</Stack.Item>
+                  </Stack>
+                </Stack.Item>
               </Stack.Item>
+              <Stack.Item>
                 <Button
                   icon="check"
                   onClick={() =>
