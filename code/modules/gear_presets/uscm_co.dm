@@ -93,6 +93,10 @@
 	if(kit)
 		new_human.equip_to_slot_or_del(new kit(new_human), WEAR_IN_BACK)
 
+	//RUCM EDIT START
+	new_human.equip_to_slot_or_del(new /obj/item/device/asrs_laptop(new_human), WEAR_IN_R_STORE)
+	//RUCM EDIT END
+
 /datum/equipment_preset/uscm_co/infantry
 	name = "Shipside - CO - Infantry"
 	equipment_to_spawn = list(
