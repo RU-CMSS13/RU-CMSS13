@@ -45,7 +45,7 @@
 
 /obj/item/device/asrs_laptop/Initialize()
 	. = ..()
-	cell = new cell_type
+	cell = new cell_type(src)
 	switch(faction)
 		if(FACTION_MARINE)
 			linked_supply_controller = GLOB.supply_controller
