@@ -56,9 +56,9 @@
 	LAZYADD(linked_supply_controller.bound_supply_computer_list, src)
 
 /obj/item/device/asrs_laptop/Destroy()
-	. = ..()
 	QDEL_NULL(cell)
 	QDEL_NULL(transceiver)
+	return ..()
 
 /obj/item/device/asrs_laptop/Move(NewLoc, direct)
 	..()
