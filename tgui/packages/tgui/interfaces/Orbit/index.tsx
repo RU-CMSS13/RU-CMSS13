@@ -473,7 +473,7 @@ const weyyuSplitter = (members: Array<Observable>) => {
   members.forEach((x) => {
     if (x.job?.includes('Whiteout')) {
       whiteout.push(x);
-    } else if (x.job?.includes('Whiteout Team')) {
+    } else if (x.job?.includes('Death Squad')) {
       whiteout.push(x);
     } else if (x.job?.includes('W-Y Commando')) {
       wycommando.push(x);
