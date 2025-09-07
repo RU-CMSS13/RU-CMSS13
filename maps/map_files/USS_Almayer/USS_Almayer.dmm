@@ -4319,6 +4319,18 @@
 	},
 /turf/open/floor/almayer/research/containment/corner_var1/east,
 /area/almayer/medical/containment/cell)
+"ajA" = (
+/obj/structure/machinery/door_control/cl/quarter/officedoor{
+	pixel_x = 25
+	},
+/turf/open/floor/wood/ship,
+/area/almayer/command/corporateliaison)
+"ajB" = (
+/obj/structure/machinery/door_control/cl/office/door{
+	pixel_y = 25
+	},
+/turf/open/floor/wood/ship,
+/area/almayer/command/corporateliaison)
 "ajC" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/flooredge/east,
@@ -4406,6 +4418,12 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/medical/medical_science)
+"ajM" = (
+/obj/structure/machinery/door_control/cl/office/door{
+	pixel_y = -20
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/hallways/upper/midship_hallway)
 "ajN" = (
 /obj/structure/ladder{
 	height = 2;
@@ -37631,12 +37649,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/wood/ship,
 /area/almayer/shipboard/brig/cells)
-"iZV" = (
-/obj/structure/machinery/door_control/cl/quarter/officedoor{
-	pixel_x = 25
-	},
-/turf/open/floor/wood/ship,
-/area/almayer/command/corporateliaison)
 "jac" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8
@@ -43444,12 +43456,6 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/command/cic)
-"lvb" = (
-/obj/structure/machinery/door_control/cl/office/door{
-	pixel_y = 25
-	},
-/turf/open/floor/wood/ship,
-/area/almayer/command/corporateliaison)
 "lvh" = (
 /obj/structure/pipes/standard/simple/visible{
 	dir = 10
@@ -45562,12 +45568,6 @@
 /obj/docking_port/stationary/escape_pod/south,
 /turf/open/floor/plating,
 /area/almayer/maint/upper/u_f_p)
-"mxq" = (
-/obj/structure/machinery/door_control/cl/office/door{
-	pixel_y = -20
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/hallways/upper/midship_hallway)
 "mxT" = (
 /obj/structure/surface/table/almayer,
 /obj/item/device/flashlight/lamp,
@@ -105881,9 +105881,9 @@ vOy
 whc
 yiu
 bBH
-mxq
+ajM
 pBG
-lvb
+ajB
 eAN
 jVg
 gyI
@@ -106696,7 +106696,7 @@ bBH
 bvX
 maO
 lPm
-iZV
+ajA
 fdx
 cuq
 eQJ
