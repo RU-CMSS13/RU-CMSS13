@@ -92,7 +92,7 @@
 		XENO_STRUCTURE_CLUSTER = /datum/construction_template/xenomorph/cluster,
 		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph,
 		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery,
-		XENO_STRUCTURE_PLASMA_TREE = /datum/construction_template/xenomorph/plasma_tree
+		XENO_STRUCTURE_PLASMA_TREE = /datum/construction_template/xenomorph/plasma_tree,
 //RUCM START
 		XENO_STRUCTURE_SUNKEN = /datum/construction_template/xenomorph/sunken_colony,
 //RUCM END
