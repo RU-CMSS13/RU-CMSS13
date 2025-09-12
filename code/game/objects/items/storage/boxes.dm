@@ -487,7 +487,6 @@
 	name = "small box of zip cuffs"
 	desc = "A small box full of zip cuffs."
 	w_class = SIZE_MEDIUM
-	max_storage_space = 7
 
 /obj/item/storage/box/zipcuffs/small/fill_preset_inventory()
 	new /obj/item/restraint/handcuffs/zip(src)
@@ -999,8 +998,8 @@
 		new /obj/item/reagent_container/food/snacks/grown/banana(src)
 
 //chanterelle
-/obj/item/storage/box/chanterelles
-	name = "box of chanterelle"
+/obj/item/storage/box/chanterelle
+	name = "box of chanterelles"
 
 /obj/item/storage/box/chanterelle/fill_preset_inventory()
 	for(var/i in 1 to 7)

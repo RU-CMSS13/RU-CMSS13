@@ -646,18 +646,7 @@
 
 /obj/item/device/radio/headset/almayer/mcl/Initialize()
 	. = ..()
-	if(spy_bug)
-		spy_bug.nametag = "CL Radio"
-
-/obj/item/device/radio/headset/almayer/mcl/sec
-	name = "corporate security radio headset"
-	spy_bug_type = null
-
-	misc_tracking = TRUE
-	locate_setting = TRACKER_CL
-	inbuilt_tracking_options = list(
-		"Corporate Liaison" = TRACKER_CL
-	)
+	spy_bug.nametag = "CL Radio"
 
 /obj/item/device/radio/headset/almayer/reporter
 	name = "reporter radio headset"

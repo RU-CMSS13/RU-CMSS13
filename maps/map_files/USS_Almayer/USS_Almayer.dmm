@@ -4319,6 +4319,18 @@
 	},
 /turf/open/floor/almayer/research/containment/corner_var1/east,
 /area/almayer/medical/containment/cell)
+"ajA" = (
+/obj/structure/machinery/door_control/cl/quarter/officedoor{
+	pixel_x = 25
+	},
+/turf/open/floor/wood/ship,
+/area/almayer/command/corporateliaison)
+"ajB" = (
+/obj/structure/machinery/door_control/cl/office/door{
+	pixel_y = 25
+	},
+/turf/open/floor/wood/ship,
+/area/almayer/command/corporateliaison)
 "ajC" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/flooredge/east,
@@ -4406,6 +4418,12 @@
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/medical/medical_science)
+"ajM" = (
+/obj/structure/machinery/door_control/cl/office/door{
+	pixel_y = -20
+	},
+/turf/open/floor/almayer/plate,
+/area/almayer/hallways/upper/midship_hallway)
 "ajN" = (
 /obj/structure/ladder{
 	height = 2;
@@ -16665,10 +16683,6 @@
 /area/almayer/living/briefing)
 "bos" = (
 /obj/structure/coatrack,
-/obj/item/clothing/head/helmet/marine/pilottex{
-	pixel_x = -2;
-	pixel_y = 11
-	},
 /turf/open/floor/wood/ship,
 /area/almayer/living/pilotbunks)
 "boy" = (
@@ -17500,6 +17514,7 @@
 /obj/structure/machinery/door/firedoor/border_only/almayer{
 	dir = 2
 	},
+/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/window,
 /turf/open/floor/plating,
 /area/almayer/command/corporateliaison)
 "bwc" = (
@@ -47137,6 +47152,14 @@
 	pixel_y = 5
 	},
 /obj/structure/surface/table/woodentable/fancy,
+/obj/structure/machinery/door_control/cl/office/door{
+	pixel_y = 3;
+	pixel_x = -5
+	},
+/obj/structure/machinery/door_control/cl/office/window{
+	pixel_x = -5;
+	pixel_y = 9
+	},
 /obj/structure/machinery/door_control/cl/office/evac{
 	pixel_x = -5;
 	pixel_y = -3
@@ -51369,6 +51392,9 @@
 	icon_state = "pottedplant_18";
 	pixel_y = 7
 	},
+/obj/structure/machinery/door_control/cl/quarter/officedoor{
+	pixel_x = -25
+	},
 /turf/open/floor/wood/ship,
 /area/almayer/command/corporateliaison)
 "oOp" = (
@@ -55081,6 +55107,7 @@
 	},
 /obj/structure/pipes/standard/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/structure/machinery/door/poddoor/shutters/almayer/cl/office/door,
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/command/corporateliaison)
 "qwo" = (
@@ -105850,9 +105877,9 @@ vOy
 whc
 yiu
 bBH
-rRT
+ajM
 pBG
-eAN
+ajB
 eAN
 jVg
 gyI
@@ -106665,7 +106692,7 @@ bBH
 bvX
 maO
 lPm
-eAN
+ajA
 fdx
 cuq
 eQJ

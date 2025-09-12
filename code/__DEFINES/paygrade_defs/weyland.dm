@@ -62,6 +62,9 @@
 /// PMC-TL, Team Leader
 #define PAY_SHORT_PMC_TL "PMC-TL"
 
+/// PMC-FOL, Field Operations Leader
+#define PAY_SHORT_PMC_FOL "PMC-FOL"
+
 /// PMC-DOC, Trauma Surgeon
 #define PAY_SHORT_PMC_DOC "PMC-DOC"
 
@@ -96,24 +99,3 @@
 
 /// WY-DOG, Weyland-Yutani Dog Catcher
 #define PAY_SHORT_WY_DOG "WY-DOG"
-
-// Weyland Yutani Corporate Security
-
-/// WY-SEC Weyland-Yutani Security Officer
-#define PAY_SHORT_WY_SEC "WY-SEC"
-
-/// WY-SEC-SPEC Weyland-Yutani Security Medic
-#define PAY_SHORT_WY_SEC_SPEC "WY-SEC-SPEC"
-
-
-/// WY-SEC-LEAD Weyland-Yutani Security Team Leader
-#define PAY_SHORT_WY_SEC_LEAD "WY-SEC-LEAD"
-
-/// WY-SEC-PSO Personal Protection Officer
-#define PAY_SHORT_WY_SEC_PPO "WY-SEC-PPO"
-
-/// WY-SEC-PSS Personal Protection Specialist
-#define PAY_SHORT_WY_SEC_PPS "WY-SEC-PPS"
-
-/// WY-SEC-PSSGT Personal Protection Coordinator
-#define PAY_SHORT_WY_SEC_PPC "WY-SEC-PPC"
