@@ -171,14 +171,13 @@
 	if(!.)
 		return FALSE
 
-	user.show_speech_bubble("medic")
-
-/datum/emote/living/carbon/human/medic/run_langchat(mob/user, group)
+/datum/emote/living/carbon/human/medic/run_langchat(mob/living/user, group)
 	if(!ishuman_strict(user))
 		return
 
 	var/medic_message = pick("Corpsman!", "Doc!", "Help!")
 	user.langchat_speech(medic_message, group, GLOB.all_languages, skip_language_check = TRUE, animation_style = LANGCHAT_FAST_POP, additional_styles = list("langchat_bolded"))
+	user.show_speech_bubble(group, "medic")
 
 /datum/emote/living/carbon/human/moan
 	key = "moan"
@@ -221,14 +220,13 @@
 	if(!.)
 		return FALSE
 
-	user.show_speech_bubble("pain")
-
-/datum/emote/living/carbon/human/pain/run_langchat(mob/user, group)
+/datum/emote/living/carbon/human/pain/run_langchat(mob/living/user, group)
 	if(!ishuman_strict(user))
 		return
 
 	var/pain_message = pick("OW!!", "AGH!!", "ARGH!!", "OUCH!!", "ACK!!", "OUF!")
 	user.langchat_speech(pain_message, group, GLOB.all_languages, skip_language_check = TRUE, animation_style = LANGCHAT_FAST_POP, additional_styles = list("langchat_yell"))
+	user.show_speech_bubble(group, "pain")
 
 /datum/emote/living/carbon/human/salute
 	key = "salute"
@@ -261,14 +259,13 @@
 	if(!.)
 		return FALSE
 
-	user.show_speech_bubble("scream")
-
-/datum/emote/living/carbon/human/scream/run_langchat(mob/user, group)
+/datum/emote/living/carbon/human/scream/run_langchat(mob/living/user, group)
 	if(!ishuman_strict(user))
 		return
 
 	var/scream_message = pick("FUCK!!!", "AGH!!!", "ARGH!!!", "AAAA!!!", "HGH!!!", "NGHHH!!!", "NNHH!!!", "SHIT!!!")
 	user.langchat_speech(scream_message, group, GLOB.all_languages, skip_language_check = TRUE, animation_style = LANGCHAT_PANIC_POP, additional_styles = list("langchat_yell"))
+	user.show_speech_bubble(group, "scream")
 
 /datum/emote/living/carbon/human/shakehead
 	key = "shakehead"
@@ -367,7 +364,9 @@
 	if(!.)
 		return FALSE
 
-	user.show_speech_bubble("warcry")
+/datum/emote/living/carbon/human/warcry/run_langchat(mob/living/user, list/group)
+	. = ..()
+	user.show_speech_bubble(group, "warcry")
 
 /* RUCM CHANGE
 /datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
@@ -389,7 +388,9 @@
 	if(!.)
 		return
 
-	user.show_speech_bubble("scream")
+/datum/emote/living/carbon/human/whimper/run_langchat(mob/living/user, list/group)
+	. = ..()
+	user.show_speech_bubble(group, "scream")
 
 /datum/emote/living/carbon/human/burstscream
 	key = "burstscream"
@@ -410,4 +411,6 @@
 	if(!.)
 		return FALSE
 
-	user.show_speech_bubble("pain")
+/datum/emote/living/carbon/human/burstscream/run_langchat(mob/living/user, list/group)
+	. = ..()
+	user.show_speech_bubble(group, "pain")
