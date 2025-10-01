@@ -101,6 +101,9 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 GLOBAL_LIST_INIT(admin_verbs_ban, list(
 	/client/proc/unban_panel,
 	/client/proc/stickyban_panel,
+	//RUCM EDIT START
+	/client/proc/DB_ban_panel,
+	//RUCM EDIT ENDS
 	// /client/proc/jobbans // Disabled temporarily due to 15-30 second lag spikes.
 ))
 
@@ -212,6 +215,9 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/datum/admins/proc/view_runtime_log, /*shows the server runtime log for this round*/
 	/datum/admins/proc/view_href_log, /*shows the server HREF log for this round*/
 	/datum/admins/proc/view_tgui_log, /*shows the server TGUI log for this round*/
+	//RUCM EDIT START
+	/datum/admins/proc/getserverlogs,
+	//RUCM EDIT END
 	/client/proc/admin_blurb,
 	/datum/admins/proc/open_shuttlepanel,
 	/client/proc/allow_browser_inspect,

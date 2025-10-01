@@ -61,6 +61,8 @@
 #include "game\objects\structures\window.dm"
 #include "game\turfs\closed.dm"
 #include "modules\admin\autoreply.dm"
+#include "modules\admin\db_ban.dm"
+#include "modules\admin\verbs\getlogs.dm"
 #include "modules\almayer\machinery.dm"
 #include "modules\clothing\suits\marine_armor\breacher_armor.dm"
 #include "modules\clothing\gloves\marine_gloves.dm"
