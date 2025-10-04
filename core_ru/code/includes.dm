@@ -56,6 +56,7 @@
 #include "game\objects\items\storage\pouch.dm"
 #include "game\objects\items\weapons\breacher_equip.dm"
 #include "game\objects\items\weapons\breacher_hammer_stacks.dm"
+#include "game\objects\items\asrs_laptop.dm"
 #include "game\objects\items\pamphlets.dm"
 #include "game\objects\structures\table_racks.dm"
 #include "game\objects\structures\window.dm"
