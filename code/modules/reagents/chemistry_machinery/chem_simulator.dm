@@ -538,9 +538,11 @@
 		if(!target.data)
 			status_bar = "DATA CORRUPTION DETECTED, RESCAN CHEMICAL"
 			return FALSE
+/*
 		if(target.data.chemclass < CHEM_CLASS_BASIC || !istype(target.data, /datum/reagent/generated)) //Requires a custom/generated chem as a base
 			status_bar = "TARGET CAN NOT BE ALTERED"
 			return FALSE
+*/
 		//Safety check in case of irregular papers
 		var/datum/chemical_reaction/C = GLOB.chemical_reactions_list[target.data.id]
 		if(C)
