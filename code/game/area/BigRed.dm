@@ -305,6 +305,7 @@
 	can_build_special = TRUE
 	ambience_exterior = AMBIENCE_BIGRED
 	soundscape_playlist = SCAPE_PL_THUNDER
+	temperature = ICE_COLONY_TEMPERATURE
 	soundscape_interval = 50
 
 /area/bigredv2/oob

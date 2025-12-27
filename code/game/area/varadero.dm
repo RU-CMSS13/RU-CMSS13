@@ -8,7 +8,7 @@
 	icon_state = "varadero"
 	can_build_special = TRUE //T-Comms structure
 	powernet_name = "ground"
-	temperature = TROPICAL_TEMP
+	temperature = ICE_COLONY_TEMPERATURE
 	minimap_color = MINIMAP_AREA_COLONY
 
 //shuttle stuff

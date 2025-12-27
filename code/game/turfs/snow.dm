@@ -46,19 +46,19 @@
 	if(bleed_layer > 0)
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			var/slow_amount = 0.75
-			var/can_stuck = 1
+			var/slow_amount = 0
+			var/can_stuck = 0
 			if(istype(C, /mob/living/carbon/xenomorph)||isyautja(C))
-				slow_amount = 0.25
+				slow_amount = 0
 				can_stuck = 0
 			var/new_slowdown = C.next_move_slowdown + (slow_amount * bleed_layer)
-			if(!HAS_TRAIT(C, TRAIT_HAULED))
-				if(prob(2))
-					to_chat(C, SPAN_WARNING("Moving through [src] slows you down.")) //Warning only
-				else if(can_stuck && bleed_layer == 3 && prob(2))
-					to_chat(C, SPAN_WARNING("You get stuck in [src] for a moment!"))
-					new_slowdown += 10
-				C.next_move_slowdown = new_slowdown
+//			if(!HAS_TRAIT(C, TRAIT_HAULED))
+//				if(prob(2))
+//					to_chat(C, SPAN_WARNING("Moving through [src] slows you down.")) //Warning only
+//				else if(can_stuck && bleed_layer == 3 && prob(2))
+//				to_chat(C, SPAN_WARNING("You get stuck in [src] for a moment!"))
+//					new_slowdown += 10
+//				C.next_move_slowdown = new_slowdown
 	..()
 
 

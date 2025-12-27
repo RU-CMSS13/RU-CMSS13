@@ -3,6 +3,7 @@
 	icon_state = "lv-626"
 	can_build_special = TRUE
 	powernet_name = "ground"
+	temperature = ICE_COLONY_TEMPERATURE
 	ambience_exterior = AMBIENCE_JUNGLE
 	minimap_color = MINIMAP_AREA_COLONY
 
