@@ -216,6 +216,15 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/research/secret/testing)
+"aaw" = (
+/obj/structure/pipes/standard/simple/hidden/dark{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/prison/darkbrowncorners2/east,
+/area/prisonru/station/hallway/east)
 "aax" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 1;
@@ -1400,6 +1409,7 @@
 	dir = 1;
 	network = list("PRISON")
 	},
+/obj/structure/machinery/light/small/blue,
 /turf/open/floor/prison/darkyellowfull2/east,
 /area/prisonru/station/engineering)
 "adC" = (
@@ -37776,9 +37786,6 @@
 /obj/effect/landmark/corpsespawner/engineer,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/machinery/light/small/blue{
-	dir = 1
-	},
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/engineering)
 "bZg" = (
@@ -37795,6 +37802,9 @@
 /area/prisonru/station/engineering)
 "bZi" = (
 /obj/structure/machinery/cm_vending/sorted/tech/comp_storage,
+/obj/structure/machinery/light/small/blue{
+	dir = 4
+	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/engineering)
 "bZj" = (
@@ -38291,7 +38301,7 @@
 /obj/structure/machinery/door/airlock/almayer/engineering/colony{
 	name = "Engineering"
 	},
-/turf/open/floor/prison,
+/turf/open/floor/prison/darkyellow2/north,
 /area/prisonru/station/engineering)
 "caS" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
@@ -38330,7 +38340,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "caW" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
@@ -38340,7 +38350,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "caX" = (
 /obj/structure/machinery/light/small/blue{
@@ -38380,7 +38390,7 @@
 /obj/structure/disposalpipe/junction{
 	icon_state = "pipe-y"
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "cbf" = (
 /obj/structure/largecrate/random,
@@ -38399,14 +38409,14 @@
 /obj/structure/pipes/standard/manifold/fourway/hidden/cyan{
 	color = "#a6aeab"
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "cbi" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "cbj" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
@@ -38791,7 +38801,7 @@
 /obj/structure/machinery/door/airlock/almayer/engineering/colony{
 	name = "Engineering"
 	},
-/turf/open/floor/prison,
+/turf/open/floor/prison/darkyellow2,
 /area/prisonru/station/engineering)
 "ccn" = (
 /obj/structure/disposalpipe/segment,
@@ -38801,7 +38811,7 @@
 	pixel_x = -1;
 	color = "#32332d"
 	},
-/turf/open/floor/plating/plating_catwalk/prison,
+/turf/open/floor/prison/darkyellowcorners2/west,
 /area/prisonru/station/hallway/engineering)
 "cco" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
@@ -38878,7 +38888,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "SE-out"
 	},
-/turf/open/floor/prison,
+/turf/open/floor/prison/darkbrowncorners2/west,
 /area/prisonru/station/hallway/east)
 "ccC" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
@@ -38892,7 +38902,7 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "S"
 	},
-/turf/open/floor/prison/darkbrowncorners2/southwest,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/east)
 "ccE" = (
 /obj/structure/window/framed/prison,
@@ -39221,7 +39231,7 @@
 /area/prisonru/station/engineering)
 "cdJ" = (
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/prison/darkyellow2,
+/turf/open/floor/prison/darkyellow2/southwest,
 /area/prisonru/station/hallway/engineering)
 "cdK" = (
 /turf/open/floor/prison/darkyellow2,
@@ -56490,7 +56500,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "fbk" = (
 /obj/structure/machinery/door/airlock/prison_hatch/autoname{
@@ -59698,7 +59708,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/shuttle/escapepod/west,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/engineering)
 "hEv" = (
 /obj/structure/bed/chair{
@@ -123385,7 +123395,7 @@ bWg
 ekj
 bEy
 bEy
-bHQ
+aaw
 ccB
 cfD
 cfD
