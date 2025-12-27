@@ -223,47 +223,43 @@
 /turf/open/auto_turf/snow/layer1,
 /area/varadero/exterior/lz1_near)
 "aaV" = (
-/obj/structure/machinery/blackbox_recorder,
-/obj/item/prop/almayer/flight_recorder/colony{
-	pixel_x = -6;
-	pixel_y = 10
-	},
-/turf/open/floor/shiva/blue/north,
-/area/varadero/interior/administration)
-"aaW" = (
 /obj/effect/decal/cleanable/blood/oil/streak,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
-"aaX" = (
+"aaW" = (
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
-"aaY" = (
+"aaX" = (
 /obj/structure/inflatable,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/makeshift_tent)
-"aaZ" = (
+"aaY" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "SW-out"
 	},
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
+"aaZ" = (
+/turf/open/auto_turf/snow/brown_base/layer1,
+/area/varadero/interior_protected/caves/digsite)
 "aba" = (
+/obj/effect/decal/cleanable/blood/oil/streak,
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/interior_protected/caves/digsite)
 "abb" = (
-/obj/effect/decal/cleanable/blood/oil/streak,
+/obj/structure/machinery/colony_floodlight,
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/interior_protected/caves/digsite)
 "abc" = (
 /obj/structure/machinery/colony_floodlight,
-/turf/open/auto_turf/snow/brown_base/layer1,
+/turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
 "abd" = (
-/obj/structure/machinery/colony_floodlight,
+/obj/structure/prop/rock/brown,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
 "abe" = (
-/obj/structure/prop/rock/brown,
+/obj/item/lightstick/variant/planted,
 /turf/open/auto_turf/snow/brown_base/layer0,
 /area/varadero/interior_protected/caves/digsite)
 "abf" = (
@@ -274,10 +270,6 @@
 /turf/open/floor/shiva/multi_tiles/southeast,
 /area/varadero/interior/medical)
 "abg" = (
-/obj/item/lightstick/variant/planted,
-/turf/open/auto_turf/snow/brown_base/layer0,
-/area/varadero/interior_protected/caves/digsite)
-"abh" = (
 /obj/structure/machinery/floodlight/landing{
 	desc = "A powerful light stationed near construction zones to provide better visibility.";
 	name = "Construction Light"
@@ -285,13 +277,13 @@
 /obj/effect/decal/warning_stripes,
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/exterior/monsoon)
-"abi" = (
+"abh" = (
 /turf/open/auto_turf/snow/layer0,
 /area/varadero/interior/caves/east)
-"abj" = (
+"abi" = (
 /turf/open/auto_turf/snow/layer1,
 /area/varadero/interior/caves/east)
-"abk" = (
+"abj" = (
 /obj/item/stack/sheet/metal,
 /obj/item/shard{
 	icon_state = "medium"
@@ -299,15 +291,23 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/auto_turf/snow/layer1,
 /area/varadero/interior/caves/east)
+"abk" = (
+/obj/item/stack/sheet/metal,
+/turf/open/auto_turf/snow/layer0,
+/area/varadero/interior/caves/east)
 "abl" = (
 /obj/structure/surface/table/reinforced/prison,
 /obj/item/device/radio,
 /turf/open/floor/shiva/red/southwest,
 /area/varadero/interior/security)
 "abm" = (
-/obj/item/stack/sheet/metal,
-/turf/open/auto_turf/snow/layer0,
-/area/varadero/interior/caves/east)
+/obj/structure/machinery/blackbox_recorder,
+/obj/item/prop/almayer/flight_recorder/colony{
+	pixel_x = -6;
+	pixel_y = 10
+	},
+/turf/open/floor/shiva/blue/north,
+/area/varadero/interior/administration)
 "abn" = (
 /obj/structure/girder/displaced,
 /turf/open/auto_turf/snow/brown_base/layer1,
@@ -448,7 +448,7 @@
 /obj/structure/largecrate/random,
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/exterior/eastbeach)
-"abP" = (
+"abO" = (
 /obj/structure/prop/structure_lattice{
 	dir = 1;
 	health = 300
@@ -464,7 +464,7 @@
 	},
 /turf/open/auto_turf/snow/layer1,
 /area/varadero/exterior/lz1_near)
-"abQ" = (
+"abP" = (
 /obj/structure/stairs/perspective{
 	color = "#b29082";
 	dir = 4;
@@ -472,17 +472,17 @@
 	},
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/exterior/lz1_near)
-"abR" = (
+"abQ" = (
 /obj/effect/overlay/palmtree_r{
 	icon_state = "palm2"
 	},
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/exterior/lz2_near)
-"abS" = (
+"abR" = (
 /obj/effect/sentry_landmark/lz_2/top_right,
 /turf/open/auto_turf/snow/brown_base/layer1,
 /area/varadero/exterior/lz2_near)
-"abT" = (
+"abS" = (
 /turf/open/ice,
 /area/varadero/exterior/pontoon_beach)
 "acO" = (
@@ -3318,15 +3318,6 @@
 /obj/structure/blocker/invisible_wall/water,
 /turf/open/floor/plating/icefloor/asteroidplating,
 /area/varadero/interior/oob)
-"cpF" = (
-/obj/structure/barricade/handrail{
-	desc = "Your platforms look pretty heavy king, let me support them for you.";
-	dir = 1;
-	icon_state = "hr_kutjevo";
-	name = "support struts"
-	},
-/turf/open/ice/noweed,
-/area/varadero/exterior/pontoon_beach)
 "cqu" = (
 /obj/structure/stairs/perspective{
 	color = "#b29082";
@@ -22214,6 +22205,15 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating/icefloor/asteroidplating,
 /area/varadero/interior_protected/maintenance/south)
+"sgn" = (
+/obj/structure/barricade/handrail{
+	desc = "Your platforms look pretty heavy king, let me support them for you.";
+	dir = 1;
+	icon_state = "hr_kutjevo";
+	name = "support struts"
+	},
+/turf/open/ice/noweed,
+/area/varadero/exterior/pontoon_beach)
 "sgp" = (
 /obj/structure/barricade/wooden,
 /turf/open/shuttle/elevator,
@@ -42457,7 +42457,7 @@ qqA
 qqA
 bYT
 xgG
-aaV
+abm
 tkT
 rzg
 rzg
@@ -42932,7 +42932,7 @@ jLk
 jLk
 jLk
 oZo
-abP
+abO
 wMw
 wMw
 sHV
@@ -43842,7 +43842,7 @@ lTR
 aTY
 iOM
 wMw
-abP
+abO
 wMw
 wMw
 wMw
@@ -43871,7 +43871,7 @@ wMw
 wMw
 wMw
 wMw
-abP
+abO
 wMw
 kqA
 kEB
@@ -44221,8 +44221,8 @@ asx
 bJI
 bJI
 oJb
-abQ
-abQ
+abP
+abP
 ebm
 bJI
 asx
@@ -44231,8 +44231,8 @@ asx
 bJI
 bJI
 oJb
-abQ
-abQ
+abP
+abP
 qlE
 bJI
 bJI
@@ -45319,7 +45319,7 @@ lTR
 lTR
 pFZ
 knw
-cpF
+sgn
 dXg
 dXg
 oGv
@@ -45500,8 +45500,8 @@ lTR
 lTR
 lTR
 pFZ
-cpF
-cpF
+sgn
+sgn
 dXg
 lTR
 oGv
@@ -45655,7 +45655,7 @@ lTR
 lTR
 qHl
 lTR
-abT
+abS
 lTR
 lTR
 lTR
@@ -45682,7 +45682,7 @@ lTR
 lTR
 lTR
 kpe
-cpF
+sgn
 lTR
 lTR
 oGv
@@ -46046,7 +46046,7 @@ lTR
 lTR
 lTR
 pFZ
-cpF
+sgn
 lTR
 lTR
 oGv
@@ -46201,7 +46201,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 lTR
@@ -46383,7 +46383,7 @@ lTR
 lTR
 lTR
 aTY
-abT
+abS
 lTR
 lTR
 lTR
@@ -46411,7 +46411,7 @@ uoh
 lTR
 lTR
 lTR
-cpF
+sgn
 lTR
 oGv
 rMb
@@ -46565,7 +46565,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 dXg
@@ -46747,7 +46747,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 dXg
@@ -46774,7 +46774,7 @@ lTR
 lTR
 lTR
 lTR
-cpF
+sgn
 oGv
 oGv
 oGv
@@ -46929,7 +46929,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 dXg
 dXg
 lTR
@@ -47111,7 +47111,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 dXg
 dXg
 lTR
@@ -47291,7 +47291,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 lTR
@@ -47473,7 +47473,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 lTR
@@ -47655,7 +47655,7 @@ lTR
 lTR
 lTR
 lTR
-abT
+abS
 lTR
 lTR
 lTR
@@ -48048,7 +48048,7 @@ lTR
 lTR
 lTR
 lTR
-cpF
+sgn
 lTR
 lTR
 oGv
@@ -48231,7 +48231,7 @@ lTR
 uoh
 lTR
 stl
-cpF
+sgn
 oGv
 oGv
 oGv
@@ -48959,7 +48959,7 @@ lTR
 lTR
 lTR
 lTR
-cpF
+sgn
 oGv
 oGv
 lsN
@@ -49140,7 +49140,7 @@ viu
 lTR
 lTR
 lTR
-cpF
+sgn
 lTR
 lTR
 oGv
@@ -50051,7 +50051,7 @@ dXg
 dXg
 lTR
 stl
-cpF
+sgn
 oGv
 oGv
 oGv
@@ -53845,7 +53845,7 @@ cUN
 sXn
 tMZ
 wlB
-abR
+abQ
 wlB
 wlB
 wlB
@@ -54417,7 +54417,7 @@ wlB
 wlB
 tfc
 bbK
-abS
+abR
 wlB
 wlB
 wlB
@@ -55123,7 +55123,7 @@ wlB
 vNy
 wlB
 wlB
-abR
+abQ
 wlB
 wlB
 wlB
@@ -55512,7 +55512,7 @@ wlB
 wlB
 bbK
 wlB
-abR
+abQ
 kgp
 nCl
 wlB
@@ -56302,8 +56302,8 @@ kbQ
 sgk
 kbQ
 pbT
-abi
-abm
+abh
+abk
 jqw
 tTU
 eyt
@@ -56482,11 +56482,11 @@ eyt
 qIF
 uqW
 gaJ
-abi
-abm
+abh
+abk
 eQI
-abi
-abi
+abh
+abh
 tVj
 eyt
 eyt
@@ -56679,9 +56679,9 @@ tXu
 tXu
 tXu
 vqG
-abi
-abi
-abi
+abh
+abh
+abh
 qfu
 kbQ
 qIF
@@ -56864,7 +56864,7 @@ cwk
 sCp
 kkc
 vqK
-abi
+abh
 kbQ
 pGs
 pGs
@@ -57226,7 +57226,7 @@ cNc
 vEi
 dir
 xHz
-abj
+abi
 xcz
 pGs
 pGs
@@ -57406,7 +57406,7 @@ lzT
 lzT
 qtC
 rTi
-abk
+abj
 inV
 ouy
 ouy
@@ -57669,7 +57669,7 @@ wlB
 tLS
 wlB
 wlB
-abR
+abQ
 wlB
 wlB
 wlB
@@ -57866,7 +57866,7 @@ wlB
 pDl
 dyl
 wlB
-abR
+abQ
 wlB
 wlB
 wlB
@@ -58148,8 +58148,8 @@ pGs
 pGs
 pGs
 pGs
-aaX
-aaX
+aaW
+aaW
 bsf
 pGs
 pGs
@@ -58330,9 +58330,9 @@ pGs
 pGs
 pGs
 iFQ
-aaX
-aaX
-aaX
+aaW
+aaW
+aaW
 hre
 bsf
 hre
@@ -58512,10 +58512,10 @@ iOi
 bGU
 bGU
 iFQ
-aaX
-abg
-aaX
-aaX
+aaW
+abe
+aaW
+aaW
 bsf
 bsf
 puq
@@ -58694,10 +58694,10 @@ bGU
 bGU
 bGU
 iFQ
-aaX
-aaX
-aaX
-aaX
+aaW
+aaW
+aaW
+aaW
 bsf
 bsf
 oWx
@@ -58876,10 +58876,10 @@ bGU
 bGU
 bGU
 iFQ
-aaX
-aaX
-aaX
-aaX
+aaW
+aaW
+aaW
+aaW
 bsf
 bsf
 oXo
@@ -59052,15 +59052,15 @@ pZS
 kyD
 qhO
 kyD
-abh
+abg
 bGU
 bGU
 bGU
 bGU
 iFQ
-aaX
-aaX
-aaX
+aaW
+aaW
+aaW
 hre
 bsf
 bsf
@@ -59240,8 +59240,8 @@ bGU
 bGU
 bGU
 iFQ
-aaX
-aaX
+aaW
+aaW
 bsf
 pGs
 pGs
@@ -59422,8 +59422,8 @@ bGU
 bGU
 bGU
 pGs
-abe
-aaX
+abd
+aaW
 pGs
 pGs
 pGs
@@ -61793,8 +61793,8 @@ pGs
 pGs
 pGs
 bsf
-aaX
-aaX
+aaW
+aaW
 hre
 bsf
 bsf
@@ -61971,14 +61971,14 @@ pGs
 pGs
 pGs
 pGs
-aaX
-aaX
-aaX
-aaX
-aaX
-aaX
-aaX
-aaX
+aaW
+aaW
+aaW
+aaW
+aaW
+aaW
+aaW
+aaW
 bsf
 bsf
 bsf
@@ -62152,15 +62152,15 @@ pGs
 pGs
 pGs
 pGs
-aba
-aba
-aba
-aba
-aba
-aba
-aba
-abe
-aaX
+aaZ
+aaZ
+aaZ
+aaZ
+aaZ
+aaZ
+aaZ
+abd
+aaW
 bsf
 bsf
 bsf
@@ -62334,17 +62334,17 @@ pGs
 pGs
 pGs
 tRN
-aba
+aaZ
 tRN
-aba
-aba
-aba
-aba
-aba
-aaX
-aaX
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaZ
+aaZ
+aaW
+aaW
+aaW
+aaW
 bsf
 brT
 uvd
@@ -62516,17 +62516,17 @@ pGs
 pGs
 pGs
 aXb
-aba
-aba
-aba
-aba
+aaZ
+aaZ
+aaZ
+aaZ
 tRN
-aba
-aba
-aba
-aba
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaZ
+aaW
+aaW
 bsf
 ulv
 uvd
@@ -62704,11 +62704,11 @@ iAE
 uNz
 iAE
 iAE
-aba
-aba
-aba
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaW
+aaW
 bsf
 uvd
 uvd
@@ -62886,11 +62886,11 @@ pRa
 rUa
 pRa
 iAE
-aba
-aba
-aba
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaW
+aaW
 bsf
 crq
 uvd
@@ -63069,10 +63069,10 @@ pRa
 pRa
 uNz
 tRN
-abb
-abb
-aaX
-aaX
+aba
+aba
+aaW
+aaW
 bsf
 uvd
 eiK
@@ -63251,10 +63251,10 @@ pRa
 rUa
 iAE
 gOj
-abb
-abb
-aaX
-abd
+aba
+aba
+aaW
+abc
 bsf
 ulv
 dHD
@@ -63433,10 +63433,10 @@ pRa
 pRa
 iAE
 tRN
-abb
-ami
 aba
-aaX
+ami
+aaZ
+aaW
 bsf
 brT
 uvd
@@ -63615,10 +63615,10 @@ pRa
 pRa
 iAE
 iAE
-aba
-aba
-aba
-aaX
+aaZ
+aaZ
+aaZ
+aaW
 bsf
 ulv
 uvd
@@ -63799,7 +63799,7 @@ rUa
 uNz
 aOG
 tRN
-aba
+aaZ
 tOV
 bsf
 lqa
@@ -64161,11 +64161,11 @@ pRa
 pRa
 eXw
 iAE
+aaZ
 aba
-abb
-abb
 aba
-aaW
+aaZ
+aaV
 esK
 vBZ
 kEK
@@ -64344,11 +64344,11 @@ pRa
 eXw
 iAE
 sXn
-aba
-aba
-aba
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaW
+aaW
 bJH
 ulv
 ulv
@@ -64527,10 +64527,10 @@ eXw
 pRa
 iAE
 uNz
-abb
-abb
-abb
 aba
+aba
+aba
+aaZ
 pTO
 vxi
 uvd
@@ -64710,10 +64710,10 @@ pRa
 pRa
 iAE
 iAE
-aba
-aba
-aba
 aaZ
+aaZ
+aaZ
+aaY
 lqM
 lTv
 ulv
@@ -64892,10 +64892,10 @@ pRa
 pRa
 pRa
 iAE
+aaZ
 aba
-abb
-aba
-aaW
+aaZ
+aaV
 vxi
 fcf
 gFY
@@ -65075,9 +65075,9 @@ pRa
 pRa
 iAE
 iAE
-aba
-aba
-aba
+aaZ
+aaZ
+aaZ
 bFo
 fcf
 bsf
@@ -65257,10 +65257,10 @@ pRa
 pRa
 rUa
 iAE
-aba
-aba
-aba
-aaW
+aaZ
+aaZ
+aaZ
+aaV
 bsf
 vxi
 bsf
@@ -65439,10 +65439,10 @@ pRa
 pRa
 iAE
 uNz
-abb
 aba
-abb
-aaX
+aaZ
+aba
+aaW
 bsf
 bsf
 pDX
@@ -65624,7 +65624,7 @@ hXq
 hXq
 hXq
 hXq
-aaY
+aaX
 qCT
 qCT
 bsf
@@ -65802,10 +65802,10 @@ pRa
 hfZ
 iAE
 tRN
-aba
-aba
-abc
-aaY
+aaZ
+aaZ
+abb
+aaX
 byw
 oXC
 sxR
@@ -65983,10 +65983,10 @@ qvk
 pRa
 pRa
 uNz
-aba
+aaZ
 gOj
-aba
-aaY
+aaZ
+aaX
 qUK
 rCB
 mmv
@@ -66165,10 +66165,10 @@ rTH
 pRa
 sXn
 iAE
-aba
-aba
-aba
-aaY
+aaZ
+aaZ
+aaZ
+aaX
 mzK
 kKS
 kKS
@@ -66346,11 +66346,11 @@ pRa
 pRa
 iAE
 iAE
-aba
+aaZ
 tRN
-aba
+aaZ
+aaW
 aaX
-aaY
 kzp
 kKS
 kKS
@@ -66528,11 +66528,11 @@ pRa
 iAE
 sXn
 gOj
-aba
-aba
-aba
+aaZ
+aaZ
+aaZ
+aaW
 aaX
-aaY
 gWL
 kKS
 eDR
@@ -66708,13 +66708,13 @@ pRa
 pRa
 rUa
 uNz
-aba
+aaZ
 tRN
-aba
-aba
-aba
-aaX
-aaX
+aaZ
+aaZ
+aaZ
+aaW
+aaW
 qCT
 gMp
 eyL
@@ -66894,7 +66894,7 @@ pGs
 pGs
 pGs
 pGs
-aaX
+aaW
 hre
 bsf
 bsf
