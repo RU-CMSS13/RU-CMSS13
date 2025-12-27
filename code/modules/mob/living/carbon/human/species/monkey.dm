@@ -23,6 +23,9 @@
 	)
 	fire_sprite_prefix = "monkey"
 	fire_sprite_sheet = 'icons/mob/humans/onmob/OnFire.dmi'
+	cold_level_1 = -1
+	cold_level_2 = -1
+	cold_level_3 = -1
 
 /datum/species/monkey/New()
 	equip_adjust = list(
