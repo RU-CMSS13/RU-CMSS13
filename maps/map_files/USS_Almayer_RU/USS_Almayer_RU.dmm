@@ -36886,23 +36886,12 @@
 /turf/open/floor/almayer/silvercorner/east,
 /area/almayer/command/cic)
 "bLu" = (
-/obj/structure/coatrack{
-	pixel_x = -10
-	},
-/obj/item/clothing/head/cmcap/bridge{
-	pixel_x = -10;
-	pixel_y = 12
-	},
-/obj/item/clothing/suit/storage/windbreaker/windbreaker_brown{
-	layer = 3.03;
-	pixel_x = -10;
-	pixel_y = 1
-	},
-/obj/item/clothing/suit/storage/windbreaker/windbreaker_green{
-	pixel_x = -10;
-	pixel_y = -1
-	},
 /obj/structure/disposalpipe/segment,
+/obj/structure/machinery/door/poddoor/almayer/open{
+	dir = 2;
+	id = "CIC Lockdown";
+	name = "\improper Combat Information Center Blast Door"
+	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/command/cic)
 "bLv" = (
