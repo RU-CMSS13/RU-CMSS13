@@ -18,11 +18,7 @@
 	. = ..()
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
-	if(w_class > 0 && w_class < 4)
-		icon_state = "gift[w_class]"
-	else
-		icon_state = "gift[pick(1, 2, 3)]"
-	return
+	icon_state = "gift[pick(1, 2, 3)]"
 
 /obj/item/gift/attack_self(mob/user)
 	..()
