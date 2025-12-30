@@ -1,4 +1,4 @@
-/obj/structure/prop/HolidayTree
+/obj/structure/prop/Holidaytree
 	name = "Christmas tree"
 	desc = "YO!!! Holiday tree!!! Presents is here!"
 	icon = 'icons_ru/obj/flora/holiday.dmi'
@@ -7,11 +7,10 @@
 	unacidable = TRUE
 	density = TRUE
 	layer = ABOVE_FLY_LAYER
-	bound_height = 32
 	pixel_x = -16
 	var/cooldown = 0
 
-/obj/structure/prop/HolidayTree/attack_hand(mob/user)
+/obj/structure/prop/Holidaytree/attack_hand(mob/user)
 	if(cooldown >= world.time)
 		return
 	else
