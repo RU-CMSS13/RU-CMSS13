@@ -72,12 +72,9 @@
 		/obj/item/explosive/grenade/smokebomb,
 		/obj/item/corncob,
 		/obj/item/poster,
-		/obj/item/book/manual/barman_recipes,
-		/obj/item/book/manual/chef_recipes,
 		/obj/item/toy/bikehorn,
 		/obj/item/toy/beach_ball,
 		/obj/item/weapon/banhammer,
-		/obj/item/toy/balloon,
 		/obj/item/toy/blink,
 		/obj/item/toy/crossbow,
 		/obj/item/toy/gun,
@@ -97,7 +94,21 @@
 		/obj/item/toy/sword,
 		/obj/item/reagent_container/food/snacks/grown/ambrosiadeus,
 		/obj/item/reagent_container/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/clothing/accessory/tie/horrible)
+		/obj/item/clothing/accessory/tie/horrible,
+		/obj/item/ammo_kit/penetrating,
+		/obj/item/stack/medical/bruise_pack,
+		/obj/item/stack/medical/ointment,
+		/obj/item/reagent_container/hypospray/autoinjector/skillless,
+		/obj/item/reagent_container/hypospray/autoinjector/skillless/tramadol,
+		/obj/item/stack/medical/splint,
+		/obj/item/tool/weldingtool,
+		/obj/item/cell/crap,
+		/obj/item/cell/high,
+		/obj/item/cell/hyper,
+		/obj/item/cell/potato,
+		/obj/effect/alien/resin/fruit,
+		/obj/effect/alien/resin/fruit/lesser,
+		)
 
 	if(!ispath(gift_type,/obj/item))
 		return
