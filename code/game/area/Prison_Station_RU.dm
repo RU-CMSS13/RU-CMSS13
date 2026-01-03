@@ -8,7 +8,7 @@
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
 	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-	soundscape_interval = 15
+	//soundscape_interval = 15
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -285,6 +285,7 @@
 
 /area/prisonru/station/maintenance/residential/ne
 	name = "Prison - Northeast Civilian Residences Maintenance"
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/sw
 	name = "Prison - Southwest Civilian Residences Maintenance"
@@ -292,12 +293,15 @@
 
 /area/prisonru/station/maintenance/residential/se
 	name = "Prison - Southeast Civilian Residences Maintenance"
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/access/north
 	name = "Prison - North Civilian Residences Access"
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/access/south
 	name = "Prison - South Civilian Residences Access"
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/staff_research
 	name = "Prison - Staff-Research Maintenance"
@@ -545,7 +549,7 @@
 //Civilian block CODE
 /area/prisonru/residential
 	minimap_color = MINIMAP_AREA_COLONY
-	ceiling = CEILING_METAL
+	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
 	icon_state = "tumor0"
 	unoviable_timer = FALSE
 
@@ -630,6 +634,7 @@
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
+	ceiling = CEILING_METAL
 	icon_state = "power0"
 
 
