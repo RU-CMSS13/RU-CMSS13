@@ -15,6 +15,8 @@
 	else
 		spawn_positions = 0
 
+/* 	enable it after the transfer Expanded multipurpose APC
+
 /datum/job/command/walker/get_total_positions(latejoin = FALSE)
 	if(SStechtree.trees[TREE_MARINE].get_node(/datum/tech/arc).unlocked)
 		return 0
@@ -22,6 +24,8 @@
 		return 1
 
 	return 0
+
+*/
 
 AddTimelock(/datum/job/command/walker, list(
 	JOB_SQUAD_ROLES = 2 HOURS,
