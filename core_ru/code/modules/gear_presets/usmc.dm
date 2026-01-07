@@ -45,13 +45,7 @@
 /obj/item/clothing/head/helmet/marine/tech/tanker/walker
 	name = "\improper M50 walker helmet"
 	desc = "The lightweight M50 walker helmet is designed for use by armored crewmen in the USCM. It offers low weight protection, and allows agile movement inside the confines of an armored vehicle. Features a toggleable welding screen for eye protection."
-//	icon = 'core_ru/icons/obj/mechpilot.dmi'
-//	icon_state = "mecha_helmet"
-//	worn_state = "tanker_helmet"
 
 /obj/item/clothing/suit/storage/marine/tanker/walker
 	name = "\improper M3 pattern walker armor"
 	desc = "A modified and refashioned suit of M3 Pattern armor designed to be worn by the loader of a USCM vehicle crew. While the suit is a bit more encumbering to wear with the crewman uniform, it offers the loader a degree of protection that would otherwise not be enjoyed."
-//	icon = 'core_ru/icons/obj/mechpilot.dmi'
-//	icon_state = "mecha_armor"
-//	worn_state = "tanker"

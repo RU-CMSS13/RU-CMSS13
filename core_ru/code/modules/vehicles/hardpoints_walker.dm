@@ -169,29 +169,6 @@
 		to_chat(user, "<span class='warning'>WARNING! System report: weapon is not ready to fire again!</span>")
 		return FALSE
 	last_fire = world.time
-/* всего хорошего всем тем кто трогал это, я больше меха трогать не буду, никогда не смотрел этот файл, и не стоило, пытался понять почему автофаеру так плохл... и добавить на RMB со вторички
-	for(var/i = 1 to burst)
-		if(!owner.firing_arc(target))
-			if(i == 1)
-				return
-			display_ammo(user)
-			visible_message("<span class='danger'>[owner.name] fires from [name]!</span>", "<span class='warning'>You hear [istype(P.ammo, /datum/ammo/bullet) ? "gunshot" : "blast"]!</span>")
-			return FALSE
-		P = new
-		P.generate_bullet(new ammo.default_ammo)
-		for (var/trait in projectile_traits)
-			GIVE_BULLET_TRAIT(P, trait, FACTION_MARINE)
-		playsound(get_turf(owner), pick(fire_sound), 60)
-		target = simulate_scatter(target, P)
-		P.fire_at(target, owner, src, P.ammo.max_range, P.ammo.shell_speed)
-		ammo.current_rounds--
-		if(ammo.current_rounds <= 0)
-			ammo.loc = owner.loc
-			ammo = null
-			visible_message("[owner.name]'s systems deployed used magazine.","")
-			break
-		sleep(3)
-*/
 	if(!owner.firing_arc(target))
 		return FALSE
 
@@ -382,25 +359,6 @@
 	max_rounds = 700
 	gun_type = /obj/item/walker_gun/smartgun
 
-/*
-/obj/item/ammo_magazine/walker/smartgun/ap
-	name = "M56 Double-Barrel Magazine (AP)"
-	desc = "A armament MG magazine"
-	caliber = "10x28mm" //Correlates to smartguns
-	icon_state = "big_ammo_box_ap"
-	default_ammo = /datum/ammo/bullet/smartgun/walker/ap
-	max_rounds = 500
-	gun_type = /obj/item/walker_gun/smartgun
-/obj/item/ammo_magazine/walker/smartgun/incendiary
-	name = "M56 Double-Barrel \"Scorcher\" Magazine"
-	desc = "A armament MG magazine"
-	caliber = "10x28mm" //Correlates to smartguns
-	icon_state = "ammoboxslug"
-	default_ammo = /datum/ammo/bullet/smartgun/walker/incendiary
-	max_rounds = 500
-	gun_type = /obj/item/walker_gun/smartgun
-*/
-
 /obj/item/ammo_magazine/walker/hmg
 	name = "M30 Machine Gun Magazine"
 	desc = "A armament M30 magazine"
@@ -456,23 +414,6 @@
 		return 0
 
 	return 100 * (reagents.total_volume / max_rounds)
-
-// /obj/item/ammo_magazine/walker/flamer/ex
-// 	name = "F40 UT-Napthal EX-type Canister"
-// 	desc = "Canister for mounted flamethower"
-// 	icon_state = "mech_flamer_ex_ammo"
-// 	max_rounds = 300
-// 	default_ammo = /datum/ammo/flamethrower
-// 	gun_type = /obj/item/walker_gun/flamer
-
-// 	flamer_chem = "napalmex"
-
-// 	max_intensity = 40
-// 	max_range = 5
-// 	max_duration = 30
-
-// 	fuel_pressure = 1 //How much fuel is used per tile fired
-// 	max_pressure = 10
 
 /obj/item/ammo_magazine/walker/flamer/btype
 	name = "F40 UT-Napthal B-type Canister"
