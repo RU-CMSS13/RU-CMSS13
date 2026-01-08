@@ -82,6 +82,9 @@
 		XENO_STRUCTURE_CORE = 1,
 		XENO_STRUCTURE_CLUSTER = 8,
 		XENO_STRUCTURE_EGGMORPH = 6,
+//RUCM START
+		XENO_STRUCTURE_SUNKEN = 2,
+//RUCM END
 		XENO_STRUCTURE_RECOVERY = 6,
 		XENO_STRUCTURE_PLASMA_TREE = 3,
 		XENO_STRUCTURE_PYLON = 2,
@@ -91,6 +94,9 @@
 		XENO_STRUCTURE_CORE = /datum/construction_template/xenomorph/core,
 		XENO_STRUCTURE_CLUSTER = /datum/construction_template/xenomorph/cluster,
 		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph,
+//RUCM START
+		XENO_STRUCTURE_SUNKEN = /datum/construction_template/xenomorph/sunken_colony,
+//RUCM END
 		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery,
 		XENO_STRUCTURE_PLASMA_TREE = /datum/construction_template/xenomorph/plasma_tree
 	)
@@ -208,6 +214,7 @@
 
 	setup_evolution_announcements()
 	setup_pylon_limits()
+	setup_blueprint_announcements()	// RUCM Add (Feline "Ксено-чертежи")
 
 /datum/hive_status/proc/setup_evolution_announcements()
 	for(var/time in GLOB.xeno_evolve_times)
@@ -215,6 +222,20 @@
 			continue
 
 		addtimer(CALLBACK(src, PROC_REF(announce_evolve_available), GLOB.xeno_evolve_times[time]), text2num(time))
+
+// RUCM Start (Feline "Ксено-чертежи")
+/datum/hive_status/proc/setup_blueprint_announcements()
+	addtimer(CALLBACK(src, PROC_REF(xeno_blueprint_disable)), 20 MINUTES)
+
+/datum/hive_status/proc/xeno_blueprint_disable(list/datum/caste_datum/available_castes)
+	for(var/datum/resin_construction/constr as anything in GLOB.resin_build_order_ovipositor)
+		if(constr.delete_after)
+			GLOB.resin_build_order_ovipositor.Remove(constr)
+
+	GLOB.xeno_blueprint_available = FALSE
+	xeno_maptext("Ускоренное строительство более не доступно", "Взросление Улья")
+	evo_screech()
+// RUCM End (Feline "Ксено-чертежи")
 
 /// Sets up limits on pylons in New() for potential futureproofing with more static comms
 /datum/hive_status/proc/setup_pylon_limits()

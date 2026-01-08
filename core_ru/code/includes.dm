@@ -1,0 +1,12 @@
+//RUCM CORE INCLUDES
+#include "_globalvars\global_lists.dm"
+#include "_globalvars\misc.dm"
+#include "datums\ammo\xeno.dm"
+#include "modules\cm_aliens\structures\blueprints.dm"
+#include "modules\cm_aliens\structures\sunken_colony.dm"
+#include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_abilities.dm"
+#include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_powers.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\lesser\sacrificer.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\lesser\scout.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\lesser\slave.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\spitter\suppressor.dm"
