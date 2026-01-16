@@ -5,7 +5,7 @@
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
-	icon = 'core_ru/icons/obj/vehicles/mech.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
 	icon_state = "mech_open"
 	layer = BIG_XENO_LAYER
 	opacity = FALSE
@@ -54,17 +54,17 @@
 	)
 
 	var/list/step_sounds = list(
-		'core_ru/sound/vehicle/walker/mecha_step1.ogg',
-		'core_ru/sound/vehicle/walker/mecha_step2.ogg',
-		'core_ru/sound/vehicle/walker/mecha_step3.ogg',
-		'core_ru/sound/vehicle/walker/mecha_step4.ogg',
-		'core_ru/sound/vehicle/walker/mecha_step5.ogg'
+		'code_ru/sound/vehicle/walker/mecha_step1.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step2.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step3.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step4.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step5.ogg'
 	)
 	var/list/turn_sounds = list(
-		'core_ru/sound/vehicle/walker/mecha_turn1.ogg',
-		'core_ru/sound/vehicle/walker/mecha_turn2.ogg',
-		'core_ru/sound/vehicle/walker/mecha_turn3.ogg',
-		'core_ru/sound/vehicle/walker/mecha_turn4.ogg'
+		'code_ru/sound/vehicle/walker/mecha_turn1.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn2.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn3.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn4.ogg'
 	)
 	flags_atom = FPRINT|USES_HEARING
 
@@ -265,9 +265,9 @@
 			if(module_map[WALKER_HARDPOIN_RIGHT])
 				module_map[WALKER_HARDPOIN_RIGHT].register_signals(user)
 
-			playsound_client(seats[VEHICLE_DRIVER].client, 'core_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
+			playsound_client(seats[VEHICLE_DRIVER].client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
 			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'core_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
 			return
 
 	to_chat(user, "Access denied.")
@@ -379,7 +379,7 @@
 	var/mob/living/carbon/user = seats[VEHICLE_DRIVER]
 	if(user.client)
 		zoom = TRUE
-		user.client.change_view(viewsize, src)
+		user.client.change_view(viewsize, user)
 
 		// zoom_initial_mob_dir = user.dir
 
@@ -388,17 +388,17 @@
 
 		switch(dir)
 			if(NORTH)
-				user.client.pixel_x = 0
-				user.client.pixel_y = viewoffset
+				user.client.set_pixel_x(0)
+				user.client.set_pixel_y(viewoffset)
 			if(SOUTH)
-				user.client.pixel_x = 0
-				user.client.pixel_y = -viewoffset
+				user.client.set_pixel_x(0)
+				user.client.set_pixel_y(-1 * viewoffset)
 			if(EAST)
-				user.client.pixel_x = viewoffset
-				user.client.pixel_y = 0
+				user.client.set_pixel_x(viewoffset)
+				user.client.set_pixel_y(0)
 			if(WEST)
-				user.client.pixel_x = -viewoffset
-				user.client.pixel_y = 0
+				user.client.set_pixel_x(-1 * viewoffset)
+				user.client.set_pixel_y(0)
 
 	to_chat(seats[VEHICLE_DRIVER], "Notification. Cameras zooming [zoom ? "activated" : "deactivated"].")
 
@@ -408,9 +408,9 @@
 	zoom = !zoom
 	//General reset in case anything goes wrong, the view will always reset to default unless zooming in.
 	if(user.client)
-		user.client.change_view(GLOB.world_view_size, src)
-		user.client.pixel_x = 0
-		user.client.pixel_y = 0
+		user.client.change_view(GLOB.world_view_size, user)
+		user.client.set_pixel_y(0)
+		user.client.set_pixel_y(0)
 
 
 /////////////////
@@ -601,7 +601,7 @@
 			to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
 			exit_walker(seats[VEHICLE_DRIVER])
 		new /obj/structure/walker_wreckage(src.loc)
-		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
+		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
 
 //Differentiates between damage types from different bullets
@@ -664,14 +664,14 @@
 			take_damage_type(250, "blunt", crusher)
 			visible_message(SPAN_DANGER("\The [crusher] rams \the [src]!"))
 			Move(get_step(src, crusher.dir))
-		playsound(loc, 'core_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
+		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
 
-/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, tts_heard_list)
+/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics)
 	var/mob/driver = seats[VEHICLE_DRIVER]
 	if (driver == null)
 		return
 	else if (driver != sourcemob)
-		driver.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list)
+		driver.hear_say(message, verb, language, "", italics, sourcemob)
 	else
 		var/list/mob/listeners = get_mobs_in_view(9,src)
 
@@ -683,7 +683,7 @@
 				continue
 			listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
-		langchat_long_speech(message, langchat_long_listeners, driver.get_default_language(), tts_heard_list)
+		langchat_long_speech(message, langchat_long_listeners, driver.get_default_language())
 
 //to handle IFF bullets
 /obj/vehicle/walker/proc/get_target_lock(access_to_check)
@@ -698,7 +698,7 @@
 /obj/structure/walker_wreckage
 	name = "CW13 wreckage"
 	desc = "Remains of some unfortunate walker. Completely unrepairable."
-	icon = 'core_ru/icons/obj/vehicles/mech.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
 	icon_state = "mech_broken"
 	density = TRUE
 	anchored = TRUE

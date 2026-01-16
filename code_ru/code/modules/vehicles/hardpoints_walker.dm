@@ -3,15 +3,13 @@
 #define WALKER_HARDPOIN_ARMOR "Armor"
 #define WALKER_HARDPOIN_BACK "Back"
 
-// Этого человека снизу надо найти и посадить в подвал перекодивать фичу
-
 ////////////////
 // MEGALODON HARDPOINTS // START
 ////////////////
 
 /obj/item/walker_gun
 	name = "walker gun"
-	icon = 'core_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
 	var/equip_state = ""
 	w_class = 12.0
 	var/obj/vehicle/walker/owner = null
@@ -348,7 +346,7 @@
 
 /obj/item/ammo_magazine/walker
 	w_class = SIZE_LARGE
-	icon = 'core_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
 
 /obj/item/ammo_magazine/walker/smartgun
 	name = "M56 Double-Barrel Magazine (Standard)"
@@ -431,6 +429,7 @@
 
 	fuel_pressure = 1 //How much fuel is used per tile fired
 	max_pressure = 10
+
 ///////////////
 // AMMO MAGS // END
 ///////////////

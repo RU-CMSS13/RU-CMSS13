@@ -38,9 +38,6 @@
 
 /obj/item/clothing/under/marine/officer/tanker/walker
 	name = "mech operator uniform"
-//	icon = 'core_ru/icons/obj/mechpilot.dmi'
-//	icon_state = "mecha_uniform"
-//	worn_state = "marine_tanker"
 
 /obj/item/clothing/head/helmet/marine/tech/tanker/walker
 	name = "\improper M50 walker helmet"
