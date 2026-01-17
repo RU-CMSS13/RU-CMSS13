@@ -1,0 +1,13 @@
+//RUCM CORE INCLUDES
+#include "supplyshuttle.dm"
+#include "datums\skills.dm"
+#include "game\jobs\job\command\auxiliary\mech_crew.dm"
+#include "game\objects\items\storage\belt.dm"
+#include "modules\cm_tech\tech_tiers.dm"
+#include "modules\cm_tech\techs\marine\tier2\walker.dm"
+#include "modules\gear_presets\usmc.dm"
+#include "modules\vehicles\hardpoints_walker.dm"
+#include "modules\vehicles\walker.dm"
+#include "modules\vehicles\walker_vendor.dm"
+#include "modules\vehicles\walker_verbs.dm"
+#include "modules\vehicles\walker_wm88_helper.dm"
