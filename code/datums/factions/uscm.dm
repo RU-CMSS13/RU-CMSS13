@@ -41,6 +41,10 @@
 				marine_rk = "dp"
 			if(JOB_TANK_CREW)
 				marine_rk = "tc"
+//RUCM START
+			if(JOB_WALKER)
+				marine_rk = "tc"
+//RUCM END
 			if(JOB_INTEL)
 				marine_rk = "io"
 			if(JOB_DROPSHIP_CREW_CHIEF)
@@ -139,6 +143,10 @@
 				marine_rk = "hgmp"
 			if(JOB_TANK_CREW)
 				marine_rk = "tc"
+//RUCM START
+			if(JOB_WALKER)
+				marine_rk = "tc"
+//RUCM END
 			if(JOB_WARDEN)
 				marine_rk = "warden"
 				border_rk = "command"
