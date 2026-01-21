@@ -270,7 +270,10 @@
 		to_chat(src, SPAN_WARNING("You cannot look up here."))
 		return
 
-	var/turf/above = SSmapping.get_turf_above(locate(x, y, z))
+	var/turf/above = SSmapping.get_turf_above(loc)
+	if(!isturf(above))
+		to_chat(src, SPAN_WARNING("You cannot look up here."))
+		return
 
 	if(!istransparentturf(above))
 		to_chat(src, SPAN_WARNING("You cannot look up here."))
