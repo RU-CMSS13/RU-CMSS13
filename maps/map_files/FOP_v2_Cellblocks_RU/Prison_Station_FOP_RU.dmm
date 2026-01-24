@@ -3835,10 +3835,10 @@
 /obj/structure/sign/safety/nonpress_0g{
 	pixel_y = 30
 	},
-/obj/structure/machinery/power/terminal{
+/obj/structure/dropship_equipment/fuel/fuel_enhancer,
+/obj/structure/terminal{
 	dir = 8
 	},
-/obj/structure/dropship_equipment/fuel/fuel_enhancer,
 /turf/open/floor/plating/kutjevo,
 /area/prisonru/lz/near_lzII)
 "ajx" = (
@@ -12106,11 +12106,6 @@
 /turf/open/floor/prison/yellowfull,
 /area/prisonru/telecomms/hangar_storage/main)
 "aEZ" = (
-/obj/structure/machinery/power/terminal{
-	dir = 8;
-	pixel_x = -5;
-	pixel_y = -8
-	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/yellowcorner,
 /area/prisonru/telecomms/hangar_storage/main)
@@ -27218,6 +27213,13 @@
 	},
 /turf/open/floor/hybrisa/tile/tilewhite,
 /area/prisonru/research/secret/bioengineering)
+"bss" = (
+/obj/effect/decal/heavy_cable/node_n_e,
+/obj/structure/terminal{
+	dir = 1
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/station/maintenance/medium_sec/west_maint)
 "bst" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
@@ -28721,11 +28723,17 @@
 	pixel_y = -12
 	},
 /obj/effect/decal/heavy_cable/node_n_w_e,
+/obj/structure/terminal{
+	dir = 1
+	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/medium_sec/west_maint)
 "bwC" = (
 /obj/item/stack/sheet/metal,
 /obj/effect/decal/heavy_cable/node_n_w,
+/obj/structure/terminal{
+	dir = 1
+	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/medium_sec/west_maint)
 "bwD" = (
@@ -36181,16 +36189,16 @@
 /turf/open/floor/wood,
 /area/prisonru/station/library)
 "bRr" = (
-/obj/structure/machinery/power/terminal{
+/obj/structure/terminal{
 	dir = 1
 	},
 /turf/open/floor/prison/darkyellow2/north,
 /area/prisonru/station/engineering)
 "bRs" = (
-/obj/structure/machinery/power/terminal{
+/obj/item/clothing/gloves/yellow,
+/obj/structure/terminal{
 	dir = 1
 	},
-/obj/item/clothing/gloves/yellow,
 /turf/open/floor/prison/darkyellow2/north,
 /area/prisonru/station/engineering)
 "bRt" = (
@@ -59367,12 +59375,6 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/security/barracks)
-"gZq" = (
-/obj/structure/machinery/power/terminal{
-	dir = 8
-	},
-/turf/open/floor/prison,
-/area/prisonru/station/maintenance/research_medbay)
 "gZL" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkyellow2/southeast,
@@ -69644,10 +69646,10 @@
 /turf/open/floor/hybrisa/carpet/carpetblack,
 /area/prisonru/station/security/monitoring/highsec/restroom)
 "oJJ" = (
-/obj/structure/machinery/power/terminal{
+/obj/structure/dropship_equipment/fuel/fuel_enhancer,
+/obj/structure/terminal{
 	dir = 8
 	},
-/obj/structure/dropship_equipment/fuel/fuel_enhancer,
 /turf/open/floor/plating/prison,
 /area/prisonru/lz/near_lzI)
 "oJQ" = (
@@ -101327,7 +101329,7 @@ bty
 bxx
 cqK
 bxb
-cqM
+bss
 bvg
 bvR
 bty
@@ -112751,9 +112753,9 @@ oDd
 kZC
 oHw
 oHw
-gZq
-gZq
-gZq
+kZC
+kZC
+kZC
 alp
 apK
 xrt
