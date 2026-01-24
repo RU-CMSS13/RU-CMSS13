@@ -83,18 +83,6 @@
 	},
 /turf/open/shuttle/dropship/predship/tile/red3,
 /area/yautja)
-"ai" = (
-/obj/effect/hunter/bridge_border/brown{
-	dir = 8
-	},
-/obj/item/reagent_container/food/snacks/meat{
-	pixel_y = -10;
-	pixel_x = -10
-	},
-/obj/effect/decal/cleanable/blood,
-/obj/structure/prop/hunter/hellhound,
-/turf/open/floor/corsat,
-/area/yautja/lower_deck)
 "aj" = (
 /obj/effect/hunter/bridge_border/brown/edge{
 	dir = 1
@@ -142,27 +130,18 @@
 /turf/open/shuttle/dropship/predship/hunter_catwalk_alt,
 /area/yautja)
 "al" = (
-/obj/effect/hunter/bridge_border/brown{
-	dir = 8
+/obj/effect/decal/cleanable/dirt/greenglow{
+	color = "#212121";
+	name = "dried blood";
+	pixel_x = 1;
+	pixel_y = 11
 	},
-/obj/effect/decal/cleanable/dirt{
-	layer = 3.2;
-	color = "#bccab4"
-	},
-/obj/structure/prop/hunter/hellhound,
-/turf/open/shuttle/dropship/predship/hunter_catwalk_new,
+/turf/closed/wall/huntership,
 /area/yautja/lower_deck)
 "am" = (
-/obj/effect/hunter/bridge_border/brown{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt{
-	layer = 3.2;
-	color = "#bccab4"
-	},
-/obj/structure/prop/hunter/hellhound,
+/obj/structure/machinery/cm_vending/clothing/yautja/thrall/blooded_thrall/left,
 /turf/open/floor/corsat,
-/area/yautja/lower_deck)
+/area/yautja)
 "an" = (
 /obj/structure/surface/rack{
 	color = "#6b675e";
@@ -189,22 +168,25 @@
 /turf/open/shuttle/dropship/predship/hunter_catwalk_alt,
 /area/yautja)
 "ao" = (
-/obj/effect/decal/cleanable/dirt/greenglow{
-	color = "#212121";
-	name = "dried blood";
-	pixel_x = 1;
-	pixel_y = 11
-	},
-/turf/closed/wall/huntership,
-/area/yautja/lower_deck)
+/obj/structure/machinery/cm_vending/clothing/yautja/thrall/blooded_thrall/right,
+/turf/open/floor/corsat,
+/area/yautja)
 "ap" = (
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/predship/hull/non_weedable_hull/southwest,
 /area/yautja)
 "aq" = (
-/obj/structure/machinery/cm_vending/clothing/yautja/thrall/blooded_thrall/left,
+/obj/effect/hunter/bridge_border/brown{
+	dir = 8
+	},
+/obj/item/reagent_container/food/snacks/meat{
+	pixel_y = -10;
+	pixel_x = -10
+	},
+/obj/effect/decal/cleanable/blood,
+/obj/structure/prop/hunter/hellhound,
 /turf/open/floor/corsat,
-/area/yautja)
+/area/yautja/lower_deck)
 "ar" = (
 /obj/structure/platform_decoration/metal/hunter,
 /obj/effect/decal/hybrisa/dirt_2,
@@ -224,9 +206,16 @@
 /turf/open/floor/corsat,
 /area/yautja)
 "at" = (
-/obj/structure/machinery/cm_vending/clothing/yautja/thrall/blooded_thrall/right,
-/turf/open/floor/corsat,
-/area/yautja)
+/obj/effect/hunter/bridge_border/brown{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt{
+	layer = 3.2;
+	color = "#bccab4"
+	},
+/obj/structure/prop/hunter/hellhound,
+/turf/open/shuttle/dropship/predship/hunter_catwalk_new,
+/area/yautja/lower_deck)
 "au" = (
 /obj/effect/hunter/catwalk/hunter_grate,
 /obj/structure/prop/hunter/fake_platform/hunter/west,
@@ -258,6 +247,17 @@
 	},
 /turf/open/floor/predship/hull,
 /area/yautja)
+"ax" = (
+/obj/effect/hunter/bridge_border/brown{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt{
+	layer = 3.2;
+	color = "#bccab4"
+	},
+/obj/structure/prop/hunter/hellhound,
+/turf/open/floor/corsat,
+/area/yautja/lower_deck)
 "ay" = (
 /obj/structure/prop/hunter/fake_platform/hunter/north,
 /obj/structure/prop/hunter/fake_platform/hunter/east,
@@ -4173,7 +4173,7 @@
 /obj/structure/platform_decoration/metal/hunter/north{
 	pixel_y = 24
 	},
-/obj/structure/machinery/power/terminal{
+/obj/structure/terminal{
 	color = "#c0baae";
 	pixel_x = 3
 	},
@@ -4902,7 +4902,7 @@
 /obj/structure/platform_decoration/metal/hunter{
 	pixel_y = 24
 	},
-/obj/structure/machinery/power/terminal{
+/obj/structure/terminal{
 	color = "#c0baae";
 	pixel_x = -3
 	},
@@ -14475,7 +14475,7 @@
 /turf/open/shuttle/dropship/predship/tile/hunter_tile_5/east,
 /area/yautja)
 "Xd" = (
-/obj/structure/machinery/power/terminal{
+/obj/structure/terminal{
 	dir = 1;
 	color = "#c0baae";
 	pixel_x = 3
@@ -14985,7 +14985,7 @@
 /obj/structure/platform_decoration/metal/hunter{
 	pixel_y = 24
 	},
-/obj/structure/machinery/power/terminal{
+/obj/structure/terminal{
 	dir = 1;
 	color = "#c0baae";
 	pixel_x = -3
@@ -20462,7 +20462,7 @@ aa
 Nu
 aV
 aV
-aq
+am
 gq
 hD
 rE
@@ -20564,7 +20564,7 @@ lv
 hH
 aV
 aV
-at
+ao
 hC
 Mu
 rm
@@ -26748,7 +26748,7 @@ dI
 rP
 rP
 rP
-ao
+al
 rP
 rP
 eP
@@ -27482,7 +27482,7 @@ uP
 kR
 tO
 yf
-al
+at
 ZX
 rP
 dI
@@ -27684,7 +27684,7 @@ rP
 uP
 uP
 eL
-am
+ax
 yf
 if
 ZX
@@ -27789,7 +27789,7 @@ AS
 zI
 Jl
 he
-ai
+aq
 rP
 dI
 "}
