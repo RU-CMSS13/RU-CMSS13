@@ -337,13 +337,7 @@
 /turf/open/floor/prison/sterile_white,
 /area/desert_dam/building/cafeteria/cafeteria)
 "bd" = (
-/obj/structure/surface/rack,
-/obj/item/tool/wet_sign,
-/obj/item/tool/wet_sign,
-/obj/item/tool/wet_sign{
-	pixel_y = -3;
-	pixel_x = 2
-	},
+/obj/structure/reagent_dispensers/tank/water,
 /turf/open/floor/plating,
 /area/desert_dam/building/cafeteria/backroom)
 "be" = (
@@ -570,7 +564,13 @@
 /turf/open/asphalt/cement_sunbleached/cement_sunbleached2,
 /area/desert_dam/exterior/valley/valley_civilian)
 "dQ" = (
-/obj/structure/reagent_dispensers/tank/water,
+/obj/structure/surface/rack,
+/obj/item/tool/wet_sign,
+/obj/item/tool/wet_sign,
+/obj/item/tool/wet_sign{
+	pixel_y = -3;
+	pixel_x = 2
+	},
 /turf/open/floor/plating,
 /area/desert_dam/building/cafeteria/backroom)
 "ee" = (
@@ -4022,7 +4022,7 @@ ww
 RT
 FX
 Cx
-bd
+dQ
 aX
 Ry
 oA
@@ -4079,7 +4079,7 @@ mD
 sf
 NL
 Cx
-dQ
+bd
 Fy
 Ry
 cr
