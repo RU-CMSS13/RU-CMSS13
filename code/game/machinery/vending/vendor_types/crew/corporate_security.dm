@@ -34,9 +34,18 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_security, list(
 ))
 
 GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
+//RUCM Start
+	list("Specialization kit (CHOOSE 1)", 0, null, null, null),
+	list("Standart Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
+	list("Medic Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/medic, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
+	list("Engineer Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/engi, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
+//RUCM End
 	list("HEADGEAR (CHOOSE 1)", 0, null, null, null),
 	list("Security Guard Armored Cap", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/guard/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
 	list("Corporate Security Helmet", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
+//RUCM Start
+	list("Enclosed Corporate Security Helmet", 5, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo/enclosed, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
+//RUCM End
 
 	list("MASK (CHOOSE 1)", 0, null, null, null),
 	list("Gas Mask", 0, /obj/item/clothing/mask/gas, MARINE_CAN_BUY_MASK, VENDOR_ITEM_REGULAR),
@@ -45,6 +54,10 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("ARMOR (CHOOSE 1)", 0, null, null, null),
 	list("Corporate Security Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_RECOMMENDED),
 	list("M4 PPO Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
+//RUCM Start
+	list("M4 PPO Medium Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/medium, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
+	list("M4 PPO Heavy Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/heavy, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
+//RUCM End
 
 	list("GLOVES (CHOOSE 1)", 0, null, null, null),
 	list("Corporate Security Gloves", 0, /obj/item/clothing/gloves/marine/veteran/ppo, MARINE_CAN_BUY_GLOVES, VENDOR_ITEM_MANDATORY),
@@ -61,6 +74,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("M39 Submachine Gun", 0, /obj/effect/essentials_set/wy_m39, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("M41A Pulse Rifle MK2", 0, /obj/effect/essentials_set/wy_m41a, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("NSG23 Assault Rifle", 0, /obj/effect/essentials_set/wy_nsg23, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+//RUCM Start
+	list("FN FP9000 Submachine Gun", 10, /obj/effect/essentials_set/wy_fn9000, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
+//RUCM End
 
 	list("SIDEARM (CHOOSE 1)", 0, null, null, null),
 	list("ES-4 Electrostatic Pistol", 0, /obj/item/storage/belt/gun/m4a3/wy/es4, MARINE_CAN_BUY_BELT, VENDOR_ITEM_RECOMMENDED),
@@ -79,6 +95,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("NSG 23 magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/nsg23, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 extended magazine (10x24mm)", 8, /obj/item/ammo_magazine/rifle/nsg23/extended, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 armor-piercing magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/nsg23/ap, null, VENDOR_ITEM_REGULAR),
+//RUCM Start
+	list("FN9000 magazine (5.7x28mm)", 6, /obj/item/ammo_magazine/smg/fp9000, null, VENDOR_ITEM_REGULAR),
+//RUCM End
 
 	list("SIDEARM AMMUNITION", 0, null, null, null),
 	list("ES-4 Stun Magazine (9mm)", 4, /obj/item/ammo_magazine/pistol/es4, null, VENDOR_ITEM_REGULAR),
@@ -158,3 +177,13 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 		/obj/item/storage/belt/shotgun/black,
 		/obj/item/ammo_magazine/shotgun/beanbag/es7,
 	)
+
+//RUCM Start
+/obj/effect/essentials_set/wy_fn9000
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/smg/fp9000/pmc/stripped,
+		/obj/item/ammo_magazine/smg/fp9000,
+		/obj/item/ammo_magazine/smg/fp9000,
+		/obj/item/ammo_magazine/smg/fp9000,
+	)
+//RUCM End
