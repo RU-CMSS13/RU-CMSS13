@@ -17,7 +17,7 @@
 	gun_firemode_list = list(
 		GUN_FIREMODE_SEMIAUTO,
 	)
-	fire_delay = 0.6 SECONDS
+	fire_delay = 0.2 SECONDS // default is 0.6
 
 	allowed_seat = VEHICLE_GUNNER
 
@@ -30,7 +30,7 @@
 		return
 
 	var/obj/vehicle/multitile/blackfoot/blackfoot = vehicle
-	
+
 	blackfoot.interior = new(blackfoot)
 	blackfoot.interior_map = interior_type
 	INVOKE_ASYNC(blackfoot, TYPE_PROC_REF(/obj/vehicle/multitile, do_create_interior))
@@ -51,7 +51,7 @@
 	if(!blackfoot_owner.back_door || !blackfoot_owner.back_door.open)
 		to_chat(user, SPAN_WARNING("You should probably open the rear door before firing."))
 		return
-	
+
 	if(ammo && ammo.current_rounds <= 0)
 		reload(user)
 		return

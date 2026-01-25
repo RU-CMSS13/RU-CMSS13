@@ -68,7 +68,7 @@
 
 	dmg_multipliers = list(
 		"all" = 1,
-		"acid" = 10,
+		"acid" = 30,
 		"slash" = 2.5,
 		"bullet" = 0.6,
 		"explosive" = 0.7,

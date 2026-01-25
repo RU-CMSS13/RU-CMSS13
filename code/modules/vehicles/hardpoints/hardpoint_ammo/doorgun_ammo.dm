@@ -8,3 +8,14 @@
 	default_ammo = /datum/ammo/grenade_container/doorgun
 	max_rounds = 10
 	gun_type = /obj/item/hardpoint/secondary/doorgun
+
+/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget
+	name = "M866 Holotarget Ammo Belt"
+	desc = "Holotarget ammo belt for taking down bio-threats."
+	caliber = "20mm"
+	icon_state = "doorgun-ammo"
+	icon = 'icons/obj/vehicles/blackfoot_peripherals.dmi'
+	w_class = SIZE_LARGE
+	default_ammo = /datum/ammo/bullet/rifle/holo_target/hunting
+	max_rounds = 50
+	gun_type = /obj/item/hardpoint/secondary/doorgun
