@@ -85,7 +85,7 @@
 		to_chat(xeno, SPAN_WARNING("You need be near!"))
 		return
 
-	xeno.say(";ЗА КОРОЛЕВУ!!!")
+	xeno.say(";FOR THE HIVE!!!")
 
 	target.gain_health(target.maxHealth/5)
 	target.updatehealth()
@@ -99,6 +99,7 @@
 	xeno_message(SPAN_XENOANNOUNCE("[xeno] sacrifice own life to heal [target]!"), 2, target.hive.hivenumber)
 
 	xeno.gib(create_cause_data("sacrificing itself", src))
+	return ..()
 
 ///////////////
 
