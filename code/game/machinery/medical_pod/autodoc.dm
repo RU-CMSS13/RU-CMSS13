@@ -3,7 +3,6 @@
 	name = "autodoc emergency medical system"
 	desc = "Surgical device designed to perform life-saving treatments and all around surgeries on patients automatically, without the need of a surgeon. <br>It still requires someone with medical knowledge to program the treatments correctly; for this reason, colonies that use these often have paramedics trained in autodoc operation."
 	icon_state = "autodoc_open"
-	skilllock = null
 	upgrades = list(1=1, 2=2, 3=3, 4=4)
 
 	entry_timer = 2 SECONDS
