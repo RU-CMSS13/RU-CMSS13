@@ -37,9 +37,6 @@
 		to_chat(src, SPAN_XENOWARNING("We can't build from that far!"))
 		return SECRETE_RESIN_FAIL
 	else if(thick) //hivelords can thicken existing resin structures.
-//RUCM START
-	else
-//RUCM END
 		var/thickened = FALSE
 		if(istype(target, /turf/closed/wall/resin))
 			var/turf/closed/wall/resin/wall = target
