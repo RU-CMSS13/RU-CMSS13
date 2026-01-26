@@ -1,7 +1,7 @@
 //Autodoc
 /obj/structure/machinery/medical_pod/autodoc
 	name = "autodoc emergency medical system"
-	desc = "Surgical device designed to perform all treatments and surgeries on patients automatically, without the need of a surgeon. <br>It still requires someone with medical knowledge to program the treatments correctly; for this reason, colonies that use these often have paramedics trained in autodoc operation."
+	desc = "An emergency surgical device designed to perform life-saving treatments and basic surgeries on patients automatically, without the need of a surgeon. <br>It still requires someone with medical knowledge to program the treatments correctly; for this reason, colonies that use these often have paramedics trained in autodoc operation."
 	icon_state = "autodoc_open"
 
 	entry_timer = 2 SECONDS
@@ -881,9 +881,3 @@
 	name = "automated medical pod"
 	desc = "An emergency surgical alien device designed to perform life-saving treatments and basic surgeries on patients automatically, without the need of a surgeon."
 	icon = 'icons/obj/structures/machinery/yautja_machines.dmi'
-
-/obj/structure/machinery/medical_pod/autodoc/almayer
-	name = "autodoc medical system"
-	desc = "Surgical device designed to perform all treatments and surgeries on patients automatically, without the need of a surgeon. <br>It still requires someone with medical knowledge to program the treatments correctly; for this reason, colonies that use these often have paramedics trained in autodoc operation."
-	icon_state = "autodoc_open"
-	upgrades = list(1=1, 2=2, 3=3, 4=4)
