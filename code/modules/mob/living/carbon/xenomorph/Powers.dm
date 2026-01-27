@@ -81,6 +81,7 @@
 				to_chat(src, SPAN_XENOWARNING("[wall] can't be made thicker."))
 				return SECRETE_RESIN_FAIL
 			thickened = TRUE
+
 /*RUCM EDIT
 		else if(istype(target, /obj/structure/mineral_door/resin))
 */
