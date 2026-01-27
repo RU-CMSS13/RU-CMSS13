@@ -18,15 +18,17 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 /obj/structure/machinery/cm_vending/gear/walker
 	name = "ColMarTech Automated Mech Vendor"
 	desc = "This vendor is connected to main ship storage, allows to fetch one hardpoint module per category for free."
-	icon_state = "engi"
+	icon = 'code_ru/icons/obj/structures/machinery/vending_mech_64x32.dmi'
+	icon_state = "vehicle_gear"
 
 	req_access = list(ACCESS_MARINE_WALKER)
 	vendor_role = list(JOB_WALKER) //everyone else, mind your business
 	var/available_categories = MECH_ALL_AVAIBALE
+	bound_width = 64
 
 	unslashable = TRUE
 
-	vend_delay = 1 SECONDS
+	vend_delay = 4 SECONDS
 	vend_sound = 'sound/machines/medevac_extend.ogg'
 
 	vend_flags = VEND_CLUTTER_PROTECTION|VEND_CATEGORY_CHECK|VEND_TO_HAND|VEND_USE_VENDOR_FLAGS
