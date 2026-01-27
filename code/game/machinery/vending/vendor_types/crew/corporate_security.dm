@@ -50,10 +50,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("ARMOR (CHOOSE 1)", 0, null, null, null),
 	list("Corporate Security Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_RECOMMENDED),
 	list("M4 PPO Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
-//RUCM Start
-	list("M4 PPO Medium Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/medium, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
-	list("M4 PPO Heavy Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/heavy, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
-//RUCM End
+	list("M4 PPO Medium Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/medium, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR), //RUCM ADD
+	list("M4 PPO Heavy Armor", 0, /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/heavy, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR), //RUCM ADD
 
 	list("GLOVES (CHOOSE 1)", 0, null, null, null),
 	list("Corporate Security Gloves", 0, /obj/item/clothing/gloves/marine/veteran/ppo, MARINE_CAN_BUY_GLOVES, VENDOR_ITEM_MANDATORY),
