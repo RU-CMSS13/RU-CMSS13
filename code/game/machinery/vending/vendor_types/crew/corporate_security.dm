@@ -41,9 +41,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("HEADGEAR (CHOOSE 1)", 0, null, null, null),
 	list("Security Guard Armored Cap", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/guard/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
 	list("Corporate Security Helmet", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
-//RUCM Start
-	list("Enclosed Corporate Security Helmet", 5, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo/enclosed, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
-//RUCM End
+	list("Enclosed Corporate Security Helmet", 5, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo/enclosed, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY), //RUCM ADD
 
 	list("MASK (CHOOSE 1)", 0, null, null, null),
 	list("Gas Mask", 0, /obj/item/clothing/mask/gas, MARINE_CAN_BUY_MASK, VENDOR_ITEM_REGULAR),
