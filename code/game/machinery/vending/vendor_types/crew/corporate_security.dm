@@ -87,9 +87,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("NSG 23 magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/nsg23, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 extended magazine (10x24mm)", 8, /obj/item/ammo_magazine/rifle/nsg23/extended, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 armor-piercing magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/nsg23/ap, null, VENDOR_ITEM_REGULAR),
-//RUCM Start
-	list("FN9000 magazine (5.7x28mm)", 6, /obj/item/ammo_magazine/smg/fp9000, null, VENDOR_ITEM_REGULAR),
-//RUCM End
+	list("FN9000 magazine (5.7x28mm)", 6, /obj/item/ammo_magazine/smg/fp9000, null, VENDOR_ITEM_REGULAR), //RUCM ADD
 
 	list("SIDEARM AMMUNITION", 0, null, null, null),
 	list("ES-4 Stun Magazine (9mm)", 4, /obj/item/ammo_magazine/pistol/es4, null, VENDOR_ITEM_REGULAR),
