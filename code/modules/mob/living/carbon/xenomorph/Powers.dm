@@ -52,6 +52,7 @@
 			if (wall.hivenumber != hivenumber)
 				to_chat(src, SPAN_XENOWARNING("[wall] doesn't belong to your hive!"))
 				return SECRETE_RESIN_FAIL
+
 			if(wall.type == /turf/closed/wall/resin)
 				wall.ChangeTurf(/turf/closed/wall/resin/thick)
 				total_resin_cost = XENO_THICKEN_WALL_COST
