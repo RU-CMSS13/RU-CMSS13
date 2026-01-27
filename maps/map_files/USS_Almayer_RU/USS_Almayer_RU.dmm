@@ -24705,6 +24705,9 @@
 	},
 /obj/effect/spawner/random/facepaint,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/computer/emails{
+	dir = 1
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/lower/constr)
 "bjh" = (
@@ -39535,16 +39538,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/u_m_p)
-"bRO" = (
-/obj/structure/sign/poster/corporate{
-	pixel_y = 32;
-	pixel_x = 26
-	},
-/obj/effect/decal/warning_stripes{
-	icon_state = "E"
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/maint/lower/constr)
 "bRP" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -39787,6 +39780,19 @@
 "bSv" = (
 /turf/closed/wall/almayer,
 /area/almayer/living/tankerbunks)
+"bSw" = (
+/obj/structure/sign/safety/maint{
+	pixel_x = 8;
+	pixel_y = -32
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/lower/constr)
+"bSx" = (
+/obj/structure/machinery/computer/working_joe{
+	pixel_y = 16
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/lower/constr)
 "bSD" = (
 /obj/item/reagent_container/glass/bucket{
 	pixel_x = -4;
@@ -55158,6 +55164,10 @@
 /obj/effect/spawner/random/toy,
 /obj/effect/spawner/random/tool,
 /obj/effect/decal/cleanable/dirt,
+/obj/item/newspaper,
+/obj/structure/machinery/newscaster{
+	pixel_x = -27
+	},
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/lower/constr)
 "hNP" = (
@@ -57601,6 +57611,10 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "N";
 	pixel_y = 1
+	},
+/obj/structure/sign/poster/corporate{
+	pixel_y = 12;
+	pixel_x = 21
 	},
 /turf/open/floor/almayer/cargo_arrow/north,
 /area/almayer/maint/lower/constr)
@@ -73643,10 +73657,6 @@
 /turf/open/floor/almayer/uscm/directional/north,
 /area/almayer/command/cic)
 "pba" = (
-/obj/structure/sign/safety/maint{
-	pixel_x = 8;
-	pixel_y = -32
-	},
 /obj/structure/machinery/cm_vending/clothing/vehicle_crew/walker,
 /turf/open/floor/almayer/cargo,
 /area/almayer/maint/lower/constr)
@@ -137139,7 +137149,7 @@ vQX
 oBQ
 eIu
 iAe
-abd
+bSw
 hOV
 uXm
 kyP
@@ -137959,7 +137969,7 @@ bHB
 kwQ
 rrh
 iNR
-bRO
+blb
 blb
 tTC
 cyR
@@ -138062,7 +138072,7 @@ bHB
 iAw
 hOV
 hOV
-abd
+bSx
 abd
 aZU
 jRp
