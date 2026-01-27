@@ -34,12 +34,10 @@ GLOBAL_LIST_INIT(cm_vending_clothing_corporate_security, list(
 ))
 
 GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
-//RUCM Start
-	list("Specialization kit (CHOOSE 1)", 0, null, null, null),
-	list("Standart Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
-	list("Medic Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/medic, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
-	list("Engineer Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/engi, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
-//RUCM End
+	list("Specialization kit (CHOOSE 1)", 0, null, null, null), //RUCM ADD
+	list("Standart Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
+	list("Medic Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/medic, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
+	list("Engineer Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/engi, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
 	list("HEADGEAR (CHOOSE 1)", 0, null, null, null),
 	list("Security Guard Armored Cap", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/guard/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
 	list("Corporate Security Helmet", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
