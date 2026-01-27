@@ -68,9 +68,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("M39 Submachine Gun", 0, /obj/effect/essentials_set/wy_m39, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("M41A Pulse Rifle MK2", 0, /obj/effect/essentials_set/wy_m41a, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("NSG23 Assault Rifle", 0, /obj/effect/essentials_set/wy_nsg23, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-//RUCM Start
-	list("FN FP9000 Submachine Gun", 10, /obj/effect/essentials_set/wy_fn9000, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
-//RUCM End
+	list("FN FP9000 Submachine Gun", 10, /obj/effect/essentials_set/wy_fn9000, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR), //RUCM ADD
 
 	list("SIDEARM (CHOOSE 1)", 0, null, null, null),
 	list("ES-4 Electrostatic Pistol", 0, /obj/item/storage/belt/gun/m4a3/wy/es4, MARINE_CAN_BUY_BELT, VENDOR_ITEM_RECOMMENDED),
