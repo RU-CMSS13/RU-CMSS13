@@ -691,6 +691,7 @@
 	unacidable = TRUE
 	var/injections = 4
 
+/*
 /obj/item/clothing/suit/storage/marine/specialist/verb/inject()
 	set name = "Create Injector"
 	set category = "Object"
@@ -713,6 +714,7 @@
 	injections--
 	playsound(src,'sound/machines/click.ogg', 15, 1)
 	return
+*/
 
 /obj/item/clothing/suit/storage/marine/M3G
 	name = "\improper M3-G4 grenadier armor"

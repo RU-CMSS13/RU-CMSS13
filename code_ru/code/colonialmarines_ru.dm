@@ -1,8 +1,12 @@
 //RUCM CORE INCLUDES
 #include "supplyshuttle.dm"
+#include "datums\supply_packs\restricted_equipment.dm"
 #include "datums\skills.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\objects\items\storage\belt.dm"
+#include "modules\clothing\gloves\marine_gloves.dm"
+#include "modules\clothing\head\helmet.dm"
+#include "modules\clothing\suits\marine_armor\_marine_armor.dm"
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
 #include "modules\gear_presets\usmc.dm"
