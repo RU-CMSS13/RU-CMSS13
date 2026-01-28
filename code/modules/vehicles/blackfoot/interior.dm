@@ -441,7 +441,8 @@
 		var/diff_y = 0
 		var/tilesize = 32
 		var/viewoffset = tilesize * 2
-		switch(dir)
+		var/fixed_dir = SOUTH
+		switch(fixed_dir)
 			if(NORTH)
 				diff_y = -16 + user_old_y
 				if(user.client)
@@ -483,7 +484,7 @@
 	RegisterSignal(user, list(COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
 	linked_blackfoot.set_seated_mob(VEHICLE_GUNNER, user)
 	if(user && user.client)
-		user.client.change_view(8, linked_blackfoot)
+		user.client.change_view(7, linked_blackfoot)
 	gunner = user
 
 /obj/structure/blackfoot_doorgun/proc/exit_interaction(mob/user)
@@ -520,6 +521,54 @@
 
 /obj/effect/landmark/interior/spawn/blackfoot_doorgun/on_load(datum/interior/interior)
 	var/obj/structure/blackfoot_doorgun/doorgun = new(get_turf(src))
+
+	doorgun.setDir(dir)
+	doorgun.alpha = alpha
+	doorgun.update_icon()
+	doorgun.pixel_x = pixel_x
+	doorgun.pixel_y = pixel_y
+
+	if(istype(interior.exterior, /obj/vehicle/multitile/blackfoot))
+		var/obj/vehicle/multitile/blackfoot/linked_blackfoot = interior.exterior
+		doorgun.linked_blackfoot = linked_blackfoot
+
+	qdel(src)
+
+// ==================MINIGUN========================
+
+/obj/structure/blackfoot_doorgun/minigun
+	name = "M866 Minigun"
+	desc = "A belt-fed automatic minigun system, mounted directly to the aft end of the Blackfoot. The superstructure is hydraulically assisted so that the operator can adjust the gun with minimal force input. The gun fires 20mm caseless ammo rounds that useful for incapacitating a large group of soft targets."
+	icon = 'icons/obj/vehicles/interiors/blackfoot_64x64.dmi'
+	icon_state = "doorgun-mini"
+
+/obj/structure/blackfoot_doorgun/minigun/update_icon()
+	if(deployed)
+		icon_state = "doorgun-mini-deployed"
+	else
+		icon_state = "doorgun-mini"
+
+/obj/structure/blackfoot_doorgun/minigun/attackby(obj/item/item, mob/user)
+	if(!deployed)
+		return
+
+	if(!istype(item, /obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget))
+		return
+
+	var/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget/ammo = item
+	var/obj/item/hardpoint/secondary/doorgun/minigun/doorgun = locate() in linked_blackfoot.hardpoints
+
+	if(!doorgun)
+		return
+
+	doorgun.try_add_clip(ammo, user)
+
+/obj/effect/landmark/interior/spawn/blackfoot_doorgun/minigun
+	icon = 'icons/obj/vehicles/interiors/blackfoot_64x64.dmi'
+	icon_state = "doorgun-mini"
+
+/obj/effect/landmark/interior/spawn/blackfoot_doorgun/minigun/on_load(datum/interior/interior)
+	var/obj/structure/blackfoot_doorgun/minigun/doorgun = new(get_turf(src))
 
 	doorgun.setDir(dir)
 	doorgun.alpha = alpha

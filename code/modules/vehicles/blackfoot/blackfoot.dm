@@ -46,6 +46,7 @@
 		/obj/item/hardpoint/primary/chimera_launchers,
 		/obj/item/hardpoint/support/sensor_array,
 		/obj/item/hardpoint/secondary/doorgun,
+		/obj/item/hardpoint/secondary/doorgun/minigun,
 	)
 
 	entrances = list(

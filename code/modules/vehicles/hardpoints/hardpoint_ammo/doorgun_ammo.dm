@@ -11,11 +11,11 @@
 
 /obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget
 	name = "M866 Holotarget Ammo Belt"
-	desc = "Holotarget ammo belt for taking down bio-threats."
+	desc = "A dynamically-linked chain of 20 mm Holotarget ammo rounds for use in the belt-fed M866 system."
 	caliber = "20mm"
-	icon_state = "doorgun-ammo"
+	icon_state = "doorgun-holo-ammo"
 	icon = 'icons/obj/vehicles/blackfoot_peripherals.dmi'
 	w_class = SIZE_LARGE
 	default_ammo = /datum/ammo/bullet/rifle/holo_target/hunting
-	max_rounds = 50
-	gun_type = /obj/item/hardpoint/secondary/doorgun
+	max_rounds = 100
+	gun_type = /obj/item/hardpoint/secondary/doorgun/minigun

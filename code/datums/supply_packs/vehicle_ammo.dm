@@ -174,17 +174,6 @@
 	containername = "blackfoot ammo crate"
 	group = "Vehicle Ammo"
 
-/datum/supply_packs/blackfoot_ammo_mix
-	name = "Chimera Mix Launchers ammunition (x2)"
-	contains = list(
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/wp,
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/sebb,
-	)
-	cost = 60
-	containertype = /obj/structure/closet/crate/weapon
-	containername = "blackfoot ammo crate"
-	group = "Vehicle Ammo"
-
 /datum/supply_packs/blackfoot_ammo
 	name = "blackfoot doorgun ammunition (x2)"
 	contains = list(

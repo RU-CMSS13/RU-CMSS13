@@ -62,6 +62,10 @@
 	name = "blackfoot doorgun"
 	interior_id = "blackfoot_doorgun"
 
+/datum/map_template/interior/blackfoot_doorgun_minigun
+	name = "blackfoot doorgun minigun"
+	interior_id = "blackfoot_doorgun_minigun"
+
 /datum/map_template/interior/blackfoot_transport
 	name = "blackfoot transport"
 	interior_id = "blackfoot_transport"
