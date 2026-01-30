@@ -16,6 +16,6 @@
 	icon_state = "doorgun-holo-ammo"
 	icon = 'icons/obj/vehicles/blackfoot_peripherals.dmi'
 	w_class = SIZE_LARGE
-	default_ammo = /datum/ammo/bullet/rifle/holo_target/hunting
+	default_ammo = /datum/ammo/bullet/doorgun/holotarget
 	max_rounds = 100
 	gun_type = /obj/item/hardpoint/secondary/doorgun/minigun
