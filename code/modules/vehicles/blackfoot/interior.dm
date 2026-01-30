@@ -484,7 +484,7 @@
 	RegisterSignal(user, list(COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
 	linked_blackfoot.set_seated_mob(VEHICLE_GUNNER, user)
 	if(user && user.client)
-		user.client.change_view(7, linked_blackfoot)
+		user.client.change_view(8, linked_blackfoot)
 	gunner = user
 
 /obj/structure/blackfoot_doorgun/proc/exit_interaction(mob/user)
@@ -508,6 +508,9 @@
 		COMSIG_MOB_DEATH,
 		COMSIG_LIVING_SET_BODY_POSITION,
 	))
+
+	if(user && user.client)
+		user.client.change_view(7, linked_blackfoot)
 
 	if(gunner == user)
 		gunner = null

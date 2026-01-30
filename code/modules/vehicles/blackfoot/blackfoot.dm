@@ -334,29 +334,33 @@
 /obj/vehicle/multitile/blackfoot/add_seated_verbs(mob/living/M, seat)
 	if(!M.client)
 		return
-
 	add_verb(M.client, list(
+		/obj/vehicle/multitile/proc/switch_hardpoint,
 		/obj/vehicle/multitile/proc/get_status_info,
-		/obj/vehicle/multitile/proc/toggle_door_lock,
-		/obj/vehicle/multitile/proc/activate_horn,
-		/obj/vehicle/multitile/proc/name_vehicle,
-		/obj/vehicle/multitile/blackfoot/proc/takeoff,
-		/obj/vehicle/multitile/blackfoot/proc/land,
-		/obj/vehicle/multitile/blackfoot/proc/toggle_vtol,
-		/obj/vehicle/multitile/blackfoot/proc/toggle_stow,
-		/obj/vehicle/multitile/proc/switch_hardpoint
 	))
-
-	give_action(M, /datum/action/human_action/blackfoot/takeoff)
-	give_action(M, /datum/action/human_action/blackfoot/land)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_vtol)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_stow)
-	give_action(M, /datum/action/human_action/blackfoot/disconnect_tug)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_sensors)
-	give_action(M, /datum/action/human_action/blackfoot/access_tacmap)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_nvg)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_engines)
-	give_action(M, /datum/action/human_action/blackfoot/toggle_targeting)
+	if(seat == VEHICLE_DRIVER)
+		add_verb(M.client, list(
+			/obj/vehicle/multitile/proc/get_status_info,
+			/obj/vehicle/multitile/proc/toggle_door_lock,
+			/obj/vehicle/multitile/proc/activate_horn,
+			/obj/vehicle/multitile/proc/name_vehicle,
+			/obj/vehicle/multitile/blackfoot/proc/takeoff,
+			/obj/vehicle/multitile/blackfoot/proc/land,
+			/obj/vehicle/multitile/blackfoot/proc/toggle_vtol,
+			/obj/vehicle/multitile/blackfoot/proc/toggle_stow,
+		))
+		give_action(M, /datum/action/human_action/blackfoot/takeoff)
+		give_action(M, /datum/action/human_action/blackfoot/land)
+		give_action(M, /datum/action/human_action/blackfoot/toggle_vtol)
+		give_action(M, /datum/action/human_action/blackfoot/toggle_stow)
+		give_action(M, /datum/action/human_action/blackfoot/disconnect_tug)
+		give_action(M, /datum/action/human_action/blackfoot/toggle_sensors)
+		give_action(M, /datum/action/human_action/blackfoot/access_tacmap)
+		give_action(M, /datum/action/human_action/blackfoot/toggle_nvg)
+	else if(seat == VEHICLE_GUNNER)
+		add_verb(M.client, list(
+			/obj/vehicle/multitile/proc/cycle_hardpoint,
+		))
 
 	for(var/atom/movable/screen/blackfoot/screen_to_add as anything in custom_hud)
 		M.client.add_to_screen(screen_to_add)
@@ -410,8 +414,13 @@
 /obj/vehicle/multitile/blackfoot/remove_seated_verbs(mob/living/M, seat)
 	if(!M.client)
 		return
-
 	remove_verb(M.client, list(
+		/obj/vehicle/multitile/proc/switch_hardpoint,
+		/obj/vehicle/multitile/proc/get_status_info,
+	))
+	SStgui.close_user_uis(M, src)
+	if(seat == VEHICLE_DRIVER)
+		remove_verb(M.client, list(
 		/obj/vehicle/multitile/proc/get_status_info,
 		/obj/vehicle/multitile/proc/toggle_door_lock,
 		/obj/vehicle/multitile/proc/activate_horn,
@@ -420,19 +429,22 @@
 		/obj/vehicle/multitile/blackfoot/proc/land,
 		/obj/vehicle/multitile/blackfoot/proc/toggle_vtol,
 		/obj/vehicle/multitile/blackfoot/proc/toggle_stow,
-		/obj/vehicle/multitile/proc/switch_hardpoint,
-	))
-
-	remove_action(M, /datum/action/human_action/blackfoot/takeoff)
-	remove_action(M, /datum/action/human_action/blackfoot/land)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_vtol)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_stow)
-	remove_action(M, /datum/action/human_action/blackfoot/disconnect_tug)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_sensors)
-	remove_action(M, /datum/action/human_action/blackfoot/access_tacmap)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_nvg)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_engines)
-	remove_action(M, /datum/action/human_action/blackfoot/toggle_targeting)
+		))
+		remove_action(M, /datum/action/human_action/blackfoot/takeoff)
+		remove_action(M, /datum/action/human_action/blackfoot/land)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_vtol)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_stow)
+		remove_action(M, /datum/action/human_action/blackfoot/disconnect_tug)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_sensors)
+		remove_action(M, /datum/action/human_action/blackfoot/access_tacmap)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_nvg)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_engines)
+		remove_action(M, /datum/action/human_action/blackfoot/toggle_targeting)
+	else if(seat == VEHICLE_GUNNER)
+		remove_verb(M.client, list(
+		/obj/vehicle/multitile/proc/get_status_info,
+		/obj/vehicle/multitile/proc/switch_hardpoint
+		))
 
 	M.client?.mouse_pointer_icon = initial(M.client?.mouse_pointer_icon)
 	var/obj/item/hardpoint/primary/chimera_launchers/launchers = locate() in hardpoints
