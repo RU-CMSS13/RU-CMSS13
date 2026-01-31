@@ -358,6 +358,7 @@
 		give_action(M, /datum/action/human_action/blackfoot/access_tacmap)
 		give_action(M, /datum/action/human_action/blackfoot/toggle_nvg)
 		give_action(M, /datum/action/human_action/blackfoot/toggle_engines)
+		give_action(M, /datum/action/human_action/blackfoot/toggle_targeting)
 	else if(seat == VEHICLE_GUNNER)
 		add_verb(M.client, list(
 			/obj/vehicle/multitile/proc/cycle_hardpoint,

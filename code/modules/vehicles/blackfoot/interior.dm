@@ -441,8 +441,7 @@
 		var/diff_y = 0
 		var/tilesize = 32
 		var/viewoffset = tilesize * 2
-		var/fixed_dir = SOUTH
-		switch(fixed_dir)
+		switch(dir)
 			if(NORTH)
 				diff_y = -16 + user_old_y
 				if(user.client)
