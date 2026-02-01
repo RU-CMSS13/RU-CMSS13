@@ -15,3 +15,21 @@
 	skill_cap = 2
 	secondary_skill_cap = 2
 	skill_increment = 2
+
+/datum/character_trait/skills/ppo
+	trait_name = "Advanced Bodyguard Training"
+	trait_desc = "Boosts the firearms skill and CQC skill. Bodyguard received advanced training in combat."
+	skill = SKILL_FIREARMS
+	secondary_skill = SKILL_CQC
+	skill_cap = 2
+	secondary_skill_cap = 3
+	skill_increment = 1
+
+/datum/character_trait/skills/ppo/command
+	trait_name = "Coordination Training"
+	trait_desc = "Boosts the overwatch skill and leadership skill to 1. Bodyguard received some basic commanding training."
+	skill = SKILL_LEADERSHIP
+	secondary_skill = SKILL_OVERWATCH
+	skill_cap = 1
+	secondary_skill_cap = 1
+	skill_increment = 1
