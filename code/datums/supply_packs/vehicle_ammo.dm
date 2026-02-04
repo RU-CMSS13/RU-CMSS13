@@ -177,8 +177,8 @@
 /datum/supply_packs/blackfoot_ammo
 	name = "blackfoot doorgun ammunition (x2)"
 	contains = list(
-		/obj/item/ammo_magazine/hardpoint/doorgun_ammo,
-		/obj/item/ammo_magazine/hardpoint/doorgun_ammo,
+		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet,
+		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet,
 	)
 	cost = 60
 	containertype = /obj/structure/closet/crate/weapon

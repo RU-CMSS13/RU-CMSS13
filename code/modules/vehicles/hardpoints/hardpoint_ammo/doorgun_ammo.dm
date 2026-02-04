@@ -1,4 +1,4 @@
-/obj/item/ammo_magazine/hardpoint/doorgun_ammo
+/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet
 	name = "M866 AGL Ammo Belt"
 	desc = "A dynamically-linked chain of 20mm Hornet-type grenade clusters for use in the belt-fed M866 AGL system, contained in a shock-proof casing. The shells disperse small-caliber projectiles on impact."
 	caliber = "20mm"

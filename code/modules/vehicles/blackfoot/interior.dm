@@ -424,10 +424,10 @@
 	if(!deployed)
 		return
 
-	if(!istype(item, /obj/item/ammo_magazine/hardpoint/doorgun_ammo))
+	if(!istype(item, /obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet))
 		return
 
-	var/obj/item/ammo_magazine/hardpoint/doorgun_ammo/ammo = item
+	var/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet/ammo = item
 	var/obj/item/hardpoint/secondary/doorgun/doorgun = locate() in linked_blackfoot.hardpoints
 
 	if(!doorgun)

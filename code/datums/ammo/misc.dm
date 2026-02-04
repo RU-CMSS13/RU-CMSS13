@@ -412,7 +412,7 @@
 	var/bonus_damage_cap_increase = 0
 	var/stack_loss_multiplier = 1
 
-/datum/ammo/grenade_container/doorgun
+/datum/ammo/grenade_container/doorgun/hornet
 	name = "hornet shell"
 	nade_type = /obj/item/explosive/grenade/high_explosive/hornet
 

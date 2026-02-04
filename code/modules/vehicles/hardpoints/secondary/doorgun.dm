@@ -10,7 +10,7 @@
 	health = 500
 	firing_arc = 180
 
-	ammo = new /obj/item/ammo_magazine/hardpoint/doorgun_ammo
+	ammo = new /obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet
 	max_clips = 2
 
 	gun_firemode = GUN_FIREMODE_AUTOMATIC
