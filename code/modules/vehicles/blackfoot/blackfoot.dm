@@ -178,6 +178,8 @@
 		vtol_type = ""
 	else if (ispath(interior_map, /datum/map_template/interior/blackfoot_doorgun))
 		vtol_type = "doorgun_"
+	else if (ispath(interior_map, /datum/map_template/interior/blackfoot_doorgun_minigun))
+		vtol_type = "doorgun_"
 
 	switch (state)
 		if(STATE_VTOL, STATE_TAKEOFF_LANDING)
