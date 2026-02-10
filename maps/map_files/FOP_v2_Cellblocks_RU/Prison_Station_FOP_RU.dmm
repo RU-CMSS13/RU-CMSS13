@@ -1966,6 +1966,7 @@
 /obj/effect/decal/siding{
 	icon_state = "siding4"
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/central/south)
 "aeT" = (
@@ -2319,6 +2320,7 @@
 	dir = 8;
 	pixel_x = 3
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/central/north)
 "afL" = (
@@ -3191,6 +3193,7 @@
 /obj/effect/decal/siding{
 	icon_state = "siding2"
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/central/south)
 "aia" = (
@@ -8971,6 +8974,7 @@
 	dir = 1;
 	pixel_y = 13
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/central/east)
 "awS" = (
@@ -9341,7 +9345,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/residential/access/north)
@@ -9657,7 +9662,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/prison,
@@ -14418,6 +14424,7 @@
 "aLa" = (
 /obj/item/ammo_casing/bullet,
 /obj/item/clothing/under/color/orange,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/ramptop,
 /area/prisonru/station/security)
 "aLb" = (
@@ -14429,6 +14436,7 @@
 /obj/item/shard{
 	icon_state = "large"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/ramptop/east,
 /area/prisonru/station/security)
 "aLd" = (
@@ -17621,6 +17629,7 @@
 	dir = 1
 	},
 /obj/structure/machinery/light/double/blue,
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/southwest,
 /area/prisonru/station/yard)
 "aTP" = (
@@ -17635,6 +17644,7 @@
 	dir = 1
 	},
 /obj/structure/machinery/light/double/blue,
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/southeast,
 /area/prisonru/station/yard)
 "aTR" = (
@@ -21112,7 +21122,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/prison/ramptop/east,
 /area/prisonru/station/security/monitoring/highsec/restroom)
@@ -23241,6 +23252,7 @@
 	pixel_x = 10;
 	pixel_y = -1
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/northeast,
 /area/prisonru/station/yard)
 "bit" = (
@@ -24143,7 +24155,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec)
@@ -24537,7 +24550,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec)
@@ -25637,6 +25651,7 @@
 	pixel_x = 10;
 	pixel_y = -1
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/southeast,
 /area/prisonru/station/yard)
 "bol" = (
@@ -27851,6 +27866,13 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/visitation)
+"bua" = (
+/obj/structure/window/framed/prison/reinforced,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
+	dir = 4
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/medbay/high_sec_medbay)
 "bub" = (
 /obj/structure/machinery/door/airlock/almayer/security/glass/colony{
 	dir = 2;
@@ -30003,6 +30025,7 @@
 	dir = 1;
 	pixel_y = 21
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/northwest,
 /area/prisonru/station/yard)
 "bAx" = (
@@ -30011,6 +30034,7 @@
 	dir = 1;
 	pixel_y = 21
 	},
+/obj/item/device/flashlight/lamp/tripod/grey,
 /turf/open/floor/prison/green/northeast,
 /area/prisonru/station/yard)
 "bAy" = (
@@ -33074,7 +33098,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/residential/access/south)
@@ -33826,6 +33851,7 @@
 /obj/structure/closet/secure_closet/guncabinet{
 	req_access = null
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hybrisa/wood/darkerwood,
 /area/prisonru/station/security)
 "bKI" = (
@@ -34711,9 +34737,11 @@
 /obj/structure/sign/poster/propaganda{
 	pixel_y = 34
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkbrown2/northwest,
 /area/prisonru/station/security/intake)
 "bNb" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkbrown2/north,
 /area/prisonru/station/security/intake)
 "bNc" = (
@@ -35385,6 +35413,10 @@
 	},
 /turf/open/floor/prison/bluecorner/east,
 /area/prisonru/station/hallway/entrance)
+"bPc" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/darkred2,
+/area/prisonru/station/security)
 "bPd" = (
 /obj/structure/surface/table/reinforced/prison{
 	dir = 1;
@@ -35401,6 +35433,10 @@
 	},
 /turf/open/floor/prison/whitered/north,
 /area/prisonru/medbay/high_sec_medbay)
+"bPe" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop,
+/area/prisonru/station/security)
 "bPf" = (
 /turf/open/floor/prison,
 /area/prisonru/station/laundry)
@@ -35923,6 +35959,17 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/cellblock/highsec/south/south)
+"bQw" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/darkred2,
+/area/prisonru/station/security/intake)
+"bQx" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison,
+/area/prisonru/station/security/intake)
 "bQy" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /turf/open/floor/kutjevo/fake_wood,
@@ -35930,10 +35977,50 @@
 "bQz" = (
 /turf/open/floor/carpet5_1,
 /area/prisonru/residential/rooms/room11)
+"bQA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/clothing/under/color/orange,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/prisonru/station/security)
+"bQB" = (
+/obj/structure/bed/chair/comfy,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop,
+/area/prisonru/station/security/intake)
+"bQC" = (
+/obj/structure/bed/chair/comfy,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/prisonru/station/security/intake)
+"bQD" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/prisonru/station/security/intake)
 "bQE" = (
 /obj/structure/machinery/washing_machine,
 /turf/open/floor/hybrisa/tile/tilewhitecheckered/biege,
 /area/prisonru/residential/rooms/room10)
+"bQF" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop,
+/area/prisonru/station/security/intake)
+"bQG" = (
+/obj/item/stack/rods,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/prisonru/station/security)
+"bQH" = (
+/obj/structure/bed/chair/comfy,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop,
+/area/prisonru/station/security/intake)
+"bQI" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop,
+/area/prisonru/station/security/intake)
 "bQJ" = (
 /turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prisonru/station/laundry)
@@ -35988,6 +36075,11 @@
 /obj/item/stack/sheet/wood,
 /turf/open/floor/hybrisa/tile/tilebeigecheckered,
 /area/prisonru/station/laundry)
+"bQQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/prisonru/station/security/intake)
 "bQR" = (
 /obj/structure/machinery/power/apc/no_power/east,
 /obj/structure/machinery/space_heater/radiator/red{
@@ -36294,10 +36386,13 @@
 /area/prisonru/station/security/intake)
 "bRI" = (
 /obj/structure/pipes/vents/scrubber,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2,
 /area/prisonru/station/security/intake)
 "bRJ" = (
 /obj/structure/pipes/vents/pump/on,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2,
 /area/prisonru/station/security/intake)
 "bRK" = (
@@ -36386,6 +36481,14 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/maintenance/residential/access/south)
+"bSb" = (
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/device/flashlight/lamp/tripod/grey,
+/turf/open/floor/prison,
+/area/prisonru/station/hallway/central/east)
 "bSc" = (
 /obj/structure/disposalpipe/broken,
 /obj/structure/prop/cash_register/broken,
@@ -36400,10 +36503,31 @@
 /obj/effect/spawner/random/tool,
 /turf/open/floor/prison,
 /area/prisonru/cellblock/highsec/south/south)
+"bSf" = (
+/obj/item/device/flashlight/lamp/tripod/grey,
+/turf/open/floor/prison,
+/area/prisonru/station/hallway/central/north)
 "bSg" = (
 /obj/structure/window/framed/prison/reinforced,
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/head)
+"bSh" = (
+/obj/effect/decal/siding{
+	icon_state = "siding4"
+	},
+/obj/structure/barricade/handrail/wire{
+	dir = 4;
+	pixel_x = -3
+	},
+/obj/item/device/flashlight/lamp/tripod/grey,
+/turf/open/floor/prison,
+/area/prisonru/station/hallway/central/north)
+"bSi" = (
+/obj/structure/terminal{
+	dir = 8
+	},
+/turf/open/floor/prison,
+/area/prisonru/station/maintenance/research_medbay)
 "bSj" = (
 /turf/closed/wall/prison,
 /area/prisonru/station/maintenance/residential/access/south)
@@ -36593,7 +36717,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/heavy_cable/cable_vertical,
 /obj/effect/decal/cleanable/dirt,
@@ -36833,6 +36958,7 @@
 	color = "#8e98a0"
 	},
 /obj/structure/machinery/computer/secure_data,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/intake)
 "bTu" = (
@@ -37145,7 +37271,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/residential/access/south)
@@ -37263,6 +37390,7 @@
 /turf/open/floor/plating/prison,
 /area/prisonru/station/engineering/atmos)
 "bUG" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2/west,
 /area/prisonru/station/security/intake)
 "bUH" = (
@@ -37274,9 +37402,11 @@
 "bUI" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
 /area/prisonru/station/security/intake)
 "bUJ" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2/east,
 /area/prisonru/station/security/intake)
 "bUK" = (
@@ -37380,7 +37510,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/prison,
@@ -37760,6 +37891,8 @@
 /obj/structure/disposalpipe/segment,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkredcorners2/west,
 /area/prisonru/station/security/intake)
 "bWm" = (
@@ -37914,7 +38047,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/prison,
@@ -38364,6 +38498,7 @@
 /turf/closed/wall/prison,
 /area/prisonru/residential/hallway/south)
 "bXU" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkred2/southeast,
 /area/prisonru/station/security/intake)
 "bXV" = (
@@ -55234,10 +55369,7 @@
 /area/prisonru/station/maintenance/residential/access/south)
 "dKo" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/machinery/power/smes/buildable{
-	capacity = 1e+006;
-	dir = 1
-	},
+/obj/structure/machinery/power/smes/buildable/charged,
 /turf/open/floor/prison/darkyellow2/west,
 /area/prisonru/station/maintenance/research_medbay)
 "dKQ" = (
@@ -56012,6 +56144,7 @@
 	req_access = null
 	},
 /obj/item/clothing/suit/storage/marine/veteran/ua_riot,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hybrisa/wood/darkerwood,
 /area/prisonru/station/security)
 "eoP" = (
@@ -61561,6 +61694,7 @@
 /area/prisonru/station/quarters/research)
 "iBi" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/darkredcorners2,
 /area/prisonru/station/security/intake)
 "iBn" = (
@@ -62189,7 +62323,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/residential/access/south)
@@ -64307,6 +64442,7 @@
 	},
 /obj/item/clothing/suit/storage/marine/veteran/ua_riot,
 /obj/effect/landmark/corpsespawner/ua_riot/burst,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hybrisa/wood/darkerwood,
 /area/prisonru/station/security)
 "kwe" = (
@@ -65084,7 +65220,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec/restroom)
@@ -65114,7 +65251,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating/prison,
@@ -66270,7 +66408,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /obj/effect/decal/heavy_cable/cable_vertical,
 /obj/effect/decal/cleanable/dirt,
@@ -67749,7 +67888,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec)
@@ -68085,6 +68225,7 @@
 /area/prisonru/station/kitchen)
 "ntF" = (
 /obj/structure/machinery/flasher/portable,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hybrisa/wood/darkerwood,
 /area/prisonru/station/security)
 "ntP" = (
@@ -71405,6 +71546,7 @@
 /obj/structure/sign/poster/wylogo{
 	pixel_x = -29
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/ramptop/east,
 /area/prisonru/station/security/intake)
 "pZl" = (
@@ -79342,7 +79484,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec)
@@ -80177,7 +80320,8 @@
 	dir = 4;
 	name = "Civilian Residences Emergency Access";
 	explo_proof = 1;
-	id = "civilian block lockdown"
+	id = "civilian block lockdown";
+	needs_power = 0
 	},
 /turf/open_space,
 /area/prisonru/oob)
@@ -97658,9 +97802,9 @@ gIy
 xvB
 bSj
 bAk
-bAk
-bAk
-bAk
+bua
+bua
+bua
 clO
 clO
 clO
@@ -111507,7 +111651,7 @@ aHR
 aHR
 aHR
 aHR
-aHR
+bSf
 aNp
 cKB
 aSA
@@ -112142,7 +112286,7 @@ aEh
 auB
 aGU
 aCT
-aFm
+bSh
 aFm
 aFm
 aFm
@@ -112753,9 +112897,9 @@ oDd
 kZC
 oHw
 oHw
-kZC
-kZC
-kZC
+bSi
+bSi
+bSi
 alp
 apK
 xrt
@@ -113861,7 +114005,7 @@ aHR
 aHR
 aHR
 aHR
-aHR
+bSf
 dcn
 aRB
 aSO
@@ -118586,7 +118730,7 @@ azj
 mrH
 wZy
 azs
-azj
+bSb
 cGb
 bfp
 wjg
@@ -124824,9 +124968,9 @@ dUz
 bMk
 bNa
 bLG
-kfK
+bQB
 pZi
-kfK
+bQB
 bRH
 blF
 bUG
@@ -125037,14 +125181,14 @@ bAA
 bIZ
 bMk
 bNb
-kfK
-bLG
-kfK
-bLG
-bTx
+bQB
+bQC
+bQH
+bQC
+bQw
 bTn
-bUH
-bTx
+bQx
+bQw
 bZp
 bYp
 bZB
@@ -125251,14 +125395,14 @@ bEA
 bJb
 bMl
 bNb
-bLG
-kfK
-bLG
-kfK
-bTx
+bQC
+bQH
+bQC
+bQB
+bQw
 bTo
-bNR
-bTx
+pKf
+bQw
 kTv
 bLz
 cce
@@ -125466,9 +125610,9 @@ bnU
 bJO
 pTO
 bOi
-bQf
-bOi
-bQf
+bQQ
+bQI
+bQD
 bRI
 bTp
 bUI
@@ -125679,10 +125823,10 @@ bEA
 aHS
 bJP
 aXf
-bQf
+bQD
 bOi
 bQf
-bOi
+bQF
 bRJ
 bTq
 bNR
@@ -125893,14 +126037,14 @@ bEA
 bJb
 xAn
 bNb
-kfK
+bQB
 bLG
-kfK
-bLG
-bTx
+bQB
+bQC
+bQw
 bTr
 pKf
-bTx
+bQw
 kTv
 bLz
 fhb
@@ -126114,7 +126258,7 @@ kfK
 bTx
 bTm
 bUH
-bTx
+bQw
 bZp
 bYr
 bZF
@@ -126966,7 +127110,7 @@ fAH
 aLJ
 aLB
 eoI
-pfc
+bQG
 kvT
 bKH
 bUK
@@ -127394,9 +127538,9 @@ bKI
 bMu
 pfc
 mdh
-pfc
-bMu
-aLf
+bQG
+bPe
+bQA
 aLa
 tFl
 bMu
@@ -127612,8 +127756,8 @@ bMu
 pxh
 hKG
 aLc
-bMu
-tFl
+bPe
+pxh
 ahM
 cce
 bMu
@@ -127828,11 +127972,11 @@ dCX
 how
 oww
 ntF
-jRg
+mnb
 cce
 tfE
-bMu
-bOl
+bPe
+bPc
 bGc
 cfR
 fWE
@@ -128044,8 +128188,8 @@ bMu
 jRg
 bMu
 cce
-bMu
-jRg
+bPe
+mnb
 bOl
 bGc
 cfR
@@ -128256,8 +128400,8 @@ bQi
 bMu
 bWn
 bMu
-jRg
-bZD
+mnb
+jqb
 iEo
 cdE
 cdU
@@ -128470,7 +128614,7 @@ eHX
 cHq
 bWo
 egP
-bMu
+bPe
 cce
 xlk
 jRg
