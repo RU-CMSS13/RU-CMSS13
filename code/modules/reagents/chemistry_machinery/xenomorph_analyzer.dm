@@ -62,6 +62,36 @@
 		icon_state = "xeno_analyzer_organ_on"
 		caste_of_organ = organ.caste_origin
 		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+	//RUCM START
+	if(istype(attacked_item, /obj/item/reagent_container/food/snacks/grown))
+		var/obj/item/reagent_container/food/snacks/grown/food = attacked_item
+		if(food.potency <= 0)
+			to_chat(user, SPAN_WARNING("This grown food don't have suitable biomass"))
+			return
+		if(!do_after(user, 0.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+			to_chat(user, SPAN_WARNING("You were interupted!"))
+			return
+		to_chat(user, SPAN_NOTICE("You dissolve [attacked_item]"))
+		biomass_points += (food.potency * 2)
+		qdel(attacked_item)
+		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+	if(istype(attacked_item, /obj/item/storage))
+		var/obj/item/storage/container = attacked_item
+		if(length(container.contents) == 0)
+			to_chat(user, SPAN_NOTICE("[container] is empty."))
+			return
+
+		to_chat(user, SPAN_NOTICE("You start dumping the contents of [container] into [src]."))
+		if(!do_after(user, 1.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC))
+			return
+
+		for(var/obj/item/reagent_container/food/snacks/grown/food as anything in container)
+			to_chat(user, SPAN_NOTICE("You dissolve [food]"))
+			container.remove_from_storage(food)
+			food.moveToNullspace()
+			biomass_points += (food.potency * 2)
+		playsound(loc, 'sound/machines/fax.ogg', 15, 1)
+	//RUCM END
 	if(istype(attacked_item, /obj/item/clothing/accessory/health/research_plate))
 		var/obj/item/clothing/accessory/health/research_plate/plate = attacked_item
 		if(plate.recyclable_value == 0 && !plate.can_recycle(user))
