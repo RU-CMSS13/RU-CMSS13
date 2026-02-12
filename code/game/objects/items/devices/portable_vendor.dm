@@ -289,6 +289,14 @@
 		list("WY Corporate Encryption Key", 5, /obj/item/device/encryptionkey/WY, "white", "WY private comms encryption key, for conducting private business."),
 		list("WY Public Encryption Key", 5, /obj/item/device/encryptionkey/wy_pub, "white", "WY public comms encryption key, for conducting business."),
 
+//RUCM START
+		list("Research & Development", 0, null, null, null),
+		list("Research Grant (4 Credits)", 10, /obj/item/paper/research_notes/grant/high, "white", "Research Grant, Sponsorship sheet for USCM scientists"),
+		list("Research Note (1 Clearence)", 5, /obj/item/paper/research_notes/unique/tier_one, "white", "Research Note, Contain unfinished research of low-grade chemical reagent"),
+		list("Research Note (2 Clearence)", 10, /obj/item/paper/research_notes/unique/tier_two, "white", "Research Note, Contain unfinished research of medium-grade chemical reagent"),
+		list("Research Note (3 Clearence)", 15, /obj/item/paper/research_notes/unique/tier_three, "white", "Research Note, Contain unfinished research of high-grade chemical reagent"),
+		list("Research Note (4 Clearence)", 20, /obj/item/paper/research_notes/unique/tier_four, "white", "Research Note, Contain unfinished research of highest-grade chemical reagent"),
+//RUCM END
 		list("SMOKABLES", 0, null, null, null),
 		list("Cigars", 5, /obj/item/storage/fancy/cigar, "white", "Case of premium cigars, untampered."),
 		list("Cigarettes", 5, /obj/item/storage/fancy/cigarettes/wypacket, "white", "Weyland-Yutani Gold packet, for the more sophisticated taste."),
