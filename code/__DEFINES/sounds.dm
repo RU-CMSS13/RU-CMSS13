@@ -150,3 +150,11 @@
 #define SCAPE_PL_FIORINA_COMPUTERS_ROOM list('sound/ambience/prisonfopru/prisoncomputer1.ogg','sound/ambience/prisonfopru/prisoncomputer2.ogg','sound/ambience/prisonfopru/prisoncomputer3.ogg','sound/ambience/prisonfopru/prisonstationmachines5.ogg','sound/ambience/prisonfopru/prisonstationservers1.ogg')
 #define SCAPE_PL_FIORINA_CIVILIAN_AD list('sound/ambience/prisonfopru/prisonintercomseegson.ogg',)
 // RU-CM CODE END
+
+// Tyrargo Soundscapes
+
+#define AMBIENCE_TYRARGO_CITY 'sound/ambience/tyrargo_city_ambience.ogg'
+#define AMBIENCE_TYRARGO_SEWER_CITY 'sound/ambience/tyrargo_sewer_ambience.ogg'
+
+#define SCAPE_PL_TYRARGO_SEWER list('sound/ambience/tyrargo_underground_1.ogg','sound/ambience/tyrargo_underground_2.ogg','sound/ambience/tyrargo_underground_3.ogg','sound/ambience/tyrargo_underground_4.ogg')
+#define SCAPE_PL_TYRARGO_ALERT list('sound/ambience/tyrargo_alert_1.ogg', 'sound/ambience/tyrargo_alert_2.ogg', 'sound/ambience/tyrargo_alert_3.ogg', 'sound/ambience/tyrargo_alert_4.ogg', 'sound/ambience/tyrargo_alert_5.ogg', 'sound/ambience/tyrargo_alert_6.ogg')
