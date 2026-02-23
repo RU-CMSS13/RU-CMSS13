@@ -1,9 +1,12 @@
+//-------------------------------------------------------
+//XM52 BREACHING SCATTERGUN
 /obj/item/weapon/gun/rifle/xm52
 	name = "\improper XM52 experimental breaching scattergun"
 	desc = "An experimental shotgun model going through testing trials in the USCM. Based on the original XM51 version, the XM52 is a mag-fed, burst pump-action shotgun. It utilizes special lighted 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells."
 	icon = 'code_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "xm52"
 	item_state = "xm52"
+//Мне было впадлу делать отдельный лайн-арт для этой хуйни так что добавил лайнарт в основной lineart.dmi под имеем "xm52"
 	item_icons = list(
 	WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
@@ -16,11 +19,24 @@
 		/obj/item/attachable/bayonet,
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/bayonet/co2,
+		/obj/item/attachable/bayonet/antique,
+		/obj/item/attachable/bayonet/wy,
+		/obj/item/attachable/bayonet/custom,
+		/obj/item/attachable/bayonet/custom/red,
+		/obj/item/attachable/bayonet/custom/blue,
+		/obj/item/attachable/bayonet/custom/black,
+		/obj/item/attachable/bayonet/tanto,
+		/obj/item/attachable/bayonet/tanto/blue,
+		/obj/item/attachable/bayonet/rmc_replica,
+		/obj/item/attachable/bayonet/rmc,
+		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/reddot,
 		/obj/item/attachable/reflex,
+		/obj/item/attachable/attached_gun/extinguisher,
 		/obj/item/attachable/gyro,
 		/obj/item/attachable/flashlight/grip,
 		/obj/item/attachable/flashlight,
+		/obj/item/attachable/flashlight/under_barrel,
 	)
 	starting_attachment_types = list(/obj/item/attachable/stock/rifle/collapsible/xm52)
 	flags_equip_slot = SLOT_BACK|SLOT_WAIST
