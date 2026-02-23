@@ -19,7 +19,7 @@
 	return TRUE
 
 
-/datum/keyb	inding/client/screenshot
+/datum/keybinding/client/screenshot
 	hotkey_keys = list("F2")
 	classic_keys = list("Unbound")
 	name = "screenshot"
