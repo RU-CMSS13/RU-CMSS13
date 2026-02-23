@@ -7,6 +7,7 @@
 	icon_state = "xm52"
 	item_state = "xm52"
 //Мне было впадлу делать отдельный лайн-арт для этой хуйни так что добавил лайнарт в основной lineart.dmi под имеем "xm52"
+	base_gun_icon = "xm52"
 	item_icons = list(
 	WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
