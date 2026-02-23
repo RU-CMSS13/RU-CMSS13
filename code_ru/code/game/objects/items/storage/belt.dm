@@ -73,9 +73,9 @@
 		sure that we don't have to do any extra calculations.
 		*/
 		playsound(src, drawSound, 7, TRUE)
-		var/image/gun_underlay = image('code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+		var/image/gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
 		if(current_gun.type == /obj/item/weapon/gun/rifle/xm52)
-			gun_underlay = image('code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+			gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
 		gun_underlay.pixel_x = holster_slots[slot]["icon_x"]
 		gun_underlay.pixel_y = holster_slots[slot]["icon_y"]
 		gun_underlay.color = current_gun.color
