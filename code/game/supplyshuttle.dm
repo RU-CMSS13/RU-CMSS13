@@ -1376,6 +1376,12 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	name = "M577 Armored Personnel Carrier"
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc/decrepit
 
+//RUCM START
+/datum/vehicle_order/apc/plain
+	name = "M577 Armored Personnel Carrier"
+	ordered_vehicle = /obj/effect/vehicle_spawner/apc
+//RUCM END
+
 /datum/vehicle_order/apc/med
 	name = "M577-MED Armored Personnel Carrier"
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc_med/decrepit
@@ -1397,10 +1403,21 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 
 /obj/structure/machinery/computer/supply/asrs/vehicle/Initialize()
 	. = ..()
-
+/*RUCM CHANGE
 	vehicles = list(
+
 		new /datum/vehicle_order/tank/plain
+
 	)
+*/
+//RUCM START
+	vehicles = list(
+
+		new /datum/vehicle_order/tank/plain,
+		new /datum/vehicle_order/apc/plain
+
+	)
+//RUCM END
 
 	if(!GLOB.VehicleElevatorConsole)
 		GLOB.VehicleElevatorConsole = src
