@@ -614,6 +614,9 @@
 	autoshot_image.pixel_y = 0
 
 /obj/item/weapon/gun/smartgun/proc/set_autoshot_image(mob/living/target)
+	var/mob/living/carbon/human/user = loc
+	if(!istype(user) || !istype(user.glasses, /obj/item/clothing/glasses/night/m56_goggles) || !user.glasses.active)
+		return
 	autoshot_image.loc = target
 	autoshot_image.pixel_x = -target.pixel_x // -16 is counted by -(-16)
 	autoshot_image.pixel_y = -target.pixel_y
