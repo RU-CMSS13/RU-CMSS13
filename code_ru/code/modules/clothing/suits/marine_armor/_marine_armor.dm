@@ -1,5 +1,6 @@
 /obj/item/clothing/suit/storage/marine/specialist
 	desc = "A heavy, rugged set of armor plates for when you really, really need to not die horribly. Slows you down though.\nComes with two emergency injectors in each arm guard."
+	icon_state = "xarmor_ru"
 	armor_melee = CLOTHING_ARMOR_HIGHPLUS
 	armor_bullet = CLOTHING_ARMOR_VERYHIGHPLUS
 	armor_bomb = CLOTHING_ARMOR_ULTRAHIGH
