@@ -1,3 +1,13 @@
+/obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong
+	icon_state = "ppo_armor_strong_ru"
+	item_state = "ppo_armor_strong_ru"
+	item_state_slots = list(WEAR_JACKET = "ppo_armor_strong_ru")
+
+/obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo
+	icon_state = "ppo_armor_ru"
+	item_state = "ppo_armor_ru"
+	item_state_slots = list(WEAR_JACKET = "ppo_armor_ru")
+
 /obj/item/clothing/suit/storage/marine/veteran/pmc/light/corporate/ppo/strong/medium
 	name = "\improper M4 pattern PPO armor"
 	desc = "A modification of the standard Armat Systems M3 armor. This variant is worn by Personal Protection Officers protecting Weyland-Yutani employees, as denoted by the blue detailing."

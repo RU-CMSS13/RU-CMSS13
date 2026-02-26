@@ -38,6 +38,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("Standart Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
 	list("Medic Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/medic, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
 	list("Engineer Bodyguard Kit", 0, /obj/item/storage/box/kit/ppo/engi, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY), //RUCM ADD
+
 	list("HEADGEAR (CHOOSE 1)", 0, null, null, null),
 	list("Security Guard Armored Cap", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/guard/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
 	list("Corporate Security Helmet", 0, /obj/item/clothing/head/helmet/marine/veteran/pmc/corporate/ppo, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
@@ -69,6 +70,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("M41A Pulse Rifle MK2", 0, /obj/effect/essentials_set/wy_m41a, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("NSG23 Assault Rifle", 0, /obj/effect/essentials_set/wy_nsg23, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR),
 	list("FN FP9000 Submachine Gun", 10, /obj/effect/essentials_set/wy_fn9000, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR), //RUCM ADD
+	list("FN P90/2 Submachine Gun", 10, /obj/effect/essentials_set/wy_p90, MARINE_CAN_BUY_KIT, VENDOR_ITEM_REGULAR), //RUCM ADD
 
 	list("SIDEARM (CHOOSE 1)", 0, null, null, null),
 	list("ES-4 Electrostatic Pistol", 0, /obj/item/storage/belt/gun/m4a3/wy/es4, MARINE_CAN_BUY_BELT, VENDOR_ITEM_RECOMMENDED),
@@ -88,6 +90,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 	list("NSG 23 extended magazine (10x24mm)", 8, /obj/item/ammo_magazine/rifle/nsg23/extended, null, VENDOR_ITEM_REGULAR),
 	list("NSG 23 armor-piercing magazine (10x24mm)", 10, /obj/item/ammo_magazine/rifle/nsg23/ap, null, VENDOR_ITEM_REGULAR),
 	list("FN9000 magazine (5.7x28mm)", 6, /obj/item/ammo_magazine/smg/fp9000, null, VENDOR_ITEM_REGULAR), //RUCM ADD
+	list("P90 magazine (5.7x28mm)", 6, /obj/item/ammo_magazine/smg/p90, null, VENDOR_ITEM_REGULAR), //RUCM ADD
+	list("P90 magazine (5.7x28mm)", 8, /obj/item/ammo_magazine/smg/p90/ap, null, VENDOR_ITEM_REGULAR), //RUCM ADD
 
 	list("SIDEARM AMMUNITION", 0, null, null, null),
 	list("ES-4 Stun Magazine (9mm)", 4, /obj/item/ammo_magazine/pistol/es4, null, VENDOR_ITEM_REGULAR),
@@ -176,4 +180,13 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 		/obj/item/ammo_magazine/smg/fp9000,
 		/obj/item/ammo_magazine/smg/fp9000,
 	)
+
+/obj/effect/essentials_set/wy_p90
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/smg/p90/pmc,
+		/obj/item/ammo_magazine/smg/p90,
+		/obj/item/ammo_magazine/smg/p90,
+		/obj/item/ammo_magazine/smg/p90,
+	)
 //RUCM End
+
