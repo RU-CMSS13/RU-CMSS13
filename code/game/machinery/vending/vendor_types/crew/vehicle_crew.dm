@@ -60,6 +60,7 @@
 		if(prob(25))
 			malfunction()
 			return
+
 /* RUCM CHANGE
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, obj/vehicle/multitile/V)
 	SIGNAL_HANDLER
