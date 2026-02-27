@@ -202,6 +202,14 @@
 /// The time when xenos can start taking over comm towers
 #define XENO_COMM_ACQUISITION_TIME (55 MINUTES)
 
+//RUCM START
+#define XENO_SHIELD_SACRIFICE 12
+
+#define LESSER_BUILD_COLOR "#cbc8fc"
+
+#define LESSER_SHIELD_OVERLAY 9
+//RUCM END
+
 /// The time it takes for a pylon to give one royal resin while activated
 #define XENO_PYLON_ACTIVATION_COOLDOWN (5 MINUTES)
 
