@@ -1,8 +1,6 @@
 //RUCM CORE INCLUDES
 #include "supplyshuttle.dm"
 #include "datums\ammo.dm"
-#include "datums\supply_packs\gear.dm"
-#include "datums\supply_packs\weapons.dm"
 #include "datums\skills.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\objects\items\storage\belt.dm"
