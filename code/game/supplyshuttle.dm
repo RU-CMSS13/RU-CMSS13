@@ -1403,6 +1403,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 
 /obj/structure/machinery/computer/supply/asrs/vehicle/Initialize()
 	. = ..()
+
 /*RUCM CHANGE
 	vehicles = list(
 
