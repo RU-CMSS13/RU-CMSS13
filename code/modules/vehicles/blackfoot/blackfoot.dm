@@ -447,7 +447,8 @@
 	else if(seat == VEHICLE_GUNNER)
 		remove_verb(M.client, list(
 		/obj/vehicle/multitile/proc/get_status_info,
-		/obj/vehicle/multitile/proc/switch_hardpoint
+		/obj/vehicle/multitile/proc/switch_hardpoint,
+		/obj/vehicle/multitile/proc/cycle_hardpoint,
 		))
 
 	M.client?.mouse_pointer_icon = initial(M.client?.mouse_pointer_icon)
