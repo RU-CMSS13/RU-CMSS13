@@ -82,11 +82,11 @@
 	name = "plasma pistol bolt"
 	icon_state = "ion"
 
-	damage = 40
+	damage = 50
 	shell_speed = AMMO_SPEED_TIER_2
 
 /datum/ammo/energy/yautja/pistol/incendiary
-	damage = 10
+	damage = 20
 
 /datum/ammo/energy/yautja/pistol/incendiary/set_bullet_traits()
 	. = ..()
@@ -179,7 +179,7 @@
 	icon_state = "pulse1"
 	flags_ammo_behavior = AMMO_IGNORE_RESIST
 	shell_speed = AMMO_SPEED_TIER_6
-	damage = 75 // This will really only be used to kill people, so it should be decent at doing so.
+	damage = 80 // This will really only be used to kill people, so it should be decent at doing so.
 
 /datum/ammo/energy/yautja/caster/bolt/single_lethal/on_hit_mob(mob/all_targets, obj/projectile/lethal_projectile)
 	cell_explosion(lethal_projectile, 50, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, lethal_projectile.weapon_cause_data)
@@ -191,7 +191,7 @@
 	shell_speed = AMMO_SPEED_TIER_4
 	accuracy = HIT_ACCURACY_TIER_8
 
-	damage = 55
+	damage = 60
 
 	accurate_range = 8
 	max_range = 8
@@ -224,7 +224,7 @@
 	debilitate = list(0,2,0,0,0,0,0,0)
 	flags_ammo_behavior = AMMO_IGNORE_RESIST
 
-	damage = 55
+	damage = 60
 	penetration = ARMOR_PENETRATION_TIER_10
 
 /datum/ammo/energy/yautja/rifle/bolt/on_hit_mob(mob/hit_mob, obj/projectile/hit_projectile)

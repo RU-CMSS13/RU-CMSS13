@@ -2,8 +2,8 @@
 	group = SPECIES_YAUTJA
 	name = "Yautja"
 	name_plural = "Yautja"
-	brute_mod = 0.28 //Beefy!
-	burn_mod = 0.65
+	brute_mod = 0
+	burn_mod = 0
 	reagent_tag = IS_YAUTJA
 	mob_flags = KNOWS_TECHNOLOGY
 	flags = IS_WHITELISTED|HAS_SKIN_COLOR|NO_CLONE_LOSS|NO_POISON|NO_NEURO|SPECIAL_BONEBREAK|NO_SHRAPNEL|HAS_HARDCRIT
@@ -29,7 +29,7 @@
 	default_lighting_alpha = LIGHTING_PLANE_ALPHA_YAUTJA
 	flags_sight = SEE_MOBS
 	slowdown = -0.5
-	total_health = 175 //more health than regular humans
+	total_health = 200 //more health than regular humans
 	timed_hug = FALSE
 
 	bloodsplatter_type = /obj/effect/bloodsplatter/yautjasplatter
