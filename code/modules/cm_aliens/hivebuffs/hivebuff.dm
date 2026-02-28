@@ -72,6 +72,9 @@
 	/// _on_cease timer id
 	var/cease_timer_id
 
+	/// for _check_danger, minimal count of groundside marines
+	var/min_groundside_humans = 4
+
 /datum/hivebuff/New(datum/hive_status/xenohive)
 	. = ..()
 	if(!xenohive || !istype(xenohive))
@@ -231,7 +234,7 @@
 		var/turf/turf = get_turf(current_human)
 		if(is_ground_level(turf?.z))
 			groundside_humans++
-			if(groundside_humans >= 12)
+			if(groundside_humans >= min_groundside_humans)
 				return TRUE
 
 	return FALSE
@@ -471,35 +474,10 @@
 	radial_icon = "shield"
 
 /datum/hivebuff/fire/apply_buff_effects(mob/living/carbon/xenomorph/xeno)
-	if(!xeno.caste)
-		return
-
-	var/valid_immunity = xeno.fire_immunity
-	if(xeno.fire_immunity & FIRE_IMMUNITY_XENO_FRENZY)
-		valid_immunity -= FIRE_IMMUNITY_XENO_FRENZY
-
-	if((valid_immunity & FIRE_IMMUNITY_COMPLETE)) // Already completely fire immune, return
-		return
-
-
-	switch(valid_immunity)
-		if(FIRE_IMMUNITY_NONE) // No immunities whatsoever, make immune to ignition but not fire damage
-			RegisterSignal(xeno, COMSIG_LIVING_PREIGNITION, TYPE_PROC_REF(/mob/living/carbon/xenomorph, preignition_no_ignition))
-			RegisterSignal(xeno, list(COMSIG_LIVING_FLAMER_CROSSED, COMSIG_LIVING_FLAMER_FLAMED), TYPE_PROC_REF(/mob/living/carbon/xenomorph, flamer_cross_no_ignition))
-
-		if(FIRE_IMMUNITY_NO_DAMAGE) // Immune to damage but not ignition, make them immune to ignition
-			RegisterSignal(xeno, COMSIG_LIVING_PREIGNITION, TYPE_PROC_REF(/mob/living/carbon/xenomorph, preignition_no_ignition))
-			RegisterSignal(xeno, list(COMSIG_LIVING_FLAMER_CROSSED, COMSIG_LIVING_FLAMER_FLAMED), TYPE_PROC_REF(/mob/living/carbon/xenomorph, flamer_cross_no_ignition))
-
-		if(FIRE_IMMUNITY_NO_IGNITE) // Immune to ignition but not damage, make them immune to damage
-			RegisterSignal(xeno, list(COMSIG_LIVING_FLAMER_CROSSED, COMSIG_LIVING_FLAMER_FLAMED), TYPE_PROC_REF(/mob/living/carbon/xenomorph, flamer_cross_no_damage))
-
-		if(FIRE_IMMUNITY_BURROWER) // Burrower, get same immunities as FIRE_IMMUNITY_NONE
-			RegisterSignal(xeno, COMSIG_LIVING_PREIGNITION, TYPE_PROC_REF(/mob/living/carbon/xenomorph, preignition_no_ignition))
-			RegisterSignal(xeno, list(COMSIG_LIVING_FLAMER_CROSSED, COMSIG_LIVING_FLAMER_FLAMED), TYPE_PROC_REF(/mob/living/carbon/xenomorph, flamer_cross_no_ignition))
+	xeno.fire_immunity |= FIRE_IMMUNITY_NO_DAMAGE|FIRE_IMMUNITY_NO_IGNITE|FIRE_IMMUNITY_IGNORE_PEN
 
 /datum/hivebuff/fire/remove_buff_effects(mob/living/carbon/xenomorph/xeno)
-	xeno.refresh_fire_immunity() // Returns all affected Xenos back to whatever fire immunity is logged on the mob
+	xeno.fire_immunity = initial(xeno.fire_immunity)
 
 /datum/hivebuff/adaptability
 	name = "Boon of Adaptability"
