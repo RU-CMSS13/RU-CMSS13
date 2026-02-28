@@ -15,49 +15,56 @@
 /turf/open/asphalt,
 /area/desert_dam/exterior/valley/bar_valley_dam)
 "ac" = (
-/obj/structure/surface/table/woodentable,
-/obj/effect/decal/cleanable/dirt,
-/obj/item/ashtray/glass,
-/turf/open/floor/grimy,
-/area/desert_dam/building/bar/bar)
-"ad" = (
-/obj/structure/flora/tree/joshua,
-/turf/open/desert/rock,
-/area/desert_dam/exterior/valley/bar_valley_dam)
-"ae" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/shard,
-/turf/open/floor/grimy,
-/area/desert_dam/building/bar/bar)
-"af" = (
-/obj/structure/flora/grass/desert/lightgrass_3,
-/turf/open/desert/rock,
-/area/desert_dam/exterior/valley/bar_valley_dam)
-"ag" = (
-/obj/structure/machinery/cm_vending/sorted/boozeomat,
-/obj/structure/prop/hybrisa/misc/machinery/screens/wood_clock{
-	pixel_y = 38
+/obj/structure/girder,
+/obj/effect/decal/sand_overlay/sand1{
+	dir = 1
 	},
-/turf/open/floor/grimy,
-/area/desert_dam/building/bar/bar)
-"ah" = (
+/turf/open/floor/plating,
+/area/desert_dam/interior/dam_interior/south_tunnel_entrance)
+"ad" = (
+/obj/effect/decal/sand_overlay/sand1/corner1{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/desert_dam/interior/dam_interior/south_tunnel_entrance)
+"ae" = (
 /obj/structure/barricade/sandbags/wired,
 /obj/effect/decal/sand_overlay/sand1/corner1{
 	dir = 8
 	},
 /turf/open/mars/mars_dirt_5,
 /area/desert_dam/exterior/valley/bar_valley_dam)
-"ai" = (
+"af" = (
 /obj/structure/barricade/sandbags/wired,
 /obj/effect/decal/sand_overlay/sand1/corner1,
 /turf/open/mars/mars_dirt_5,
 /area/desert_dam/exterior/valley/bar_valley_dam)
-"aj" = (
+"ag" = (
 /obj/effect/decal/sand_overlay/sand1/corner1{
 	dir = 8
 	},
 /turf/open/mars/mars_dirt_5,
 /area/desert_dam/exterior/valley/bar_valley_dam)
+"ah" = (
+/obj/structure/shuttle/part/ert/transparent{
+	name = "Fulcrum";
+	icon_state = "rightengine_1"
+	},
+/turf/open/floor/plating/platingdmg3/west,
+/area/desert_dam/building/bar/bar)
+"ai" = (
+/turf/closed/shuttle/ert/transparent{
+	name = "Fulcrum";
+	icon_state = "T5"
+	},
+/area/desert_dam/building/bar/bar)
+"aj" = (
+/obj/structure/shuttle/part/ert/transparent{
+	icon_state = "T11";
+	name = "Fulcrum"
+	},
+/turf/open/floor/plating/platingdmg1,
+/area/desert_dam/building/bar/bar)
 "ak" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/sand_overlay/sand1{
@@ -66,12 +73,13 @@
 /turf/open/asphalt/cement_sunbleached/cement_sunbleached2,
 /area/desert_dam/exterior/valley/bar_valley_dam)
 "al" = (
-/obj/structure/girder,
-/obj/effect/decal/sand_overlay/sand1{
-	dir = 1
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/shuttle/part/ert/transparent{
+	icon_state = "T16";
+	name = "Fulcrum"
 	},
-/turf/open/floor/plating,
-/area/desert_dam/interior/dam_interior/south_tunnel_entrance)
+/turf/open/floor/plating/platingdmg1,
+/area/desert_dam/building/bar/bar)
 "am" = (
 /obj/structure/desertdam/decals/road_edge{
 	icon_state = "road_edge_decal11"
@@ -82,38 +90,30 @@
 /turf/open/asphalt,
 /area/desert_dam/interior/dam_interior/south_tunnel_entrance)
 "an" = (
-/obj/effect/decal/sand_overlay/sand1/corner1{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/desert_dam/interior/dam_interior/south_tunnel_entrance)
-"ao" = (
-/obj/structure/shuttle/part/ert/transparent{
-	name = "Fulcrum";
-	icon_state = "rightengine_1"
-	},
-/turf/open/floor/plating/platingdmg3/west,
+/obj/structure/surface/table/woodentable,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ashtray/glass,
+/turf/open/floor/grimy,
 /area/desert_dam/building/bar/bar)
+"ao" = (
+/obj/structure/flora/tree/joshua,
+/turf/open/desert/rock,
+/area/desert_dam/exterior/valley/bar_valley_dam)
 "ap" = (
-/turf/closed/shuttle/ert/transparent{
-	name = "Fulcrum";
-	icon_state = "T5"
-	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/shard,
+/turf/open/floor/grimy,
 /area/desert_dam/building/bar/bar)
 "aq" = (
-/obj/structure/shuttle/part/ert/transparent{
-	icon_state = "T11";
-	name = "Fulcrum"
-	},
-/turf/open/floor/plating/platingdmg1,
-/area/desert_dam/building/bar/bar)
+/obj/structure/flora/grass/desert/lightgrass_3,
+/turf/open/desert/rock,
+/area/desert_dam/exterior/valley/bar_valley_dam)
 "ar" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/shuttle/part/ert/transparent{
-	icon_state = "T16";
-	name = "Fulcrum"
+/obj/structure/machinery/cm_vending/sorted/boozeomat,
+/obj/structure/prop/hybrisa/misc/machinery/screens/wood_clock{
+	pixel_y = 38
 	},
-/turf/open/floor/plating/platingdmg1,
+/turf/open/floor/grimy,
 /area/desert_dam/building/bar/bar)
 "aw" = (
 /obj/effect/decal/sand_overlay/sand1,
@@ -2846,7 +2846,7 @@ aO
 tW
 nz
 Om
-ap
+ai
 Qc
 wy
 vy
@@ -2880,7 +2880,7 @@ oD
 Xw
 jt
 Rs
-aq
+aj
 HP
 Om
 QK
@@ -2929,7 +2929,7 @@ YY
 Cm
 nk
 bO
-aj
+ag
 pk
 xT
 xT
@@ -3044,7 +3044,7 @@ wZ
 gM
 kf
 kf
-aj
+ag
 jC
 IU
 PY
@@ -3086,7 +3086,7 @@ cR
 kf
 kf
 kf
-aj
+ag
 pk
 xT
 xT
@@ -3125,7 +3125,7 @@ kf
 Di
 md
 tl
-ah
+ae
 QI
 xT
 xT
@@ -3183,7 +3183,7 @@ WG
 UB
 WK
 zM
-ar
+al
 NK
 Om
 Om
@@ -3201,7 +3201,7 @@ Jd
 kf
 tl
 np
-ai
+af
 Nj
 pu
 xT
@@ -3214,9 +3214,9 @@ xT
 "}
 (14,1,1) = {"
 hv
-ag
+ar
 Vr
-ae
+ap
 jj
 ye
 Xh
@@ -3227,7 +3227,7 @@ NK
 Om
 pO
 kM
-ao
+ah
 zM
 wE
 tK
@@ -3280,7 +3280,7 @@ TH
 Ug
 KC
 Iu
-al
+ac
 xT
 xT
 xT
@@ -3293,7 +3293,7 @@ hv
 QG
 Ev
 Ev
-ac
+an
 hY
 Er
 At
@@ -3356,7 +3356,7 @@ UK
 Ug
 KC
 oK
-an
+ad
 tR
 Ae
 xG
@@ -3445,7 +3445,7 @@ xT
 xT
 ln
 ln
-ad
+ao
 ln
 ln
 xX
@@ -3482,7 +3482,7 @@ tX
 xT
 ln
 ln
-af
+aq
 ln
 ln
 ln

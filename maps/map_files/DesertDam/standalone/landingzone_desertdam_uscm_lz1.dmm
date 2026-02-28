@@ -59,13 +59,11 @@
 /turf/open/floor/prison/southwest,
 /area/desert_dam/interior/dam_interior/hanger)
 "an" = (
-/obj/structure/bed/chair{
-	buckling_y = 5;
-	dir = 1;
-	buckling_x = 4
+/obj/structure/shuttle/part/dropship3/transparent/engine_left_exhaust{
+	name = "\improper Tornado"
 	},
-/turf/open/floor/prison/southwest,
-/area/desert_dam/interior/dam_interior/hanger)
+/turf/open/floor/prison/darkyellow2/east,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
 "ao" = (
 /obj/structure/machinery/floodlight/landing,
 /obj/effect/decal/sand_overlay/sand1,
@@ -75,30 +73,30 @@
 /turf/open/floor/asteroidplating,
 /area/desert_dam/exterior/landing_pad_one)
 "ap" = (
-/obj/structure/surface/table,
-/obj/item/prop/colony/game{
-	pixel_y = 4
+/obj/structure/shuttle/part/dropship3/transparent/engine_right_exhaust{
+	name = "\improper Tornado"
 	},
-/turf/open/floor/prison/darkbrown3/east,
-/area/desert_dam/interior/dam_interior/hanger)
+/turf/open/floor/prison/darkyellow2/west,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
 "aq" = (
-/obj/item/weapon/twohanded/folded_metal_chair,
-/turf/open/floor/prison/southwest,
-/area/desert_dam/interior/dam_interior/hanger)
+/obj/structure/shuttle/part/dropship3/transparent/engine_left_cap{
+	name = "\improper Tornado"
+	},
+/turf/open/floor/prison/darkyellow2/east,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
 "ar" = (
 /turf/open/floor/prison/cell_stripe/east,
 /area/desert_dam/interior/dam_interior/hanger)
 "as" = (
-/obj/item/trash/crushed_cup,
-/turf/open/desert/dirt/desert_transition_edge1/northeast,
-/area/desert_dam/exterior/valley/valley_northwest)
-"at" = (
-/obj/effect/decal/sand_overlay/sand1,
-/obj/item/tool/warning_cone{
-	pixel_x = 5
+/obj/structure/shuttle/part/dropship3/transparent/engine_right_cap{
+	name = "\improper Tornado"
 	},
-/turf/open/asphalt/cement_sunbleached/cement_sunbleached18,
-/area/desert_dam/exterior/valley/valley_northwest)
+/turf/open/floor/prison/darkyellow2/west,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"at" = (
+/obj/structure/machinery/door/airlock/dropship_hatch/two,
+/turf/open/shuttle/dropship/can_surgery/light_grey_single_wide_up_to_down,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
 "au" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
 /turf/open/floor/prison/floor_plate/southwest,
@@ -110,18 +108,20 @@
 /turf/open/floor/prison/blue,
 /area/desert_dam/building/administration/hallway)
 "aw" = (
-/obj/effect/decal/sand_overlay/sand1,
-/obj/item/tool/warning_cone{
-	pixel_y = 5
+/obj/structure/bed/chair{
+	buckling_y = 5;
+	dir = 1;
+	buckling_x = 4
 	},
-/turf/open/asphalt/cement_sunbleached/cement_sunbleached18,
-/area/desert_dam/exterior/valley/valley_northwest)
+/turf/open/floor/prison/southwest,
+/area/desert_dam/interior/dam_interior/hanger)
 "ax" = (
-/obj/effect/landmark/nightmare{
-	insert_tag = "admin_fight"
+/obj/structure/surface/table,
+/obj/item/prop/colony/game{
+	pixel_y = 4
 	},
-/turf/closed/wall/r_wall,
-/area/desert_dam/building/administration/lobby)
+/turf/open/floor/prison/darkbrown3/east,
+/area/desert_dam/interior/dam_interior/hanger)
 "ay" = (
 /obj/structure/platform_decoration/metal/almayer/west,
 /obj/structure/bed/chair/dropship/passenger{
@@ -130,99 +130,94 @@
 /turf/open/shuttle/dropship/can_surgery/medium_grey_single_wide_up_to_down,
 /area/lv522/landing_zone_forecon/UD6_Tornado)
 "az" = (
+/obj/item/weapon/twohanded/folded_metal_chair,
+/turf/open/floor/prison/southwest,
+/area/desert_dam/interior/dam_interior/hanger)
+"aA" = (
+/turf/closed/shuttle/dropship3/tornado{
+	icon_state = "81"
+	},
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"aB" = (
+/obj/structure/shuttle/part/dropship3/transparent/outer_left_weapons{
+	name = "\improper Tornado"
+	},
+/turf/open/floor/prison/floor_plate/southwest,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"aC" = (
+/obj/structure/shuttle/part/dropship3/transparent/inner_left_weapons{
+	name = "\improper Tornado"
+	},
+/turf/open/floor/prison/floor_plate/southwest,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"aE" = (
+/obj/structure/shuttle/part/dropship3/transparent/inner_right_weapons{
+	name = "\improper Tornado"
+	},
+/turf/open/floor/prison/floor_plate/southwest,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"aF" = (
+/obj/structure/shuttle/part/dropship3/transparent/outer_right_weapons{
+	name = "\improper Tornado"
+	},
+/turf/open/floor/prison/floor_plate/southwest,
+/area/lv522/landing_zone_forecon/UD6_Tornado)
+"aG" = (
+/obj/item/trash/crushed_cup,
+/turf/open/desert/dirt/desert_transition_edge1/northeast,
+/area/desert_dam/exterior/valley/valley_northwest)
+"aH" = (
+/obj/effect/decal/sand_overlay/sand1,
+/obj/item/tool/warning_cone{
+	pixel_x = 5
+	},
+/turf/open/asphalt/cement_sunbleached/cement_sunbleached18,
+/area/desert_dam/exterior/valley/valley_northwest)
+"aI" = (
+/obj/effect/decal/sand_overlay/sand1,
+/obj/item/tool/warning_cone{
+	pixel_y = 5
+	},
+/turf/open/asphalt/cement_sunbleached/cement_sunbleached18,
+/area/desert_dam/exterior/valley/valley_northwest)
+"aJ" = (
+/obj/effect/landmark/nightmare{
+	insert_tag = "admin_fight"
+	},
+/turf/closed/wall/r_wall,
+/area/desert_dam/building/administration/lobby)
+"aK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/cigbutt,
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/lobby)
-"aA" = (
+"aL" = (
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/gate)
-"aB" = (
+"aM" = (
 /obj/item/trash/cigbutt,
 /obj/item/trash/eat,
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/lobby)
-"aC" = (
+"aN" = (
 /obj/item/trash/cigbutt,
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/lobby)
-"aD" = (
-/obj/structure/shuttle/part/dropship3/transparent/engine_left_exhaust{
-	name = "\improper Tornado"
-	},
-/turf/open/floor/prison/darkyellow2/east,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
-"aE" = (
+"aO" = (
 /obj/effect/decal/cleanable/blood{
 	layer = 3
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/lobby)
-"aF" = (
+"aP" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "gib6"
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/lobby)
-"aG" = (
+"aQ" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison,
-/area/desert_dam/building/administration/gate)
-"aH" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison/blue/east,
-/area/desert_dam/building/administration/gate)
-"aI" = (
-/obj/structure/bed/sofa/vert/white/top,
-/turf/open/floor/prison/bluefull,
-/area/desert_dam/building/administration/gate)
-"aJ" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/obj/effect/decal/hybrisa/trash{
-	pixel_y = 22;
-	pixel_x = 12
-	},
-/turf/open/floor/prison/blue,
-/area/desert_dam/building/administration/hallway)
-"aK" = (
-/obj/structure/surface/table/almayer,
-/obj/item/storage/briefcase,
-/turf/open/floor/prison/blue,
-/area/desert_dam/building/administration/hallway)
-"aL" = (
-/obj/structure/largecrate/random/mini/small_case{
-	pixel_x = 3;
-	pixel_y = 15
-	},
-/turf/open/floor/prison/blue/west,
-/area/desert_dam/building/administration/gate)
-"aM" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison/bluecorner,
-/area/desert_dam/building/administration/gate)
-"aN" = (
-/obj/structure/pipes/vents/pump{
-	dir = 4
-	},
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/gate)
-"aO" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison/blue/north,
-/area/desert_dam/building/administration/gate)
-"aP" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/disposalpipe/junction{
-	dir = 8
-	},
-/obj/structure/pipes/standard/manifold/hidden/green,
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/hallway)
-"aQ" = (
-/obj/structure/largecrate/empty/case/double,
-/turf/open/floor/prison/blue/west,
 /area/desert_dam/building/administration/gate)
 "aR" = (
 /obj/structure/pipes/standard/simple/hidden/green,
@@ -234,33 +229,33 @@
 /turf/open/floor/prison/blue/east,
 /area/desert_dam/building/administration/gate)
 "aT" = (
-/obj/structure/pipes/standard/simple/hidden/green,
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/hallway)
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/blue/east,
+/area/desert_dam/building/administration/gate)
 "aU" = (
 /obj/structure/flora/grass/desert/lightgrass_2,
 /obj/structure/prop/hybrisa/vehicles/Small_Truck/White,
 /turf/open/desert/dirt,
 /area/desert_dam/exterior/valley/valley_northwest)
 "aV" = (
-/obj/structure/closet/crate/foodcart,
-/turf/open/floor/prison/blue/west,
+/obj/structure/bed/sofa/vert/white/top,
+/turf/open/floor/prison/bluefull,
 /area/desert_dam/building/administration/gate)
 "aW" = (
-/obj/structure/shuttle/part/dropship3/transparent/engine_right_exhaust{
-	name = "\improper Tornado"
+/obj/structure/bed/chair{
+	dir = 1
 	},
-/turf/open/floor/prison/darkyellow2/west,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/obj/effect/decal/hybrisa/trash{
+	pixel_y = 22;
+	pixel_x = 12
+	},
+/turf/open/floor/prison/blue,
+/area/desert_dam/building/administration/hallway)
 "aX" = (
-/obj/item/card/id/visa{
-	desc = "A United Americas entry visa. A rare commodity out here on the rim.";
-	pixel_x = -6;
-	pixel_y = 6
-	},
-/turf/open/floor/prison/blue/west,
-/area/desert_dam/building/administration/gate)
+/obj/structure/surface/table/almayer,
+/obj/item/storage/briefcase,
+/turf/open/floor/prison/blue,
+/area/desert_dam/building/administration/hallway)
 "aY" = (
 /obj/structure/surface/table/almayer,
 /obj/item/tool/stamp{
@@ -269,57 +264,48 @@
 /obj/item/tool/lighter/random,
 /turf/open/floor/darkred2/southwest,
 /area/desert_dam/building/administration/lobby)
-"aZ" = (
-/obj/structure/shuttle/part/dropship3/transparent/engine_left_cap{
-	name = "\improper Tornado"
-	},
-/turf/open/floor/prison/darkyellow2/east,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
 "ba" = (
-/obj/structure/pipes/standard/simple/hidden/green,
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/breakroom)
-"bb" = (
-/obj/structure/surface/table/almayer,
-/obj/item/storage/fancy/cigarettes/lady_finger{
-	pixel_x = 5;
-	pixel_y = 5
+/obj/structure/largecrate/random/mini/small_case{
+	pixel_x = 3;
+	pixel_y = 15
 	},
 /turf/open/floor/prison/blue/west,
 /area/desert_dam/building/administration/gate)
+"bb" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/bluecorner,
+/area/desert_dam/building/administration/gate)
 "bc" = (
-/obj/structure/shuttle/part/dropship3/transparent/engine_right_cap{
-	name = "\improper Tornado"
+/obj/structure/pipes/vents/pump{
+	dir = 4
 	},
-/turf/open/floor/prison/darkyellow2/west,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/gate)
 "bd" = (
-/turf/open/floor/prison/bluecorner/west,
-/area/desert_dam/building/administration/breakroom)
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/blue/north,
+/area/desert_dam/building/administration/gate)
 "be" = (
 /obj/structure/flora/pottedplant,
 /turf/open/floor/prison/bluecorner/north,
 /area/desert_dam/building/administration/lobby)
 "bf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/disposalpipe/junction{
+	dir = 8
+	},
+/obj/structure/pipes/standard/manifold/hidden/green,
 /turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/breakroom)
+/area/desert_dam/building/administration/hallway)
 "bg" = (
-/turf/open/floor/prison/bluecorner,
-/area/desert_dam/building/administration/breakroom)
-"bh" = (
-/obj/structure/surface/table/almayer,
-/obj/item/card/id/visa{
-	desc = "A United Americas entry visa. A rare commodity out here on the rim.";
-	pixel_x = 8;
-	pixel_y = 2
-	},
-/obj/item/newspaper{
-	pixel_x = -8;
-	pixel_y = 4
-	},
+/obj/structure/largecrate/empty/case/double,
 /turf/open/floor/prison/blue/west,
 /area/desert_dam/building/administration/gate)
+"bh" = (
+/obj/structure/pipes/standard/simple/hidden/green,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/hallway)
 "bi" = (
 /obj/structure/machinery/landinglight/ds1/delaytwo{
 	dir = 8
@@ -327,22 +313,29 @@
 /turf/open/asphalt/cement_sunbleached/cement_sunbleached3,
 /area/desert_dam/exterior/landing_pad_one)
 "bj" = (
-/turf/open/floor/prison/bluecorner,
+/obj/structure/closet/crate/foodcart,
+/turf/open/floor/prison/blue/west,
 /area/desert_dam/building/administration/gate)
 "bk" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/cell_stripe/east,
 /area/desert_dam/interior/dam_interior/hanger)
 "bl" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison/bluecorner/west,
+/obj/item/card/id/visa{
+	desc = "A United Americas entry visa. A rare commodity out here on the rim.";
+	pixel_x = -6;
+	pixel_y = 6
+	},
+/turf/open/floor/prison/blue/west,
 /area/desert_dam/building/administration/gate)
 "bm" = (
 /obj/structure/largecrate/random/barrel/white,
 /turf/open/floor/prison/southwest,
 /area/desert_dam/interior/dam_interior/hanger)
 "bn" = (
-/turf/open/floor/prison/blue/west,
+/obj/structure/pipes/standard/simple/hidden/green,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/breakroom)
 "bo" = (
 /obj/structure/machinery/disposal,
@@ -352,14 +345,13 @@
 /turf/open/floor/darkred2,
 /area/desert_dam/building/administration/lobby)
 "bp" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/surface/table/almayer,
+/obj/item/storage/fancy/cigarettes/lady_finger{
+	pixel_x = 5;
+	pixel_y = 5
 	},
-/obj/structure/pipes/standard/simple/hidden/green{
-	dir = 4
-	},
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/breakroom)
+/turf/open/floor/prison/blue/west,
+/area/desert_dam/building/administration/gate)
 "bq" = (
 /obj/structure/prop/colorable_rock/colorable/alt{
 	dir = 1;
@@ -377,12 +369,7 @@
 /turf/open/floor/prison/blue,
 /area/desert_dam/interior/dam_interior/tech_storage)
 "bs" = (
-/obj/structure/surface/table/almayer,
-/obj/item/trash/burger{
-	pixel_x = -1;
-	pixel_y = 6
-	},
-/turf/open/floor/prison/bright_clean2,
+/turf/open/floor/prison/bluecorner/west,
 /area/desert_dam/building/administration/breakroom)
 "bt" = (
 /obj/structure/machinery/landinglight/ds1/delaythree{
@@ -391,29 +378,27 @@
 /turf/open/asphalt/cement_sunbleached/cement_sunbleached3,
 /area/desert_dam/exterior/landing_pad_one)
 "bu" = (
-/obj/item/weapon/twohanded/folded_metal_chair{
-	pixel_y = 7
-	},
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/breakroom)
 "bv" = (
-/obj/structure/surface/table/almayer,
-/obj/item/reagent_container/food/snacks/packaged_hdogs,
-/obj/item/reagent_container/food/snacks/packaged_hdogs{
-	pixel_x = 3;
-	pixel_y = 12
-	},
-/turf/open/floor/prison/blue/west,
+/turf/open/floor/prison/bluecorner,
 /area/desert_dam/building/administration/breakroom)
 "bw" = (
-/obj/effect/landmark/survivor_spawner,
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/breakroom)
+/obj/structure/surface/table/almayer,
+/obj/item/card/id/visa{
+	desc = "A United Americas entry visa. A rare commodity out here on the rim.";
+	pixel_x = 8;
+	pixel_y = 2
+	},
+/obj/item/newspaper{
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/turf/open/floor/prison/blue/west,
+/area/desert_dam/building/administration/gate)
 "bx" = (
-/obj/structure/disposalpipe/segment,
-/obj/structure/pipes/standard/simple/hidden/green,
-/turf/open/floor/prison/bright_clean2,
-/area/desert_dam/building/administration/breakroom)
+/turf/open/floor/prison/bluecorner,
+/area/desert_dam/building/administration/gate)
 "by" = (
 /turf/open/shuttle/dropship/can_surgery/light_grey_single_wide_left_to_right,
 /area/lv522/landing_zone_forecon/UD6_Tornado)
@@ -430,45 +415,53 @@
 /turf/open/floor/prison/darkbrown2/west,
 /area/desert_dam/interior/dam_interior/auxilary_tool_storage)
 "bB" = (
-/obj/structure/bed/chair{
-	dir = 4;
-	pixel_y = 4
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/bluecorner/west,
+/area/desert_dam/building/administration/gate)
+"bC" = (
+/turf/open/floor/prison/blue/west,
+/area/desert_dam/building/administration/breakroom)
+"bD" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/pipes/standard/simple/hidden/green{
+	dir = 4
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/desert_dam/building/administration/breakroom)
-"bC" = (
-/obj/structure/machinery/door/airlock/dropship_hatch/two,
-/turf/open/shuttle/dropship/can_surgery/light_grey_single_wide_up_to_down,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
-"bD" = (
-/turf/closed/shuttle/dropship3/tornado{
-	icon_state = "81"
-	},
-/area/lv522/landing_zone_forecon/UD6_Tornado)
 "bE" = (
-/obj/structure/shuttle/part/dropship3/transparent/outer_left_weapons{
-	name = "\improper Tornado"
+/obj/structure/surface/table/almayer,
+/obj/item/trash/burger{
+	pixel_x = -1;
+	pixel_y = 6
 	},
-/turf/open/floor/prison/floor_plate/southwest,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/breakroom)
 "bF" = (
-/obj/structure/shuttle/part/dropship3/transparent/inner_left_weapons{
-	name = "\improper Tornado"
+/obj/item/weapon/twohanded/folded_metal_chair{
+	pixel_y = 7
 	},
-/turf/open/floor/prison/floor_plate/southwest,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/breakroom)
 "bG" = (
-/obj/structure/shuttle/part/dropship3/transparent/inner_right_weapons{
-	name = "\improper Tornado"
+/obj/structure/surface/table/almayer,
+/obj/item/reagent_container/food/snacks/packaged_hdogs,
+/obj/item/reagent_container/food/snacks/packaged_hdogs{
+	pixel_x = 3;
+	pixel_y = 12
 	},
-/turf/open/floor/prison/floor_plate/southwest,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/turf/open/floor/prison/blue/west,
+/area/desert_dam/building/administration/breakroom)
 "bH" = (
-/obj/structure/shuttle/part/dropship3/transparent/outer_right_weapons{
-	name = "\improper Tornado"
-	},
-/turf/open/floor/prison/floor_plate/southwest,
-/area/lv522/landing_zone_forecon/UD6_Tornado)
+/obj/effect/landmark/survivor_spawner,
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/breakroom)
+"bI" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/pipes/standard/simple/hidden/green,
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/breakroom)
 "bJ" = (
 /turf/closed/shuttle/dropship3/tornado{
 	icon_state = "18"
@@ -479,6 +472,13 @@
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /turf/open/floor/darkred2,
 /area/desert_dam/building/administration/lobby)
+"bL" = (
+/obj/structure/bed/chair{
+	dir = 4;
+	pixel_y = 4
+	},
+/turf/open/floor/prison/bright_clean2,
+/area/desert_dam/building/administration/breakroom)
 "bX" = (
 /obj/structure/barricade/metal/wired{
 	dir = 4
@@ -3304,9 +3304,9 @@ DU
 bm
 DF
 ZY
-aq
-ap
-an
+az
+ax
+aw
 Lk
 Yh
 Lk
@@ -3364,10 +3364,10 @@ vC
 vC
 vC
 vC
-aZ
+aq
 EC
 gJ
-aD
+an
 vC
 aj
 ah
@@ -3467,13 +3467,13 @@ Ia
 BC
 gU
 gU
-bE
+aB
 fn
 up
 cm
 IB
-bC
-bC
+at
+at
 bJ
 op
 kV
@@ -3522,7 +3522,7 @@ Ia
 BC
 gU
 gU
-bF
+aC
 FK
 JA
 FX
@@ -3688,7 +3688,7 @@ BC
 dw
 En
 Ya
-bD
+aA
 QZ
 Zo
 Zo
@@ -3742,7 +3742,7 @@ Ia
 BC
 gU
 gU
-bG
+aE
 FK
 gV
 Qx
@@ -3797,7 +3797,7 @@ Ia
 BC
 gU
 gU
-bH
+aF
 No
 XG
 Wp
@@ -3914,10 +3914,10 @@ hN
 it
 it
 it
-bc
+as
 Wn
 iQ
-aW
+ap
 it
 it
 it
@@ -4973,14 +4973,14 @@ wf
 "}
 (33,1,1) = {"
 PK
-bh
-bb
-aV
-aQ
+bw
+bp
+bj
+bg
 Sx
-aL
+ba
 hK
-aG
+aQ
 KC
 ky
 Zw
@@ -5028,13 +5028,13 @@ KG
 "}
 (34,1,1) = {"
 CN
-bj
+bx
 aS
 aS
 aS
 JG
-aM
-aH
+bb
+aT
 aS
 jY
 aS
@@ -5084,12 +5084,12 @@ SA
 (35,1,1) = {"
 ZT
 GE
-aI
+aV
 FU
 RE
-aO
+bd
 GE
-aI
+aV
 FU
 FU
 RE
@@ -5138,9 +5138,9 @@ Dv
 "}
 (36,1,1) = {"
 mV
-bl
+bB
 Zw
-aX
+bl
 Zw
 BV
 ky
@@ -5195,15 +5195,15 @@ Dv
 hR
 jo
 jo
-aA
-aA
+aL
+aL
 dI
-aN
-aA
-aA
+bc
+aL
+aL
 jo
 jo
-aA
+aL
 nn
 gq
 sY
@@ -5248,17 +5248,17 @@ Dv
 "}
 (38,1,1) = {"
 lz
-aA
-aA
-aA
-aA
+aL
+aL
+aL
+aL
 vQ
-aA
-aA
-aA
-aA
-aA
-aA
+aL
+aL
+aL
+aL
+aL
+aL
 nn
 gq
 yD
@@ -5412,8 +5412,8 @@ aR
 dX
 "}
 (41,1,1) = {"
-bv
-bn
+bG
+bC
 sg
 Ct
 yj
@@ -5467,9 +5467,9 @@ na
 Dv
 "}
 (42,1,1) = {"
-bf
-bf
-bd
+bu
+bu
+bs
 Bo
 Xb
 eX
@@ -5477,7 +5477,7 @@ Eh
 wu
 Bq
 oU
-aC
+aN
 rG
 Gt
 XP
@@ -5522,9 +5522,9 @@ Ls
 Dv
 "}
 (43,1,1) = {"
-bf
+bu
 sd
-bf
+bu
 pc
 qi
 eX
@@ -5579,17 +5579,17 @@ Dv
 (44,1,1) = {"
 jS
 nm
-ba
-ba
-aT
-aP
+bn
+bn
+bh
+bf
 Eh
 qi
 qi
 SX
 oG
 oG
-az
+aK
 SX
 fc
 hf
@@ -5632,9 +5632,9 @@ YA
 Dv
 "}
 (45,1,1) = {"
-bw
-bp
-bg
+bH
+bD
+bv
 Bo
 pL
 eX
@@ -5687,7 +5687,7 @@ Dv
 Dv
 "}
 (46,1,1) = {"
-bx
+bI
 xq
 Sh
 Ct
@@ -5742,20 +5742,20 @@ Yg
 Yg
 "}
 (47,1,1) = {"
-bB
+bL
 OT
 Ew
 Ct
 An
 eX
 Eh
-aJ
+aW
 GD
 oz
 Oi
 Zj
 aY
-ax
+aJ
 yD
 cQ
 gC
@@ -5775,8 +5775,8 @@ ck
 hd
 hd
 WB
-at
-as
+aH
+aG
 mO
 mO
 mO
@@ -5798,17 +5798,17 @@ Yg
 "}
 (48,1,1) = {"
 RO
-bs
+bE
 Sh
 Ct
 An
 eX
 Eh
-aK
+aX
 GD
 Ci
-aE
-aB
+aO
+aM
 CJ
 wO
 yD
@@ -5862,7 +5862,7 @@ cL
 LJ
 Bq
 QV
-aF
+aP
 nz
 bK
 wO
@@ -5908,7 +5908,7 @@ Yg
 "}
 (50,1,1) = {"
 XJ
-bu
+bF
 Sh
 Ct
 An
@@ -5940,7 +5940,7 @@ gC
 hd
 hd
 WB
-aw
+aI
 ht
 IR
 Yp

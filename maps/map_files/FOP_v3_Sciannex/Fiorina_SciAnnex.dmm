@@ -297,63 +297,64 @@
 /turf/open/floor/prison,
 /area/fiorina/station/medbay)
 "abc" = (
-/turf/open/floor/prison/greenfull/east,
-/area/fiorina/oob)
-"abd" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/tool/kitchen/tray{
-	pixel_y = 6
-	},
-/turf/open/floor/prison/kitchen/southwest,
-/area/fiorina/station/civres_blue)
-"abe" = (
 /obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/tumor/aux_engi)
-"abf" = (
+"abd" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abg" = (
+"abe" = (
 /obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abh" = (
+"abf" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /turf/open/floor/prison/floor_plate,
 /area/fiorina/tumor/aux_engi)
-"abi" = (
+"abg" = (
 /obj/structure/shuttle/part/ert/front_left_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abj" = (
+"abh" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abk" = (
+"abi" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/oob)
-"abl" = (
+"abj" = (
 /obj/structure/shuttle/part/ert/transparent/right_engine,
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/floor/plating/prison,
+/area/fiorina/oob)
+"abk" = (
+/obj/structure/shuttle/part/ert/front_right_stan,
+/turf/open/space/basic,
+/area/fiorina/tumor/ship)
+"abl" = (
+/obj/structure/shuttle/part/ert/front_left_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
@@ -361,28 +362,27 @@
 /area/fiorina/oob)
 "abm" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
-/turf/open/space/basic,
-/area/fiorina/tumor/ship)
-"abn" = (
-/obj/structure/shuttle/part/ert/front_left_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
+/area/fiorina/oob)
+"abn" = (
+/turf/open/floor/prison/greenfull/east,
 /area/fiorina/oob)
 "abo" = (
-/obj/structure/shuttle/part/ert/front_right_stan,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/floor/plating/prison,
-/area/fiorina/oob)
-"abp" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /turf/open/floor/plating/prison,
 /area/fiorina/lz/near_lzI)
+"abp" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/tool/kitchen/tray{
+	pixel_y = 6
+	},
+/turf/open/floor/prison/kitchen/southwest,
+/area/fiorina/station/civres_blue)
 "abq" = (
-/turf/closed/shuttle/ert/transparent{
+/turf/closed/shuttle/ert{
 	icon_state = "wy27"
 	},
 /area/fiorina/oob)
@@ -2477,7 +2477,7 @@
 /turf/open/floor/prison/kitchen/southwest,
 /area/fiorina/station/civres_blue)
 "bFA" = (
-/turf/closed/shuttle/ert{
+/turf/closed/shuttle/ert/transparent{
 	icon_state = "wy27"
 	},
 /area/fiorina/oob)
@@ -33783,7 +33783,7 @@ vXT
 bQM
 bQM
 bQM
-abm
+abk
 nTq
 lUi
 oOV
@@ -33997,7 +33997,7 @@ baC
 bQM
 baC
 baC
-abm
+abk
 lUi
 jCt
 fiU
@@ -34210,7 +34210,7 @@ baC
 baC
 baC
 baC
-abm
+abk
 lUi
 oFk
 anq
@@ -43294,7 +43294,7 @@ rqC
 rqC
 eYz
 baC
-abc
+abn
 baC
 baC
 baC
@@ -45390,7 +45390,7 @@ pQs
 bNE
 rja
 rja
-abd
+abp
 mIQ
 hDb
 jYK
@@ -46732,7 +46732,7 @@ bAc
 hgS
 hgS
 lvy
-abe
+abc
 sfI
 sfI
 sfI
@@ -47146,9 +47146,9 @@ ufN
 hvL
 baC
 uNM
-abh
+abf
 taj
-abh
+abf
 fpn
 svP
 fpn
@@ -47570,9 +47570,9 @@ sgw
 sgw
 baC
 uNM
-abh
+abf
 svP
-abh
+abf
 kIg
 taj
 taj
@@ -48201,11 +48201,11 @@ iiw
 awL
 awL
 awL
-abn
+abl
 naf
 naf
 cqz
-abk
+abi
 tsc
 hQk
 tsc
@@ -48625,11 +48625,11 @@ gcx
 okv
 iiw
 awL
-abo
+abm
 vcf
 vcf
 lku
-abl
+abj
 tsc
 wtm
 tsc
@@ -55552,7 +55552,7 @@ esw
 esw
 vzB
 bQM
-abq
+bFA
 anm
 qFi
 hXZ
@@ -55764,7 +55764,7 @@ cMb
 jMh
 vzB
 bQM
-bFA
+abq
 rYY
 ePq
 mzS
@@ -80855,11 +80855,11 @@ mvF
 kkU
 kkU
 kkU
-abi
+abg
 naf
 naf
 cqz
-abf
+abd
 ogf
 mRM
 bce
@@ -81279,11 +81279,11 @@ mvF
 kkU
 kkU
 kkU
-abj
+abh
 vcf
 vcf
 lku
-abg
+abe
 ogf
 fWI
 bce
@@ -81686,7 +81686,7 @@ paI
 tsc
 bEk
 ogf
-abn
+abl
 naf
 naf
 cqz
@@ -82110,7 +82110,7 @@ paI
 tsc
 bEk
 ogf
-abo
+abm
 vcf
 vcf
 lku
@@ -84204,7 +84204,7 @@ paI
 paI
 eeH
 dFM
-abp
+abo
 xeO
 xeO
 xeO
