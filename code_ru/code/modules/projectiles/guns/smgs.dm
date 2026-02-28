@@ -26,7 +26,7 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/scope/mini,
-		/obj/item/attachable/lasersight, // Under
+		/obj/item/attachable/lasersight,
 		)
 	starting_attachment_types = list(/obj/item/attachable/lasersight)
 
@@ -54,3 +54,19 @@
 
 /obj/item/weapon/gun/smg/p90/twe/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 42, "muzzle_y" = 16,"rail_x" = 22, "rail_y" = 24, "under_x" = 23, "under_y" = 15, "stock_x" = 28, "stock_y" = 17)
+
+/obj/effect/essentials_set/wy_fn9000
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/smg/fp9000/pmc/stripped,
+		/obj/item/ammo_magazine/smg/fp9000,
+		/obj/item/ammo_magazine/smg/fp9000,
+		/obj/item/ammo_magazine/smg/fp9000,
+	)
+
+/obj/effect/essentials_set/wy_p90
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/smg/p90/pmc,
+		/obj/item/ammo_magazine/smg/p90,
+		/obj/item/ammo_magazine/smg/p90,
+		/obj/item/ammo_magazine/smg/p90,
+	)

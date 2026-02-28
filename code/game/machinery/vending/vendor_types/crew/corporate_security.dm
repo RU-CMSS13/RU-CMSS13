@@ -172,21 +172,3 @@ GLOBAL_LIST_INIT(cm_vending_gear_corporate_security_full, list(
 		/obj/item/ammo_magazine/shotgun/beanbag/es7,
 	)
 
-//RUCM Start
-/obj/effect/essentials_set/wy_fn9000
-	spawned_gear_list = list(
-		/obj/item/weapon/gun/smg/fp9000/pmc/stripped,
-		/obj/item/ammo_magazine/smg/fp9000,
-		/obj/item/ammo_magazine/smg/fp9000,
-		/obj/item/ammo_magazine/smg/fp9000,
-	)
-
-/obj/effect/essentials_set/wy_p90
-	spawned_gear_list = list(
-		/obj/item/weapon/gun/smg/p90/pmc,
-		/obj/item/ammo_magazine/smg/p90,
-		/obj/item/ammo_magazine/smg/p90,
-		/obj/item/ammo_magazine/smg/p90,
-	)
-//RUCM End
-
