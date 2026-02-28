@@ -26,7 +26,7 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/scope/mini,
-		/obj/item/attachable/lasersight,
+		/obj/item/attachable/lasersight, // Under
 		)
 	starting_attachment_types = list(/obj/item/attachable/lasersight)
 
