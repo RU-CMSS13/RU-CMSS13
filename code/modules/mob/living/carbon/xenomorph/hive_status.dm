@@ -255,7 +255,6 @@
 	evo_screech()
 // RUCM End (Feline "Ксено-чертежи")
 
-
 /// Sets up limits on pylons in New() for potential futureproofing with more static comms
 /datum/hive_status/proc/setup_pylon_limits()
 	hive_structures_limit[XENO_STRUCTURE_PYLON] = length(GLOB.all_static_telecomms_towers) || 2
