@@ -1,10 +1,12 @@
 //RUCM CORE INCLUDES
+#include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
 #include "datums\supply_packs\gear.dm"
 #include "datums\supply_packs\weapons.dm"
 #include "datums\skills.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\objects\items\storage\belt.dm"
+#include "modules\cm_aliens\structures\blueprints.dm"
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
 #include "modules\gear_presets\usmc.dm"
