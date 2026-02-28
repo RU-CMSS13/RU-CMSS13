@@ -81,3 +81,4 @@
 
 	A.color = null
 	user << "<span class='notice'>You remove the paint from [A].</span>"
+#include "objects/items/spraycan.dm"

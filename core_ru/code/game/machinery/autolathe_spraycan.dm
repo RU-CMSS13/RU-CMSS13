@@ -2,3 +2,4 @@
 	name = "spraycan"
 	path = /obj/item/spraycan
 	category = AUTOLATHE_CATEGORY_GENERAL
+#include "datums/autolathe_ru.dm"
