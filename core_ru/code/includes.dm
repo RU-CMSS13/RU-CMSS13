@@ -8,7 +8,7 @@
 #include "controllers\subsystem\queue.dm"
 #include "controllers\subsystem\techtree.dm"
 #include "controllers\subsystem\tts.dm"
-#include "datum\machinery\autolathe_spraycan.dm"
+#include "datums\autolathe_spraycan.dm"
 #include "datums\shuttles.dm"
 #include "datums\vehicles.dm"
 #include "datums\skills.dm"
