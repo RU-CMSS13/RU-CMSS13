@@ -1376,12 +1376,6 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	name = "M577 Armored Personnel Carrier"
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc/decrepit
 
-//RUCM START
-/datum/vehicle_order/apc/plain
-	name = "M577 Armored Personnel Carrier"
-	ordered_vehicle = /obj/effect/vehicle_spawner/apc
-//RUCM END
-
 /datum/vehicle_order/apc/med
 	name = "M577-MED Armored Personnel Carrier"
 	ordered_vehicle = /obj/effect/vehicle_spawner/apc_med/decrepit
@@ -1415,7 +1409,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	vehicles = list(
 
 		new /datum/vehicle_order/tank/plain,
-		new /datum/vehicle_order/apc/plain
+		new /datum/vehicle_order/apc/max,
 
 	)
 //RUCM END
