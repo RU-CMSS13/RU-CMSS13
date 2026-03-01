@@ -85,6 +85,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 		list("PRIMARY AMMUNITION", 0, null, null, null),
 		list("M4RA AP Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/m4ra/ap, null, VENDOR_ITEM_REGULAR),
 		list("M4RA Extended Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/m4ra/extended, null, VENDOR_ITEM_REGULAR),
+		list("M10 AP Magazine (10x20mm-APC)", 6, /obj/item/ammo_magazine/pistol/m10/ap , null, VENDOR_ITEM_REGULAR),
+		list("M10 AP Extended Magazine (10x20mm-APC)", 8, /obj/item/ammo_magazine/pistol/m10/ap/extended , null, VENDOR_ITEM_REGULAR),
 		list("M39 AP Magazine (10x20mm)", 6, /obj/item/ammo_magazine/smg/m39/ap , null, VENDOR_ITEM_REGULAR),
 		list("M39 Extended Magazine (10x20mm)", 6, /obj/item/ammo_magazine/smg/m39/extended , null, VENDOR_ITEM_REGULAR),
 		list("M41A AP Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/ap , null, VENDOR_ITEM_REGULAR),
@@ -117,23 +119,15 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 		list("Medical Radio Encryption Key", 3, /obj/item/device/encryptionkey/med, null, VENDOR_ITEM_REGULAR),
 	))
 
-GLOBAL_LIST_INIT(cm_vending_gear_vet_leader, list(
-
-	//MMTODO - actually put the right gear in here
-))
-
 /obj/structure/machinery/cm_vending/gear/leader
 	name = "\improper ColMarTech Squad Leader Gear Rack"
 	desc = "An automated gear rack for Squad Leaders."
 	icon_state = "sl_gear"
 	show_points = TRUE
-	vendor_role = list(JOB_VET_SQUAD_LEADER, JOB_SQUAD_LEADER)
+	vendor_role = list(JOB_SQUAD_LEADER)
 	req_access = list(ACCESS_MARINE_LEADER)
 
-/obj/structure/machinery/cm_vending/gear/leader/get_listed_products(mob/living/carbon/human/user)
-	if(user?.wear_id)
-		//if(id_card.paygrade == PAY_SHORT_MMTODO)
-			//return GLOB.cm_vending_gear_vet_leader
+/obj/structure/machinery/cm_vending/gear/leader/get_listed_products(mob/user)
 	return GLOB.cm_vending_gear_leader
 
 //------------CLOTHING VENDOR---------------
@@ -259,7 +253,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_vet_leader, list(
 	name = "\improper ColMarTech Squad Leader Equipment Rack"
 	desc = "An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment."
 	req_access = list(ACCESS_MARINE_LEADER)
-	vendor_role = list(JOB_VET_SQUAD_LEADER, JOB_SQUAD_LEADER)
+	vendor_role = list(JOB_SQUAD_LEADER)
 
 /obj/structure/machinery/cm_vending/clothing/leader/get_listed_products(mob/living/carbon/human/user)
 	if(user?.wear_id)
