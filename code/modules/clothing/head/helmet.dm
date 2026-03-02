@@ -1050,10 +1050,13 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	specialty = "M11 pattern marine"
 
-/obj/item/clothing/head/helmet/marine/leader/mod
+/obj/item/clothing/head/helmet/marine/radio_helmet/vsl
 	name = "\improper M11-R pattern helmet"
-	desc = "A variant of the M11 pattern, the 'R' platform features an older, external-style comms module and leather banding. Those who use it swear it has a better signal, but nobody knows for sure."
+	desc = "A variant of the M11 pattern, the 'R' platform features new external-style comms module and leather banding. This module allow you to use radio."
+	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	icon_state = "vsl_helmet"
+
+	phone_category = PHONE_MARINE
 
 /obj/item/clothing/head/helmet/marine/rto
 	name = "\improper M12 pattern dust helmet"
