@@ -375,7 +375,9 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	prefs.last_id = computer_id //these are gonna be used for banning
 	fps = prefs.fps
 
+/* RUCM CHANGE
 	notify_login()
+*/
 
 	load_xeno_name()
 
@@ -448,6 +450,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	update_fullscreen()
 
+/* RUCM CHANGE
 	var/file = file2text("config/donators.txt")
 	var/lines = splittext(file, "\n")
 
@@ -455,6 +458,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		if(src.ckey == line)
 			src.donator = TRUE
 			add_verb(src, /client/proc/set_ooc_color_self)
+*/
 
 	if(!tooltips && prefs.tooltips)
 		tooltips = new(src)
@@ -501,7 +505,12 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		message_admins("Admin logout: [key_name(src)]")
 
 		var/list/adm = get_admin_counts(R_MOD)
+/*
 		REDIS_PUBLISH("byond.access", "type" = "logout", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+*/
+		//RUCM START
+		REDIS_PUBLISH("byond.access", "type" = "admin", "state" = "logout", "key" = src.key, "remaining" = length(adm["total"]), "afk" = length(adm["afk"]))
+		//RUCM END
 
 	..()
 	return QDEL_HINT_HARDDEL_NOW

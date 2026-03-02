@@ -122,7 +122,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/remove_speech_bubble(mutable_appearance/speech_bubble, list_of_mobs)
 	overlays -= speech_bubble
 
-/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon)
+/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, tts_heard_list)
 	var/turf/T
 
 	if(!filter_message(src, message))
@@ -132,6 +132,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		return
 
 	message = process_chat_markup(message, list("~", "_"))
+
+	//RUCM START
+	if(!length(tts_heard_list))
+		tts_heard_list = list(list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
+	//RUCM END
 
 	for(var/dst=0; dst<=1; dst++) //Will run twice if src has a clone
 		if(!dst && src.clone) //Will speak in src's location and the clone's
@@ -204,11 +210,18 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(not_dead_speaker)
 			langchat_speech(message, listening, speaking)
 		for(var/mob/M as anything in listening)
+<<<<<<< HEAD
 			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, message_mode)
+=======
+			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list = tts_heard_list)
+		overlays += speech_bubble
+
+		addtimer(CALLBACK(src, PROC_REF(remove_speech_bubble), speech_bubble), 3 SECONDS)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 		for(var/obj/hearing_obj as anything in listening_obj)
 			if(hearing_obj) //It's possible that it could be deleted in the meantime.
-				hearing_obj.hear_talk(src, message, verb, speaking, italics)
+				hearing_obj.hear_talk(src, message, verb, speaking, italics, tts_heard_list = tts_heard_list)
 
 	//used for STUI to stop logging of animal messages and radio
 	//if(!nolog)
@@ -225,7 +238,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else
 		log_say("[name != "Unknown" ? name : "([real_name])"]: [message] (CKEY: [key]) (AREA: [get_area_name(loc)])")
 
-	return 1
+	return tts_heard_list
 
 /mob/living/proc/say_signlang(message, verb="gestures", datum/language/language)
 	for (var/mob/O in viewers(src, null))

@@ -126,10 +126,22 @@ Additional game mode variables.
 	xeno_starting_num = clamp((GLOB.readied_players/CONFIG_GET(number/xeno_number_divider)), xeno_required_num, INFINITY) //(n, minimum, maximum)
 	surv_starting_num = clamp((GLOB.readied_players/CONFIG_GET(number/surv_number_divider)), 2, 8) //this doesn't run
 	marine_starting_num = length(GLOB.player_list) - xeno_starting_num - surv_starting_num
+/* RUCM REMOVE
 	for(var/datum/squad/target_squad in GLOB.RoleAuthority.squads)
 		if(target_squad)
 			target_squad.roles_cap[JOB_SQUAD_ENGI] = engi_slot_formula(marine_starting_num)
 			target_squad.roles_cap[JOB_SQUAD_MEDIC] = medic_slot_formula(marine_starting_num)
+*/
+//RUCM START
+	for(var/datum/squad/target_squad in GLOB.RoleAuthority.squads)
+		if(target_squad)
+			target_squad.roles_cap[JOB_SQUAD_ENGI] = engi_slot_formula(marine_starting_num)
+			target_squad.roles_cap[JOB_SQUAD_MEDIC] = medic_slot_formula(marine_starting_num)
+
+		if(!isnull(target_squad.active_at) && target_squad.active_at > marine_starting_num)
+			target_squad.roundstart = FALSE
+			target_squad.usable = FALSE
+//RUCM END
 
 	for(var/i in GLOB.RoleAuthority.roles_by_name)
 		var/datum/job/J = GLOB.RoleAuthority.roles_by_name[i]
@@ -549,12 +561,23 @@ Additional game mode variables.
 			if(picked_hive.stored_larva)
 				if(!xeno_bypass_timer)
 					var/deathtime = world.time - xeno_candidate.timeofdeath
+/* RUCM REMOVE
 					if(isnewplayer(xeno_candidate))
 						deathtime = INFINITY //so new players don't have to wait to latejoin as xeno in the round's first 2.5 mins.
 					if(deathtime < XENO_JOIN_DEAD_LARVA_TIME && !candidate_observer.bypass_time_of_death_checks && !check_client_rights(xeno_candidate.client, R_ADMIN, FALSE))
 						to_chat(xeno_candidate, SPAN_WARNING("You have been dead for [DisplayTimeText(deathtime)]."))
 						to_chat(xeno_candidate, SPAN_WARNING("You must wait at least [XENO_JOIN_DEAD_LARVA_TIME / 600] minute\s before rejoining the game as a buried larva!"))
 						return FALSE
+*/
+//RUCM START
+					if(isnewplayer(xeno_candidate))
+						deathtime = INFINITY //so new players don't have to wait to latejoin as xeno in the round's first 5 mins.
+
+					else if(deathtime < GLOB.xeno_join_dead_larva_time && !candidate_observer.bypass_time_of_death_checks && !check_client_rights(xeno_candidate.client, R_ADMIN, FALSE))
+						to_chat(xeno_candidate, SPAN_WARNING("You have been dead for [DisplayTimeText(deathtime)]."))
+						to_chat(xeno_candidate, SPAN_WARNING("You must wait [DisplayTimeText(GLOB.xeno_join_dead_larva_time - deathtime)] before rejoining the game as a buried larva!"))
+						return FALSE
+//RUCM END
 
 				for(var/mob_name in picked_hive.banished_ckeys)
 					if(picked_hive.banished_ckeys[mob_name] == xeno_candidate.ckey)
@@ -590,10 +613,12 @@ Additional game mode variables.
 			return FALSE
 
 		var/required_leave_time = XENO_LEAVE_TIMER
-		var/required_dead_time = XENO_JOIN_DEAD_TIME
+		//var/required_dead_time = XENO_JOIN_DEAD_TIME // RUCM CHANGE
+		var/required_dead_time = GLOB.xeno_join_dead_time
 		if(islarva(new_xeno))
 			required_leave_time = XENO_LEAVE_TIMER_LARVA
-			required_dead_time = XENO_JOIN_DEAD_LARVA_TIME
+			//required_dead_time = XENO_JOIN_DEAD_LARVA_TIME // RUCM CHANGE
+			required_dead_time = GLOB.xeno_join_dead_larva_time
 
 		if(new_xeno.away_timer < required_leave_time)
 			var/to_wait = required_leave_time - new_xeno.away_timer

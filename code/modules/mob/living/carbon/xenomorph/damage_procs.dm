@@ -118,8 +118,7 @@
 		"penetration" = penetration,
 		"armour_break_pr_pen" = armour_break_pr_pen,
 		"armour_break_flat" = armour_break_flat,
-		"armor_integrity" = armor_integrity,
-		"armour_type" = armour_type,
+		"armor_integrity" = armor_integrity
 	)
 	SEND_SIGNAL(src, COMSIG_XENO_PRE_APPLY_ARMOURED_DAMAGE, damagedata)
 	var/modified_damage = armor_damage_reduction(armour_config, damage,
@@ -208,8 +207,7 @@
 	if(GLOB.xeno_general.armor_ignore_integrity)
 		return FALSE
 
-	if(stat == DEAD)
-		return
+	if(stat == DEAD) return
 
 	if(armor_deflection<=0)
 		return
@@ -269,6 +267,7 @@
 					decal.icon_state = pick(decal.random_icon_states)
 
 		var/splash_chance = 40 //Base chance of getting splashed. Decreases with # of victims.
+		var/acid_blood_damage_new
 		var/i = 0 //Tally up our victims.
 
 		for(var/mob/living/carbon/human/victim in range(radius, src)) //Loop through all nearby victims, including the tile.
@@ -281,7 +280,14 @@
 				splash_chance -= victim.species.acid_blood_dodge_chance
 
 			if(splash_chance > 0 && prob(splash_chance)) //Success!
+				//RUCM EDIT START
+				if(istype(victim.wear_suit, /obj/item/clothing/suit/storage/marine/m40))
+					acid_blood_damage_new = (acid_blood_damage*0.25)
+				/* RUCM REMOVE START
 				var/dmg = list("damage" = acid_blood_damage)
+				*///RUCM REMOVE END
+				var/dmg = list("damage" = acid_blood_damage_new)
+				//RUCM EDIT END
 				if(SEND_SIGNAL(src, COMSIG_XENO_DEAL_ACID_DAMAGE, victim, dmg) & COMPONENT_BLOCK_DAMAGE)
 					continue
 				i++
@@ -311,6 +317,10 @@
 
 /mob/living/carbon/xenomorph/handle_flamer_fire(obj/flamer_fire/fire, damage, delta_time)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+//RUCM END
 	switch(fire.fire_variant)
 		if(FIRE_VARIANT_TYPE_B)
 			if(!armor_deflection_debuff) //Only adds another reset timer if the debuff is currently on 0, so at the start or after a reset has recently occurred.
@@ -319,6 +329,10 @@
 
 /mob/living/carbon/xenomorph/handle_flamer_fire_crossed(obj/flamer_fire/fire)
 	. = ..()
+//RUCM START
+	if(!.)
+		return
+//RUCM END
 	switch(fire.fire_variant)
 		if(FIRE_VARIANT_TYPE_B) //Armor Shredding Greenfire
 			if(!armor_deflection_debuff) //Only applies the xeno armor shred reset when the debuff isn't present or was recently removed.

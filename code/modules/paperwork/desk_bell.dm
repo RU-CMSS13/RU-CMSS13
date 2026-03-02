@@ -113,7 +113,10 @@
 	name = "corporate liaison reception bell"
 	desc = "The cornerstone of any customer service job. This one is linked to ARES and will notify the Corporate Liaison upon being rung."
 	ring_cooldown_length = 60 SECONDS // Prevents spam
+<<<<<<< HEAD
 	anchored = TRUE
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 /obj/item/desk_bell/corp_liaison/ring_bell(mob/living/user)
 	if(broken_ringer)

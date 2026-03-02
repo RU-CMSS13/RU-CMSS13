@@ -38,6 +38,7 @@
 #define SKILL_FIREARMS_MASTER 3   //special training
 #define SKILL_FIREARMS_MAX 3
 
+/* RUCM MOVE
 //spec_weapons skill
 //hidden. who can and can't use specialist weapons
 #define SKILL_SPEC_DEFAULT 0
@@ -61,6 +62,7 @@
 #define SKILL_SPEC_UPP 8
 /// Can use ALL specialist weapons
 #define SKILL_SPEC_ALL 9
+*/
 
 //construction skill
 #define SKILL_CONSTRUCTION_DEFAULT 0

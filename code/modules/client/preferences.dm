@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	var/toggles_ert = TOGGLES_ERT_DEFAULT
 	var/toggles_survivor = TOGGLES_SURVIVOR_DEFAULT
 	var/toggles_ert_pred = TOGGLES_ERT_GROUNDS
-	var/list/volume_preferences = list(1, 0.5, 1, 0.6) // Game, music, admin midis, lobby music (this is also set in sanitize_volume_preferences() call)
+	var/list/volume_preferences = list(1, 0.5, 1, 0.6, 1) // Game, music, admin midis, lobby music, TTS (this is also set in sanitize_volume_preferences() call)
 	var/chat_display_preferences = CHAT_TYPE_ALL
 	var/item_animation_pref_level = SHOW_ITEM_ANIMATIONS_ALL
 	var/pain_overlay_pref_level = PAIN_OVERLAY_BLURRY
@@ -419,7 +419,17 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 			dat += "<h2><b><u>Physical Information:</u></b>"
 			dat += "<a href='byond://?_src_=prefs;preference=all;task=random'>&reg;</A></h2>"
 			dat += "<b>Age:</b> <a href='byond://?_src_=prefs;preference=age;task=input'><b>[age]</b></a><br>"
+<<<<<<< HEAD
 			dat += "<b>Gender:</b> <a href='byond://?_src_=prefs;preference=gender'><b>[gender == PLURAL ? "Non-Binary" : gender == MALE ? "Male" : "Female"]</b></a><br>"
+=======
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;task=input'><b>[voice]</b></a><br>"
+				dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=voice_pitch;task=input'><b>[voice_pitch]</b></a><br>"
+				dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=human;task=input'><b>Hear Voice</b></a><br>"
+			//RUCM END
+			dat += "<b>Gender:</b> <a href='byond://?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br><br>"
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 			dat += "<b>Skin Color:</b> [skin_color]<br>"
 			dat += "<b>Body Size:</b> [body_size]<br>"
@@ -531,7 +541,18 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 			var/display_postfix = xeno_postfix ? xeno_postfix : "------"
 			dat += "<b>Xeno prefix:</b> <a href='byond://?_src_=prefs;preference=xeno_prefix;task=input'><b>[display_prefix]</b></a><br>"
 			dat += "<b>Xeno postfix:</b> <a href='byond://?_src_=prefs;preference=xeno_postfix;task=input'><b>[display_postfix]</b></a><br>"
+<<<<<<< HEAD
 
+=======
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice]</b></a><br>"
+				dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
+				dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
+				dat += "<b>Hivemind TTS:</b> <a href='byond://?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
+			//RUCM END
+			dat += "<b>Enable Playtime Perks:</b> <a href='byond://?_src_=prefs;preference=playtime_perks'><b>[playtime_perks? "Yes" : "No"]</b></a><br>"
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 			dat += "<b>Show Queen Name:</b> <a href='byond://?_src_=prefs;preference=show_queen_name'><b>[show_queen_name? "Yes" : "No"]</b></a><br>"
 			dat += "<b>Default Xeno Night Vision Level:</b> <a href='byond://?_src_=prefs;preference=xeno_vision_level_pref;task=input'><b>[xeno_vision_level_pref]</b></a><br>"
 
@@ -560,6 +581,12 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 				dat += "<div id='column1'>"
 				dat += "<h2><b><u>Synthetic Settings:</u></b></h2>"
 				dat += "<b>Synthetic Name:</b> <a href='byond://?_src_=prefs;preference=synth_name;task=input'><b>[synthetic_name]</b></a><br>"
+				//RUCM START
+				if(SStts.tts_enabled)
+					dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
+					dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
+					dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
+				//RUCM END
 				dat += "<b>Synthetic Type:</b> <a href='byond://?_src_=prefs;preference=synth_type;task=input'><b>[synthetic_type]</b></a><br>"
 				dat += "<b>Synthetic Whitelist Status:</b> <a href='byond://?_src_=prefs;preference=synth_status;task=input'><b>[synth_status]</b></a><br>"
 				dat += "<b>Synthetic Specialisation:</b> <a href='byond://?_src_=prefs;preference=synth_specialisation;task=input'><b>[synth_specialisation]</b></a><br>"
@@ -610,6 +637,10 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Game Settings:</u></b></h2>"
+			//RUCM START
+			if(SStts.tts_enabled)
+				dat += "<b>TTS Mode:</b> <a href='byond://?_src_=prefs;preference=tts_mode'><b>[tts_mode]</b></a><br>"
+			//RUCM END
 			dat += "<b>Ambient Occlusion:</b> <a href='byond://?_src_=prefs;preference=ambientocclusion'><b>[toggle_prefs & TOGGLE_AMBIENT_OCCLUSION ? "Enabled" : "Disabled"]</b></a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='byond://?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
 			dat += "<b>Adaptive Zoom:</b> <a href='byond://?_src_=prefs;preference=adaptive_zoom'>[adaptive_zoom ? "[adaptive_zoom * 2]x" : "Disabled"]</a><br>"
@@ -1581,6 +1612,88 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 					if(new_age)
 						age = max(min( floor(text2num(new_age)), AGE_MAX),AGE_MIN)
 
+				//RUCM START
+				if("voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers & (gender == MALE ? GLOB.tts_voices_men_whitelists : GLOB.tts_voices_woman_whitelists))
+					if(new_voice)
+						voice = new_voice
+
+				if("synth_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						synth_voice = new_voice
+
+				if("xeno_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", SStts.available_speakers)
+					if(new_voice)
+						xeno_voice = new_voice
+
+				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice_pitch = input(user, "Choose your voice's pitch:\n([-12] to [12])", "Character Preferences") as num|null
+					if(!isnull(new_voice_pitch))
+						switch(href_list["preference"])
+							if("voice_pitch")
+								voice_pitch = new_voice_pitch
+							if("synth_voice_pitch")
+								synth_pitch = new_voice_pitch
+							if("xeno_voice_pitch")
+								xeno_pitch = new_voice_pitch
+
+				if("test_voice")
+					if(!SStts.tts_enabled)
+						return
+					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
+						return
+
+					COOLDOWN_START(src, tts_test_cooldown, 0.5 SECONDS)
+					var/target_voice
+					var/target_pitch
+					var/target_filter = ""
+					switch(href_list["target_voice"])
+						if("human")
+							target_voice = voice
+							target_pitch = voice_pitch
+						if("synth")
+							target_voice = synth_voice
+							target_pitch = synth_pitch
+						if("xeno")
+							target_voice = xeno_voice
+							target_pitch = xeno_pitch
+//							target_filter = TTS_FILTER_XENO
+
+					if(!target_voice)
+						return
+
+					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, target_filter, null, TRUE, 0, target_pitch)
+
+				if("hivemind_tts")
+					var/list/options = list(
+						tts_hivemind_to_text(TTS_HIVEMIND_ALL) = TTS_HIVEMIND_ALL,
+						tts_hivemind_to_text(TTS_HIVEMIND_LEADERS) = TTS_HIVEMIND_LEADERS,
+						tts_hivemind_to_text(TTS_HIVEMIND_QUEEN) = TTS_HIVEMIND_QUEEN,
+						tts_hivemind_to_text(TTS_HIVEMIND_OFF) = TTS_HIVEMIND_OFF
+					)
+					var/result_text = tgui_input_list(user, "Select hivemind TTS mode.", "Hivemind TTS Mode Selection", options, theme = "hive_status")
+					if(!result_text)
+						return
+					var/result_value = options[result_text]
+					tts_hivemind_mode = result_value
+
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+				//RUCM END
+
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
@@ -1934,6 +2047,13 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 					var/flag = text2num(href_list["flag"])
 					toggles_ert ^= flag
 
+				//RUCM START
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+				//RUCM END
+
 				if("toggles_ert_pred")
 					var/flag = text2num(href_list["flag"])
 					toggles_ert_pred ^= flag
@@ -2135,6 +2255,11 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	character.skin_color = skin_color
 	character.body_type = body_type
 	character.body_size = body_size
+	//RUCM START
+	if(SStts.tts_enabled)
+		character.tts_voice = sanitize_inlist(voice, SStts.available_speakers, pick(SStts.available_speakers))
+		character.tts_voice_pitch = voice_pitch
+	//RUCM END
 	character.body_presentation = get_body_presentation()
 
 	character.r_eyes = r_eyes

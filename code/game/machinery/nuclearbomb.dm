@@ -1,3 +1,4 @@
+
 GLOBAL_VAR_INIT(bomb_set, FALSE)
 /obj/structure/machinery/nuclearbomb
 	name = "\improper 'Blockbuster' Large Atomic Fission Demolition Device (LAFDEDE)"

@@ -39,7 +39,12 @@
 
 		var/new_spread_amt = fire_spread_amount - 1
 		if(T.density)
+/*
 			T.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+			T.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 			new_spread_amt = 0
 
 		else
@@ -47,7 +52,12 @@
 			var/atom/A = LinkBlocked(temp, source_turf, T)
 
 			if(A)
+/*
 				A.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+				A.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 				if (A.flags_atom & ON_BORDER)
 					break
 				new_spread_amt = 0
@@ -85,12 +95,22 @@
 				continue
 
 			if(T.density && !T.throwpass) // unpassable turfs stop the spread
+/*
 				T.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+				T.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 
 			var/obj/flamer_fire/temp = new()
 			var/atom/A = LinkBlocked(temp, prev_T, T)
 			if(A)
+/*
 				A.flamer_fire_act(burn_dam, , F.weapon_cause_data)
+*/
+//RUCM START
+				A.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 				if (A.flags_atom & ON_BORDER)
 					break
 
@@ -128,14 +148,24 @@
 			break
 
 		if(T.density)
+/*
 			T.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+			T.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 			stop_at_turf = TRUE
 		else if(prev_T)
 			var/obj/flamer_fire/temp = new()
 			var/atom/A = LinkBlocked(temp, prev_T, T)
 
 			if(A)
+/*
 				A.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+				A.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 				if (A.flags_atom & ON_BORDER)
 					break
 				stop_at_turf = TRUE
@@ -174,14 +204,24 @@
 			break
 
 		if(T.density)
+/*
 			T.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+			T.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 			hit_dense_atom_mid = TRUE
 		else if(prev_T)
 			var/atom/movable/temp = new/obj/flamer_fire()
 			var/atom/movable/AM = LinkBlocked(temp, prev_T, T)
 			qdel(temp)
 			if(AM)
+/*
 				AM.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+				AM.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 				if (AM.flags_atom & ON_BORDER)
 					break
 				hit_dense_atom_mid = TRUE
@@ -218,7 +258,12 @@
 				var/atom/movable/AM = LinkBlocked(temp, prev_R, R)
 				qdel(temp)
 				if(AM)
+/*
 					AM.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+					AM.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 					if (AM.flags_atom & ON_BORDER)
 						break
 					hit_dense_atom_side = TRUE
@@ -237,7 +282,12 @@
 				var/atom/movable/AM = LinkBlocked(temp, prev_L, L)
 				qdel(temp)
 				if(AM)
+/*
 					AM.flamer_fire_act(burn_dam, F.weapon_cause_data)
+*/
+//RUCM START
+					AM.flamer_fire_act(burn_dam, F.weapon_cause_data, F)
+//RUCM END
 					if (AM.flags_atom & ON_BORDER)
 						break
 					hit_dense_atom_side = TRUE

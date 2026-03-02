@@ -8,6 +8,8 @@
 	var/total_xeno_majors = 0
 	var/total_draws = 0
 
+BSQL_PROTECT_DATUM(/datum/entity/statistic_map)
+
 /datum/entity_meta/statistic_map
 	entity_type = /datum/entity/statistic/map
 	table_name = "maps"

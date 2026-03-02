@@ -49,7 +49,12 @@
 	can_hold = list() //Nada. Once you take the stuff out it doesn't fit back in.
 	foldable = null
 
+<<<<<<< HEAD
 /obj/item/storage/box/m56a2c_system/Initialize()
+=======
+/* RUCM CHANGE
+/obj/item/storage/box/m56c_system/Initialize()
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	. = ..()
 	new /obj/item/clothing/glasses/night/m56_goggles(src)
 	new /obj/item/weapon/gun/smartgun/co(src)
@@ -58,6 +63,7 @@
 	new /obj/item/clothing/suit/storage/marine/smartgunner(src)
 	new /obj/item/storage/belt/marine/smartgunner(src)
 	update_icon()
+*/
 
 /obj/item/storage/box/m56a2c_system/update_icon()
 	LAZYCLEARLIST(overlays)

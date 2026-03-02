@@ -372,6 +372,10 @@ GLOBAL_DATUM_INIT(fax_network, /datum/fax_network, new)
 
 			copy_fax_paper()
 
+			//RUCM START
+			REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "fax", "sender" = usr.client.ckey, "sender_name" = usr, "fax_name" = fax_paper_copy.name, "departament" = "[network], [target_department]", "message" = fax_paper_copy.info, "admins" = length(GLOB.admins))
+			//RUCM END
+
 			outgoing_fax_message(user, is_priority_fax)
 			is_priority_fax = FALSE
 

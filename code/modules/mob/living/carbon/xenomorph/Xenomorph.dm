@@ -78,7 +78,9 @@
 	//////////////////////////////////////////////////////////////////
 	var/datum/caste_datum/caste // Used to extract determine ALL Xeno stats.
 	var/speaking_key = "x"
+/* RUCM CHANGE
 	var/speaking_noise = "alien_talk"
+*/
 	slash_verb = "slash"
 	slashes_verb = "slashes"
 	var/slash_sound = "alien_claw_flesh"
@@ -367,8 +369,6 @@
 	var/atom/movable/vis_obj/xeno_pack/backpack_icon_holder
 	/// If TRUE, the xeno cannot slash anything
 	var/cannot_slash = FALSE
-	/// The world.time when the xeno was created. Carries over between strains and evolving
-	var/creation_time = 0
 
 /mob/living/carbon/xenomorph/Initialize(mapload, mob/living/carbon/xenomorph/old_xeno, hivenumber)
 	if(old_xeno && old_xeno.hivenumber)
@@ -393,9 +393,14 @@
 	wound_icon_holder = new(null, src)
 	vis_contents += wound_icon_holder
 
+	set_languages(list(LANGUAGE_XENOMORPH, LANGUAGE_HIVEMIND))
+
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	AddComponent(/datum/component/deevolve_cooldown, old_xeno)
 	if(old_xeno)
+		//RUCM SART
+		tts_voice = old_xeno.tts_voice
+		//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total
@@ -518,6 +523,7 @@
 	if (hive && hive.hive_ui)
 		hive.hive_ui.update_all_xeno_data()
 
+<<<<<<< HEAD
 	if(hive.hivenumber != XENO_HIVE_NORMAL)
 		remove_verb(src, /mob/living/carbon/xenomorph/verb/view_tacmaps)
 	minimap_ref = WEAKREF(new minimap_type(hive_number=hive.hivenumber))
@@ -527,6 +533,8 @@
 
 	creation_time = world.time
 
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	Decorate()
 
 	RegisterSignal(src, COMSIG_MOB_SCREECH_ACT, PROC_REF(handle_screech_act))
@@ -729,6 +737,9 @@
 	if(client)
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
+		//RUCM START
+		init_voice()
+		//RUCM END
 		age_xeno()
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 
@@ -1040,11 +1051,20 @@
 	tacklestrength_max = caste.tacklestrength_max
 
 /mob/living/carbon/xenomorph/proc/recalculate_health()
+/* RUCM CHANGE
 	var/new_max_health = nocrit ? health_modifier + maxHealth : health_modifier + caste.max_health
+<<<<<<< HEAD
 	if(hive)
 		new_max_health += hive.hive_stat_modifier_flat["health"]
 		new_max_health *= hive.hive_stat_modifier_multiplier["health"]
 	if(new_max_health == maxHealth)
+=======
+*/
+//RUCM START
+	var/new_max_health = nocrit ? health_modifier + maxHealth : round((health_modifier + caste.max_health) * hive.healthstack)
+//RUCM END
+	if (new_max_health == maxHealth)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 		return
 	var/currentHealthRatio = 1
 	if(health < maxHealth)
@@ -1188,7 +1208,12 @@
 
 /mob/living/carbon/xenomorph/resist_fire()
 	adjust_fire_stacks(XENO_FIRE_RESIST_AMOUNT, min_stacks = 0)
+/* RUCM CHANGE
 	apply_effect(4, WEAKEN)
+*/
+//RUCM START
+	apply_effect(hive.resist_xeno_countdown, WEAKEN)
+//RUCM END
 	visible_message(SPAN_DANGER("[src] rolls on the floor, trying to put themselves out!"),
 		SPAN_NOTICE("You stop, drop, and roll!"), null, 5)
 

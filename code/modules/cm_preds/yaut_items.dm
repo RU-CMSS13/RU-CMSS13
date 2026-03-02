@@ -333,13 +333,14 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 	volume_settings = list(RADIO_VOLUME_QUIET_STR, RADIO_VOLUME_RAISED_STR)
 	minimap_flag = MINIMAP_FLAG_YAUTJA
 
-/obj/item/device/radio/headset/yautja/talk_into(mob/living/M as mob, message, channel, verb = "commands", datum/language/speaking)
+/obj/item/device/radio/headset/yautja/talk_into(mob/living/M as mob, message, channel, verb = "commands", datum/language/speaking, tts_heard_list)
 	if(!isyautja(M)) //Nope.
 		to_chat(M, SPAN_WARNING("You try to talk into the headset, but just get a horrible shrieking in your ears!"))
 		return
 
 	for(var/mob/living/carbon/xenomorph/hellhound/hellhound as anything in GLOB.hellhound_list)
 		if(!hellhound.stat)
+			tts_heard_list[2] += hellhound
 			to_chat(hellhound, "\[Radio\]: [M.real_name] [verb], '<B>[message]</b>'.")
 	..()
 

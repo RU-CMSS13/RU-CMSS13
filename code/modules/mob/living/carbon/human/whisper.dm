@@ -82,11 +82,16 @@
 			if(istype(C,/mob/living))
 				listening += C
 
+	//RUCM START
+	var/list/tts_heard_list = list(list(), list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, -25, tts_voice_pitch, "", speaking_noise)
+	//RUCM END
+
 	//pass on the message to objects that can hear us.
 	FOR_DVIEW(var/obj/O, message_range, src, HIDE_INVISIBLE_OBSERVER)
 		spawn (0)
 			if (O)
-				O.hear_talk(src, message) //O.hear_talk(src, message, verb, speaking)
+				O.hear_talk(src, message, tts_heard_list = tts_heard_list) //O.hear_talk(src, message, verb, speaking)
 	FOR_DVIEW_END
 
 	var/list/eavesdropping = hearers(eavesdropping_range, src)
@@ -104,14 +109,26 @@
 
 	var/not_dead_speaker = (stat != DEAD)
 	for(var/mob/M in listening)
+<<<<<<< HEAD
 		M.hear_say(message, verb, speaking, alt_name, italics, src)
 		langchat_speech(message, listening, speaking, langchat_color, FALSE, LANGCHAT_DEFAULT_POP, list("langchat_italic"))
+=======
+		if(not_dead_speaker)
+			M << speech_bubble
+		M.hear_say(message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	if (length(eavesdropping))
 		var/new_message = stars(message) //hopefully passing the message twice through stars() won't hurt... I guess if you already don't understand the language, when they speak it too quietly to hear normally you would be able to catch even less.
 		for(var/mob/M in eavesdropping)
+<<<<<<< HEAD
 			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 			langchat_speech(message, listening, speaking, langchat_color, FALSE, LANGCHAT_DEFAULT_POP, list("langchat_italic"))
+=======
+			if(not_dead_speaker)
+				M << speech_bubble
+			M.hear_say(new_message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	spawn(30)
 		if(not_dead_speaker)

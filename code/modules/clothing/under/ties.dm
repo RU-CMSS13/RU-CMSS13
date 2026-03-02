@@ -863,8 +863,8 @@
 	. = ..()
 	hold.emp_act(severity)
 
-/obj/item/clothing/accessory/storage/hear_talk(mob/M, msg)
-	hold.hear_talk(M, msg)
+/obj/item/clothing/accessory/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	hold.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 	..()
 
 /obj/item/clothing/accessory/storage/attack_self(mob/user)
@@ -1037,7 +1037,9 @@
 		/obj/item/device/multitool,
 		/obj/item/tool/shovel/etool,
 		/obj/item/weapon/gun/smg/nailgun/compact,
+/* RUCM REMOVE
 		/obj/item/device/defibrillator/synthetic,
+*/
 		/obj/item/stack/rods,
 	)
 

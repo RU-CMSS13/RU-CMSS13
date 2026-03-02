@@ -82,6 +82,9 @@
 		XENO_STRUCTURE_CORE = 1,
 		XENO_STRUCTURE_CLUSTER = 8,
 		XENO_STRUCTURE_EGGMORPH = 6,
+//RUCM START
+		XENO_STRUCTURE_SUNKEN = 2,
+//RUCM END
 		XENO_STRUCTURE_RECOVERY = 6,
 		XENO_STRUCTURE_PLASMA_TREE = 3,
 		XENO_STRUCTURE_PYLON = 2,
@@ -91,8 +94,15 @@
 		XENO_STRUCTURE_CORE = /datum/construction_template/xenomorph/core,
 		XENO_STRUCTURE_CLUSTER = /datum/construction_template/xenomorph/cluster,
 		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph,
+<<<<<<< HEAD
 		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery,
 		XENO_STRUCTURE_PLASMA_TREE = /datum/construction_template/xenomorph/plasma_tree
+=======
+//RUCM START
+		XENO_STRUCTURE_SUNKEN = /datum/construction_template/xenomorph/sunken_colony,
+//RUCM END
+		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	)
 
 	var/list/list/hive_structures = list() //Stringref list of structures that have been built

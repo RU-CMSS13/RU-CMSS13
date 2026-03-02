@@ -141,9 +141,11 @@
 	message = "laughs!"
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
 
+/*
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
 	if(isyautja(user))
 		return pick('sound/voice/pred_laugh1.ogg', 'sound/voice/pred_laugh2.ogg', 'sound/voice/pred_laugh3.ogg', 'sound/voice/pred_laugh4.ogg', 'sound/voice/pred_laugh5.ogg', 'sound/voice/pred_laugh6.ogg')
+*/
 
 /datum/emote/living/carbon/human/look
 	key = "look"
@@ -366,6 +368,7 @@
 	. = ..()
 	user.show_speech_bubble(group, "warcry")
 
+/* RUCM CHANGE
 /datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		switch(user.faction)
@@ -373,6 +376,7 @@
 				return get_sfx("[user.gender]_upp_warcry")
 			else
 				return get_sfx("[user.gender]_warcry")
+*/
 
 /datum/emote/living/carbon/human/whimper
 	key = "whimper"

@@ -154,6 +154,11 @@
 			overlays += image(icon, "statn_c100")
 
 /obj/structure/machinery/recharge_station/proc/process_occupant()
+	//RUCM START
+	if (hacky_override)
+		process_occupant_localized()
+		return
+	//RUCM END
 	if(src.occupant)
 		var/doing_stuff = FALSE
 		if (issynth(occupant))
@@ -294,9 +299,9 @@
 
 #ifdef OBJECTS_PROXY_SPEECH
 // Transfers speech to occupant
-/obj/structure/machinery/recharge_station/hear_talk(mob/living/sourcemob, message, verb, language, italics)
+/obj/structure/machinery/recharge_station/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	if(!QDELETED(occupant) && istype(occupant) && occupant.stat != DEAD)
-		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics)
+		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics, tts_heard_list = tts_heard_list)
 	else
-		..(sourcemob, message, verb, language, italics)
+		..(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)
 #endif // ifdef OBJECTS_PROXY_SPEECH

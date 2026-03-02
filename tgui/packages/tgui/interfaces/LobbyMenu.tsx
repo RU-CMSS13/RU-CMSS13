@@ -33,6 +33,7 @@ type LobbyData = {
   xeno_postfix: string;
 
   tutorials_ready: BooleanLike;
+  battlepass_ready: BooleanLike;
   round_start: BooleanLike;
   readied: BooleanLike;
 
@@ -303,6 +304,7 @@ const LobbyButtons = (props: {
     fax_responder_enabled,
     upp_enabled,
     tutorials_ready,
+    battlepass_ready,
     xenomorph_enabled,
   } = data;
 
@@ -473,7 +475,7 @@ const LobbyButtons = (props: {
                   <LobbyButton
                     icon="list"
                     tooltip="View Crew Manifest"
-                    index={6 + SMALL_BUTTON_DELAY}
+                    index={4 + SMALL_BUTTON_DELAY}
                     onClick={() => act('manifest')}
                   />
                 </Stack.Item>

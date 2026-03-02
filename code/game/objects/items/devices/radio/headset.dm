@@ -681,7 +681,20 @@
 	. = ..()
 	if(spy_bug)
 		spy_bug.nametag = "CL Radio"
+<<<<<<< HEAD
 	AddElement(/datum/element/corp_label/wy)
+=======
+
+/obj/item/device/radio/headset/almayer/mcl/sec
+	name = "corporate security radio headset"
+	spy_bug_type = null
+
+	misc_tracking = TRUE
+	locate_setting = TRACKER_CL
+	inbuilt_tracking_options = list(
+		"Corporate Liaison" = TRACKER_CL
+	)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 /obj/item/device/radio/headset/almayer/reporter
 	name = "reporter radio headset"

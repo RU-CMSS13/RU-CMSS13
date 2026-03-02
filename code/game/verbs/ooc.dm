@@ -39,6 +39,10 @@ CLIENT_VERB(ooc, msg as text)
 	if(!attempt_talking(msg))
 		return
 
+	//RUCM START
+	REDIS_PUBLISH("byond.round", "type" = "ooc", "state" = "ooc", "author" = key, "message" = msg)
+	//RUCM END
+
 	log_ooc("[mob.name]/[key] : [msg]")
 	GLOB.STUI.ooc.Add("\[[time_stamp()]] <font color='#display_colour'>OOC: [mob.name]/[key]: [msg]</font><br>")
 	GLOB.STUI.processing |= STUI_LOG_OOC_CHAT
@@ -59,10 +63,19 @@ CLIENT_VERB(ooc, msg as text)
 			display_colour  = CONFIG_GET(string/ooc_color_maint)
 		if(admin_holder.rights & R_COLOR)
 			display_colour = prefs.ooccolor
+/*
 	else if(donator)
 		display_colour = prefs.ooccolor
+<<<<<<< HEAD
 	else if(SScmtv.is_subscriber(src))
 		display_colour = CONFIG_GET(string/ooc_color_subs)
+=======
+*/
+//RUCM START
+	else if(player_data?.donator_info.patreon_function_available("ooc_color"))
+		display_colour = prefs.ooccolor
+//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	if(!display_colour) // if invalid R_COLOR choice
 		display_colour = CONFIG_GET(string/ooc_color_default)
 
@@ -86,11 +99,20 @@ CLIENT_VERB(ooc, msg as text)
 		prefix += "[icon2html(byond, GLOB.clients)]"
 	if(CONFIG_GET(flag/ooc_country_flags) && (prefs.toggle_prefs & TOGGLE_OOC_FLAG))
 		prefix += "[country2chaticon(country, GLOB.clients)]"
+/*
 	if(donator)
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
+<<<<<<< HEAD
 	if(SScmtv.is_subscriber(src))
 		var/static/sub_icon = icon('icons/effects/effects.dmi', "sub")
 		prefix += "[icon2html(sub_icon, GLOB.clients)]"
+=======
+*/
+//RUCM START
+	if(player_data.donator_info.patreon_function_available("badge"))
+		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "Donator")]"
+//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	if(isCouncil(src))
 		prefix += "[icon2html(GLOB.ooc_rank_dmi, GLOB.clients, "WhitelistCouncil")]"
 	var/comm_award = find_community_award_icons()

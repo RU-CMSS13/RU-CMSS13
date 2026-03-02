@@ -30,6 +30,11 @@
 	var/final_name = "David"
 	if(new_human.client && new_human.client.prefs)
 		final_name = new_human.client.prefs.synthetic_name
+		//RUCM START
+		if(SStts.tts_enabled)
+			new_human.tts_voice = new_human.client.prefs.synth_voice
+			new_human.tts_voice_pitch = new_human.client.prefs.synth_pitch
+		//RUCM END
 		if(!final_name || final_name == "Undefined")
 			final_name = "David"
 	new_human.change_real_name(new_human, final_name)
@@ -724,7 +729,6 @@
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/sling(new_human), WEAR_L_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/device/working_joe_pda(new_human.back), WEAR_IN_L_STORE)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/construction(new_human), WEAR_R_STORE)
-	new_human.equip_to_slot_or_del(new /obj/item/reagent_container/spray/cleaner(new_human.back), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/reagent_container/spray/cleaner(new_human.back), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/reagent_container/glass/bucket(new_human.back), WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/tool/mop(new_human.back), WEAR_IN_BACK)

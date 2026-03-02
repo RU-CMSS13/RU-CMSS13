@@ -72,8 +72,7 @@
 		if(user_xeno.hive.living_xeno_queen && user_xeno.hive.living_xeno_queen.observed_xeno == target_xeno)
 			user_xeno.hive.living_xeno_queen.overwatch(new_xeno)
 
-		if(new_xeno.ckey)
-			GLOB.deevolved_ckeys += new_xeno.ckey
+	return
 
 /datum/action/xeno_action/onclick/remove_eggsac/use_ability(atom/target)
 	var/mob/living/carbon/xenomorph/queen/X = owner
@@ -214,8 +213,13 @@
 		to_chat(queen, SPAN_WARNING("You must select a valid turf to heal around."))
 		return
 
+<<<<<<< HEAD
 	if(!SSmapping.same_z_map(queen.loc.z, target_turf.loc.z))
 		to_chat(queen, SPAN_XENOWARNING("You are too far away to do this here."))
+=======
+	if(X.loc.z != T.loc.z)
+		to_chat(X, SPAN_XENOWARNING("You are too far away to do this here."))
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 		return
 
 	if(!check_and_use_plasma_owner())

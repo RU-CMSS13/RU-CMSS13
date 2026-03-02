@@ -358,6 +358,9 @@
 		/obj/item/attachable/flashlight/under_barrel,
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/extended_barrel/vented,
 		/obj/item/attachable/compensator,
@@ -549,6 +552,9 @@
 		/obj/item/attachable/bayonet, // Muzzle
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/extended_barrel/vented,
 		/obj/item/attachable/lasersight, // Underbarrel
@@ -652,6 +658,9 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/flashlight/under_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/mateba,
 		/obj/item/attachable/mateba/long,
@@ -736,6 +745,9 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/flashlight/under_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/mateba/gold,
 		/obj/item/attachable/mateba/long/gold,
@@ -833,6 +845,9 @@
 		/obj/item/attachable/flashlight,
 		/obj/item/attachable/flashlight/under_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 	)
 	starting_attachment_types = list()
@@ -912,6 +927,9 @@
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/extended_barrel/vented,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail
 		/obj/item/attachable/reddot/small,

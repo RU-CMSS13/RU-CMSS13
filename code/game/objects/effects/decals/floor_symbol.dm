@@ -32,7 +32,11 @@
 /obj/effect/decal/floor_symbol/upp/westface/northwest
 	dir = NORTHWEST
 
+<<<<<<< HEAD
 /obj/effect/decal/floor_symbol/upp/northface
+=======
+/obj/effect/decal/floor_symbol/upp/northface/
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	icon_state = "upp_directional1"
 
 /obj/effect/decal/floor_symbol/upp/northface/southwest
@@ -54,6 +58,7 @@
 	dir = SOUTHEAST
 
 /obj/effect/decal/floor_symbol/upp/northface/northwest
+<<<<<<< HEAD
 	dir = NORTHWEST
 
 
@@ -117,4 +122,17 @@
 	dir = SOUTHEAST
 
 /obj/effect/decal/floor_symbol/uscm_3x3/westface/northwest
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	dir = NORTHWEST
+
+
+/obj/effect/decal/floor_symbol/wey_yu
+	name = "\improper Wey-Yu Logo"
+	icon_state = "wy_left"
+
+/obj/effect/decal/floor_symbol/wey_yu/mid
+	icon_state = "wy_mid"
+
+/obj/effect/decal/floor_symbol/wey_yu/right
+	icon_state = "wy_right"

@@ -1398,12 +1398,21 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 /obj/structure/machinery/computer/supply/asrs/vehicle/Initialize()
 	. = ..()
 
-	vehicles = list(
-		new /datum/vehicle_order/tank/plain
-	)
-
 	if(!GLOB.VehicleElevatorConsole)
 		GLOB.VehicleElevatorConsole = src
+
+	vehicles = list(
+/*
+		new /datum/vehicle_order/tank/plain
+*/
+//RUCM START
+		new /datum/vehicle_order/tank/plain,
+		new /datum/vehicle_order/apc/max,
+	)
+
+/datum/vehicle_order/arc/ru/has_vehicle_lock()
+	return
+//RUCM END
 
 /obj/structure/machinery/computer/supply/asrs/vehicle/Destroy()
 	GLOB.VehicleElevatorConsole = null

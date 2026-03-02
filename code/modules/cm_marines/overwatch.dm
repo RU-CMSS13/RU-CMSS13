@@ -1416,7 +1416,7 @@ GLOBAL_LIST_EMPTY_TYPED(active_overwatch_consoles, /obj/structure/machinery/comp
 
 	busy = FALSE
 	if(istype(T))
-		current_orbital_cannon.fire_ob_cannon(T, user, current_squad)
+		GLOB.almayer_orbital_cannon.fire_ob_cannon(T, user, current_squad)
 		user.count_niche_stat(STATISTICS_NICHE_OB)
 
 /obj/structure/machinery/computer/overwatch/proc/handle_supplydrop()

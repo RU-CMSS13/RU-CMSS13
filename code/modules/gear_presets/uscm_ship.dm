@@ -52,7 +52,6 @@
 	job_title = JOB_CORPORATE_LIAISON
 	paygrades = list(PAY_SHORT_WYC2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_WYC3 = JOB_PLAYTIME_TIER_2, PAY_SHORT_WYC4 = JOB_PLAYTIME_TIER_3, PAY_SHORT_WYC5 = JOB_PLAYTIME_TIER_4)
 	role_comm_title = "CL"
-	skills = /datum/skills/civilian
 
 	minimap_icon = "cl"
 	minimap_background = "background_goon"
@@ -75,12 +74,19 @@
 //*****************************************************************************************************/
 
 /datum/equipment_preset/uscm_ship/corp_sec
+<<<<<<< HEAD
 	name = "USCM CL Bodyguard (CB)"
+=======
+	name = "USCM Corporate Security (CS)"
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	faction = FACTION_WY
 	faction_group =	FACTION_LIST_MARINE_WY
 	flags = EQUIPMENT_PRESET_START_OF_ROUND
 	origin_override = ORIGIN_CIVILIAN
+<<<<<<< HEAD
 	selection_categories = list(FACTION_MARINE)
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	idtype = /obj/item/card/id/silver/cl
 	access = list(
@@ -99,8 +105,13 @@
 	)
 	assignment = JOB_CORPORATE_BODYGUARD
 	job_title = JOB_CORPORATE_BODYGUARD
+<<<<<<< HEAD
 	paygrades = list(PAY_SHORT_WY_SEC_TPPO = JOB_PLAYTIME_TIER_0, PAY_SHORT_WY_SEC_PPO = JOB_PLAYTIME_TIER_1, PAY_SHORT_WY_SEC_PPS = JOB_PLAYTIME_TIER_3, PAY_SHORT_WY_SEC_PPC = JOB_PLAYTIME_TIER_4)
 	role_comm_title = "CB"
+=======
+	paygrades = list(PAY_SHORT_WY_SEC_PPO = JOB_PLAYTIME_TIER_0, PAY_SHORT_WY_SEC_PPS = JOB_PLAYTIME_TIER_2, PAY_SHORT_WY_SEC_PPC = JOB_PLAYTIME_TIER_3)
+	role_comm_title = "CS"
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	skills = /datum/skills/wy_goon
 
 	minimap_icon = "goon_guard"
@@ -108,6 +119,7 @@
 
 /datum/equipment_preset/uscm_ship/corp_sec/New()
 	. = ..()
+<<<<<<< HEAD
 	access = get_access(ACCESS_LIST_MARINE_LIAISON) + list(ACCESS_WY_SECURITY)
 
 /datum/equipment_preset/uscm_ship/corp_sec/load_gear(mob/living/carbon/human/new_human)
@@ -131,6 +143,33 @@
 
 	new_human.equip_to_slot_or_del(new /obj/item/storage/box/zipcuffs/small, WEAR_IN_BACK)
 	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/tools/tactical/sec/full, WEAR_L_STORE)
+=======
+	access = get_access(ACCESS_LIST_MARINE_LIAISON)
+
+/datum/equipment_preset/uscm_ship/corp_sec/load_gear(mob/living/carbon/human/new_human)
+	new_human.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/mcl/sec, WEAR_L_EAR)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/under/marine/veteran/pmc/guard, WEAR_BODY)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/accessory/patch/wy_faction, WEAR_ACCESSORY)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/marine/veteran/pmc/light/bulletproof/guard, WEAR_JACKET)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/baton, WEAR_J_STORE)
+	new_human.equip_to_slot_or_del(new /obj/item/reagent_container/spray/pepper, WEAR_IN_JACKET)
+
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/gloves/marine/veteran/pmc, WEAR_HANDS)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/marine/veteran/pmc/guard, WEAR_HEAD)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/shoes/veteran/pmc/knife, WEAR_FEET)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/pmc, WEAR_FACE)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud/tactical, WEAR_EYES)
+
+	new_human.equip_to_slot_or_del(new /obj/item/storage/backpack/pmc, WEAR_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/tool/crowbar/tactical, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/storage/box/mre/pmc, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/clothing/accessory/storage/holster, WEAR_ACCESSORY)
+	new_human.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/taser, WEAR_IN_ACCESSORY)
+	new_human.equip_to_slot_or_del(new /obj/item/storage/pouch/firstaid/ert/wy, WEAR_R_STORE)
+
+	new_human.equip_to_slot_or_del(new /obj/item/storage/box/zipcuffs/small, WEAR_IN_BACK)
+	new_human.equip_to_slot_or_del(new /obj/item/device/flash, WEAR_L_STORE)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 
 //*****************************************************************************************************/

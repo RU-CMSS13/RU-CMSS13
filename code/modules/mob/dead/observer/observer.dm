@@ -453,6 +453,7 @@ Works together with spawning an observer, noted above.
 /mob/proc/ghostize(can_reenter_corpse = TRUE, aghosted = FALSE)
 	if(isaghost(src) || !key)
 		return
+
 	if(aghosted)
 		src.aghosted = TRUE
 

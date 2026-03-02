@@ -10,7 +10,16 @@ GLOBAL_LIST_INIT(cm_vending_gear_commanding_officer, list(
 		list("M41A MK1 AP Magazine", 40, /obj/item/ammo_magazine/rifle/m41aMK1/ap, null, VENDOR_ITEM_RECOMMENDED),
 		list("M41A Extended Magazine", 20, /obj/item/ammo_magazine/rifle/extended, null, VENDOR_ITEM_REGULAR),
 		list("M41A AP Magazine", 20, /obj/item/ammo_magazine/rifle/ap, null, VENDOR_ITEM_REGULAR),
+<<<<<<< HEAD
 		list("M56 Smartgun Drum", 20, /obj/item/ammo_magazine/smartgun, null, VENDOR_ITEM_REGULAR),
+=======
+/*
+		list("M56B Smartgun Drum", 20, /obj/item/ammo_magazine/smartgun, null, VENDOR_ITEM_REGULAR),
+*/
+//RUCM START
+		list("M56C Smartgun Drum (limited)", 20, /obj/item/ammo_magazine/smartgun/m56c, null, VENDOR_ITEM_REGULAR),
+//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 		list("SIDEARM AMMUNITION", 0, null, null, null),
 		list("High Impact Unica Speedloader (.454)", 15, /obj/item/ammo_magazine/revolver/mateba/highimpact, null, VENDOR_ITEM_RECOMMENDED),

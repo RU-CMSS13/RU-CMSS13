@@ -251,4 +251,6 @@ FLOOR SAFES
 	new /obj/item/storage/box/mre/wy(src)
 	new /obj/item/storage/box/mre/wy(src)
 	new /obj/item/coin/platinum(src)
+/* RUCM REMOVE
 	new /obj/item/device/defibrillator/synthetic/noskill(src)
+*/

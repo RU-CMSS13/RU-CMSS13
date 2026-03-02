@@ -6,9 +6,14 @@ import sys
 reading = False
 
 FORBID_INCLUDE = [
+<<<<<<< HEAD
 
     # Included by _ru_defines.dm
     r'code/__DEFINES/_RU_DEFINES/*.dm',
+=======
+    # Included by _idefinse_includes.dm
+    r'code/__DEFINES/core_defines_ru/*.dm',
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
     # Included by _unit_test.dm
     r'code/modules/unit_tests/[!_]*.dm',

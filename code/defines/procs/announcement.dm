@@ -186,11 +186,17 @@
 	if(!message || !title || !targets) //Shouldn't happen
 		return
 
+<<<<<<< HEAD
 	var/garbled_message
 	var/garbled_count = length(targets_to_garble)
 	if(garbled_count)
 		garbled_message = get_garbled_announcement(message, faction_to_garble)
 		log_garble("[garbled_count] received '[garbled_message]' for faction [faction_to_garble].")
+=======
+	//RUCM START
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), "jaina", null, list(targets, list(), list()), FALSE, 50)
+	//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	for(var/mob/target in targets)
 		if(istype(target, /mob/new_player))
