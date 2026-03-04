@@ -53,7 +53,12 @@
 	else
 		.["message"] = strip_language(message_and_language)
 
+/* RUCM CHANGE
 /mob/living/carbon/human/say(message)
+*/
+//RUCM START
+/mob/living/carbon/human/say(message, tts_heard_list)
+//RUCM END
 
 	var/verb = "says"
 	var/alt_name = ""
@@ -138,6 +143,11 @@
 		if(!(copytext(message, -1) in ENDING_PUNCT))
 			message += "."
 
+	//RUCM START
+	if(!length(tts_heard_list))
+		tts_heard_list = list(list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(handle_r[3]), tts_voice, handle_r[4], tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
+	//RUCM END
 	for(var/message_mode in parsed["modes"])
 		var/list/obj/item/used_radios = list()
 		switch(message_mode)
@@ -178,13 +188,26 @@
 			italics = 1
 			message_range = 2
 
+/* RUCM CHANGE
 		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
+*/
+//RUCM START
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
 
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
+//RUCM END
+/* RUCM CHANGE
 /mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking)
 	for(var/obj/item/device/radio/R in used_radios)
 		R.talk_into(src, message, message_mode, verb, speaking)
+*/
+//RUCM START
+/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, tts_heard_list)
+	for(var/obj/item/device/radio/R in used_radios)
+		R.talk_into(src, message, message_mode, verb, speaking, tts_heard_list = tts_heard_list)
+//RUCM END
 
 /mob/living/carbon/human/proc/forcesay(forcesay_type = SUDDEN)
 	if (!client || stat != CONSCIOUS)

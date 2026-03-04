@@ -195,11 +195,20 @@
 			a_right = null
 		qdel(src)
 
+/* RUCM CHANGE
 /obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg)
 	if(a_right)
 		a_right.hear_talk(M,msg)
 	if(a_left)
 		a_left.hear_talk(M,msg)
+*/
+//RUCM START
+/obj/item/device/assembly_holder/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	if(a_right)
+		a_right.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+	if(a_left)
+		a_left.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+//RUCM END
 
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"

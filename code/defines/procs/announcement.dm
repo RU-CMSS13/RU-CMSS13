@@ -186,6 +186,10 @@
 	if(!message || !title || !targets) //Shouldn't happen
 		return
 
+//RUCM START
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), GLOB.tts_announce_voice, null, list(targets, list(), list()), FALSE, 50)
+//RUCM END
+
 	var/garbled_message
 	var/garbled_count = length(targets_to_garble)
 	if(garbled_count)

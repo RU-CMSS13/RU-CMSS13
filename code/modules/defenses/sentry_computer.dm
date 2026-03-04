@@ -151,7 +151,15 @@
 /obj/item/device/sentry_computer/proc/send_message(message)
 	if(!silent && transceiver)
 		message = strip_improper(message)
+
+//RUCM START
+		var/tts_heard_list = list(list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), GLOB.tts_announce_voice, null, tts_heard_list, FALSE, 50)
+		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY, tts_heard_list)
+//RUCM END
+/* RUCM CHANGE
 		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY)
+*/
 		voice.say(message)
 
 /obj/item/device/sentry_computer/attack_hand(mob/user)

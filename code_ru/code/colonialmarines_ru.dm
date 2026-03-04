@@ -1,5 +1,6 @@
 //RUCM CORE INCLUDES
 #include "supplyshuttle.dm"
+#include "controllers\subsystem\tts.dm"
 #include "datums\supply_packs\gear.dm"
 #include "datums\supply_packs\weapons.dm"
 #include "datums\skills.dm"

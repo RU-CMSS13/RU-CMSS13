@@ -486,8 +486,14 @@
 		return src_label_component.label_name
 	return "Broadcast [serial_number]"
 
+/* RUCM CHANGE
 /obj/item/device/broadcasting/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, get_dist(sourcemob, src) < 3)
+*/
+//RUCM START
+/obj/item/device/broadcasting/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, tts_heard_list)
+	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, get_dist(sourcemob, src) < 3, tts_heard_list)
+//RUCM END
 
 /obj/item/device/broadcasting/see_emote(mob/living/sourcemob, emote, audible = FALSE)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_SEE_EMOTE, sourcemob, emote, audible, get_dist(sourcemob, src) < 3 && audible)

@@ -21,9 +21,16 @@
 	. = ..()
 	flags_atom |= USES_HEARING
 
+/* RUCM CHANGE
 /obj/item/implant/neurostim/hear_talk(mob/M as mob, msg)
 	hear(msg)
 	return
+*/
+//RUCM START
+/obj/item/implant/neurostim/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	hear(message)
+	return
+//RUCM END
 
 /obj/item/implant/neurostim/hear(msg)
 	msg = strip_html(msg)
