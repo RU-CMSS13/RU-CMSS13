@@ -154,7 +154,7 @@
 
 //RUCM START
 		var/tts_heard_list = list(list(), list(), list())
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), CONFIG_GET(str_list/tts_announce_voice), null, tts_heard_list, FALSE, 50)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), CONFIG_GET(string/tts_announce_voice), null, tts_heard_list, FALSE, 50)
 		transceiver.talk_into(voice, "[message]", RADIO_CHANNEL_SENTRY, tts_heard_list)
 //RUCM END
 /* RUCM CHANGE

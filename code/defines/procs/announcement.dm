@@ -187,7 +187,7 @@
 		return
 
 //RUCM START
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), CONFIG_GET(str_list/tts_announce_voice), null, list(targets, list(), list()), FALSE, 50)
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, html_decode(message), CONFIG_GET(string/tts_announce_voice), null, list(targets, list(), list()), FALSE, 50)
 //RUCM END
 
 	var/garbled_message
