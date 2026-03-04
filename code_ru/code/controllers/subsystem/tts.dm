@@ -484,7 +484,7 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	/// Whether they have a TTS voice or not.
 	var/has_tts_voice = TRUE
 
-/datum/species/synthetic/colonial/working_joe
+/datum/species/synthetic/gen_two/gen_one/working_joe
 	has_tts_voice = FALSE
 
 /datum/species/yautja
