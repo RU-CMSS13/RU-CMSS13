@@ -398,8 +398,8 @@
 //Announces the end of the game with all relevant information stated//
 //////////////////////////////////////////////////////////////////////
 /datum/game_mode/huntergames/declare_completion()
-	if(GLOB.round_statistics)
-		GLOB.round_statistics.track_round_end()
+	. = ..()
+
 	var/mob/living/carbon/winner = null
 
 	for(var/mob/living/carbon/human/Q in GLOB.alive_mob_list)
@@ -426,7 +426,7 @@
 		GLOB.round_statistics.end_round_player_population = count_humans()
 
 		GLOB.round_statistics.log_round_statistics()
-		GLOB.round_statistics.save()
+
 
 	return 1
 

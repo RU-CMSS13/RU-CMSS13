@@ -98,6 +98,11 @@
 	for(var/obj/effect/landmark/whiskey_outpost/supplydrops/S)
 		supply_spawns += S.loc
 
+//RUCM START
+	var/datum/hive_status/hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
+	hive.allow_queen_evolve = FALSE
+	hive.allow_no_queen_actions = TRUE
+//RUCM END
 
 	//  WO waves
 	var/list/paths = typesof(/datum/whiskey_outpost_wave) - /datum/whiskey_outpost_wave - /datum/whiskey_outpost_wave/random
@@ -307,10 +312,11 @@
 		GLOB.round_statistics.game_mode = name
 		GLOB.round_statistics.round_length = world.time
 		GLOB.round_statistics.end_round_player_population = length(GLOB.clients)
-		GLOB.round_statistics.log_round_statistics()
-		GLOB.round_statistics.save()
 
-	round_finished = 1
+		GLOB.round_statistics.log_round_statistics()
+
+		round_finished = 1
+
 	calculate_end_statistics()
 
 

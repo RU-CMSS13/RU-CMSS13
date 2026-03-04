@@ -125,9 +125,9 @@
 
 	..()
 
-/obj/item/clothing/hear_talk(mob/M, msg)
+/obj/item/clothing/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
 	for(var/obj/item/clothing/accessory/attached in accessories)
-		attached.hear_talk(M, msg)
+		attached.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 	..()
 
 /obj/item/clothing/proc/get_armor(armortype)

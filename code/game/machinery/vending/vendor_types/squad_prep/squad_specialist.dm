@@ -1,7 +1,5 @@
 //------------GEAR VENDOR---------------
 
-GLOBAL_LIST_EMPTY(primary_specialists_picked)
-
 GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("WEAPONS SPECIALIST SETS (CHOOSE 1)", 0, null, null, null),
 		list("Demolitionist Set", 0, /obj/item/storage/box/spec/demolitionist, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
@@ -11,6 +9,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("Scout Set", 0, /obj/item/storage/box/spec/scout, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_REGULAR),
 		list("Sniper Set", 0, /obj/item/storage/box/spec/sniper, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
 		list("Anti-Materiel Sniper Set", 0, /obj/item/storage/box/spec/sniper/anti_materiel, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
+//RUCM START
+		list("Breacher Set", 0, /obj/item/storage/box/spec/breacher, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_RECOMMENDED),
+//RUCM END
 
 		list("EXTRA SCOUT AMMUNITION", 0, null, null, null),
 		list("A19 High Velocity Impact Magazine (10x24mm)", 40, /obj/item/ammo_magazine/rifle/m4ra/custom/impact, null, VENDOR_ITEM_REGULAR),
@@ -47,6 +48,11 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec, list(
 		list("Large Incinerator Tank (B) (Green Flame)", 40, /obj/item/ammo_magazine/flamer_tank/large/B, null, VENDOR_ITEM_REGULAR),
 		list("Large Incinerator Tank (X) (Blue Flame)", 40, /obj/item/ammo_magazine/flamer_tank/large/X, null, VENDOR_ITEM_REGULAR),
 
+//RUCM START
+		list("EXTRA BREACHER SPARKSHOTS", 0, null, null, null),
+		list("Extra sparkshots magazine", 40, /obj/item/ammo_magazine/rifle/xm52, null, VENDOR_ITEM_REGULAR),
+		list("Extra sparkshots shells", 40, /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots, null, VENDOR_ITEM_REGULAR),
+//RUCM END
 	))
 
 GLOBAL_LIST_INIT(cm_vending_gear_spec_heavy, list(
@@ -71,14 +77,6 @@ GLOBAL_LIST_INIT(cm_vending_gear_spec_heavy, list(
 		return GLOB.cm_vending_gear_spec_heavy
 	return GLOB.cm_vending_gear_spec
 
-/obj/structure/machinery/cm_vending/gear/spec/vendor_successful_vend_one(prod_type, mob/living/carbon/human/user, turf/target_turf, insignas_override, stack_amount)
-	. = ..()
-	if(length(GLOB.primary_specialists_picked) >= /datum/job/marine/specialist::total_positions)
-		return
-
-	if(ispath(prod_type, /obj/item/storage/box/spec))
-		var/obj/item/storage/box/spec/spec_kit = prod_type
-		GLOB.primary_specialists_picked[spec_kit::kit_name] = TRUE
 
 /obj/structure/machinery/cm_vending/gear/spec/automatic_vend(mob/user)
 	// Try to automatically vend spec kit if it was already assigned automatically if needed
@@ -205,6 +203,9 @@ GLOBAL_LIST_INIT(cm_vending_clothing_specialist, list(
 		list("PAMPHLETS", 0, null, null, null),
 		list("JTAC Pamphlet", 15, /obj/item/pamphlet/skill/jtac, null, VENDOR_ITEM_REGULAR),
 		list("Engineering Pamphlet", 15, /obj/item/pamphlet/skill/engineer, null, VENDOR_ITEM_REGULAR),
+//RUCM START
+		list("Medical Pamphlet", 15, /obj/item/pamphlet/skill/medical, null, VENDOR_ITEM_RECOMMENDED),
+//RUCM END
 
 		list("RADIO KEYS", 0, null, null, null),
 		list("Engineering Radio Encryption Key", 5, /obj/item/device/encryptionkey/engi, null, VENDOR_ITEM_REGULAR),

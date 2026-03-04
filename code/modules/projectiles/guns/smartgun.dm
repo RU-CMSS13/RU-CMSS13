@@ -809,6 +809,7 @@
 	else
 		drain -= 15
 
+/* RUCM CHANGE
 //CO SMARTGUN
 /obj/item/weapon/gun/smartgun/co
 	name = "\improper M56A2C 'Cavalier' smartgun"
@@ -919,6 +920,7 @@
 /obj/item/weapon/gun/smartgun/co/proc/remove_idlock()
 	SIGNAL_HANDLER
 	linked_human = null
+*/
 
 //TERMINATOR SMARTGUN
 /obj/item/weapon/gun/smartgun/terminator

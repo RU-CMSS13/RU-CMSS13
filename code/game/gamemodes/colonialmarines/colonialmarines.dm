@@ -33,10 +33,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+/* RUCM CHANGE
 /* Pre-pre-startup */
 /datum/game_mode/colonialmarines/can_start(bypass_checks = FALSE)
 	initialize_special_clamps()
 	return TRUE
+*/
 
 /datum/game_mode/colonialmarines/announce()
 	to_chat_spaced(world, type = MESSAGE_TYPE_SYSTEM, html = SPAN_ROUNDHEADER("The current map is - [SSmapping.configs[GROUND_MAP].map_name]!"))
@@ -135,8 +137,11 @@
 	addtimer(CALLBACK(src, PROC_REF(map_announcement)), 20 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(start_lz_hazards)), DISTRESS_LZ_HAZARD_START)
 	addtimer(CALLBACK(src, PROC_REF(ares_command_check)), 2 MINUTES)
+<<<<<<< HEAD
 	addtimer(CALLBACK(SSentity_manager, TYPE_PROC_REF(/datum/controller/subsystem/entity_manager, select), /datum/entity/survivor_survival), 7 MINUTES)
 	GLOB.chemical_data.reroll_chemicals()
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	return ..()
 
@@ -365,7 +370,16 @@
 	var/role_in_charge
 	/// human being auto-promoted.
 	var/mob/living/carbon/human/person_in_charge
+<<<<<<< HEAD
 	/// Extra info to add to the ARES announcement announcing the promotion.
+=======
+
+	var/list/role_needs_id = list(JOB_SO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
+//RUCM START
+	var/list/role_needs_cargo = list(JOB_SO, JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
+//RUCM END
+	var/list/role_needs_comms = list(JOB_CHIEF_POLICE, JOB_CMO, JOB_CHIEF_ENGINEER, JOB_DROPSHIP_PILOT, JOB_CAS_PILOT, JOB_INTEL)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	var/announce_addendum
 
 	//Basically this follows the list of command staff in order of CoC,
@@ -416,6 +430,15 @@
 		if(card.access ~! new_access)
 			card.access = new_access
 			announce_addendum += "\nSenior Command access added to ID."
+//RUCMSTART
+	if(LAZYFIND(role_needs_cargo, role_in_charge))
+//If the role needs cargo access, we need to add it to the ID card
+		var/obj/item/card/id/card = person_in_charge.get_idcard()
+		if(card)
+			var/list/access = card.access
+			access.Add(ACCESS_MARINE_CARGO)
+			announce_addendum += "\nReq access added to ID."
+//RUCM END
 
 	announce_addendum += "\nA Command headset is available in the Command Tablet cabinet."
 
@@ -571,8 +594,6 @@
 
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(show_blurb_uscm)), DROPSHIP_DROP_MSG_DELAY)
 	addtimer(CALLBACK(src, PROC_REF(warn_resin_clear), marine_dropship), DROPSHIP_DROP_FIRE_DELAY)
-	DB_ENTITY(/datum/entity/survivor_survival) // Record surv survival right now
-	addtimer(CALLBACK(SSentity_manager, TYPE_PROC_REF(/datum/controller/subsystem/entity_manager, select), /datum/entity/survivor_survival), 7 MINUTES) // And 7 minutes after drop. By then, marines will have found them, most likely
 
 	add_current_round_status_to_end_results("First Drop")
 	clear_lz_hazards()
@@ -741,8 +762,6 @@
 
 	add_current_round_status_to_end_results("Round End")
 	handle_round_results_statistics_output()
-
-	GLOB.round_statistics?.save()
 
 	return 1
 
@@ -918,4 +937,3 @@
 #undef HIJACK_EXPLOSION_COUNT
 #undef MAJORITY
 #undef MARINE_MAJOR_ROUND_END_DELAY
-#undef GROUNDSIDE_XENO_MULTIPLIER

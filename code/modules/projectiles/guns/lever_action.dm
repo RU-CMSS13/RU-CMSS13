@@ -313,6 +313,9 @@ their unique feature is that a direct hit will buff your damage and firerate
 		/obj/item/attachable/bayonet/rmc,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/suppressor,
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/reddot, // Rail

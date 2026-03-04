@@ -12,6 +12,7 @@
 		if(target_squad)
 			target_squad.roles_cap[title] = medic_slot_formula(count)
 
+/* RUCM CHANGE
 /datum/job/marine/medic/get_total_positions(latejoin=0)
 	var/slots = medic_slot_formula(get_total_marines())
 
@@ -26,6 +27,7 @@
 				target_squad.roles_cap[title] = slots
 
 	return (slots*4)
+*/
 
 /datum/job/marine/medic/whiskey
 	title = JOB_WO_SQUAD_MEDIC

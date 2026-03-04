@@ -17,7 +17,14 @@
 
 	. = say_dead(message)
 
+<<<<<<< HEAD
 /mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, message_mode)
+=======
+
+
+
+/mob/dead/observer/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	if(!client)
 		return
 
@@ -49,6 +56,12 @@
 
 	var/track = ""
 
+<<<<<<< HEAD
+=======
+	tts_heard_list[1] += src
+	if(italics && client.prefs.toggles_chat & CHAT_GHOSTRADIO)
+		return
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	if(speaker_name != speaker.real_name && speaker.real_name)
 		speaker_name = "[speaker.real_name] ([speaker_name])"
 	track = "(<a href='byond://?src=\ref[src];track=\ref[speaker]'>F</a>) "

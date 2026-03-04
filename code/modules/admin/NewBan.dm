@@ -266,6 +266,10 @@ GLOBAL_DATUM(Banlist, /savefile)
 
 			unban_player.save()
 
+			//RUCM START
+			REDIS_PUBLISH("byond.admin", "type" = "admin", "state" = "remove_perma_ban", "ref_player_id" = unban_player.id)
+			//RUCM END
+
 			message_admins("[key_name_admin(user)] has removed the permanent ban on [unban_player.ckey].")
 			important_message_external("[user.ckey] has removed the permanent ban on [unban_player.ckey].", "Permaban Removed")
 

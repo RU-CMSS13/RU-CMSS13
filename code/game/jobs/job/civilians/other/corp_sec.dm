@@ -14,6 +14,10 @@
 	job = /datum/job/civilian/corp_sec
 
 AddTimelock(/datum/job/civilian/corp_sec, list(
+<<<<<<< HEAD
 	JOB_CORPORATE_ROLES = 25 HOURS,
 	JOB_POLICE_ROLES = 5 HOURS,
+=======
+	JOB_SQUAD_MARINE = 30 HOURS,
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 ))

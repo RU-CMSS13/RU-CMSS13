@@ -2,7 +2,7 @@
 /mob/proc/hear_apollo()
 	return FALSE
 
-/mob/hologram/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
+/mob/hologram/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
 	if(!hears_speech || !linked_mob)
 		return
 	if(speaker == linked_mob)
@@ -15,7 +15,11 @@
 	return
 
 
+<<<<<<< HEAD
 /mob/proc/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, message_mode)
+=======
+/mob/proc/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 
 	if(!client && !(mind && mind.current != src))
 		return
@@ -39,6 +43,8 @@
 			message = language.scramble(message)
 		else
 			message = stars(message)
+	else
+		tts_heard_list[1] += src
 
 	if(language)
 		style = language.color
@@ -167,7 +173,7 @@
 			M.show_message(message)
 	src.show_message(message)
 
-/mob/living/hear_say(message, verb, datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol)
+/mob/living/hear_say(message, verb, datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol, tts_heard_list)
 	if(client && mind && stat == UNCONSCIOUS)
 		hear_sleep(speaker, message, src == speaker, Adjacent(speaker), language)
 		return

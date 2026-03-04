@@ -309,6 +309,10 @@ GLOBAL_LIST_EMPTY(all_static_telecomms_towers)
 			SSradio.update_cache()
 
 /obj/structure/machinery/telecomms/relay/preset/tower/mapcomms/update_state()
+//RUCM START
+	if(toggled)
+		START_PROCESSING(SSslowobj, src)
+//RUCM END
 	..()
 	if(inoperable())
 		handle_xeno_acquisition(get_turf(src))
@@ -380,6 +384,9 @@ GLOBAL_LIST_EMPTY(all_static_telecomms_towers)
 		new_pylon.linked_hive.buff_points += 1
 
 	new_pylon.comms_relay_connection()
+//RUCM START
+	START_PROCESSING(SSslowobj, src)
+//RUCM END
 
 /// Handles removing corruption effects from the comms relay
 /obj/structure/machinery/telecomms/relay/preset/tower/mapcomms/proc/uncorrupt(datum/deleting_datum)

@@ -174,7 +174,15 @@ let clientButtons = {
 	"Volume": [
 		{name: "Effects", command: "Adjust-Volume-SFX"},
 		{name: "Ambience", command: "Adjust-Volume-Ambience"},
+<<<<<<< HEAD
 		{name: "Admin Music", command: "Adjust-Volume-Admin-Music"}
+=======
+		{name: "Admin Music", command: "Adjust-Volume-Admin-Music"},
+		{name: "TTS", command: "Adjust-Volume-TTS"},
+	],
+	"Statbrowser": [
+		{name: "Change Fontsize", function: openOptionsMenu}
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	]
 }
 

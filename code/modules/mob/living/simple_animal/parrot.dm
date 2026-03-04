@@ -701,19 +701,28 @@
 
 	message = capitalize(trim_left(message))
 
+	//RUCM START
+	var/list/tts_heard_list = list(list(), list(), list())
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
+	//RUCM END
+
 	if(message_mode)
 		if(message_mode in GLOB.radiochannels)
 			if(ears && istype(ears,/obj/item/device/radio))
-				ears.talk_into(src,message, message_mode, verb, null)
+				ears.talk_into(src,message, message_mode, verb, null, tts_heard_list = tts_heard_list)
 
 
 	..(message)
 
 
+<<<<<<< HEAD
 /mob/living/simple_animal/small/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null)
+=======
+/mob/living/simple_animal/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, tts_heard_list)
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 	if(prob(50))
 		parrot_hear(message)
-	..(message,verb,language,alt_name,italics,speaker)
+	..(message,verb,language,alt_name,italics,speaker, tts_heard_list = tts_heard_list)
 
 
 

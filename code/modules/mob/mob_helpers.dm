@@ -183,7 +183,16 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
+<<<<<<< HEAD
 		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
+=======
+/*
+		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
+*/
+//RUCM START
+		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
+//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 		if(rand(1,3)==3)
 			if(lowertext(newletter)=="o")
 				newletter="u"

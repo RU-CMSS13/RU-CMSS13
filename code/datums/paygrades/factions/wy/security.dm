@@ -20,6 +20,7 @@
 	prefix = "CSSgt."
 	pay_multiplier = 3
 
+<<<<<<< HEAD
 
 /datum/paygrade/wy_sec/bodyguard/trainee
 	paygrade = PAY_SHORT_WY_SEC_TPPO
@@ -27,6 +28,8 @@
 	prefix = "TPPO."
 	pay_multiplier = 2.5
 
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 /datum/paygrade/wy_sec/bodyguard
 	paygrade = PAY_SHORT_WY_SEC_PPO
 	name = "Personal Protection Officer"
@@ -44,6 +47,7 @@
 	name = "Personal Protection Coordinator"
 	prefix = "PPC."
 	pay_multiplier = 4
+<<<<<<< HEAD
 
 /datum/paygrade/wy_sec/bodyguard/leadership
 	paygrade = PAY_SHORT_WY_SEC_DPO
@@ -62,3 +66,5 @@
 	name = "Directorate Protection Coordinator"
 	prefix = "DPC."
 	pay_multiplier = 8
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6

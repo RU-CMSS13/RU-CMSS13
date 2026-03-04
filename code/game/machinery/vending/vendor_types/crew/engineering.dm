@@ -56,8 +56,10 @@ GLOBAL_LIST_INIT(cm_vending_clothing_maintenance_technician, list(
 		list("Webbing", 0, /obj/item/clothing/accessory/storage/webbing, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 		list("Black Webbing", 0, /obj/item/clothing/accessory/storage/webbing/black, MARINE_CAN_BUY_ACCESSORY, VENDOR_ITEM_REGULAR),
 
+/* RUCM REMOVE
 		list("SPARE GEAR", 0, null, null, null),
 		list("Synthetic Reset Key", 20, /obj/item/device/defibrillator/synthetic, null, VENDOR_ITEM_REGULAR),
+*/
 	))
 
 /obj/structure/machinery/cm_vending/clothing/maintenance_technician

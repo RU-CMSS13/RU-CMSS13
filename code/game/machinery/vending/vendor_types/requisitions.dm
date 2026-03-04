@@ -141,6 +141,15 @@
 		list("Sentry Gun Network Laptop", 4, /obj/item/device/sentry_computer, VENDOR_ITEM_REGULAR),
 		list("Spare PDT/L Battle Buddy Kit", floor(scale * 4), /obj/item/storage/box/pdt_kit, VENDOR_ITEM_REGULAR),
 		list("W-Y brand rechargeable mini-battery", floor(scale * 3), /obj/item/cell/crap, VENDOR_ITEM_REGULAR),
+		list("High-Capacity Power Cell", floor(scale * 1), /obj/item/cell/high, VENDOR_ITEM_REGULAR),
+
+		list("SKILL PAMPHLETS", -1, null, null),
+		list("JTAC Pamphlet", floor(scale * 1), /obj/item/pamphlet/skill/jtac, VENDOR_ITEM_REGULAR),
+		list("Engineering Pamphlet", floor(scale * 1), /obj/item/pamphlet/skill/engineer, VENDOR_ITEM_REGULAR),
+//RUCM START
+		list("Medical Pamphlet", floor(scale * 1), /obj/item/pamphlet/skill/medical, VENDOR_ITEM_REGULAR),
+//RUCM END
+		list("Powerloader Certification", 0.75, /obj/item/pamphlet/skill/powerloader, VENDOR_ITEM_REGULAR),
 
 		list("MISCELLANEOUS", -1, null, null),
 		list("Entrenching Tool", floor(scale * 4), /obj/item/tool/shovel/etool/folded, VENDOR_ITEM_REGULAR),
@@ -417,7 +426,14 @@
 		list("Recoil Compensator", 6.5, /obj/item/attachable/compensator, VENDOR_ITEM_REGULAR),
 		list("M10 Compensator", 6.5, /obj/item/attachable/compensator/m10, VENDOR_ITEM_REGULAR),
 		list("Suppressor", 6.5, /obj/item/attachable/suppressor, VENDOR_ITEM_REGULAR),
+<<<<<<< HEAD
 		list("Suppressor, Compact", 6, /obj/item/attachable/suppressor/sleek, VENDOR_ITEM_REGULAR),
+=======
+//RUCM START
+		list("Barrel Charger", 1.5, /obj/item/attachable/heavy_barrel, VENDOR_ITEM_REGULAR),
+		list("Upgraded Barrel Charger", 0.5, /obj/item/attachable/heavy_barrel/upgraded, VENDOR_ITEM_REGULAR),
+//RUCM END
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 		list("Shotgun Choke", 4.5, /obj/item/attachable/shotgun_choke, VENDOR_ITEM_REGULAR),
 
 		list("RAIL", -1, null, null),

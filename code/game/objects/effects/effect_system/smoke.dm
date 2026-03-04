@@ -566,7 +566,10 @@
 	for(var/obj/vehicle/walker/walker in cur_turf)
 		walker.take_damage_type(15, "acid")
 //RUCM END
+<<<<<<< HEAD
 
+=======
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 //No effect when merely entering the smoke turf, for balance reasons
 /obj/effect/particle_effect/smoke/xeno_burn/Crossed(mob/living/carbon/affected_mob as mob)
 	return

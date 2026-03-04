@@ -105,6 +105,7 @@
 /// WY-SEC Weyland-Yutani Security Officer
 #define PAY_SHORT_WY_SEC "WY-SEC"
 
+<<<<<<< HEAD
 /// WY-SEC-SPEC Weyland-Yutani Security Specialist
 #define PAY_SHORT_WY_SEC_SPEC "WY-SEC-SPEC"
 
@@ -132,3 +133,20 @@
 
 /// WY-SEC-DPC Directorate Protection Coordinator
 #define PAY_SHORT_WY_SEC_DPC "WY-SEC-DPC"
+=======
+/// WY-SEC-SPEC Weyland-Yutani Security Medic
+#define PAY_SHORT_WY_SEC_SPEC "WY-SEC-SPEC"
+
+
+/// WY-SEC-LEAD Weyland-Yutani Security Team Leader
+#define PAY_SHORT_WY_SEC_LEAD "WY-SEC-LEAD"
+
+/// WY-SEC-PSO Personal Protection Officer
+#define PAY_SHORT_WY_SEC_PPO "WY-SEC-PPO"
+
+/// WY-SEC-PSS Personal Protection Specialist
+#define PAY_SHORT_WY_SEC_PPS "WY-SEC-PPS"
+
+/// WY-SEC-PSSGT Personal Protection Coordinator
+#define PAY_SHORT_WY_SEC_PPC "WY-SEC-PPC"
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6

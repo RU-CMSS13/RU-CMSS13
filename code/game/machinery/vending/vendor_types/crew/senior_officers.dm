@@ -177,7 +177,9 @@ GLOBAL_LIST_INIT(cm_vending_clothing_chief_engineer, list(
 
 		list("Spare Equipment", 0, null, null, null),
 		list("Technician's Headset", 15, /obj/item/device/radio/headset/almayer/mt, null, VENDOR_ITEM_REGULAR),
+/* RUCM REMOVE
 		list("Synthetic Reset Key", 15, /obj/item/device/defibrillator/synthetic, null, VENDOR_ITEM_REGULAR),
+*/
 
 	))
 
@@ -407,7 +409,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_xo, list(
 		list("Fulton Recovery Device", 5, /obj/item/stack/fulton, null, VENDOR_ITEM_REGULAR),
 		list("Space Cleaner", 2, /obj/item/reagent_container/spray/cleaner, null, VENDOR_ITEM_REGULAR),
 		list("Flashlight", 1, /obj/item/device/flashlight, null, VENDOR_ITEM_REGULAR),
+/* RUCM REMOVE
 		list("Synthetic Reset Key", 10, /obj/item/device/defibrillator/synthetic, null, VENDOR_ITEM_REGULAR),
+*/
 	))
 
 /obj/effect/essentials_set/xo/shotgunpreset

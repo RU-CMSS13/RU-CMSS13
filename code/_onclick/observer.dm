@@ -98,6 +98,63 @@
 			return TRUE
 
 		if(ismob(target) || isVehicle(target))
+<<<<<<< HEAD
+=======
+			if(isxeno(target) && SSticker.mode.check_xeno_late_join(src)) //if it's a xeno and all checks are alright, we are gonna try to take their body
+				var/mob/living/carbon/xenomorph/xeno = target
+				if(xeno.stat == DEAD || should_block_game_interaction(xeno) || xeno.aghosted)
+					to_chat(src, SPAN_WARNING("You cannot join as [xeno]."))
+					do_observe(xeno)
+					return FALSE
+
+				if(xeno.health <= 0)
+					to_chat(src, SPAN_WARNING("You cannot join if the xenomorph is in critical condition or unconscious."))
+					do_observe(xeno)
+					return FALSE
+
+				var/required_leave_time = XENO_LEAVE_TIMER
+				//var/required_dead_time = XENO_JOIN_DEAD_TIME // RUCM CHANGE
+				var/required_dead_time = GLOB.xeno_join_dead_time
+				if(islarva(xeno))
+					required_leave_time = XENO_LEAVE_TIMER_LARVA
+					//required_dead_time = XENO_JOIN_DEAD_LARVA_TIME // RUCM CHANGE
+					required_dead_time = GLOB.xeno_join_dead_larva_time
+
+				if(xeno.away_timer < required_leave_time)
+					var/to_wait = required_leave_time - xeno.away_timer
+					if(to_wait > 60 SECONDS) // don't spam for clearly non-AFK xenos
+						to_chat(src, SPAN_WARNING("That player hasn't been away long enough. Please wait [to_wait] second\s longer."))
+					do_observe(target)
+					return FALSE
+
+				if(!SSticker.mode.xeno_bypass_timer)
+					var/deathtime = world.time - timeofdeath
+
+					if(deathtime < required_dead_time && !bypass_time_of_death_checks)
+						to_chat(src, SPAN_WARNING("You have been dead for [DisplayTimeText(deathtime)]."))
+						//to_chat(src, SPAN_WARNING("You must wait at least [required_dead_time / 600] minute\s before rejoining the game!")) // RUCM CHANGE
+						to_chat(src, SPAN_WARNING("You must wait at least [DisplayTimeText(required_dead_time - deathtime)] minute\s before rejoining the game!"))
+						do_observe(target)
+						return FALSE
+
+				if(xeno.hive)
+					for(var/mob_name in xeno.hive.banished_ckeys)
+						if(xeno.hive.banished_ckeys[mob_name] == ckey)
+							to_chat(src, SPAN_WARNING("You are banished from the [xeno.hive], you may not rejoin unless the Queen re-admits you or dies."))
+							do_observe(target)
+							return FALSE
+
+				if(tgui_alert(src, "Are you sure you want to transfer yourself into [xeno]?", "Confirm Transfer", list("Yes", "No")) != "Yes")
+					return FALSE
+
+				if(xeno.away_timer < required_leave_time || xeno.stat == DEAD || !(xeno in GLOB.living_xeno_list)) // Do it again, just in case
+					to_chat(src, SPAN_WARNING("That xenomorph can no longer be controlled. Please try another."))
+					return FALSE
+
+				SSticker.mode.transfer_xeno(src, xeno)
+				return TRUE
+
+>>>>>>> 79fc22fcba45a7a9173e05b6f1c920fa5e8e2cd6
 			do_observe(target)
 			return TRUE
 

@@ -386,7 +386,7 @@
 
 	return
 
-/obj/item/proc/talk_into(mob/M as mob, text)
+/obj/item/proc/talk_into(mob/M as mob, text, tts_heard_list)
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)

@@ -219,7 +219,12 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 		var/datum/job/PJ = temp_roles_for_mode[JOB_PREDATOR]
 		if(istype(PJ))
 			PJ.set_spawn_positions(GLOB.players_preassigned)
+		/*
 		REDIS_PUBLISH("byond.round", "type" = "predator-round", "map" = SSmapping.configs[GROUND_MAP].map_name)
+		*/
+		//RUCM START
+		REDIS_PUBLISH("byond.round", "type" = "predator", "state" = "predator")
+		//RUCM END
 		chance = 0
 
 	chance += 20
@@ -410,13 +415,11 @@ I hope it's easier to tell what the heck this proc is even doing, unlike previou
 		squad = tgui_input_list(user, "Select squad you want to free [job.title] slot from.", "Squad Selection", squad_list)
 		if(!squad)
 			return
-
 		if(squad.roles_in[job.title] > 0)
 			squad.roles_in[job.title]--
 		else
 			to_chat(user, "There are no [job.title] slots occupied in [squad.name] Squad.")
 			return
-
 	job.current_positions--
 	message_admins("[key_name(user)] freed the [job.title] job slot[squad ? " in [squad.name] Squad" : ""].")
 	return TRUE

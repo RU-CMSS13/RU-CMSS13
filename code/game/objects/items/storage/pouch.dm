@@ -1602,7 +1602,9 @@
 	new /obj/item/device/multitool(src)
 	new /obj/item/tool/weldingtool(src)
 	new /obj/item/stack/cable_coil(src)
+/* RUCM REMOVE
 	new /obj/item/device/defibrillator/synthetic(src)
+*/
 
 /obj/item/storage/pouch/tools/tactical/upp/dzho/fill_preset_inventory()
 	new /obj/item/tool/wrench(src)

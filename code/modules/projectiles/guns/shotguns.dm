@@ -468,6 +468,9 @@ can cause issues with ammo types getting mixed up during the burst.
 		/obj/item/attachable/magnetic_harness,
 		/obj/item/attachable/bayonet, // Muzzle
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/verticalgrip, // Underbarrel
 		/obj/item/attachable/flashlight/under_barrel,
@@ -532,6 +535,9 @@ can cause issues with ammo types getting mixed up during the burst.
 	random_spawn_muzzle = list(
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 	)
 	random_under_chance = 100
 	random_spawn_under = list(
@@ -550,6 +556,9 @@ can cause issues with ammo types getting mixed up during the burst.
 	random_spawn_muzzle = list(
 		/obj/item/attachable/bayonet/upp,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 	)
 	random_under_chance = 100
 	random_spawn_under = list(
@@ -1240,6 +1249,9 @@ can cause issues with ammo types getting mixed up during the burst.
 		/obj/item/attachable/flashlight/under_barrel,
 		/obj/item/attachable/extended_barrel,
 		/obj/item/attachable/heavy_barrel,
+//RUCM START
+		/obj/item/attachable/heavy_barrel/upgraded,
+//RUCM END
 		/obj/item/attachable/compensator,
 		/obj/item/attachable/shotgun_choke,
 		/obj/item/attachable/magnetic_harness,
