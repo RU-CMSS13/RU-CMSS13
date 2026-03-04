@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(tts_voices_woman)
 /datum/config_entry/str_list/tts_voice_xeno_whitelist
 GLOBAL_LIST_EMPTY(tts_voices_xeno)
 
-/datum/config_entry/str_list/tts_announce_voice
+/datum/config_entry/string/tts_announce_voice
 
 SUBSYSTEM_DEF(tts)
 	name = "Text To Speech"
