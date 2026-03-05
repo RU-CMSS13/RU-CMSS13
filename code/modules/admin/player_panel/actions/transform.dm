@@ -201,7 +201,8 @@ GLOBAL_LIST_INIT(pp_transformables, list(
 			var/mob/living/carbon/xenomorph/X = target
 			newXeno.set_hive_and_update(X.hivenumber)
 //RUCM START
-		newXeno.init_voice()
+		else
+			newXeno.init_voice()
 //RUCM END
 
 
