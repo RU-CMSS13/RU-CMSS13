@@ -1268,6 +1268,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	current_mob.mind.transfer_to(Hellhound, TRUE)
 	Hellhound.generate_name()
+//RUCM START
+	Hellhound.init_voice()
+//RUCM END
 
 /mob/dead/verb/join_as_yautja()
 	set category = "Ghost.Join"
