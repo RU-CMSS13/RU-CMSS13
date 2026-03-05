@@ -23,6 +23,7 @@
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
 #include "modules\gear_presets\usmc.dm"
+#include "modules\mob\living\carbon\human\life.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
 #include "modules\vehicles\interiors\interiors_landmarks.dm"
 #include "modules\vehicles\multitile\multitile.dm"
