@@ -52,8 +52,10 @@
 	job_title = JOB_CORPORATE_LIAISON
 	paygrades = list(PAY_SHORT_WYC2 = JOB_PLAYTIME_TIER_0, PAY_SHORT_WYC3 = JOB_PLAYTIME_TIER_2, PAY_SHORT_WYC4 = JOB_PLAYTIME_TIER_3, PAY_SHORT_WYC5 = JOB_PLAYTIME_TIER_4)
 	role_comm_title = "CL"
-//	skills = /datum/skills/civilian
-	skills = /datum/skills/cl //RUCM Add
+/*RUCM Change
+	skills = /datum/skills/civilian
+*/
+	skills = /datum/skills/cl //RUCM EDIT
 
 	minimap_icon = "cl"
 	minimap_background = "background_goon"
