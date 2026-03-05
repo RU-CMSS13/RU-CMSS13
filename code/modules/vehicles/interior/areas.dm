@@ -46,6 +46,7 @@
 	name = "\improper ARC interior"
 	icon_state = "arc"
 
+<<<<<<< HEAD
 /area/interior/vehicle/humvee
 	name = "\improper vehicle interior"
 	icon_state = "apc"
@@ -57,3 +58,8 @@
 /area/interior/vehicle/humvee/transport
 	name = "\improper vehicle interior"
 	icon_state = "apc"
+=======
+/area/interior/vehicle/blackfoot
+	name = "blackfoot interior"
+	ambience_exterior = 'sound/vehicles/vtol/interior.ogg'
+>>>>>>> pr-520

@@ -54,6 +54,7 @@
 	name = "ARC"
 	interior_id = "arc"
 
+<<<<<<< HEAD
 /datum/map_template/interior/humvee
 	name = "JTMV-HWC"
 	interior_id = "humvee"
@@ -65,3 +66,20 @@
 /datum/map_template/interior/humvee/humvee_transport
 	name = "JTMV-Utility"
 	interior_id = "humvee_transport"
+=======
+/datum/map_template/interior/blackfoot
+	name = "blackfoot base"
+	interior_id = "blackfoot"
+
+/datum/map_template/interior/blackfoot_doorgun
+	name = "blackfoot doorgun"
+	interior_id = "blackfoot_doorgun"
+
+/datum/map_template/interior/blackfoot_doorgun_minigun
+	name = "blackfoot doorgun minigun"
+	interior_id = "blackfoot_doorgun_minigun"
+
+/datum/map_template/interior/blackfoot_transport
+	name = "blackfoot transport"
+	interior_id = "blackfoot_transport"
+>>>>>>> pr-520

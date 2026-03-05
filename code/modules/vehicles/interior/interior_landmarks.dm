@@ -22,6 +22,8 @@
 	icon_state = "arrow"
 
 	var/exit_type = /obj/structure/interior_exit
+	var/offset_x = 0
+	var/offset_y = 0
 
 /obj/effect/landmark/interior/spawn/entrance/on_load(datum/interior/interior)
 	var/exit_path = exit_type
@@ -40,7 +42,12 @@
 	E.update_icon()
 	E.pixel_x = pixel_x
 	E.pixel_y = pixel_y
+<<<<<<< HEAD
 	E.layer = layer
+=======
+
+	return E
+>>>>>>> pr-520
 	// Don't qdel this because it's used for entering as well
 
 /obj/effect/landmark/interior/spawn/entrance/step_toward/on_load(datum/interior/interior)
