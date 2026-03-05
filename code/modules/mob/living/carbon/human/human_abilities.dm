@@ -25,6 +25,7 @@
 		return
 	var/mob/living/carbon/human/my_owner = owner
 	my_owner.issue_order(order_type)
+
 */
 /datum/action/human_action/issue_order/action_cooldown_check()
 	if(!ishuman(owner))
