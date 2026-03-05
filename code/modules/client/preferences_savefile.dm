@@ -317,6 +317,10 @@
 	S["chat_display_preferences"] >> chat_display_preferences
 	S["toggles_ghost"] >> toggles_ghost
 	S["toggles_langchat"] >> toggles_langchat
+//RUCM START
+	S["tts_mode"] >> tts_mode
+	S["tts_hivemind_mode"] >> tts_hivemind_mode
+//RUCM END
 	S["toggles_sound"] >> toggles_sound
 	S["volume_preferences"] >> volume_preferences
 	S["toggle_prefs"] >> toggle_prefs
@@ -348,6 +352,10 @@
 
 	S["xeno_prefix"] >> xeno_prefix
 	S["xeno_postfix"] >> xeno_postfix
+//RUCM START
+	S["xeno_pitch"] >> xeno_pitch
+	S["xeno_voice"] >> xeno_voice
+//RUCM END
 	S["xeno_name_ban"] >> xeno_name_ban
 	S["playtime_perks"] >> playtime_perks
 	S["skip_playtime_ranks"] >> skip_playtime_ranks
@@ -360,6 +368,10 @@
 	S["pref_job_slots"] >> pref_job_slots
 
 	S["synth_name"] >> synthetic_name
+//RUCM START
+	S["synth_voice"] >> synth_voice
+	S["synth_pitch"] >> synth_pitch
+//RUCM END
 	S["synth_type"] >> synthetic_type
 	S["synth_specialisation"] >> synth_specialisation
 	S["pred_name"] >> predator_name
@@ -624,6 +636,10 @@
 	S["chat_display_preferences"] << chat_display_preferences
 	S["toggles_ghost"] << toggles_ghost
 	S["toggles_langchat"] << toggles_langchat
+//RUCM START
+	S["tts_mode"] << tts_mode
+	S["tts_hivemind_mode"] << tts_hivemind_mode
+//RUCM END
 	S["toggles_sound"] << toggles_sound
 	S["volume_preferences"] << volume_preferences
 	S["toggle_prefs"] << toggle_prefs
@@ -645,6 +661,10 @@
 
 	S["xeno_prefix"] << xeno_prefix
 	S["xeno_postfix"] << xeno_postfix
+//RUCM START
+	S["xeno_voice"] << xeno_voice
+	S["xeno_pitch"] << xeno_pitch
+//RUCM END
 	S["xeno_name_ban"] << xeno_name_ban
 	S["xeno_vision_level_pref"] << xeno_vision_level_pref
 	S["playtime_perks"] << playtime_perks
@@ -658,6 +678,10 @@
 	S["pref_job_slots"] << pref_job_slots
 
 	S["synth_name"] << synthetic_name
+//RUCM START
+	S["synth_voice"] << synth_voice
+	S["synth_pitch"] << synth_pitch
+//RUCM END
 	S["synth_type"] << synthetic_type
 	S["synth_specialisation"] << synth_specialisation
 	S["pred_name"] << predator_name
@@ -785,6 +809,10 @@
 	S["underwear"] >> underwear
 	S["undershirt"] >> undershirt
 	S["backbag"] >> backbag
+//RUCM START
+	S["human_voice"] >> voice
+	S["human_pitch"] >> voice_pitch
+//RUCM END
 	//S["blood_type"] >> blood_type
 
 	//Jobs
@@ -958,6 +986,10 @@
 	S["underwear"] << underwear
 	S["undershirt"] << undershirt
 	S["backbag"] << backbag
+//RUCM START
+	S["human_voice"] << voice
+	S["human_pitch"] << voice_pitch
+//RUCM END
 	//S["blood_type"] << blood_type
 	S["spawnpoint"] << spawnpoint
 
