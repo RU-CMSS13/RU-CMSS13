@@ -131,6 +131,12 @@ Additional game mode variables.
 			target_squad.roles_cap[JOB_SQUAD_ENGI] = engi_slot_formula(marine_starting_num)
 			target_squad.roles_cap[JOB_SQUAD_MEDIC] = medic_slot_formula(marine_starting_num)
 
+//RUCM START
+			if(!isnull(target_squad.active_at) && target_squad.active_at > marine_starting_num)
+				target_squad.roundstart = FALSE
+				target_squad.usable = FALSE
+//RUCM END
+
 	for(var/i in GLOB.RoleAuthority.roles_by_name)
 		var/datum/job/J = GLOB.RoleAuthority.roles_by_name[i]
 		if(J.scaled)
