@@ -1,7 +1,7 @@
 /datum/element/traitbound/leadership
 	associated_trait = TRAIT_LEADERSHIP
 	compatible_types = list(/mob/living/carbon/human)
-
+/*
 /datum/element/traitbound/leadership/Attach(datum/target)
 	. = ..()
 	if(. & ELEMENT_INCOMPATIBLE)
@@ -25,3 +25,18 @@
 	leader.langchat_styles = ""
 
 	return ..()
+*/
+
+// RUCM Start
+/datum/element/traitbound/leadership/Attach(datum/target)
+	. = ..()
+	if(. & ELEMENT_INCOMPATIBLE)
+		return
+	give_action(target, /datum/action/human_action/issue_order)
+
+/datum/element/traitbound/leadership/Detach(datum/target)
+	var/mob/living/carbon/human/H = target
+	for(var/datum/action/human_action/issue_order/O in H.actions)
+		O.remove_from(H)
+	return ..()
+// RUCM End

@@ -11,7 +11,7 @@
 	name = "Issue Order"
 	action_icon_state = "order"
 	var/order_type = "help"
-
+/*
 /datum/action/human_action/issue_order/give_to(mob/living/L)
 	..()
 	if(!ishuman(L))
@@ -24,7 +24,7 @@
 		return
 	var/mob/living/carbon/human/my_owner = owner
 	my_owner.issue_order(order_type)
-
+*/
 /datum/action/human_action/issue_order/action_cooldown_check()
 	if(!ishuman(owner))
 		return FALSE
