@@ -19,4 +19,4 @@
 #define TTS_FLAG_HIVEMIND (1<<0)
 #define TTS_FLAG_RADIO (1<<1)
 
-#define VOLUME_TTS  5
+#define VOLUME_TTS  10
