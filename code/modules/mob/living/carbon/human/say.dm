@@ -290,7 +290,14 @@ for it but just ignore it.
 	return verb
 
 /mob/living/carbon/human/proc/handle_speech_problems(message, verb)
+/* RUCM CHANGE
 	var/list/returns[2]
+*/
+//RUCM START
+	var/list/returns[4]
+	var/tts_message = message
+	var/tts_filter = ""
+//RUCM END
 	if(silent)
 		message = ""
 	if(sdisabilities & DISABILITY_MUTE)
@@ -300,16 +307,28 @@ for it but just ignore it.
 		msg_admin_niche("[key_name(src)] stuttered while saying: \"[message]\"") //Messages that get modified by the 4 reasons below have their original message logged too
 	if(slurring)
 		message = slur(message)
+//RUCM START
+		tts_filter = "tremolo=f=10:d=0.8,rubberband=tempo=0.5"
+//RUCM END
 		verb = pick("stammers","stutters")
 	if(stuttering)
 		message = NewStutter(message)
+//RUCM START
+		tts_filter = "tremolo=f=10:d=0.8,rubberband=tempo=0.5"
+//RUCM END
 		verb = pick("stammers", "stutters")
 	if(HAS_TRAIT(src, TRAIT_DAZED))
 		message = DazedText(message)
+//RUCM START
+		tts_filter = "tremolo=f=10:d=0.8,rubberband=tempo=0.5"
+//RUCM END
 		verb = pick("mumbles", "babbles")
 	if(braindam >= 60)
 		if(prob(braindam/4))
 			message = stutter(message, stuttering)
+//RUCM START
+			tts_filter = "tremolo=f=10:d=0.8,rubberband=tempo=0.5"
+//RUCM END
 			verb = pick("stammers", "stutters")
 		if(prob(braindam))
 			message = uppertext(message)
@@ -317,11 +336,18 @@ for it but just ignore it.
 	if(HAS_TRAIT(src, TRAIT_LISPING))
 		var/old_message = message
 		message = lisp_replace(message)
+//RUCM START
+		tts_message = message
+//RUCM END
 		if(old_message != message)
 			verb = "lisps"
 
 	returns[1] = message
 	returns[2] = verb
+//RUCM START
+	returns[3] = tts_message
+	returns[4] = tts_filter
+//RUCM END
 	return returns
 
 /mob/living/carbon/human/hear_apollo()
