@@ -1,6 +1,6 @@
 //RUCM CORE INCLUDES
-#include "supplyshuttle.dm"
 #include "_globalvars\misc.dm"
+#include "supplyshuttle.dm"
 #include "datums\ammo.dm"
 #include "datums\skills.dm"
 #include "datums\vehicles.dm"
