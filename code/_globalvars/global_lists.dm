@@ -67,6 +67,16 @@ GLOBAL_LIST_INIT(resin_build_order_lesser_drone, list(
 	/datum/resin_construction/resin_obj/door,
 ))
 
+//RUCM START
+GLOBAL_LIST_INIT(resin_build_order_lesser_slave, list(
+	/datum/resin_construction/resin_turf/wall/lesser_slave,
+	/datum/resin_construction/resin_turf/membrane/lesser_slave,
+	/datum/resin_construction/resin_obj/door/lesser_slave,
+	/datum/resin_construction/resin_obj/sticky_resin,
+	/datum/resin_construction/resin_obj/fast_resin,
+))
+//RUCM END
+
 GLOBAL_LIST_INIT(resin_build_order_drone, list(
 	/datum/resin_construction/resin_turf/wall,
 	/datum/resin_construction/resin_turf/membrane,
@@ -144,7 +154,7 @@ GLOBAL_LIST_INIT_TYPED(combining_properties, /list, list( PROPERTY_DEFIBRILLATIN
 											PROPERTY_ANTIADDICTIVE = list(PROPERTY_PSYCHOSTIMULATING, PROPERTY_ANTIHALLUCINOGENIC),\
 											PROPERTY_ADDICTIVE = list(PROPERTY_PSYCHOSTIMULATING, PROPERTY_NEUROTOXIC),\
 											PROPERTY_CIPHERING_PREDATOR = list(PROPERTY_CIPHERING, PROPERTY_CROSSMETABOLIZING),\
-											PROPERTY_FIRE_PENETRATING = list(PROPERTY_OXYGENATING, PROPERTY_VISCOUS),\
+											PROPERTY_FIRE_PENETRATING = list(PROPERTY_OXYGENATING, PROPERTY_EXPLOSIVE),\
 											PROPERTY_BONEMENDING = list(PROPERTY_CRYSTALLIZATION, PROPERTY_NUTRITIOUS)))
 
 //List of all id's from classed /datum/reagent datums indexed by class or tier. Used by chemistry generator and chem spawners.
@@ -256,7 +266,7 @@ GLOBAL_REFERENCE_LIST_INDEXED(hair_gradient_list, /datum/sprite_accessory/hair_g
 GLOBAL_REFERENCE_LIST_INDEXED(yautja_hair_styles_list, /datum/sprite_accessory/yautja_hair, name)
 
 	//Backpacks
-GLOBAL_LIST_INIT(backbaglist, list("Backpack", "Satchel"))
+GLOBAL_LIST_INIT(backbaglist, list("Backpack", "Satchel", "Chestrig"))
 
 	//NVG colors
 GLOBAL_LIST_INIT(nvg_color_list, list("Green", "White", "Yellow", "Orange", "Red", "Blue"))
@@ -638,7 +648,7 @@ GLOBAL_LIST_INIT_TYPED(specialist_set_datums, /datum/specialist_set, setup_speci
 /// Setup for WY droid emotes and category list, returns data for wy_droid_emotes
 /proc/setup_wy_droid_emotes()
 	var/list/emotes_to_add = list()
-	for(var/datum/emote/living/carbon/human/synthetic/colonial/wy_droid/emote as anything in subtypesof(/datum/emote/living/carbon/human/synthetic/colonial/wy_droid))
+	for(var/datum/emote/living/carbon/human/synthetic/gen_two/gen_one/wy_droid/emote as anything in subtypesof(/datum/emote/living/carbon/human/synthetic/gen_two/gen_one/wy_droid))
 		if(!initial(emote.key) || !initial(emote.say_message))
 			continue
 
