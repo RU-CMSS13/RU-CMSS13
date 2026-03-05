@@ -80,7 +80,12 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	var/toggles_ert = TOGGLES_ERT_DEFAULT
 	var/toggles_survivor = TOGGLES_SURVIVOR_DEFAULT
 	var/toggles_ert_pred = TOGGLES_ERT_GROUNDS
+/* RUCM CHANGE
 	var/list/volume_preferences = list(1, 0.5, 1, 0.6) // Game, music, admin midis, lobby music (this is also set in sanitize_volume_preferences() call)
+*/
+//RUCM START
+	var/list/volume_preferences = list(1, 0.5, 1, 0.6, 0, 0, 0, 0, 0, 0)
+//RUCM END
 	var/chat_display_preferences = CHAT_TYPE_ALL
 	var/item_animation_pref_level = SHOW_ITEM_ANIMATIONS_ALL
 	var/pain_overlay_pref_level = PAIN_OVERLAY_BLURRY
