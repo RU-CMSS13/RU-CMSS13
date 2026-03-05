@@ -95,10 +95,21 @@ SUBSYSTEM_DEF(tts)
 	var/list/temp_speakers = json_decode(response.body)?["voices"]
 	for(var/speaker in temp_speakers)
 		available_speakers.Add(speaker["speakers"][1])
+
 	tts_enabled = TRUE
-	GLOB.tts_voices_men = available_speakers & CONFIG_GET(str_list/tts_voice_men_whitelist)
-	GLOB.tts_voices_woman = available_speakers & CONFIG_GET(str_list/tts_voice_woman_whitelist)
-	GLOB.tts_voices_xeno = available_speakers & CONFIG_GET(str_list/tts_voice_xeno_whitelist)
+	if(length(CONFIG_GET(str_list/tts_voice_men_whitelist)))
+		GLOB.tts_voices_men = available_speakers & CONFIG_GET(str_list/tts_voice_men_whitelist)
+	else
+		GLOB.tts_voices_men = available_speakers
+	if(length(CONFIG_GET(str_list/tts_voice_woman_whitelist)))
+		GLOB.tts_voices_woman = available_speakers & CONFIG_GET(str_list/tts_voice_woman_whitelist)
+	else
+		GLOB.tts_voices_woman = available_speakers
+	if(length(CONFIG_GET(str_list/tts_voice_xeno_whitelist)))
+		GLOB.tts_voices_xeno = available_speakers & CONFIG_GET(str_list/tts_voice_xeno_whitelist)
+	else
+		GLOB.tts_voices_xeno = available_speakers
+
 	var/datum/http_request/request_pitch = new()
 	request_pitch.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/pitch-available", "")
 	request_pitch.begin_async()

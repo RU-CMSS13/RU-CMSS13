@@ -28,6 +28,11 @@
 		final_name = new_human.client.prefs.synthetic_name
 		if(!final_name || final_name == "Undefined")
 			final_name = "David"
+//RUCM START
+		if(SStts.tts_enabled)
+			new_human.tts_voice = new_human.client.prefs.synth_voice
+			new_human.tts_voice_pitch = new_human.client.prefs.synth_pitch
+//RUCM END
 	new_human.change_real_name(new_human, final_name)
 
 /datum/equipment_preset/synth/load_skills(mob/living/carbon/human/new_human)
