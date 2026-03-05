@@ -564,7 +564,7 @@
 //RUCM START
 	if(SStts.tts_enabled)
 		synth_voice = sanitize_inlist(synth_voice, SStts.available_speakers, SAFEPICK(SStts.available_speakers))
-		xeno_voice = sanitize_inlist(xeno_voice, SStts.available_speakers, SAFEPICK(GLOB.tts_voices_xeno))
+		xeno_voice = sanitize_inlist(xeno_voice, GLOB.tts_voices_xeno, SAFEPICK(GLOB.tts_voices_xeno))
 	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
 	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
 	tts_mode = sanitize_inlist(tts_mode, list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF), TTS_SOUND_ENABLED)
@@ -879,7 +879,7 @@
 
 //RUCM START
 	if(SStts.tts_enabled)
-		var/availible_voices = SAFEPICK(gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
 		voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
 	voice_pitch = sanitize_integer(voice_pitch, -12, 12, 0)
 //RUCM END

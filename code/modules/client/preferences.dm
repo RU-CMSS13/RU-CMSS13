@@ -2268,7 +2268,7 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 //RUCM START
 	if(SStts.tts_enabled)
-		var/availible_voices = SAFEPICK(gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
 		character.tts_voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
 		character.tts_voice_pitch = voice_pitch
 //RUCM END

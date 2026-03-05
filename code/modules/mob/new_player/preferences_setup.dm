@@ -13,7 +13,7 @@
 
 //RUCM START
 	if(SStts.tts_enabled && H.has_tts_voice)
-		H.tts_voice = SAFEPICK(H.gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+		voice = SAFEPICK(gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
 //RUCM END
 
 	skin_color = random_skin_color()
