@@ -11,6 +11,7 @@
 	name = "Issue Order"
 	action_icon_state = "order"
 	var/order_type = "help"
+
 /*
 /datum/action/human_action/issue_order/give_to(mob/living/L)
 	..()
