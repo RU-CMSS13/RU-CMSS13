@@ -432,10 +432,6 @@
 			iff_tag = old_xeno.iff_tag
 			iff_tag.forceMove(src)
 			old_xeno.iff_tag = null
-//RUCM START
-	else
-		init_voice()
-//RUCM END
 
 	if(hive)
 		for(var/trait in hive.hive_inherited_traits)
@@ -489,6 +485,10 @@
 					//Set leader to the new mob
 	if(old_xeno && hive && IS_XENO_LEADER(old_xeno))
 		hive.replace_hive_leader(old_xeno, src)
+//RUCM START
+	else if(!old_xeno)
+		init_voice()
+//RUCM END
 
 	//Begin SStracking
 	SStracking.start_tracking("hive_[src.hivenumber]", src)

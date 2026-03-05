@@ -798,6 +798,9 @@ Additional game mode variables.
 
 	msg_admin_niche("[new_xeno.key] has joined as [new_xeno].")
 	new_xeno.generate_name()
+//RUCM START
+	new_xeno.init_voice()
+//RUCM END
 	if(new_xeno.is_ventcrawling)
 		new_xeno.update_pipe_icons(new_xeno.loc) //If we are in a vent, fetch a fresh vent map
 	return TRUE
@@ -862,6 +865,9 @@ Additional game mode variables.
 	ghost_mind.name = ghost_mind.current.name
 
 	new_queen.generate_name()
+//RUCM START
+	new_queen.init_voice()
+//RUCM END
 
 	SSround_recording.recorder.track_player(new_queen)
 	if(Check_WO())

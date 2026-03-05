@@ -145,6 +145,9 @@
 	new_drone.visible_message(SPAN_XENODANGER("A lesser drone emerges out of [src]!"), SPAN_XENODANGER("You emerge out of [src] and awaken from your slumber. For the Hive!"))
 	playsound(new_drone, 'sound/effects/xeno_newlarva.ogg', 25, TRUE)
 	new_drone.generate_name()
+//RUCM START
+	new_drone.init_voice()
+//RUCM END
 
 	msg_admin_niche("[key_name(new_drone)] has joined as a lesser drone at ([x],[y],[z]).")
 
