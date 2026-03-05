@@ -366,6 +366,7 @@
 	. = ..()
 	user.show_speech_bubble(group, "warcry")
 
+/*
 /datum/emote/living/carbon/human/warcry/get_sound(mob/living/user)
 	if(ishumansynth_strict(user))
 		switch(user.faction)
@@ -373,6 +374,7 @@
 				return get_sfx("[user.gender]_upp_warcry")
 			else
 				return get_sfx("[user.gender]_warcry")
+*/
 
 /datum/emote/living/carbon/human/whimper
 	key = "whimper"
