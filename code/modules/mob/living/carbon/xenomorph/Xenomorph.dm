@@ -432,6 +432,10 @@
 			iff_tag = old_xeno.iff_tag
 			iff_tag.forceMove(src)
 			old_xeno.iff_tag = null
+//RUCM START
+	else
+		init_voice()
+//RUCM END
 
 	if(hive)
 		for(var/trait in hive.hive_inherited_traits)
