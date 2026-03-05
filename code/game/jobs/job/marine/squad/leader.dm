@@ -27,7 +27,7 @@
 			gear_preset = /datum/equipment_preset/uscm/leader
 		if(VET_SQUADLEAD)
 			gear_preset = /datum/equipment_preset/uscm/leader/veteran
-			flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_SQUAD|ROLE_WHITELISTED
+			flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_SQUAD
 
 /datum/job/marine/leader/whiskey
 	title = JOB_WO_SQUAD_LEADER
