@@ -46,7 +46,7 @@
 	actions_types = list(
 		/datum/action/item_action/smartgun/toggle_accuracy_improvement,
 		/datum/action/item_action/smartgun/toggle_ammo_type,
-		/datum/action/item_action/smartgun/toggle_auto_fire,
+		/datum/action/item_action/smartgun/toggle_aim_assist,
 		/datum/action/item_action/smartgun/toggle_frontline_mode,
 		/datum/action/item_action/smartgun/toggle_lethal_mode,
 		/datum/action/item_action/smartgun/toggle_motion_detector,
@@ -329,9 +329,11 @@
 		return
 	var/obj/item/weapon/gun/smartgun/smortgun = holder_item
 	if(smortgun.aim_assist)
-		action_icon_state = "aimassist"
-	else
 		action_icon_state = "aimassist_off"
+	else
+		action_icon_state = "aimassist"
+	button.overlays.Cut()
+	button.overlays += image('icons/mob/hud/actions.dmi', button, action_icon_state)
 
 /datum/action/item_action/smartgun/toggle_accuracy_improvement/New(Target, obj/item/holder)
 	. = ..()
@@ -612,6 +614,9 @@
 	autoshot_image.pixel_y = 0
 
 /obj/item/weapon/gun/smartgun/proc/set_autoshot_image(mob/living/target)
+	var/mob/living/carbon/human/user = loc
+	if(!istype(user) || !istype(user.glasses, /obj/item/clothing/glasses/night/m56_goggles) || !user.glasses.active)
+		return
 	autoshot_image.loc = target
 	autoshot_image.pixel_x = -target.pixel_x // -16 is counted by -(-16)
 	autoshot_image.pixel_y = -target.pixel_y

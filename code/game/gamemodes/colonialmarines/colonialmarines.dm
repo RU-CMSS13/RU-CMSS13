@@ -31,10 +31,12 @@
 	var/near_lz_protection_delay = 8 MINUTES
 
 
+/* RUCM CHANGE
 /* Pre-pre-startup */
 /datum/game_mode/colonialmarines/can_start(bypass_checks = FALSE)
 	initialize_special_clamps()
 	return TRUE
+*/
 
 /datum/game_mode/colonialmarines/announce()
 	to_chat_spaced(world, type = MESSAGE_TYPE_SYSTEM, html = SPAN_ROUNDHEADER("The current map is - [SSmapping.configs[GROUND_MAP].map_name]!"))
@@ -241,8 +243,8 @@
 	warhead.clear_falloff = 400
 	warhead.standard_power = 0
 	warhead.standard_falloff = 30
-	warhead.clear_delay = 3
-	warhead.double_explosion_delay = 6
+	warhead.clear_delay = 0
+	warhead.double_explosion_delay = 0 // No third explosion please
 	warhead.warhead_impact(target) // This is a blocking call
 	playsound(target, 'sound/effects/smoke.ogg', vol=50, vary=1, sound_range=75)
 
@@ -578,7 +580,7 @@
 			continue
 		shake_camera(current_mob, 3, 1)
 
-	playsound_z(SSmapping.levels_by_any_trait(list(ZTRAIT_MARINE_MAIN_SHIP)), 'sound/effects/double_klaxon.ogg', volume = 10)
+	playsound_z(SSmapping.levels_by_trait(ZTRAIT_MARINE_MAIN_SHIP), 'sound/effects/double_klaxon.ogg', volume = 10)
 
 /datum/game_mode/colonialmarines/ds_first_drop(obj/docking_port/mobile/marine_dropship)
 	if(!active_lz)
