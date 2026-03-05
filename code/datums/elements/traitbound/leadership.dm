@@ -1,6 +1,7 @@
 /datum/element/traitbound/leadership
 	associated_trait = TRAIT_LEADERSHIP
 	compatible_types = list(/mob/living/carbon/human)
+
 /*
 /datum/element/traitbound/leadership/Attach(datum/target)
 	. = ..()
