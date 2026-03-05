@@ -61,6 +61,7 @@
 			malfunction()
 			return
 
+/* RUCM CHANGE
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, obj/vehicle/multitile/V)
 	SIGNAL_HANDLER
 	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
@@ -70,6 +71,20 @@
 	if(selected_vehicle == "TANK")
 		available_categories &= ~(VEHICLE_INTEGRAL_AVAILABLE) //APC lacks these, so we need to remove these flags to be able to access spare parts section
 		marine_announcement("A tank is being sent up to reinforce this operation.")
+*/
+//RUCM START
+/obj/structure/machinery/cm_vending/gear/vehicle_crew/proc/populate_products(datum/source, datum/vehicle_order/tank/plain/VO)
+
+	SIGNAL_HANDLER
+	UnregisterSignal(SSdcs, COMSIG_GLOB_VEHICLE_ORDERED)
+
+	if(istype(VO, /obj/effect/vehicle_spawner/tank))
+		selected_vehicle = "TANK"
+		marine_announcement("Tank is being sent up to reinforce this operation. Good luck")
+	else
+		selected_vehicle = "APC"
+		marine_announcement("APC is being sent up to reinforce this operation. Good luck")
+//RUCM END
 
 /obj/structure/machinery/cm_vending/gear/vehicle_crew/get_listed_products(mob/user)
 	var/list/display_list = list()
@@ -237,7 +252,8 @@ GLOBAL_LIST_INIT(cm_vending_vehicle_crew_arc, list(
 		list("M82F Flare Gun", 2, /obj/item/weapon/gun/flare, VENDOR_ITEM_REGULAR),
 
 		list("SIDEARM AMMUNITION", -1, null, null),
-		list("M10 HV Magazine (10x20mm-APC)", 10, /obj/item/ammo_magazine/pistol/m10, VENDOR_ITEM_REGULAR),
+		list("M10 HV Magazine (10x20mm-APC)", 6, /obj/item/ammo_magazine/pistol/m10, VENDOR_ITEM_REGULAR),
+		list("M10 HV Extended Magazine (10x20mm-APC)", 2, /obj/item/ammo_magazine/pistol/m10/extended, VENDOR_ITEM_REGULAR),
 		list("88M4 AP Magazine (9mm)", 10, /obj/item/ammo_magazine/pistol/mod88, VENDOR_ITEM_REGULAR),
 		list("M44 Speedloader (.44)", 10, /obj/item/ammo_magazine/revolver, VENDOR_ITEM_REGULAR),
 		list("M4A3 Magazine (9mm)", 10, /obj/item/ammo_magazine/pistol, VENDOR_ITEM_REGULAR),
@@ -321,6 +337,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_vehicle_crew, list(
 		list("Laser Sight", 10, /obj/item/attachable/lasersight, null, VENDOR_ITEM_REGULAR),
 		list("Masterkey Shotgun", 10, /obj/item/attachable/attached_gun/shotgun, null, VENDOR_ITEM_REGULAR),
 		list("M10 Solid Stock", 10, /obj/item/attachable/stock/m10_solid, null, VENDOR_ITEM_REGULAR),
+		list("M10 Folding Stock", 10, /obj/item/attachable/stock/pistol/collapsible, null, VENDOR_ITEM_REGULAR),
 		list("M37A2 Collapsible Stock", 10, /obj/item/attachable/stock/synth/collapsible, null, VENDOR_ITEM_REGULAR),
 		list("M39 Stock", 10, /obj/item/attachable/stock/smg, null, VENDOR_ITEM_REGULAR),
 		list("M41A Solid Stock", 10, /obj/item/attachable/stock/rifle, null, VENDOR_ITEM_REGULAR),
