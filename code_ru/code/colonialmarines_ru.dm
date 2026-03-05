@@ -1,10 +1,10 @@
 //RUCM CORE INCLUDES
-#include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
-#include "datums\supply_packs\gear.dm"
-#include "datums\supply_packs\weapons.dm"
+#include "_globalvars\misc.dm"
 #include "datums\skills.dm"
 #include "datums\vehicles.dm"
+#include "datums\supply_packs\gear.dm"
+#include "datums\supply_packs\weapons.dm"
 #include "game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\jobs\job\marine\squads.dm"
