@@ -1,6 +1,7 @@
 //RUCM CORE INCLUDES
 #include "supplyshuttle.dm"
 #include "_globalvars\misc.dm"
+#include "datums\ammo.dm"
 #include "datums\skills.dm"
 #include "datums\vehicles.dm"
 #include "datums\supply_packs\gear.dm"
@@ -24,6 +25,9 @@
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
 #include "modules\gear_presets\usmc.dm"
+#include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_abilities.dm"
+#include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_powers.dm"
+#include "modules\mob\living\carbon\xenomorph\strains\castes\spitter\suppressor.dm"
 #include "modules\mob\living\carbon\human\emote.dm"
 #include "modules\mob\living\carbon\human\life.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
