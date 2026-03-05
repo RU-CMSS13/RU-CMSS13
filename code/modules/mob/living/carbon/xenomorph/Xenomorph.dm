@@ -1217,6 +1217,9 @@
 	if(new_player.mind)
 		new_player.mind_initialize()
 		new_player.mind.transfer_to(target, TRUE)
+//RUCM START
+		target.init_voice()
+//RUCM END
 
 /mob/living/carbon/xenomorph/drop_inv_item_on_ground(obj/item/object, nomoveupdate, force)
 	if(istype(object, /obj/item/clothing/mask/facehugger) && !force)
