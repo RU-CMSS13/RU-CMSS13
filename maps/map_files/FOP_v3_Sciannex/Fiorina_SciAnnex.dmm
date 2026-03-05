@@ -297,64 +297,63 @@
 /turf/open/floor/prison,
 /area/fiorina/station/medbay)
 "abc" = (
+/turf/open/floor/prison/greenfull/east,
+/area/fiorina/oob)
+"abd" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/tool/kitchen/tray{
+	pixel_y = 6
+	},
+/turf/open/floor/prison/kitchen/southwest,
+/area/fiorina/station/civres_blue)
+"abe" = (
 /obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/tumor/aux_engi)
-"abd" = (
-/obj/structure/shuttle/part/ert/transparent/left_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/space/basic,
-/area/fiorina/oob)
-"abe" = (
-/obj/structure/shuttle/part/ert/transparent/right_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/space/basic,
-/area/fiorina/oob)
 "abf" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
-/turf/open/floor/prison/floor_plate,
-/area/fiorina/tumor/aux_engi)
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/space/basic,
+/area/fiorina/oob)
 "abg" = (
-/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
 "abh" = (
+/obj/structure/shuttle/part/ert/transparent/left_engine,
+/turf/open/floor/prison/floor_plate,
+/area/fiorina/tumor/aux_engi)
+"abi" = (
+/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/space/basic,
+/area/fiorina/oob)
+"abj" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abi" = (
+"abk" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/oob)
-"abj" = (
-/obj/structure/shuttle/part/ert/transparent/right_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/floor/plating/prison,
-/area/fiorina/oob)
-"abk" = (
-/obj/structure/shuttle/part/ert/front_right_stan,
-/turf/open/space/basic,
-/area/fiorina/tumor/ship)
 "abl" = (
-/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
@@ -362,29 +361,34 @@
 /area/fiorina/oob)
 "abm" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
+/turf/open/space/basic,
+/area/fiorina/tumor/ship)
+"abn" = (
+/obj/structure/shuttle/part/ert/front_left_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/oob)
-"abn" = (
-/turf/open/floor/prison/greenfull/east,
-/area/fiorina/oob)
 "abo" = (
+/obj/structure/shuttle/part/ert/front_right_stan,
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/floor/plating/prison,
+/area/fiorina/oob)
+"abp" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /turf/open/floor/plating/prison,
 /area/fiorina/lz/near_lzI)
-"abp" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/tool/kitchen/tray{
-	pixel_y = 6
-	},
-/turf/open/floor/prison/kitchen/southwest,
-/area/fiorina/station/civres_blue)
 "abq" = (
-/turf/closed/shuttle/ert{
+/turf/closed/shuttle/ert/transparent{
 	icon_state = "wy27"
 	},
+/area/fiorina/oob)
+"abr" = (
+/obj/effect/landmark/mainship_crashsite,
+/turf/closed/wall/mineral/bone_resin,
 /area/fiorina/oob)
 "abG" = (
 /obj/item/trash/chunk,
@@ -2477,7 +2481,7 @@
 /turf/open/floor/prison/kitchen/southwest,
 /area/fiorina/station/civres_blue)
 "bFA" = (
-/turf/closed/shuttle/ert/transparent{
+/turf/closed/shuttle/ert{
 	icon_state = "wy27"
 	},
 /area/fiorina/oob)
@@ -19523,7 +19527,7 @@
 /turf/open/floor/prison/darkredfull2,
 /area/fiorina/station/research_cells/west)
 "oOV" = (
-/obj/structure/machinery/filtration/console{
+/obj/structure/machinery/filtration_console{
 	pixel_y = 22
 	},
 /turf/open/floor/almayer,
@@ -23452,7 +23456,7 @@
 /area/fiorina/station/lowsec/east)
 "rYY" = (
 /obj/structure/bed/roller,
-/obj/structure/machinery/filtration/console{
+/obj/structure/machinery/filtration_console{
 	can_block_movement = 0;
 	pixel_y = 22
 	},
@@ -24792,7 +24796,7 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/fiorina/station/research_cells/west)
 "sXa" = (
-/obj/structure/machinery/filtration/console,
+/obj/structure/machinery/filtration_console,
 /turf/open/floor/prison,
 /area/fiorina/station/power_ring)
 "sXe" = (
@@ -33783,7 +33787,7 @@ vXT
 bQM
 bQM
 bQM
-abk
+abm
 nTq
 lUi
 oOV
@@ -33997,7 +34001,7 @@ baC
 bQM
 baC
 baC
-abk
+abm
 lUi
 jCt
 fiU
@@ -34210,7 +34214,7 @@ baC
 baC
 baC
 baC
-abk
+abm
 lUi
 oFk
 anq
@@ -37209,7 +37213,7 @@ yhu
 yhu
 uNM
 baC
-baC
+abr
 tan
 ble
 hvL
@@ -43294,7 +43298,7 @@ rqC
 rqC
 eYz
 baC
-abn
+abc
 baC
 baC
 baC
@@ -45390,7 +45394,7 @@ pQs
 bNE
 rja
 rja
-abp
+abd
 mIQ
 hDb
 jYK
@@ -46732,7 +46736,7 @@ bAc
 hgS
 hgS
 lvy
-abc
+abe
 sfI
 sfI
 sfI
@@ -47146,9 +47150,9 @@ ufN
 hvL
 baC
 uNM
-abf
+abh
 taj
-abf
+abh
 fpn
 svP
 fpn
@@ -47570,9 +47574,9 @@ sgw
 sgw
 baC
 uNM
-abf
+abh
 svP
-abf
+abh
 kIg
 taj
 taj
@@ -48201,11 +48205,11 @@ iiw
 awL
 awL
 awL
-abl
+abn
 naf
 naf
 cqz
-abi
+abk
 tsc
 hQk
 tsc
@@ -48625,11 +48629,11 @@ gcx
 okv
 iiw
 awL
-abm
+abo
 vcf
 vcf
 lku
-abj
+abl
 tsc
 wtm
 tsc
@@ -55552,7 +55556,7 @@ esw
 esw
 vzB
 bQM
-bFA
+abq
 anm
 qFi
 hXZ
@@ -55764,7 +55768,7 @@ cMb
 jMh
 vzB
 bQM
-abq
+bFA
 rYY
 ePq
 mzS
@@ -80855,11 +80859,11 @@ mvF
 kkU
 kkU
 kkU
-abg
+abi
 naf
 naf
 cqz
-abd
+abf
 ogf
 mRM
 bce
@@ -81279,11 +81283,11 @@ mvF
 kkU
 kkU
 kkU
-abh
+abj
 vcf
 vcf
 lku
-abe
+abg
 ogf
 fWI
 bce
@@ -81686,7 +81690,7 @@ paI
 tsc
 bEk
 ogf
-abl
+abn
 naf
 naf
 cqz
@@ -82110,7 +82114,7 @@ paI
 tsc
 bEk
 ogf
-abm
+abo
 vcf
 vcf
 lku
@@ -84204,7 +84208,7 @@ paI
 paI
 eeH
 dFM
-abo
+abp
 xeO
 xeO
 xeO
