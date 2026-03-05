@@ -20,6 +20,7 @@
 #include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_abilities.dm"
 #include "modules\mob\living\carbon\xenomorph\abilities\spitter\spitter_powers.dm"
 #include "modules\mob\living\carbon\xenomorph\strains\castes\spitter\suppressor.dm"
+#include "modules\mob\living\carbon\human\emote.dm"
 #include "modules\mob\living\carbon\human\life.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
 #include "modules\vehicles\walker.dm"
