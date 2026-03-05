@@ -140,6 +140,7 @@
 	key_third_person = "laughs"
 	message = "laughs!"
 	emote_type = EMOTE_AUDIBLE|EMOTE_VISIBLE
+
 /*
 /datum/emote/living/carbon/human/laugh/get_sound(mob/living/user)
 	if(isyautja(user))
