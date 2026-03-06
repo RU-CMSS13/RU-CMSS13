@@ -14,6 +14,9 @@ GLOBAL_LIST_EMPTY(tts_voices_men)
 /datum/config_entry/str_list/tts_voice_woman_whitelist
 GLOBAL_LIST_EMPTY(tts_voices_woman)
 
+/datum/config_entry/str_list/tts_voice_synth_whitelist
+GLOBAL_LIST_EMPTY(tts_voices_synth)
+
 /datum/config_entry/str_list/tts_voice_xeno_whitelist
 GLOBAL_LIST_EMPTY(tts_voices_xeno)
 
@@ -105,6 +108,10 @@ SUBSYSTEM_DEF(tts)
 		GLOB.tts_voices_woman = available_speakers & CONFIG_GET(str_list/tts_voice_woman_whitelist)
 	else
 		GLOB.tts_voices_woman = available_speakers
+	if(length(CONFIG_GET(str_list/tts_voice_synth_whitelist)))
+		GLOB.tts_voices_synth = available_speakers & CONFIG_GET(str_list/tts_voice_synth_whitelist)
+	else
+		GLOB.tts_voices_xeno = available_speakers
 	if(length(CONFIG_GET(str_list/tts_voice_xeno_whitelist)))
 		GLOB.tts_voices_xeno = available_speakers & CONFIG_GET(str_list/tts_voice_xeno_whitelist)
 	else

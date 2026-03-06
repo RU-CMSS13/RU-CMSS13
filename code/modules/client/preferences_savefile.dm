@@ -575,7 +575,7 @@
 
 //RUCM START
 	if(SStts.tts_enabled)
-		synth_voice = sanitize_inlist(synth_voice, SStts.available_speakers, SAFEPICK(SStts.available_speakers))
+		synth_voice = sanitize_inlist(synth_voice, GLOB.tts_voices_synth, SAFEPICK(GLOB.tts_voices_synth))
 		xeno_voice = sanitize_inlist(xeno_voice, GLOB.tts_voices_xeno, SAFEPICK(GLOB.tts_voices_xeno))
 	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
 	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
@@ -598,7 +598,7 @@
 	volume_preferences = sanitize_volume_preferences(volume_preferences, list(1, 0.5, 1, 0.6)) // Game, music, admin midis, lobby music
 */
 //RUCM START
-	volume_preferences = sanitize_volume_preferences(volume_preferences, list(1, 0.5, 1, 0.6, 0, 0, 0, 0, 0, 0))
+	volume_preferences = sanitize_volume_preferences(volume_preferences, list(1, 0.5, 1, 0.6, 0.5, 0.5, 0.5, 0.5, 0.5, 0.2))
 //RUCM END
 
 	if(!islist(custom_keybinds))
