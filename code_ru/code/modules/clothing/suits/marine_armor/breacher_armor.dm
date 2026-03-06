@@ -4,13 +4,20 @@
 /obj/item/clothing/suit/storage/marine/m40
 	name = "\improper M40 experimental armor"
 	desc = "A custom set of M40 armor designed for use by USCM breacher. Contains thick kevlar shielding and integrated experimental injectors of adrenaline with portative-protective dialysis device."
-	item_icons = list(WEAR_JACKET = 'code_ru/icons/mob/humans/onmob/suit_1.dmi')
+	item_icons = list(
+	WEAR_JACKET = 'code_ru/icons/mob/humans/onmob/suit_1.dmi'
+	)
 	icon = 'code_ru/icons/obj/items/clothing/cm_suits.dmi'
-	icon_state = "st_armor"
+	icon_state = "st"
 	armor_melee = CLOTHING_ARMOR_HIGH
 	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
+	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
+	armor_energy = CLOTHING_ARMOR_MEDIUMLOW
+	armor_bomb = CLOTHING_ARMOR_MEDIUMLOW
+	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
+	armor_rad = CLOTHING_ARMOR_MEDIUM
+	armor_internaldamage = CLOTHING_ARMOR_MEDIUM
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROT
-	flags_atom = NO_GAMEMODE_SKIN
 	flags_armor_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_cold_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_heat_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET

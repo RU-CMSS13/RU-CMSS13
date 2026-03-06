@@ -50,7 +50,7 @@
 						var/obj/item/ammo_magazine/handful/new_handful = new /obj/item/ammo_magazine/handful
 						var/transferred_handfuls = min(ammo_dumping.current_rounds, amount_to_dump)
 						new_handful.generate_handful(ammo_dumping.default_ammo, ammo_dumping.caliber, amount_to_dump, transferred_handfuls, ammo_dumping.gun_type)
-						new_handful.icon = 'code_ru/icons/obj/items/weapons/guns/sparkshot.dmi' //основное что меняю
+						new_handful.icon = 'icons/obj/items/weapons/guns/handful.dmi' //Ёбаный в рот этого казино блять
 						ammo_dumping.current_rounds -= transferred_handfuls
 						handle_item_insertion(new_handful, TRUE,user)
 						update_icon(-transferred_handfuls)
