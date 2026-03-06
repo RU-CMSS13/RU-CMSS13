@@ -282,7 +282,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, filter, list/listeners, local = FALSE, volume_offset = 0, pitch = 0, special_filters = "", start_noise = null)
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, list/listeners, volume_offset = 0, pitch = 0, special_filters = "", start_noise = null, local = FALSE)
 	if(!tts_enabled)
 		return
 
@@ -290,7 +290,8 @@ SUBSYSTEM_DEF(tts)
 	if(!fexists("tmp/tts/init.txt"))
 		rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 
-	var/identifier = "[sha1(speaker + filter + num2text(pitch) + special_filters + message)].[world.time]"
+	message = html_decode(message)
+	var/identifier = "[sha1(speaker + num2text(pitch) + special_filters + message)].[world.time]"
 	if(!(speaker in available_speakers))
 		return
 
@@ -462,8 +463,6 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 /mob
 	/// Text to speech voice. Set to null if no voice.
 	var/tts_voice
-	/// Text to speech filter. Filter that gets applied when passed in.
-	var/tts_voice_filter = ""
 	/// Text to speech pitch. Used to determine the pitch of the voice.
 	var/tts_voice_pitch = 0
 
@@ -510,7 +509,6 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 
 /mob/living/carbon/xenomorph
 	speaking_noise = "alien_talk"
-//	tts_voice_filter = TTS_FILTER_XENO
 
 /mob/living/carbon/xenomorph/proc/init_voice()
 	if(!client)

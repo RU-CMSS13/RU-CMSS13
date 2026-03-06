@@ -47,7 +47,7 @@
 		var/list/mob/langchat_long_listeners = list()
 
 //RUCM START
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), user.tts_voice, user.tts_voice_filter, list(langchat_long_listeners, list(), list()), FALSE, 50, user.tts_voice_pitch, "", user.speaking_noise)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, user.tts_voice, list(langchat_long_listeners, list(), list()), 50, user.tts_voice_pitch, "", user.speaking_noise)
 //RUCM END
 
 		for(var/mob/listener in listeners)

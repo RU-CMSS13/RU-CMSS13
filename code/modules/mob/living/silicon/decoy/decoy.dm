@@ -78,7 +78,7 @@
 */
 //RUCM START
 	var/list/tts_heard_list = list(list(), list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, html_decode(message), tts_voice, tts_voice_filter, tts_heard_list, FALSE, 0, tts_voice_pitch, "", speaking_noise)
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
 
 	ai_headset.talk_into(src, message, message_mode, "states", languages[1], tts_heard_list = tts_heard_list)
 //RUCM END
