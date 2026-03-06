@@ -709,6 +709,7 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
 			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
+			dat += "</div>"
 
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Xeno:</u></b></h2>"
@@ -716,11 +717,13 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
 			dat += "<b>Hivemind TTS:</b> <a href='byond://?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
+			dat += "</div>"
 
 			dat += "<div id='column3'>"
 			dat += "<h2><b><u>Game:</u></b></h2>"
 			dat += "<b>TTS Mode:</b> <a href='byond://?_src_=prefs;preference=tts_mode;task=input'><b>[tts_mode]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=tts_volume;task=input'>Adjust TTS Volume</a><br>"
+			dat += "</div>"
 //RUCM END
 		if(MENU_SPECIAL) //wart
 			dat += "<div id='column1'>"
