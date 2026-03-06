@@ -290,7 +290,7 @@
 // Landmark for spawning the reloader
 /obj/effect/landmark/interior/spawn/weapons_loader
 	name = "vehicle weapons reloader spawner"
-	icon = 'icons/obj/vehicles/interiors/general_humvee.dmi'
+	icon = 'icons/obj/vehicles/interiors/general.dmi'
 	icon_state = "weapons_loader"
 	color = "#00920c"
 
