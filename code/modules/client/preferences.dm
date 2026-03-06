@@ -719,8 +719,8 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 			dat += "<div id='column3'>"
 			dat += "<h2><b><u>Game:</u></b></h2>"
-			dat += "<b>TTS Mode:</b> <a href='byond://?_src_=prefs;preference=tts_mode'><b>[tts_mode]</b></a><br>"
-			dat += "<b>TTS Volume:</b> <a href='byond://?_src_=prefs;preference=tts_volume'><b>Adjust TTS Volume</b></a><br>"
+			dat += "<b>TTS Mode:</b> <a href='byond://?_src_=prefs;preference=tts_mode;task=input'><b>[tts_mode]</b></a><br>"
+			dat += "<a href='byond://?_src_=prefs;preference=tts_volume;task=input'>Adjust TTS Volume</a><br>"
 //RUCM END
 		if(MENU_SPECIAL) //wart
 			dat += "<div id='column1'>"
