@@ -214,7 +214,12 @@
 
 #ifdef OBJECTS_PROXY_SPEECH
 // Transfers speech to occupant
+/* RUCM CHANGE
 /obj/structure/machinery/phonebox/hear_talk(mob/living/sourcemob, message, verb, language, italics)
+*/
+//RUCM START
+/obj/structure/machinery/phonebox/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+//RUCM END
 	if(!QDELETED(occupant) && istype(occupant) && occupant.stat != DEAD)
 		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics)
 	else

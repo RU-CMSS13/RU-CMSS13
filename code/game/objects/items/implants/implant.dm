@@ -156,9 +156,16 @@ Implant Specifics:<BR>"}
 <b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 	return dat
 
+/* RUCM CHANGE
 /obj/item/implant/explosive/hear_talk(mob/M as mob, msg)
 	hear(msg)
 	return
+*/
+//RUCM START
+/obj/item/implant/explosive/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	hear(message)
+	return
+//RUCM END
 
 /obj/item/implant/explosive/hear(msg)
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")

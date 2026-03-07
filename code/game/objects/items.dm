@@ -384,7 +384,12 @@
 
 	return
 
+/* RUCM CHANGE
 /obj/item/proc/talk_into(mob/M as mob, text)
+*/
+//RUCM START
+/obj/item/proc/talk_into(mob/M as mob, text, tts_heard_list)
+//RUCM END
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)

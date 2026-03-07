@@ -352,8 +352,14 @@
 		camera.c_tag = "Unknown"
 	..()
 
+/* RUCM CHANGE
 /obj/item/device/overwatch_camera/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, loc == sourcemob)
+*/
+//RUCM START
+/obj/item/device/overwatch_camera/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, tts_heard_list, loc == sourcemob)
+//RUCM END
 
 /obj/item/device/overwatch_camera/see_emote(mob/living/sourcemob, emote, audible)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_SEE_EMOTE, sourcemob, emote, audible, loc == sourcemob && audible)

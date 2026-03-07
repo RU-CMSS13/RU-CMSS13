@@ -162,7 +162,12 @@
 	return
 
 
+/* RUCM CHANGE
 /obj/item/device/taperecorder/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics)
+*/
+//RUCM START
+/obj/item/device/taperecorder/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics, tts_heard_list)
+//RUCM END
 	. = ..()
 	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity

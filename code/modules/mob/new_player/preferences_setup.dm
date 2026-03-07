@@ -11,6 +11,11 @@
 			else
 				gender = pick(MALE, FEMALE)
 
+//RUCM START
+	if(SStts.tts_enabled && H.has_tts_voice)
+		voice = SAFEPICK(gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+//RUCM END
+
 	skin_color = random_skin_color()
 	body_type = random_body_type()
 	body_size = random_body_size()

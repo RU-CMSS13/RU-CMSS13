@@ -6,6 +6,9 @@
 #define MENU_MENTOR "mentor"
 #define MENU_SETTINGS "settings"
 #define MENU_SPECIAL "special"
+//RUCM START
+#define MENU_TTS "tts"
+//RUCM END
 
 GLOBAL_LIST_EMPTY(preferences_datums)
 
@@ -80,7 +83,12 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	var/toggles_ert = TOGGLES_ERT_DEFAULT
 	var/toggles_survivor = TOGGLES_SURVIVOR_DEFAULT
 	var/toggles_ert_pred = TOGGLES_ERT_GROUNDS
+/* RUCM CHANGE
 	var/list/volume_preferences = list(1, 0.5, 1, 0.6) // Game, music, admin midis, lobby music (this is also set in sanitize_volume_preferences() call)
+*/
+//RUCM START
+	var/list/volume_preferences = list(1, 0.5, 1, 0.6, 0.5, 0.5, 0.5, 0.5, 0.5, 0.2)
+//RUCM END
 	var/chat_display_preferences = CHAT_TYPE_ALL
 	var/item_animation_pref_level = SHOW_ITEM_ANIMATIONS_ALL
 	var/pain_overlay_pref_level = PAIN_OVERLAY_BLURRY
@@ -411,6 +419,10 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	if(owner.check_whitelist_status(WHITELIST_MENTOR))
 		dat += "<a[current_menu == MENU_MENTOR ? " class='linkOff'" : ""] href=\"byond://?src=\ref[user];preference=change_menu;menu=[MENU_MENTOR]\"><b>Mentor</b></a> - "
 	dat += "<a[current_menu == MENU_SETTINGS ? " class='linkOff'" : ""] href=\"byond://?src=\ref[user];preference=change_menu;menu=[MENU_SETTINGS]\"><b>Settings</b></a> - "
+//RUCM START
+	if(SStts.tts_enabled)
+		dat += "<a[current_menu == MENU_TTS ? " class='linkOff'" : ""] href=\"byond://?src=\ref[user];preference=change_menu;menu=[MENU_TTS]\"><b>TTS Settings</b></a> - "
+//RUCM END
 	dat += "<a[current_menu == MENU_SPECIAL ? " class='linkOff'" : ""] href=\"byond://?src=\ref[user];preference=change_menu;menu=[MENU_SPECIAL]\"><b>Special Roles</b></a>"
 	dat += "</center>"
 
@@ -685,6 +697,34 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 			dat += "<a href='byond://?src=\ref[src];action=proccall;procpath=/client/proc/switch_item_animations'>Toggle Item Animations Detail Level</a><br>"
 			dat += "<a href='byond://?src=\ref[src];action=proccall;procpath=/client/proc/toggle_dualwield'>Toggle Dual Wield Functionality</a><br>"
 			dat += "<a href='byond://?src=\ref[src];action=proccall;procpath=/client/proc/toggle_auto_shove'>Toggle Auto Shove</a><br>"
+//RUCM START
+		if(MENU_TTS)
+			dat += "<div id='column1'>"
+			dat += "<h2><b><u>Human:</u></b></h2>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;task=input'><b>[voice]</b></a><br>"
+//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=voice_pitch;task=input'><b>[voice_pitch]</b></a><br>"
+			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=human;task=input'><b>Hear Voice</b></a><br>"
+
+			dat += "<h2><b><u>Synth:</u></b></h2>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
+//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
+			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
+			dat += "</div>"
+
+			dat += "<div id='column2'>"
+			dat += "<h2><b><u>Xeno:</u></b></h2>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice]</b></a><br>"
+//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
+			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
+			dat += "<b>Hivemind TTS:</b> <a href='byond://?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
+			dat += "</div>"
+
+			dat += "<div id='column3'>"
+			dat += "<h2><b><u>Game:</u></b></h2>"
+			dat += "<b>TTS Mode:</b> <a href='byond://?_src_=prefs;preference=tts_mode;task=input'><b>[tts_mode]</b></a><br>"
+			dat += "<a href='byond://?_src_=prefs;preference=tts_volume;task=input'>Adjust TTS Volume</a><br>"
+			dat += "</div>"
+//RUCM END
 		if(MENU_SPECIAL) //wart
 			dat += "<div id='column1'>"
 			dat += "<h2><b><u>ERT Settings:</u></b></h2>"
@@ -1598,6 +1638,90 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 					if(new_age)
 						age = max(min( floor(text2num(new_age)), AGE_MAX),AGE_MIN)
 
+//RUCM START
+				if("voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+					if(new_voice)
+						voice = new_voice
+
+				if("synth_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", GLOB.tts_voices_synth)
+					if(new_voice)
+						synth_voice = new_voice
+
+				if("xeno_voice")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", GLOB.tts_voices_xeno)
+					if(new_voice)
+						xeno_voice = new_voice
+
+				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
+					if(!SStts.tts_enabled)
+						return
+					var/new_voice_pitch = tgui_input_number(user, "Choose your voice's pitch:\n([-12] to [12])", "Voice Pitch", 0, 12, -12)
+					if(!isnull(new_voice_pitch))
+						switch(href_list["preference"])
+							if("voice_pitch")
+								voice_pitch = new_voice_pitch
+							if("synth_voice_pitch")
+								synth_pitch = new_voice_pitch
+							if("xeno_voice_pitch")
+								xeno_pitch = new_voice_pitch
+
+				if("test_voice")
+					if(!SStts.tts_enabled)
+						return
+					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
+						return
+
+					COOLDOWN_START(src, tts_test_cooldown, 0.5 SECONDS)
+					var/target_voice
+					var/target_pitch
+					switch(href_list["target_voice"])
+						if("human")
+							target_voice = voice
+							target_pitch = voice_pitch
+						if("synth")
+							target_voice = synth_voice
+							target_pitch = synth_pitch
+						if("xeno")
+							target_voice = xeno_voice
+							target_pitch = xeno_pitch
+//							target_filter = TTS_FILTER_XENO
+
+					if(!target_voice)
+						return
+
+					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
+					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, null, 0, target_pitch, "", null, TRUE)
+
+				if("hivemind_tts")
+					var/list/options = list(
+						tts_hivemind_to_text(TTS_HIVEMIND_ALL) = TTS_HIVEMIND_ALL,
+						tts_hivemind_to_text(TTS_HIVEMIND_LEADERS) = TTS_HIVEMIND_LEADERS,
+						tts_hivemind_to_text(TTS_HIVEMIND_QUEEN) = TTS_HIVEMIND_QUEEN,
+						tts_hivemind_to_text(TTS_HIVEMIND_OFF) = TTS_HIVEMIND_OFF
+					)
+					var/result_text = tgui_input_list(user, "Select hivemind TTS mode.", "Hivemind TTS Mode Selection", options, theme = "hive_status")
+					if(!result_text)
+						return
+					var/result_value = options[result_text]
+					tts_hivemind_mode = result_value
+
+				if("tts_mode")
+					var/new_mode = tgui_input_list(user, "Select the new TTS mode for yourself.", "Set TTS mode", list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF))
+					if(new_mode)
+						tts_mode = new_mode
+
+				if("tts_volume")
+					user.client.adjust_volume_prefs(VOLUME_TTS, "Set the volume for TTS", 0)
+//RUCM END
+
 				if("metadata")
 					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 					if(new_metadata)
@@ -2155,6 +2279,14 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 	character.skin_color = skin_color
 	character.body_type = body_type
 	character.body_size = body_size
+
+//RUCM START
+	if(SStts.tts_enabled)
+		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
+		character.tts_voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
+		character.tts_voice_pitch = voice_pitch
+//RUCM END
+
 	character.body_presentation = get_body_presentation()
 
 	character.r_eyes = r_eyes

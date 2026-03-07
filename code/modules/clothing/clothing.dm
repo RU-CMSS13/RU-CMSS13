@@ -125,10 +125,18 @@
 
 	..()
 
+/* RUCM CHANGE
 /obj/item/clothing/hear_talk(mob/M, msg)
 	for(var/obj/item/clothing/accessory/attached in accessories)
 		attached.hear_talk(M, msg)
 	..()
+*/
+//RUCM START
+/obj/item/clothing/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	for(var/obj/item/clothing/accessory/attached in accessories)
+		attached.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+	..()
+//RUCM END
 
 /obj/item/clothing/proc/get_armor(armortype)
 	var/armor_total = 0

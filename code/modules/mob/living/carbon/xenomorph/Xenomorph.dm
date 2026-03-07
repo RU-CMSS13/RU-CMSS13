@@ -78,7 +78,9 @@
 	//////////////////////////////////////////////////////////////////
 	var/datum/caste_datum/caste // Used to extract determine ALL Xeno stats.
 	var/speaking_key = "x"
+/* RUCM CHANGE
 	var/speaking_noise = "alien_talk"
+*/
 	slash_verb = "slash"
 	slashes_verb = "slashes"
 	var/slash_sound = "alien_claw_flesh"
@@ -399,6 +401,10 @@
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	AddComponent(/datum/component/deevolve_cooldown, old_xeno)
 	if(old_xeno)
+//RUCM SART
+		tts_voice = old_xeno.tts_voice
+		tts_voice_pitch = old_xeno.tts_voice_pitch
+//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total

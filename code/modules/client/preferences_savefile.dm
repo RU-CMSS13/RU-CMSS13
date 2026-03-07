@@ -317,6 +317,10 @@
 	S["chat_display_preferences"] >> chat_display_preferences
 	S["toggles_ghost"] >> toggles_ghost
 	S["toggles_langchat"] >> toggles_langchat
+//RUCM START
+	S["tts_mode"] >> tts_mode
+	S["tts_hivemind_mode"] >> tts_hivemind_mode
+//RUCM END
 	S["toggles_sound"] >> toggles_sound
 	S["volume_preferences"] >> volume_preferences
 	S["toggle_prefs"] >> toggle_prefs
@@ -348,6 +352,10 @@
 
 	S["xeno_prefix"] >> xeno_prefix
 	S["xeno_postfix"] >> xeno_postfix
+//RUCM START
+	S["xeno_pitch"] >> xeno_pitch
+	S["xeno_voice"] >> xeno_voice
+//RUCM END
 	S["xeno_name_ban"] >> xeno_name_ban
 	S["playtime_perks"] >> playtime_perks
 	S["skip_playtime_ranks"] >> skip_playtime_ranks
@@ -360,6 +368,10 @@
 	S["pref_job_slots"] >> pref_job_slots
 
 	S["synth_name"] >> synthetic_name
+//RUCM START
+	S["synth_voice"] >> synth_voice
+	S["synth_pitch"] >> synth_pitch
+//RUCM END
 	S["synth_type"] >> synthetic_type
 	S["synth_specialisation"] >> synth_specialisation
 	S["pred_name"] >> predator_name
@@ -561,6 +573,16 @@
 	pref_special_job_options = sanitize_islist(pref_special_job_options, list())
 	pref_job_slots = sanitize_islist(pref_job_slots, list())
 
+//RUCM START
+	if(SStts.tts_enabled)
+		synth_voice = sanitize_inlist(synth_voice, GLOB.tts_voices_synth, SAFEPICK(GLOB.tts_voices_synth))
+		xeno_voice = sanitize_inlist(xeno_voice, GLOB.tts_voices_xeno, SAFEPICK(GLOB.tts_voices_xeno))
+	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
+	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
+	tts_mode = sanitize_inlist(tts_mode, list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF), TTS_SOUND_ENABLED)
+	tts_hivemind_mode = sanitize_integer(tts_hivemind_mode, TTS_HIVEMIND_OFF, TTS_HIVEMIND_ALL, TTS_HIVEMIND_LEADERS)
+//RUCM END
+
 	loadout = sanitize_loadout(loadout, owner)
 	loadout_slot_names = sanitize_islist(loadout_slot_names, list())
 
@@ -571,7 +593,13 @@
 	if(!observer_huds)
 		observer_huds = list("Medical HUD" = FALSE, "Security HUD" = FALSE, "Squad HUD" = FALSE, "Xeno Status HUD" = FALSE, "Hunter HUD"= FALSE, HUD_MENTOR_SIGHT = FALSE)
 
+
+/* RUCM CHANGE
 	volume_preferences = sanitize_volume_preferences(volume_preferences, list(1, 0.5, 1, 0.6)) // Game, music, admin midis, lobby music
+*/
+//RUCM START
+	volume_preferences = sanitize_volume_preferences(volume_preferences, list(1, 0.5, 1, 0.6, 0.5, 0.5, 0.5, 0.5, 0.5, 0.2))
+//RUCM END
 
 	if(!islist(custom_keybinds))
 		custom_keybinds = new /list(KEYBIND_CUSTOM_MAX)
@@ -608,6 +636,10 @@
 	S["chat_display_preferences"] << chat_display_preferences
 	S["toggles_ghost"] << toggles_ghost
 	S["toggles_langchat"] << toggles_langchat
+//RUCM START
+	S["tts_mode"] << tts_mode
+	S["tts_hivemind_mode"] << tts_hivemind_mode
+//RUCM END
 	S["toggles_sound"] << toggles_sound
 	S["volume_preferences"] << volume_preferences
 	S["toggle_prefs"] << toggle_prefs
@@ -629,6 +661,10 @@
 
 	S["xeno_prefix"] << xeno_prefix
 	S["xeno_postfix"] << xeno_postfix
+//RUCM START
+	S["xeno_voice"] << xeno_voice
+	S["xeno_pitch"] << xeno_pitch
+//RUCM END
 	S["xeno_name_ban"] << xeno_name_ban
 	S["xeno_vision_level_pref"] << xeno_vision_level_pref
 	S["playtime_perks"] << playtime_perks
@@ -642,6 +678,10 @@
 	S["pref_job_slots"] << pref_job_slots
 
 	S["synth_name"] << synthetic_name
+//RUCM START
+	S["synth_voice"] << synth_voice
+	S["synth_pitch"] << synth_pitch
+//RUCM END
 	S["synth_type"] << synthetic_type
 	S["synth_specialisation"] << synth_specialisation
 	S["pred_name"] << predator_name
@@ -769,6 +809,10 @@
 	S["underwear"] >> underwear
 	S["undershirt"] >> undershirt
 	S["backbag"] >> backbag
+//RUCM START
+	S["human_voice"] >> voice
+	S["human_pitch"] >> voice_pitch
+//RUCM END
 	//S["blood_type"] >> blood_type
 
 	//Jobs
@@ -860,6 +904,14 @@
 	undershirt = sanitize_inlist(undershirt, gender == MALE ? GLOB.undershirt_m : GLOB.undershirt_f, initial(undershirt))
 	backbag = sanitize_integer(backbag, 1, length(GLOB.backbaglist), initial(backbag))
 	preferred_armor = sanitize_inlist(preferred_armor, GLOB.armor_style_list, "Random")
+
+//RUCM START
+	if(SStts.tts_enabled)
+		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
+		voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
+	voice_pitch = sanitize_integer(voice_pitch, -12, 12, 0)
+//RUCM END
+
 	night_vision_preference = sanitize_inlist(night_vision_preference, GLOB.nvg_color_list, "Green")
 	//blood_type = sanitize_text(blood_type, initial(blood_type))
 
@@ -934,6 +986,10 @@
 	S["underwear"] << underwear
 	S["undershirt"] << undershirt
 	S["backbag"] << backbag
+//RUCM START
+	S["human_voice"] << voice
+	S["human_pitch"] << voice_pitch
+//RUCM END
 	//S["blood_type"] << blood_type
 	S["spawnpoint"] << spawnpoint
 

@@ -233,9 +233,18 @@
 
 #ifdef OBJECTS_PROXY_SPEECH
 // Transfers speech to synth brainmob (ie the player)
+/* RUCM CHANGE
 /obj/item/limb/head/synth/hear_talk(mob/living/sourcemob, message, verb, language, italics)
 	if(istype(brainmob))
 		proxy_object_heard(src, sourcemob, brainmob, message, verb, language, italics)
 	else
 		..(sourcemob, message, verb, language, italics)
+*/
+//RUCM START
+/obj/item/limb/head/synth/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+	if(istype(brainmob))
+		proxy_object_heard(src, sourcemob, brainmob, message, verb, language, italics, tts_heard_list = tts_heard_list)
+	else
+		..(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)
+//RUCM END
 #endif // ifdef OBJECTS_PROXY_SPEECH
