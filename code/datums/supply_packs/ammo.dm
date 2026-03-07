@@ -546,3 +546,16 @@
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "\improper L54 HP magazines crate"
 	group = "Ammo"
+
+/datum/supply_packs/ammo_vulture_mags
+	name = "M-707 Vulture mags (x3)"
+	contains = list(
+		/obj/item/ammo_magazine/rifle/boltaction/vulture,
+		/obj/item/ammo_magazine/rifle/boltaction/vulture,
+		/obj/item/ammo_magazine/rifle/boltaction/vulture,
+	)
+	cost = 40
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "\improper M-707 Vulture mags (x3)"
+	group = "Ammo"
+
