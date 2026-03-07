@@ -1063,9 +1063,6 @@
 	hugger.visible_message(SPAN_XENODANGER("A facehugger suddenly emerges out of \the [A]!"), SPAN_XENODANGER("You emerge out of \the [A] and awaken from your slumber. For the Hive!"))
 	playsound(hugger, 'sound/effects/xeno_newlarva.ogg', 25, TRUE)
 	hugger.generate_name()
-//RUCM START
-	hugger.init_voice()
-//RUCM END
 	hugger.timeofdeath = user.timeofdeath // Keep old death time
 	msg_admin_niche("[key_name(hugger)] has joined as a facehugger at ([A.x],[A.y],[A.z]).")
 

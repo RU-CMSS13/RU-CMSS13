@@ -403,6 +403,7 @@
 	if(old_xeno)
 //RUCM SART
 		tts_voice = old_xeno.tts_voice
+		tts_voice_pitch = old_xeno.tts_voice_pitch
 //RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
@@ -485,10 +486,6 @@
 					//Set leader to the new mob
 	if(old_xeno && hive && IS_XENO_LEADER(old_xeno))
 		hive.replace_hive_leader(old_xeno, src)
-//RUCM START
-	else if(!old_xeno)
-		init_voice()
-//RUCM END
 
 	//Begin SStracking
 	SStracking.start_tracking("hive_[src.hivenumber]", src)
@@ -1217,9 +1214,6 @@
 	if(new_player.mind)
 		new_player.mind_initialize()
 		new_player.mind.transfer_to(target, TRUE)
-//RUCM START
-		target.init_voice()
-//RUCM END
 
 /mob/living/carbon/xenomorph/drop_inv_item_on_ground(obj/item/object, nomoveupdate, force)
 	if(istype(object, /obj/item/clothing/mask/facehugger) && !force)

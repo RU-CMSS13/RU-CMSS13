@@ -509,11 +509,3 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 
 /mob/living/carbon/xenomorph
 	speaking_noise = "alien_talk"
-
-/mob/living/carbon/xenomorph/proc/init_voice()
-	if(!client)
-		return
-	if(!SStts.tts_enabled)
-		return
-	tts_voice = sanitize_inlist(client.prefs?.xeno_voice, SStts.available_speakers, pick(SStts.available_speakers))
-	tts_voice_pitch = client.prefs?.xeno_pitch
