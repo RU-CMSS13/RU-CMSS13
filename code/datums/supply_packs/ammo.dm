@@ -558,3 +558,4 @@
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "\improper M-707 Vulture mags (x3)"
 	group = "Ammo"
+
