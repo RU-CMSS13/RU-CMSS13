@@ -321,7 +321,7 @@
 	if(use_volume)
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,
-						filter_type, 0, target_zs, connection.frequency, verb, speaking, volume, listening_device,tts_heard_list)
+						filter_type, 0, target_zs, connection.frequency, verb, speaking, volume, listening_device, tts_heard_list)
 	else
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,

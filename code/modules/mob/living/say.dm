@@ -123,12 +123,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/remove_speech_bubble(mutable_appearance/speech_bubble, list_of_mobs)
 	overlays -= speech_bubble
 
-/* RUCM CHANGE
 /mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon)
-*/
-//RUCM START
-/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, tts_heard_list)
-//RUCM END
 	var/turf/T
 
 	if(!filter_message(src, message))
@@ -140,8 +135,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	message = process_chat_markup(message, list("~", "_"))
 
 //RUCM START
-	if(!length(tts_heard_list))
-		tts_heard_list = list(list(), list(), list())
+	var/list/tts_heard_list = list(list(), list(), list())
+	if(SStts.tts_enabled)
 		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
 //RUCM END
 
@@ -247,12 +242,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else
 		log_say("[name != "Unknown" ? name : "([real_name])"]: [message] (CKEY: [key]) (AREA: [get_area_name(loc)])")
 
-/* RUCM CHANGE
 	return 1
-*/
-//RUCM START
-	return tts_heard_list
-//RUCM END
 
 /mob/living/proc/say_signlang(message, verb="gestures", datum/language/language)
 	for (var/mob/O in viewers(src, null))

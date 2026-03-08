@@ -53,13 +53,7 @@
 	else
 		.["message"] = strip_language(message_and_language)
 
-/* RUCM CHANGE
 /mob/living/carbon/human/say(message)
-*/
-//RUCM START
-/mob/living/carbon/human/say(message, tts_heard_list)
-//RUCM END
-
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = GLOB.world_view_size
@@ -143,12 +137,10 @@
 		if(!(copytext(message, -1) in ENDING_PUNCT))
 			message += "."
 
-	//RUCM START
-	if(!length(tts_heard_list))
-		tts_heard_list = list(list(), list(), list())
-		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
-	//RUCM END
 	for(var/message_mode in parsed["modes"])
+//RUCM START
+		var/radio_volume = 0
+//RUCM END
 		var/list/obj/item/used_radios = list()
 		switch(message_mode)
 			if(RADIO_MODE_WHISPER)
@@ -158,13 +150,19 @@
 				message_mode = null
 				FOR_DVIEW(var/obj/item/device/radio/intercom/I, 1, src, HIDE_INVISIBLE_OBSERVER)
 					used_radios += I
+//RUCM START
+					radio_volume = I.volume
+//RUCM END
 					break // remove this if we EVER have two different intercomms with DIFFERENT frequencies IN ONE ROOM
 				FOR_DVIEW_END
 			else
 				if(message_mode != MESSAGE_MODE_LOCAL)
-					var/earpiece = get_type_in_ears(/obj/item/device/radio)
+					var/obj/item/device/radio/earpiece = get_type_in_ears(/obj/item/device/radio)
 					if(earpiece)
 						used_radios += earpiece
+//RUCM START
+						radio_volume = earpiece.volume
+//RUCM END
 
 		var/sound/speech_sound
 		var/sound_vol
@@ -194,7 +192,11 @@
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
 */
 //RUCM START
-		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
+		var/list/tts_heard_list = list(list(), list(), list())
+		if(SStts.tts_enabled)
+			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
+
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
 //RUCM END

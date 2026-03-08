@@ -319,6 +319,7 @@
 	S["toggles_langchat"] >> toggles_langchat
 //RUCM START
 	S["tts_mode"] >> tts_mode
+	S["tts_radio_mode"] >> tts_radio_mode
 	S["tts_hivemind_mode"] >> tts_hivemind_mode
 //RUCM END
 	S["toggles_sound"] >> toggles_sound
@@ -580,6 +581,7 @@
 	synth_pitch = sanitize_integer(synth_pitch, -12, 12, 0)
 	xeno_pitch = sanitize_integer(xeno_pitch, -12, 12, 0)
 	tts_mode = sanitize_inlist(tts_mode, list(TTS_SOUND_ENABLED, TTS_SOUND_BLIPS, TTS_SOUND_OFF), TTS_SOUND_ENABLED)
+	tts_radio_mode = sanitize_integer(tts_radio_mode, TTS_RADIO_OFF, TTS_RADIO_ALL, TTS_RADIO_BIG_VOICE_ONLY)
 	tts_hivemind_mode = sanitize_integer(tts_hivemind_mode, TTS_HIVEMIND_OFF, TTS_HIVEMIND_ALL, TTS_HIVEMIND_LEADERS)
 //RUCM END
 
@@ -638,6 +640,7 @@
 	S["toggles_langchat"] << toggles_langchat
 //RUCM START
 	S["tts_mode"] << tts_mode
+	S["tts_radio_mode"] << tts_radio_mode
 	S["tts_hivemind_mode"] << tts_hivemind_mode
 //RUCM END
 	S["toggles_sound"] << toggles_sound
@@ -810,8 +813,8 @@
 	S["undershirt"] >> undershirt
 	S["backbag"] >> backbag
 //RUCM START
-	S["human_voice"] >> voice
-	S["human_pitch"] >> voice_pitch
+	S["human_voice"] >> human_voice
+	S["human_pitch"] >> human_voice_pitch
 //RUCM END
 	//S["blood_type"] >> blood_type
 
@@ -907,9 +910,8 @@
 
 //RUCM START
 	if(SStts.tts_enabled)
-		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
-		voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
-	voice_pitch = sanitize_integer(voice_pitch, -12, 12, 0)
+		human_voice = sanitize_inlist(human_voice, gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman, "Random")
+	human_voice_pitch = sanitize_integer(human_voice_pitch, -12, 12, 0)
 //RUCM END
 
 	night_vision_preference = sanitize_inlist(night_vision_preference, GLOB.nvg_color_list, "Green")
@@ -987,8 +989,8 @@
 	S["undershirt"] << undershirt
 	S["backbag"] << backbag
 //RUCM START
-	S["human_voice"] << voice
-	S["human_pitch"] << voice_pitch
+	S["human_voice"] << human_voice
+	S["human_pitch"] << human_voice_pitch
 //RUCM END
 	//S["blood_type"] << blood_type
 	S["spawnpoint"] << spawnpoint

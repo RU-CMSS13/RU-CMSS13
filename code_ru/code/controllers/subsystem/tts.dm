@@ -111,22 +111,23 @@ SUBSYSTEM_DEF(tts)
 	if(length(CONFIG_GET(str_list/tts_voice_synth_whitelist)))
 		GLOB.tts_voices_synth = available_speakers & CONFIG_GET(str_list/tts_voice_synth_whitelist)
 	else
-		GLOB.tts_voices_xeno = available_speakers
+		GLOB.tts_voices_synth = available_speakers
 	if(length(CONFIG_GET(str_list/tts_voice_xeno_whitelist)))
 		GLOB.tts_voices_xeno = available_speakers & CONFIG_GET(str_list/tts_voice_xeno_whitelist)
 	else
 		GLOB.tts_voices_xeno = available_speakers
 
+/* No pitch in our tts
 	var/datum/http_request/request_pitch = new()
 	request_pitch.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]/pitch-available", "")
 	request_pitch.begin_async()
 	UNTIL(request_pitch.is_complete())
-	pitch_enabled = TRUE
 	var/datum/http_response/response_pitch = request_pitch.into_response()
 	if(response_pitch.errored || response_pitch.status_code != 200)
 		if(response_pitch.errored)
 			stack_trace(response.error)
 		pitch_enabled = FALSE
+*/
 	rustg_file_write(json_encode(available_speakers), "data/cached_tts_voices.json")
 	rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 	return TRUE
@@ -141,29 +142,41 @@ SUBSYSTEM_DEF(tts)
 		return SS_INIT_FAILURE
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/tts/proc/should_play_hivemind_tts(client/listener, target)
+/datum/controller/subsystem/tts/proc/should_skip_radio_tts(client/listener, target, flags, radio_volume)
+	var/radio_preference = listener?.prefs.tts_radio_mode
+	if(radio_preference == TTS_RADIO_ALL)
+		return FALSE
+	else if(radio_preference == TTS_RADIO_BIG_VOICE_ONLY && radio_volume >= RADIO_VOLUME_IMPORTANT)
+		return FALSE
+	return TRUE
+
+/datum/controller/subsystem/tts/proc/should_skip_hivemind_tts(client/listener, target)
 	var/hivemind_preference = listener?.prefs.tts_hivemind_mode
 	if(hivemind_preference == TTS_HIVEMIND_ALL)
-		return TRUE
+		return FALSE
 	else if(hivemind_preference == TTS_HIVEMIND_LEADERS)
 		var/mob/living/carbon/xenomorph/xeno = target
 		if(!istype(xeno))
-			return FALSE
-		if(isqueen(xeno) || IS_XENO_LEADER(xeno))
 			return TRUE
+		if(isqueen(xeno) || IS_XENO_LEADER(xeno))
+			return FALSE
 	else if(hivemind_preference == TTS_HIVEMIND_QUEEN)
 		if(isqueen(target))
-			return TRUE
-	return FALSE
+			return FALSE
+	return TRUE
 
-/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, volume_offset = 0, flags)
+/datum/controller/subsystem/tts/proc/play_tts(target, list/listeners, sound/audio, volume_offset = 0, flags, radio_volume)
 	for(var/mob/receiver in listeners)
-		if(!receiver.client || !receiver.client.prefs)
+		if(!receiver.client?.prefs)
 			continue
 		if(receiver.client.prefs.tts_mode == TTS_SOUND_OFF)
 			continue
-		if((flags & TTS_FLAG_HIVEMIND) && !should_play_hivemind_tts(receiver.client, target))
-			continue
+		if(flags & TTS_FLAG_RADIO)
+			if(should_skip_radio_tts(receiver.client, target))
+				continue
+		else if(flags & TTS_FLAG_HIVEMIND)
+			if(should_skip_hivemind_tts(receiver.client, target, radio_volume))
+				continue
 		playsound_client(receiver.client, audio, flags ? null : target, volume_offset, vol_cat = VOLUME_TTS)
 
 #define SHIFT_DATA_ARRAY(tts_message_queue, target, data) \
@@ -265,7 +278,7 @@ SUBSYSTEM_DEF(tts)
 				var/turf/turf_source = get_turf(tts_target)
 				if(turf_source)
 					play_tts(turf_source, current_target.listeners[1], audio_file, current_target.volume_offset + 60)
-					play_tts(turf_source, current_target.listeners[2], audio_file, current_target.volume_offset + 30, TTS_FLAG_RADIO)
+					play_tts(turf_source, current_target.listeners[2], audio_file, current_target.volume_offset + 30, TTS_FLAG_RADIO, current_target.radio_volume)
 					play_tts(turf_source, current_target.listeners[3], audio_file, current_target.volume_offset + 30, TTS_FLAG_HIVEMIND)
 				if(length(data) != 1)
 					var/datum/tts_request/next_target = data[2]
@@ -282,7 +295,7 @@ SUBSYSTEM_DEF(tts)
 
 #undef TTS_ARBRITRARY_DELAY
 
-/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, list/listeners, volume_offset = 0, pitch = 0, special_filters = "", start_noise = null, local = FALSE)
+/datum/controller/subsystem/tts/proc/queue_tts_message(datum/target, message, speaker, list/listeners, volume_offset = 0, pitch = 0, special_filters = "", start_noise = null, local = FALSE, radio_volume = 0)
 	if(!tts_enabled)
 		return
 
@@ -290,7 +303,7 @@ SUBSYSTEM_DEF(tts)
 	if(!fexists("tmp/tts/init.txt"))
 		rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 
-	message = html_decode(message)
+	message = sanitize_filename(message)
 	var/identifier = "[sha1(speaker + num2text(pitch) + special_filters + message)].[world.time]"
 	if(!(speaker in available_speakers))
 		return
@@ -302,7 +315,7 @@ SUBSYSTEM_DEF(tts)
 	var/file_name = "tmp/tts/[identifier].ogg"
 
 	request.prepare(RUSTG_HTTP_METHOD_GET, "[CONFIG_GET(string/tts_http_url)]?speaker=[speaker]&effect=[url_encode(special_filters)]&pitch=[pitch]&ext=ogg&text=[message]", null, headers, file_name)
-	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, message, target, local, volume_offset, listeners, pitch, start_noise)
+	var/datum/tts_request/current_request = new /datum/tts_request(identifier, request, message, target, listeners, volume_offset, pitch, start_noise, local, radio_volume)
 
 	var/list/player_queued_tts_messages = queued_tts_messages[target]
 	if(!player_queued_tts_messages)
@@ -332,6 +345,7 @@ SUBSYSTEM_DEF(tts)
 	var/volume_offset = 0
 	/// Whether this TTS message should be sent to the target only or not.
 	var/local = FALSE
+	var/radio_volume = FALSE
 	/// The time at which this request was started
 	var/start_time
 
@@ -350,17 +364,18 @@ SUBSYSTEM_DEF(tts)
 
 BSQL_PROTECT_DATUM(/datum/tts_request)
 
-/datum/tts_request/New(identifier, datum/http_request/request, message, target, local, volume_offset, list/listeners, pitch, start_noise)
+/datum/tts_request/New(identifier, datum/http_request/request, message, target, list/listeners, volume_offset = 0, pitch = 0, start_noise = null, local = FALSE, radio_volume = 0)
 	. = ..()
 	src.identifier = identifier
 	src.request = request
 	src.message = message
 	src.target = target
-	src.local = local
-	src.volume_offset = volume_offset
 	src.listeners = listeners
+	src.volume_offset = volume_offset
 	src.pitch = pitch
 	src.start_noise = start_noise
+	src.local = local
+	src.radio_volume = radio_volume
 	start_time = world.time
 
 /datum/tts_request/proc/start_requests()
@@ -475,15 +490,15 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 	adjust_volume_prefs(VOLUME_TTS, "Set the volume for TTS", 0)
 
 /datum/preferences
-	var/voice = "Random"
-	var/voice_pitch = 0
+	var/human_voice = "Random"
+	var/human_voice_pitch = 0
 	var/xeno_voice = "Random"
 	var/xeno_pitch = 0
 	var/synth_voice = "Random"
 	var/synth_pitch = 0
 	var/tts_mode = TTS_SOUND_ENABLED
-	var/tts_hivemind_mode = TTS_HIVEMIND_LEADERS
 	var/tts_radio_mode = TTS_RADIO_BIG_VOICE_ONLY
+	var/tts_hivemind_mode = TTS_HIVEMIND_LEADERS
 	COOLDOWN_DECLARE(tts_test_cooldown)
 
 /datum/preferences/proc/tts_hivemind_to_text(value)
@@ -495,6 +510,15 @@ BSQL_PROTECT_DATUM(/datum/tts_request)
 		if(TTS_HIVEMIND_LEADERS)
 			return "Queen and leaders"
 		if(TTS_HIVEMIND_ALL)
+			return "Everyone"
+
+/datum/preferences/proc/tts_radio_to_text(value)
+	switch(value)
+		if(TTS_RADIO_OFF)
+			return "Disabled"
+		if(TTS_RADIO_BIG_VOICE_ONLY)
+			return "Big Voices"
+		if(TTS_RADIO_ALL)
 			return "Everyone"
 
 /datum/species

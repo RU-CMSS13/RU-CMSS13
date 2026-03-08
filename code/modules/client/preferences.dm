@@ -701,20 +701,24 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 		if(MENU_TTS)
 			dat += "<div id='column1'>"
 			dat += "<h2><b><u>Human:</u></b></h2>"
-			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;task=input'><b>[voice]</b></a><br>"
-//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=voice_pitch;task=input'><b>[voice_pitch]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;target_voice=human;task=input'><b>[human_voice || "Random"]</b></a><br>"
+			if(SStts.pitch_enabled)
+				dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=voice_pitch;target_voice=human;task=input'><b>[human_voice_pitch]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=human;task=input'><b>Hear Voice</b></a><br>"
+			dat += "<b>Radio TTS:</b> <a href='byond://?_src_=prefs;preference=radio_tts;task=input'><b>[tts_radio_to_text(tts_radio_mode)]</b></a><br>"
 
 			dat += "<h2><b><u>Synth:</u></b></h2>"
-			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=synth_voice;task=input'><b>[synth_voice]</b></a><br>"
-//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=synth_voice_pitch;task=input'><b>[synth_pitch]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;target_voice=synth;task=input'><b>[synth_voice || "Random"]</b></a><br>"
+			if(SStts.pitch_enabled)
+				dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=synth_voice_pitch;target_voice=synth;task=input'><b>[synth_pitch]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=synth;task=input'><b>Hear Voice</b></a><br>"
 			dat += "</div>"
 
 			dat += "<div id='column2'>"
 			dat += "<h2><b><u>Xeno:</u></b></h2>"
-			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=xeno_voice;task=input'><b>[xeno_voice]</b></a><br>"
-//			dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=xeno_voice_pitch;task=input'><b>[xeno_pitch]</b></a><br>"
+			dat += "<b>Voice:</b> <a href='byond://?_src_=prefs;preference=voice;target_voice=xeno;task=input'><b>[xeno_voice || "Random"]</b></a><br>"
+			if(SStts.pitch_enabled)
+				dat += "<b>Voice Pitch:</b> <a href='byond://?_src_=prefs;preference=xeno_voice_pitch;target_voice=xeno;task=input'><b>[xeno_pitch]</b></a><br>"
 			dat += "<a href='byond://?_src_=prefs;preference=test_voice;target_voice=xeno;task=input'><b>Hear Voice</b></a><br>"
 			dat += "<b>Hivemind TTS:</b> <a href='byond://?_src_=prefs;preference=hivemind_tts;task=input'><b>[tts_hivemind_to_text(tts_hivemind_mode)]</b></a><br>"
 			dat += "</div>"
@@ -1640,42 +1644,36 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 //RUCM START
 				if("voice")
-					if(!SStts.tts_enabled)
-						return
-					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman)
+					var/list/available_voices
+					switch(href_list["target_voice"])
+						if("human")
+							available_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
+						if("synth")
+							available_voices = GLOB.tts_voices_synth
+						if("xeno")
+							available_voices = GLOB.tts_voices_xeno
+					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", available_voices)
 					if(new_voice)
-						voice = new_voice
+						switch(href_list["target_voice"])
+							if("human")
+								human_voice = new_voice
+							if("synth")
+								synth_voice = new_voice
+							if("xeno")
+								xeno_voice = new_voice
 
-				if("synth_voice")
-					if(!SStts.tts_enabled)
-						return
-					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", GLOB.tts_voices_synth)
-					if(new_voice)
-						synth_voice = new_voice
-
-				if("xeno_voice")
-					if(!SStts.tts_enabled)
-						return
-					var/new_voice = tgui_input_list(user, "Choose your character's voice", "Voice selection", GLOB.tts_voices_xeno)
-					if(new_voice)
-						xeno_voice = new_voice
-
-				if("voice_pitch", "synth_voice_pitch", "xeno_voice_pitch")
-					if(!SStts.tts_enabled)
-						return
+				if("voice_pitch")
 					var/new_voice_pitch = tgui_input_number(user, "Choose your voice's pitch:\n([-12] to [12])", "Voice Pitch", 0, 12, -12)
 					if(!isnull(new_voice_pitch))
-						switch(href_list["preference"])
-							if("voice_pitch")
-								voice_pitch = new_voice_pitch
-							if("synth_voice_pitch")
+						switch(href_list["target_voice"])
+							if("human")
+								human_voice_pitch = new_voice_pitch
+							if("synth")
 								synth_pitch = new_voice_pitch
-							if("xeno_voice_pitch")
+							if("xeno")
 								xeno_pitch = new_voice_pitch
 
 				if("test_voice")
-					if(!SStts.tts_enabled)
-						return
 					if(!COOLDOWN_FINISHED(src, tts_test_cooldown))
 						return
 
@@ -1684,8 +1682,8 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 					var/target_pitch
 					switch(href_list["target_voice"])
 						if("human")
-							target_voice = voice
-							target_pitch = voice_pitch
+							target_voice = human_voice
+							target_pitch = human_voice_pitch
 						if("synth")
 							target_voice = synth_voice
 							target_pitch = synth_pitch
@@ -1699,6 +1697,18 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 					var/random_text = pick_weight(list("Это мой голос." = 50, "Ксеноморф в вентиляции!" = 50, "КО опять убил просто так." = 50, "Эти ебланоиды опять сделали неправильный перевод." = 1))
 					INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), user.client, random_text, target_voice, null, 0, target_pitch, "", null, TRUE)
+
+				if("radio_tts")
+					var/list/options = list(
+						tts_radio_to_text(TTS_RADIO_ALL) = TTS_RADIO_ALL,
+						tts_radio_to_text(TTS_RADIO_BIG_VOICE_ONLY) = TTS_RADIO_BIG_VOICE_ONLY,
+						tts_radio_to_text(TTS_RADIO_OFF) = TTS_RADIO_OFF
+					)
+					var/result_text = tgui_input_list(user, "Select radio TTS mode.", "Radio TTS Mode Selection", options)
+					if(!result_text)
+						return
+					var/result_value = options[result_text]
+					tts_radio_mode = result_value
 
 				if("hivemind_tts")
 					var/list/options = list(
@@ -2283,8 +2293,8 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 //RUCM START
 	if(SStts.tts_enabled)
 		var/availible_voices = gender == MALE ? GLOB.tts_voices_men : GLOB.tts_voices_woman
-		character.tts_voice = sanitize_inlist(voice, availible_voices, SAFEPICK(availible_voices))
-		character.tts_voice_pitch = voice_pitch
+		character.tts_voice = sanitize_inlist(human_voice, availible_voices, SAFEPICK(availible_voices))
+		character.tts_voice_pitch = human_voice_pitch
 //RUCM END
 
 	character.body_presentation = get_body_presentation()

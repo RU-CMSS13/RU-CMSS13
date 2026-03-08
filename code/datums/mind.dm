@@ -50,14 +50,6 @@
 		SSnano.nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 		SStgui.on_transfer(current, new_character) // and active TGUI instances
 
-//RUCM START
-	if(isxeno(new_character) && !new_character.tts_voice)
-		var/client/cli = GLOB.directory[ckey]
-		var/mob/living/carbon/xenomorph/xeno = new_character
-		xeno.tts_voice = sanitize_inlist(cli.prefs?.xeno_voice, GLOB.tts_voices_xeno, pick(GLOB.tts_voices_xeno))
-		xeno.tts_voice_pitch = cli.prefs?.xeno_pitch
-//RUCM END
-
 	if(key)
 		if(new_character.key != key)
 			new_character.ghostize(TRUE)

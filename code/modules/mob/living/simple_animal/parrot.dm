@@ -703,7 +703,8 @@
 
 //RUCM START
 	var/list/tts_heard_list = list(list(), list(), list())
-	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
+	if(SStts.tts_enabled)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
 //RUCM END
 
 	if(message_mode)

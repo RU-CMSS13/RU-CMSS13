@@ -401,10 +401,6 @@
 	///Handle transferring things from the old Xeno if we have one in the case of evolve, devolve etc.
 	AddComponent(/datum/component/deevolve_cooldown, old_xeno)
 	if(old_xeno)
-//RUCM SART
-		tts_voice = old_xeno.tts_voice
-		tts_voice_pitch = old_xeno.tts_voice_pitch
-//RUCM END
 		src.nicknumber = old_xeno.nicknumber
 		src.life_kills_total = old_xeno.life_kills_total
 		src.life_damage_taken_total = old_xeno.life_damage_taken_total
@@ -625,6 +621,11 @@
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
 		age_xeno()
+//RUCM START
+		if(SStts.tts_enabled)
+			tts_voice = client.prefs?.xeno_voice
+			tts_voice_pitch = client.prefs?.xeno_pitch
+//RUCM END
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 
 	var/age_display = show_age_prefix ? age_prefix : ""
