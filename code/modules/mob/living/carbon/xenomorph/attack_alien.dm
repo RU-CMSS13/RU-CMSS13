@@ -98,6 +98,11 @@
 			var/damage = rand(attacking_xeno.melee_damage_lower, attacking_xeno.melee_damage_upper) + dam_bonus
 			var/acid_damage = attacking_xeno.behavior_delegate.melee_attack_modify_burn_damage(0, src)
 
+//RUCM START
+			if(isyautja(src))
+				damage *= 1.5
+//RUCM END
+
 			//Frenzy auras stack in a way, then the raw value is multiplied by two to get the additive modifier
 			if(attacking_xeno.frenzy_aura > 0)
 				damage += (attacking_xeno.frenzy_aura * FRENZY_DAMAGE_MULTIPLIER)
