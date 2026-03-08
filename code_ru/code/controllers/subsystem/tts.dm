@@ -142,7 +142,7 @@ SUBSYSTEM_DEF(tts)
 		return SS_INIT_FAILURE
 	return SS_INIT_SUCCESS
 
-/datum/controller/subsystem/tts/proc/should_skip_radio_tts(client/listener, target, flags, radio_volume)
+/datum/controller/subsystem/tts/proc/should_skip_radio_tts(client/listener, target, radio_volume)
 	var/radio_preference = listener?.prefs.tts_radio_mode
 	if(radio_preference == TTS_RADIO_ALL)
 		return FALSE
