@@ -6,7 +6,7 @@
 	threshold_moderate = null
 	threshold_distressing = null
 	threshold_severe = null
-	threshold_horrible = 120
+	threshold_horrible = 150
 
 	feels_pain = FALSE
 
