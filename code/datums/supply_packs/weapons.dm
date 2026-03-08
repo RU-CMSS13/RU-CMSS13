@@ -114,6 +114,7 @@
 /datum/supply_packs/gun/m707
 	name = "M707 Anti-Materiel Rifle crate (M707 x1)"
 	contains = list(
+		/obj/item/storage/box/guncase/vulture,
 	)
 	cost = 120
 	containertype = /obj/structure/closet/crate/secure/vulture
