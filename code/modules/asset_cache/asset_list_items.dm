@@ -477,7 +477,9 @@
 
 /datum/asset/spritesheet/gun_lineart/register()
 	var/icon_file = 'icons/obj/items/weapons/guns/lineart.dmi'
+	var/icon_file_ru = 'code_ru/icons/obj/items/weapons/guns/lineart.dmi'
 	InsertAll("", icon_file)
+	InsertAll("", icon_file_ru)
 
 	for(var/obj/item/weapon/gun/current_gun as anything in subtypesof(/obj/item/weapon/gun))
 		if(isnull(initial(current_gun.icon_state)))
@@ -489,7 +491,7 @@
 		qdel(temp_gun)
 		if(icon_state && isnull(sprites[icon_state]))
 			// downgrade this to a log_debug if we don't want missing lineart to be a lint
-			stack_trace("[current_gun] does not have a valid lineart icon state, icon=[icon_file], icon_state=[json_encode(icon_state)]")
+			stack_trace("[current_gun] does not have a valid lineart icon state, icon = [icon_file_ru], icon_state=[json_encode(icon_state)]")
 
 	..()
 
