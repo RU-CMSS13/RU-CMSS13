@@ -187,8 +187,8 @@
 	damage_type = BRUTE
 	icon_state = "arrow"
 
-	damage = 100
-	penetration = 10
+	damage = 110
+	penetration = 20
 	accuracy = HIT_ACCURACY_TIER_3
 	max_range = 14
 	shell_speed = AMMO_SPEED_TIER_3

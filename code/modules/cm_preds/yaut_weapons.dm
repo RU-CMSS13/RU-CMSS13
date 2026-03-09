@@ -1934,7 +1934,7 @@
 /obj/item/storage/belt/gun/quiver
 	name = "quiver strap"
 	desc = "A strap that can hold a bow with a quiver for arrows."
-	storage_slots = 10
+	storage_slots = 8
 	max_storage_space = 20
 	icon_state = "quiver"
 	item_state = "s_marinebelt"
