@@ -256,6 +256,8 @@
 
 	/// for referencing the timer subsystem, such as the wield queue timer
 	var/gun_timer_id
+	/// for lineart override
+	var/lineart_ru = FALSE  //RUCM EDIT
 
 /**
  * An assoc list where the keys are fire delay group string defines
