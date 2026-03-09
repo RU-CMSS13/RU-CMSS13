@@ -10,7 +10,7 @@
 	new /obj/item/clothing/head/helmet/marine/m40(src)
 	new /obj/item/clothing/gloves/marine/m40(src)
 	new /obj/item/weapon/twohanded/breacher_hammer(src)
-	new /obj/item/weapon/shield/montage(src)
+	new /obj/item/storage/belt/gun/brutepack/full(src)
 	new /obj/item/storage/belt/gun/xm52(src)
 	new /obj/item/weapon/gun/rifle/xm52(src)
 	new /obj/item/ammo_magazine/rifle/xm52(src)
