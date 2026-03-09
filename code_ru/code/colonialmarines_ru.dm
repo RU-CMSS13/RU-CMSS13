@@ -4,6 +4,7 @@
 #include "datums\ammo.dm"
 #include "datums\ammo\bullets\shotgun.dm"
 #include "datums\skills.dm"
+#include "datums\vehicles.dm"
 #include "datums\supply_packs\gear.dm"
 #include "datums\supply_packs\weapons.dm"
 #include "datums\supply_packs\spec_ammo.dm"
