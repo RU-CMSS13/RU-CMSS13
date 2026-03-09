@@ -1,4 +1,5 @@
 //RUCM CORE INCLUDES
+#include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
 #include "datums\ammo.dm"
 #include "datums\skills.dm"
@@ -19,6 +20,7 @@
 #include "game\objects\structures\table_racks.dm"
 #include "game\turfs\open.dm"
 #include "modules\almayer\machinery.dm"
+#include "modules\cm_aliens\structures\blueprints.dm"
 #include "modules\cm_marines\overwatch.dm"
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
