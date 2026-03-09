@@ -53,7 +53,13 @@
 	else
 		.["message"] = strip_language(message_and_language)
 
+/* RUCM CHANGE
 /mob/living/carbon/human/say(message)
+*/
+//RUCM START
+/mob/living/carbon/human/say(message, list/tts_heard_list)
+//RUCM END
+
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = GLOB.world_view_size
@@ -157,7 +163,12 @@
 				FOR_DVIEW_END
 			else
 				if(message_mode != MESSAGE_MODE_LOCAL)
+/* RUCM CHANGE
+					var/earpiece = get_type_in_ears(/obj/item/device/radio)
+*/
+//RUCM START
 					var/obj/item/device/radio/earpiece = get_type_in_ears(/obj/item/device/radio)
+//RUCM END
 					if(earpiece)
 						used_radios += earpiece
 //RUCM START
@@ -192,11 +203,11 @@
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
 */
 //RUCM START
-		var/list/tts_heard_list = list(list(), list(), list())
-		if(SStts.tts_enabled)
+		if(SStts.tts_enabled && !tts_heard_list)
+			tts_heard_list = list(list(), list(), list())
 			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
 
-		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
 //RUCM END

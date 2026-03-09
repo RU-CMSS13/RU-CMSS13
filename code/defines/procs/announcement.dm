@@ -127,7 +127,12 @@
 	if(!isnull(signature))
 		message += "<br><br><i> Signed by, <br> [signature]</i>"
 
+/* RUCM CHANGE
+	announcement_helper(message, title, targets, sound_to_play, FALSE, targets_to_garble, FACTION_MARINE)
+*/
+//RUCM START
 	announcement_helper(message, title, targets, sound_to_play, FALSE, targets_to_garble, FACTION_MARINE, original_message = original_message)
+//RUCM END
 
 //AI announcement that uses talking into comms
 /proc/ai_announcement(message, sound_to_play = sound('sound/misc/interference.ogg'), logging = ARES_LOG_MAIN)

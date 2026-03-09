@@ -303,7 +303,15 @@ SUBSYSTEM_DEF(tts)
 	if(!fexists("tmp/tts/init.txt"))
 		rustg_file_write("rustg HTTP requests can't write to folders that don't exist, so we need to make it exist.", "tmp/tts/init.txt")
 
-	message = sanitize_filename(message)
+	message = copytext(message,1,512)
+	for(var/char in list(
+		"+"="", "-"="", "="="", "~"="", "&"="", "*"="", "%"="", ":"="", ";"="", "_"="", "/"="",
+		"."="", ","="", "!"="", "?"="", "—"="", "'"="", "`"="",  "\""="", "\n"="",
+		"("="", ")"="", "{"="", "}"="", "<"="", ">"="", "\["="", "\]"="", "\t"="",
+		"$"="", "#"="", "@"="", "^"="", "№"="", "|"="", "�"="", "\\"="",
+	))
+		message = replacetext(message, char, "")
+
 	var/identifier = "[sha1(speaker + num2text(pitch) + special_filters + message)].[world.time]"
 	if(!(speaker in available_speakers))
 		return

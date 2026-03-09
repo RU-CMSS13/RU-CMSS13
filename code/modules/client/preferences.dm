@@ -1690,7 +1690,6 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 						if("xeno")
 							target_voice = xeno_voice
 							target_pitch = xeno_pitch
-//							target_filter = TTS_FILTER_XENO
 
 					if(!target_voice)
 						return
