@@ -41,6 +41,7 @@
 #include "modules\mob\living\carbon\human\life.dm"
 #include "modules\projectiles\gun_attachables.dm"
 #include "modules\projectiles\guns\rifles.dm"
+#include "modules\projectiles\guns\specialist\launcher\rocket_launcher.dm"
 #include "modules\projectiles\magazines\rifles.dm"
 #include "modules\projectiles\magazines\shotguns.dm"
 #include "modules\vehicles\hardpoints_walker.dm"
