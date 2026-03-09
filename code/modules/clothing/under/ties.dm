@@ -391,7 +391,7 @@
 
 /obj/item/clothing/accessory/medal/gold/cross
 	name = MARINE_MEDAL_GALACTIC_CROSS
-	desc = "The second highest decoration within the USCM. Granted for acts of valor performed under extreme conditions. When the mission's success or the survival of fellow marines hinged upon extraordinary courage and quick thinking."
+	desc = "The second-highest decoration within the USCM. Granted for acts of valor performed under extreme conditions. When the mission's success or the survival of fellow marines hinged upon extraordinary courage and quick thinking."
 	icon_state = "ua_cross"
 	awarding_faction = FACTION_MARINE
 
@@ -499,7 +499,7 @@
 
 /obj/item/clothing/accessory/armband/squad
 	name = "squad armband"
-	desc = "An armband in squad colors, worn for ease of idenfication."
+	desc = "An armband in squad colors, worn for ease of identification."
 	icon_state = "armband_squad"
 	var/dummy_icon_state = "armband_%SQUAD%"
 	var/static/list/valid_icon_states
@@ -761,6 +761,11 @@
 	name = "Hyperdyne Corporation patch"
 	desc = "A sleek corporate patch bearing the logo of the Hyperdyne Corporation—one of the most powerful conglomerates. Known for synthetic production, AI research, and deep-space logistics. Wearing this patch implies loyalty to profit over people."
 	icon_state = "hyperdynepatch"
+
+/obj/item/clothing/accessory/patch/conam_patch
+	name = "Con-Amalagated Corporation patch"
+	desc = "A colorful corporate patch bearing the logo of the Con-Amalagated Corporation. Once a powerful conglomerate within the Sol System, now relegated to a middle-power on the verge of financial collapse. This patch is popular amongst collectors due to its color scheme."
+	icon_state = "conampatch"
 
 // Misc
 
