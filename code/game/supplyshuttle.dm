@@ -1408,7 +1408,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 //RUCM START
 	vehicles = list(
 
-		new /datum/vehicle_order/tank/plain,
+		new /datum/vehicle_order/tank,
 		new /datum/vehicle_order/apc/max,
 
 	)
