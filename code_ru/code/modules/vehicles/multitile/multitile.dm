@@ -1,3 +1,6 @@
+/obj/vehicle/multitile
+	var/next_shout = 0 //to prevent spamming
+
 //armor & threads -> guns & sup -> turret -> corpuse
 /obj/vehicle/multitile/proc/take_damage_type(damage, type, atom/attacker)
 	var/list/damages_applied = list(0, damage)
