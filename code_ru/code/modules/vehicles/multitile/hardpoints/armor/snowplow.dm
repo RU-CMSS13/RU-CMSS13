@@ -32,7 +32,7 @@
 	damage_to_apply = round(damages_applied[2] * owner.get_dmg_multi(type))
 	real_damage = damage_to_apply * damage_multiplier
 	if(is_active && !(get_dir(owner.dir, attacker) in get_related_directions(owner.dir)))
-		real_damage /= 2
+		real_damage *= 0.5
 
 	. = ..(damages_applied, type, attacker, damage_to_apply, real_damage)
 
@@ -40,7 +40,7 @@
 	. = ..()
 	. += "Plow is [is_active ? "lowered" : "raised"]"
 	if(isobserver(user) || (ishuman(user) && (skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE) || skillcheck(user, SKILL_VEHICLE, SKILL_VEHICLE_CREWMAN))))
-		. += "It's at [round(100*debri_ammount/max_debri, 1)]% clutter!"
+		. += "It's cluttering progress [round(100*debri_ammount/max_debri, 1)]%!"
 
 /obj/item/hardpoint/armor/snowplow/livingmob_interact(mob/living/living_unit)
 	var/turf/targ = get_step(living_unit, owner.dir)

@@ -177,7 +177,7 @@
 		tank_armor.debri_ammount -= 500
 		if(tank_armor.debri_ammount < 0)
 			tank_armor.debri_ammount = 0
-		to_chat(user, SPAN_WARNING("You cleared trash from plow."))
+		to_chat(user, SPAN_WARNING("You cleared trash from [tank_armor]."))
 		return
 //RUCM END
 

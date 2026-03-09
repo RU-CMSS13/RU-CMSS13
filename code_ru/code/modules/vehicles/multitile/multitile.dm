@@ -29,7 +29,7 @@
 		damage_to_apply = round(damages_applied[2] * owner.get_dmg_multi(type))
 		real_damage = damage_to_apply * damage_multiplier
 
-	damages_applied[2] -= damage_to_apply
+	damages_applied[2] -= damage_to_apply * 0.5
 	damages_applied[1] += real_damage
 	health = max(0, health - real_damage)
 	if(!health)
