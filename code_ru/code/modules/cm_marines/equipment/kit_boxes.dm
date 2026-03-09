@@ -21,6 +21,7 @@
 	new /obj/item/ammo_magazine/rifle/xm52(src)
 	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
 	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
+
 /obj/item/storage/box/kit/ppo
 	name = "\improper Corporate Bodyguard Standart Kit"
 	pro_case_overlay = "defense"
