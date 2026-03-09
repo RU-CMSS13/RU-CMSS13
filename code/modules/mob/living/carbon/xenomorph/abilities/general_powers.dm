@@ -22,6 +22,13 @@
 		to_chat(xeno, SPAN_WARNING("We can't do that here."))
 		return
 
+//RUCM START
+	var/obj/vehicle/vehicle_unit = locate() in turf
+	if(vehicle_unit)
+		to_chat(xeno, SPAN_WARNING("You cannot build under [vehicle_unit]!"))
+		return
+//RUCM END
+
 	var/is_weedable = turf.is_weedable
 	if(!is_weedable)
 		to_chat(xeno, SPAN_WARNING("Bad place for a garden!"))

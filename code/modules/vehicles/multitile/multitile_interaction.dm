@@ -163,6 +163,24 @@
 			to_chat(user, SPAN_WARNING("\The [MD] can't pick up any signatures, so the vehicle should be empty. In theory."))
 		return
 
+//RUCM START
+	if(istype(O, /obj/item/tool/shovel) && user.a_intent != INTENT_HARM)
+		var/obj/item/hardpoint/armor/snowplow/tank_armor = locate() in hardpoints
+		if(!tank_armor || !tank_armor.debri_ammount)
+			to_chat(user, SPAN_WARNING("Youre can't find anything to clear with shovel."))
+			return
+		if(user.action_busy)
+			return
+		if(!do_after(user, 100 * user.get_skill_duration_multiplier(SKILL_CONSTRUCTION), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+			to_chat(user, SPAN_WARNING("You need to hold still while doing heavy job."))
+			return
+		tank_armor.debri_ammount -= 1000
+		if(tank_armor.debri_ammount < 0)
+			tank_armor.debri_ammount = 0
+		to_chat(user, SPAN_WARNING("You cleared trash from plow."))
+		return
+//RUCM END
+
 	if(user.a_intent != INTENT_HARM)
 		handle_player_entrance(user)
 		return

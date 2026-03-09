@@ -37,11 +37,13 @@
 
 	return data
 
+/* RUCM CHANGE
 /obj/item/hardpoint/holder/take_damage(damage)
 	..()
 
 	for(var/obj/item/hardpoint/H in hardpoints)
 		H.take_damage(damage)
+*/
 
 /obj/item/hardpoint/holder/on_install(obj/vehicle/multitile/vehicle)
 	..()

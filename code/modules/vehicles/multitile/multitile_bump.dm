@@ -17,10 +17,29 @@
 
 /turf/closed/wall/handle_vehicle_bump(obj/vehicle/multitile/V)
 	if(!(turf_flags & TURF_HULL) && !(V.vehicle_flags & VEHICLE_CLASS_WEAK))
+/* RUCM CHANGE
 		take_damage(V.wall_ram_damage)
 		V.take_damage_type(10, "blunt", src)
 		playsound(V, 'sound/effects/metal_crash.ogg', 35)
 		visible_message(SPAN_DANGER("\The [V] rams \the [src]!"))
+*/
+//RUCM START
+		var/damage_to_deal = V.wall_ram_damage
+		var/obj/item/hardpoint/armor/snowplow/tank_armor = locate() in V.hardpoints
+		if(tank_armor?.is_active && (get_dir(V, src) in get_related_directions(V.dir)))
+			var/modify_final_debri = damage_cap > HEALTH_WALL_XENO_THICK ? 0.5 : 1
+			damage_to_deal = min(damage_cap - damage, tank_armor.max_debri - tank_armor.debri_ammount)
+			tank_armor.debri_ammount += damage_to_deal * modify_final_debri
+		else
+			V.take_damage_type(damage_to_deal * 0.5, "blunt", src)
+
+		if(damage >= damage_cap)
+			. = TRUE
+		take_damage(damage_to_deal)
+		playsound(V, 'sound/effects/metal_crash.ogg', 35)
+		visible_message(SPAN_DANGER("\The [V] rams \the [src]!"))
+		return .
+//RUCM END
 	return FALSE
 
 //-----------------------------------------------------------
