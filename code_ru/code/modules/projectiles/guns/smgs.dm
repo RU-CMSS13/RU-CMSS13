@@ -3,9 +3,6 @@
 	random_spawn_under = list()
 	random_spawn_muzzle = list()
 
-/obj/item/weapon/gun/smg/p90/set_gun_attachment_offsets()
-	attachable_offset = list("muzzle_x" = 31, "muzzle_y" = 16,"rail_x" = 22, "rail_y" = 24, "under_x" = 23, "under_y" = 15, "stock_x" = 28, "stock_y" = 17)
-
 /obj/item/weapon/gun/smg/p90/pmc
 	name = "\improper FN P90/2 submachinegun"
 	desc = "A variation of the FN P90 submachine gun with improved internal parts, as well as integrated mini-laser. Used by corporate PMCs or some corporate bodyguards. This weapon only accepts 5.7x28mm rounds."
