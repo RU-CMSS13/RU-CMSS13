@@ -210,7 +210,7 @@
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG)
 */
 //RUCM START
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG, tts_heard_list)
+/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG, list/tts_heard_list)
 //RUCM END
 	if(!on)
 		return // the device has to be on
@@ -321,11 +321,11 @@
 	if(use_volume)
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,
-						filter_type, 0, target_zs, connection.frequency, verb, speaking, volume, listening_device, tts_heard_list)
+						filter_type, 0, target_zs, connection.frequency, verb, speaking, volume, listening_device, tts_heard_list = tts_heard_list)
 	else
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,
-						filter_type, 0, target_zs, connection.frequency, verb, speaking, RADIO_VOLUME_QUIET, listening_device, tts_heard_list)
+						filter_type, 0, target_zs, connection.frequency, verb, speaking, RADIO_VOLUME_QUIET, listening_device, tts_heard_list = tts_heard_list)
 //RUCM END
 
 /obj/item/device/radio/proc/get_target_zs(frequency)
@@ -360,7 +360,7 @@
 			talk_into(M, msg,null,verb,speaking)
 */
 //RUCM START
-/obj/item/device/radio/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/device/radio/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	if (broadcasting)
 		if(get_dist(src, sourcemob) <= canhear_range)
 			talk_into(sourcemob, message, null, verb, language, tts_heard_list = tts_heard_list)

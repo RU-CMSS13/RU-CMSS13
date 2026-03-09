@@ -728,7 +728,7 @@
 	..(message,verb,language,alt_name,italics,speaker)
 */
 //RUCM START
-/mob/living/simple_animal/small/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, tts_heard_list)
+/mob/living/simple_animal/small/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, list/tts_heard_list)
 	if(prob(50))
 		parrot_hear(message)
 	..(message,verb,language,alt_name,italics,speaker, tts_heard_list = tts_heard_list)

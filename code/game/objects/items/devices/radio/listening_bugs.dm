@@ -86,7 +86,7 @@
 			talk_into(M, msg, null, processed_verb, speaking, listening_device = bug_broadcast_level)
 */
 //RUCM START
-/obj/item/device/radio/listening_bug/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, tts_heard_list)
+/obj/item/device/radio/listening_bug/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, list/tts_heard_list)
 	var/processed_verb = "[SPAN_RED("\[LSTN [nametag]\]")] [verb]"
 	if(broadcasting)
 		if(get_dist(src, sourcemob) <= 7)

@@ -6,7 +6,7 @@
 /mob/hologram/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
 */
 //RUCM START
-/mob/hologram/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
+/mob/hologram/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, list/tts_heard_list)
 //RUCM END
 	if(!hears_speech || !linked_mob)
 		return
@@ -29,7 +29,7 @@
 /mob/proc/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, message_mode)
 */
 //RUCM START
-/mob/proc/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, tts_heard_list)
+/mob/proc/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol, list/tts_heard_list)
 //RUCM END
 
 	if(!client && !(mind && mind.current != src))
@@ -190,7 +190,7 @@
 /mob/living/hear_say(message, verb, datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol)
 */
 //RUCM START
-/mob/living/hear_say(message, verb, datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol, tts_heard_list)
+/mob/living/hear_say(message, verb, datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol, list/tts_heard_list)
 //RUCM END
 	if(client && mind && stat == UNCONSCIOUS)
 		hear_sleep(speaker, message, src == speaker, Adjacent(speaker), language)

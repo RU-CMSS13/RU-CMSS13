@@ -1618,7 +1618,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	targetmob.hear_say(message, verb, language, "", italics, sourcemob) // proxies speech itself to the mob
 */
 //RUCM START
-/proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics, tts_heard_list)
+/proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics, list/tts_heard_list)
 	if(QDELETED(sourcemob) || !istype(sourcemob) || QDELETED(targetmob) || !istype(targetmob) || (targetmob.stat == DEAD))
 		return
 	targetmob.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list) // proxies speech itself to the mob

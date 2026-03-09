@@ -293,7 +293,7 @@
 /obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_talk(obj/item/camera, mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, show_message_above_tv = FALSE)
 */
 //RUCM START
-/obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_talk(obj/item/camera, mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, tts_heard_list, show_message_above_tv = FALSE)
+/obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_talk(obj/item/camera, mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, list/tts_heard_list, show_message_above_tv = FALSE)
 //RUCM END
 	SIGNAL_HANDLER
 	if(inoperable())

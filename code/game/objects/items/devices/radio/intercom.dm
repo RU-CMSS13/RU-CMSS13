@@ -55,7 +55,7 @@
 /obj/item/device/radio/intercom/hear_talk(mob/M as mob, msg)
 */
 //RUCM START
-/obj/item/device/radio/intercom/hear_talk(mob/living/M, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/device/radio/intercom/hear_talk(mob/living/M, message, verb, datum/language/language, italics, list/tts_heard_list)
 //RUCM END
 	if(!src.anyai && !(M in src.ai))
 		return

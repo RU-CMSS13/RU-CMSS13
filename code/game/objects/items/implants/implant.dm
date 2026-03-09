@@ -162,7 +162,7 @@ Implant Specifics:<BR>"}
 	return
 */
 //RUCM START
-/obj/item/implant/explosive/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/implant/explosive/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	hear(message)
 	return
 //RUCM END

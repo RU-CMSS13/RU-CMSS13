@@ -973,7 +973,7 @@ W is always an item. stop_warning prevents messaging. user may be null.**/
 		I.hear_talk(M, msg, verb, speaking, italics)
 */
 //RUCM START
-/obj/item/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	// Whatever is stored in /storage/ substypes should ALWAYS be an item
 	for (var/obj/item/I as anything in hearing_items)
 		I.hear_talk(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)

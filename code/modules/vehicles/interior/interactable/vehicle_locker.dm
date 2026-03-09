@@ -126,7 +126,7 @@
 	..()
 */
 //RUCM START
-/obj/structure/vehicle_locker/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/structure/vehicle_locker/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	container.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
 	..()
 //RUCM END

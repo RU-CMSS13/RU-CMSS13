@@ -666,7 +666,7 @@
 			Move(get_step(src, crusher.dir))
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
 
-/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, tts_heard_list)
+/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, list/tts_heard_list)
 	var/mob/driver = seats[VEHICLE_DRIVER]
 	if (driver == null)
 		return

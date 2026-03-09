@@ -829,7 +829,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, loc == sourcemob)
 */
 //RUCM START
-/obj/item/clothing/head/helmet/marine/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/clothing/head/helmet/marine/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, tts_heard_list, loc == sourcemob)
 //RUCM END
 

@@ -382,7 +382,7 @@
 #endif // ifdef OBJECTS_PROXY_SPEECH
 */
 //RUCM START
-/obj/structure/closet/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/structure/closet/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A

@@ -22,7 +22,7 @@
 /obj/item/device/radio/beacon/hear_talk()
 */
 //RUCM START
-/obj/item/device/radio/beacon/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/device/radio/beacon/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 //RUCM END
 	return
 

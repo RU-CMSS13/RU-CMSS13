@@ -203,8 +203,8 @@
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
 */
 //RUCM START
-		if(SStts.tts_enabled && !tts_heard_list)
-			tts_heard_list = list(list(), list(), list())
+		tts_heard_list = list(list(), list(), list())
+		if(SStts.tts_enabled)
 			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
 
 		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
@@ -217,7 +217,7 @@
 		R.talk_into(src, message, message_mode, verb, speaking)
 */
 //RUCM START
-/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, tts_heard_list)
+/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, list/tts_heard_list)
 	for(var/obj/item/device/radio/R in used_radios)
 		R.talk_into(src, message, message_mode, verb, speaking, tts_heard_list = tts_heard_list)
 //RUCM END

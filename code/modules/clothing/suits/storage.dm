@@ -46,7 +46,7 @@
 	..()
 */
 //RUCM START
-/obj/item/clothing/suit/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, tts_heard_list)
+/obj/item/clothing/suit/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
 	pockets.hear_talk(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)
 	..()
 //RUCM END

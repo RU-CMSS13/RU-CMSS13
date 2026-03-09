@@ -87,7 +87,7 @@
 						datum/language/speaking = null, volume = RADIO_VOLUME_QUIET, listening_device = NOT_LISTENING_BUG)
 */
 //RUCM START
-						datum/language/speaking = null, volume = RADIO_VOLUME_QUIET, listening_device = NOT_LISTENING_BUG, tts_heard_list)
+						datum/language/speaking = null, volume = RADIO_VOLUME_QUIET, listening_device = NOT_LISTENING_BUG, list/tts_heard_list)
 //RUCM END
 
 	/* ###### Prepare the radio connection ###### */

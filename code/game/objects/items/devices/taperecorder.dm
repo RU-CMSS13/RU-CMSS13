@@ -166,7 +166,7 @@
 /obj/item/device/taperecorder/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics)
 */
 //RUCM START
-/obj/item/device/taperecorder/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics, tts_heard_list)
+/obj/item/device/taperecorder/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics, list/tts_heard_list)
 //RUCM END
 	. = ..()
 	if(mytape && recording)

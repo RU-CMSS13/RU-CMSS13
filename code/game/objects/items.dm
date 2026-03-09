@@ -388,7 +388,7 @@
 /obj/item/proc/talk_into(mob/M as mob, text)
 */
 //RUCM START
-/obj/item/proc/talk_into(mob/M as mob, text, tts_heard_list)
+/obj/item/proc/talk_into(mob/M as mob, text, list/tts_heard_list)
 //RUCM END
 	return
 
