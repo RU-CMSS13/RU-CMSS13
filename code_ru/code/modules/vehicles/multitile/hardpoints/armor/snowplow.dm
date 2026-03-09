@@ -1,5 +1,5 @@
 /obj/item/hardpoint/armor/snowplow
-	name = "Engineering plow"
+	name = "Engineering Plow"
 	desc = "Clears road for friendlies."
 
 	icon_state = "snowplow"

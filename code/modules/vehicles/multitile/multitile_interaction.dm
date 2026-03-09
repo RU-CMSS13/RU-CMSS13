@@ -171,10 +171,10 @@
 			return
 		if(user.action_busy)
 			return
-		if(!do_after(user, 100 * user.get_skill_duration_multiplier(SKILL_CONSTRUCTION), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+		if(!do_after(user, 150 * user.get_skill_duration_multiplier(SKILL_CONSTRUCTION), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
 			to_chat(user, SPAN_WARNING("You need to hold still while doing heavy job."))
 			return
-		tank_armor.debri_ammount -= 1000
+		tank_armor.debri_ammount -= 500
 		if(tank_armor.debri_ammount < 0)
 			tank_armor.debri_ammount = 0
 		to_chat(user, SPAN_WARNING("You cleared trash from plow."))
