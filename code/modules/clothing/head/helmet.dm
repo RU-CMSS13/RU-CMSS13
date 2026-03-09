@@ -1050,6 +1050,14 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	specialty = "M11 pattern marine"
 
+/obj/item/clothing/head/helmet/marine/radio_helmet/vsl
+	name = "\improper M11-R pattern helmet"
+	desc = "A variant of the M11 pattern, the 'R' platform features new external-style comms module and leather banding. This module allow you to use radio."
+	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
+	icon_state = "vsl_helmet"
+
+	phone_category = PHONE_MARINE
+
 /obj/item/clothing/head/helmet/marine/rto
 	name = "\improper M12 pattern dust helmet"
 	desc = "An experimental brain-bucket. A dust ruffle hangs from back instead of the standard lobster shell design. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your fantastic leadership."
