@@ -23,6 +23,7 @@
 	flags_heat_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
 	specialty = "M40 breacher"
+	flags_atom = NO_GAMEMODE_SKIN
 	actions_types = list(/datum/action/item_action/toggle, /datum/action/item_action/specialist/enrage)
 	unacidable = TRUE
 	var/enrage_active = FALSE
