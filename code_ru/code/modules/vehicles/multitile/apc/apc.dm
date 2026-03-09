@@ -7,7 +7,7 @@
 	desc = "An M888 Armored Personnel Carrier. An armored transport with four big wheels. Entrances on the sides"
 
 	icon = 'icons/obj/vehicles/apc.dmi'
-	icon_state = "apc_base"
+	icon_state = "apc_base_med"
 	pixel_x = -48
 	pixel_y = -48
 
