@@ -18,6 +18,7 @@
 
 	var/base_mounted_state = "holder"
 	var/mounted_state = "holder"
+	var/obj/structure/machinery/mounted_defence/owner
 
 	current_mag = null
 
@@ -32,29 +33,15 @@
 	var/build_in_zoom = 0
 
 /obj/item/weapon/gun/mounted/update_icon()
-	if(overlays)
-		overlays.Cut()
-	else
-		overlays = list()
-	..()
-	if(blood_overlay) //need to reapply bloodstain because of the Cut.
-		overlays += blood_overlay
-
-	var/new_icon_state = base_gun_icon
-	var/new_mounted_state = base_mounted_state
+	icon_state = base_gun_icon
+	mounted_state = base_mounted_state
 
 	if(has_empty_icon && (!current_mag || current_mag.current_rounds <= 0))
-		new_icon_state += "_e"
-		new_mounted_state += "_e"
+		icon_state += "_e"
+		mounted_state += "_e"
 
-	if(has_open_icon && (!current_mag || !current_mag.chamber_closed))
-		new_icon_state += "_e"
-		new_mounted_state += "_e"
-
-	icon_state = new_icon_state
-	mounted_state = new_mounted_state
-	update_mag_overlay()
-	update_attachables()
+	if(owner)
+		owner.update_icon()
 
 /obj/item/weapon/gun/mounted/m56d2_gun
 	name = "M56D2 Stationary Heavy Machinegun"
@@ -125,6 +112,7 @@
 
 	var/base_mounted_state = "holder"
 	var/mounted_state = "holder"
+	var/obj/structure/machinery/mounted_defence/owner
 
 	preload = /obj/item/explosive/grenade/incendiary/airburst
 
@@ -150,20 +138,17 @@
 // FUCK them ALIVE to DEATH
 
 /obj/item/weapon/gun/launcher/grenade/mounted/update_icon()
-	..()
-	var/GL_sprite = base_gun_icon
-	var/GL_mounted_sprite = base_mounted_state
-	if(!cylinder  || cylinder == 1)
-		GL_sprite += "_e"
-	else if(GL_has_empty_icon && !length(cylinder.contents))
-		GL_sprite += "_e"
-		GL_mounted_sprite += "_e"
-	if(GL_has_open_icon && open_chamber)
-		GL_sprite += "_o"
-		GL_mounted_sprite += "_o"
+	icon_state = base_gun_icon
+	mounted_state = base_mounted_state
 
-	icon_state = GL_sprite
-	mounted_state = GL_mounted_sprite
+	if(!cylinder || cylinder == 1)
+		icon_state += "_e"
+	else if(GL_has_empty_icon && !length(cylinder.contents))
+		icon_state += "_e"
+		mounted_state += "_e"
+
+	if(owner)
+		owner.update_icon()
 
 /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun
 	name = "SGL2 Stationary Heavy Grenadelauncher"
@@ -197,7 +182,7 @@
 // ROCKET LAUNCHERS											//
 //////////////////////////////////////////////////////////////
 
-/obj/item/weapon/gun/launcher/rocket/brute/mounted
+/obj/item/weapon/gun/launcher/rocket/mounted
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
@@ -213,6 +198,7 @@
 
 	var/base_mounted_state = "holder"
 	var/mounted_state = "holder"
+	var/obj/structure/machinery/mounted_defence/owner
 
 	current_mag = null
 
@@ -228,32 +214,18 @@
 
 	var/build_in_zoom = 0
 
-/obj/item/weapon/gun/launcher/rocket/brute/mounted/update_icon()
-	if(overlays)
-		overlays.Cut()
-	else
-		overlays = list()
-	..()
-	if(blood_overlay) //need to reapply bloodstain because of the Cut.
-		overlays += blood_overlay
-
-	var/new_icon_state = base_gun_icon
-	var/new_mounted_state = base_mounted_state
+/obj/item/weapon/gun/launcher/rocket/mounted/update_icon()
+	icon_state = base_gun_icon
+	mounted_state = base_mounted_state
 
 	if(has_empty_icon && (!current_mag || current_mag.current_rounds <= 0))
-		new_icon_state += "_e"
-		new_mounted_state += "_e"
+		icon_state += "_e"
+		mounted_state += "_e"
 
-	if(has_open_icon && (!current_mag || !current_mag.chamber_closed))
-		new_icon_state += "_e"
-		new_mounted_state += "_e"
+	if(owner)
+		owner.update_icon()
 
-	icon_state = new_icon_state
-	mounted_state = new_mounted_state
-	update_mag_overlay()
-	update_attachables()
-
-/obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
+/obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 	name = "RCT Stationary Rocket Launcher"
 	desc = "RCT Stationary Rocket Launcher, can load all USCM rocket types, expanded range fire and special fragmentation rockets ammo."
 	icon_state = "RCT_gun"
@@ -265,6 +237,51 @@
 	current_mag = /obj/item/ammo_magazine/rocket/stationary
 
 	build_in_zoom = 8
+
+	var/f_aiming_time = 4 SECONDS
+	var/aiming = FALSE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/rct_gun/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
+	if(aiming)
+		return
+
+	if(!(istype(target, /obj/structure) || istype(target,/turf/closed/wall)) )
+		to_chat(user, SPAN_WARNING("Invalid target!"))
+		return
+
+	var/list/turf/path = get_line(user, target, include_start_atom = FALSE)
+	for(var/turf/turf_path in path)
+		if(turf_path.opacity && turf_path != target)
+			to_chat(user, SPAN_WARNING("Target obscured!"))
+			return
+	aiming = TRUE
+	var/beam = "laser_beam_guided"
+	var/lockon = "sniper_lockon_guided"
+	var/image/lockon_icon = image(icon = 'icons/effects/Targeted.dmi', icon_state = lockon)
+	target.overlays += lockon_icon
+
+	var/image/lockon_direction_icon
+	lockon_direction_icon = image(icon = 'icons/effects/Targeted.dmi', icon_state = "[lockon]_direction", dir = get_cardinal_dir(target, user))
+	target.overlays += lockon_direction_icon
+	var/datum/beam/laser_beam
+	laser_beam = target.beam(user, beam, 'icons/effects/beam.dmi', (f_aiming_time + 1 SECONDS), beam_type = /obj/effect/ebeam/laser/intense)
+	laser_beam.visuals.alpha = 0
+	animate(laser_beam.visuals, alpha = initial(laser_beam.visuals.alpha), f_aiming_time, easing = SINE_EASING|EASE_OUT)
+
+
+	if(do_after(user, f_aiming_time, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+		if(!QDELETED(target))
+			. = ..()
+
+	target.overlays -= lockon_icon
+	target.overlays -= lockon_direction_icon
+	qdel(laser_beam)
+	aiming = FALSE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/rct_gun/make_rocket(mob/user, drop_override = 0, empty = 1)
+	if(empty)
+		return
+	. = ..()
 
 
 //////////////////////////////////////////////////////////////
@@ -287,6 +304,7 @@
 
 	var/base_mounted_state = "holder"
 	var/mounted_state = "holder"
+	var/obj/structure/machinery/mounted_defence/owner
 
 	current_mag = null
 
@@ -299,6 +317,17 @@
 	mounted_class = GUN_MOUNT_SMALL
 
 	var/build_in_zoom = 0
+
+/obj/item/weapon/gun/flamer/mounted/update_icon()
+	icon_state = base_gun_icon
+	mounted_state = base_mounted_state
+
+	if(has_empty_icon && !current_mag)
+		icon_state += "_e"
+		mounted_state += "_e"
+
+	if(owner)
+		owner.update_icon()
 
 /obj/item/weapon/gun/flamer/mounted/sagf
 	name = "SAGF Stationary Incinerator Unit"

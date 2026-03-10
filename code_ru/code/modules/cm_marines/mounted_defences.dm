@@ -352,7 +352,7 @@
 /obj/structure/machinery/mounted_defence/update_icon()
 	overlays.Cut()
 	if(mounted_gun)
-		overlays += mounted_gun
+		overlays += mounted_gun.mounted_state
 
 /obj/structure/machinery/mounted_defence/get_examine_text(mob/user)
 	. = ..()
@@ -560,7 +560,7 @@
 
 /obj/item/storage/box/rct/Initialize()
 	. = ..()
-	new /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun(src)
+	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src)
 	new /obj/item/device/mounted_defence/tripod(src)
 	new /obj/item/ammo_magazine/rocket/stationary(src)
 	new /obj/item/ammo_magazine/rocket/stationary(src)
@@ -572,7 +572,7 @@
 	desc = "A rocket tube loaded with a high-explosive warhead. Deals high damage to soft targets on direct hit and stuns most targets in a 5-meter-wide area for a short time. Has decreased effect on heavily armored targets."
 
 	default_ammo = /datum/ammo/rocket/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 
 /datum/ammo/rocket/stationary
 	max_range = 12
@@ -582,7 +582,7 @@
 	desc = "A rocket tube loaded with an armor-piercing warhead. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters."
 
 	default_ammo = /datum/ammo/rocket/ap/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 
 /datum/ammo/rocket/ap/stationary
 	max_range = 14
@@ -592,7 +592,7 @@
 	desc = "A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area."
 
 	default_ammo = /datum/ammo/rocket/wp/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 
 /datum/ammo/rocket/wp/stationary
 	max_range = 14
