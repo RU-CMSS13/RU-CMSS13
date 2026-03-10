@@ -9,6 +9,13 @@
 	icon_state = "mounted"
 	item_state = "mounted"
 
+	item_icons = list(
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
+	)
+
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
 
@@ -109,6 +116,13 @@
 	icon_state = "mounted"
 	item_state = "mounted"
 
+	item_icons = list(
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
+	)
+
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
 
@@ -190,6 +204,13 @@
 	icon_state = "mounted"
 	item_state = "mounted"
 
+	item_icons = list(
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
+	)
+
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
 
@@ -256,6 +277,13 @@
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	icon_state = "mounted"
 	item_state = "mounted"
+
+	item_icons = list(
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
+		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
+	)
 
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
