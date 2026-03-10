@@ -46,6 +46,7 @@
 #include "modules\mob\living\carbon\human\emote.dm"
 #include "modules\mob\living\carbon\human\life.dm"
 #include "modules\projectiles\gun_attachables.dm"
+#include "modules\projectiles\gun.dm"
 #include "modules\projectiles\guns\rifles.dm"
 #include "modules\projectiles\guns\smgs.dm"
 #include "modules\projectiles\guns\specialist\launcher\rocket_launcher.dm"
