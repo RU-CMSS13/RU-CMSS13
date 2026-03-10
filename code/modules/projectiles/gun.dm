@@ -1494,7 +1494,7 @@ and you're good to go.
 		if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
 */
 //RUCM START
-		if(loc != user && !(flags_mounted_gun_features & GUN_MOUNTING) || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+		if((loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED))) && !(flags_mounted_gun_features & GUN_MOUNTED))
 //RUCM END
 			break //If you drop it while bursting, for example.
 
@@ -1744,8 +1744,8 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	if(user.is_mob_incapacitated())
 		return
 //RUCM START
-	if(flags_mounted_gun_features & GUN_MOUNTING && !(flags_mounted_gun_features & GUN_MOUNTED))
-		to_chat(user, SPAN_WARNING("To heavy and big for handheld usage."))
+	if(flags_mounted_gun_features & GUN_ONLY_MOUNTING && !(flags_mounted_gun_features & GUN_MOUNTED))
+		to_chat(user, SPAN_WARNING("To heavy and big for hand held usage."))
 		return FALSE
 //RUCM END
 	if(HAS_TRAIT(user, TRAIT_HAULED))
@@ -1795,7 +1795,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		if((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !active_attachable) //If we're not holding the weapon with both hands when we should.
 */
 //RUCM START
-		if((((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !flags_mounted_gun_features) || (flags_mounted_gun_features & GUN_CAN_OVERRIDE_MOUNTED && !(flags_mounted_gun_features & GUN_MOUNTED))) && !active_attachable)
+		if((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !active_attachable && !(flags_mounted_gun_features & GUN_MOUNTED))
 //RUCM END
 			to_chat(user, SPAN_WARNING("You need a more secure grip to fire this weapon!"))
 			return
@@ -1905,8 +1905,11 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 /* RUCM CHANGE
 	if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED)
 */
-//RUCM START
-	if((flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED) || flags_mounted_gun_features & GUN_MOUNTING)
+//RUCM START SCATTER_AMOUNT_NONE
+	if(flags_mounted_gun_features & GUN_MOUNTED)
+		gun_accuracy_mult = accuracy_mult + HIT_ACCURACY_MULT_TIER_5
+		gun_scatter = SCATTER_AMOUNT_NONE
+	else if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED)
 //RUCM END
 		gun_accuracy_mult = accuracy_mult
 		gun_scatter = scatter

@@ -1,5 +1,9 @@
+#define MOUNTED_DEFENSE_SECURED 0
+#define MOUNTED_DEFENSE_UNSECURED 1
+#define MOUNTED_DEFENSE_MOVABLE 2
+
 //////////////////////////////////////////////////////////////
-//MOUNTED DEFENCE
+//MOUNTED DEFENCE											//
 //////////////////////////////////////////////////////////////
 
 /obj/structure/machinery/mounted_defence
@@ -16,48 +20,47 @@
 	layer = ABOVE_MOB_LAYER
 	use_power = FALSE
 
-	var/base_name = "Stationary Fortification"
-
-	var/prebuild = FALSE
-	var/parrent_type_gun = null
-	var/undestructible = FALSE
-
-	var/list/obj/structure/blocker/anti_cade/mounted/cadeblockers = list()
-	var/cadeblockers_range = 0
-
-	var/mount_class = 0
-
-	var/obj/item/weapon/gun/mounted/mounted_gun = null
-
 	projectile_coverage = PROJECTILE_COVERAGE_LOW
 
 	health = 600
 	var/max_health = 600
 
+	var/parrent_type_gun = null
+	var/obj/item/weapon/gun/mounted/mounted_gun = null
+	var/repair_materials = list()
+	var/mount_class = 0
+	var/build_stage = 0
+
+	var/hitsound = 'sound/effects/metalhit.ogg'
+
+	var/list/obj/structure/blocker/anti_cade/mounted/cadeblockers = list()
+	var/cadeblockers_range = 0
+
 	var/user_old_x = 0
 	var/user_old_y = 0
-
 	var/tiles_zoom = 5
 
 /obj/structure/machinery/mounted_defence/Initialize()
 	. = ..()
+
 	for(var/turf/in_range in range(cadeblockers_range, src))
 		var/obj/structure/blocker/anti_cade/mounted/cade_blocker = new(in_range)
 		cade_blocker.to_block = src
 
 		cadeblockers.Add(cade_blocker)
 
-	if(parrent_type_gun && prebuild)
+	if(parrent_type_gun)
 		mounted_gun = new parrent_type_gun(src)
 		mounted_gun.owner = src
 		mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
-		name = "[mounted_gun] installed on [base_name]"
 		update_icon()
 
 /obj/structure/machinery/mounted_defence/Destroy()
+	if(operator)
+		operator.unset_interaction()
 	if(mounted_gun)
 		mounted_gun.owner = null
-	mounted_gun = null
+		QDEL_NULL(mounted_gun)
 	QDEL_NULL_LIST(cadeblockers)
 	return ..()
 
@@ -78,184 +81,185 @@
 	else
 		return ..()
 
-/obj/structure/machinery/mounted_defence/proc/crusher_impact()
-	update_health(max_health * 0.2)
+
+//////////////////////////////////////////////////////////////
+//MOUNTED DEFENCE ATTACK INTERACTIONS
+
+/obj/structure/machinery/mounted_defence/attackby(obj/item/attacking_item, mob/user)
+	if(try_repair(attacking_item, user))
+		return
+
+	if(try_nailgun_usage(attacking_item, user))
+		return
+
+	for(var/obj/effect/xenomorph/acid/splatter in loc)
+		if(splatter.acid_t == src)
+			to_chat(user, "You can't get near that, it's melting!")
+			return
+
+	if(mounted_gun && try_reload_mounts(attacking_item, user))
+		return
+
+	if(!build_stage && try_insert_weapon(attacking_item, user))
+		return
+
+	handle_building_stages(attacking_item, user)
+	return ..()
+
+/obj/structure/machinery/mounted_defence/proc/handle_building_stages(obj/item/attacking_item, mob/user)
+	return
+
+/obj/structure/machinery/mounted_defence/proc/try_repair(obj/item/attacking_item, mob/user)
+	return
+
+/obj/structure/machinery/mounted_defence/proc/try_nailgun_usage(obj/item/attacking_item, mob/user)
+	if(!length(repair_materials) || health >= max_health || !istype(attacking_item, /obj/item/weapon/gun/smg/nailgun))
+		return FALSE
+
+	var/obj/item/weapon/gun/smg/nailgun/nailgun = attacking_item
+
+	var/nails_required = 4
+	if(!nailgun.in_chamber || !nailgun.current_mag || nailgun.current_mag.current_rounds < nails_required)
+		to_chat(user, SPAN_WARNING("You require at least [nails_required] nails to complete this task!"))
+		return FALSE
+
+	// Check if either hand has a metal stack by checking the weapon offhand
+	// Presume the material is a sheet until proven otherwise.
+	var/obj/item/stack/sheet/material = null
+	if(user.l_hand == nailgun)
+		material = user.r_hand
+	else
+		material = user.l_hand
+
+	if(!istype(material, /obj/item/stack/sheet))
+		to_chat(user, SPAN_WARNING("You'll need some adequate repair material in your other hand to patch up [src]!"))
+		return FALSE
+
+	if(material.amount < nailgun.material_per_repair)
+		to_chat(user, SPAN_WARNING("You'll need more adequate repair material in your other hand to patch up [src]!"))
+		return FALSE
+
+	var/repair_value = 0
+	for(var/validSheetType in repair_materials)
+		if(validSheetType == material.sheettype)
+			repair_value = repair_materials[validSheetType]
+			break
+
+	if(repair_value == 0)
+		to_chat(user, SPAN_WARNING("You'll need some adequate repair material in your other hand to patch up [src]!"))
+		return FALSE
+
+	var/soundchannel = playsound(src, nailgun.repair_sound, 25, 1)
+	if(!do_after(user, nailgun.nailing_speed, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, src))
+		playsound(src, null, channel = soundchannel)
+		return FALSE
+
+	if(!material || (material != user.l_hand && material != user.r_hand) || material.amount <= 0)
+		to_chat(user, SPAN_WARNING("You seem to have misplaced the repair material!"))
+		return FALSE
+
+	if(!nailgun.in_chamber || !nailgun.current_mag || nailgun.current_mag.current_rounds < nails_required)
+		to_chat(user, SPAN_WARNING("You require at least [nails_required] nails to complete this task!"))
+		return FALSE
+
+	update_health(-repair_value * max_health)
+	to_chat(user, SPAN_WARNING("You nail [material] to [src], restoring some of its integrity!"))
+	material.use(nailgun.material_per_repair)
+	nailgun.current_mag.current_rounds -= nails_required - 1
+	nailgun.in_chamber = null
+	nailgun.load_into_chamber()
+	return TRUE
+
+/obj/structure/machinery/mounted_defence/proc/try_insert_weapon(obj/item/attacking_item, mob/user)
+	return FALSE
+
+/obj/structure/machinery/mounted_defence/proc/try_remove_weapon(obj/item/attacking_item, mob/user)
+	return FALSE
+
+/obj/structure/machinery/mounted_defence/proc/try_reload_mounts(obj/item/attacking_item, mob/user)
+	if(istype(attacking_item, /obj/item/ammo_magazine))
+		mounted_gun.reload(user, attacking_item)
+		update_icon()
+		return TRUE
+
+	if(istype(attacking_item, /obj/item/explosive/grenade))
+		mounted_gun.on_pocket_attackby(attacking_item, user)
+		update_icon()
+		return TRUE
+
+	return FALSE
+
+
+//////////////////////////////////////////////////////////////
+//MOUNTED DEFENCE DAMAGE RELATED
+
+/obj/structure/machinery/mounted_defence/handle_charge_collision(mob/living/carbon/xenomorph/xeno, datum/action/xeno_action/onclick/charger_charge/charger_ability)
+	if(charger_ability.momentum)
+		CrusherImpact(xeno, charger_ability.momentum * 22)
+
+	charger_ability.stop_momentum()
+
+/obj/structure/machinery/mounted_defence/proc/CrusherImpact(mob/living/carbon/xenomorph/xeno, damage)
+	xeno.visible_message(
+		SPAN_DANGER("[xeno] rams into \the [src] and skids to a halt!"),
+		SPAN_XENOWARNING("You ram into \the [src] and skid to a halt!")
+	)
 	if(operator)
 		to_chat(operator, SPAN_HIGHDANGER("You are knocked off the gun by the sheer force of the ram!"))
 		operator.unset_interaction()
 		operator.apply_effect(3, WEAKEN)
 		operator.emote("pain")
 
-/obj/structure/machinery/mounted_defence/attackby(obj/item/attacking_item as obj, mob/user, mob/living/E)
-	if(!ishuman(user))
+	playsound(src, hitsound, 25, TRUE)
+	update_health(damage)
+
+/obj/structure/machinery/mounted_defence/attack_alien(mob/living/carbon/xenomorph/xeno)
+	if(islarva(xeno))
 		return
 
-	if(HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER))
-		if(undestructible)
-			return
+	xeno.visible_message(SPAN_DANGER("[xeno] hits [src]!"),
+	SPAN_DANGER("You hit [src]!"))
+	xeno.animation_attack_on(src)
+	xeno.flick_attack_overlay(src, "slash")
+	playsound(loc, "alien_claw_metal", 25)
+	update_health(rand(xeno.melee_damage_lower, xeno.melee_damage_upper))
+	return XENO_ATTACK_ACTION
 
-		if(anchored)
-			to_chat(user, "You begin unscrewing [src] from the ground...")
-		else
-			to_chat(user, "You begin screwing [src] into place...")
+/obj/structure/machinery/mounted_defence/bullet_act(obj/projectile/bullet)
+	bullet_ping(bullet)
 
-		var/old_anchored = anchored
-		if(do_after(user, 450 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD) && anchored == old_anchored)
-			anchored = !anchored
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, 1)
-			if(anchored)
-				user.visible_message(SPAN_NOTICE("[user] anchors [src] into place."),SPAN_NOTICE("You anchor [src] into place."))
-			else
-				user.visible_message(SPAN_NOTICE("[user] unanchors [src]."),SPAN_NOTICE("You unanchor [src]."))
-		return
+	if(bullet.ammo.damage_type == BURN)
+		bullet.damage = bullet.damage
+	else
+		bullet.damage = bullet.damage
+		playsound(src, hitsound, 35, 1)
 
-	else if(isgun(attacking_item))
-		var/obj/item/weapon/gun/operator_gun = attacking_item
-		if(operator_gun.mounted_class > mount_class)
-			to_chat(user, SPAN_WARNING("[mounted_gun] too big for [src]."))
-			return
+	if(istype(bullet.ammo, /datum/ammo/xeno/boiler_gas))
+		update_health(50)
 
-		if(!anchored)
-			to_chat(user, SPAN_WARNING("At first need to anchor [src]."))
-			return
+	else if(bullet.ammo.flags_ammo_behavior & AMMO_ANTISTRUCT)
+		update_health(bullet.damage * ANTISTRUCT_DMG_MULT_BARRICADES)
 
-		if(!mounted_gun)
-			user.visible_message(SPAN_NOTICE("[user] start putting [mounted_gun] in [src]."),
-			SPAN_NOTICE("You start putting [operator_gun] in [src]."))
-			if(do_after(user, 100 * operator_gun.mounted_class * mount_class * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
-				if(mounted_gun || !anchored || !user.drop_inv_item_to_loc(operator_gun, src))
-					return
-
-				mounted_gun = operator_gun
-				mounted_gun.owner = src
-				user.visible_message(SPAN_NOTICE("[user] put [mounted_gun] in [src]."),
-				SPAN_NOTICE("You put [operator_gun] in [src]."))
-				mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
-				name = "[mounted_gun] installed on [base_name]"
-				update_icon()
-		else
-			to_chat(user, SPAN_WARNING("Place in [src] already taken."))
-		return
-
-	else if(HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
-		if(undestructible)
-			return
-
-		if(health < max_health * 0.2)
-			to_chat(user, SPAN_WARNING("[mounted_gun] stuck to [src], repair it first."))
-			return
-
-		if(!mounted_gun)
-			to_chat(user, SPAN_WARNING("There nothing to remove from [src]."))
-			return
-
-		playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
-		user.visible_message(SPAN_NOTICE("[user] started removing [mounted_gun] from [src]."),
-		SPAN_NOTICE("You start removing [mounted_gun] from [src]."))
-		if(do_after(user, 200 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
-			user.visible_message(SPAN_NOTICE("[user] removed [mounted_gun] from [src]."),
-			SPAN_NOTICE("You removed [mounted_gun] from [src]."))
-			mounted_gun.flags_mounted_gun_features &= ~GUN_BURST_FIRING
-			mounted_gun.update_icon()
-			name = base_name
-			user.put_in_hands(mounted_gun)
-			mounted_gun.owner = null
-			mounted_gun = null
-			update_icon()
-		return
-
-	else if(HAS_TRAIT(attacking_item, TRAIT_TOOL_BLOWTORCH))
-		var/obj/item/tool/weldingtool/welder = attacking_item
-		if(welder.get_fuel() < 3)
-			return
-
-		if(!do_after(user, 60 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
-			return
-
-		if(!welder.remove_fuel(3, user))
-			return
-
-		to_chat(user, SPAN_NOTICE("You repaired [src]."))
-		update_health(-100)
-		return
-
-	else if(istype(attacking_item, /obj/item/ammo_magazine))
-		mounted_gun.reload(user, attacking_item)
-		update_icon()
-		return
-
-	else if(istype(attacking_item, /obj/item/explosive/grenade))
-		mounted_gun.on_pocket_attackby(attacking_item, user)
-		update_icon()
-		return
-
-	return ..()
-
-/obj/structure/machinery/mounted_defence/bullet_act(obj/projectile/proj)
-	bullet_ping(proj)
-	visible_message(SPAN_WARNING("[src] is hit by the [proj]!"))
-	update_health(round(proj.damage / 10))
+	update_health(bullet.damage)
 	return TRUE
 
 /obj/structure/machinery/mounted_defence/update_health(damage)
 	health = clamp(health - damage, 0, max_health)
-	if(health <= 0)
+	if(!health)
 		playsound(src, 'sound/effects/metal_crash.ogg', 25, 1)
-		qdel(src)
-
-/obj/structure/machinery/mounted_defence/MouseDrop(over_object, src_location, over_location)
-	if(!ishuman(usr))
+		deconstruct()
 		return
 
-	var/mob/living/carbon/human/user = usr
-	if(!Adjacent(user))
-		return
+	update_damage_state(floor(health/max_health * 100))
+	update_icon()
 
-	if(over_object != user)
-		return
-
-	if(anchored)
-		if(user.interactee == src)
-			user.unset_interaction()
-			return
-
-		if(operator)
-			if(operator.interactee == null)
-				operator = null
-			else
-				to_chat(user, "Somebody already taken control of it.")
-				return
-		else
-			if(user.interactee)
-				to_chat(user, "You already busy.")
-				return
-
-			if(user.get_active_hand() != null)
-				to_chat(user, SPAN_WARNING("You need free hand to control [src]."))
-				return
-
-			user.set_interaction(src)
-
-	else
-		if(prebuild)
-			return
-
-		if(anchored)
-			to_chat(user, SPAN_WARNING("[src] can't be taken while anchored."))
-			return
-
-		if(mounted_gun)
-			to_chat(user, SPAN_WARNING("[src] can't be taken while holds [mounted_gun]."))
-			return
-
-		to_chat(user, SPAN_NOTICE("You taken [src]."))
-		var/obj/item/device/mounted_defence/tripod/mount = new(loc)
-		transfer_label_component(mount)
-		user.put_in_hands(mount)
-		qdel(src)
+/obj/structure/machinery/mounted_defence/proc/update_damage_state()
+	return
 
 
-// INTERACTIONS SET AND UNSET
+//////////////////////////////////////////////////////////////
+//MOUNTED DEFENCE INTERACTIONS
+
 /obj/structure/machinery/mounted_defence/proc/exit_interaction()
 	SIGNAL_HANDLER
 
@@ -264,7 +268,7 @@
 /obj/structure/machinery/mounted_defence/on_set_interaction(mob/living/user)
 	ADD_TRAIT(user, TRAIT_IMMOBILIZED, INTERACTION_TRAIT)
 	give_action(user, /datum/action/human_action/mg_exit)
-	user.forceMove(src.loc)
+	user.forceMove(loc)
 	user.setDir(dir)
 	user.reset_view(src)
 	user.status_flags |= IMMOBILE_ACTION
@@ -283,7 +287,7 @@
 /obj/structure/machinery/mounted_defence/on_unset_interaction(mob/living/user)
 	REMOVE_TRAIT(user, TRAIT_IMMOBILIZED, INTERACTION_TRAIT)
 	remove_action(user, /datum/action/human_action/mg_exit)
-	user.Move(get_step(src, reverse_direction(src.dir)))
+	user.Move(get_step(src, reverse_direction(dir)))
 	user.setDir(dir)
 	user.reset_view(null)
 	user.status_flags &= ~IMMOBILE_ACTION
@@ -341,19 +345,22 @@
 /obj/structure/machinery/mounted_defence/check_eye(mob/living/user)
 	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated() || !user.client)
 		user.unset_interaction()
-// End of horros beyond game official cm devs comprehension!!!
 
-/obj/structure/machinery/mounted_defence/attack_alien(mob/living/carbon/xenomorph/xeno)
-	if(islarva(xeno))
-		return
+/obj/structure/machinery/mounted_defence/MouseDrop(over_object, src_location, over_location)
+	if(!ishuman(usr))
+		return FALSE
 
-	xeno.visible_message(SPAN_DANGER("[xeno] hits [src]!"),
-	SPAN_DANGER("You hit [src]!"))
-	xeno.animation_attack_on(src)
-	xeno.flick_attack_overlay(src, "slash")
-	playsound(loc, "alien_claw_metal", 25)
-	update_health(rand(xeno.melee_damage_lower, xeno.melee_damage_upper))
-	return XENO_ATTACK_ACTION
+	if(usr.action_busy)
+		return FALSE
+
+	if(!Adjacent(usr))
+		return FALSE
+
+	if(over_object != usr)
+		return FALSE
+
+	return TRUE
+// End of horros beyond official cm devs comprehension!!!
 
 /obj/structure/machinery/mounted_defence/update_icon()
 	overlays.Cut()
@@ -398,24 +405,213 @@
 	return ..()
 
 
+
+
+
 //////////////////////////////////////////////////////////////
 //TIER 1													//
 //////////////////////////////////////////////////////////////
+
+
 /obj/structure/machinery/mounted_defence/tier_one
 	mount_class = GUN_MOUNT_SMALL
 
+/obj/structure/machinery/mounted_defence/tier_one/deconstruct(disassemble, mob/living/user)
+	if(disassemble)
+		var/obj/item/device/mounted_defence/tripod/mount = new(loc)
+		transfer_label_component(mount)
+		if(user)
+			user.put_in_hands(mount)
+
+		if(mounted_gun)
+			mounted_gun.update_icon()
+			mounted_gun.owner = null
+			if(user)
+				user.put_in_hands(mounted_gun)
+			else
+				mounted_gun.forceMove(loc)
+			mounted_gun = null
+
+	qdel(src)
+
+/obj/structure/machinery/mounted_defence/tier_one/MouseDrop(over_object, src_location, over_location)
+	. = ..()
+	if(!.)
+		return
+
+	var/mob/living/user = usr
+	if(mounted_gun)
+		if(build_stage != MOUNTED_DEFENSE_SECURED)
+			return
+
+		if(user.interactee == src)
+			user.unset_interaction()
+			return
+
+		if(operator)
+			if(operator.interactee == null)
+				operator = null
+			else
+				to_chat(user, "Somebody already taken control of it.")
+				return
+		else
+			if(user.interactee)
+				to_chat(user, "You already busy.")
+				return
+
+			if(user.get_active_hand() != null)
+				to_chat(user, SPAN_WARNING("You need free hand to control [src]."))
+				return
+
+			user.set_interaction(src)
+		return
+	else
+		if(build_stage != MOUNTED_DEFENSE_MOVABLE)
+			to_chat(user, SPAN_WARNING("You are need to lose [src] first."))
+			return
+
+		if(!do_after(user, 20, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+			return
+
+		user.visible_message(SPAN_NOTICE("[user] takes [src]."),
+		SPAN_NOTICE("You take [src]."))
+		playsound(loc, 'sound/items/Deconstruct.ogg', 25, 1)
+
+		deconstruct(TRUE, user)
+
+/obj/structure/machinery/mounted_defence/tier_one/handle_building_stages(obj/item/attacking_item, mob/user)
+	switch(build_stage)
+		if(MOUNTED_DEFENSE_SECURED) //Fully constructed step. Use screwdriver to remove the protection panels to reveal the bolts
+			if(HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER))
+				if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+					to_chat(user, SPAN_WARNING("You are not trained to touch [src]..."))
+					return
+				if(user.action_busy)
+					return
+				playsound(loc, 'sound/items/Screwdriver.ogg', 25, 1)
+				if(!do_after(user, 10, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+					return
+				user.visible_message(SPAN_NOTICE("[user] removes [src]'s protection panel."),
+				SPAN_NOTICE("You remove [src]'s protection panels, exposing the anchor bolts."))
+				build_stage = MOUNTED_DEFENSE_UNSECURED
+				return
+
+		if(MOUNTED_DEFENSE_UNSECURED) //Protection panel removed step. Screwdriver to put the panel back, wrench to unsecure the anchor bolts
+			if(HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER))
+				if(user.action_busy)
+					return
+				if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+					to_chat(user, SPAN_WARNING("You are not trained to assemble [src]..."))
+					return
+				playsound(loc, 'sound/items/Screwdriver.ogg', 25, 1)
+				if(!do_after(user, 10, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+					return
+				user.visible_message(SPAN_NOTICE("[user] set [src]'s protection panel back."),
+				SPAN_NOTICE("You set [src]'s protection panel back."))
+				build_stage = MOUNTED_DEFENSE_SECURED
+				return
+
+			if(HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
+				if(user.action_busy)
+					return
+				if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+					to_chat(user, SPAN_WARNING("You are not trained to disassemble [src]..."))
+					return
+				playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
+				if(!do_after(user, 10, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+					return
+				user.visible_message(SPAN_NOTICE("[user] loosens [src]'s anchor bolts."),
+				SPAN_NOTICE("You loosen [src]'s anchor bolts."))
+				anchored = FALSE
+				build_stage = MOUNTED_DEFENSE_MOVABLE
+				update_icon() //unanchored changes layer
+				return
+
+		if(MOUNTED_DEFENSE_MOVABLE) //Anchor bolts loosened step. Apply crowbar to unseat the panel and take apart the whole thing. Apply wrench to resecure anchor bolts
+			if(HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
+				if(user.action_busy)
+					return
+				if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+					to_chat(user, SPAN_WARNING("You are not trained to assemble [src]..."))
+					return
+				for(var/obj/structure/barricade/B in loc)
+					if(B != src && B.dir == dir)
+						to_chat(user, SPAN_WARNING("There's already a barricade here."))
+						return
+				playsound(loc, 'sound/items/Ratchet.ogg', 25, 1)
+				if(!do_after(user, 10, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src))
+					return
+				user.visible_message(SPAN_NOTICE("[user] secures [src]'s anchor bolts."),
+				SPAN_NOTICE("You secure [src]'s anchor bolts."))
+				build_stage = MOUNTED_DEFENSE_UNSECURED
+				anchored = TRUE
+				update_icon() //unanchored changes layer
+				return
+
+/obj/structure/machinery/mounted_defence/tier_one/try_insert_weapon(obj/item/attacking_item, mob/user)
+	if(!isgun(attacking_item) || user.action_busy || mounted_gun)
+		return FALSE
+
+	if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+		to_chat(user, SPAN_WARNING("You are not trained to touch [src]..."))
+		return FALSE
+
+	var/obj/item/weapon/gun/attacking_gun = attacking_item
+	if(attacking_gun.mounted_class > mount_class)
+		to_chat(user, SPAN_WARNING("[mounted_gun] too big for [src]."))
+		return FALSE
+
+	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src) || !mounted_gun)
+		return FALSE
+
+	mounted_gun = attacking_gun
+	mounted_gun.owner = src
+	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
+	update_icon()
+
+	user.visible_message(SPAN_NOTICE("[user] places [mounted_gun] in [src]."),
+	SPAN_NOTICE("You place [mounted_gun] in [src]."))
+	return TRUE
+
+/obj/structure/machinery/mounted_defence/tier_one/try_remove_weapon(obj/item/attacking_item, mob/user)
+	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_CROWBAR) || !mounted_gun)
+		return FALSE
+
+	if(!skillcheck(user, SKILL_CONSTRUCTION, SKILL_CONSTRUCTION_TRAINED))
+		to_chat(user, SPAN_WARNING("You are not trained to touch [src]..."))
+		return FALSE
+
+	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src) || mounted_gun)
+		return FALSE
+
+	user.visible_message(SPAN_NOTICE("[user] removes [mounted_gun] from [src]."),
+	SPAN_NOTICE("You remove [mounted_gun] from [src]."))
+
+	mounted_gun.update_icon()
+	mounted_gun.owner = null
+	user.put_in_hands(mounted_gun)
+	mounted_gun = null
+	update_icon()
+	return TRUE
+
+
 /obj/structure/machinery/mounted_defence/tier_one/tripod
 	name = "Tripod"
-	base_name = "Tripod"
 	desc = "Tripod for light weight stationary weapons."
+
 	icon_state = "tripod"
 	anchored = FALSE
 	density = TRUE
 
+	repair_materials = list("metal" = 0.20, "plasteel" = 0.10)
+
+	hitsound = 'sound/effects/metalhit.ogg'
+
 	health = 300
 	max_health = 300
 	projectile_coverage = PROJECTILE_COVERAGE_LOW
-
 
 /obj/item/device/mounted_defence
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
@@ -461,27 +657,25 @@
 
 	to_chat(user, SPAN_NOTICE("You install [src]."))
 	var/obj/structure/machinery/mounted_defence/tier_one/tripod/mount = new /obj/structure/machinery/mounted_defence/tier_one/tripod(user.loc)
-	mount.name = src.name
+	transfer_label_component(mount)
 	mount.setDir(user.dir)
 	qdel(src)
 
 
-/obj/structure/machinery/mounted_defence/tier_one/tripod/prebuild
-	prebuild = TRUE
-	density = TRUE
-	anchored = TRUE
+/obj/structure/machinery/mounted_defence/tier_one/metal_barricade
+	repair_materials = list("metal" = 0.3, "plasteel" = 0.15)
 
-/obj/structure/machinery/mounted_defence/tier_one/tripod/prebuild/mg_turret
-	name = "Nest"
-	desc = "Nest for light weight stationary weapons."
-	icon_state = "small_place_sand"
-	projectile_coverage = PROJECTILE_COVERAGE_HIGH
-	parrent_type_gun = /obj/item/weapon/gun/mounted/m56d2_gun
+/obj/structure/machinery/mounted_defence/tier_one/plasteel_barricade
+	repair_materials = list("metal" = 0.6, "plasteel" = 0.3)
+
+
+
 
 
 //////////////////////////////////////////////////////////////
 //TIER 2													//
 //////////////////////////////////////////////////////////////
+
 
 /obj/structure/machinery/mounted_defence/tier_two
 	name = "Medium Fortification"
@@ -489,10 +683,22 @@
 	mount_class = GUN_MOUNT_MEDIUM
 	projectile_coverage = PROJECTILE_COVERAGE_MEDIUM
 
+/obj/structure/machinery/mounted_defence/tier_two/plasteel_position
+
+//simply position for artilery of different types, or anti air gun (all manual)
+/obj/structure/machinery/mounted_defence/tier_two/beton_position
+
+//some exagurated weapons, but not so cool
+/obj/structure/machinery/mounted_defence/tier_two/beton_dot
+
+
+
+
 
 //////////////////////////////////////////////////////////////
 //TIER 3													//
 //////////////////////////////////////////////////////////////
+
 
 /obj/structure/machinery/mounted_defence/tier_three
 	name = "Dot Fortification"
@@ -500,10 +706,20 @@
 	mount_class = GUN_MOUNT_BIG
 	projectile_coverage = PROJECTILE_COVERAGE_HIGH
 
+//can auto load artilery, making it shot very fast, can have special types like missile or shell, even rail and possibility for anti air gun and even rocket turret
+/obj/structure/machinery/mounted_defence/tier_three/reinforced_beton_position
+
+//as example ltb or direct artilery, can hold up to 2 big automatic turrest
+/obj/structure/machinery/mounted_defence/tier_three/reinforced_beton_dot
+
+
+
+
 
 //////////////////////////////////////////////////////////////
 // WEAPONS													//
 //////////////////////////////////////////////////////////////
+
 
 /obj/item/storage/box/stationary_m56d2_hmg
 	name = "\improper M56D2 crate"

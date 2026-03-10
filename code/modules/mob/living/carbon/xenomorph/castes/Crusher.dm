@@ -96,10 +96,10 @@
 
 //RUCM START
 	else if(istype(target, /obj/structure/machinery/mounted_defence))
-		var/obj/structure/machinery/mounted_defence/mounted = target
-		visible_message(SPAN_DANGER("[src] rams [mounted]!"), SPAN_XENODANGER("You ram [mounted]!"))
-		playsound(loc, "punch", 25, 1)
-		mounted.crusher_impact()
+		var/obj/structure/machinery/mounted_defence/mounted_in_path = target
+		visible_message(SPAN_DANGER("[src] rams into [mounted_in_path] and skids to a halt!"), SPAN_XENOWARNING("We ram into [mounted_in_path] and skid to a halt!"))
+
+		mounted_in_path.CrusherImpact(src, 150)
 		. =  FALSE
 //RUCM END
 

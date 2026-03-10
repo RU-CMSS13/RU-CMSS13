@@ -1,7 +1,7 @@
 //Gun mounted flags
 #define GUN_MOUNTING				(1<<0)
-#define GUN_MOUNTED					(1<<1)
-#define GUN_CAN_OVERRIDE_MOUNTED	(1<<2)
+#define GUN_ONLY_MOUNTING			(1<<1)
+#define GUN_MOUNTED					(1<<2)
 
 #define GUN_CATEGORY_MOUNTED 6
 
@@ -12,6 +12,6 @@
 
 DEFINE_BITFIELD(flags_mounted_gun_features, list(
 	"MOUNTING" = GUN_MOUNTING,
+	"GUN_ONLY_MOUNTING" = GUN_ONLY_MOUNTING,
 	"MOUNTED" = GUN_MOUNTED,
-	"CAN_OVERRIDE_MOUNTED" = GUN_CAN_OVERRIDE_MOUNTED,
 ))

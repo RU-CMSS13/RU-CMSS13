@@ -24,7 +24,7 @@
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
-	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	gun_category = GUN_CATEGORY_MOUNTED
 
 	lineart_ru = TRUE
@@ -64,7 +64,7 @@
 	current_mag = /obj/item/ammo_magazine/m56d2
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
-	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	start_automatic = TRUE
 	start_semiauto = FALSE
 
@@ -124,7 +124,7 @@
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_RECOIL_BUILDUP
-	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	gun_category = GUN_CATEGORY_MOUNTED
 
 	lineart_ru = TRUE
@@ -216,7 +216,7 @@
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
-	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	gun_category = GUN_CATEGORY_MOUNTED
 
 	skill_locked = FALSE
@@ -328,7 +328,7 @@
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY
-	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	gun_category = GUN_CATEGORY_MOUNTED
 
 	lineart_ru = TRUE
