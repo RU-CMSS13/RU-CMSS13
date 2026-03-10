@@ -1278,7 +1278,12 @@ and you're good to go.
 
 	var/atom/original_target = target //This is for burst mode, in case the target changes per scatter chance in between fired bullets.
 
+/* RUCM CHANGE
 	if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+*/
+//RUCM START
+	if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)) && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 		return TRUE
 
 	//The gun should return the bullet that it already loaded from the end cycle of the last Fire().
@@ -1477,7 +1482,12 @@ and you're good to go.
 
 	var/bullets_fired
 	for(bullets_fired = 1 to bullets_to_fire)
+/* RUCM CHANGE
 		if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+*/
+//RUCM START
+		if(loc != user && !(flags_mounted_gun_features & GUN_MOUNTING) || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+//RUCM END
 			break //If you drop it while bursting, for example.
 
 		if (bullets_fired > 1 && !(flags_gun_features & GUN_BURST_FIRING)) // No longer burst firing somehow
@@ -1725,6 +1735,11 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		return TRUE
 	if(user.is_mob_incapacitated())
 		return
+//RUCM START
+	if(flags_mounted_gun_features & GUN_MOUNTING && !(flags_mounted_gun_features & GUN_MOUNTED))
+		to_chat(user, SPAN_WARNING("To heavy and big for handheld usage."))
+		return FALSE
+//RUCM END
 	if(HAS_TRAIT(user, TRAIT_HAULED))
 		return
 	if(world.time < guaranteed_delay_time)
@@ -1768,7 +1783,12 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 				if(!(active_attachable.flags_attach_features & ATTACH_WIELD_OVERRIDE) && !(flags_item & WIELDED))
 					to_chat(user, SPAN_WARNING("You must wield [src] to fire [active_attachable]!"))
 					return
+/* RUCM CHANGE
 		if((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !active_attachable) //If we're not holding the weapon with both hands when we should.
+*/
+//RUCM START
+		if((((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !flags_mounted_gun_features) || (flags_mounted_gun_features & GUN_CAN_OVERRIDE_MOUNTED && !(flags_mounted_gun_features & GUN_MOUNTED))) && !active_attachable)
+//RUCM END
 			to_chat(user, SPAN_WARNING("You need a more secure grip to fire this weapon!"))
 			return
 
@@ -1874,7 +1894,12 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	var/gun_accuracy_mult = accuracy_mult_unwielded
 	var/gun_scatter = scatter_unwielded
 
+/* RUCM CHANGE
 	if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED)
+*/
+//RUCM START
+	if((flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED) || flags_mounted_gun_features & GUN_MOUNTING)
+//RUCM END
 		gun_accuracy_mult = accuracy_mult
 		gun_scatter = scatter
 	else if(user && world.time - user.l_move_time < 5) //moved during the last half second
@@ -2190,7 +2215,12 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		return
 
 	if(!bypass_checks)
+/* RUCM CHANGE
 		if(gun_user.hand && !isgun(gun_user.l_hand) || !gun_user.hand && !isgun(gun_user.r_hand)) // If the object in our active hand is not a gun, abort
+*/
+//RUCM START
+		if((gun_user.hand && !isgun(gun_user.l_hand) || !gun_user.hand && !isgun(gun_user.r_hand)) && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 			return
 
 		if(gun_user.throw_mode)

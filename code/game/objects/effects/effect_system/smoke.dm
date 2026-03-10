@@ -563,6 +563,12 @@
 		gun.update_health(XENO_ACID_HMG_DAMAGE)
 
 //RUCM START
+	for(var/obj/structure/machinery/mounted_defence/mount in cur_turf)
+		mount.update_health(XENO_ACID_HMG_DAMAGE)
+
+	for(var/obj/structure/machinery/defenses/defense in cur_turf)
+		defense.update_health(XENO_ACID_HMG_DAMAGE)
+
 	for(var/obj/vehicle/walker/walker in cur_turf)
 		walker.take_damage_type(15, "acid")
 //RUCM END

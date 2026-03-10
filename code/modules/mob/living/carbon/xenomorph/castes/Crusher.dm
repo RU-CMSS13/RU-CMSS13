@@ -94,6 +94,15 @@
 		vehicle_in_path.Collided(src)
 		. = FALSE
 
+//RUCM START
+	else if(istype(target, /obj/structure/machinery/mounted_defence))
+		var/obj/structure/machinery/mounted_defence/mounted = target
+		visible_message(SPAN_DANGER("[src] rams [mounted]!"), SPAN_XENODANGER("You ram [mounted]!"))
+		playsound(loc, "punch", 25, 1)
+		mounted.crusher_impact()
+		. =  FALSE
+//RUCM END
+
 	else if (istype(target, /obj/structure/machinery/m56d_hmg))
 		var/obj/structure/machinery/m56d_hmg/weapon_in_path = target
 		visible_message(SPAN_DANGER("[src] rams [weapon_in_path]!"), SPAN_XENODANGER("We ram [weapon_in_path]!"))
