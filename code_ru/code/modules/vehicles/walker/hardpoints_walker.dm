@@ -282,6 +282,8 @@
 	return pick(fire_sounds)
 
 /obj/item/walker_gun/flamer/active_effect(atom/target, mob/living/user)
+	set waitfor = 0
+
 	if (!ammo)
 		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
 		return
@@ -302,32 +304,21 @@
 		visible_message("[owner.name]'s systems deployed used magazine.")
 		return
 
-	var/datum/reagent/R = ammo.reagents.reagent_list[1]
+	var/datum/reagent/chem = ammo.reagents.reagent_list[1]
 
-	var/flameshape = R.flameshape
-	var/fire_type = R.fire_type
+	var/flameshape = chem.flameshape
+	var/fire_type = chem.fire_type
 
-	R.intensityfire = clamp(R.intensityfire, ammo.reagents.min_fire_int, ammo.reagents.max_fire_int)
-	R.durationfire = clamp(R.durationfire, ammo.reagents.min_fire_dur, ammo.reagents.max_fire_dur)
-	R.rangefire = clamp(R.rangefire, ammo.reagents.min_fire_rad, ammo.reagents.max_fire_rad)
-	var/max_range = R.rangefire
-	if (max_range < fuel_pressure) //Used for custom tanks, allows for higher ranges
-		max_range = clamp(fuel_pressure, 0, ammo.reagents.max_fire_rad)
-	if(R.rangefire == -1)
+	chem.intensityfire = clamp(chem.intensityfire, ammo.reagents.min_fire_int, ammo.reagents.max_fire_int)
+	chem.durationfire = clamp(chem.durationfire, ammo.reagents.min_fire_dur, ammo.reagents.max_fire_dur)
+
+	var/max_range = chem.rangefire
+	if(chem.rangefire == -1)
 		max_range = ammo.reagents.max_fire_rad
+	var/distance = 0
 
-	var/turf/temp[] = get_line(get_turf(owner), get_turf(target))
-
-	var/turf/to_fire = temp[2]
-
-	var/obj/flamer_fire/fire = locate() in to_fire
-	if(fire)
-		qdel(fire)
-
-	playsound(to_fire, src.get_fire_sound(), 50, TRUE)
-	ammo.current_rounds = ammo.reagents.total_volume
-
-	new /obj/flamer_fire(to_fire, create_cause_data(initial(name), user), R, max_range, ammo.reagents, flameshape, target, CALLBACK(src, PROC_REF(show_percentage), user), fuel_pressure, fire_type)
+	var/turf/temp[] = get_line(get_turf(user), get_turf(target))
+	process_flame_tiles(temp, target, user, chem, max_range, flameshape, fire_type, distance, null, FALSE)
 
 	if(ammo.current_rounds <= 0 || !ammo)
 		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
@@ -335,6 +326,59 @@
 		ammo = null
 		visible_message("[owner.name]'s systems deployed used magazine.","")
 		return
+
+/obj/item/walker_gun/flamer/proc/process_flame_tiles(list/turfs, atom/target, mob/living/user, datum/reagent/chem, max_range, flameshape, fire_type, distance, turf/prev_turf, stop_at_turf)
+	if(!length(turfs))
+		return
+
+	var/turf/current_turf = turfs[1]
+	turfs.Cut(1, 2)
+
+	if(current_turf == user.loc)
+		prev_turf = current_turf
+		addtimer(CALLBACK(src, PROC_REF(process_flame_tiles), turfs, target, user, chem, max_range, flameshape, fire_type, distance, prev_turf, stop_at_turf), 1, TIMER_UNIQUE)
+		return
+
+	if(distance >= max_range)
+		return
+
+	if(current_turf.density)
+		stop_at_turf = TRUE
+	else if(prev_turf)
+		var/atom/movable/temp = new /obj/flamer_fire()
+		var/atom/movable/blocked = LinkBlocked(temp, prev_turf, current_turf)
+		qdel(temp)
+
+		if(blocked)
+			if(blocked.flags_atom & ON_BORDER)
+				return
+			stop_at_turf = TRUE
+
+	if(stop_at_turf)
+		flame_adjacent(current_turf, user, chem)
+		playsound(current_turf, src.get_fire_sound(), 50, TRUE)
+		show_percentage(user)
+		return
+
+	distance++
+	prev_turf = current_turf
+
+	playsound(current_turf, src.get_fire_sound(), 50, TRUE)
+
+	new /obj/flamer_fire(current_turf, create_cause_data(initial(name), user), chem, max_range, ammo.reagents, flameshape, target, CALLBACK(src, PROC_REF(show_percentage), user), fuel_pressure, fire_type)
+
+/obj/item/walker_gun/flamer/proc/flame_adjacent(turf/turfed, mob/living/user, datum/reagent/chem)
+	if(!istype(turfed))
+		return
+
+	if(!locate(/obj/flamer_fire) in turfed) // Prevent stacking flames
+		if(ammo && ammo.reagents && length(ammo.reagents.reagent_list)) // Ensure reagents exist
+
+			chem.intensityfire = clamp(chem.intensityfire, ammo.reagents.min_fire_int, ammo.reagents.max_fire_int)
+			chem.durationfire = clamp(chem.durationfire, ammo.reagents.min_fire_dur, ammo.reagents.max_fire_dur)
+
+			new /obj/flamer_fire(turfed, create_cause_data(initial(name), user), chem)
+			ammo.reagents.remove_reagent(chem.id, 1)
 
 /obj/item/walker_gun/flamer/proc/show_percentage(mob/living/user)
 	if(ammo)
