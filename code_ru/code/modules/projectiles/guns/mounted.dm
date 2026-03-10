@@ -1,5 +1,6 @@
-//-------------------------------------------------------
-//This gun is very powerful, but also has a kick.
+//////////////////////////////////////////////////////////////
+// NORMAL GUNS												//
+//////////////////////////////////////////////////////////////
 
 /obj/item/weapon/gun/mounted
 	name = "Stationar Weapon"
@@ -11,6 +12,8 @@
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
 
+	current_mag = null
+
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
@@ -19,7 +22,7 @@
 	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
 
-	var/build_in_zoom = FALSE
+	var/build_in_zoom = 0
 
 /obj/item/weapon/gun/mounted/update_icon()
 	if(overlays)
@@ -46,27 +49,28 @@
 	update_mag_overlay()
 	update_attachables()
 
-/obj/item/weapon/gun/mounted/m56d_gun
-	name = "M56D Stationary Heavy Machinegun"
-	desc = "M56D Stationary Heavy Machinegun, with IFF system, can installed on tripod."
-	icon_state = "M56D_gun"
-	item_state = "M56D_gun"
+/obj/item/weapon/gun/mounted/m56d2_gun
+	name = "M56D2 Stationary Heavy Machinegun"
+	desc = "M56D2 Stationary Heavy Machinegun, with IFF system, can installed on tripod."
+	icon_state = "M56D2_gun"
+	item_state = "M56D2_gun"
 
-	mounted_state = "M56D"
-	base_mounted_state = "M56D"
+	mounted_state = "M56D2"
+	base_mounted_state = "M56D2"
 
 	fire_sound = 'sound/weapons/gun_rifle.ogg'
 	var/iff_enabled = TRUE //Begin with the safety on.
 
 	current_mag = /obj/item/ammo_magazine/m56d
+
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	start_automatic = TRUE
 	start_semiauto = FALSE
 
-	build_in_zoom = TRUE
+	build_in_zoom = 6
 
-/obj/item/weapon/gun/mounted/set_gun_config_values()
+/obj/item/weapon/gun/mounted/m56d2_gun/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_LMG)
 	burst_amount = BURST_AMOUNT_TIER_5
@@ -79,12 +83,12 @@
 	recoil_unwielded = RECOIL_AMOUNT_TIER_5
 	burst_scatter_mult = 0
 
-/obj/item/weapon/gun/mounted/m56d_gun/set_bullet_traits()
+/obj/item/weapon/gun/mounted/m56d2_gun/set_bullet_traits()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
 	))
 
-/obj/item/weapon/gun/mounted/m56d_gun/proc/toggle_lethal_mode(mob/user)
+/obj/item/weapon/gun/mounted/m56d2_gun/proc/toggle_lethal_mode(mob/user)
 	to_chat(user, "[icon2html(src, usr)] You [iff_enabled? "<B>disable</b>" : "<B>enable</b>"] the [src.name]'s fire restriction. You will [iff_enabled ? "harm anyone in your way" : "target through IFF"].")
 	playsound(loc,'sound/machines/click.ogg', 25, 1)
 	iff_enabled = !iff_enabled
@@ -94,7 +98,10 @@
 		remove_bullet_trait("iff")
 
 
-///GRENADE LAUNCHER
+//////////////////////////////////////////////////////////////
+// GRENADE LAUNCHERS										//
+//////////////////////////////////////////////////////////////
+
 /obj/item/weapon/gun/launcher/grenade/mounted
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
@@ -115,7 +122,7 @@
 	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
 
-	var/build_in_zoom = FALSE
+	var/build_in_zoom = 0
 
 // Official CMs shitcoded something, so yea, they work not the same like supposed, SHITCODE
 /obj/item/weapon/gun/launcher/grenade/mounted/handle_fire(atom/target, mob/living/user, params)
@@ -157,6 +164,8 @@
 	direct_draw = FALSE
 	internal_slots = 12
 
+	build_in_zoom = 4
+
 /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun/set_gun_config_values()
 	..()
 	fire_delay = FIRE_DELAY_TIER_1
@@ -170,7 +179,10 @@
 	recoil_unwielded = RECOIL_AMOUNT_TIER_3
 
 
-///ROCKET LAUNCHER
+//////////////////////////////////////////////////////////////
+// ROCKET LAUNCHERS											//
+//////////////////////////////////////////////////////////////
+
 /obj/item/weapon/gun/launcher/rocket/mounted
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
@@ -180,6 +192,8 @@
 
 	var/base_mounted_state = "mounted"
 	var/mounted_state = "mounted"
+
+	current_mag = null
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
@@ -191,7 +205,7 @@
 	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
 
-	var/build_in_zoom = FALSE
+	var/build_in_zoom = 0
 
 /obj/item/weapon/gun/launcher/rocket/mounted/update_icon()
 	if(overlays)
@@ -227,4 +241,46 @@
 	base_mounted_state = "RCT"
 	mounted_state = "RCT"
 
-	build_in_zoom = TRUE
+	current_mag = /obj/item/ammo_magazine/rocket/stationary
+
+	build_in_zoom = 8
+
+
+//////////////////////////////////////////////////////////////
+// FLAMETHROWERS											//
+//////////////////////////////////////////////////////////////
+
+/obj/item/weapon/gun/flamer/mounted
+	name = "Stationar Weapon"
+	desc = "Installing on tripod."
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
+	icon_state = "mounted"
+	item_state = "mounted"
+
+	var/base_mounted_state = "mounted"
+	var/mounted_state = "mounted"
+
+	current_mag = /obj/item/ammo_magazine/flamer_tank
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	lineart_ru = TRUE
+	mounted_class = GUN_MOUNT_SMALL
+
+	var/build_in_zoom = 0
+
+/obj/item/weapon/gun/flamer/mounted/sagf
+	name = "SAGF Stationary Incinerator Unit"
+	desc = "SAGF Stationary Incinerator Unit, when you see it, first what comes to mind \"Napalm stick to kids\"."
+	icon_state = "SAGF_gun"
+	item_state = "SAGF_gun"
+
+	base_mounted_state = "SAGF"
+	mounted_state = "SAGF"
+
+	current_mag = /obj/item/ammo_magazine/flamer_tank/large/stationary
+
+	build_in_zoom = 6

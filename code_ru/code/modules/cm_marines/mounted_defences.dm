@@ -87,39 +87,13 @@
 		if(undestructible)
 			return
 
-		var/turf/location = get_turf(src)
-		var/fail = FALSE
-		if(location.density)
-			fail = TRUE
-		else
-			for(var/obj/blocker in location.contents - src)
-				if(blocker.density && !(blocker.flags_atom & ON_BORDER))
-					fail = TRUE
-					break
-				if(istype(blocker, /obj/structure/machinery/defenses))
-					fail = TRUE
-					break
-				if(istype(blocker, /obj/structure/window))
-					fail = TRUE
-					break
-				if(istype(blocker, /obj/structure/windoor_assembly))
-					fail = TRUE
-					break
-				if(istype(blocker, /obj/structure/machinery/door))
-					fail = TRUE
-					break
-
-		if(fail)
-			to_chat(user, SPAN_WARNING("You can't install [src] here, something is in the way."))
-			return
-
 		if(anchored)
 			to_chat(user, "You begin unscrewing [src] from the ground...")
 		else
 			to_chat(user, "You begin screwing [src] into place...")
 
 		var/old_anchored = anchored
-		if(do_after(user, 30 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD) && anchored == old_anchored)
+		if(do_after(user, 450 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD) && anchored == old_anchored)
 			anchored = !anchored
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, 1)
 			if(anchored)
@@ -142,13 +116,15 @@
 			user.visible_message(SPAN_NOTICE("[user] start putting [mounted_gun] in [src]."),
 			SPAN_NOTICE("You start putting [operator_gun] in [src]."))
 			if(do_after(user, 100 * operator_gun.mounted_class * mount_class * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
-				if(user.drop_inv_item_to_loc(operator_gun, src))
-					mounted_gun = operator_gun
-					user.visible_message(SPAN_NOTICE("[user] put [mounted_gun] in [src]."),
-					SPAN_NOTICE("You put [operator_gun] in [src]."))
-					mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
-					name = "[mounted_gun] installed on [base_name]"
-					update_icon()
+				if(mounted_gun || !anchored || !user.drop_inv_item_to_loc(operator_gun, src))
+					return
+
+				mounted_gun = operator_gun
+				user.visible_message(SPAN_NOTICE("[user] put [mounted_gun] in [src]."),
+				SPAN_NOTICE("You put [operator_gun] in [src]."))
+				mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
+				name = "[mounted_gun] installed on [base_name]"
+				update_icon()
 		else
 			to_chat(user, SPAN_WARNING("Place in [src] already taken."))
 		return
@@ -226,8 +202,10 @@
 	if(!Adjacent(user))
 		return
 
-	src.add_fingerprint(usr)
-	if(anchored && (over_object == user && (in_range(src, user) || locate(src) in user)))
+	if(over_object != user)
+		return
+
+	if(anchored)
 		if(user.interactee == src)
 			user.unset_interaction()
 			return
@@ -242,18 +220,25 @@
 			if(user.interactee)
 				to_chat(user, "You already busy.")
 				return
+
 			if(user.get_active_hand() != null)
 				to_chat(user, SPAN_WARNING("You need free hand to control [src]."))
-			else
-				user.set_interaction(src)
+				return
 
-	else if(over_object == user && in_range(src, user) && !prebuild)
+			user.set_interaction(src)
+
+	else
+		if(prebuild)
+			return
+
 		if(anchored)
 			to_chat(user, SPAN_WARNING("[src] can't be taken while anchored."))
 			return
+
 		if(mounted_gun)
 			to_chat(user, SPAN_WARNING("[src] can't be taken while holds [mounted_gun]."))
 			return
+
 		to_chat(user, SPAN_NOTICE("You taken [src]."))
 		var/obj/item/device/mounted_defence/tripod/mount = new(loc)
 		transfer_label_component(mount)
@@ -300,8 +285,7 @@
 	user.remove_temp_pass_flags(PASS_MOB_THRU)
 
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
-	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION,
-	))
+	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION))
 
 	mounted_gun.update_mouse_pointer(operator, FALSE)
 	if(operator == user)
@@ -314,7 +298,7 @@
 		var/diff_x = 0
 		var/diff_y = 0
 		var/tilesize = 32
-		var/viewoffset = mounted_gun?.build_in_zoom ? tilesize * tiles_zoom : tilesize * 2
+		var/viewoffset = tilesize * (mounted_gun?.build_in_zoom || 2)
 		switch(dir)
 			if(NORTH)
 				diff_y = -16 + user_old_y
@@ -348,7 +332,7 @@
 /obj/structure/machinery/mounted_defence/check_eye(mob/living/user)
 	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated() || !user.client)
 		user.unset_interaction()
-
+// End of horros beyond game official cm devs comprehension!!!
 
 /obj/structure/machinery/mounted_defence/attack_alien(mob/living/carbon/xenomorph/xeno)
 	if(islarva(xeno))
@@ -363,12 +347,9 @@
 	return XENO_ATTACK_ACTION
 
 /obj/structure/machinery/mounted_defence/update_icon()
-	if(overlays)
-		overlays.Cut()
-	else
-		overlays = list()
+	overlays.Cut()
 	if(mounted_gun)
-		overlays += mounted_gun.mounted_state
+		overlays += mounted_gun
 
 /obj/structure/machinery/mounted_defence/get_examine_text(mob/user)
 	. = ..()
@@ -411,7 +392,7 @@
 //////////////////////////////////////////////////////////////
 //TIER 1													//
 //////////////////////////////////////////////////////////////
-/obj/structure/machinery/mounted_defence/tier_one/tripod
+/obj/structure/machinery/mounted_defence/tier_one
 	mount_class = GUN_MOUNT_SMALL
 
 /obj/structure/machinery/mounted_defence/tier_one/tripod
@@ -432,26 +413,6 @@
 	unacidable = TRUE
 	w_class = SIZE_MEDIUM
 
-/obj/item/device/mounted_defence/tripod_frame
-	name = "Premade for Tripod"
-	desc = "You need to <B>weld</b> Tripod."
-	icon_state = "folded_tripod_frame"
-
-/obj/item/device/mounted_defence/tripod_frame/attackby(obj/item/attacking_item as obj, mob/user as mob)
-	if(HAS_TRAIT(attacking_item, TRAIT_TOOL_BLOWTORCH))
-		var/obj/item/tool/weldingtool/welder = attacking_item
-		if(!welder.remove_fuel(1, user))
-			return
-
-		var/obj/item/device/mounted_defence/tripod/tripod = new(user.loc)
-		to_chat(user, SPAN_NOTICE("You welded [src] in [tripod]."))
-		transfer_label_component(tripod)
-		qdel(src)
-		user.put_in_hands(tripod)
-		return
-
-	return ..()
-
 /obj/item/device/mounted_defence/tripod
 	name = "Tripod"
 	desc = "Tripod Tripod for light weight stationary weapons."
@@ -461,6 +422,32 @@
 	. = ..()
 
 	if(!ishuman(usr))
+		return
+
+	var/turf/location = get_turf(src)
+	var/fail = FALSE
+	if(location.density)
+		fail = TRUE
+	else
+		for(var/obj/blocker in location.contents - src)
+			if(blocker.density && !(blocker.flags_atom & ON_BORDER))
+				fail = TRUE
+				break
+			if(istype(blocker, /obj/structure/machinery/defenses))
+				fail = TRUE
+				break
+			if(istype(blocker, /obj/structure/window))
+				fail = TRUE
+				break
+			if(istype(blocker, /obj/structure/windoor_assembly))
+				fail = TRUE
+				break
+			if(istype(blocker, /obj/structure/machinery/door))
+				fail = TRUE
+				break
+
+	if(fail)
+		to_chat(user, SPAN_WARNING("You can't install [src] here, something is in the way."))
 		return
 
 	to_chat(user, SPAN_NOTICE("You install [src]."))
@@ -480,7 +467,7 @@
 	desc = "Nest for light weight stationary weapons."
 	icon_state = "small_place_sand"
 	projectile_coverage = PROJECTILE_COVERAGE_HIGH
-	parrent_type_gun = /obj/item/weapon/gun/mounted/m56d_gun
+	parrent_type_gun = /obj/item/weapon/gun/mounted/m56d2_gun
 
 
 //////////////////////////////////////////////////////////////
@@ -511,32 +498,31 @@
 // WEAPONS													//
 //////////////////////////////////////////////////////////////
 
-/obj/item/ammo_magazine/m56d
-	name = "M56D drum magazine (10x28mm Caseless)"
-	desc = "A box of 700, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system. Just click the M56D with this to reload it."
+/obj/item/storage/box/stationary_m56d2_hmg
+	name = "\improper M56D2 crate"
+	desc = "A large metal case with Japanese writing on the top. However it also comes with English text to the side. This is a M56D2 heavy machine gun, it clearly has various labeled warnings. The most major one is that this does not have IFF features due to specialized ammo."
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
+	icon_state = "M56D2_case"
+	w_class = SIZE_HUGE
+	storage_slots = 5
+
+/obj/item/storage/box/stationary_m56d2_hmg/Initialize()
+	. = ..()
+	new /obj/item/weapon/gun/mounted/m56d2_gun(src)
+	new /obj/item/device/mounted_defence/tripod(src)
+	new /obj/item/ammo_magazine/m56d(src)
+	new /obj/item/ammo_magazine/m56d(src)
+
+/obj/item/ammo_magazine/m56d2
+	name = "M56D2 drum magazine (10x28mm Caseless)"
+	desc = "A box of 700, 10x28mm caseless tungsten rounds for the M56D2 heavy machine gun system. Just click the M56D2 with this to reload it."
 	w_class = SIZE_MEDIUM
 	icon_state = "m56d_drum"
 	flags_magazine = NO_FLAGS //can't be refilled or emptied by hand
 	caliber = "10x28mm"
 	max_rounds = 700
 	default_ammo = /datum/ammo/bullet/smartgun
-	gun_type = /obj/item/weapon/gun/mounted/m56d_gun
-
-//Now we need a box for this.
-/obj/item/storage/box/stationary_m56d_hmg
-	name = "\improper M56D crate"
-	desc = "A large metal case with Japanese writing on the top. However it also comes with English text to the side. This is a M56D heavy machine gun, it clearly has various labeled warnings. The most major one is that this does not have IFF features due to specialized ammo."
-	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "M56D_case" // I guess a placeholder? Not actually going to show up ingame for now.
-	w_class = SIZE_HUGE
-	storage_slots = 5
-
-/obj/item/storage/box/stationary_m56d_hmg/Initialize()
-	. = ..()
-	new /obj/item/weapon/gun/mounted/m56d_gun(src) //gun itself
-	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
-	new /obj/item/ammo_magazine/m56d(src) //ammo for the gun
-	new /obj/item/ammo_magazine/m56d(src)
+	gun_type = /obj/item/weapon/gun/mounted/m56d2_gun
 
 
 //////////////////////////////////////////////////////////////
@@ -550,28 +536,28 @@
 	storage_slots = 5
 
 /obj/item/storage/box/sgl2/Initialize()
-	..()
+	. = ..()
 
-	new /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun(src) //gun itself
-	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
-	new /obj/item/storage/box/nade_box/airburstincen(src) //ammo for the gun
+	new /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun(src)
+	new /obj/item/device/mounted_defence/tripod(src)
+	new /obj/item/storage/box/nade_box/airburstincen(src)
 
 
 //////////////////////////////////////////////////////////////
 
 /obj/item/storage/box/rct
 	name = "\improper RCT Assembly-Supply Crate"
-	desc = "A large case labelled 'RCT, heavy grenade launcher', seems to be fairly heavy to hold. Contains stationary rocket launcher, can be used with all types rockets. likely to destroy enemy heavy machines."
+	desc = "A large case labelled 'RCT, heavy rocket launcher', seems to be fairly heavy to hold. Contains stationary rocket launcher, can be used with 100mm types rockets. likely to destroy enemy heavy machines."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "RCT_case" // I guess a placeholder? Not actually going to show up ingame for now.
+	icon_state = "RCT_case"
 	w_class = SIZE_HUGE
 	storage_slots = 5
 
 /obj/item/storage/box/rct/Initialize()
 	. = ..()
-	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src) //gun itself
-	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
-	new /obj/item/ammo_magazine/rocket/stationary(src) //ammo for the gun
+	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src)
+	new /obj/item/device/mounted_defence/tripod(src)
+	new /obj/item/ammo_magazine/rocket/stationary(src)
 	new /obj/item/ammo_magazine/rocket/stationary(src)
 	new /obj/item/ammo_magazine/rocket/ap/stationary(src)
 	new /obj/item/ammo_magazine/rocket/wp/stationary(src)
@@ -580,16 +566,56 @@
 	name = "\improper 100mm high explosive rocket"
 	desc = "A rocket tube loaded with a high-explosive warhead. Deals high damage to soft targets on direct hit and stuns most targets in a 5-meter-wide area for a short time. Has decreased effect on heavily armored targets."
 
+	default_ammo = /datum/ammo/rocket/stationary
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+
+/datum/ammo/rocket/stationary
+	max_range = 12
 
 /obj/item/ammo_magazine/rocket/ap/stationary
 	name = "\improper 100mm anti-armor rocket"
 	desc = "A rocket tube loaded with an armor-piercing warhead. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters."
 
+	default_ammo = /datum/ammo/rocket/ap/stationary
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+
+/datum/ammo/rocket/ap/stationary
+	max_range = 14
 
 /obj/item/ammo_magazine/rocket/wp/stationary
 	name = "\improper 100mm white-phosphorus rocket"
 	desc = "A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area."
 
+	default_ammo = /datum/ammo/rocket/wp/stationary
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+
+/datum/ammo/rocket/wp/stationary
+	max_range = 14
+
+//////////////////////////////////////////////////////////////
+
+/obj/item/storage/box/sagf
+	name = "\improper SAGF Assembly-Supply Crate"
+	desc = "A large case labelled 'SAGF, heavy flamer', seems to be fairly heavy to hold. Contains stationary flamethrower, can be used with special fuel."
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
+	icon_state = "RCT_case"
+	w_class = SIZE_HUGE
+	storage_slots = 5
+
+/obj/item/storage/box/sagf/Initialize()
+	. = ..()
+	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src)
+	new /obj/item/device/mounted_defence/tripod(src)
+	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
+	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
+	new /obj/item/ammo_magazine/flamer_tank/large/EX/stationary(src)
+
+/obj/item/ammo_magazine/flamer_tank/large/stationary
+	name = "M255 large incinerator tank"
+
+	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
+
+/obj/item/ammo_magazine/flamer_tank/large/EX/stationary
+	name = "M255 large incinerator tank (EX)"
+
+	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf

@@ -2170,8 +2170,14 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 
 /obj/item/weapon/gun/proc/stop_fire()
 	SIGNAL_HANDLER
+/* RUCM CHANGE
 	if(!target || (gun_user.get_active_hand() != src))
 		return
+*/
+//RUCM START
+	if(!target || ((gun_user.get_active_hand() != src) && !(flags_mounted_gun_features & GUN_MOUNTING)))
+		return
+//RUCM END
 
 	if(gun_firemode == GUN_FIREMODE_AUTOMATIC)
 		reset_fire()
