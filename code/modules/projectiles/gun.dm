@@ -1282,7 +1282,7 @@ and you're good to go.
 	if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
 */
 //RUCM START
-	if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)) && !(flags_mounted_gun_features & GUN_MOUNTED))
+	if((loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED))) && !(flags_mounted_gun_features & GUN_MOUNTED))
 //RUCM END
 		return TRUE
 

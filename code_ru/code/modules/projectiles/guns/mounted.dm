@@ -12,7 +12,7 @@
 	var/mounted_state = "mounted"
 
 	w_class = SIZE_HUGE
-	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
 
@@ -71,7 +71,7 @@
 	var/iff_enabled = TRUE //Begin with the safety on.
 
 	current_mag = /obj/item/ammo_magazine/m56d
-	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 
 	build_in_zoom = TRUE
@@ -105,7 +105,7 @@
 	preload = /obj/item/explosive/grenade/incendiary/airburst
 
 	w_class = SIZE_HUGE
-	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER|GUN_RECOIL_BUILDUP
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_RECOIL_BUILDUP
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
 
@@ -168,9 +168,11 @@
 	var/mounted_state = "mounted"
 
 	w_class = SIZE_HUGE
-	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
+
+	skill_locked = FALSE
 
 	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL

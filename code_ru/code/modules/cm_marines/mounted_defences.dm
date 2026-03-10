@@ -501,7 +501,6 @@
 // WEAPONS													//
 //////////////////////////////////////////////////////////////
 
-//First thing we need is the ammo drum for this thing.
 /obj/item/ammo_magazine/m56d
 	name = "M56D drum magazine (10x28mm Caseless)"
 	desc = "A box of 700, 10x28mm caseless tungsten rounds for the M56D heavy machine gun system. Just click the M56D with this to reload it."
@@ -528,8 +527,6 @@
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
 	new /obj/item/ammo_magazine/m56d(src) //ammo for the gun
 	new /obj/item/ammo_magazine/m56d(src)
-	new /obj/item/tool/wrench(src)
-	new /obj/item/tool/screwdriver(src)
 
 
 //////////////////////////////////////////////////////////////
@@ -549,13 +546,10 @@
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
 	new /obj/item/explosive/grenade/incendiary/airburst(src) //ammo for the gun
 	new /obj/item/explosive/grenade/incendiary/airburst(src)
-	new /obj/item/tool/wrench(src)
-	new /obj/item/tool/screwdriver(src)
 
 
 //////////////////////////////////////////////////////////////
 
-//Now we need a box for this.
 /obj/item/storage/box/rct
 	name = "\improper RCT Assembly-Supply Crate"
 	desc = "A large case labelled 'RCT, heavy grenade launcher', seems to be fairly heavy to hold. Contains stationary rocket launcher, can be used with all types rockets. likely to destroy enemy heavy machines."
@@ -570,5 +564,3 @@
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
 	new /obj/item/ammo_magazine/rocket/ap(src) //ammo for the gun
 	new /obj/item/ammo_magazine/rocket/ap(src)
-	new /obj/item/tool/wrench(src)
-	new /obj/item/tool/screwdriver(src)
