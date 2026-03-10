@@ -16,8 +16,10 @@
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
 
-	var/build_in_zoom = FALSE
+	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
+
+	var/build_in_zoom = FALSE
 
 /obj/item/weapon/gun/mounted/set_gun_config_values()
 	..()
@@ -107,6 +109,7 @@
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
 
+	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
 
 	var/build_in_zoom = FALSE
@@ -169,6 +172,7 @@
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
 	gun_category = GUN_CATEGORY_MOUNTED
 
+	lineart_ru = TRUE
 	mounted_class = GUN_MOUNT_SMALL
 
 	var/build_in_zoom = FALSE
