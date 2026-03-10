@@ -63,7 +63,12 @@
 		. += "It's not loaded."
 		return
 	if(current_mag.current_rounds > 0)
+/* RUCM CHANGE
 		. += "It has an 84mm [ammo.name] loaded."
+*/
+//RUCM START
+		. += "It has an [current_mag] loaded."
+//RUCM END
 
 
 /obj/item/weapon/gun/launcher/rocket/able_to_fire(mob/living/user)

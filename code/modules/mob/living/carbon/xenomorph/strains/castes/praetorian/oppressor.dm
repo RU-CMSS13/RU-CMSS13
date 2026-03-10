@@ -146,6 +146,11 @@
 				else if(cade_facing == facing)
 					allow_one_more_step = TRUE
 				continue
+//RUCM START
+			if(istype(structure, /obj/vehicle/walker))
+				allow_one_more_step = TRUE
+				continue
+//RUCM END
 			if(structure.pass_flags.flags_can_pass_all & PASS_HIGH_OVER)
 				continue
 			blocked = TRUE
@@ -196,6 +201,14 @@
 
 	var/list/targets = list()
 	for(var/turf/target_turf in turflist)
+//RUCM START
+		var/obj/vehicle/walker/mecha = locate() in target_turf
+		if(mecha)
+			var/obj/item/hardpoint/walker/attacked_hardpoint = mecha.hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+			if(!attacked_hardpoint?.can_take_damage() && mecha.seats[VEHICLE_DRIVER])
+				targets += mecha.seats[VEHICLE_DRIVER]
+				mecha.seats[VEHICLE_DRIVER].unset_interaction()
+//RUCM END
 		for(var/mob/living/carbon/target in target_turf)
 			if(!isxeno_human(target) || abduct_user.can_not_harm(target) || target.is_dead() || target.is_mob_incapacitated(TRUE) || target.mob_size >= MOB_SIZE_BIG)
 				continue
