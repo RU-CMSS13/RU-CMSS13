@@ -3,10 +3,10 @@
 //////////////////////////////////////////////////////////////
 
 /obj/structure/machinery/mounted_defence
-	name = "Стационарное Укрепление"
-	var/base_name = "Стационарное Укрепление"
-	desc = "Сюда нужно положить стационарное разобранное оружие, после чего его можно будет использовать."
-	icon = 'icons/obj/structures/barricades.dmi'
+	name = "Stationary Fortification"
+	var/base_name = "Stationary Fortification"
+	desc = "Stationary fortifications can be used to set up fire positions with heavy weapons."
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	icon_state = "small_place"
 	anchored = TRUE
 	unslashable = TRUE
@@ -99,13 +99,13 @@
 				if(istype(blocker, /obj/structure/machinery/defenses))
 					fail = TRUE
 					break
-				else if(istype(blocker, /obj/structure/window))
+				if(istype(blocker, /obj/structure/window))
 					fail = TRUE
 					break
-				else if(istype(blocker, /obj/structure/windoor_assembly))
+				if(istype(blocker, /obj/structure/windoor_assembly))
 					fail = TRUE
 					break
-				else if(istype(blocker, /obj/structure/machinery/door))
+				if(istype(blocker, /obj/structure/machinery/door))
 					fail = TRUE
 					break
 
@@ -131,31 +131,27 @@
 	else if(isgun(attacking_item))
 		var/obj/item/weapon/gun/operator_gun = attacking_item
 		if(operator_gun.mounted_class > mount_class)
-			to_chat(user, SPAN_WARNING("[mounted_gun] слишком большой для [src]."))
-			return
-
-		if(!mount_class)
-			to_chat(user, SPAN_WARNING("[mounted_gun] слишком большой для [src]."))
+			to_chat(user, SPAN_WARNING("[mounted_gun] too big for [src]."))
 			return
 
 		if(!anchored)
-			to_chat(user, SPAN_WARNING("[mounted_gun] нельзя закрепить на [src]."))
+			to_chat(user, SPAN_WARNING("At first need to anchor [src]."))
 			return
 
 		else if(!mounted_gun)
-			user.visible_message(SPAN_NOTICE("[user] начал вставлять [mounted_gun] в [src]."),
-			SPAN_NOTICE("Вы начали вставлять [operator_gun] в [src]."))
+			user.visible_message(SPAN_NOTICE("[user] start putting [mounted_gun] in [src]."),
+			SPAN_NOTICE("You start putting [operator_gun] in [src]."))
 			if(do_after(user, 100 * operator_gun.mounted_class * mount_class * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				if(user.drop_inv_item_to_loc(operator_gun, src))
 					mounted_gun = operator_gun
-					user.visible_message(SPAN_NOTICE("[user] вставил [mounted_gun] в [src]."),
-					SPAN_NOTICE("Вы вставляете [operator_gun] в [src]."))
+					user.visible_message(SPAN_NOTICE("[user] put [mounted_gun] in [src]."),
+					SPAN_NOTICE("You put [operator_gun] in [src]."))
 					mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
 					name = "[mounted_gun] installed on [base_name]"
 					update_icon()
 			return
 		else
-			to_chat(user, SPAN_WARNING("В [src] место занято, для замены надо в начале снять [mounted_gun]."))
+			to_chat(user, SPAN_WARNING("Place in [src] already taken."))
 
 	else if(HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
 		if(undestructible)
@@ -234,35 +230,33 @@
 	if(anchored && (over_object == user && (in_range(src, user) || locate(src) in user)))
 		if(user.interactee == src)
 			user.unset_interaction()
-			visible_message("[icon2html(src, viewers(src))] [SPAN_NOTICE("[user] решил дать кому-то другому попробывать.")]")
-			to_chat(usr, SPAN_NOTICE("Вы решили дать кому-то другому пострелять."))
 			return
+
 		if(operator)
 			if(operator.interactee == null)
 				operator = null
 			else
-				to_chat(user, "Кто-то уже за пушкой.")
+				to_chat(user, "Somebody already taken control of it.")
 				return
 		else
 			if(user.interactee)
-				to_chat(user, "Вы уже делаете что-то другое!")
+				to_chat(user, "You already busy.")
 				return
 			if(user.get_active_hand() != null)
-				to_chat(user, SPAN_WARNING("Вы должны быть с пустыми руками, чтобы управлять [src]."))
+				to_chat(user, SPAN_WARNING("You need free hand to control [src]."))
 			else
-				visible_message("[icon2html(src, viewers(src))] [SPAN_NOTICE("[user] mans the [mounted_gun]!")]")
-				to_chat(user, SPAN_NOTICE("Вы за орудием!"))
 				user.set_interaction(src)
 
 	else if(over_object == user && in_range(src, user) && !prebuild)
 		if(anchored)
-			to_chat(user, SPAN_WARNING("[src] не может быть снят, пока прекручен."))
+			to_chat(user, SPAN_WARNING("[src] can't be taken while anchored."))
 			return
 		if(mounted_gun)
-			to_chat(user, SPAN_WARNING("[src] не может быть снят, пока на нем закреплено орудие."))
+			to_chat(user, SPAN_WARNING("[src] can't be taken while holds [mounted_gun]."))
 			return
-		to_chat(user, SPAN_NOTICE("Вы сняли [src]."))
+		to_chat(user, SPAN_NOTICE("You taken [src]."))
 		var/obj/item/device/mounted_defence/tripod/mount = new(loc)
+		transfer_label_component(mount)
 		user.put_in_hands(mount)
 		qdel(src)
 
@@ -360,8 +354,8 @@
 	if(islarva(xeno))
 		return
 
-	xeno.visible_message(SPAN_DANGER("[xeno] ударил [src]!"),
-	SPAN_DANGER("Вы бьете [src]!"))
+	xeno.visible_message(SPAN_DANGER("[xeno] hits [src]!"),
+	SPAN_DANGER("You hit [src]!"))
 	xeno.animation_attack_on(src)
 	xeno.flick_attack_overlay(src, "slash")
 	playsound(loc, "alien_claw_metal", 25)
@@ -379,11 +373,11 @@
 /obj/structure/machinery/mounted_defence/get_examine_text(mob/user)
 	. = ..()
 	if(mounted_gun)
-		. += "Установлено [mounted_gun], [mounted_gun.desc].<br>"
+		. += "Installed [mounted_gun], [mounted_gun.desc].<br>"
 	else if(!anchored)
-		. += "Оно должно быть <B>прикручено</b>.<br>"
+		. += "Need to be <B>bolted</b>.<br>"
 	else
-		. += "Ничего не установлено.<br>"
+		. += "Empty.<br>"
 
 /obj/structure/machinery/mounted_defence/proc/handle_outside_cone(mob/living/carbon/human/user)
 	return FALSE
@@ -394,24 +388,14 @@
 	if(mods["ctrl"])
 		if(operator != user)
 			return
-		toggle_burst()
-		return 1
+
+		if(!mounted_gun)
+			return
+
+		mounted_gun.do_toggle_firemode(operator)
+		return TRUE
+
 	return ..()
-
-/obj/structure/machinery/mounted_defence/proc/toggle_burst()
-	if(!mounted_gun) return
-
-	if(!(mounted_gun.gun_firemode_list & GUN_FIREMODE_AUTOMATIC))
-		to_chat(usr, SPAN_WARNING("Это оружие не имеет режима стрельбы очередями!"))
-		return
-
-	if(mounted_gun.flags_gun_features & GUN_BURST_FIRING)//can't toggle mid burst
-		return
-
-	playsound(usr, 'sound/weapons/handling/gun_burst_toggle.ogg', 15, 1)
-
-	mounted_gun.do_toggle_firemode(src, null, GUN_FIREMODE_BURSTFIRE)
-	to_chat(usr, SPAN_NOTICE("[icon2html(src, usr)] Вы [mounted_gun.gun_firemode == GUN_FIREMODE_BURSTFIRE ? "<B>включили</b>" : "<B>выключили</b>"] [src] режим стрельбы очередями."))
 
 
 //////////////////////////////////////////////////////////////
@@ -421,9 +405,9 @@
 	mount_class = GUN_MOUNT_SMALL
 
 /obj/structure/machinery/mounted_defence/tier_one/tripod
-	name = "Триног"
-	base_name = "Триног"
-	desc = "Триног на который можно установить стационарное легкое вооружение."
+	name = "Tripod"
+	base_name = "Tripod"
+	desc = "Tripod for light weight stationary weapons."
 	icon_state = "tripod"
 	anchored = FALSE
 	density = TRUE
@@ -434,13 +418,13 @@
 
 
 /obj/item/device/mounted_defence
-	icon = 'icons/obj/structures/barricades.dmi'
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	unacidable = TRUE
 	w_class = SIZE_MEDIUM
 
 /obj/item/device/mounted_defence/tripod_frame
-	name = "Заготовка Тринога"
-	desc = "Почти готовый триног, который надо <B>сварить</b>."
+	name = "Premade for Tripod"
+	desc = "You need to <B>weld</b> Tripod."
 	icon_state = "folded_tripod_frame"
 
 /obj/item/device/mounted_defence/tripod_frame/attackby(obj/item/attacking_item as obj, mob/user as mob)
@@ -451,6 +435,7 @@
 
 		var/obj/item/device/mounted_defence/tripod/tripod = new(user.loc)
 		to_chat(user, SPAN_NOTICE("You welded [src] in [tripod]."))
+		transfer_label_component(tripod)
 		qdel(src)
 		user.put_in_hands(tripod)
 		return
@@ -458,8 +443,8 @@
 	return ..()
 
 /obj/item/device/mounted_defence/tripod
-	name = "Триног"
-	desc = "Триног на который можно установить стационарное легкое вооружение."
+	name = "Tripod"
+	desc = "Tripod Tripod for light weight stationary weapons."
 	icon_state = "folded_tripod"
 
 /obj/item/device/mounted_defence/tripod/attack_self(mob/user)
@@ -481,8 +466,8 @@
 	anchored = TRUE
 
 /obj/structure/machinery/mounted_defence/tier_one/tripod/prebuild/mg_turret
-	name = "Нест"
-	desc = "Нест на который можно установить стационарное легкое вооружение"
+	name = "Nest"
+	desc = "Nest for light weight stationary weapons."
 	icon_state = "small_place_sand"
 	projectile_coverage = PROJECTILE_COVERAGE_HIGH
 	parrent_type_gun = /obj/item/weapon/gun/mounted/m56d_gun
@@ -493,8 +478,8 @@
 //////////////////////////////////////////////////////////////
 
 /obj/structure/machinery/mounted_defence/tier_two
-	name = "Среднее Укрепление"
-	desc = "Используется для размещения среднего стационарного вооружения."
+	name = "Medium Fortification"
+	desc = "Stationary fortifications for medium stationary weapons."
 	icon_state = "medium_place"
 	mount_class = GUN_MOUNT_MEDIUM
 	projectile_coverage = PROJECTILE_COVERAGE_MEDIUM
@@ -505,8 +490,8 @@
 //////////////////////////////////////////////////////////////
 
 /obj/structure/machinery/mounted_defence/tier_three
-	name = "Дот"
-	desc = "Специальная огневая позиция для тяжелого стационарного вооружения."
+	name = "Dot Fortification"
+	desc = "Special firing postion for big stationary weapons."
 	icon_state = "high_place"
 	mount_class = GUN_MOUNT_BIG
 	projectile_coverage = PROJECTILE_COVERAGE_HIGH
@@ -532,7 +517,7 @@
 /obj/item/storage/box/m56d_hmg
 	name = "\improper M56D crate"
 	desc = "A large metal case with Japanese writing on the top. However it also comes with English text to the side. This is a M56D heavy machine gun, it clearly has various labeled warnings. The most major one is that this does not have IFF features due to specialized ammo."
-	icon = 'icons/obj/structures/barricades.dmi'
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	icon_state = "M56D_case" // I guess a placeholder? Not actually going to show up ingame for now.
 	w_class = SIZE_HUGE
 	storage_slots = 5
@@ -552,7 +537,7 @@
 /obj/item/storage/box/sgl2
 	name = "\improper SGL2 Assembly-Supply Crate"
 	desc = "A large case labelled 'SGL2, heavy grenade launcher', seems to be fairly heavy to hold. Contains a deadly SGL2 Heavy Grenade Launching System and its ammunition."
-	icon = 'icons/obj/structures/barricades.dmi'
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	icon_state = "SGL2_case"
 	w_class = SIZE_HUGE
 	storage_slots = 5
@@ -574,7 +559,7 @@
 /obj/item/storage/box/rct
 	name = "\improper RCT Assembly-Supply Crate"
 	desc = "A large case labelled 'RCT, heavy grenade launcher', seems to be fairly heavy to hold. Contains stationary rocket launcher, can be used with all types rockets. likely to destroy enemy heavy machines."
-	icon = 'icons/obj/structures/barricades.dmi'
+	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
 	icon_state = "RCT_case" // I guess a placeholder? Not actually going to show up ingame for now.
 	w_class = SIZE_HUGE
 	storage_slots = 5
