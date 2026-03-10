@@ -55,7 +55,8 @@
 		update_icon()
 
 /obj/structure/machinery/mounted_defence/Destroy()
-	mounted_gun.owner = null
+	if(mounted_gun)
+		mounted_gun.owner = null
 	mounted_gun = null
 	QDEL_NULL_LIST(cadeblockers)
 	return ..()
@@ -518,6 +519,7 @@
 	new /obj/item/device/mounted_defence/tripod(src)
 	new /obj/item/ammo_magazine/m56d2(src)
 	new /obj/item/ammo_magazine/m56d2(src)
+	new /obj/item/storage/belt/marine/mounted(src)
 
 /obj/item/ammo_magazine/m56d2
 	name = "M56D2 drum magazine (10x28mm Caseless)"
@@ -563,6 +565,7 @@
 	new /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun(src)
 	new /obj/item/device/mounted_defence/tripod(src)
 	new /obj/item/storage/box/nade_box/airburstincen(src)
+	new /obj/item/storage/belt/marine/mounted(src)
 
 
 //////////////////////////////////////////////////////////////
@@ -583,6 +586,7 @@
 	new /obj/item/ammo_magazine/rocket/stationary(src)
 	new /obj/item/ammo_magazine/rocket/ap/stationary(src)
 	new /obj/item/ammo_magazine/rocket/wp/stationary(src)
+	new /obj/item/storage/belt/marine/mounted(src)
 
 /obj/item/ammo_magazine/rocket/stationary
 	name = "\improper 100mm high explosive rocket"
@@ -614,6 +618,7 @@
 /datum/ammo/rocket/wp/stationary
 	max_range = 15
 
+
 //////////////////////////////////////////////////////////////
 
 /obj/item/storage/box/sagf
@@ -631,6 +636,7 @@
 	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
 	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
 	new /obj/item/ammo_magazine/flamer_tank/large/EX/stationary(src)
+	new /obj/item/storage/belt/marine/mounted(src)
 
 /obj/item/ammo_magazine/flamer_tank/large/stationary
 	name = "M255 large incinerator tank"
@@ -647,3 +653,46 @@
 	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
 
 	max_range = 13
+
+
+//////////////////////////////////////////////////////////////
+
+/obj/item/storage/belt/marine/mounted
+	name = "\improper M1000 heavygunner storage rig"
+	desc = "The M1000 heavygunner storage rig is an M276 pattern toolbelt rig modified to carry ammunition for heavy stationary systems, and engineering tools for the gunner."
+
+	icon_state = "m2c_ammo_rig"
+	item_state = "m2c_ammo_rig"
+	icon = 'icons/obj/items/clothing/belts/belts.dmi'
+	item_icons = list(
+		WEAR_WAIST = 'icons/mob/humans/onmob/clothing/belts/belts.dmi',
+		WEAR_L_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/snow_lefthand.dmi',
+		WEAR_R_HAND = 'icons/mob/humans/onmob/inhands/items_by_map/snow_righthand.dmi'
+	)
+	item_state_slots = list(
+		WEAR_L_HAND = "marinebelt",
+		WEAR_R_HAND = "marinebelt"
+	)
+
+	storage_slots = 14
+	max_w_class = SIZE_LARGE
+	max_storage_space = 30
+
+	can_hold = list(
+		/obj/item/tool/weldingtool,
+		/obj/item/tool/wrench,
+		/obj/item/tool/screwdriver,
+		/obj/item/tool/crowbar,
+		/obj/item/tool/extinguisher/mini,
+		/obj/item/explosive/plastic,
+		/obj/item/explosive/mine,
+		/obj/item/ammo_magazine/m56d2,
+		/obj/item/explosive/grenade,
+		/obj/item/storage/box/nade_box,
+		/obj/item/ammo_magazine/rocket/stationary,
+		/obj/item/ammo_magazine/rocket/ap/stationary,
+		/obj/item/ammo_magazine/rocket/wp/stationary,
+		/obj/item/ammo_magazine/flamer_tank/large/stationary,
+		/obj/item/ammo_magazine/flamer_tank/large/EX/stationary,
+	)
+	flags_atom = FPRINT|NO_GAMEMODE_SKIN

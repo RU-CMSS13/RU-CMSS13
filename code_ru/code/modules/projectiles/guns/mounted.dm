@@ -44,7 +44,8 @@
 		owner.update_icon()
 
 /obj/item/weapon/gun/mounted/Destroy()
-	owner.mounted_gun = null
+	if(owner)
+		owner.mounted_gun = null
 	owner = null
 	return ..()
 
@@ -156,7 +157,8 @@
 		owner.update_icon()
 
 /obj/item/weapon/gun/launcher/grenade/mounted/Destroy()
-	owner.mounted_gun = null
+	if(owner)
+		owner.mounted_gun = null
 	owner = null
 	return ..()
 
@@ -236,7 +238,8 @@
 		owner.update_icon()
 
 /obj/item/weapon/gun/launcher/rocket/mounted/Destroy()
-	owner.mounted_gun = null
+	if(owner)
+		owner.mounted_gun = null
 	owner = null
 	return ..()
 
@@ -345,7 +348,8 @@
 		owner.update_icon()
 
 /obj/item/weapon/gun/flamer/mounted/Destroy()
-	owner.mounted_gun = null
+	if(owner)
+		owner.mounted_gun = null
 	owner = null
 	return ..()
 
