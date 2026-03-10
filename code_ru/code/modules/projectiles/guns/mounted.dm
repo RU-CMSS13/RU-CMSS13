@@ -6,18 +6,18 @@
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "mounted"
-	item_state = "mounted"
+	icon_state = "holder"
+	item_state = "holder"
 
 	item_icons = list(
-		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_BACK = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
 		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
 	)
 
-	var/base_mounted_state = "mounted"
-	var/mounted_state = "mounted"
+	var/base_mounted_state = "holder"
+	var/mounted_state = "holder"
 
 	current_mag = null
 
@@ -68,7 +68,7 @@
 	fire_sound = 'sound/weapons/gun_rifle.ogg'
 	var/iff_enabled = TRUE //Begin with the safety on.
 
-	current_mag = /obj/item/ammo_magazine/m56d
+	current_mag = /obj/item/ammo_magazine/m56d2
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
@@ -113,18 +113,18 @@
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "mounted"
-	item_state = "mounted"
+	icon_state = "holder"
+	item_state = "holder"
 
 	item_icons = list(
-		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_BACK = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
 		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
 	)
 
-	var/base_mounted_state = "mounted"
-	var/mounted_state = "mounted"
+	var/base_mounted_state = "holder"
+	var/mounted_state = "holder"
 
 	preload = /obj/item/explosive/grenade/incendiary/airburst
 
@@ -197,22 +197,22 @@
 // ROCKET LAUNCHERS											//
 //////////////////////////////////////////////////////////////
 
-/obj/item/weapon/gun/launcher/rocket/mounted
+/obj/item/weapon/gun/launcher/rocket/brute/mounted
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "mounted"
-	item_state = "mounted"
+	icon_state = "holder"
+	item_state = "holder"
 
 	item_icons = list(
-		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_BACK = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
 		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
 	)
 
-	var/base_mounted_state = "mounted"
-	var/mounted_state = "mounted"
+	var/base_mounted_state = "holder"
+	var/mounted_state = "holder"
 
 	current_mag = null
 
@@ -228,7 +228,7 @@
 
 	var/build_in_zoom = 0
 
-/obj/item/weapon/gun/launcher/rocket/mounted/update_icon()
+/obj/item/weapon/gun/launcher/rocket/brute/mounted/update_icon()
 	if(overlays)
 		overlays.Cut()
 	else
@@ -253,7 +253,7 @@
 	update_mag_overlay()
 	update_attachables()
 
-/obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+/obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
 	name = "RCT Stationary Rocket Launcher"
 	desc = "RCT Stationary Rocket Launcher, can load all USCM rocket types, expanded range fire and special fragmentation rockets ammo."
 	icon_state = "RCT_gun"
@@ -275,20 +275,20 @@
 	name = "Stationar Weapon"
 	desc = "Installing on tripod."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "mounted"
-	item_state = "mounted"
+	icon_state = "holder"
+	item_state = "holder"
 
 	item_icons = list(
-		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
+		WEAR_BACK = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/mounted.dmi',
 		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
 	)
 
-	var/base_mounted_state = "mounted"
-	var/mounted_state = "mounted"
+	var/base_mounted_state = "holder"
+	var/mounted_state = "holder"
 
-	current_mag = /obj/item/ammo_magazine/flamer_tank
+	current_mag = null
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY

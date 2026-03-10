@@ -4,16 +4,19 @@
 
 /obj/structure/machinery/mounted_defence
 	name = "Stationary Fortification"
-	var/base_name = "Stationary Fortification"
 	desc = "Stationary fortifications can be used to set up fire positions with heavy weapons."
+
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "small_place"
+	icon_state = null
+
 	anchored = TRUE
 	unslashable = TRUE
 	unacidable = TRUE
 	density = TRUE
 	layer = ABOVE_MOB_LAYER
 	use_power = FALSE
+
+	var/base_name = "Stationary Fortification"
 
 	var/prebuild = FALSE
 	var/parrent_type_gun = null
@@ -477,7 +480,6 @@
 /obj/structure/machinery/mounted_defence/tier_two
 	name = "Medium Fortification"
 	desc = "Stationary fortifications for medium stationary weapons."
-	icon_state = "medium_place"
 	mount_class = GUN_MOUNT_MEDIUM
 	projectile_coverage = PROJECTILE_COVERAGE_MEDIUM
 
@@ -489,7 +491,6 @@
 /obj/structure/machinery/mounted_defence/tier_three
 	name = "Dot Fortification"
 	desc = "Special firing postion for big stationary weapons."
-	icon_state = "high_place"
 	mount_class = GUN_MOUNT_BIG
 	projectile_coverage = PROJECTILE_COVERAGE_HIGH
 
@@ -510,15 +511,19 @@
 	. = ..()
 	new /obj/item/weapon/gun/mounted/m56d2_gun(src)
 	new /obj/item/device/mounted_defence/tripod(src)
-	new /obj/item/ammo_magazine/m56d(src)
-	new /obj/item/ammo_magazine/m56d(src)
+	new /obj/item/ammo_magazine/m56d2(src)
+	new /obj/item/ammo_magazine/m56d2(src)
 
 /obj/item/ammo_magazine/m56d2
 	name = "M56D2 drum magazine (10x28mm Caseless)"
-	desc = "A box of 700, 10x28mm caseless tungsten rounds for the M56D2 heavy machine gun system. Just click the M56D2 with this to reload it."
-	w_class = SIZE_MEDIUM
+	desc = "A box of 700, 10x28mm caseless tungsten rounds for the M56D2 heavy machine gun system."
+
+	icon = 'icons/obj/items/weapons/guns/ammo_by_faction/USCM/machineguns.dmi'
 	icon_state = "m56d_drum"
+
+	w_class = SIZE_MEDIUM
 	flags_magazine = NO_FLAGS //can't be refilled or emptied by hand
+
 	caliber = "10x28mm"
 	max_rounds = 700
 	default_ammo = /datum/ammo/bullet/smartgun
@@ -555,7 +560,7 @@
 
 /obj/item/storage/box/rct/Initialize()
 	. = ..()
-	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src)
+	new /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun(src)
 	new /obj/item/device/mounted_defence/tripod(src)
 	new /obj/item/ammo_magazine/rocket/stationary(src)
 	new /obj/item/ammo_magazine/rocket/stationary(src)
@@ -567,7 +572,7 @@
 	desc = "A rocket tube loaded with a high-explosive warhead. Deals high damage to soft targets on direct hit and stuns most targets in a 5-meter-wide area for a short time. Has decreased effect on heavily armored targets."
 
 	default_ammo = /datum/ammo/rocket/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
 
 /datum/ammo/rocket/stationary
 	max_range = 12
@@ -577,7 +582,7 @@
 	desc = "A rocket tube loaded with an armor-piercing warhead. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters."
 
 	default_ammo = /datum/ammo/rocket/ap/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
 
 /datum/ammo/rocket/ap/stationary
 	max_range = 14
@@ -587,7 +592,7 @@
 	desc = "A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area."
 
 	default_ammo = /datum/ammo/rocket/wp/stationary
-	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+	gun_type = /obj/item/weapon/gun/launcher/rocket/brute/mounted/rct_gun
 
 /datum/ammo/rocket/wp/stationary
 	max_range = 14
@@ -598,13 +603,13 @@
 	name = "\improper SAGF Assembly-Supply Crate"
 	desc = "A large case labelled 'SAGF, heavy flamer', seems to be fairly heavy to hold. Contains stationary flamethrower, can be used with special fuel."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
-	icon_state = "RCT_case"
+	icon_state = "SAGF_case"
 	w_class = SIZE_HUGE
 	storage_slots = 5
 
 /obj/item/storage/box/sagf/Initialize()
 	. = ..()
-	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src)
+	new /obj/item/weapon/gun/flamer/mounted/sagf(src)
 	new /obj/item/device/mounted_defence/tripod(src)
 	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
 	new /obj/item/ammo_magazine/flamer_tank/large/stationary(src)
@@ -613,9 +618,11 @@
 /obj/item/ammo_magazine/flamer_tank/large/stationary
 	name = "M255 large incinerator tank"
 
+	stripe_icon = null
 	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
 
 /obj/item/ammo_magazine/flamer_tank/large/EX/stationary
 	name = "M255 large incinerator tank (EX)"
 
+	stripe_icon = null
 	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
