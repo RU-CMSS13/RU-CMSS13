@@ -138,7 +138,7 @@
 			to_chat(user, SPAN_WARNING("At first need to anchor [src]."))
 			return
 
-		else if(!mounted_gun)
+		if(!mounted_gun)
 			user.visible_message(SPAN_NOTICE("[user] start putting [mounted_gun] in [src]."),
 			SPAN_NOTICE("You start putting [operator_gun] in [src]."))
 			if(do_after(user, 100 * operator_gun.mounted_class * mount_class * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
@@ -149,9 +149,9 @@
 					mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
 					name = "[mounted_gun] installed on [base_name]"
 					update_icon()
-			return
 		else
 			to_chat(user, SPAN_WARNING("Place in [src] already taken."))
+		return
 
 	else if(HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
 		if(undestructible)
@@ -379,13 +379,16 @@
 	else
 		. += "Empty.<br>"
 
+	if(mounted_gun)
+		. += mounted_gun.get_examine_text(user)
+
 /obj/structure/machinery/mounted_defence/proc/handle_outside_cone(mob/living/carbon/human/user)
 	return FALSE
 
 /obj/structure/machinery/mounted_defence/clicked(mob/user, list/mods)
 	if(isobserver(user)) return
 
-	if(mods["ctrl"])
+	if(mods[CTRL_CLICK])
 		if(operator != user)
 			return
 
@@ -393,6 +396,13 @@
 			return
 
 		mounted_gun.do_toggle_firemode(operator)
+		return TRUE
+
+	if(mods[ALT_CLICK])
+		if(!mounted_gun)
+			return
+
+		mounted_gun.unload(user)
 		return TRUE
 
 	return ..()
@@ -513,7 +523,7 @@
 	gun_type = /obj/item/weapon/gun/mounted/m56d_gun
 
 //Now we need a box for this.
-/obj/item/storage/box/m56d_hmg
+/obj/item/storage/box/stationary_m56d_hmg
 	name = "\improper M56D crate"
 	desc = "A large metal case with Japanese writing on the top. However it also comes with English text to the side. This is a M56D heavy machine gun, it clearly has various labeled warnings. The most major one is that this does not have IFF features due to specialized ammo."
 	icon = 'code_ru/icons/obj/structures/mounted_defenses.dmi'
@@ -521,7 +531,7 @@
 	w_class = SIZE_HUGE
 	storage_slots = 5
 
-/obj/item/storage/box/m56d_hmg/Initialize()
+/obj/item/storage/box/stationary_m56d_hmg/Initialize()
 	. = ..()
 	new /obj/item/weapon/gun/mounted/m56d_gun(src) //gun itself
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
@@ -544,8 +554,7 @@
 
 	new /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun(src) //gun itself
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
-	new /obj/item/explosive/grenade/incendiary/airburst(src) //ammo for the gun
-	new /obj/item/explosive/grenade/incendiary/airburst(src)
+	new /obj/item/storage/box/nade_box/airburstincen(src) //ammo for the gun
 
 
 //////////////////////////////////////////////////////////////
@@ -562,5 +571,25 @@
 	. = ..()
 	new /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun(src) //gun itself
 	new /obj/item/device/mounted_defence/tripod_frame(src) //tripod
-	new /obj/item/ammo_magazine/rocket/ap(src) //ammo for the gun
-	new /obj/item/ammo_magazine/rocket/ap(src)
+	new /obj/item/ammo_magazine/rocket/stationary(src) //ammo for the gun
+	new /obj/item/ammo_magazine/rocket/stationary(src)
+	new /obj/item/ammo_magazine/rocket/ap/stationary(src)
+	new /obj/item/ammo_magazine/rocket/wp/stationary(src)
+
+/obj/item/ammo_magazine/rocket/stationary
+	name = "\improper 100mm high explosive rocket"
+	desc = "A rocket tube loaded with a high-explosive warhead. Deals high damage to soft targets on direct hit and stuns most targets in a 5-meter-wide area for a short time. Has decreased effect on heavily armored targets."
+
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+
+/obj/item/ammo_magazine/rocket/ap/stationary
+	name = "\improper 100mm anti-armor rocket"
+	desc = "A rocket tube loaded with an armor-piercing warhead. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters."
+
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
+
+/obj/item/ammo_magazine/rocket/wp/stationary
+	name = "\improper 100mm white-phosphorus rocket"
+	desc = "A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area."
+
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun

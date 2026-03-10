@@ -21,18 +21,6 @@
 
 	var/build_in_zoom = FALSE
 
-/obj/item/weapon/gun/mounted/set_gun_config_values()
-	..()
-	fire_delay = FIRE_DELAY_TIER_7
-	burst_amount = BURST_AMOUNT_TIER_5
-	burst_delay = FIRE_DELAY_TIER_9
-	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
-	accuracy_mult_unwielded = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
-	scatter = SCATTER_AMOUNT_TIER_7
-	scatter_unwielded = SCATTER_AMOUNT_TIER_7
-	damage_mult = BASE_BULLET_DAMAGE_MULT
-	recoil_unwielded = RECOIL_AMOUNT_TIER_5
-
 /obj/item/weapon/gun/mounted/update_icon()
 	if(overlays)
 		overlays.Cut()
@@ -73,8 +61,23 @@
 	current_mag = /obj/item/ammo_magazine/m56d
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_CAN_OVERRIDE_MOUNTED
+	start_automatic = TRUE
+	start_semiauto = FALSE
 
 	build_in_zoom = TRUE
+
+/obj/item/weapon/gun/mounted/set_gun_config_values()
+	..()
+	set_fire_delay(FIRE_DELAY_TIER_LMG)
+	burst_amount = BURST_AMOUNT_TIER_5
+	burst_delay = FIRE_DELAY_TIER_9
+	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
+	accuracy_mult_unwielded = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
+	scatter = SCATTER_AMOUNT_TIER_7
+	scatter_unwielded = SCATTER_AMOUNT_TIER_7
+	damage_mult = BASE_BULLET_DAMAGE_MULT
+	recoil_unwielded = RECOIL_AMOUNT_TIER_5
+	burst_scatter_mult = 0
 
 /obj/item/weapon/gun/mounted/m56d_gun/set_bullet_traits()
 	LAZYADD(traits_to_give, list(
@@ -113,6 +116,17 @@
 	mounted_class = GUN_MOUNT_SMALL
 
 	var/build_in_zoom = FALSE
+
+// Official CMs shitcoded something, so yea, they work not the same like supposed, SHITCODE
+/obj/item/weapon/gun/launcher/grenade/mounted/handle_fire(atom/target, mob/living/user, params)
+	. = NONE
+	afterattack(target, user, params, TRUE)
+
+/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, flag, force = FALSE)
+	if(!force)
+		return
+	. = ..()
+// FUCK them ALIVE to DEATH
 
 /obj/item/weapon/gun/launcher/grenade/mounted/update_icon()
 	..()

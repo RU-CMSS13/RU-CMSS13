@@ -1396,7 +1396,15 @@ and you're good to go.
 
 	//>>POST PROCESSING AND CLEANUP BEGIN HERE.<<
 	var/angle = floor(Get_Angle(user,target)) //Let's do a muzzle flash.
+/* RUCM CHANGE
 	muzzle_flash(angle,user)
+*/
+//RUCM START
+	if(user == loc)
+		muzzle_flash(angle, user)
+	else
+		muzzle_flash(angle, src)
+//RUCM END
 
 	//This is where we load the next bullet in the chamber. We check for attachments too, since we don't want to load anything if an attachment is active.
 	if(!check_for_attachment_fire && !reload_into_chamber(user)) // It has to return a bullet, otherwise it's empty. Unless it's an undershotgun.
