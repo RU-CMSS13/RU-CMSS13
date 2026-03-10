@@ -10,7 +10,14 @@ GLOBAL_LIST_INIT(cm_vending_gear_engi, list(
 		list("UA 42-F Sentry Flamer", 0, /obj/item/defenses/handheld/sentry/flamer, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_MANDATORY),
 		list("UA 571-C Sentry Gun", 0, /obj/item/defenses/handheld/sentry, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_MANDATORY),
 		list("M6H-BRUTE Breaching Launcher",0, /obj/item/storage/belt/gun/brutepack/full, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_MANDATORY),
+//RUCM START
+		list("RCT Heavy Stationar Rocket Launcher", 0, /obj/item/storage/box/sgl2, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_MANDATORY),
+		list("SGL2 Heavy Stationar Grenade Launcher", 0, /obj/item/storage/box/rct, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_MANDATORY),
+//RUCM END
 		list("Sentry Upgrade kit", 15, /obj/item/engi_upgrade_kit, null, VENDOR_ITEM_REGULAR),
+//RUCM START
+		list("M56D2 Heavy Stationar Machinegun", 15, /obj/item/storage/box/stationary_m56d2_hmg, null, VENDOR_ITEM_REGULAR),
+//RUCM END
 
 
 		list("ENGINEERING SUPPLIES", 0, null, null, null),

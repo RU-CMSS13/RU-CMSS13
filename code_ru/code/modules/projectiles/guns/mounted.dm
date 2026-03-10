@@ -43,6 +43,11 @@
 	if(owner)
 		owner.update_icon()
 
+/obj/item/weapon/gun/mounted/Destroy()
+	owner.mounted_gun = null
+	owner = null
+	return ..()
+
 /obj/item/weapon/gun/mounted/m56d2_gun
 	name = "M56D2 Stationary Heavy Machinegun"
 	desc = "M56D2 Stationary Heavy Machinegun, with IFF system, can installed on tripod."
@@ -66,7 +71,7 @@
 
 /obj/item/weapon/gun/mounted/m56d2_gun/set_gun_config_values()
 	..()
-	set_fire_delay(FIRE_DELAY_TIER_LMG)
+	set_fire_delay(FIRE_DELAY_TIER_SMG)
 	burst_amount = BURST_AMOUNT_TIER_5
 	burst_delay = FIRE_DELAY_TIER_9
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
@@ -131,7 +136,7 @@
 	. = NONE
 	afterattack(target, user, params, TRUE)
 
-/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, flag, force = FALSE)
+/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, click_parameters, force = FALSE)
 	if(!force)
 		return
 	. = ..()
@@ -149,6 +154,11 @@
 
 	if(owner)
 		owner.update_icon()
+
+/obj/item/weapon/gun/launcher/grenade/mounted/Destroy()
+	owner.mounted_gun = null
+	owner = null
+	return ..()
 
 /obj/item/weapon/gun/launcher/grenade/mounted/sgl2_gun
 	name = "SGL2 Stationary Heavy Grenadelauncher"
@@ -224,6 +234,11 @@
 
 	if(owner)
 		owner.update_icon()
+
+/obj/item/weapon/gun/launcher/rocket/mounted/Destroy()
+	owner.mounted_gun = null
+	owner = null
+	return ..()
 
 /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 	name = "RCT Stationary Rocket Launcher"
@@ -328,6 +343,11 @@
 
 	if(owner)
 		owner.update_icon()
+
+/obj/item/weapon/gun/flamer/mounted/Destroy()
+	owner.mounted_gun = null
+	owner = null
+	return ..()
 
 /obj/item/weapon/gun/flamer/mounted/sagf
 	name = "SAGF Stationary Incinerator Unit"

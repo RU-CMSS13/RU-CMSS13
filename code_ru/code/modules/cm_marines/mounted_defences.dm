@@ -49,11 +49,14 @@
 
 	if(parrent_type_gun && prebuild)
 		mounted_gun = new parrent_type_gun(src)
+		mounted_gun.owner = src
 		mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
 		name = "[mounted_gun] installed on [base_name]"
 		update_icon()
 
 /obj/structure/machinery/mounted_defence/Destroy()
+	mounted_gun.owner = null
+	mounted_gun = null
 	QDEL_NULL_LIST(cadeblockers)
 	return ..()
 
@@ -123,6 +126,7 @@
 					return
 
 				mounted_gun = operator_gun
+				mounted_gun.owner = src
 				user.visible_message(SPAN_NOTICE("[user] put [mounted_gun] in [src]."),
 				SPAN_NOTICE("You put [operator_gun] in [src]."))
 				mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
@@ -154,6 +158,7 @@
 			mounted_gun.update_icon()
 			name = base_name
 			user.put_in_hands(mounted_gun)
+			mounted_gun.owner = null
 			mounted_gun = null
 			update_icon()
 		return
@@ -526,8 +531,20 @@
 
 	caliber = "10x28mm"
 	max_rounds = 700
-	default_ammo = /datum/ammo/bullet/smartgun
+	default_ammo = /datum/ammo/bullet/smartgun/stationary
 	gun_type = /obj/item/weapon/gun/mounted/m56d2_gun
+
+/datum/ammo/bullet/smartgun/stationary
+	name = "smartgun tracer bullet"
+	icon_state = "bullet_iff"
+	flags_ammo_behavior = AMMO_BALLISTIC
+
+	damage_falloff = DAMAGE_FALLOFF_TIER_9
+	max_range = 16
+	accuracy = HIT_ACCURACY_TIER_4
+	damage = 30
+	penetration = 0
+	effective_range_max = 4
 
 
 //////////////////////////////////////////////////////////////
@@ -595,7 +612,7 @@
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/rct_gun
 
 /datum/ammo/rocket/wp/stationary
-	max_range = 14
+	max_range = 15
 
 //////////////////////////////////////////////////////////////
 
@@ -621,8 +638,12 @@
 	stripe_icon = null
 	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
 
+	max_range = 10
+
 /obj/item/ammo_magazine/flamer_tank/large/EX/stationary
 	name = "M255 large incinerator tank (EX)"
 
 	stripe_icon = null
 	gun_type = /obj/item/weapon/gun/flamer/mounted/sagf
+
+	max_range = 13
