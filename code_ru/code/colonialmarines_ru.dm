@@ -1,6 +1,7 @@
 //RUCM CORE INCLUDES
 #include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
+#include "controllers\subsystem\tts.dm"
 #include "datums\ammo.dm"
 #include "datums\ammo\bullet\shotgun.dm"
 #include "datums\skills.dm"
