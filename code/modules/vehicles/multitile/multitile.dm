@@ -21,13 +21,17 @@
 
 	can_buckle = FALSE
 
+/* RUCM CHANGE
 	light_system = MOVABLE_LIGHT
+*/
 	light_range = 5
 
+/* RUCM CHANGE
 	var/atom/movable/vehicle_light_holder/lighting_holder
 
 	var/vehicle_light_range = 5
 	var/vehicle_light_power = 2
+*/
 
 	//Yay! Working cameras in the vehicles at last!!
 	var/obj/structure/machinery/camera/vehicle/camera = null
@@ -42,6 +46,7 @@
 	var/list/seat_verbs
 
 	move_delay = VEHICLE_SPEED_STATIC
+/* RUCM CHANGE
 	// The next world.time when the vehicle can move
 	var/next_move = 0
 	// How much momentum the vehicle has. Increases by 1 each move
@@ -54,11 +59,14 @@
 	// When the vehicle has 0 momentum, it's movement delay will be move_delay * momentum_build_factor
 	// The movement delay gradually reduces up to move_delay when momentum increases
 	var/move_momentum_build_factor = 1.3
+*/
 
 	//Sound to play when moving
 	var/movement_sound
+/* RUCM CHANGE
 	//Cooldown for next sound to play
 	var/move_next_sound_play = 0
+*/
 
 	//whether MP vehicle clamps are applied
 	var/clamped = FALSE
@@ -71,20 +79,24 @@
 	req_one_access = list() //List of accesses you need one of to enter
 	locked = TRUE //Whether we should skip access checking for entry
 
+/* RUCM CHANGE
 	// List of all hardpoints attached to the vehicle
 	var/list/hardpoints = list()
 	//List of all hardpoints you can attach to this vehicle
 	var/list/hardpoints_allowed = list()
+*/
 
 	var/mob_size_required_to_hit = MOB_SIZE_XENO_SMALL
 
 	//variable for various flags
 	var/vehicle_flags = VEHICLE_CLASS_WEAK
 
+/* RUCM CHANGE
 	// References to the active/chosen hardpoint for each seat
 	var/active_hp = list(
 		VEHICLE_DRIVER = null
 	)
+*/
 
 	// Map file name of the vehicle interior
 	var/interior_map = null
@@ -144,6 +156,7 @@
 	//Exits will be loaded by the interior manager and sorted by tag to match
 	var/list/entrances = list()
 
+/* RUCM CHANGE
 	var/list/misc_multipliers = list(
 		"move" = 1.0,
 		"accuracy" = 1.0,
@@ -159,6 +172,7 @@
 		"explosive" = 1.0,
 		"blunt" = 1.0,
 		"abstract" = 1.0) //abstract for when you just want to hurt it
+*/
 
 	// This is more important than you think.
 	// Explosive waves can propagate through the vehicle and hit it multiple times
@@ -168,7 +182,9 @@
 	icon = 'icons/obj/vehicles/vehicles.dmi'
 	icon_state = "cargo_engine"
 
+/* RUCM CHANGE
 	var/move_on_turn = FALSE
+*/
 	///Minimap flags to use for this vehicle
 	var/minimap_flags = MINIMAP_FLAG_USCM
 	///Minimap iconstate to use for this vehicle
@@ -181,6 +197,7 @@
 	rotate_entrances(angle_to_turn)
 	rotate_bounds(angle_to_turn)
 
+/* RUCM CHANGE
 	if(bound_width > world.icon_size || bound_height > world.icon_size)
 		lighting_holder = new(src)
 		lighting_holder.set_light_range(vehicle_light_range)
@@ -191,6 +208,7 @@
 
 	light_pixel_x = -bound_x
 	light_pixel_y = -bound_y
+*/
 
 	healthcheck()
 	update_icon()
@@ -219,7 +237,9 @@
 	if(!QDELETED(interior))
 		QDEL_NULL(interior)
 
+/* RUCM CHANGE
 	QDEL_NULL_LIST(hardpoints)
+*/
 
 	GLOB.all_multi_vehicles -= src
 
@@ -264,9 +284,11 @@
 //Normal examine() but tells the player what is installed and if it's broken
 /obj/vehicle/multitile/get_examine_text(mob/user)
 	. = ..()
+/* RUCM CHANGE
 	for(var/obj/item/hardpoint/H in hardpoints)
 		. += "There [H.p_are()] \a [H] module[H.p_s()] installed."
 		H.examine(user, TRUE)
+*/
 	if(clamped)
 		. += "There is a vehicle clamp attached."
 	if(isxeno(user) && interior)
@@ -322,12 +344,14 @@
 		return
 	return ..()
 
+/* RUCM CHANGE
 // Add/remove verbs that should be given when a mob sits down or unbuckles here
 /obj/vehicle/multitile/proc/add_seated_verbs(mob/living/M, seat)
 	return
 
 /obj/vehicle/multitile/proc/remove_seated_verbs(mob/living/M, seat)
 	return
+*/
 
 /obj/vehicle/multitile/set_seated_mob(seat, mob/living/M)
 	// Give/remove verbs
@@ -348,6 +372,7 @@
 	give_action(M, /datum/action/human_action/vehicle_unbuckle)
 	return TRUE
 
+/* RUCM CHANGE
 /// Get crewmember of seat.
 /obj/vehicle/multitile/proc/get_seat_mob(seat)
 	return seats[seat]
@@ -365,6 +390,7 @@
 	if(seat)
 		return active_hp[seat]
 	return null
+*/
 
 /obj/vehicle/multitile/proc/get_passengers()
 	if(interior)

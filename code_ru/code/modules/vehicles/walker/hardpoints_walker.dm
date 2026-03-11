@@ -1,7 +1,233 @@
-#define WALKER_HARDPOIN_LEFT "Left"
-#define WALKER_HARDPOIN_RIGHT "Right"
-#define WALKER_HARDPOIN_ARMOR "Armor"
-#define WALKER_HARDPOIN_BACK "Back"
+#define WALKER_HARDPOIN_LEFT_HAND "left_hand"
+#define WALKER_HARDPOIN_RIGHT_HAND "right_hand"
+#define WALKER_HARDPOIN_LEFT_LEG "left_leg"
+#define WALKER_HARDPOIN_RIGHT_LEG "right_leg"
+#define WALKER_HARDPOIN_ARMOR "armor"
+#define WALKER_HARDPOIN_BACK "back"
+
+/obj/item/hardpoint/walker
+	name = "Mecha Hardpoint"
+	desc = "Something to place on mech."
+
+	disp_icon = "walker"
+
+	allowed_seat = VEHICLE_DRIVER
+
+
+/obj/item/hardpoint/walker/hand
+	name = "Left Mecha Hand"
+	desc = "Allows mecha to hold weapons."
+
+	slot = WALKER_HARDPOIN_LEFT_HAND
+	hdpt_layer = HDPT_LAYER_SUPPORT
+
+	var/obj/item/weapon/gun/mounted_gun = null
+
+/obj/item/hardpoint/walker/hand/right
+	name = "Right Mecha Hand"
+	desc = "Allows mecha to hold weapons."
+
+	slot = WALKER_HARDPOIN_RIGHT_HAND
+
+
+/obj/item/hardpoint/walker/leg
+	name = "Left Mecha Leg"
+	desc = "Allows mecha to move around."
+
+	slot = WALKER_HARDPOIN_LEFT_LEG
+	hdpt_layer = HDPT_LAYER_SUPPORT
+
+/obj/item/hardpoint/walker/leg/right
+	name = "Right Mecha Leg"
+
+	slot = WALKER_HARDPOIN_RIGHT_LEG
+
+
+/obj/item/hardpoint/walker/back
+	name = "Mecha Back Hardpoint"
+	desc = "Allows special abilities."
+
+	slot = WALKER_HARDPOIN_BACK
+	hdpt_layer = HDPT_LAYER_SUPPORT
+
+
+//////////////////////////////////////////////////////////////
+//ARMOR
+
+/obj/item/hardpoint/walker/armor
+	name = "Armor Hardpoint"
+	desc = "Primary armor source."
+	icon = 'code_ru/icons/obj/vehicles/mecha_armor.dmi'
+
+	slot = WALKER_HARDPOIN_ARMOR
+	hdpt_layer = HDPT_LAYER_ARMOR
+
+	damage_multiplier = 0.5
+
+	health = 1000
+
+/obj/item/hardpoint/walker/armor/paladin
+	name = "Paladin Armor"
+	desc = "Protects the vehicle from large incoming explosive projectiles."
+
+	icon_state = "paladin_armor"
+	disp_icon_state = "paladin_armor"
+
+	type_multipliers = list(
+		"explosive" = 0.67,
+		"all" = 0.9
+	)
+
+/obj/item/hardpoint/walker/armor/concussive
+	name = "Concussive Armor"
+	desc = "Protects the vehicle from high-impact weapons."
+
+	icon_state = "concussive_armor"
+	disp_icon_state = "concussive_armor"
+
+	type_multipliers = list(
+		"blunt" = 0.67,
+		"all" = 0.9
+	)
+
+/obj/item/hardpoint/walker/armor/caustic
+	name = "Caustic Armor"
+	desc = "Protects vehicles from most types of acid."
+
+	icon_state = "caustic_armor"
+	disp_icon_state = "caustic_armor"
+
+	type_multipliers = list(
+		"acid" = 0.67,
+		"all" = 0.9
+	)
+
+/obj/item/hardpoint/walker/armor/fire
+	name = "Fire Armor"
+	desc = "Protects vehicles from most types of fire."
+
+	icon_state = "caustic_armor"
+	disp_icon_state = "caustic_armor"
+
+	type_multipliers = list(
+		"fire" = 0.67,
+		"all" = 0.9
+	)
+
+/obj/item/hardpoint/walker/armor/ballistic
+	name = "Ballistic Armor"
+	desc = "Protects the vehicle from high-penetration weapons."
+
+	icon_state = "ballistic_armor"
+	disp_icon_state = "ballistic_armor"
+
+	type_multipliers = list(
+		"bullet" = 0.67,
+		"slash" = 0.67,
+		"all" = 0.9
+	)
+
+/*
+//////////////////////////////////////////////////////////////
+//GUNS
+
+/obj/item/hardpoint/walker/weapon
+	name = "Walker Gun"
+	desc = "Primary gun source."
+	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+
+	slot = WALKER_HARDPOIN_GUN
+	hdpt_layer = HDPT_LAYER_TURRET
+
+	var/obj/item/weapon/gun/mounted_gun = null
+*/
+
+/obj/item/hardpoint/walker/hand
+
+/obj/item/hardpoint/walker/hand/get_examine_text(mob/user)
+	. = ..()
+	if(mounted_gun)
+		. += "There is \a [mounted_gun] module installed on [src]."
+		. += mounted_gun.get_examine_text(user)
+
+/obj/item/hardpoint/walker/hand/attackby(obj/item/attacking_item, mob/user)
+	if(mounted_gun)
+		if(try_reload(attacking_item, user))
+			return
+		if(try_remove(attacking_item, user))
+			return
+	else
+		if(try_insert(attacking_item, user))
+			return
+
+/obj/item/hardpoint/walker/hand/proc/try_reload(obj/item/attacking_item, mob/user)
+	. = FALSE
+
+	if(istype(attacking_item, /obj/item/ammo_magazine))
+		. = TRUE
+		mounted_gun.reload(user, attacking_item)
+		update_icon()
+
+	if(istype(attacking_item, /obj/item/explosive/grenade))
+		. = TRUE
+		mounted_gun.on_pocket_attackby(attacking_item, user)
+		update_icon()
+
+/obj/item/hardpoint/walker/hand/proc/try_insert(obj/item/attacking_item, mob/user)
+	. = FALSE
+
+	if(!isgun(attacking_item) || user.action_busy || mounted_gun)
+		return
+
+	var/obj/item/weapon/gun/attacking_gun = attacking_item
+	if(attacking_gun.mount_class != GUN_MOUNT_MECHA)
+		return
+
+	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner) || !mounted_gun)
+		return
+
+	if(user.drop_inv_item_to_loc(attacking_gun, src))
+		return
+
+	. = TRUE
+
+	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
+	SPAN_NOTICE("You place [attacking_gun] in [src]."))
+
+	mounted_gun = attacking_gun
+	mounted_gun.gun_holder = src
+	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
+	update_icon()
+
+	AddComponent(/datum/component/automatedfire/autofire, mounted_gun.fire_delay, mounted_gun.burst_delay, mounted_gun.burst_amount, mounted_gun.gun_firemode, mounted_gun.autofire_slow_mult,\
+	CALLBACK(mounted_gun, PROC_REF(set_bursting)), CALLBACK(mounted_gun, PROC_REF(reset_fire)),\
+	CALLBACK(mounted_gun, PROC_REF(fire_wrapper)), CALLBACK(src, PROC_REF(display_ammo)), CALLBACK(mounted_gun, PROC_REF(set_auto_firing)))
+
+/obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
+	. = FALSE
+
+	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_CROWBAR) || !mounted_gun)
+		return
+
+	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src) || mounted_gun)
+		return
+
+	. = TRUE
+
+	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	user.visible_message(SPAN_NOTICE("[user] removes [mounted_gun] from [src]."),
+	SPAN_NOTICE("You remove [mounted_gun] from [src]."))
+
+	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
+	mounted_gun.gun_holder = null
+	user.put_in_hands(mounted_gun)
+	mounted_gun = null
+	update_icon()
+
+
+
+
 
 ////////////////
 // MEGALODON HARDPOINTS // START
@@ -68,7 +294,7 @@
 	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
 		return
 
-	if(owner.module_map[WALKER_HARDPOIN_LEFT] == src ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
+	if(owner.module_map[WALKER_HARDPOIN_LEFT_HAND] == src ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
 		return
 
 	if(istype(object, /atom/movable/screen))
@@ -91,7 +317,7 @@
 	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
 		return
 
-	if(owner.module_map[WALKER_HARDPOIN_LEFT] == src ? modifiers[BUTTON] == LEFT_CLICK : modifiers[BUTTON] == MIDDLE_CLICK)
+	if(owner.module_map[WALKER_HARDPOIN_LEFT_HAND] == src ? modifiers[BUTTON] == LEFT_CLICK : modifiers[BUTTON] == MIDDLE_CLICK)
 		reset_fire()
 
 /obj/item/walker_gun/proc/get_icon_image(hardpoint)

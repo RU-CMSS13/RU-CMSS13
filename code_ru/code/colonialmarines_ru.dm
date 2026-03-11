@@ -53,6 +53,7 @@
 #include "modules\projectiles\magazines\rifles.dm"
 #include "modules\projectiles\magazines\shotguns.dm"
 #include "modules\reagents\chemistry_reagents\medical.dm"
+#include "modules\vehicles\vehicle.dm"
 #include "modules\vehicles\interiors\interiors_landmarks.dm"
 #include "modules\vehicles\multitile\multitile.dm"
 #include "modules\vehicles\multitile\apc\apc.dm"

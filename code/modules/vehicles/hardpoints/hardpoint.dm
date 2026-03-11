@@ -6,7 +6,7 @@
 	/// Which slot is this hardpoint in. Purely to check for conflicting hardpoints.
 	var/slot
 	/// The vehicle this hardpoint is installed on.
-	var/obj/vehicle/multitile/owner
+	var/obj/vehicle/owner
 
 	health = 100
 	w_class = SIZE_LARGE

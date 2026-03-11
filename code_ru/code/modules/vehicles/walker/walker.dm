@@ -26,6 +26,7 @@
 	var/repair = FALSE
 
 	var/acid_process_cooldown = null
+/*
 	var/list/dmg_multipliers = list(
 		"all" = 1.0, //for when you want to make it invincible
 		"acid" = 2,
@@ -36,11 +37,12 @@
 		"energy" = 1.0,
 		"abstract" = 1.0
 	) //abstract for when you just want to hurt it
+*/
 
 	var/max_angle = 45
 	var/list/obj/item/walker_gun/module_map = list(
-		WALKER_HARDPOIN_LEFT = null,
-		WALKER_HARDPOIN_RIGHT = null,
+		WALKER_HARDPOIN_LEFT_HAND = null,
+		WALKER_HARDPOIN_RIGHT_HAND = null,
 		WALKER_HARDPOIN_BACK = null,
 		WALKER_HARDPOIN_ARMOR = null
 	)
@@ -53,14 +55,14 @@
 		/obj/vehicle/walker/proc/get_stats
 	)
 
-	var/list/step_sounds = list(
+	move_sounds = list(
 		'code_ru/sound/vehicle/walker/mecha_step1.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step2.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step3.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step4.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step5.ogg'
 	)
-	var/list/turn_sounds = list(
+	turn_sounds = list(
 		'code_ru/sound/vehicle/walker/mecha_turn1.ogg',
 		'code_ru/sound/vehicle/walker/mecha_turn2.ogg',
 		'code_ru/sound/vehicle/walker/mecha_turn3.ogg',
@@ -77,8 +79,8 @@
 /obj/vehicle/walker/prebuilt/Initialize()
 	. = ..()
 
-	module_map[WALKER_HARDPOIN_LEFT] = new /obj/item/walker_gun/smartgun(src)
-	module_map[WALKER_HARDPOIN_RIGHT] = new /obj/item/walker_gun/flamer(src)
+	module_map[WALKER_HARDPOIN_LEFT_HAND] = new /obj/item/walker_gun/smartgun(src)
+	module_map[WALKER_HARDPOIN_RIGHT_HAND] = new /obj/item/walker_gun/flamer(src)
 
 	update_icon()
 
@@ -90,11 +92,11 @@
 	else
 		icon_state = "mech_open"
 
-	if(module_map[WALKER_HARDPOIN_LEFT])
-		var/image/left_gun = module_map[WALKER_HARDPOIN_LEFT].get_icon_image("_l_hand")
+	if(module_map[WALKER_HARDPOIN_LEFT_HAND])
+		var/image/left_gun = module_map[WALKER_HARDPOIN_LEFT_HAND].get_icon_image("_l_hand")
 		overlays += left_gun
-	if(module_map[WALKER_HARDPOIN_RIGHT])
-		var/image/right_gun = module_map[WALKER_HARDPOIN_RIGHT].get_icon_image("_r_hand")
+	if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
+		var/image/right_gun = module_map[WALKER_HARDPOIN_RIGHT_HAND].get_icon_image("_r_hand")
 		overlays += right_gun
 
 /* In future
@@ -112,8 +114,8 @@
 	else if(isobserver(user) || (ishuman(user) && (skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE) || skillcheck(user, SKILL_VEHICLE, SKILL_VEHICLE_CREWMAN))))
 		. += "It's at [round(100 * health / max_health)]% integrity!"
 
-	. += "[module_map[WALKER_HARDPOIN_LEFT] ? module_map[WALKER_HARDPOIN_LEFT].name : "Nothing"] is placed on its left hardpoint."
-	. += "[module_map[WALKER_HARDPOIN_RIGHT] ? module_map[WALKER_HARDPOIN_RIGHT].name : "Nothing"] is placed on its right hardpoint."
+	. += "[module_map[WALKER_HARDPOIN_LEFT_HAND] ? module_map[WALKER_HARDPOIN_LEFT_HAND].name : "Nothing"] is placed on its left hardpoint."
+	. += "[module_map[WALKER_HARDPOIN_RIGHT_HAND] ? module_map[WALKER_HARDPOIN_RIGHT_HAND].name : "Nothing"] is placed on its right hardpoint."
 
 /obj/vehicle/walker/ex_act(severity)
 	take_damage_type(severity * 0.5, "explosive")
@@ -130,26 +132,6 @@
 		move_in(user)
 	else
 		to_chat(user, "How to operate it?")
-
-/obj/vehicle/walker/relaymove(mob/user, direction)
-	if(user.is_mob_incapacitated()) return
-	if(seats[VEHICLE_DRIVER] != user) return
-	seats[VEHICLE_DRIVER].set_interaction(src)
-
-	if(world.time > l_move_time + move_delay)
-		if (zoom)
-			unzoom()
-		if(dir != direction && GLOB.reverse_dir[dir] != direction)
-			l_move_time = world.time
-			dir = direction
-			playsound(src.loc, pick(turn_sounds), 20, 1)
-			. = TRUE
-		else
-			var/oldDir = dir
-			. = step(src, direction)
-			setDir(oldDir)
-			if(.)
-				playsound(src.loc, pick(step_sounds), 60, 1)
 
 /obj/vehicle/walker/Bump(atom/obstacle)
 	if(isxeno(obstacle))
@@ -199,7 +181,7 @@
 		return
 
 	else if(istype(obstacle, /obj/structure/barricade))
-		playsound(src.loc, pick(step_sounds), 60, 1)
+		playsound(src.loc, pick(move_sounds), 60, 1)
 		var/obj/structure/barricade/cade = obstacle
 		var/new_dir = get_dir(src, cade) ? get_dir(src, cade) : cade.dir
 		var/turf/new_loc = get_step(loc, new_dir)
@@ -260,10 +242,10 @@
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Press LMB for use left weapon."))
 			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Press MMB for use right weapon."))
 
-			if(module_map[WALKER_HARDPOIN_LEFT])
-				module_map[WALKER_HARDPOIN_LEFT].register_signals(user)
-			if(module_map[WALKER_HARDPOIN_RIGHT])
-				module_map[WALKER_HARDPOIN_RIGHT].register_signals(user)
+			if(module_map[WALKER_HARDPOIN_LEFT_HAND])
+				module_map[WALKER_HARDPOIN_LEFT_HAND].register_signals(user)
+			if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
+				module_map[WALKER_HARDPOIN_RIGHT_HAND].register_signals(user)
 
 			playsound_client(seats[VEHICLE_DRIVER].client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
 			update_icon()
@@ -323,10 +305,10 @@
 		return
 
 	if(!firing_arc(A))
-		if(module_map[WALKER_HARDPOIN_LEFT])
-			SEND_SIGNAL(module_map[WALKER_HARDPOIN_LEFT], COMSIG_GUN_STOP_FIRE)
-		if(module_map[WALKER_HARDPOIN_RIGHT])
-			SEND_SIGNAL(module_map[WALKER_HARDPOIN_RIGHT], COMSIG_GUN_STOP_FIRE)
+		if(module_map[WALKER_HARDPOIN_LEFT_HAND])
+			SEND_SIGNAL(module_map[WALKER_HARDPOIN_LEFT_HAND], COMSIG_GUN_STOP_FIRE)
+		if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
+			SEND_SIGNAL(module_map[WALKER_HARDPOIN_RIGHT_HAND], COMSIG_GUN_STOP_FIRE)
 
 		var/new_dir = get_cardinal_dir(src, A)
 		if(dir != new_dir && world.time > l_move_time + move_delay)
@@ -338,7 +320,7 @@
 	if(!params[LEFT_CLICK] && !params[MIDDLE_CLICK])
 		return
 
-	var/picked_module = params[LEFT_CLICK] ? WALKER_HARDPOIN_LEFT : WALKER_HARDPOIN_RIGHT
+	var/picked_module = params[LEFT_CLICK] ? WALKER_HARDPOIN_LEFT_HAND : WALKER_HARDPOIN_RIGHT_HAND
 	if(!module_map[picked_module])
 		to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
 		return
@@ -420,7 +402,7 @@
 /obj/vehicle/walker/attackby(obj/item/held_item, mob/user as mob)
 	if(istype(held_item, /obj/item/ammo_magazine/walker))
 		var/rearmed = FALSE
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT, WALKER_HARDPOIN_RIGHT))
+		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
 			if(!module_map[hardpoint_slot] || module_map[hardpoint_slot].ammo || !istype(held_item, module_map[hardpoint_slot].magazine_type))
 				continue
 			rearm(held_item, user, module_map[hardpoint_slot])
@@ -433,13 +415,13 @@
 
 	else if(istype(held_item, /obj/item/walker_gun))
 		var/remaining_slots = list()
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT, WALKER_HARDPOIN_RIGHT))
+		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
 
 			if(module_map[hardpoint_slot])
 				continue
 			remaining_slots += hardpoint_slot
 		var/slot = tgui_alert(user, "On which hardpoint install gun.", "Hardpoint", remaining_slots + "Cancel")
-		if (module_map[WALKER_HARDPOIN_LEFT]?.type == held_item.type || module_map[WALKER_HARDPOIN_RIGHT]?.type == held_item.type)
+		if (module_map[WALKER_HARDPOIN_LEFT_HAND]?.type == held_item.type || module_map[WALKER_HARDPOIN_RIGHT_HAND]?.type == held_item.type)
 			to_chat(user, "You cannot install two of the same type of gun.")
 			return
 		if(slot && slot != "Cancel")
@@ -447,7 +429,7 @@
 
 	else if(HAS_TRAIT(held_item, TRAIT_TOOL_WRENCH))
 		var/taken_slots = list()
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT, WALKER_HARDPOIN_RIGHT))
+		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
 			if(!module_map[hardpoint_slot])
 				continue
 			taken_slots += hardpoint_slot

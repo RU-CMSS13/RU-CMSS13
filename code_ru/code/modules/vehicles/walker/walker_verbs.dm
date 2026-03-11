@@ -29,10 +29,10 @@
 		remove_verb(user.client, verb_list)
 	UnregisterSignal(user, COMSIG_MOB_RESISTED)
 
-	if(module_map[WALKER_HARDPOIN_LEFT])
-		module_map[WALKER_HARDPOIN_LEFT].unregister_signals(user)
-	if(module_map[WALKER_HARDPOIN_RIGHT])
-		module_map[WALKER_HARDPOIN_RIGHT].unregister_signals(user)
+	if(module_map[WALKER_HARDPOIN_LEFT_HAND])
+		module_map[WALKER_HARDPOIN_LEFT_HAND].unregister_signals(user)
+	if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
+		module_map[WALKER_HARDPOIN_RIGHT_HAND].unregister_signals(user)
 
 	seats[VEHICLE_DRIVER] = null
 	update_icon()
@@ -75,10 +75,10 @@
 		return FALSE
 
 	var/list/acceptible_modules = list()
-	if(module_map[WALKER_HARDPOIN_LEFT]?.ammo)
-		acceptible_modules += module_map[WALKER_HARDPOIN_LEFT]
-	if(module_map[WALKER_HARDPOIN_RIGHT]?.ammo)
-		acceptible_modules += module_map[WALKER_HARDPOIN_RIGHT]
+	if(module_map[WALKER_HARDPOIN_LEFT_HAND]?.ammo)
+		acceptible_modules += module_map[WALKER_HARDPOIN_LEFT_HAND]
+	if(module_map[WALKER_HARDPOIN_RIGHT_HAND]?.ammo)
+		acceptible_modules += module_map[WALKER_HARDPOIN_RIGHT_HAND]
 
 	if(!length(acceptible_modules))
 		to_chat(user, "Not found magazines to eject")
