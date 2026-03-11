@@ -245,7 +245,7 @@
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
 	fire_delay = 2.7
-	scatter_value = 50
+	scatter_value = 40
 
 	projectile_traits = list()
 
@@ -577,7 +577,7 @@
 	scatter_value = 0
 	magazine_type = /obj/item/ammo_magazine/walker/katana
 	var/damage = 105
-	force = 80          // для атаки по дверям и стенам
+	force = 75          // для атаки по дверям и стенам
 	sharp = TRUE         // режущий урон
 	edge = TRUE          // острый край
 
