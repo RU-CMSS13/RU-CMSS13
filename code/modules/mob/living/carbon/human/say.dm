@@ -53,7 +53,12 @@
 	else
 		.["message"] = strip_language(message_and_language)
 
+/* RUCM CHANGE
 /mob/living/carbon/human/say(message)
+*/
+//RUCM START
+/mob/living/carbon/human/say(message, list/tts_heard_list)
+//RUCM END
 
 	var/verb = "says"
 	var/alt_name = ""
@@ -139,6 +144,9 @@
 			message += "."
 
 	for(var/message_mode in parsed["modes"])
+//RUCM START
+		var/radio_volume = 0
+//RUCM END
 		var/list/obj/item/used_radios = list()
 		switch(message_mode)
 			if(RADIO_MODE_WHISPER)
@@ -148,13 +156,24 @@
 				message_mode = null
 				FOR_DVIEW(var/obj/item/device/radio/intercom/I, 1, src, HIDE_INVISIBLE_OBSERVER)
 					used_radios += I
+//RUCM START
+					radio_volume = I.volume
+//RUCM END
 					break // remove this if we EVER have two different intercomms with DIFFERENT frequencies IN ONE ROOM
 				FOR_DVIEW_END
 			else
 				if(message_mode != MESSAGE_MODE_LOCAL)
+/* RUCM CHANGE
 					var/earpiece = get_type_in_ears(/obj/item/device/radio)
+*/
+//RUCM START
+					var/obj/item/device/radio/earpiece = get_type_in_ears(/obj/item/device/radio)
+//RUCM END
 					if(earpiece)
 						used_radios += earpiece
+//RUCM START
+						radio_volume = earpiece.volume
+//RUCM END
 
 		var/sound/speech_sound
 		var/sound_vol
@@ -178,13 +197,30 @@
 			italics = 1
 			message_range = 2
 
+/* RUCM CHANGE
 		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode) //ohgod we should really be passing a datum here.
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
+*/
+//RUCM START
+		tts_heard_list = list(list(), list(), list())
+		if(SStts.tts_enabled)
+			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
 
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
+
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
+//RUCM END
+/* RUCM CHANGE
 /mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking)
 	for(var/obj/item/device/radio/R in used_radios)
 		R.talk_into(src, message, message_mode, verb, speaking)
+*/
+//RUCM START
+/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, list/tts_heard_list)
+	for(var/obj/item/device/radio/R in used_radios)
+		R.talk_into(src, message, message_mode, verb, speaking, tts_heard_list = tts_heard_list)
+//RUCM END
 
 /mob/living/carbon/human/proc/forcesay(forcesay_type = SUDDEN)
 	if (!client || stat != CONSCIOUS)

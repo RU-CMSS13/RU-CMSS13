@@ -824,8 +824,14 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	return FALSE
 
 
+/* RUCM CHANGE
 /obj/item/clothing/head/helmet/marine/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, loc == sourcemob)
+*/
+//RUCM START
+/obj/item/clothing/head/helmet/marine/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	SEND_SIGNAL(src, COMSIG_BROADCAST_HEAR_TALK, sourcemob, message, verb, language, italics, tts_heard_list, loc == sourcemob)
+//RUCM END
 
 /obj/item/clothing/head/helmet/marine/see_emote(mob/living/sourcemob, emote, audible)
 	SEND_SIGNAL(src, COMSIG_BROADCAST_SEE_EMOTE, sourcemob, emote, audible, loc == sourcemob && audible)
