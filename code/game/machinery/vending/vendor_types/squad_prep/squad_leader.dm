@@ -81,9 +81,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 
 		list("Health Analyzer", 4, /obj/item/device/healthanalyzer, null, VENDOR_ITEM_REGULAR),
 		list("Roller Bed", 2, /obj/item/roller, null, VENDOR_ITEM_REGULAR),
-		//RUCM START
-		list("Minimedical Pamphlet", 15, /obj/item/pamphlet/skill/minimed, null, VENDOR_ITEM_REGULAR),
-		//RUSCM END
+		list("Minimedical Pamphlet", 15, /obj/item/pamphlet/skill/minimed, null, VENDOR_ITEM_REGULAR), //RUCM EDIT
 
 		list("PRIMARY AMMUNITION", 0, null, null, null),
 		list("M4RA AP Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/m4ra/ap, null, VENDOR_ITEM_REGULAR),
