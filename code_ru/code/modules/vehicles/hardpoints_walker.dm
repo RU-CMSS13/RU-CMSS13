@@ -245,7 +245,7 @@
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/hmg
 	fire_delay = 2.7
-	scatter_value = 40
+	scatter_value = 50
 
 	projectile_traits = list()
 
@@ -256,7 +256,7 @@
 	equip_state = "redy_shotgun8g"
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/shotgun8g
-	fire_delay = 11
+	fire_delay = 10
 	scatter_value = 0
 	automatic = FALSE
 
@@ -473,6 +473,7 @@
 	accurate_range = 2 //запрет на дальнюю стрельбу, нанесет только ~30 урона из-за промахов разброса, в дистанции два тайла спереди спокойно сносит 160 квине/раве
 	max_range = 6 //Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
 	damage = 60 //вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
+	// и это самооборона совсем не помогает меху, лол :D
 	damage_falloff = DAMAGE_FALLOFF_TIER_6 //5 фэлл офа,фиг, а не дальнее поражение с высоким уроном
 	penetration= ARMOR_PENETRATION_TIER_2 //нулевое бронепробитие в оригинале
 	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
@@ -576,7 +577,7 @@
 	scatter_value = 0
 	magazine_type = /obj/item/ammo_magazine/walker/katana
 	var/damage = 105
-	force = 105          // для атаки по дверям и стенам
+	force = 80          // для атаки по дверям и стенам
 	sharp = TRUE         // режущий урон
 	edge = TRUE          // острый край
 
@@ -593,7 +594,7 @@
 		return FALSE
 
 	if(world.time < last_fire + fire_delay)
-		to_chat(user, "<span class='warning'>WARNING! Weapon is not ready to fire again!</span>")
+		to_chat(user, "<span class='warning'>WARNING! Weapon is not ready to slice again!</span>")
 		return FALSE
 
 	if(!owner.firing_arc(target))
