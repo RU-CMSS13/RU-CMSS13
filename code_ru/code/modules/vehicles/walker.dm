@@ -416,7 +416,6 @@
 /////////////////
 // Attackby
 /////////////////
-
 /obj/vehicle/walker/attackby(obj/item/held_item, mob/user as mob)
 	if(istype(held_item, /obj/item/ammo_magazine/walker))
 		var/rearmed = FALSE

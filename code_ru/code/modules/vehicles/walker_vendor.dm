@@ -5,6 +5,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M32 Mounted Shotgun", 0,/obj/item/walker_gun/shotgun8g, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("M30 Machine Gun", 0, /obj/item/walker_gun/hmg, MECH_GUN, VENDOR_ITEM_REGULAR),
 	list("F40 \"Hellfire\" Flamethower", 0, /obj/item/walker_gun/flamer, MECH_GUN, VENDOR_ITEM_REGULAR),
+	list("AA1 Katana", 0, /obj/item/walker_gun/katana, MECH_GUN, VENDOR_ITEM_REGULAR),
 
 	list("AMMUNITION", 0, null, null, null),
 	list("M88 AMR Magazine", 3, /obj/item/ammo_magazine/walker/wm88, null, VENDOR_ITEM_REGULAR),
@@ -13,6 +14,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M30 Machinegun Magazine", 2, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal Canister", 2, /obj/item/ammo_magazine/walker/flamer, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal B-type Canister", 3, /obj/item/ammo_magazine/walker/flamer/btype, null, VENDOR_ITEM_REGULAR),
+	list("AA1 Katana Power Cell", 2, /obj/item/ammo_magazine/walker/katana, null, VENDOR_ITEM_REGULAR),
 	))
 
 /obj/structure/machinery/cm_vending/gear/walker
