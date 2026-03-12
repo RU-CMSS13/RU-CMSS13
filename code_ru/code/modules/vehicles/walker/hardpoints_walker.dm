@@ -36,7 +36,7 @@
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
-	var/mount_class = GUN_MOUNT_MECHA
+	var/mount_class = GUN_MOUNT_NO
 	var/obj/item/weapon/gun/mounted_gun = null
 
 /obj/item/hardpoint/walker/get_icon_image(x_offset, y_offset, new_dir, type_slot)
@@ -299,6 +299,8 @@
 	firing_arc = 45
 	destruction_on_zero = FALSE
 
+	mount_class = GUN_MOUNT_MECHA
+
 /obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir, type_slot)
 	type_slot = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
 
@@ -358,7 +360,7 @@
 	var/move_momentum_build_factor = 0.5
 
 /obj/item/hardpoint/walker/leg/deactivate()
-	var/obj/vehicle/walker/vehicle
+	var/obj/vehicle/walker/vehicle = owner
 	vehicle.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/vehicle)
@@ -412,10 +414,10 @@
 	motion_detector.owner = src
 
 /obj/item/hardpoint/walker/spinal/artilery/Destroy()
-	. = ..()
-
 	motion_detector.owner = null
 	QDEL_NULL(motion_detector)
+
+	. = ..()
 
 /obj/item/hardpoint/walker/spinal/artilery/pilot_entered(mob/user)
 	motion_detector.iff_signal = user.faction

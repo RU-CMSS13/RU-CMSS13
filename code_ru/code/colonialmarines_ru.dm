@@ -3,6 +3,7 @@
 #include "supplyshuttle.dm"
 #include "controllers\subsystem\tts.dm"
 #include "datums\ammo.dm"
+#include "datums\ammo\xeno.dm"
 #include "datums\ammo\bullet\shotgun.dm"
 #include "datums\skills.dm"
 #include "datums\supply_packs\gear.dm"

@@ -206,12 +206,22 @@
 		interactee.on_set_interaction(src)
 
 
+/* RUCM CHANGE
 /mob/proc/unset_interaction()
+*/
+//RUCM START
+/mob/proc/unset_interaction(logout)
+//RUCM END
 	if(interactee)
 		var/atom/movable/prev_interactee = interactee
 		interactee = null
 		if(istype(prev_interactee))
+/* RUCM CHANGE
 			prev_interactee.on_unset_interaction(src)
+*/
+//RUCM START
+			prev_interactee.on_unset_interaction(src, logout)
+//RUCM END
 
 
 //things the user's machine must do just after we set the user's machine.

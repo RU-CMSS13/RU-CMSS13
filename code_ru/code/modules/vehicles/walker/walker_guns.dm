@@ -115,6 +115,8 @@
 	start_automatic = TRUE
 	start_semiauto = FALSE
 
+	mount_class = GUN_MOUNT_MECHA
+
 	var/basic_fire_delay = FIRE_DELAY_TIER_1 + FIRE_DELAY_TIER_8
 	var/overheat_reset_cooldown = 3 SECONDS
 	var/overheat_rate = 2
@@ -226,6 +228,8 @@
 	current_mag = /obj/item/ammo_magazine/walker/shotgun8g
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 
+	mount_class = GUN_MOUNT_MECHA
+
 /obj/item/weapon/gun/mounted/mecha_shotgun8g/set_gun_config_values()
 	. = ..()
 
@@ -284,6 +288,8 @@
 
 	preload = /obj/item/explosive/grenade/incendiary/airburst
 
+	mount_class = GUN_MOUNT_MECHA
+
 	is_lobbing = TRUE
 	direct_draw = FALSE
 	internal_slots = 24
@@ -336,6 +342,7 @@
 	item_state = "redy_smartgun"
 
 	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
+	mount_class = GUN_MOUNT_MECHA
 
 	var/f_aiming_time = 30 SECONDS
 	var/aiming = FALSE
@@ -452,3 +459,5 @@
 
 	current_mag = /obj/item/ammo_magazine/walker/flamer
 	fire_sound = list('sound/weapons/gun_flamethrower2.ogg')
+
+	mount_class = GUN_MOUNT_MECHA

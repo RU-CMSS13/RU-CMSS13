@@ -144,7 +144,16 @@
 		selected.pilot_entered(user)
 	update_icon()
 
-/obj/vehicle/walker/on_unset_interaction(mob/living/user)
+/obj/vehicle/walker/proc/reset_interaction(mob/living/user)
+	SIGNAL_HANDLER
+
+	user.set_interaction(src)
+
+/obj/vehicle/walker/on_unset_interaction(mob/living/user, logout)
+	if(logout)
+		RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(reset_interaction))
+		return
+
 	remove_action(user, /datum/action/human_action/mg_exit)
 
 	if(user.client)
