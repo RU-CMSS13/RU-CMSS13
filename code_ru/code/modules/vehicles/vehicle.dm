@@ -115,7 +115,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//HARDPOINTS
+// HARDPOINTS
 
 //Putting on hardpoints
 //Similar to repairing stuff, down to the time delay
@@ -365,7 +365,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//MOVEMENT
+// MOVEMENT
 
 /obj/vehicle/relaymove(mob/user, direction)
 	if(user != seats[VEHICLE_DRIVER])

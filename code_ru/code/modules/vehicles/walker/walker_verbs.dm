@@ -26,6 +26,9 @@ AND YOULL BE FINE!*/
 	user.unset_interaction()
 
 
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/walker/proc/toggle_lights()
 	set name = "Lights on/off"
 	set category = "Vehicle"
@@ -50,6 +53,9 @@ AND YOULL BE FINE!*/
 		else
 			lighting_holder.set_light_on(TRUE)
 	playsound(src, 'sound/machines/click.ogg', 50)
+
+
+//////////////////////////////////////////////////////////////
 
 
 /obj/vehicle/walker/proc/eject_magazine()
@@ -84,6 +90,9 @@ AND YOULL BE FINE!*/
 	visible_message("[name]'s systems ejected used magazine.","")
 
 
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/walker/proc/get_stats()
 	set name = "Status Display"
 	set category = "Vehicle"
@@ -115,3 +124,50 @@ AND YOULL BE FINE!*/
 
 	zoom = !zoom
 	update_pixels(usr, zoom)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/toggle_motion_detector()
+	set name = "Motion Detector on/off"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != usr)
+		return
+
+	var/obj/item/hardpoint/walker/back/artilery/provider = locate() in hardpoints
+	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/toggle_reactor()
+	set name = "Reactor on/off"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != usr)
+		return
+
+	if(!power_supply)
+		return
+	if(power_supply.rebooting)
+		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
+		return
+	if(tgui_alert(user, "Are you sure about turning it [power_supply.turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
+		return
+
+	power_supply.switch_reactor_operational_state()

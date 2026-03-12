@@ -24,15 +24,12 @@
 
 	light_range = 8
 
-	var/zoom = FALSE
-	var/zoom_size = 12
-
 	pixel_x = -18
 
 	health = 500
 	var/max_health = 500
 
-	var/acid_process_cooldown = null
+	var/zoom = FALSE
 
 	dmg_multipliers = list(
 		"all" = 1,
@@ -86,7 +83,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//INTERACTIONS
+// INTERACTIONS
 
 /obj/vehicle/walker/get_examine_text(mob/user)
 	. = ..()
@@ -155,9 +152,13 @@
 		return
 
 	if(selected_zoom)
-		user.client.change_view(zoom_size, src)
+		var/obj/item/hardpoint/walker/back/artilery/zoom_provider = locate() in hardpoints
+		if(!zoom_provider)
+			return
+
+		user.client.change_view(zoom_provider.zoom_size, src)
 		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_size / 2
+		var/viewoffset = tilesize * zoom_provider.zoom_size / 2
 		switch(dir)
 			if(NORTH)
 				user.client.set_pixel_x(0)
@@ -214,6 +215,14 @@
 
 	. = ..()
 
+/obj/vehicle/walker/try_rotate(deg)
+	. = ..()
+	if(!.)
+		return
+
+	if(zoom && seats[VEHICLE_DRIVER])
+		update_pixels(seats[VEHICLE_DRIVER], TRUE)
+
 /obj/vehicle/walker/proc/recalculate_legs()
 	move_delay = initial(move_delay)
 	move_max_momentum = initial(move_max_momentum)
@@ -258,7 +267,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//TGUI
+// TGUI
 
 /obj/vehicle/walker/ui_status(mob/user)
 	. = ..()
@@ -298,7 +307,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//DAMAGE
+// DAMAGE
 
 /obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
 	if(!damage)
@@ -383,8 +392,9 @@
 /obj/vehicle/walker/flamer_fire_act(dam, datum/cause_data/flame_cause_data)
 	take_damage_type(dam, "fire", flame_cause_data.resolve_mob(), null, "all")
 
+
 //////////////////////////////////////////////////////////////
-//ATTACKS
+// ATTACKS
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)

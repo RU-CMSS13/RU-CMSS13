@@ -68,7 +68,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//REACTOR
+// REACTOR
 
 /obj/item/hardpoint/walker/reactor
 	name = "Shielded Mecha Reactor"
@@ -84,13 +84,14 @@
 	var/rebooting = FALSE
 	var/count_down = FALSE
 
-	var/reboot_time = 5 MINUTES
+	var/reboot_time = 2.5 MINUTES
 	var/meltdown_time = 1 MINUTES
 	var/meltdown_timer_id = null
 
 	var/reactor_state = VEHICLE_REACTOR_FINE
 	var/chance_of_malf = 10
 
+	var/list/reactor_sounds = list('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg')
 	var/obj/item/fuel_cell/reactor/fuel
 
 /obj/item/hardpoint/walker/reactor/Destroy()
@@ -152,13 +153,17 @@
 			owner.visible_message(SPAN_WARNING("[owner] burst with steam as [src] turns off."))
 
 		if(owner.seats[VEHICLE_DRIVER])
-			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time] minutes for reboot!"))
+			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time / 10] seconds for reboot!"))
 
+		playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 		turned_on = FALSE
 	else
 		if(reactor_state == VEHICLE_REACTOR_CRITICAL)
 			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("It was for sure bad idea to turn on [src] in this state."))
 		else
+			playsound(get_turf(src), pick(reactor_sounds), 25, 1)
+			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_WARNING("Booting up reactor, it might take you to [reboot_time / 10] seconds"))
+
 			rebooting = TRUE
 			addtimer(VARSET_CALLBACK(src, turned_on, 1), reboot_time, TIMER_DELETE_ME)
 			addtimer(VARSET_CALLBACK(src, rebooting, 0), reboot_time, TIMER_DELETE_ME)
@@ -171,7 +176,7 @@
 	if(!do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, owner, INTERRUPT_MOVED))
 		return FALSE
 
-	playsound(get_turf(src), pick('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg'), 25, 1)
+	playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 	fuel.forceMove(get_turf(src))
 	new_fuel.forceMove(src)
 	fuel = new_fuel
@@ -222,7 +227,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//HEAD
+// HEAD
 
 /obj/item/hardpoint/walker/head
 	name = "Mecha Head"
@@ -236,7 +241,7 @@
 	return
 
 //////////////////////////////////////////////////////////////
-//HANDS
+// HANDS
 
 /obj/item/hardpoint/walker/hand
 	name = "Mecha Hand"
@@ -266,7 +271,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//LEGS
+// LEGS
 
 /obj/item/hardpoint/walker/leg
 	name = "Mecha Leg"
@@ -308,7 +313,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//BACK
+// BACK
 
 /obj/item/hardpoint/walker/back
 	name = "Mecha Back Hardpoint"
@@ -326,7 +331,36 @@
 
 /obj/item/hardpoint/walker/back/artilery
 	name = "Detection Array \"Night Hawk\""
-	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful moution detector at cost of faster reactor consumption."
+	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful motion detector at cost of faster reactor consumption."
+
+	var/zoom_size = 12
+	var/obj/item/device/motiondetector/walker/motion_detector
+
+/obj/item/hardpoint/walker/back/artilery/Initialize()
+	. = ..()
+
+	motion_detector = new(src)
+	motion_detector.owner = src
+
+/obj/item/hardpoint/walker/back/artilery/Destroy()
+	. = ..()
+
+	motion_detector.owner = null
+	QDEL_NULL(motion_detector)
+
+/obj/item/hardpoint/walker/back/artilery/pilot_entered(mob/user)
+	motion_detector.iff_signal = user.faction
+
+/obj/item/hardpoint/walker/back/artilery/pilot_ejected(mob/user)
+	return
+
+/obj/item/device/motiondetector/walker
+	detector_range = 24
+
+	var/obj/item/hardpoint/walker/back/artilery/owner
+
+/obj/item/device/motiondetector/walker/get_user()
+	return owner?.owner?.seats[VEHICLE_DRIVER]
 
 
 /obj/item/hardpoint/walker/back/tactical_rocket
@@ -380,7 +414,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//ARMOR
+// ARMOR
 
 /obj/item/hardpoint/walker/armor
 	name = "Armor Hardpoint"
@@ -457,7 +491,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//GUNS
+// GUNS
 
 /obj/item/hardpoint/walker/hand/tgui_additional_data()
 	. = ..()
@@ -490,7 +524,7 @@
 
 
 //////////////////////////////////////////////////////////////
-//INTERACTIONS
+// INTERACTIONS
 
 /obj/item/hardpoint/walker/hand/get_examine_text(mob/user)
 	. = ..()
@@ -646,135 +680,354 @@
 			self.color = null
 
 	if(mounted_gun)
-		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.icon_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
 		gun.color = self.color
 		. += gun
+
+
+
+
+//////////////////////////////////////////////////////////////
+// GUNS
+
+/obj/item/weapon/gun/mounted
+	name = "placeholder"
+	desc = "placeholder."
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
+	icon_state = "holder"
+	item_state = "holder"
+
+	item_icons = list()
+
+	current_mag = null
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	lineart_ru = TRUE
+
+	var/build_in_zoom = 0
+
+/obj/item/weapon/gun/mounted/update_icon()
+	return
 
 
 //////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-/obj/item/hardpoint/walker/weapon
-	name = "Walker Gun"
-	desc = "Primary gun source."
-	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
-
-	slot = WALKER_HARDPOIN_GUN
-	hdpt_layer = HDPT_LAYER_TURRET
-
-	var/obj/item/weapon/gun/mounted_gun = null
-
-
-
-
-
-////////////////
-// MEGALODON HARDPOINTS // START
-////////////////
-
-/obj/item/walker_gun
-	name = "walker gun"
-	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
-	var/equip_state = ""
-	w_class = 12.0
-	var/obj/vehicle/walker/owner = null
-	var/magazine_type = /obj/item/ammo_magazine/walker
-	var/obj/item/ammo_magazine/walker/ammo = null
-	var/list/fire_sound = list('sound/weapons/gun_smartgun1.ogg', 'sound/weapons/gun_smartgun2.ogg', 'sound/weapons/gun_smartgun3.ogg')
-	var/fire_delay = 0
-	var/last_fire = 0
-
-	w_class = 12.0
-
-	var/muzzle_flash = "muzzle_flash"
-	var/muzzle_flash_lum = 3 //muzzle flash brightness
-	var/list/projectile_traits = list()
-	var/automatic = TRUE
-	var/shots_fired = 0
-	var/fa_firing = FALSE
-
-	var/atom/target = null
-	var/scatter_value = 5
-
-	var/autofire_slow_mult = 1
-
-/obj/item/walker_gun/smartgun
+/obj/item/weapon/gun/mounted/mecha_smartgun
 	name = "M56 High-Caliber Mounted Smartgun"
 	desc = "Modified version of standart USCM Smartgun System, mounted on military walkers"
+
 	icon_state = "mech_smartgun_parts"
-	equip_state = "redy_smartgun"
-	magazine_type = /obj/item/ammo_magazine/walker/smartgun
-	fire_delay = 1
+	item_state = "redy_smartgun"
 
-	projectile_traits = list(/datum/element/bullet_trait_iff)
+	current_mag = /obj/item/ammo_magazine/walker/smartgun
+	fire_sound = list('sound/weapons/gun_smartgun1.ogg', 'sound/weapons/gun_smartgun2.ogg', 'sound/weapons/gun_smartgun3.ogg')
 
-/obj/item/walker_gun/hmg
+	start_automatic = TRUE
+	start_semiauto = FALSE
+
+	mount_class = GUN_MOUNT_MECHA
+
+/obj/item/weapon/gun/mounted/mecha_smartgun/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(FIRE_DELAY_TIER_SMG)
+
+	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
+	fa_max_scatter = SCATTER_AMOUNT_TIER_9
+
+	accuracy_mult += HIT_ACCURACY_MULT_TIER_3
+
+	scatter = SCATTER_AMOUNT_TIER_10
+	recoil = RECOIL_OFF
+
+	damage_mult = BASE_BULLET_DAMAGE_MULT
+
+/obj/item/weapon/gun/mounted/mecha_smartgun/set_bullet_traits()
+	LAZYADD(traits_to_give, list(
+		BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
+	))
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/mounted/mecha_hmg
 	name = "M30 Machine Gun"
 	desc = "High-caliber machine gun firing small bursts of AP bullets, tearing into shreds unfortunate fellas on its way."
+
 	icon_state = "mech_minigun_parts"
-	equip_state = "redy_minigun"
+	item_state = "redy_minigun"
+
+	current_mag = /obj/item/ammo_magazine/walker/hmg
 	fire_sound = list('sound/weapons/gun_minigun.ogg')
-	magazine_type = /obj/item/ammo_magazine/walker/hmg
-	fire_delay = 2.7
-	scatter_value = 40
 
-	projectile_traits = list()
+	start_automatic = TRUE
+	start_semiauto = FALSE
 
-/obj/item/walker_gun/shotgun8g
+	mount_class = GUN_MOUNT_MECHA
+
+/obj/item/weapon/gun/mounted/mecha_hmg/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(FIRE_DELAY_TIER_12)
+
+	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
+	fa_max_scatter = SCATTER_AMOUNT_TIER_9
+
+	accuracy_mult += HIT_ACCURACY_MULT_TIER_1
+
+	scatter = SCATTER_AMOUNT_TIER_6
+	recoil = RECOIL_AMOUNT_TIER_3
+
+	damage_mult = BASE_BULLET_DAMAGE_MULT
+
+
+
+
+//////////////////////////////////////////////////////////////
+// GRENADE LAUNCHERS
+
+/obj/item/weapon/gun/launcher/grenade/mounted
+	name = "placeholder"
+	desc = "placeholder."
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
+	icon_state = "holder"
+	item_state = "holder"
+
+	item_icons = list()
+
+	preload = /obj/item/explosive/grenade/incendiary/airburst
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_RECOIL_BUILDUP
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	lineart_ru = TRUE
+
+// Official CMs shitcoded something, so yea, they work not the same like supposed, SHITCODE
+/obj/item/weapon/gun/launcher/grenade/mounted/handle_fire(atom/target, mob/living/user, params)
+	. = NONE
+	afterattack(target, user, params, TRUE)
+
+/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, click_parameters, force = FALSE)
+	if(!force)
+		return
+	. = ..()
+// FUCK them ALIVE to DEATH
+
+/obj/item/weapon/gun/launcher/grenade/mounted/update_icon()
+	return
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/launcher/grenade/mounted/grenade_launcher
+	name = "Heavy Grenadelauncher"
+	desc = "Heavy Grenadelauncher."
+
+	icon_state = "mech_smartgun_parts"
+	item_state = "redy_smartgun"
+
+	is_lobbing = TRUE
+	direct_draw = FALSE
+	internal_slots = 24
+
+/obj/item/weapon/gun/launcher/grenade/mounted/grenade_launcher/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(FIRE_DELAY_TIER_4*2)
+
+
+
+
+//////////////////////////////////////////////////////////////
+// ROCKET LAUNCHERS
+
+/obj/item/weapon/gun/launcher/rocket/mounted
+	name = "placeholder"
+	desc = "placeholder."
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
+	icon_state = "holder"
+	item_state = "holder"
+
+	item_icons = list()
+
+	current_mag = null
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	skill_locked = FALSE
+
+	lineart_ru = TRUE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/update_icon()
+	return
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile
+	name = "Tactical Missile Launcher"
+	desc = "Tactical missile launcher."
+
+	icon_state = "mech_smartgun_parts"
+	item_state = "redy_smartgun"
+
+	current_mag = /obj/item/ammo_magazine/rocket/brute
+
+	var/f_aiming_time = 30 SECONDS
+	var/aiming = FALSE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
+	if(aiming)
+		return
+
+	if(!(istype(target, /obj/structure) || istype(target, /turf/closed/wall)))
+		to_chat(user, SPAN_WARNING("Invalid target!"))
+		return
+
+	var/list/turf/path = get_line(user, target, include_start_atom = FALSE)
+	for(var/turf/turf_path in path)
+		if(turf_path.opacity && turf_path != target)
+			to_chat(user, SPAN_WARNING("Target obscured!"))
+			return
+	aiming = TRUE
+	var/beam = "laser_beam_guided"
+	var/lockon = "sniper_lockon_guided"
+	var/image/lockon_icon = image(icon = 'icons/effects/Targeted.dmi', icon_state = lockon)
+	target.overlays += lockon_icon
+
+	var/image/lockon_direction_icon
+	lockon_direction_icon = image(icon = 'icons/effects/Targeted.dmi', icon_state = "[lockon]_direction", dir = get_cardinal_dir(target, user))
+	target.overlays += lockon_direction_icon
+	var/datum/beam/laser_beam
+	laser_beam = target.beam(user, beam, 'icons/effects/beam.dmi', (f_aiming_time + 1 SECONDS), beam_type = /obj/effect/ebeam/laser/intense)
+	laser_beam.visuals.alpha = 0
+	animate(laser_beam.visuals, alpha = initial(laser_beam.visuals.alpha), f_aiming_time, easing = SINE_EASING|EASE_OUT)
+
+	if(do_after(user, f_aiming_time, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
+		if(!QDELETED(target))
+			. = ..()
+
+	target.overlays -= lockon_icon
+	target.overlays -= lockon_direction_icon
+	qdel(laser_beam)
+	aiming = FALSE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile/make_rocket(mob/user, drop_override = 0, empty = 1)
+	if(empty)
+		return
+	. = ..()
+
+
+
+
+//////////////////////////////////////////////////////////////
+// SHOTGUNS
+
+/obj/item/weapon/gun/shotgun/mounted
+	name = "placeholder"
+	desc = "placeholder."
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
+	icon_state = "holder"
+	item_state = "holder"
+
+	item_icons = list()
+
+	current_mag = null
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	lineart_ru = TRUE
+
+/obj/item/weapon/gun/shotgun/mounted/update_icon()
+	return
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/shotgun/mounted/shotgun8g
 	name = "M32 Mounted Shotgun"
 	desc = "8 Gauge shotgun firing wave of AP bullets ineffective at distance, mounted on military walkers for devastation pacify"
+
 	icon_state = "mech_shotgun8g_parts"
-	equip_state = "redy_shotgun8g"
+	item_state = "redy_shotgun8g"
+
+	current_mag = /obj/item/ammo_magazine/walker/shotgun8g
 	fire_sound = list('sound/weapons/gun_type23.ogg')
-	magazine_type = /obj/item/ammo_magazine/walker/shotgun8g
-	fire_delay = 11
-	scatter_value = 0
-	automatic = FALSE
+
+/obj/item/weapon/gun/shotgun/mounted/shotgun8g/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(FIRE_DELAY_TIER_2)
 
 
-/obj/item/walker_gun/flamer
+
+
+//////////////////////////////////////////////////////////////
+// FLAMETHROWERS
+
+/obj/item/weapon/gun/flamer/mounted
+	name = "placeholder"
+	desc = "placeholder."
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
+	icon_state = "holder"
+	item_state = "holder"
+
+	item_icons = list()
+
+	current_mag = null
+
+	w_class = SIZE_HUGE
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY
+	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
+	gun_category = GUN_CATEGORY_MOUNTED
+
+	lineart_ru = TRUE
+
+/obj/item/weapon/gun/flamer/mounted/update_icon()
+	return
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/flamer/mounted/flamer
 	name = "F40 \"Hellfire\" Flamethower"
 	desc = "Powerful flamethower, that can send any unprotected target straight to hell."
+
 	icon_state = "mech_flamer_parts"
-	equip_state = "redy_flamer"
-	fire_sound = 'sound/weapons/gun_flamethrower2.ogg'
-	magazine_type = /obj/item/ammo_magazine/walker/flamer
-	var/fuel_pressure = 1 //Pressure setting of the attached fueltank, controls how much fuel is used per tile
-	var/max_range = 9 //9 tiles, 7 is screen range, controlled by the type of napalm in the canister. We max at 9 since diagonal bullshit.
-	fire_delay = 4 SECONDS
+	item_state = "redy_flamer"
 
-	automatic = FALSE
+	current_mag = /obj/item/ammo_magazine/walker/flamer
+	fire_sound = list('sound/weapons/gun_flamethrower2.ogg')
 
 
 
 
+//////////////////////////////////////////////////////////////
+// AMMO MAGAZINES
 
-
-
-
-
-
-
-
-
-
-///////////////
-// AMMO MAGS // START
-///////////////
 
 /obj/item/ammo_magazine/walker
 	w_class = SIZE_LARGE
@@ -787,7 +1040,7 @@
 	icon_state = "mech_smartgun_ammo"
 	default_ammo = /datum/ammo/bullet/walker/smartgun
 	max_rounds = 700
-	gun_type = /obj/item/walker_gun/smartgun
+	gun_type = /obj/item/weapon/gun/mounted/mecha_smartgun
 
 /obj/item/ammo_magazine/walker/hmg
 	name = "M30 Machine Gun Magazine"
@@ -795,7 +1048,7 @@
 	icon_state = "mech_minigun_ammo"
 	max_rounds = 400
 	default_ammo = /datum/ammo/bullet/walker/machinegun
-	gun_type = /obj/item/walker_gun/hmg
+	gun_type = /obj/item/weapon/gun/mounted/mecha_hmg
 
 /obj/item/ammo_magazine/walker/shotgun8g
 	name = "M32 Mounted Shotgun Magazine"
@@ -803,7 +1056,7 @@
 	icon_state = "mech_shotgun8g_ammo"
 	max_rounds = 60
 	default_ammo = /datum/ammo/bullet/walker/shotgun8g
-	gun_type = /obj/item/walker_gun/shotgun8g
+	gun_type = /obj/item/weapon/gun/shotgun/mounted/shotgun8g
 
 
 /obj/item/ammo_magazine/walker/flamer
@@ -812,7 +1065,7 @@
 	icon_state = "mech_flamer_s_ammo"
 	max_rounds = 300
 	default_ammo = /datum/ammo/flamethrower
-	gun_type = /obj/item/walker_gun/flamer
+	gun_type = /obj/item/weapon/gun/flamer/mounted/flamer
 	flags_magazine = AMMUNITION_HIDE_AMMO
 
 	var/flamer_chem = "utnapthal"
@@ -851,7 +1104,7 @@
 	icon_state = "mech_flamer_b_ammo"
 	max_rounds = 300
 	default_ammo = /datum/ammo/flamethrower
-	gun_type = /obj/item/walker_gun/flamer
+	gun_type = /obj/item/weapon/gun/flamer/mounted/flamer
 
 	flamer_chem = "napalmb"
 
@@ -862,9 +1115,18 @@
 	fuel_pressure = 1 //How much fuel is used per tile fired
 	max_pressure = 10
 
-///////////////
-// AMMO MAGS // END
-///////////////
+/obj/item/ammo_magazine/rocket/brute
+	name = "M1488 Laser-Guided Rocket"
+	icon_state = "brute_rocket"
+	default_ammo = /datum/ammo/rocket/brute/tactical
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile
+	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. The warhead itself uses an inflection stabilized shaped-charge to generate a low-frequency pressure wave that can flatten nearly any fortification in an ellipical radius of several meters. These rockets are known to have reduced lethality to personnel, but will put just about any ol' backwater mud-hut right into orbit."
+
+
+
+
+//////////////////////////////////////////////////////////////
+// AMMO DATUMS
 
 /datum/ammo/bullet/walker/smartgun
 	name = "smartgun bullet"
@@ -922,9 +1184,15 @@
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
 
-////////////////
-// MEGALODON HARDPOINTS // END
-////////////////
+/datum/ammo/rocket/brute/tactical
+	max_range = 18
+	max_distance = 18
+
+
+
+
+//////////////////////////////////////////////////////////////
+// AMMO SUPPLY PACKS
 
 /datum/supply_packs/ammo_m56_walker
 	name = "M56 Double-Barrel magazines (x2)"
@@ -969,12 +1237,6 @@
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "F40 Flamethower ammo crate"
 	group = "Vehicle Ammo"
-
-////////////////
-// MEGALODON SUPPLYPACKS // END
-////////////////
-
-*/
 
 
 #undef VEHICLE_REACTOR_FINE
