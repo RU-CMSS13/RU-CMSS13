@@ -256,7 +256,7 @@
 	equip_state = "redy_shotgun8g"
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 	magazine_type = /obj/item/ammo_magazine/walker/shotgun8g
-	fire_delay = 10
+	fire_delay = 11
 	scatter_value = 0
 	automatic = FALSE
 
