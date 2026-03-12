@@ -161,19 +161,20 @@
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
 
-/obj/vehicle/walker/proc/update_pixels(selected_zoom)
+/obj/vehicle/walker/proc/update_pixels(selected_zoom, override_zoom)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user.client)
 		return
 
 	if(selected_zoom)
 		var/obj/item/hardpoint/walker/spinal/artilery/zoom_provider = locate() in hardpoints
-		if(!zoom_provider)
+		if(!zoom_provider && !override_zoom)
 			return
 
-		user.client.change_view(zoom_provider.zoom_size, src)
+		var/zoom_power = override_zoom ? override_zoom : zoom_provider.zoom_size
+		user.client.change_view(zoom_power, src)
 		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_provider.zoom_size / 2
+		var/viewoffset = tilesize * zoom_power / 2
 		switch(dir)
 			if(NORTH)
 				user.client.set_pixel_x(0)

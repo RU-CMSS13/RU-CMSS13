@@ -643,11 +643,12 @@
 		return FALSE
 
 	var/list/modifiers = params2list(params)
-	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
-		return FALSE
+	if(length(modifiers))
+		if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
+			return FALSE
 
-	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
-		return FALSE
+		if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
+			return FALSE
 
 	if(!in_firing_arc(object))
 		return FALSE
