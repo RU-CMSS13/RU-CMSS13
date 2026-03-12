@@ -402,7 +402,7 @@
 	icon_state = "mech_shotgun8g_parts"
 	item_state = "redy_shotgun8g"
 
-	current_mag = /obj/item/ammo_magazine/walker/shotgun8g
+	current_mag = /obj/item/ammo_magazine/internal/walker/shotgun8g
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 
 /obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g/set_gun_config_values()

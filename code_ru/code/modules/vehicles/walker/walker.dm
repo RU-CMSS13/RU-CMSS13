@@ -19,6 +19,18 @@
 	move_turn_momentum_loss_factor = 1
 	move_momentum_build_factor = 2
 
+	hardpoints_allowed = list(
+		/obj/item/hardpoint/walker/hand/left,
+		/obj/item/hardpoint/walker/hand/right,
+		/obj/item/hardpoint/walker/leg/left,
+		/obj/item/hardpoint/walker/leg/right,
+		/obj/item/hardpoint/walker/reactor,
+		/obj/item/hardpoint/walker/head,
+		/obj/item/hardpoint/walker/spinal/artilery,
+		/obj/item/hardpoint/walker/spinal/tactical_missile,
+		/obj/item/hardpoint/walker/spinal/shield,
+	)
+
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
 
