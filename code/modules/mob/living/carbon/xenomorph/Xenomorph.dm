@@ -78,7 +78,9 @@
 	//////////////////////////////////////////////////////////////////
 	var/datum/caste_datum/caste // Used to extract determine ALL Xeno stats.
 	var/speaking_key = "x"
+/* RUCM CHANGE
 	var/speaking_noise = "alien_talk"
+*/
 	slash_verb = "slash"
 	slashes_verb = "slashes"
 	var/slash_sound = "alien_claw_flesh"
@@ -619,6 +621,11 @@
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
 		age_xeno()
+//RUCM START
+		if(SStts.tts_enabled)
+			tts_voice = client.prefs?.xeno_voice
+			tts_voice_pitch = client.prefs?.xeno_pitch
+//RUCM END
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 
 	var/age_display = show_age_prefix ? age_prefix : ""

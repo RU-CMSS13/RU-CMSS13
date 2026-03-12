@@ -121,10 +121,18 @@
 			if(!is_shipside && !(current_turf?.z in coms_zs))
 				targets_to_garble += current_human
 
+//RUCM START
+	var/original_message = message
+//RUCM END
 	if(!isnull(signature))
 		message += "<br><br><i> Signed by, <br> [signature]</i>"
 
+/* RUCM CHANGE
 	announcement_helper(message, title, targets, sound_to_play, FALSE, targets_to_garble, FACTION_MARINE)
+*/
+//RUCM START
+	announcement_helper(message, title, targets, sound_to_play, FALSE, targets_to_garble, FACTION_MARINE, original_message = original_message)
+//RUCM END
 
 //AI announcement that uses talking into comms
 /proc/ai_announcement(message, sound_to_play = sound('sound/misc/interference.ogg'), logging = ARES_LOG_MAIN)
@@ -169,6 +177,9 @@
 		if(!ishuman(target) || isyautja(target) || !is_mainship_level(target_turf?.z))
 			targets.Remove(target)
 
+//RUCM START
+	var/original_message = message
+//RUCM END
 	if(!isnull(signature))
 		message += "<br><br><i> Signed by, <br> [signature]</i>"
 	switch(ares_logging)
@@ -177,14 +188,28 @@
 		if(ARES_LOG_SECURITY)
 			log_ares_security(title, message, signature)
 
+/* RUCM CHANGE
 	announcement_helper(message, title, targets, sound_to_play, quiet)
+*/
+//RUCM START
+	announcement_helper(message, title, targets, sound_to_play, quiet, original_message = original_message)
+//RUCM END
 
 /proc/all_hands_on_deck(message, title = MAIN_AI_SYSTEM, sound_to_play = sound('sound/misc/sound_misc_boatswain.ogg'))
 	shipwide_ai_announcement(message, title, sound_to_play, null, ARES_LOG_MAIN, FALSE)
 
+/* RUCM CHANGE
 /proc/announcement_helper(message, title, list/targets, sound_to_play, quiet, list/targets_to_garble, faction_to_garble)
+*/
+//RUCM START
+/proc/announcement_helper(message, title, list/targets, sound_to_play, quiet, list/targets_to_garble, faction_to_garble, original_message)
+//RUCM END
 	if(!message || !title || !targets) //Shouldn't happen
 		return
+
+//RUCM START
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), usr, original_message || message, CONFIG_GET(string/tts_announce_voice), list(targets, list(), list()), 100, 0, "announce")
+//RUCM END
 
 	var/garbled_message
 	var/garbled_count = length(targets_to_garble)

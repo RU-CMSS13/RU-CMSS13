@@ -208,7 +208,12 @@
 	return
 
 
+/* RUCM CHANGE
 /obj/proc/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking, italics = 0)
+*/
+//RUCM START
+/obj/proc/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+//RUCM END
 	return
 
 /obj/proc/see_emote(mob/living/M as mob, emote, audible = FALSE)
