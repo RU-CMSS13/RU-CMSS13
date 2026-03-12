@@ -1,6 +1,7 @@
 //RUCM CORE INCLUDES
 #include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
+#include "controllers\subsystem\tts.dm"
 #include "datums\ammo.dm"
 #include "datums\ammo\bullet\shotgun.dm"
 #include "datums\skills.dm"
@@ -46,6 +47,7 @@
 #include "modules\mob\living\carbon\human\emote.dm"
 #include "modules\mob\living\carbon\human\life.dm"
 #include "modules\projectiles\gun_attachables.dm"
+#include "modules\projectiles\gun.dm"
 #include "modules\projectiles\guns\rifles.dm"
 #include "modules\projectiles\guns\smgs.dm"
 #include "modules\projectiles\guns\specialist\launcher\rocket_launcher.dm"

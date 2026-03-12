@@ -878,9 +878,16 @@
 	. = ..()
 	hold.emp_act(severity)
 
+/* RUCM CHANGE
 /obj/item/clothing/accessory/storage/hear_talk(mob/M, msg)
 	hold.hear_talk(M, msg)
 	..()
+*/
+//RUCM START
+/obj/item/clothing/accessory/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	hold.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+	..()
+//RUCM END
 
 /obj/item/clothing/accessory/storage/attack_self(mob/user)
 	..()
