@@ -8,7 +8,7 @@
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
 
 	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
-	icon_state = "mech_open"
+	icon_state = "mech_body"
 
 	layer = BIG_XENO_LAYER
 	opacity = FALSE
@@ -41,6 +41,7 @@
 	health = 500
 	var/max_health = 500
 
+	var/selected_group = SELECTED_GROUP_HANDS
 	var/zoom = FALSE
 
 	dmg_multipliers = list(
@@ -61,7 +62,8 @@
 		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/get_stats,
 		/obj/vehicle/walker/proc/toggle_motion_detector,
-		/obj/vehicle/walker/proc/toggle_motion_detector
+		/obj/vehicle/walker/proc/toggle_reactor,
+		/obj/vehicle/walker/proc/switch_weapons
 	)
 
 	move_sounds = list(

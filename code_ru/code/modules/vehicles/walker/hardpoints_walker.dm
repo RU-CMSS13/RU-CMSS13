@@ -8,6 +8,9 @@
 #define WALKER_HARDPOIN_ARMOR "Armor"
 #define WALKER_HARDPOIN_SPINAL "Spinal"
 
+#define SELECTED_GROUP_HANDS list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND)
+#define SELECTED_GROUP_SPINAL list(WALKER_HARDPOIN_SPINAL)
+
 #define VEHICLE_REACTOR_FINE 0
 #define VEHICLE_REACTOR_DAMAGE 1
 #define VEHICLE_REACTOR_CRITICAL 2
@@ -33,6 +36,8 @@
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
+	var/mount_class = GUN_MOUNT_MECHA
+	var/obj/item/weapon/gun/mounted_gun = null
 
 /obj/item/hardpoint/walker/get_icon_image(x_offset, y_offset, new_dir, type_slot)
 	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
@@ -80,10 +85,17 @@
 			remove_buff(owner)
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
-	return
+	if(!mounted_gun)
+		return
+
+	var/obj/vehicle/walker/source = owner
+	if(slot in source.selected_group)
+		mounted_gun.set_gun_user(user)
 
 /obj/item/hardpoint/walker/proc/pilot_ejected(mob/user)
-	return
+	if(!mounted_gun)
+		return
+	mounted_gun.set_gun_user(null)
 
 
 //////////////////////////////////////////////////////////////
@@ -287,8 +299,35 @@
 	firing_arc = 45
 	destruction_on_zero = FALSE
 
-	var/mount_class = GUN_MOUNT_MECHA
-	var/obj/item/weapon/gun/mounted_gun = null
+/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir, type_slot)
+	type_slot = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
+
+	. = ..(x_offset, y_offset, new_dir, type_slot)
+
+	if(mounted_gun)
+		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		var/image/self = .[1]
+		gun.color = self.color
+		. += gun
+
+/obj/item/hardpoint/walker/hand/tgui_additional_data()
+	. = ..()
+
+	.["value_name"] = "Ammo"
+	if(!mounted_gun?.current_mag)
+		return
+
+	.["current_rounds"] = "[mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds]"
+	.["max_rounds"] = "[mounted_gun.current_mag.max_rounds]"
+
+/obj/item/hardpoint/walker/hand/check_modifiers(modifiers, button = FALSE)
+	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(button && (slot == WALKER_HARDPOIN_LEFT_HAND ? modifiers[BUTTON] != LEFT_CLICK : modifiers[BUTTON] != MIDDLE_CLICK))
+		return FALSE
+	return TRUE
+
 
 /obj/item/hardpoint/walker/hand/left
 	name = "Left Mecha Hand"
@@ -397,11 +436,31 @@
 	name = "M1488 Tactical Rocket Unit"
 	desc = "\"Special Deliver Package System\" includes a pair of heavy binoculars with laser aiming device, and bunker buster rocket. However due to only ground spotting and no remote, you have guide it at all the flight time for good hits."
 
+	mount_class = GUN_MOUNT_NO
 
-/obj/item/hardpoint/walker/spinal/tactical_missile
+/obj/item/hardpoint/walker/spinal/tactical_missile/Initialize()
+	. = ..()
 
+	mounted_gun = new /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile(src)
+	insert_gun()
 
+/obj/item/hardpoint/walker/spinal/tactical_missile/tgui_additional_data()
+	. = ..()
 
+	.["value_name"] = "Rockets"
+	if(!mounted_gun?.current_mag)
+		return
+
+	.["current_rounds"] = "[mounted_gun.current_mag?.current_rounds || 0]"
+	.["max_rounds"] = "1"
+
+/obj/item/hardpoint/walker/spinal/tactical_missile/check_modifiers(modifiers, button = FALSE)
+	if(!modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(button && (modifiers[BUTTON] != MIDDLE_CLICK))
+		return FALSE
+	return TRUE
 
 
 
@@ -537,53 +596,36 @@
 	)
 
 
+
+
 //////////////////////////////////////////////////////////////
 // GUNS
 
-/obj/item/hardpoint/walker/hand/tgui_additional_data()
-	. = ..()
 
-	.["value_name"] = "Ammo"
-	if(!mounted_gun?.current_mag)
-		return
-
-	.["current_rounds"] = "[mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds]"
-	.["max_rounds"] = "[mounted_gun.current_mag.max_rounds]"
-
-/obj/item/hardpoint/walker/hand/Destroy()
+/obj/item/hardpoint/walker/Destroy()
 	if(mounted_gun)
-		QDEL_NULL(mounted_gun.callback_can_fire)
-		QDEL_NULL(mounted_gun.callback_can_stop_fire)
-		QDEL_NULL(mounted_gun.callback_fire_stat)
-		mounted_gun.gun_holder = null
-		QDEL_NULL(mounted_gun)
+		remove_gun()
 
 	. = ..()
 
-/obj/item/hardpoint/walker/hand/pilot_entered(mob/user)
-	if(!mounted_gun)
+/obj/item/hardpoint/walker/on_install(obj/vehicle/walker/vehicle)
+	if(!vehicle.seats[VEHICLE_DRIVER])
 		return
+	pilot_entered(vehicle.seats[VEHICLE_DRIVER])
 
-	mounted_gun.set_gun_user(user)
-
-/obj/item/hardpoint/walker/hand/pilot_ejected(mob/user)
-	if(!mounted_gun)
+/obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/vehicle)
+	if(!vehicle.seats[VEHICLE_DRIVER])
 		return
+	pilot_ejected(vehicle.seats[VEHICLE_DRIVER])
 
-	mounted_gun.set_gun_user(null)
-
-
-//////////////////////////////////////////////////////////////
-// INTERACTIONS
-
-/obj/item/hardpoint/walker/hand/get_examine_text(mob/user)
+/obj/item/hardpoint/walker/get_examine_text(mob/user)
 	. = ..()
 
 	if(mounted_gun)
 		. += "There is \a [mounted_gun] module installed on [src]."
 		. += mounted_gun.get_examine_text(user)
 
-/obj/item/hardpoint/walker/hand/proc/try_reload(obj/item/attacking_item, mob/user)
+/obj/item/hardpoint/walker/proc/try_reload(obj/item/attacking_item, mob/user)
 	. = FALSE
 
 	if(istype(attacking_item, /obj/item/ammo_magazine))
@@ -594,7 +636,7 @@
 		. = TRUE
 		mounted_gun.on_pocket_attackby(attacking_item, user)
 
-/obj/item/hardpoint/walker/hand/proc/try_insert(obj/item/attacking_item, mob/user)
+/obj/item/hardpoint/walker/proc/try_insert(obj/item/attacking_item, mob/user)
 	. = FALSE
 
 	if(!isgun(attacking_item) || user.action_busy || mounted_gun)
@@ -615,16 +657,11 @@
 	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
 	SPAN_NOTICE("You place [attacking_gun] in [src]."))
 
+	mounted_gun = attacking_item
+	insert_gun(user)
 	name = "[name] with [attacking_gun]"
-	mounted_gun = attacking_gun
-	mounted_gun.gun_holder = src
-	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
-	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
-	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
-	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
-	owner.update_icon()
 
-/obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
+/obj/item/hardpoint/walker/proc/try_remove(obj/item/attacking_item, mob/user)
 	. = FALSE
 
 	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER) || !mounted_gun)
@@ -639,86 +676,73 @@
 	user.visible_message(SPAN_NOTICE("[user] removes [mounted_gun] from [src]."),
 	SPAN_NOTICE("You remove [mounted_gun] from [src]."))
 
-	QDEL_NULL(mounted_gun.callback_can_fire)
-	QDEL_NULL(mounted_gun.callback_can_stop_fire)
-	QDEL_NULL(mounted_gun.callback_fire_stat)
-	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
-	mounted_gun.gun_holder = null
-	user.put_in_hands(mounted_gun)
-	mounted_gun = null
+	remove_gun(user)
 	name = initial(name)
 	owner.update_icon()
-
-/obj/item/hardpoint/walker/hand/on_install(obj/vehicle/walker/vehicle)
-	if(!vehicle.seats[VEHICLE_DRIVER])
-		return
-	pilot_entered(vehicle.seats[VEHICLE_DRIVER])
-
-/obj/item/hardpoint/walker/hand/on_uninstall(obj/vehicle/walker/vehicle)
-	if(!vehicle.seats[VEHICLE_DRIVER])
-		return
-	pilot_ejected(vehicle.seats[VEHICLE_DRIVER])
 
 
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/hand/proc/guns_debuff(obj/projectile/projectile_to_fire, mob/user)
+/obj/item/hardpoint/walker/proc/insert_gun(mob/user)
+	mounted_gun.gun_holder = src
+	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
+	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
+	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
+	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
+	owner.update_icon()
+
+	if(user)
+		var/obj/vehicle/walker/source = owner
+		if(slot in source.selected_group)
+			mounted_gun.set_gun_user(user)
+
+/obj/item/hardpoint/walker/proc/remove_gun(mob/user)
+	QDEL_NULL(mounted_gun.callback_can_fire)
+	QDEL_NULL(mounted_gun.callback_can_stop_fire)
+	QDEL_NULL(mounted_gun.callback_fire_stat)
+	mounted_gun.set_gun_user(null)
+	mounted_gun.gun_holder = null
+	if(!user)
+		QDEL_NULL(mounted_gun)
+		return
+
+	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
+	user.put_in_hands(mounted_gun)
+	mounted_gun = null
+
+/obj/item/hardpoint/walker/proc/check_modifiers(modifiers, button = FALSE)
+	return TRUE
+
+/obj/item/hardpoint/walker/proc/guns_debuff(obj/projectile/projectile_to_fire, mob/user)
 	for(var/obj/item/hardpoint/walker/hand/hardpoint in owner.hardpoints)
 		if(hardpoint == src || !hardpoint.mounted_gun)
 			continue
 		if(hardpoint.mounted_gun.type == mounted_gun.type)
 			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2)
 
-/obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, params)
+/obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params)
 	var/obj/vehicle/walker/vehicle = owner
 	if(!vehicle.power_supply?.on_consume_enegry_action() || !health)
 		return FALSE
-
 	var/list/modifiers = params2list(params)
-	if(length(modifiers))
-		if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
-			return FALSE
-
-		if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
-			return FALSE
-
+	if(length(modifiers) && !check_modifiers(modifiers))
+		return FALSE
 	if(!in_firing_arc(object))
 		return FALSE
-
 	return TRUE
 
-/obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, params)
+/obj/item/hardpoint/walker/proc/can_stop_fire(datum/source, atom/object, params)
 	var/obj/vehicle/walker/vehicle = owner
 	if(!vehicle.power_supply?.turned_on || !health)
 		return TRUE
-
 	var/list/modifiers = params2list(params)
-	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
+	if(length(modifiers) && !check_modifiers(modifiers, TRUE))
 		return FALSE
-
-	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
-		return FALSE
-
-	if(slot == WALKER_HARDPOIN_LEFT_HAND ? modifiers[BUTTON] != LEFT_CLICK : modifiers[BUTTON] != MIDDLE_CLICK)
-		return FALSE
-
 	return TRUE
 
 
 //////////////////////////////////////////////////////////////
-
-
-/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir, type_slot)
-	type_slot = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
-
-	. = ..(x_offset, y_offset, new_dir, type_slot)
-
-	if(mounted_gun)
-		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
-		var/image/self = .[1]
-		gun.color = self.color
-		. += gun
 
 
 #undef VEHICLE_REACTOR_FINE

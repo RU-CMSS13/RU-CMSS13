@@ -30,7 +30,7 @@ AND YOULL BE FINE!*/
 
 
 /obj/vehicle/walker/proc/toggle_lights()
-	set name = "Lights on/off"
+	set name = "Lights On/Off"
 	set category = "Vehicle"
 
 	var/mob/user = usr
@@ -113,7 +113,7 @@ AND YOULL BE FINE!*/
 
 
 /obj/vehicle/walker/proc/toggle_zoom()
-	set name = "Zoom on/off"
+	set name = "Zoom On/Off"
 	set category = "Vehicle"
 
 	var/mob/user = usr
@@ -133,7 +133,7 @@ AND YOULL BE FINE!*/
 
 
 /obj/vehicle/walker/proc/toggle_motion_detector()
-	set name = "Motion Detector on/off"
+	set name = "Motion Detector On/Off"
 	set category = "Vehicle"
 
 	var/mob/user = usr
@@ -155,7 +155,7 @@ AND YOULL BE FINE!*/
 
 
 /obj/vehicle/walker/proc/toggle_reactor()
-	set name = "Reactor on/off"
+	set name = "Reactor On/Off"
 	set category = "Vehicle"
 
 	var/mob/user = usr
@@ -176,3 +176,32 @@ AND YOULL BE FINE!*/
 		return
 
 	power_supply.switch_reactor_operational_state()
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/switch_weapons()
+	set name = "Switch Weapons Group"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	if((selected_group in SELECTED_GROUP_SPINAL) || !(locate(/obj/item/hardpoint/walker/spinal/tactical_missile) in hardpoints))
+		selected_group = SELECTED_GROUP_HANDS
+	else
+		selected_group = SELECTED_GROUP_SPINAL
+
+	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
+		selected.pilot_ejected(user)
+		selected.pilot_entered(user)
+
+	to_chat(user, SPAN_WARNING("New selected group is [selected_group in SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))
