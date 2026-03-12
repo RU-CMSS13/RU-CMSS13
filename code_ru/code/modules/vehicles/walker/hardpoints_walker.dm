@@ -788,6 +788,119 @@
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
 
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/mounted/mecha_wm88
+	name = "M88 Mounted Automated Anti-Material rifle"
+	desc = "Anti-material rifle mounted on walker for counter-fire against enemy vehicles, each successfull hit will increase firerate and armor penetration"
+
+	icon_state = "mech_wm88_parts"
+	item_state = "redy_wm88"
+
+	current_mag = /obj/item/ammo_magazine/walker/wm88
+
+	start_automatic = TRUE
+	start_semiauto = FALSE
+
+	var/basic_fire_delay = FIRE_DELAY_TIER_1 + FIRE_DELAY_TIER_8
+	var/overheat_reset_cooldown = 3 SECONDS
+	var/overheat_rate = 2
+	var/overheat = 0
+	var/overheat_upper_limit = 8
+	var/overheat_self_destruction_rate = 5 //при финальном перегреве начнет получать урон при стрельбе умноженный на перегрев
+	var/steam_effect = /obj/effect/particle_effect/smoke/bad/wm88
+
+/obj/item/weapon/gun/mounted/mecha_wm88/Initialize(mapload)
+	. = ..()
+
+	RegisterSignal(src, COMSIG_GUN_BEFORE_FIRE, PROC_REF(apply_effect))
+	RegisterSignal(src, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
+
+/obj/item/weapon/gun/mounted/mecha_wm88/Destroy()
+	UnregisterSignal(src, list(COMSIG_MOB_FIRED_GUN, COMSIG_GUN_BEFORE_FIRE))
+
+	. = ..()
+
+/obj/item/weapon/gun/mounted/mecha_wm88/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(basic_fire_delay)
+
+	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
+	fa_max_scatter = SCATTER_AMOUNT_TIER_9
+
+	accuracy_mult += HIT_ACCURACY_MULT_TIER_5
+
+	scatter = SCATTER_AMOUNT_NONE
+	recoil = RECOIL_AMOUNT_TIER_3
+
+	damage_mult = BASE_BULLET_DAMAGE_MULT
+
+/obj/item/weapon/gun/mounted/mecha_wm88/set_bullet_traits()
+	LAZYADD(traits_to_give, list(
+		BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
+	))
+
+/obj/item/weapon/gun/mounted/mecha_wm88/proc/apply_effect(obj/item/proj, atom/target, mob/living/user)
+	if(!overheat)
+		return
+	switch(overheat)
+		if(2)
+			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a20]
+		if(4)
+			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a30]
+		if(6)
+			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a40]
+		if(8)
+			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a50]
+
+/obj/item/weapon/gun/mounted/mecha_wm88/proc/after_fire_effect(mob/living/user)
+	if(overheat == overheat_upper_limit)
+		var/turf/T = get_turf(src)
+		new steam_effect(T)
+		var/damage = overheat_self_destruction_rate * overheat
+		var/obj/item/hardpoint/walker/hand = gun_holder
+		hand.owner.take_damage_type(damage, "abstract", src)
+	else if(overheat < overheat_upper_limit)
+		overheat += overheat_rate
+	set_fire_delay(basic_fire_delay - overheat)
+
+	addtimer(CALLBACK(src, PROC_REF(reset_overheat_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+
+/obj/item/weapon/gun/mounted/mecha_wm88/proc/reset_overheat_buff(mob/user)
+	SIGNAL_HANDLER
+	to_chat(user, SPAN_WARNING("[src] beeps as it's extinguish."))
+	overheat = 0
+	current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88]
+	set_fire_delay(basic_fire_delay)
+
+/obj/effect/particle_effect/smoke/bad/wm88
+	smokeranking = SMOKE_RANK_MED
+	time_to_live = 8
+
+/obj/effect/particle_effect/smoke/bad/wm88/affect(mob/living/carbon/affected_mob)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(affected_mob.internal != null && affected_mob.wear_mask && (affected_mob.wear_mask.flags_inventory & ALLOWINTERNALS))
+		return FALSE
+	if(issynth(affected_mob))
+		return FALSE
+
+	if(prob(20))
+		affected_mob.drop_held_item()
+
+	affected_mob.apply_damage(15, BURN)
+	to_chat(affected_mob, SPAN_WARNING("YOUR FLASH IS BURNED BY HOT STEAM"))
+
+	if(affected_mob.coughedtime < world.time && !affected_mob.stat)
+		affected_mob.coughedtime = world.time + 2 SECONDS
+		if(ishuman(affected_mob)) //Humans only to avoid issues
+			affected_mob.emote("scream")
+	return TRUE
+
+
 
 
 //////////////////////////////////////////////////////////////
@@ -803,7 +916,7 @@
 
 	item_icons = list()
 
-	preload = /obj/item/explosive/grenade/incendiary/airburst
+	preload = null
 
 	w_class = SIZE_HUGE
 	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_AUTO_EJECTOR|GUN_WIELDED_FIRING_ONLY|GUN_RECOIL_BUILDUP
@@ -830,18 +943,20 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/weapon/gun/launcher/grenade/mounted/grenade_launcher
+/obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher
 	name = "Heavy Grenadelauncher"
 	desc = "Heavy Grenadelauncher."
 
 	icon_state = "mech_smartgun_parts"
 	item_state = "redy_smartgun"
 
+	preload = /obj/item/explosive/grenade/incendiary/airburst
+
 	is_lobbing = TRUE
 	direct_draw = FALSE
 	internal_slots = 24
 
-/obj/item/weapon/gun/launcher/grenade/mounted/grenade_launcher/set_gun_config_values()
+/obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher/set_gun_config_values()
 	. = ..()
 
 	set_fire_delay(FIRE_DELAY_TIER_4*2)
@@ -880,19 +995,19 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile
+/obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
 	name = "Tactical Missile Launcher"
 	desc = "Tactical missile launcher."
 
 	icon_state = "mech_smartgun_parts"
 	item_state = "redy_smartgun"
 
-	current_mag = /obj/item/ammo_magazine/rocket/brute
+	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
 
 	var/f_aiming_time = 30 SECONDS
 	var/aiming = FALSE
 
-/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
+/obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
 	if(aiming)
 		return
 
@@ -965,7 +1080,7 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/weapon/gun/shotgun/mounted/shotgun8g
+/obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g
 	name = "M32 Mounted Shotgun"
 	desc = "8 Gauge shotgun firing wave of AP bullets ineffective at distance, mounted on military walkers for devastation pacify"
 
@@ -975,7 +1090,7 @@
 	current_mag = /obj/item/ammo_magazine/walker/shotgun8g
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 
-/obj/item/weapon/gun/shotgun/mounted/shotgun8g/set_gun_config_values()
+/obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g/set_gun_config_values()
 	. = ..()
 
 	set_fire_delay(FIRE_DELAY_TIER_2)
@@ -1012,7 +1127,7 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/weapon/gun/flamer/mounted/flamer
+/obj/item/weapon/gun/flamer/mounted/mecha_flamer
 	name = "F40 \"Hellfire\" Flamethower"
 	desc = "Powerful flamethower, that can send any unprotected target straight to hell."
 
@@ -1056,7 +1171,7 @@
 	icon_state = "mech_shotgun8g_ammo"
 	max_rounds = 60
 	default_ammo = /datum/ammo/bullet/walker/shotgun8g
-	gun_type = /obj/item/weapon/gun/shotgun/mounted/shotgun8g
+	gun_type = /obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g
 
 
 /obj/item/ammo_magazine/walker/flamer
@@ -1065,7 +1180,7 @@
 	icon_state = "mech_flamer_s_ammo"
 	max_rounds = 300
 	default_ammo = /datum/ammo/flamethrower
-	gun_type = /obj/item/weapon/gun/flamer/mounted/flamer
+	gun_type = /obj/item/weapon/gun/flamer/mounted/mecha_flamer
 	flags_magazine = AMMUNITION_HIDE_AMMO
 
 	var/flamer_chem = "utnapthal"
@@ -1077,7 +1192,7 @@
 	var/fuel_pressure = 1 //How much fuel is used per tile fired
 	var/max_pressure = 10
 
-/obj/item/ammo_magazine/walker/flamer/Initialize(mapload, ...)
+/obj/item/ammo_magazine/walker/flamer/Initialize(mapload)
 	. = ..()
 	create_reagents(max_rounds)
 
@@ -1104,7 +1219,7 @@
 	icon_state = "mech_flamer_b_ammo"
 	max_rounds = 300
 	default_ammo = /datum/ammo/flamethrower
-	gun_type = /obj/item/weapon/gun/flamer/mounted/flamer
+	gun_type = /obj/item/weapon/gun/flamer/mounted/mecha_flamer
 
 	flamer_chem = "napalmb"
 
@@ -1115,11 +1230,19 @@
 	fuel_pressure = 1 //How much fuel is used per tile fired
 	max_pressure = 10
 
-/obj/item/ammo_magazine/rocket/brute
-	name = "M1488 Laser-Guided Rocket"
+/obj/item/ammo_magazine/walker/wm88
+	name = "M88 Mounted AMR Magazine"
+	desc = "A armament M88 magazine"
+	icon_state = "mech_wm88_ammo"
+	max_rounds = 80
+	default_ammo = /datum/ammo/bullet/walker/wm88
+	gun_type = /obj/item/weapon/gun/mounted/mecha_wm88
+
+/obj/item/ammo_magazine/rocket/brute/tactical
+	name = "M1488 Tactical Laser-Guided Rocket"
 	icon_state = "brute_rocket"
 	default_ammo = /datum/ammo/rocket/brute/tactical
-	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
 	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. The warhead itself uses an inflection stabilized shaped-charge to generate a low-frequency pressure wave that can flatten nearly any fortification in an ellipical radius of several meters. These rockets are known to have reduced lethality to personnel, but will put just about any ol' backwater mud-hut right into orbit."
 
 
@@ -1184,6 +1307,28 @@
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
 
+/datum/ammo/bullet/walker/wm88
+	name = ".458 SOCOM round"
+
+	damage = 80 //изначально 104
+	penetration = ARMOR_PENETRATION_TIER_2
+	accuracy = HIT_ACCURACY_TIER_1
+	shell_speed = AMMO_SPEED_TIER_6
+	accurate_range = 14
+	handful_state = "boomslang_bullet"
+
+/datum/ammo/bullet/walker/wm88/a20
+	penetration = ARMOR_PENETRATION_TIER_4
+
+/datum/ammo/bullet/walker/wm88/a30
+	penetration = ARMOR_PENETRATION_TIER_6
+
+/datum/ammo/bullet/walker/wm88/a40
+	penetration = ARMOR_PENETRATION_TIER_8
+
+/datum/ammo/bullet/walker/wm88/a50
+	penetration = ARMOR_PENETRATION_TIER_10
+
 /datum/ammo/rocket/brute/tactical
 	max_range = 18
 	max_distance = 18
@@ -1236,6 +1381,27 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "F40 Flamethower ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/ammo_wm88_walker
+	name = "M88 Mounted AMR Magazine (x2)"
+	contains = list(
+		/obj/item/ammo_magazine/walker/wm88,
+		/obj/item/ammo_magazine/walker/wm88,
+	)
+	cost = 40
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "M88 Mounted AMR Magazine crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/ammo_wm88_walker
+	name = "M1488 Tactical Laser-Guided Rocket (x1)"
+	contains = list(
+		/obj/item/ammo_magazine/rocket/brute/tactical,
+	)
+	cost = 100
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "M1488 Tactical Laser-Guided Rocket crate"
 	group = "Vehicle Ammo"
 
 

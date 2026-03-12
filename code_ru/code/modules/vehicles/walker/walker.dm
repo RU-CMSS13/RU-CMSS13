@@ -309,7 +309,7 @@
 //////////////////////////////////////////////////////////////
 // DAMAGE
 
-/obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
+/obj/vehicle/walker/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
 	if(!damage)
 		return
 

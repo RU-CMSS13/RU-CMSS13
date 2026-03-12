@@ -326,7 +326,12 @@
 
 //Generic proc for taking damage
 //ALWAYS USE THIS WHEN INFLICTING DAMAGE TO THE VEHICLES
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/take_damage_type(damage, type, atom/attacker)
+*/
+//RUCM START
+/obj/vehicle/multitile/take_damage_type(damage, type, atom/attacker)
+//RUCM END
 	var/all_broken = TRUE
 	for(var/obj/item/hardpoint/H in hardpoints)
 		// Health check is done before the hardpoint takes damage

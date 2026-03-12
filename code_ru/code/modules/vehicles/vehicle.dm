@@ -533,3 +533,6 @@
 	to_chat(user, SPAN_WARNING("You use [material] to restore some of [src] integrity!"))
 	material.use(required_material)
 	return repair_value * max_health
+
+/obj/vehicle/proc/take_damage_type()
+	return
