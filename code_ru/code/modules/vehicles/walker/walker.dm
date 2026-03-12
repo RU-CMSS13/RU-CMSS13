@@ -193,7 +193,7 @@
 		user.client.set_pixel_y(0)
 
 /obj/vehicle/walker/check_eye(mob/living/user)
-	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated() || !user.client)
+	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated())
 		user.unset_interaction()
 
 /obj/vehicle/walker/MouseDrop_T(mob/target, mob/living/carbon/human/user)
