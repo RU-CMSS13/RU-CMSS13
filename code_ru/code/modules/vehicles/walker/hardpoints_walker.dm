@@ -31,11 +31,12 @@
 	take_damage_type(list(0, severity / 2 * owner.get_dmg_multi(type)), "explosive", "explosion")
 
 /obj/item/hardpoint/walker/proc/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
-	if(!damage_to_apply || !real_damage)
-		damage_to_apply = round(damages_applied[2])
+	if(!damage_to_apply)
+		damage_to_apply = damages_applied[2]
+	if(!real_damage)
 		real_damage = damage_to_apply * damage_multiplier
 
-	damages_applied[2] -= damage_to_apply * 0.5
+	damages_applied[2] -= real_damage
 	damages_applied[1] += real_damage
 	health = max(0, health - real_damage)
 	if(!health)
@@ -95,7 +96,12 @@
 
 /obj/item/hardpoint/walker/reactor/proc/meltdown()
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
-	cell_explosion(get_turf(src), 600, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
+	var/obj/vehicle/walker/vehicle = owner
+	if(vehicle?.seats[VEHICLE_DRIVER])
+		vehicle.seats[VEHICLE_DRIVER].unset_interaction()
+		vehicle.power_supply = null
+
+	cell_explosion(get_turf(src), 1000, 300, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
 /obj/item/hardpoint/walker/reactor/proc/switch_reactor_operational_state()
 	if(rebooting)
@@ -314,7 +320,7 @@
 
 	type_multipliers = list(
 		"all" = 0.95,
-		"fire" = 0.2
+		"fire" = 0
 	)
 
 /obj/item/hardpoint/walker/armor/ballistic

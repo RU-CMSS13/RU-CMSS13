@@ -39,8 +39,9 @@
 		"acid" = 2.5,
 		"slash" = 1,
 		"bullet" = 0.5,
-		"explosive" = 5,
+		"explosive" = 2.5,
 		"blunt" = 0.8,
+		"fire" = 0.5,
 		"abstract" = 1
 	)
 
@@ -303,26 +304,21 @@
 
 /obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
 	var/list/damages_applied = list(0, damage * get_dmg_multi(type))
-
-	var/obj/item/hardpoint/walker/hardpoint_armor = locate(/obj/item/hardpoint/walker/armor) in hardpoints
-	if(hardpoint_armor?.can_take_damage())
-		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
-	damage = damages_applied[2]
+	if(!damages_applied[2])
+		return
 
 	var/mob/living/user = seats[VEHICLE_DRIVER]
-	if(attacked_hardpoint?.can_take_damage())
-		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
-	else if(zone_selected == "head" && user)
-		user.apply_armoured_damage(damage, ARMOR_MELEE, BRUTE, null, 20)
-	else
-		var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
-		for(var/length = 1 to length(hardpoints_remaining))
-			attacked_hardpoint = pick(hardpoints_remaining)
-			hardpoints_remaining -= attacked_hardpoint
+	if(zone_selected == "all")
+		damage = damages_applied[2]
+		user.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 50)
+		damages_applied[1] += damage
+		for(attacked_hardpoint in hardpoints)
 			if(!attacked_hardpoint.can_take_damage())
 				continue
 			attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
-			break
+			damages_applied[2] = damage
+	else
+		damage = handle_modules_take_damage(damage, type, attacker, attacked_hardpoint, zone_selected)
 
 	damages_applied[1] += damage
 	health = max(0, health - damage)
@@ -344,6 +340,35 @@
 	else
 		update_icon()
 
+/obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
+	var/obj/item/hardpoint/walker/hardpoint_armor = locate(/obj/item/hardpoint/walker/armor) in hardpoints
+	if(hardpoint_armor?.can_take_damage())
+		if(zone_selected == "chest")
+			hardpoint_armor.take_damage_type(damages_applied, type, attacker, damages_applied[2], damages_applied[2])
+			return
+		else
+			hardpoint_armor.take_damage_type(damages_applied, type, attacker)
+
+	. = damages_applied[2]
+	if(attacked_hardpoint?.can_take_damage())
+		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
+		return
+
+	var/mob/living/user = seats[VEHICLE_DRIVER]
+	if(zone_selected == "head" && user)
+		user.apply_armoured_damage(., ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 20)
+		damages_applied[1] += .
+		return
+
+	var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
+	for(var/length = 1 to length(hardpoints_remaining))
+		attacked_hardpoint = pick(hardpoints_remaining)
+		hardpoints_remaining -= attacked_hardpoint
+		if(!attacked_hardpoint.can_take_damage())
+			continue
+		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
+		break
+
 /obj/vehicle/walker/get_dmg_multi(type)
 	if(!dmg_multipliers.Find(type))
 		return 1
@@ -352,13 +377,15 @@
 /obj/vehicle/walker/ex_act(severity)
 	take_damage_type(severity, "explosive", "explosion")
 
+/obj/vehicle/walker/flamer_fire_act(dam, datum/cause_data/flame_cause_data)
+	take_damage_type(dam, "fire", flame_cause_data.resolve_mob(), null, "all")
 
 //////////////////////////////////////////////////////////////
 //ATTACKS
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
-		take_damage_type(attacking_item.force * 0.05, "blunt", user)
+		take_damage_type(attacking_item.force, "blunt", user)
 		return
 
 	if(istype(attacking_item, /obj/item/hardpoint/walker))
