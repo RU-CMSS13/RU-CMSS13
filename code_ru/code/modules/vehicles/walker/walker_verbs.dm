@@ -43,12 +43,12 @@ AND YOULL BE FINE!*/
 		return
 
 	if(lighting_holder)
-		if(lighting_holder.light)
+		if(lighting_holder.light_on)
 			lighting_holder.set_light_on(FALSE)
 		else
 			lighting_holder.set_light_on(TRUE)
 	else
-		if(light)
+		if(light_on)
 			set_light_on(FALSE)
 		else
 			set_light_on(TRUE)
@@ -146,6 +146,8 @@ AND YOULL BE FINE!*/
 		return
 
 	var/obj/item/hardpoint/walker/spinal/artilery/provider = locate() in hardpoints
+	if(!provider)
+		return
 	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
 
 

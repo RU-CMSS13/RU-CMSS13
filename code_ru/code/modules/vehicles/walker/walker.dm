@@ -162,7 +162,7 @@
 		selected.pilot_ejected(user)
 
 /obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom)
-	if(user.client)
+	if(!user.client)
 		return
 
 	if(selected_zoom)

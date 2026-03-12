@@ -569,13 +569,12 @@
 	if(attacking_gun.mount_class != mount_class)
 		return
 
-	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || !mounted_gun)
-		return
-
-	if(user.drop_inv_item_to_loc(attacking_gun, src))
+	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || mounted_gun)
 		return
 
 	. = TRUE
+
+	user.drop_inv_item_to_loc(attacking_gun, src)
 
 	playsound(get_turf(src), 'sound/items/Crowbar.ogg', 25, 1)
 	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
@@ -596,7 +595,7 @@
 	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER) || !mounted_gun)
 		return
 
-	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || mounted_gun)
+	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || !mounted_gun)
 		return
 
 	. = TRUE
