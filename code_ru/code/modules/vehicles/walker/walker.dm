@@ -152,7 +152,7 @@
 		return
 
 	if(selected_zoom)
-		var/obj/item/hardpoint/walker/back/artilery/zoom_provider = locate() in hardpoints
+		var/obj/item/hardpoint/walker/spinal/artilery/zoom_provider = locate() in hardpoints
 		if(!zoom_provider)
 			return
 
@@ -314,7 +314,7 @@
 		return
 
 	var/list/damages_applied = list(0, damage)
-	var/obj/item/hardpoint/walker/back/shield/projector = locate() in hardpoints
+	var/obj/item/hardpoint/walker/spinal/shield/projector = locate() in hardpoints
 	if(projector.take_hits(damages_applied))
 		return
 
@@ -497,6 +497,8 @@
 
 	icon = 'code_ru/icons/obj/items/fuel_rod.dmi'
 	icon_state = "rod"
+
+	w_class = SIZE_HUGE
 
 	// ~40 minutes of work time under load
 	fuel_amount = 24000

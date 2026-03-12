@@ -59,6 +59,7 @@
 #include "modules\vehicles\multitile\apc\apc.dm"
 #include "modules\vehicles\multitile\apc\multitile_verbs.dm"
 #include "modules\vehicles\walker\hardpoints_walker.dm"
+#include "modules\vehicles\walker\walker_ammo.dm"
 #include "modules\vehicles\walker\walker_guns.dm"
 #include "modules\vehicles\walker\walker_vendor.dm"
 #include "modules\vehicles\walker\walker_verbs.dm"

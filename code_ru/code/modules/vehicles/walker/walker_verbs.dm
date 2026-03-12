@@ -142,7 +142,7 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != usr)
 		return
 
-	var/obj/item/hardpoint/walker/back/artilery/provider = locate() in hardpoints
+	var/obj/item/hardpoint/walker/spinal/artilery/provider = locate() in hardpoints
 	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
 
 
