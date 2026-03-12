@@ -268,11 +268,6 @@
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
-	if(seats[VEHICLE_DRIVER])
-		icon_state = "mech_prep"
-	else
-		icon_state = "mech_open"
-
 	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
 		if(istype(hardpoint_image))
