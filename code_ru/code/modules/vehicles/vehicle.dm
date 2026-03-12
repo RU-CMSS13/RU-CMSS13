@@ -424,6 +424,8 @@
 	if(!can_rotate(deg))
 		return
 
+	. = TRUE
+
 	move_momentum = move_momentum * move_turn_momentum_loss_factor
 	if(abs(move_momentum) < 0.5)
 		if(move_momentum < 0)

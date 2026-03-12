@@ -123,7 +123,7 @@
 	user.forceMove(src)
 	user.reset_view(src)
 	if(zoom)
-		update_pixels(user, TRUE)
+		update_pixels(TRUE)
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
 	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
@@ -145,12 +145,12 @@
 	if(user.client)
 		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
 
+	user.reset_view(null)
+	if(zoom)
+		update_pixels(FALSE)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
 	user.setDir(dir)
-	user.reset_view(null)
-	if(zoom)
-		update_pixels(user, FALSE)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
 
 	if(user.client)
@@ -161,7 +161,8 @@
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
 
-/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom)
+/obj/vehicle/walker/proc/update_pixels(selected_zoom)
+	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user.client)
 		return
 
@@ -235,7 +236,7 @@
 		return
 
 	if(zoom && seats[VEHICLE_DRIVER])
-		update_pixels(seats[VEHICLE_DRIVER], TRUE)
+		update_pixels(TRUE)
 
 /obj/vehicle/walker/proc/recalculate_legs()
 	move_delay = initial(move_delay)
