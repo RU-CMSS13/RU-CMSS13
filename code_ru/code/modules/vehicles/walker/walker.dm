@@ -28,7 +28,11 @@
 		/obj/item/hardpoint/walker/head,
 		/obj/item/hardpoint/walker/spinal/artilery,
 		/obj/item/hardpoint/walker/spinal/tactical_missile,
-		/obj/item/hardpoint/walker/spinal/shield,
+		/obj/item/hardpoint/walker/armor/paladin,
+		/obj/item/hardpoint/walker/armor/concussive,
+		/obj/item/hardpoint/walker/armor/caustic,
+		/obj/item/hardpoint/walker/armor/fire,
+		/obj/item/hardpoint/walker/armor/ballistic
 	)
 
 	req_access = list(ACCESS_MARINE_WALKER)
@@ -138,7 +142,6 @@
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_entered(user)
-
 	update_icon()
 
 /obj/vehicle/walker/on_unset_interaction(mob/living/user)
@@ -147,9 +150,9 @@
 	if(user.client)
 		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
 
-	user.reset_view(null)
 	if(zoom)
 		update_pixels(FALSE)
+	user.reset_view(null)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
 	user.setDir(dir)
@@ -162,6 +165,7 @@
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
+	update_icon()
 
 /obj/vehicle/walker/proc/update_pixels(selected_zoom, override_zoom)
 	var/mob/user = seats[VEHICLE_DRIVER]
@@ -183,12 +187,12 @@
 				user.client.set_pixel_y(viewoffset)
 			if(SOUTH)
 				user.client.set_pixel_x(0)
-				user.client.set_pixel_y(-1 * viewoffset)
+				user.client.set_pixel_y(-viewoffset)
 			if(EAST)
 				user.client.set_pixel_x(viewoffset)
 				user.client.set_pixel_y(0)
 			if(WEST)
-				user.client.set_pixel_x(-1 * viewoffset)
+				user.client.set_pixel_x(-viewoffset)
 				user.client.set_pixel_y(0)
 
 	else
@@ -229,6 +233,9 @@
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(!power_supply?.on_consume_enegry_action())
+		return FALSE
+
+	if(move_delay == initial(move_delay))
 		return FALSE
 
 	. = ..()
@@ -417,7 +424,7 @@
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
 		take_damage_type(attacking_item.force / 10, "blunt", user)
-		return
+		return ..()
 
 	if(istype(attacking_item, /obj/item/hardpoint/walker))
 		install_hardpoint(attacking_item, user)

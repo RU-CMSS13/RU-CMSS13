@@ -471,12 +471,7 @@
 /obj/vehicle/proc/update_next_move()
 	// 1/((m/M)*b) where m is momentum, M is max momentum and b is the build factor
 	var/anti_build_factor = 1/((max(abs(move_momentum), 1)/move_max_momentum) * move_momentum_build_factor)
-
-	if(move_delay == initial(move_delay))
-		next_move = INFINITY
-	else
-		next_move = world.time + move_delay * move_momentum_build_factor * anti_build_factor * misc_multipliers["move"]
-
+	next_move = world.time + move_delay * move_momentum_build_factor * anti_build_factor * misc_multipliers["move"]
 	l_move_time = world.time
 
 // This just checks if the vehicle can physically move in the given direction

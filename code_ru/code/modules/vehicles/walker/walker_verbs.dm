@@ -126,7 +126,7 @@ AND YOULL BE FINE!*/
 		return
 
 	zoom = !zoom
-	update_pixels(user, zoom)
+	update_pixels(zoom)
 
 
 //////////////////////////////////////////////////////////////
