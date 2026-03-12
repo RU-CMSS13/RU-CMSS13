@@ -301,6 +301,10 @@
 	return TRUE
 
 /obj/vehicle/multitile/remove_hardpoint(obj/item/hardpoint/old, mob/user)
+	. = ..()
+	if(!.)
+		return
+
 	if(old.slot == HDPT_TREADS && clamped)
 		detach_clamp(user)
 

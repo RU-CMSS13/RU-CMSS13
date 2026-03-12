@@ -142,6 +142,7 @@
 	if(user.client)
 		add_verb(user.client, verb_list)
 	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
+	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(reset_interaction))
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_entered(user)
@@ -150,13 +151,10 @@
 /obj/vehicle/walker/proc/reset_interaction(mob/living/user)
 	SIGNAL_HANDLER
 
-	user.set_interaction(src)
+	user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
+	add_verb(user.client, verb_list)
 
-/obj/vehicle/walker/on_unset_interaction(mob/living/user, logout)
-	if(logout)
-		RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(reset_interaction))
-		return
-
+/obj/vehicle/walker/on_unset_interaction(mob/living/user)
 	remove_action(user, /datum/action/human_action/mg_exit)
 
 	if(user.client)
@@ -173,7 +171,7 @@
 	if(user.client)
 		remove_verb(user.client, verb_list)
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
-	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION))
+	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION, COMSIG_MOB_LOGIN))
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
@@ -237,17 +235,22 @@
 	if(!do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) || seats[VEHICLE_DRIVER])
 		return
 
+	user.drop_held_items()
 	user.set_interaction(src)
 
 
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/remove_hardpoint(obj/item/hardpoint/old, mob/user)
+	. = ..()
+	if(!.)
+		return
+
+	recalculate_legs()
+
 /obj/vehicle/walker/pre_movement(direction)
 	if(!power_supply?.on_consume_enegry_action())
-		return FALSE
-
-	if(move_delay == initial(move_delay))
 		return FALSE
 
 	. = ..()
@@ -267,6 +270,9 @@
 	move_turn_momentum_loss_factor = initial(move_turn_momentum_loss_factor)
 
 	for(var/obj/item/hardpoint/walker/leg/leggy in hardpoints)
+		if(!health)
+			continue
+
 		move_delay -= leggy.move_delay
 		move_max_momentum -= leggy.move_max_momentum
 		move_momentum_build_factor -= leggy.move_momentum_build_factor

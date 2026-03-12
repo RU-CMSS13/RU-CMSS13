@@ -79,10 +79,9 @@
 	damages_applied[2] -= real_damage
 	damages_applied[1] += real_damage
 	health = max(0, health - real_damage)
-	if(!health)
-		if(owner)
-			deactivate()
-			remove_buff(owner)
+	if(!health && owner)
+		deactivate(owner)
+		remove_buff(owner)
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	if(!mounted_gun)
@@ -225,8 +224,9 @@
 	if(!fuel?.fuel_amount)
 		turned_on = FALSE
 		return FALSE
+
+	fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 	if(!reactor_state)
-		fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 		return TRUE
 
 	switch(reactor_state)
@@ -238,7 +238,6 @@
 				turned_on = FALSE
 
 	if(turned_on)
-		fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 		return TRUE
 
 	rebooting = TRUE
@@ -359,8 +358,7 @@
 	var/move_turn_momentum_loss_factor = 0.25
 	var/move_momentum_build_factor = 0.5
 
-/obj/item/hardpoint/walker/leg/deactivate()
-	var/obj/vehicle/walker/vehicle = owner
+/obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/vehicle)
 	vehicle.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/vehicle)
@@ -368,9 +366,6 @@
 		return
 
 	vehicle.recalculate_legs()
-
-/obj/item/hardpoint/walker/leg/on_uninstall(obj/vehicle/walker/vehicle)
-	deactivate()
 
 /obj/item/hardpoint/walker/leg/left
 	name = "Left Mecha Leg"

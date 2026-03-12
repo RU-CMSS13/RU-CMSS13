@@ -43,6 +43,7 @@
 
 	max_rounds = 300
 	gun_type = /obj/item/weapon/gun/flamer/mounted/mecha_flamer
+	stripe_icon = FALSE
 
 	max_intensity = 40
 	max_range = 5
