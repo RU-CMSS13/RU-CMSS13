@@ -84,7 +84,7 @@ AND YOULL BE FINE!*/
 
 	var/selected_module = tgui_input_list(user, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
 	if(!selected_module)
-		continue
+		return
 	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
 	if(!mounted_gun || mounted_gun.gun_holder != src || !mounted_gun.current_mag)
 		return FALSE
