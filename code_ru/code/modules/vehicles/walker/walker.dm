@@ -30,7 +30,8 @@
 	vehicle_faction = user.faction
 	user.forceMove(src)
 	user.reset_view(src)
-	update_pixels(user)
+	if(zoom)
+		update_pixels(user, TRUE)
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
 	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
@@ -41,7 +42,7 @@
 		add_verb(user.client, verb_list)
 	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
 
-	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_entered(user)
 
 	update_icon()
@@ -56,7 +57,8 @@
 	user.forceMove(get_turf(src))
 	user.setDir(dir)
 	user.reset_view(null)
-	update_pixels(user, FALSE)
+	if(zoom)
+		update_pixels(user, FALSE)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
 
 	if(user.client)
@@ -64,10 +66,10 @@
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
 	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION))
 
-	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
 
-/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom = TRUE, new_view_size = 12)
+/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom, new_view_size = 12)
 	if(user.client)
 		return
 
@@ -133,13 +135,13 @@
 	else
 		icon_state = "mech_open"
 
-	for(var/obj/item/hardpoint/hardpoint in hardpoints)
+	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
 		if(istype(hardpoint_image))
 			hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.1
 		else if(islist(hardpoint_image))
 			var/list/image/hardpoint_image_list = hardpoint_image
-			for(var/image/subimage in hardpoint_image_list)
+			for(var/image/subimage as anything in hardpoint_image_list)
 				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
 		overlays += hardpoint_image
 
@@ -183,7 +185,7 @@
 	.["integrity"] = floor(100 * health / max_health)
 	.["hardpoint_data"] = list()
 
-	for(var/obj/item/hardpoint/hardpoint in hardpoints)
+	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/list/hardpoint_info = list()
 		.["hardpoint_data"] += list(hardpoint_info)
 
