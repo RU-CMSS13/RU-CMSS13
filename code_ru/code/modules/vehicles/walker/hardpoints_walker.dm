@@ -33,6 +33,24 @@
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
+
+/obj/item/hardpoint/walker/get_icon_image(x_offset, y_offset, new_dir, type_slot)
+	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+	. = list(self)
+	switch(floor((health / initial(health)) * 100))
+		if(0)
+			self.color = "#888888"
+		if(1 to 20)
+			self.color = "#4e4e4e"
+		if(21 to 40)
+			self.color = "#6e6e6e"
+		if(41 to 60)
+			self.color = "#8b8b8b"
+		if(61 to 80)
+			self.color = "#bebebe"
+		else
+			self.color = null
+
 /obj/item/hardpoint/walker/get_origin_turf()
 	return get_turf(src)
 
@@ -240,9 +258,23 @@
 	name = "Mecha Head"
 	desc = "Protects pilot from potential danger outside mecha."
 
+	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'
+	icon_state = "cockpit_glass"
+	disp_icon_state = "mech_cockpit"
+
 	slot = WALKER_HARDPOIN_HEAD
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	destruction_on_zero = FALSE
+
+
+/obj/item/hardpoint/walker/head/get_icon_image(x_offset, y_offset, new_dir, type_slot)
+	if(owner?.seats[VEHICLE_DRIVER])
+		type_slot = "_closed"
+	else
+		type_slot = "_open"
+
+	. = ..(x_offset, y_offset, new_dir, type_slot)
+
 
 //////////////////////////////////////////////////////////////
 // HANDS
@@ -366,6 +398,7 @@
 	desc = "\"Special Deliver Package System\" includes a pair of heavy binoculars with laser aiming device, and bunker buster rocket. However due to only ground spotting and no remote, you have guide it at all the flight time for good hits."
 
 
+/obj/item/hardpoint/walker/spinal/tactical_missile
 
 
 
@@ -676,26 +709,14 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir)
-	var/hardpoint = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
-	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
-	. = list(self)
-	switch(floor((health / initial(health)) * 100))
-		if(0)
-			self.color = "#888888"
-		if(1 to 20)
-			self.color = "#4e4e4e"
-		if(21 to 40)
-			self.color = "#6e6e6e"
-		if(41 to 60)
-			self.color = "#8b8b8b"
-		if(61 to 80)
-			self.color = "#bebebe"
-		else
-			self.color = null
+/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir, type_slot)
+	type_slot = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
+
+	. = ..(x_offset, y_offset, new_dir, type_slot)
 
 	if(mounted_gun)
-		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		var/image/self = .[1]
 		gun.color = self.color
 		. += gun
 

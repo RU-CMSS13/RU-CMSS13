@@ -34,7 +34,7 @@ export const Walker = (props) => {
   const height = 150 + hardpoint_data.length * 80;
 
   return (
-    <Window width={400} height={height}>
+    <Window width={500} height={height}>
       <Window.Content>
         <Section>
           {integrity >= 0 ? (

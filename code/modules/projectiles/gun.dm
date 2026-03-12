@@ -2191,7 +2191,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	SIGNAL_HANDLER
 
 	if(callback_can_stop_fire)
-		if(!callback_can_stop_fire.Invoke(source, object, location, control, params))
+		if(!callback_can_stop_fire.Invoke(source, object, params))
 			return
 
 	else if(!target || (gun_user.get_active_hand() != src))
