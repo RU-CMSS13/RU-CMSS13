@@ -32,52 +32,30 @@
 	gun_type = /obj/item/weapon/gun/mounted/mecha_shotgun8g
 
 
-/obj/item/ammo_magazine/walker/flamer
+/obj/item/ammo_magazine/flamer_tank/walker
 	name = "F40 UT-Napthal Canister"
 	desc = "Canister for mounted flamethower"
+
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
 	icon_state = "mech_flamer_s_ammo"
+
+	w_class = SIZE_LARGE
+
 	max_rounds = 300
-	default_ammo = /datum/ammo/flamethrower
 	gun_type = /obj/item/weapon/gun/flamer/mounted/mecha_flamer
-	flags_magazine = AMMUNITION_HIDE_AMMO
 
-	var/flamer_chem = "utnapthal"
+	max_intensity = 40
+	max_range = 5
+	max_duration = 30
 
-	var/max_intensity = 40
-	var/max_range = 5
-	var/max_duration = 30
+	fuel_pressure = 1 //How much fuel is used per tile fired
+	max_pressure = 10
 
-	var/fuel_pressure = 1 //How much fuel is used per tile fired
-	var/max_pressure = 10
-
-/obj/item/ammo_magazine/walker/flamer/Initialize(mapload)
-	. = ..()
-	create_reagents(max_rounds)
-
-	if(flamer_chem)
-		reagents.add_reagent(flamer_chem, max_rounds)
-
-	reagents.min_fire_dur = 1
-	reagents.min_fire_int = 1
-	reagents.min_fire_rad = 1
-
-	reagents.max_fire_dur = max_duration
-	reagents.max_fire_rad = max_range
-	reagents.max_fire_int = max_intensity
-
-/obj/item/ammo_magazine/walker/flamer/get_ammo_percent()
-	if(!reagents)
-		return 0
-
-	return 100 * (reagents.total_volume / max_rounds)
-
-/obj/item/ammo_magazine/walker/flamer/btype
+/obj/item/ammo_magazine/flamer_tank/walker/btype
 	name = "F40 UT-Napthal B-type Canister"
 	desc = "Canister for mounted flamethower"
+
 	icon_state = "mech_flamer_b_ammo"
-	max_rounds = 300
-	default_ammo = /datum/ammo/flamethrower
-	gun_type = /obj/item/weapon/gun/flamer/mounted/mecha_flamer
 
 	flamer_chem = "napalmb"
 
@@ -235,8 +213,8 @@
 /datum/supply_packs/ammo_F40_walker
 	name = "F40 Flamethower Mixed magazines (UT-Napthal x1, B-Type x1)"
 	contains = list(
-		/obj/item/ammo_magazine/walker/flamer,
-		/obj/item/ammo_magazine/walker/flamer/btype,
+		/obj/item/ammo_magazine/flamer_tank/walker,
+		/obj/item/ammo_magazine/flamer_tank/walker/btype,
 	)
 	cost = 20
 	containertype = /obj/structure/closet/crate/ammo

@@ -611,11 +611,15 @@
 	. = ..()
 
 /obj/item/hardpoint/walker/on_install(obj/vehicle/walker/vehicle)
+	. = ..()
+
 	if(!vehicle.seats[VEHICLE_DRIVER])
 		return
 	pilot_entered(vehicle.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/vehicle)
+	. = ..()
+
 	if(!vehicle.seats[VEHICLE_DRIVER])
 		return
 	pilot_ejected(vehicle.seats[VEHICLE_DRIVER])

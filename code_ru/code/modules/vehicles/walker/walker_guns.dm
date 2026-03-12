@@ -457,7 +457,7 @@
 	icon_state = "mech_flamer_parts"
 	item_state = "redy_flamer"
 
-	current_mag = /obj/item/ammo_magazine/walker/flamer
+	current_mag = /obj/item/ammo_magazine/flamer_tank/walker
 	fire_sound = list('sound/weapons/gun_flamethrower2.ogg')
 
 	mount_class = GUN_MOUNT_MECHA

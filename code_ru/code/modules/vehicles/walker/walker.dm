@@ -26,8 +26,11 @@
 		/obj/item/hardpoint/walker/leg/right,
 		/obj/item/hardpoint/walker/reactor,
 		/obj/item/hardpoint/walker/head,
+		/obj/item/hardpoint/walker/spinal/powerful_cooling,
 		/obj/item/hardpoint/walker/spinal/artilery,
 		/obj/item/hardpoint/walker/spinal/tactical_missile,
+		/obj/item/hardpoint/walker/spinal/shield,
+		/obj/item/hardpoint/walker/spinal/jetpack,
 		/obj/item/hardpoint/walker/armor/paladin,
 		/obj/item/hardpoint/walker/armor/concussive,
 		/obj/item/hardpoint/walker/armor/caustic,
@@ -351,7 +354,7 @@
 	var/mob/living/user = seats[VEHICLE_DRIVER]
 	if(zone_selected == "all")
 		damage = damages_applied[2]
-		user.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 50)
+		user?.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 50)
 		damages_applied[1] += damage
 		for(attacked_hardpoint in hardpoints)
 			if(!attacked_hardpoint.can_take_damage())
@@ -477,7 +480,7 @@
 
 /obj/vehicle/walker/attack_alien(mob/living/carbon/xenomorph/xeno)
 	if(xeno.a_intent == INTENT_HELP && seats[VEHICLE_DRIVER])
-		if(do_after(xeno, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED))
+		if(do_after(xeno, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) && seats[VEHICLE_DRIVER])
 			seats[VEHICLE_DRIVER].unset_interaction()
 			return XENO_NONCOMBAT_ACTION
 		return XENO_NO_DELAY_ACTION
@@ -512,8 +515,9 @@
 		if("r_arm", "r_hand")
 			attacked_hardpoint = locate(/obj/item/hardpoint/walker/hand/right) in hardpoints
 
-	xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [attacked_hardpoint] installed on [src]!"),
-	SPAN_DANGER("We slash \the [attacked_hardpoint] installed on [src]!"))
+	var/attack_msg = attacked_hardpoint ? "[attacked_hardpoint] installed on [src]" : src
+	xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [attack_msg]!"),
+	SPAN_DANGER("We slash \the [attack_msg]!"))
 	playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
 
 	take_damage_type(damage * damage_mult, "slash", xeno, attacked_hardpoint, check_zone(xeno.zone_selected))
