@@ -477,7 +477,7 @@
 	)
 
 /obj/item/hardpoint/walker/armor/fire
-	name = "Fire Armor"
+	name = "Fire Fighter Armor"
 	desc = "Protects vehicles from fire."
 
 	icon_state = "concussive_armor"

@@ -29,7 +29,7 @@
 	icon_state = "mech_shotgun8g_ammo"
 	max_rounds = 60
 	default_ammo = /datum/ammo/bullet/walker/shotgun8g
-	gun_type = /obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g
+	gun_type = /obj/item/weapon/gun/mounted/mecha_shotgun8g
 
 
 /obj/item/ammo_magazine/walker/flamer

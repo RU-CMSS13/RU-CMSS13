@@ -30,7 +30,7 @@
 
 /obj/effect/essentials_set/walker/shotgun8g
 	spawned_gear_list = list(
-		/obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g,
+		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
 		/obj/item/ammo_magazine/walker/shotgun8g,
 		/obj/item/ammo_magazine/walker/shotgun8g,
 	)
@@ -61,6 +61,12 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M1488 Tactical Rocket Unit", 45, /obj/item/hardpoint/walker/spinal/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 35, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
+	list("ARMOR", 0, null, null, null),
+	list("Paladin Armor", 40, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
+	list("Concussive Armor", 40, /obj/item/hardpoint/walker/armor/concussive, null, VENDOR_ITEM_REGULAR),
+	list("Caustic Armor", 40, /obj/item/hardpoint/walker/armor/caustic, null, VENDOR_ITEM_REGULAR),
+	list("Fire Fighter Armor", 40, /obj/item/hardpoint/walker/armor/fire, null, VENDOR_ITEM_REGULAR),
+	list("Ballistic Armor", 40, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
 
 	list("WEAPONS KITS (Recommended 1-2 units)", 0, null, null, null),
 	list("M88 Mounted Automated Anti-Material rifle", 40, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
