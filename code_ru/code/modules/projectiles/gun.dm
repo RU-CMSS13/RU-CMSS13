@@ -10,6 +10,7 @@
 	/// For gun holder
 	var/datum/callback/callback_can_fire
 	var/datum/callback/callback_can_stop_fire
+	var/datum/callback/callback_fire_stat
 
 /obj/item/weapon/gun/proc/muzzle_flash(angle, mob/user)
 	if(!muzzle_flash || flags_gun_features & GUN_SILENCED || isnull(angle))

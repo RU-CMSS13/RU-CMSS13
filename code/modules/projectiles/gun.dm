@@ -1903,8 +1903,13 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 */
 //RUCM START SCATTER_AMOUNT_NONE
 	if(flags_mounted_gun_features & GUN_MOUNTED)
-		gun_accuracy_mult = accuracy_mult + HIT_ACCURACY_MULT_TIER_5
-		gun_scatter = SCATTER_AMOUNT_NONE
+		if(callback_fire_stat)
+			var/list/modifs = callback_fire_stat.Invoke(projectile_to_fire, user)
+			gun_accuracy_mult = modifs[1]
+			gun_scatter += modifs[2]
+		else
+			gun_accuracy_mult = accuracy_mult + HIT_ACCURACY_MULT_TIER_5
+			gun_scatter = SCATTER_AMOUNT_NONE
 	else if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED || flags_mounted_gun_features & GUN_ONLY_MOUNTING)
 //RUCM END
 		gun_accuracy_mult = accuracy_mult

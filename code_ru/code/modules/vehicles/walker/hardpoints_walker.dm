@@ -1,10 +1,16 @@
+
+#define WALKER_HARDPOIN_HEAD "Head"
 #define WALKER_HARDPOIN_LEFT_HAND "Left Hand"
 #define WALKER_HARDPOIN_RIGHT_HAND "Right Hand"
 #define WALKER_HARDPOIN_LEFT_LEG "Left Leg"
 #define WALKER_HARDPOIN_RIGHT_LEG "Right Leg"
+#define WALKER_HARDPOIN_INTERNAL "Internal"
 #define WALKER_HARDPOIN_ARMOR "Armor"
-#define WALKER_HARDPOIN_BACK "Back"
+#define WALKER_HARDPOIN_SPINAL "Spinal"
 
+#define VEHICLE_REACTOR_FINE 0
+#define VEHICLE_REACTOR_DAMAGE 1
+#define VEHICLE_REACTOR_CRITICAL 2
 
 //////////////////////////////////////////////////////////////
 
@@ -13,8 +19,8 @@
 	name = "Mecha Hardpoint"
 	desc = "Something to place on mech."
 
+	health = 150
 	disp_icon = "walker"
-
 	allowed_seat = VEHICLE_DRIVER
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
@@ -25,19 +31,114 @@
 
 
 //////////////////////////////////////////////////////////////
+//REACTOR
 
+/obj/item/hardpoint/walker/reactor
+	name = "Mecha Reactor"
+	desc = "Self sufficient reactor for power supply of mecha equipment."
 
-/obj/item/hardpoint/walker/hand
-	name = "Left Mecha Hand"
-	desc = "Allows mecha to hold weapons."
-
-	slot = WALKER_HARDPOIN_LEFT_HAND
+	slot = WALKER_HARDPOIN_INTERNAL
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
+	var/turned_on = TRUE
+	var/rebooting = 0
+	var/reboot_time = 5 MINUTES
+
+	var/reactor_state = VEHICLE_REACTOR_FINE
+	var/count_down = 0
+	var/chance_of_malf = 10
+
+/obj/item/hardpoint/walker/reactor/proc/switch_reactor_operational_state()
+	if(rebooting)
+		return FALSE
+
+	if(turned_on)
+		if(count_down)
+			count_down = FALSE
+			owner.visible_message(SPAN_WARNING("[owner] burst with steam as [src] turns off."))
+
+		if(owner.seats[VEHICLE_DRIVER])
+			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time] minutes for reboot!"))
+
+		turned_on = FALSE
+	else
+		if(reactor_state == VEHICLE_REACTOR_CRITICAL)
+			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("It was for sure bad idea to turn on [src] in this state."))
+		else
+			rebooting = TRUE
+			addtimer(VARSET_CALLBACK(src, turned_on, 1), reboot_time, TIMER_DELETE_ME)
+			addtimer(VARSET_CALLBACK(src, rebooting, 0), reboot_time, TIMER_DELETE_ME)
+
+/obj/item/hardpoint/walker/reactor/proc/on_consume_enegry_action()
+	if(!turned_on)
+		return FALSE
+	if(!reactor_state)
+		return TRUE
+
+	switch(reactor_state)
+		if(VEHICLE_REACTOR_DAMAGE)
+			if(prob(chance_of_malf / 10))
+				turned_on = FALSE
+		if(VEHICLE_REACTOR_CRITICAL)
+			if(prob(chance_of_malf))
+				turned_on = FALSE
+
+	if(turned_on)
+		return TRUE
+
+	rebooting = TRUE
+	var/time_till_reboot = rand(10, 60)
+	addtimer(VARSET_CALLBACK(src, turned_on, 1), time_till_reboot, TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_till_reboot, TIMER_DELETE_ME)
+
+	owner.visible_message(SPAN_WARNING("[src] burst in smoke! [owner] turns off due to short circuit."))
+	if(owner.seats[VEHICLE_DRIVER])
+		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Bzzzzzz. Reactor core unstable, required [reactor_state == VEHICLE_REACTOR_CRITICAL ? "URGENT " : ""]repair. Network reboot in [time_till_reboot / 10] seconds!"))
+	return FALSE
+
+/obj/item/hardpoint/walker/reactor/Destroy()
+	var/obj/vehicle/walker/vehicle = owner
+	if(vehicle)
+		vehicle.power_supply = null
+
+	. = ..()
+
+/obj/item/hardpoint/walker/reactor/on_install(obj/vehicle/walker/vehicle)
+	vehicle.power_supply = src
+
+/obj/item/hardpoint/walker/reactor/on_uninstall(obj/vehicle/walker/vehicle)
+	vehicle.power_supply = null
+
+
+//////////////////////////////////////////////////////////////
+//HEAD
+
+/obj/item/hardpoint/walker/head
+	name = "Mecha Head"
+	desc = "Protects pilot from potential danger outside mecha."
+
+	slot = WALKER_HARDPOIN_HEAD
+	hdpt_layer = HDPT_LAYER_SUPPORT
+
+
+//////////////////////////////////////////////////////////////
+//HANDS
+
+/obj/item/hardpoint/walker/hand
+	name = "Mecha Hand"
+	desc = "Allows mecha to hold weapons."
+
+	hdpt_layer = HDPT_LAYER_SUPPORT
 	firing_arc = 45
 
 	var/mount_class = GUN_MOUNT_MECHA
 	var/obj/item/weapon/gun/mounted_gun = null
+
+/obj/item/hardpoint/walker/hand/left
+	name = "Left Mecha Hand"
+	desc = "Allows mecha to hold weapons."
+
+	slot = WALKER_HARDPOIN_LEFT_HAND
 
 /obj/item/hardpoint/walker/hand/right
 	name = "Right Mecha Hand"
@@ -46,12 +147,45 @@
 	slot = WALKER_HARDPOIN_RIGHT_HAND
 
 
+//////////////////////////////////////////////////////////////
+//LEGS
+
 /obj/item/hardpoint/walker/leg
-	name = "Left Mecha Leg"
+	name = "Mecha Leg"
 	desc = "Allows mecha to move around."
 
-	slot = WALKER_HARDPOIN_LEFT_LEG
 	hdpt_layer = HDPT_LAYER_SUPPORT
+
+	var/move_delay = 3
+	var/move_max_momentum = 3
+	var/move_momentum_build_factor = 1.8
+	var/move_turn_momentum_loss_factor = 0.6
+
+/obj/item/hardpoint/walker/leg/deactivate()
+	owner.move_delay += move_delay
+	owner.move_max_momentum -= move_max_momentum
+	owner.move_momentum_build_factor -= move_momentum_build_factor
+	owner.move_turn_momentum_loss_factor -= move_turn_momentum_loss_factor
+	owner.next_move = world.time + owner.move_delay
+
+/obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/vehicle)
+	if(move_delay)
+		vehicle.move_delay -= move_delay
+	if(move_max_momentum)
+		vehicle.move_max_momentum += move_max_momentum
+	if(move_momentum_build_factor)
+		vehicle.move_momentum_build_factor += move_momentum_build_factor
+	if(move_turn_momentum_loss_factor)
+		vehicle.move_turn_momentum_loss_factor += move_turn_momentum_loss_factor
+	owner.next_move = world.time + owner.move_delay
+
+/obj/item/hardpoint/walker/leg/on_uninstall(obj/vehicle/walker/vehicle)
+	deactivate()
+
+/obj/item/hardpoint/walker/leg/left
+	name = "Left Mecha Leg"
+
+	slot = WALKER_HARDPOIN_LEFT_LEG
 
 /obj/item/hardpoint/walker/leg/right
 	name = "Right Mecha Leg"
@@ -59,11 +193,14 @@
 	slot = WALKER_HARDPOIN_RIGHT_LEG
 
 
+//////////////////////////////////////////////////////////////
+//BACK
+
 /obj/item/hardpoint/walker/back
 	name = "Mecha Back Hardpoint"
 	desc = "Allows special abilities."
 
-	slot = WALKER_HARDPOIN_BACK
+	slot = WALKER_HARDPOIN_SPINAL
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
 
@@ -158,6 +295,16 @@
 	var/obj/item/weapon/gun/mounted_gun = null
 */
 
+/obj/item/hardpoint/walker/hand/Destroy()
+	if(mounted_gun)
+		QDEL_NULL(mounted_gun.callback_can_fire)
+		QDEL_NULL(mounted_gun.callback_can_stop_fire)
+		QDEL_NULL(mounted_gun.callback_fire_stat)
+		mounted_gun.gun_holder = null
+		QDEL_NULL(mounted_gun)
+
+	. = ..()
+
 /obj/item/hardpoint/walker/hand/pilot_entered(mob/user)
 	if(!mounted_gun)
 		return
@@ -222,6 +369,7 @@
 	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
 	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
 	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
+	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
 	update_icon()
 
 /obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
@@ -241,6 +389,7 @@
 
 	QDEL_NULL(mounted_gun.callback_can_fire)
 	QDEL_NULL(mounted_gun.callback_can_stop_fire)
+	QDEL_NULL(mounted_gun.callback_fire_stat)
 	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
 	mounted_gun.gun_holder = null
 	user.put_in_hands(mounted_gun)
@@ -248,12 +397,31 @@
 	name = initial(name)
 	update_icon()
 
+/obj/item/hardpoint/walker/hand/on_install(obj/vehicle/walker/vehicle)
+	if(!vehicle.seats[VEHICLE_DRIVER])
+		return
+	pilot_entered(vehicle.seats[VEHICLE_DRIVER])
+
+/obj/item/hardpoint/walker/hand/on_uninstall(obj/vehicle/walker/vehicle)
+	if(!vehicle.seats[VEHICLE_DRIVER])
+		return
+	pilot_ejected(vehicle.seats[VEHICLE_DRIVER])
+
 
 //////////////////////////////////////////////////////////////
 
 
+/obj/item/hardpoint/walker/hand/proc/guns_debuff(obj/projectile/projectile_to_fire, mob/user)
+	for(var/obj/item/hardpoint/walker/hand/hardpoint in owner.hardpoints)
+		if(hardpoint == src || !hardpoint.mounted_gun)
+			continue
+		if(hardpoint.mounted_gun.type == mounted_gun.type)
+			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_3)
+
 /obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, turf/location, control, params)
-	SIGNAL_HANDLER
+	var/obj/vehicle/walker/vehicle = owner
+	if(!vehicle.power_supply?.on_consume_enegry_action())
+		return FALSE
 
 	var/list/modifiers = params2list(params)
 	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
@@ -268,7 +436,9 @@
 	return TRUE
 
 /obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, turf/location, control, params)
-	SIGNAL_HANDLER
+	var/obj/vehicle/walker/vehicle = owner
+	if(!vehicle.power_supply?.turned_on)
+		return TRUE
 
 	var/list/modifiers = params2list(params)
 	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
@@ -311,6 +481,18 @@
 
 
 //////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

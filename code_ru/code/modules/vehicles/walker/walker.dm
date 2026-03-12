@@ -2,6 +2,74 @@
 // Walker
 /////////////////
 
+
+/obj/vehicle/walker
+	name = "CW13 \"Enforcer\" Assault Walker"
+	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
+
+	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
+	icon_state = "mech_open"
+
+	layer = BIG_XENO_LAYER
+	opacity = FALSE
+	can_buckle = FALSE
+
+	move_delay = 12
+
+	req_access = list(ACCESS_MARINE_WALKER)
+	unacidable = TRUE
+
+	light_range = 8
+
+	var/zoom = FALSE
+	var/zoom_size = 12
+
+	pixel_x = -18
+
+	health = 500
+	var/max_health = 500
+
+	var/acid_process_cooldown = null
+
+	dmg_multipliers = list(
+		"all" = 1,
+		"acid" = 2.5,
+		"slash" = 1,
+		"bullet" = 0.5,
+		"explosive" = 5,
+		"blunt" = 0.8,
+		"abstract" = 1
+	)
+
+	var/list/verb_list = list(
+		/obj/vehicle/walker/proc/exit_walker,
+		/obj/vehicle/walker/proc/toggle_lights,
+		/obj/vehicle/walker/proc/toggle_zoom,
+		/obj/vehicle/walker/proc/eject_magazine,
+		/obj/vehicle/walker/proc/get_stats
+	)
+
+	move_sounds = list(
+		'code_ru/sound/vehicle/walker/mecha_step1.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step2.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step3.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step4.ogg',
+		'code_ru/sound/vehicle/walker/mecha_step5.ogg'
+	)
+	turn_sounds = list(
+		'code_ru/sound/vehicle/walker/mecha_turn1.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn2.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn3.ogg',
+		'code_ru/sound/vehicle/walker/mecha_turn4.ogg'
+	)
+	flags_atom = FPRINT|USES_HEARING
+
+	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
+	var/vehicle_faction = ""
+
+	var/obj/item/hardpoint/walker/reactor/power_supply = null
+
+
 /obj/structure/walker_wreckage
 	name = "CW13 wreckage"
 	desc = "Remains of some unfortunate walker. Completely unrepairable."
@@ -11,6 +79,7 @@
 	anchored = TRUE
 	opacity = FALSE
 	pixel_x = -18
+
 
 //////////////////////////////////////////////////////////////
 //INTERACTIONS
@@ -135,6 +204,12 @@
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/pre_movement(direction)
+	if(!power_supply?.on_consume_enegry_action())
+		return FALSE
+
+	. = ..()
+
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
@@ -211,7 +286,7 @@
 	health = clamp(health - damage, 0, max_health)
 
 	var/mob/user = seats[VEHICLE_DRIVER]
-	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage.</span>"))
+	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
 	if(ismob(attacker))
 		var/mob/M = attacker
 		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
@@ -220,12 +295,9 @@
 
 	update_icon()
 
-	if(health)
-		return
-
 	if(!health)
 		if(user)
-			to_chat(user, "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
+			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
 			user.unset_interaction()
 
 		new /obj/structure/walker_wreckage(src.loc)
@@ -243,7 +315,7 @@
 
 
 //////////////////////////////////////////////////////////////
-
+//ATTACKS
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
@@ -287,6 +359,51 @@
 	mecha_hardpoint.try_insert(attacking_item, user)
 	return
 
+/obj/vehicle/walker/attack_alien(mob/living/carbon/xenomorph/xeno)
+	if(xeno.a_intent == INTENT_HELP && seats[VEHICLE_DRIVER])
+		if(do_after(xeno, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED))
+			seats[VEHICLE_DRIVER].unset_interaction()
+			return XENO_NONCOMBAT_ACTION
+		return XENO_NO_DELAY_ACTION
+
+	var/damage = (xeno.melee_vehicle_damage + rand(-5,5)) * XENO_UNIVERSAL_VEHICLE_DAMAGEMULT
+	var/damage_mult = 1
+	if(xeno.caste == XENO_CASTE_RAVAGER || xeno.caste == XENO_CASTE_QUEEN)
+		damage_mult = 2
+
+	if(xeno.frenzy_aura > 0)
+		damage += (xeno.frenzy_aura * FRENZY_DAMAGE_MULTIPLIER)
+
+	xeno.animation_attack_on(src)
+	if(!damage)
+		playsound(xeno, 'sound/weapons/alien_claw_swipe.ogg', 25, 1)
+		xeno.visible_message(SPAN_DANGER("\The [xeno] swipes at \the [src] to no effect!"),
+		SPAN_DANGER("We swipe at \the [src] to no effect!"))
+		return XENO_ATTACK_ACTION
+
+	var/obj/item/hardpoint/walker/attacked_hardpoint = null
+	switch(check_zone(xeno.zone_selected))
+		if("head")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in hardpoints
+		if("chest")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/armor) in hardpoints
+		if("groin")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/reactor) in hardpoints
+		if("l_leg", "l_foot")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/leg/left) in hardpoints
+		if("r_leg", "r_foot")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/leg/right) in hardpoints
+		if("l_arm", "l_hand")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/hand/left) in hardpoints
+		if("r_arm", "r_hand")
+			attacked_hardpoint = locate(/obj/item/hardpoint/walker/hand/right) in hardpoints
+
+	xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [attacked_hardpoint] installed on [src]!"),
+	SPAN_DANGER("We slash \the [attacked_hardpoint] installed on [src]!"))
+	playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
+
+	update_health(damage * damage_mult, "slash", xeno, attacked_hardpoint)
+	return XENO_ATTACK_ACTION
 
 
 
@@ -304,68 +421,7 @@
 
 
 
-/obj/vehicle/walker
-	name = "CW13 \"Enforcer\" Assault Walker"
-	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
 
-	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
-	icon_state = "mech_open"
-
-	layer = BIG_XENO_LAYER
-	opacity = FALSE
-	can_buckle = FALSE
-	move_delay = 6
-	req_access = list(ACCESS_MARINE_WALKER)
-	unacidable = TRUE
-
-	light_range = 8
-
-	var/zoom = FALSE
-	var/zoom_size = 12
-
-	pixel_x = -18
-
-	health = 1000
-	var/max_health = 1000
-	var/repair = FALSE
-
-	var/acid_process_cooldown = null
-
-	dmg_multipliers = list(
-		"all" = 1,
-		"acid" = 2.5,
-		"slash" = 1,
-		"bullet" = 0.5,
-		"explosive" = 5,
-		"blunt" = 0.8,
-		"abstract" = 1
-	)
-
-	var/list/verb_list = list(
-		/obj/vehicle/walker/proc/exit_walker,
-		/obj/vehicle/walker/proc/toggle_lights,
-		/obj/vehicle/walker/proc/toggle_zoom,
-		/obj/vehicle/walker/proc/eject_magazine,
-		/obj/vehicle/walker/proc/get_stats
-	)
-
-	move_sounds = list(
-		'code_ru/sound/vehicle/walker/mecha_step1.ogg',
-		'code_ru/sound/vehicle/walker/mecha_step2.ogg',
-		'code_ru/sound/vehicle/walker/mecha_step3.ogg',
-		'code_ru/sound/vehicle/walker/mecha_step4.ogg',
-		'code_ru/sound/vehicle/walker/mecha_step5.ogg'
-	)
-	turn_sounds = list(
-		'code_ru/sound/vehicle/walker/mecha_turn1.ogg',
-		'code_ru/sound/vehicle/walker/mecha_turn2.ogg',
-		'code_ru/sound/vehicle/walker/mecha_turn3.ogg',
-		'code_ru/sound/vehicle/walker/mecha_turn4.ogg'
-	)
-	flags_atom = FPRINT|USES_HEARING
-
-	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
-	var/vehicle_faction = ""
 
 
 // FOR SURE I DON'T WANT TO MESS AROUND WITH THAT FOR NOW
@@ -457,44 +513,6 @@
 
 
 
-/////////
-//Attack_alien
-/////////
-
-/obj/vehicle/walker/attack_alien(mob/living/carbon/xenomorph/X)
-	// If they're on help intent, attempt to enter the vehicle
-	if(X.a_intent == INTENT_HELP)
-		return XENO_NO_DELAY_ACTION
-
-	var/damage = (X.melee_vehicle_damage + rand(-5,5)) * XENO_UNIVERSAL_VEHICLE_DAMAGEMULT
-
-	var/damage_mult = 1
-	//Ravs, as designated vehicles fighters do a heckin double damage
-	//Queen, being Queen, does x2 damage to discourage blocking her
-	if(X.caste == XENO_CASTE_RAVAGER || X.caste == XENO_CASTE_QUEEN)
-		damage_mult = 2
-
-	//Frenzy auras stack in a way, then the raw value is multipled by two to get the additive modifier
-	if(X.frenzy_aura > 0)
-		damage += (X.frenzy_aura * FRENZY_DAMAGE_MULTIPLIER)
-
-	X.animation_attack_on(src)
-
-	//Somehow we will deal no damage on this attack
-	if(!damage)
-		playsound(X.loc, 'sound/weapons/alien_claw_swipe.ogg', 25, 1)
-		X.visible_message(SPAN_DANGER("\The [X] swipes at \the [src] to no effect!"), \
-		SPAN_DANGER("We swipe at \the [src] to no effect!"))
-		return XENO_ATTACK_ACTION
-
-	X.visible_message(SPAN_DANGER("\The [X] slashes \the [src]!"), \
-	SPAN_DANGER("We slash \the [src]!"))
-	playsound(X.loc, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
-
-	update_health(damage * damage_mult, "slash", X)
-
-	healthcheck()
-	return XENO_ATTACK_ACTION
 
 //Differentiates between damage types from different bullets
 //Applies a linear transformation to bullet damage that will generally decrease damage done
@@ -565,13 +583,3 @@
 		return access_to_check == vehicle_faction
 
 	return vehicle_faction in access_to_check
-
-/obj/structure/walker_wreckage
-	name = "CW13 wreckage"
-	desc = "Remains of some unfortunate walker. Completely unrepairable."
-	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
-	icon_state = "mech_broken"
-	density = TRUE
-	anchored = TRUE
-	opacity = FALSE
-	pixel_x = -18
