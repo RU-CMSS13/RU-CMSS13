@@ -690,7 +690,8 @@
 	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
 	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
 	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
-	owner.update_icon()
+	if(owner)
+		owner.update_icon()
 
 	if(user)
 		var/obj/vehicle/walker/source = owner
