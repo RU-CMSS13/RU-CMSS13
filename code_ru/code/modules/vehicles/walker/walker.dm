@@ -15,6 +15,9 @@
 	can_buckle = FALSE
 
 	move_delay = 12
+	move_max_momentum = 6
+	move_turn_momentum_loss_factor = 1
+	move_momentum_build_factor = 2
 
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
@@ -210,6 +213,23 @@
 
 	. = ..()
 
+/obj/vehicle/walker/proc/recalculate_legs()
+	move_delay = initial(move_delay)
+	move_max_momentum = initial(move_max_momentum)
+	move_momentum_build_factor = initial(move_momentum_build_factor)
+	move_turn_momentum_loss_factor = initial(move_turn_momentum_loss_factor)
+
+	for(var/obj/item/hardpoint/walker/leg/leggy in hardpoints)
+		move_delay -= leggy.move_delay
+		move_max_momentum -= leggy.move_max_momentum
+		move_momentum_build_factor -= leggy.move_momentum_build_factor
+		move_turn_momentum_loss_factor -= leggy.move_turn_momentum_loss_factor
+
+	if(move_delay == initial(move_delay))
+		next_move = INFINITY
+	else
+		next_move = world.time + move_delay
+
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
@@ -281,23 +301,19 @@
 //////////////////////////////////////////////////////////////
 //DAMAGE
 
-/obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint)
-	var/mob/user = seats[VEHICLE_DRIVER]
-	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
-	if(ismob(attacker))
-		var/mob/M = attacker
-		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
-	else
-		log_attack("[src] took [damage] [type] damage from [attacker].")
-
+/obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
 	var/list/damages_applied = list(0, damage * get_dmg_multi(type))
 
 	var/obj/item/hardpoint/walker/hardpoint_armor = locate(/obj/item/hardpoint/walker/armor) in hardpoints
 	if(hardpoint_armor?.can_take_damage())
 		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
+	damage = damages_applied[2]
 
+	var/mob/living/user = seats[VEHICLE_DRIVER]
 	if(attacked_hardpoint?.can_take_damage())
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
+	else if(zone_selected == "head" && user)
+		user.apply_armoured_damage(damage, ARMOR_MELEE, BRUTE, null, 20)
 	else
 		var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
 		for(var/length = 1 to length(hardpoints_remaining))
@@ -308,19 +324,25 @@
 			attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 			break
 
-	damages_applied[1] += damages_applied[2]
-	health = max(0, health - damages_applied[2])
+	damages_applied[1] += damage
+	health = max(0, health - damage)
 
-	update_icon()
+	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
+	if(ismob(attacker))
+		var/mob/M = attacker
+		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
+	else
+		log_attack("[src] took [damage] [type] damage from [attacker].")
 
 	if(!health)
 		if(user)
 			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
 			user.unset_interaction()
-
 		new /obj/structure/walker_wreckage(src.loc)
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
+	else
+		update_icon()
 
 /obj/vehicle/walker/get_dmg_multi(type)
 	if(!dmg_multipliers.Find(type))
@@ -417,7 +439,7 @@
 	SPAN_DANGER("We slash \the [attacked_hardpoint] installed on [src]!"))
 	playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
 
-	take_damage_type(damage * damage_mult, "slash", xeno, attacked_hardpoint)
+	take_damage_type(damage * damage_mult, "slash", xeno, attacked_hardpoint, check_zone(xeno.zone_selected))
 	return XENO_ATTACK_ACTION
 
 

@@ -19,7 +19,6 @@
 	name = "Mecha Hardpoint"
 	desc = "Something to place on mech."
 
-
 	damage_multiplier = 0.5
 	health = 150
 	disp_icon = "walker"
@@ -40,6 +39,9 @@
 	damages_applied[1] += real_damage
 	health = max(0, health - real_damage)
 	if(!health)
+		if(owner)
+			deactivate()
+			remove_buff(owner)
 		on_destroy()
 	update_icon()
 
@@ -54,19 +56,46 @@
 //REACTOR
 
 /obj/item/hardpoint/walker/reactor
-	name = "Mecha Reactor"
+	name = "Shielded Mecha Reactor"
 	desc = "Self sufficient reactor for power supply of mecha equipment."
 
 	slot = WALKER_HARDPOIN_INTERNAL
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
+	damage_multiplier = 0.1
+
 	var/turned_on = TRUE
-	var/rebooting = 0
+	var/rebooting = FALSE
+	var/count_down = FALSE
+
 	var/reboot_time = 5 MINUTES
+	var/meltdown_time = 1 MINUTES
+	var/meltdown_timer_id = null
 
 	var/reactor_state = VEHICLE_REACTOR_FINE
-	var/count_down = 0
 	var/chance_of_malf = 10
+
+/obj/item/hardpoint/walker/reactor/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
+	if(!damage_to_apply || !real_damage)
+		damage_to_apply = round(damages_applied[2])
+		real_damage = damage_to_apply * damage_multiplier
+
+	if(reactor_state < VEHICLE_REACTOR_CRITICAL && prob(real_damage / (chance_of_malf / 2)))
+		reactor_state++
+		if(reactor_state == VEHICLE_REACTOR_CRITICAL)
+			count_down = TRUE
+			meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	. = ..(damages_applied, type, attacker, damage_to_apply, real_damage)
+
+/*
+		deltimer(meltdown_timer_id)
+		meltdown_timer_id = null
+*/
+
+/obj/item/hardpoint/walker/reactor/proc/meltdown()
+	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
+	cell_explosion(get_turf(src), 600, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
 /obj/item/hardpoint/walker/reactor/proc/switch_reactor_operational_state()
 	if(rebooting)
@@ -185,30 +214,22 @@
 	destruction_on_zero = FALSE
 
 	var/move_delay = 3
-	var/move_max_momentum = 3
-	var/move_momentum_build_factor = 1.8
-	var/move_turn_momentum_loss_factor = 0.6
+	var/move_max_momentum = 2
+	var/move_turn_momentum_loss_factor = 0.25
+	var/move_momentum_build_factor = 0.5
 
 /obj/item/hardpoint/walker/leg/on_destroy()
 	return
 
 /obj/item/hardpoint/walker/leg/deactivate()
-	owner.move_delay += move_delay
-	owner.move_max_momentum -= move_max_momentum
-	owner.move_momentum_build_factor -= move_momentum_build_factor
-	owner.move_turn_momentum_loss_factor -= move_turn_momentum_loss_factor
-	owner.next_move = world.time + owner.move_delay
+	var/obj/vehicle/walker/vehicle
+	vehicle.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/vehicle)
-	if(move_delay)
-		vehicle.move_delay -= move_delay
-	if(move_max_momentum)
-		vehicle.move_max_momentum += move_max_momentum
-	if(move_momentum_build_factor)
-		vehicle.move_momentum_build_factor += move_momentum_build_factor
-	if(move_turn_momentum_loss_factor)
-		vehicle.move_turn_momentum_loss_factor += move_turn_momentum_loss_factor
-	owner.next_move = world.time + owner.move_delay
+	if(!health)
+		return
+
+	vehicle.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/on_uninstall(obj/vehicle/walker/vehicle)
 	deactivate()
@@ -449,7 +470,7 @@
 
 /obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, turf/location, control, params)
 	var/obj/vehicle/walker/vehicle = owner
-	if(!vehicle.power_supply?.on_consume_enegry_action())
+	if(!vehicle.power_supply?.on_consume_enegry_action() || !health)
 		return FALSE
 
 	var/list/modifiers = params2list(params)
@@ -466,7 +487,7 @@
 
 /obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, turf/location, control, params)
 	var/obj/vehicle/walker/vehicle = owner
-	if(!vehicle.power_supply?.turned_on)
+	if(!vehicle.power_supply?.turned_on || !health)
 		return TRUE
 
 	var/list/modifiers = params2list(params)

@@ -210,8 +210,14 @@
 
 /// Apply hardpoint effects to vehicle and self.
 /obj/item/hardpoint/proc/on_install(obj/vehicle/multitile/vehicle)
+/* RUCM CHANGE
 	if(!vehicle) //in loose holder
 		return
+*/
+//RUCM START
+	if(!vehicle || !health)
+		return
+//RUCM END
 	RegisterSignal(vehicle, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES, PROC_REF(recalculate_hardpoint_bonuses))
 	apply_buff(vehicle)
 
