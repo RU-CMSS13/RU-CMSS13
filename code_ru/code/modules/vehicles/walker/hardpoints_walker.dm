@@ -19,9 +19,29 @@
 	name = "Mecha Hardpoint"
 	desc = "Something to place on mech."
 
+
+	damage_multiplier = 0.5
 	health = 150
 	disp_icon = "walker"
 	allowed_seat = VEHICLE_DRIVER
+
+/obj/item/hardpoint/walker/ex_act(severity)
+	if(owner || explo_proof)
+		return
+
+	take_damage_type(list(0, severity / 2 * owner.get_dmg_multi(type)), "explosive", "explosion")
+
+/obj/item/hardpoint/walker/proc/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
+	if(!damage_to_apply || !real_damage)
+		damage_to_apply = round(damages_applied[2])
+		real_damage = damage_to_apply * damage_multiplier
+
+	damages_applied[2] -= damage_to_apply * 0.5
+	damages_applied[1] += real_damage
+	health = max(0, health - real_damage)
+	if(!health)
+		on_destroy()
+	update_icon()
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	return
@@ -119,7 +139,10 @@
 
 	slot = WALKER_HARDPOIN_HEAD
 	hdpt_layer = HDPT_LAYER_SUPPORT
+	destruction_on_zero = FALSE
 
+/obj/item/hardpoint/walker/head/on_destroy()
+	return
 
 //////////////////////////////////////////////////////////////
 //HANDS
@@ -130,9 +153,13 @@
 
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	firing_arc = 45
+	destruction_on_zero = FALSE
 
 	var/mount_class = GUN_MOUNT_MECHA
 	var/obj/item/weapon/gun/mounted_gun = null
+
+/obj/item/hardpoint/walker/hand/on_destroy()
+	return
 
 /obj/item/hardpoint/walker/hand/left
 	name = "Left Mecha Hand"
@@ -155,11 +182,15 @@
 	desc = "Allows mecha to move around."
 
 	hdpt_layer = HDPT_LAYER_SUPPORT
+	destruction_on_zero = FALSE
 
 	var/move_delay = 3
 	var/move_max_momentum = 3
 	var/move_momentum_build_factor = 1.8
 	var/move_turn_momentum_loss_factor = 0.6
+
+/obj/item/hardpoint/walker/leg/on_destroy()
+	return
 
 /obj/item/hardpoint/walker/leg/deactivate()
 	owner.move_delay += move_delay
@@ -215,9 +246,7 @@
 	slot = WALKER_HARDPOIN_ARMOR
 	hdpt_layer = HDPT_LAYER_ARMOR
 
-	damage_multiplier = 0.5
-
-	health = 1000
+	health = 500
 
 /obj/item/hardpoint/walker/armor/paladin
 	name = "Paladin Armor"
@@ -793,3 +822,9 @@
 ////////////////
 // MEGALODON SUPPLYPACKS // END
 ////////////////
+
+
+
+#undef VEHICLE_REACTOR_FINE
+#undef VEHICLE_REACTOR_DAMAGE
+#undef VEHICLE_REACTOR_CRITICAL

@@ -314,7 +314,12 @@
 	return list("width" = (bound_width / world.icon_size), "height" = (bound_height / world.icon_size))
 
 //Returns the ratio of damage to take, just a housekeeping thing
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/get_dmg_multi(type)
+*/
+//RUCM START
+/obj/vehicle/multitile/get_dmg_multi(type)
+//RUCM END
 	if(!dmg_multipliers || !dmg_multipliers.Find(type))
 		return 1
 	return dmg_multipliers[type] * dmg_multipliers["all"]

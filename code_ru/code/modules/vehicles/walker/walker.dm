@@ -281,10 +281,7 @@
 //////////////////////////////////////////////////////////////
 //DAMAGE
 
-/obj/vehicle/walker/update_health(damage, type, atom/attacker)
-	damage = damage * get_dmg_multi(type)
-	health = clamp(health - damage, 0, max_health)
-
+/obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
 	if(ismob(attacker))
@@ -292,6 +289,27 @@
 		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
 	else
 		log_attack("[src] took [damage] [type] damage from [attacker].")
+
+	var/list/damages_applied = list(0, damage * get_dmg_multi(type))
+
+	var/obj/item/hardpoint/walker/hardpoint_armor = locate(/obj/item/hardpoint/walker/armor) in hardpoints
+	if(hardpoint_armor?.can_take_damage())
+		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
+
+	if(attacked_hardpoint?.can_take_damage())
+		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
+	else
+		var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
+		for(var/length = 1 to length(hardpoints_remaining))
+			attacked_hardpoint = pick(hardpoints_remaining)
+			hardpoints_remaining -= attacked_hardpoint
+			if(!attacked_hardpoint.can_take_damage())
+				continue
+			attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
+			break
+
+	damages_applied[1] += damages_applied[2]
+	health = max(0, health - damages_applied[2])
 
 	update_icon()
 
@@ -303,15 +321,14 @@
 		new /obj/structure/walker_wreckage(src.loc)
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
-		return
 
-/obj/vehicle/walker/proc/get_dmg_multi(type)
+/obj/vehicle/walker/get_dmg_multi(type)
 	if(!dmg_multipliers.Find(type))
 		return 1
 	return dmg_multipliers[type] * dmg_multipliers["all"]
 
 /obj/vehicle/walker/ex_act(severity)
-	update_health(severity, "explosive")
+	take_damage_type(severity, "explosive", "explosion")
 
 
 //////////////////////////////////////////////////////////////
@@ -319,7 +336,7 @@
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
-		update_health(attacking_item.force * 0.05, "blunt", user)
+		take_damage_type(attacking_item.force * 0.05, "blunt", user)
 		return
 
 	if(istype(attacking_item, /obj/item/hardpoint/walker))
@@ -381,12 +398,10 @@
 		SPAN_DANGER("We swipe at \the [src] to no effect!"))
 		return XENO_ATTACK_ACTION
 
-	var/obj/item/hardpoint/walker/attacked_hardpoint = null
+	var/obj/item/hardpoint/walker/attacked_hardpoint
 	switch(check_zone(xeno.zone_selected))
 		if("head")
 			attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in hardpoints
-		if("chest")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/armor) in hardpoints
 		if("groin")
 			attacked_hardpoint = locate(/obj/item/hardpoint/walker/reactor) in hardpoints
 		if("l_leg", "l_foot")
@@ -402,7 +417,7 @@
 	SPAN_DANGER("We slash \the [attacked_hardpoint] installed on [src]!"))
 	playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
 
-	update_health(damage * damage_mult, "slash", xeno, attacked_hardpoint)
+	take_damage_type(damage * damage_mult, "slash", xeno, attacked_hardpoint)
 	return XENO_ATTACK_ACTION
 
 
@@ -485,28 +500,28 @@
 	else if(istype(obstacle, /obj/structure/fence))
 		var/obj/structure/fence/F = obstacle
 		F.visible_message(SPAN_DANGER("[src.name] smashes through [F]!"))
-		update_health(5, "blunt", obstacle)
+		take_damage_type(5, "blunt", obstacle)
 		F.health = 0
 		F.healthcheck()
 	else if(istype(obstacle, /obj/structure/surface/table))
 		var/obj/structure/surface/table/T = obstacle
 		T.visible_message(SPAN_DANGER("[src.name] crushes [T]!"))
-		update_health(5, "blunt", obstacle)
+		take_damage_type(5, "blunt", obstacle)
 		T.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/showcase))
 		var/obj/structure/showcase/S = obstacle
 		S.visible_message(SPAN_DANGER("[src.name] bulldozes over [S]!"))
-		update_health(15, "blunt", obstacle)
+		take_damage_type(15, "blunt", obstacle)
 		S.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/window/framed))
 		var/obj/structure/window/framed/W = obstacle
 		W.visible_message(SPAN_DANGER("[src.name] crashes through the [W]!"))
-		update_health(20, "blunt", obstacle)
+		take_damage_type(20, "blunt", obstacle)
 		W.shatter_window(1)
 	else if(istype(obstacle, /obj/structure/window_frame))
 		var/obj/structure/window_frame/WF = obstacle
 		WF.visible_message(SPAN_DANGER("[src.name] runs over the [WF]!"))
-		update_health(20, "blunt", obstacle)
+		take_damage_type(20, "blunt", obstacle)
 		WF.deconstruct()
 	else
 		..()
@@ -536,7 +551,7 @@
 
 	bullet_ping(P)
 
-	update_health(damage * (0.33 + penetration/100), dam_type, firer)
+	take_damage_type(damage * (0.33 + penetration/100), dam_type, firer)
 
 	healthcheck()
 
@@ -550,7 +565,7 @@
 			return
 
 		if(health > 0)
-			update_health(250, "blunt", crusher)
+			take_damage_type(250, "blunt", crusher)
 			visible_message(SPAN_DANGER("\The [crusher] rams \the [src]!"))
 			Move(get_step(src, crusher.dir))
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)

@@ -293,7 +293,7 @@
 	hardpoints -= old
 	old.owner = null
 
-	if(old.health <= 0 && !old.gc_destroyed) // Make sure it's not already being deleted.
+	if(!old.health && old.destruction_on_zero && !QDELETED(old)) // Make sure it's not already being deleted.
 		visible_message(SPAN_WARNING("\The [src] disintegrates into useless pile of scrap under the damage it suffered."))
 		qdel(old)
 
@@ -487,3 +487,9 @@
 
 /obj/vehicle/proc/toggle_cameras_status()
 	return
+
+/obj/vehicle/proc/get_dmg_multi()
+	return
+
+/obj/item/hardpoint
+	var/destruction_on_zero = TRUE

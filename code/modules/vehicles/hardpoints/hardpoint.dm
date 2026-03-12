@@ -188,8 +188,10 @@
 		return TRUE
 
 /obj/item/hardpoint/proc/take_damage(damage)
+/* RUCM CHANGE
 	if(health <= 0)
 		return
+*/
 	health = max(0, health - damage * damage_multiplier)
 	if(!health)
 		on_destroy()
