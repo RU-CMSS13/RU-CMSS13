@@ -59,7 +59,9 @@
 		/obj/vehicle/walker/proc/toggle_lights,
 		/obj/vehicle/walker/proc/toggle_zoom,
 		/obj/vehicle/walker/proc/eject_magazine,
-		/obj/vehicle/walker/proc/get_stats
+		/obj/vehicle/walker/proc/get_stats,
+		/obj/vehicle/walker/proc/toggle_motion_detector,
+		/obj/vehicle/walker/proc/toggle_motion_detector
 	)
 
 	move_sounds = list(
@@ -441,14 +443,13 @@
 	for(mecha_hardpoint in hardpoints)
 		if(mecha_hardpoint.try_reload(attacking_item, user))
 			return
-
 		mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
 
-	var/selected_option = tgui_alert(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands + "Cancel")
-	if(!selected_option || selected_option == "Cancel")
+	var/selected_module = tgui_input_list(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands)
+	if(!selected_module)
 		return
 
-	mecha_hardpoint = mecha_hands[selected_option]
+	mecha_hardpoint = mecha_hands[selected_module]
 
 	if(mecha_hardpoint.mounted_gun)
 		mecha_hardpoint.try_remove(attacking_item, user)

@@ -6,7 +6,7 @@
 	src = user.interactee// In mecha up to date of this comment we use set interactee, so here we can find ref to our mecha
 	if(!istype(src, /obj/vehicle/walker))// There we make sure our chocolate fabric is MECH
 		return
-	if(seats[VEHICLE_DRIVER] != usr)// Here we check if for real mech pilot called it
+	if(seats[VEHICLE_DRIVER] != user)// Here we check if for real mech pilot called it
 		return
 AND YOULL BE FINE!*/
 
@@ -20,7 +20,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	user.unset_interaction()
@@ -39,7 +39,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	if(lighting_holder)
@@ -68,7 +68,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	var/list/acceptible_modules = list()
@@ -77,12 +77,15 @@ AND YOULL BE FINE!*/
 			continue
 		if(!selected.mounted_gun.current_mag)
 			continue
-		acceptible_modules += selected.mounted_gun
+		acceptible_modules[selected.mounted_gun.name] = selected.mounted_gun
 	if(!length(acceptible_modules))
 		to_chat(user, "Not found ammo mags to eject")
 		return
 
-	var/obj/item/weapon/gun/mounted_gun = tgui_input_list(usr, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
+	var/selected_module = tgui_input_list(user, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
+	if(!selected_module)
+		continue
+	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
 	if(!mounted_gun || mounted_gun.gun_holder != src || !mounted_gun.current_mag)
 		return FALSE
 	mounted_gun.unload(user, TRUE)
@@ -103,7 +106,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	tgui_interact(user)
@@ -119,11 +122,11 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	zoom = !zoom
-	update_pixels(usr, zoom)
+	update_pixels(user, zoom)
 
 
 //////////////////////////////////////////////////////////////
@@ -139,7 +142,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	var/obj/item/hardpoint/walker/spinal/artilery/provider = locate() in hardpoints
@@ -159,7 +162,7 @@ AND YOULL BE FINE!*/
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != usr)
+	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	if(!power_supply)
