@@ -442,13 +442,14 @@
 		mecha_reactor.replace_fuel(attacking_item, user)
 		return
 
-	var/obj/item/hardpoint/walker/hand/mecha_hardpoint
 	var/list/mecha_hands = list()
-	for(mecha_hardpoint in hardpoints)
+	var/obj/item/hardpoint/walker/mecha_hardpoint
+	for(mecha_hardpoint as anything in hardpoints)
 		if(mecha_hardpoint.try_reload(attacking_item, user))
 			return
 
-		mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
+		if(mecha_hardpoint.mount_class == GUN_MOUNT_MECHA)
+			mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
 
 	var/selected_module = tgui_input_list(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands)
 	if(!selected_module)
