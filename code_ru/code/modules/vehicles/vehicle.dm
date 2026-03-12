@@ -492,4 +492,44 @@
 	return
 
 /obj/item/hardpoint
-	var/destruction_on_zero = TRUE
+	var/max_health = 0
+	var/destruction_on_zero = FALSE
+
+	var/material_per_repair = 0
+	var/list/repair_materials = list()
+
+/obj/item/hardpoint/proc/recovered()
+	return
+
+/obj/item/hardpoint/proc/material_use(obj/item/tool/weldingtool/welder, mob/user, modificator = 5)
+	var/required_material = material_per_repair
+	if(!health || modificator)
+		required_material *= modificator
+
+	var/obj/item/stack/sheet/material = null
+	if(user.l_hand == welder)
+		material = user.r_hand
+	else
+		material = user.l_hand
+
+	if(!istype(material, /obj/item/stack/sheet))
+		to_chat(user, SPAN_WARNING("You'll need some adequate repair material in your other hand to patch up [src]!"))
+		return FALSE
+
+	var/repair_value = 0
+	for(var/validSheetType in repair_materials)
+		if(validSheetType == material.sheettype)
+			repair_value = repair_materials[validSheetType]
+			break
+
+	if(repair_value == 0)
+		to_chat(user, SPAN_WARNING("You'll need some adequate repair material in your other hand to patch up [src]!"))
+		return FALSE
+
+	if(material.amount < required_material)
+		to_chat(user, SPAN_WARNING("You'll need [required_material] material in your other hand to patch up [src]!"))
+		return FALSE
+
+	to_chat(user, SPAN_WARNING("You use [material] to restore some of [src] integrity!"))
+	material.use(required_material)
+	return repair_value * max_health

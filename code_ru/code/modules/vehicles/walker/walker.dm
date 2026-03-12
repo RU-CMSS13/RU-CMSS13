@@ -301,10 +301,15 @@
 //DAMAGE
 
 /obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
-	var/list/damages_applied = list(0, damage * get_dmg_multi(type))
-	if(!damages_applied[2])
+	if(!damage)
 		return
 
+	var/list/damages_applied = list(0, damage)
+	var/obj/item/hardpoint/walker/back/shield/projector = locate() in hardpoints
+	if(projector.take_hits(damages_applied))
+		return
+
+	damages_applied[2] *= get_dmg_multi(type)
 	var/mob/living/user = seats[VEHICLE_DRIVER]
 	if(zone_selected == "all")
 		damage = damages_applied[2]

@@ -12,6 +12,7 @@
 #define VEHICLE_REACTOR_DAMAGE 1
 #define VEHICLE_REACTOR_CRITICAL 2
 
+
 //////////////////////////////////////////////////////////////
 
 
@@ -19,10 +20,17 @@
 	name = "Mecha Hardpoint"
 	desc = "Something to place on mech."
 
+	icon = 'code_ru/icons/obj/vehicles/mech_hardpoints.dmi'
+	icon_state = "mech_part"
+	disp_icon = 'code_ru/icons/obj/vehicles/mech.dmi'
+	disp_icon_state = "mech_part"
+
 	damage_multiplier = 0.5
+	material_per_repair = 1
+	repair_materials = list("plastic" = 0.5, "metal" = 0.10)
+
 	health = 150
-	var/max_health = 150
-	disp_icon = "walker"
+	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
 /obj/item/hardpoint/walker/ex_act(severity)
@@ -70,6 +78,7 @@
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
 	damage_multiplier = 0.1
+	repair_materials = list("metal" = 0.5, "plasteel" = 0.10)
 
 	var/turned_on = TRUE
 	var/rebooting = FALSE
@@ -93,6 +102,17 @@
 
 	. = ..()
 
+/obj/item/hardpoint/walker/reactor/recovered()
+	deltimer(meltdown_timer_id)
+	meltdown_timer_id = null
+	reactor_state = VEHICLE_REACTOR_FINE
+
+/obj/item/hardpoint/walker/reactor/material_use(obj/item/tool/weldingtool/welder, mob/user, modificator = 4)
+	if(reactor_state)
+		modificator *= reactor_state / 2
+
+	. = ..(welder, user, modificator)
+
 /obj/item/hardpoint/walker/reactor/tgui_additional_data()
 	. = ..()
 
@@ -112,11 +132,6 @@
 			meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	. = ..(damages_applied, type, attacker, damage_to_apply, real_damage)
-
-/*
-		deltimer(meltdown_timer_id)
-		meltdown_timer_id = null
-*/
 
 /obj/item/hardpoint/walker/reactor/proc/meltdown()
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
@@ -199,6 +214,11 @@
 
 /obj/item/hardpoint/walker/reactor/on_uninstall(obj/vehicle/walker/vehicle)
 	vehicle.power_supply = null
+
+
+/obj/item/hardpoint/walker/reactor/enhanced
+	name = "Enhanced Mecha Reactor"
+	desc = "Self sufficient reactor for power supply of mecha equipment."
 
 
 //////////////////////////////////////////////////////////////
@@ -294,8 +314,69 @@
 	name = "Mecha Back Hardpoint"
 	desc = "Allows special abilities."
 
+	icon = 'code_ru/icons/obj/vehicles/mech_back.dmi'
+
 	slot = WALKER_HARDPOIN_SPINAL
 	hdpt_layer = HDPT_LAYER_SUPPORT
+
+/obj/item/hardpoint/walker/back/powerful_cooling
+	name = "Active Mecha Cooling"
+	desc = "This very powerful cooling can take twice as much heat out of system! Allows do actions much faster."
+
+
+/obj/item/hardpoint/walker/back/artilery
+	name = "Detection Array \"Night Hawk\""
+	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful moution detector at cost of faster reactor consumption."
+
+
+/obj/item/hardpoint/walker/back/tactical_rocket
+	name = "Tactical Rocket Unit"
+	desc = "\"Special Deliver Package System\" includes a pair of heavy binoculars with laser aiming device, and bunker buster rocket. However due to only ground spotting and no remote, you have guide it at all the flight time for good hits."
+
+
+/obj/item/hardpoint/walker/back/shield
+	name = "Resonation Projecting System \"F35\""
+	desc = "This modification grants you unvulnereability, as long as you have unlimited source of energy."
+
+	var/damage_capacity = 200
+	var/max_damage_capacity = 200
+	var/cooldown_end_time = 0
+	var/delay_between_hits = 10 SECONDS
+
+/obj/item/hardpoint/walker/back/shield/Initialize()
+	. = ..()
+
+	START_PROCESSING(SSobj, src)
+
+/obj/item/hardpoint/walker/back/shield/Destroy()
+	. = ..()
+
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/hardpoint/walker/back/shield/proc/take_hits(list/damages_applied)
+	cooldown_end_time = world.time + delay_between_hits
+	if(!damage_capacity)
+		return FALSE
+
+	damage_capacity -= damages_applied[2]
+	if(damage_capacity < 0)
+		damage_capacity = 0
+		cooldown_end_time = world.time + delay_between_hits * 6
+		owner.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [owner]. Seems it got disabled for sufficient time!"))
+		if(owner.seats[VEHICLE_DRIVER])
+			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [delay_between_hits / 10] seconds"))
+	return TRUE
+
+/obj/item/hardpoint/walker/back/shield/process()
+	if(cooldown_end_time > world.time)
+		return
+
+	damage_capacity = min(damage_capacity + 2, max_damage_capacity)
+
+
+/obj/item/hardpoint/walker/back/jetpack
+	name = "Mecha Jetpack"
+	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
 
 //////////////////////////////////////////////////////////////
@@ -304,7 +385,8 @@
 /obj/item/hardpoint/walker/armor
 	name = "Armor Hardpoint"
 	desc = "Primary armor source."
-	icon = 'code_ru/icons/obj/vehicles/mecha_armor.dmi'
+
+	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'
 
 	slot = WALKER_HARDPOIN_ARMOR
 	hdpt_layer = HDPT_LAYER_ARMOR
@@ -352,8 +434,8 @@
 	name = "Fire Armor"
 	desc = "Protects vehicles from fire."
 
-	icon_state = "caustic_armor"
-	disp_icon_state = "caustic_armor"
+	icon_state = "concussive_armor"
+	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
 		"all" = 0.95,
@@ -547,7 +629,7 @@
 
 /obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir)
 	var/hardpoint = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
-	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + hardpoint]_[health ? "0" : "1"]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
 	. = list(self)
 	switch(floor((health / initial(health)) * 100))
 		if(0)
@@ -564,7 +646,7 @@
 			self.color = null
 
 	if(mounted_gun)
-		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.icon + hardpoint]_[health ? "0" : "1"]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.icon_state + hardpoint]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
 		gun.color = self.color
 		. += gun
 
@@ -589,7 +671,7 @@
 /obj/item/hardpoint/walker/weapon
 	name = "Walker Gun"
 	desc = "Primary gun source."
-	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
 
 	slot = WALKER_HARDPOIN_GUN
 	hdpt_layer = HDPT_LAYER_TURRET
@@ -606,7 +688,7 @@
 
 /obj/item/walker_gun
 	name = "walker gun"
-	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
 	var/equip_state = ""
 	w_class = 12.0
 	var/obj/vehicle/walker/owner = null
@@ -696,7 +778,7 @@
 
 /obj/item/ammo_magazine/walker
 	w_class = SIZE_LARGE
-	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon = 'code_ru/icons/obj/vehicles/mech_guns.dmi'
 
 /obj/item/ammo_magazine/walker/smartgun
 	name = "M56 Double-Barrel Magazine (Standard)"
