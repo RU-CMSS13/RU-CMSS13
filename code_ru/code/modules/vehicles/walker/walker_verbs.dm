@@ -49,9 +49,9 @@ AND YOULL BE FINE!*/
 			lighting_holder.set_light_on(TRUE)
 	else
 		if(light)
-			lighting_holder.set_light_on(FALSE)
+			set_light_on(FALSE)
 		else
-			lighting_holder.set_light_on(TRUE)
+			set_light_on(TRUE)
 	playsound(src, 'sound/machines/click.ogg', 50)
 
 

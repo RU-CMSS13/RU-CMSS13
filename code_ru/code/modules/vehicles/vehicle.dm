@@ -393,11 +393,18 @@
 			. = try_move(direction)
 
 // Attempts to execute the given movement input
-/obj/vehicle/proc/try_move(direction, force=FALSE)
+/obj/vehicle/proc/try_move(direction, force = FALSE)
 	. = FALSE
 
 	if(!can_move(direction))
 		return
+
+	if(!force)
+		var/should_move = update_momentum(direction)
+		update_next_move()
+
+		if(!should_move)
+			return FALSE
 
 	. = step(src, direction)
 	if(!.)

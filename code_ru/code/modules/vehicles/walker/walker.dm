@@ -16,8 +16,8 @@
 
 	move_delay = 12
 	move_max_momentum = 6
-	move_turn_momentum_loss_factor = 1
-	move_momentum_build_factor = 2
+	move_turn_momentum_loss_factor = 0.25
+	move_momentum_build_factor = 2.5
 
 	hardpoints_allowed = list(
 		/obj/item/hardpoint/walker/hand/left,
@@ -245,7 +245,7 @@
 		move_delay -= leggy.move_delay
 		move_max_momentum -= leggy.move_max_momentum
 		move_momentum_build_factor -= leggy.move_momentum_build_factor
-		move_turn_momentum_loss_factor -= leggy.move_turn_momentum_loss_factor
+		move_turn_momentum_loss_factor += leggy.move_turn_momentum_loss_factor
 
 	if(move_delay == initial(move_delay))
 		next_move = INFINITY
@@ -327,7 +327,7 @@
 
 	var/list/damages_applied = list(0, damage)
 	var/obj/item/hardpoint/walker/spinal/shield/projector = locate() in hardpoints
-	if(projector.take_hits(damages_applied))
+	if(projector?.take_hits(damages_applied))
 		return
 
 	damages_applied[2] *= get_dmg_multi(type)
@@ -342,7 +342,7 @@
 			attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 			damages_applied[2] = damage
 	else
-		damage = handle_modules_take_damage(damage, type, attacker, attacked_hardpoint, zone_selected)
+		damage = handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
 
 	damages_applied[1] += damage
 	health = max(0, health - damage)
@@ -437,16 +437,18 @@
 		return
 
 	var/obj/item/hardpoint/walker/hand/mecha_hardpoint
-	var/list/obj/item/hardpoint/walker/hand/mecha_hands = list()
+	var/list/mecha_hands = list()
 	for(mecha_hardpoint in hardpoints)
 		if(mecha_hardpoint.try_reload(attacking_item, user))
 			return
 
-		mecha_hands += mecha_hardpoint
+		mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
 
-	mecha_hardpoint = tgui_alert(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands + "Cancel")
-	if(!istype(mecha_hardpoint))
+	var/selected_option = tgui_alert(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands + "Cancel")
+	if(!selected_option || selected_option == "Cancel")
 		return
+
+	mecha_hardpoint = mecha_hands[selected_option]
 
 	if(mecha_hardpoint.mounted_gun)
 		mecha_hardpoint.try_remove(attacking_item, user)

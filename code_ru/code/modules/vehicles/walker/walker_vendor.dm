@@ -31,8 +31,8 @@
 /obj/effect/essentials_set/walker/shotgun8g
 	spawned_gear_list = list(
 		/obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g,
-		/obj/item/ammo_magazine/internal/walker/shotgun8g,
-		/obj/item/ammo_magazine/internal/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
 	)
 
 /obj/effect/essentials_set/walker/hmg
@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
-	list("Shielded Reactor", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
+	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
 	list("M1488 Tactical Rocket Unit", 45, /obj/item/hardpoint/walker/spinal/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 35, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("AMMUNITION", 0, null, null, null),
 	list("M88 AMR Magazine", 6, /obj/item/ammo_magazine/walker/wm88, null, VENDOR_ITEM_REGULAR),
 	list("M56 Smartgun Magazine", 2, /obj/item/ammo_magazine/walker/smartgun, null, VENDOR_ITEM_REGULAR),
-	list("M32 Shotgun Magazine", 6, /obj/item/ammo_magazine/internal/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
+	list("M32 Shotgun Magazine", 6, /obj/item/ammo_magazine/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
 	list("M30 Machinegun Magazine", 4, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal Canister", 4, /obj/item/ammo_magazine/walker/flamer, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal B-type Canister", 6, /obj/item/ammo_magazine/walker/flamer/btype, null, VENDOR_ITEM_REGULAR),

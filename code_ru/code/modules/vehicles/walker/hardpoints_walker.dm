@@ -93,6 +93,11 @@
 	var/list/reactor_sounds = list('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg')
 	var/obj/item/fuel_cell/reactor/fuel
 
+/obj/item/hardpoint/walker/reactor/Initialize()
+	. = ..()
+
+	fuel = new(src)
+
 /obj/item/hardpoint/walker/reactor/Destroy()
 	var/obj/vehicle/walker/vehicle = owner
 	if(vehicle)
@@ -176,15 +181,16 @@
 		return FALSE
 
 	playsound(get_turf(src), pick(reactor_sounds), 25, 1)
-	fuel.forceMove(get_turf(src))
-	new_fuel.forceMove(src)
+	if(fuel)
+		fuel.forceMove(get_turf(src))
+	user.drop_inv_item_to_loc(new_fuel, src)
 	fuel = new_fuel
 	return TRUE
 
 /obj/item/hardpoint/walker/reactor/proc/on_consume_enegry_action()
 	if(!turned_on)
 		return FALSE
-	if(!fuel.fuel_amount)
+	if(!fuel?.fuel_amount)
 		turned_on = FALSE
 		return FALSE
 	if(!reactor_state)
@@ -273,8 +279,8 @@
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	destruction_on_zero = FALSE
 
-	var/move_delay = 3
-	var/move_max_momentum = 2
+	var/move_delay = 4
+	var/move_max_momentum = 1
 	var/move_turn_momentum_loss_factor = 0.25
 	var/move_momentum_build_factor = 0.5
 
@@ -356,6 +362,20 @@
 /obj/item/hardpoint/walker/spinal/tactical_missile
 	name = "M1488 Tactical Rocket Unit"
 	desc = "\"Special Deliver Package System\" includes a pair of heavy binoculars with laser aiming device, and bunker buster rocket. However due to only ground spotting and no remote, you have guide it at all the flight time for good hits."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /obj/item/hardpoint/walker/spinal/shield
@@ -487,6 +507,9 @@
 	. = ..()
 
 	.["value_name"] = "Ammo"
+	if(!mounted_gun?.current_mag)
+		return
+
 	.["current_rounds"] = "[mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds]"
 	.["max_rounds"] = "[mounted_gun.current_mag.max_rounds]"
 

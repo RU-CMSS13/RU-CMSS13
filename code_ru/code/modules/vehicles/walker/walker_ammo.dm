@@ -23,7 +23,7 @@
 	default_ammo = /datum/ammo/bullet/walker/machinegun
 	gun_type = /obj/item/weapon/gun/mounted/mecha_hmg
 
-/obj/item/ammo_magazine/internal/walker/shotgun8g
+/obj/item/ammo_magazine/walker/shotgun8g
 	name = "M32 Mounted Shotgun Magazine"
 	desc = "A armament M32 magazine"
 	icon_state = "mech_shotgun8g_ammo"
@@ -213,8 +213,8 @@
 /datum/supply_packs/ammo_M32_walker
 	name = "M32 Mounted Shotgun magazines crate"
 	contains = list(
-		/obj/item/ammo_magazine/internal/walker/shotgun8g,
-		/obj/item/ammo_magazine/internal/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
 	)
 	cost = 30
 	containertype = /obj/structure/closet/crate/ammo

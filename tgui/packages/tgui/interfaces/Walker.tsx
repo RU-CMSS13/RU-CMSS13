@@ -87,13 +87,15 @@ const HardpointsView = (props) => {
       <Box>At {hardpoint.position}</Box>
       <Box height="3px" />
       <Flex direction="row">
-        <ProgressBar
-          value={hardpoint.current_rounds / hardpoint.max_rounds}
-          width={'49%'}
-        >
-          {hardpoint.value_name}: {hardpoint.current_rounds} /{' '}
-          {hardpoint.max_rounds}
-        </ProgressBar>
+        {hardpoint.max_rounds && (
+          <ProgressBar
+            value={hardpoint.current_rounds / hardpoint.max_rounds}
+            width={'49%'}
+          >
+            {hardpoint.value_name}: {hardpoint.current_rounds} /{' '}
+            {hardpoint.max_rounds}
+          </ProgressBar>
+        )}
         <ProgressBar value={hardpoint.integrity / 100} width={'49%'}>
           Integrity: {hardpoint.integrity}%
         </ProgressBar>
