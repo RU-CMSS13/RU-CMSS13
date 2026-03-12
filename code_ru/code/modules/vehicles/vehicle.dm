@@ -385,8 +385,9 @@
 		return
 
 	if(dir == turn(direction, 180) || dir == direction)
+		var/old_dir = dir
 		. = try_move(direction)
-	// Rotation/turning
+		setDir(old_dir, TRUE)
 	else
 		. = try_rotate(turning_angle(dir, direction))
 		if(move_on_turn)
@@ -431,12 +432,9 @@
 			move_momentum = 0.5
 	update_next_move()
 
-	. = setDir(turn(dir, deg), TRUE)
-	if(!.)
-		return
+	setDir(turn(dir, deg), TRUE)
 
 	last_move_dir = dir
-
 	if(length(turn_sounds))
 		playsound(src, pick(turn_sounds), vol = 20, sound_range = 30)
 

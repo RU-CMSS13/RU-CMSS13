@@ -33,6 +33,9 @@
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
+/obj/item/hardpoint/walker/get_origin_turf()
+	return get_turf(src)
+
 /obj/item/hardpoint/walker/ex_act(severity)
 	if(owner || explo_proof)
 		return
