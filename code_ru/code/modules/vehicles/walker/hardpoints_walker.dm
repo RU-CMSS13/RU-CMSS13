@@ -57,7 +57,6 @@
 		if(owner)
 			deactivate()
 			remove_buff(owner)
-	update_icon()
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	return
@@ -552,12 +551,10 @@
 	if(istype(attacking_item, /obj/item/ammo_magazine))
 		. = TRUE
 		mounted_gun.reload(user, attacking_item)
-		update_icon()
 
 	if(istype(attacking_item, /obj/item/explosive/grenade))
 		. = TRUE
 		mounted_gun.on_pocket_attackby(attacking_item, user)
-		update_icon()
 
 /obj/item/hardpoint/walker/hand/proc/try_insert(obj/item/attacking_item, mob/user)
 	. = FALSE
@@ -587,7 +584,7 @@
 	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
 	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
 	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
-	update_icon()
+	owner.update_icon()
 
 /obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
 	. = FALSE
@@ -612,7 +609,7 @@
 	user.put_in_hands(mounted_gun)
 	mounted_gun = null
 	name = initial(name)
-	update_icon()
+	owner.update_icon()
 
 /obj/item/hardpoint/walker/hand/on_install(obj/vehicle/walker/vehicle)
 	if(!vehicle.seats[VEHICLE_DRIVER])

@@ -412,7 +412,7 @@
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
-		take_damage_type(attacking_item.force, "blunt", user)
+		take_damage_type(attacking_item.force / 10, "blunt", user)
 		return
 
 	if(istype(attacking_item, /obj/item/hardpoint/walker))
@@ -443,6 +443,7 @@
 	for(mecha_hardpoint in hardpoints)
 		if(mecha_hardpoint.try_reload(attacking_item, user))
 			return
+
 		mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
 
 	var/selected_module = tgui_input_list(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands)

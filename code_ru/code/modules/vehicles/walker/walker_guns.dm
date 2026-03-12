@@ -226,7 +226,7 @@
 	current_mag = /obj/item/ammo_magazine/walker/shotgun8g
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 
-/obj/item/weapon/gun/shotgun/mounted/mecha_shotgun8g/set_gun_config_values()
+/obj/item/weapon/gun/mounted/mecha_shotgun8g/set_gun_config_values()
 	. = ..()
 
 	set_fire_delay(FIRE_DELAY_TIER_2)
