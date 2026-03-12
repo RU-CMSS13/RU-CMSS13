@@ -170,7 +170,12 @@
 	take_damage_type(O.force * 0.05, "blunt", user) //Melee weapons from people do very little damage
 
 // Frame repairs on the vehicle itself
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/handle_repairs(obj/item/O, mob/user)
+*/
+//RUCM START
+/obj/vehicle/proc/handle_repairs(obj/item/O, mob/user)
+//RUCM END
 	if(user.action_busy)
 		return
 	var/max_hp = initial(health)

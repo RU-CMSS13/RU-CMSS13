@@ -2,7 +2,15 @@
 // Walker
 /////////////////
 
-
+/obj/structure/walker_wreckage
+	name = "CW13 wreckage"
+	desc = "Remains of some unfortunate walker. Completely unrepairable."
+	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
+	icon_state = "mech_broken"
+	density = TRUE
+	anchored = TRUE
+	opacity = FALSE
+	pixel_x = -18
 
 //////////////////////////////////////////////////////////////
 //INTERACTIONS
@@ -69,14 +77,14 @@
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
 
-/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom, new_view_size = 12)
+/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom)
 	if(user.client)
 		return
 
 	if(selected_zoom)
-		user.client.change_view(new_view_size, src)
+		user.client.change_view(zoom_size, src)
 		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_size
+		var/viewoffset = tilesize * zoom_size / 2
 		switch(dir)
 			if(NORTH)
 				user.client.set_pixel_x(0)
@@ -234,15 +242,50 @@
 	update_health(severity, "explosive")
 
 
+//////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
+	if(user.a_intent == INTENT_HARM)
+		update_health(attacking_item.force * 0.05, "blunt", user)
+		return
 
+	if(istype(attacking_item, /obj/item/hardpoint/walker))
+		install_hardpoint(attacking_item, user)
+		return
 
+	if(ispowerclamp(attacking_item))
+		var/obj/item/powerloader_clamp/clampy = attacking_item
+		if(clampy.linked_powerloader && clampy.loaded && istype(clampy.loaded, /obj/item/hardpoint/walker))
+			install_hardpoint(clampy, user)
+			return
 
+	if(HAS_TRAIT(attacking_item, TRAIT_TOOL_CROWBAR) || ispowerclamp(attacking_item))
+		uninstall_hardpoint(attacking_item, user)
+		return
 
+	if(iswelder(attacking_item) || HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
+		handle_repairs(attacking_item, user)
+		return
 
+	var/obj/item/hardpoint/walker/hand/mecha_hardpoint
+	var/list/obj/item/hardpoint/walker/hand/mecha_hands = list()
+	for(mecha_hardpoint in hardpoints)
+		if(mecha_hardpoint.try_reload(attacking_item, user))
+			return
 
+		mecha_hands += mecha_hardpoint
 
+	mecha_hardpoint = tgui_alert(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands + "Cancel")
+	if(!istype(mecha_hardpoint))
+		return
+
+	if(mecha_hardpoint.mounted_gun)
+		mecha_hardpoint.try_remove(attacking_item, user)
+		return
+
+	mecha_hardpoint.try_insert(attacking_item, user)
+	return
 
 
 
@@ -264,8 +307,10 @@
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
+
 	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
 	icon_state = "mech_open"
+
 	layer = BIG_XENO_LAYER
 	opacity = FALSE
 	can_buckle = FALSE
@@ -273,10 +318,10 @@
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
 
-	var/lights = FALSE
-	var/lights_power = 8
+	light_range = 8
+
 	var/zoom = FALSE
-	var/zoom_size = 11
+	var/zoom_size = 12
 
 	pixel_x = -18
 
@@ -285,25 +330,15 @@
 	var/repair = FALSE
 
 	var/acid_process_cooldown = null
-/*
-	var/list/dmg_multipliers = list(
-		"all" = 1.0, //for when you want to make it invincible
-		"acid" = 2,
-		"slash" = 0.85,
-		"bullet" = 0.2,
-		"explosive" = 5.0,
-		"blunt" = 0.1,
-		"energy" = 1.0,
-		"abstract" = 1.0
-	) //abstract for when you just want to hurt it
-*/
 
-	var/max_angle = 45
-	var/list/obj/item/walker_gun/module_map = list(
-		WALKER_HARDPOIN_LEFT_HAND = null,
-		WALKER_HARDPOIN_RIGHT_HAND = null,
-		WALKER_HARDPOIN_BACK = null,
-		WALKER_HARDPOIN_ARMOR = null
+	dmg_multipliers = list(
+		"all" = 1,
+		"acid" = 2.5,
+		"slash" = 1,
+		"bullet" = 0.5,
+		"explosive" = 5,
+		"blunt" = 0.8,
+		"abstract" = 1
 	)
 
 	var/list/verb_list = list(
@@ -331,18 +366,6 @@
 
 	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
 	var/vehicle_faction = ""
-
-/obj/vehicle/walker/Initialize()
-	. = ..()
-
-/obj/vehicle/walker/prebuilt/Initialize()
-	. = ..()
-
-	module_map[WALKER_HARDPOIN_LEFT_HAND] = new /obj/item/walker_gun/smartgun(src)
-	module_map[WALKER_HARDPOIN_RIGHT_HAND] = new /obj/item/walker_gun/flamer(src)
-
-	update_icon()
-
 
 
 // FOR SURE I DON'T WANT TO MESS AROUND WITH THAT FOR NOW
@@ -432,146 +455,6 @@
 	else
 		..()
 
-
-/////////////////
-// Attackby
-/////////////////
-
-/obj/vehicle/walker/attackby(obj/item/held_item, mob/user as mob)
-	if(istype(held_item, /obj/item/ammo_magazine/walker))
-		var/rearmed = FALSE
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
-			if(!module_map[hardpoint_slot] || module_map[hardpoint_slot].ammo || !istype(held_item, module_map[hardpoint_slot].magazine_type))
-				continue
-			rearm(held_item, user, module_map[hardpoint_slot])
-			rearmed = TRUE
-			break
-
-		if(!rearmed)
-			to_chat(user, "You cannot fit that magazine in any weapon.")
-			return
-
-	else if(istype(held_item, /obj/item/walker_gun))
-		var/remaining_slots = list()
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
-
-			if(module_map[hardpoint_slot])
-				continue
-			remaining_slots += hardpoint_slot
-		var/slot = tgui_alert(user, "On which hardpoint install gun.", "Hardpoint", remaining_slots + "Cancel")
-		if (module_map[WALKER_HARDPOIN_LEFT_HAND]?.type == held_item.type || module_map[WALKER_HARDPOIN_RIGHT_HAND]?.type == held_item.type)
-			to_chat(user, "You cannot install two of the same type of gun.")
-			return
-		if(slot && slot != "Cancel")
-			install_gun(held_item, user, slot)
-
-	else if(HAS_TRAIT(held_item, TRAIT_TOOL_WRENCH))
-		var/taken_slots = list()
-		for(var/hardpoint_slot in list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND))
-			if(!module_map[hardpoint_slot])
-				continue
-			taken_slots += hardpoint_slot
-		var/slot = tgui_alert(user, "Which hardpoint should be dismounted.", "Hardpoint", taken_slots + "Cancel")
-		if(slot && slot != "Cancel")
-			dismount(held_item, user, slot)
-
-	else if(iswelder(held_item))
-		repair_walker(held_item, user)
-
-	else
-		. = ..()
-
-/obj/vehicle/walker/proc/rearm(obj/item/ammo_magazine/walker/mag, mob/user, obj/item/walker_gun/selected_gun)
-	if(!do_after(user, 20, TRUE, 5, BUSY_ICON_BUILD))
-		to_chat(user, "Your action was interrupted.")
-		return
-
-	user.drop_inv_item_to_loc(mag, selected_gun)
-	selected_gun.ammo = mag
-	to_chat(user, "You load magazine in [selected_gun.name].")
-
-/obj/vehicle/walker/proc/install_gun(obj/item/walker_gun/gun, mob/user, slot)
-	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
-		to_chat(user, "You don't know how to mount weapon.")
-		return
-
-	if(module_map[slot])
-		to_chat(user, "This [lowertext(slot)] hardpoint is full")
-		return
-
-	to_chat(user, "You start mounting [gun.name] on [lowertext(slot)] hardpoint.")
-	if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
-		user.drop_inv_item_to_loc(gun, src)
-		gun.owner = src
-		module_map[slot] = gun
-
-		to_chat(user, "You mount [gun.name] on [lowertext(slot)] hardpoint.")
-		update_icon()
-	else
-		to_chat(user, "Mounting has been interrupted.")
-
-/obj/vehicle/walker/proc/dismount(obj/item/tool, mob/user, slot)
-	if(skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_MASTER))
-		to_chat(user, "You don't know how to mount weapon.")
-		return
-
-	if(!module_map[slot])
-		to_chat(user, "This [lowertext(slot)] hardpoint is empty")
-		return
-
-	to_chat(user, "You start dismounting [lowertext(slot)] hardpoint.")
-	if(do_after(user, 100, TRUE, 5, BUSY_ICON_BUILD))
-		module_map[slot].forceMove(get_turf(src))
-		module_map[slot].owner = null
-		module_map[slot] = null
-
-		to_chat(user, "You dismount [lowertext(slot)] hardpoint.")
-		update_icon()
-	else
-		to_chat(user, "Dismounting has been interrupted.")
-
-/obj/vehicle/walker/proc/repair_walker(obj/item/tool/weldingtool/weld  as obj, mob/user as mob)
-	if(!weld.isOn())
-		return
-	if(health >= max_health)
-		to_chat(user, "Armor seems fully intact.")
-		return
-	if(repair)
-		to_chat(user, "Someone already reparing this vehicle.")
-		return
-	repair = TRUE
-	var/repair_time = 1 SECONDS
-
-	to_chat(user, SPAN_NOTICE("You start repairing broken part of [src.name]'s armor..."))
-	playsound(src.loc, 'sound/items/weldingtool_weld.ogg', 25)
-
-	while (weld.get_fuel() > 1)
-		if(!(world.time % 3))
-			playsound(get_turf(user), 'sound/items/weldingtool_weld.ogg', 25)
-		if(!do_after(user, repair_time, INTERRUPT_ALL, BUSY_ICON_BUILD))
-			break
-		if(!skillcheckexplicit(user, SKILL_ENGINEER, SKILL_ENGINEER_ENGI))
-			to_chat(user, SPAN_NOTICE("You haphazardly weld together chunks of broken armor."))
-			health += 5
-			healthcheck()
-		else
-			health += 25
-			healthcheck()
-			to_chat(user, SPAN_NOTICE("You repair broken part of the armor."))
-		if(seats[VEHICLE_DRIVER])
-			to_chat(seats[VEHICLE_DRIVER], SPAN_NOTICE("Notification.Armor partly restored."))
-
-		weld.remove_fuel(1, user)
-
-		if (health >= max_health)
-			health = max_health
-			to_chat(user, SPAN_NOTICE("You've finished repairing the walker"))
-			break
-
-		if(!weld.isOn())
-			break;
-
-	repair = FALSE
 
 
 /////////

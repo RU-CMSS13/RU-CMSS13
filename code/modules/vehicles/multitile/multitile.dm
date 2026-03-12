@@ -248,7 +248,12 @@
 /obj/vehicle/multitile/proc/initialize_cameras()
 	return
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/toggle_cameras_status(on)
+*/
+//RUCM START
+/obj/vehicle/multitile/toggle_cameras_status(on)
+//RUCM END
 	if(camera)
 		camera.toggle_cam_status(on)
 	if(camera_int)
@@ -495,7 +500,12 @@
 	forceMove(get_turf(mover))
 
 ///Updates the vehicles minimap icon
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/update_minimap_icon(modules_broken)
+*/
+//RUCM START
+/obj/vehicle/multitile/update_minimap_icon(modules_broken)
+//RUCM END
 	if(!minimap_icon_state)
 		return
 	SSminimaps.remove_marker(src)

@@ -1,4 +1,14 @@
 //README: Be aware, what add_verb from vehicle makes src be client, so ensure src is mech and user is mech-operator,if you're making new verbs
+/* To be fair, just put this code like at examples you have, also remove comments
+	var/mob/user = usr// Internal byond shit
+	if(!istype(user))// HUH? Not supposed to happen, however in this case, better to have this way
+		return
+	src = user.interactee// In mecha up to date of this comment we use set interactee, so here we can find ref to our mecha
+	if(!istype(src, /obj/vehicle/walker))// There we make sure our chocolate fabric is MECH
+		return
+	if(seats[VEHICLE_DRIVER] != usr)// Here we check if for real mech pilot called it
+		return
+AND YOULL BE FINE!*/
 
 /obj/vehicle/walker/proc/exit_walker()
 	set name = "Eject"
@@ -29,11 +39,16 @@
 	if(seats[VEHICLE_DRIVER] != usr)
 		return
 
-	if(lights)
-		set_light(0)
+	if(lighting_holder)
+		if(lighting_holder.light)
+			lighting_holder.set_light_on(FALSE)
+		else
+			lighting_holder.set_light_on(TRUE)
 	else
-		set_light(lights_power)
-	lights = !lights
+		if(light)
+			lighting_holder.set_light_on(FALSE)
+		else
+			lighting_holder.set_light_on(TRUE)
 	playsound(src, 'sound/machines/click.ogg', 50)
 
 

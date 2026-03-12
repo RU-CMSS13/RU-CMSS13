@@ -53,6 +53,9 @@
 	var/move_on_turn = FALSE
 
 
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/Initialize()
 	. = ..()
 
@@ -109,6 +112,7 @@
 
 	if(!QDELETED(cell))
 		QDEL_NULL(cell)
+
 
 //////////////////////////////////////////////////////////////
 //HARDPOINTS
@@ -269,6 +273,7 @@
 	HP.on_install(src)
 	HP.rotate(turning_angle(HP.dir, dir))
 
+	update_minimap_icon()
 	update_icon()
 	return TRUE
 
@@ -357,6 +362,7 @@
 	var/list/hps = get_activatable_hardpoints()
 	for(var/obj/item/hardpoint/H in hps)
 		H.deactivate()
+
 
 //////////////////////////////////////////////////////////////
 //MOVEMENT
@@ -467,3 +473,13 @@
 
 /obj/vehicle/proc/can_rotate(deg)
 	return TRUE
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/proc/update_minimap_icon()
+	return
+
+/obj/vehicle/proc/toggle_cameras_status()
+	return

@@ -563,8 +563,9 @@
 		gun.update_health(XENO_ACID_HMG_DAMAGE)
 
 //RUCM START
+//fuck we need to do it other way, we already 4x times run thru turf context, that fucking cursed, at least put it in one LOOP, then do signaller
 	for(var/obj/vehicle/walker/walker in cur_turf)
-		walker.take_damage_type(15, "acid")
+		walker.update_health(15, "acid")
 //RUCM END
 
 //No effect when merely entering the smoke turf, for balance reasons

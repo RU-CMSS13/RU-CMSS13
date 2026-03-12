@@ -36,6 +36,7 @@
 
 	firing_arc = 45
 
+	var/mount_class = GUN_MOUNT_MECHA
 	var/obj/item/weapon/gun/mounted_gun = null
 
 /obj/item/hardpoint/walker/hand/right
@@ -180,16 +181,6 @@
 		. += "There is \a [mounted_gun] module installed on [src]."
 		. += mounted_gun.get_examine_text(user)
 
-/obj/item/hardpoint/walker/hand/attackby(obj/item/attacking_item, mob/user)
-	if(mounted_gun)
-		if(try_reload(attacking_item, user))
-			return
-		if(try_remove(attacking_item, user))
-			return
-	else
-		if(try_insert(attacking_item, user))
-			return
-
 /obj/item/hardpoint/walker/hand/proc/try_reload(obj/item/attacking_item, mob/user)
 	. = FALSE
 
@@ -210,7 +201,7 @@
 		return
 
 	var/obj/item/weapon/gun/attacking_gun = attacking_item
-	if(attacking_gun.mount_class != GUN_MOUNT_MECHA)
+	if(attacking_gun.mount_class != mount_class)
 		return
 
 	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner) || !mounted_gun)
@@ -236,7 +227,7 @@
 /obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
 	. = FALSE
 
-	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_CROWBAR) || !mounted_gun)
+	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER) || !mounted_gun)
 		return
 
 	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src) || mounted_gun)
