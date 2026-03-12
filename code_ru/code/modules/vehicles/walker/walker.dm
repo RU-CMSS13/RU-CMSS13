@@ -292,11 +292,9 @@
 	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/list/hardpoint_info = list()
 		.["hardpoint_data"] += list(hardpoint_info)
-
 		hardpoint_info["name"] = hardpoint.name
 		hardpoint_info["postion"] = hardpoint.slot
-		hardpoint_info["current_rounds"] = hardpoint.ammo.current_rounds
-		hardpoint_info["max_rounds"] = hardpoint.ammo.max_rounds
+		hardpoint.tgui_additional_data(hardpoint_info)
 
 
 //////////////////////////////////////////////////////////////
@@ -406,6 +404,11 @@
 		handle_repairs(attacking_item, user)
 		return
 
+	if(istype(attacking_item, /obj/item/fuel_cell/reactor))
+		var/obj/item/hardpoint/walker/reactor/mecha_reactor = locate() in hardpoints
+		mecha_reactor.replace_fuel(attacking_item, user)
+		return
+
 	var/obj/item/hardpoint/walker/hand/mecha_hardpoint
 	var/list/obj/item/hardpoint/walker/hand/mecha_hands = list()
 	for(mecha_hardpoint in hardpoints)
@@ -470,7 +473,22 @@
 	return XENO_ATTACK_ACTION
 
 
+//////////////////////////////////////////////////////////////
 
+
+/obj/item/fuel_cell/reactor
+	name = "Enriched Uranium Rod"
+	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy!"
+
+	icon = 'code_ru/icons/obj/items/fuel_rod.dmi'
+	icon_state = "rod"
+
+	// ~40 minutes of work time under load
+	fuel_amount = 24000
+	max_fuel_amount = 24000
+
+/obj/item/fuel_cell/reactor/update_icon()
+	return
 
 
 

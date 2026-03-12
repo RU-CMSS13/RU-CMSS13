@@ -21,6 +21,7 @@
 
 	damage_multiplier = 0.5
 	health = 150
+	var/max_health = 150
 	disp_icon = "walker"
 	allowed_seat = VEHICLE_DRIVER
 
@@ -29,6 +30,11 @@
 		return
 
 	take_damage_type(list(0, severity / 2 * owner.get_dmg_multi(type)), "explosive", "explosion")
+
+/obj/item/hardpoint/walker/proc/tgui_additional_data(list/tgui_data)
+	. = tgui_data
+
+	.["integrity"] = "[health / max_health * 100]"
 
 /obj/item/hardpoint/walker/proc/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	if(!damage_to_apply)
@@ -75,6 +81,24 @@
 
 	var/reactor_state = VEHICLE_REACTOR_FINE
 	var/chance_of_malf = 10
+
+	var/obj/item/fuel_cell/reactor/fuel
+
+/obj/item/hardpoint/walker/reactor/Destroy()
+	var/obj/vehicle/walker/vehicle = owner
+	if(vehicle)
+		vehicle.power_supply = null
+
+	QDEL_NULL(fuel)
+
+	. = ..()
+
+/obj/item/hardpoint/walker/reactor/tgui_additional_data()
+	. = ..()
+
+	.["value_name"] = "Fuel"
+	.["current_rounds"] = "[fuel.fuel_amount]"
+	.["max_rounds"] = "[fuel.max_fuel_amount]"
 
 /obj/item/hardpoint/walker/reactor/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	if(!damage_to_apply || !real_damage)
@@ -124,10 +148,28 @@
 			addtimer(VARSET_CALLBACK(src, turned_on, 1), reboot_time, TIMER_DELETE_ME)
 			addtimer(VARSET_CALLBACK(src, rebooting, 0), reboot_time, TIMER_DELETE_ME)
 
+/obj/item/hardpoint/walker/reactor/proc/replace_fuel(obj/new_fuel, mob/user)
+	if(user.skills.get_skill_level(SKILL_POWERLOADER) <= SKILL_POWERLOADER_DEFAULT)
+		to_chat(user, "You dont know how to operate it")
+		return
+
+	if(!do_after(user, 10 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, owner, INTERRUPT_MOVED))
+		return FALSE
+
+	playsound(get_turf(src), pick('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg'), 25, 1)
+	fuel.forceMove(get_turf(src))
+	new_fuel.forceMove(src)
+	fuel = new_fuel
+	return TRUE
+
 /obj/item/hardpoint/walker/reactor/proc/on_consume_enegry_action()
 	if(!turned_on)
 		return FALSE
+	if(!fuel.fuel_amount)
+		turned_on = FALSE
+		return FALSE
 	if(!reactor_state)
+		fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 		return TRUE
 
 	switch(reactor_state)
@@ -139,6 +181,7 @@
 				turned_on = FALSE
 
 	if(turned_on)
+		fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 		return TRUE
 
 	rebooting = TRUE
@@ -150,13 +193,6 @@
 	if(owner.seats[VEHICLE_DRIVER])
 		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Bzzzzzz. Reactor core unstable, required [reactor_state == VEHICLE_REACTOR_CRITICAL ? "URGENT " : ""]repair. Network reboot in [time_till_reboot / 10] seconds!"))
 	return FALSE
-
-/obj/item/hardpoint/walker/reactor/Destroy()
-	var/obj/vehicle/walker/vehicle = owner
-	if(vehicle)
-		vehicle.power_supply = null
-
-	. = ..()
 
 /obj/item/hardpoint/walker/reactor/on_install(obj/vehicle/walker/vehicle)
 	vehicle.power_supply = src
@@ -274,6 +310,7 @@
 	hdpt_layer = HDPT_LAYER_ARMOR
 
 	health = 500
+	max_health = 500
 
 /obj/item/hardpoint/walker/armor/paladin
 	name = "Paladin Armor"
@@ -339,17 +376,13 @@
 
 //////////////////////////////////////////////////////////////
 //GUNS
-/*
-/obj/item/hardpoint/walker/weapon
-	name = "Walker Gun"
-	desc = "Primary gun source."
-	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
 
-	slot = WALKER_HARDPOIN_GUN
-	hdpt_layer = HDPT_LAYER_TURRET
+/obj/item/hardpoint/walker/hand/tgui_additional_data()
+	. = ..()
 
-	var/obj/item/weapon/gun/mounted_gun = null
-*/
+	.["value_name"] = "Ammo"
+	.["current_rounds"] = "[mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds]"
+	.["max_rounds"] = "[mounted_gun.current_mag.max_rounds]"
 
 /obj/item/hardpoint/walker/hand/Destroy()
 	if(mounted_gun)
@@ -407,7 +440,7 @@
 	if(attacking_gun.mount_class != mount_class)
 		return
 
-	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner) || !mounted_gun)
+	if(!do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || !mounted_gun)
 		return
 
 	if(user.drop_inv_item_to_loc(attacking_gun, src))
@@ -415,7 +448,7 @@
 
 	. = TRUE
 
-	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	playsound(get_turf(src), 'sound/items/Crowbar.ogg', 25, 1)
 	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
 	SPAN_NOTICE("You place [attacking_gun] in [src]."))
 
@@ -434,12 +467,12 @@
 	if(!HAS_TRAIT(attacking_item, TRAIT_TOOL_SCREWDRIVER) || !mounted_gun)
 		return
 
-	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, src) || mounted_gun)
+	if(user.action_busy || !do_after(user, 200, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, owner, INTERRUPT_MOVED) || mounted_gun)
 		return
 
 	. = TRUE
 
-	playsound(loc, 'sound/items/Crowbar.ogg', 25, 1)
+	playsound(get_turf(src), 'sound/items/Crowbar.ogg', 25, 1)
 	user.visible_message(SPAN_NOTICE("[user] removes [mounted_gun] from [src]."),
 	SPAN_NOTICE("You remove [mounted_gun] from [src]."))
 
@@ -552,6 +585,16 @@
 
 
 
+/*
+/obj/item/hardpoint/walker/weapon
+	name = "Walker Gun"
+	desc = "Primary gun source."
+	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+
+	slot = WALKER_HARDPOIN_GUN
+	hdpt_layer = HDPT_LAYER_TURRET
+
+	var/obj/item/weapon/gun/mounted_gun = null
 
 
 
@@ -647,7 +690,6 @@
 
 
 
-/*
 ///////////////
 // AMMO MAGS // START
 ///////////////
@@ -797,7 +839,7 @@
 			living_mob.apply_effect(1, SUPERSLOW)
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
-*/
+
 ////////////////
 // MEGALODON HARDPOINTS // END
 ////////////////
@@ -850,6 +892,7 @@
 // MEGALODON SUPPLYPACKS // END
 ////////////////
 
+*/
 
 
 #undef VEHICLE_REACTOR_FINE

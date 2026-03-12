@@ -1,4 +1,4 @@
-
+/*
 /obj/item/ammo_magazine/walker/wm88
 	name = "M88 Mounted AMR Magazine"
 	desc = "A armament M88 magazine"
@@ -177,3 +177,4 @@
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M88 Mounted AMR Magazine crate"
 	group = "Vehicle Ammo"
+*/

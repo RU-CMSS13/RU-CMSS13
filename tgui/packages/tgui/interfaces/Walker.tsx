@@ -15,8 +15,10 @@ import { Window } from '../layouts';
 type HardpointInfo = {
   name: string;
   position: string;
+  value_name: string;
   current_rounds: number;
   max_rounds: number;
+  integrity: number;
 };
 
 type Data = {
@@ -26,7 +28,7 @@ type Data = {
 };
 
 export const Walker = (props) => {
-  const { act, data } = useBackend<Data>();
+  const { data } = useBackend<Data>();
   const { integrity, hardpoint_data } = data;
 
   const height = 150 + hardpoint_data.length * 80;
@@ -63,7 +65,7 @@ export const Walker = (props) => {
 };
 
 const ResistanceView = (props) => {
-  const { act, data } = useBackend<Data>();
+  const { data } = useBackend<Data>();
   const { resistance_data, integrity } = data;
   return resistance_data.map((resistance, index) => (
     <Fragment key={index}>
@@ -76,7 +78,7 @@ const ResistanceView = (props) => {
 };
 
 const HardpointsView = (props) => {
-  const { act, data } = useBackend<Data>();
+  const { data } = useBackend<Data>();
   const { hardpoint_data } = data;
   return hardpoint_data.map((hardpoint, index) => (
     <Fragment key={index}>
@@ -89,7 +91,11 @@ const HardpointsView = (props) => {
           value={hardpoint.current_rounds / hardpoint.max_rounds}
           width={'49%'}
         >
-          Ammo: {hardpoint.current_rounds} / {hardpoint.max_rounds}
+          {hardpoint.value_name}: {hardpoint.current_rounds} /{' '}
+          {hardpoint.max_rounds}
+        </ProgressBar>
+        <ProgressBar value={hardpoint.integrity / 100} width={'49%'}>
+          Integrity: {hardpoint.integrity}%
         </ProgressBar>
       </Flex>
     </Fragment>
