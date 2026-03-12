@@ -635,9 +635,9 @@
 		if(hardpoint == src || !hardpoint.mounted_gun)
 			continue
 		if(hardpoint.mounted_gun.type == mounted_gun.type)
-			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_3)
+			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2)
 
-/obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, turf/location, control, params)
+/obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, params)
 	var/obj/vehicle/walker/vehicle = owner
 	if(!vehicle.power_supply?.on_consume_enegry_action() || !health)
 		return FALSE
@@ -654,7 +654,7 @@
 
 	return TRUE
 
-/obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, turf/location, control, params)
+/obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, params)
 	var/obj/vehicle/walker/vehicle = owner
 	if(!vehicle.power_supply?.turned_on || !health)
 		return TRUE

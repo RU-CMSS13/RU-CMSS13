@@ -1229,6 +1229,11 @@ and you're good to go.
 	if(!able_to_fire(user) || !target || !get_turf(user) || !get_turf(target))
 		return NONE
 
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(user, target, params))
+		return NONE
+//RUCM END
+
 	/*
 	This is where the grenade launcher and flame thrower function as attachments.
 	This is also a general check to see if the attachment can fire in the first place.
@@ -2232,7 +2237,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	SIGNAL_HANDLER
 
 //RUCM START
-	if(callback_can_fire && !callback_can_fire.Invoke(source, object, location, control, params))
+	if(callback_can_fire && !callback_can_fire.Invoke(source, object, params))
 		return
 //RUCM END
 
