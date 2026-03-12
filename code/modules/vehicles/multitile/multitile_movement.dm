@@ -208,6 +208,7 @@
 /obj/vehicle/multitile/proc/rotate_entrances(deg)
 	entrances = rotate_origins(deg, entrances)
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/rotate_hardpoints(deg, update_icons = TRUE, list/specific_hardpoints = null)
 	if(specific_hardpoints)
 		for(var/obj/item/hardpoint/H in specific_hardpoints)
@@ -219,6 +220,7 @@
 
 	if(update_icons)
 		update_icon()
+*/
 
 // Rotates a list of relative coordinates around the center of the vehicle
 /obj/vehicle/multitile/proc/rotate_origins(deg, list/origins, list/specific_indexes)

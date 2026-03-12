@@ -430,8 +430,9 @@
 			move_momentum = -0.5
 		else
 			move_momentum = 0.5
-	update_next_move()
 
+	update_next_move()
+	rotate_hardpoints(deg)
 	setDir(turn(dir, deg), TRUE)
 
 	last_move_dir = dir
@@ -483,6 +484,17 @@
 /obj/vehicle/proc/can_rotate(deg)
 	return TRUE
 
+/obj/vehicle/proc/rotate_hardpoints(deg, update_icons = TRUE, list/specific_hardpoints = null)
+	if(specific_hardpoints)
+		for(var/obj/item/hardpoint/H in specific_hardpoints)
+			H.rotate(deg)
+		return
+
+	for(var/obj/item/hardpoint/H in hardpoints)
+		H.rotate(deg)
+
+	if(update_icons)
+		update_icon()
 
 //////////////////////////////////////////////////////////////
 

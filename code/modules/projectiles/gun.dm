@@ -2237,11 +2237,21 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 //RUCM END
 
 	var/list/modifiers = params2list(params)
+/* RUCM CHANGE
 	if(modifiers[SHIFT_CLICK] || modifiers[MIDDLE_CLICK] || modifiers[RIGHT_CLICK] || modifiers[BUTTON4] || modifiers[BUTTON5])
+*/
+//RUCM START
+	if(!(flags_mounted_gun_features & GUN_MOUNTED) && (modifiers[SHIFT_CLICK] || modifiers[MIDDLE_CLICK] || modifiers[RIGHT_CLICK] || modifiers[BUTTON4] || modifiers[BUTTON5]))
+//RUCM END
 		return
 
 	// Don't allow doing anything else if inside a container of some sort, like a locker.
+/* RUCM CHANGE
 	if(!isturf(gun_user.loc))
+*/
+//RUCM START
+	if(!(flags_mounted_gun_features & GUN_MOUNTED) && !isturf(gun_user.loc))
+//RUCM END
 		return
 
 	if(istype(object, /atom/movable/screen))

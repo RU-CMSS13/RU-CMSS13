@@ -411,6 +411,8 @@
 		owner.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [owner]. Seems it got disabled for sufficient time!"))
 		if(owner.seats[VEHICLE_DRIVER])
 			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [delay_between_hits / 10] seconds"))
+	else
+		owner.visible_message(SPAN_WARNING("Arc of sparks coming out from aura around [owner], seems like reflecting an attack."))
 	return TRUE
 
 /obj/item/hardpoint/walker/spinal/shield/process()
