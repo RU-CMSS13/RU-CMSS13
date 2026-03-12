@@ -96,9 +96,10 @@
 
 /obj/vehicle/get_examine_text(mob/user)
 	. = ..()
-	for(var/obj/item/hardpoint/H in hardpoints)
-		. += "There [H.p_are()] \a [H] module[H.p_s()] installed."
-		H.examine(user, TRUE)
+
+	for(var/obj/item/hardpoint/selected in hardpoints)
+		. += "There [selected.p_are()] \a [selected] module[selected.p_s()] installed."
+		selected.examine(user, TRUE)
 
 
 /obj/vehicle/Destroy(force)

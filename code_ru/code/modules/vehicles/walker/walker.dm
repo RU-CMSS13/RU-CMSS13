@@ -2,6 +2,263 @@
 // Walker
 /////////////////
 
+
+
+//////////////////////////////////////////////////////////////
+//INTERACTIONS
+
+/obj/vehicle/walker/get_examine_text(mob/user)
+	. = ..()
+
+	if(!health)
+		. += "It's busted!"
+	else if(isobserver(user) || (ishuman(user) && (skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE) || skillcheck(user, SKILL_VEHICLE, SKILL_VEHICLE_CREWMAN))))
+		. += "It's at [round(100 * health / max_health)]% integrity!"
+
+/obj/vehicle/walker/proc/exit_interaction()
+	SIGNAL_HANDLER
+
+	seats[VEHICLE_DRIVER].unset_interaction()
+
+/obj/vehicle/walker/on_set_interaction(mob/living/user)
+	give_action(user, /datum/action/human_action/mg_exit)
+
+	if(user.client)
+		user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
+
+	seats[VEHICLE_DRIVER] = user
+	vehicle_faction = user.faction
+	user.forceMove(src)
+	user.reset_view(src)
+	update_pixels(user)
+	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
+	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
+
+	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
+
+	if(user.client)
+		add_verb(user.client, verb_list)
+	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
+
+	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		selected.pilot_entered(user)
+
+	update_icon()
+
+/obj/vehicle/walker/on_unset_interaction(mob/living/user)
+	remove_action(user, /datum/action/human_action/mg_exit)
+
+	if(user.client)
+		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
+
+	seats[VEHICLE_DRIVER] = null
+	user.forceMove(get_turf(src))
+	user.setDir(dir)
+	user.reset_view(null)
+	update_pixels(user, FALSE)
+	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
+
+	if(user.client)
+		remove_verb(user.client, verb_list)
+	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
+	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION))
+
+	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		selected.pilot_ejected(user)
+
+/obj/vehicle/walker/proc/update_pixels(mob/user, selected_zoom = TRUE, new_view_size = 12)
+	if(user.client)
+		return
+
+	if(selected_zoom)
+		user.client.change_view(new_view_size, src)
+		var/tilesize = 32
+		var/viewoffset = tilesize * zoom_size
+		switch(dir)
+			if(NORTH)
+				user.client.set_pixel_x(0)
+				user.client.set_pixel_y(viewoffset)
+			if(SOUTH)
+				user.client.set_pixel_x(0)
+				user.client.set_pixel_y(-1 * viewoffset)
+			if(EAST)
+				user.client.set_pixel_x(viewoffset)
+				user.client.set_pixel_y(0)
+			if(WEST)
+				user.client.set_pixel_x(-1 * viewoffset)
+				user.client.set_pixel_y(0)
+
+	else
+		user.client.change_view(GLOB.world_view_size, src)
+		user.client.set_pixel_x(0)
+		user.client.set_pixel_y(0)
+
+/obj/vehicle/walker/check_eye(mob/living/user)
+	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated() || !user.client)
+		user.unset_interaction()
+
+/obj/vehicle/walker/MouseDrop_T(mob/target, mob/living/carbon/human/user)
+	. = ..()
+
+	if(target != user || !istype(user))
+		return
+
+	if(user.skills.get_skill_level(SKILL_POWERLOADER) <= SKILL_POWERLOADER_DEFAULT)
+		to_chat(user, "You dont know how to operate it")
+		return
+
+	if(seats[VEHICLE_DRIVER])
+		to_chat(user, "There is someone occupying mecha right now.")
+		return
+
+	if(!check_access(user.wear_id))
+		to_chat(user, SPAN_DANGER("Access denied!"))
+		return
+
+	if(!do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) || seats[VEHICLE_DRIVER])
+		return
+
+	user.set_interaction(src)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/update_icon()
+	overlays.Cut()
+
+	if(seats[VEHICLE_DRIVER])
+		icon_state = "mech_prep"
+	else
+		icon_state = "mech_open"
+
+	for(var/obj/item/hardpoint/hardpoint in hardpoints)
+		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
+		if(istype(hardpoint_image))
+			hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.1
+		else if(islist(hardpoint_image))
+			var/list/image/hardpoint_image_list = hardpoint_image
+			for(var/image/subimage in hardpoint_image_list)
+				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
+		overlays += hardpoint_image
+
+
+/* In future | Future, there are some code left alone, so I just ignore it | [put here your next time update]
+	if(health <= max_health)
+		var/image/damage_overlay = image(icon, icon_state = "damaged_frame", layer = layer+0.1)
+		damage_overlay.alpha = 255 * (1 - (health / max_health))
+		overlays += damage_overlay*/
+
+
+//////////////////////////////////////////////////////////////
+//TGUI
+
+/obj/vehicle/walker/ui_status(mob/user)
+	. = ..()
+	if(seats[VEHICLE_DRIVER] != user)
+		return UI_CLOSE
+
+/obj/vehicle/walker/tgui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Walker")
+		ui.open()
+		ui.set_autoupdate(TRUE)
+
+/obj/vehicle/walker/ui_data(mob/user)
+	. = list()
+
+	var/list/resist_name = list("Bio" = "acid", "Slash" = "slash", "Bullet" = "bullet", "Expl" = "explosive", "Blunt" = "blunt")
+	var/list/resist_data_list = list()
+
+	for(var/selected in resist_name)
+		var/resist = 1 - dmg_multipliers[resist_name[selected]]
+		resist_data_list += list(list(
+			"name" = selected,
+			"pct" = resist
+		))
+
+	.["resistance_data"] = resist_data_list
+	.["integrity"] = floor(100 * health / max_health)
+	.["hardpoint_data"] = list()
+
+	for(var/obj/item/hardpoint/hardpoint in hardpoints)
+		var/list/hardpoint_info = list()
+		.["hardpoint_data"] += list(hardpoint_info)
+
+		hardpoint_info["name"] = hardpoint.name
+		hardpoint_info["postion"] = hardpoint.slot
+		hardpoint_info["current_rounds"] = hardpoint.ammo.current_rounds
+		hardpoint_info["max_rounds"] = hardpoint.ammo.max_rounds
+
+
+//////////////////////////////////////////////////////////////
+//DAMAGE
+
+/obj/vehicle/walker/update_health(damage, type, atom/attacker)
+	damage = damage * get_dmg_multi(type)
+	health = clamp(health - damage, 0, max_health)
+
+	var/mob/user = seats[VEHICLE_DRIVER]
+	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage.</span>"))
+	if(ismob(attacker))
+		var/mob/M = attacker
+		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
+	else
+		log_attack("[src] took [damage] [type] damage from [attacker].")
+
+	update_icon()
+
+	if(health)
+		return
+
+	if(!health)
+		if(user)
+			to_chat(user, "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
+			user.unset_interaction()
+
+		new /obj/structure/walker_wreckage(src.loc)
+		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
+		qdel(src)
+		return
+
+/obj/vehicle/walker/proc/get_dmg_multi(type)
+	if(!dmg_multipliers.Find(type))
+		return 1
+	return dmg_multipliers[type] * dmg_multipliers["all"]
+
+/obj/vehicle/walker/ex_act(severity)
+	update_health(severity, "explosive")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
@@ -84,54 +341,9 @@
 
 	update_icon()
 
-/obj/vehicle/walker/update_icon()
-	overlays.Cut()
 
-	if(seats[VEHICLE_DRIVER] != null)
-		icon_state = "mech_prep"
-	else
-		icon_state = "mech_open"
 
-	if(module_map[WALKER_HARDPOIN_LEFT_HAND])
-		var/image/left_gun = module_map[WALKER_HARDPOIN_LEFT_HAND].get_icon_image("_l_hand")
-		overlays += left_gun
-	if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
-		var/image/right_gun = module_map[WALKER_HARDPOIN_RIGHT_HAND].get_icon_image("_r_hand")
-		overlays += right_gun
-
-/* In future
-	if(health <= max_health)
-		var/image/damage_overlay = image(icon, icon_state = "damaged_frame", layer = layer+0.1)
-		damage_overlay.alpha = 255 * (1 - (health / max_health))
-		overlays += damage_overlay
-*/
-
-/obj/vehicle/walker/get_examine_text(mob/user)
-	. = ..()
-
-	if(health <= 0)
-		. += "It's busted!"
-	else if(isobserver(user) || (ishuman(user) && (skillcheck(user, SKILL_ENGINEER, SKILL_ENGINEER_NOVICE) || skillcheck(user, SKILL_VEHICLE, SKILL_VEHICLE_CREWMAN))))
-		. += "It's at [round(100 * health / max_health)]% integrity!"
-
-	. += "[module_map[WALKER_HARDPOIN_LEFT_HAND] ? module_map[WALKER_HARDPOIN_LEFT_HAND].name : "Nothing"] is placed on its left hardpoint."
-	. += "[module_map[WALKER_HARDPOIN_RIGHT_HAND] ? module_map[WALKER_HARDPOIN_RIGHT_HAND].name : "Nothing"] is placed on its right hardpoint."
-
-/obj/vehicle/walker/ex_act(severity)
-	take_damage_type(severity * 0.5, "explosive")
-	take_damage_type(severity * 0.1, "slash")
-
-	healthcheck()
-
-/obj/vehicle/walker/MouseDrop_T(mob/target, mob/living/user)
-	. = ..()
-	if(!istype(user) || target != user) //No making other people climb into walker.
-		return
-
-	if(user.skills.get_skill_level(SKILL_POWERLOADER) > SKILL_POWERLOADER_DEFAULT)
-		move_in(user)
-	else
-		to_chat(user, "How to operate it?")
+// FOR SURE I DON'T WANT TO MESS AROUND WITH THAT FOR NOW
 
 /obj/vehicle/walker/Bump(atom/obstacle)
 	if(isxeno(obstacle))
@@ -192,207 +404,31 @@
 	else if(istype(obstacle, /obj/structure/fence))
 		var/obj/structure/fence/F = obstacle
 		F.visible_message(SPAN_DANGER("[src.name] smashes through [F]!"))
-		take_damage_type(5, "blunt", obstacle)
+		update_health(5, "blunt", obstacle)
 		F.health = 0
 		F.healthcheck()
 	else if(istype(obstacle, /obj/structure/surface/table))
 		var/obj/structure/surface/table/T = obstacle
 		T.visible_message(SPAN_DANGER("[src.name] crushes [T]!"))
-		take_damage_type(5, "blunt", obstacle)
+		update_health(5, "blunt", obstacle)
 		T.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/showcase))
 		var/obj/structure/showcase/S = obstacle
 		S.visible_message(SPAN_DANGER("[src.name] bulldozes over [S]!"))
-		take_damage_type(15, "blunt", obstacle)
+		update_health(15, "blunt", obstacle)
 		S.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/window/framed))
 		var/obj/structure/window/framed/W = obstacle
 		W.visible_message(SPAN_DANGER("[src.name] crashes through the [W]!"))
-		take_damage_type(20, "blunt", obstacle)
+		update_health(20, "blunt", obstacle)
 		W.shatter_window(1)
 	else if(istype(obstacle, /obj/structure/window_frame))
 		var/obj/structure/window_frame/WF = obstacle
 		WF.visible_message(SPAN_DANGER("[src.name] runs over the [WF]!"))
-		take_damage_type(20, "blunt", obstacle)
+		update_health(20, "blunt", obstacle)
 		WF.deconstruct()
 	else
 		..()
-
-/obj/vehicle/walker/proc/move_in(mob/living/carbon/user)
-	set waitfor = FALSE
-	if(!ishuman(user))
-		return
-	if(seats[VEHICLE_DRIVER])
-		to_chat(user, "There is someone occupying mecha right now.")
-		return
-	var/mob/living/carbon/human/H = user
-
-	if(!do_after(H, 1 SECONDS, INTERRUPT_ALL, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED))
-		return
-
-	for(var/ID in list(H.wear_id, H.belt))
-		if(operation_allowed(ID))
-			seats[VEHICLE_DRIVER] = H
-			add_verb(H.client, verb_list)
-			user.loc = src
-			vehicle_faction = user.faction
-			seats[VEHICLE_DRIVER].client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
-			seats[VEHICLE_DRIVER].set_interaction(src)
-			RegisterSignal(H, COMSIG_MOB_RESISTED, PROC_REF(exit_walker))
-			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Press LMB for use left weapon."))
-			to_chat(seats[VEHICLE_DRIVER], SPAN_HELPFUL("Press MMB for use right weapon."))
-
-			if(module_map[WALKER_HARDPOIN_LEFT_HAND])
-				module_map[WALKER_HARDPOIN_LEFT_HAND].register_signals(user)
-			if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
-				module_map[WALKER_HARDPOIN_RIGHT_HAND].register_signals(user)
-
-			playsound_client(seats[VEHICLE_DRIVER].client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
-			update_icon()
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), seats[VEHICLE_DRIVER].client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
-			return
-
-	to_chat(user, "Access denied.")
-
-/obj/vehicle/walker/proc/operation_allowed(obj/item/I)
-	if(check_access(I))
-		return TRUE
-	return FALSE
-
-/obj/vehicle/walker/ui_status(mob/user)
-	. = ..()
-	if(get_dist(get_turf(user), get_turf(src)) > 0)
-		return UI_CLOSE
-
-/obj/vehicle/walker/tgui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "Walker")
-		ui.open()
-		ui.set_autoupdate(TRUE)
-
-/obj/vehicle/walker/ui_data(mob/user)
-	. = list()
-
-	var/list/resist_name = list("Bio" = "acid", "Slash" = "slash", "Bullet" = "bullet", "Expl" = "explosive", "Blunt" = "blunt")
-	var/list/resist_data_list = list()
-
-	for(var/i in resist_name)
-		var/resist = 1 - LAZYACCESS(dmg_multipliers, LAZYACCESS(resist_name, i))
-		resist_data_list += list(list(
-			"name" = i,
-			"pct" = resist
-		))
-
-	.["resistance_data"] = resist_data_list
-	.["integrity"] = floor(100 * health / max_health)
-	.["hardpoint_data"] = list()
-
-	for(var/position in module_map)
-		var/obj/item/hardpoint/hardpoint = module_map[position]
-		if(!hardpoint)
-			continue
-		var/list/hardpoint_info = list()
-		.["hardpoint_data"] += list(hardpoint_info)
-
-		hardpoint_info["name"] = hardpoint.name
-		hardpoint_info["postion"] = position
-		hardpoint_info["current_rounds"] = hardpoint.ammo.current_rounds
-		hardpoint_info["max_rounds"] = hardpoint.ammo.max_rounds
-
-/obj/vehicle/walker/handle_click(mob/living/user, atom/A, list/params)
-	if(istype(A, /atom/movable/screen) || A.z != z)
-		return
-
-	if(!firing_arc(A))
-		if(module_map[WALKER_HARDPOIN_LEFT_HAND])
-			SEND_SIGNAL(module_map[WALKER_HARDPOIN_LEFT_HAND], COMSIG_GUN_STOP_FIRE)
-		if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
-			SEND_SIGNAL(module_map[WALKER_HARDPOIN_RIGHT_HAND], COMSIG_GUN_STOP_FIRE)
-
-		var/new_dir = get_cardinal_dir(src, A)
-		if(dir != new_dir && world.time > l_move_time + move_delay)
-			l_move_time = world.time
-			playsound(get_turf(src), pick(turn_sounds), 70, 1)
-			dir = new_dir
-
-	// Make sure only LMB and RMB
-	if(!params[LEFT_CLICK] && !params[MIDDLE_CLICK])
-		return
-
-	var/picked_module = params[LEFT_CLICK] ? WALKER_HARDPOIN_LEFT_HAND : WALKER_HARDPOIN_RIGHT_HAND
-	if(!module_map[picked_module])
-		to_chat(usr, "<span class='warning'>WARNING! Hardpoint is empty.</span>")
-		return
-
-	if(module_map[picked_module].automatic)
-		return
-
-	module_map[picked_module].active_effect(A, user)
-
-/obj/vehicle/walker/proc/firing_arc(atom/A)
-	if (!A)
-		return FALSE
-
-	var/turf/T = get_turf(A)
-
-	if(!T)
-		return FALSE
-
-	var/dx = T.x - x
-	var/dy = T.y - y
-	var/deg = 0
-	switch(src.dir)
-		if(EAST) deg = 0
-		if(NORTH) deg = -90
-		if(WEST) deg = -180
-		if(SOUTH) deg = -270
-
-	var/nx = dx * cos(deg) - dy * sin(deg)
-	var/ny = dx * sin(deg) + dy * cos(deg)
-	if(nx == 0)
-		return max_angle >= 180
-	var/angle = arctan(ny/nx)
-	if(nx < 0)
-		angle += 180
-	return abs(angle) <= max_angle
-
-/obj/vehicle/walker/proc/do_zoom(viewsize = 12)
-	var/mob/living/carbon/user = seats[VEHICLE_DRIVER]
-	if(user.client)
-		zoom = TRUE
-		user.client.change_view(viewsize, user)
-
-		// zoom_initial_mob_dir = user.dir
-
-		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_size
-
-		switch(dir)
-			if(NORTH)
-				user.client.set_pixel_x(0)
-				user.client.set_pixel_y(viewoffset)
-			if(SOUTH)
-				user.client.set_pixel_x(0)
-				user.client.set_pixel_y(-1 * viewoffset)
-			if(EAST)
-				user.client.set_pixel_x(viewoffset)
-				user.client.set_pixel_y(0)
-			if(WEST)
-				user.client.set_pixel_x(-1 * viewoffset)
-				user.client.set_pixel_y(0)
-
-	to_chat(seats[VEHICLE_DRIVER], "Notification. Cameras zooming [zoom ? "activated" : "deactivated"].")
-
-/obj/vehicle/walker/proc/unzoom()
-	var/mob/living/carbon/user = seats[VEHICLE_DRIVER]
-
-	zoom = !zoom
-	//General reset in case anything goes wrong, the view will always reset to default unless zooming in.
-	if(user.client)
-		user.client.change_view(GLOB.world_view_size, user)
-		user.client.set_pixel_y(0)
-		user.client.set_pixel_y(0)
 
 
 /////////////////
@@ -570,21 +606,10 @@
 	SPAN_DANGER("We slash \the [src]!"))
 	playsound(X.loc, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
 
-	take_damage_type(damage * damage_mult, "slash", X)
+	update_health(damage * damage_mult, "slash", X)
 
 	healthcheck()
 	return XENO_ATTACK_ACTION
-
-/obj/vehicle/walker/healthcheck()
-	if(health > max_health)
-		health = max_health
-	else if(!health)
-		if(seats[VEHICLE_DRIVER])
-			to_chat(seats[VEHICLE_DRIVER], "<span class='danger'>PRIORITY ALERT! Chassis integrity failing. Systems shutting down.</span>")
-			exit_walker(seats[VEHICLE_DRIVER])
-		new /obj/structure/walker_wreckage(src.loc)
-		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
-		qdel(src)
 
 //Differentiates between damage types from different bullets
 //Applies a linear transformation to bullet damage that will generally decrease damage done
@@ -608,31 +633,10 @@
 
 	bullet_ping(P)
 
-	take_damage_type(damage * (0.33 + penetration/100), dam_type, firer)
+	update_health(damage * (0.33 + penetration/100), dam_type, firer)
 
 	healthcheck()
 
-/obj/vehicle/walker/proc/take_damage_type(damage, type, atom/attacker)
-	damage = damage * get_dmg_multi(type)
-	if(damage <= 3)
-		to_chat(, SPAN_DANGER("ALERT! Hostile incursion detected. Deflected."))
-		return
-
-	health = max(0, health - damage)
-
-	to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage.</span>"))
-	if(ismob(attacker))
-		var/mob/M = attacker
-		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
-	else
-		log_attack("[src] took [damage] [type] damage from [attacker].")
-	healthcheck()
-
-//Returns the ratio of damage to take, just a housekeeping thing
-/obj/vehicle/walker/proc/get_dmg_multi(type)
-	if(!dmg_multipliers || !dmg_multipliers.Find(type))
-		return 1
-	return dmg_multipliers[type] * dmg_multipliers["all"]
 
 /obj/vehicle/walker/Collided(atom/A)
 	. = ..()
@@ -643,7 +647,7 @@
 			return
 
 		if(health > 0)
-			take_damage_type(250, "blunt", crusher)
+			update_health(250, "blunt", crusher)
 			visible_message(SPAN_DANGER("\The [crusher] rams \the [src]!"))
 			Move(get_step(src, crusher.dir))
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)

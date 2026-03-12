@@ -1,9 +1,13 @@
-#define WALKER_HARDPOIN_LEFT_HAND "left_hand"
-#define WALKER_HARDPOIN_RIGHT_HAND "right_hand"
-#define WALKER_HARDPOIN_LEFT_LEG "left_leg"
-#define WALKER_HARDPOIN_RIGHT_LEG "right_leg"
-#define WALKER_HARDPOIN_ARMOR "armor"
-#define WALKER_HARDPOIN_BACK "back"
+#define WALKER_HARDPOIN_LEFT_HAND "Left Hand"
+#define WALKER_HARDPOIN_RIGHT_HAND "Right Hand"
+#define WALKER_HARDPOIN_LEFT_LEG "Left Leg"
+#define WALKER_HARDPOIN_RIGHT_LEG "Right Leg"
+#define WALKER_HARDPOIN_ARMOR "Armor"
+#define WALKER_HARDPOIN_BACK "Back"
+
+
+//////////////////////////////////////////////////////////////
+
 
 /obj/item/hardpoint/walker
 	name = "Mecha Hardpoint"
@@ -13,6 +17,15 @@
 
 	allowed_seat = VEHICLE_DRIVER
 
+/obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
+	return
+
+/obj/item/hardpoint/walker/proc/pilot_ejected(mob/user)
+	return
+
+
+//////////////////////////////////////////////////////////////
+
 
 /obj/item/hardpoint/walker/hand
 	name = "Left Mecha Hand"
@@ -20,6 +33,8 @@
 
 	slot = WALKER_HARDPOIN_LEFT_HAND
 	hdpt_layer = HDPT_LAYER_SUPPORT
+
+	firing_arc = 45
 
 	var/obj/item/weapon/gun/mounted_gun = null
 
@@ -74,8 +89,8 @@
 	disp_icon_state = "paladin_armor"
 
 	type_multipliers = list(
-		"explosive" = 0.67,
-		"all" = 0.9
+		"all" = 0.95,
+		"explosive" = 0.85
 	)
 
 /obj/item/hardpoint/walker/armor/concussive
@@ -86,8 +101,8 @@
 	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
-		"blunt" = 0.67,
-		"all" = 0.9
+		"all" = 0.95,
+		"blunt" = 0.85
 	)
 
 /obj/item/hardpoint/walker/armor/caustic
@@ -98,20 +113,20 @@
 	disp_icon_state = "caustic_armor"
 
 	type_multipliers = list(
-		"acid" = 0.67,
-		"all" = 0.9
+		"all" = 0.95,
+		"acid" = 0.85
 	)
 
 /obj/item/hardpoint/walker/armor/fire
 	name = "Fire Armor"
-	desc = "Protects vehicles from most types of fire."
+	desc = "Protects vehicles from fire."
 
 	icon_state = "caustic_armor"
 	disp_icon_state = "caustic_armor"
 
 	type_multipliers = list(
-		"fire" = 0.67,
-		"all" = 0.9
+		"all" = 0.95,
+		"fire" = 0.2
 	)
 
 /obj/item/hardpoint/walker/armor/ballistic
@@ -122,15 +137,15 @@
 	disp_icon_state = "ballistic_armor"
 
 	type_multipliers = list(
-		"bullet" = 0.67,
-		"slash" = 0.67,
-		"all" = 0.9
+		"all" = 0.95,
+		"bullet" = 0.85,
+		"slash" = 0.85,
 	)
 
-/*
+
 //////////////////////////////////////////////////////////////
 //GUNS
-
+/*
 /obj/item/hardpoint/walker/weapon
 	name = "Walker Gun"
 	desc = "Primary gun source."
@@ -142,10 +157,25 @@
 	var/obj/item/weapon/gun/mounted_gun = null
 */
 
-/obj/item/hardpoint/walker/hand
+/obj/item/hardpoint/walker/hand/pilot_entered(mob/user)
+	if(!mounted_gun)
+		return
+
+	mounted_gun.set_gun_user(user)
+
+/obj/item/hardpoint/walker/hand/pilot_ejected(mob/user)
+	if(!mounted_gun)
+		return
+
+	mounted_gun.set_gun_user(null)
+
+
+//////////////////////////////////////////////////////////////
+//INTERACTIONS
 
 /obj/item/hardpoint/walker/hand/get_examine_text(mob/user)
 	. = ..()
+
 	if(mounted_gun)
 		. += "There is \a [mounted_gun] module installed on [src]."
 		. += mounted_gun.get_examine_text(user)
@@ -195,14 +225,13 @@
 	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
 	SPAN_NOTICE("You place [attacking_gun] in [src]."))
 
+	name = "[name] with [attacking_gun]"
 	mounted_gun = attacking_gun
 	mounted_gun.gun_holder = src
 	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
+	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
+	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
 	update_icon()
-
-	AddComponent(/datum/component/automatedfire/autofire, mounted_gun.fire_delay, mounted_gun.burst_delay, mounted_gun.burst_amount, mounted_gun.gun_firemode, mounted_gun.autofire_slow_mult,\
-	CALLBACK(mounted_gun, PROC_REF(set_bursting)), CALLBACK(mounted_gun, PROC_REF(reset_fire)),\
-	CALLBACK(mounted_gun, PROC_REF(fire_wrapper)), CALLBACK(src, PROC_REF(display_ammo)), CALLBACK(mounted_gun, PROC_REF(set_auto_firing)))
 
 /obj/item/hardpoint/walker/hand/proc/try_remove(obj/item/attacking_item, mob/user)
 	. = FALSE
@@ -219,11 +248,81 @@
 	user.visible_message(SPAN_NOTICE("[user] removes [mounted_gun] from [src]."),
 	SPAN_NOTICE("You remove [mounted_gun] from [src]."))
 
+	QDEL_NULL(mounted_gun.callback_can_fire)
+	QDEL_NULL(mounted_gun.callback_can_stop_fire)
 	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
 	mounted_gun.gun_holder = null
 	user.put_in_hands(mounted_gun)
 	mounted_gun = null
+	name = initial(name)
 	update_icon()
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/hardpoint/walker/hand/proc/can_fire(datum/source, atom/object, turf/location, control, params)
+	SIGNAL_HANDLER
+
+	var/list/modifiers = params2list(params)
+	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(!in_firing_arc(object))
+		return FALSE
+
+	return TRUE
+
+/obj/item/hardpoint/walker/hand/proc/can_stop_fire(datum/source, atom/object, turf/location, control, params)
+	SIGNAL_HANDLER
+
+	var/list/modifiers = params2list(params)
+	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
+		return FALSE
+
+	if(slot == WALKER_HARDPOIN_LEFT_HAND ? modifiers[BUTTON] != LEFT_CLICK : modifiers[BUTTON] != MIDDLE_CLICK)
+		return FALSE
+
+	return TRUE
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir)
+	var/hardpoint = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
+	var/image/self = image(icon = disp_icon, icon_state = "[disp_icon_state + hardpoint]_[health ? "0" : "1"]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+	. = list(self)
+	switch(floor((health / initial(health)) * 100))
+		if(0)
+			self.color = "#888888"
+		if(1 to 20)
+			self.color = "#4e4e4e"
+		if(21 to 40)
+			self.color = "#6e6e6e"
+		if(41 to 60)
+			self.color = "#8b8b8b"
+		if(61 to 80)
+			self.color = "#bebebe"
+		else
+			self.color = null
+
+	if(mounted_gun)
+		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.icon + hardpoint]_[health ? "0" : "1"]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
+		gun.color = self.color
+		. += gun
+
+
+//////////////////////////////////////////////////////////////
+
+
+
 
 
 
@@ -258,200 +357,6 @@
 	var/scatter_value = 5
 
 	var/autofire_slow_mult = 1
-
-/obj/item/walker_gun/Initialize(mapload, ...)
-	. = ..()
-
-	if(istype(loc, /obj/vehicle/walker))
-		owner = loc
-
-	ammo = new magazine_type
-
-	if(automatic)
-		AddComponent(/datum/component/automatedfire/autofire, fire_delay, fire_delay, 1, GUN_FIREMODE_AUTOMATIC, autofire_slow_mult, CALLBACK(src, PROC_REF(set_bursting)), CALLBACK(src, PROC_REF(reset_fire)), CALLBACK(src, PROC_REF(fire_wrapper)), CALLBACK(src, PROC_REF(display_ammo)), CALLBACK(src, PROC_REF(set_auto_firing)))
-
-/obj/item/walker_gun/proc/register_signals(mob/user)
-	if(automatic)
-		RegisterSignal(user, COMSIG_MOB_MOUSEDOWN, PROC_REF(start_fire))
-		RegisterSignal(user, COMSIG_MOB_MOUSEDRAG, PROC_REF(change_target))
-		RegisterSignal(user, COMSIG_MOB_MOUSEUP, PROC_REF(stop_fire))
-
-/obj/item/walker_gun/proc/unregister_signals(mob/user)
-	if(automatic)
-		UnregisterSignal(user, list(COMSIG_MOB_MOUSEUP, COMSIG_MOB_MOUSEDOWN, COMSIG_MOB_MOUSEDRAG))
-
-/obj/item/walker_gun/proc/change_target(datum/source, atom/src_object, atom/over_object, turf/src_location, turf/over_location, src_control, over_control, params)
-	SIGNAL_HANDLER
-	set_target(get_turf_on_clickcatcher(over_object, owner.seats[VEHICLE_DRIVER], params))
-
-/obj/item/walker_gun/proc/start_fire(datum/source, atom/object, turf/location, control, params, bypass_checks = FALSE)
-	SIGNAL_HANDLER
-
-	if(!owner)
-		return
-
-	var/list/modifiers = params2list(params)
-	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
-		return
-
-	if(owner.module_map[WALKER_HARDPOIN_LEFT_HAND] == src ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
-		return
-
-	if(istype(object, /atom/movable/screen))
-		return
-
-	if(!owner.firing_arc(object))
-		return
-
-	set_target(get_turf_on_clickcatcher(object, owner.seats[VEHICLE_DRIVER], params))
-
-	SEND_SIGNAL(src, COMSIG_GUN_FIRE)
-
-/obj/item/walker_gun/proc/stop_fire(datum/source, atom/object, turf/location, control, params)
-	SIGNAL_HANDLER
-
-	if(!owner)
-		return
-
-	var/list/modifiers = params2list(params)
-	if(!modifiers[LEFT_CLICK] && !modifiers[MIDDLE_CLICK])
-		return
-
-	if(owner.module_map[WALKER_HARDPOIN_LEFT_HAND] == src ? modifiers[BUTTON] == LEFT_CLICK : modifiers[BUTTON] == MIDDLE_CLICK)
-		reset_fire()
-
-/obj/item/walker_gun/proc/get_icon_image(hardpoint)
-	if(!owner)
-		return
-
-	return image(owner.icon, equip_state + hardpoint)
-
-/obj/item/walker_gun/proc/display_ammo(user)
-	if(ammo)
-		to_chat(user, SPAN_WARNING("[name] fired! [ammo.current_rounds]/[ammo.max_rounds] rounds remaining!"))
-	else
-		to_chat(user, SPAN_WARNING("[name] fired! NO rounds remaining!"))
-
-/obj/item/walker_gun/proc/set_bursting(bursting = FALSE)
-	return
-
-/obj/item/walker_gun/proc/reset_fire()
-	shots_fired = 0//Let's clean everything
-	set_target(null)
-	set_auto_firing(FALSE)
-	SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
-
-/obj/item/walker_gun/proc/set_auto_firing(auto = FALSE)
-	fa_firing = auto
-
-/obj/item/walker_gun/proc/fire_wrapper(atom/target, mob/living/user, params, reflex = FALSE, dual_wield)
-	SHOULD_NOT_OVERRIDE(TRUE)
-	if(!target)
-		target = src.target
-	if(!user)
-		user = owner.seats[VEHICLE_DRIVER]
-	if(!target || !user || !owner.firing_arc(target))
-		return NONE
-	return active_effect(target, user)
-
-/obj/item/walker_gun/proc/set_target(atom/object)
-	if(object == target || object == loc)
-		return
-	if(target)
-		UnregisterSignal(target, COMSIG_PARENT_QDELETING)
-	if (!owner.firing_arc(object) && object != null)
-		reset_fire()
-		return
-	target = object
-	if(target)
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(clean_target))
-
-/obj/item/walker_gun/proc/clean_target()
-	SIGNAL_HANDLER
-	target = get_turf(target)
-
-/obj/item/walker_gun/proc/create_bullet(mob/user, location)
-	var/obj/projectile/P = new(location, create_cause_data(initial(name), user))
-	P.generate_bullet(new ammo.default_ammo)
-	for (var/trait in projectile_traits)
-		GIVE_BULLET_TRAIT(P, trait, FACTION_MARINE)
-	return P
-
-/obj/item/walker_gun/proc/active_effect(atom/target, mob/living/user)
-	if (!ammo)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
-		return FALSE
-	if(ammo.current_rounds <= 0)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		ammo.loc = owner.loc
-		ammo = null
-		visible_message("[owner.name]'s systems deployed used magazine.","")
-		SEND_SIGNAL(src, COMSIG_GUN_STOP_FIRE)
-		return FALSE
-	if(world.time < last_fire + fire_delay)
-		to_chat(user, "<span class='warning'>WARNING! System report: weapon is not ready to fire again!</span>")
-		return FALSE
-	last_fire = world.time
-	if(!owner.firing_arc(target))
-		return FALSE
-
-	var/obj/projectile/P = create_bullet(user)
-	playsound(get_turf(owner), pick(fire_sound), 60)
-	target = simulate_scatter(target, P)
-	P.fire_at(target, owner, src, P.ammo.max_range, P.ammo.shell_speed)
-	ammo.current_rounds--
-
-	display_ammo(user)
-	visible_message("<span class='danger'>[owner.name] fires from [name]!</span>", "<span class='warning'>You hear [istype(P.ammo, /datum/ammo/bullet) ? "gunshot" : "blast"]!</span>")
-
-	var/angle = round(Get_Angle(owner, target))
-	muzzle_flash(angle)
-
-	if(ammo && ammo.current_rounds <= 0)
-		ammo.loc = owner.loc
-		ammo = null
-		visible_message("[owner.name]'s systems deployed used magazine.","")
-	return TRUE
-
-/obj/item/walker_gun/proc/muzzle_flash(angle, x_offset = -9, y_offset = 5)
-	if(!muzzle_flash ||  isnull(angle))
-		return //We have to check for null angle here, as 0 can also be an angle.
-	if(!istype(owner) || !istype(owner.loc,/turf))
-		return
-
-	var/prev_light = light_range
-	if(!light_on && (light_range <= muzzle_flash_lum))
-		set_light_range(muzzle_flash_lum)
-		set_light_on(TRUE)
-		addtimer(CALLBACK(src, PROC_REF(reset_light_range), prev_light), 0.5 SECONDS)
-
-	var/image_layer = (owner && owner.dir == SOUTH) ? MOB_LAYER+0.1 : MOB_LAYER-0.1
-	var/offset = 5
-
-	var/image/I = image('icons/obj/items/weapons/projectiles.dmi',owner,muzzle_flash,image_layer)
-	var/matrix/rotate = matrix() //Change the flash angle.
-	rotate.Translate(0, offset)
-	rotate.Turn(angle)
-	I.transform = rotate
-	I.flick_overlay(owner, 3)
-
-/// called by a timer to remove the light range from muzzle flash
-/obj/item/walker_gun/proc/reset_light_range(lightrange)
-	set_light_range(lightrange)
-	if(lightrange <= 0)
-		set_light_on(FALSE)
-
-/obj/item/walker_gun/proc/simulate_scatter(atom/target, obj/projectile/projectile_to_fire)
-	var/fire_angle = Get_Angle(owner.loc, get_turf(target))
-	var/total_scatter_angle = projectile_to_fire.scatter - rand(-scatter_value,scatter_value)
-
-	//Not if the gun doesn't scatter at all, or negative scatter.
-	if(total_scatter_angle > 0)
-		fire_angle += rand(-total_scatter_angle, total_scatter_angle)
-		target = get_angle_target_turf(owner.loc, fire_angle, 30)
-
-	return get_turf(target)
 
 /obj/item/walker_gun/smartgun
 	name = "M56 High-Caliber Mounted Smartgun"
@@ -500,116 +405,20 @@
 
 	automatic = FALSE
 
-/obj/item/walker_gun/flamer/proc/get_fire_sound()
-	var/list/fire_sounds = list(
-							'sound/weapons/gun_flamethrower1.ogg',
-							'sound/weapons/gun_flamethrower2.ogg',
-							'sound/weapons/gun_flamethrower3.ogg')
-	return pick(fire_sounds)
 
-/obj/item/walker_gun/flamer/active_effect(atom/target, mob/living/user)
-	set waitfor = 0
 
-	if (!ammo)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		return
-	if(ammo.current_rounds <= 0)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		ammo.loc = owner.loc
-		ammo = null
-		visible_message("[owner.name]'s systems deployed used magazine.","")
-		return
-	if(world.time < last_fire + fire_delay)
-		to_chat(user, "<span class='warning'>WARNING! System report: weapon is not ready to fire again!</span>")
-		return
-	last_fire = world.time
-	if(!ammo.reagents.reagent_list.len)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		ammo.loc = owner.loc
-		ammo = null
-		visible_message("[owner.name]'s systems deployed used magazine.")
-		return
 
-	var/datum/reagent/chem = ammo.reagents.reagent_list[1]
 
-	var/flameshape = chem.flameshape
-	var/fire_type = chem.fire_type
 
-	chem.intensityfire = clamp(chem.intensityfire, ammo.reagents.min_fire_int, ammo.reagents.max_fire_int)
-	chem.durationfire = clamp(chem.durationfire, ammo.reagents.min_fire_dur, ammo.reagents.max_fire_dur)
 
-	var/max_range = chem.rangefire
-	if(chem.rangefire == -1)
-		max_range = ammo.reagents.max_fire_rad
-	var/distance = 0
 
-	var/turf/temp[] = get_line(get_turf(user), get_turf(target))
-	process_flame_tiles(temp, target, user, chem, max_range, flameshape, fire_type, distance, null, FALSE)
 
-	if(ammo.current_rounds <= 0 || !ammo)
-		to_chat(user, "<span class='warning'>WARNING! System report: ammunition is depleted!</span>")
-		ammo.loc = owner.loc
-		ammo = null
-		visible_message("[owner.name]'s systems deployed used magazine.","")
-		return
 
-/obj/item/walker_gun/flamer/proc/process_flame_tiles(list/turfs, atom/target, mob/living/user, datum/reagent/chem, max_range, flameshape, fire_type, distance, turf/prev_turf, stop_at_turf)
-	if(!length(turfs))
-		return
 
-	var/turf/current_turf = turfs[1]
-	turfs.Cut(1, 2)
 
-	if(current_turf == user.loc)
-		prev_turf = current_turf
-		addtimer(CALLBACK(src, PROC_REF(process_flame_tiles), turfs, target, user, chem, max_range, flameshape, fire_type, distance, prev_turf, stop_at_turf), 1, TIMER_UNIQUE)
-		return
 
-	if(distance >= max_range)
-		return
 
-	if(current_turf.density)
-		stop_at_turf = TRUE
-	else if(prev_turf)
-		var/atom/movable/temp = new /obj/flamer_fire()
-		var/atom/movable/blocked = LinkBlocked(temp, prev_turf, current_turf)
-		qdel(temp)
-
-		if(blocked)
-			if(blocked.flags_atom & ON_BORDER)
-				return
-			stop_at_turf = TRUE
-
-	if(stop_at_turf)
-		flame_adjacent(current_turf, user, chem)
-		playsound(current_turf, src.get_fire_sound(), 50, TRUE)
-		show_percentage(user)
-		return
-
-	distance++
-	prev_turf = current_turf
-
-	playsound(current_turf, src.get_fire_sound(), 50, TRUE)
-
-	new /obj/flamer_fire(current_turf, create_cause_data(initial(name), user), chem, max_range, ammo.reagents, flameshape, target, CALLBACK(src, PROC_REF(show_percentage), user), fuel_pressure, fire_type)
-
-/obj/item/walker_gun/flamer/proc/flame_adjacent(turf/turfed, mob/living/user, datum/reagent/chem)
-	if(!istype(turfed))
-		return
-
-	if(!locate(/obj/flamer_fire) in turfed) // Prevent stacking flames
-		if(ammo && ammo.reagents && length(ammo.reagents.reagent_list)) // Ensure reagents exist
-
-			chem.intensityfire = clamp(chem.intensityfire, ammo.reagents.min_fire_int, ammo.reagents.max_fire_int)
-			chem.durationfire = clamp(chem.durationfire, ammo.reagents.min_fire_dur, ammo.reagents.max_fire_dur)
-
-			new /obj/flamer_fire(turfed, create_cause_data(initial(name), user), chem)
-			ammo.reagents.remove_reagent(chem.id, 1)
-
-/obj/item/walker_gun/flamer/proc/show_percentage(mob/living/user)
-	if(ammo)
-		to_chat(user, SPAN_WARNING("System Report: <b>[round(ammo.get_ammo_percent())]</b>% fuel remains!"))
-
+/*
 ///////////////
 // AMMO MAGS // START
 ///////////////
@@ -759,7 +568,7 @@
 			living_mob.apply_effect(1, SUPERSLOW)
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
-
+*/
 ////////////////
 // MEGALODON HARDPOINTS // END
 ////////////////

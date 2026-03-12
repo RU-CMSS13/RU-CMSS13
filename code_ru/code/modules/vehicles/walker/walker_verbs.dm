@@ -1,42 +1,21 @@
 //README: Be aware, what add_verb from vehicle makes src be client, so ensure src is mech and user is mech-operator,if you're making new verbs
 
-/obj/vehicle/walker/proc/exit_walker(mob/pilot)
+/obj/vehicle/walker/proc/exit_walker()
 	set name = "Eject"
 	set category = "Vehicle"
 
 	var/mob/user = usr
+	if(!istype(user))
+		return
 
-	if(pilot) //overriding external usr from destroying to internal pilot
-		user = pilot
-
+	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
-		src = user.interactee
+		return
 
-	if(!mech_link_check(src, user))
-		log_debug("Wrong Mech Parameters detected, user[user] or src[src]")
-		return FALSE
-
-	if(zoom)
-		unzoom()
-
-	if(user.client)
-		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
+	if(seats[VEHICLE_DRIVER] != usr)
+		return
 
 	user.unset_interaction()
-	user.loc = get_turf(src)
-	user.reset_view(null)
-	if(user.client)
-		remove_verb(user.client, verb_list)
-	UnregisterSignal(user, COMSIG_MOB_RESISTED)
-
-	if(module_map[WALKER_HARDPOIN_LEFT_HAND])
-		module_map[WALKER_HARDPOIN_LEFT_HAND].unregister_signals(user)
-	if(module_map[WALKER_HARDPOIN_RIGHT_HAND])
-		module_map[WALKER_HARDPOIN_RIGHT_HAND].unregister_signals(user)
-
-	seats[VEHICLE_DRIVER] = null
-	update_icon()
-	return TRUE
 
 
 /obj/vehicle/walker/proc/toggle_lights()
@@ -127,11 +106,3 @@
 	else
 		do_zoom()
 	return TRUE
-
-/obj/vehicle/walker/proc/mech_link_check(obj/vehicle/walker/walker, mob/user)
-	if(!istype(user))
-		return FALSE
-	if(!istype(walker))
-		return FALSE
-	else
-		return TRUE

@@ -2169,15 +2169,24 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	active_attachable?.clean_target()
 	target = get_turf(target)
 
+/* RUCM CHANGE
 /obj/item/weapon/gun/proc/stop_fire()
 	SIGNAL_HANDLER
-/* RUCM CHANGE
+
 	if(!target || (gun_user.get_active_hand() != src))
+		return
 */
 //RUCM START
-	if(!target || ((gun_user.get_active_hand() != src) && !(flags_mounted_gun_features & GUN_MOUNTING)))
-//RUCM END
+/obj/item/weapon/gun/proc/stop_fire(datum/source, atom/object, turf/location, control, params)
+	SIGNAL_HANDLER
+
+	if(callback_can_stop_fire)
+		if(!callback_can_stop_fire.Invoke(source, object, location, control, params))
+			return
+
+	else if(!target || (gun_user.get_active_hand() != src))
 		return
+//RUCM END
 
 	if(gun_firemode == GUN_FIREMODE_AUTOMATIC)
 		reset_fire()
@@ -2216,6 +2225,11 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 ///Check if the gun can fire and add it to bucket auto_fire system if needed, or just fire the gun if not
 /obj/item/weapon/gun/proc/start_fire(datum/source, atom/object, turf/location, control, params, bypass_checks = FALSE)
 	SIGNAL_HANDLER
+
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(source, object, location, control, params))
+		return
+//RUCM END
 
 	var/list/modifiers = params2list(params)
 	if(modifiers[SHIFT_CLICK] || modifiers[MIDDLE_CLICK] || modifiers[RIGHT_CLICK] || modifiers[BUTTON4] || modifiers[BUTTON5])

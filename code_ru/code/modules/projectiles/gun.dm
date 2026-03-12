@@ -3,8 +3,13 @@
 	var/lineart_ru = FALSE  //RUCM EDIT
 	var/flags_mounted_gun_features = null
 
+	/// Remote handling
 	var/atom/gun_holder = null
 	var/mount_class = GUN_MOUNT_NO
+
+	/// For gun holder
+	var/datum/callback/callback_can_fire
+	var/datum/callback/callback_can_stop_fire
 
 /obj/item/weapon/gun/proc/muzzle_flash(angle, mob/user)
 	if(!muzzle_flash || flags_gun_features & GUN_SILENCED || isnull(angle))
@@ -28,7 +33,7 @@
 	var/matrix/rotate = matrix()
 	if(ismob(ref_for_muzzle))
 		user = ref_for_muzzle
-		if(iscarbonsizexeno(user))
+		if(iscarbonsizexeno(user))// This can't be run without mob type
 			var/mob/living/carbon/xenomorph/xeno = user
 			I.pixel_x = xeno.xeno_inhand_item_offset
 
