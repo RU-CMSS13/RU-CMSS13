@@ -487,11 +487,8 @@
 	var/list/mecha_hands = list()
 	var/obj/item/hardpoint/walker/mecha_hardpoint
 	for(mecha_hardpoint as anything in hardpoints)
-		if(mecha_hardpoint.mounted_gun && mecha_hardpoint.try_reload(attacking_item, user))
-			return
-		if(mecha_hardpoint.mount_class == GUN_MOUNT_MECHA)
+		if(mecha_hardpoint.mount_class == GUN_MOUNT_MECHA || mecha_hardpoint.mounted_gun)
 			mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
-
 	if(!length(mecha_hands))
 		return
 	var/selected_module = tgui_input_list(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands)
@@ -499,6 +496,7 @@
 		return
 	mecha_hardpoint = mecha_hands[selected_module]
 	if(mecha_hardpoint.mounted_gun)
+		mecha_hardpoint.try_reload(attacking_item, user)
 		mecha_hardpoint.try_remove(attacking_item, user)
 		return
 	mecha_hardpoint.try_insert(attacking_item, user)

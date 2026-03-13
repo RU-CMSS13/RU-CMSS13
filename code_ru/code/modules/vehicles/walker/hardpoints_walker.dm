@@ -635,13 +635,11 @@
 /obj/item/hardpoint/walker/proc/try_reload(obj/item/attacking_item, mob/user)
 	. = FALSE
 
-	if(istype(attacking_item, /obj/item/ammo_magazine))
+	if(istype(attacking_item, /obj/item/ammo_magazine) && mounted_gun.reload(null, attacking_item))
 		. = TRUE
-		mounted_gun.reload(user, attacking_item)
 
-	if(istype(attacking_item, /obj/item/explosive/grenade))
+	if(istype(attacking_item, /obj/item/explosive/grenade) && mounted_gun.on_pocket_attackby(attacking_item, null))
 		. = TRUE
-		mounted_gun.on_pocket_attackby(attacking_item, user)
 
 /obj/item/hardpoint/walker/proc/try_insert(obj/item/attacking_item, mob/user)
 	. = FALSE
