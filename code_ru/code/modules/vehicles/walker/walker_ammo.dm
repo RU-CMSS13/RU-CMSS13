@@ -75,9 +75,15 @@
 	default_ammo = /datum/ammo/bullet/walker/wm88
 	gun_type = /obj/item/weapon/gun/mounted/mecha_wm88
 
+
+/obj/item/ammo_magazine/rocket/ap/tactical
+	name = "M1488 Tactical AP Laser-Guided Rocket"
+	default_ammo = /datum/ammo/rocket/ap/tactical
+	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
+	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets."
+
 /obj/item/ammo_magazine/rocket/brute/tactical
 	name = "M1488 Tactical Laser-Guided Rocket"
-	icon_state = "brute_rocket"
 	default_ammo = /datum/ammo/rocket/brute/tactical
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
 	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. The warhead itself uses an inflection stabilized shaped-charge to generate a low-frequency pressure wave that can flatten nearly any fortification in an ellipical radius of several meters. These rockets are known to have reduced lethality to personnel, but will put just about any ol' backwater mud-hut right into orbit."
@@ -167,9 +173,14 @@
 /datum/ammo/bullet/walker/wm88/a50
 	penetration = ARMOR_PENETRATION_TIER_10
 
+/datum/ammo/rocket/ap/tactical
+	damage = 200
+	accurate_range = 12
+	max_range = 20
+
 /datum/ammo/rocket/brute/tactical
-	max_range = 18
-	max_distance = 18
+	max_range = 20
+	max_distance = 20
 
 
 
@@ -233,9 +244,23 @@
 	containername = "M88 Mounted AMR Magazine crate"
 	group = "Vehicle Ammo"
 
-/datum/supply_packs/ammo_m1488_tactical_rocket
-	name = "M1488 Tactical Laser-Guided Rocket (x1)"
+/datum/supply_packs/ammo_m1488_tactical_rocket_ap
+	name = "M1488 Tactical AP Laser-Guided Rocket (x4)"
 	contains = list(
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+	)
+	cost = 20
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "M1488 Tactical AP Laser-Guided Rocket crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/ammo_m1488_tactical_rocket
+	name = "M1488 Tactical Laser-Guided Rocket (x2)"
+	contains = list(
+		/obj/item/ammo_magazine/rocket/brute/tactical,
 		/obj/item/ammo_magazine/rocket/brute/tactical,
 	)
 	cost = 20

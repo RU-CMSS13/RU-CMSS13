@@ -49,6 +49,17 @@
 		/obj/item/ammo_magazine/flamer_tank/walker,
 	)
 
+/obj/effect/essentials_set/walker/tactical_missile
+	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/spinal/tactical_missile,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/brute/tactical,
+		/obj/item/ammo_magazine/rocket/brute/tactical,
+	)
+
 
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("STARTING PARTS", 0, null, null, null),
@@ -58,7 +69,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Rocket Unit", 40, /obj/item/hardpoint/walker/spinal/tactical_missile, null, VENDOR_ITEM_REGULAR),
+	list("M1488 Tactical Rocket Unit", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
