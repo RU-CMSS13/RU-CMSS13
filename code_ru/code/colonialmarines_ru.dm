@@ -29,6 +29,7 @@
 #include "modules\clothing\head\WY\goons.dm"
 #include "modules\clothing\suits\marine_armor\WY\goon.dm"
 #include "modules\cm_aliens\structures\blueprints.dm"
+#include "modules\cm_marines\equipment\kit_boxes.dm"
 #include "modules\cm_marines\overwatch.dm"
 #include "modules\cm_tech\tech_tiers.dm"
 #include "modules\cm_tech\techs\marine\tier2\walker.dm"
