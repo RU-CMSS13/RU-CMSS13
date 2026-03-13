@@ -731,6 +731,7 @@
 			if(!ishumansynth_strict(listener) && !isobserver(listener))
 				listener.show_message("[src] broadcasts something, but you can't understand it.")
 				continue
+			tts_heard_list[1] += listener
 			listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
 		langchat_long_speech(message, langchat_long_listeners, driver.get_default_language())
