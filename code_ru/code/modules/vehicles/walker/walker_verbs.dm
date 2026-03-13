@@ -194,7 +194,7 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if((selected_group in SELECTED_GROUP_SPINAL) || !(locate(/obj/item/hardpoint/walker/spinal/tactical_missile) in hardpoints))
+	if(selected_group == SELECTED_GROUP_SPINAL || !(locate(/obj/item/hardpoint/walker/spinal/tactical_missile) in hardpoints))
 		selected_group = SELECTED_GROUP_HANDS
 	else
 		selected_group = SELECTED_GROUP_SPINAL
@@ -204,4 +204,4 @@ AND YOULL BE FINE!*/
 		selected.pilot_ejected(user)
 		selected.pilot_entered(user)
 
-	to_chat(user, SPAN_WARNING("New selected group is [selected_group in SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))
+	to_chat(user, SPAN_WARNING("New selected group is [selected_group == SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))

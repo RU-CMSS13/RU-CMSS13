@@ -8,8 +8,9 @@
 #define WALKER_HARDPOIN_ARMOR "Armor"
 #define WALKER_HARDPOIN_SPINAL "Spinal"
 
-#define SELECTED_GROUP_HANDS list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND)
-#define SELECTED_GROUP_SPINAL list(WALKER_HARDPOIN_SPINAL)
+#define SELECTED_GROUP_HANDS "Hands Group"
+#define SELECTED_GROUP_SPINAL "Spinal Group"
+#define GROUPS_BY_ID list(SELECTED_GROUP_HANDS = list(WALKER_HARDPOIN_LEFT_HAND, WALKER_HARDPOIN_RIGHT_HAND), SELECTED_GROUP_SPINAL = list(WALKER_HARDPOIN_SPINAL))
 
 #define VEHICLE_REACTOR_FINE 0
 #define VEHICLE_REACTOR_DAMAGE 1
@@ -88,7 +89,7 @@
 		return
 
 	var/obj/vehicle/walker/source = owner
-	if(slot in source.selected_group)
+	if(slot in GROUPS_BY_ID[source.selected_group])
 		mounted_gun.set_gun_user(user)
 
 /obj/item/hardpoint/walker/proc/pilot_ejected(mob/user)
@@ -161,7 +162,7 @@
 		damage_to_apply = round(damages_applied[2])
 		real_damage = damage_to_apply * damage_multiplier
 
-	if(reactor_state < VEHICLE_REACTOR_CRITICAL && prob(real_damage / (chance_of_malf / 2)))
+	if(reactor_state < VEHICLE_REACTOR_CRITICAL && prob(real_damage / (chance_of_malf / 5)))
 		reactor_state++
 		if(reactor_state == VEHICLE_REACTOR_CRITICAL)
 			count_down = TRUE
@@ -435,6 +436,8 @@
 
 	mount_class = GUN_MOUNT_NO
 
+	var/zoom_size = 18
+
 /obj/item/hardpoint/walker/spinal/tactical_missile/Initialize()
 	. = ..()
 
@@ -458,15 +461,6 @@
 	if(button && (modifiers[BUTTON] != MIDDLE_CLICK))
 		return FALSE
 	return TRUE
-
-
-
-
-
-
-
-
-
 
 
 /obj/item/hardpoint/walker/spinal/shield
@@ -691,13 +685,16 @@
 	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
 	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
 	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
-	if(owner)
-		owner.update_icon()
+	if(!owner)
+		return
 
-	if(user)
-		var/obj/vehicle/walker/source = owner
-		if(slot in source.selected_group)
-			mounted_gun.set_gun_user(user)
+	owner.update_icon()
+	if(!owner.seats[VEHICLE_DRIVER])
+		return
+
+	var/obj/vehicle/walker/source = owner
+	if(slot in GROUPS_BY_ID[source.selected_group])
+		mounted_gun.set_gun_user(source.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/proc/remove_gun(mob/user)
 	QDEL_NULL(mounted_gun.callback_can_fire)
@@ -746,6 +743,15 @@
 
 //////////////////////////////////////////////////////////////
 
+
+#undef WALKER_HARDPOIN_HEAD
+#undef WALKER_HARDPOIN_LEFT_HAND
+#undef WALKER_HARDPOIN_RIGHT_HAND
+#undef WALKER_HARDPOIN_LEFT_LEG
+#undef WALKER_HARDPOIN_RIGHT_LEG
+#undef WALKER_HARDPOIN_INTERNAL
+#undef WALKER_HARDPOIN_ARMOR
+#undef WALKER_HARDPOIN_SPINAL
 
 #undef VEHICLE_REACTOR_FINE
 #undef VEHICLE_REACTOR_DAMAGE

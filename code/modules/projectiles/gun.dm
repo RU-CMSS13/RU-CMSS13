@@ -1910,8 +1910,9 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	if(flags_mounted_gun_features & GUN_MOUNTED)
 		if(callback_fire_stat)
 			var/list/modifs = callback_fire_stat.Invoke(projectile_to_fire, user)
-			gun_accuracy_mult = modifs[1]
-			gun_scatter += modifs[2]
+			if(length(modifs))
+				gun_accuracy_mult = modifs[1]
+				gun_scatter += modifs[2]
 		else
 			gun_accuracy_mult = accuracy_mult + HIT_ACCURACY_MULT_TIER_5
 			gun_scatter = SCATTER_AMOUNT_NONE

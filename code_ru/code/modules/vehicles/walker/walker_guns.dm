@@ -129,10 +129,24 @@
 	. = ..()
 
 	RegisterSignal(src, COMSIG_GUN_BEFORE_FIRE, PROC_REF(apply_effect))
-	RegisterSignal(src, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
+
+/obj/item/weapon/gun/mounted/mecha_wm88/set_gun_user(mob/to_set)
+	var/mob/cached_gun_user = gun_user
+
+	. = ..()
+
+	if(to_set == cached_gun_user)
+		if(!(comp_lookup[COMSIG_MOB_FIRED_GUN]) && to_set)
+			RegisterSignal(cached_gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
+		return
+	if(cached_gun_user)
+		UnregisterSignal(cached_gun_user, list(COMSIG_MOB_FIRED_GUN))
+
+	if(gun_user)
+		RegisterSignal(gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
 
 /obj/item/weapon/gun/mounted/mecha_wm88/Destroy()
-	UnregisterSignal(src, list(COMSIG_MOB_FIRED_GUN, COMSIG_GUN_BEFORE_FIRE))
+	UnregisterSignal(src, list(COMSIG_GUN_BEFORE_FIRE))
 
 	. = ..()
 
@@ -344,18 +358,23 @@
 	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
 	mount_class = GUN_MOUNT_MECHA
 
-	var/f_aiming_time = 30 SECONDS
+	var/f_aiming_time = 10 SECONDS
 	var/aiming = FALSE
 
 /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
 	if(aiming)
 		return
 
+	var/start_turf = get_turf(user)
 	if(!(istype(target, /obj/structure) || istype(target, /turf/closed/wall)))
 		to_chat(user, SPAN_WARNING("Invalid target!"))
 		return
 
-	var/list/turf/path = get_line(user, target, include_start_atom = FALSE)
+	if(!current_mag?.current_rounds)
+		click_empty(user)
+		return
+
+	var/list/turf/path = get_line(start_turf, target, include_start_atom = FALSE)
 	for(var/turf/turf_path in path)
 		if(turf_path.opacity && turf_path != target)
 			to_chat(user, SPAN_WARNING("Target obscured!"))
@@ -370,7 +389,7 @@
 	lockon_direction_icon = image(icon = 'icons/effects/Targeted.dmi', icon_state = "[lockon]_direction", dir = get_cardinal_dir(target, user))
 	target.overlays += lockon_direction_icon
 	var/datum/beam/laser_beam
-	laser_beam = target.beam(user, beam, 'icons/effects/beam.dmi', (f_aiming_time + 1 SECONDS), beam_type = /obj/effect/ebeam/laser/intense)
+	laser_beam = target.beam(start_turf, beam, 'icons/effects/beam.dmi', (f_aiming_time + 1 SECONDS), beam_type = /obj/effect/ebeam/laser/intense)
 	laser_beam.visuals.alpha = 0
 	animate(laser_beam.visuals, alpha = initial(laser_beam.visuals.alpha), f_aiming_time, easing = SINE_EASING|EASE_OUT)
 

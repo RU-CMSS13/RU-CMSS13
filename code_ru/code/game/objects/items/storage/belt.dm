@@ -3,6 +3,7 @@
 	desc = "The M103 EXT is limited-edition modernized product , made specially for mech pilots to carry their walker's ammunition."
 	can_hold = list(
 		/obj/item/ammo_magazine/walker,
+		/obj/item/ammo_magazine/flamer_tank/walker,
 	)
 
 // XM52 Belt

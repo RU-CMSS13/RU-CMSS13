@@ -177,12 +177,17 @@
 		selected.pilot_ejected(user)
 	update_icon()
 
-/obj/vehicle/walker/proc/update_pixels(selected_zoom, override_zoom)
+/obj/vehicle/walker/proc/update_pixels(selected_zoom)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user.client)
 		return
 
 	if(selected_zoom)
+		var/override_zoom = 0
+		if(selected_group == SELECTED_GROUP_SPINAL)
+			var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = locate() in hardpoints
+			override_zoom = launcer.zoom_size
+
 		var/obj/item/hardpoint/walker/spinal/artilery/zoom_provider = locate() in hardpoints
 		if(!zoom_provider && !override_zoom)
 			return
@@ -250,6 +255,10 @@
 	recalculate_legs()
 
 /obj/vehicle/walker/pre_movement(direction)
+	if(selected_group == SELECTED_GROUP_SPINAL)
+		to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("[src] can't move due to spinal weapon selection!"))
+		return FALSE
+
 	if(!power_supply?.on_consume_enegry_action())
 		return FALSE
 
@@ -260,7 +269,7 @@
 	if(!.)
 		return
 
-	if(zoom && seats[VEHICLE_DRIVER])
+	if(zoom)
 		update_pixels(TRUE)
 
 /obj/vehicle/walker/proc/recalculate_legs()
@@ -465,22 +474,20 @@
 	var/list/mecha_hands = list()
 	var/obj/item/hardpoint/walker/mecha_hardpoint
 	for(mecha_hardpoint as anything in hardpoints)
-		if(mecha_hardpoint.try_reload(attacking_item, user))
+		if(mecha_hardpoint.mounted_gun && mecha_hardpoint.try_reload(attacking_item, user))
 			return
-
 		if(mecha_hardpoint.mount_class == GUN_MOUNT_MECHA)
 			mecha_hands[mecha_hardpoint.name] = mecha_hardpoint
 
+	if(!length(mecha_hands))
+		return
 	var/selected_module = tgui_input_list(user, "With which hardpoint you want to interact?", "Hardpoints", mecha_hands)
 	if(!selected_module)
 		return
-
 	mecha_hardpoint = mecha_hands[selected_module]
-
 	if(mecha_hardpoint.mounted_gun)
 		mecha_hardpoint.try_remove(attacking_item, user)
 		return
-
 	mecha_hardpoint.try_insert(attacking_item, user)
 	return
 

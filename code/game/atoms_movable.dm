@@ -215,7 +215,7 @@
 	if(!interactee)
 		return
 
-	if(istype(interactee, /obj/vehicle/walker))
+	if(istype(interactee, /obj/vehicle/walker) && logout)
 		return
 //RUCM END
 	if(interactee)

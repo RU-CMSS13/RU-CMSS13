@@ -153,8 +153,7 @@
 	user.visible_message(SPAN_NOTICE("[user] begins installing \the [HP] on the [HP.slot] hardpoint slot of \the [src]."),
 		SPAN_NOTICE("You begin installing \the [HP] on the [HP.slot] hardpoint slot of \the [src]."))
 
-	var/num_delays = 1
-
+	var/num_delays = 5
 	switch(HP.slot)
 		if(HDPT_PRIMARY)
 			num_delays = 5
@@ -167,7 +166,7 @@
 		if(HDPT_TREADS, HDPT_WHEELS)
 			num_delays = 7
 
-	if(!do_after(user, 30*num_delays * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = num_delays))
+	if(!do_after(user, 50 * num_delays * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = num_delays))
 		user.visible_message(SPAN_WARNING("[user] stops installing \the [HP] on \the [src]."), SPAN_WARNING("You stop installing \the [HP] on \the [src]."))
 		return
 
@@ -233,8 +232,7 @@
 	user.visible_message(SPAN_NOTICE("[user] begins removing [old] on the [old.slot] hardpoint slot on \the [src]."),
 		SPAN_NOTICE("You begin removing [old] on the [old.slot] hardpoint slot on \the [src]."))
 
-	var/num_delays = 1
-
+	var/num_delays = 5
 	switch(old.slot)
 		if(HDPT_PRIMARY)
 			num_delays = 5
@@ -247,7 +245,7 @@
 		if(HDPT_TREADS)
 			num_delays = 7
 
-	if(!do_after(user, 30*num_delays * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = num_delays, target_flags = INTERRUPT_DIFF_LOC, target = old))
+	if(!do_after(user, 50 * num_delays * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = num_delays, target_flags = INTERRUPT_DIFF_LOC, target = old))
 		user.visible_message(SPAN_WARNING("[user] stops removing \the [old] on \the [src]."), SPAN_WARNING("You stop removing \the [old] on \the [src]."))
 		return
 
