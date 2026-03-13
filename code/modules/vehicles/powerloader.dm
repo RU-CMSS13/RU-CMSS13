@@ -48,7 +48,12 @@
 	if(world.time > l_move_time + move_delay)
 		if(dir != direction)
 			l_move_time = world.time
+/* RUCM CHANGE
 			setDir(direction)
+*/
+//RUCM START
+			setDir(direction, TRUE)
+//RUCM END
 			handle_rotation()
 			pick(playsound(src.loc, 'sound/mecha/powerloader_turn.ogg', 25, 1), playsound(src.loc, 'sound/mecha/powerloader_turn2.ogg', 25, 1))
 			. = TRUE
