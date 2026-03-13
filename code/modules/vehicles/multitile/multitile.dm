@@ -109,6 +109,9 @@
 		/obj/structure/airlock_assembly,
 		/obj/structure/barricade,
 		/obj/structure/machinery/defenses,
+//RUCM START
+		/obj/structure/machinery/mounted_defence,
+//RUCM END
 		/obj/structure/machinery/m56d_post,
 		/obj/structure/machinery/cm_vending,
 		/obj/structure/machinery/vending,
