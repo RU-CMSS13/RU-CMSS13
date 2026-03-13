@@ -584,12 +584,12 @@
 
 /obj/structure/sign/safety/luggageclaim
 	name = "\improper luggage claim semiotic"
-	desc = "Semiotic Standard denoting the presecense of a luggage claim area nearby."
+	desc = "Semiotic Standard denoting the presence of a luggage claim area nearby."
 	icon_state = "luggageclaim"
 
 /obj/structure/sign/safety/landingzone
 	name = "\improper landing zone semiotic"
-	desc = "Semiotic Standard denoting the presecense of a landing zone nearby."
+	desc = "Semiotic Standard denoting the presence of a landing zone nearby."
 	icon_state = "landingzone"
 
 /obj/structure/sign/safety/zero
@@ -648,7 +648,7 @@
 
 /obj/structure/sign/ROsign
 	name = "\improper USCM Requisitions Office Guidelines"
-	desc = "1. You are not entitled to service or equipment. Attachments are a privilege, not a right.\n 2. You must be fully dressed to obtain service. Cryosleep underwear is non-permissible.\n 3. The Quartermaster has the final say and the right to decline service. Only the Acting Commanding Officer may override their decisions.\n 4. Please treat your Requsitions staff with respect. They work hard."
+	desc = "1. You are not entitled to service or equipment. Attachments are a privilege, not a right.\n 2. You must be fully dressed to obtain service. Cryosleep underwear is non-permissible.\n 3. The Quartermaster has the final say and the right to decline service. Only the Acting Commanding Officer may override their decisions.\n 4. Please treat your Requisitions staff with respect. They work hard."
 	icon_state = "roplaque"
 	deconstructable = FALSE
 
@@ -776,3 +776,12 @@
 	icon_state = "calendar_ua"
 	desc = "Classic office decoration and a place to stare at maniacally, has a vertically placed UA flag and some army symbolics."
 	calendar_faction = FACTION_MARINE
+
+//===================//
+//      Con-Am Faction Symbol     //
+//=================//
+
+/obj/structure/sign/conam
+	name = "\improper Con-Am Poster"
+	desc = "A symbol of the Con-Am corporation. Oozes a proud confidence of Con-Am, despite its mounting real world troubles."
+	icon_state = "conam_symbol"

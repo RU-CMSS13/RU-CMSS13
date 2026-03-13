@@ -24,7 +24,7 @@
 
 #define MAP_MAXSIZE 300
 
-
+#define MAP_CONAM_81_ABYSSAL "Con-Am 81 'Abyssal'"
 #define MAP_ICE_COLONY "Ice Colony" // Highpop only
 #define MAP_LV_624 "LV-624"
 #define MAP_BIG_RED "Solaris Ridge"
