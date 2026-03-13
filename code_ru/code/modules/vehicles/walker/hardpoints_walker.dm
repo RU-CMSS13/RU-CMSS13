@@ -485,6 +485,13 @@
 
 	STOP_PROCESSING(SSobj, src)
 
+/obj/item/hardpoint/walker/spinal/shield/tgui_additional_data()
+	. = ..()
+
+	.["value_name"] = "Shield"
+	.["current_rounds"] = "[damage_capacity]"
+	.["max_rounds"] = "[max_damage_capacity]"
+
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
 	cooldown_end_time = world.time + delay_between_hits
 	if(!damage_capacity)
@@ -539,7 +546,7 @@
 
 	type_multipliers = list(
 		"all" = 0.9,
-		"explosive" = 0.8
+		"explosive" = 0.8,
 	)
 
 /obj/item/hardpoint/walker/armor/concussive
@@ -551,7 +558,7 @@
 
 	type_multipliers = list(
 		"all" = 0.9,
-		"blunt" = 0.8
+		"blunt" = 0.8,
 	)
 
 /obj/item/hardpoint/walker/armor/caustic
@@ -563,7 +570,7 @@
 
 	type_multipliers = list(
 		"all" = 0.9,
-		"acid" = 0.8
+		"acid" = 0.8,
 	)
 
 /obj/item/hardpoint/walker/armor/fire
@@ -575,7 +582,7 @@
 
 	type_multipliers = list(
 		"all" = 0.9,
-		"fire" = 0
+		"fire" = 0,
 	)
 
 /obj/item/hardpoint/walker/armor/ballistic
