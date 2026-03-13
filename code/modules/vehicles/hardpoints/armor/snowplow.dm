@@ -1,3 +1,4 @@
+/* RUCM CHANGE
 /obj/item/hardpoint/armor/snowplow
 	name = "\improper Snowplow"
 	desc = "Clears a path in the snow for friendlies. It doesn't seem to have much use beyond that."
@@ -42,3 +43,4 @@
 			S.changing_layer(0)
 		else
 			continue
+*/

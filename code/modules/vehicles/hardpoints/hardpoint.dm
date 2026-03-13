@@ -157,7 +157,12 @@
 	if(owner || explo_proof)
 		return
 
+/* RUCM CHANGE
 	take_damage(severity / 2)
+*/
+//RUCM START
+	take_damage_type(list(0, severity / 2))
+//RUCM END
 	if(health <= 0)
 		visible_message(SPAN_WARNING("\The [src] disintegrates into useless pile of scrap under the damage it suffered."))
 		deconstruct(TRUE)
@@ -187,12 +192,14 @@
 	if(health > 0)
 		return TRUE
 
+/* RUCM CHANGE
 /obj/item/hardpoint/proc/take_damage(damage)
 	if(health <= 0)
 		return
 	health = max(0, health - damage * damage_multiplier)
 	if(!health)
 		on_destroy()
+*/
 
 /obj/item/hardpoint/proc/on_destroy()
 	return

@@ -229,6 +229,10 @@
 			continue
 		if(!spread_on_semiweedable && T.is_weedable < FULLY_WEEDABLE)
 			continue
+//RUCM START
+		if(locate(/obj/vehicle) in T)
+			continue
+//RUCM END
 		T.clean_cleanables()
 
 		var/obj/effect/alien/resin/fruit/old_fruit

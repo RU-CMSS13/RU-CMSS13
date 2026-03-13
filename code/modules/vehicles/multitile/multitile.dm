@@ -292,6 +292,7 @@
 		return 1
 	return dmg_multipliers[type] * dmg_multipliers["all"]
 
+/* RUCM CHANGE
 //Generic proc for taking damage
 //ALWAYS USE THIS WHEN INFLICTING DAMAGE TO THE VEHICLES
 /obj/vehicle/multitile/proc/take_damage_type(damage, type, atom/attacker)
@@ -315,6 +316,7 @@
 	else
 		log_attack("[src] took [damage] [type] damage from [attacker].")
 	update_icon()
+*/
 
 /obj/vehicle/multitile/Entered(atom/movable/A)
 	if(istype(A, /obj) && !istype(A, /obj/item/ammo_magazine/hardpoint) && !istype(A, /obj/item/hardpoint))

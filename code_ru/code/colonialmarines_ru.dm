@@ -60,6 +60,7 @@
 #include "modules\vehicles\multitile\multitile.dm"
 #include "modules\vehicles\multitile\apc\apc.dm"
 #include "modules\vehicles\multitile\apc\multitile_verbs.dm"
+#include "modules\vehicles\multitile\hardpoints\armor\snowplow.dm"
 #include "modules\vehicles\walker.dm"
 #include "modules\vehicles\walker_vendor.dm"
 #include "modules\vehicles\walker_verbs.dm"
