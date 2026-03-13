@@ -256,7 +256,9 @@
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(selected_group == SELECTED_GROUP_SPINAL)
-		to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("[src] can't move due to spinal weapon selection!"))
+		if(move_sounds && world.time > move_next_sound_play)
+			to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("[src] can't move due to spinal weapon selection!"))
+			move_next_sound_play = world.time + 10
 		return FALSE
 
 	if(!power_supply?.on_consume_enegry_action())
@@ -295,6 +297,21 @@
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
+	overlays += image(icon = icon, icon_state = "[icon_state]_effect", dir = dir)
+	switch(floor((health / max_health) * 100))
+		if(0)
+			color = "#888888"
+		if(1 to 20)
+			color = "#4e4e4e"
+		if(21 to 40)
+			color = "#6e6e6e"
+		if(41 to 60)
+			color = "#8b8b8b"
+		if(61 to 80)
+			color = "#bebebe"
+		else
+			color = null
+
 	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
 		if(istype(hardpoint_image))
@@ -304,13 +321,6 @@
 			for(var/image/subimage as anything in hardpoint_image_list)
 				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
 		overlays += hardpoint_image
-
-
-/* In future | Future, there are some code left alone, so I just ignore it | [put here your next time update]
-	if(health <= max_health)
-		var/image/damage_overlay = image(icon, icon_state = "damaged_frame", layer = layer+0.1)
-		damage_overlay.alpha = 255 * (1 - (health / max_health))
-		overlays += damage_overlay*/
 
 
 //////////////////////////////////////////////////////////////

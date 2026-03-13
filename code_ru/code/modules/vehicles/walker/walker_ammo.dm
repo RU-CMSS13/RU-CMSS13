@@ -238,7 +238,7 @@
 	contains = list(
 		/obj/item/ammo_magazine/rocket/brute/tactical,
 	)
-	cost = 100
+	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M1488 Tactical Laser-Guided Rocket crate"
 	group = "Vehicle Ammo"

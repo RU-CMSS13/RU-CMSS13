@@ -371,11 +371,13 @@
 /obj/item/hardpoint/walker/leg/left
 	name = "Left Mecha Leg"
 
+	disp_icon_state = "mech_part_l_leg"
 	slot = WALKER_HARDPOIN_LEFT_LEG
 
 /obj/item/hardpoint/walker/leg/right
 	name = "Right Mecha Leg"
 
+	disp_icon_state = "mech_part_r_leg"
 	slot = WALKER_HARDPOIN_RIGHT_LEG
 
 

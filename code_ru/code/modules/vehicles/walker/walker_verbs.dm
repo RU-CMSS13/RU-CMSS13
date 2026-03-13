@@ -125,6 +125,8 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
+	if(selected_group == SELECTED_GROUP_SPINAL)
+		return
 	zoom = !zoom
 	update_pixels(zoom)
 
@@ -194,10 +196,16 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(selected_group == SELECTED_GROUP_SPINAL || !(locate(/obj/item/hardpoint/walker/spinal/tactical_missile) in hardpoints))
+	handle_weapon_groups(user)
+
+/obj/vehicle/walker/proc/handle_weapon_groups(mob/user)
+	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = locate() in hardpoints
+	if(selected_group == SELECTED_GROUP_SPINAL || !launcer || !launcer.mounted_gun.current_mag?.current_rounds)
 		selected_group = SELECTED_GROUP_HANDS
+		update_pixels(zoom)
 	else
 		selected_group = SELECTED_GROUP_SPINAL
+		update_pixels(TRUE)
 
 	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)

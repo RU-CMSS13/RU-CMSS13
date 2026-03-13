@@ -53,23 +53,23 @@
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("STARTING PARTS", 0, null, null, null),
 	list("Internal Parts", 0, /obj/effect/essentials_set/walker/internals, MECH_START_KIT, VENDOR_ITEM_RECOMMENDED),
-	list("Shielded Reactor (critical)", 20, /obj/effect/essentials_set/walker/reactor, null, VENDOR_ITEM_RECOMMENDED),
+	list("Shielded Reactor", 0, /obj/effect/essentials_set/walker/reactor, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
 	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Rocket Unit", 45, /obj/item/hardpoint/walker/spinal/tactical_missile, null, VENDOR_ITEM_REGULAR),
-	list("F35 Resonation Projecting System", 35, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
+	list("M1488 Tactical Rocket Unit", 40, /obj/item/hardpoint/walker/spinal/tactical_missile, null, VENDOR_ITEM_REGULAR),
+	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
-	list("Paladin Armor", 40, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
-	list("Concussive Armor", 40, /obj/item/hardpoint/walker/armor/concussive, null, VENDOR_ITEM_REGULAR),
-	list("Caustic Armor", 40, /obj/item/hardpoint/walker/armor/caustic, null, VENDOR_ITEM_REGULAR),
-	list("Fire Fighter Armor", 40, /obj/item/hardpoint/walker/armor/fire, null, VENDOR_ITEM_REGULAR),
-	list("Ballistic Armor", 40, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
+	list("Paladin Armor", 25, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
+	list("Concussive Armor", 25, /obj/item/hardpoint/walker/armor/concussive, null, VENDOR_ITEM_REGULAR),
+	list("Caustic Armor", 25, /obj/item/hardpoint/walker/armor/caustic, null, VENDOR_ITEM_REGULAR),
+	list("Fire Fighter Armor", 25, /obj/item/hardpoint/walker/armor/fire, null, VENDOR_ITEM_REGULAR),
+	list("Ballistic Armor", 25, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
 
 	list("WEAPONS KITS (Recommended 1-2 units)", 0, null, null, null),
-	list("M88 Mounted Automated Anti-Material rifle", 40, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
+	list("M88 Mounted Automated Anti-Material rifle", 35, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
 	list("M56 Double-Barrel Mounted Smartgun", 25, /obj/effect/essentials_set/walker/smartgun, null, VENDOR_ITEM_REGULAR),
 	list("M32 Mounted Shotgun", 15, /obj/effect/essentials_set/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
 	list("M30 Machine Gun", 20, /obj/effect/essentials_set/walker/hmg, null, VENDOR_ITEM_REGULAR),
@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M30 Machinegun Magazine", 4, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal Canister", 4, /obj/item/ammo_magazine/flamer_tank/walker, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal B-type Canister", 6, /obj/item/ammo_magazine/flamer_tank/walker/btype, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Laser-Guided Rocket", 14, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
+	list("M1488 Tactical Laser-Guided Rocket", 4, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
 	))
 
 

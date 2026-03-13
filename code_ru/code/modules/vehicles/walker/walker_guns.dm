@@ -396,6 +396,10 @@
 	if(do_after(user, f_aiming_time, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
 		if(!QDELETED(target))
 			. = ..()
+			var/obj/item/hardpoint/handler = gun_holder
+			var/obj/vehicle/walker/mech = handler.owner
+			if(mech)
+				mech.handle_weapon_groups(user)
 
 	target.overlays -= lockon_icon
 	target.overlays -= lockon_direction_icon

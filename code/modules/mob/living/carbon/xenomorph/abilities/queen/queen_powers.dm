@@ -845,6 +845,14 @@
 	FOR_DOVIEW(var/mob/living/carbon/M, 7, xeno, HIDE_INVISIBLE_OBSERVER)
 		mobs_in_view += M
 	FOR_DOVIEW_END
+//RUCM START
+
+	FOR_DOVIEW(var/obj/vehicle/walker/mech, 7, xeno, HIDE_INVISIBLE_OBSERVER)
+		var/obj/item/hardpoint/walker/attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in mech.hardpoints
+		if(!attacked_hardpoint?.can_take_damage() && mech.seats[VEHICLE_DRIVER])
+			mobs_in_view += mech.seats[VEHICLE_DRIVER]
+	FOR_DOVIEW_END
+//RUCM END
 	for(var/mob/living/carbon/M in orange(10, xeno))
 		if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, xeno) & COMPONENT_SCREECH_ACT_CANCEL)
 			continue
