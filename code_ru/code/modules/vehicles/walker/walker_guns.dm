@@ -371,7 +371,6 @@
 		return
 
 	if(!current_mag?.current_rounds)
-		click_empty(user)
 		return
 
 	var/list/turf/path = get_line(start_turf, target, include_start_atom = FALSE)
@@ -379,6 +378,7 @@
 		if(turf_path.opacity && turf_path != target)
 			to_chat(user, SPAN_WARNING("Target obscured!"))
 			return
+
 	aiming = TRUE
 	var/beam = "laser_beam_guided"
 	var/lockon = "sniper_lockon_guided"
@@ -396,19 +396,16 @@
 	if(do_after(user, f_aiming_time, INTERRUPT_ALL, BUSY_ICON_HOSTILE))
 		if(!QDELETED(target))
 			. = ..()
-			var/obj/item/hardpoint/handler = gun_holder
-			var/obj/vehicle/walker/mech = handler.owner
-			if(mech)
-				mech.handle_weapon_groups(user)
 
 	target.overlays -= lockon_icon
 	target.overlays -= lockon_direction_icon
 	qdel(laser_beam)
 	aiming = FALSE
 
-/obj/item/weapon/gun/launcher/rocket/mounted/tactical_missile/make_rocket(mob/user, drop_override = 0, empty = 1)
+/obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/make_rocket(mob/user, drop_override = 0, empty = TRUE)
 	if(empty)
 		return
+
 	. = ..()
 
 

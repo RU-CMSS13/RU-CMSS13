@@ -160,8 +160,7 @@
 	if(user.client)
 		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
 
-	if(zoom)
-		update_pixels(FALSE)
+	update_pixels(FALSE)
 	user.reset_view(null)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
@@ -256,15 +255,19 @@
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(selected_group == SELECTED_GROUP_SPINAL)
-		if(move_sounds && world.time > move_next_sound_play)
+		if(world.time < next_move)
 			to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("[src] can't move due to spinal weapon selection!"))
-			move_next_sound_play = world.time + 10
+			next_move = world.time + move_delay
 		return FALSE
 
-	if(!power_supply?.on_consume_enegry_action())
+	if(!power_supply?.can_consume_enegry())
 		return FALSE
 
 	. = ..()
+	if(!.)
+		return
+
+	power_supply?.on_consume_enegry_action()
 
 /obj/vehicle/walker/try_rotate(deg)
 	. = ..()

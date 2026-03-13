@@ -219,37 +219,38 @@
 	fuel = new_fuel
 	return TRUE
 
-/obj/item/hardpoint/walker/reactor/proc/on_consume_enegry_action()
+/obj/item/hardpoint/walker/reactor/proc/can_consume_enegry()
 	if(!turned_on)
 		return FALSE
 	if(!fuel?.fuel_amount)
 		turned_on = FALSE
 		return FALSE
+	return TRUE
 
+/obj/item/hardpoint/walker/reactor/proc/on_consume_enegry_action()
 	fuel.fuel_amount = max(0, fuel.fuel_amount - 1)
 	if(!reactor_state)
-		return TRUE
+		return
 
 	switch(reactor_state)
 		if(VEHICLE_REACTOR_DAMAGE)
-			if(prob(chance_of_malf / 10))
+			if(rand(1, 1000) < chance_of_malf / 10)
 				turned_on = FALSE
 		if(VEHICLE_REACTOR_CRITICAL)
-			if(prob(chance_of_malf))
+			if(rand(1, 1000) < chance_of_malf)
 				turned_on = FALSE
 
 	if(turned_on)
-		return TRUE
+		return
 
 	rebooting = TRUE
-	var/time_till_reboot = rand(10, 60)
+	var/time_till_reboot = rand(5, 20)
 	addtimer(VARSET_CALLBACK(src, turned_on, 1), time_till_reboot, TIMER_DELETE_ME)
 	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_till_reboot, TIMER_DELETE_ME)
 
 	owner.visible_message(SPAN_WARNING("[src] burst in smoke! [owner] turns off due to short circuit."))
 	if(owner.seats[VEHICLE_DRIVER])
 		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Bzzzzzz. Reactor core unstable, required [reactor_state == VEHICLE_REACTOR_CRITICAL ? "URGENT " : ""]repair. Network reboot in [time_till_reboot / 10] seconds!"))
-	return FALSE
 
 /obj/item/hardpoint/walker/reactor/on_install(obj/vehicle/walker/vehicle)
 	vehicle.power_supply = src
@@ -524,6 +525,8 @@
 	slot = WALKER_HARDPOIN_ARMOR
 	hdpt_layer = HDPT_LAYER_ARMOR
 
+	damage_multiplier = 0.75
+
 	health = 500
 	max_health = 500
 
@@ -535,8 +538,8 @@
 	disp_icon_state = "paladin_armor"
 
 	type_multipliers = list(
-		"all" = 0.95,
-		"explosive" = 0.85
+		"all" = 0.9,
+		"explosive" = 0.8
 	)
 
 /obj/item/hardpoint/walker/armor/concussive
@@ -547,8 +550,8 @@
 	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
-		"all" = 0.95,
-		"blunt" = 0.85
+		"all" = 0.9,
+		"blunt" = 0.8
 	)
 
 /obj/item/hardpoint/walker/armor/caustic
@@ -559,8 +562,8 @@
 	disp_icon_state = "caustic_armor"
 
 	type_multipliers = list(
-		"all" = 0.95,
-		"acid" = 0.85
+		"all" = 0.9,
+		"acid" = 0.8
 	)
 
 /obj/item/hardpoint/walker/armor/fire
@@ -571,7 +574,7 @@
 	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
-		"all" = 0.95,
+		"all" = 0.9,
 		"fire" = 0
 	)
 
@@ -583,9 +586,9 @@
 	disp_icon_state = "ballistic_armor"
 
 	type_multipliers = list(
-		"all" = 0.95,
-		"bullet" = 0.85,
-		"slash" = 0.85,
+		"all" = 0.9,
+		"bullet" = 0.8,
+		"slash" = 0.8,
 	)
 
 
@@ -723,14 +726,17 @@
 			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2)
 
 /obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params)
+	if(!health)
+		return FALSE
 	var/obj/vehicle/walker/vehicle = owner
-	if(!vehicle.power_supply?.on_consume_enegry_action() || !health)
+	if(!vehicle.power_supply?.can_consume_enegry())
 		return FALSE
 	var/list/modifiers = params2list(params)
 	if(length(modifiers) && !check_modifiers(modifiers))
 		return FALSE
 	if(!in_firing_arc(object))
 		return FALSE
+	vehicle.power_supply?.on_consume_enegry_action()
 	return TRUE
 
 /obj/item/hardpoint/walker/proc/can_stop_fire(datum/source, atom/object, params)
