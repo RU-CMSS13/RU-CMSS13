@@ -358,7 +358,7 @@
 	var/move_delay = 4
 	var/move_max_momentum = 1
 	var/move_turn_momentum_loss_factor = 0.25
-	var/move_momentum_build_factor = 0.5
+	var/move_momentum_build_factor = 0.3
 
 /obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/vehicle)
 	vehicle.recalculate_legs()

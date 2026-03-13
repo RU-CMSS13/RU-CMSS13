@@ -17,7 +17,7 @@
 	move_delay = 12
 	move_max_momentum = 6
 	move_turn_momentum_loss_factor = 0.35
-	move_momentum_build_factor = 2.2
+	move_momentum_build_factor = 1.8
 
 	hardpoints_allowed = list(
 		/obj/item/hardpoint/walker/hand/left,
