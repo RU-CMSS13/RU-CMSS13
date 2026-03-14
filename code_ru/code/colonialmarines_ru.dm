@@ -25,6 +25,7 @@
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\items\weapons\breacher_equip.dm"
 #include "game\objects\items\weapons\breacher_hammer_stacks.dm"
+#include "game\objects\items\device\walkman\walkman.dm"
 #include "game\objects\structures\table_racks.dm"
 #include "game\turfs\open.dm"
 #include "modules\almayer\machinery.dm"
@@ -63,3 +64,4 @@
 #include "modules\vehicles\walker_vendor.dm"
 #include "modules\vehicles\walker_verbs.dm"
 #include "modules\vehicles\walker_wm88_helper.dm"
+#include "modules\vendors\walkman_vendor_override.dm"

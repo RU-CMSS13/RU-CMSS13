@@ -586,3 +586,44 @@
 	desc = "The shell on this cassette is broken, it still looks like it'll work, though!"
 	icon_state = "cassette_worstmap"
 	side1_icon = "cassette_worstmap"
+
+/obj/item/device/cassette_tape/hotline
+	name = "Hotline cassette"
+	id = 19
+	desc = "A cassette with some \"chicken\"?."
+	icon = 'code_ru/icons/obj/items/walkman/cassette.dmi'
+	icon_state = "cassette_hotline"
+	side1_icon = "cassette_hotline"
+	songs = list(
+		"side1" = list(
+			"code_ru/sound/music/walkman/Hotline A-New-Morning.ogg",
+			"code_ru/sound/music/walkman/Hotline Crystals.ogg",
+			"code_ru/sound/music/walkman/Hotline Daisuke.ogg",
+			"code_ru/sound/music/walkman/Hotline Hydrogen.ogg",
+			"code_ru/sound/music/walkman/Hotline It_s-Safe-Now.ogg"
+		),
+		"side2" = list(
+			"code_ru/sound/music/walkman/Hotline Miami.ogg",
+			"code_ru/sound/music/walkman/Hotline Musik.ogg",
+			"code_ru/sound/music/walkman/Hotline Paris.ogg",
+			"code_ru/sound/music/walkman/Hotline Perturbator.ogg"
+		)
+	)
+
+/obj/item/device/cassette_tape/puma
+	name = "Puma cassette" // Пума, ты мой любимый пупсик <З
+	id = 20
+	desc = "Very familiar..."
+	icon = 'code_ru/icons/obj/items/walkman/cassette.dmi'
+	icon_state = "cassette_puma"
+	side1_icon = "cassette_puma"
+	songs = list(
+		"side1" = list(
+			"code_ru/sound/music/walkman/Louie, Louie.ogg",
+			"code_ru/sound/music/walkman/These Boots Are Made For Walkin'.ogg"
+		),
+		"side2" = list(
+			"code_ru/sound/music/walkman/Venus.ogg",
+			"code_ru/sound/music/walkman/Wooly Bully.ogg"
+		)
+	)
