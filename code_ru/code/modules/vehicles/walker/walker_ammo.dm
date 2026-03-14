@@ -77,16 +77,16 @@
 
 
 /obj/item/ammo_magazine/rocket/ap/tactical
-	name = "M1488 Tactical AP Laser-Guided Rocket"
+	name = "M2558 Tactical AP Laser-Guided Rocket"
 	default_ammo = /datum/ammo/rocket/ap/tactical
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
-	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets."
+	desc = "The M2558 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. Capable of piercing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets."
 
 /obj/item/ammo_magazine/rocket/brute/tactical
-	name = "M1488 Tactical Laser-Guided Rocket"
+	name = "M2558 Tactical Laser-Guided Rocket"
 	default_ammo = /datum/ammo/rocket/brute/tactical
 	gun_type = /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile
-	desc = "The M1488 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. The warhead itself uses an inflection stabilized shaped-charge to generate a low-frequency pressure wave that can flatten nearly any fortification in an ellipical radius of several meters. These rockets are known to have reduced lethality to personnel, but will put just about any ol' backwater mud-hut right into orbit."
+	desc = "The M2558 rockets are high-explosive anti-structure munitions designed to rapidly accelerate to nearly 1,000 miles per hour in any atmospheric conditions. The warhead itself uses an inflection stabilized shaped-charge to generate a low-frequency pressure wave that can flatten nearly any fortification in an ellipical radius of several meters. These rockets are known to have reduced lethality to personnel, but will put just about any ol' backwater mud-hut right into orbit."
 
 
 
@@ -245,7 +245,7 @@
 	group = "Vehicle Ammo"
 
 /datum/supply_packs/ammo_m1488_tactical_rocket_ap
-	name = "M1488 Tactical AP Laser-Guided Rocket (x4)"
+	name = "M2558 Tactical AP Laser-Guided Rocket (x4)"
 	contains = list(
 		/obj/item/ammo_magazine/rocket/ap/tactical,
 		/obj/item/ammo_magazine/rocket/ap/tactical,
@@ -254,16 +254,16 @@
 	)
 	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
-	containername = "M1488 Tactical AP Laser-Guided Rocket crate"
+	containername = "M2558 Tactical AP Laser-Guided Rocket crate"
 	group = "Vehicle Ammo"
 
 /datum/supply_packs/ammo_m1488_tactical_rocket
-	name = "M1488 Tactical Laser-Guided Rocket (x2)"
+	name = "M2558 Tactical Laser-Guided Rocket (x2)"
 	contains = list(
 		/obj/item/ammo_magazine/rocket/brute/tactical,
 		/obj/item/ammo_magazine/rocket/brute/tactical,
 	)
 	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
-	containername = "M1488 Tactical Laser-Guided Rocket crate"
+	containername = "M2558 Tactical Laser-Guided Rocket crate"
 	group = "Vehicle Ammo"

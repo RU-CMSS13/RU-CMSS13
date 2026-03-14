@@ -129,6 +129,7 @@
 /obj/vehicle/walker/process()
 	if(light_state)
 		if(!can_consume_energy(4))
+			light_state = FALSE
 			switch_light_state(FALSE, TRUE)
 		else
 			consume_energy(4)

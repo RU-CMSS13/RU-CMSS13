@@ -69,7 +69,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
+	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M30 Machinegun Magazine", 4, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal Canister", 4, /obj/item/ammo_magazine/flamer_tank/walker, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal B-type Canister", 6, /obj/item/ammo_magazine/flamer_tank/walker/btype, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Laser-Guided Rocket", 4, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
+	list("M2558 Tactical Laser-Guided Rocket", 4, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
 	))
 
 
