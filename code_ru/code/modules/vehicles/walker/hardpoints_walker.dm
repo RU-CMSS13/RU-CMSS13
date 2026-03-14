@@ -102,7 +102,7 @@
 /obj/item/hardpoint/walker/proc/tgui_additional_data(list/tgui_data)
 	. = tgui_data
 
-	.["integrity"] = "[health / max_health * 100]"
+	.["integrity"] = health / max_health * 100
 
 /obj/item/hardpoint/walker/proc/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	if(!damage_to_apply)
@@ -142,10 +142,10 @@
 /obj/item/hardpoint/walker/proc/try_reload(obj/item/attacking_item, mob/user)
 	. = FALSE
 
-	if(istype(attacking_item, /obj/item/ammo_magazine) && mounted_gun.reload(null, attacking_item))
+	if(istype(attacking_item, /obj/item/ammo_magazine) && mounted_gun.reload(user, attacking_item))
 		. = TRUE
 
-	if(istype(attacking_item, /obj/item/explosive/grenade) && mounted_gun.on_pocket_attackby(attacking_item, null))
+	if(istype(attacking_item, /obj/item/explosive/grenade) && mounted_gun.on_pocket_attackby(attacking_item, user))
 		. = TRUE
 
 /obj/item/hardpoint/walker/proc/try_insert(obj/item/attacking_item, mob/user)
@@ -309,9 +309,18 @@
 /obj/item/hardpoint/walker/reactor/tgui_additional_data()
 	. = ..()
 
-	.["value_name"] = "Fuel"
-	.["current_rounds"] = "[fuel.fuel_amount]"
-	.["max_rounds"] = "[fuel.max_fuel_amount]"
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Fuel"
+	data["current_value"] = fuel.fuel_amount
+	data["max_value"] = fuel.max_fuel_amount
+
+	if(meltdown_timer_id)
+		data = list()
+		.["hardpoint_data_additional"] += list(data)
+		data["value_name"] = "Meltdown"
+		data["current_value"] = timeleft(meltdown_timer_id) / 10
+		data["max_value"] = meltdown_time / 10
 
 /obj/item/hardpoint/walker/reactor/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	var/health_cache = health
@@ -327,8 +336,12 @@
 
 	reactor_state++
 	if(reactor_state != VEHICLE_REACTOR_CRITICAL)
+		if(owner)
+			owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and smoke. That not good, need to look after [src]."))
 		return
 
+	if(owner)
+		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], seems like it can EXPLODE any time soon."))
 	count_down = TRUE
 	meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
@@ -447,14 +460,16 @@ handle_seated_take_damage
 	destruction_on_zero = FALSE
 
 	var/move_delay = 4
-	var/move_max_momentum = 1
+	var/move_max_momentum = 2
 	var/move_turn_momentum_loss_factor = 0.25
-	var/move_momentum_build_factor = 0.3
+	var/move_momentum_build_factor = 0.4
 
 /obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/mecha)
 	mecha.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/mecha)
+	. = ..()
+
 	if(!health)
 		return
 
@@ -548,12 +563,13 @@ handle_seated_take_damage
 /obj/item/hardpoint/walker/spinal/tactical_missile/tgui_additional_data()
 	. = ..()
 
-	.["value_name"] = "Rockets"
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Rocket"
 	if(!mounted_gun?.current_mag)
 		return
-
-	.["current_rounds"] = "[mounted_gun.current_mag?.current_rounds || 0]"
-	.["max_rounds"] = "1"
+	data["current_value"] = mounted_gun.current_mag.current_rounds
+	data["max_value"] = mounted_gun.current_mag.max_rounds
 
 /obj/item/hardpoint/walker/spinal/tactical_missile/check_modifiers(modifiers, button = FALSE)
 	if(!modifiers[MIDDLE_CLICK])
@@ -595,9 +611,11 @@ handle_seated_take_damage
 /obj/item/hardpoint/walker/spinal/shield/tgui_additional_data()
 	. = ..()
 
-	.["value_name"] = "Shield"
-	.["current_rounds"] = "[damage_capacity]"
-	.["max_rounds"] = "[max_damage_capacity]"
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Shield"
+	data["current_value"] = damage_capacity
+	data["max_value"] = max_damage_capacity
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
 	cooldown_end_time = world.time + delay_between_hits
@@ -650,12 +668,13 @@ handle_seated_take_damage
 /obj/item/hardpoint/walker/hand/tgui_additional_data()
 	. = ..()
 
-	.["value_name"] = "Ammo"
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Ammo"
 	if(!mounted_gun?.current_mag)
 		return
-
-	.["current_rounds"] = "[mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds]"
-	.["max_rounds"] = "[mounted_gun.current_mag.max_rounds]"
+	data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
+	data["max_value"] = mounted_gun.current_mag.max_rounds
 
 /obj/item/hardpoint/walker/hand/check_modifiers(modifiers, button = FALSE)
 	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])

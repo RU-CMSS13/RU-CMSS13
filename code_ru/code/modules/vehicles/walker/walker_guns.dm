@@ -358,8 +358,16 @@
 	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
 	mount_class = GUN_MOUNT_MECHA
 
-	var/f_aiming_time = 5 SECONDS
+	var/f_aiming_time = 2 SECONDS
 	var/aiming = FALSE
+
+/obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/get_examine_text(mob/user)
+	. = ..()
+	if(current_mag.current_rounds <= 0)
+		. += "It's not loaded."
+		return
+	if(current_mag.current_rounds > 0)
+		. += "It has an [current_mag] loaded."
 
 /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
 	if(aiming)

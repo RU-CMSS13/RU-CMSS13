@@ -17,7 +17,7 @@
 	move_delay = 12
 	move_max_momentum = 6
 	move_turn_momentum_loss_factor = 0.35
-	move_momentum_build_factor = 1.8
+	move_momentum_build_factor = 2
 
 	hardpoints_allowed = list(
 		/obj/item/hardpoint/walker/hand/left,
@@ -53,7 +53,8 @@
 
 	light_range = 8
 
-	pixel_x = -18
+	pixel_x = -17
+	pixel_y = -22
 
 	health = 750
 	var/max_health = 750
@@ -110,8 +111,7 @@
 	density = TRUE
 	anchored = TRUE
 	opacity = FALSE
-	pixel_x = -18
-
+	pixel_x = -17
 
 //////////////////////////////////////////////////////////////
 // INTERACTIONS
@@ -150,17 +150,16 @@
 	if(user.client)
 		add_verb(user.client, verb_list)
 	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
-	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(reset_interaction))
+	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(client_login_interaction))
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_entered(user)
 	update_icon()
 
-/obj/vehicle/walker/proc/reset_interaction(mob/living/user)
+/obj/vehicle/walker/proc/client_login_interaction(mob/living/user)
 	SIGNAL_HANDLER
 
 	user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
-	add_verb(user.client, verb_list)
 
 /obj/vehicle/walker/on_unset_interaction(mob/living/user)
 	remove_action(user, /datum/action/human_action/mg_exit)
@@ -175,8 +174,8 @@
 	user.setDir(dir)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
 
-	if(user.client)
-		remove_verb(user.client, verb_list)
+	if(user)
+		remove_verb(user, verb_list)
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
 	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION, COMSIG_MOB_LOGIN))
 
@@ -261,7 +260,7 @@
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
 	if(!energy_source || !energy_source.turned_on || !energy_source.fuel)
 		return FALSE
-	if(!energy_source.fuel.fuel_amount < amount)
+	if(energy_source.fuel.fuel_amount < amount)
 		return FALSE
 	return TRUE
 
@@ -305,7 +304,7 @@
 		move_delay -= leggy.move_delay
 		move_max_momentum -= leggy.move_max_momentum
 		move_momentum_build_factor -= leggy.move_momentum_build_factor
-		move_turn_momentum_loss_factor += leggy.move_turn_momentum_loss_factor
+		move_turn_momentum_loss_factor -= leggy.move_turn_momentum_loss_factor
 
 	if(move_delay == initial(move_delay))
 		next_move = INFINITY
@@ -314,6 +313,11 @@
 
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
+
+	if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
+		animate(src, pixel_y = 0, time = 10)
+	else
+		animate(src, pixel_y = -22, time = 10)
 
 	overlays += image(icon = icon, icon_state = "[icon_state]_effect", dir = dir)
 	switch(floor((health / max_health) * 100))
@@ -376,7 +380,7 @@
 		var/list/hardpoint_info = list()
 		.["hardpoint_data"] += list(hardpoint_info)
 		hardpoint_info["name"] = hardpoint.name
-		hardpoint_info["postion"] = hardpoint.slot
+		hardpoint_info["hardpoint_data_additional"] = list()
 		hardpoint.tgui_additional_data(hardpoint_info)
 
 
@@ -466,7 +470,8 @@
 
 /obj/vehicle/walker/attackby(obj/item/attacking_item, mob/user)
 	if(user.a_intent == INTENT_HARM)
-		take_damage_type(attacking_item.force / 10, "blunt", user)
+		if(attacking_item.force > 40)
+			take_damage_type(attacking_item.force / 10, "blunt", user)
 		return ..()
 
 	if(istype(attacking_item, /obj/item/hardpoint/walker))
@@ -691,7 +696,7 @@
 /obj/vehicle/walker/bullet_act(obj/projectile/P)
 	var/dam_type = "bullet"
 	var/damage = P.damage
-	var/ammo_flags = P.ammo.flags_ammo_behavior | P.projectile_override_flags
+	var/ammo_flags = P.ammo?.flags_ammo_behavior | P.projectile_override_flags
 	var/penetration = P.ammo.penetration
 	var/firer = P.firer
 

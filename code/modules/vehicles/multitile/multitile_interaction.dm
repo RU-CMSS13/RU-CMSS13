@@ -237,7 +237,12 @@
 			return
 
 		health = min(health + max_hp/100 * (5 / amount_fixed_adjustment), max_hp)
+/* RUCM CHANGE
 		if(!lighting_holder.light)
+*/
+//RUCM START
+		if(!lighting_holder?.light)
+//RUCM END
 			update_minimap_icon()
 			lighting_holder.set_light_on(TRUE)
 
