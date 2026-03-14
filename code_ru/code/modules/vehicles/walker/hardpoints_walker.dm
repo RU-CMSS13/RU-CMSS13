@@ -565,7 +565,7 @@ handle_seated_take_damage
 	name = "M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\""
 	desc = "\"Special Package Deliver System\" includes a pair of heavy optics with laser guidance system, and bunker buster rockets. Developen in 2123 for assistance in destructing illigal establishments."
 
-	zoom_size = 18
+	zoom_size = 10
 	mount_class = GUN_MOUNT_NO
 
 /obj/item/hardpoint/walker/spinal/tactical_missile/Initialize()
