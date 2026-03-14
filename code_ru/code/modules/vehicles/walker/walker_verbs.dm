@@ -79,7 +79,7 @@ AND YOULL BE FINE!*/
 	if(!selected_module)
 		return
 	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
-	if(!mounted_gun || !mounted_gun.current_mag || mounted_gun.loc != src)
+	if(!mounted_gun || !mounted_gun.current_mag)
 		return FALSE
 	mounted_gun.unload(user, TRUE)
 	to_chat(user, SPAN_WARNING("WARNING! [mounted_gun] ammo magazine deployed."))

@@ -672,7 +672,7 @@ handle_seated_take_damage
 	desc = "Allows mecha to hold weapons."
 
 	hdpt_layer = HDPT_LAYER_SUPPORT
-	firing_arc = 65
+	firing_arc = 120
 	destruction_on_zero = FALSE
 
 	mount_class = GUN_MOUNT_MECHA

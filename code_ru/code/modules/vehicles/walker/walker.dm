@@ -431,9 +431,11 @@
 	if(istype(projector) && projector.take_hits(damages_applied))
 		return FALSE
 
-	. = TRUE
-
 	damages_applied[WALKER_DAMAGE_REMAINING] *= get_dmg_multi(type)
+	if(!damage)
+		return FALSE
+
+	. = TRUE
 	handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
 
 	if(!attacked_hardpoint)
