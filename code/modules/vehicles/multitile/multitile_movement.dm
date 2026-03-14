@@ -25,6 +25,7 @@
 		Any questions? Ask Atebite
 */
 
+/* RUCM CHANGE
 // Called when someone tries to move the vehicle
 /obj/vehicle/multitile/relaymove(mob/user, direction)
 	if(user != seats[VEHICLE_DRIVER])
@@ -58,6 +59,10 @@
 
 // Attempts to execute the given movement input
 /obj/vehicle/multitile/proc/try_move(direction, force=FALSE)
+*/
+//RUCM START
+/obj/vehicle/multitile/try_move(direction, force=FALSE)
+//RUCM END
 	if(!can_move(direction))
 		return FALSE
 
@@ -87,7 +92,12 @@
 	return TRUE
 
 // Rotates the vehicle by deg degrees if possible
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/try_rotate(deg)
+*/
+//RUCM START
+/obj/vehicle/multitile/try_rotate(deg)
+//RUCM END
 	if(!can_rotate(deg))
 		return FALSE
 
@@ -114,6 +124,7 @@
 
 	return TRUE
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/setDir(newdir, real_rotate = FALSE)
 	if(!real_rotate)
 		return
@@ -144,10 +155,16 @@
 
 	next_move = world.time + move_delay * move_momentum_build_factor * anti_build_factor * misc_multipliers["move"]
 	l_move_time = world.time
+*/
 
 
 // This just checks if the vehicle can physically move in the given direction
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/can_move(direction)
+*/
+//RUCM START
+/obj/vehicle/multitile/can_move(direction)
+//RUCM END
 	var/can_move = TRUE
 
 	var/bound_x_tiles = bound_x / world.icon_size
@@ -177,7 +194,12 @@
 
 	return can_move
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/can_rotate(deg)
+*/
+//RUCM START
+/obj/vehicle/multitile/can_rotate(deg)
+//RUCM END
 	if(bound_width == bound_height)
 		return TRUE
 	//VHCLTODO: Add non-square checks here
@@ -186,6 +208,7 @@
 /obj/vehicle/multitile/proc/rotate_entrances(deg)
 	entrances = rotate_origins(deg, entrances)
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/rotate_hardpoints(deg, update_icons = TRUE, list/specific_hardpoints = null)
 	if(specific_hardpoints)
 		for(var/obj/item/hardpoint/H in specific_hardpoints)
@@ -197,6 +220,7 @@
 
 	if(update_icons)
 		update_icon()
+*/
 
 // Rotates a list of relative coordinates around the center of the vehicle
 /obj/vehicle/multitile/proc/rotate_origins(deg, list/origins, list/specific_indexes)

@@ -1,38 +1,41 @@
 import { Fragment } from 'react';
+import { Table, TableCell, TableRow } from 'tgui/components/Table';
 
 import { useBackend } from '../backend';
-import {
-  Box,
-  Collapsible,
-  Divider,
-  Flex,
-  NoticeBox,
-  ProgressBar,
-  Section,
-} from '../components';
+import { Collapsible, NoticeBox, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
-type HardpointInfo = {
+interface HardpointValues {
+  value_name: string;
+  current_value: number;
+  max_value: number;
+}
+
+interface HardpointInfo {
   name: string;
-  position: string;
-  current_rounds: number;
-  max_rounds: number;
-};
-
-type Data = {
-  resistance_data: Array<{ name: string; pct: number }>;
   integrity: number;
-  hardpoint_data: Array<HardpointInfo>;
-};
+  hardpoint_data_additional: HardpointValues[];
+}
 
-export const Walker = (props) => {
-  const { act, data } = useBackend<Data>();
-  const { integrity, hardpoint_data } = data;
+interface ResistanceInfo {
+  name: string;
+  pct: number;
+}
+
+interface WalkerInfo {
+  resistance_data: ResistanceInfo[];
+  integrity: number;
+  hardpoint_data: HardpointInfo[];
+}
+
+export const Walker = () => {
+  const { data } = useBackend<WalkerInfo>();
+  const { resistance_data, integrity, hardpoint_data } = data;
 
   const height = 150 + hardpoint_data.length * 80;
 
   return (
-    <Window width={400} height={height}>
+    <Window width={500} height={height}>
       <Window.Content>
         <Section>
           {integrity >= 0 ? (
@@ -50,48 +53,64 @@ export const Walker = (props) => {
             <NoticeBox danger>Hull destroyed!</NoticeBox>
           )}
         </Section>
-        <Box height="5px" />
-        <Collapsible title="Current armour resistances">
-          <ResistanceView />
-        </Collapsible>
+        <Section>
+          <Collapsible title="Current armour resistances">
+            <ResistanceView resists={resistance_data} />
+          </Collapsible>
+        </Section>
         <Section title="Hardpoints">
-          <HardpointsView />
+          <HardpointTable hardpoints={hardpoint_data} />
         </Section>
       </Window.Content>
     </Window>
   );
 };
 
-const ResistanceView = (props) => {
-  const { act, data } = useBackend<Data>();
-  const { resistance_data, integrity } = data;
-  return resistance_data.map((resistance, index) => (
-    <Fragment key={index}>
-      <Box>
-        {resistance.name}: {resistance.pct * 100}%
-      </Box>
-      <Box width="3px" />
-    </Fragment>
-  ));
+const ResistanceView = (props: { readonly resists: ResistanceInfo[] }) => {
+  return (
+    <Table>
+      {props.resists.map((resistance, index) => (
+        <TableCell key={index}>
+          <span className="GigaSpan">
+            {resistance.name}: {resistance.pct * 100}%
+          </span>
+        </TableCell>
+      ))}
+    </Table>
+  );
 };
 
-const HardpointsView = (props) => {
-  const { act, data } = useBackend<Data>();
-  const { hardpoint_data } = data;
-  return hardpoint_data.map((hardpoint, index) => (
-    <Fragment key={index}>
-      {index !== 0 ? <Divider /> : null}
-      <Box>{hardpoint.name}</Box>
-      <Box>At {hardpoint.position}</Box>
-      <Box height="3px" />
-      <Flex direction="row">
-        <ProgressBar
-          value={hardpoint.current_rounds / hardpoint.max_rounds}
-          width={'49%'}
-        >
-          Ammo: {hardpoint.current_rounds} / {hardpoint.max_rounds}
-        </ProgressBar>
-      </Flex>
-    </Fragment>
-  ));
+const HardpointTable = (props: { readonly hardpoints: HardpointInfo[] }) => {
+  return (
+    <>
+      {props.hardpoints.map((hardpoint) => (
+        <Table key={hardpoint.name}>
+          <TableRow>
+            <TableCell>
+              <span className="LabelSpan">{hardpoint.name}</span>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <ProgressBar value={hardpoint.integrity / 100} width={'100%'}>
+                Integrity: {hardpoint.integrity}%
+              </ProgressBar>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            {hardpoint.hardpoint_data_additional.map((value) => (
+              <TableCell key={value.value_name}>
+                <ProgressBar
+                  value={value.current_value / value.max_value}
+                  width={'49%'}
+                >
+                  {value.value_name}: {value.current_value} / {value.max_value}
+                </ProgressBar>
+              </TableCell>
+            ))}
+          </TableRow>
+        </Table>
+      ))}
+    </>
+  );
 };

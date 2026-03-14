@@ -284,6 +284,15 @@
 	if (!lunge_user.check_state() || lunge_user.agility)
 		return
 
+//RUCM START
+	if(istype(affected_atom, /obj/vehicle/walker))
+		var/obj/vehicle/walker/mecha = affected_atom
+		var/obj/item/hardpoint/walker/attacked_hardpoint = mecha.hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+		if(!attacked_hardpoint?.can_take_damage() && mecha.seats[VEHICLE_DRIVER])
+			affected_atom = mecha.seats[VEHICLE_DRIVER]
+			mecha.seats[VEHICLE_DRIVER].unset_interaction()
+//RUCM END
+
 	if(lunge_user.can_not_harm(affected_atom) || !ismob(affected_atom))
 		apply_cooldown_override(click_miss_cooldown)
 		return

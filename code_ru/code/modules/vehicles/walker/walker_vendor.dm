@@ -1,19 +1,101 @@
+/obj/effect/essentials_set/walker/internals
+	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/hand/left,
+		/obj/item/hardpoint/walker/hand/right,
+		/obj/item/hardpoint/walker/leg/left,
+		/obj/item/hardpoint/walker/leg/right,
+	)
+
+/obj/effect/essentials_set/walker/reactor
+	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/reactor,
+		/obj/item/fuel_cell/mecha_reactor,
+		/obj/item/fuel_cell/mecha_reactor,
+		/obj/item/fuel_cell/mecha_reactor,
+	)
+
+/obj/effect/essentials_set/walker/wm88
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/mounted/mecha_wm88,
+		/obj/item/ammo_magazine/walker/wm88,
+		/obj/item/ammo_magazine/walker/wm88,
+	)
+
+/obj/effect/essentials_set/walker/smartgun
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/mounted/mecha_smartgun,
+		/obj/item/ammo_magazine/walker/smartgun,
+		/obj/item/ammo_magazine/walker/smartgun,
+	)
+
+/obj/effect/essentials_set/walker/shotgun8g
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
+		/obj/item/ammo_magazine/walker/shotgun8g,
+	)
+
+/obj/effect/essentials_set/walker/hmg
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/mounted/mecha_hmg,
+		/obj/item/ammo_magazine/walker/hmg,
+		/obj/item/ammo_magazine/walker/hmg,
+	)
+
+/obj/effect/essentials_set/walker/flamer
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/flamer/mounted/mecha_flamer,
+		/obj/item/ammo_magazine/flamer_tank/walker,
+		/obj/item/ammo_magazine/flamer_tank/walker,
+	)
+
+/obj/effect/essentials_set/walker/tactical_missile
+	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/spinal/tactical_missile,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/ap/tactical,
+		/obj/item/ammo_magazine/rocket/brute/tactical,
+		/obj/item/ammo_magazine/rocket/brute/tactical,
+	)
+
+
 GLOBAL_LIST_INIT(cm_vending_walker, list(
-	list("WEAPONS, DO NOT PICK SIMILAR (choose 2)", 0, null, null, null),
-	list("M88 Mounted Automated Anti-Material rifle", 0, /obj/item/walker_gun/wm88, MECH_GUN, VENDOR_ITEM_REGULAR),
-	list("M56 Double-Barrel Mounted Smartgun", 0, /obj/item/walker_gun/smartgun, MECH_GUN, VENDOR_ITEM_REGULAR),
-	list("M32 Mounted Shotgun", 0,/obj/item/walker_gun/shotgun8g, MECH_GUN, VENDOR_ITEM_REGULAR),
-	list("M30 Machine Gun", 0, /obj/item/walker_gun/hmg, MECH_GUN, VENDOR_ITEM_REGULAR),
-	list("F40 \"Hellfire\" Flamethower", 0, /obj/item/walker_gun/flamer, MECH_GUN, VENDOR_ITEM_REGULAR),
+	list("STARTING PARTS", 0, null, null, null),
+	list("Internal Parts", 0, /obj/effect/essentials_set/walker/internals, MECH_START_KIT, VENDOR_ITEM_RECOMMENDED),
+	list("Shielded Reactor", 0, /obj/effect/essentials_set/walker/reactor, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
+	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
+
+	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
+	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
+	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
+	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
+
+	list("ARMOR", 0, null, null, null),
+	list("Paladin Armor", 25, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
+	list("Concussive Armor", 25, /obj/item/hardpoint/walker/armor/concussive, null, VENDOR_ITEM_REGULAR),
+	list("Caustic Armor", 25, /obj/item/hardpoint/walker/armor/caustic, null, VENDOR_ITEM_REGULAR),
+	list("Fire Fighter Armor", 25, /obj/item/hardpoint/walker/armor/fire, null, VENDOR_ITEM_REGULAR),
+	list("Ballistic Armor", 25, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
+
+	list("WEAPONS KITS (Recommended 1-2 units)", 0, null, null, null),
+	list("M88 Mounted Automated Anti-Material rifle", 35, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
+	list("M56 Double-Barrel Mounted Smartgun", 25, /obj/effect/essentials_set/walker/smartgun, null, VENDOR_ITEM_REGULAR),
+	list("M32 Mounted Shotgun", 15, /obj/effect/essentials_set/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
+	list("M30 Machine Gun", 20, /obj/effect/essentials_set/walker/hmg, null, VENDOR_ITEM_REGULAR),
+	list("F40 \"Hellfire\" Flamethower", 30, /obj/effect/essentials_set/walker/flamer, null, VENDOR_ITEM_REGULAR),
 
 	list("AMMUNITION", 0, null, null, null),
-	list("M88 AMR Magazine", 3, /obj/item/ammo_magazine/walker/wm88, null, VENDOR_ITEM_REGULAR),
-	list("M56 Smartgun Magazine", 1, /obj/item/ammo_magazine/walker/smartgun, null, VENDOR_ITEM_REGULAR),
-	list("M32 Shotgun Magazine", 3, /obj/item/ammo_magazine/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
-	list("M30 Machinegun Magazine", 2, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
-	list("F40 UT-Napthal Canister", 2, /obj/item/ammo_magazine/walker/flamer, null, VENDOR_ITEM_REGULAR),
-	list("F40 UT-Napthal B-type Canister", 3, /obj/item/ammo_magazine/walker/flamer/btype, null, VENDOR_ITEM_REGULAR),
+	list("M88 AMR Magazine", 6, /obj/item/ammo_magazine/walker/wm88, null, VENDOR_ITEM_REGULAR),
+	list("M56 Smartgun Magazine", 2, /obj/item/ammo_magazine/walker/smartgun, null, VENDOR_ITEM_REGULAR),
+	list("M32 Shotgun Magazine", 6, /obj/item/ammo_magazine/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
+	list("M30 Machinegun Magazine", 4, /obj/item/ammo_magazine/walker/hmg, null, VENDOR_ITEM_REGULAR),
+	list("F40 UT-Napthal Canister", 4, /obj/item/ammo_magazine/flamer_tank/walker, null, VENDOR_ITEM_REGULAR),
+	list("F40 UT-Napthal B-type Canister", 6, /obj/item/ammo_magazine/flamer_tank/walker/btype, null, VENDOR_ITEM_REGULAR),
+	list("M2558 Tactical Laser-Guided Rocket", 4, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
 	))
+
 
 /obj/structure/machinery/cm_vending/gear/walker
 	name = "ColMarTech Automated Mech Vendor"

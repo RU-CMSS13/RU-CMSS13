@@ -38,16 +38,19 @@
 // Standard procs
 //-------------------------------------------
 
+/* RUCM CHANGE
 /obj/vehicle/Destroy(force)
 	. = ..()
 	if(!QDELETED(cell))
 		QDEL_NULL(cell)
+*/
 
 /obj/vehicle/initialize_pass_flags(datum/pass_flags_container/PF)
 	..()
 	if (PF)
 		PF.flags_can_pass_all = PASS_HIGH_OVER_ONLY|PASS_OVER_THROW_ITEM
 
+/* RUCM CHANGE
 /obj/vehicle/relaymove(mob/user, direction)
 	if(user.is_mob_incapacitated())
 		return
@@ -61,6 +64,7 @@
 			to_chat(user, SPAN_WARNING("Turn on the engine first."))
 		else
 			. = step(src, direction)
+*/
 
 /obj/vehicle/attackby(obj/item/W, mob/user)
 	if(HAS_TRAIT(W, TRAIT_TOOL_SCREWDRIVER))
