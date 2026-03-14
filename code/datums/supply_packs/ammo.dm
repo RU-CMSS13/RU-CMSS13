@@ -554,7 +554,7 @@
 		/obj/item/ammo_magazine/rifle/boltaction/vulture,
 		/obj/item/ammo_magazine/rifle/boltaction/vulture,
 	)
-	cost = 40
+	cost = 30
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "\improper M-707 Vulture magazines (x3)"
 	group = "Ammo"
