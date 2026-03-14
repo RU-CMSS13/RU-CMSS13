@@ -1,4 +1,3 @@
-#define CAT_NORMAL "Products"
 /obj/structure/machinery/vending/walkman/Initialize()
 	. = ..()
 
