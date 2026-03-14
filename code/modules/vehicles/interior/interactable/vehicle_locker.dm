@@ -120,9 +120,16 @@
 	. = ..()
 	container.emp_act(severity)
 
+/* RUCM CHANGE
 /obj/structure/vehicle_locker/hear_talk(mob/M, msg)
 	container.hear_talk(M, msg)
 	..()
+*/
+//RUCM START
+/obj/structure/vehicle_locker/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	container.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+	..()
+//RUCM END
 
 //Cosmetically opens/closes the locker when its storage window is accessed or closed. Only makes sound when not already open/closed.
 /obj/structure/vehicle_locker/on_pocket_open(first_open)
