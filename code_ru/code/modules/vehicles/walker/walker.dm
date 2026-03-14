@@ -113,6 +113,42 @@
 	opacity = FALSE
 	pixel_x = -17
 
+
+/obj/vehicle/walker/Initialize()
+	. = ..()
+
+	recalculate_legs()
+
+	START_PROCESSING(SSobj, src)
+
+/obj/vehicle/walker/Destroy(force)
+	STOP_PROCESSING(SSobj, src)
+
+	. = ..()
+
+/obj/vehicle/walker/process()
+	if(light_state)
+		if(!can_consume_energy(4))
+			switch_light_state(FALSE, TRUE)
+		else
+			consume_energy(4)
+
+	if(zoom)
+		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(!zoom_provider)
+			zoom = FALSE
+			update_pixels(zoom)
+			return
+
+		var/zoom_power = zoom_provider.zoom_size
+		var/consumption = round(zoom_power * 0.5)
+		if(!can_consume_energy(consumption))
+			zoom = FALSE
+			update_pixels(zoom)
+		else
+			consume_energy(consumption)
+
+
 //////////////////////////////////////////////////////////////
 // INTERACTIONS
 
@@ -190,9 +226,6 @@
 
 	if(selected_zoom)
 		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(selected_group == SELECTED_GROUP_SPINAL && !istype(zoom_provider, /obj/item/hardpoint/walker/spinal/tactical_missile))
-			return
-
 		if(!zoom_provider)
 			return
 

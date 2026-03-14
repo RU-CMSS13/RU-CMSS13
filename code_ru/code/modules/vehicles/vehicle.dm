@@ -4,6 +4,7 @@
 	var/atom/movable/vehicle_light_holder/lighting_holder
 	var/vehicle_light_range = 5
 	var/vehicle_light_power = 2
+	var/light_state = 1
 
 	// List of all hardpoints attached to the vehicle
 	var/list/hardpoints = list()
@@ -554,3 +555,12 @@
 
 /obj/vehicle/proc/take_damage_type()
 	return
+
+/obj/vehicle/proc/switch_light_state(new_state, override)
+	if(lighting_holder)
+		lighting_holder.set_light_on(new_state)
+	else
+		set_light_on(new_state)
+	if(!override)
+		light_state = new_state
+	playsound(src, 'sound/machines/click.ogg', 50)

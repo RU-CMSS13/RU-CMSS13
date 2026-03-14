@@ -42,11 +42,13 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(lighting_holder)
-		lighting_holder.set_light_on(!lighting_holder.light_on)
-	else
-		set_light_on(!light_on)
-	playsound(src, 'sound/machines/click.ogg', 50)
+	switch_light_state(!light_state)
+
+/obj/vehicle/walker/switch_light_state(new_state, override)
+	if(!can_consume_energy(4) && !override)
+		return
+
+	. = ..()
 
 
 //////////////////////////////////////////////////////////////
@@ -116,7 +118,7 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(selected_group == SELECTED_GROUP_SPINAL)
+	if(selected_group == SELECTED_GROUP_SPINAL || !can_consume_energy(2))
 		return
 	zoom = !zoom
 	update_pixels(zoom)

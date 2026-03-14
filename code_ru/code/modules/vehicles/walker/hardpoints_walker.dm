@@ -46,6 +46,10 @@
 
 	if(owner)
 		var/obj/vehicle/walker/mecha = owner
+		if(mecha.zoom && zoom_size)
+			mecha.zoom = FALSE
+			mecha.update_pixels(mecha.zoom)
+
 		mecha.hardpoints_by_slot[slot] = null
 
 	. = ..()
@@ -331,7 +335,8 @@
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
-		short_circuit_reactor()
+		if(owner)
+			short_circuit_reactor()
 		return
 
 	reactor_state++
@@ -362,8 +367,9 @@
 		if(count_down)
 			count_down = FALSE
 			owner.visible_message(SPAN_WARNING("[owner] burst with steam as [src] turns off."))
-		if(owner.seats[VEHICLE_DRIVER])
-			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time / 10] seconds for reboot!"))
+		if(owner.light_state)
+			owner.switch_light_state(FALSE, TRUE)
+		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time / 10] seconds for reboot!"))
 		playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 		turned_on = FALSE
 		return
@@ -375,6 +381,10 @@
 	rebooting = TRUE
 	addtimer(VARSET_CALLBACK(src, turned_on, 1), reboot_time, TIMER_DELETE_ME)
 	addtimer(VARSET_CALLBACK(src, rebooting, 0), reboot_time, TIMER_DELETE_ME)
+
+	if(owner.light_state)
+		addtimer(CALLBACK(owner, TYPE_PROC_REF(/obj/vehicle/walker, switch_light_state), TRUE, TRUE), reboot_time, TIMER_DELETE_ME)
+
 	playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 	to_chat(owner.seats[VEHICLE_DRIVER], SPAN_WARNING("Booting up reactor, it might take you to [reboot_time / 10] seconds."))
 
@@ -411,6 +421,10 @@
 	var/time_till_reboot = rand(5, 10)
 	addtimer(VARSET_CALLBACK(src, turned_on, 1), time_till_reboot, TIMER_DELETE_ME)
 	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_till_reboot, TIMER_DELETE_ME)
+
+	if(owner.light_state)
+		owner.switch_light_state(FALSE, TRUE)
+		addtimer(CALLBACK(owner, TYPE_PROC_REF(/obj/vehicle/walker, switch_light_state), TRUE, TRUE), time_till_reboot, TIMER_DELETE_ME)
 
 	owner.visible_message(SPAN_WARNING("[src] burst in smoke! [owner] turns off due to short circuit."))
 	if(owner.seats[VEHICLE_DRIVER])
@@ -539,11 +553,11 @@ handle_seated_take_damage
 		return FALSE
 
 	var/obj/vehicle/walker/mecha = hardpoint_holder.owner
-	if(!mecha.can_consume_energy(5))
+	if(!mecha.can_consume_energy(20))
 		turn_off(null, TRUE)
 		return FALSE
 
-	mecha.consume_energy(5)
+	mecha.consume_energy(20)
 	. = ..()
 
 
@@ -617,6 +631,12 @@ handle_seated_take_damage
 	data["current_value"] = damage_capacity
 	data["max_value"] = max_damage_capacity
 
+	data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Cooldown"
+	data["current_value"] = cooldown_end_time - world.time / 10
+	data["max_value"] = delay_between_hits / 10
+
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
 	cooldown_end_time = world.time + delay_between_hits
 	if(!damage_capacity)
@@ -670,9 +690,10 @@ handle_seated_take_damage
 
 	var/list/data = list()
 	.["hardpoint_data_additional"] += list(data)
-	data["value_name"] = "Ammo"
-	if(!mounted_gun?.current_mag)
+	if(!mounted_gun || !(mounted_gun.current_mag.current_rounds || mounted_gun.current_mag.reagents))
 		return
+
+	data["value_name"] = "Ammo"
 	data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
 	data["max_value"] = mounted_gun.current_mag.max_rounds
 

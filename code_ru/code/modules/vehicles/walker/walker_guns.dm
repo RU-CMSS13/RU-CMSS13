@@ -183,7 +183,10 @@
 		if(8)
 			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a50]
 
-/obj/item/weapon/gun/mounted/mecha_wm88/proc/after_fire_effect(mob/living/user)
+/obj/item/weapon/gun/mounted/mecha_wm88/proc/after_fire_effect(mob/living/user, obj/item/weapon/gun/used)
+	if(src != used || !istype(used, type))
+		return
+
 	if(overheat == overheat_upper_limit)
 		var/turf/T = get_turf(src)
 		new steam_effect(T)
