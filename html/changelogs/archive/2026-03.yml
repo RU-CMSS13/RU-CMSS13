@@ -94,13 +94,13 @@
   MoondancerPony:
   - bugfix: Tyrargo Rift army survivors no longer show up as part of Alpha Squad on
       the crew monitor.
+  RUCM:
+  - rscadd: Upstream 05.03
   Riot:
   - rscadd: Adds US army ranks, applied to the survivors and ERT on Tyrargo Rift
   - bugfix: Army survivors can now program the comms tower to accept their comms.
   - bugfix: Army comms are now fully working, with their own radio key and working
       comms color.
-  RUCM:
-  - rscadd: Upstream 05.03
   rinoglaz:
   - rscadd: Suppressor strain
 2026-03-07:
@@ -142,12 +142,6 @@
   riot:
   - maptweak: The basketball hoops on LV-624's Fitness dome can now be walked through.
 2026-03-10:
-  Drathek:
-  - bugfix: Fixed queen no forfeit check not checking the relevant Z levels (namely
-      regarding hijack/FTL)
-  - bugfix: Fixed potential for hive collapse during hijack
-  MistChristmas:
-  - soundtweak: Normalise ambience that Abyssal uses to be quieter.
   0Tikwah0:
   - rscdel: The forcefield function for stopping vehicles has been removed.
   Arom-beep:
@@ -158,6 +152,12 @@
       \u0440\u043F\u043E\u0440\u0430\u0442\u0430"
   - rscadd: Biomass for plants, synaptizine and hyperzine.
   - rscadd: Re-Added Stuff for CL
+  Drathek:
+  - bugfix: Fixed queen no forfeit check not checking the relevant Z levels (namely
+      regarding hijack/FTL)
+  - bugfix: Fixed potential for hive collapse during hijack
+  MistChristmas:
+  - soundtweak: Normalise ambience that Abyssal uses to be quieter.
   rinoglaz:
   - rscadd: Xeno Blueprints
 2026-03-11:
@@ -166,6 +166,13 @@
   MoondancerPony:
   - bugfix: fixed larvae being able to dig snow
 2026-03-12:
+  715th:
+  - rscadd: "\u0414\u043E\u0431\u0430\u0432\u0438\u043B \u0441\u0438\u0433\u0430\u0440\
+      \u0435\u0442\u044B \u0441 \u043F\u0435\u043F\u0435\u043B\u044C\u043D\u0438\u0446\
+      \u0435\u0439"
+  - code_imp: "\u0417\u0430\u043C\u0435\u043D\u0438\u043B \u0441\u043F\u0440\u0430\
+      \u0439\u0442 \u0411\u0422\u0420\u0430"
+  - maptweak: "\u0418\u0437\u043C\u0435\u043D\u0438\u043B \u0411\u0422\u0420"
   MistChristmas:
   - bugfix: 'Unique items: I.E. Family Photo now belong to you even if they spawn
       in your inventory instead of pocket.'
@@ -183,12 +190,26 @@
       fallbacking to icon_state
   - code_imp: Autodocs a few clothing variables
   - bugfix: Fixes accessorized inv_icon overlay from being directional
-  715th:
-  - rscadd: "\u0414\u043E\u0431\u0430\u0432\u0438\u043B \u0441\u0438\u0433\u0430\u0440\
-      \u0435\u0442\u044B \u0441 \u043F\u0435\u043F\u0435\u043B\u044C\u043D\u0438\u0446\
-      \u0435\u0439"
-  - code_imp: "\u0417\u0430\u043C\u0435\u043D\u0438\u043B \u0441\u043F\u0440\u0430\
-      \u0439\u0442 \u0411\u0422\u0420\u0430"
-  - maptweak: "\u0418\u0437\u043C\u0435\u043D\u0438\u043B \u0411\u0422\u0420"
   The-Last-Shadow:
   - rscadd: TTS
+2026-03-14:
+  MistChristmas:
+  - bugfix: Xenomorph on dropship alert now only occurs after landing.
+  - bugfix: Intel job not properly being tied to roundstart gear_preset
+  - admin: G2s and Claymores now get logged when deployed.
+  MoondancerPony:
+  - rscdel: broke area-based lighting
+  - bugfix: fixed area-based lighting
+  - bugfix: fixed Tyrargo army CO survivors not starting with an unbuttoned jacket
+      due to an error
+  RUCM:
+  - rscadd: Upstream 13.03.2026
+  Riot:
+  - bugfix: Fixes the army tgui prefixes
+  The-Last-Shadow:
+  - rscadd: Global playtimes leader board
+  cuberound:
+  - balance: increases random sandbag crate spawn chance
+  - balance: increases random HPR crate spawn chance
+  - balance: reduces random flamer fuel crate spawn chance
+  - balance: reduces random smartgun ammo crate spawn chance
