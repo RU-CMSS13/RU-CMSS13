@@ -313,11 +313,13 @@
 /obj/item/hardpoint/walker/reactor/tgui_additional_data()
 	. = ..()
 
-	var/list/data = list()
-	.["hardpoint_data_additional"] += list(data)
-	data["value_name"] = "Fuel"
-	data["current_value"] = fuel.fuel_amount
-	data["max_value"] = fuel.max_fuel_amount
+	var/list/data
+	if(fuel)
+		data = list()
+		.["hardpoint_data_additional"] += list(data)
+		data["value_name"] = "Fuel"
+		data["current_value"] = fuel.fuel_amount
+		data["max_value"] = fuel.max_fuel_amount
 
 	if(meltdown_timer_id)
 		data = list()
@@ -577,11 +579,12 @@ handle_seated_take_damage
 /obj/item/hardpoint/walker/spinal/tactical_missile/tgui_additional_data()
 	. = ..()
 
+	if(!mounted_gun?.current_mag)
+		return
+
 	var/list/data = list()
 	.["hardpoint_data_additional"] += list(data)
 	data["value_name"] = "Rocket"
-	if(!mounted_gun?.current_mag)
-		return
 	data["current_value"] = mounted_gun.current_mag.current_rounds
 	data["max_value"] = mounted_gun.current_mag.max_rounds
 
@@ -688,11 +691,11 @@ handle_seated_take_damage
 /obj/item/hardpoint/walker/hand/tgui_additional_data()
 	. = ..()
 
-	var/list/data = list()
-	.["hardpoint_data_additional"] += list(data)
-	if(!mounted_gun || !(mounted_gun.current_mag.current_rounds || mounted_gun.current_mag.reagents))
+	if(!mounted_gun?.current_mag || !(mounted_gun.current_mag.current_rounds || mounted_gun.current_mag.reagents))
 		return
 
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
 	data["value_name"] = "Ammo"
 	data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
 	data["max_value"] = mounted_gun.current_mag.max_rounds

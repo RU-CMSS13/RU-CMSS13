@@ -6,6 +6,10 @@
 	var/vehicle_light_power = 2
 	var/light_state = 1
 
+	var/vehicle_flags = VEHICLE_CLASS_WEAK
+
+	var/wall_ram_damage = 10
+
 	// List of all hardpoints attached to the vehicle
 	var/list/hardpoints = list()
 	//List of all hardpoints you can attach to this vehicle
@@ -564,3 +568,6 @@
 	if(!override)
 		light_state = new_state
 	playsound(src, 'sound/machines/click.ogg', 50)
+
+/obj/vehicle/proc/get_dimensions()
+	return list("width" = (bound_width / world.icon_size), "height" = (bound_height / world.icon_size))

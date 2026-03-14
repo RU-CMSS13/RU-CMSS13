@@ -89,7 +89,9 @@
 	var/mob_size_required_to_hit = MOB_SIZE_XENO_SMALL
 
 	//variable for various flags
+/* RUCM CHANGE
 	var/vehicle_flags = VEHICLE_CLASS_WEAK
+*/
 
 /* RUCM CHANGE
 	// References to the active/chosen hardpoint for each seat
@@ -128,7 +130,12 @@
 		/obj/structure/windoor_assembly,
 	)
 
+/* RUCM CHANGE
 	var/wall_ram_damage = 30
+*/
+//RUCM START
+	wall_ram_damage = 30
+//RUCM END
 	//allows more flexibility in ram damage
 	var/vehicle_ram_multiplier = 1
 
@@ -310,8 +317,10 @@
 	return
 
 // Gets the dimensions of the vehicle hitbox, aka the dimensions of the vehicle itself
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/get_dimensions()
 	return list("width" = (bound_width / world.icon_size), "height" = (bound_height / world.icon_size))
+*/
 
 //Returns the ratio of damage to take, just a housekeeping thing
 /* RUCM CHANGE
