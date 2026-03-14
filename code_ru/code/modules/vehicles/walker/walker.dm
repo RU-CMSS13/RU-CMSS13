@@ -35,7 +35,17 @@
 		/obj/item/hardpoint/walker/armor/concussive,
 		/obj/item/hardpoint/walker/armor/caustic,
 		/obj/item/hardpoint/walker/armor/fire,
-		/obj/item/hardpoint/walker/armor/ballistic
+		/obj/item/hardpoint/walker/armor/ballistic,
+	)
+	hardpoints_by_slot = list(
+		WALKER_HARDPOIN_HEAD = null,
+		WALKER_HARDPOIN_LEFT_HAND = null,
+		WALKER_HARDPOIN_RIGHT_HAND = null,
+		WALKER_HARDPOIN_LEFT_LEG = null,
+		WALKER_HARDPOIN_RIGHT_LEG = null,
+		WALKER_HARDPOIN_INTERNAL = null,
+		WALKER_HARDPOIN_ARMOR = null,
+		WALKER_HARDPOIN_SPINAL = null,
 	)
 
 	req_access = list(ACCESS_MARINE_WALKER)
@@ -45,21 +55,21 @@
 
 	pixel_x = -18
 
-	health = 500
-	var/max_health = 500
+	health = 750
+	var/max_health = 750
 
 	var/selected_group = SELECTED_GROUP_HANDS
 	var/zoom = FALSE
 
 	dmg_multipliers = list(
 		"all" = 1,
-		"acid" = 2.5,
+		"acid" = 1.5,
 		"slash" = 1,
 		"bullet" = 0.5,
-		"explosive" = 2.5,
+		"explosive" = 1.5,
 		"blunt" = 0.8,
 		"fire" = 0.5,
-		"abstract" = 1
+		"abstract" = 1,
 	)
 
 	var/list/verb_list = list(
@@ -70,7 +80,7 @@
 		/obj/vehicle/walker/proc/get_stats,
 		/obj/vehicle/walker/proc/toggle_motion_detector,
 		/obj/vehicle/walker/proc/toggle_reactor,
-		/obj/vehicle/walker/proc/switch_weapons
+		/obj/vehicle/walker/proc/switch_weapons,
 	)
 
 	move_sounds = list(
@@ -78,20 +88,18 @@
 		'code_ru/sound/vehicle/walker/mecha_step2.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step3.ogg',
 		'code_ru/sound/vehicle/walker/mecha_step4.ogg',
-		'code_ru/sound/vehicle/walker/mecha_step5.ogg'
+		'code_ru/sound/vehicle/walker/mecha_step5.ogg',
 	)
 	turn_sounds = list(
 		'code_ru/sound/vehicle/walker/mecha_turn1.ogg',
 		'code_ru/sound/vehicle/walker/mecha_turn2.ogg',
 		'code_ru/sound/vehicle/walker/mecha_turn3.ogg',
-		'code_ru/sound/vehicle/walker/mecha_turn4.ogg'
+		'code_ru/sound/vehicle/walker/mecha_turn4.ogg',
 	)
 	flags_atom = FPRINT|USES_HEARING
 
 	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
 	var/vehicle_faction = ""
-
-	var/obj/item/hardpoint/walker/reactor/power_supply = null
 
 
 /obj/structure/walker_wreckage
@@ -134,8 +142,8 @@
 	if(zoom)
 		update_pixels(TRUE)
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
-	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 40)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 40), 2 SECONDS)
+	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 20)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 20), 2 SECONDS)
 
 	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
 
@@ -182,16 +190,14 @@
 		return
 
 	if(selected_zoom)
-		var/override_zoom = 0
-		if(selected_group == SELECTED_GROUP_SPINAL)
-			var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = locate() in hardpoints
-			override_zoom = launcer.zoom_size
-
-		var/obj/item/hardpoint/walker/spinal/artilery/zoom_provider = locate() in hardpoints
-		if(!zoom_provider && !override_zoom)
+		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(selected_group == SELECTED_GROUP_SPINAL && !istype(zoom_provider, /obj/item/hardpoint/walker/spinal/tactical_missile))
 			return
 
-		var/zoom_power = override_zoom ? override_zoom : zoom_provider.zoom_size
+		if(!zoom_provider)
+			return
+
+		var/zoom_power = zoom_provider.zoom_size
 		user.client.change_view(zoom_power, src)
 		var/tilesize = 32
 		var/viewoffset = tilesize * zoom_power / 2
@@ -224,16 +230,16 @@
 	if(target != user || !istype(user))
 		return
 
+	if(!check_access(user.wear_id))
+		to_chat(user, SPAN_DANGER("Access denied!"))
+		return
+
 	if(user.skills.get_skill_level(SKILL_POWERLOADER) <= SKILL_POWERLOADER_DEFAULT)
-		to_chat(user, "You dont know how to operate it")
+		to_chat(user, "You dont know how to operate it.")
 		return
 
 	if(seats[VEHICLE_DRIVER])
 		to_chat(user, "There is someone occupying mecha right now.")
-		return
-
-	if(!check_access(user.wear_id))
-		to_chat(user, SPAN_DANGER("Access denied!"))
 		return
 
 	if(!do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) || seats[VEHICLE_DRIVER])
@@ -246,6 +252,19 @@
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/proc/consume_energy(amount)
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	energy_source.fuel.fuel_amount = max(0, energy_source.fuel.fuel_amount - amount)
+	energy_source.on_consume_enegry()
+
+/obj/vehicle/walker/proc/can_consume_energy(amount)
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	if(!energy_source || !energy_source.turned_on || !energy_source.fuel)
+		return FALSE
+	if(!energy_source.fuel.fuel_amount < amount)
+		return FALSE
+	return TRUE
+
 /obj/vehicle/walker/remove_hardpoint(obj/item/hardpoint/old, mob/user)
 	. = ..()
 	if(!.)
@@ -255,19 +274,16 @@
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(selected_group == SELECTED_GROUP_SPINAL)
-		if(world.time < next_move)
-			to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("[src] can't move due to spinal weapon selection!"))
-			next_move = world.time + move_delay
-		return FALSE
+		handle_weapon_groups()
 
-	if(!power_supply?.can_consume_enegry())
+	if(!can_consume_energy(1))
 		return FALSE
 
 	. = ..()
 	if(!.)
 		return
 
-	power_supply?.on_consume_enegry_action()
+	consume_energy(1)
 
 /obj/vehicle/walker/try_rotate(deg)
 	. = ..()
@@ -286,7 +302,6 @@
 	for(var/obj/item/hardpoint/walker/leg/leggy in hardpoints)
 		if(!health)
 			continue
-
 		move_delay -= leggy.move_delay
 		move_max_momentum -= leggy.move_max_momentum
 		move_momentum_build_factor -= leggy.move_momentum_build_factor
@@ -344,9 +359,8 @@
 /obj/vehicle/walker/ui_data(mob/user)
 	. = list()
 
-	var/list/resist_name = list("Bio" = "acid", "Slash" = "slash", "Bullet" = "bullet", "Expl" = "explosive", "Blunt" = "blunt")
+	var/list/resist_name = list("Bio" = "acid", "Slash" = "slash", "Bullet" = "bullet", "Explosive" = "explosive", "Fire" = "fire", "Blunt" = "blunt")
 	var/list/resist_data_list = list()
-
 	for(var/selected in resist_name)
 		var/resist = 1 - dmg_multipliers[resist_name[selected]]
 		resist_data_list += list(list(
@@ -371,65 +385,52 @@
 
 /obj/vehicle/walker/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
 	if(!damage)
-		return
+		return FALSE
 
+	// WALKER_DAMAGE_TOTAL, WALKER_DAMAGE_REMAINING
 	var/list/damages_applied = list(0, damage)
-	var/obj/item/hardpoint/walker/spinal/shield/projector = locate() in hardpoints
-	if(projector?.take_hits(damages_applied))
-		return
+	var/obj/item/hardpoint/walker/spinal/shield/projector = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(istype(projector) && projector.take_hits(damages_applied))
+		return FALSE
 
-	damages_applied[2] *= get_dmg_multi(type)
-	var/mob/living/user = seats[VEHICLE_DRIVER]
-	if(zone_selected == "all")
-		damage = damages_applied[2]
-		user?.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 50)
-		damages_applied[1] += damage
-		for(attacked_hardpoint in hardpoints)
-			if(!attacked_hardpoint.can_take_damage())
-				continue
-			attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
-			damages_applied[2] = damage
-	else
-		damage = handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
+	. = TRUE
 
-	damages_applied[1] += damage
-	health = max(0, health - damage)
+	damages_applied[WALKER_DAMAGE_REMAINING] *= get_dmg_multi(type)
+	handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
 
-	to_chat(user, SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
-	if(ismob(attacker))
+	if(!attacked_hardpoint)
+		damages_applied[WALKER_DAMAGE_TOTAL] += damages_applied[WALKER_DAMAGE_REMAINING]
+		health = max(0, health - damages_applied[WALKER_DAMAGE_REMAINING])
+
+	to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
+	if(attacker)
 		var/mob/M = attacker
-		log_attack("[src] took [damage] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
+		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
 	else
-		log_attack("[src] took [damage] [type] damage from [attacker].")
+		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage.")
 
 	if(!health)
+		var/mob/living/user = seats[VEHICLE_DRIVER]
 		if(user)
 			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
 			user.unset_interaction()
-		new /obj/structure/walker_wreckage(src.loc)
+		new /obj/structure/walker_wreckage(loc)
 		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
 	else
 		update_icon()
 
 /obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
-	var/obj/item/hardpoint/walker/hardpoint_armor = locate(/obj/item/hardpoint/walker/armor) in hardpoints
+	var/obj/item/hardpoint/walker/hardpoint_armor = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
 	if(hardpoint_armor?.can_take_damage())
-		if(zone_selected == "chest")
-			hardpoint_armor.take_damage_type(damages_applied, type, attacker, damages_applied[2], damages_applied[2])
-			return
-		else
-			hardpoint_armor.take_damage_type(damages_applied, type, attacker)
+		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
 
-	. = damages_applied[2]
 	if(attacked_hardpoint?.can_take_damage())
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 		return
 
-	var/mob/living/user = seats[VEHICLE_DRIVER]
-	if(zone_selected == "head" && user)
-		user.apply_armoured_damage(., ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 20)
-		damages_applied[1] += .
+	if(seats[VEHICLE_DRIVER] && (zone_selected in list("head", "all")))
+		handle_seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
 		return
 
 	var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
@@ -439,7 +440,14 @@
 		if(!attacked_hardpoint.can_take_damage())
 			continue
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
-		break
+		if(zone_selected != "all")
+			break
+
+/obj/vehicle/walker/proc/handle_seated_take_damage(damage, type, atom/attacker, mob/living/user)
+	if(isxeno(attacker))
+		user.attack_alien(attacker)
+	else
+		user.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 20)
 
 /obj/vehicle/walker/get_dmg_multi(type)
 	if(!dmg_multipliers.Find(type))
@@ -447,7 +455,7 @@
 	return dmg_multipliers[type] * dmg_multipliers["all"]
 
 /obj/vehicle/walker/ex_act(severity)
-	take_damage_type(severity, "explosive", "explosion")
+	take_damage_type(severity, "explosive")
 
 /obj/vehicle/walker/flamer_fire_act(dam, datum/cause_data/flame_cause_data)
 	take_damage_type(dam, "fire", flame_cause_data.resolve_mob(), null, "all")
@@ -479,8 +487,8 @@
 		handle_repairs(attacking_item, user)
 		return
 
-	if(istype(attacking_item, /obj/item/fuel_cell/reactor))
-		var/obj/item/hardpoint/walker/reactor/mecha_reactor = locate() in hardpoints
+	if(istype(attacking_item, /obj/item/fuel_cell/mecha_reactor))
+		var/obj/item/hardpoint/walker/reactor/mecha_reactor = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
 		mecha_reactor.replace_fuel(attacking_item, user)
 		return
 
@@ -506,52 +514,57 @@
 	if(xeno.a_intent == INTENT_HELP && seats[VEHICLE_DRIVER])
 		if(do_after(xeno, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) && seats[VEHICLE_DRIVER])
 			seats[VEHICLE_DRIVER].unset_interaction()
-			return XENO_NONCOMBAT_ACTION
-		return XENO_NO_DELAY_ACTION
+		return XENO_NONCOMBAT_ACTION
 
-	var/damage = (xeno.melee_vehicle_damage + rand(-5,5)) * XENO_UNIVERSAL_VEHICLE_DAMAGEMULT
-	var/damage_mult = 1
-	if(xeno.caste == XENO_CASTE_RAVAGER || xeno.caste == XENO_CASTE_QUEEN)
-		damage_mult = 2
+	. = XENO_ATTACK_ACTION
 
+	var/damage = xeno.melee_vehicle_damage + rand(-5,5)
 	if(xeno.frenzy_aura > 0)
 		damage += (xeno.frenzy_aura * FRENZY_DAMAGE_MULTIPLIER)
+	if(xeno.caste == XENO_CASTE_RAVAGER || xeno.caste == XENO_CASTE_QUEEN)
+		damage *= 2
 
-	xeno.animation_attack_on(src)
 	if(!damage)
 		playsound(xeno, 'sound/weapons/alien_claw_swipe.ogg', 25, 1)
 		xeno.visible_message(SPAN_DANGER("\The [xeno] swipes at \the [src] to no effect!"),
 		SPAN_DANGER("We swipe at \the [src] to no effect!"))
-		return XENO_ATTACK_ACTION
+		return
 
-	var/obj/item/hardpoint/walker/attacked_hardpoint
-	switch(check_zone(xeno.zone_selected))
+	xeno.animation_attack_on(src)
+
+	var/selected_zone = check_zone(xeno.zone_selected)
+	var/target
+	switch(selected_zone)
 		if("head")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+		if("chest")
+			target = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
 		if("groin")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/reactor) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
 		if("l_leg", "l_foot")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/leg/left) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG]
 		if("r_leg", "r_foot")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/leg/right) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG]
 		if("l_arm", "l_hand")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/hand/left) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_HAND]
 		if("r_arm", "r_hand")
-			attacked_hardpoint = locate(/obj/item/hardpoint/walker/hand/right) in hardpoints
+			target = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_HAND]
 
-	var/attack_msg = attacked_hardpoint ? "[attacked_hardpoint] installed on [src]" : src
-	xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [attack_msg]!"),
-	SPAN_DANGER("We slash \the [attack_msg]!"))
-	playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
+	if(take_damage_type(damage, "slash", xeno, target, selected_zone))
+		playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
+		xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [src]!"),
+		SPAN_DANGER("We slash \the [src]!"))
+		return
 
-	take_damage_type(damage * damage_mult, "slash", xeno, attacked_hardpoint, check_zone(xeno.zone_selected))
-	return XENO_ATTACK_ACTION
+	playsound(xeno, 'sound/weapons/alien_claw_swipe.ogg', 25, 1)
+	xeno.visible_message(SPAN_DANGER("\The [xeno] tries to slash \the [src], however their attack seems to be deflected by some sort of field!"),
+	SPAN_DANGER("We try to slash \the [src], however our attack seems to be deflected by some sort of field!"))
 
 
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/fuel_cell/reactor
+/obj/item/fuel_cell/mecha_reactor
 	name = "Enriched Uranium Rod"
 	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy!"
 
@@ -564,7 +577,7 @@
 	fuel_amount = 24000
 	max_fuel_amount = 24000
 
-/obj/item/fuel_cell/reactor/update_icon()
+/obj/item/fuel_cell/mecha_reactor/update_icon()
 	return
 
 
@@ -743,3 +756,19 @@
 		return access_to_check == vehicle_faction
 
 	return vehicle_faction in access_to_check
+
+#undef WALKER_HARDPOIN_HEAD
+#undef WALKER_HARDPOIN_LEFT_HAND
+#undef WALKER_HARDPOIN_RIGHT_HAND
+#undef WALKER_HARDPOIN_LEFT_LEG
+#undef WALKER_HARDPOIN_RIGHT_LEG
+#undef WALKER_HARDPOIN_INTERNAL
+#undef WALKER_HARDPOIN_ARMOR
+#undef WALKER_HARDPOIN_SPINAL
+
+#undef WALKER_DAMAGE_TOTAL
+#undef WALKER_DAMAGE_REMAINING
+
+#undef SELECTED_GROUP_HANDS
+#undef SELECTED_GROUP_SPINAL
+#undef GROUPS_BY_ID

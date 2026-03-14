@@ -2,7 +2,6 @@
 	light_system = MOVABLE_LIGHT
 	light_range = 0
 	var/atom/movable/vehicle_light_holder/lighting_holder
-
 	var/vehicle_light_range = 5
 	var/vehicle_light_power = 2
 
@@ -10,6 +9,8 @@
 	var/list/hardpoints = list()
 	//List of all hardpoints you can attach to this vehicle
 	var/list/hardpoints_allowed = list()
+	//List of hardpoints with their slots taken in
+	var/list/hardpoints_by_slot = list()
 
 	var/list/misc_multipliers = list(
 		"move" = 1.0,
@@ -515,7 +516,7 @@
 	var/material_per_repair = 0
 	var/list/repair_materials = list()
 
-/obj/item/hardpoint/proc/recovered()
+/obj/item/hardpoint/proc/repaired()
 	return
 
 /obj/item/hardpoint/proc/material_use(obj/item/tool/weldingtool/welder, mob/user, modificator = 5)

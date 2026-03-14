@@ -16,3 +16,12 @@ DEFINE_BITFIELD(flags_mounted_gun_features, list(
 	"GUN_ONLY_MOUNTING" = GUN_ONLY_MOUNTING,
 	"MOUNTED" = GUN_MOUNTED,
 ))
+
+#define WALKER_HARDPOIN_HEAD "Head"
+#define WALKER_HARDPOIN_LEFT_HAND "Left Hand"
+#define WALKER_HARDPOIN_RIGHT_HAND "Right Hand"
+#define WALKER_HARDPOIN_LEFT_LEG "Left Leg"
+#define WALKER_HARDPOIN_RIGHT_LEG "Right Leg"
+#define WALKER_HARDPOIN_INTERNAL "Internal"
+#define WALKER_HARDPOIN_ARMOR "Armor"
+#define WALKER_HARDPOIN_SPINAL "Spinal"

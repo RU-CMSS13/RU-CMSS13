@@ -43,15 +43,9 @@ AND YOULL BE FINE!*/
 		return
 
 	if(lighting_holder)
-		if(lighting_holder.light_on)
-			lighting_holder.set_light_on(FALSE)
-		else
-			lighting_holder.set_light_on(TRUE)
+		lighting_holder.set_light_on(!lighting_holder.light_on)
 	else
-		if(light_on)
-			set_light_on(FALSE)
-		else
-			set_light_on(TRUE)
+		set_light_on(!light_on)
 	playsound(src, 'sound/machines/click.ogg', 50)
 
 
@@ -72,25 +66,22 @@ AND YOULL BE FINE!*/
 		return
 
 	var/list/acceptible_modules = list()
-	for(var/obj/item/hardpoint/walker/hand/selected in hardpoints)
-		if(!selected.mounted_gun)
-			continue
-		if(!selected.mounted_gun.current_mag)
+	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		if(!selected.mounted_gun?.current_mag)
 			continue
 		acceptible_modules[selected.mounted_gun.name] = selected.mounted_gun
 	if(!length(acceptible_modules))
-		to_chat(user, "Not found ammo mags to eject")
 		return
 
 	var/selected_module = tgui_input_list(user, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
 	if(!selected_module)
 		return
 	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
-	if(!mounted_gun || mounted_gun.gun_holder != src || !mounted_gun.current_mag)
+	if(!mounted_gun || !mounted_gun.current_mag || mounted_gun.loc != src)
 		return FALSE
 	mounted_gun.unload(user, TRUE)
 	to_chat(user, SPAN_WARNING("WARNING! [mounted_gun] ammo magazine deployed."))
-	visible_message("[name]'s systems ejected used magazine.","")
+	visible_message("[src]'s system ejected used magazine.","")
 
 
 //////////////////////////////////////////////////////////////
@@ -147,8 +138,8 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	var/obj/item/hardpoint/walker/spinal/artilery/provider = locate() in hardpoints
-	if(!provider)
+	var/obj/item/hardpoint/walker/spinal/artilery/provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(!istype(provider))
 		return
 	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
 
@@ -169,15 +160,15 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(!power_supply)
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	if(!energy_source)
 		return
-	if(power_supply.rebooting)
+	if(energy_source.rebooting)
 		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
 		return
-	if(tgui_alert(user, "Are you sure about turning it [power_supply.turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
+	if(tgui_alert(user, "Are you sure about turning it [energy_source.turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
 		return
-
-	power_supply.switch_reactor_operational_state()
+	energy_source.switch_reactor_operational_state()
 
 
 //////////////////////////////////////////////////////////////
@@ -198,15 +189,17 @@ AND YOULL BE FINE!*/
 
 	handle_weapon_groups(user)
 
+// I forgot why I made this a proc and why did this way, however... ~upd 2 days later
 /obj/vehicle/walker/proc/handle_weapon_groups(mob/user)
-	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = locate() in hardpoints
-	if(selected_group == SELECTED_GROUP_SPINAL || !launcer || !launcer.mounted_gun.current_mag?.current_rounds)
+	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(selected_group == SELECTED_GROUP_SPINAL || !istype(launcer) || !launcer.mounted_gun.current_mag?.current_rounds)
 		selected_group = SELECTED_GROUP_HANDS
 		update_pixels(zoom)
 	else
 		selected_group = SELECTED_GROUP_SPINAL
 		update_pixels(TRUE)
 
+	// Simple re-register of signals, I still don't want to do it clean way ~upd 2 days later
 	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)

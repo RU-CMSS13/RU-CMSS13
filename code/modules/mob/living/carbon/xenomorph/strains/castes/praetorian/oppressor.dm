@@ -202,14 +202,11 @@
 	var/list/targets = list()
 	for(var/turf/target_turf in turflist)
 //RUCM START
-		for(var/obj/vehicle/walker/vehicle in target_turf)
-			var/obj/item/hardpoint/walker/attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in vehicle.hardpoints
-			if(attacked_hardpoint?.can_take_damage() || !vehicle.seats[VEHICLE_DRIVER])
-				break
-
-			targets += vehicle.seats[VEHICLE_DRIVER]
-			vehicle.seats[VEHICLE_DRIVER].unset_interaction()
-			break
+		var/obj/vehicle/walker/mecha = locate() in target_turf
+		var/obj/item/hardpoint/walker/attacked_hardpoint = mecha.hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+		if(!attacked_hardpoint?.can_take_damage() && mecha.seats[VEHICLE_DRIVER])
+			targets += mecha.seats[VEHICLE_DRIVER]
+			mecha.seats[VEHICLE_DRIVER].unset_interaction()
 //RUCM END
 		for(var/mob/living/carbon/target in target_turf)
 			if(!isxeno_human(target) || abduct_user.can_not_harm(target) || target.is_dead() || target.is_mob_incapacitated(TRUE) || target.mob_size >= MOB_SIZE_BIG)
@@ -252,6 +249,7 @@
 		var/obj/effect/beam/tail_beam = abduct_user.beam(target, "oppressor_tail", 'icons/effects/beam.dmi', 0.5 SECONDS, 8)
 		var/image/tail_image = image('icons/effects/status_effects.dmi', "hooked")
 		target.overlays += tail_image
+
 		target.throw_atom(throw_target_turf, get_dist(throw_target_turf, target)-1, SPEED_VERY_FAST)
 
 		qdel(tail_beam) // hook beam catches target, throws them back, is deleted (throw_atom has sleeps), then hook beam catches another target, repeat

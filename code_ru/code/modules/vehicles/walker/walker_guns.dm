@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////
-// GUNS
+// NORMAL GUNS
 
 
 /obj/item/weapon/gun/mounted
@@ -189,7 +189,7 @@
 		new steam_effect(T)
 		var/damage = overheat_self_destruction_rate * overheat
 		var/obj/item/hardpoint/walker/hand = gun_holder
-		hand.owner.take_damage_type(damage, "abstract", src)
+		hand.owner.take_damage_type(damage, "abstract")
 	else if(overheat < overheat_upper_limit)
 		overheat += overheat_rate
 	set_fire_delay(basic_fire_delay - overheat)
@@ -358,7 +358,7 @@
 	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
 	mount_class = GUN_MOUNT_MECHA
 
-	var/f_aiming_time = 10 SECONDS
+	var/f_aiming_time = 5 SECONDS
 	var/aiming = FALSE
 
 /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)

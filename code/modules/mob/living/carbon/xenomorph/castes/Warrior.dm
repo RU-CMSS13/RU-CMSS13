@@ -286,11 +286,11 @@
 
 //RUCM START
 	if(istype(affected_atom, /obj/vehicle/walker))
-		var/obj/vehicle/walker/vehicle = affected_atom
-		var/obj/item/hardpoint/walker/attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in vehicle.hardpoints
-		if(!attacked_hardpoint?.can_take_damage() && vehicle.seats[VEHICLE_DRIVER])
-			affected_atom = vehicle.seats[VEHICLE_DRIVER]
-			vehicle.seats[VEHICLE_DRIVER].unset_interaction()
+		var/obj/vehicle/walker/mecha = affected_atom
+		var/obj/item/hardpoint/walker/attacked_hardpoint = mecha.hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+		if(!attacked_hardpoint?.can_take_damage() && mecha.seats[VEHICLE_DRIVER])
+			affected_atom = mecha.seats[VEHICLE_DRIVER]
+			mecha.seats[VEHICLE_DRIVER].unset_interaction()
 //RUCM END
 
 	if(lunge_user.can_not_harm(affected_atom) || !ismob(affected_atom))

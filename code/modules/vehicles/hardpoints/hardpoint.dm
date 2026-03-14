@@ -213,14 +213,8 @@
 
 /// Apply hardpoint effects to vehicle and self.
 /obj/item/hardpoint/proc/on_install(obj/vehicle/multitile/vehicle)
-/* RUCM CHANGE
 	if(!vehicle) //in loose holder
 		return
-*/
-//RUCM START
-	if(!vehicle || !health)
-		return
-//RUCM END
 	RegisterSignal(vehicle, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES, PROC_REF(recalculate_hardpoint_bonuses))
 	apply_buff(vehicle)
 
@@ -234,6 +228,10 @@
 
 /// Applying passive buffs like damage type resistance, speed, accuracy, cooldowns.
 /obj/item/hardpoint/proc/apply_buff(obj/vehicle/multitile/vehicle)
+//RUCM START
+	if(!health)
+		return
+//RUCM END
 	if(buff_applied)
 		return
 	if(LAZYLEN(type_multipliers))
@@ -483,7 +481,7 @@
 			break
 
 //RUCM START
-		if(length(repair_materials) && material_per_repair)
+		if(!health && length(repair_materials) && material_per_repair)
 			var/material_fixed = material_use(WT, user)
 			if(!material_fixed)
 				break
@@ -499,10 +497,9 @@
 			health = initial(health)
 */
 //RUCM START
-		if(!health)
-			recovered()
 		health = min(max_health, health + max_health / 100 * (amount_fixed / amount_fixed_adjustment))
 		if(health == max_health)
+			repaired()
 //RUCM END
 			user.visible_message(SPAN_NOTICE("[user] finishes repairing \the [name]."), SPAN_NOTICE("You finish repairing \the [name]. The integrity of the module is at [SPAN_HELPFUL(floor(get_integrity_percent()))]%."))
 			being_repaired = FALSE

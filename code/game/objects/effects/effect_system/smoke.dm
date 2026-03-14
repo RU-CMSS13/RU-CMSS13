@@ -564,8 +564,8 @@
 
 //RUCM START
 //fuck we need to do it other way, we already 4x times run thru turf context, that fucking cursed, at least put it in one LOOP, then do signaller
-	for(var/obj/vehicle/walker/walker in cur_turf)
-		walker.update_health(15, "acid")
+	for(var/obj/vehicle/walker/mecha in cur_turf)
+		mecha.take_damage_type(15, "acid", zone_selected = "all")
 //RUCM END
 
 //No effect when merely entering the smoke turf, for balance reasons

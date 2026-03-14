@@ -2195,7 +2195,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		if(!callback_can_stop_fire.Invoke(source, object, params))
 			return
 
-	else if(!target || (gun_user.get_active_hand() != src))
+	else if(!target || gun_user.get_active_hand() != src)
 		return
 //RUCM END
 

@@ -9,9 +9,9 @@
 /obj/effect/essentials_set/walker/reactor
 	spawned_gear_list = list(
 		/obj/item/hardpoint/walker/reactor,
-		/obj/item/fuel_cell/reactor,
-		/obj/item/fuel_cell/reactor,
-		/obj/item/fuel_cell/reactor,
+		/obj/item/fuel_cell/mecha_reactor,
+		/obj/item/fuel_cell/mecha_reactor,
+		/obj/item/fuel_cell/mecha_reactor,
 	)
 
 /obj/effect/essentials_set/walker/wm88
@@ -69,7 +69,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
-	list("M1488 Tactical Rocket Unit", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
+	list("M1488 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
