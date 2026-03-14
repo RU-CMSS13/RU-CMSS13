@@ -67,13 +67,13 @@
 
 	switch(building_evolve)
 		if(XENO_BLUEPRINT_WALL)
-			new_turf.PlaceOnTop(/turf/closed/wall/resin)
+			new_turf.place_on_top(/turf/closed/wall/resin)
 			var/turf/closed/wall/resin/new_wall = new_turf
 			new_wall.hivenumber = xeno.hivenumber
 			set_hive_data(new_wall, xeno.hivenumber)
 			new_wall.add_fingerprint(xeno)
 		if(XENO_BLUEPRINT_WINDOW)
-			new_turf.PlaceOnTop(/turf/closed/wall/resin/membrane)
+			new_turf.place_on_top(/turf/closed/wall/resin/membrane)
 			var/turf/closed/wall/resin/membrane/new_wall = new_turf
 			new_wall.hivenumber = xeno.hivenumber
 			set_hive_data(new_wall, xeno.hivenumber)
