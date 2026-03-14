@@ -102,17 +102,24 @@
 	update_pixels(TRUE)
 	give_action(user, /datum/action/vulture_tripod_unscope, null, null, src)
 	set_scope_loc(user, scope)
+//RU-CHANGE
+	toggle_alt_iff(TRUE)
+//RU-CHANGE
 
 /obj/structure/vulture_spotter_tripod/on_unset_interaction(mob/living/user)
 	user.status_flags &= ~IMMOBILE_ACTION
 	user.visible_message(SPAN_NOTICE("[user] looks up from [src]."),SPAN_NOTICE("You look up from [src]."))
 	REMOVE_TRAIT(user, TRAIT_IMMOBILIZED, TRAIT_SOURCE_ABILITY("Vulture spotter"))
 	user.reset_view(null)
+	user.client.mouse_pointer_icon = null
 	user.Move(get_step(src, reverse_direction(src.dir)))
 	user.client?.change_view(GLOB.world_view_size, src)
 	user.setDir(dir) //set the direction of the player to the direction the gun is facing
 	update_pixels(FALSE)
 	remove_action(user, /datum/action/vulture_tripod_unscope)
+//RU-CHANGE
+	toggle_alt_iff(FALSE)
+//RU-CHANGE
 	unscope()
 
 /obj/structure/vulture_spotter_tripod/clicked(mob/user, list/mods)
@@ -167,7 +174,7 @@
 		skillless = TRUE
 
 	user.visible_message(SPAN_NOTICE("[user] attaches [scope] to [src]."), SPAN_NOTICE("You attach [scope] to [src]."))
-	icon_state = "vulture_tripod_deployed"
+	icon_state = "vulture_scope_deployed"
 	setDir(user.dir)
 	bound_rifle = scope.bound_rifle
 	scope_attached = TRUE
@@ -298,6 +305,16 @@
 		return
 
 	return rifle.attachments["rail"]
+
+//RU-CHANGE
+/obj/structure/vulture_spotter_tripod/proc/toggle_alt_iff(toggle)
+    var/obj/item/attachable/vulture_scope/scope = get_vulture_scope()
+    if(!scope)
+        return
+    var/obj/item/weapon/gun/boltaction/vulture/rifle = bound_rifle?.resolve()
+    if(rifle)
+        SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
+//RU-CHANGE
 
 /obj/structure/vulture_spotter_tripod/check_eye(mob/living/user)
 	if((user.body_position != STANDING_UP) || (get_dist(user, src) > 0) || user.is_mob_incapacitated() || !user.client)
