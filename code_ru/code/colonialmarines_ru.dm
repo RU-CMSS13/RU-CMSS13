@@ -24,6 +24,7 @@
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\structures\table_racks.dm"
 #include "game\turfs\open.dm"
+#include "game\objects\items\device\walkman\walkman.dm"
 #include "modules\almayer\machinery.dm"
 #include "modules\character_traits\skills.dm"
 #include "modules\clothing\head\WY\goons.dm"
