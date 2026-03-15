@@ -1,12 +1,12 @@
 /obj/structure/machinery/vending/walkman/Initialize()
-    . = ..()
-    addtimer(CALLBACK(src, PROC_REF(lateInitialize)), 1 SECONDS)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(lateInitialize)), 1 SECONDS)
 
+/obj/structure/machinery/vending/walkman/proc/lateInitialize()
 	// Hotline
 	if(!(/obj/item/device/cassette_tape/hotline in products))
 		products[/obj/item/device/cassette_tape/hotline] = 10
 		prices[/obj/item/device/cassette_tape/hotline] = 5
-
 		var/datum/data/vending_product/new_product = new()
 		new_product.product_path = /obj/item/device/cassette_tape/hotline
 		new_product.amount = 10
@@ -20,7 +20,6 @@
 	if(!(/obj/item/device/cassette_tape/puma in products))
 		products[/obj/item/device/cassette_tape/puma] = 10
 		prices[/obj/item/device/cassette_tape/puma] = 5
-
 		var/datum/data/vending_product/new_product = new()
 		new_product.product_path = /obj/item/device/cassette_tape/puma
 		new_product.amount = 10
@@ -34,7 +33,6 @@
 	if(!(/obj/item/device/cassette_tape/duck in products))
 		products[/obj/item/device/cassette_tape/duck] = 10
 		prices[/obj/item/device/cassette_tape/duck] = 5
-
 		var/datum/data/vending_product/new_product = new()
 		new_product.product_path = /obj/item/device/cassette_tape/duck
 		new_product.amount = 10
