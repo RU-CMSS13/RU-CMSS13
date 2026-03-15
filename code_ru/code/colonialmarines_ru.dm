@@ -53,4 +53,3 @@
 #include "modules\vehicles\walker_verbs.dm"
 #include "modules\vehicles\walker_wm88_helper.dm"
 #include "modules\vendors\walkman_vendor_override.dm"
-#include "modules\vendors\cassette_paths_fix.dm"
