@@ -1,8 +1,8 @@
-/obj/structure/machinery/vending/walkman/Initialize()
+/obj/structure/machinery/vending/walkman/New()
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(lateInitialize)), 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(add_custom_tapes)), 1 SECONDS)
 
-/obj/structure/machinery/vending/walkman/proc/lateInitialize()
+/obj/structure/machinery/vending/walkman/proc/add_custom_tapes()
 	// Hotline
 	if(!(/obj/item/device/cassette_tape/hotline in products))
 		products[/obj/item/device/cassette_tape/hotline] = 10
