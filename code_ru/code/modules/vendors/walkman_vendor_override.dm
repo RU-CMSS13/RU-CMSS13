@@ -1,5 +1,6 @@
 /obj/structure/machinery/vending/walkman/Initialize()
-	. = ..()
+    . = ..()
+    addtimer(CALLBACK(src, PROC_REF(lateInitialize)), 1 SECONDS)
 
 	// Hotline
 	if(!(/obj/item/device/cassette_tape/hotline in products))
