@@ -20,7 +20,7 @@
 
 /obj/effect/alien/resin/special/antiair_pylon/proc/update_minimap_icon()
 	SSminimaps.remove_marker(src)
-	SSminimaps.add_marker(src, z, MINIMAP_FLAG_XENO, "antiair_pylon")
+	SSminimaps.add_marker(src, MINIMAP_FLAG_XENO, image('icons/ui_icons/map_blips.dmi', null, "antiair_pylon"))
 
 /obj/effect/alien/resin/special/antiair_pylon/Destroy()
 	set_light(0)
