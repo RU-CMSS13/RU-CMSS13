@@ -46,10 +46,12 @@
 	var/mob/living/carbon/human/H = target
 	for(var/datum/action/human_action/issue_order/O in H.actions)
 		O.remove_from(H)
+//RUCM START
 	var/mob/living/carbon/human/leader = target
 	var/datum/action/human_action/cycle_voice_level/voice = get_action(leader, /datum/action/human_action/cycle_voice_level)
 	voice?.remove_from(leader)
 
 	leader.langchat_styles = ""
+//RUCM END
 	return ..()
 // RUCM End
