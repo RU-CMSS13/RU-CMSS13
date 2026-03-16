@@ -327,6 +327,8 @@
 			tier_2_xenos += X
 		else if(X.tier == 3)
 			tier_3_xenos += X
+			if(length(tier_3_xenos) == 1)
+				SEND_SIGNAL(src, COMSIG_HIVE_FIRST_T3, X)
 
 	// Xenos are a fuckfest of cross-dependencies of different datums that are initialized at different times
 	// So don't even bother trying updating UI here without large refactors
