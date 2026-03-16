@@ -35,11 +35,13 @@
 		return
 	give_action(target, /datum/action/human_action/issue_order)
 
+//RUCM START
 	give_action(target, /datum/action/human_action/cycle_voice_level)
 
 	var/mob/living/carbon/human/leader = target
 	leader.langchat_styles = "langchat_smaller_bolded"
 
+//RUCM END
 /datum/element/traitbound/leadership/Detach(datum/target)
 	var/mob/living/carbon/human/H = target
 	for(var/datum/action/human_action/issue_order/O in H.actions)
