@@ -6,7 +6,7 @@ import { Table, TableCell, TableRow } from 'tgui/components/Table';
 import { Window } from 'tgui/layouts';
 
 interface PlaytimeRecord {
-  total_time: number | undefined;
+  total_time: number;
   ckey: string | undefined;
   job: string;
   playtime: number;
@@ -17,8 +17,11 @@ interface PlaytimeRecord {
 
 interface PlaytimeData {
   stored_human_playtime: PlaytimeRecord[];
+  total_human_playtime: number;
   stored_xeno_playtime: PlaytimeRecord[];
+  total_xeno_playtime: number;
   stored_other_playtime: PlaytimeRecord[];
+  total_other_playtime: number;
 }
 
 interface PlaytimeRows {
@@ -31,9 +34,6 @@ export const Playtime = () => {
   const { playtime, best_playtime } = data;
   const [selected, setSelected] = useState('human');
   const [selectedGP, setSelectedGP] = useState('private');
-  const human = playtime.stored_human_playtime[0]?.playtime || 0;
-  const xeno = playtime.stored_xeno_playtime[0]?.playtime || 0;
-  const other = playtime.stored_other_playtime[0]?.playtime || 0;
   return (
     <Window theme={selected !== 'xeno' ? 'usmc' : 'hive_status'}>
       <Window.Content className="PlaytimeInterface" scrollable>
@@ -53,7 +53,7 @@ export const Playtime = () => {
         </Tabs>
         {selectedGP === 'global' ? (
           <Table>
-            <PlaytimeTable playtime={best_playtime} total={undefined} />
+            <PlaytimeTable playtime={best_playtime} total={0} />
           </Table>
         ) : (
           <Table>
@@ -62,37 +62,37 @@ export const Playtime = () => {
                 selected={selected === 'human'}
                 onClick={() => setSelected('human')}
               >
-                Human ({human} hr)
+                Human ({playtime.total_human_playtime} hr)
               </Tabs.Tab>
               <Tabs.Tab
                 selected={selected === 'xeno'}
                 onClick={() => setSelected('xeno')}
               >
-                Xeno ({xeno} hr)
+                Xeno ({playtime.total_xeno_playtime} hr)
               </Tabs.Tab>
               <Tabs.Tab
                 selected={selected === 'other'}
                 onClick={() => setSelected('other')}
               >
-                Other ({other} hr)
+                Other ({playtime.total_other_playtime} hr)
               </Tabs.Tab>
             </Tabs>
             {selected === 'human' && (
               <PlaytimeTable
                 playtime={playtime.stored_human_playtime}
-                total={human}
+                total={playtime.total_human_playtime}
               />
             )}
             {selected === 'xeno' && (
               <PlaytimeTable
                 playtime={playtime.stored_xeno_playtime}
-                total={xeno}
+                total={playtime.total_xeno_playtime}
               />
             )}
             {selected === 'other' && (
               <PlaytimeTable
                 playtime={playtime.stored_other_playtime}
-                total={other}
+                total={playtime.total_other_playtime}
               />
             )}
           </Table>
@@ -104,20 +104,17 @@ export const Playtime = () => {
 
 const PlaytimeTable = (props: {
   readonly playtime: PlaytimeRecord[];
-  readonly total: number | undefined;
+  readonly total: number;
 }) => {
   return (
     <Table>
-      {props.playtime
-        .slice(props.playtime.length > 1 ? 1 : 0)
-        .filter((selected) => selected.playtime > 0)
-        .map((selected) => (
-          <PlaytimeRow
-            key={selected.job}
-            data={selected}
-            total={props.total || selected.total_time}
-          />
-        ))}
+      {props.playtime.map((selected) => (
+        <PlaytimeRow
+          key={selected.job}
+          data={selected}
+          total={props.total || selected.total_time}
+        />
+      ))}
     </Table>
   );
 };
@@ -137,12 +134,10 @@ const ProgressColor = (percent: number) => {
 
 const PlaytimeRow = (props: {
   readonly data: PlaytimeRecord;
-  readonly total: number | undefined;
+  readonly total: number;
 }) => {
   const time_to_use = props.data.total_time || props.total;
-  const percentage = time_to_use
-    ? (props.data.playtime / time_to_use) * 100
-    : 100;
+  const percentage = (props.data.playtime / time_to_use) * 100;
   return (
     <>
       <TableRow className="PlaytimeRow">
