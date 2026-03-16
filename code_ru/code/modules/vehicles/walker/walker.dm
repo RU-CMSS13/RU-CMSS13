@@ -432,7 +432,7 @@
 		return FALSE
 
 	damages_applied[WALKER_DAMAGE_REMAINING] *= get_dmg_multi(type)
-	if(!damage)
+	if(!damages_applied[WALKER_DAMAGE_REMAINING])
 		return FALSE
 
 	. = TRUE
