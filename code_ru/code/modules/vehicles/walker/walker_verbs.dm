@@ -124,13 +124,9 @@ AND YOULL BE FINE!*/
 		return
 
 	if(flags_atom & NO_ZFALL)
-		var/turf/above = SSmapping.get_turf_above(loc)
-		if(istype(above, /turf/open_space))
-			visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift it of the ground."))
-			forceMove(above)
-		else
-			to_chat(user, SPAN_WARNING("Seems there no free space above us!"))
-
+		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(istype(flying_support))
+			flying_support.handle_move_z_up(user, src)
 
 /obj/vehicle/walker/proc/move_z_down()
 	set name = "Move Down"
@@ -146,12 +142,9 @@ AND YOULL BE FINE!*/
 		return
 
 	if(flags_atom & NO_ZFALL)
-		if(istype(loc, /turf/open_space))
-			var/turf/below = SSmapping.get_turf_below(loc)
-			visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift it of the ground."))
-			forceMove(below)
-		else
-			to_chat(user, SPAN_WARNING("Seems there no free space below us!"))
+		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(istype(flying_support))
+			flying_support.handle_move_z_down(user, src)
 
 
 //////////////////////////////////////////////////////////////

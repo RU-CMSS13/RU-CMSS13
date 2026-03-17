@@ -19,9 +19,12 @@
 	collision_result(charger_ability.momentum * 20, xeno)
 	charger_ability.stop_momentum()
 
-/obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason)
-	take_damage_type(damage, "blunt", collision_reason)
-	playsound(loc, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 49, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
+/obj/vehicle/walker/onZImpact(turf/impact_turf, height)
+	collision_result(height * 100, src, "all")
+
+/obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason, zones)
+	take_damage_type(damage, "blunt", collision_reason, null, zones)
+	playsound(src, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 49, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
 	var/turf/target = get_step(src, collision_reason.dir)
 	var/list/cached_interactions = list()
 	for(var/atom/movable/potential_atom in target)
@@ -51,5 +54,13 @@
 	swith_visual_position(90, -20)
 	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0, 0), damage / 10 - 2, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
-/obj/vehicle/walker/onZImpact(turf/impact_turf, height)
-	collision_result(height * 200, src)
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/handle_vehicle_bump(obj/vehicle/some_vehicle)
+	. = ..()
+
+	if(!istype(some_vehicle, /obj/vehicle/walker))
+		return
+	if(!linked_dropship?.in_flyby)
+		return
+
+	var/obj/vehicle/walker/vessel = some_vehicle
+	vessel.prepare_titan_fall()

@@ -80,6 +80,8 @@
 		/obj/vehicle/walker/proc/special_module_action,
 		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/switch_weapons,
+		/obj/vehicle/walker/proc/move_z_up,
+		/obj/vehicle/walker/proc/move_z_down,
 	)
 
 	move_sounds = list(
@@ -149,6 +151,8 @@
 	recalculate_hardpoints()
 	START_PROCESSING(SSobj, src)
 
+	shadow_holder = new (src)
+
 /obj/vehicle/walker/Destroy(force)
 	STOP_PROCESSING(SSobj, src)
 
@@ -158,6 +162,8 @@
 
 	if(seats[VEHICLE_DRIVER])
 		seats[VEHICLE_DRIVER].unset_interaction()
+
+	QDEL_NULL(shadow_holder)
 
 	. = ..()
 
@@ -372,17 +378,25 @@
 	if(!can_consume_energy(consume_energy_move))
 		return FALSE
 
+	var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(!istype(flying_support))
+		flying_support = null
+	if(flying_support?.performing_action)
+		return FALSE
+
 	. = ..()
 	if(!.)
 		return
 
+	if(flying_support)
+		update_shadow(flying_support)
 	consume_energy(consume_energy_move)
 
 /obj/vehicle/walker/try_rotate(deg)
 	. = ..()
 	if(!.)
 		return
-
+	shadow_holder.dir = dir
 	update_zoom_pixels()
 
 /obj/vehicle/walker/proc/recalculate_hardpoints()
@@ -409,6 +423,8 @@
 
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
+
+	overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
 
 	if(!override_pixel_y)
 		if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
@@ -526,8 +542,8 @@
 		if(user)
 			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
 			user.unset_interaction()
-		new /obj/structure/walker_wreckage(loc)
-		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
+		new /obj/structure/walker_wreckage(get_turf(src))
+		playsound(src, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
 		qdel(src)
 	else
 		update_icon()
@@ -790,7 +806,7 @@
 		return
 
 	else if(istype(obstacle, /obj/structure/barricade))
-		playsound(src.loc, pick(move_sounds), 60, 1)
+		playsound(src, pick(move_sounds), 60, 1)
 		var/obj/structure/barricade/cade = obstacle
 		var/new_dir = get_dir(src, cade) ? get_dir(src, cade) : cade.dir
 		var/turf/new_loc = get_step(loc, new_dir)
@@ -829,15 +845,6 @@
 
 
 
-
-#undef WALKER_HARDPOIN_HEAD
-#undef WALKER_HARDPOIN_LEFT_HAND
-#undef WALKER_HARDPOIN_RIGHT_HAND
-#undef WALKER_HARDPOIN_LEFT_LEG
-#undef WALKER_HARDPOIN_RIGHT_LEG
-#undef WALKER_HARDPOIN_INTERNAL
-#undef WALKER_HARDPOIN_ARMOR
-#undef WALKER_HARDPOIN_SPINAL
 
 #undef WALKER_DAMAGE_TOTAL
 #undef WALKER_DAMAGE_REMAINING

@@ -379,7 +379,7 @@
 		return
 
 	if(owner)
-		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], it can EXPLODE any time soon."))
+		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], it going critical."))
 	count_down = TRUE
 	meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
@@ -422,8 +422,8 @@
 
 /obj/item/hardpoint/walker/reactor/proc/reboot_reactor(time_for_reboot)
 	rebooting = TRUE
-	addtimer(VARSET_CALLBACK(src, turned_on, TRUE), time_for_reboot, TIMER_DELETE_ME)
-	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_for_reboot, TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, turned_on, TRUE), time_for_reboot, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, rebooting, FALSE), time_for_reboot, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/reactor/proc/replace_fuel(obj/new_fuel, mob/user)
 	if(user.skills.get_skill_level(SKILL_POWERLOADER) < SKILL_POWERLOADER_MASTER)
@@ -743,82 +743,6 @@
 	owner.add_filter("spinal_shield", 1, list("type" = "outline", "color" = shield_color, "size" = damage_capacity / max_damage_capacity * 2))
 
 
-/obj/item/hardpoint/walker/spinal/jetpack
-	name = "Mecha Jetpack"
-	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
-
-	custom_actions = list("Fly", "Evac")
-
-	var/fuel = 200
-	var/fuel_max = 200
-	var/fuel_recover_rate = 2
-
-	var/flying = FALSE
-	var/fuel_consumption_rate = 5
-
-/obj/item/hardpoint/walker/spinal/jetpack/tgui_additional_data()
-	. = ..()
-
-	var/list/data = list()
-	.["hardpoint_data_additional"] += list(data)
-	data["value_name"] = "Fuel"
-	data["current_value"] = fuel
-	data["max_value"] = fuel_max
-
-/obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
-	var/obj/vehicle/walker/vessel = owner
-	if(flying && istype(get_turf(vessel), /turf/open_space))
-		if(!use_fuel(fuel_consumption_rate))
-			flying = FALSE
-			owner.flags_atom &= ~NO_ZFALL
-			owner.visible_message(SPAN_WARNING("Nozzles of [src] stops burning fuel, something very bad about to happen!"))
-
-	var/fuel_to_recover = min(fuel_recover_rate * delta_time, fuel_max - fuel)
-	if(!fuel_to_recover || !vessel.can_consume_energy(fuel_to_recover * 2))
-		return
-	vessel.consume_energy(fuel_to_recover * 2)
-
-	fuel += fuel_to_recover
-
-/obj/item/hardpoint/walker/spinal/jetpack/proc/use_fuel(amount)
-	if(fuel < amount)
-		return FALSE
-	fuel -= amount
-	return TRUE
-
-/obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
-	if(custom_action == "Evac")
-		var/obj/structure/dropship_equipment/equipment
-		for(var/shuttle_tag in list(DROPSHIP_ALAMO, DROPSHIP_NORMANDY))
-			var/obj/docking_port/mobile/marine_dropship/dropship = SSshuttle.getShuttle(shuttle_tag)
-			if(!dropship.in_flyby)
-				continue
-			for(equipment in dropship.equipments)
-				if(!istype(equipment, /obj/structure/dropship_equipment/medevac_system) &&\
-				!istype(equipment, /obj/structure/dropship_equipment/fulton_system) &&\
-				!istype(equipment, /obj/structure/dropship_equipment/paradrop_system))
-					equipment = null
-					continue
-				break
-		if(!equipment || !use_fuel(fuel_max))
-			return
-
-		//here we catch shuttle
-		return
-
-	if(!use_fuel(fuel_consumption_rate))
-		return
-	flying = !flying
-	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
-	if(flying)
-		owner.flags_atom |= NO_ZFALL
-	else
-		owner.flags_atom &= ~NO_ZFALL
-
-/obj/item/hardpoint/walker/spinal/jetpack/proc/titan_fall()
-
-
-
 
 
 //////////////////////////////////////////////////////////////
@@ -877,89 +801,6 @@
 	desc = "Allows mecha to hold weapons."
 
 	slot = WALKER_HARDPOIN_RIGHT_HAND
-
-
-
-
-//////////////////////////////////////////////////////////////
-// ARMOR
-
-/obj/item/hardpoint/walker/armor
-	name = "Armor Hardpoint"
-	desc = "Primary armor source."
-
-	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'
-
-	slot = WALKER_HARDPOIN_ARMOR
-	hdpt_layer = HDPT_LAYER_ARMOR
-
-	damage_multiplier = 0.75
-
-	health = 500
-	max_health = 500
-
-	weight = 2.5
-
-/obj/item/hardpoint/walker/armor/paladin
-	name = "Paladin Armor"
-	desc = "Protects the vehicle from large incoming explosive projectiles."
-
-	icon_state = "paladin_armor"
-	disp_icon_state = "paladin_armor"
-
-	type_multipliers = list(
-		"all" = 0.9,
-		"explosive" = 0.8,
-	)
-
-/obj/item/hardpoint/walker/armor/concussive
-	name = "Concussive Armor"
-	desc = "Protects the vehicle from high-impact weapons."
-
-	icon_state = "concussive_armor"
-	disp_icon_state = "concussive_armor"
-
-	type_multipliers = list(
-		"all" = 0.9,
-		"blunt" = 0.8,
-	)
-
-/obj/item/hardpoint/walker/armor/caustic
-	name = "Caustic Armor"
-	desc = "Protects vehicles from most types of acid."
-
-	icon_state = "caustic_armor"
-	disp_icon_state = "caustic_armor"
-
-	type_multipliers = list(
-		"all" = 0.9,
-		"acid" = 0.8,
-	)
-
-/obj/item/hardpoint/walker/armor/fire
-	name = "Fire Fighter Armor"
-	desc = "Protects vehicles from fire."
-
-	icon_state = "concussive_armor"
-	disp_icon_state = "concussive_armor"
-
-	type_multipliers = list(
-		"all" = 0.9,
-		"fire" = 0,
-	)
-
-/obj/item/hardpoint/walker/armor/ballistic
-	name = "Ballistic Armor"
-	desc = "Protects the vehicle from high-penetration weapons."
-
-	icon_state = "ballistic_armor"
-	disp_icon_state = "ballistic_armor"
-
-	type_multipliers = list(
-		"all" = 0.9,
-		"bullet" = 0.8,
-		"slash" = 0.8,
-	)
 
 
 //////////////////////////////////////////////////////////////
