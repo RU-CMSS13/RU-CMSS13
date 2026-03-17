@@ -534,6 +534,45 @@
 								"sound/music/walkman/surf/10-2-3.ogg",\
 								"sound/music/walkman/surf/10-2-4.ogg"))
 
+/obj/item/device/cassette_tape/hotline
+	name = "Hotline cassette"
+	id = 19
+	desc = "A cassette with some \"chicken\"?"
+	icon_state = "cassette_hotline"
+	side1_icon = "cassette_hotline"
+	songs = list("side1" = list("sound/music/walkman/Hotline-A-New-Morning.ogg",\
+								"sound/music/walkman/Hotline-Crystals.ogg",\
+								"sound/music/walkman/Hotline-Daisuke.ogg",\
+								"sound/music/walkman/Hotline-Hydrogen.ogg",\
+								"sound/music/walkman/Hotline-It_s-Safe-Now.ogg"),\
+				"side2" = list(
+								"sound/music/walkman/Hotline-Miami.ogg",\
+								"sound/music/walkman/Hotline-Musik.ogg",\
+								"sound/music/walkman/Hotline-Paris.ogg",\
+								"sound/music/walkman/Hotline-Perturbator.ogg"))
+
+/obj/item/device/cassette_tape/puma
+	name = "Puma cassette" // Пума, ты мой любимый пупсик <З
+	id = 20
+	desc = "Very familiar..."
+	icon_state = "cassette_puma"
+	side1_icon = "cassette_puma"
+	songs = list("side1" = list("sound/music/walkman/Louie,-Louie.ogg",\
+								"sound/music/walkman/These-Boots-Are-Made-For-Walkin.ogg"),\
+				"side2" = list("sound/music/walkman/Venus.ogg",\
+								"sound/music/walkman/Wooly-Bully.ogg",))
+
+/obj/item/device/cassette_tape/duck
+	name = "Duck cassette"
+	id = 21
+	desc = "Quack-quack!"
+	icon_state = "cassette_duck"
+	side1_icon = "cassette_duck"
+	songs = list("side1" = list("sound/music/walkman/ANTAG-TYPE-BEAT.ogg",\
+								"sound/music/walkman/HONK.ogg",\
+								"sound/music/walkman/Sudden Changes.ogg"),\
+				"side2" = list("sound/music/walkman/Helltaker-Take-me.ogg",
+								"sound/music/walkman/The-Fate-of-Sickle.ogg",))
 // hotline reference
 /obj/item/device/cassette_tape/aesthetic
 	name = "aesthetic cassette"

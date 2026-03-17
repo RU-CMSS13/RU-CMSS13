@@ -24,7 +24,6 @@
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\structures\table_racks.dm"
 #include "game\turfs\open.dm"
-#include "game\objects\items\device\walkman\walkman.dm"
 #include "modules\almayer\machinery.dm"
 #include "modules\character_traits\skills.dm"
 #include "modules\clothing\head\WY\goons.dm"
@@ -52,4 +51,3 @@
 #include "modules\vehicles\walker_vendor.dm"
 #include "modules\vehicles\walker_verbs.dm"
 #include "modules\vehicles\walker_wm88_helper.dm"
-#include "modules\vendors\walkman_vendor_override.dm"
