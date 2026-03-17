@@ -540,6 +540,9 @@
 	desc = "A cassette with some \"chicken\"?"
 	icon_state = "cassette_hotline"
 	side1_icon = "cassette_hotline"
+	item_icons = list(
+		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi' // временная мера, чтобы не было ошибок или варнингов
+	)
 	songs = list("side1" = list("sound/music/walkman/Hotline-A-New-Morning.ogg",\
 								"sound/music/walkman/Hotline-Crystals.ogg",\
 								"sound/music/walkman/Hotline-Daisuke.ogg",\
@@ -557,6 +560,9 @@
 	desc = "Very familiar..."
 	icon_state = "cassette_puma"
 	side1_icon = "cassette_puma"
+	item_icons = list(
+		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi'
+	)
 	songs = list("side1" = list("sound/music/walkman/Louie,-Louie.ogg",\
 								"sound/music/walkman/These-Boots-Are-Made-For-Walkin.ogg"),\
 				"side2" = list("sound/music/walkman/Venus.ogg",\
@@ -568,6 +574,9 @@
 	desc = "Quack-quack!"
 	icon_state = "cassette_duck"
 	side1_icon = "cassette_duck"
+	item_icons = list(
+		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi'
+	)
 	songs = list("side1" = list("sound/music/walkman/ANTAG-TYPE-BEAT.ogg",\
 								"sound/music/walkman/HONK.ogg",\
 								"sound/music/walkman/Sudden Changes.ogg"),\
