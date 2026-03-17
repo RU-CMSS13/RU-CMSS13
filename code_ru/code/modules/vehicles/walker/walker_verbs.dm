@@ -87,8 +87,8 @@ AND YOULL BE FINE!*/
 	tgui_interact(user)
 
 
-/obj/vehicle/walker/proc/toggle_zoom()
-	set name = "Zoom On/Off"
+/obj/vehicle/walker/proc/special_module_action()
+	set name = "Special Module Actions"
 	set category = "Vehicle"
 
 	var/mob/user = usr
@@ -100,60 +100,11 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(selected_group == SELECTED_GROUP_SPINAL)
-		return
-	zoom = !zoom
-	update_pixels(zoom)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/toggle_motion_detector()
-	set name = "Motion Detector On/Off"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
+	var/selected = tgui_input_list(user, "Select action to perform", "Special Abilities", hardpoint_actions)
+	if(!selected)
 		return
 
-
-	var/obj/item/hardpoint/walker/provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(!provider?.motion_detector || !can_consume_energy(provider.motion_detector.detector_range))
-		return
-	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/toggle_reactor()
-	set name = "Reactor On/Off"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
-
-	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	if(!energy_source)
-		return
-	if(energy_source.rebooting)
-		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
-		return
-	if(tgui_alert(user, "Are you sure about turning it [energy_source.turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
-		return
-	energy_source.switch_reactor_operational_state()
+	hardpoint_actions[selected].custom_action(user, selected)
 
 
 //////////////////////////////////////////////////////////////
@@ -176,13 +127,22 @@ AND YOULL BE FINE!*/
 
 // I forgot why I made this a proc and why did this way, however... ~upd 2 days later
 /obj/vehicle/walker/proc/handle_weapon_groups(mob/user)
+	var/selected_group_cache = selected_group
 	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(selected_group == SELECTED_GROUP_SPINAL || !istype(launcer) || !launcer.mounted_gun.current_mag?.current_rounds)
-		selected_group = SELECTED_GROUP_HANDS
-		update_pixels(zoom)
+	if(istype(launcer))
+		if(selected_group == SELECTED_GROUP_HANDS && launcer.mounted_gun.current_mag?.current_rounds)
+			selected_group = SELECTED_GROUP_SPINAL
+			launcer.zoom = TRUE
+			update_zoom_pixels()
+		else
+			selected_group = SELECTED_GROUP_HANDS
+			launcer.zoom = FALSE
+			update_zoom_pixels()
 	else
-		selected_group = SELECTED_GROUP_SPINAL
-		update_pixels(TRUE)
+		selected_group = SELECTED_GROUP_HANDS
+
+	if(selected_group_cache == selected_group)
+		return
 
 	// Simple re-register of signals, I still don't want to do it clean way ~upd 2 days later
 	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action

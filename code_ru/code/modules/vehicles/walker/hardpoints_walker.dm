@@ -38,6 +38,8 @@
 	var/move_turn_momentum_loss_factor = 0
 	var/move_momentum_build_factor = 0
 
+	var/list/custom_actions = list()
+
 	var/zoom_size = 0
 	var/obj/item/device/motiondetector/walker/motion_detector
 
@@ -54,10 +56,6 @@
 
 	if(owner)
 		var/obj/vehicle/walker/vessel = owner
-		if(vessel.zoom && zoom_size)
-			vessel.zoom = FALSE
-			vessel.update_pixels(vessel.zoom)
-
 		vessel.hardpoints_by_slot[slot] = null
 
 	. = ..()
@@ -79,14 +77,22 @@
 	. = ..()
 
 	vessel.hardpoints_by_slot[slot] = src
+	for(var/action in custom_actions)
+		vessel.hardpoint_actions[action] = src
 	if(!vessel.seats[VEHICLE_DRIVER])
 		return
 	pilot_entered(vessel.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/vessel)
+	if(zoom)
+		zoom = FALSE
+		vessel.update_zoom_pixels(zoom)
+
 	. = ..()
 
 	vessel.hardpoints_by_slot[slot] = null
+	for(var/action in custom_actions)
+		vessel.hardpoint_actions -= action
 	if(!vessel.seats[VEHICLE_DRIVER])
 		return
 	pilot_ejected(vessel.seats[VEHICLE_DRIVER])
@@ -147,7 +153,17 @@
 		return
 	mounted_gun.set_gun_user(null)
 
-/obj/item/hardpoint/walker/proc/custom_action(mob/user)
+/obj/item/hardpoint/walker/proc/on_source_process(delta_time)
+	if(zoom)
+		var/obj/vehicle/walker/vessel = owner
+		var/consumption = ceil(zoom_size * delta_time * 0.5)
+		if(!vessel.can_consume_energy(consumption))
+			zoom = FALSE
+			vessel.update_zoom_pixels(zoom)
+		else
+			vessel.consume_energy(consumption)
+
+/obj/item/hardpoint/walker/proc/custom_action(mob/user, custom_action)
 	return
 
 
@@ -293,6 +309,8 @@
 
 	weight = 2
 
+	custom_actions = list("Reactor")
+
 	var/turned_on = TRUE
 	var/rebooting = FALSE
 	var/count_down = FALSE
@@ -374,9 +392,13 @@
 	meltdown_timer_id = null
 	reactor_state = VEHICLE_REACTOR_FINE
 
-/obj/item/hardpoint/walker/reactor/proc/switch_reactor_operational_state()
+/obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
 	if(rebooting)
-		return FALSE
+		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
+		return
+
+	if(tgui_alert(user, "Are you sure about turning it [turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
+		return
 
 	if(turned_on)
 		if(count_down)
@@ -384,19 +406,19 @@
 			owner.visible_message(SPAN_WARNING("[owner] burst with steam as [src] turns off."))
 		if(owner.light_state)
 			owner.switch_light_state(FALSE, TRUE)
-		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("Reactor turned off, it might take up to [reboot_time / 10] seconds for reboot!"))
+		to_chat(user, SPAN_DANGER("Reactor turned off, it might take up to [reboot_time / 10] seconds for reboot!"))
 		playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 		turned_on = FALSE
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
-		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("It was for sure bad idea to turn on [src] in this state."))
+		to_chat(user, SPAN_DANGER("It was for sure bad idea to turn on [src] in this state."))
 		return
 
 	reboot_reactor(reboot_time)
 
 	playsound(get_turf(src), pick(reactor_sounds), 25, 1)
-	to_chat(owner.seats[VEHICLE_DRIVER], SPAN_WARNING("Booting up reactor, it might take you to [reboot_time / 10] seconds."))
+	to_chat(user, SPAN_WARNING("Booting up reactor, it might take you to [reboot_time / 10] seconds."))
 
 /obj/item/hardpoint/walker/reactor/proc/reboot_reactor(time_for_reboot)
 	rebooting = TRUE
@@ -462,7 +484,6 @@
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	destruction_on_zero = FALSE
 
-handle_seated_take_damage
 /obj/item/hardpoint/walker/head/get_icon_image(x_offset, y_offset, new_dir, type_slot)
 	if(owner?.seats[VEHICLE_DRIVER])
 		type_slot = "_closed"
@@ -531,6 +552,8 @@ handle_seated_take_damage
 	name = "Detection Array \"Night Hawk\""
 	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful motion detector at cost of faster reactor consumption."
 
+	custom_actions = list("Zoom", "Motion Detector")
+
 	zoom_size = 12
 
 /obj/item/hardpoint/walker/spinal/artilery/Initialize()
@@ -544,6 +567,20 @@ handle_seated_take_damage
 
 /obj/item/hardpoint/walker/spinal/artilery/pilot_ejected(mob/user)
 	return
+
+/obj/item/hardpoint/walker/spinal/artilery/custom_action(mob/user, custom_action)
+	var/obj/vehicle/walker/vessel = owner
+	if(custom_action == "Motion Detector")
+		if(!vessel.can_consume_energy(motion_detector.detector_range))
+			return
+		motion_detector.toggle_active(user, motion_detector.active)
+		return
+
+	var/consumption = ceil(zoom_size * 0.5)
+	if(!vessel.can_consume_energy(consumption))
+		return
+	zoom = !zoom
+	vessel.update_zoom_pixels(zoom)
 
 /obj/item/device/motiondetector/walker
 	detector_range = 24
@@ -574,7 +611,6 @@ handle_seated_take_damage
 	weight = 1.5
 
 	zoom_size = 10
-	mount_class = GUN_MOUNT_NO
 
 /obj/item/hardpoint/walker/spinal/tactical_missile/Initialize()
 	. = ..()
@@ -620,21 +656,13 @@ handle_seated_take_damage
 	var/cooldown_timer_id = null
 	var/delay_between_hits = 10 SECONDS
 
-/obj/item/hardpoint/walker/spinal/shield/Destroy()
-	STOP_PROCESSING(SSobj, src)
-
-	. = ..()
-
-
 /obj/item/hardpoint/walker/spinal/shield/on_install(obj/vehicle/walker/vessel)
 	update_filter()
-	START_PROCESSING(SSobj, src)
 
 	. = ..()
 
 /obj/item/hardpoint/walker/spinal/shield/on_uninstall(obj/vehicle/walker/vessel)
 	vessel.remove_filter("spinal_shield")
-	STOP_PROCESSING(SSobj, src)
 
 	. = ..()
 
@@ -654,17 +682,18 @@ handle_seated_take_damage
 		data["current_value"] = timeleft(cooldown_timer_id) / 10
 		data["max_value"] = delay_between_hits * 6 / 10
 
-/obj/item/hardpoint/walker/spinal/shield/process(delta_time)
+/obj/item/hardpoint/walker/spinal/shield/on_source_process(delta_time)
 	var/obj/vehicle/walker/vessel = owner
 	if(damage_capacity == max_damage_capacity)
 		return
 
-	var/energy_required = ceil(damage_capacity / (capacity_recover_rate * 10))
-	if(!vessel.can_consume_energy(energy_required))
-		damage_capacity = max(damage_capacity - capacity_recover_rate, 0)
-		return
+	if(damage_capacity)
+		var/energy_required = ceil(damage_capacity / (capacity_recover_rate * 10)) * delta_time
+		if(!vessel.can_consume_energy(energy_required))
+			damage_capacity = max(damage_capacity - capacity_recover_rate, 0)
+			return
+		vessel.consume_energy(energy_required)
 
-	vessel.consume_energy(energy_required)
 	if(timeleft(cooldown_timer_id))
 		return
 
@@ -701,7 +730,10 @@ handle_seated_take_damage
 	return TRUE
 
 /obj/item/hardpoint/walker/spinal/shield/proc/resume_recovering()
-	START_PROCESSING(SSobj, src)
+	if(!owner)
+		return
+	var/obj/vehicle/walker/vessel = owner
+	vessel.consume_energy(capacity_recover_rate * 4)
 
 /obj/item/hardpoint/walker/spinal/shield/proc/stop_recovering(time_to_resume)
 	if(time_to_resume)
@@ -715,28 +747,14 @@ handle_seated_take_damage
 	name = "Mecha Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
+	custom_actions = list("Fly")
+
 	var/fuel = 200
 	var/fuel_max = 200
 	var/fuel_recover_rate = 2
 
 	var/flying = FALSE
 	var/fuel_consumption_rate = 5
-
-/obj/item/hardpoint/walker/spinal/jetpack/Destroy()
-	STOP_PROCESSING(SSobj, src)
-
-	. = ..()
-
-
-/obj/item/hardpoint/walker/spinal/jetpack/on_install(obj/vehicle/walker/vessel)
-	START_PROCESSING(SSobj, src)
-
-	. = ..()
-
-/obj/item/hardpoint/walker/spinal/jetpack/on_uninstall(obj/vehicle/walker/vessel)
-	STOP_PROCESSING(SSobj, src)
-
-	. = ..()
 
 /obj/item/hardpoint/walker/spinal/jetpack/tgui_additional_data()
 	. = ..()
@@ -747,7 +765,7 @@ handle_seated_take_damage
 	data["current_value"] = fuel
 	data["max_value"] = fuel_max
 
-/obj/item/hardpoint/walker/spinal/jetpack/process(delta_time)
+/obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
 	var/obj/vehicle/walker/vessel = owner
 	var/fuel_to_recover = min(fuel_recover_rate * delta_time, fuel_max - fuel)
 	if(!fuel_to_recover || !vessel.can_consume_energy(fuel_to_recover * 2))
@@ -762,11 +780,13 @@ handle_seated_take_damage
 	fuel -= amount
 	return TRUE
 
-/obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user)
+/obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
 	if(!use_fuel(fuel_consumption_rate))
 		return FALSE
 
-	owner.visible_message(SPAN_WARNING("[owner] ignites [src] nozzles and lifts up in the sky, watch out for above."))
+	flying = !flying
+	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
+
 
 
 

@@ -272,13 +272,13 @@
 
 //General proc for putting on hardpoints
 //ALWAYS CALL THIS WHEN ATTACHING HARDPOINTS
-/obj/vehicle/proc/add_hardpoint(obj/item/hardpoint/HP, mob/user)
-	HP.owner = src
-	HP.forceMove(src)
-	hardpoints += HP
+/obj/vehicle/proc/add_hardpoint(obj/item/hardpoint/added, mob/user)
+	added.owner = src
+	added.forceMove(src)
+	hardpoints += added
 
-	HP.on_install(src)
-	HP.rotate(turning_angle(HP.dir, dir))
+	added.on_install(src)
+	added.rotate(turning_angle(added.dir, dir))
 
 	update_minimap_icon()
 	update_icon()

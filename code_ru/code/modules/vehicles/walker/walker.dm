@@ -48,6 +48,8 @@
 		WALKER_HARDPOIN_SPINAL = null,
 	)
 
+	var/list/obj/item/hardpoint/walker/hardpoint_actions = list()
+
 	req_access = list(ACCESS_MARINE_WALKER)
 	unacidable = TRUE
 
@@ -60,7 +62,6 @@
 	var/max_health = 750
 
 	var/selected_group = SELECTED_GROUP_HANDS
-	var/zoom = FALSE
 
 	dmg_multipliers = list(
 		"all" = 1,
@@ -74,12 +75,10 @@
 	)
 
 	var/list/verb_list = list(
-		/obj/vehicle/walker/proc/toggle_lights,
-		/obj/vehicle/walker/proc/toggle_zoom,
-		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/get_stats,
-		/obj/vehicle/walker/proc/toggle_motion_detector,
-		/obj/vehicle/walker/proc/toggle_reactor,
+		/obj/vehicle/walker/proc/toggle_lights,
+		/obj/vehicle/walker/proc/special_module_action,
+		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/switch_weapons,
 	)
 
@@ -162,27 +161,17 @@
 
 	. = ..()
 
-/obj/vehicle/walker/process()
+/obj/vehicle/walker/process(delta_time)
 	if(light_state)
-		if(!can_consume_energy(consume_energy_light))
+		var/light_consuming = consume_energy_light * delta_time
+		if(!can_consume_energy(light_consuming))
 			light_state = FALSE
 			switch_light_state(FALSE, TRUE)
 		else
-			consume_energy(consume_energy_light)
+			consume_energy(light_consuming)
 
-	if(zoom)
-		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(!zoom_provider)
-			zoom = FALSE
-			update_pixels(zoom)
-		else
-			var/zoom_power = zoom_provider.zoom_size
-			var/consumption = round(zoom_power * 0.5)
-			if(!can_consume_energy(consumption))
-				zoom = FALSE
-				update_pixels(zoom)
-			else
-				consume_energy(consumption)
+	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		selected.on_source_process(delta_time)
 
 
 //////////////////////////////////////////////////////////////
@@ -211,8 +200,7 @@
 	vehicle_faction = user.faction
 	user.forceMove(src)
 	user.reset_view(src)
-	if(zoom)
-		update_pixels(TRUE)
+	update_zoom_pixels()
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
 	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 20)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 20), 2 SECONDS)
@@ -241,7 +229,7 @@
 	if(user.client)
 		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
 
-	update_pixels(FALSE)
+	update_zoom_pixels(FALSE)
 	user.reset_view(null)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
@@ -258,27 +246,19 @@
 		selected.pilot_ejected(user)
 	update_icon()
 
-/obj/vehicle/walker/proc/update_pixels(selected_zoom)
+/obj/vehicle/walker/proc/update_zoom_pixels(selected_zoom)
 	var/mob/user = seats[VEHICLE_DRIVER]
-	if(!user.client)
+	if(!user?.client)
 		return
 
-	if(selected_zoom)
-		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(!zoom_provider?.zoom_size)
-			zoom = FALSE
-			return
+	var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(isnull(selected_zoom))
+		selected_zoom = zoom_provider.zoom
 
-		var/zoom_power = zoom_provider.zoom_size
-		var/consumption = round(zoom_power * 0.5)
-		if(!can_consume_energy(consumption))
-			zoom = FALSE
-			return
-
-		consume_energy(consumption)
-		user.client.change_view(zoom_power, src)
+	if(selected_zoom && zoom_provider?.zoom_size)
+		user.client.change_view(zoom_provider.zoom_size, src)
 		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_power / 2
+		var/viewoffset = tilesize * zoom_provider.zoom_size / 2
 		switch(dir)
 			if(NORTH)
 				user.client.set_pixel_x(0)
@@ -373,7 +353,7 @@
 		return FALSE
 	return TRUE
 
-/obj/vehicle/walker/add_hardpoint(obj/item/hardpoint/HP, mob/user)
+/obj/vehicle/walker/add_hardpoint(obj/item/hardpoint/added, mob/user)
 	. = ..()
 	if(!.)
 		return
@@ -387,7 +367,7 @@
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(selected_group == SELECTED_GROUP_SPINAL)
-		handle_weapon_groups()
+		handle_weapon_groups(seats[VEHICLE_DRIVER])
 
 	if(!can_consume_energy(consume_energy_move))
 		return FALSE
@@ -403,8 +383,7 @@
 	if(!.)
 		return
 
-	if(zoom)
-		update_pixels(TRUE)
+	update_zoom_pixels()
 
 /obj/vehicle/walker/proc/recalculate_hardpoints()
 	move_delay = initial(move_delay)

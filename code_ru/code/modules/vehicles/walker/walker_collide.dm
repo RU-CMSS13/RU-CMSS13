@@ -21,9 +21,7 @@
 
 /obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason)
 	take_damage_type(damage, "blunt", collision_reason)
-	playsound(loc, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 19, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
-	setDir(turn(dir, collision_reason.dir), TRUE)
-	rotate_hardpoints(turning_angle(dir, collision_reason.dir), TRUE)
+	playsound(loc, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 49, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
 	var/turf/target = get_step(src, collision_reason.dir)
 	var/list/cached_interactions = list()
 	for(var/atom/movable/potential_atom in target)
@@ -33,11 +31,13 @@
 		if(istype(potential_atom, /obj/vehicle/walker))
 			cached_interactions += potential_atom
 
+	var/turn_angle = turning_angle(dir, collision_reason.dir)
 	Move(target)
+	rotate_hardpoints(turn_angle)
 	for(var/atom/movable/unlucky as anything in cached_interactions)
 		if(ismob(unlucky))
 			var/mob/living/unlucky_mob = unlucky
-			unlucky_mob.apply_damage(80, BRUTE)
+			unlucky_mob.apply_damage(damage / 3, BRUTE)
 			unlucky_mob.SetKnockDown(2 SECONDS)
 			continue
 		if(istype(unlucky, /obj/vehicle/walker))
