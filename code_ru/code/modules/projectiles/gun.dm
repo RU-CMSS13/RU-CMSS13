@@ -7,6 +7,8 @@
 	var/atom/gun_holder = null
 	var/mount_class = GUN_MOUNT_NO
 
+	var/charge_cost = 0
+
 	/// For gun holder
 	var/datum/callback/callback_can_fire
 	var/datum/callback/callback_can_stop_fire

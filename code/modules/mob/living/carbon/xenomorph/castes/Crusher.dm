@@ -94,6 +94,13 @@
 		vehicle_in_path.Collided(src)
 		. = FALSE
 
+//RUCM START
+	else if (istype(target, /obj/vehicle/walker))
+		var/obj/vehicle/walker/vessel_in_path = target
+		vessel_in_path.Collided(src)
+		. = FALSE
+//RUCM END
+
 	else if (istype(target, /obj/structure/machinery/m56d_hmg))
 		var/obj/structure/machinery/m56d_hmg/weapon_in_path = target
 		visible_message(SPAN_DANGER("[src] rams [weapon_in_path]!"), SPAN_XENODANGER("We ram [weapon_in_path]!"))

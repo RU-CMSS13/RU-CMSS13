@@ -14,9 +14,9 @@
 	opacity = FALSE
 	can_buckle = FALSE
 
-	move_delay = 12
-	move_max_momentum = 6
-	move_turn_momentum_loss_factor = 0.35
+	move_delay = 4
+	move_max_momentum = 9
+	move_turn_momentum_loss_factor = 0
 	move_momentum_build_factor = 2
 
 	hardpoints_allowed = list(
@@ -99,8 +99,8 @@
 	)
 	flags_atom = FPRINT|USES_HEARING
 
-	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
-	var/vehicle_faction = ""
+	var/consume_energy_move = 1
+	var/consume_energy_light = 2
 
 
 /obj/structure/walker_wreckage
@@ -117,8 +117,7 @@
 /obj/vehicle/walker/Initialize()
 	. = ..()
 
-	recalculate_legs()
-
+	recalculate_hardpoints()
 	START_PROCESSING(SSobj, src)
 
 /obj/vehicle/walker/Destroy(force)
@@ -128,26 +127,25 @@
 
 /obj/vehicle/walker/process()
 	if(light_state)
-		if(!can_consume_energy(4))
+		if(!can_consume_energy(consume_energy_light))
 			light_state = FALSE
 			switch_light_state(FALSE, TRUE)
 		else
-			consume_energy(4)
+			consume_energy(consume_energy_light)
 
 	if(zoom)
 		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
 		if(!zoom_provider)
 			zoom = FALSE
 			update_pixels(zoom)
-			return
-
-		var/zoom_power = zoom_provider.zoom_size
-		var/consumption = round(zoom_power * 0.5)
-		if(!can_consume_energy(consumption))
-			zoom = FALSE
-			update_pixels(zoom)
 		else
-			consume_energy(consumption)
+			var/zoom_power = zoom_provider.zoom_size
+			var/consumption = round(zoom_power * 0.5)
+			if(!can_consume_energy(consumption))
+				zoom = FALSE
+				update_pixels(zoom)
+			else
+				consume_energy(consumption)
 
 
 //////////////////////////////////////////////////////////////
@@ -184,8 +182,8 @@
 
 	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
 
-	if(user.client)
-		add_verb(user.client, verb_list)
+	if(user)
+		add_verb(user, verb_list)
 	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
 	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(client_login_interaction))
 
@@ -227,10 +225,17 @@
 
 	if(selected_zoom)
 		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(!zoom_provider)
+		if(!zoom_provider?.zoom_size)
+			zoom = FALSE
 			return
 
 		var/zoom_power = zoom_provider.zoom_size
+		var/consumption = round(zoom_power * 0.5)
+		if(!can_consume_energy(consumption))
+			zoom = FALSE
+			return
+
+		consume_energy(consumption)
 		user.client.change_view(zoom_power, src)
 		var/tilesize = 32
 		var/viewoffset = tilesize * zoom_power / 2
@@ -254,8 +259,13 @@
 		user.client.set_pixel_y(0)
 
 /obj/vehicle/walker/check_eye(mob/living/user)
-	if(user.body_position != STANDING_UP || get_dist(user,src) > 1 || user.is_mob_incapacitated())
+	if(stat == DEAD || get_dist(user, src) > 1)
 		user.unset_interaction()
+		return
+
+	if(user.is_mob_incapacitated())
+		visible_message(SPAN_WARNING("Warning, Pilot of [src] are incapacitated, required immediate medical assistance!"))
+		return
 
 /obj/vehicle/walker/MouseDrop_T(mob/target, mob/living/carbon/human/user)
 	. = ..()
@@ -281,6 +291,31 @@
 	user.drop_held_items()
 	user.set_interaction(src)
 
+/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, list/tts_heard_list)
+	var/mob/driver = seats[VEHICLE_DRIVER]
+	if(!driver)
+		return
+
+	if(driver != sourcemob)
+		driver.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list)
+		return
+
+	var/list/mob/listeners = get_mobs_in_view(9, src)
+	if(CONFIG_GET(string/tts_announce_voice))
+		tts_heard_list = list(list(), list(), list())
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, CONFIG_GET(string/tts_announce_voice), tts_heard_list)
+		listeners += driver
+
+	var/list/mob/langchat_long_listeners = list()
+	for(var/mob/listener as anything in listeners)
+		if(!ishumansynth_strict(listener) && !isobserver(listener))
+			listener.show_message("[src] broadcasts something, but you can't understand it.")
+			continue
+		tts_heard_list[1] += listener
+		listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
+		langchat_long_listeners += listener
+	langchat_long_speech(message, langchat_long_listeners, driver.get_default_language())
+
 
 //////////////////////////////////////////////////////////////
 
@@ -298,25 +333,30 @@
 		return FALSE
 	return TRUE
 
+/obj/vehicle/walker/add_hardpoint(obj/item/hardpoint/HP, mob/user)
+	. = ..()
+	if(!.)
+		return
+	recalculate_hardpoints()
+
 /obj/vehicle/walker/remove_hardpoint(obj/item/hardpoint/old, mob/user)
 	. = ..()
 	if(!.)
 		return
-
-	recalculate_legs()
+	recalculate_hardpoints()
 
 /obj/vehicle/walker/pre_movement(direction)
 	if(selected_group == SELECTED_GROUP_SPINAL)
 		handle_weapon_groups()
 
-	if(!can_consume_energy(1))
+	if(!can_consume_energy(consume_energy_move))
 		return FALSE
 
 	. = ..()
 	if(!.)
 		return
 
-	consume_energy(1)
+	consume_energy(consume_energy_move)
 
 /obj/vehicle/walker/try_rotate(deg)
 	. = ..()
@@ -326,23 +366,26 @@
 	if(zoom)
 		update_pixels(TRUE)
 
-/obj/vehicle/walker/proc/recalculate_legs()
+/obj/vehicle/walker/proc/recalculate_hardpoints()
 	move_delay = initial(move_delay)
 	move_max_momentum = initial(move_max_momentum)
 	move_momentum_build_factor = initial(move_momentum_build_factor)
 	move_turn_momentum_loss_factor = initial(move_turn_momentum_loss_factor)
 
-	for(var/obj/item/hardpoint/walker/leg/leggy in hardpoints)
+	var/cached_move_delay = 0
+	for(var/obj/item/hardpoint/walker/current in hardpoints)
+		cached_move_delay += current.weight
 		if(!health)
 			continue
-		move_delay -= leggy.move_delay
-		move_max_momentum -= leggy.move_max_momentum
-		move_momentum_build_factor -= leggy.move_momentum_build_factor
-		move_turn_momentum_loss_factor -= leggy.move_turn_momentum_loss_factor
+		move_delay -= current.move_delay
+		move_max_momentum -= current.move_max_momentum
+		move_momentum_build_factor -= current.move_momentum_build_factor
+		move_turn_momentum_loss_factor -= current.move_turn_momentum_loss_factor
 
 	if(move_delay == initial(move_delay))
 		next_move = INFINITY
 	else
+		move_delay += cached_move_delay
 		next_move = world.time + move_delay
 
 /obj/vehicle/walker/update_icon()
@@ -377,6 +420,10 @@
 			for(var/image/subimage as anything in hardpoint_image_list)
 				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
 		overlays += hardpoint_image
+
+/obj/vehicle/walker/proc/swith_visual_position(angle)
+	var/matrix/base = matrix()
+	apply_transform(base.Turn(angle), UPDATE_TRANSFORM_ANIMATION_TIME)
 
 
 //////////////////////////////////////////////////////////////
@@ -521,16 +568,21 @@
 			return
 
 	if(HAS_TRAIT(attacking_item, TRAIT_TOOL_CROWBAR) || ispowerclamp(attacking_item))
-		uninstall_hardpoint(attacking_item, user)
+		if(!seats[VEHICLE_DRIVER])
+			uninstall_hardpoint(attacking_item, user)
+			return
+
+		if(do_after(user, 5 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_GENERIC, src, INTERRUPT_MOVED) && seats[VEHICLE_DRIVER])
+			seats[VEHICLE_DRIVER].unset_interaction()
 		return
 
 	if(iswelder(attacking_item) || HAS_TRAIT(attacking_item, TRAIT_TOOL_WRENCH))
 		handle_repairs(attacking_item, user)
 		return
 
-	if(istype(attacking_item, /obj/item/fuel_cell/mecha_reactor))
-		var/obj/item/hardpoint/walker/reactor/mecha_reactor = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-		mecha_reactor.replace_fuel(attacking_item, user)
+	if(istype(attacking_item, /obj/item/fuel_cell/walker_reactor))
+		var/obj/item/hardpoint/walker/reactor/walker_reactor = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+		walker_reactor.replace_fuel(attacking_item, user)
 		return
 
 	var/list/mecha_hands = list()
@@ -601,26 +653,81 @@
 	xeno.visible_message(SPAN_DANGER("\The [xeno] tries to slash \the [src], however their attack seems to be deflected by some sort of field!"),
 	SPAN_DANGER("We try to slash \the [src], however our attack seems to be deflected by some sort of field!"))
 
+/obj/vehicle/walker/Collided(atom/A)
+	. = ..()
+
+	var/mob/living/carbon/xenomorph/crusher/crusher = A
+	if(!istype(crusher))
+		return
+	if(!crusher.throwing)
+		return
+	crusher_collision_result(250, crusher)
+
+/obj/vehicle/walker/handle_charge_collision(mob/living/carbon/xenomorph/xeno, datum/action/xeno_action/onclick/charger_charge/charger_ability)
+	crusher_collision_result(charger_ability.momentum * 20, xeno)
+	charger_ability.stop_momentum()
+
+/obj/vehicle/walker/proc/crusher_collision_result(damage, mob/living/carbon/xenomorph/crusher/crusher)
+	take_damage_type(damage, "blunt", crusher)
+	crusher.visible_message(SPAN_DANGER("[crusher] rams into [src] and skids to a halt!"), SPAN_XENOWARNING("We ram into [src] and skid to a halt!"))
+	playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
+	rotate_hardpoints(turning_angle(dir, crusher.dir))
+	Move(get_step(src, crusher.dir))
+	update_icon()
+
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	if(!energy_source)
+		return
+	energy_source.reboot_reactor(damage / 10)
+	swith_visual_position(90)
+	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0), damage / 10 - 2)
+
+/obj/vehicle/walker/bullet_act(obj/projectile/proj)
+	var/dam_type = "bullet"
+	var/damage = proj.damage
+	var/ammo_flags = proj.ammo?.flags_ammo_behavior | proj.projectile_override_flags
+
+	if(proj.runtime_iff_group && get_target_lock(proj.runtime_iff_group))
+		return
+
+	if(ammo_flags & AMMO_ANTISTRUCT|AMMO_ANTIVEHICLE)
+		damage = round(damage*ANTISTRUCT_DMG_MULT_TANK)
+	if(ammo_flags & AMMO_ACIDIC)
+		dam_type = "acid"
+
+	bullet_ping(proj)
+	take_damage_type(damage * (0.33 + proj.ammo.penetration/100), dam_type, proj.firer)
+
 
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/fuel_cell/mecha_reactor
+/obj/item/fuel_cell/walker_reactor
 	name = "Enriched Uranium Rod"
-	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy!"
+	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy! It's also rechargeable."
 
 	icon = 'code_ru/icons/obj/items/fuel_rod.dmi'
 	icon_state = "rod"
 
 	w_class = SIZE_HUGE
 
-	// ~40 minutes of work time under load
+	// ~30 minutes of work time under load
 	fuel_amount = 24000
 	max_fuel_amount = 24000
 
-/obj/item/fuel_cell/mecha_reactor/update_icon()
+/obj/item/fuel_cell/walker_reactor/update_icon()
 	return
 
+/datum/supply_packs/walker_reactor_fuel
+	name = "Enriched Uranium Fuel (x2)"
+	contains = list(
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+	)
+	cost = 20
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "Enriched Uranium Fuel crate"
+	group = "Vehicle Ammo"
 
 
 
@@ -698,105 +805,34 @@
 	else if(istype(obstacle, /obj/structure/fence))
 		var/obj/structure/fence/F = obstacle
 		F.visible_message(SPAN_DANGER("[src.name] smashes through [F]!"))
-		take_damage_type(5, "blunt", obstacle)
+		take_damage_type(5, "blunt")
 		F.health = 0
 		F.healthcheck()
 	else if(istype(obstacle, /obj/structure/surface/table))
 		var/obj/structure/surface/table/T = obstacle
 		T.visible_message(SPAN_DANGER("[src.name] crushes [T]!"))
-		take_damage_type(5, "blunt", obstacle)
+		take_damage_type(5, "blunt")
 		T.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/showcase))
 		var/obj/structure/showcase/S = obstacle
 		S.visible_message(SPAN_DANGER("[src.name] bulldozes over [S]!"))
-		take_damage_type(15, "blunt", obstacle)
+		take_damage_type(15, "blunt")
 		S.deconstruct(TRUE)
 	else if(istype(obstacle, /obj/structure/window/framed))
 		var/obj/structure/window/framed/W = obstacle
 		W.visible_message(SPAN_DANGER("[src.name] crashes through the [W]!"))
-		take_damage_type(20, "blunt", obstacle)
+		take_damage_type(20, "blunt")
 		W.shatter_window(1)
 	else if(istype(obstacle, /obj/structure/window_frame))
 		var/obj/structure/window_frame/WF = obstacle
 		WF.visible_message(SPAN_DANGER("[src.name] runs over the [WF]!"))
-		take_damage_type(20, "blunt", obstacle)
+		take_damage_type(20, "blunt")
 		WF.deconstruct()
 	else
 		..()
 
 
 
-
-//Differentiates between damage types from different bullets
-//Applies a linear transformation to bullet damage that will generally decrease damage done
-/obj/vehicle/walker/bullet_act(obj/projectile/P)
-	var/dam_type = "bullet"
-	var/damage = P.damage
-	var/ammo_flags = P.ammo?.flags_ammo_behavior | P.projectile_override_flags
-	var/penetration = P.ammo.penetration
-	var/firer = P.firer
-
-	//IFF bullets magically stop themselves short of hitting friendly vehicles,
-	//because both sentries and smartgun users keep trying to shoot through them
-	if(P.runtime_iff_group && get_target_lock(P.runtime_iff_group))
-		return
-
-	if(ammo_flags & AMMO_ANTISTRUCT|AMMO_ANTIVEHICLE)
-		// Multiplier based on tank railgun relationship, so might have to reconsider multiplier for AMMO_SIEGE in general
-		damage = round(damage*ANTISTRUCT_DMG_MULT_TANK)
-	if(ammo_flags & AMMO_ACIDIC)
-		dam_type = "acid"
-
-	bullet_ping(P)
-
-	take_damage_type(damage * (0.33 + penetration/100), dam_type, firer)
-
-	healthcheck()
-
-
-/obj/vehicle/walker/Collided(atom/A)
-	. = ..()
-
-	var/mob/living/carbon/xenomorph/crusher/crusher = A
-	if(istype(crusher))
-		if(!crusher.throwing)
-			return
-
-		if(health > 0)
-			take_damage_type(250, "blunt", crusher)
-			visible_message(SPAN_DANGER("\The [crusher] rams \the [src]!"))
-			Move(get_step(src, crusher.dir))
-		playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
-
-/obj/vehicle/walker/hear_talk(mob/living/sourcemob, message, verb = "says", datum/language/language, italics, list/tts_heard_list)
-	var/mob/driver = seats[VEHICLE_DRIVER]
-	if (driver == null)
-		return
-	else if (driver != sourcemob)
-		driver.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list)
-	else
-		var/list/mob/listeners = get_mobs_in_view(9,src)
-
-		var/list/mob/langchat_long_listeners = list()
-		listeners += driver
-		for(var/mob/listener in listeners)
-			if(!ishumansynth_strict(listener) && !isobserver(listener))
-				listener.show_message("[src] broadcasts something, but you can't understand it.")
-				continue
-			tts_heard_list[1] += listener
-			listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
-			langchat_long_listeners += listener
-		langchat_long_speech(message, langchat_long_listeners, driver.get_default_language())
-
-//to handle IFF bullets
-/obj/vehicle/walker/proc/get_target_lock(access_to_check)
-	if(isnull(access_to_check) || !vehicle_faction)
-		return FALSE
-
-	if(!islist(access_to_check))
-		return access_to_check == vehicle_faction
-
-	return vehicle_faction in access_to_check
 
 #undef WALKER_HARDPOIN_HEAD
 #undef WALKER_HARDPOIN_LEFT_HAND

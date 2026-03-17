@@ -157,7 +157,9 @@
 	)
 
 	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
+/* RUCM CHANGE
 	var/vehicle_faction = ""
+*/
 
 	//All the connected entrances sorted by tag
 	//Exits will be loaded by the interior manager and sorted by tag to match

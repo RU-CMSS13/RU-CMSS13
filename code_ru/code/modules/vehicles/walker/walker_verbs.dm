@@ -45,7 +45,7 @@ AND YOULL BE FINE!*/
 	switch_light_state(!light_state)
 
 /obj/vehicle/walker/switch_light_state(new_state, override)
-	if(!can_consume_energy(4) && !override)
+	if(!can_consume_energy(consume_energy_light) && !override)
 		return
 
 	. = ..()
@@ -118,7 +118,7 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	if(selected_group == SELECTED_GROUP_SPINAL || !can_consume_energy(2))
+	if(selected_group == SELECTED_GROUP_SPINAL)
 		return
 	zoom = !zoom
 	update_pixels(zoom)
@@ -140,8 +140,9 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	var/obj/item/hardpoint/walker/spinal/artilery/provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(!istype(provider))
+
+	var/obj/item/hardpoint/walker/provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(!provider?.motion_detector || !can_consume_energy(provider.motion_detector.detector_range))
 		return
 	provider.motion_detector.toggle_active(user, provider.motion_detector.active)
 

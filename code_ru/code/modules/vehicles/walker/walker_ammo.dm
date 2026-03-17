@@ -110,11 +110,11 @@
 	name = "machinegun bullet"
 	icon_state = "bullet"
 
-	accurate_range = 6
+	accurate_range = 1
 	max_range = 12
-	damage = 45
-	penetration= ARMOR_PENETRATION_TIER_5
-	accuracy = -HIT_ACCURACY_TIER_2
+	damage = 30
+	penetration = ARMOR_PENETRATION_TIER_5
+	accuracy = -HIT_ACCURACY_TIER_3
 
 /datum/ammo/bullet/walker/shotgun8g
 	name = "8 gauge buckshot shell"

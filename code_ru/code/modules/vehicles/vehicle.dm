@@ -58,6 +58,9 @@
 
 	var/move_on_turn = FALSE
 
+	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
+	var/vehicle_faction = ""
+
 
 //////////////////////////////////////////////////////////////
 
@@ -513,6 +516,20 @@
 
 /obj/vehicle/proc/get_dmg_multi()
 	return
+
+//to handle IFF bullets
+/obj/vehicle/proc/get_target_lock(access_to_check)
+	if(isnull(access_to_check) || !vehicle_faction)
+		return FALSE
+
+	if(!islist(access_to_check))
+		return access_to_check == vehicle_faction
+
+	return vehicle_faction in access_to_check
+
+
+//////////////////////////////////////////////////////////////
+
 
 /obj/item/hardpoint
 	var/max_health = 0

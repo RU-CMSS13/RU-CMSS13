@@ -9,9 +9,9 @@
 /obj/effect/essentials_set/walker/reactor
 	spawned_gear_list = list(
 		/obj/item/hardpoint/walker/reactor,
-		/obj/item/fuel_cell/mecha_reactor,
-		/obj/item/fuel_cell/mecha_reactor,
-		/obj/item/fuel_cell/mecha_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
 	)
 
 /obj/effect/essentials_set/walker/wm88

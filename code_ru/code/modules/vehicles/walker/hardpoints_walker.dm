@@ -23,12 +23,20 @@
 	disp_icon_state = "mech_part"
 
 	damage_multiplier = 0.75
-	material_per_repair = 1
-	repair_materials = list("plastic" = 0.05, "metal" = 0.1)
+	material_per_repair = 5
+	repair_materials = list("plastic" = 0.05, "metal" = 0.02)
 
 	health = 150
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
+
+	//Additional move delay for every hardpoint installed on mecha
+	var/weight = 0.5
+
+	var/move_delay = 0
+	var/move_max_momentum = 0
+	var/move_turn_momentum_loss_factor = 0
+	var/move_momentum_build_factor = 0
 
 	var/zoom_size = 0
 	var/obj/item/device/motiondetector/walker/motion_detector
@@ -45,12 +53,12 @@
 		QDEL_NULL(motion_detector)
 
 	if(owner)
-		var/obj/vehicle/walker/mecha = owner
-		if(mecha.zoom && zoom_size)
-			mecha.zoom = FALSE
-			mecha.update_pixels(mecha.zoom)
+		var/obj/vehicle/walker/vessel = owner
+		if(vessel.zoom && zoom_size)
+			vessel.zoom = FALSE
+			vessel.update_pixels(vessel.zoom)
 
-		mecha.hardpoints_by_slot[slot] = null
+		vessel.hardpoints_by_slot[slot] = null
 
 	. = ..()
 
@@ -67,21 +75,21 @@
 		. += "There is \a [mounted_gun] module installed on [src]."
 		. += mounted_gun.get_examine_text(user)
 
-/obj/item/hardpoint/walker/on_install(obj/vehicle/walker/mecha)
+/obj/item/hardpoint/walker/on_install(obj/vehicle/walker/vessel)
 	. = ..()
 
-	mecha.hardpoints_by_slot[slot] = src
-	if(!mecha.seats[VEHICLE_DRIVER])
+	vessel.hardpoints_by_slot[slot] = src
+	if(!vessel.seats[VEHICLE_DRIVER])
 		return
-	pilot_entered(mecha.seats[VEHICLE_DRIVER])
+	pilot_entered(vessel.seats[VEHICLE_DRIVER])
 
-/obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/mecha)
+/obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/vessel)
 	. = ..()
 
-	mecha.hardpoints_by_slot[slot] = null
-	if(!mecha.seats[VEHICLE_DRIVER])
+	vessel.hardpoints_by_slot[slot] = null
+	if(!vessel.seats[VEHICLE_DRIVER])
 		return
-	pilot_ejected(mecha.seats[VEHICLE_DRIVER])
+	pilot_ejected(vessel.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/get_origin_turf()
 	return get_turf(src)
@@ -128,8 +136,8 @@
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	if(mounted_gun)
-		var/obj/vehicle/walker/mecha = owner
-		if(slot in GROUPS_BY_ID[mecha.selected_group])
+		var/obj/vehicle/walker/vessel = owner
+		if(slot in GROUPS_BY_ID[vessel.selected_group])
 			mounted_gun.set_gun_user(user)
 	if(motion_detector)
 		motion_detector.iff_signal = user.faction
@@ -213,9 +221,9 @@
 	if(!owner.seats[VEHICLE_DRIVER])
 		return
 
-	var/obj/vehicle/walker/mecha = owner
-	if(slot in GROUPS_BY_ID[mecha.selected_group])
-		mounted_gun.set_gun_user(mecha.seats[VEHICLE_DRIVER])
+	var/obj/vehicle/walker/vessel = owner
+	if(slot in GROUPS_BY_ID[vessel.selected_group])
+		mounted_gun.set_gun_user(vessel.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/proc/remove_gun(mob/user)
 	QDEL_NULL(mounted_gun.callback_can_fire)
@@ -244,20 +252,20 @@
 /obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params)
 	if(!health)
 		return FALSE
-	var/obj/vehicle/walker/mecha = owner
-	if(!mecha.can_consume_energy(2))
+	var/obj/vehicle/walker/vessel = owner
+	if(!vessel.can_consume_energy(mounted_gun.charge_cost))
 		return FALSE
 	var/list/modifiers = params2list(params)
 	if(length(modifiers) && !check_modifiers(modifiers))
 		return FALSE
 	if(!in_firing_arc(object))
 		return FALSE
-	mecha.consume_energy(2)
+	vessel.consume_energy(mounted_gun.charge_cost)
 	return TRUE
 
 /obj/item/hardpoint/walker/proc/can_stop_fire(datum/source, atom/object, params)
-	var/obj/vehicle/walker/mecha = owner
-	if(!mecha.can_consume_energy(2) || !health)
+	var/obj/vehicle/walker/vessel = owner
+	if(!vessel.can_consume_energy(mounted_gun.charge_cost) || !health)
 		return TRUE
 	var/list/modifiers = params2list(params)
 	if(length(modifiers) && !check_modifiers(modifiers, TRUE))
@@ -278,7 +286,9 @@
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
 	damage_multiplier = 0.1
-	repair_materials = list("metal" = 0.5, "plasteel" = 0.1)
+	material_per_repair = 10
+
+	weight = 2
 
 	var/turned_on = TRUE
 	var/rebooting = FALSE
@@ -292,7 +302,7 @@
 	var/chance_of_malf = 10
 
 	var/list/reactor_sounds = list('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg')
-	var/obj/item/fuel_cell/mecha_reactor/fuel
+	var/obj/item/fuel_cell/walker_reactor/fuel
 
 /obj/item/hardpoint/walker/reactor/Initialize()
 	. = ..()
@@ -380,15 +390,15 @@
 		to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("It was for sure bad idea to turn on [src] in this state."))
 		return
 
-	rebooting = TRUE
-	addtimer(VARSET_CALLBACK(src, turned_on, 1), reboot_time, TIMER_DELETE_ME)
-	addtimer(VARSET_CALLBACK(src, rebooting, 0), reboot_time, TIMER_DELETE_ME)
-
-	if(owner.light_state)
-		addtimer(CALLBACK(owner, TYPE_PROC_REF(/obj/vehicle/walker, switch_light_state), TRUE, TRUE), reboot_time, TIMER_DELETE_ME)
+	reboot_reactor(reboot_time)
 
 	playsound(get_turf(src), pick(reactor_sounds), 25, 1)
 	to_chat(owner.seats[VEHICLE_DRIVER], SPAN_WARNING("Booting up reactor, it might take you to [reboot_time / 10] seconds."))
+
+/obj/item/hardpoint/walker/reactor/proc/reboot_reactor(time_for_reboot)
+	rebooting = TRUE
+	addtimer(VARSET_CALLBACK(src, turned_on, TRUE), time_for_reboot, TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_for_reboot, TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/reactor/proc/replace_fuel(obj/new_fuel, mob/user)
 	if(user.skills.get_skill_level(SKILL_POWERLOADER) < SKILL_POWERLOADER_MASTER)
@@ -419,14 +429,8 @@
 
 /obj/item/hardpoint/walker/reactor/proc/short_circuit_reactor()
 	turned_on = FALSE
-	rebooting = TRUE
 	var/time_till_reboot = rand(5, 10)
-	addtimer(VARSET_CALLBACK(src, turned_on, 1), time_till_reboot, TIMER_DELETE_ME)
-	addtimer(VARSET_CALLBACK(src, rebooting, 0), time_till_reboot, TIMER_DELETE_ME)
-
-	if(owner.light_state)
-		owner.switch_light_state(FALSE, TRUE)
-		addtimer(CALLBACK(owner, TYPE_PROC_REF(/obj/vehicle/walker, switch_light_state), TRUE, TRUE), time_till_reboot, TIMER_DELETE_ME)
+	reboot_reactor(time_till_reboot)
 
 	owner.visible_message(SPAN_WARNING("[src] burst in smoke! [owner] turns off due to short circuit."))
 	if(owner.seats[VEHICLE_DRIVER])
@@ -436,6 +440,8 @@
 /obj/item/hardpoint/walker/reactor/enhanced
 	name = "Enhanced Mecha Reactor"
 	desc = "Self sufficient reactor for power supply of mecha equipment."
+
+	weight = 1
 
 
 //////////////////////////////////////////////////////////////
@@ -475,21 +481,14 @@ handle_seated_take_damage
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	destruction_on_zero = FALSE
 
-	var/move_delay = 4
-	var/move_max_momentum = 2
-	var/move_turn_momentum_loss_factor = 0.25
-	var/move_momentum_build_factor = 0.4
+	move_delay = 2
+	move_max_momentum = 4
+	move_turn_momentum_loss_factor = 0.5
+	move_momentum_build_factor = 0.5
 
-/obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/mecha)
-	mecha.recalculate_legs()
+/obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/vessel)
+	vessel.recalculate_hardpoints()
 
-/obj/item/hardpoint/walker/leg/on_install(obj/vehicle/walker/mecha)
-	. = ..()
-
-	if(!health)
-		return
-
-	mecha.recalculate_legs()
 
 /obj/item/hardpoint/walker/leg/left
 	name = "Left Mecha Leg"
@@ -518,9 +517,11 @@ handle_seated_take_damage
 	slot = WALKER_HARDPOIN_SPINAL
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
+	weight = 1
+
 /obj/item/hardpoint/walker/spinal/powerful_cooling
 	name = "Active Mecha Cooling"
-	desc = "This very powerful cooling can take twice as much heat out of system! Allows do actions much faster."
+	desc = "This very powerful cooling can take twice as much heat out of system! Allows do actions much faster, however consume a lot of energy."
 
 
 /obj/item/hardpoint/walker/spinal/artilery
@@ -554,18 +555,20 @@ handle_seated_take_damage
 		turn_off(null, TRUE)
 		return FALSE
 
-	var/obj/vehicle/walker/mecha = hardpoint_holder.owner
-	if(!mecha.can_consume_energy(20))
+	var/obj/vehicle/walker/vessel = hardpoint_holder.owner
+	if(!vessel.can_consume_energy(detector_range))
 		turn_off(null, TRUE)
 		return FALSE
 
-	mecha.consume_energy(20)
+	vessel.consume_energy(detector_range)
 	. = ..()
 
 
 /obj/item/hardpoint/walker/spinal/tactical_missile
 	name = "M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\""
 	desc = "\"Special Package Deliver System\" includes a pair of heavy optics with laser guidance system, and bunker buster rockets. Developen in 2123 for assistance in destructing illigal establishments."
+
+	weight = 1.5
 
 	zoom_size = 10
 	mount_class = GUN_MOUNT_NO
@@ -604,8 +607,11 @@ handle_seated_take_damage
 	name = "F35 Resonation Projecting System"
 	desc = "This modification grants you unvulnereability, as long as you have unlimited source of energy."
 
-	var/damage_capacity = 200
-	var/max_damage_capacity = 200
+	weight = 2.5
+
+	var/damage_capacity = 400
+	var/max_damage_capacity = 400
+	var/heal_per_time = 4
 	var/cooldown_end_time = 0
 	var/delay_between_hits = 10 SECONDS
 
@@ -619,11 +625,12 @@ handle_seated_take_damage
 
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/hardpoint/walker/spinal/shield/process()
+/obj/item/hardpoint/walker/spinal/shield/process(delta_time)
 	if(cooldown_end_time > world.time)
 		return
 
-	damage_capacity = min(damage_capacity + 2, max_damage_capacity)
+	cooldown_end_time = 0
+	damage_capacity = min(damage_capacity + heal_per_time * delta_time, max_damage_capacity)
 
 /obj/item/hardpoint/walker/spinal/shield/tgui_additional_data()
 	. = ..()
@@ -634,11 +641,12 @@ handle_seated_take_damage
 	data["current_value"] = damage_capacity
 	data["max_value"] = max_damage_capacity
 
-	data = list()
-	.["hardpoint_data_additional"] += list(data)
-	data["value_name"] = "Cooldown"
-	data["current_value"] = cooldown_end_time - world.time / 10
-	data["max_value"] = delay_between_hits / 10
+	if(cooldown_end_time)
+		data = list()
+		.["hardpoint_data_additional"] += list(data)
+		data["value_name"] = "Cooldown"
+		data["current_value"] = (cooldown_end_time - world.time) / 10
+		data["max_value"] = delay_between_hits / 10
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
 	cooldown_end_time = world.time + delay_between_hits
@@ -669,7 +677,7 @@ handle_seated_take_damage
 
 /obj/item/hardpoint/walker/hand
 	name = "Mecha Hand"
-	desc = "Allows mecha to hold weapons."
+	desc = "Allows mecha to hold weapons. You can use a screwdriver to remove any equipment installed in this slot."
 
 	hdpt_layer = HDPT_LAYER_SUPPORT
 	firing_arc = 120
@@ -740,6 +748,8 @@ handle_seated_take_damage
 
 	health = 500
 	max_health = 500
+
+	weight = 2.5
 
 /obj/item/hardpoint/walker/armor/paladin
 	name = "Paladin Armor"

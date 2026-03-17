@@ -45,10 +45,12 @@
 
 	mount_class = GUN_MOUNT_MECHA
 
+	charge_cost = 6
+
 /obj/item/weapon/gun/mounted/mecha_smartgun/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_SMG)
+	set_fire_delay(FIRE_DELAY_TIER_12)
 
 	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
 	fa_max_scatter = SCATTER_AMOUNT_TIER_9
@@ -84,17 +86,17 @@
 
 	mount_class = GUN_MOUNT_MECHA
 
+	charge_cost = 2
+
 /obj/item/weapon/gun/mounted/mecha_hmg/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_12)
+	set_fire_delay(FIRE_DELAY_TIER_LMG)
 
 	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
 	fa_max_scatter = SCATTER_AMOUNT_TIER_9
 
-	accuracy_mult += HIT_ACCURACY_MULT_TIER_1
-
-	scatter = SCATTER_AMOUNT_TIER_6
+	scatter = SCATTER_AMOUNT_TIER_3
 	recoil = RECOIL_AMOUNT_TIER_3
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
@@ -116,6 +118,8 @@
 	start_semiauto = FALSE
 
 	mount_class = GUN_MOUNT_MECHA
+
+	charge_cost = 10
 
 	var/basic_fire_delay = FIRE_DELAY_TIER_1 + FIRE_DELAY_TIER_8
 	var/overheat_reset_cooldown = 3 SECONDS
@@ -192,7 +196,7 @@
 		new steam_effect(T)
 		var/damage = overheat_self_destruction_rate * overheat
 		var/obj/item/hardpoint/walker/hand = gun_holder
-		hand.owner.take_damage_type(damage, "abstract")
+		hand.owner.take_damage_type(damage, "abstract", null, hand)
 	else if(overheat < overheat_upper_limit)
 		overheat += overheat_rate
 	set_fire_delay(basic_fire_delay - overheat)
@@ -246,6 +250,8 @@
 	fire_sound = list('sound/weapons/gun_type23.ogg')
 
 	mount_class = GUN_MOUNT_MECHA
+
+	charge_cost = 4
 
 /obj/item/weapon/gun/mounted/mecha_shotgun8g/set_gun_config_values()
 	. = ..()
@@ -360,6 +366,8 @@
 
 	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
 	mount_class = GUN_MOUNT_MECHA
+
+	charge_cost = 150
 
 	var/f_aiming_time = 2 SECONDS
 	var/aiming = FALSE
@@ -484,3 +492,5 @@
 	fire_sound = list('sound/weapons/gun_flamethrower2.ogg')
 
 	mount_class = GUN_MOUNT_MECHA
+
+	charge_cost = 1
