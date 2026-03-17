@@ -289,16 +289,38 @@
 		current = broadcastingcamera.linked_cam
 		SEND_SIGNAL(src, COMSIG_CAMERA_SET_TARGET, broadcastingcamera.linked_cam, broadcastingcamera.linked_cam.view_range, broadcastingcamera.linked_cam.view_range)
 
+/* RUCM CHANGE
 /obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_talk(obj/item/camera, mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, show_message_above_tv = FALSE)
+*/
+//RUCM START
+/obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_talk(obj/item/camera, mob/living/sourcemob, message, verb = "says", datum/language/language, italics = FALSE, list/tts_heard_list, show_message_above_tv = FALSE)
+//RUCM END
 	SIGNAL_HANDLER
 	if(inoperable())
 		return
 	if(show_message_above_tv)
+/* RUCM CHANGE
 		langchat_speech(message, get_mobs_in_view(7, src), language, sourcemob.langchat_color, FALSE, LANGCHAT_FAST_POP, list(sourcemob.langchat_styles))
+*/
+//RUCM START
+		var/list/mobs_in_view = get_mobs_in_view(7, src)
+		for(var/mob/M in langchat_listeners)
+			if(!M.ear_deaf && M.say_understands(src, language))
+				tts_heard_list[2] += mobs_in_view
+		langchat_speech(message, mobs_in_view, language, sourcemob.langchat_color, FALSE, LANGCHAT_FAST_POP, list(sourcemob.langchat_styles))
+//RUCM END
 	for(var/datum/weakref/user_ref in concurrent_users)
 		var/mob/user = user_ref.resolve()
+//RUCM START
+		if(!user.ear_deaf && user.say_understands(sourcemob, language))
+			tts_heard_list[2] += user
+			if(user?.client?.prefs && !user.client.prefs.lang_chat_disabled)
+				sourcemob.langchat_display_image(user)
+//RUCM END
+/* RUCM CHANGE
 		if(user?.client?.prefs && !user.client.prefs.lang_chat_disabled && !user.ear_deaf && user.say_understands(sourcemob, language))
 			sourcemob.langchat_display_image(user)
+*/
 
 /obj/structure/machinery/computer/cameras/wooden_tv/broadcast/proc/transfer_emote(obj/item/camera, mob/living/sourcemob, emote, audible = FALSE, show_message_above_tv = FALSE)
 	SIGNAL_HANDLER
