@@ -74,7 +74,6 @@
 	)
 
 	var/list/verb_list = list(
-		/obj/vehicle/walker/proc/exit_walker,
 		/obj/vehicle/walker/proc/toggle_lights,
 		/obj/vehicle/walker/proc/toggle_zoom,
 		/obj/vehicle/walker/proc/eject_magazine,
@@ -102,6 +101,10 @@
 	var/consume_energy_move = 1
 	var/consume_energy_light = 2
 
+	var/leg_pixel_y = 0
+	var/legless_pixel_y = -22
+	var/override_pixel_y = 0
+
 
 /obj/structure/walker_wreckage
 	name = "CW13 wreckage"
@@ -113,6 +116,33 @@
 	opacity = FALSE
 	pixel_x = -17
 
+/obj/effect/vehicle_spawner/walker/prebuild
+	var/list/hardpoints = list(
+		/obj/item/hardpoint/walker/hand/left,
+		/obj/item/hardpoint/walker/hand/right,
+		/obj/item/hardpoint/walker/leg/left,
+		/obj/item/hardpoint/walker/leg/right,
+		/obj/item/hardpoint/walker/reactor,
+	)
+
+/obj/effect/vehicle_spawner/walker/prebuild/Initialize()
+	. = ..()
+	spawn_vehicle()
+	qdel(src)
+
+/obj/effect/vehicle_spawner/walker/prebuild/spawn_vehicle()
+	var/obj/vehicle/walker/vessel = new (loc)
+	handle_direction(vessel)
+	load_hardpoints(vessel)
+	vessel.update_icon()
+
+/obj/effect/vehicle_spawner/walker/prebuild/load_hardpoints(obj/vehicle/walker/vessel)
+	for(var/hardpoint in hardpoints)
+		vessel.add_hardpoint(new hardpoint)
+
+
+//////////////////////////////////////////////////////////////
+
 
 /obj/vehicle/walker/Initialize()
 	. = ..()
@@ -122,6 +152,13 @@
 
 /obj/vehicle/walker/Destroy(force)
 	STOP_PROCESSING(SSobj, src)
+
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	if(energy_source.reactor_state == VEHICLE_REACTOR_CRITICAL)
+		energy_source.meltdown()
+
+	if(seats[VEHICLE_DRIVER])
+		seats[VEHICLE_DRIVER].unset_interaction()
 
 	. = ..()
 
@@ -182,9 +219,10 @@
 
 	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
 
-	if(user)
-		add_verb(user, verb_list)
-	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION), PROC_REF(exit_interaction))
+	add_verb(user, verb_list)
+	if(user.client)
+		add_verb(user.client, verb_list)
+	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH), PROC_REF(exit_interaction))
 	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(client_login_interaction))
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
@@ -195,6 +233,7 @@
 	SIGNAL_HANDLER
 
 	user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
+	add_verb(user.client, verb_list)
 
 /obj/vehicle/walker/on_unset_interaction(mob/living/user)
 	remove_action(user, /datum/action/human_action/mg_exit)
@@ -209,10 +248,11 @@
 	user.setDir(dir)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
 
-	if(user)
-		remove_verb(user, verb_list)
+	remove_verb(user, verb_list)
+	if(user.client)
+		remove_verb(user.client, verb_list)
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
-	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_LIVING_SET_BODY_POSITION, COMSIG_MOB_LOGIN))
+	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_MOB_LOGIN))
 
 	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.pilot_ejected(user)
@@ -391,10 +431,11 @@
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
-	if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
-		animate(src, pixel_y = 0, time = 10)
-	else
-		animate(src, pixel_y = -22, time = 10)
+	if(!override_pixel_y)
+		if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
+			animate(src, pixel_y = leg_pixel_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
+		else
+			animate(src, pixel_y = legless_pixel_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
 
 	overlays += image(icon = icon, icon_state = "[icon_state]_effect", dir = dir)
 	switch(floor((health / max_health) * 100))
@@ -421,9 +462,11 @@
 				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
 		overlays += hardpoint_image
 
-/obj/vehicle/walker/proc/swith_visual_position(angle)
+/obj/vehicle/walker/proc/swith_visual_position(angle, pixel_shift)
 	var/matrix/base = matrix()
 	apply_transform(base.Turn(angle), UPDATE_TRANSFORM_ANIMATION_TIME)
+	override_pixel_y = pixel_shift
+	animate(src, pixel_y = pixel_shift, time = UPDATE_TRANSFORM_ANIMATION_TIME)
 
 
 //////////////////////////////////////////////////////////////
@@ -485,14 +528,17 @@
 	. = TRUE
 	handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
 
-	if(!attacked_hardpoint)
+	if(!attacked_hardpoint?.can_take_damage())
 		damages_applied[WALKER_DAMAGE_TOTAL] += damages_applied[WALKER_DAMAGE_REMAINING]
 		health = max(0, health - damages_applied[WALKER_DAMAGE_REMAINING])
 
 	to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
 	if(attacker)
-		var/mob/M = attacker
-		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage from [M] ([M.client ? M.client.ckey : "disconnected"]).")
+		var/attacker_text = "[attacker]"
+		if(ismob(attacker))
+			var/mob/M = attacker
+			attacker_text += " ([M.client ? M.client.ckey : "disconnected"])"
+		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage from [attacker_text].")
 	else
 		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage.")
 
@@ -534,7 +580,7 @@
 	if(isxeno(attacker))
 		user.attack_alien(attacker)
 	else
-		user.apply_armoured_damage(damage, ARMOR_MELEE, type == BURN ? BURN : BRUTE, null, 20)
+		user.apply_damage(damage, type == BURN ? BURN : BRUTE)
 
 /obj/vehicle/walker/get_dmg_multi(type)
 	if(!dmg_multipliers.Find(type))
@@ -652,35 +698,6 @@
 	playsound(xeno, 'sound/weapons/alien_claw_swipe.ogg', 25, 1)
 	xeno.visible_message(SPAN_DANGER("\The [xeno] tries to slash \the [src], however their attack seems to be deflected by some sort of field!"),
 	SPAN_DANGER("We try to slash \the [src], however our attack seems to be deflected by some sort of field!"))
-
-/obj/vehicle/walker/Collided(atom/A)
-	. = ..()
-
-	var/mob/living/carbon/xenomorph/crusher/crusher = A
-	if(!istype(crusher))
-		return
-	if(!crusher.throwing)
-		return
-	crusher_collision_result(250, crusher)
-
-/obj/vehicle/walker/handle_charge_collision(mob/living/carbon/xenomorph/xeno, datum/action/xeno_action/onclick/charger_charge/charger_ability)
-	crusher_collision_result(charger_ability.momentum * 20, xeno)
-	charger_ability.stop_momentum()
-
-/obj/vehicle/walker/proc/crusher_collision_result(damage, mob/living/carbon/xenomorph/crusher/crusher)
-	take_damage_type(damage, "blunt", crusher)
-	crusher.visible_message(SPAN_DANGER("[crusher] rams into [src] and skids to a halt!"), SPAN_XENOWARNING("We ram into [src] and skid to a halt!"))
-	playsound(loc, 'code_ru/sound/vehicle/walker/mecha_crusher.ogg', 35)
-	rotate_hardpoints(turning_angle(dir, crusher.dir))
-	Move(get_step(src, crusher.dir))
-	update_icon()
-
-	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	if(!energy_source)
-		return
-	energy_source.reboot_reactor(damage / 10)
-	swith_visual_position(90)
-	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0), damage / 10 - 2)
 
 /obj/vehicle/walker/bullet_act(obj/projectile/proj)
 	var/dam_type = "bullet"
@@ -849,3 +866,7 @@
 #undef SELECTED_GROUP_HANDS
 #undef SELECTED_GROUP_SPINAL
 #undef GROUPS_BY_ID
+
+#undef VEHICLE_REACTOR_FINE
+#undef VEHICLE_REACTOR_DAMAGE
+#undef VEHICLE_REACTOR_CRITICAL

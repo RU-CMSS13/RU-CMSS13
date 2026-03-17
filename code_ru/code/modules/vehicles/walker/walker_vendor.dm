@@ -94,6 +94,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("F40 UT-Napthal Canister", 4, /obj/item/ammo_magazine/flamer_tank/walker, null, VENDOR_ITEM_REGULAR),
 	list("F40 UT-Napthal B-type Canister", 6, /obj/item/ammo_magazine/flamer_tank/walker/btype, null, VENDOR_ITEM_REGULAR),
 	list("M2558 Tactical Laser-Guided Rocket", 4, /obj/item/ammo_magazine/rocket/brute/tactical, null, VENDOR_ITEM_REGULAR),
+	list("M2558 Tactical AP Laser-Guided Rocket", 2, /obj/item/ammo_magazine/rocket/ap/tactical, null, VENDOR_ITEM_REGULAR),
 	))
 
 

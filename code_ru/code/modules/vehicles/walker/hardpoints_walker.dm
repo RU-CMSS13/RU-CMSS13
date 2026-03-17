@@ -147,6 +147,9 @@
 		return
 	mounted_gun.set_gun_user(null)
 
+/obj/item/hardpoint/walker/proc/custom_action(mob/user)
+	return
+
 
 //////////////////////////////////////////////////////////////
 
@@ -358,7 +361,7 @@
 		return
 
 	if(owner)
-		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], seems like it can EXPLODE any time soon."))
+		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], it can EXPLODE any time soon."))
 	count_down = TRUE
 	meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
@@ -611,26 +614,29 @@ handle_seated_take_damage
 
 	var/damage_capacity = 400
 	var/max_damage_capacity = 400
-	var/heal_per_time = 4
-	var/cooldown_end_time = 0
+	var/capacity_recover_rate = 5
+	var/shield_color = "#527eec"
+
+	var/cooldown_timer_id = null
 	var/delay_between_hits = 10 SECONDS
 
-/obj/item/hardpoint/walker/spinal/shield/Initialize()
-	. = ..()
-
-	START_PROCESSING(SSobj, src)
-
 /obj/item/hardpoint/walker/spinal/shield/Destroy()
-	. = ..()
-
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/hardpoint/walker/spinal/shield/process(delta_time)
-	if(cooldown_end_time > world.time)
-		return
+	. = ..()
 
-	cooldown_end_time = 0
-	damage_capacity = min(damage_capacity + heal_per_time * delta_time, max_damage_capacity)
+
+/obj/item/hardpoint/walker/spinal/shield/on_install(obj/vehicle/walker/vessel)
+	update_filter()
+	START_PROCESSING(SSobj, src)
+
+	. = ..()
+
+/obj/item/hardpoint/walker/spinal/shield/on_uninstall(obj/vehicle/walker/vessel)
+	vessel.remove_filter("spinal_shield")
+	STOP_PROCESSING(SSobj, src)
+
+	. = ..()
 
 /obj/item/hardpoint/walker/spinal/shield/tgui_additional_data()
 	. = ..()
@@ -641,34 +647,126 @@ handle_seated_take_damage
 	data["current_value"] = damage_capacity
 	data["max_value"] = max_damage_capacity
 
-	if(cooldown_end_time)
+	if(cooldown_timer_id)
 		data = list()
 		.["hardpoint_data_additional"] += list(data)
 		data["value_name"] = "Cooldown"
-		data["current_value"] = (cooldown_end_time - world.time) / 10
-		data["max_value"] = delay_between_hits / 10
+		data["current_value"] = timeleft(cooldown_timer_id) / 10
+		data["max_value"] = delay_between_hits * 6 / 10
+
+/obj/item/hardpoint/walker/spinal/shield/process(delta_time)
+	var/obj/vehicle/walker/vessel = owner
+	if(damage_capacity == max_damage_capacity)
+		return
+
+	var/energy_required = ceil(damage_capacity / (capacity_recover_rate * 10))
+	if(!vessel.can_consume_energy(energy_required))
+		damage_capacity = max(damage_capacity - capacity_recover_rate, 0)
+		return
+
+	vessel.consume_energy(energy_required)
+	if(timeleft(cooldown_timer_id))
+		return
+
+	var/damage_to_recover = min(capacity_recover_rate * delta_time, max_damage_capacity - damage_capacity)
+	if(!vessel.can_consume_energy(damage_to_recover * 2))
+		return
+	vessel.consume_energy(damage_to_recover * 2)
+
+	damage_capacity += damage_to_recover
+	update_filter()
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
-	cooldown_end_time = world.time + delay_between_hits
+	stop_recovering(world.time + delay_between_hits)
 	if(!damage_capacity)
 		return FALSE
 
+	var/obj/vehicle/walker/vessel = owner
+	if(!vessel.can_consume_energy(damages_applied[2]))
+		return FALSE
+
+	vessel.consume_energy(damages_applied[2])
 	damage_capacity -= damages_applied[2]
 	if(damage_capacity < 0)
 		damage_capacity = 0
-		cooldown_end_time = world.time + delay_between_hits * 6
-		owner.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [owner]. Seems it got disabled for sufficient time!"))
-		if(owner.seats[VEHICLE_DRIVER])
-			to_chat(owner.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [delay_between_hits / 10] seconds"))
+		vessel.remove_filter("spinal_shield")
+		stop_recovering(world.time + delay_between_hits * 6)
+
+		vessel.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [vessel]. Seems it got disabled for sufficient time!"))
+		if(vessel.seats[VEHICLE_DRIVER])
+			to_chat(vessel.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [delay_between_hits / 10] seconds"))
 	else
-		owner.visible_message(SPAN_WARNING("Arc of sparks coming out from aura around [owner], seems like reflecting an attack."))
+		update_filter()
+		vessel.visible_message(SPAN_WARNING("Arc of sparks coming out from aura around [vessel], seems like reflecting an attack."))
 	return TRUE
+
+/obj/item/hardpoint/walker/spinal/shield/proc/resume_recovering()
+	START_PROCESSING(SSobj, src)
+
+/obj/item/hardpoint/walker/spinal/shield/proc/stop_recovering(time_to_resume)
+	if(time_to_resume)
+		cooldown_timer_id = addtimer(CALLBACK(src, PROC_REF(resume_recovering)), time_to_resume, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+
+/obj/item/hardpoint/walker/spinal/shield/proc/update_filter()
+	owner.add_filter("spinal_shield", 1, list("type" = "outline", "color" = shield_color, "size" = damage_capacity / max_damage_capacity * 2))
 
 
 /obj/item/hardpoint/walker/spinal/jetpack
 	name = "Mecha Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
+	var/fuel = 200
+	var/fuel_max = 200
+	var/fuel_recover_rate = 2
+
+	var/flying = FALSE
+	var/fuel_consumption_rate = 5
+
+/obj/item/hardpoint/walker/spinal/jetpack/Destroy()
+	STOP_PROCESSING(SSobj, src)
+
+	. = ..()
+
+
+/obj/item/hardpoint/walker/spinal/jetpack/on_install(obj/vehicle/walker/vessel)
+	START_PROCESSING(SSobj, src)
+
+	. = ..()
+
+/obj/item/hardpoint/walker/spinal/jetpack/on_uninstall(obj/vehicle/walker/vessel)
+	STOP_PROCESSING(SSobj, src)
+
+	. = ..()
+
+/obj/item/hardpoint/walker/spinal/jetpack/tgui_additional_data()
+	. = ..()
+
+	var/list/data = list()
+	.["hardpoint_data_additional"] += list(data)
+	data["value_name"] = "Fuel"
+	data["current_value"] = fuel
+	data["max_value"] = fuel_max
+
+/obj/item/hardpoint/walker/spinal/jetpack/process(delta_time)
+	var/obj/vehicle/walker/vessel = owner
+	var/fuel_to_recover = min(fuel_recover_rate * delta_time, fuel_max - fuel)
+	if(!fuel_to_recover || !vessel.can_consume_energy(fuel_to_recover * 2))
+		return
+	vessel.consume_energy(fuel_to_recover * 2)
+
+	fuel += fuel_to_recover
+
+/obj/item/hardpoint/walker/spinal/jetpack/proc/use_fuel(amount)
+	if(fuel < amount)
+		return FALSE
+	fuel -= amount
+	return TRUE
+
+/obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user)
+	if(!use_fuel(fuel_consumption_rate))
+		return FALSE
+
+	owner.visible_message(SPAN_WARNING("[owner] ignites [src] nozzles and lifts up in the sky, watch out for above."))
 
 
 
@@ -814,8 +912,3 @@ handle_seated_take_damage
 
 
 //////////////////////////////////////////////////////////////
-
-
-#undef VEHICLE_REACTOR_FINE
-#undef VEHICLE_REACTOR_DAMAGE
-#undef VEHICLE_REACTOR_CRITICAL

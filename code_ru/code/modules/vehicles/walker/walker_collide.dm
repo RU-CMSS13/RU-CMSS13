@@ -3,3 +3,50 @@
 		A.last_bumped = world.time
 		A.Collided(src)
 	return A.handle_vehicle_bump(src)
+
+/obj/vehicle/walker/Collided(atom/A)
+	. = ..()
+
+	var/mob/living/carbon/xenomorph/crusher/crusher = A
+	if(!istype(crusher))
+		return
+	if(!crusher.throwing)
+		return
+	collision_result(250, crusher)
+
+/obj/vehicle/walker/handle_charge_collision(mob/living/carbon/xenomorph/xeno, datum/action/xeno_action/onclick/charger_charge/charger_ability)
+	xeno.visible_message(SPAN_DANGER("[xeno] rams into [src] and skids to a halt!"), SPAN_XENOWARNING("We ram into [src] and skid to a halt!"))
+	collision_result(charger_ability.momentum * 20, xeno)
+	charger_ability.stop_momentum()
+
+/obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason)
+	take_damage_type(damage, "blunt", collision_reason)
+	playsound(loc, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 19, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
+	setDir(turn(dir, collision_reason.dir), TRUE)
+	rotate_hardpoints(turning_angle(dir, collision_reason.dir), TRUE)
+	var/turf/target = get_step(src, collision_reason.dir)
+	var/list/cached_interactions = list()
+	for(var/atom/movable/potential_atom in target)
+		if(ismob(potential_atom))
+			cached_interactions += potential_atom
+			continue
+		if(istype(potential_atom, /obj/vehicle/walker))
+			cached_interactions += potential_atom
+
+	Move(target)
+	for(var/atom/movable/unlucky as anything in cached_interactions)
+		if(ismob(unlucky))
+			var/mob/living/unlucky_mob = unlucky
+			unlucky_mob.apply_damage(80, BRUTE)
+			unlucky_mob.SetKnockDown(2 SECONDS)
+			continue
+		if(istype(unlucky, /obj/vehicle/walker))
+			var/obj/vehicle/walker/unlucky_vessel = unlucky
+			unlucky_vessel.collision_result(damage, src)
+
+	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+	if(!energy_source)
+		return
+	energy_source.reboot_reactor(damage / 10)
+	swith_visual_position(90, -20)
+	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0, 0), damage / 10 - 2, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)

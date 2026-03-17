@@ -10,24 +10,6 @@
 		return
 AND YOULL BE FINE!*/
 
-/obj/vehicle/walker/proc/exit_walker()
-	set name = "Eject"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
-
-	user.unset_interaction()
-
-
-//////////////////////////////////////////////////////////////
-
 
 /obj/vehicle/walker/proc/toggle_lights()
 	set name = "Lights On/Off"
