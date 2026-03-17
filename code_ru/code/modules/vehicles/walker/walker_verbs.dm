@@ -110,6 +110,53 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/proc/move_z_up()
+	set name = "Move UP"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	if(flags_atom & NO_ZFALL)
+		var/turf/above = SSmapping.get_turf_above(loc)
+		if(istype(above, /turf/open_space))
+			visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift it of the ground."))
+			forceMove(above)
+		else
+			to_chat(user, SPAN_WARNING("Seems there no free space above us!"))
+
+
+/obj/vehicle/walker/proc/move_z_down()
+	set name = "Move Down"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	if(flags_atom & NO_ZFALL)
+		if(istype(loc, /turf/open_space))
+			var/turf/below = SSmapping.get_turf_below(loc)
+			visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift it of the ground."))
+			forceMove(below)
+		else
+			to_chat(user, SPAN_WARNING("Seems there no free space below us!"))
+
+
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/walker/proc/switch_weapons()
 	set name = "Switch Weapons Group"
 	set category = "Vehicle"

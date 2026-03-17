@@ -28,7 +28,7 @@
 		if(ismob(potential_atom))
 			cached_interactions += potential_atom
 			continue
-		if(istype(potential_atom, /obj/vehicle/walker))
+		if(istype(potential_atom, /obj/vehicle/walker) && src != potential_atom)
 			cached_interactions += potential_atom
 
 	var/turn_angle = turning_angle(dir, collision_reason.dir)
@@ -50,3 +50,6 @@
 	energy_source.reboot_reactor(damage / 10)
 	swith_visual_position(90, -20)
 	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0, 0), damage / 10 - 2, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+
+/obj/vehicle/walker/onZImpact(turf/impact_turf, height)
+	collision_result(height * 200, src)

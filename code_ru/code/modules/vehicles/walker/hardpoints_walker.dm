@@ -747,7 +747,7 @@
 	name = "Mecha Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
-	custom_actions = list("Fly")
+	custom_actions = list("Fly", "Evac")
 
 	var/fuel = 200
 	var/fuel_max = 200
@@ -767,6 +767,12 @@
 
 /obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
 	var/obj/vehicle/walker/vessel = owner
+	if(flying && istype(get_turf(vessel), /turf/open_space))
+		if(!use_fuel(fuel_consumption_rate))
+			flying = FALSE
+			owner.flags_atom &= ~NO_ZFALL
+			owner.visible_message(SPAN_WARNING("Nozzles of [src] stops burning fuel, something very bad about to happen!"))
+
 	var/fuel_to_recover = min(fuel_recover_rate * delta_time, fuel_max - fuel)
 	if(!fuel_to_recover || !vessel.can_consume_energy(fuel_to_recover * 2))
 		return
@@ -781,11 +787,36 @@
 	return TRUE
 
 /obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
-	if(!use_fuel(fuel_consumption_rate))
-		return FALSE
+	if(custom_action == "Evac")
+		var/obj/structure/dropship_equipment/equipment
+		for(var/shuttle_tag in list(DROPSHIP_ALAMO, DROPSHIP_NORMANDY))
+			var/obj/docking_port/mobile/marine_dropship/dropship = SSshuttle.getShuttle(shuttle_tag)
+			if(!dropship.in_flyby)
+				continue
+			for(equipment in dropship.equipments)
+				if(!istype(equipment, /obj/structure/dropship_equipment/medevac_system) &&\
+				!istype(equipment, /obj/structure/dropship_equipment/fulton_system) &&\
+				!istype(equipment, /obj/structure/dropship_equipment/paradrop_system))
+					equipment = null
+					continue
+				break
+		if(!equipment || !use_fuel(fuel_max))
+			return
 
+		//here we catch shuttle
+		return
+
+	if(!use_fuel(fuel_consumption_rate))
+		return
 	flying = !flying
 	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
+	if(flying)
+		owner.flags_atom |= NO_ZFALL
+	else
+		owner.flags_atom &= ~NO_ZFALL
+
+/obj/item/hardpoint/walker/spinal/jetpack/proc/titan_fall()
+
 
 
 
