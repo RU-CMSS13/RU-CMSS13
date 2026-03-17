@@ -311,6 +311,7 @@
     var/obj/item/attachable/vulture_scope/scope = get_vulture_scope()
     if(!scope)
         return
+
     var/obj/item/weapon/gun/boltaction/vulture/rifle = bound_rifle?.resolve()
     if(rifle)
         SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
