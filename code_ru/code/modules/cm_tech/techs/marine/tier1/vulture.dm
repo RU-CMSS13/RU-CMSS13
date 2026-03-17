@@ -1,4 +1,3 @@
-//RU-CHANGE
 /datum/tech/vulture
     name = "M707 Anti-Materiel Rifle kit"
     desc = "Anti-Materiel Rifle kit, for using against heavy targets."
@@ -6,7 +5,7 @@
 
     announce_message = "M707 Anti-Materiel Rifle kit has been delivered to Requisitions' ASRS."
 
-    tier = /datum/tier/two
+    tier = /datum/tier/one
     required_points = 5
     flags = TREE_FLAG_MARINE
 
