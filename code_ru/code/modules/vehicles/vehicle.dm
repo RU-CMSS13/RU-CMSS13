@@ -507,6 +507,9 @@
 		update_icon()
 
 /obj/vehicle/proc/custom_direction_rotation_handler(atom/target, mob/user)
+	if(user != seats[VEHICLE_DRIVER])
+		return
+
 	if(world.time < next_move - move_delay * 0.8)
 		return
 
