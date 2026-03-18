@@ -6,7 +6,7 @@
 	icon = 'code_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "xm52"
 	item_state = "xm52"
-//Мне было впадлу делать отдельный лайн-арт для этой хуйни так что добавил лайнарт в основной lineart.dmi под именем "xm52"
+	lineart_ru = TRUE
 	item_icons = list(
 	WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/shotguns.dmi',
 	WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/shotguns.dmi',
