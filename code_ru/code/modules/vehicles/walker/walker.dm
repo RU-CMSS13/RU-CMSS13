@@ -563,7 +563,8 @@
 
 	if(seats[VEHICLE_DRIVER] && (zone_selected in list("head", "all")))
 		handle_seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
-		return
+		if(zone_selected == "all")
+			return
 
 	var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
 	for(var/length = 1 to length(hardpoints_remaining))

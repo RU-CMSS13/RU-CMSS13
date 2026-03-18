@@ -31,7 +31,7 @@
 	if(flying && istype(under, /turf/open_space))
 		if(!use_fuel(fuel_consumption_rate * delta_time))
 			flying = FALSE
-			stop_flying(owner)
+			stop_flying(vessel)
 			under.on_throw_end(vessel)
 			vessel.visible_message(SPAN_WARNING("Nozzles of [src] stops burning fuel, something very bad about to happen!"))
 		return
@@ -50,16 +50,16 @@
 	return TRUE
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/start_flying(obj/vehicle/walker/vessel)
-	owner.flags_atom |= NO_ZFALL
-	owner.move_sounds = move_sounds
-	owner.turn_sounds = turn_sounds
+	vessel.flags_atom |= NO_ZFALL
+	vessel.move_sounds = move_sounds
+	vessel.turn_sounds = turn_sounds
 	vessel.update_shadow(src)
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/stop_flying(obj/vehicle/walker/vessel)
-	owner.flags_atom &= ~NO_ZFALL
-	owner.move_sounds = initial(owner.move_sounds)
-	owner.turn_sounds = initial(owner.turn_sounds)
-	vessel.shadow_holder.forceMove(owner)
+	vessel.flags_atom &= ~NO_ZFALL
+	vessel.move_sounds = initial(vessel.move_sounds)
+	vessel.turn_sounds = initial(vessel.turn_sounds)
+	vessel.shadow_holder.forceMove(vessel)
 
 /obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
 	if(performing_action)
@@ -105,23 +105,23 @@
 /obj/item/hardpoint/walker/spinal/jetpack/proc/handle_move_z_up(mob/user, obj/vehicle/walker/vessel)
 	var/turf/above = SSmapping.get_turf_above(get_turf(src))
 	if(istype(above, /turf/open_space))
-		visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift [owner]."))
+		visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift [vessel]."))
 		var/turf/current = get_turf(src)
 		if(!istype(current, /turf/open_space))
 			vessel.flight_start(src, above, 2 SECONDS)
 		else
-			owner.forceMove(above)
+			vessel.forceMove(above)
 	else
 		to_chat(user, SPAN_WARNING("Seems there no free space above us!"))
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/handle_move_z_down(mob/user, obj/vehicle/walker/vessel)
 	if(istype(get_turf(src), /turf/open_space))
 		var/turf/below = SSmapping.get_turf_below(get_turf(src))
-		visible_message(SPAN_WARNING("Nozzles of [src] burns less to descend [owner]."))
+		visible_message(SPAN_WARNING("Nozzles of [src] burns less to descend [vessel]."))
 		if(!istype(below, /turf/open_space))
 			vessel.flight_end(src, below, 2 SECONDS)
 		else
-			owner.forceMove(below)
+			vessel.forceMove(below)
 	else
 		to_chat(user, SPAN_WARNING("Seems there no free space below us!"))
 
