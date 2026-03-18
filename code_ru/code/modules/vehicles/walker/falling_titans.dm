@@ -35,6 +35,9 @@
 	if(!istype(module))
 		return
 
+	if(!module.flying)
+		return
+
 	//Selecting the fucking real cord of map, WIP. Supposed to be via MAP overlay.
 	var/x_coord = tgui_input_real_number(user, "Input real longitude", "Longitude")
 	var/y_coord = tgui_input_real_number(user, "Input real latitude", "Latitude")
@@ -67,8 +70,6 @@
 	shadow_holder.alpha = 0
 	shadow_holder.forceMove(fall_target)
 	animate(shadow_holder, alpha = 255, time = fall_time, easing = LINEAR_EASING)
-	animate(shadow_holder, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(shadow_holder, pixel_y, initial(shadow_holder.pixel_y)), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	FOR_DVIEW(var/mob/mob, 7, fall_target, HIDE_INVISIBLE_OBSERVER)
 		shake_camera(mob, 4, 5)
@@ -84,10 +85,7 @@
 
 	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(current)
 	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), raise_time)
-
-	shadow_holder.pixel_y = 0
 	shadow_holder.forceMove(current)
-	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y), time = raise_time, easing = LINEAR_EASING)
 
 	animate(src, pixel_y = 32, time = raise_time, easing = LINEAR_EASING)
 	addtimer(VARSET_CALLBACK(src, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
@@ -98,10 +96,6 @@
 /obj/vehicle/walker/proc/flight_end(obj/item/hardpoint/walker/spinal/jetpack/module, turf/fall_target, fall_time)
 	module.perform_action(fall_time)
 	forceMove(fall_target)
-
-	shadow_holder.pixel_y = 0
-	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y), time = fall_time, easing = LINEAR_EASING)
-	addtimer(CALLBACK(shadow_holder, TYPE_PROC_REF(/atom/movable, forceMove), src), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	pixel_y = 32
 	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
@@ -119,14 +113,13 @@
 	if(!module.flying)
 		return
 
-	var/turf/below = SSmapping.get_turf_below(get_turf(src))
-	if(!below)
+	var/turf/current = get_turf(src)
+	if(!istype(current, /turf/open_space))
+		shadow_holder.forceMove(current)
 		return
-	if(!istype(get_turf(src), /turf/open_space))
-		if(shadow_holder.loc != src && !module.performing_action)
-			shadow_holder.forceMove(src)
-		return
-	if(below.density)
+
+	var/turf/below = SSmapping.get_turf_below(current)
+	if(!below || below.density)
 		return
 
 	var/heigh = 1
@@ -138,7 +131,6 @@
 		below = below_us
 		heigh++
 	shadow_holder.forceMove(below)
-	animate(shadow_holder, pixel_y = heigh * initial(shadow_holder.pixel_y), time = 1 SECONDS, easing = LINEAR_EASING)
 
 
 //////////////////////////////////////////////////////////////
@@ -148,7 +140,7 @@
 	icon = 'code_ru/icons/obj/vehicles/mech_effects.dmi'
 	icon_state = "mech_shadow"
 	pixel_x = -17
-	pixel_y = -32
+	pixel_y = 0
 	layer = ABOVE_MOB_LAYER
 	flags_atom = NO_ZFALL
 	anchored = TRUE

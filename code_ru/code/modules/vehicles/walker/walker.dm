@@ -426,12 +426,15 @@
 
 	if(flags_atom & NO_ZFALL)
 		overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
+		override_pixel_y = 16
 
-	if(!override_pixel_y)
-		if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
-			animate(src, pixel_y = leg_pixel_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
-		else
-			animate(src, pixel_y = legless_pixel_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
+	var/current_y = override_pixel_y
+	if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
+		current_y += leg_pixel_y
+	else
+		current_y += legless_pixel_y
+	if(pixel_y != current_y)
+		animate(src, pixel_y = current_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
 
 	overlays += image(icon = icon, icon_state = "[icon_state]_effect", dir = dir)
 	switch(floor((health / max_health) * 100))

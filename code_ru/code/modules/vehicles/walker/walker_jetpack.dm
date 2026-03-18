@@ -66,6 +66,8 @@
 		return
 
 	if(custom_action == "Evac")
+		if(!flying)
+			return
 		prepare_titan_raise(user, owner)
 		return
 
@@ -77,6 +79,7 @@
 		start_flying(owner)
 	else
 		stop_flying(owner)
+	owner.update_icon()
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/prepare_titan_raise(mob/user, obj/vehicle/walker/vessel)
 	var/obj/structure/dropship_equipment/equipment
