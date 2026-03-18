@@ -50,7 +50,7 @@
 						var/obj/item/ammo_magazine/handful/new_handful = new /obj/item/ammo_magazine/handful
 						var/transferred_handfuls = min(ammo_dumping.current_rounds, amount_to_dump)
 						new_handful.generate_handful(ammo_dumping.default_ammo, ammo_dumping.caliber, amount_to_dump, transferred_handfuls, ammo_dumping.gun_type)
-						new_handful.icon = 'icons/obj/items/weapons/guns/handful.dmi' //Ёбаный в рот этого казино блять
+						new_handful.icon = 'code_ru/icons/obj/items/weapons/guns/sparkshot.dmi' //Ёбаный в рот этого казино блять
 						ammo_dumping.current_rounds -= transferred_handfuls
 						handle_item_insertion(new_handful, TRUE,user)
 						update_icon(-transferred_handfuls)
@@ -73,9 +73,9 @@
 		sure that we don't have to do any extra calculations.
 		*/
 		playsound(src, drawSound, 7, TRUE)
-		var/image/gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+		var/image/gun_underlay = image('code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
 		if(current_gun.type == /obj/item/weapon/gun/rifle/xm52)
-			gun_underlay = image('icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
+			gun_underlay = image('code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi', current_gun.base_gun_icon)
 		gun_underlay.pixel_x = holster_slots[slot]["icon_x"]
 		gun_underlay.pixel_y = holster_slots[slot]["icon_y"]
 		gun_underlay.color = current_gun.color

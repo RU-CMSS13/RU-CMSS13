@@ -22,4 +22,5 @@
 	unacidable = TRUE
 	anti_hug = 6
 	specialty = "M40 breacher"
+	flags_atom = NO_GAMEMODE_SKIN
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
