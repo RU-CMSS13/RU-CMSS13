@@ -11,8 +11,9 @@
 	gun_type = /obj/item/weapon/gun/rifle/xm52
 	caliber = "Sparkshots"
 
-/obj/item/ammo_magazine/handful/shotgun/light/breaching/sparkshots //Эта тварь упорно не хотела брать иконку из code_ru, что пришлось вставить иконки патронов в code
-	name = "handful of sparkshot shells (16g)" //Отдельный файлик с спаркшотами останется в code_ru (sparkshot.dmi)
+/obj/item/ammo_magazine/handful/shotgun/light/breaching/sparkshots
+	name = "handful of sparkshot shells (16g)"
+	icon = 'code_ru/icons/obj/items/weapons/guns/handful.dmi'
 	icon_state = "sparkshot_shell_6"
 	handful_state = "sparkshot_shell"
 	max_rounds = 6 //XM52 magazines are 12 rounds total, two handfuls should be enough to reload a mag

@@ -3,10 +3,10 @@
 /obj/item/weapon/gun/rifle/xm52
 	name = "\improper XM52 experimental breaching scattergun"
 	desc = "An experimental shotgun model going through testing trials in the USCM. Based on the original XM51 version, the XM52 is a mag-fed, burst pump-action shotgun. It utilizes special lighted 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells."
+	lineart_ru = TRUE
 	icon = 'code_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "xm52"
 	item_state = "xm52"
-	lineart_ru = TRUE
 	item_icons = list(
 	WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/shotguns.dmi',
 	WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/shotguns.dmi',
