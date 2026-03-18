@@ -308,13 +308,13 @@
 
 //RU-CHANGE
 /obj/structure/vulture_spotter_tripod/proc/toggle_alt_iff(toggle)
-    var/obj/item/attachable/vulture_scope/scope = get_vulture_scope()
-    if(!scope)
-        return
+	var/obj/item/attachable/vulture_scope/scope = get_vulture_scope()
+	if(!scope)
+		return
 
-    var/obj/item/weapon/gun/boltaction/vulture/rifle = bound_rifle?.resolve()
-    if(rifle)
-        SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
+	var/obj/item/weapon/gun/boltaction/vulture/rifle = bound_rifle?.resolve()
+	if(rifle)
+		SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
 //RU-CHANGE
 
 /obj/structure/vulture_spotter_tripod/check_eye(mob/living/user)
