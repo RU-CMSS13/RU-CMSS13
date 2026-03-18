@@ -193,10 +193,10 @@
 	icon_locked = "secure_locked_vulture"
 	icon_unlocked = "secure_unlocked_vulture"
 
-/*/obj/structure/closet/crate/secure/vulture/Initialize()
+/obj/structure/closet/crate/secure/vulture/Initialize()
 	. = ..()
 	new /obj/item/storage/box/guncase/vulture(src)
-*/
+
 //special version, able to store OB fuel and warheads only
 /obj/structure/closet/crate/secure/ob
 	name = "secure orbital bombardment ammunition crate"

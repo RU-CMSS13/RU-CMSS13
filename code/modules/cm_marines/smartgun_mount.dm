@@ -544,9 +544,7 @@
 	if(!user.client?.prefs.custom_cursors)
 		return
 
-	//user.client?.mouse_pointer_icon = new_cursor ? get_mouse_pointer() : initial(user.client?.mouse_pointer_icon)
-	//lazy fix
-	user.client.mouse_pointer_icon = new_cursor ? get_mouse_pointer() : null
+	user.client?.mouse_pointer_icon = new_cursor ? get_mouse_pointer() : initial(user.client?.mouse_pointer_icon)
 
 ///Getter proc. Returns the weapon's crosshair icon.
 /obj/structure/machinery/m56d_hmg/proc/get_mouse_pointer()
