@@ -1,15 +1,10 @@
 /obj/effect/essentials_set/walker/internals
 	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/reactor,
 		/obj/item/hardpoint/walker/hand/left,
 		/obj/item/hardpoint/walker/hand/right,
 		/obj/item/hardpoint/walker/leg/left,
 		/obj/item/hardpoint/walker/leg/right,
-	)
-
-/obj/effect/essentials_set/walker/reactor
-	spawned_gear_list = list(
-		/obj/item/hardpoint/walker/reactor,
-		/obj/item/fuel_cell/walker_reactor,
 		/obj/item/fuel_cell/walker_reactor,
 		/obj/item/fuel_cell/walker_reactor,
 	)
@@ -17,7 +12,6 @@
 /obj/effect/essentials_set/walker/reactor_enhanced
 	spawned_gear_list = list(
 		/obj/item/hardpoint/walker/reactor/enhanced,
-		/obj/item/fuel_cell/walker_reactor,
 		/obj/item/fuel_cell/walker_reactor,
 		/obj/item/fuel_cell/walker_reactor,
 	)
@@ -79,9 +73,10 @@
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("STARTING PARTS", 0, null, null, null),
 	list("Internal Parts", 0, /obj/effect/essentials_set/walker/internals, MECH_START_KIT, VENDOR_ITEM_RECOMMENDED),
-	list("Shielded Reactor", 5, /obj/effect/essentials_set/walker/reactor, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
-	list("Enhanced Mecha Reactor", 15, /obj/effect/essentials_set/walker/reactor_enhanced, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
 	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
+
+	list("SPARE INTERNAL PARTS (UPGRADE)", 0, null, null, null),
+	list("Enhanced Mecha Reactor", 15, /obj/effect/essentials_set/walker/reactor_enhanced, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),

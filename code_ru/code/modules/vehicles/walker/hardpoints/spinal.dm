@@ -30,8 +30,8 @@
 	if(buff_applied)
 		return
 
-	vessel.misc_multipliers["scatter"] -= 3
-	vessel.misc_multipliers["fire_delay"] -= 0.5
+	vessel.misc_multipliers["scatter"] -= 0.6
+	vessel.misc_multipliers["fire_delay"] -= 0.4
 	buff_applied = TRUE
 	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
 
@@ -39,8 +39,8 @@
 	if(!buff_applied)
 		return
 
-	vessel.misc_multipliers["scatter"] += 3
-	vessel.misc_multipliers["fire_delay"] += 0.5
+	vessel.misc_multipliers["scatter"] += 0.6
+	vessel.misc_multipliers["fire_delay"] += 0.4
 	buff_applied = FALSE
 	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
 

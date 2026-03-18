@@ -183,7 +183,7 @@
 		return
 
 	vessel.misc_multipliers["reactor_buff"] += 1
-	vessel.misc_multipliers["scatter"] -= 1
+	vessel.misc_multipliers["scatter"] -= 0.2
 	vessel.misc_multipliers["fire_delay"] -= 0.2
 	vessel.misc_multipliers["same_guns_debuff"] -= 1
 	buff_applied = TRUE
@@ -194,7 +194,7 @@
 		return
 
 	vessel.misc_multipliers["reactor_buff"] -= 1
-	vessel.misc_multipliers["scatter"] += 1
+	vessel.misc_multipliers["scatter"] = 0.2
 	vessel.misc_multipliers["fire_delay"] += 0.2
 	vessel.misc_multipliers["same_guns_debuff"] += 1
 	buff_applied = FALSE

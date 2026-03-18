@@ -25,6 +25,7 @@
 		/obj/item/hardpoint/walker/leg/left,
 		/obj/item/hardpoint/walker/leg/right,
 		/obj/item/hardpoint/walker/reactor,
+		/obj/item/hardpoint/walker/reactor/enhanced,
 		/obj/item/hardpoint/walker/head,
 		/obj/item/hardpoint/walker/spinal/powerful_cooling,
 		/obj/item/hardpoint/walker/spinal/artilery,

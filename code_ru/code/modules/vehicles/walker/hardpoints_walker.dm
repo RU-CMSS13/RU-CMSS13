@@ -85,8 +85,9 @@
 /obj/item/hardpoint/walker/recalculate_hardpoint_bonuses()
 	if(!mounted_gun)
 		return
+	mounted_gun.set_gun_config_values()
 	mounted_gun.set_fire_delay(mounted_gun.get_fire_delay() * owner.misc_multipliers["fire_delay"])
-	mounted_gun.scatter -= owner.misc_multipliers["scatter"]
+	mounted_gun.scatter = mounted_gun.scatter * owner.misc_multipliers["scatter"]
 
 /obj/item/hardpoint/walker/get_origin_turf()
 	return get_turf(src)
