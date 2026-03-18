@@ -10,8 +10,39 @@
 	weight = 1
 
 /obj/item/hardpoint/walker/spinal/powerful_cooling
-	name = "Active Mecha Cooling"
+	name = "Active Cooling Circuit"
 	desc = "This very powerful cooling can take twice as much heat out of system! Allows do actions much faster, however consume a lot of energy."
+
+	var/consume_rate = 10
+
+/obj/item/hardpoint/walker/spinal/powerful_cooling/on_source_process(delta_time)
+	var/obj/vehicle/walker/vessel = owner
+	var/energy_required = consume_rate * delta_time
+	if(!vessel.can_consume_energy(energy_required))
+		remove_buff(vessel)
+		return
+	apply_buff(vessel)
+	vessel.consume_energy(energy_required)
+
+/obj/item/hardpoint/walker/spinal/powerful_cooling/apply_buff(obj/vehicle/walker/vessel)
+	if(!health)
+		return
+	if(buff_applied)
+		return
+
+	vessel.misc_multipliers["scatter"] -= 3
+	vessel.misc_multipliers["fire_delay"] -= 0.5
+	buff_applied = TRUE
+	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+
+/obj/item/hardpoint/walker/spinal/powerful_cooling/remove_buff(obj/vehicle/walker/vessel)
+	if(!buff_applied)
+		return
+
+	vessel.misc_multipliers["scatter"] += 3
+	vessel.misc_multipliers["fire_delay"] += 0.5
+	buff_applied = FALSE
+	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
 
 
 /obj/item/hardpoint/walker/spinal/artilery
@@ -168,7 +199,7 @@
 		return
 	vessel.consume_energy(damage_to_recover * 2)
 
-	damage_capacity += damage_to_recover
+	damage_capacity += damage_to_recover * vessel.misc_multipliers["reactor_buff"]
 	update_filter()
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)

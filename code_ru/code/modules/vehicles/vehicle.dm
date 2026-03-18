@@ -18,20 +18,20 @@
 	var/list/hardpoints_by_slot = list()
 
 	var/list/misc_multipliers = list(
-		"move" = 1.0,
-		"accuracy" = 1.0,
+		"move" = 1,
+		"accuracy" = 1,
 		"cooldown" = 1
 	)
 
 	//Changes how much damage the vehicle takes
 	var/list/dmg_multipliers = list(
-		"all" = 1.0, //for when you want to make it invincible
-		"acid" = 1.0,
-		"slash" = 1.0,
-		"bullet" = 1.0,
-		"explosive" = 1.0,
-		"blunt" = 1.0,
-		"abstract" = 1.0) //abstract for when you just want to hurt it
+		"all" = 1, //for when you want to make it invincible
+		"acid" = 1,
+		"slash" = 1,
+		"bullet" = 1,
+		"explosive" = 1,
+		"blunt" = 1,
+		"abstract" = 1) //abstract for when you just want to hurt it
 
 	// References to the active/chosen hardpoint for each seat
 	var/active_hp = list(
@@ -539,7 +539,10 @@
 	var/list/repair_materials = list()
 
 /obj/item/hardpoint/proc/repaired()
-	return
+	apply_buff(owner)
+
+/obj/item/hardpoint/proc/deactivate()
+	remove_buff(owner)
 
 /obj/item/hardpoint/proc/material_use(obj/item/tool/weldingtool/welder, mob/user, modificator = 5)
 	var/required_material = material_per_repair

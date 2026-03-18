@@ -82,6 +82,12 @@
 		return
 	pilot_ejected(vessel.seats[VEHICLE_DRIVER])
 
+/obj/item/hardpoint/walker/recalculate_hardpoint_bonuses()
+	if(!mounted_gun)
+		return
+	mounted_gun.set_fire_delay(mounted_gun.get_fire_delay() * owner.misc_multipliers["fire_delay"])
+	mounted_gun.scatter -= owner.misc_multipliers["scatter"]
+
 /obj/item/hardpoint/walker/get_origin_turf()
 	return get_turf(src)
 
@@ -230,6 +236,7 @@
 		mounted_gun.set_gun_user(vessel.seats[VEHICLE_DRIVER])
 
 /obj/item/hardpoint/walker/proc/remove_gun(mob/user)
+	mounted_gun.set_gun_config_values()
 	QDEL_NULL(mounted_gun.callback_can_fire)
 	QDEL_NULL(mounted_gun.callback_can_stop_fire)
 	QDEL_NULL(mounted_gun.callback_fire_stat)
@@ -251,7 +258,10 @@
 		if(hardpoint == src || !hardpoint.mounted_gun)
 			continue
 		if(hardpoint.mounted_gun.type == mounted_gun.type)
-			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2)
+			var/list/modificator = list(0, 0)
+			modificator[1] = max(1, mounted_gun.accuracy_mult_unwielded - 0.1 * rand(5,7) * owner.misc_multipliers["same_guns_debuff"])
+			modificator[2] = (SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2) * owner.misc_multipliers["same_guns_debuff"]
+			return modificator
 
 /obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params, consume_energy = TRUE)
 	if(!health)
@@ -322,6 +332,7 @@
 	move_momentum_build_factor = 0.5
 
 /obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/vessel)
+	. = ..()
 	vessel.recalculate_hardpoints()
 
 

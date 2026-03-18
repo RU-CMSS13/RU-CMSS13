@@ -14,6 +14,14 @@
 		/obj/item/fuel_cell/walker_reactor,
 	)
 
+/obj/effect/essentials_set/walker/reactor_enhanced
+	spawned_gear_list = list(
+		/obj/item/hardpoint/walker/reactor/enhanced,
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+	)
+
 /obj/effect/essentials_set/walker/wm88
 	spawned_gear_list = list(
 		/obj/item/weapon/gun/mounted/mecha_wm88,
@@ -71,12 +79,14 @@
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("STARTING PARTS", 0, null, null, null),
 	list("Internal Parts", 0, /obj/effect/essentials_set/walker/internals, MECH_START_KIT, VENDOR_ITEM_RECOMMENDED),
-	list("Shielded Reactor", 0, /obj/effect/essentials_set/walker/reactor, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
+	list("Shielded Reactor", 5, /obj/effect/essentials_set/walker/reactor, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
+	list("Enhanced Mecha Reactor", 15, /obj/effect/essentials_set/walker/reactor_enhanced, MECH_REACTOR, VENDOR_ITEM_RECOMMENDED),
 	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
 	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
+	list("Active Cooling Circuit", 30, /obj/item/hardpoint/walker/spinal/powerful_cooling, null, VENDOR_ITEM_REGULAR),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),

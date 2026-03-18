@@ -74,6 +74,14 @@
 		"abstract" = 1,
 	)
 
+	misc_multipliers = list(
+		"move" = 1,
+		"reactor_buff" = 1,
+		"scatter" = 1,
+		"fire_delay" = 1,
+		"same_guns_debuff" = 1,
+	)
+
 	var/list/verb_list = list(
 		/obj/vehicle/walker/proc/get_stats,
 		/obj/vehicle/walker/proc/toggle_lights,
@@ -348,14 +356,14 @@
 
 /obj/vehicle/walker/proc/consume_energy(amount)
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	energy_source.fuel.fuel_amount = max(0, energy_source.fuel.fuel_amount - amount)
+	energy_source.fuel.fuel_amount = max(0, energy_source.fuel.fuel_amount - (amount * energy_source.conversion_rate))
 	energy_source.on_consume_enegry()
 
 /obj/vehicle/walker/proc/can_consume_energy(amount)
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
 	if(!energy_source || !energy_source.turned_on || !energy_source.fuel)
 		return FALSE
-	if(energy_source.fuel.fuel_amount < amount)
+	if(energy_source.fuel.fuel_amount < (amount * energy_source.conversion_rate))
 		return FALSE
 	return TRUE
 

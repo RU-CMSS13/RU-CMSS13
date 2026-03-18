@@ -333,8 +333,10 @@
 //------INTERACTION PROCS----------
 //-----------------------------
 
+/* RUCM CHANGE
 /obj/item/hardpoint/proc/deactivate()
 	return
+*/
 
 //used during bumping. Every mob we bump is getting affected by this proc from every module.
 /obj/item/hardpoint/proc/livingmob_interact(mob/living/M)

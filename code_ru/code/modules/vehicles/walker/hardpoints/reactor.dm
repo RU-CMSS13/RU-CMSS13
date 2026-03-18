@@ -25,6 +25,7 @@
 
 	var/list/reactor_sounds = list('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg')
 	var/obj/item/fuel_cell/walker_reactor/fuel
+	var/conversion_rate = 1
 
 /obj/item/hardpoint/walker/reactor/Initialize()
 	. = ..()
@@ -89,6 +90,7 @@
 	cell_explosion(get_turf(src), 1000, 300, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
 /obj/item/hardpoint/walker/reactor/repaired()
+	. = ..()
 	deltimer(meltdown_timer_id)
 	meltdown_timer_id = null
 	reactor_state = VEHICLE_REACTOR_FINE
@@ -167,4 +169,33 @@
 	name = "Enhanced Mecha Reactor"
 	desc = "Self sufficient reactor for power supply of mecha equipment."
 
-	weight = 1
+	health = 100
+	max_health = 100
+
+	weight = 3
+	chance_of_malf = 20
+	conversion_rate = 0.5
+
+/obj/item/hardpoint/walker/reactor/enhanced/apply_buff(obj/vehicle/walker/vessel)
+	if(!health)
+		return
+	if(buff_applied)
+		return
+
+	vessel.misc_multipliers["reactor_buff"] += 1
+	vessel.misc_multipliers["scatter"] -= 1
+	vessel.misc_multipliers["fire_delay"] -= 0.2
+	vessel.misc_multipliers["same_guns_debuff"] -= 1
+	buff_applied = TRUE
+	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+
+/obj/item/hardpoint/walker/reactor/enhanced/remove_buff(obj/vehicle/walker/vessel)
+	if(!buff_applied)
+		return
+
+	vessel.misc_multipliers["reactor_buff"] -= 1
+	vessel.misc_multipliers["scatter"] += 1
+	vessel.misc_multipliers["fire_delay"] += 0.2
+	vessel.misc_multipliers["same_guns_debuff"] += 1
+	buff_applied = FALSE
+	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
