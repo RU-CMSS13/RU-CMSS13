@@ -91,6 +91,7 @@
 		/obj/vehicle/walker/proc/switch_weapons,
 		/obj/vehicle/walker/proc/move_z_up,
 		/obj/vehicle/walker/proc/move_z_down,
+		/obj/vehicle/walker/proc/dir_look_lock,
 	)
 
 	move_sounds = list(

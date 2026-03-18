@@ -150,6 +150,25 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/proc/dir_look_lock()
+	set name = "Togle Dir Lock"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	dir_look_lock = !dir_look_lock
+
+
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/walker/proc/switch_weapons()
 	set name = "Switch Weapons Group"
 	set category = "Vehicle"

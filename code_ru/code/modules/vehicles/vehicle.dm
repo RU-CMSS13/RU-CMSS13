@@ -61,6 +61,8 @@
 	//used for IFF stuff. Determined by driver. It will remember faction of a last driver. IFF-compatible rounds won't damage vehicle.
 	var/vehicle_faction = ""
 
+	var/dir_look_lock = FALSE
+
 
 //////////////////////////////////////////////////////////////
 
@@ -395,7 +397,7 @@
 	if(world.time < next_move)
 		return
 
-	if(dir == turn(direction, 180) || dir == direction)
+	if(dir == turn(direction, 180) || dir == direction || dir_look_lock)
 		var/old_dir = dir
 		. = try_move(direction)
 		setDir(old_dir, TRUE)
@@ -503,6 +505,31 @@
 
 	if(update_icons)
 		update_icon()
+
+/obj/vehicle/proc/custom_direction_rotation_handler(atom/target, mob/user)
+	if(world.time < next_move - move_delay * 0.8)
+		return
+
+	var/dx = target.x - x
+	var/dy = target.y - y
+	if(!dx && !dy)
+		return
+
+	var/direction
+	if(abs(dx) < abs(dy))
+		if(dy > 0)
+			direction = NORTH
+		else
+			direction = SOUTH
+	else
+		if(dx > 0)
+			direction = EAST
+		else
+			direction = WEST
+
+	if(dir == direction)
+		return
+	try_rotate(turning_angle(dir, direction))
 
 
 //////////////////////////////////////////////////////////////

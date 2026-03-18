@@ -309,6 +309,11 @@
 /mob/proc/face_atom(atom/A)
 
 	if( !A || !x || !y || !A.x || !A.y )
+//RUCM START
+		if(istype(interactee, /obj/vehicle))
+			var/obj/vehicle/vessel = interactee
+			vessel.custom_direction_rotation_handler(A, src)
+//RUCM END
 		return
 	var/dx = A.x - x
 	var/dy = A.y - y
