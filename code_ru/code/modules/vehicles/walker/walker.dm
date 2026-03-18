@@ -157,7 +157,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	if(energy_source.reactor_state == VEHICLE_REACTOR_CRITICAL)
+	if(energy_source?.reactor_state == VEHICLE_REACTOR_CRITICAL)
 		energy_source.meltdown()
 
 	if(seats[VEHICLE_DRIVER])
@@ -258,7 +258,7 @@
 		return
 
 	var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(isnull(selected_zoom))
+	if(isnull(selected_zoom) && zoom_provider)
 		selected_zoom = zoom_provider.zoom
 
 	if(selected_zoom && zoom_provider?.zoom_size)

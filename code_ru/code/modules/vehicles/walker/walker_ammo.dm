@@ -182,6 +182,33 @@
 	max_range = 20
 	max_distance = 20
 
+/datum/ammo/energy/walker
+	name = "Laser Beam"
+	icon_state = "laser_new"
+	flags_ammo_behavior = AMMO_ENERGY|AMMO_IGNORE_ARMOR
+
+/datum/ammo/energy/walker/laser
+	name = "Hi-Power Laser Beam"
+
+	accurate_range = 8
+	max_range = 21
+
+/datum/ammo/energy/walker/laser/on_hit_mob(mob/living/target_mob, obj/projectile/proj)
+	do_flame_spread(get_turf(target_mob), proj)
+
+/datum/ammo/energy/walker/laser/on_hit_turf(turf/target_turf, obj/projectile/proj)
+	do_flame_spread(target_turf, proj)
+
+/datum/ammo/energy/walker/laser/on_hit_obj(obj/target_object, obj/projectile/proj)
+	do_flame_spread(get_turf(target_object), proj)
+
+/datum/ammo/energy/walker/laser/do_at_max_range(obj/projectile/proj)
+	do_flame_spread(get_turf(proj), proj)
+
+/datum/ammo/energy/walker/laser/proc/do_flame_spread(turf/impact, obj/projectile/proj)
+	cell_explosion(impact, 100, 50, explosion_cause_data = proj.weapon_cause_data)
+	fire_spread(impact, proj.weapon_cause_data, 4, 45, 60, LIGHT_COLOR_CYAN, "white")
+
 
 
 

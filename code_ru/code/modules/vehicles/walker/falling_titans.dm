@@ -122,14 +122,12 @@
 	if(!below || below.density)
 		return
 
-	var/heigh = 1
 	var/turf/below_us = below
 	while(below_us)
 		below_us = SSmapping.get_turf_below(below)
 		if(!below_us || below_us.density)
 			break
 		below = below_us
-		heigh++
 	shadow_holder.forceMove(below)
 
 

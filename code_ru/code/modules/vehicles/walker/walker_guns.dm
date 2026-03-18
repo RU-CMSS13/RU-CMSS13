@@ -259,6 +259,36 @@
 	set_fire_delay(FIRE_DELAY_TIER_2)
 
 
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/weapon/gun/mounted/mecha_laser
+	name = "L55 \"Lazarus\" Heavy Pulse Lazer"
+	desc = "This is for sure abomination of mobile ground unit weapons. This gun consume a lot of energy and can have literally deadly recoil. Only heavy platforms can use it. Very limited edition, result can vary due to low production scale."
+
+	icon_state = "mech_shotgun8g_parts"
+	item_state = "redy_shotgun8g"
+
+	ammo = /datum/ammo/energy/walker/laser
+	fire_sound = list('sound/effects/phasein.ogg')
+
+	mount_class = GUN_MOUNT_MECHA
+
+	charge_cost = 750
+
+/obj/item/weapon/gun/mounted/mecha_laser/set_gun_config_values()
+	. = ..()
+
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_SLOW + FIRE_DELAY_TIER_SHOTGUN_SLOW)
+
+/obj/item/weapon/gun/mounted/mecha_laser/load_into_chamber()
+	in_chamber = create_bullet(ammo, initial(name))
+	return in_chamber
+
+/obj/item/weapon/gun/mounted/mecha_laser/has_ammunition()
+	return TRUE
+
+
 
 
 //////////////////////////////////////////////////////////////
@@ -289,7 +319,7 @@
 	. = NONE
 	afterattack(target, user, params, TRUE)
 
-/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, click_parameters, force = FALSE)
+/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, force = FALSE)
 	if(!force)
 		return
 	. = ..()
@@ -303,8 +333,8 @@
 
 
 /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher
-	name = "Heavy Grenadelauncher"
-	desc = "Heavy Grenadelauncher."
+	name = "G67 \"Demoman\" Grenade Launcher"
+	desc = "Developed for long range air support and cutting off reinforcements, do very well with wiping out enemy fortifications. Do you know why is there only good demomans? Because all bad is dead already."
 
 	icon_state = "mech_smartgun_parts"
 	item_state = "redy_smartgun"
@@ -316,6 +346,8 @@
 	is_lobbing = TRUE
 	direct_draw = FALSE
 	internal_slots = 24
+
+	charge_cost = 2
 
 /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher/set_gun_config_values()
 	. = ..()

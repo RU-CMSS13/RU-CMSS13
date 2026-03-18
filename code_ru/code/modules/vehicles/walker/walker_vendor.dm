@@ -60,6 +60,13 @@
 		/obj/item/ammo_magazine/rocket/brute/tactical,
 	)
 
+/obj/effect/essentials_set/walker/tactical_grenade_launcher
+	spawned_gear_list = list(
+		/obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher,
+		/obj/item/storage/box/nade_box/airburst,
+		/obj/item/storage/box/nade_box/airburst,
+	)
+
 
 GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("STARTING PARTS", 0, null, null, null),
@@ -68,9 +75,9 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("Cock Pit Protection (optional)", 10, /obj/item/hardpoint/walker/head, null, VENDOR_ITEM_RECOMMENDED),
 
 	list("SPINAL PARTS (Fully optional)", 0, null, null, null),
-	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
 	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
+	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
 	list("Paladin Armor", 25, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
@@ -80,11 +87,13 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("Ballistic Armor", 25, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
 
 	list("WEAPONS KITS (Recommended 1-2 units)", 0, null, null, null),
+	list("L55 \"Lazarus\" Heavy Pulse Lazer", 50, /obj/item/weapon/gun/mounted/mecha_laser, null, VENDOR_ITEM_REGULAR),
 	list("M88 Mounted Automated Anti-Material rifle", 35, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
-	list("M56 Double-Barrel Mounted Smartgun", 25, /obj/effect/essentials_set/walker/smartgun, null, VENDOR_ITEM_REGULAR),
-	list("M32 Mounted Shotgun", 15, /obj/effect/essentials_set/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
-	list("M30 Machine Gun", 20, /obj/effect/essentials_set/walker/hmg, null, VENDOR_ITEM_REGULAR),
+	list("G67 \"Demoman\" Grenade Launcher", 35, /obj/effect/essentials_set/walker/tactical_grenade_launcher, null, VENDOR_ITEM_REGULAR),
 	list("F40 \"Hellfire\" Flamethower", 30, /obj/effect/essentials_set/walker/flamer, null, VENDOR_ITEM_REGULAR),
+	list("M56 Double-Barrel Mounted Smartgun", 25, /obj/effect/essentials_set/walker/smartgun, null, VENDOR_ITEM_REGULAR),
+	list("M30 Machine Gun", 20, /obj/effect/essentials_set/walker/hmg, null, VENDOR_ITEM_REGULAR),
+	list("M32 Mounted Shotgun", 15, /obj/effect/essentials_set/walker/shotgun8g, null, VENDOR_ITEM_REGULAR),
 
 	list("AMMUNITION", 0, null, null, null),
 	list("M88 AMR Magazine", 6, /obj/item/ammo_magazine/walker/wm88, null, VENDOR_ITEM_REGULAR),
