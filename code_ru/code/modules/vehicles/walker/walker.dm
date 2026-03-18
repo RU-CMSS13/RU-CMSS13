@@ -424,7 +424,8 @@
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
-	overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
+	if(flags_atom & NO_ZFALL)
+		overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
 
 	if(!override_pixel_y)
 		if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])

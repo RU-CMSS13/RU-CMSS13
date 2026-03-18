@@ -11,6 +11,9 @@
 	var/flying = FALSE
 	var/fuel_consumption_rate = 6
 
+	var/list/move_sounds = null
+	var/list/turn_sounds = null
+
 	var/performing_action = FALSE
 
 /obj/item/hardpoint/walker/spinal/jetpack/tgui_additional_data()
@@ -24,10 +27,13 @@
 
 /obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
 	var/obj/vehicle/walker/vessel = owner
-	if(flying && istype(get_turf(vessel), /turf/open_space))
+	var/turf/under = get_turf(vessel)
+	if(flying && istype(under, /turf/open_space))
 		if(!use_fuel(fuel_consumption_rate * delta_time))
-			stop_flying()
-			owner.visible_message(SPAN_WARNING("Nozzles of [src] stops burning fuel, something very bad about to happen!"))
+			flying = FALSE
+			stop_flying(owner)
+			under.on_throw_end(vessel)
+			vessel.visible_message(SPAN_WARNING("Nozzles of [src] stops burning fuel, something very bad about to happen!"))
 		return
 
 	var/fuel_to_recover = min(fuel_recover_rate * delta_time, fuel_max - fuel)
@@ -43,18 +49,22 @@
 	fuel -= amount
 	return TRUE
 
-/obj/item/hardpoint/walker/spinal/jetpack/proc/start_flying()
-	flying = TRUE
+/obj/item/hardpoint/walker/spinal/jetpack/proc/start_flying(obj/vehicle/walker/vessel)
 	owner.flags_atom |= NO_ZFALL
-//	update_shadow()
+	owner.move_sounds = move_sounds
+	owner.turn_sounds = turn_sounds
+	vessel.update_shadow(src)
 
-/obj/item/hardpoint/walker/spinal/jetpack/proc/stop_flying()
-	flying = FALSE
+/obj/item/hardpoint/walker/spinal/jetpack/proc/stop_flying(obj/vehicle/walker/vessel)
 	owner.flags_atom &= ~NO_ZFALL
-//	shadow_holder.forceMove(src)
 	owner.move_sounds = initial(owner.move_sounds)
+	owner.turn_sounds = initial(owner.turn_sounds)
+	vessel.shadow_holder.forceMove(owner)
 
 /obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
+	if(performing_action)
+		return
+
 	if(custom_action == "Evac")
 		prepare_titan_raise(user, owner)
 		return
@@ -62,11 +72,11 @@
 	if(!use_fuel(fuel_consumption_rate))
 		return
 	flying = !flying
-	owner.visible_message(SPAN_WARNING("[owner] [flying ? "extinguish" : "ignites"] [src] nozzles."))
+	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
 	if(flying)
-		stop_flying()
+		start_flying(owner)
 	else
-		start_flying()
+		stop_flying(owner)
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/prepare_titan_raise(mob/user, obj/vehicle/walker/vessel)
 	var/obj/structure/dropship_equipment/equipment
@@ -92,18 +102,23 @@
 /obj/item/hardpoint/walker/spinal/jetpack/proc/handle_move_z_up(mob/user, obj/vehicle/walker/vessel)
 	var/turf/above = SSmapping.get_turf_above(get_turf(src))
 	if(istype(above, /turf/open_space))
-		visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift it."))
-//		titan_raise(2 SECONDS)
-		owner.forceMove(above)
+		visible_message(SPAN_WARNING("Nozzles of [src] burns hard to lift [owner]."))
+		var/turf/current = get_turf(src)
+		if(!istype(current, /turf/open_space))
+			vessel.flight_start(src, above, 2 SECONDS)
+		else
+			owner.forceMove(above)
 	else
 		to_chat(user, SPAN_WARNING("Seems there no free space above us!"))
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/handle_move_z_down(mob/user, obj/vehicle/walker/vessel)
 	if(istype(get_turf(src), /turf/open_space))
 		var/turf/below = SSmapping.get_turf_below(get_turf(src))
-		visible_message(SPAN_WARNING("Nozzles of [src] burns less to make it descend."))
-		owner.forceMove(below)
-//		titan_fall(2 SECONDS)
+		visible_message(SPAN_WARNING("Nozzles of [src] burns less to descend [owner]."))
+		if(!istype(below, /turf/open_space))
+			vessel.flight_end(src, below, 2 SECONDS)
+		else
+			owner.forceMove(below)
 	else
 		to_chat(user, SPAN_WARNING("Seems there no free space below us!"))
 

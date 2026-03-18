@@ -1,6 +1,30 @@
 /obj/vehicle/walker
 	var/obj/walker_shadow/shadow_holder
 
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/titan_raise(obj/item/hardpoint/walker/spinal/jetpack/module, turf/raise_target, raise_time)
+	module.perform_action(raise_time)
+
+	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(get_turf(src))
+	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), raise_time)
+
+	animate(shadow_holder, alpha = 0, time = raise_time, easing = LINEAR_EASING)
+	addtimer(VARSET_CALLBACK(shadow_holder, alpha, 255), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	layer = ABOVE_FLY_LAYER
+	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+	animate(src, pixel_y = 32 * 15, time = raise_time, easing = LINEAR_EASING)
+	addtimer(VARSET_CALLBACK(src, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, forceMove), raise_target), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+
+//////////////////////////////////////////////////////////////
+
+
 //TITAN HAS FALLEN
 /obj/vehicle/walker/proc/prepare_titan_fall()
 	var/mob/user = seats[VEHICLE_DRIVER]
@@ -30,20 +54,21 @@
 
 /obj/vehicle/walker/proc/titan_fall(obj/item/hardpoint/walker/spinal/jetpack/module, turf/fall_target, fall_time)
 	module.perform_action(fall_time)
-
-	pixel_y = 32 * 15
 	forceMove(fall_target)
-	shadow_holder.pixel_y = initial(shadow_holder.pixel_y) * 14
-	shadow_holder.forceMove(fall_target)
 
 	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(get_turf(src))
-	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), fall_time)
+	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
-	//Effect of sprite coming down
 	layer = ABOVE_FLY_LAYER
-	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), fall_time)
+	pixel_y = 32 * 15
+	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
-	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y), time = fall_time, easing = LINEAR_EASING)
+
+	shadow_holder.alpha = 0
+	shadow_holder.forceMove(fall_target)
+	animate(shadow_holder, alpha = 255, time = fall_time, easing = LINEAR_EASING)
+	animate(shadow_holder, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
+	addtimer(VARSET_CALLBACK(shadow_holder, pixel_y, initial(shadow_holder.pixel_y)), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	FOR_DVIEW(var/mob/mob, 7, fall_target, HIDE_INVISIBLE_OBSERVER)
 		shake_camera(mob, 4, 5)
@@ -53,20 +78,38 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/vehicle/walker/proc/titan_raise(obj/item/hardpoint/walker/spinal/jetpack/module, turf/raise_target, raise_time)
+/obj/vehicle/walker/proc/flight_start(obj/item/hardpoint/walker/spinal/jetpack/module, turf/raise_target, raise_time)
 	module.perform_action(raise_time)
+	var/turf/current = get_turf(src)
 
-	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(get_turf(src))
+	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(current)
 	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), raise_time)
 
-	//Effect of sprite flying up
-	layer = ABOVE_FLY_LAYER
-	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), raise_time)
-	animate(src, pixel_y = 32 * 15, time = raise_time, easing = LINEAR_EASING)
-	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y) * 14, time = raise_time, easing = LINEAR_EASING)
+	shadow_holder.pixel_y = 0
+	shadow_holder.forceMove(current)
+	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y), time = raise_time, easing = LINEAR_EASING)
 
+	animate(src, pixel_y = 32, time = raise_time, easing = LINEAR_EASING)
 	addtimer(VARSET_CALLBACK(src, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
-	addtimer(VARSET_CALLBACK(shadow_holder, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, forceMove), raise_target), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+
+/obj/vehicle/walker/proc/flight_end(obj/item/hardpoint/walker/spinal/jetpack/module, turf/fall_target, fall_time)
+	module.perform_action(fall_time)
+	forceMove(fall_target)
+
+	shadow_holder.pixel_y = 0
+	animate(shadow_holder, pixel_y = initial(shadow_holder.pixel_y), time = fall_time, easing = LINEAR_EASING)
+	addtimer(CALLBACK(shadow_holder, TYPE_PROC_REF(/atom/movable, forceMove), src), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	pixel_y = 32
+	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
+	addtimer(VARSET_CALLBACK(src, pixel_y, 0), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+	FOR_DVIEW(var/mob/mob, 7, fall_target, HIDE_INVISIBLE_OBSERVER)
+		shake_camera(mob, 4, 5)
+	FOR_DVIEW_END
 
 
 //////////////////////////////////////////////////////////////
@@ -78,10 +121,10 @@
 
 	var/turf/below = SSmapping.get_turf_below(get_turf(src))
 	if(!below)
+		return
+	if(!istype(get_turf(src), /turf/open_space))
 		if(shadow_holder.loc != src && !module.performing_action)
-			module.perform_action(3 SECONDS)
-			animate(shadow_holder, pixel_y = 0, time = 2 SECONDS, easing = LINEAR_EASING)
-			addtimer(CALLBACK(shadow_holder, TYPE_PROC_REF(/atom/movable, forceMove), src), 2 SECONDS, TIMER_UNIQUE|TIMER_DELETE_ME)
+			shadow_holder.forceMove(src)
 		return
 	if(below.density)
 		return
@@ -95,7 +138,7 @@
 		below = below_us
 		heigh++
 	shadow_holder.forceMove(below)
-	animate(shadow_holder, pixel_y = heigh * initial(shadow_holder.pixel_y), time = 2 SECONDS, easing = LINEAR_EASING)
+	animate(shadow_holder, pixel_y = heigh * initial(shadow_holder.pixel_y), time = 1 SECONDS, easing = LINEAR_EASING)
 
 
 //////////////////////////////////////////////////////////////
