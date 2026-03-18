@@ -5,10 +5,10 @@
 	icon_state = "breacher_hammer"
 	item_state = "breacher_hammer"
 	item_icons = list(
-		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/suit_slot.dmi',
-		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/belt.dmi',
-		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_0.dmi',
-		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_0.dmi'
+		WEAR_J_STORE = 'code_ru/icons/mob/humans/onmob/hammer_suit_slot.dmi',
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/hammer_belt.dmi',
+		WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/hammer_lefthand.dmi',
+		WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/hammer_righthand.dmi'
 	)
 	pickup_sound = "gunequip"
 	hitsound = "code_ru/sound/weapon/hammer_swing.ogg"
