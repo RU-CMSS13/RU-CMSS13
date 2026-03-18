@@ -2,7 +2,7 @@
 	name = "\improper M40 breacher helmet"
 	desc = "A helmet designed for USCM breacher. Contains heavy insulation, covered in nomex weave."
 	icon = 'code_ru/icons/mob/humans/onmob/head_1.dmi'
-	icon_state = "st_h" //Назвал "st_h" чтобы было короче. Камуфляжы находится в папке icons/obj/items/clothing/hats/hats_by_map
+	icon_state = "u_breacher_helmet"
 	item_icons = list(
 		WEAR_HEAD = 'code_ru/icons/mob/humans/onmob/head_1.dmi'
 	)

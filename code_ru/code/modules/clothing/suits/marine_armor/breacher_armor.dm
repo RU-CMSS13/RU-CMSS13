@@ -8,7 +8,7 @@
 	WEAR_JACKET = 'code_ru/icons/mob/humans/onmob/suit_1.dmi'
 	)
 	icon = 'code_ru/icons/obj/items/clothing/cm_suits.dmi'
-	icon_state = "st"
+	icon_state = "u_st_armor"
 	armor_melee = CLOTHING_ARMOR_HIGH
 	armor_bullet = CLOTHING_ARMOR_HIGHPLUS
 	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
