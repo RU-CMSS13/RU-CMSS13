@@ -33,7 +33,7 @@
 #include "modules\clothing\gloves\marine_gloves.dm"
 #include "modules\clothing\head\helmet.dm"
 #include "modules\clothing\head\WY\goons.dm"
-
+#include "modules\clothing\suits\marine_armor\breacher_armor.dm"
 #include "modules\clothing\suits\marine_armor\WY\goon.dm"
 #include "modules\cm_aliens\structures\blueprints.dm"
 #include "modules\cm_marines\equipment\kit_boxes.dm"
