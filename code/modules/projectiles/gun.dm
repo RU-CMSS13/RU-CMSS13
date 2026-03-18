@@ -2239,7 +2239,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	SIGNAL_HANDLER
 
 //RUCM START
-	if(callback_can_fire && !callback_can_fire.Invoke(source, object, params))
+	if(callback_can_fire && !callback_can_fire.Invoke(source, object, params, FALSE))
 		return
 //RUCM END
 

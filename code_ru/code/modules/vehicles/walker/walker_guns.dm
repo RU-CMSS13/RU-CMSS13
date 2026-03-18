@@ -288,6 +288,8 @@
 /obj/item/weapon/gun/mounted/mecha_laser/has_ammunition()
 	return TRUE
 
+/obj/item/weapon/gun/mounted/mecha_laser/reload_into_chamber()
+	return TRUE
 
 
 
@@ -352,7 +354,7 @@
 /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_4*2)
+	set_fire_delay(FIRE_DELAY_TIER_6)
 
 
 

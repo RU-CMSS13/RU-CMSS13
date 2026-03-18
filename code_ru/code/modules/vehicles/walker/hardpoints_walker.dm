@@ -253,7 +253,7 @@
 		if(hardpoint.mounted_gun.type == mounted_gun.type)
 			return list(max(0.1, mounted_gun.accuracy_mult_unwielded - 0.1*rand(5,7)), SCATTER_AMOUNT_TIER_2 + SCATTER_AMOUNT_TIER_2)
 
-/obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params)
+/obj/item/hardpoint/walker/proc/can_fire(datum/source, atom/object, params, consume_energy = TRUE)
 	if(!health)
 		return FALSE
 	var/obj/vehicle/walker/vessel = owner
@@ -264,7 +264,8 @@
 		return FALSE
 	if(!in_firing_arc(object))
 		return FALSE
-	vessel.consume_energy(mounted_gun.charge_cost)
+	if(consume_energy)
+		vessel.consume_energy(mounted_gun.charge_cost)
 	return TRUE
 
 /obj/item/hardpoint/walker/proc/can_stop_fire(datum/source, atom/object, params)
