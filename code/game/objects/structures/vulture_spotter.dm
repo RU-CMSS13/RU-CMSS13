@@ -314,7 +314,7 @@
 
     var/obj/item/weapon/gun/boltaction/vulture/rifle = bound_rifle?.resolve()
     if(rifle)
-        SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
+    SEND_SIGNAL(rifle, COMSIG_GUN_ALT_IFF_TOGGLED, toggle)
 //RU-CHANGE
 
 /obj/structure/vulture_spotter_tripod/check_eye(mob/living/user)
