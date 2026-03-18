@@ -37,6 +37,7 @@
 	new /obj/item/clothing/glasses/hud/health(src)
 	new	/obj/item/device/defibrillator/compact(src)
 	new /obj/item/roller(src)
+
 /obj/item/storage/box/spec/breacher
 	name = "\improper Breacher equipment case"
 	desc = "A large case containing your experimental M40 full armor, heavy hammer and montage shield."
@@ -49,6 +50,7 @@
 	new /obj/item/clothing/head/helmet/marine/m40(src)
 	new /obj/item/clothing/gloves/marine/m40(src)
 	new /obj/item/weapon/twohanded/breacher_hammer(src)
+	new /obj/item/weapon/shield/montage(src)
 	new /obj/item/weapon/gun/launcher/rocket/brute/breacher(src)
 	new /obj/item/storage/belt/gun/brutepack(src)
 	new /obj/item/ammo_magazine/rocket/brute(src)
