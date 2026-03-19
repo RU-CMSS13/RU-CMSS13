@@ -38,7 +38,7 @@
 	if(!module.flying)
 		return
 
-	var/atom/movable/screen/minimap/targeting = SSminimaps.fetch_minimap_object(GLOB.railgun_eye_location.z_pos, MINIMAP_FLAG_USCM, live = FALSE, popup = FALSE, drawing = FALSE, for_client = user.client)
+	var/atom/movable/screen/minimap/targeting = SSminimaps.fetch_minimap_object(GLOB.railgun_eye_location.z_pos, MINIMAP_FLAG_USCM, live = TRUE, popup = FALSE, drawing = FALSE, for_client = user.client)
 	user.client.add_to_screen(targeting)
 	//We should see ceiling always
 	targeting.update_ceiling_overlay(user.client)
