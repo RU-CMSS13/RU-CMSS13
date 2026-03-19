@@ -28,8 +28,9 @@
 /obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
 	var/obj/vehicle/walker/vessel = owner
 	var/turf/under = get_turf(vessel)
-	if(flying && istype(under, /turf/open_space))
-		if(!use_fuel(fuel_consumption_rate * delta_time))
+	if(flying)
+		var/fuel_to_spend = istype(under, /turf/open_space) ? fuel_consumption_rate : fuel_consumption_rate / 2
+		if(!use_fuel(fuel_to_spend * delta_time))
 			flying = FALSE
 			stop_flying(vessel)
 			under.on_throw_end(vessel)
@@ -54,12 +55,14 @@
 	vessel.move_sounds = move_sounds
 	vessel.turn_sounds = turn_sounds
 	vessel.update_shadow(src)
+	vessel.recalculate_hardpoints()
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/stop_flying(obj/vehicle/walker/vessel)
 	vessel.flags_atom &= ~NO_ZFALL
 	vessel.move_sounds = initial(vessel.move_sounds)
 	vessel.turn_sounds = initial(vessel.turn_sounds)
 	vessel.shadow_holder.forceMove(vessel)
+	vessel.recalculate_hardpoints()
 
 /obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
 	if(performing_action)

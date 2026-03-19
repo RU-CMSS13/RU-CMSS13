@@ -189,6 +189,12 @@
 	for(var/obj/item/hardpoint/walker/selected in hardpoints)
 		selected.on_source_process(delta_time)
 
+	if(seats[VEHICLE_DRIVER])
+		var/mob/user = seats[VEHICLE_DRIVER]
+		if(user.is_mob_incapacitated())
+			visible_message(SPAN_WARNING("Warning, Pilot of [src] are incapacitated, required immediate medical assistance!"))
+			return
+
 
 //////////////////////////////////////////////////////////////
 // INTERACTIONS
@@ -297,10 +303,6 @@
 /obj/vehicle/walker/check_eye(mob/living/user)
 	if(stat == DEAD || get_dist(user, src) > 1)
 		user.unset_interaction()
-		return
-
-	if(user.is_mob_incapacitated())
-		visible_message(SPAN_WARNING("Warning, Pilot of [src] are incapacitated, required immediate medical assistance!"))
 		return
 
 /obj/vehicle/walker/MouseDrop_T(mob/target, mob/living/carbon/human/user)
@@ -428,6 +430,8 @@
 	if(move_delay == initial(move_delay))
 		next_move = INFINITY
 	else
+		if(flags_atom & NO_ZFALL)
+			cached_move_delay /= 2
 		move_delay += cached_move_delay
 		next_move = world.time + move_delay
 
