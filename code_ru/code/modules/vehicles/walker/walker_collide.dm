@@ -63,4 +63,4 @@
 		return
 
 	var/obj/vehicle/walker/vessel = some_vehicle
-	vessel.prepare_titan_fall()
+	vessel.prepare_titan_fall(linked_dropship)

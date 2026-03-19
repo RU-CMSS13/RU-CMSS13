@@ -26,7 +26,7 @@
 
 
 //TITAN HAS FALLEN
-/obj/vehicle/walker/proc/prepare_titan_fall()
+/obj/vehicle/walker/proc/prepare_titan_fall(obj/docking_port/mobile/marine_dropship/our_dropship)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user)
 		return
@@ -38,14 +38,20 @@
 	if(!module.flying)
 		return
 
-	//Selecting the fucking real cord of map, WIP. Supposed to be via MAP overlay.
-	var/x_coord = tgui_input_real_number(user, "Input real longitude", "Longitude")
-	var/y_coord = tgui_input_real_number(user, "Input real latitude", "Latitude")
-	if(!x_coord || !y_coord)
+	var/atom/movable/screen/minimap/targeting = SSminimaps.fetch_minimap_object(GLOB.railgun_eye_location.z_pos, MINIMAP_FLAG_USCM, live = FALSE, popup = FALSE, drawing = FALSE, for_client = user.client)
+	user.client.add_to_screen(targeting)
+	//We should see ceiling always
+	targeting.update_ceiling_overlay(user.client)
+	var/list/polled_coords = targeting.get_coords_from_click(user)
+	//It sleeps
+	if(user?.client)
+		user.client.remove_from_screen(targeting)
+	if(!polled_coords)
 		return
 
-	var/turf/fall_target = locate(x_coord, y_coord, GLOB.railgun_eye_location.z_pos)
-	if(!fall_target || fall_target.density)
+	var/turf/fall_target = locate(polled_coords[1], polled_coords[2], GLOB.railgun_eye_location.z_pos)
+	var/area/targ_area = get_area(fall_target)
+	if(!fall_target || fall_target.density || targ_area.ceiling > CEILING_GLASS || !our_dropship.in_flyby)
 		to_chat(user, SPAN_WARNING("Seems there nowhere to fall."))
 		return
 
