@@ -77,7 +77,7 @@
 	if(!vessel.can_consume_energy(consumption))
 		return
 	zoom = !zoom
-	vessel.update_zoom_pixels(zoom)
+	vessel.update_zoom_pixels(TRUE)
 
 /obj/item/device/motiondetector/walker
 	detector_range = 24
@@ -152,6 +152,11 @@
 
 	var/cooldown_timer_id = null
 	var/delay_between_hits = 10 SECONDS
+
+/obj/item/hardpoint/walker/spinal/shield/deactivate(obj/vehicle/walker/vessel)
+	. = ..()
+
+	damage_capacity = 0
 
 /obj/item/hardpoint/walker/spinal/shield/on_install(obj/vehicle/walker/vessel)
 	update_filter()
@@ -233,8 +238,7 @@
 	vessel.consume_energy(capacity_recover_rate * 4)
 
 /obj/item/hardpoint/walker/spinal/shield/proc/stop_recovering(time_to_resume)
-	if(time_to_resume)
-		cooldown_timer_id = addtimer(CALLBACK(src, PROC_REF(resume_recovering)), time_to_resume, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+	cooldown_timer_id = addtimer(CALLBACK(src, PROC_REF(resume_recovering)), time_to_resume, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/spinal/shield/proc/update_filter()
 	owner.add_filter("spinal_shield", 1, list("type" = "outline", "color" = shield_color, "size" = damage_capacity / max_damage_capacity * 2))

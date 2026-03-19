@@ -8,8 +8,7 @@
 	can_hold = list(
 		/obj/item/ammo_magazine/walker,
 		/obj/item/ammo_magazine/flamer_tank/walker,
-		/obj/item/ammo_magazine/rocket/ap/tactical,
-		/obj/item/ammo_magazine/rocket/brute/tactical,
+		/obj/item/ammo_magazine/rocket/walker,
 		/obj/item/storage/box/nade_box,
 		/obj/item/fuel_cell/walker_reactor,
 	)

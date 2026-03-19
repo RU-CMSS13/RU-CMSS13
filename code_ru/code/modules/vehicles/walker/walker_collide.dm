@@ -22,6 +22,7 @@
 /obj/vehicle/walker/onZImpact(turf/impact_turf, height)
 	collision_result(height * 100, src, "all")
 
+// The fucking domino effect)))
 /obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason, zones)
 	take_damage_type(damage, "blunt", collision_reason, null, zones)
 	playsound(src, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 49, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
@@ -37,6 +38,9 @@
 	var/turn_angle = turning_angle(dir, collision_reason.dir)
 	Move(target)
 	rotate_hardpoints(turn_angle)
+	if(flags_atom & NO_ZFALL)
+		update_shadow(hardpoints_by_slot[WALKER_HARDPOIN_SPINAL])
+		shadow_holder.dir = dir
 	for(var/atom/movable/unlucky as anything in cached_interactions)
 		if(ismob(unlucky))
 			var/mob/living/unlucky_mob = unlucky
@@ -48,9 +52,8 @@
 			unlucky_vessel.collision_result(damage, src)
 
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	if(!energy_source)
-		return
-	energy_source.reboot_reactor(damage / 10)
+	if(energy_source)
+		energy_source.reboot_reactor(damage / 10)
 	swith_visual_position(90, -20)
 	addtimer(CALLBACK(src, PROC_REF(swith_visual_position), 0, 0), damage / 10 - 2, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 

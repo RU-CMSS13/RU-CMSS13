@@ -15,7 +15,7 @@
 	max_health = 150
 	allowed_seat = VEHICLE_DRIVER
 
-	//Additional move delay for every hardpoint installed on mecha
+	// Additional move delay for every hardpoint installed on mecha
 	var/weight = 0.5
 
 	var/move_delay = 0
@@ -45,6 +45,15 @@
 
 	. = ..()
 
+/obj/item/hardpoint/walker/deactivate(obj/vehicle/walker/vessel)
+	. = ..()
+
+	if(motion_detector.active)
+		motion_detector.toggle_active(null, motion_detector.active)
+	if(zoom)
+		zoom = FALSE
+		vessel.update_zoom_pixels(FALSE, FALSE)
+
 /obj/item/hardpoint/walker/ex_act(severity)
 	if(owner || explo_proof)
 		return
@@ -71,7 +80,7 @@
 /obj/item/hardpoint/walker/on_uninstall(obj/vehicle/walker/vessel)
 	if(zoom)
 		zoom = FALSE
-		vessel.update_zoom_pixels(zoom)
+		vessel.update_zoom_pixels(FALSE, FALSE)
 
 	. = ..()
 
@@ -130,7 +139,6 @@
 	health -= real_damage
 	if(!health && owner)
 		deactivate(owner)
-		remove_buff(owner)
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	if(mounted_gun)
@@ -151,7 +159,7 @@
 		var/consumption = ceil(zoom_size * delta_time * 0.5)
 		if(!vessel.can_consume_energy(consumption))
 			zoom = FALSE
-			vessel.update_zoom_pixels(zoom)
+			vessel.update_zoom_pixels(FALSE, FALSE)
 		else
 			vessel.consume_energy(consumption)
 
@@ -287,124 +295,3 @@
 	if(length(modifiers) && !check_modifiers(modifiers, TRUE))
 		return FALSE
 	return TRUE
-
-
-
-
-//////////////////////////////////////////////////////////////
-// HEAD
-
-/obj/item/hardpoint/walker/head
-	name = "Mecha Head"
-	desc = "Protects pilot from potential danger outside mecha."
-
-	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'
-	icon_state = "cockpit_glass"
-	disp_icon_state = "mech_cockpit"
-
-	slot = WALKER_HARDPOIN_HEAD
-	hdpt_layer = HDPT_LAYER_SUPPORT
-	destruction_on_zero = FALSE
-
-/obj/item/hardpoint/walker/head/get_icon_image(x_offset, y_offset, new_dir, type_slot)
-	if(owner?.seats[VEHICLE_DRIVER])
-		type_slot = "_closed"
-	else
-		type_slot = "_open"
-
-	. = ..(x_offset, y_offset, new_dir, type_slot)
-
-
-
-
-//////////////////////////////////////////////////////////////
-// LEGS
-
-/obj/item/hardpoint/walker/leg
-	name = "Mecha Leg"
-	desc = "Allows mecha to move around."
-
-	hdpt_layer = HDPT_LAYER_SUPPORT
-	destruction_on_zero = FALSE
-
-	move_delay = 2
-	move_max_momentum = 4
-	move_turn_momentum_loss_factor = 0.5
-	move_momentum_build_factor = 0.5
-
-/obj/item/hardpoint/walker/leg/deactivate(obj/vehicle/walker/vessel)
-	. = ..()
-	vessel.recalculate_hardpoints()
-
-
-/obj/item/hardpoint/walker/leg/left
-	name = "Left Mecha Leg"
-
-	disp_icon_state = "mech_part_l_leg"
-	slot = WALKER_HARDPOIN_LEFT_LEG
-
-/obj/item/hardpoint/walker/leg/right
-	name = "Right Mecha Leg"
-
-	disp_icon_state = "mech_part_r_leg"
-	slot = WALKER_HARDPOIN_RIGHT_LEG
-
-
-
-
-//////////////////////////////////////////////////////////////
-// HANDS
-
-/obj/item/hardpoint/walker/hand
-	name = "Mecha Hand"
-	desc = "Allows mecha to hold weapons. You can use a screwdriver to remove any equipment installed in this slot."
-
-	hdpt_layer = HDPT_LAYER_SUPPORT
-	firing_arc = 120
-	destruction_on_zero = FALSE
-
-	mount_class = GUN_MOUNT_MECHA
-
-/obj/item/hardpoint/walker/hand/get_icon_image(x_offset, y_offset, new_dir, type_slot)
-	type_slot = slot == WALKER_HARDPOIN_LEFT_HAND ? "_l_hand" : "_r_hand"
-
-	. = ..(x_offset, y_offset, new_dir, type_slot)
-
-	if(mounted_gun)
-		var/image/gun = image(icon = disp_icon, icon_state = "[mounted_gun.item_state + type_slot]", pixel_x = x_offset, pixel_y = y_offset, dir = new_dir)
-		var/image/self = .[1]
-		gun.color = self.color
-		. += gun
-
-/obj/item/hardpoint/walker/hand/tgui_additional_data()
-	. = ..()
-
-	if(!mounted_gun?.current_mag || !(mounted_gun.current_mag.current_rounds || mounted_gun.current_mag.reagents))
-		return
-
-	var/list/data = list()
-	.["hardpoint_data_additional"] += list(data)
-	data["value_name"] = "Ammo"
-	data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
-	data["max_value"] = mounted_gun.current_mag.max_rounds
-
-/obj/item/hardpoint/walker/hand/check_modifiers(modifiers, button = FALSE)
-	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])
-		return FALSE
-
-	if(button && (slot == WALKER_HARDPOIN_LEFT_HAND ? modifiers[BUTTON] != LEFT_CLICK : modifiers[BUTTON] != MIDDLE_CLICK))
-		return FALSE
-	return TRUE
-
-
-/obj/item/hardpoint/walker/hand/left
-	name = "Left Mecha Hand"
-	desc = "Allows mecha to hold weapons."
-
-	slot = WALKER_HARDPOIN_LEFT_HAND
-
-/obj/item/hardpoint/walker/hand/right
-	name = "Right Mecha Hand"
-	desc = "Allows mecha to hold weapons."
-
-	slot = WALKER_HARDPOIN_RIGHT_HAND

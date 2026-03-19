@@ -1,6 +1,27 @@
 /obj/vehicle/walker
 	var/obj/walker_shadow/shadow_holder
 
+/obj/vehicle/walker/proc/update_shadow(obj/item/hardpoint/walker/spinal/jetpack/module)
+	if(!module.flying)
+		return
+
+	var/turf/current = get_turf(src)
+	if(!istype(current, /turf/open_space))
+		shadow_holder.forceMove(current)
+		return
+
+	var/turf/below = SSmapping.get_turf_below(current)
+	if(!below || below.density)
+		return
+
+	var/turf/below_us = below
+	while(below_us)
+		below_us = SSmapping.get_turf_below(below)
+		if(!below_us || below_us.density)
+			break
+		below = below_us
+	shadow_holder.forceMove(below)
+
 
 //////////////////////////////////////////////////////////////
 
@@ -9,23 +30,24 @@
 	module.perform_action(raise_time)
 
 	var/obj/landing_dust_effect/effect = new /obj/landing_dust_effect(get_turf(src))
-	addtimer(CALLBACK(effect, GLOBAL_PROC_REF(qdel), effect), raise_time)
-
 	animate(shadow_holder, alpha = 0, time = raise_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(shadow_holder, alpha, 255), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
-
 	layer = ABOVE_FLY_LAYER
-	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 	animate(src, pixel_y = 32 * 15, time = raise_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(src, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, forceMove), raise_target), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+	addtimer(CALLBACK(src, PROC_REF(reset_titan_raise), raise_target, effect), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+
+/obj/vehicle/walker/proc/reset_titan_raise(turf/raise_target, obj/landing_dust_effect/effect)
+	qdel(effect)
+	shadow_holder.alpha = 255
+	layer = initial(layer)
+	pixel_y = get_pixels_y()
+	forceMove(raise_target)
 
 
 //////////////////////////////////////////////////////////////
 
 
-//TITAN HAS FALLEN
+// TITAN HAS FALLEN
 /obj/vehicle/walker/proc/prepare_titan_fall(obj/docking_port/mobile/marine_dropship/our_dropship)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user)
@@ -40,10 +62,10 @@
 
 	var/atom/movable/screen/minimap/targeting = SSminimaps.fetch_minimap_object(GLOB.railgun_eye_location.z_pos, MINIMAP_FLAG_USCM, live = TRUE, popup = FALSE, drawing = FALSE, for_client = user.client)
 	user.client.add_to_screen(targeting)
-	//We should see ceiling always
+	// We should see ceiling always
 	targeting.update_ceiling_overlay(user.client)
 	var/list/polled_coords = targeting.get_coords_from_click(user)
-	//It sleeps
+	// It sleeps
 	if(user?.client)
 		user.client.remove_from_screen(targeting)
 	if(!polled_coords)
@@ -71,7 +93,7 @@
 	layer = ABOVE_FLY_LAYER
 	pixel_y = 32 * 15
 	addtimer(VARSET_CALLBACK(src, layer, initial(layer)), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
-	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
+	animate(src, pixel_y = get_pixels_y(), time = fall_time, easing = LINEAR_EASING)
 
 	shadow_holder.alpha = 0
 	shadow_holder.forceMove(fall_target)
@@ -94,7 +116,7 @@
 	shadow_holder.forceMove(current)
 
 	animate(src, pixel_y = 32, time = raise_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(src, pixel_y, 0), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, pixel_y, get_pixels_y()), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, forceMove), raise_target), raise_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
@@ -105,36 +127,11 @@
 
 	pixel_y = 32
 	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(src, pixel_y, 0), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+	addtimer(VARSET_CALLBACK(src, pixel_y, get_pixels_y()), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	FOR_DVIEW(var/mob/mob, 7, fall_target, HIDE_INVISIBLE_OBSERVER)
 		shake_camera(mob, 4, 5)
 	FOR_DVIEW_END
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/update_shadow(obj/item/hardpoint/walker/spinal/jetpack/module)
-	if(!module.flying)
-		return
-
-	var/turf/current = get_turf(src)
-	if(!istype(current, /turf/open_space))
-		shadow_holder.forceMove(current)
-		return
-
-	var/turf/below = SSmapping.get_turf_below(current)
-	if(!below || below.density)
-		return
-
-	var/turf/below_us = below
-	while(below_us)
-		below_us = SSmapping.get_turf_below(below)
-		if(!below_us || below_us.density)
-			break
-		below = below_us
-	shadow_holder.forceMove(below)
 
 
 //////////////////////////////////////////////////////////////

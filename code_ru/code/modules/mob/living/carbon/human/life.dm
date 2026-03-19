@@ -50,7 +50,10 @@
 			"Hold!" = image(icon = 'icons/mob/radial.dmi', icon_state = "order_hold")
 			)
 
-		new_aura = show_radial_menu(my_owner, my_owner, aura_selections, radius = 38, require_near = TRUE, tooltips = TRUE)
+		var/atom/movable/real_anchor = my_owner
+		while(real_anchor.loc && !isturf(real_anchor.loc))// If we want to find the fucking real atom located on map
+			real_anchor = real_anchor.loc
+		new_aura = show_radial_menu(my_owner, real_anchor, aura_selections, radius = 38, require_near = TRUE, tooltips = TRUE)
 		switch(new_aura)
 			if("Help")
 				to_chat(my_owner, SPAN_DANGER("<br>Each order has it's own effects. \

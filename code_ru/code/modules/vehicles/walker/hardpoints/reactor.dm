@@ -14,7 +14,6 @@
 
 	var/turned_on = TRUE
 	var/rebooting = FALSE
-	var/count_down = FALSE
 
 	var/reboot_time = 2 MINUTES
 	var/meltdown_time = 1 MINUTES
@@ -36,6 +35,20 @@
 	QDEL_NULL(fuel)
 
 	. = ..()
+
+/obj/item/hardpoint/walker/reactor/repaired()
+	. = ..()
+
+	deltimer(meltdown_timer_id)
+	meltdown_timer_id = null
+	reactor_state = VEHICLE_REACTOR_FINE
+
+/obj/item/hardpoint/walker/reactor/deactivate(obj/vehicle/walker/vessel)
+	. = ..()
+
+	turned_on = FALSE
+	if(!meltdown_timer_id)
+		meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/reactor/material_use(obj/item/tool/weldingtool/welder, mob/user, modificator = 4)
 	if(reactor_state)
@@ -82,18 +95,11 @@
 
 	if(owner)
 		owner.visible_message(SPAN_HIGHDANGER("[owner] burst with steam and fire. That not good, seems like something VERY wrong with [src], it going critical."))
-	count_down = TRUE
 	meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/reactor/proc/meltdown()
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
 	cell_explosion(get_turf(src), 1000, 300, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
-
-/obj/item/hardpoint/walker/reactor/repaired()
-	. = ..()
-	deltimer(meltdown_timer_id)
-	meltdown_timer_id = null
-	reactor_state = VEHICLE_REACTOR_FINE
 
 /obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
 	if(rebooting)
@@ -104,8 +110,7 @@
 		return
 
 	if(turned_on)
-		if(count_down)
-			count_down = FALSE
+		if(meltdown_timer_id)
 			owner.visible_message(SPAN_WARNING("[owner] burst with steam as [src] turns off."))
 		if(owner.light_state)
 			owner.switch_light_state(FALSE, TRUE)

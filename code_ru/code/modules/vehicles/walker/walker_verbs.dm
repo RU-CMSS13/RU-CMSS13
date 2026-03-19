@@ -103,7 +103,8 @@ AND YOULL BE FINE!*/
 	var/selected = tgui_input_list(user, "Select action to perform", "Special Abilities", hardpoint_actions)
 	if(!selected)
 		return
-
+	if(!hardpoint_actions[selected].health)
+		return
 	hardpoint_actions[selected].custom_action(user, selected)
 
 
@@ -192,11 +193,11 @@ AND YOULL BE FINE!*/
 		if(selected_group == SELECTED_GROUP_HANDS && launcer.mounted_gun.current_mag?.current_rounds)
 			selected_group = SELECTED_GROUP_SPINAL
 			launcer.zoom = TRUE
-			update_zoom_pixels()
+			update_zoom_pixels(TRUE)
 		else
 			selected_group = SELECTED_GROUP_HANDS
 			launcer.zoom = FALSE
-			update_zoom_pixels()
+			update_zoom_pixels(TRUE)
 	else
 		selected_group = SELECTED_GROUP_HANDS
 

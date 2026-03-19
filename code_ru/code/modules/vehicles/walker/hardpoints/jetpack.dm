@@ -4,6 +4,11 @@
 
 	custom_actions = list("Fly", "Evac")
 
+	move_delay = 4
+	move_max_momentum = 8
+	move_turn_momentum_loss_factor = 1
+	move_momentum_build_factor = 1
+
 	var/fuel = 200
 	var/fuel_max = 200
 	var/fuel_recover_rate = 2
@@ -13,8 +18,15 @@
 
 	var/list/move_sounds = null
 	var/list/turn_sounds = null
+	var/list/cache_move_sounds = null
+	var/list/cache_turn_sounds = null
 
 	var/performing_action = FALSE
+
+/obj/item/hardpoint/walker/spinal/jetpack/deactivate(obj/vehicle/walker/vessel)
+	. = ..()
+
+	stop_flying(vessel)
 
 /obj/item/hardpoint/walker/spinal/jetpack/tgui_additional_data()
 	. = ..()
@@ -29,8 +41,9 @@
 	var/obj/vehicle/walker/vessel = owner
 	var/turf/under = get_turf(vessel)
 	if(flying)
-		var/fuel_to_spend = istype(under, /turf/open_space) ? fuel_consumption_rate : fuel_consumption_rate / 2
-		if(!use_fuel(fuel_to_spend * delta_time))
+		if(!istype(under, /turf/open_space))
+			return
+		if(!use_fuel(fuel_consumption_rate * delta_time))
 			flying = FALSE
 			stop_flying(vessel)
 			under.on_throw_end(vessel)
@@ -52,6 +65,8 @@
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/start_flying(obj/vehicle/walker/vessel)
 	vessel.flags_atom |= NO_ZFALL
+	cache_move_sounds = vessel.move_sounds
+	cache_turn_sounds = vessel.turn_sounds
 	vessel.move_sounds = move_sounds
 	vessel.turn_sounds = turn_sounds
 	vessel.update_shadow(src)
@@ -59,8 +74,8 @@
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/stop_flying(obj/vehicle/walker/vessel)
 	vessel.flags_atom &= ~NO_ZFALL
-	vessel.move_sounds = initial(vessel.move_sounds)
-	vessel.turn_sounds = initial(vessel.turn_sounds)
+	vessel.move_sounds = cache_move_sounds// initial() don't work on list? Since when?
+	vessel.turn_sounds = cache_turn_sounds
 	vessel.shadow_holder.forceMove(vessel)
 	vessel.recalculate_hardpoints()
 
@@ -74,7 +89,7 @@
 		prepare_titan_raise(user, owner)
 		return
 
-	if(!use_fuel(fuel_consumption_rate))
+	if(fuel < fuel_consumption_rate)
 		return
 	flying = !flying
 	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))

@@ -398,7 +398,7 @@
 	icon_state = "mech_smartgun_parts"
 	item_state = "redy_smartgun"
 
-	current_mag = /obj/item/ammo_magazine/rocket/brute/tactical
+	current_mag = /obj/item/ammo_magazine/rocket/walker/brute
 	mount_class = GUN_MOUNT_MECHA
 
 	charge_cost = 150

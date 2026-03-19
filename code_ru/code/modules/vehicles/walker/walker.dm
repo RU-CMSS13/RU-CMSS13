@@ -1,8 +1,3 @@
-/////////////////
-// Walker
-/////////////////
-
-
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
@@ -187,6 +182,8 @@
 			consume_energy(light_consuming)
 
 	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		if(!selected.health)
+			continue
 		selected.on_source_process(delta_time)
 
 	if(seats[VEHICLE_DRIVER])
@@ -222,7 +219,7 @@
 	vehicle_faction = user.faction
 	user.forceMove(src)
 	user.reset_view(src)
-	update_zoom_pixels()
+	update_zoom_pixels(TRUE)
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
 	playsound_client(user.client, 'code_ru/sound/vehicle/walker/mecha_start.ogg', null, 20)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound_client), user.client, 'code_ru/sound/vehicle/walker/mecha_online.ogg', null, 20), 2 SECONDS)
@@ -251,7 +248,7 @@
 	if(user.client)
 		user.client.mouse_pointer_icon = initial(user.client.mouse_pointer_icon)
 
-	update_zoom_pixels(FALSE)
+	update_zoom_pixels(FALSE, FALSE)
 	user.reset_view(null)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
@@ -268,19 +265,21 @@
 		selected.pilot_ejected(user)
 	update_icon()
 
-/obj/vehicle/walker/proc/update_zoom_pixels(selected_zoom)
+/obj/vehicle/walker/proc/update_zoom_pixels(auto_provider, selected_zoom, selected_zoom_size)
 	var/mob/user = seats[VEHICLE_DRIVER]
 	if(!user?.client)
 		return
 
-	var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(isnull(selected_zoom) && zoom_provider)
-		selected_zoom = zoom_provider.zoom
+	if(auto_provider)
+		var/obj/item/hardpoint/walker/zoom_provider = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(zoom_provider)
+			selected_zoom = zoom_provider.zoom
+			selected_zoom_size = zoom_provider.zoom_size
 
-	if(selected_zoom && zoom_provider?.zoom_size)
-		user.client.change_view(zoom_provider.zoom_size, src)
+	if(selected_zoom && selected_zoom_size)
+		user.client.change_view(selected_zoom_size, src)
 		var/tilesize = 32
-		var/viewoffset = tilesize * zoom_provider.zoom_size / 2
+		var/viewoffset = tilesize * selected_zoom_size / 2
 		switch(dir)
 			if(NORTH)
 				user.client.set_pixel_x(0)
@@ -409,7 +408,7 @@
 	if(!.)
 		return
 	shadow_holder.dir = dir
-	update_zoom_pixels()
+	update_zoom_pixels(TRUE)
 
 /obj/vehicle/walker/proc/recalculate_hardpoints()
 	move_delay = initial(move_delay)
@@ -418,14 +417,23 @@
 	move_turn_momentum_loss_factor = initial(move_turn_momentum_loss_factor)
 
 	var/cached_move_delay = 0
-	for(var/obj/item/hardpoint/walker/current in hardpoints)
-		cached_move_delay += current.weight
-		if(!health)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
+		cached_move_delay += selected.weight
+
+	var/list/motion_realted_hardpoints = list()
+	if(flags_atom & NO_ZFALL)
+		motion_realted_hardpoints += hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	else
+		motion_realted_hardpoints += hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG]
+		motion_realted_hardpoints += hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG]
+
+	for(var/obj/item/hardpoint/walker/motion_related as anything in motion_realted_hardpoints)
+		if(!motion_related?.health)
 			continue
-		move_delay -= current.move_delay
-		move_max_momentum -= current.move_max_momentum
-		move_momentum_build_factor -= current.move_momentum_build_factor
-		move_turn_momentum_loss_factor -= current.move_turn_momentum_loss_factor
+		move_delay -= motion_related.move_delay
+		move_max_momentum -= motion_related.move_max_momentum
+		move_momentum_build_factor -= motion_related.move_momentum_build_factor
+		move_turn_momentum_loss_factor -= motion_related.move_turn_momentum_loss_factor
 
 	if(move_delay == initial(move_delay))
 		next_move = INFINITY
@@ -435,18 +443,20 @@
 		move_delay += cached_move_delay
 		next_move = world.time + move_delay
 
+/obj/vehicle/walker/proc/get_pixels_y()
+	. = override_pixel_y
+	if(flags_atom & NO_ZFALL)
+		overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
+		. += 16
+	if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
+		. += leg_pixel_y
+	else
+		. += legless_pixel_y
+
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
 
-	if(flags_atom & NO_ZFALL)
-		overlays += image('code_ru/icons/obj/vehicles/mech_effects.dmi', "mech_nozzle_effect")
-		override_pixel_y = 16
-
-	var/current_y = override_pixel_y
-	if(hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG] || hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG])
-		current_y += leg_pixel_y
-	else
-		current_y += legless_pixel_y
+	var/current_y = get_pixels_y()
 	if(pixel_y != current_y)
 		animate(src, pixel_y = current_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
 
@@ -476,10 +486,13 @@
 		overlays += hardpoint_image
 
 /obj/vehicle/walker/proc/swith_visual_position(angle, pixel_shift)
+	override_pixel_y = pixel_shift
 	var/matrix/base = matrix()
 	apply_transform(base.Turn(angle), UPDATE_TRANSFORM_ANIMATION_TIME)
-	override_pixel_y = pixel_shift
-	animate(src, pixel_y = pixel_shift, time = UPDATE_TRANSFORM_ANIMATION_TIME)
+	animate(src, pixel_y = get_pixels_y(), time = UPDATE_TRANSFORM_ANIMATION_TIME)
+	if(flags_atom & NO_ZFALL)
+		shadow_holder.apply_transform(base.Turn(angle), UPDATE_TRANSFORM_ANIMATION_TIME)
+		animate(shadow_holder, pixel_y = pixel_shift, time = UPDATE_TRANSFORM_ANIMATION_TIME)
 
 
 //////////////////////////////////////////////////////////////
@@ -531,7 +544,7 @@
 	// WALKER_DAMAGE_TOTAL, WALKER_DAMAGE_REMAINING
 	var/list/damages_applied = list(0, damage)
 	var/obj/item/hardpoint/walker/spinal/shield/projector = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(istype(projector) && projector.take_hits(damages_applied))
+	if(istype(projector) && projector.health && projector.take_hits(damages_applied))
 		return FALSE
 
 	damages_applied[WALKER_DAMAGE_REMAINING] *= get_dmg_multi(type)
@@ -561,7 +574,7 @@
 			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
 			user.unset_interaction()
 		new /obj/structure/walker_wreckage(get_turf(src))
-		playsound(src, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 75)
+		playsound(src, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 30)
 		qdel(src)
 	else
 		update_icon()
