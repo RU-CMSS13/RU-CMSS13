@@ -77,7 +77,7 @@
 /obj/item/hardpoint/walker/reactor/on_source_process(delta_time)
 	if(!meltdown_timer_id)
 		return
-	playsound(owner, 'sound/vox/vox/bizwarn.ogg', 20)
+	playsound(owner, 'sound/vox/vox/bizwarn.ogg', 100 * (1 - timeleft(meltdown_timer_id) / meltdown_time))
 
 /obj/item/hardpoint/walker/reactor/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	var/health_cache = health
@@ -105,9 +105,10 @@
 /obj/item/hardpoint/walker/reactor/proc/meltdown()
 	set waitfor = FALSE
 
+	meltdown_timer_id = null
 	owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
-	playsound(owner, 'sound/weapons/ring.ogg', 150, sound_range = 14)
-	sleep(1 SECONDS)
+	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
+	sleep(3 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
 	cell_explosion(get_turf(src), 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
