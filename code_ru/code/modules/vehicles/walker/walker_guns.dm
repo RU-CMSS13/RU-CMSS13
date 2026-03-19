@@ -274,12 +274,12 @@
 
 	mount_class = GUN_MOUNT_MECHA
 
-	charge_cost = 750
+	charge_cost = 2000
 
 /obj/item/weapon/gun/mounted/mecha_laser/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_SLOW + FIRE_DELAY_TIER_SHOTGUN_SLOW)
+	set_fire_delay(15 SECONDS)
 
 /obj/item/weapon/gun/mounted/mecha_laser/load_into_chamber()
 	in_chamber = create_bullet(ammo, initial(name))

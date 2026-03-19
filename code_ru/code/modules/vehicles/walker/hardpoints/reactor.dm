@@ -108,8 +108,10 @@
 	meltdown_timer_id = null
 	owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
 	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
+	deactivate(owner)
 	sleep(3 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
+	owner.health = 0
 	cell_explosion(get_turf(src), 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
 /obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
