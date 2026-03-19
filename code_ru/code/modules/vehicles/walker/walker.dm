@@ -162,7 +162,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 	var/obj/item/hardpoint/walker/reactor/energy_source = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-	if(energy_source?.reactor_state == VEHICLE_REACTOR_CRITICAL)
+	if(energy_source?.meltdown_timer_id)
 		energy_source.meltdown()
 
 	if(seats[VEHICLE_DRIVER])

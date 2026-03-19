@@ -74,6 +74,11 @@
 		data["current_value"] = timeleft(meltdown_timer_id) / 10
 		data["max_value"] = meltdown_time / 10
 
+/obj/item/hardpoint/walker/reactor/on_source_process(delta_time)
+	if(!meltdown_timer_id)
+		return
+	playsound(owner, 'sound/vox/vox/bizwarn.ogg', 20)
+
 /obj/item/hardpoint/walker/reactor/take_damage_type(list/damages_applied, type, atom/attacker, damage_to_apply, real_damage)
 	var/health_cache = health
 
@@ -98,8 +103,13 @@
 	meltdown_timer_id = addtimer(CALLBACK(src, PROC_REF(meltdown)), meltdown_time, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/hardpoint/walker/reactor/proc/meltdown()
+	set waitfor = FALSE
+
+	owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
+	playsound(owner, 'sound/weapons/ring.ogg', 150, sound_range = 14)
+	sleep(1 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
-	cell_explosion(get_turf(src), 1000, 300, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
+	cell_explosion(get_turf(src), 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 
 /obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
 	if(rebooting)
