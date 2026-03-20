@@ -8,8 +8,8 @@
 	item_state = "xm52"
 	lineart_ru = TRUE
 	item_icons = list(
-	WEAR_BACK = 'icons/mob/humans/onmob/clothing/back/guns_by_type/shotguns.dmi',
-	WEAR_J_STORE = 'icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/shotguns.dmi',
+	WEAR_BACK = 'code_ru/icons/obj/items/weapons/guns/guns_by_map/urban/back.dmi',
+	WEAR_J_STORE = 'code_ru/icons/obj/items/weapons/guns/guns_by_map/urban/suit_slot.dmi',
 	WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
 	)
@@ -20,20 +20,6 @@
 	unload_sound = 'sound/weapons/handling/l42_unload.ogg'
 	current_mag = /obj/item/ammo_magazine/rifle/xm52
 	attachable_allowed = list(
-		/obj/item/attachable/bayonet,
-		/obj/item/attachable/bayonet/upp,
-		/obj/item/attachable/bayonet/co2,
-		/obj/item/attachable/bayonet/antique,
-		/obj/item/attachable/bayonet/wy,
-		/obj/item/attachable/bayonet/custom,
-		/obj/item/attachable/bayonet/custom/red,
-		/obj/item/attachable/bayonet/custom/blue,
-		/obj/item/attachable/bayonet/custom/black,
-		/obj/item/attachable/bayonet/tanto,
-		/obj/item/attachable/bayonet/tanto/blue,
-		/obj/item/attachable/bayonet/rmc_replica,
-		/obj/item/attachable/bayonet/rmc,
-		/obj/item/attachable/bayonet/co2,
 		/obj/item/attachable/reddot,
 		/obj/item/attachable/reflex,
 		/obj/item/attachable/attached_gun/extinguisher,
