@@ -13,6 +13,7 @@
 	icon_state = "xm52_holster"
 	flags_atom = FPRINT|NO_GAMEMODE_SKIN
 	gun_has_gamemode_skin = FALSE
+	map_specific_decoration = FALSE
 	storage_slots = 8
 	max_w_class = 6
 	can_hold = list(
