@@ -11,7 +11,10 @@
 		return
 
 	var/turf/below = SSmapping.get_turf_below(current)
-	if(!below || below.density)
+	if(!below)
+		return
+	if(below.density)
+		shadow_holder.forceMove(src)
 		return
 
 	var/turf/below_us = below
