@@ -16,7 +16,7 @@ mkdir -p \
 	$1/config \
     $1/strings \
 	$1/nano \
-	$1/map_config
+	$1/map_config \
 	$1/code_ru
 
 if [ -d ".git" ]; then
