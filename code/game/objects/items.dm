@@ -141,8 +141,6 @@
 	var/blood_color = ""
 	/// taken from blood.dm
 	appearance_flags = KEEP_TOGETHER
-	/// lets us know if the item is an objective or not
-	var/is_objective = FALSE
 
 	/// Allows for bigger than 32x32 sprites.
 	var/worn_x_dimension = 32
@@ -386,7 +384,12 @@
 
 	return
 
+/* RUCM CHANGE
 /obj/item/proc/talk_into(mob/M as mob, text)
+*/
+//RUCM START
+/obj/item/proc/talk_into(mob/M as mob, text, list/tts_heard_list)
+//RUCM END
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)

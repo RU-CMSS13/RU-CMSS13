@@ -56,15 +56,39 @@
 			if(wall.type == /turf/closed/wall/resin)
 				wall.ChangeTurf(/turf/closed/wall/resin/thick)
 				total_resin_cost = XENO_THICKEN_WALL_COST
+/*RUCM EDIT
 			else if(wall.type == /turf/closed/wall/resin/membrane)
 				wall.ChangeTurf(/turf/closed/wall/resin/membrane/thick)
 				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
+*/
+//RUCM START
+			if(wall.type == /turf/closed/wall/resin || wall.type == /turf/closed/wall/resin/lesser_slave && thick) // Hivelord wall
+				wall.ChangeTurf(/turf/closed/wall/resin/thick)
+				total_resin_cost = XENO_THICKEN_WALL_COST
+
+			else if(wall.type == /turf/closed/wall/resin/lesser_slave && istype(src, /mob/living/carbon/xenomorph/drone)) // Drone wall
+				wall.ChangeTurf(/turf/closed/wall/resin)
+				total_resin_cost = XENO_THICKEN_WALL_COST
+
+			else if(wall.type == /turf/closed/wall/resin/membrane || wall.type == /turf/closed/wall/resin/membrane/lesser_slave && thick) // Hivelord membrane
+				wall.ChangeTurf(/turf/closed/wall/resin/membrane/thick)
+				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
+
+			else if(wall.type == /turf/closed/wall/resin/membrane/lesser_slave && istype(src, /mob/living/carbon/xenomorph/drone)) // Drone membrane
+				wall.ChangeTurf(/turf/closed/wall/resin/membrane)
+				total_resin_cost = XENO_THICKEN_MEMBRANE_COST
+//RUCM END
 			else
 				to_chat(src, SPAN_XENOWARNING("[wall] can't be made thicker."))
 				return SECRETE_RESIN_FAIL
 			thickened = TRUE
 
+/*RUCM EDIT
 		else if(istype(target, /obj/structure/mineral_door/resin))
+*/
+//RUCM START
+		else if(istype(target, /obj/structure/mineral_door/resin) || istype(target, /obj/structure/mineral_door/resin/lesser_slave))
+//RUCM END
 			var/obj/structure/mineral_door/resin/door = target
 			if (door.hivenumber != hivenumber)
 				to_chat(src, SPAN_XENOWARNING("[door] doesn't belong to your hive!"))
@@ -74,11 +98,25 @@
 				to_chat(src, SPAN_XENOWARNING("The extra resin is preventing us from reinforcing [door]. Wait until it elapse."))
 				return SECRETE_RESIN_FAIL
 
+/*RUCM EDIT
 			if(door.hardness == 1.5) //non thickened
 				var/oldloc = door.loc
 				qdel(door)
 				new /obj/structure/mineral_door/resin/thick (oldloc, door.hivenumber)
 				total_resin_cost = XENO_THICKEN_DOOR_COST
+*/
+//RUCM START
+			if(door.hardness == 1.5 || door.hardness == 1 && thick) // Hivelord door
+				var/oldloc = door.loc
+				qdel(door)
+				new /obj/structure/mineral_door/resin/thick (oldloc, door.hivenumber)
+				total_resin_cost = XENO_THICKEN_DOOR_COST
+			else if((door.hardness == 1) && (istype(src, /mob/living/carbon/xenomorph/drone)))	// Drone door
+				var/oldloc = door.loc
+				qdel(door)
+				new /obj/structure/mineral_door/resin (oldloc, door.hivenumber)
+				total_resin_cost = XENO_THICKEN_DOOR_COST
+//RUCM END
 			else
 				to_chat(src, SPAN_XENOWARNING("[door] can't be made thicker."))
 				return SECRETE_RESIN_FAIL
@@ -194,9 +232,9 @@
 
 	if(istype(resin_construct, /datum/resin_construction/resin_turf/wall))
 		if(thick)
-			current_turf.PlaceOnTop(/turf/closed/wall/resin/weedbound/thick)
+			current_turf.place_on_top(/turf/closed/wall/resin/weedbound/thick)
 		else
-			current_turf.PlaceOnTop(/turf/closed/wall/resin/weedbound/normal)
+			current_turf.place_on_top(/turf/closed/wall/resin/weedbound/normal)
 
 		qdel(the_node)
 		return TRUE
@@ -259,7 +297,7 @@
 		if(istype(AM, /obj/effect/alien/weeds))
 			found_weeds = TRUE
 		if(AM.density || istype(AM, /obj/effect/alien/resin))
-			to_chat(src, SPAN_XENONOTICE("Theres not enough space there for a resin mark."))
+			to_chat(src, SPAN_XENONOTICE("There's not enough space there for a resin mark."))
 			return FALSE
 
 	var/obj/effect/alien/resin/marker/NM = new /obj/effect/alien/resin/marker(target_turf, src)

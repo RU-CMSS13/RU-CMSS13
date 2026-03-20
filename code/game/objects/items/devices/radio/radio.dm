@@ -206,7 +206,12 @@
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
+/* RUCM CHANGE
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG)
+*/
+//RUCM START
+/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, verb = "says", datum/language/speaking = null, listening_device = NOT_LISTENING_BUG, list/tts_heard_list)
+//RUCM END
 	if(!on)
 		return // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
@@ -290,13 +295,19 @@
 				for(var/mob/dead/observer as anything in GLOB.observer_list)
 					// Ghosts that listen to radio normally ignore radio whispers, but this radio transmission failed
 					if(CHECK_MULTIPLE_BITFIELDS(observer?.client?.prefs?.toggles_chat, CHAT_GHOSTEARS|CHAT_GHOSTRADIO))
+/* RUCM CHANGE
 						observer.hear_say(message, verb, speaking, italics=TRUE, speaker=M) // Intentionally omitting message_mode
+*/
+//RUCM START
+						observer.hear_say(message, verb, speaking, italics=TRUE, speaker=M, tts_heard_list = tts_heard_list) // Intentionally omitting message_mode
+//RUCM END
 				return
 
 	/* --- Intercoms can only broadcast to other intercoms, but shortwave radios can broadcast to shortwave radios and intercoms --- */
 	if(istype(src, /obj/item/device/radio/intercom))
 		filter_type = RADIO_FILTER_TYPE_INTERCOM
 
+/* RUCM CHANGE
 	if(use_volume)
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,
@@ -305,6 +316,17 @@
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						src, message, displayname, jobname, real_name, M.voice_name,
 						filter_type, 0, target_zs, connection.frequency, verb, speaking, RADIO_VOLUME_QUIET, listening_device)
+*/
+//RUCM START
+	if(use_volume)
+		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
+						src, message, displayname, jobname, real_name, M.voice_name,
+						filter_type, 0, target_zs, connection.frequency, verb, speaking, volume, listening_device, tts_heard_list = tts_heard_list)
+	else
+		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
+						src, message, displayname, jobname, real_name, M.voice_name,
+						filter_type, 0, target_zs, connection.frequency, verb, speaking, RADIO_VOLUME_QUIET, listening_device, tts_heard_list = tts_heard_list)
+//RUCM END
 
 /obj/item/device/radio/proc/get_target_zs(frequency)
 	var/turf/position = get_turf(src)
@@ -331,10 +353,18 @@
 				return null
 	return target_zs
 
+/* RUCM CHANGE
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, verb = "says", datum/language/speaking = null)
 	if (broadcasting)
 		if(get_dist(src, M) <= canhear_range)
 			talk_into(M, msg,null,verb,speaking)
+*/
+//RUCM START
+/obj/item/device/radio/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	if (broadcasting)
+		if(get_dist(src, sourcemob) <= canhear_range)
+			talk_into(sourcemob, message, null, verb, language, tts_heard_list = tts_heard_list)
+//RUCM END
 
 
 /*

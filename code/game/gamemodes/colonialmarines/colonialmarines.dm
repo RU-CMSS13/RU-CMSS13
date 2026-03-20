@@ -31,10 +31,12 @@
 	var/near_lz_protection_delay = 8 MINUTES
 
 
+/* RUCM CHANGE
 /* Pre-pre-startup */
 /datum/game_mode/colonialmarines/can_start(bypass_checks = FALSE)
 	initialize_special_clamps()
 	return TRUE
+*/
 
 /datum/game_mode/colonialmarines/announce()
 	to_chat_spaced(world, type = MESSAGE_TYPE_SYSTEM, html = SPAN_ROUNDHEADER("The current map is - [SSmapping.configs[GROUND_MAP].map_name]!"))
@@ -241,8 +243,8 @@
 	warhead.clear_falloff = 400
 	warhead.standard_power = 0
 	warhead.standard_falloff = 30
-	warhead.clear_delay = 3
-	warhead.double_explosion_delay = 6
+	warhead.clear_delay = 0
+	warhead.double_explosion_delay = 0 // No third explosion please
 	warhead.warhead_impact(target) // This is a blocking call
 	playsound(target, 'sound/effects/smoke.ogg', vol=50, vary=1, sound_range=75)
 
@@ -578,7 +580,7 @@
 			continue
 		shake_camera(current_mob, 3, 1)
 
-	playsound_z(SSmapping.levels_by_any_trait(list(ZTRAIT_MARINE_MAIN_SHIP)), 'sound/effects/double_klaxon.ogg', volume = 10)
+	playsound_z(SSmapping.levels_by_trait(ZTRAIT_MARINE_MAIN_SHIP), 'sound/effects/double_klaxon.ogg', volume = 10)
 
 /datum/game_mode/colonialmarines/ds_first_drop(obj/docking_port/mobile/marine_dropship)
 	if(!active_lz)
@@ -630,7 +632,7 @@
 	else if (force_end_at && world.time > force_end_at)
 		round_finished = MODE_INFESTATION_X_MINOR // Times up.
 
-/datum/game_mode/colonialmarines/count_humans_and_xenos(list/z_levels)
+/datum/game_mode/colonialmarines/count_humans_and_xenos(list/z_levels = SSmapping.levels_by_any_trait(list(ZTRAIT_GROUND, ZTRAIT_RESERVED, ZTRAIT_MARINE_MAIN_SHIP)))
 	. = ..()
 	if(.[2] != 0) // index 2 = num_xenos
 		return .
@@ -642,13 +644,18 @@
 		if(hive.need_round_end_check && !hive.can_delay_round_end())
 			continue
 		if(hive.living_xeno_queen && !should_block_game_interaction(hive.living_xeno_queen.loc))
-			//Some Queen is alive, we shouldn't end the game yet
-			.[2]++
+			var/turf/queen_turf = get_turf(hive.living_xeno_queen)
+			if(queen_turf?.z in z_levels)
+				//Some Queen is alive, we shouldn't end the game yet
+				.[2]++
 	return .
 
 /datum/game_mode/colonialmarines/check_queen_status(hivenumber, immediately = FALSE)
 	if(!(flags_round_type & MODE_INFESTATION))
 		return
+
+	if(is_in_endgame)
+		return // Don't handle hive collapse for hijack
 
 	var/datum/hive_status/hive = GLOB.hive_datum[hivenumber]
 	if(hive.need_round_end_check && !hive.can_delay_round_end())
@@ -754,6 +761,9 @@
 		GLOB.round_statistics.end_round_player_population = length(GLOB.clients)
 
 		GLOB.round_statistics.log_round_statistics()
+
+	for(var/mob/mob as anything in GLOB.alive_human_list)
+		SEND_SIGNAL(mob, COMSIG_HUMAN_FINISHED_ROUND)
 
 	calculate_end_statistics()
 	show_end_statistics(end_icon)

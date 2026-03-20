@@ -77,6 +77,8 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment() //Optimized a good bit.
 
+	handle_orders() //RUCM Add
+
 	updatehealth()
 
 	//Status updates, death etc.

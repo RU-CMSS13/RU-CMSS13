@@ -83,7 +83,12 @@
 						vmask, vmessage, obj/item/device/radio/radio,
 						message, name, job, realname, vname,
 						data, compression, list/level, freq, verbage = "says",
+/* RUCM CHANGE
 						datum/language/speaking = null, volume = RADIO_VOLUME_QUIET, listening_device = NOT_LISTENING_BUG)
+*/
+//RUCM START
+						datum/language/speaking = null, volume = RADIO_VOLUME_QUIET, listening_device = NOT_LISTENING_BUG, list/tts_heard_list)
+//RUCM END
 
 	/* ###### Prepare the radio connection ###### */
 	var/display_freq = freq
@@ -236,11 +241,17 @@
 		/* --- Process all the mobs that heard a masked voice (understood) --- */
 		if (length(heard_masked))
 			for (var/mob/R in heard_masked)
+//RUCM START
+				tts_heard_list[2] += R
+//RUCM END
 				R.hear_radio(message,verbage, speaking, part_a, part_b, M, 0, name, volume)
 
 		/* --- Process all the mobs that heard the voice normally (understood) --- */
 		if (length(heard_normal))
 			for (var/mob/R in heard_normal)
+//RUCM START
+				tts_heard_list[2] += R
+//RUCM END
 				R.hear_radio(message, verbage, speaking, part_a, part_b, M, 0, realname, volume)
 
 		/* --- Process all the mobs that heard the voice normally (did not understand) --- */

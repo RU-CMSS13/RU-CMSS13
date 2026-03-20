@@ -46,7 +46,7 @@
 	actions_types = list(
 		/datum/action/item_action/smartgun/toggle_accuracy_improvement,
 		/datum/action/item_action/smartgun/toggle_ammo_type,
-		/datum/action/item_action/smartgun/toggle_auto_fire,
+		/datum/action/item_action/smartgun/toggle_aim_assist,
 		/datum/action/item_action/smartgun/toggle_frontline_mode,
 		/datum/action/item_action/smartgun/toggle_lethal_mode,
 		/datum/action/item_action/smartgun/toggle_motion_detector,
@@ -329,9 +329,11 @@
 		return
 	var/obj/item/weapon/gun/smartgun/smortgun = holder_item
 	if(smortgun.aim_assist)
-		action_icon_state = "aimassist"
-	else
 		action_icon_state = "aimassist_off"
+	else
+		action_icon_state = "aimassist"
+	button.overlays.Cut()
+	button.overlays += image('icons/mob/hud/actions.dmi', button, action_icon_state)
 
 /datum/action/item_action/smartgun/toggle_accuracy_improvement/New(Target, obj/item/holder)
 	. = ..()
@@ -612,6 +614,9 @@
 	autoshot_image.pixel_y = 0
 
 /obj/item/weapon/gun/smartgun/proc/set_autoshot_image(mob/living/target)
+	var/mob/living/carbon/human/user = loc
+	if(!istype(user) || !istype(user.glasses, /obj/item/clothing/glasses/night/m56_goggles) || !user.glasses.active)
+		return
 	autoshot_image.loc = target
 	autoshot_image.pixel_x = -target.pixel_x // -16 is counted by -(-16)
 	autoshot_image.pixel_y = -target.pixel_y
@@ -920,6 +925,23 @@
 	SIGNAL_HANDLER
 	linked_human = null
 
+// Normal smartgun but with autoaim option
+/obj/item/weapon/gun/smartgun/autoaim
+	desc = "The actual firearm in the 4-piece M56A2 Smartgun System. Essentially a heavy, mobile machinegun. This upgraded variant features new, updated tracking software."
+	actions_types = list(
+		/datum/action/item_action/smartgun/toggle_accuracy_improvement,
+		/datum/action/item_action/smartgun/toggle_ammo_type,
+		/datum/action/item_action/smartgun/toggle_aim_assist,
+		/datum/action/item_action/smartgun/toggle_frontline_mode,
+		/datum/action/item_action/smartgun/toggle_lethal_mode,
+		/datum/action/item_action/smartgun/toggle_motion_detector,
+		/datum/action/item_action/smartgun/toggle_recoil_compensation,
+	)
+
+/obj/item/weapon/gun/smartgun/autoaim/Initialize(mapload, ...)
+	. = ..()
+	toggle_aim_assist(null, TRUE)
+
 //TERMINATOR SMARTGUN
 /obj/item/weapon/gun/smartgun/terminator
 	name = "\improper M57R 'Terminator' smartgun"
@@ -1154,7 +1176,7 @@
 /obj/item/weapon/gun/smartgun/rmc
 	name = "\improper L56A1 smartgun"
 	desc = "The actual firearm in the 2-piece L56A2 Smartgun System. This variant is used by the Three World Empires Royal Marines Commando units."
-	desc_lore = "The L56A1 is a W-Y licensed copy of the original M56 developed for the USMC, this version was marketed to the 3WE's Royal Marines as having a lighter weight construction and as being more reliable then the LMG's in service at the time."
+	desc_lore = "The L56A1 is a W-Y licensed copy of the original M56 developed for the USMC, this version was marketed to the 3WE's Royal Marines as having a lighter weight construction and as being more reliable than the LMGs in service at the time."
 	current_mag = /obj/item/ammo_magazine/smartgun/holo_targetting
 	ammo = /obj/item/ammo_magazine/smartgun/holo_targetting
 	ammo_primary_def = /datum/ammo/bullet/smartgun/holo_target
@@ -1174,7 +1196,7 @@
 /obj/item/weapon/gun/smartgun/upp
 	name = "\improper RFVS37 smartgun"
 	desc = "The actual firearm in the 2-piece RFVS37 Smartgun System. This experimental variant is used by the Union of Progressive Peoples units."
-	desc_lore = "Seeing the successful use of the M56 and L56 by the UA and 3WE Militaries during military conflicts such as the linna 349 campaign and the the australia wars, the UPP SOF saw a need for a similar self aiming LMG for their own units, following extensive trials the NORCOMM RFVS-37 was chosen, fulfilling all of the SOF's criteria."
+	desc_lore = "Seeing the successful use of the M56 and L56 by the UA and 3WE Militaries during military conflicts such as the Linna 349 campaign and the australia wars, the UPP SOF saw a need for a similar self aiming LMG for their own units, following extensive trials the NORCOMM RFVS-37 was chosen, fulfilling all of the SOF's criteria."
 	flags_gun_features = GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY
 	icon = 'icons/obj/items/weapons/guns/guns_by_faction/UPP/machineguns.dmi'
 	icon_state = "rfvs37"
