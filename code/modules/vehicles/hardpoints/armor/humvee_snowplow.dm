@@ -27,8 +27,8 @@
 
 	var/list/turfs_ahead = list(ahead, get_step(ahead, turn(move_dir, 90)), get_step(ahead, turn(move_dir, -90)))
 	for(var/turf/T in turfs_ahead)
-		if(istype(T, /turf/open/snow))
-			var/turf/open/snow/ST = T
+		if(istype(T, /turf/open/auto_turf/snow/))
+			var/turf/open/auto_turf/snow/ST = T
 			if(!ST || !ST.bleed_layer)
 				continue
 			new /obj/item/stack/snow(ST, ST.bleed_layer)
