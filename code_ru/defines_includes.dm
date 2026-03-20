@@ -1,0 +1,6 @@
+#include "code\__DEFINES\access.dm"
+#include "code\__DEFINES\conflict.dm"
+#include "code\__DEFINES\job.dm"
+#include "code\__DEFINES\tts.dm"
+#include "code\__DEFINES\vendors.dm"
+#include "code\__DEFINES\xeno.dm"
