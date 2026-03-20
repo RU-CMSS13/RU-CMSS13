@@ -191,7 +191,7 @@
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget,
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget,
 	)
-	cost = 80
+	cost = 40
 	containertype = /obj/structure/closet/crate/weapon
 	containername = "blackfoot ammo crate"
 	group = "Vehicle Ammo"
