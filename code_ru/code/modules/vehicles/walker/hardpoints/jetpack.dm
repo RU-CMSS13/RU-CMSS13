@@ -101,6 +101,9 @@
 		start_flying(owner)
 	else
 		stop_flying(owner)
+		var/turf/under = get_turf(owner)
+		if(istype(under, /turf/open_space))
+			under.on_throw_end(owner)
 	owner.update_icon()
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/prepare_titan_raise(mob/user, obj/vehicle/walker/vessel)
