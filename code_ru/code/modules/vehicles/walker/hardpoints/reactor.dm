@@ -20,7 +20,7 @@
 	var/meltdown_timer_id = null
 
 	var/reactor_state = VEHICLE_REACTOR_FINE
-	var/chance_of_malf = 10
+	var/chance_of_malf = 0.01
 
 	var/list/reactor_sounds = list('code_ru/sound/effects/switch.ogg', 'code_ru/sound/effects/switch2.ogg', 'code_ru/sound/effects/switch3.ogg')
 	var/obj/item/fuel_cell/walker_reactor/fuel
@@ -85,7 +85,7 @@
 
 	. = ..()
 
-	if(!prob(health_cache - health / (chance_of_malf / 5)))
+	if(!prob((health_cache - health) * chance_of_malf))
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
@@ -170,10 +170,10 @@
 
 	switch(reactor_state)
 		if(VEHICLE_REACTOR_DAMAGE)
-			if(rand(1, 1000) < chance_of_malf / 10)
+			if(rand(1, 100) / 100 < chance_of_malf)
 				short_circuit_reactor()
 		if(VEHICLE_REACTOR_CRITICAL)
-			if(rand(1, 1000) < chance_of_malf)
+			if(rand(1, 100) / 100 < chance_of_malf * 5)
 				short_circuit_reactor()
 
 /obj/item/hardpoint/walker/reactor/proc/short_circuit_reactor()
@@ -194,7 +194,7 @@
 	max_health = 100
 
 	weight = 3
-	chance_of_malf = 20
+	chance_of_malf = 0.02
 	conversion_rate = 0.5
 
 /obj/item/hardpoint/walker/reactor/enhanced/apply_buff(obj/vehicle/walker/vessel)
