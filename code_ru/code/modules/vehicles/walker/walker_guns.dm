@@ -52,7 +52,7 @@
 
 	set_fire_delay(FIRE_DELAY_TIER_SG)
 
-	fa_scatter_peak = 0
+	fa_scatter_peak = 1
 	fa_max_scatter = 0
 	scatter = SCATTER_AMOUNT_TIER_1
 
@@ -89,7 +89,7 @@
 
 	set_fire_delay(FIRE_DELAY_TIER_8)
 
-	fa_scatter_peak = 0
+	fa_scatter_peak = 1
 	fa_max_scatter = 0
 	scatter = SCATTER_AMOUNT_TIER_1 + SCATTER_AMOUNT_TIER_2
 
@@ -138,7 +138,7 @@
 
 	set_fire_delay(basic_fire_delay)
 
-	fa_scatter_peak = 0
+	fa_scatter_peak = 1
 	fa_max_scatter = 0
 	scatter = SCATTER_AMOUNT_TIER_2
 
