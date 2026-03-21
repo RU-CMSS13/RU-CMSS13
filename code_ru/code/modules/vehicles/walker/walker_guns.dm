@@ -50,15 +50,11 @@
 /obj/item/weapon/gun/mounted/mecha_smartgun/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_12)
+	set_fire_delay(FIRE_DELAY_TIER_SG)
 
-	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
-	fa_max_scatter = SCATTER_AMOUNT_TIER_9
-
-	accuracy_mult += HIT_ACCURACY_MULT_TIER_3
-
-	scatter = SCATTER_AMOUNT_TIER_10
-	recoil = RECOIL_OFF
+	fa_scatter_peak = 0
+	fa_max_scatter = 0
+	scatter = SCATTER_AMOUNT_TIER_1
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
@@ -93,11 +89,9 @@
 
 	set_fire_delay(FIRE_DELAY_TIER_8)
 
-	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_2
-	fa_max_scatter = SCATTER_AMOUNT_TIER_6
-
-	scatter = SCATTER_AMOUNT_TIER_2
-	recoil = RECOIL_AMOUNT_TIER_0
+	fa_scatter_peak = 0
+	fa_max_scatter = 0
+	scatter = SCATTER_AMOUNT_TIER_1 + SCATTER_AMOUNT_TIER_2
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
@@ -144,18 +138,13 @@
 
 	set_fire_delay(basic_fire_delay)
 
-	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
-	fa_max_scatter = SCATTER_AMOUNT_TIER_9
-
-	accuracy_mult += HIT_ACCURACY_MULT_TIER_5
-
-	scatter = SCATTER_AMOUNT_NONE
-	recoil = RECOIL_AMOUNT_TIER_3
+	fa_scatter_peak = 0
+	fa_max_scatter = 0
+	scatter = SCATTER_AMOUNT_TIER_2
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
 /obj/item/weapon/gun/mounted/mecha_wm88/Destroy()
-	UnregisterSignal(src, list(COMSIG_GUN_BEFORE_FIRE))
 	for(var/value in ammo_overheat_map)
 		ammo_overheat_map[value] = null
 

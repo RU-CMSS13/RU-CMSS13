@@ -1,6 +1,6 @@
 /obj/item/hardpoint/walker/head
-	name = "Mecha Head"
-	desc = "Protects pilot from potential danger outside mecha."
+	name = "Mecha Cockpit"
+	desc = "This reinforced high quality glass protects operator from potential danger outside of mech."
 
 	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'
 	icon_state = "cockpit_glass"

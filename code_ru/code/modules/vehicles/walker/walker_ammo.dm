@@ -103,9 +103,9 @@
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	accurate_range = 7
 	max_range = 24
-	accuracy = HIT_ACCURACY_TIER_4
+	accuracy = -HIT_ACCURACY_TIER_2
 	damage = 30
-	penetration = 0
+	penetration = ARMOR_PENETRATION_TIER_4
 	effective_range_max = 7
 
 
@@ -116,8 +116,8 @@
 	accurate_range = 1
 	max_range = 12
 	damage = 45
-	penetration = ARMOR_PENETRATION_TIER_5
-	accuracy = -HIT_ACCURACY_TIER_3
+	penetration = ARMOR_PENETRATION_TIER_6
+	accuracy = -HIT_ACCURACY_TIER_4
 
 
 /datum/ammo/bullet/walker/shotgun8g
@@ -222,7 +222,7 @@
 
 /datum/ammo/energy/walker/laser/proc/do_flame_spread(turf/impact, obj/projectile/proj)
 	cell_explosion(impact, 100, 50, explosion_cause_data = proj.weapon_cause_data)
-	fire_spread(impact, proj.weapon_cause_data, 3, 35, 50, LIGHT_COLOR_CYAN, "white")
+	fire_spread(impact, proj.weapon_cause_data, 3, 35, 50, LIGHT_COLOR_CYAN, "#609de3")
 
 
 
