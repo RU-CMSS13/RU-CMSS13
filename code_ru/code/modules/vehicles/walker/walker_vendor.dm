@@ -81,8 +81,8 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\"", 40, /obj/effect/essentials_set/walker/tactical_missile, null, VENDOR_ITEM_REGULAR),
 	list("F35 Resonation Projecting System", 30, /obj/item/hardpoint/walker/spinal/shield, null, VENDOR_ITEM_REGULAR),
 	list("Active Cooling Circuit", 30, /obj/item/hardpoint/walker/spinal/powerful_cooling, null, VENDOR_ITEM_REGULAR),
+	list("\"B-2 Spirit\" JetPack", 25, /obj/item/hardpoint/walker/spinal/jetpack, null, VENDOR_ITEM_REGULAR),
 	list("Detection Array \"Night Hawk\"", 20, /obj/item/hardpoint/walker/spinal/artilery, null, VENDOR_ITEM_REGULAR),
-	list("\"B-2 Spirit\" JetPack", 15, /obj/item/hardpoint/walker/spinal/jetpack, null, VENDOR_ITEM_REGULAR),
 
 	list("ARMOR", 0, null, null, null),
 	list("Paladin Armor", 25, /obj/item/hardpoint/walker/armor/paladin, null, VENDOR_ITEM_REGULAR),
