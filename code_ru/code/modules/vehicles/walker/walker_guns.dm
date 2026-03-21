@@ -181,7 +181,7 @@
 		/datum/ammo/bullet/walker/wm88/a50,
 	)
 	for(var/current_pos = 0 to overheat_limit)
-		ammo_overheat_map["[current_pos]"] = options[ceil(current_pos / overheat_limit * options.len)]
+		ammo_overheat_map["[current_pos]"] = options[max(ceil(current_pos / overheat_limit * options.len), 1)]
 
 /obj/item/weapon/gun/mounted/mecha_wm88/proc/after_fire_effect(mob/living/user, obj/item/weapon/gun/used)
 	if(src != used)

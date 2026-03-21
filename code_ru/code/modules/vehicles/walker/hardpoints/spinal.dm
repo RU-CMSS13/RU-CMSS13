@@ -116,8 +116,7 @@
 /obj/item/hardpoint/walker/spinal/tactical_missile/Initialize()
 	. = ..()
 
-	mounted_gun = new /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile(src)
-	insert_gun()
+	insert_gun(new /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile)
 
 /obj/item/hardpoint/walker/spinal/tactical_missile/tgui_additional_data()
 	. = ..()
