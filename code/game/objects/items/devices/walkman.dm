@@ -534,25 +534,25 @@
 								"sound/music/walkman/surf/10-2-3.ogg",\
 								"sound/music/walkman/surf/10-2-4.ogg"))
 
-/obj/item/device/cassette_tape/hotline
+/obj/item/device/cassette_tape/milkline
 	name = "Hotline cassette"
 	id = 19
-	desc = "A cassette with some \"chicken\"?"
-	icon_state = "cassette_hotline"
-	side1_icon = "cassette_hotline"
+	desc = "A cassette with some \"milk\"? heh... Sounds funny."
+	icon_state = "cassette_milkline"
+	side1_icon = "cassette_milkline"
 	item_icons = list(
 		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi' // временная мера, чтобы не было ошибок или варнингов
 	)
-	songs = list("side1" = list("sound/music/walkman/Hotline-A-New-Morning.ogg",\
-								"sound/music/walkman/Hotline-Crystals.ogg",\
-								"sound/music/walkman/Hotline-Daisuke.ogg",\
-								"sound/music/walkman/Hotline-Hydrogen.ogg",\
-								"sound/music/walkman/Hotline-It_s-Safe-Now.ogg"),\
+	songs = list("side1" = list("sound/music/walkman/Cool_sound1.ogg",\
+								"sound/music/walkman/Cool_sound2.ogg",\
+								"sound/music/walkman/Cool_sound3.ogg",\
+								"sound/music/walkman/Cool_sound4.ogg",\
+								"sound/music/walkman/Cool_sound5.ogg"),\
 				"side2" = list(
-								"sound/music/walkman/Hotline-Miami.ogg",\
-								"sound/music/walkman/Hotline-Musik.ogg",\
-								"sound/music/walkman/Hotline-Paris.ogg",\
-								"sound/music/walkman/Hotline-Perturbator.ogg"))
+								"sound/music/walkman/Cool_sound1-1.ogg",\
+								"sound/music/walkman/Cool_sound1-2.ogg",\
+								"sound/music/walkman/Cool_sound1-3.ogg",\
+								"sound/music/walkman/Cool_sound1-4.ogg"))
 
 /obj/item/device/cassette_tape/puma
 	name = "Puma cassette" // Пума, ты мой любимый пупсик <З
@@ -563,10 +563,10 @@
 	item_icons = list(
 		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi'
 	)
-	songs = list("side1" = list("sound/music/walkman/Louie,-Louie.ogg",\
-								"sound/music/walkman/These-Boots-Are-Made-For-Walkin.ogg"),\
-				"side2" = list("sound/music/walkman/Venus.ogg",\
-								"sound/music/walkman/Wooly-Bully.ogg",))
+	songs = list("side1" = list("sound/music/walkman/Old_cool_sound1.ogg",\
+								"sound/music/walkman/Old_cool_sound2.ogg"),\
+				"side2" = list("sound/music/walkman/Old_cool_sound1-1.ogg",\
+								"sound/music/walkman/Old_cool_sound1-2.ogg",))
 
 /obj/item/device/cassette_tape/duck
 	name = "Duck cassette"
@@ -577,11 +577,11 @@
 	item_icons = list(
 		WEAR_AS_GARB = 'icons/obj/items/walkman.dmi'
 	)
-	songs = list("side1" = list("sound/music/walkman/ANTAG-TYPE-BEAT.ogg",\
-								"sound/music/walkman/HONK.ogg",\
-								"sound/music/walkman/Sudden Changes.ogg"),\
-				"side2" = list("sound/music/walkman/Helltaker-Take-me.ogg",
-								"sound/music/walkman/The-Fate-of-Sickle.ogg",))
+	songs = list("side1" = list("sound/music/walkman/Fire_cool_sound1.ogg",\
+								"sound/music/walkman/Fire_cool_sound2.ogg",\
+								"sound/music/walkman/Fire_cool_sound3.ogg"),\
+				"side2" = list("sound/music/walkman/Fire_cool_sound1-1.ogg",
+								"sound/music/walkman/Fire_cool_sound1-2.ogg",))
 // hotline reference
 /obj/item/device/cassette_tape/aesthetic
 	name = "aesthetic cassette"
