@@ -44,7 +44,7 @@
 	for(var/atom/movable/unlucky as anything in cached_interactions)
 		if(ismob(unlucky))
 			var/mob/living/unlucky_mob = unlucky
-			unlucky_mob.apply_damage(damage / 3, BRUTE)
+			unlucky_mob.apply_damage(damage * (unlucky_mob.mob_size + 0.5), BRUTE)
 			unlucky_mob.SetKnockDown(2 SECONDS)
 			continue
 		if(istype(unlucky, /obj/vehicle/walker))
