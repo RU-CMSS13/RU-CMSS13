@@ -104,8 +104,8 @@
 	accurate_range = 7
 	max_range = 24
 	accuracy = -HIT_ACCURACY_TIER_2
-	damage = 30
-	penetration = ARMOR_PENETRATION_TIER_4
+	damage = 25
+	penetration = ARMOR_PENETRATION_TIER_3
 	effective_range_max = 7
 
 
@@ -115,8 +115,8 @@
 
 	accurate_range = 1
 	max_range = 12
-	damage = 45
-	penetration = ARMOR_PENETRATION_TIER_6
+	damage = 40
+	penetration = ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_4
 
 
