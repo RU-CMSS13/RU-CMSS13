@@ -129,14 +129,16 @@
 	var/steam_effect = /obj/effect/particle_effect/smoke/bad/wm88
 
 /obj/item/weapon/gun/mounted/mecha_wm88/Initialize(mapload)
-	. = ..()
-
 	update_overheat_ammo_map()
+
+	. = ..()
 
 /obj/item/weapon/gun/mounted/mecha_wm88/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(basic_fire_delay)
+	set_fire_delay(basic_fire_delay - overheat * overheat_rate_to_fire_delay)
+	charge_cost = max(basic_charge_cost * overheat, basic_charge_cost)
+	current_mag.default_ammo = ammo_overheat_map["[overheat]"]
 
 	fa_scatter_peak = 1
 	fa_max_scatter = 0
@@ -185,10 +187,11 @@
 	if(src != used)
 		return
 
+	var/obj/item/hardpoint/walker/holding_hand = mount_class
+	if(holding_hand)
+		holding_hand.recalculate_hardpoint_bonuses()
+
 	overheat = min(overheat + overheat_rate, overheat_limit)
-	current_mag.default_ammo = ammo_overheat_map["[overheat]"]
-	charge_cost = basic_charge_cost * overheat
-	set_fire_delay(basic_fire_delay - overheat * overheat_rate_to_fire_delay)
 	if(overheat == overheat_limit)
 		new steam_effect(get_turf(src))
 		var/obj/item/hardpoint/walker/hand = gun_holder
