@@ -302,7 +302,7 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	/obj/item/device/cassette_tape/hiphop = NO_GARB_OVERRIDE,
 	/obj/item/device/cassette_tape/nam = NO_GARB_OVERRIDE,
 	/obj/item/device/cassette_tape/ocean = NO_GARB_OVERRIDE,
-	/obj/item/device/cassette_tape/hotline = NO_GARB_OVERRIDE,
+	/obj/item/device/cassette_tape/milkline = NO_GARB_OVERRIDE,
 	/obj/item/device/cassette_tape/puma = NO_GARB_OVERRIDE,
 	/obj/item/device/cassette_tape/duck = NO_GARB_OVERRIDE,
 	/obj/item/storage/pouch/cassette = NO_GARB_OVERRIDE,
