@@ -247,6 +247,7 @@
 	if(user.anchored)
 		to_chat(user, SPAN_XENOWARNING("We can't climb through a tunnel while immobile."))
 		return XENO_NO_DELAY_ACTION
+		
 /*RUCM REMOVE
 	if(user.hauled_mob)
 		to_chat(user, SPAN_WARNING("We can't tunnel and haul someone at the same time."))
