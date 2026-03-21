@@ -424,7 +424,7 @@
 	if(!.)
 		return
 
-	if(move_sounds && world.time > move_next_sound_play)
+	if(length(move_sounds) && world.time > move_next_sound_play)
 		playsound(src, pick(move_sounds), vol = 20, sound_range = 30)
 		move_next_sound_play = world.time + 10
 
@@ -510,7 +510,7 @@
 	if(user != seats[VEHICLE_DRIVER])
 		return
 
-	if(world.time < next_move - move_delay * 0.8)
+	if(world.time < next_move - move_delay * 0.2)
 		return
 
 	var/dx = target.x - x

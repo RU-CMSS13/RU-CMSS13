@@ -100,11 +100,13 @@
 	icon_state = "redbullet"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
+	damage_falloff = DAMAGE_FALLOFF_TIER_10
+	accurate_range = 7
 	max_range = 24
-	accurate_range = 12
-	accuracy = HIT_ACCURACY_TIER_5
-	damage = 20
-	penetration = ARMOR_PENETRATION_TIER_1
+	accuracy = HIT_ACCURACY_TIER_4
+	damage = 30
+	penetration = 0
+	effective_range_max = 7
 
 
 /datum/ammo/bullet/walker/machinegun
@@ -113,7 +115,7 @@
 
 	accurate_range = 1
 	max_range = 12
-	damage = 30
+	damage = 45
 	penetration = ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_3
 
@@ -122,18 +124,21 @@
 	name = "8 gauge buckshot shell"
 	icon_state = "buckshot"
 
-	accurate_range = 2// запрет на дальнюю стрельбу, нанесет только ~30 урона из-за промахов разброса, в дистанции два тайла спереди спокойно сносит 160 квине/раве
-	max_range = 6// Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
-	damage = 60// вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
-	damage_falloff = DAMAGE_FALLOFF_TIER_6// 5 фэлл офа,фиг, а не дальнее поражение с высоким уроном
-	penetration= ARMOR_PENETRATION_TIER_2// нулевое бронепробитие в оригинале
+	max_range = 6
+	damage = 40
+	damage_var_low = PROJECTILE_VARIANCE_TIER_5
+	damage_var_high = PROJECTILE_VARIANCE_TIER_5
+	penetration = ARMOR_PENETRATION_TIER_3
+	scatter = 15
+	accuracy = -HIT_ACCURACY_TIER_3
+
 	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
-	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_3// у меха проблема с мелкими целями, больших в упор спокойно дамажит, дрон же получит 1 дробинку и оглушится, подставляя, но не нанося серьезного ущерба
+	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_6
 
 /datum/ammo/bullet/walker/shotgun8g/spread
 	name = "additional 8 gauge buckshot"
-	scatter = SCATTER_AMOUNT_TIER_1
 	bonus_projectiles_amount = 0
+	scatter = 30
 
 
 /datum/ammo/bullet/walker/shotgun8g/on_hit_mob(mob/M,obj/projectile/P)
@@ -189,7 +194,7 @@
 
 /datum/ammo/rocket/brute/tactical
 	max_range = 20
-	max_distance = 20
+	max_distance = 14
 
 
 /datum/ammo/energy/walker

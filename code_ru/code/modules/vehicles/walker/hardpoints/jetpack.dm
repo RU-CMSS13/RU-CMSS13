@@ -38,6 +38,10 @@
 	data["max_value"] = fuel_max
 
 /obj/item/hardpoint/walker/spinal/jetpack/on_source_process(delta_time)
+	. = ..()
+	if(!.)
+		return
+
 	var/obj/vehicle/walker/vessel = owner
 	var/turf/under = get_turf(vessel)
 	if(flying)
@@ -89,7 +93,7 @@
 		prepare_titan_raise(user, owner)
 		return
 
-	if(fuel < fuel_consumption_rate)
+	if(!flying && fuel < fuel_consumption_rate)
 		return
 	flying = !flying
 	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
@@ -114,6 +118,10 @@
 			break
 	if(!equipment)
 		to_chat(user, SPAN_WARNING("Shuttle need to have recovery equipment!"))
+		return
+	var/area/vessel_area = get_area(get_turf(src))
+	if(!vessel_area.ceiling > CEILING_GLASS)
+		to_chat(user, SPAN_WARNING("Ceiling stops mech from flying."))
 		return
 	if(!use_fuel(fuel_max))
 		to_chat(user, SPAN_WARNING("There not enough fuel!"))

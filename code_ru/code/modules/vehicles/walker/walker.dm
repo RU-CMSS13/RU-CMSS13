@@ -122,29 +122,61 @@
 	opacity = FALSE
 	pixel_x = -17
 
-/obj/effect/vehicle_spawner/walker/prebuild
-	var/list/hardpoints = list(
+/obj/effect/vehicle_spawner/walker
+	var/list/base_hardpoints = list(
 		/obj/item/hardpoint/walker/hand/left,
 		/obj/item/hardpoint/walker/hand/right,
 		/obj/item/hardpoint/walker/leg/left,
 		/obj/item/hardpoint/walker/leg/right,
+	)
+	var/list/additional_hardpoints = list(
 		/obj/item/hardpoint/walker/reactor,
 	)
+	var/list/pre_install_guns = list()
 
-/obj/effect/vehicle_spawner/walker/prebuild/Initialize()
+/obj/effect/vehicle_spawner/walker/Initialize()
 	. = ..()
 	spawn_vehicle()
 	qdel(src)
 
-/obj/effect/vehicle_spawner/walker/prebuild/spawn_vehicle()
+/obj/effect/vehicle_spawner/walker/spawn_vehicle()
 	var/obj/vehicle/walker/vessel = new (loc)
 	handle_direction(vessel)
 	load_hardpoints(vessel)
 	vessel.update_icon()
 
-/obj/effect/vehicle_spawner/walker/prebuild/load_hardpoints(obj/vehicle/walker/vessel)
-	for(var/hardpoint in hardpoints)
+/obj/effect/vehicle_spawner/walker/load_hardpoints(obj/vehicle/walker/vessel)
+	for(var/hardpoint in base_hardpoints + additional_hardpoints)
 		vessel.add_hardpoint(new hardpoint)
+	for(var/gun in pre_install_guns)
+		for(var/obj/item/hardpoint/walker/selected in vessel.hardpoints)
+			if(selected.mount_class != GUN_MOUNT_MECHA || selected.mounted_gun)
+				continue
+			selected.insert_gun(new gun)
+
+/obj/effect/vehicle_spawner/walker/shotgun
+	pre_install_guns = list(
+		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
+		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
+	)
+
+/obj/effect/vehicle_spawner/walker/smartgun
+	pre_install_guns = list(
+		/obj/item/weapon/gun/mounted/mecha_smartgun,
+		/obj/item/weapon/gun/mounted/mecha_smartgun,
+	)
+
+/obj/effect/vehicle_spawner/walker/m30
+	pre_install_guns = list(
+		/obj/item/weapon/gun/mounted/mecha_hmg,
+		/obj/item/weapon/gun/mounted/mecha_hmg,
+	)
+
+/obj/effect/vehicle_spawner/walker/wm88
+	pre_install_guns = list(
+		/obj/item/weapon/gun/mounted/mecha_wm88,
+		/obj/item/weapon/gun/mounted/mecha_wm88,
+	)
 
 
 //////////////////////////////////////////////////////////////
@@ -182,8 +214,6 @@
 			consume_energy(light_consuming)
 
 	for(var/obj/item/hardpoint/walker/selected in hardpoints)
-		if(!selected.health)
-			continue
 		selected.on_source_process(delta_time)
 
 	if(seats[VEHICLE_DRIVER])

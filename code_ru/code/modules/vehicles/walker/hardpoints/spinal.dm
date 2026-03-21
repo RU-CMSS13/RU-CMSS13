@@ -16,6 +16,10 @@
 	var/consume_rate = 10
 
 /obj/item/hardpoint/walker/spinal/powerful_cooling/on_source_process(delta_time)
+	. = ..()
+	if(!.)
+		return
+
 	var/obj/vehicle/walker/vessel = owner
 	var/energy_required = consume_rate * delta_time
 	if(!vessel.can_consume_energy(energy_required))
@@ -185,6 +189,10 @@
 		data["max_value"] = delay_between_hits * 6 / 10
 
 /obj/item/hardpoint/walker/spinal/shield/on_source_process(delta_time)
+	. = ..()
+	if(!.)
+		return
+
 	var/obj/vehicle/walker/vessel = owner
 	if(damage_capacity == max_damage_capacity)
 		return

@@ -91,13 +91,13 @@
 /obj/item/weapon/gun/mounted/mecha_hmg/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_LMG)
+	set_fire_delay(FIRE_DELAY_TIER_8)
 
-	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_8
-	fa_max_scatter = SCATTER_AMOUNT_TIER_9
+	fa_scatter_peak = FULL_AUTO_SCATTER_PEAK_TIER_2
+	fa_max_scatter = SCATTER_AMOUNT_TIER_6
 
-	scatter = SCATTER_AMOUNT_TIER_3
-	recoil = RECOIL_AMOUNT_TIER_3
+	scatter = SCATTER_AMOUNT_TIER_2
+	recoil = RECOIL_AMOUNT_TIER_0
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
@@ -119,40 +119,25 @@
 
 	mount_class = GUN_MOUNT_MECHA
 
-	charge_cost = 10
+	charge_cost = 40
+	var/basic_charge_cost = 40
+	var/basic_fire_delay = 1.6 SECONDS
 
-	var/basic_fire_delay = FIRE_DELAY_TIER_1 + FIRE_DELAY_TIER_8
-	var/overheat_reset_cooldown = 3 SECONDS
-	var/overheat_rate = 2
 	var/overheat = 0
-	var/overheat_upper_limit = 8
-	var/overheat_self_destruction_rate = 5 //при финальном перегреве начнет получать урон при стрельбе умноженный на перегрев
+	var/overheat_rate = 1
+	var/overheat_limit = 8
+	var/overheat_rate_to_fire_delay = 1
+	var/overheat_self_destruction_rate = 2// при финальном перегреве начнет получать урон при стрельбе умноженный на перегрев
+	var/overheat_reset_cooldown = 3 SECONDS
+
+	var/list/ammo_overheat_map = list()
+
 	var/steam_effect = /obj/effect/particle_effect/smoke/bad/wm88
 
 /obj/item/weapon/gun/mounted/mecha_wm88/Initialize(mapload)
 	. = ..()
 
-	RegisterSignal(src, COMSIG_GUN_BEFORE_FIRE, PROC_REF(apply_effect))
-
-/obj/item/weapon/gun/mounted/mecha_wm88/set_gun_user(mob/to_set)
-	var/mob/cached_gun_user = gun_user
-
-	. = ..()
-
-	if(to_set == cached_gun_user)
-		if(!(comp_lookup[COMSIG_MOB_FIRED_GUN]) && to_set)
-			RegisterSignal(cached_gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
-		return
-	if(cached_gun_user)
-		UnregisterSignal(cached_gun_user, list(COMSIG_MOB_FIRED_GUN))
-
-	if(gun_user)
-		RegisterSignal(gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
-
-/obj/item/weapon/gun/mounted/mecha_wm88/Destroy()
-	UnregisterSignal(src, list(COMSIG_GUN_BEFORE_FIRE))
-
-	. = ..()
+	update_overheat_ammo_map()
 
 /obj/item/weapon/gun/mounted/mecha_wm88/set_gun_config_values()
 	. = ..()
@@ -169,46 +154,67 @@
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
+/obj/item/weapon/gun/mounted/mecha_wm88/Destroy()
+	UnregisterSignal(src, list(COMSIG_GUN_BEFORE_FIRE))
+	for(var/value in ammo_overheat_map)
+		ammo_overheat_map[value] = null
+
+	. = ..()
+
+/obj/item/weapon/gun/mounted/mecha_wm88/set_gun_user(mob/to_set)
+	var/mob/cached_gun_user = gun_user
+
+	. = ..()
+
+	if(to_set == cached_gun_user)
+		if(!(comp_lookup[COMSIG_MOB_FIRED_GUN]) && to_set)
+			RegisterSignal(cached_gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
+		return
+	if(cached_gun_user)
+		UnregisterSignal(cached_gun_user, list(COMSIG_MOB_FIRED_GUN))
+
+	if(gun_user)
+		RegisterSignal(gun_user, COMSIG_MOB_FIRED_GUN, PROC_REF(after_fire_effect))
+
 /obj/item/weapon/gun/mounted/mecha_wm88/set_bullet_traits()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
 	))
 
-/obj/item/weapon/gun/mounted/mecha_wm88/proc/apply_effect(obj/item/proj, atom/target, mob/living/user)
-	if(!overheat)
-		return
-	switch(overheat)
-		if(2)
-			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a20]
-		if(4)
-			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a30]
-		if(6)
-			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a40]
-		if(8)
-			current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88/a50]
+/obj/item/weapon/gun/mounted/mecha_wm88/proc/update_overheat_ammo_map()
+	var/static/list/options = list(// We have only five options, so just stick with it
+		/datum/ammo/bullet/walker/wm88,
+		/datum/ammo/bullet/walker/wm88/a20,
+		/datum/ammo/bullet/walker/wm88/a30,
+		/datum/ammo/bullet/walker/wm88/a40,
+		/datum/ammo/bullet/walker/wm88/a50,
+	)
+	for(var/current_pos = 0 to overheat_limit)
+		ammo_overheat_map["[current_pos]"] = options[ceil(current_pos / overheat_limit * options.len)]
 
 /obj/item/weapon/gun/mounted/mecha_wm88/proc/after_fire_effect(mob/living/user, obj/item/weapon/gun/used)
-	if(src != used || !istype(used, type))
+	if(src != used)
 		return
 
-	if(overheat == overheat_upper_limit)
-		var/turf/T = get_turf(src)
-		new steam_effect(T)
-		var/damage = overheat_self_destruction_rate * overheat
+	overheat = min(overheat + overheat_rate, overheat_limit)
+	current_mag.default_ammo = ammo_overheat_map["[overheat]"]
+	charge_cost = basic_charge_cost * overheat
+	set_fire_delay(basic_fire_delay - overheat * overheat_rate_to_fire_delay)
+	if(overheat == overheat_limit)
+		new steam_effect(get_turf(src))
 		var/obj/item/hardpoint/walker/hand = gun_holder
-		hand.owner.take_damage_type(damage, "abstract", null, hand)
-	else if(overheat < overheat_upper_limit)
-		overheat += overheat_rate
-	set_fire_delay(basic_fire_delay - overheat)
+		hand.owner.take_damage_type(overheat_self_destruction_rate * overheat, "abstract", null, hand)
 
 	addtimer(CALLBACK(src, PROC_REF(reset_overheat_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /obj/item/weapon/gun/mounted/mecha_wm88/proc/reset_overheat_buff(mob/user)
 	SIGNAL_HANDLER
-	to_chat(user, SPAN_WARNING("[src] beeps as it's extinguish."))
+
 	overheat = 0
-	current_mag.default_ammo = GLOB.ammo_list[/datum/ammo/bullet/walker/wm88]
+	current_mag.default_ammo = ammo_overheat_map["[overheat]"]
 	set_fire_delay(basic_fire_delay)
+
+	to_chat(user, SPAN_WARNING("[src] beeps as it's extinguish."))
 
 /obj/effect/particle_effect/smoke/bad/wm88
 	smokeranking = SMOKE_RANK_MED
@@ -218,6 +224,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
+
 	if(affected_mob.internal != null && affected_mob.wear_mask && (affected_mob.wear_mask.flags_inventory & ALLOWINTERNALS))
 		return FALSE
 	if(issynth(affected_mob))
@@ -225,15 +232,12 @@
 
 	if(prob(20))
 		affected_mob.drop_held_item()
-
 	affected_mob.apply_damage(15, BURN)
 	to_chat(affected_mob, SPAN_WARNING("YOUR FLASH IS BURNED BY HOT STEAM"))
-
 	if(affected_mob.coughedtime < world.time && !affected_mob.stat)
 		affected_mob.coughedtime = world.time + 2 SECONDS
 		if(ishuman(affected_mob)) //Humans only to avoid issues
 			affected_mob.emote("scream")
-	return TRUE
 
 
 //////////////////////////////////////////////////////////////
@@ -256,7 +260,7 @@
 /obj/item/weapon/gun/mounted/mecha_shotgun8g/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_2)
+	set_fire_delay(FIRE_DELAY_TIER_SHOTGUN_BASE)
 
 
 //////////////////////////////////////////////////////////////

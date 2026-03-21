@@ -75,6 +75,7 @@
 		data["max_value"] = meltdown_time / 10
 
 /obj/item/hardpoint/walker/reactor/on_source_process(delta_time)
+	. = ..()
 	if(!meltdown_timer_id)
 		return
 	playsound(owner, 'sound/vox/vox/bizwarn.ogg', 100 * (1 - timeleft(meltdown_timer_id) / meltdown_time))

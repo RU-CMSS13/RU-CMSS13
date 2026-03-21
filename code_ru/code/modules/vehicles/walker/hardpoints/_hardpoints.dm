@@ -33,7 +33,7 @@
 
 /obj/item/hardpoint/walker/Destroy()
 	if(mounted_gun)
-		remove_gun()
+		remove_gun(null, TRUE)
 
 	if(motion_detector)
 		motion_detector.hardpoint_holder = null
@@ -48,7 +48,7 @@
 /obj/item/hardpoint/walker/deactivate(obj/vehicle/walker/vessel)
 	. = ..()
 
-	if(motion_detector.active)
+	if(motion_detector?.active)
 		motion_detector.toggle_active(null, motion_detector.active)
 	if(zoom)
 		zoom = FALSE
@@ -154,6 +154,11 @@
 	mounted_gun.set_gun_user(null)
 
 /obj/item/hardpoint/walker/proc/on_source_process(delta_time)
+	if(!health)
+		return FALSE
+
+	. = TRUE
+
 	if(zoom)
 		var/obj/vehicle/walker/vessel = owner
 		var/consumption = ceil(zoom_size * delta_time * 0.5)
@@ -200,9 +205,7 @@
 	user.visible_message(SPAN_NOTICE("[user] places [attacking_gun] in [src]."),
 	SPAN_NOTICE("You place [attacking_gun] in [src]."))
 
-	mounted_gun = attacking_item
-	insert_gun(user)
-	name = "[name] with [attacking_gun]"
+	insert_gun(attacking_gun)
 
 /obj/item/hardpoint/walker/proc/try_remove(obj/item/attacking_item, mob/user)
 	. = FALSE
@@ -227,37 +230,43 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/proc/insert_gun(mob/user)
-	mounted_gun.gun_holder = src
-	mounted_gun.flags_mounted_gun_features |= GUN_MOUNTED
-	mounted_gun.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
-	mounted_gun.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
-	mounted_gun.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
+/obj/item/hardpoint/walker/proc/insert_gun(obj/item/weapon/gun/target)
+	mounted_gun = target
+	target.gun_holder = src
+	target.forceMove(src)
+	name = "[name] with [target]"
+	target.flags_mounted_gun_features |= GUN_MOUNTED
+	target.callback_can_fire = CALLBACK(src, PROC_REF(can_fire))
+	target.callback_can_stop_fire = CALLBACK(src, PROC_REF(can_stop_fire))
+	target.callback_fire_stat = CALLBACK(src, PROC_REF(guns_debuff))
 	if(!owner)
 		return
 
 	owner.update_icon()
 	if(!owner.seats[VEHICLE_DRIVER])
 		return
-
 	var/obj/vehicle/walker/vessel = owner
 	if(slot in GROUPS_BY_ID[vessel.selected_group])
 		mounted_gun.set_gun_user(vessel.seats[VEHICLE_DRIVER])
 
-/obj/item/hardpoint/walker/proc/remove_gun(mob/user)
-	mounted_gun.set_gun_config_values()
-	QDEL_NULL(mounted_gun.callback_can_fire)
-	QDEL_NULL(mounted_gun.callback_can_stop_fire)
-	QDEL_NULL(mounted_gun.callback_fire_stat)
-	mounted_gun.set_gun_user(null)
-	mounted_gun.gun_holder = null
-	if(!user)
-		QDEL_NULL(mounted_gun)
+/obj/item/hardpoint/walker/proc/remove_gun(mob/user, delete = FALSE)
+	var/obj/item/weapon/gun/target = mounted_gun
+	mounted_gun = null
+	QDEL_NULL(target.callback_can_fire)
+	QDEL_NULL(target.callback_can_stop_fire)
+	QDEL_NULL(target.callback_fire_stat)
+	if(delete)
+		qdel(target)
 		return
 
-	mounted_gun.flags_mounted_gun_features &= ~GUN_MOUNTED
-	user.put_in_hands(mounted_gun)
-	mounted_gun = null
+	target.set_gun_config_values()
+	target.set_gun_user(null)
+	target.gun_holder = null
+	target.flags_mounted_gun_features &= ~GUN_MOUNTED
+	if(user)
+		user.put_in_hands(target)
+	else
+		target.forceMove(get_turf(src))
 
 /obj/item/hardpoint/walker/proc/check_modifiers(modifiers, button = FALSE)
 	return TRUE
