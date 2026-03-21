@@ -211,7 +211,7 @@
 		return
 	vessel.consume_energy(damage_to_recover * 2)
 
-	damage_capacity += damage_to_recover * vessel.misc_multipliers["reactor_buff"]
+	damage_capacity = min(damage_capacity + damage_to_recover * vessel.misc_multipliers["reactor_buff"], max_damage_capacity)
 	update_filter()
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)

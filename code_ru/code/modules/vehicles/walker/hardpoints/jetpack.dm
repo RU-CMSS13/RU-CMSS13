@@ -59,7 +59,7 @@
 		return
 	vessel.consume_energy(fuel_to_recover * 2)
 
-	fuel += fuel_to_recover * vessel.misc_multipliers["reactor_buff"]
+	fuel = min(fuel + fuel_to_recover * vessel.misc_multipliers["reactor_buff"], fuel_max)
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/use_fuel(amount)
 	if(fuel < amount)

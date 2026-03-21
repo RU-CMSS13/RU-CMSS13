@@ -128,9 +128,10 @@
 	module.perform_action(fall_time)
 	forceMove(fall_target)
 
-	pixel_y = 32
-	animate(src, pixel_y = 0, time = fall_time, easing = LINEAR_EASING)
-	addtimer(VARSET_CALLBACK(src, pixel_y, get_pixels_y()), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
+	var/pix_dif = get_pixels_y()
+	pixel_y = pix_dif + 32
+	animate(src, pixel_y = pix_dif, time = fall_time, easing = LINEAR_EASING)
+	addtimer(VARSET_CALLBACK(src, pixel_y, pix_dif), fall_time, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 	FOR_DVIEW(var/mob/mob, 7, fall_target, HIDE_INVISIBLE_OBSERVER)
 		shake_camera(mob, 4, 5)
