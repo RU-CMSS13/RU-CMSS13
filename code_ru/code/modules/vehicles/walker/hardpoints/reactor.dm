@@ -6,7 +6,7 @@
 	hdpt_layer = HDPT_LAYER_SUPPORT
 
 	damage_multiplier = 0.1
-	material_per_repair = 10
+	material_per_repair = 4
 
 	weight = 2
 
@@ -15,7 +15,7 @@
 	var/turned_on = TRUE
 	var/rebooting = FALSE
 
-	var/reboot_time = 2 MINUTES
+	var/reboot_time = 1 MINUTES
 	var/meltdown_time = 1 MINUTES
 	var/meltdown_timer_id = null
 
@@ -85,7 +85,7 @@
 
 	. = ..()
 
-	if(!prob((health_cache - health) * chance_of_malf))
+	if(health < max_health * 0.65 && !prob((health_cache - health) * chance_of_malf))
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
@@ -109,8 +109,9 @@
 	var/turf/owner_loc = get_turf(src)
 
 	meltdown_timer_id = null
-	owner.health = 0
-	owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
+	if(owner)
+		owner.health = 0
+		owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
 	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
 	deactivate(owner)
 	sleep(3 SECONDS)

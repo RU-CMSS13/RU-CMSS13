@@ -8,7 +8,7 @@
 	disp_icon_state = "mech_part"
 
 	damage_multiplier = 0.75
-	material_per_repair = 5
+	material_per_repair = 2
 	repair_materials = list("plastic" = 0.05, "metal" = 0.02)
 
 	health = 150

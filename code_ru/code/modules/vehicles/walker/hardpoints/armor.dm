@@ -7,7 +7,7 @@
 	slot = WALKER_HARDPOIN_ARMOR
 	hdpt_layer = HDPT_LAYER_ARMOR
 
-	damage_multiplier = 0.75
+	damage_multiplier = 0.85
 
 	health = 500
 	max_health = 500
@@ -22,8 +22,8 @@
 	disp_icon_state = "paladin_armor"
 
 	type_multipliers = list(
-		"all" = 0.9,
-		"explosive" = 0.8,
+		"all" = 0.8,
+		"explosive" = 0.6,
 	)
 
 /obj/item/hardpoint/walker/armor/concussive
@@ -34,8 +34,8 @@
 	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
-		"all" = 0.9,
-		"blunt" = 0.8,
+		"all" = 0.8,
+		"blunt" = 0.6,
 	)
 
 /obj/item/hardpoint/walker/armor/caustic
@@ -46,8 +46,8 @@
 	disp_icon_state = "caustic_armor"
 
 	type_multipliers = list(
-		"all" = 0.9,
-		"acid" = 0.8,
+		"all" = 0.8,
+		"acid" = 0.6,
 	)
 
 /obj/item/hardpoint/walker/armor/fire
@@ -58,7 +58,7 @@
 	disp_icon_state = "concussive_armor"
 
 	type_multipliers = list(
-		"all" = 0.9,
+		"all" = 0.8,
 		"fire" = 0,
 	)
 
@@ -70,7 +70,7 @@
 	disp_icon_state = "ballistic_armor"
 
 	type_multipliers = list(
-		"all" = 0.9,
-		"bullet" = 0.8,
-		"slash" = 0.8,
+		"all" = 0.8,
+		"bullet" = 0.6,
+		"slash" = 0.6,
 	)
