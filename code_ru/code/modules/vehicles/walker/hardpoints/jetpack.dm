@@ -1,5 +1,5 @@
 /obj/item/hardpoint/walker/spinal/jetpack
-	name = "Mecha Jetpack"
+	name = "\"B-2 Spirit\" Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
 	custom_actions = list("Fly", "Evac")
