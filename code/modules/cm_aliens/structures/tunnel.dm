@@ -247,11 +247,12 @@
 	if(user.anchored)
 		to_chat(user, SPAN_XENOWARNING("We can't climb through a tunnel while immobile."))
 		return XENO_NO_DELAY_ACTION
-
+/*RUCM REMOVE
 	if(user.hauled_mob)
 		to_chat(user, SPAN_WARNING("We can't tunnel and haul someone at the same time."))
 		user.balloon_alert(user, "we're hauling someone!", text_color = "#7d32bb", delay = 1 SECONDS)
 		return XENO_NO_DELAY_ACTION
+*/
 
 	if(!length(hive.tunnels))
 		to_chat(user, SPAN_WARNING("[src] doesn't seem to lead anywhere."))
@@ -283,10 +284,12 @@
 		to_chat(user, SPAN_WARNING("Our crawling was interrupted!"))
 		return XENO_NO_DELAY_ACTION
 
+/*RUCM REMOVE
 	if(user.hauled_mob)
 		to_chat(user, SPAN_WARNING("We can't tunnel and haul someone at the same time."))
 		user.balloon_alert(user, "we're hauling someone!", text_color = "#7d32bb", delay = 1 SECONDS)
 		return XENO_NO_DELAY_ACTION
+*/
 
 	if(!length(hive.tunnels)) //Make sure other tunnels exist
 		to_chat(user, SPAN_WARNING("[src] doesn't seem to lead anywhere anymore."))
