@@ -87,6 +87,7 @@
 		/obj/vehicle/walker/proc/move_z_up,
 		/obj/vehicle/walker/proc/move_z_down,
 		/obj/vehicle/walker/proc/dir_look_lock,
+		/obj/vehicle/walker/proc/name_walker,
 	)
 
 	move_sounds = list(
@@ -110,6 +111,8 @@
 	var/leg_pixel_y = 0
 	var/legless_pixel_y = -22
 	var/override_pixel_y = 0
+
+	var/nickname
 
 
 /obj/structure/walker_wreckage

@@ -211,3 +211,44 @@ AND YOULL BE FINE!*/
 		selected.pilot_entered(user)
 
 	to_chat(user, SPAN_WARNING("New selected group is [selected_group == SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/name_walker()
+	set name = "Name Vehicle"
+	set desc = "Allows you to add a custom name to your vehicle. Single use. 26 characters maximum."
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	if(!istype(user))
+		return
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	var/obj/vehicle/walker/vessel = src
+	if(vessel.nickname)
+		to_chat(user, SPAN_WARNING("Vehicle already has a \"[vessel.nickname]\" nickname."))
+		return
+
+	var/new_nickname = stripped_input(user, "Enter a unique IC name or a callsign to add to your vehicle's name. [MAX_NAME_LEN] characters maximum. \n\nIMPORTANT! This is an IC nickname/callsign for your vehicle and you will be punished for putting in meme names.\nSINGLE USE ONLY.", "Name your vehicle", null, MAX_NAME_LEN)
+	if(!new_nickname)
+		return
+	if(length(new_nickname) > MAX_NAME_LEN)
+		alert(user, "Name [new_nickname] is over [MAX_NAME_LEN] characters limit. Try again.", "Naming vehicle failed", "Ok")
+		return
+	if(alert(user, "Vehicle's name will be CW13 \"[new_nickname]\" Assault Walker. Confirm?", "Confirmation?", "Yes", "No") != "Yes")
+		return
+
+	if(seats[VEHICLE_DRIVER] != user)
+		return
+
+	vessel.nickname = new_nickname
+	name = "CW13 \"[vessel.nickname]\" Assault Walker"
+	to_chat(user, SPAN_NOTICE("You've added \"[vessel.nickname]\" nickname to your vehicle."))
+
+	message_admins(WRAP_STAFF_LOG(user, "added \"[vessel.nickname]\" nickname to their [initial(name)]. ([x],[y],[z])"), x, y, z)
