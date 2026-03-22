@@ -222,7 +222,7 @@
 
 /datum/ammo/energy/walker/laser/proc/do_flame_spread(turf/impact, obj/projectile/proj)
 	cell_explosion(impact, 100, 50, explosion_cause_data = proj.weapon_cause_data)
-	fire_spread(impact, proj.weapon_cause_data, 3, 35, 50, LIGHT_COLOR_CYAN, "#609de3")
+	fire_spread(impact, proj.weapon_cause_data, 3, 35, 50, "#609de3")
 
 
 
