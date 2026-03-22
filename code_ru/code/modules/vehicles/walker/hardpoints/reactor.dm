@@ -85,7 +85,7 @@
 
 	. = ..()
 
-	if(health < max_health * 0.65 && !prob((health_cache - health) * chance_of_malf))
+	if(health < max_health * 0.65 && !prob((health_cache - health) * chance_of_malf) || !health)
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
@@ -112,11 +112,13 @@
 	if(owner)
 		owner.health = 0
 		owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
+		owner.remove_hardpoint(src)
 	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
 	deactivate(owner)
 	sleep(3 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
 	cell_explosion(owner_loc, 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
+	qdel(src)
 
 /obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
 	if(rebooting)
