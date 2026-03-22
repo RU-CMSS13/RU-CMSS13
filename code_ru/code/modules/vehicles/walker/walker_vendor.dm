@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(cm_vending_walker, list(
 	list("Ballistic Armor", 25, /obj/item/hardpoint/walker/armor/ballistic, null, VENDOR_ITEM_REGULAR),
 
 	list("WEAPONS KITS (Recommended 1-2 units)", 0, null, null, null),
-	list("L55 \"Lazarus\" Heavy Pulse Lazer", 50, /obj/item/weapon/gun/mounted/mecha_laser, null, VENDOR_ITEM_REGULAR),
+	list("L55 \"Lazarus\" Heavy Plasma Cannon", 50, /obj/item/weapon/gun/mounted/mecha_laser, null, VENDOR_ITEM_REGULAR),
 	list("M88 Mounted Automated Anti-Material rifle", 35, /obj/effect/essentials_set/walker/wm88, null, VENDOR_ITEM_REGULAR),
 	list("G67 \"Demoman\" Grenade Launcher", 35, /obj/effect/essentials_set/walker/tactical_grenade_launcher, null, VENDOR_ITEM_REGULAR),
 	list("F40 \"Hellfire\" Flamethower", 30, /obj/effect/essentials_set/walker/flamer, null, VENDOR_ITEM_REGULAR),

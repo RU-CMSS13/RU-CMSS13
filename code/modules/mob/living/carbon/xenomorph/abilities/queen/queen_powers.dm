@@ -848,7 +848,7 @@
 //RUCM START
 
 	FOR_DOVIEW(var/obj/vehicle/walker/vessel, 7, xeno, HIDE_INVISIBLE_OBSERVER)
-		var/obj/item/hardpoint/walker/attacked_hardpoint = locate(/obj/item/hardpoint/walker/head) in vessel.hardpoints
+		var/obj/item/hardpoint/walker/attacked_hardpoint = vessel.hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
 		if(!attacked_hardpoint?.can_take_damage() && vessel.seats[VEHICLE_DRIVER])
 			mobs_in_view += vessel.seats[VEHICLE_DRIVER]
 	FOR_DOVIEW_END

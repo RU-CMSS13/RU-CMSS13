@@ -259,7 +259,7 @@
 
 
 /obj/item/weapon/gun/mounted/mecha_laser
-	name = "L55 \"Lazarus\" Heavy Pulse Lazer"
+	name = "L55 \"Lazarus\" Heavy Plasma Cannon"
 	desc = "This is for sure abomination of mobile ground unit weapons. This gun consume a lot of energy and can have literally deadly recoil. Only heavy platforms can use it. Very limited edition, result can vary due to low production scale."
 
 	icon_state = "mech_shotgun8g_parts"
