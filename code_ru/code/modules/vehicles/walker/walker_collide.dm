@@ -41,10 +41,14 @@
 	if(flags_atom & NO_ZFALL)
 		update_shadow(hardpoints_by_slot[WALKER_HARDPOIN_SPINAL])
 		shadow_holder.dir = dir
+
 	var/obj/item/hardpoint/walker/head_protection = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
 	if(!head_protection && seats[VEHICLE_DRIVER])
-		cached_interactions += seats[VEHICLE_DRIVER]
-		seats[VEHICLE_DRIVER].unset_interaction()
+		var/mob/living/unlucky_mob = seats[VEHICLE_DRIVER]
+		unlucky_mob.unset_interaction()
+		unlucky_mob.apply_damage(40, BRUTE)
+		unlucky_mob.SetKnockDown(2 SECONDS)
+
 	for(var/atom/movable/unlucky as anything in cached_interactions)
 		if(ismob(unlucky))
 			var/mob/living/unlucky_mob = unlucky
