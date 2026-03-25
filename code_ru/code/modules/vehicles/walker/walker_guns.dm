@@ -265,7 +265,7 @@
 	icon_state = "mech_shotgun8g_parts"
 	item_state = "redy_shotgun8g"
 
-	ammo = /datum/ammo/energy/walker/laser
+	ammo = /datum/ammo/energy/walker/plasma
 	fire_sound = list('sound/effects/phasein.ogg')
 
 	mount_class = GUN_MOUNT_MECHA
