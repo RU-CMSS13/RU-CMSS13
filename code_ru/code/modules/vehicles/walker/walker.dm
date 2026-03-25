@@ -23,7 +23,7 @@
 		/obj/item/hardpoint/walker/reactor/enhanced,
 		/obj/item/hardpoint/walker/head,
 		/obj/item/hardpoint/walker/spinal/powerful_cooling,
-		/obj/item/hardpoint/walker/spinal/artilery,
+		/obj/item/hardpoint/walker/spinal/artillery,
 		/obj/item/hardpoint/walker/spinal/tactical_missile,
 		/obj/item/hardpoint/walker/spinal/shield,
 		/obj/item/hardpoint/walker/spinal/jetpack,

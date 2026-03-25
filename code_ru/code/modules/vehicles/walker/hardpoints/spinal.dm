@@ -49,7 +49,7 @@
 	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
 
 
-/obj/item/hardpoint/walker/spinal/artilery
+/obj/item/hardpoint/walker/spinal/artillery
 	name = "Detection Array \"Night Hawk\""
 	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful motion detector at cost of faster reactor consumption."
 
@@ -57,19 +57,19 @@
 
 	zoom_size = 12
 
-/obj/item/hardpoint/walker/spinal/artilery/Initialize()
+/obj/item/hardpoint/walker/spinal/artillery/Initialize()
 	. = ..()
 
 	motion_detector = new(src)
 	motion_detector.hardpoint_holder = src
 
-/obj/item/hardpoint/walker/spinal/artilery/pilot_entered(mob/user)
+/obj/item/hardpoint/walker/spinal/artillery/pilot_entered(mob/user)
 	motion_detector.iff_signal = user.faction
 
-/obj/item/hardpoint/walker/spinal/artilery/pilot_ejected(mob/user)
+/obj/item/hardpoint/walker/spinal/artillery/pilot_ejected(mob/user)
 	return
 
-/obj/item/hardpoint/walker/spinal/artilery/custom_action(mob/user, custom_action)
+/obj/item/hardpoint/walker/spinal/artillery/custom_action(mob/user, custom_action)
 	var/obj/vehicle/walker/vessel = owner
 	if(custom_action == "Motion Detector")
 		if(!vessel.can_consume_energy(motion_detector.detector_range))
@@ -86,7 +86,7 @@
 /obj/item/device/motiondetector/walker
 	detector_range = 24
 
-	var/obj/item/hardpoint/walker/spinal/artilery/hardpoint_holder
+	var/obj/item/hardpoint/walker/spinal/artillery/hardpoint_holder
 
 /obj/item/device/motiondetector/walker/get_user()
 	return hardpoint_holder?.owner?.seats[VEHICLE_DRIVER]
