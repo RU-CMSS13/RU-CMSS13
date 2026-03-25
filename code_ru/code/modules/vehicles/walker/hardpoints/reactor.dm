@@ -125,7 +125,7 @@
 		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
 		return
 
-	if(tgui_alert(user, "Are you sure about turning it [turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) == "No")
+	if(tgui_alert(user, "Are you sure about turning it [turned_on ? "Off" : "On"]?", "Reactor Control", list("Yes", "No")) != "Yes")
 		return
 
 	if(turned_on)

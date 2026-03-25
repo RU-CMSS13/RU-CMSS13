@@ -152,7 +152,7 @@ AND YOULL BE FINE!*/
 
 
 /obj/vehicle/walker/proc/dir_look_lock()
-	set name = "Togle Dir Lock"
+	set name = "Toggle Dir Lock"
 	set category = "Vehicle"
 
 	var/mob/user = usr
