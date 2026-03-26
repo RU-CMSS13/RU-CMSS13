@@ -43,11 +43,12 @@
 		shadow_holder.dir = dir
 
 	var/obj/item/hardpoint/walker/head_protection = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
-	if(!head_protection && seats[VEHICLE_DRIVER])
+	if(!head_protection && seats[VEHICLE_DRIVER] && prob(50))
 		var/mob/living/unlucky_mob = seats[VEHICLE_DRIVER]
 		unlucky_mob.unset_interaction()
 		unlucky_mob.apply_damage(40, BRUTE)
 		unlucky_mob.SetKnockDown(2 SECONDS)
+		unlucky_mob.Move(get_step(src, collision_reason.dir))
 
 	for(var/atom/movable/unlucky as anything in cached_interactions)
 		if(ismob(unlucky))
