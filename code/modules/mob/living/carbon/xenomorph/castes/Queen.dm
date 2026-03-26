@@ -511,6 +511,11 @@
 		if(client?.prefs?.show_queen_name)
 			name += " (" + replacetext((name_client_prefix + name_client_postfix), "-","") + ")"
 
+//RUCM START
+		if(SStts.tts_enabled)
+			tts_voice = client.prefs?.xeno_voice
+			tts_voice_pitch = client.prefs?.xeno_pitch
+//RUCM END
 
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 

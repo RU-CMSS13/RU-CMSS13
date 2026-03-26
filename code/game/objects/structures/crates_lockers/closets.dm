@@ -368,6 +368,7 @@
 	else
 		icon_state = icon_opened
 
+/* RUCM CHANGE
 /obj/structure/closet/hear_talk(mob/M as mob, text, verb, language, italics)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
@@ -379,6 +380,20 @@
 		if(istype(TM) && TM.stat != DEAD)
 			proxy_object_heard(src, M, TM, text, verb, language, italics)
 #endif // ifdef OBJECTS_PROXY_SPEECH
+*/
+//RUCM START
+/obj/structure/closet/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	for (var/atom/A in src)
+		if(istype(A,/obj/))
+			var/obj/O = A
+			O.hear_talk(sourcemob, message, tts_heard_list = tts_heard_list)
+#ifdef OBJECTS_PROXY_SPEECH
+			continue
+		var/mob/living/TM = A
+		if(istype(TM) && TM.stat != DEAD)
+			proxy_object_heard(src, sourcemob, TM, message, verb, language, italics, tts_heard_list = tts_heard_list)
+#endif // ifdef OBJECTS_PROXY_SPEECH
+//RUCM END
 
 /obj/structure/closet/proc/break_open(mob/user)
 	if(!opened)

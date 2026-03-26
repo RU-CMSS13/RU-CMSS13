@@ -194,7 +194,7 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 	unacidable = TRUE
 	var/councillor_override = FALSE
 	worn_accessory_slot = ACCESSORY_SLOT_PONCHO
-	can_become_accessory = TRUE
+	flags_obj = OBJ_CAN_ACCESSORIZE
 
 /obj/item/clothing/yautja_cape/Initialize(mapload, new_color = "#654321")
 	. = ..()
@@ -405,13 +405,21 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 	volume_settings = list(RADIO_VOLUME_QUIET_STR, RADIO_VOLUME_RAISED_STR)
 	minimap_flag = MINIMAP_FLAG_YAUTJA
 
+/* RUCM CHANGE
 /obj/item/device/radio/headset/yautja/talk_into(mob/living/M as mob, message, channel, verb = "commands", datum/language/speaking)
+*/
+//RUCM START
+/obj/item/device/radio/headset/yautja/talk_into(mob/living/M as mob, message, channel, verb = "commands", datum/language/speaking, listening_device, list/tts_heard_list)
+//RUCM END
 	if(!isyautja(M) && !isthrall(M)) //Nope.
 		to_chat(M, SPAN_WARNING("You try to talk into the headset, but just get a horrible shrieking in your ears!"))
 		return
 
 	for(var/mob/living/carbon/xenomorph/hellhound/hellhound as anything in GLOB.hellhound_list)
 		if(!hellhound.stat)
+//RUCM START
+			tts_heard_list[2] += hellhound
+//RUCM END
 			to_chat(hellhound, "\[Radio\]: [M.real_name] [verb], '<B>[message]</b>'.")
 	..()
 
@@ -1492,7 +1500,7 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 
 /obj/item/skull/burrower
 	name = "Burrower skull"
-	desc = "Skull of of a digging xenomorph, master of subterranean assault."
+	desc = "Skull of a digging xenomorph, master of subterranean assault."
 	icon_state = "burrower_skull"
 
 /obj/item/skull/drone
@@ -1653,7 +1661,7 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 
 /obj/item/tool/wirecutters/yautja
 	name = "\improper alien wirecutters"
-	desc = "This cuts wires, also flesh. Made of some razorsharp animal teeth."
+	desc = "This cuts wires, also flesh. Made of some razor-sharp animal teeth."
 	icon = 'icons/obj/items/hunter/pred_gear.dmi'
 	icon_state = "wirescutter"
 	item_state = "wirescutter"
@@ -1664,7 +1672,7 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 
 /obj/item/tool/screwdriver/yautja
 	name = "\improper alien screwdriver"
-	desc = "Some hightech screwing abilities."
+	desc = "Some high-tech screwing abilities."
 	icon = 'icons/obj/items/hunter/pred_gear.dmi'
 	icon_state = "screwdriver"
 	item_state = "screwdriver"
@@ -1677,7 +1685,7 @@ GLOBAL_VAR_INIT(youngblood_timer_yautja, 0)
 
 /obj/item/device/multitool/yautja
 	name = "\improper alien multitool"
-	desc = "Top notch alien tech for B&E through hacking."
+	desc = "Top-notch alien tech for B&E through hacking."
 	icon = 'icons/obj/items/hunter/pred_gear.dmi'
 	icon_state = "multitool"
 	item_state = "multitool"

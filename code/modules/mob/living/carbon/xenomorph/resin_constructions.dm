@@ -77,6 +77,13 @@
 		to_chat(X, SPAN_WARNING("This area is too unstable to support a construction."))
 		return FALSE
 
+// RUCM Start (Feline "Ксено-чертежи")
+	var/obj/effect/alien/resin/blueprint/alien_blueprint = locate() in T
+	if(alien_blueprint)
+		alien_blueprint.fill_plasma(X)
+		return FALSE
+// RUCM End (Feline "Ксено-чертежи")
+
 	if(!X.check_alien_construction(T, check_doors = !can_build_on_doors))
 		return FALSE
 
@@ -117,7 +124,7 @@
 /datum/resin_construction/resin_turf/build(turf/build_turf, hivenumber, mob/living/carbon/xenomorph/builder)
 	var/path = check_thick_build(build_turf, hivenumber, builder) ? build_path_thick : build_path
 
-	build_turf.PlaceOnTop(path)
+	build_turf.place_on_top(path)
 
 	var/turf/closed/wall/resin/resin_wall = build_turf
 	if (istype(resin_wall) && pass_hivenumber)
