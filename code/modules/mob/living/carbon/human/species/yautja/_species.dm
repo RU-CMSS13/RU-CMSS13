@@ -213,20 +213,20 @@
 	for(var/obj/limb/limb in hunter.limbs)
 		switch(limb.name)
 			if("groin","chest")
-				limb.min_broken_damage = 100
-				limb.max_damage = 125
+				limb.min_broken_damage = 145
+				limb.max_damage = 150
 				limb.time_to_knit = 1200 // 2 minutes to self heal bone break, time is in tenths of a second to auto heal this
 			if("head")
-				limb.min_broken_damage = 100
-				limb.max_damage = 125
+				limb.min_broken_damage = 145
+				limb.max_damage = 150
 				limb.time_to_knit = 600 // 1 minute to self heal bone break, time is in tenths of a second
 			if("l_hand","r_hand","r_foot","l_foot")
-				limb.min_broken_damage = 70
-				limb.max_damage = 90
+				limb.min_broken_damage = 145
+				limb.max_damage = 150
 				limb.time_to_knit = 600 // 1 minute to self heal bone break, time is in tenths of a second
 			if("r_leg","r_arm","l_leg","l_arm")
-				limb.min_broken_damage = 80
-				limb.max_damage = 100
+				limb.min_broken_damage = 145
+				limb.max_damage = 150
 				limb.time_to_knit = 600 // 1 minute to self heal bone break, time is in tenths of a second
 
 	hunter.set_languages(list(LANGUAGE_YAUTJA))
