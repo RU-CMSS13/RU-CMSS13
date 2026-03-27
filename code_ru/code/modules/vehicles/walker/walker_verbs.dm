@@ -53,7 +53,7 @@ AND YOULL BE FINE!*/
 	for(var/obj/item/hardpoint/walker/selected in hardpoints)
 		if(!selected.mounted_gun?.current_mag)
 			continue
-		acceptible_modules[selected.mounted_gun.name] = selected.mounted_gun
+		acceptible_modules[selected.name] = selected.mounted_gun
 	if(!length(acceptible_modules))
 		return
 
