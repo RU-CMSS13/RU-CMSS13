@@ -73,7 +73,16 @@
 		else
 			message = copytext(message, 3)
 
+/* RUCM CHANGE
 	ai_headset.talk_into(src, message, message_mode, "states", languages[1])
+*/
+//RUCM START
+	var/list/tts_heard_list = list(list(), list(), list())
+	if(SStts.tts_enabled)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
+
+	ai_headset.talk_into(src, message, message_mode, "states", languages[1], tts_heard_list = tts_heard_list)
+//RUCM END
 	return TRUE
 
 /mob/living/silicon/decoy/parse_message_mode(message)

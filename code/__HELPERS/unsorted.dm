@@ -1368,6 +1368,12 @@ GLOBAL_LIST_INIT(WALLITEMS, list(
 		return 1
 	if (!initial_delay)
 		initial_delay = world.tick_lag
+// Unit tests are not the normal environemnt. The mc can get absolutely thigh crushed, and sleeping procs running for ages is much more common
+// We don't want spurious hard deletes off this, so let's only sleep for the requested period of time here yeah?
+#ifdef UNIT_TESTS
+	sleep(initial_delay)
+	return CEILING(DS2TICKS(initial_delay), 1)
+#else
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
@@ -1375,6 +1381,7 @@ GLOBAL_LIST_INIT(WALLITEMS, list(
 		sleep(i*world.tick_lag*DELTA_CALC)
 		i *= 2
 	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+#endif
 
 #undef DELTA_CALC
 
@@ -1604,10 +1611,18 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 // Disable by commenting/undefining the line below!
 #define OBJECTS_PROXY_SPEECH
 #ifdef OBJECTS_PROXY_SPEECH
+/* RUCM CHANGE
 /proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics)
 	if(QDELETED(sourcemob) || !istype(sourcemob) || QDELETED(targetmob) || !istype(targetmob) || (targetmob.stat == DEAD))
 		return
 	targetmob.hear_say(message, verb, language, "", italics, sourcemob) // proxies speech itself to the mob
+*/
+//RUCM START
+/proc/proxy_object_heard(obj/object, mob/living/sourcemob, mob/living/targetmob, message, verb, language, italics, list/tts_heard_list)
+	if(QDELETED(sourcemob) || !istype(sourcemob) || QDELETED(targetmob) || !istype(targetmob) || (targetmob.stat == DEAD))
+		return
+	targetmob.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list) // proxies speech itself to the mob
+//RUCM END
 	if(targetmob && targetmob.client && targetmob.client.prefs && !targetmob.client.prefs.lang_chat_disabled \
 	   && !targetmob.ear_deaf && targetmob.say_understands(sourcemob, language))
 		sourcemob.langchat_display_image(targetmob) // strap langchat display on
