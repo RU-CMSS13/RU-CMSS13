@@ -336,6 +336,7 @@
 		if(world.time < SHUTTLE_LOCK_TIME_LOCK)
 			to_chat(xeno, SPAN_XENODANGER("You can't mobilize the strength to hijack the shuttle yet. Please wait another [time_left_until(SHUTTLE_LOCK_TIME_LOCK, world.time, 1 MINUTES)] minutes before trying again."))
 			return
+		SSvote.initiate_vote("skip_endgame_vote", "SERVER")
 		hijack(xeno)
 		return
 
