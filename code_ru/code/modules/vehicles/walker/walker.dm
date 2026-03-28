@@ -367,7 +367,6 @@
 		return
 
 	if(driver != sourcemob)
-		sourcemob.langchat_speech(message, list(driver), language)
 		driver.hear_say(message, verb, language, "", italics, sourcemob, tts_heard_list = tts_heard_list)
 		return
 
