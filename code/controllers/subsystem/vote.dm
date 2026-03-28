@@ -180,7 +180,7 @@ SUBSYSTEM_DEF(vote)
 			if("skip_endgame_vote")
 				if(. == "Skip")
 					SSticker.force_ending = TRUE
-					SSticker.mode.round_finished = MODE_INFESTATION_X_MINOR
+					SSticker.mode.round_finished = MODE_INFESTATION_X_MAJOR
 					log_admin("Due to vote the round end early.")
 					message_admins("Due to vote the round end early.")
 //RUCM END
