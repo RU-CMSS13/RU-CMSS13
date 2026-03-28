@@ -341,6 +341,7 @@ SUBSYSTEM_DEF(vote)
 //RUCM START
 			if("skip_endgame_vote")
 				question = "Skip endgame vote"
+				vote_type = "Skip Endgame Vote"
 				choices.Add("Skip")
 				choices.Add("Continue")
 //RUCM END
