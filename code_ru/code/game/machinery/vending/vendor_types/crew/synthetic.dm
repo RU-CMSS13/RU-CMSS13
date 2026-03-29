@@ -99,7 +99,6 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Breaching Hammer", 15, /obj/item/weapon/twohanded/breacher/synth, null, VENDOR_ITEM_REGULAR),
-	list("Advanced Medical Kit", 15, /obj/item/storage/box/czsp/medical, null, VENDOR_ITEM_REGULAR),
 	list("Compact Defibrillator", 15, /obj/item/device/defibrillator/compact, null, VENDOR_ITEM_REGULAR),
 	list("Autocompressor", 15, /obj/item/clothing/suit/auto_cpr, null, VENDOR_ITEM_REGULAR),
 	list("Compact Nailgun kit", 15, /obj/effect/essentials_set/cnailgun, null, VENDOR_ITEM_REGULAR),
