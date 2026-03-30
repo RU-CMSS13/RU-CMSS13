@@ -177,7 +177,7 @@ SUBSYSTEM_DEF(vote)
 				var/datum/map_config/VM = config.maplist[SHIP_MAP][.]
 				SSmapping.changemap(VM, SHIP_MAP)
 //RUCM START
-			if("skip_endgame_vote")
+			if("Skip Endgame Vote")
 				if(. == "Skip")
 					SSticker.force_ending = TRUE
 					SSticker.mode.round_finished = MODE_INFESTATION_X_MAJOR
