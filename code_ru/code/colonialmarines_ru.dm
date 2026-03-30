@@ -9,6 +9,7 @@
 #include "datums\supply_packs\gear.dm"
 #include "datums\supply_packs\weapons.dm"
 #include "datums\vehicles.dm"
+#include "events\mining_op\mining_basis.dm"
 #include "game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\jobs\job\marine\squads.dm"
