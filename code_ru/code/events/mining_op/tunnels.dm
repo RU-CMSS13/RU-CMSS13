@@ -6,11 +6,35 @@
 /mob/living/carbon/xenomorph
 	var/point_worth = 1
 
+/mob/living/carbon/xenomorph/drone
+	point_worth = 1
+/mob/living/carbon/xenomorph/sentinel
+	point_worth = 1
+/mob/living/carbon/xenomorph/runner
+	point_worth = 4
+/mob/living/carbon/xenomorph/defender
+	point_worth = 4
+/mob/living/carbon/xenomorph/lurker
+	point_worth = 8
+/mob/living/carbon/xenomorph/spitter
+	point_worth = 8
+/mob/living/carbon/xenomorph/warrior
+	point_worth = 8
+/mob/living/carbon/xenomorph/burrower
+	point_worth = 8
+/mob/living/carbon/xenomorph/despoiler
+	point_worth = 8
+/mob/living/carbon/xenomorph/ravager
+	point_worth = 10
+/mob/living/carbon/xenomorph/crusher
+	point_worth = 10
+
 /obj/effect/mineop/xeno_join
 	name = "Ксеноджоин"
 	icon = 'icons/landmarks.dmi'
 	icon_state = "xeno_spawn"
 
+	anchored = TRUE
 	invisibility = INVISIBILITY_OBSERVER
 	var/obj/structure/tunnel/mineop/connected_tunnel
 
@@ -19,10 +43,6 @@
 /obj/effect/mineop/xeno_join/Initialize(mapload, ...)
 	. = ..()
 	animate(src, alpha = 255, pixel_y = 32, time = 3, easing = SINE_EASING | EASE_IN)
-
-/obj/effect/mineop/xeno_join/Destroy()
-	animate(src, alpha = 0, pixel_y = 0, time = 3, easing = SINE_EASING | EASE_OUT)
-	. = ..()
 
 /obj/effect/mineop/xeno_join/attack_ghost(mob/dead/observer/user)
 	connected_tunnel.try_spawning_xeno(user)
@@ -38,12 +58,13 @@
 	var/replenish_points_for = 0
 	var/replenish_timeframe = 0
 	var/restocking = FALSE
+	var/crumbles = FALSE
 
 	var/special_type_chance = 5
 
 	var/obj/effect/mineop/xeno_join/button
 
-/obj/structure/tunnel/mineop/Initialize(mapload, h_number, hive_ref)
+/obj/structure/tunnel/mineop/Initialize(mapload, h_number)
 	. = ..()
 
 	var/area/A = get_area(src)
@@ -70,25 +91,29 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/tunnel/mineop/process()
-	if(unused_points <= 0)
+	if(unused_points <= 0 && !crumbles)
 		if(replenish_points_for > 0 && !restocking)
 			restocking = TRUE
-			qdel(button)
+			animate(button, alpha = 0, pixel_y = 0, time = 3, easing = SINE_EASING | EASE_OUT)
 			addtimer(CALLBACK(src, PROC_REF(replenish_points)), replenish_timeframe)
 		if(replenish_points_for <= 0)
-			qdel(src)
+			crumbles = TRUE
+			destroy_the_tunnel()
 
-/obj/structure/tunnel/mineop/Destroy()
-	qdel(button)
-
+/obj/structure/tunnel/mineop/proc/destroy_the_tunnel()
+	animate(button, alpha = 0, pixel_y = 0, time = 3, easing = SINE_EASING | EASE_OUT)
 	animate(src, transform = matrix(rand(-3,3), rand(-3,3), MATRIX_TRANSLATE), time = 0.5, easing = EASE_IN)
 	for(var/i in 0 to 10)
 		animate(transform = matrix(rand(-4,4), rand(-4,4), MATRIX_TRANSLATE), time = 1)
 	animate(transform = matrix(0, 0, MATRIX_TRANSLATE), time = 0.5, easing = EASE_OUT)
 
-	. = ..()
+	spawn(1 SECONDS)
+		qdel(button)
+		qdel(src)
 
 /obj/structure/tunnel/mineop/proc/replenish_points()
+	qdel(button)
+
 	replenish_points_for -= 1
 	unused_points = points_max
 	restocking = FALSE
@@ -144,8 +169,63 @@
 
 /obj/structure/tunnel/mineop/testing
 	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/sentinel)
-	special_xeno_types = list(/mob/living/carbon/xenomorph/warrior, /datum/caste_datum/lurker)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/warrior, /mob/living/carbon/xenomorph/lurker)
 	unused_points = 50
 	points_max = 50
 	replenish_points_for = 2
 	replenish_timeframe = 5 SECONDS
+
+/obj/structure/tunnel/mineop/stage_1
+
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/sentinel)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/spitter)
+
+	points_max = 35
+	unused_points = 35
+
+/obj/structure/tunnel/mineop/stage_2
+
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/spitter)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/warrior)
+
+	special_type_chance = 15
+
+/obj/structure/tunnel/mineop/stage_2/Initialize(mapload, h_number)
+	. = ..()
+	points_max = rand(20,30)
+	unused_points = points_max
+
+	replenish_points_for = rand(0,1)
+	if(replenish_points_for > 0)
+		replenish_timeframe = 10 SECONDS
+
+/obj/structure/tunnel/mineop/stage_3
+
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/warrior)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/ravager, /mob/living/carbon/xenomorph/crusher)
+
+	special_type_chance = 15
+
+/obj/structure/tunnel/mineop/stage_3/Initialize(mapload, h_number)
+	. = ..()
+	points_max = points_max = rand(20,30)
+	unused_points = points_max
+
+	replenish_points_for = rand(0,1)
+	if(replenish_points_for > 0)
+		replenish_timeframe = 30 SECONDS
+
+/obj/structure/tunnel/mineop/stage_4
+
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/warrior, /mob/living/carbon/xenomorph/ravager)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/crusher, /mob/living/carbon/xenomorph/despoiler)
+
+	special_type_chance = 30
+	points_max = 20
+	unused_points = 20
+	replenish_timeframe = 30 SECONDS
+
+/obj/structure/tunnel/mineop/stage_4/Initialize(mapload, h_number)
+	. = ..()
+
+	replenish_points_for = rand(1,3)
