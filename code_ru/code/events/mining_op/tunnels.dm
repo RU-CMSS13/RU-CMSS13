@@ -43,7 +43,7 @@
 
 	var/obj/effect/mineop/xeno_join/button
 
-/obj/structure/tunnel/mineop/Initialize(mapload, h_number)
+/obj/structure/tunnel/mineop/Initialize(mapload, h_number, hive_ref)
 	. = ..()
 
 	var/area/A = get_area(src)
@@ -113,30 +113,39 @@
 	REMOVE_TRAIT(M, TRAIT_IMMOBILIZED, TUNNELFALL_TRAIT)
 	REMOVE_TRAIT(M, TRAIT_UNDENSE, TUNNELFALL_TRAIT)
 
-/obj/structure/tunnel/mineop/proc/try_spawning_xeno(mob/candidate)
+/obj/structure/tunnel/mineop/proc/try_spawning_xeno(mob/dead/observer/candidate)
 	if(unused_points <= 0)
 		return FALSE
 
-	var/list/mob/living/carbon/xenomorph/pool = list()
-	for(var/mob/living/carbon/xenomorph/X in basic_xeno_types)
+	var/special_one = FALSE
+	var/list/pool = list()
+	for(var/mob/living/carbon/xenomorph/X as anything in basic_xeno_types)
 		if(X.point_worth <= unused_points)
-			pool += X
+			pool += X.caste_type
 
 	if(prob(special_type_chance) && length(special_xeno_types)) // гарант того, что кликнувшему выпадет какой-то жирнич
 		pool.Cut()
-		pool += special_xeno_types
+		for(var/mob/living/carbon/xenomorph/X as anything in special_xeno_types)
+			pool += X.caste_type
 		special_type_chance = initial(special_type_chance)
+		special_one = TRUE
 
-	var/mob/living/carbon/xenomorph/X = pick(pool)
+	var/randomspawn = pick(pool)
+	var/xeno_type = GLOB.RoleAuthority.get_caste_by_text(randomspawn)
 
-	X = new(loc, null)
-	X.alpha = 0
-	ADD_TRAIT(X, TRAIT_IMMOBILIZED, TUNNELFALL_TRAIT)
-	animate(X, transform = matrix(0.01, MATRIX_SCALE), time = 0)
+	var/mob/living/carbon/xenomorph/X = new xeno_type(get_turf(src))
 	candidate.mind.transfer_to(X, TRUE)
 	unused_points -= X.point_worth
+	if(!special_one)
+		special_type_chance += 5
 	X.generate_name()
 
-	animate(X, alpha = 255, transform = matrix(1, MATRIX_SCALE), time = 1 SECONDS, easing = SINE_EASING)
-	REMOVE_TRAIT(X, TRAIT_IMMOBILIZED, TUNNELFALL_TRAIT)
 	msg_admin_niche("[key_name(X)] has joined as a lesser drone at ([x],[y],[z]).")
+
+/obj/structure/tunnel/mineop/testing
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/sentinel)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/warrior, /datum/caste_datum/lurker)
+	unused_points = 50
+	points_max = 50
+	replenish_points_for = 2
+	replenish_timeframe = 5 SECONDS
