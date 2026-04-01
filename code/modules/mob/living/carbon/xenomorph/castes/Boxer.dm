@@ -29,7 +29,7 @@
 
 	minimum_evolve_time = 9 MINUTES
 
-	minimap_icon = "boxer"
+	minimap_icon = "warrior"
 
 
 /mob/living/carbon/xenomorph/boxer
