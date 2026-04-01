@@ -42,6 +42,7 @@
 	var/invis_duration = 30 SECONDS // so we can display how long the lurker is invisible to it
 	var/base_fury = 999999
 	var/next_slash_buffed = FALSE
+	var/screech_sound_effect_list = list('sound/voice/alien_queen_screech.ogg')
 
 /mob/living/carbon/xenomorph/drone/proc/queen_gut(atom/target)
 	if(!iscarbon(target))
@@ -138,6 +139,28 @@
 	if(ishuman(movable_atom))
 		return
 	..()
+
+
+/datum/behavior_delegate/drone_gambler/proc/decloak_handler(mob/source)
+	SIGNAL_HANDLER
+	var/datum/action/xeno_action/onclick/lurker_invisibility/lurker_invis_action = get_action(bound_xeno, /datum/action/xeno_action/onclick/lurker_invisibility)
+	if(istype(lurker_invis_action))
+		lurker_invis_action.invisibility_off(0.5) // Partial refund of remaining time
+
+/// Implementation for enabling invisibility.
+/datum/behavior_delegate/drone_gambler/proc/on_invisibility()
+
+	ADD_TRAIT(bound_xeno, TRAIT_CLOAKED, TRAIT_SOURCE_ABILITY("cloak"))
+	RegisterSignal(bound_xeno, COMSIG_MOB_EFFECT_CLOAK_CANCEL, PROC_REF(decloak_handler))
+	bound_xeno.stealth = TRUE
+	invis_start_time = world.time
+
+/// Implementation for disabling invisibility.
+/datum/behavior_delegate/drone_gambler/proc/on_invisibility_off()
+	bound_xeno.stealth = FALSE
+	REMOVE_TRAIT(bound_xeno, TRAIT_CLOAKED, TRAIT_SOURCE_ABILITY("cloak"))
+	UnregisterSignal(bound_xeno, COMSIG_MOB_EFFECT_CLOAK_CANCEL)
+	invis_start_time = -1
 
 
 /datum/action/xeno_action/activable/lets_go_gambling
