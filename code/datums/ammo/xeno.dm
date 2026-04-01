@@ -145,6 +145,141 @@
 	scatter = SCATTER_AMOUNT_NEURO
 	bonus_projectiles_amount = 0
 
+/datum/ammo/xeno/toxin/neuro
+	effect_power = XENO_NEURO_TIER_4
+	var/datum/callback/retro_neuro_callback
+
+/datum/ammo/xeno/toxin/neuro/New()
+	..()
+	shell_speed = AMMO_SPEED_TIER_2
+	max_range = 6
+
+	retro_neuro_callback = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(apply_retro_neuro))
+
+/datum/ammo/xeno/toxin/neuro/on_hit_mob(mob/M,obj/projectile/P)
+
+	retro_neuro_callback.Invoke(M, effect_power)
+
+// attempt 2
+/proc/apply_retro_neuro(mob/living/victim, power)
+	var/pass_down_the_line = FALSE
+
+	if(skillcheck(victim, SKILL_ENDURANCE, SKILL_ENDURANCE_MAX))
+		victim.visible_message(SPAN_DANGER("[victim] withstands the neurotoxin!"))
+		return //endurance 5 makes you immune to weak neurotoxin
+	if(ishuman(victim))
+		var/mob/living/carbon/human/H = victim
+		if(H.chem_effect_flags & CHEM_EFFECT_RESIST_NEURO || H.species.flags & NO_NEURO)
+			return
+
+	if(ishuman(victim))
+		if(HAS_TRAIT(victim, KNOCKEDOUT_TRAIT) || pass_down_the_line) //second part is always false, but consistency is a great thing
+			pass_down_the_line = TRUE
+
+	if(!isxeno(victim))
+		if(victim.AmountKnockDown() > 4 || pass_down_the_line)
+			if(!pass_down_the_line)
+				victim.visible_message(SPAN_DANGER("[victim] falls limp on the ground."))
+			victim.KnockOut(30) //KO them. They already got rekt too much
+			pass_down_the_line = TRUE
+
+		var/no_clothes_neuro = FALSE
+
+		if(ishuman(victim))
+			var/mob/living/carbon/human/H = victim
+			if(!H.wear_suit || H.wear_suit.slowdown == 0)
+				no_clothes_neuro = TRUE
+
+
+		if(HAS_TRAIT(victim, TRAIT_DAZED) || pass_down_the_line || no_clothes_neuro)
+			if(victim.AmountKnockDown() < 4)
+				victim.AdjustKnockDown(1 * power) // KD them a bit more
+				if(!pass_down_the_line)
+					victim.visible_message(SPAN_DANGER("[victim] falls prone."))
+			pass_down_the_line = TRUE
+
+		if(victim.superslowed || pass_down_the_line)
+			if(victim.dazed < 6)
+				victim.AdjustDaze(3 * power) // Daze them a bit more
+				if(!pass_down_the_line)
+					victim.visible_message(SPAN_DANGER("[victim] is visibly confused."))
+			pass_down_the_line = TRUE
+
+	if(victim.superslowed < 10)
+		victim.AdjustSuperslow(3 * power) // Superslow them a bit more
+		if(!pass_down_the_line)
+			victim.visible_message(SPAN_DANGER("[victim] movements are slowed."))
+
+// Neuro Spit
+/datum/action/xeno_action/activable/neuro_spit
+	name = "Neuro Spit"
+	action_icon_state = "xeno_spit"
+	macro_path = /datum/action/xeno_action/verb/verb_neuro_spit
+	action_type = XENO_ACTION_CLICK
+	ability_primacy = XENO_PRIMARY_ACTION_1
+	xeno_cooldown = 2 SECONDS
+	plasma_cost = 20
+	ability_uses_acid_overlay = TRUE
+
+
+/datum/action/xeno_action/verb/verb_neuro_spit()
+	set category = "Alien"
+	set name = "Neuro Spit"
+	set hidden = TRUE
+	var/action_name = "Neuro Spit"
+	handle_xeno_macro(src,action_name)
+
+/datum/xeno_strain/neuro_spitter
+	name = SENTINEL_NEURO_SPITTER
+	description = "At the cost of your abilities, your tackles are improved and your gain neurotoxic spit, which will slow down, stun, and eventually knock out hosts with consecutive spits."
+	flavor_description = "Anyone else wanna take a nap?" // REM
+	actions_to_remove = list(
+		/datum/action/xeno_action/activable/slowing_spit,
+		/datum/action/xeno_action/activable/scattered_spit,
+		/datum/action/xeno_action/onclick/paralyzing_slash,
+	)
+	actions_to_add = list(
+		/datum/action/xeno_action/activable/neuro_spit,
+	)
+
+/datum/xeno_strain/neuro_spitter/apply_strain(mob/living/carbon/xenomorph/sentinel/sentinel)
+	sentinel.tackle_min = 2
+	sentinel.tacklestrength_max = 5
+	sentinel.recalculate_everything()
+
+/datum/action/xeno_action/activable/neuro_spit/use_ability(atom/target)
+	var/mob/living/carbon/xenomorph/neuro_spit = owner
+	if(!neuro_spit.check_state())
+		return
+
+	if(!action_cooldown_check())
+		to_chat(src, SPAN_WARNING("We must wait for our spit glands to refill."))
+		return
+
+	var/turf/current_turf = get_turf(neuro_spit)
+
+	if(!current_turf)
+		return
+
+	if (!check_and_use_plasma_owner())
+		return
+
+	neuro_spit.visible_message(SPAN_XENOWARNING("[neuro_spit] spits at [target]!"),
+	SPAN_XENOWARNING("You spit at [target]!") )
+	var/sound_to_play = pick(1, 2) == 1 ? 'sound/voice/alien_spitacid.ogg' : 'sound/voice/alien_spitacid2.ogg'
+	playsound(neuro_spit.loc, sound_to_play, 25, 1)
+
+	neuro_spit.ammo = GLOB.ammo_list[/datum/ammo/xeno/toxin/neuro]
+	var/obj/projectile/projectile = new /obj/projectile(current_turf, create_cause_data(initial(neuro_spit.caste_type), neuro_spit))
+	projectile.generate_bullet(neuro_spit.ammo)
+	projectile.permutated += neuro_spit
+	projectile.def_zone = neuro_spit.get_limbzone_target()
+	projectile.fire_at(target, neuro_spit, neuro_spit, neuro_spit.ammo.max_range, neuro_spit.ammo.shell_speed)
+
+	apply_cooldown()
+	return ..()
+
+
 /datum/ammo/xeno/acid
 	name = "acid spit"
 	icon_state = "xeno_acid_weak"
