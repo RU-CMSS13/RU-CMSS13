@@ -258,7 +258,7 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/weapon/gun/mounted/mecha_laser
+/obj/item/weapon/gun/mounted/mecha_plasma
 	name = "L55 \"Lazarus\" Heavy Plasma Cannon"
 	desc = "This is for sure abomination of mobile ground unit weapons. This gun consume a lot of energy and can have literally deadly recoil. Only heavy platforms can use it. Very limited edition, result can vary due to low production scale."
 
@@ -272,19 +272,19 @@
 
 	charge_cost = 2000
 
-/obj/item/weapon/gun/mounted/mecha_laser/set_gun_config_values()
+/obj/item/weapon/gun/mounted/mecha_plasma/set_gun_config_values()
 	. = ..()
 
 	set_fire_delay(15 SECONDS)
 
-/obj/item/weapon/gun/mounted/mecha_laser/load_into_chamber()
+/obj/item/weapon/gun/mounted/mecha_plasma/load_into_chamber()
 	in_chamber = create_bullet(ammo, initial(name))
 	return in_chamber
 
-/obj/item/weapon/gun/mounted/mecha_laser/has_ammunition()
+/obj/item/weapon/gun/mounted/mecha_plasma/has_ammunition()
 	return TRUE
 
-/obj/item/weapon/gun/mounted/mecha_laser/reload_into_chamber()
+/obj/item/weapon/gun/mounted/mecha_plasma/reload_into_chamber()
 	return TRUE
 
 

@@ -208,6 +208,12 @@
 	accurate_range = 8
 	max_range = 21
 
+	var/explosion_power = 20
+	var/explosion_fallof = 20
+	var/fire_range = 2
+	var/fire_dur = 15
+	var/fire_burn = 40
+
 /datum/ammo/energy/walker/plasma/on_hit_mob(mob/living/target_mob, obj/projectile/proj)
 	do_flame_spread(get_turf(target_mob), proj)
 
@@ -221,8 +227,8 @@
 	do_flame_spread(get_turf(proj), proj)
 
 /datum/ammo/energy/walker/plasma/proc/do_flame_spread(turf/impact, obj/projectile/proj)
-	cell_explosion(impact, 50, 50, explosion_cause_data = proj.weapon_cause_data)
-	fire_spread(impact, proj.weapon_cause_data, 2, 15, 50, "#3c82a5")
+	cell_explosion(impact, explosion_power, explosion_fallof, explosion_cause_data = proj.weapon_cause_data)
+	fire_spread(impact, proj.weapon_cause_data, fire_range, fire_dur, fire_burn, "#3c82a5")
 
 
 
