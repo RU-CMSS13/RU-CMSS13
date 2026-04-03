@@ -17,7 +17,7 @@
 	/obj/item/hardpoint/walker/armor/fire,\
 	/obj/item/hardpoint/walker/armor/ballistic,\
 )
-#define BASE_MECHA_GUNS list(/obj/item/weapon/gun/mounted/mecha_wm88, /obj/item/weapon/gun/mounted/mecha_smartgun, /obj/item/weapon/gun/mounted/mecha_shotgun8g, /obj/item/weapon/gun/mounted/mecha_hmg, /obj/item/weapon/gun/flamer/mounted/mecha_flamer, /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher)
+#define BASE_MECHA_GUNS list(/obj/item/weapon/gun/mounted/mecha_wm88, /obj/item/weapon/gun/mounted/mecha_smartgun, /obj/item/weapon/gun/mounted/mecha_shotgun8g, /obj/item/weapon/gun/mounted/mecha_hmg, /obj/item/weapon/gun/flamer/mounted/mecha_flamer, /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher, /obj/item/weapon/gun/mounted/mecha_plasma)
 
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
@@ -86,8 +86,6 @@
 		/obj/vehicle/walker/proc/toggle_lights,
 		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/switch_weapons,
-		/obj/vehicle/walker/proc/move_z_up,
-		/obj/vehicle/walker/proc/move_z_down,
 		/obj/vehicle/walker/proc/dir_look_lock,
 		/obj/vehicle/walker/proc/name_walker,
 	)
@@ -260,6 +258,8 @@
 	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
 
 	add_verb(user, verbs_list)
+	if(user.client)
+		add_verb(user.client, verbs_list)
 	for(var/datum/action/action as anything in actions_list)
 		give_action(user, action, null, null, src)
 

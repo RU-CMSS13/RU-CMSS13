@@ -25,6 +25,7 @@
 
 
 /datum/action/walker/lights
+	name = "Toggle Light"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_LIGHTS
 
 /datum/action/walker/lights/action_activate()
@@ -52,6 +53,7 @@
 
 
 /datum/action/walker/eject_magazine
+	name = "Eject Magazine"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_EJECT_MAGAZINE
 
 /datum/action/walker/eject_magazine/action_activate()
@@ -72,6 +74,7 @@
 
 
 /datum/action/walker/get_stats
+	name = "Show Stats"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_STATUS
 
 /datum/action/walker/get_stats/action_activate()
@@ -92,6 +95,7 @@
 
 
 /datum/action/walker/dir_look_lock
+	name = "Toggle Dir Lock"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_DIR_LOCK
 
 /datum/action/walker/dir_look_lock/action_activate()
@@ -112,6 +116,7 @@
 
 
 /datum/action/walker/switch_weapons
+	name = "Switch Weapons"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_SWITCH_WEAPONS
 
 /datum/action/walker/switch_weapons/action_activate()
@@ -131,20 +136,8 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack()
-	set name = "Jetpack"
-	set category = "Vehicle"
-
-	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK)
-
-/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack_evac()
-	set name = "Jetpack Evac"
-	set category = "Vehicle"
-
-	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK_EVAC)
-
-
 /datum/action/walker/jetpack
+	name = "Toggle Jetpack"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK
 
 /datum/action/walker/jetpack/action_activate()
@@ -155,6 +148,7 @@
 	action_holder.prepare_titan_raise(owner, action_holder.owner)
 
 /datum/action/walker/jetpack_evac
+	name = "Jetpack Evac"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK_EVAC
 
 /datum/action/walker/jetpack_evac/action_activate()
@@ -174,7 +168,7 @@
 	classic_keys = list("Unbound")
 	name = "walker_jetpack"
 	full_name = "Jetpack"
-	description = "Allows to turn on/off jetpack"
+	description = "Allows to toggle jetpack"
 	keybind_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK
 
 /datum/keybinding/human/walker/jetpack_evac
@@ -189,30 +183,8 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/vehicle/walker/proc/z_up()
-	set name = "Move UP"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	move_z_up(user)
-
-/obj/vehicle/walker/proc/z_down()
-	set name = "Move Down"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	move_z_down(user)
-
-
 /datum/action/walker/move_z_up
+	name = "Move UP"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_Z_UP
 
 /datum/action/walker/move_z_up/action_activate()
@@ -220,6 +192,7 @@
 	vessel.move_z_up(owner)
 
 /datum/action/walker/move_z_down
+	name = "Move DOWN"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_Z_DOWN
 
 /datum/action/walker/move_z_down/action_activate()
@@ -247,14 +220,8 @@
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/reactor/proc/reactor()
-	set name = "Reactor"
-	set category = "Vehicle"
-
-	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_REACTOR)
-
-
 /datum/action/walker/reactor
+	name = "Toggle Reactor"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_REACTOR
 
 /datum/action/walker/reactor/action_activate()
@@ -268,27 +235,15 @@
 	classic_keys = list("Unbound")
 	name = "walker_reactor"
 	full_name = "Reactor"
-	description = "Allows to turn on/off reactor"
+	description = "Allows to toggle reactor"
 	keybind_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_REACTOR
 
 
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/spinal/artillery/proc/art_zoom()
-	set name = "Zoom"
-	set category = "Vehicle"
-
-	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_ZOOM)
-
-/obj/item/hardpoint/walker/spinal/artillery/proc/motion_detector()
-	set name = "Motion Detector"
-	set category = "Vehicle"
-
-	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_MOTION_DETECTOR)
-
-
 /datum/action/walker/art_zoom
+	name = "Zoom"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_ZOOM
 
 /datum/action/walker/art_zoom/action_activate()
@@ -300,6 +255,7 @@
 	vessel.update_zoom_pixels(TRUE)
 
 /datum/action/walker/motion_detector
+	name = "Motion Detector"
 	listen_signal = COMSIG_KB_HUMAN_INTERACT_WALKER_MOTION_DETECTOR
 
 /datum/action/walker/motion_detector/action_activate()

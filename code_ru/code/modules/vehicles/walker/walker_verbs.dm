@@ -117,3 +117,74 @@ AND YOULL BE FINE!*/
 	to_chat(user, SPAN_NOTICE("You've added \"[nickname]\" nickname to your vehicle."))
 
 	message_admins(WRAP_STAFF_LOG(user, "added \"[nickname]\" nickname to their [initial(name)]. ([x],[y],[z])"), x, y, z)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/z_up()
+	set name = "Move UP"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+
+	move_z_up(user)
+
+/obj/vehicle/walker/proc/z_down()
+	set name = "Move Down"
+	set category = "Vehicle"
+
+	var/mob/user = usr
+	src = user.interactee
+	if(!istype(src, /obj/vehicle/walker))
+		return
+
+	move_z_down(user)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack()
+	set name = "Jetpack"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK)
+
+/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack_evac()
+	set name = "Jetpack Evac"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK_EVAC)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/hardpoint/walker/reactor/proc/reactor()
+	set name = "Reactor"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_REACTOR)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/hardpoint/walker/spinal/artillery/proc/art_zoom()
+	set name = "Zoom"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_ZOOM)
+
+/obj/item/hardpoint/walker/spinal/artillery/proc/motion_detector()
+	set name = "Motion Detector"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_MOTION_DETECTOR)
+
+
+//////////////////////////////////////////////////////////////
