@@ -90,7 +90,7 @@
 		var/obj/docking_port/mobile/marine_dropship/dropship = SSshuttle.getShuttle(shuttle_tag)
 		if(!dropship.in_flyby)
 			continue
-		for(equipment in dropship.equipments)
+		for(equipment as anything in dropship.equipments)
 			if(!istype(equipment, /obj/structure/dropship_equipment/medevac_system) &&\
 			!istype(equipment, /obj/structure/dropship_equipment/fulton_system) &&\
 			!istype(equipment, /obj/structure/dropship_equipment/paradrop_system))

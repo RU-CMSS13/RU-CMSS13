@@ -140,7 +140,7 @@
 	var/obj/vehicle/walker/vessel = new
 	for(var/slot in vessel.hardpoints_by_slot)
 		var/list/hardpoints_options = list()
-		for(var/obj/item/hardpoint/walker/hardpoint in BASE_MECHA_MODULES)
+		for(var/obj/item/hardpoint/walker/hardpoint as anything in BASE_MECHA_MODULES)
 			if(initial(hardpoint.slot) != slot)
 				continue
 			hardpoints_options += hardpoint
@@ -151,7 +151,7 @@
 
 		selected_hardpoint = new selected_hardpoint
 		vessel.add_hardpoint(selected_hardpoint)
-		if(selected_hardpoint != GUN_MOUNT_MECHA)
+		if(selected_hardpoint.mount_class != GUN_MOUNT_MECHA)
 			continue
 
 		var/selected_gun = tgui_input_list(usr, "Select weapon for [slot] or skip by selecting nothing", "Mecha weapon", BASE_MECHA_GUNS)
@@ -166,63 +166,6 @@
 
 	vessel.forceMove(get_turf(usr))
 	message_admins("[key_name_admin(usr)] spawned mecha.")
-
-
-/obj/effect/vehicle_spawner/walker
-	var/list/base_hardpoints = list(
-		/obj/item/hardpoint/walker/hand/left,
-		/obj/item/hardpoint/walker/hand/right,
-		/obj/item/hardpoint/walker/leg/left,
-		/obj/item/hardpoint/walker/leg/right,
-	)
-	var/list/additional_hardpoints = list(
-		/obj/item/hardpoint/walker/reactor,
-	)
-	var/list/pre_install_guns = list()
-
-/obj/effect/vehicle_spawner/walker/Initialize()
-	. = ..()
-	spawn_vehicle()
-	qdel(src)
-
-/obj/effect/vehicle_spawner/walker/spawn_vehicle()
-	var/obj/vehicle/walker/vessel = new (loc)
-	handle_direction(vessel)
-	load_hardpoints(vessel)
-	vessel.update_icon()
-
-/obj/effect/vehicle_spawner/walker/load_hardpoints(obj/vehicle/walker/vessel)
-	for(var/hardpoint in base_hardpoints + additional_hardpoints)
-		vessel.add_hardpoint(new hardpoint)
-	for(var/gun in pre_install_guns)
-		for(var/obj/item/hardpoint/walker/selected in vessel.hardpoints)
-			if(selected.mount_class != GUN_MOUNT_MECHA || selected.mounted_gun)
-				continue
-			selected.insert_gun(new gun)
-
-/obj/effect/vehicle_spawner/walker/shotgun
-	pre_install_guns = list(
-		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
-		/obj/item/weapon/gun/mounted/mecha_shotgun8g,
-	)
-
-/obj/effect/vehicle_spawner/walker/smartgun
-	pre_install_guns = list(
-		/obj/item/weapon/gun/mounted/mecha_smartgun,
-		/obj/item/weapon/gun/mounted/mecha_smartgun,
-	)
-
-/obj/effect/vehicle_spawner/walker/m30
-	pre_install_guns = list(
-		/obj/item/weapon/gun/mounted/mecha_hmg,
-		/obj/item/weapon/gun/mounted/mecha_hmg,
-	)
-
-/obj/effect/vehicle_spawner/walker/wm88
-	pre_install_guns = list(
-		/obj/item/weapon/gun/mounted/mecha_wm88,
-		/obj/item/weapon/gun/mounted/mecha_wm88,
-	)
 
 
 //////////////////////////////////////////////////////////////
@@ -273,7 +216,7 @@
 		else
 			consume_energy(light_consuming)
 
-	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		selected.on_source_process(delta_time)
 
 	if(seats[VEHICLE_DRIVER])
@@ -459,7 +402,7 @@
 
 /obj/vehicle/walker/proc/eject_magazine(mob/user)
 	var/list/acceptible_modules = list()
-	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
 		if(!selected.mounted_gun?.current_mag)
 			continue
 		acceptible_modules[selected.name] = selected.mounted_gun
@@ -731,7 +674,7 @@
 /obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, zone_selected, obj/item/hardpoint/walker/attacked_hardpoint)
 	if(!zone_selected && !attacked_hardpoint)
 		var/damage_per_part = damages_applied[WALKER_DAMAGE_REMAINING] / max(length(hardpoints), 1)
-		for(var/obj/item/hardpoint/walker/hardpoints_remaining in hardpoints)
+		for(var/obj/item/hardpoint/walker/hardpoints_remaining as anything in hardpoints)
 			if(!hardpoints_remaining.can_take_damage())
 				continue
 			hardpoints_remaining.take_damage_type(damages_applied, type, attacker, damage_per_part, damage_per_part)
