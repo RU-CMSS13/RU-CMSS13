@@ -195,7 +195,7 @@
 	if(overheat == overheat_limit)
 		new steam_effect(get_turf(src))
 		var/obj/item/hardpoint/walker/hand = gun_holder
-		hand.owner.take_damage_type(overheat_self_destruction_rate * overheat, "abstract", null, hand)
+		hand.owner.take_damage_type(overheat_self_destruction_rate * overheat, "abstract", null, null, hand)
 
 	addtimer(CALLBACK(src, PROC_REF(reset_overheat_buff), user), overheat_reset_cooldown, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
 

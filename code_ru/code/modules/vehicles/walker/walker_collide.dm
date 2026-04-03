@@ -20,11 +20,11 @@
 	charger_ability.stop_momentum()
 
 /obj/vehicle/walker/onZImpact(turf/impact_turf, height)
-	collision_result(height * 100, src, "all")
+	collision_result(height * 100, src)
 
 // The fucking domino effect)))
-/obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason, zones)
-	take_damage_type(damage, "blunt", collision_reason, null, zones)
+/obj/vehicle/walker/proc/collision_result(damage, atom/collision_reason)
+	take_damage_type(damage, "blunt", collision_reason)
 	playsound(src, pick_weight(list('code_ru/sound/vehicle/walker/mecha_crusher.ogg' = 49, 'code_ru/sound/vehicle/walker/mecha_crusher_metal_pipe.ogg' = 1)), 35)
 	var/turf/target = get_step(src, collision_reason.dir)
 	var/list/cached_interactions = list()

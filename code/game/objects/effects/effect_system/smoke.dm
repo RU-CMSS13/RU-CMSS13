@@ -565,7 +565,7 @@
 //RUCM START
 //fuck we need to do it other way, we already 4x times run thru turf context, that fucking cursed, at least put it in one LOOP, then do signaller
 	for(var/obj/vehicle/walker/vessel in cur_turf)
-		vessel.take_damage_type(15, "acid", zone_selected = "all")
+		vessel.take_damage_type(15, "acid")
 //RUCM END
 
 //No effect when merely entering the smoke turf, for balance reasons

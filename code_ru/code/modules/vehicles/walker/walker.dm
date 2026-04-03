@@ -1,3 +1,24 @@
+#define BASE_MECHA_MODULES list(\
+	/obj/item/hardpoint/walker/hand/left,\
+	/obj/item/hardpoint/walker/hand/right,\
+	/obj/item/hardpoint/walker/leg/left,\
+	/obj/item/hardpoint/walker/leg/right,\
+	/obj/item/hardpoint/walker/reactor,\
+	/obj/item/hardpoint/walker/reactor/enhanced,\
+	/obj/item/hardpoint/walker/head,\
+	/obj/item/hardpoint/walker/spinal/powerful_cooling,\
+	/obj/item/hardpoint/walker/spinal/artillery,\
+	/obj/item/hardpoint/walker/spinal/tactical_missile,\
+	/obj/item/hardpoint/walker/spinal/shield,\
+	/obj/item/hardpoint/walker/spinal/jetpack,\
+	/obj/item/hardpoint/walker/armor/paladin,\
+	/obj/item/hardpoint/walker/armor/concussive,\
+	/obj/item/hardpoint/walker/armor/caustic,\
+	/obj/item/hardpoint/walker/armor/fire,\
+	/obj/item/hardpoint/walker/armor/ballistic,\
+)
+#define BASE_MECHA_GUNS list(/obj/item/weapon/gun/mounted/mecha_wm88, /obj/item/weapon/gun/mounted/mecha_smartgun, /obj/item/weapon/gun/mounted/mecha_shotgun8g, /obj/item/weapon/gun/mounted/mecha_hmg, /obj/item/weapon/gun/flamer/mounted/mecha_flamer, /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher)
+
 /obj/vehicle/walker
 	name = "CW13 \"Enforcer\" Assault Walker"
 	desc = "Relatively new combat walker of \"Enforcer\"-series. Unlike its predecessor, \"Carharodon\"-series, slower, but relays on its tough armor and rapid-firing weapons."
@@ -14,25 +35,7 @@
 	move_turn_momentum_loss_factor = 0
 	move_momentum_build_factor = 2
 
-	hardpoints_allowed = list(
-		/obj/item/hardpoint/walker/hand/left,
-		/obj/item/hardpoint/walker/hand/right,
-		/obj/item/hardpoint/walker/leg/left,
-		/obj/item/hardpoint/walker/leg/right,
-		/obj/item/hardpoint/walker/reactor,
-		/obj/item/hardpoint/walker/reactor/enhanced,
-		/obj/item/hardpoint/walker/head,
-		/obj/item/hardpoint/walker/spinal/powerful_cooling,
-		/obj/item/hardpoint/walker/spinal/artillery,
-		/obj/item/hardpoint/walker/spinal/tactical_missile,
-		/obj/item/hardpoint/walker/spinal/shield,
-		/obj/item/hardpoint/walker/spinal/jetpack,
-		/obj/item/hardpoint/walker/armor/paladin,
-		/obj/item/hardpoint/walker/armor/concussive,
-		/obj/item/hardpoint/walker/armor/caustic,
-		/obj/item/hardpoint/walker/armor/fire,
-		/obj/item/hardpoint/walker/armor/ballistic,
-	)
+	hardpoints_allowed = BASE_MECHA_MODULES
 	hardpoints_by_slot = list(
 		WALKER_HARDPOIN_HEAD = null,
 		WALKER_HARDPOIN_LEFT_HAND = null,
@@ -78,16 +81,22 @@
 		"same_guns_debuff" = 1,
 	)
 
-	var/list/verb_list = list(
+	var/list/verbs_list = list(
 		/obj/vehicle/walker/proc/get_stats,
 		/obj/vehicle/walker/proc/toggle_lights,
-		/obj/vehicle/walker/proc/special_module_action,
 		/obj/vehicle/walker/proc/eject_magazine,
 		/obj/vehicle/walker/proc/switch_weapons,
 		/obj/vehicle/walker/proc/move_z_up,
 		/obj/vehicle/walker/proc/move_z_down,
 		/obj/vehicle/walker/proc/dir_look_lock,
 		/obj/vehicle/walker/proc/name_walker,
+	)
+	var/list/actions_list = list(
+		/datum/action/walker/lights,
+		/datum/action/walker/eject_magazine,
+		/datum/action/walker/get_stats,
+		/datum/action/walker/dir_look_lock,
+		/datum/action/walker/switch_weapons,
 	)
 
 	move_sounds = list(
@@ -115,15 +124,49 @@
 	var/nickname
 
 
-/obj/structure/walker_wreckage
-	name = "CW13 wreckage"
-	desc = "Remains of some unfortunate walker. Completely unrepairable."
-	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
-	icon_state = "mech_broken"
-	density = TRUE
-	anchored = TRUE
-	opacity = FALSE
-	pixel_x = -17
+//////////////////////////////////////////////////////////////
+
+
+/datum/admins/proc/spawn_mecha()
+	set name = "Spawn Mecha"
+	set category = "Admin.Events"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	if(tgui_alert(src, "Are you sure you want start building mecha?", "Confirm", list("Yes", "No")) != "Yes")
+		return
+
+	var/obj/vehicle/walker/vessel = new
+	for(var/slot in vessel.hardpoints_by_slot)
+		var/list/hardpoints_options = list()
+		for(var/obj/item/hardpoint/walker/hardpoint in BASE_MECHA_MODULES)
+			if(initial(hardpoint.slot) != slot)
+				continue
+			hardpoints_options += hardpoint
+
+		var/obj/item/hardpoint/walker/selected_hardpoint = tgui_input_list(usr, "Select components for [slot] or skip by selecting nothing", "Mecha component", hardpoints_options)
+		if(!selected_hardpoint)
+			continue
+
+		selected_hardpoint = new selected_hardpoint
+		vessel.add_hardpoint(selected_hardpoint)
+		if(selected_hardpoint != GUN_MOUNT_MECHA)
+			continue
+
+		var/selected_gun = tgui_input_list(usr, "Select weapon for [slot] or skip by selecting nothing", "Mecha weapon", BASE_MECHA_GUNS)
+		if(!selected_gun)
+			continue
+
+		selected_hardpoint.insert_gun(new selected_gun)
+
+	if(tgui_alert(src, "Are you sure you want to spawn builded mecha?", "Confirm", list("Yes", "No")) != "Yes")
+		qdel(vessel)// It didn't exist at this point in real world, however I want to make sure for clean removal
+		return
+
+	vessel.forceMove(get_turf(usr))
+	message_admins("[key_name_admin(usr)] spawned mecha.")
+
 
 /obj/effect/vehicle_spawner/walker
 	var/list/base_hardpoints = list(
@@ -180,6 +223,20 @@
 		/obj/item/weapon/gun/mounted/mecha_wm88,
 		/obj/item/weapon/gun/mounted/mecha_wm88,
 	)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/structure/walker_wreckage
+	name = "CW13 wreckage"
+	desc = "Remains of some unfortunate walker. Completely unrepairable."
+	icon = 'code_ru/icons/obj/vehicles/mech.dmi'
+	icon_state = "mech_broken"
+	density = TRUE
+	anchored = TRUE
+	opacity = FALSE
+	pixel_x = -17
 
 
 //////////////////////////////////////////////////////////////
@@ -259,9 +316,10 @@
 
 	to_chat(user, SPAN_HELPFUL("Press LMB/MMB for use left/right weapon."))
 
-	add_verb(user, verb_list)
-	if(user.client)
-		add_verb(user.client, verb_list)
+	add_verb(user, verbs_list)
+	for(var/datum/action/action as anything in actions_list)
+		give_action(user, action, null, null, src)
+
 	RegisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH), PROC_REF(exit_interaction))
 	RegisterSignal(user, COMSIG_MOB_LOGIN, PROC_REF(client_login_interaction))
 
@@ -273,7 +331,7 @@
 	SIGNAL_HANDLER
 
 	user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
-	add_verb(user.client, verb_list)
+	add_verb(user.client, verbs_list)
 
 /obj/vehicle/walker/on_unset_interaction(mob/living/user)
 	remove_action(user, /datum/action/human_action/mg_exit)
@@ -288,9 +346,10 @@
 	user.setDir(dir)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
 
-	remove_verb(user, verb_list)
-	if(user.client)
-		remove_verb(user.client, verb_list)
+	remove_verb(user, verbs_list)
+	for(var/datum/action/action as anything in actions_list)
+		remove_action(user, action)
+
 	SEND_SIGNAL(src, COMSIG_GUN_INTERRUPT_FIRE)
 	UnregisterSignal(user, list(COMSIG_MOB_MG_EXIT, COMSIG_MOB_RESISTED, COMSIG_MOB_DEATH, COMSIG_MOB_LOGIN))
 
@@ -385,6 +444,64 @@
 		listener.show_message("<B>[src]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 		langchat_long_listeners += listener
 	langchat_long_speech(message, langchat_long_listeners, driver.get_default_language())
+
+/obj/vehicle/walker/proc/move_z_up(mob/user)
+	if(flags_atom & NO_ZFALL)
+		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(istype(flying_support))
+			flying_support.handle_move_z_up(user, src)
+
+/obj/vehicle/walker/proc/move_z_down(mob/user)
+	if(flags_atom & NO_ZFALL)
+		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+		if(istype(flying_support))
+			flying_support.handle_move_z_down(user, src)
+
+/obj/vehicle/walker/proc/eject_magazine(mob/user)
+	var/list/acceptible_modules = list()
+	for(var/obj/item/hardpoint/walker/selected in hardpoints)
+		if(!selected.mounted_gun?.current_mag)
+			continue
+		acceptible_modules[selected.name] = selected.mounted_gun
+	if(!length(acceptible_modules))
+		return
+
+	var/selected_module = tgui_input_list(user, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
+	if(!selected_module)
+		return
+	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
+	if(!mounted_gun || !mounted_gun.current_mag)
+		return FALSE
+	mounted_gun.unload(user, TRUE)
+	to_chat(user, SPAN_WARNING("WARNING! [mounted_gun] ammo magazine deployed."))
+	visible_message("[src]'s system ejected used magazine.","")
+
+// I forgot why I made this a proc and why did this way, however... ~upd 2 days later
+/obj/vehicle/walker/proc/handle_weapon_groups(mob/user)
+	var/selected_group_cache = selected_group
+	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
+	if(istype(launcer))
+		if(selected_group == SELECTED_GROUP_HANDS && launcer.mounted_gun.current_mag?.current_rounds)
+			selected_group = SELECTED_GROUP_SPINAL
+			launcer.zoom = TRUE
+			update_zoom_pixels(TRUE)
+		else
+			selected_group = SELECTED_GROUP_HANDS
+			launcer.zoom = FALSE
+			update_zoom_pixels(TRUE)
+	else
+		selected_group = SELECTED_GROUP_HANDS
+
+	if(selected_group_cache == selected_group)
+		return
+
+	// Simple re-register of signals, I still don't want to do it clean way ~upd 2 days later
+	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
+		selected.pilot_ejected(user)
+		selected.pilot_entered(user)
+
+	to_chat(user, SPAN_WARNING("New selected group is [selected_group == SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))
 
 
 //////////////////////////////////////////////////////////////
@@ -511,11 +628,11 @@
 	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
 		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
 		if(istype(hardpoint_image))
-			hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.1
+			hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.001// Lame source code, working bad above this values with objects on tiles upper
 		else if(islist(hardpoint_image))
 			var/list/image/hardpoint_image_list = hardpoint_image
 			for(var/image/subimage as anything in hardpoint_image_list)
-				subimage.layer = layer + hardpoint.hdpt_layer * 0.1
+				subimage.layer = layer + hardpoint.hdpt_layer * 0.001
 		overlays += hardpoint_image
 
 /obj/vehicle/walker/proc/swith_visual_position(angle, pixel_shift)
@@ -570,7 +687,7 @@
 //////////////////////////////////////////////////////////////
 // DAMAGE
 
-/obj/vehicle/walker/take_damage_type(damage, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
+/obj/vehicle/walker/take_damage_type(damage, type, atom/attacker, zone_selected, obj/item/hardpoint/walker/attacked_hardpoint)
 	if(!damage)
 		return FALSE
 
@@ -585,13 +702,12 @@
 		return FALSE
 
 	. = TRUE
-	handle_modules_take_damage(damages_applied, type, attacker, attacked_hardpoint, zone_selected)
 
-	if(!attacked_hardpoint?.can_take_damage())
+	handle_modules_take_damage(damages_applied, type, attacker, zone_selected, attacked_hardpoint)
+	if(damages_applied[WALKER_DAMAGE_REMAINING])
 		damages_applied[WALKER_DAMAGE_TOTAL] += damages_applied[WALKER_DAMAGE_REMAINING]
 		health = max(0, health - damages_applied[WALKER_DAMAGE_REMAINING])
 
-	to_chat(seats[VEHICLE_DRIVER], SPAN_DANGER("ALERT! Hostile incursion detected. Chassis taking damage."))
 	if(attacker)
 		var/attacker_text = "[attacker]"
 		if(ismob(attacker))
@@ -601,7 +717,9 @@
 	else
 		log_attack("[src] took [damages_applied[WALKER_DAMAGE_TOTAL]] [type] damage.")
 
-	if(!health)
+	if(health)
+		update_icon()
+	else
 		var/mob/living/user = seats[VEHICLE_DRIVER]
 		if(user)
 			to_chat(user, SPAN_DANGER("PRIORITY ALERT! Chassis integrity failing. Systems shutting down."))
@@ -609,34 +727,49 @@
 		new /obj/structure/walker_wreckage(get_turf(src))
 		playsound(src, 'code_ru/sound/vehicle/walker/mecha_dead.ogg', 30)
 		qdel(src)
-	else
-		update_icon()
 
-/obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, obj/item/hardpoint/walker/attacked_hardpoint, zone_selected)
+/obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, zone_selected, obj/item/hardpoint/walker/attacked_hardpoint)
+	if(!zone_selected && !attacked_hardpoint)
+		var/damage_per_part = damages_applied[WALKER_DAMAGE_REMAINING] / max(length(hardpoints), 1)
+		for(var/obj/item/hardpoint/walker/hardpoints_remaining in hardpoints)
+			if(!hardpoints_remaining.can_take_damage())
+				continue
+			hardpoints_remaining.take_damage_type(damages_applied, type, attacker, damage_per_part, damage_per_part)
+		if(seats[VEHICLE_DRIVER])
+			seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
+		return
+
 	var/obj/item/hardpoint/walker/hardpoint_armor = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
 	if(hardpoint_armor?.can_take_damage())
 		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
+
+	if(!attacked_hardpoint)
+		switch(zone_selected)
+			if("head", "eyes", "mouth")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+			if("chest")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
+			if("groin")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
+			if("l_leg", "l_foot")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG]
+			if("r_leg", "r_foot")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG]
+			if("l_arm", "l_hand")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_HAND]
+			if("r_arm", "r_hand")
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_HAND]
+			else
+				attacked_hardpoint = pick(hardpoints.Copy() - hardpoint_armor)
 
 	if(attacked_hardpoint?.can_take_damage())
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 		return
 
-	if(seats[VEHICLE_DRIVER] && (zone_selected in list("head", "all")))
-		handle_seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
-		if(zone_selected == "all")
-			return
+	if(seats[VEHICLE_DRIVER] && (zone_selected in list("head", "eyes", "mouth")))
+		seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
 
-	var/list/obj/item/hardpoint/walker/hardpoints_remaining = hardpoints.Copy() - attacked_hardpoint - hardpoint_armor
-	for(var/length = 1 to length(hardpoints_remaining))
-		attacked_hardpoint = pick(hardpoints_remaining)
-		hardpoints_remaining -= attacked_hardpoint
-		if(!attacked_hardpoint.can_take_damage())
-			continue
-		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
-		if(zone_selected != "all")
-			break
-
-/obj/vehicle/walker/proc/handle_seated_take_damage(damage, type, atom/attacker, mob/living/user)
+/obj/vehicle/walker/proc/seated_take_damage(damage, type, atom/attacker, mob/living/user)
 	if(isxeno(attacker))
 		user.attack_alien(attacker)
 	else
@@ -651,7 +784,7 @@
 	take_damage_type(severity, "explosive")
 
 /obj/vehicle/walker/flamer_fire_act(dam, datum/cause_data/flame_cause_data)
-	take_damage_type(dam, "fire", flame_cause_data.resolve_mob(), null, "all")
+	take_damage_type(dam, "fire", flame_cause_data.resolve_mob())
 
 
 //////////////////////////////////////////////////////////////
@@ -731,25 +864,7 @@
 
 	xeno.animation_attack_on(src)
 
-	var/selected_zone = check_zone(xeno.zone_selected)
-	var/target
-	switch(selected_zone)
-		if("head")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
-		if("chest")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
-		if("groin")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
-		if("l_leg", "l_foot")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_LEG]
-		if("r_leg", "r_foot")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_LEG]
-		if("l_arm", "l_hand")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_LEFT_HAND]
-		if("r_arm", "r_hand")
-			target = hardpoints_by_slot[WALKER_HARDPOIN_RIGHT_HAND]
-
-	if(take_damage_type(damage, "slash", xeno, target, selected_zone))
+	if(take_damage_type(damage, "slash", xeno, check_zone(xeno.zone_selected)))
 		playsound(xeno, pick('sound/effects/metalhit.ogg', "alien_claw_metal"), 25, 1)
 		xeno.visible_message(SPAN_DANGER("\The [xeno] slashes \the [src]!"),
 		SPAN_DANGER("We slash \the [src]!"))

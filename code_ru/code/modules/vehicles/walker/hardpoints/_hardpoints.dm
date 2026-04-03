@@ -23,7 +23,8 @@
 	var/move_turn_momentum_loss_factor = 0
 	var/move_momentum_build_factor = 0
 
-	var/list/custom_actions = list()
+	var/list/verbs_list = list()
+	var/list/actions_list = list()
 
 	var/zoom_size = 0
 	var/obj/item/device/motiondetector/walker/motion_detector
@@ -58,7 +59,7 @@
 	if(owner || explo_proof)
 		return
 
-	take_damage_type(list(0, severity / 2 * owner.get_dmg_multi(type)), "explosive", "explosion")
+	take_damage_type(list(0, severity / 2 * owner.get_dmg_multi(type)), "explosive")
 
 /obj/item/hardpoint/walker/get_examine_text(mob/user)
 	. = ..()
@@ -71,8 +72,6 @@
 	. = ..()
 
 	vessel.hardpoints_by_slot[slot] = src
-	for(var/action in custom_actions)
-		vessel.hardpoint_actions[action] = src
 	if(!vessel.seats[VEHICLE_DRIVER])
 		return
 	pilot_entered(vessel.seats[VEHICLE_DRIVER])
@@ -85,8 +84,6 @@
 	. = ..()
 
 	vessel.hardpoints_by_slot[slot] = null
-	for(var/action in custom_actions)
-		vessel.hardpoint_actions -= action
 	if(!vessel.seats[VEHICLE_DRIVER])
 		return
 	pilot_ejected(vessel.seats[VEHICLE_DRIVER])
@@ -127,10 +124,7 @@
 	if(!damage_to_apply)
 		damage_to_apply = damages_applied[WALKER_DAMAGE_REMAINING]
 	if(!real_damage)
-		if(damage_to_apply > 20)
-			real_damage = damage_to_apply * damage_multiplier
-		else
-			real_damage = damage_to_apply
+		real_damage = damage_to_apply * damage_multiplier
 
 	if(real_damage > health)
 		real_damage = health
@@ -141,6 +135,11 @@
 		deactivate(owner)
 
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
+	if(length(verbs_list))
+		add_verb(user, verbs_list)
+	for(var/datum/action/action as anything in actions_list)
+		give_action(user, action, null, null, owner, src)
+
 	if(mounted_gun)
 		var/obj/vehicle/walker/vessel = owner
 		if(slot in GROUPS_BY_ID[vessel.selected_group])
@@ -149,6 +148,11 @@
 		motion_detector.iff_signal = user.faction
 
 /obj/item/hardpoint/walker/proc/pilot_ejected(mob/user)
+	if(length(verbs_list))
+		remove_verb(user, verbs_list)
+	for(var/datum/action/action as anything in actions_list)
+		remove_action(user, action)
+
 	if(!mounted_gun)
 		return
 	mounted_gun.set_gun_user(null)
@@ -167,9 +171,6 @@
 			vessel.update_zoom_pixels(FALSE, FALSE)
 		else
 			vessel.consume_energy(consumption)
-
-/obj/item/hardpoint/walker/proc/custom_action(mob/user, custom_action)
-	return
 
 
 //////////////////////////////////////////////////////////////

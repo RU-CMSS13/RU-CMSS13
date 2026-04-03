@@ -16,56 +16,26 @@ AND YOULL BE FINE!*/
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
 
 	switch_light_state(!light_state)
-
-/obj/vehicle/walker/switch_light_state(new_state, override)
-	if(!can_consume_energy(consume_energy_light) && !override)
-		return
-
-	. = ..()
 
 
 //////////////////////////////////////////////////////////////
 
 
-/obj/vehicle/walker/proc/eject_magazine()
+/obj/vehicle/walker/proc/action_eject_magazine()
 	set name = "Eject Magazine"
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
 
-	var/list/acceptible_modules = list()
-	for(var/obj/item/hardpoint/walker/selected in hardpoints)
-		if(!selected.mounted_gun?.current_mag)
-			continue
-		acceptible_modules[selected.name] = selected.mounted_gun
-	if(!length(acceptible_modules))
-		return
-
-	var/selected_module = tgui_input_list(user, "Select a gun to eject magazine.", "Eject Magazine", acceptible_modules)
-	if(!selected_module)
-		return
-	var/obj/item/weapon/gun/mounted_gun = acceptible_modules[selected_module]
-	if(!mounted_gun || !mounted_gun.current_mag)
-		return FALSE
-	mounted_gun.unload(user, TRUE)
-	to_chat(user, SPAN_WARNING("WARNING! [mounted_gun] ammo magazine deployed."))
-	visible_message("[src]'s system ejected used magazine.","")
+	eject_magazine(user)
 
 
 //////////////////////////////////////////////////////////////
@@ -76,76 +46,11 @@ AND YOULL BE FINE!*/
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	tgui_interact(user)
-
-
-/obj/vehicle/walker/proc/special_module_action()
-	set name = "Special Module Actions"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
-
-	var/selected = tgui_input_list(user, "Select action to perform", "Special Abilities", hardpoint_actions)
-	if(!selected)
-		return
-	if(!hardpoint_actions[selected].health)
-		return
-	hardpoint_actions[selected].custom_action(user, selected)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/move_z_up()
-	set name = "Move UP"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
-
-	if(flags_atom & NO_ZFALL)
-		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(istype(flying_support))
-			flying_support.handle_move_z_up(user, src)
-
-/obj/vehicle/walker/proc/move_z_down()
-	set name = "Move Down"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
-
-	if(flags_atom & NO_ZFALL)
-		var/obj/item/hardpoint/walker/spinal/jetpack/flying_support = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-		if(istype(flying_support))
-			flying_support.handle_move_z_down(user, src)
 
 
 //////////////////////////////////////////////////////////////
@@ -156,12 +61,8 @@ AND YOULL BE FINE!*/
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
-		return
-	if(seats[VEHICLE_DRIVER] != user)
 		return
 
 	dir_look_lock = !dir_look_lock
@@ -175,42 +76,11 @@ AND YOULL BE FINE!*/
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
 
 	handle_weapon_groups(user)
-
-// I forgot why I made this a proc and why did this way, however... ~upd 2 days later
-/obj/vehicle/walker/proc/handle_weapon_groups(mob/user)
-	var/selected_group_cache = selected_group
-	var/obj/item/hardpoint/walker/spinal/tactical_missile/launcer = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
-	if(istype(launcer))
-		if(selected_group == SELECTED_GROUP_HANDS && launcer.mounted_gun.current_mag?.current_rounds)
-			selected_group = SELECTED_GROUP_SPINAL
-			launcer.zoom = TRUE
-			update_zoom_pixels(TRUE)
-		else
-			selected_group = SELECTED_GROUP_HANDS
-			launcer.zoom = FALSE
-			update_zoom_pixels(TRUE)
-	else
-		selected_group = SELECTED_GROUP_HANDS
-
-	if(selected_group_cache == selected_group)
-		return
-
-	// Simple re-register of signals, I still don't want to do it clean way ~upd 2 days later
-	// I was tired at this moment, sorry for shitcode, for now I see it this way, without coding threehundred shortcuts and mechanics for this one action
-	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
-		selected.pilot_ejected(user)
-		selected.pilot_entered(user)
-
-	to_chat(user, SPAN_WARNING("New selected group is [selected_group == SELECTED_GROUP_SPINAL ? "spinal" : "hands"] weapons"))
 
 
 //////////////////////////////////////////////////////////////
@@ -222,17 +92,12 @@ AND YOULL BE FINE!*/
 	set category = "Vehicle"
 
 	var/mob/user = usr
-	if(!istype(user))
-		return
 	src = user.interactee
 	if(!istype(src, /obj/vehicle/walker))
 		return
-	if(seats[VEHICLE_DRIVER] != user)
-		return
 
-	var/obj/vehicle/walker/vessel = src
-	if(vessel.nickname)
-		to_chat(user, SPAN_WARNING("Vehicle already has a \"[vessel.nickname]\" nickname."))
+	if(nickname)
+		to_chat(user, SPAN_WARNING("Vehicle already has a \"[nickname]\" nickname."))
 		return
 
 	var/new_nickname = stripped_input(user, "Enter a unique IC name or a callsign to add to your vehicle's name. [MAX_NAME_LEN] characters maximum. \n\nIMPORTANT! This is an IC nickname/callsign for your vehicle and you will be punished for putting in meme names.\nSINGLE USE ONLY.", "Name your vehicle", null, MAX_NAME_LEN)
@@ -247,8 +112,8 @@ AND YOULL BE FINE!*/
 	if(seats[VEHICLE_DRIVER] != user)
 		return
 
-	vessel.nickname = new_nickname
-	name = "CW13 \"[vessel.nickname]\" Assault Walker"
-	to_chat(user, SPAN_NOTICE("You've added \"[vessel.nickname]\" nickname to your vehicle."))
+	nickname = new_nickname
+	name = "CW13 \"[nickname]\" Assault Walker"
+	to_chat(user, SPAN_NOTICE("You've added \"[nickname]\" nickname to your vehicle."))
 
-	message_admins(WRAP_STAFF_LOG(user, "added \"[vessel.nickname]\" nickname to their [initial(name)]. ([x],[y],[z])"), x, y, z)
+	message_admins(WRAP_STAFF_LOG(user, "added \"[nickname]\" nickname to their [initial(name)]. ([x],[y],[z])"), x, y, z)

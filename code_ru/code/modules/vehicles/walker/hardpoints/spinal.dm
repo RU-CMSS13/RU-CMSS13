@@ -53,7 +53,8 @@
 	name = "Detection Array \"Night Hawk\""
 	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful motion detector at cost of faster reactor consumption."
 
-	custom_actions = list("Zoom", "Motion Detector")
+	verbs_list = list(/obj/item/hardpoint/walker/spinal/artillery/proc/art_zoom, /obj/item/hardpoint/walker/spinal/artillery/proc/motion_detector)
+	actions_list = list(/datum/action/walker/art_zoom, /datum/action/walker/motion_detector)
 
 	zoom_size = 12
 
@@ -68,20 +69,6 @@
 
 /obj/item/hardpoint/walker/spinal/artillery/pilot_ejected(mob/user)
 	return
-
-/obj/item/hardpoint/walker/spinal/artillery/custom_action(mob/user, custom_action)
-	var/obj/vehicle/walker/vessel = owner
-	if(custom_action == "Motion Detector")
-		if(!vessel.can_consume_energy(motion_detector.detector_range))
-			return
-		motion_detector.toggle_active(user, motion_detector.active)
-		return
-
-	var/consumption = ceil(zoom_size * 0.5)
-	if(!vessel.can_consume_energy(consumption))
-		return
-	zoom = !zoom
-	vessel.update_zoom_pixels(TRUE)
 
 /obj/item/device/motiondetector/walker
 	detector_range = 24

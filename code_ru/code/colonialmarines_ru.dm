@@ -49,6 +49,7 @@
 #include "modules\vehicles\multitile\apc\apc.dm"
 #include "modules\vehicles\multitile\apc\multitile_verbs.dm"
 #include "modules\vehicles\walker\titan_fall.dm"
+#include "modules\vehicles\walker\walker_actions.dm"
 #include "modules\vehicles\walker\walker_ammo.dm"
 #include "modules\vehicles\walker\walker_collide.dm"
 #include "modules\vehicles\walker\walker_guns.dm"

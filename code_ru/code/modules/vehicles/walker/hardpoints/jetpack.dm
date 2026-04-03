@@ -2,7 +2,8 @@
 	name = "\"B-2 Spirit\" Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
-	custom_actions = list("Fly", "Evac")
+	verbs_list = list(/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack, /obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack_evac, /obj/vehicle/walker/proc/z_up, /obj/vehicle/walker/proc/z_down)
+	actions_list = list(/datum/action/walker/jetpack, /datum/action/walker/jetpack_evac)
 
 	move_delay = 4
 	move_max_momentum = 8
@@ -83,29 +84,6 @@
 	vessel.shadow_holder.forceMove(vessel)
 	vessel.recalculate_hardpoints()
 
-/obj/item/hardpoint/walker/spinal/jetpack/custom_action(mob/user, custom_action)
-	if(performing_action)
-		return
-
-	if(custom_action == "Evac")
-		if(!flying)
-			return
-		prepare_titan_raise(user, owner)
-		return
-
-	if(!flying && fuel < fuel_consumption_rate)
-		return
-	flying = !flying
-	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
-	if(flying)
-		start_flying(owner)
-	else
-		stop_flying(owner)
-		var/turf/under = get_turf(owner)
-		if(istype(under, /turf/open_space))
-			under.on_throw_end(owner)
-	owner.update_icon()
-
 /obj/item/hardpoint/walker/spinal/jetpack/proc/prepare_titan_raise(mob/user, obj/vehicle/walker/vessel)
 	var/obj/structure/dropship_equipment/equipment
 	for(var/shuttle_tag in list(DROPSHIP_ALAMO, DROPSHIP_NORMANDY))
@@ -130,6 +108,18 @@
 		to_chat(user, SPAN_WARNING("There not enough fuel!"))
 		return
 	vessel.titan_raise(src, get_turf(equipment), 4 SECONDS)
+
+/obj/item/hardpoint/walker/spinal/jetpack/proc/change_flying_state()
+	flying = !flying
+	owner.visible_message(SPAN_WARNING("[owner] [flying ? "ignites" : "extinguish"] [src] nozzles."))
+	if(flying)
+		start_flying(owner)
+	else
+		stop_flying(owner)
+		var/turf/under = get_turf(owner)
+		if(istype(under, /turf/open_space))
+			under.on_throw_end(owner)
+	owner.update_icon()
 
 /obj/item/hardpoint/walker/spinal/jetpack/proc/handle_move_z_up(mob/user, obj/vehicle/walker/vessel)
 	var/turf/above = SSmapping.get_turf_above(get_turf(src))

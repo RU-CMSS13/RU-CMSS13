@@ -110,7 +110,7 @@ const HardpointTable = (props: { readonly hardpoints: HardpointInfo[] }) => {
               <TableCell key={value.value_name}>
                 <ProgressBar
                   value={value.current_value / value.max_value}
-                  width={'49%'}
+                  width={'45%'}
                 >
                   {value.value_name}: {value.current_value} / {value.max_value}
                 </ProgressBar>

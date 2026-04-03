@@ -10,7 +10,8 @@
 
 	weight = 2
 
-	custom_actions = list("Reactor")
+	verbs_list = list(/obj/item/hardpoint/walker/reactor/proc/reactor)
+	actions_list = list(/datum/action/walker/reactor)
 
 	var/turned_on = TRUE
 	var/rebooting = FALSE
@@ -85,7 +86,10 @@
 
 	. = ..()
 
-	if(health < max_health * 0.65 && !prob((health_cache - health) * chance_of_malf) || !health)
+	if(!health)
+		return
+
+	if(max_health * 0.65 > health && prob(100 - (health_cache - health) * chance_of_malf))
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
@@ -108,19 +112,19 @@
 
 	var/turf/owner_loc = get_turf(src)
 
-	meltdown_timer_id = null
 	if(owner)
+		deactivate(owner)
 		owner.health = 0
 		owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
 		owner.remove_hardpoint(src)
+	repaired()
 	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
-	deactivate(owner)
 	sleep(3 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
 	cell_explosion(owner_loc, 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)
 	qdel(src)
 
-/obj/item/hardpoint/walker/reactor/custom_action(mob/user, custom_action)
+/obj/item/hardpoint/walker/reactor/proc/switch_reactor_state(mob/user)
 	if(rebooting)
 		to_chat(user, SPAN_DANGER("Reactor already rebooting!"))
 		return
