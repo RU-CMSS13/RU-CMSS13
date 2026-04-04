@@ -10,7 +10,7 @@
 
 	weight = 2
 
-	verbs_list = list(/obj/item/hardpoint/walker/reactor/proc/reactor)
+	verbs_list = list(/obj/vehicle/walker/proc/reactor)
 	actions_list = list(/datum/action/walker/reactor)
 
 	var/turned_on = TRUE
@@ -89,7 +89,10 @@
 	if(!health)
 		return
 
-	if(max_health * 0.65 > health && prob(100 - (health_cache - health) * chance_of_malf))
+	if(max_health * 0.65 > health)
+		return
+
+	if(prob(100 - (health_cache - health) * chance_of_malf))
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
@@ -118,7 +121,7 @@
 		owner.visible_message(SPAN_HIGHDANGER("[owner] heats up and [src] about to EXPLODE."))
 		owner.remove_hardpoint(src)
 	repaired()
-	playsound(owner, 'sound/weapons/ring.ogg', 250, sound_range = 14)
+	playsound(owner_loc, 'sound/weapons/ring.ogg', 250, sound_range = 14)
 	sleep(3 SECONDS)
 	var/datum/cause_data/cause = create_cause_data("Reactor meltdown")
 	cell_explosion(owner_loc, 500, 200, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, cause)

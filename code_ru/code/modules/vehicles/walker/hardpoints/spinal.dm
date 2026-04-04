@@ -53,7 +53,7 @@
 	name = "Detection Array \"Night Hawk\""
 	desc = "Grant precision vision over entire battle field via special equipment of this hardpoint, additionaly grants very powerful motion detector at cost of faster reactor consumption."
 
-	verbs_list = list(/obj/item/hardpoint/walker/spinal/artillery/proc/art_zoom, /obj/item/hardpoint/walker/spinal/artillery/proc/motion_detector)
+	verbs_list = list(/obj/vehicle/walker/proc/art_zoom, /obj/vehicle/walker/proc/motion_detector)
 	actions_list = list(/datum/action/walker/art_zoom, /datum/action/walker/motion_detector)
 
 	zoom_size = 12

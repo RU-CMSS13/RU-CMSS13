@@ -2,8 +2,8 @@
 	name = "\"B-2 Spirit\" Jetpack"
 	desc = "Special \"B-2 Spirit\" modification, spread democracy where nobody can reach! Jump in and even faster move out of combat zone after delivering payload."
 
-	verbs_list = list(/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack, /obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack_evac, /obj/vehicle/walker/proc/z_up, /obj/vehicle/walker/proc/z_down)
-	actions_list = list(/datum/action/walker/jetpack, /datum/action/walker/jetpack_evac)
+	verbs_list = list(/obj/vehicle/walker/proc/jetpack, /obj/vehicle/walker/proc/jetpack_evac, /obj/vehicle/walker/proc/z_up, /obj/vehicle/walker/proc/z_down)
+	actions_list = list(/datum/action/walker/jetpack, /datum/action/walker/jetpack_evac, /datum/action/walker/move_z_up, /datum/action/walker/move_z_down)
 
 	move_delay = 4
 	move_max_momentum = 8
@@ -88,7 +88,7 @@
 	var/obj/structure/dropship_equipment/equipment
 	for(var/shuttle_tag in list(DROPSHIP_ALAMO, DROPSHIP_NORMANDY))
 		var/obj/docking_port/mobile/marine_dropship/dropship = SSshuttle.getShuttle(shuttle_tag)
-		if(!dropship.in_flyby)
+		if(!dropship?.in_flyby)
 			continue
 		for(equipment as anything in dropship.equipments)
 			if(!istype(equipment, /obj/structure/dropship_equipment/medevac_system) &&\

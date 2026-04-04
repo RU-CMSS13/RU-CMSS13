@@ -148,13 +148,13 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack()
+/obj/vehicle/walker/proc/jetpack()
 	set name = "Jetpack"
 	set category = "Vehicle"
 
 	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK)
 
-/obj/item/hardpoint/walker/spinal/jetpack/proc/jetpack_evac()
+/obj/vehicle/walker/proc/jetpack_evac()
 	set name = "Jetpack Evac"
 	set category = "Vehicle"
 
@@ -164,7 +164,7 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/reactor/proc/reactor()
+/obj/vehicle/walker/proc/reactor()
 	set name = "Reactor"
 	set category = "Vehicle"
 
@@ -174,13 +174,13 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
-/obj/item/hardpoint/walker/spinal/artillery/proc/art_zoom()
+/obj/vehicle/walker/proc/art_zoom()
 	set name = "Zoom"
 	set category = "Vehicle"
 
 	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_ZOOM)
 
-/obj/item/hardpoint/walker/spinal/artillery/proc/motion_detector()
+/obj/vehicle/walker/proc/motion_detector()
 	set name = "Motion Detector"
 	set category = "Vehicle"
 

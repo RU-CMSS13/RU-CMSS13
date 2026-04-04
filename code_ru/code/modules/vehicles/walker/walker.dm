@@ -275,6 +275,10 @@
 
 	user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 	add_verb(user.client, verbs_list)
+	for(var/obj/item/hardpoint/walker/selected as anything in hardpoints)
+		if(!length(selected.verbs_list))
+			continue
+		add_verb(user.client, selected.verbs_list)
 
 /obj/vehicle/walker/on_unset_interaction(mob/living/user)
 	remove_action(user, /datum/action/human_action/mg_exit)

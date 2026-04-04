@@ -143,9 +143,13 @@
 /datum/action/walker/jetpack/action_activate()
 	. = ..()
 	var/obj/item/hardpoint/walker/spinal/jetpack/action_holder = hardpoint
-	if(action_holder.performing_action || !action_holder.flying)
+	if(action_holder.performing_action)
 		return FALSE
-	action_holder.prepare_titan_raise(owner, action_holder.owner)
+
+	if(!action_holder.flying && action_holder.fuel < action_holder.fuel_consumption_rate)
+		return FALSE
+
+	action_holder.change_flying_state()
 
 /datum/action/walker/jetpack_evac
 	name = "Jetpack Evac"
@@ -154,13 +158,9 @@
 /datum/action/walker/jetpack_evac/action_activate()
 	. = ..()
 	var/obj/item/hardpoint/walker/spinal/jetpack/action_holder = hardpoint
-	if(action_holder.performing_action)
+	if(action_holder.performing_action || !action_holder.flying)
 		return FALSE
-
-	if(!action_holder.flying && action_holder.fuel < action_holder.fuel_consumption_rate)
-		return FALSE
-
-	action_holder.change_flying_state()
+	action_holder.prepare_titan_raise(owner, action_holder.owner)
 
 
 /datum/keybinding/human/walker/jetpack

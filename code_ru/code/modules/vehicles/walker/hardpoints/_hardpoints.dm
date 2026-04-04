@@ -137,6 +137,8 @@
 /obj/item/hardpoint/walker/proc/pilot_entered(mob/user)
 	if(length(verbs_list))
 		add_verb(user, verbs_list)
+		if(user.client)
+			add_verb(user.client, verbs_list)
 	for(var/datum/action/action as anything in actions_list)
 		give_action(user, action, null, null, owner, src)
 
