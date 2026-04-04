@@ -89,10 +89,10 @@
 	if(!health)
 		return
 
-	if(max_health * 0.65 > health)
+	if(max_health * 0.75 > health)
 		return
 
-	if(prob(100 - (health_cache - health) * chance_of_malf))
+	if(prob(100 - (health_cache - health) * chance_of_malf * 10))
 		return
 
 	if(reactor_state == VEHICLE_REACTOR_CRITICAL)
