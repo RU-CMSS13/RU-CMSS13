@@ -10,6 +10,7 @@
 #include "datums\supply_packs\weapons.dm"
 #include "datums\vehicles.dm"
 #include "events\mining_op\event_controller.dm"
+#include "events\mining_op\logistics.dm"
 #include "events\mining_op\mining_basis.dm"
 #include "events\mining_op\tunnels.dm"
 #include "game\gamemodes\colonialmarines\colonialmarines.dm"

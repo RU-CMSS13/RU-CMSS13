@@ -370,7 +370,26 @@
 
 	current_minerals--
 	if(mineral_drop)
-		new mineral_drop(get_turf(src))
+		var/obj/mineral = new mineral_drop(get_turf(src))
+		var/choose_dir = pick(SOUTH,NORTH,WEST,EAST)
+
+		animate(mineral, transform = matrix(0.01, MATRIX_SCALE), time = 0)
+		animate(mineral, pixel_y = 16, transform = matrix(1, MATRIX_SCALE), time = 5, easing = SINE_EASING | EASE_IN)
+
+		switch(choose_dir)
+			if(SOUTH)
+				animate(mineral, pixel_y = -16, time = 3, easing = BOUNCE_EASING | EASE_OUT)
+			if(NORTH)
+				animate(mineral, pixel_y = 24, time = 3, easing = BOUNCE_EASING | EASE_OUT)
+			if(WEST)
+				animate(mineral, pixel_x = -16, pixel_y = 0, time = 3, easing = BOUNCE_EASING | EASE_OUT)
+			if(EAST)
+				animate(mineral, pixel_x = 16, pixel_y = 0, time = 3, easing = BOUNCE_EASING | EASE_OUT)
+
+		spawn(10)
+			mineral.throw_atom(get_step(src, choose_dir), 1, 3, src, TRUE)
+			mineral.pixel_x = 0
+			mineral.pixel_y = 0
 
 	if(!current_minerals)
 		balloon_alert_to_viewers("*[src] crumbles to dust*")
@@ -379,6 +398,34 @@
 
 	update_icon()
 	return TRUE
+
+/obj/structure/mineop/minerarls_drop
+	name = "ore"
+	desc = "This rocks."
+	icon = 'code_ru/code/events/mining_op/mining.dmi'
+	icon_state = "o_slag"
+	anchored = FALSE
+	density = FALSE
+
+	var/isgold = FALSE
+	var/ismat = FALSE
+
+/obj/structure/mineop/minerarls_drop/Crossed(O)
+	. = ..()
+	if(istype(O,/obj/structure/mineop/minecart))
+		var/obj/structure/mineop/minecart/M = O
+		layer = M.layer + 0.1
+
+		if(isgold)
+			M.gold += 1
+		if(ismat)
+			M.mat += 1
+
+		animate(src, alpha = 0, transform = matrix(0.01, MATRIX_SCALE), time = 0.5 SECONDS, easing = SINE_EASING)
+		spawn(0.8 SECONDS)
+			forceMove(M)
+			M.minerals_inside += src
+			animate(src, alpha = 255, transform = matrix(1, MATRIX_SCALE), time = 0)
 
 /obj/item
 	var/digging_tool = FALSE // МОЖНО ЛИ ПРЕДМЕТОМ КОПАТЬ
@@ -399,3 +446,45 @@
 
 	damage_cap = HEALTH_SOFT_ROCK
 	dig_health = 20
+
+/obj/structure/mineop/minerals/marine_gold
+	name = "shiny crystal"
+	desc = "Crystal rocks, growing from the floor, walls, and even from cave roof. This one has purple color!"
+	anchored = TRUE
+	density = TRUE
+
+	health = STRUCTURE_HEALTH_REINFORCED
+	projectile_coverage = PROJECTILE_COVERAGE_LOW
+
+	color = "#e100ff"
+	light_color = "#e100ff"
+
+	mineral_amount = 9
+
+	mineral_drop = /obj/structure/mineop/minerarls_drop/marine_gold
+	mining_sound = 'code_ru/code/events/mining_op/drg/goldmining.ogg'
+
+/obj/structure/mineop/minerarls_drop/marine_gold
+	icon_state = "o_plasma"
+	isgold = TRUE
+
+/obj/structure/mineop/minerals/marine_mat
+	name = "shiny crystal"
+	desc = "Crystal rocks, growing from the floor, walls, and even from cave roof. This one has green color!"
+	anchored = TRUE
+	density = TRUE
+
+	health = STRUCTURE_HEALTH_REINFORCED
+	projectile_coverage = PROJECTILE_COVERAGE_LOW
+
+	color = "#2bff00"
+	light_color = "#2bff00"
+
+	mineral_amount = 20
+
+	mineral_drop = /obj/structure/mineop/minerarls_drop/marine_mat
+	mining_sound = 'code_ru/code/events/mining_op/drg/matmining.ogg'
+
+/obj/structure/mineop/minerarls_drop/marine_mat
+	icon_state = "o_uranium"
+	ismat = TRUE

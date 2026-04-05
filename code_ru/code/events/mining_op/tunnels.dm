@@ -177,16 +177,26 @@
 
 /obj/structure/tunnel/mineop/stage_1
 
-	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/sentinel)
-	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/spitter)
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/runner,
+							/mob/living/carbon/xenomorph/sentinel)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/spitter)
 
 	points_max = 35
 	unused_points = 35
 
 /obj/structure/tunnel/mineop/stage_2
 
-	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/runner, /mob/living/carbon/xenomorph/spitter)
-	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/warrior)
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/runner,
+							/mob/living/carbon/xenomorph/spitter)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/warrior)
 
 	special_type_chance = 15
 
@@ -201,8 +211,16 @@
 
 /obj/structure/tunnel/mineop/stage_3
 
-	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/lurker, /mob/living/carbon/xenomorph/burrower, /mob/living/carbon/xenomorph/warrior)
-	special_xeno_types = list(/mob/living/carbon/xenomorph/ravager, /mob/living/carbon/xenomorph/crusher)
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/spitter,
+							/mob/living/carbon/xenomorph/spitter,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/lurker,
+							/mob/living/carbon/xenomorph/burrower,
+							/mob/living/carbon/xenomorph/warrior)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/ravager, /mob/living/carbon/xenomorph/ravager, /mob/living/carbon/xenomorph/crusher)
 
 	special_type_chance = 15
 
@@ -217,8 +235,15 @@
 
 /obj/structure/tunnel/mineop/stage_4
 
-	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone, /mob/living/carbon/xenomorph/spitter, /mob/living/carbon/xenomorph/defender, /mob/living/carbon/xenomorph/warrior, /mob/living/carbon/xenomorph/ravager)
-	special_xeno_types = list(/mob/living/carbon/xenomorph/crusher, /mob/living/carbon/xenomorph/despoiler)
+	basic_xeno_types = list(/mob/living/carbon/xenomorph/drone,
+							/mob/living/carbon/xenomorph/spitter,
+							/mob/living/carbon/xenomorph/spitter,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/defender,
+							/mob/living/carbon/xenomorph/warrior,
+							/mob/living/carbon/xenomorph/warrior,
+							/mob/living/carbon/xenomorph/ravager)
+	special_xeno_types = list(/mob/living/carbon/xenomorph/crusher, /mob/living/carbon/xenomorph/despoiler, /mob/living/carbon/xenomorph/despoiler)
 
 	special_type_chance = 30
 	points_max = 20
