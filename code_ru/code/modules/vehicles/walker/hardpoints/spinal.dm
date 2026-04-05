@@ -135,13 +135,13 @@
 
 	weight = 2.5
 
-	var/damage_capacity = 400
-	var/max_damage_capacity = 400
-	var/capacity_recover_rate = 5
+	var/damage_capacity = 300
+	var/max_damage_capacity = 300
+	var/capacity_recover_rate = 2
 	var/shield_color = "#527eec"
 
 	var/cooldown_timer_id = null
-	var/delay_between_hits = 10 SECONDS
+	var/delay_between_hits = 30 SECONDS
 
 /obj/item/hardpoint/walker/spinal/shield/deactivate(obj/vehicle/walker/vessel)
 	. = ..()
@@ -215,7 +215,7 @@
 	if(damage_capacity < 0)
 		damage_capacity = 0
 		vessel.remove_filter("spinal_shield")
-		stop_recovering(world.time + delay_between_hits * 6)
+		stop_recovering(world.time + delay_between_hits * 4)
 
 		vessel.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [vessel]. Seems it got disabled for sufficient time!"))
 		if(vessel.seats[VEHICLE_DRIVER])

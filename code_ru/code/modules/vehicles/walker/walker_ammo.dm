@@ -63,6 +63,11 @@
 
 	flamer_chem = "napalmb"
 
+	max_rounds = 100
+	max_intensity = 20
+	max_range = 3
+	max_duration = 15
+
 
 /obj/item/ammo_magazine/walker/wm88
 	name = "M88 Mounted AMR Magazine"
