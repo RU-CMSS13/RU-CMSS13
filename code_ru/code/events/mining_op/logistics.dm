@@ -1,3 +1,5 @@
+#define CAMERA_TRAIT "camera"
+
 /obj/effect/temp_visual/do_after_fake
 	duration = 4 SECONDS
 	icon = 'icons/mob/do_afters.dmi'
@@ -170,6 +172,7 @@
 
 	sleep(4 SECONDS)
 	terminal.balloon_alert_to_viewers("[total_worth] реквизиционных очков", null, DEFAULT_MESSAGE_RANGE, null, "#ffbb00")
+	terminal.busy = FALSE
 
 	return TRUE
 
@@ -195,3 +198,37 @@
 	anchored = TRUE
 	density = TRUE
 	var/obj/structure/prop/vehicles/aircraft/vtol/mineop/transporter
+	var/obj/structure/mineop/camera/camera
+	var/list/obj/structure/mineop/rnd/researched_tech_list = list()
+
+	var/busy = FALSE
+	var/first_time_accessing = TRUE
+
+/obj/structure/mineop/fob/resource_managing_tm/attack_hand(mob/user)
+	. = ..()
+
+	if(first_time_accessing)
+		load_rnd_level()
+		first_time_accessing = FALSE
+
+	if(busy)
+		return FALSE
+
+	busy = TRUE
+	var/list/options = list("CALL TRANSPORT" = image(icon = 'code_ru/code/events/mining_op/ui.dmi', icon_state = "Req_Radial"),
+							"OPEN RESEARCH TREE" = image(icon = 'code_ru/code/events/mining_op/ui.dmi', icon_state = "RnD_Radial"))
+	var/answer = show_radial_menu(user, src, options, tooltips = TRUE, radius = 30)
+	if(!answer)
+		busy = FALSE
+		return FALSE
+	switch(answer)
+		if("CALL TRANSPORT")
+			transporter.flycycle()
+			return TRUE
+		if("OPEN RESEARCH TREE")
+			user.client.perspective = EYE_PERSPECTIVE
+			user.client.set_eye(camera)
+
+			camera.connected_mob = user
+			ADD_TRAIT(user, TRAIT_IMMOBILIZED, CAMERA_TRAIT)
+			return TRUE

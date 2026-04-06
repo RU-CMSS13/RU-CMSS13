@@ -13,6 +13,7 @@
 #include "events\mining_op\logistics.dm"
 #include "events\mining_op\mining_basis.dm"
 #include "events\mining_op\tunnels.dm"
+#include "events\mining_op\rnd\rnd_system.dm"
 #include "game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "game\jobs\job\marine\squads.dm"

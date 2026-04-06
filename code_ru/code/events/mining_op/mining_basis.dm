@@ -13,14 +13,14 @@
 	layer = 5
 	plane = HUD_PLANE
 
-/obj/effect/temp_visual/digging_spark/Initialize(mapload)
-	. = ..()
-	animate(src, transform = matrix(0.5, MATRIX_SCALE), time = 0)
-
-	light_power = 0.7
+	light_power = 1
 	light_range = 2
 	light_on = TRUE
 	light_color = "#ffbb00"
+
+/obj/effect/temp_visual/digging_spark/Initialize(mapload)
+	. = ..()
+	animate(src, transform = matrix(0.5, MATRIX_SCALE), time = 0)
 
 /mob/living/proc/cool_attack_on(atom/A, pixel_offset = 8)
 	animation_flash_color(A, "#ffbb00")
@@ -327,7 +327,7 @@
 	projectile_coverage = PROJECTILE_COVERAGE_LOW
 
 	light_power = 4
-	light_range = 1
+	light_range = 2
 	light_on = TRUE
 
 	var/mineral_amount = 3
