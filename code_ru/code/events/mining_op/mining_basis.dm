@@ -10,7 +10,17 @@
 	duration = 0.6 SECONDS
 	icon = 'code_ru/code/events/mining_op/hit_effect.dmi'
 	icon_state = "block"
-	layer = 4.5
+	layer = 5
+	plane = HUD_PLANE
+
+/obj/effect/temp_visual/digging_spark/Initialize(mapload)
+	. = ..()
+	animate(src, transform = matrix(0.5, MATRIX_SCALE), time = 0)
+
+	light_power = 0.7
+	light_range = 2
+	light_on = TRUE
+	light_color = "#ffbb00"
 
 /mob/living/proc/cool_attack_on(atom/A, pixel_offset = 8)
 	animation_flash_color(A, "#ffbb00")
@@ -144,7 +154,7 @@
 
 	if(W.digging_tool)
 		if(W.not_ready_for_digging)
-			W.balloon_alert(W, "*on cooldown*", "#ffbb00")
+			W.balloon_alert(user, "*немного подожди*", "#ffbb00")
 			return
 
 		var/list/random_sound = list('code_ru/code/events/mining_op/drg/standart_pickaxe_1.ogg', 'code_ru/code/events/mining_op/drg/standart_pickaxe_2.ogg')

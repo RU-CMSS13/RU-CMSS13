@@ -1,3 +1,18 @@
+/obj/effect/temp_visual/do_after_fake
+	duration = 4 SECONDS
+	icon = 'icons/mob/do_afters.dmi'
+	icon_state = "busy_build"
+	layer = 5.1
+
+/obj/effect/temp_visual/do_after_fake/New(loc, setted_duration, needed_icon)
+	icon_state = needed_icon
+	duration = setted_duration
+	. = ..()
+
+/obj/effect/temp_visual/do_after_fake/Initialize()
+	. = ..()
+	animate(src, pixel_y = 28, time = 0.3 SECONDS, easing = SINE_EASING|EASE_IN)
+
 /obj/structure/mineop/minecart/proc/generate_oreicon(icon, icon_state)
 	var/icon/T = new(icon)
 	return image(T, icon_state, layer = HUD_PLANE)
@@ -106,6 +121,8 @@
 		TM.transporter = src
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flycycle()
+	var/total_worth = 0
+
 	animate(src, transform = matrix(320, MATRIX_ROTATE), pixel_y = 160, pixel_x = -160, time = 0)
 	flyin()
 
@@ -113,6 +130,8 @@
 	for(var/obj/structure/mineop/minecart/M in landing_zone)
 		var/x_offset = (x - M.x) * 32
 		var/y_offset = (y - M.y) * 32
+
+		new /obj/effect/temp_visual/do_after_fake(get_turf(src), 2 SECONDS, "status_bar")
 		animate(M, pixel_x = x_offset, pixel_y = y_offset, time = 2 SECONDS, easing = SINE_EASING)
 
 		sleep(2 SECONDS)
@@ -124,6 +143,7 @@
 	for(var/obj/structure/mineop/minecart/M in contents)
 		for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in M.minerals_inside)
 			GLOB.supply_controller.points += 4
+			total_worth += 4
 			M.gold -= 1
 			M.minerals_inside -= G
 
@@ -144,6 +164,12 @@
 
 		M.forceMove(pick(candidates_list))
 		animate(M, transform = matrix(1, MATRIX_SCALE), alpha = 255, pixel_y = 0, time = 1 SECONDS, easing = BOUNCE_EASING | EASE_OUT)
+
+	terminal.balloon_alert_to_viewers("Оценочная стоимость текущей поставки составила...", null, DEFAULT_MESSAGE_RANGE, null, "#ffbb00")
+	new /obj/effect/temp_visual/do_after_fake(get_turf(terminal), 4 SECONDS, "busy_build")
+
+	sleep(4 SECONDS)
+	terminal.balloon_alert_to_viewers("[total_worth] реквизиционных очков", null, DEFAULT_MESSAGE_RANGE, null, "#ffbb00")
 
 	return TRUE
 
