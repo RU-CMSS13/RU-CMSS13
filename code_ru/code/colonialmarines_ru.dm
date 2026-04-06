@@ -2,6 +2,7 @@
 #include "_globalvars\misc.dm"
 #include "supplyshuttle.dm"
 #include "controllers\subsystem\playtime.dm"
+#include "controllers\subsystem\que_system.dm"
 #include "controllers\subsystem\tts.dm"
 #include "datums\ammo.dm"
 #include "datums\research_upgrade_datum.dm"

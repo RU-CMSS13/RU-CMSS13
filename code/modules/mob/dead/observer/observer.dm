@@ -36,7 +36,9 @@
 	flags_atom = FPRINT|NO_ZFALL
 
 	/// If the observer is an admin, are they excluded from the xeno queue?
+/* RUCM CHANGE
 	var/admin_larva_protection = TRUE // Enabled by default
+*/
 	var/ghostvision = TRUE
 	var/self_visibility = TRUE
 	var/can_reenter_corpse
@@ -330,6 +332,9 @@
 		clean_observe_target()
 
 	set_huds_from_prefs()
+//RUCM START
+	client.player_details.add_to_xeno_queue()
+//RUCM END
 
 /mob/dead/observer/Destroy(force)
 	GLOB.observer_list -= src
@@ -339,6 +344,15 @@
 	following = null
 	observe_target_mob = null
 	observe_target_client = null
+//RUCM START
+	var/datum/player_details/player_details
+	if(client)
+		player_details = client.player_details
+	else if(persistent_ckey)
+		player_details = GLOB.player_details[persistent_ckey]
+	if(player_details)
+		player_details.remove_from_xeno_queue(TRUE)
+//RUCM END
 	return ..()
 
 /mob/dead/observer/MouseDrop(atom/A)
@@ -460,7 +474,19 @@ Works together with spawning an observer, noted above.
 	if(!hud_used)
 		hud_used = new /datum/hud/ghost(src)
 
+/* RUCM CHANGE
 /mob/proc/ghostize(can_reenter_corpse = TRUE, aghosted = FALSE)
+*/
+//RUCM START
+/mob/proc/ghostize(can_reenter_corpse = TRUE, aghosted = FALSE, transfer = FALSE, forced_by_queue = FALSE)
+	if(forced_by_queue)
+		away_timer = 300 //They'll never come back, so we can max out the timer right away.
+		if(GLOB.round_statistics)
+			GLOB.round_statistics.update_panel_data()
+		track_death_calculations() //This needs to be done before mind is nullified
+		mind = null
+		return TRUE
+//RUCM END
 	if(isaghost(src) || !key)
 		return
 	if(aghosted)
@@ -1413,12 +1439,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			. += "Self Destruct Goal: [SShijack.get_sd_eta()]"
 
 	if(client.prefs?.be_special & BE_ALIEN)
+/* RUCM CHANGE
 		if(!larva_pool_cached_message)
 			// Try to refresh now
 			message_alien_candidate_observer(src, cache_only=TRUE)
 		if(larva_pool_cached_message)
 			. += larva_pool_cached_message
 			. += ""
+*/
+//RUCM START
+		if(client?.player_details.xeno_que_position.larva_pool_message)
+			. += client.player_details.xeno_que_position.larva_pool_message
+			. += ""
+//RUCM END
 
 	if(timeofdeath)
 		var/time_since_death = world.time - timeofdeath

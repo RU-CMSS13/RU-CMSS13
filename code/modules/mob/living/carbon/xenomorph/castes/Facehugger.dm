@@ -278,6 +278,11 @@
 		. += "Lifetime Hugs: [total_facehugs] / [next_facehug_goal]"
 	else
 		. += "Lifetime Hugs: [total_facehugs]"
+//RUCM START
+	if(client?.player_details.xeno_que_position.larva_pool_message)
+		. += ""
+		. += client.player_details.xeno_que_position.larva_pool_message
+//RUCM END
 
 /datum/behavior_delegate/facehugger_base
 	name = "Base Facehugger Behavior Delegate"

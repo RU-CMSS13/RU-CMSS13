@@ -10,7 +10,17 @@ GLOBAL_LIST_EMPTY(player_details) // ckey -> /datum/player_details
 	/// The descriminator for larva pool ordering: Generally set to timeofdeath except for facehuggers/admin z-level play
 	var/larva_pool_time
 
+/* RUCM CHANGE
 /datum/player_details/New()
+*/
+//RUCM START
+/datum/player_details/New(ckey)
+	player_ckey = ckey
+	xeno_que_position = new /datum/queued_player/xeno(ckey)
+	var/client/client = GLOB.directory[ckey]
+	if(check_client_rights(client, R_MOD, FALSE))
+		xeno_que_position.admin_larva_protection = TRUE
+//RUCM END
 	larva_pool_time = world.time
 	return ..()
 
