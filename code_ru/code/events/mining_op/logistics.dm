@@ -91,13 +91,14 @@
 	layer = 5
 
 	mouse_opacity = FALSE
+	pixel_x = -64
+	pixel_y = -64
 
 	var/area/landing_zone
 	var/obj/structure/mineop/fob/resource_managing_tm/terminal
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/Initialize(mapload, ...)
 	. = ..()
-	animate(src, pixel_y = 96, transform = matrix(4, MATRIX_SCALE), time = 0)
 
 	landing_zone = get_area(src)
 	for(var/obj/structure/mineop/fob/resource_managing_tm/TM in landing_zone)
@@ -105,13 +106,19 @@
 		TM.transporter = src
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flycycle()
+	animate(src, transform = matrix(320, MATRIX_ROTATE), pixel_y = 160, pixel_x = -160, time = 0)
 	flyin()
 
 	sleep(10 SECONDS)
 	for(var/obj/structure/mineop/minecart/M in landing_zone)
+		var/x_offset = (x - M.x) * 32
+		var/y_offset = (y - M.y) * 32
+		animate(M, pixel_x = x_offset, pixel_y = y_offset, time = 2 SECONDS, easing = SINE_EASING)
+
+		sleep(2 SECONDS)
 		M.forceMove(src)
 
-	sleep(1 SECONDS)
+	sleep(10 SECONDS)
 	flyout()
 
 	for(var/obj/structure/mineop/minecart/M in contents)
@@ -125,7 +132,7 @@
 	sleep(10 SECONDS)
 
 	flyby()
-	sleep(5 SECONDS)
+	sleep(4 SECONDS)
 
 	var/list/turf/candidates_list = list()
 	for(var/turf/open/T in landing_zone)
@@ -133,29 +140,32 @@
 			candidates_list += T
 
 	for(var/obj/structure/mineop/minecart/M in contents)
-		animate(M, alpha = 0, pixel_y = 64, transform = matrix(2, MATRIX_SCALE), time = 0)
+		animate(M, transform = matrix(2, MATRIX_SCALE), alpha = 0, pixel_y = 96, pixel_x = 0, time = 0)
 
 		M.forceMove(pick(candidates_list))
-		animate(src, alpha = 255, pixel_y = 0, transform = matrix(1, MATRIX_SCALE), time = 3 SECONDS, easing = SINE_EASING | EASE_IN)
+		animate(M, transform = matrix(1, MATRIX_SCALE), alpha = 255, pixel_y = 0, time = 1 SECONDS, easing = BOUNCE_EASING | EASE_OUT)
 
 	return TRUE
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyin()
-	animate(src, alpha = 255, pixel_y = 0, transform = matrix(1, MATRIX_SCALE), time = 10 SECONDS, easing = CUBIC_EASING | EASE_OUT)
+	animate(src, transform = matrix(0, MATRIX_ROTATE), alpha = 255, pixel_y = -32, pixel_x = -64, time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
+	animate(pixel_y = -64, time = 1 SECONDS, easing = SINE_EASING | EASE_IN)
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyout()
-	animate(src, alpha = 0, pixel_y = -96, transform = matrix(4, MATRIX_SCALE), time = 10 SECONDS, easing = CUBIC_EASING | EASE_IN)
-	pixel_y = 96
+	animate(src, pixel_y = -32, time = 1 SECONDS, easing = SINE_EASING | EASE_OUT)
+	animate(transform = matrix(40, MATRIX_ROTATE), alpha = 0, pixel_y = -192, pixel_x = 192, time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyby()
-	animate(src, alpha = 255, pixel_y = 0, transform = matrix(2, MATRIX_SCALE), time = 5 SECONDS, easing = CUBIC_EASING | EASE_OUT)
-	animate(src, alpha = 0, pixel_y = -96, transform = matrix(4, MATRIX_SCALE), time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
+	animate(src, transform = matrix(0, MATRIX_ROTATE), pixel_y = 192, pixel_x = -64, time = 0)
 
-	pixel_y = 96
+	animate(alpha = 255, pixel_y = -96, time = 2 SECONDS, easing = LINEAR_EASING)
+	animate(alpha = 0, pixel_y = -192, time = 1 SECONDS, easing = LINEAR_EASING)
 
 /obj/structure/mineop/fob/resource_managing_tm
 	name = "resource managing terminal"
-	icon = 'code_ru/code/events/mining_op/minecart.dmi'
+	icon = 'code_ru/code/events/mining_op/managing_terminal.dmi'
 	icon_state = "terminal"
 
+	anchored = TRUE
+	density = TRUE
 	var/obj/structure/prop/vehicles/aircraft/vtol/mineop/transporter
