@@ -118,6 +118,11 @@
 	if(!able_to_fire(user))
 		return NONE
 
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(user, target, params))
+		return NONE
+//RUCM END
+
 	var/turf/curloc = get_turf(user) //In case the target or we are expired.
 	var/turf/targloc = get_turf(target)
 	if (!targloc || !curloc)

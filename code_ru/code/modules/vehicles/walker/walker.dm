@@ -159,7 +159,7 @@
 		selected_hardpoint.insert_gun(new selected_gun)
 
 	if(tgui_alert(src, "Are you sure you want to spawn builded mecha?", "Confirm", list("Yes", "No")) != "Yes")
-		qdel(vessel)// It didn't exist at this point in real world, however I want to make sure for clean removal
+		vessel.moveToNullspace()// Funny issue due to OFFICIAL CM SHITCODE, so I have to nullspace it
 		return
 
 	vessel.forceMove(get_turf(usr))

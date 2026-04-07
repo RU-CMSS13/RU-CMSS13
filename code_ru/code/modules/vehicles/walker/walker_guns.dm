@@ -310,11 +310,14 @@
 	flags_mounted_gun_features = GUN_MOUNTING|GUN_ONLY_MOUNTING
 	gun_category = GUN_CATEGORY_MOUNTED
 
+	start_automatic = TRUE
+	start_semiauto = FALSE
+
 	lineart_ru = TRUE
 
 // Official CMs shitcoded something, so yea, they work not the same like supposed, SHITCODE
 /obj/item/weapon/gun/launcher/grenade/mounted/handle_fire(atom/target, mob/living/user, params)
-	. = NONE
+	. = TRUE
 	afterattack(target, user, params, TRUE)
 
 /obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, force = FALSE)

@@ -190,7 +190,7 @@
 			return
 		vessel.consume_energy(energy_required)
 
-	if(timeleft(cooldown_timer_id))
+	if(cooldown_timer_id)
 		return
 
 	var/damage_to_recover = min(capacity_recover_rate * delta_time, max_damage_capacity - damage_capacity)
@@ -228,6 +228,7 @@
 /obj/item/hardpoint/walker/spinal/shield/proc/resume_recovering()
 	if(!owner)
 		return
+	cooldown_timer_id = null
 	var/obj/vehicle/walker/vessel = owner
 	vessel.consume_energy(capacity_recover_rate * 4)
 
