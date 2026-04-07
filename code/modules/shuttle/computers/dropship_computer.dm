@@ -131,7 +131,7 @@
 				tacmap_component.map_holder.map.transform = transform
 				tacmap_component.map = tacmap_component.map_holder.map
 			user.client.register_map_obj(tacmap_component.map_holder.map)
-		var/obj/docking_port/mobile/shuttle = SSshuttle.getShuttle(shuttleId)
+		var/obj/docking_port/mobile/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 		var/name = capitalize(shuttle?.name)
 		if(can_change_shuttle)
 			name = "Remote"
@@ -147,9 +147,6 @@
 	if(!skip_time_lock && world.time < SSticker.mode.round_time_lobby + SHUTTLE_TIME_LOCK)
 		to_chat(user, SPAN_WARNING("The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another [floor((SSticker.mode.round_time_lobby + SHUTTLE_TIME_LOCK-world.time)/600)] minutes before trying again."))
 		return UI_CLOSE
-	if(SShijack.in_ftl || SShijack.hijack_status >= HIJACK_OBJECTIVES_GROUND_CRASH)
-		to_chat(user, SPAN_WARNING("Launch location unknown. Autopilot requires recalibration. Please seek an authorized service technician."))
-		return UI_CLOSE
 	if(dropship_control_lost)
 		var/remaining_time = timeleft(door_control_cooldown) / 10
 		var/units = "seconds"
@@ -158,9 +155,25 @@
 			units = "minutes"
 		to_chat(user, SPAN_WARNING("The shuttle is not responding, try again in [remaining_time] [units]."))
 		return UI_CLOSE
+	if(!ignore_ftl_or_crash && (SShijack.in_ftl || SShijack.hijack_status >= HIJACK_OBJECTIVES_GROUND_CRASH))
+		var/turf/our_location = get_turf(src)
+		var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
+		if(!shuttle)
+			if(is_mainship_level(our_location.z))
+				to_chat(user, SPAN_WARNING("Launch location unknown. Autopilot requires recalibration. Please seek an authorized service technician."))
+				return UI_CLOSE
+			return .
+		var/turf/shuttle_location = get_turf(shuttle)
+		if(is_mainship_level(shuttle_location.z) || (shuttle_location.z != our_location.z && is_mainship_level(our_location.z)))
+			to_chat(user, SPAN_WARNING("Launch location unknown. Autopilot requires recalibration. Please seek an authorized service technician."))
+			if(can_change_shuttle)
+				shuttleId = null
+				update_static_data(user)
+				return .
+			return UI_CLOSE
 
 /obj/structure/machinery/computer/shuttle/dropship/flight/ui_state(mob/user)
-	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 	if(shuttle?.is_hijacked)
 		return GLOB.never_state
 	return GLOB.not_incapacitated_and_adjacent_strict_state
@@ -183,7 +196,7 @@
 /obj/structure/machinery/computer/shuttle/dropship/flight/ui_static_data(mob/user)
 	. = ..(user)
 	compatible_landing_zones = get_landing_zones()
-	var/obj/docking_port/mobile/shuttle = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/mobile/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 	// we convert the time to seconds for rendering to ui
 	if(shuttle)
 		.["max_flight_duration"] = shuttle.callTime / 10
@@ -220,7 +233,7 @@
 		return TRUE
 
 	// if the dropship has crashed don't allow more interactions
-	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 	if(!shuttle)
 		tgui_interact(user)
 		return
@@ -472,7 +485,7 @@
 	update_icon()
 
 /obj/structure/machinery/computer/shuttle/dropship/flight/ui_data(mob/user)
-	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 	. = list()
 	.["shuttle_id"] = shuttle?.id
 	.["shuttle_mode"] = shuttle?.mode
@@ -532,7 +545,7 @@
 	. = ..()
 	if(.)
 		return
-	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/mobile/marine_dropship/shuttle = SSshuttle.getShuttle(shuttleId, warn=!can_change_shuttle)
 	if(disabled || (shuttle && shuttle.is_hijacked))
 		switch(action)
 			if ("change_shuttle")
@@ -636,6 +649,10 @@
 				return
 			var/obj/structure/machinery/computer/shuttle/dropship/flight/root_console = shuttle.getControlConsole()
 			if(root_console.dropship_control_lost)
+				to_chat(user, SPAN_WARNING("The dropships main controls are not accepting the order."))
+				playsound(loc, 'sound/machines/terminal_error.ogg', KEYBOARD_SOUND_VOLUME, 1)
+				return
+			if(SShijack.in_ftl || SShijack.hijack_status >= HIJACK_OBJECTIVES_GROUND_CRASH)
 				to_chat(user, SPAN_WARNING("The dropships main controls are not accepting the order."))
 				playsound(loc, 'sound/machines/terminal_error.ogg', KEYBOARD_SOUND_VOLUME, 1)
 				return
