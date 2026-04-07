@@ -190,12 +190,7 @@ They're all essentially identical when it comes to getting the job done.
 /obj/item/ammo_magazine/proc/create_handful(mob/user, transfer_amount, obj_name = src)
 	var/amount_to_transfer
 	if (current_rounds > 0)
-/* RUCM EDIT START
 		var/obj/item/ammo_magazine/handful/new_handful = new /obj/item/ammo_magazine/handful
-*/
-		var/datum/ammo/our_ammo = GLOB.ammo_list[default_ammo]
-		var/obj/item/ammo_magazine/handful/new_handful = new our_ammo.handful_type
-//RUCM EDIT END
 		amount_to_transfer = transfer_amount ? min(current_rounds, transfer_amount) : min(current_rounds, transfer_handful_amount)
 		new_handful.generate_handful(default_ammo, caliber, transfer_handful_amount, amount_to_transfer, gun_type)
 		current_rounds -= amount_to_transfer
@@ -319,7 +314,10 @@ If it is the same and the other stack isn't full, transfer an amount (default 1)
 	var/datum/ammo/bullet = GLOB.ammo_list[new_ammo]
 	var/ammo_name = bullet.name //Let's pull up the name.
 	var/multiple_handful_name = bullet.multiple_handful_name
-
+//RUCM EDIT START
+	var/obj/item/ammo_magazine/handful/handful_type = bullet.handful_type
+	icon = initial(handful_type.icon)
+//RUCM EDIT END
 	name = "handful of [ammo_name + (multiple_handful_name ? " ":"s ") + "([new_caliber])"]"
 
 	default_ammo = new_ammo
