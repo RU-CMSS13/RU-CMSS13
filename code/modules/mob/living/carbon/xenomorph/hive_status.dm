@@ -131,14 +131,14 @@
 	/// Minimum number of huggers available at any hive size
 	var/playable_hugger_minimum = 2
 	/// This number divides the total xenos counted for slots to give the max number of facehuggers
-	var/playable_hugger_max_divisor = 4
+	var/playable_hugger_max_divisor = 1
 
 	/// How many lesser drones the hive can support
 	var/lesser_drone_limit = 0
 	/// Slots available for lesser drones will never go below this number
 	var/lesser_drone_minimum = 2
 	/// This number divides the total xenos counted for slots to give the max number of lesser drones
-	var/playable_lesser_drones_max_divisor = 3
+	var/playable_lesser_drones_max_divisor = 1
 
 	var/minimap_type = MINIMAP_FLAG_XENO
 
