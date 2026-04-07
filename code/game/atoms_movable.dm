@@ -49,12 +49,22 @@
 	/// Which vehicle are we ontop of?
 	var/tmp/obj/vehicle/multitile/tank/tank_on_top_of = null
 
+	/// A weakref to the mob currently interacting with us.
+	var/datum/weakref/interactor
+
+
 //===========================================================================
+
+
 /atom/movable/Destroy(force)
 	for(var/atom/movable/I in contents)
 		qdel(I)
 	if(pulledby)
 		pulledby.stop_pulling()
+	if(interactor)
+		var/mob/real_interactor = interactor.resolve()
+		if(istype(real_interactor))
+			real_interactor.unset_interaction(src) // unsets interactor
 	QDEL_NULL(launch_metadata)
 	QDEL_NULL(em_block)
 	QDEL_NULL(emissive_overlay)
@@ -212,6 +222,7 @@
 		else
 			unset_interaction()
 	interactee = AM
+	AM.interactor = WEAKREF(src)
 	if(istype(interactee)) //some stupid code is setting datums as interactee...
 		interactee.on_set_interaction(src)
 
@@ -222,6 +233,7 @@
 		interactee = null
 		if(istype(prev_interactee))
 			prev_interactee.on_unset_interaction(src)
+			prev_interactee.interactor = null
 
 
 //things the user's machine must do just after we set the user's machine.
@@ -231,7 +243,7 @@
 
 /obj/on_set_interaction(mob/user)
 	..()
-	in_use = 1
+	in_use = TRUE
 
 
 //things the user's machine must do just before we unset the user's machine.
