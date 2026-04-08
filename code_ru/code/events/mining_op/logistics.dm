@@ -1,5 +1,36 @@
 #define CAMERA_TRAIT "camera"
 
+/particles/shuttle_dust_hover
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "smoke"
+	width = 250
+	height = 250
+	count = 1000
+	spawning = 20
+	lifespan = 8
+	fade = 50
+	grow = 0.3
+	velocity = list(0, 0)
+	position = generator(GEN_CIRCLE, 80, 70, NORMAL_RAND)
+	gravity = list(0, 0)
+	scale = generator(GEN_VECTOR, list(1, 1), list(2,2), NORMAL_RAND)
+	rotation = 0
+	spin = generator(GEN_NUM, -20, 20)
+
+/obj/effect/temp_visual/dropship_hover
+	layer = 4
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	duration = 4 SECONDS
+	explo_proof = TRUE
+
+/obj/effect/temp_visual/dropship_hover/Initialize()
+	. = ..()
+	particles = new /particles/shuttle_dust_hover
+	addtimer(CALLBACK(src, PROC_REF(fade_away)), 3 SECONDS)
+
+/obj/effect/temp_visual/dropship_hover/proc/fade_away()
+	particles.spawning = 0
+
 /obj/effect/temp_visual/do_after_fake
 	duration = 4 SECONDS
 	icon = 'icons/mob/do_afters.dmi'
@@ -22,7 +53,7 @@
 /obj/structure/mineop/minecart/proc/setup_oreicon(image/counter, counter_amount, x_shift, y_shift)
 	counter.alpha = 0
 	counter.plane = HUD_PLANE
-	counter.maptext = "[counter_amount]"
+	counter.maptext = SPAN_LANGCHAT("[counter_amount]")
 
 	counter.loc = get_turf(src)
 
@@ -70,6 +101,11 @@
 /obj/structure/mineop/minecart/proc/recalculate_resources()
 	var/list/gold_left = list()
 	var/list/mat_left = list()
+
+	for(var/obj/structure/mineop/minerarls_drop/D in minerals_inside)
+		if(!(D in contents))
+			minerals_inside -= D
+
 	for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in minerals_inside)
 		gold_left += G
 	for(var/obj/structure/mineop/minerarls_drop/marine_mat/G in minerals_inside)
@@ -98,14 +134,18 @@
 /obj/structure/mineop/minecart/proc/hide_insides()
 
 	revealed = FALSE
-	animate(gold_counter, alpha = 0, pixel_x = 0, pixel_y = 0, time = 0.3 SECONDS, easing = SINE_EASING|EASE_IN)
-	animate(mat_counter, alpha = 0, pixel_x = 0, pixel_y = 0, time = 0.3 SECONDS, easing = SINE_EASING|EASE_IN)
+	if(gold_counter)
+		animate(gold_counter, alpha = 0, pixel_x = 0, pixel_y = 0, time = 0.3 SECONDS, easing = SINE_EASING|EASE_IN)
+	if(mat_counter)
+		animate(mat_counter, alpha = 0, pixel_x = 0, pixel_y = 0, time = 0.3 SECONDS, easing = SINE_EASING|EASE_IN)
 
 	spawn(0.3 SECONDS)
-		usr.client.images -= gold_counter
-		usr.client.images -= mat_counter
-		qdel(gold_counter)
-		qdel(mat_counter)
+		if(gold_counter)
+			usr.client.images -= gold_counter
+			qdel(gold_counter)
+		if(mat_counter)
+			usr.client.images -= mat_counter
+			qdel(mat_counter)
 
 // Консоль и пад для отправки ресурсов
 
@@ -159,9 +199,9 @@
 			GLOB.supply_controller.points += 4
 			total_worth += 4
 			M.gold -= 1
-			M.minerals_inside -= G
 
 			qdel(G)
+		M.recalculate_resources()
 
 	sleep(10 SECONDS)
 
@@ -190,11 +230,15 @@
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyin()
 	animate(src, transform = matrix(0, MATRIX_ROTATE), alpha = 255, pixel_y = -32, pixel_x = -64, time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
+	spawn(4.5 SECONDS)
+		new /obj/effect/temp_visual/dropship_hover(get_turf(src))
 	animate(pixel_y = -64, time = 1 SECONDS, easing = SINE_EASING | EASE_IN)
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyout()
-	animate(src, pixel_y = -32, time = 1 SECONDS, easing = SINE_EASING | EASE_OUT)
-	animate(transform = matrix(40, MATRIX_ROTATE), alpha = 0, pixel_y = -192, pixel_x = 192, time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
+	new /obj/effect/temp_visual/dropship_hover(get_turf(src))
+	spawn(1 SECONDS)
+		animate(src, pixel_y = -32, time = 1 SECONDS, easing = SINE_EASING | EASE_OUT)
+		animate(transform = matrix(40, MATRIX_ROTATE), alpha = 0, pixel_y = -192, pixel_x = 192, time = 5 SECONDS, easing = CUBIC_EASING | EASE_IN)
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop/proc/flyby()
 	animate(src, transform = matrix(0, MATRIX_ROTATE), pixel_y = 192, pixel_x = -64, time = 0)
@@ -214,14 +258,12 @@
 	var/list/obj/structure/mineop/rnd/researched_tech_list = list()
 
 	var/busy = FALSE
-	var/first_time_accessing = TRUE
 
 /obj/structure/mineop/fob/resource_managing_tm/attack_hand(mob/user)
 	. = ..()
 
-	if(first_time_accessing)
+	if(!camera)
 		load_rnd_level()
-		first_time_accessing = FALSE
 
 	if(busy)
 		return FALSE
@@ -244,3 +286,70 @@
 			camera.connected_mob = user
 			ADD_TRAIT(user, TRAIT_IMMOBILIZED, CAMERA_TRAIT)
 			return TRUE
+
+/obj/structure/mineop/fob/fabricator_hatch
+	name = "fabricator hatch"
+	icon = 'icons/obj/structures/props/dropship/dropship_equipment.dmi'
+	icon_state = "rappel_hatch_closed"
+
+	anchored = TRUE
+	density = FALSE
+
+	var/obj/structure/mineop/fob/fabricator/connected_fabricator
+	var/busy = FALSE
+
+/obj/structure/mineop/fob/fabricator_hatch/proc/start_production(order, time = 0)
+	busy = TRUE
+	icon_state = "rappel_hatch_closed"
+
+	new /obj/effect/temp_visual/do_after_fake(get_turf(src), time, "busy_build")
+
+	sleep(time)
+
+	icon_state = "rappel_hatch_opening"
+
+	sleep(1.5 SECONDS)
+	var/obj/created = new order(get_turf(src))
+	animate(created, transform = matrix(0.01, MATRIX_SCALE), alpha = 0, time = 0)
+	animate(transform = matrix(1, MATRIX_SCALE), alpha = 255, time = 1 SECONDS, easing = SINE_EASING | EASE_IN)
+	sleep(0.5 SECONDS)
+
+	icon_state = "rappel_hatch_closing"
+	busy = FALSE
+	return TRUE
+
+/obj/structure/mineop/fob/fabricator
+	name = "fabricator"
+	icon = 'code_ru/code/events/mining_op/fabricator.dmi'
+	icon_state = "fabricator"
+
+	anchored = TRUE
+	density = TRUE
+
+	var/list/obj/structure/mineop/fob/fabricator_hatch/hatches = list()
+	var/obj/structure/mineop/camera/camera
+
+	var/busy = FALSE
+
+/obj/structure/mineop/fob/fabricator/Initialize(mapload, ...)
+	. = ..()
+	var/area/A = get_area(src)
+	for(var/obj/structure/mineop/fob/fabricator_hatch/H in A)
+		hatches += H
+
+/obj/structure/mineop/fob/fabricator/attack_hand(mob/user)
+	. = ..()
+
+	if(!camera)
+		load_rnd_level()
+
+	if(busy)
+		return FALSE
+
+	busy = TRUE
+	user.client.perspective = EYE_PERSPECTIVE
+	user.client.set_eye(camera)
+
+	camera.connected_mob = user
+	ADD_TRAIT(user, TRAIT_IMMOBILIZED, CAMERA_TRAIT)
+	return TRUE

@@ -1,3 +1,5 @@
+// спавн з-уровня для ресёрча и создания ивентовых предметов, появляется при первом взаимодействии с одной из двух консолей
+
 /datum/map_template/mineop
 	name = "Whatever Template"
 	var/prefix = "code_ru/code/events/mining_op/rnd/"
@@ -30,6 +32,8 @@
 	// Now notify the staff of the load - this goes in addition to the generic template load game log
 	message_admins("Successfully loaded template as new Z-Level, template name: [template.name]", center_x, center_y, loaded.z_value)
 
+// зоны
+
 /area/mineop/rnd_level
 	name = "RND Tree"
 	icon_state = "unknown"
@@ -39,19 +43,43 @@
 	statistic_exempt = TRUE
 	base_lighting_alpha = 255
 
+/area/mineop/fabric_level
+	name = "Fabrication Center"
+	icon_state = "unknown"
+
+	ceiling = CEILING_METAL
+	requires_power = FALSE
+	statistic_exempt = TRUE
+	base_lighting_alpha = 255
+
+// камера для взаимодействия с новым з-уровнем
+
 /obj/structure/mineop/camera
 	name = "CAMERA"
 	desc = "..."
 	mouse_opacity = FALSE
+	var/connected_to_level = "rnd"
 	var/obj/structure/mineop/fob/resource_managing_tm/connected_terminal
+	var/obj/structure/mineop/fob/fabricator/connected_fabricator
 	var/mob/connected_mob
 
 /obj/structure/mineop/camera/Initialize()
 	. = ..()
 
-	for(var/obj/structure/mineop/fob/resource_managing_tm/TM in world)
-		TM.camera = src
-		connected_terminal = TM
+	if(connected_to_level == "rnd")
+		for(var/obj/structure/mineop/fob/resource_managing_tm/TM in world)
+			TM.camera = src
+			connected_terminal = TM
+
+	if(connected_to_level == "fab")
+		for(var/obj/structure/mineop/fob/fabricator/F in world)
+			F.camera = src
+			connected_fabricator = F
+
+/obj/structure/mineop/camera/fab
+	connected_to_level = "fab"
+
+// кнопка выхода с з-лвла
 
 /obj/structure/mineop/rnd_exit
 	name = "EXIT"
@@ -82,20 +110,34 @@
 
 			REMOVE_TRAIT(client_holder.connected_mob, TRAIT_IMMOBILIZED, CAMERA_TRAIT)
 
-			client_holder.connected_terminal.busy = FALSE
+			if(client_holder.connected_to_level == "rnd")
+				client_holder.connected_terminal.busy = FALSE
+			if(client_holder.connected_to_level == "fab")
+				client_holder.connected_fabricator.busy = FALSE
+
 			var/area/A = get_area(src)
-			for(var/obj/structure/mineop/rnd/R in A)
-				if(R.shown_desc)
-					R.hide_more(client_holder.connected_mob)
-					R.shown_desc = FALSE
-				if(R.hovering)
-					R.remove_filter("hover_outline")
-					R.hovering = FALSE
+			if(client_holder.connected_to_level == "rnd")
+				for(var/obj/structure/mineop/rnd/R in A)
+					if(R.shown_desc)
+						R.hide_more(client_holder.connected_mob)
+						R.shown_desc = FALSE
+					if(R.hovering)
+						R.remove_filter("hover_outline")
+						R.hovering = FALSE
+
+			if(client_holder.connected_to_level == "fab")
+				for(var/obj/structure/mineop/design/D in A)
+					if(D.hovering)
+						D.remove_filter("hover_outline")
+						D.hide_name_and_cost(client_holder.connected_mob)
+						D.hovering = FALSE
 
 			client_holder.connected_mob = null
 			return TRUE
 
 	return TRUE
+
+// маптекст для данных по техам
 
 /atom/movable/screen/fullscreen/maptext_description
 	icon = null
@@ -108,6 +150,8 @@
 
 	maptext_x = 8
 	maptext_y = -45
+
+// визуализация техов
 
 /obj/structure/mineop/rnd
 	name = "RESEARCH"
@@ -129,6 +173,7 @@
 	layer = 5
 	plane = HUD_PLANE
 	var/atom/movable/screen/fullscreen/maptext_description/tech_desc
+	var/tech_id = "none"
 
 /obj/structure/mineop/rnd/Initialize(mapload, ...)
 	. = ..()
@@ -151,7 +196,6 @@
 			for(var/obj/structure/mineop/minecart/M in terminal)
 				for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in M.minerals_inside)
 					goldlist += G
-
 
 			if(length(goldlist) < buycost)
 				outline_color = COLOR_YELLOW
@@ -213,7 +257,7 @@
 				animation_flash_color(src, COLOR_GREEN)
 
 				if(shown_desc)
-					hide_more()
+					hide_more(user)
 					shown_desc = FALSE
 
 				if(hovering)
@@ -224,8 +268,11 @@
 					if(type in R.tech_needed_list)
 						R.tech_needed_list -= type
 
+				var/remove_that_much = buycost
 				for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in goldlist)
-					qdel(G)
+					if(remove_that_much > 0)
+						remove_that_much -= 1
+						qdel(G)
 
 				for(var/obj/structure/mineop/minecart/M in terminal)
 					M.recalculate_resources()
@@ -248,8 +295,159 @@
 
 	return ..()
 
-/obj/structure/mineop/rnd/energy_shield
-	name = "Энерго-щит"
-	desc = "Капсуль, создающий временное силовое поле при детонации. Позволяет стрелять изнутри."
+// визуализация дизайнов
 
-	buycost = 30
+/obj/structure/mineop/design
+	name = "DESIGN"
+	desc = "DESIGN."
+
+	icon = 'code_ru/code/events/mining_op/ui.dmi'
+	icon_state = "back"
+
+	anchored = TRUE
+	var/obj/structure/mineop/fob/resource_managing_tm/connected_terminal
+	var/obj/structure/mineop/fob/fabricator/connected_fabricator
+	var/buycost = 999
+	var/buildtime = 3 SECONDS
+
+	var/type_to_create
+
+	var/hovering = FALSE
+
+	layer = 5
+	plane = HUD_PLANE
+	var/atom/movable/screen/fullscreen/maptext_description/des_desc
+	var/design_id = "none"
+	var/already_researched = FALSE
+
+/obj/structure/mineop/design/Initialize(mapload, ...)
+	. = ..()
+
+	for(var/obj/structure/mineop/fob/resource_managing_tm/TM in world)
+		connected_terminal = TM
+
+	for(var/obj/structure/mineop/fob/fabricator/F in world)
+		connected_fabricator = F
+
+/obj/structure/mineop/design/MouseEntered(location, control, params)
+	. = ..()
+
+	if(ishuman(usr))
+		if(!hovering)
+			var/outline_color = COLOR_GREEN
+			var/researched = FALSE
+			var/obj/structure/mineop/fob/fabricator_hatch/free_hatch
+
+			for(var/obj/structure/mineop/fob/fabricator_hatch/H in connected_fabricator.hatches)
+				if(H.busy)
+					continue
+				free_hatch = H
+
+			var/list/obj/structure/mineop/minerarls_drop/marine_mat/matlist = list()
+			var/area/fab = get_area(connected_fabricator)
+			for(var/obj/structure/mineop/minerarls_drop/marine_mat/T in fab)
+				matlist += T
+			for(var/obj/structure/mineop/minecart/M in fab)
+				for(var/obj/structure/mineop/minerarls_drop/marine_mat/T in M.minerals_inside)
+					matlist += T
+
+			for(var/obj/structure/mineop/rnd/R in connected_terminal.researched_tech_list)
+				if(R.tech_id == design_id)
+					researched = TRUE
+
+			if(already_researched)
+				researched = TRUE
+
+			if(length(matlist) < buycost)
+				outline_color = COLOR_YELLOW
+			if(!free_hatch)
+				outline_color = COLOR_YELLOW
+			if(!researched)
+				outline_color = COLOR_RED
+
+			add_filter("hover_outline", 1, list("type" = "outline", "color" = outline_color, "size" = 1))
+			reveal_name_and_cost(usr)
+			hovering = TRUE
+
+/obj/structure/mineop/design/MouseExited(location, control, params)
+	. = ..()
+
+	if(ishuman(usr))
+		if(hovering)
+			remove_filter("hover_outline")
+			hide_name_and_cost(usr)
+			hovering = FALSE
+
+/obj/structure/mineop/design/proc/reveal_name_and_cost(mob/user)
+	des_desc = new(null, src)
+	var/des_name = "<span class='langchat langchat_yell'>[name]</span><br>"
+	var/des_info = "<span class='langchat' style='font-size: 7px;'>ЦЕНА: [buycost] ВРЕМЯ ПРОИЗВОДСТВА: [buildtime]</span>"
+
+	des_desc.maptext = des_name + des_info
+	user.client.screen += des_desc
+
+/obj/structure/mineop/design/proc/hide_name_and_cost(mob/user)
+	des_desc.maptext = ""
+	user.client.screen -= des_desc
+	qdel(des_desc)
+
+/obj/structure/mineop/design/clicked(mob/user, list/mods)
+	if(ishuman(usr))
+		if(mods[LEFT_CLICK])
+			var/list/obj/structure/mineop/minerarls_drop/marine_mat/matlist = list()
+			var/area/fab = get_area(connected_fabricator)
+			var/researched = FALSE
+			var/obj/structure/mineop/fob/fabricator_hatch/free_hatch
+
+			for(var/obj/structure/mineop/minerarls_drop/marine_mat/T in fab)
+				matlist += T
+			for(var/obj/structure/mineop/minecart/M in fab)
+				for(var/obj/structure/mineop/minerarls_drop/marine_mat/T in M.minerals_inside)
+					matlist += T
+
+			if(length(matlist) < buycost)
+				animation_flash_color(src, COLOR_RED)
+				return FALSE
+
+			for(var/obj/structure/mineop/rnd/R in connected_terminal.researched_tech_list)
+				if(R.tech_id == design_id)
+					researched = TRUE
+
+			if(already_researched)
+				researched = TRUE
+
+			if(!researched)
+				animation_flash_color(src, COLOR_RED)
+				return FALSE
+
+			for(var/obj/structure/mineop/fob/fabricator_hatch/H in connected_fabricator.hatches)
+				if(H.busy)
+					continue
+				free_hatch = H
+
+			if(!free_hatch)
+				animation_flash_color(src, COLOR_RED)
+				return FALSE
+
+			animation_flash_color(src, COLOR_GREEN)
+			animate(src, transform = matrix(0.7, MATRIX_SCALE), time = 0.2 SECONDS, easing = SINE_EASING | EASE_IN)
+			animate(transform = matrix(1, MATRIX_SCALE), time = 0.2 SECONDS, easing = SINE_EASING | EASE_OUT)
+
+			if(hovering)
+				remove_filter("hover_outline")
+				hide_name_and_cost(usr)
+				hovering = FALSE
+
+			var/remove_that_much = buycost
+			for(var/obj/structure/mineop/minerarls_drop/marine_mat/T in matlist)
+				if(remove_that_much > 0)
+					remove_that_much -= 1
+					qdel(T)
+
+			for(var/obj/structure/mineop/minecart/M in fab)
+				M.recalculate_resources()
+
+			free_hatch.start_production(type_to_create, buildtime)
+			return TRUE
+
+	return ..()

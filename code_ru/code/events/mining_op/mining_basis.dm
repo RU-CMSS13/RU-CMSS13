@@ -126,6 +126,8 @@
 
 	var/floor_types = list(/turf/open/auto_turf/sand_white/layer0, /turf/open/auto_turf/sand_white/layer1)
 
+	var/cannot_be_destructed_normally = FALSE
+
 /turf/closed/wall/mineop/destructable_rock/dismantle_wall(devastated, explode)
 	if(mining_sound)
 		playsound(get_turf(src), mining_sound, 100, 1)
@@ -154,7 +156,6 @@
 
 	if(W.digging_tool)
 		if(W.not_ready_for_digging)
-			W.balloon_alert(user, "*немного подожди*", "#ffbb00")
 			return
 
 		var/list/random_sound = list('code_ru/code/events/mining_op/drg/standart_pickaxe_1.ogg', 'code_ru/code/events/mining_op/drg/standart_pickaxe_2.ogg')
@@ -361,7 +362,6 @@
 		return
 
 	if(W.not_ready_for_digging)
-		W.balloon_alert(W, "*on cooldown*", "#ffbb00")
 		return
 
 	var/list/random_sound = list('code_ru/code/events/mining_op/drg/standart_pickaxe_1.ogg', 'code_ru/code/events/mining_op/drg/standart_pickaxe_2.ogg')
