@@ -148,6 +148,10 @@
 			var/area/terminal = get_area(connected_terminal)
 			for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in terminal)
 				goldlist += G
+			for(var/obj/structure/mineop/minecart/M in terminal)
+				for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in M.minerals_inside)
+					goldlist += G
+
 
 			if(length(goldlist) < buycost)
 				outline_color = COLOR_YELLOW
@@ -194,6 +198,9 @@
 				var/area/rnd = get_area(src)
 				for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in terminal)
 					goldlist += G
+				for(var/obj/structure/mineop/minecart/M in terminal)
+					for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in M.minerals_inside)
+						goldlist += G
 
 				if(length(goldlist) < buycost)
 					animation_flash_color(src, COLOR_RED)
@@ -219,6 +226,9 @@
 
 				for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in goldlist)
 					qdel(G)
+
+				for(var/obj/structure/mineop/minecart/M in terminal)
+					M.recalculate_resources()
 
 				connected_terminal.researched_tech_list += src
 				add_filter("bought_outline", 1, list("type" = "outline", "color" = COLOR_GREEN, "size" = 1))

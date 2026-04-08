@@ -67,6 +67,17 @@
 		hide_insides()
 		return TRUE
 
+/obj/structure/mineop/minecart/proc/recalculate_resources()
+	var/list/gold_left = list()
+	var/list/mat_left = list()
+	for(var/obj/structure/mineop/minerarls_drop/marine_gold/G in minerals_inside)
+		gold_left += G
+	for(var/obj/structure/mineop/minerarls_drop/marine_mat/G in minerals_inside)
+		mat_left += G
+
+	gold = length(gold_left)
+	mat = length(mat_left)
+
 /obj/structure/mineop/minecart/proc/reveal_insides()
 // материала всего два, так что не хочу выёбываться листами
 
@@ -102,6 +113,7 @@
 	name = "Supply Dock"
 	icon_state = "shuttle3"
 	requires_power = 0
+	ceiling = CEILING_METAL
 
 /obj/structure/prop/vehicles/aircraft/vtol/mineop
 	alpha = 0 //изначально невидим
