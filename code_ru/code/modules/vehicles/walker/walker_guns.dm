@@ -318,9 +318,9 @@
 // Official CMs shitcoded something, so yea, they work not the same like supposed, SHITCODE
 /obj/item/weapon/gun/launcher/grenade/mounted/handle_fire(atom/target, mob/living/user, params)
 	. = TRUE
-	afterattack(target, user, params, TRUE)
+	afterattack(target, user, params, null, TRUE)
 
-/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, force = FALSE)
+/obj/item/weapon/gun/launcher/grenade/mounted/afterattack(atom/target, mob/user, proximity_flag, click_parameters, force = FALSE)
 	if(!force)
 		return
 	. = ..()
@@ -353,7 +353,7 @@
 /obj/item/weapon/gun/launcher/grenade/mounted/mecha_grenade_launcher/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_6)
+	set_fire_delay(FIRE_DELAY_TIER_1)
 
 
 
