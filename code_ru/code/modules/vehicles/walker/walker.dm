@@ -677,13 +677,19 @@
 
 /obj/vehicle/walker/proc/handle_modules_take_damage(damages_applied, type, atom/attacker, zone_selected, obj/item/hardpoint/walker/attacked_hardpoint)
 	if(!zone_selected && !attacked_hardpoint)
-		var/damage_per_part = damages_applied[WALKER_DAMAGE_REMAINING] / max(length(hardpoints), 1)
-		for(var/obj/item/hardpoint/walker/hardpoints_remaining as anything in hardpoints)
-			if(!hardpoints_remaining.can_take_damage())
+		var/list/elegible_hardpoints = list()
+		for(attacked_hardpoint as anything in hardpoints)
+			if(!attacked_hardpoint.can_take_damage())
 				continue
-			hardpoints_remaining.take_damage_type(damages_applied, type, attacker, damage_per_part, damage_per_part)
-		if(seats[VEHICLE_DRIVER])
+			elegible_hardpoints += attacked_hardpoint
+
+		attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+		if(seats[VEHICLE_DRIVER] && !attacked_hardpoint?.can_take_damage())
 			seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
+
+		var/damage_per_part = damages_applied[WALKER_DAMAGE_REMAINING] / max(length(elegible_hardpoints), 1)
+		for(attacked_hardpoint as anything in elegible_hardpoints)
+			attacked_hardpoint.take_damage_type(damages_applied, type, attacker, damage_per_part, damage_per_part)
 		return
 
 	var/obj/item/hardpoint/walker/hardpoint_armor = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
@@ -713,7 +719,7 @@
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 		return
 
-	if(seats[VEHICLE_DRIVER] && (zone_selected in list("head", "eyes", "mouth")))
+	if(seats[VEHICLE_DRIVER] && (zone_selected == "head" || "eyes" || "mouth"))
 		seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
 
 /obj/vehicle/walker/proc/seated_take_damage(damage, type, atom/attacker, mob/living/user)

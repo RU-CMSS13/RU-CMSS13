@@ -107,14 +107,13 @@ const HardpointTable = (props: { readonly hardpoints: HardpointInfo[] }) => {
           </TableRow>
           <TableRow>
             {hardpoint.hardpoint_data_additional.map((value) => (
-              <TableCell key={value.value_name}>
-                <ProgressBar
-                  value={value.current_value / value.max_value}
-                  width={'45%'}
-                >
-                  {value.value_name}: {value.current_value} / {value.max_value}
-                </ProgressBar>
-              </TableCell>
+              <ProgressBar
+                key={value.value_name}
+                width={100 / hardpoint.hardpoint_data_additional.length + '%'}
+                value={value.current_value / value.max_value}
+              >
+                {value.value_name}: {value.current_value} / {value.max_value}
+              </ProgressBar>
             ))}
           </TableRow>
         </Table>

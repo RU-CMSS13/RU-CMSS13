@@ -22,14 +22,22 @@
 /obj/item/hardpoint/walker/hand/tgui_additional_data()
 	. = ..()
 
-	if(!mounted_gun?.current_mag || !(mounted_gun.current_mag.current_rounds || mounted_gun.current_mag.reagents))
+	if(!mounted_gun)
 		return
 
 	var/list/data = list()
 	.["hardpoint_data_additional"] += list(data)
 	data["value_name"] = "Ammo"
-	data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
-	data["max_value"] = mounted_gun.current_mag.max_rounds
+	if(mounted_gun.has_cylinder)
+		var/obj/item/weapon/gun/launcher/mounted_cylinder_gun = mounted_gun
+		data["current_value"] = length(mounted_cylinder_gun.cylinder.contents)
+		data["max_value"] = mounted_cylinder_gun.internal_slots
+	else if(mounted_gun.current_mag)
+		data["current_value"] = mounted_gun.current_mag.reagents?.total_volume || mounted_gun.current_mag.current_rounds
+		data["max_value"] = mounted_gun.current_mag.max_rounds
+	else
+		data["current_value"] = 0
+		data["max_value"] = 0
 
 /obj/item/hardpoint/walker/hand/check_modifiers(modifiers, button = FALSE)
 	if(slot == WALKER_HARDPOIN_LEFT_HAND ? !modifiers[LEFT_CLICK] : !modifiers[MIDDLE_CLICK])

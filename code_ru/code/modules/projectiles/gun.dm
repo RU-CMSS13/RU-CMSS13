@@ -9,9 +9,14 @@
 
 	var/charge_cost = 0
 
-	/// For gun holder
+	/// Variable that initializes the above.
+	var/has_cylinder = FALSE
+
+	/// For gun holder call back to check if it can fire
 	var/datum/callback/callback_can_fire
+	/// For gun holder call back to check if it can stop fire
 	var/datum/callback/callback_can_stop_fire
+	/// For gun holder call back on fire apply stats
 	var/datum/callback/callback_fire_stat
 
 /obj/item/weapon/gun/proc/muzzle_flash(angle, mob/user)

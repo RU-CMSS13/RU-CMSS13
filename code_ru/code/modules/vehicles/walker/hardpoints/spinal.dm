@@ -140,6 +140,7 @@
 	var/capacity_recover_rate = 2
 	var/shield_color = "#527eec"
 
+	var/last_coldown_time = 0
 	var/cooldown_timer_id = null
 	var/delay_between_hits = 30 SECONDS
 
@@ -172,7 +173,7 @@
 		.["hardpoint_data_additional"] += list(data)
 		data["value_name"] = "Cooldown"
 		data["current_value"] = timeleft(cooldown_timer_id) / 10
-		data["max_value"] = delay_between_hits * 6 / 10
+		data["max_value"] = last_coldown_time / 10
 
 /obj/item/hardpoint/walker/spinal/shield/on_source_process(delta_time)
 	. = ..()
@@ -202,24 +203,24 @@
 	update_filter()
 
 /obj/item/hardpoint/walker/spinal/shield/proc/take_hits(list/damages_applied)
-	stop_recovering(world.time + delay_between_hits)
 	if(!damage_capacity)
 		return FALSE
 
+	stop_recovering(delay_between_hits)
 	var/obj/vehicle/walker/vessel = owner
 	if(!vessel.can_consume_energy(damages_applied[2]))
 		return FALSE
 
 	vessel.consume_energy(damages_applied[2])
 	damage_capacity -= damages_applied[2]
-	if(damage_capacity < 0)
+	if(damage_capacity <= 0)
 		damage_capacity = 0
 		vessel.remove_filter("spinal_shield")
-		stop_recovering(world.time + delay_between_hits * 4)
+		stop_recovering(delay_between_hits * 4)
 
 		vessel.visible_message(SPAN_WARNING("Arc of sparks coming out from [src] installed on [vessel]. Seems it got disabled for sufficient time!"))
 		if(vessel.seats[VEHICLE_DRIVER])
-			to_chat(vessel.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [delay_between_hits / 10] seconds"))
+			to_chat(vessel.seats[VEHICLE_DRIVER], SPAN_DANGER("SHIELD DISABLED, main system frame overloded. Rebooting, ETA: [last_coldown_time / 10] seconds"))
 	else
 		update_filter()
 		vessel.visible_message(SPAN_WARNING("Arc of sparks coming out from aura around [vessel], seems like reflecting an attack."))
@@ -233,7 +234,8 @@
 	vessel.consume_energy(capacity_recover_rate * 4)
 
 /obj/item/hardpoint/walker/spinal/shield/proc/stop_recovering(time_to_resume)
-	cooldown_timer_id = addtimer(CALLBACK(src, PROC_REF(resume_recovering)), time_to_resume, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_DELETE_ME)
+	last_coldown_time = time_to_resume
+	cooldown_timer_id = addtimer(CALLBACK(src, PROC_REF(resume_recovering)), time_to_resume, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT|TIMER_DELETE_ME|TIMER_STOPPABLE)
 
 /obj/item/hardpoint/walker/spinal/shield/proc/update_filter()
 	owner.add_filter("spinal_shield", 1, list("type" = "outline", "color" = shield_color, "size" = damage_capacity / max_damage_capacity * 2))
