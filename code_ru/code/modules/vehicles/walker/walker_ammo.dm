@@ -13,7 +13,7 @@
 	caliber = "10x28mm"
 	icon_state = "mech_smartgun_ammo"
 	default_ammo = /datum/ammo/bullet/walker/smartgun
-	max_rounds = 700
+	max_rounds = 800
 	gun_type = /obj/item/weapon/gun/mounted/mecha_smartgun
 
 
@@ -106,12 +106,12 @@
 	flags_ammo_behavior = AMMO_BALLISTIC
 
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
-	accurate_range = 7
-	max_range = 24
+	accurate_range = 9
+	max_range = 21
 	accuracy = -HIT_ACCURACY_TIER_2
-	damage = 25
+	damage = 24
 	penetration = ARMOR_PENETRATION_TIER_3
-	effective_range_max = 7
+	effective_range_max = 9
 
 
 /datum/ammo/bullet/walker/machinegun
@@ -119,10 +119,11 @@
 	icon_state = "bullet"
 
 	accurate_range = 1
-	max_range = 12
-	damage = 40
+	max_range = 7
+	damage = 42
 	penetration = ARMOR_PENETRATION_TIER_5
 	accuracy = -HIT_ACCURACY_TIER_4
+	effective_range_max = 1
 
 
 /datum/ammo/bullet/walker/shotgun8g
@@ -139,6 +140,14 @@
 
 	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
 	bonus_projectiles_amount = EXTRA_PROJECTILES_TIER_6
+
+/datum/ammo/bullet/walker/shotgun8g/set_bullet_traits()
+	. = ..()
+	LAZYADD(traits_to_give, list(
+		BULLET_TRAIT_ENTRY_ID("turfs", /datum/element/bullet_trait_damage_boost, 5, GLOB.damage_boost_turfs),
+		BULLET_TRAIT_ENTRY_ID("breaching", /datum/element/bullet_trait_damage_boost, 10.8, GLOB.damage_boost_breaching),
+		BULLET_TRAIT_ENTRY_ID("pylons", /datum/element/bullet_trait_damage_boost, 5, GLOB.damage_boost_pylons)
+	))
 
 /datum/ammo/bullet/walker/shotgun8g/spread
 	name = "additional 8 gauge buckshot"
@@ -167,11 +176,11 @@
 /datum/ammo/bullet/walker/wm88
 	name = ".458 SOCOM round"
 
-	damage = 80
+	damage = 120
 	penetration = ARMOR_PENETRATION_TIER_2
 	accuracy = HIT_ACCURACY_TIER_1
 	shell_speed = AMMO_SPEED_TIER_6
-	accurate_range = 14
+	accurate_range = 21
 	handful_state = "boomslang_bullet"
 
 /datum/ammo/bullet/walker/wm88/a20
@@ -305,16 +314,14 @@
 		/obj/item/ammo_magazine/rocket/walker,
 		/obj/item/ammo_magazine/rocket/walker,
 	)
-	cost = 10
+	cost = 20
 	containertype = /obj/structure/closet/crate/ammo
 	containername = "M2558 Tactical Laser-Guided Rocket crate"
 	group = "Vehicle Ammo"
 
 /datum/supply_packs/ammo_m1488_tactical_rocket_ap
-	name = "M2558 Tactical AP Laser-Guided Rocket (x4)"
+	name = "M2558 Tactical AP Laser-Guided Rocket (x2)"
 	contains = list(
-		/obj/item/ammo_magazine/rocket/walker/ap,
-		/obj/item/ammo_magazine/rocket/walker/ap,
 		/obj/item/ammo_magazine/rocket/walker/ap,
 		/obj/item/ammo_magazine/rocket/walker/ap,
 	)

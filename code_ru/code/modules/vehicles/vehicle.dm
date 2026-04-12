@@ -563,7 +563,7 @@
 
 /obj/item/hardpoint
 	var/max_health = 0
-	var/destruction_on_zero = FALSE
+	var/destruction_on_zero = TRUE
 
 	var/material_per_repair = 0
 	var/list/repair_materials = list()

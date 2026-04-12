@@ -93,7 +93,7 @@
 
 
 /obj/item/hardpoint/walker/spinal/tactical_missile
-	name = "M2558 Tactical Rocket Launcher \"Anti Tsiganskij Khutor\""
+	name = "M2558 \"Anti Tsiganskij Khutor\" Tactical Rocket Launcher"
 	desc = "\"Special Package Deliver System\" includes a pair of heavy optics with laser guidance system, and bunker buster rockets. Developen in 2123 for assistance in destructing illigal establishments."
 
 	weight = 1.5

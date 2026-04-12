@@ -79,7 +79,7 @@
 
 /datum/action/walker/get_stats/action_activate()
 	. = ..()
-	tgui_interact(owner)
+	vessel.tgui_interact(owner)
 
 
 /datum/keybinding/human/walker/status_display

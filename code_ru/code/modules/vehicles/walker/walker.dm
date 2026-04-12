@@ -54,7 +54,7 @@
 
 	light_range = 8
 
-	pixel_x = -17
+	pixel_x = -16
 	pixel_y = -22
 
 	health = 750
@@ -177,7 +177,7 @@
 	density = TRUE
 	anchored = TRUE
 	opacity = FALSE
-	pixel_x = -17
+	pixel_x = -16
 
 
 //////////////////////////////////////////////////////////////
@@ -189,6 +189,7 @@
 	recalculate_hardpoints()
 	START_PROCESSING(SSobj, src)
 
+	mob_overplay = new ()
 	shadow_holder = new (src)
 
 /obj/vehicle/walker/Destroy(force)
@@ -201,6 +202,8 @@
 	if(seats[VEHICLE_DRIVER])
 		seats[VEHICLE_DRIVER].unset_interaction()
 
+	vis_contents.Cut()
+	QDEL_NULL(mob_overplay)
 	QDEL_NULL(shadow_holder)
 
 	. = ..()
@@ -247,6 +250,7 @@
 		user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 
 	seats[VEHICLE_DRIVER] = user
+	mob_overplay.update_mob(seats[VEHICLE_DRIVER], TRUE)
 	vehicle_faction = user.faction
 	user.forceMove(src)
 	user.reset_view(src)
@@ -288,6 +292,7 @@
 
 	update_zoom_pixels(FALSE, FALSE)
 	user.reset_view(null)
+	mob_overplay.update_mob(seats[VEHICLE_DRIVER], FALSE)
 	seats[VEHICLE_DRIVER] = null
 	user.forceMove(get_turf(src))
 	user.setDir(dir)
@@ -552,10 +557,15 @@
 
 /obj/vehicle/walker/update_icon()
 	overlays.Cut()
+	vis_contents.Cut()
 
 	var/current_y = get_pixels_y()
 	if(pixel_y != current_y)
 		animate(src, pixel_y = current_y, time = UPDATE_TRANSFORM_ANIMATION_TIME)
+
+	if(seats[VEHICLE_DRIVER] && !hardpoints_by_slot[WALKER_HARDPOIN_HEAD])
+		mob_overplay.on_dir_change(dir)
+		vis_contents += mob_overplay
 
 	overlays += image(icon = icon, icon_state = "[icon_state]_effect", dir = dir)
 	switch(floor((health / max_health) * 100))
@@ -573,14 +583,7 @@
 			color = null
 
 	for(var/obj/item/hardpoint/walker/hardpoint as anything in hardpoints)
-		var/image/hardpoint_image = hardpoint.get_hardpoint_image()
-		if(istype(hardpoint_image))
-			hardpoint_image.layer = layer + hardpoint.hdpt_layer * 0.001// Lame source code, working bad above this values with objects on tiles upper
-		else if(islist(hardpoint_image))
-			var/list/image/hardpoint_image_list = hardpoint_image
-			for(var/image/subimage as anything in hardpoint_image_list)
-				subimage.layer = layer + hardpoint.hdpt_layer * 0.001
-		overlays += hardpoint_image
+		overlays += hardpoint.get_hardpoint_image()
 
 /obj/vehicle/walker/proc/swith_visual_position(angle, pixel_shift)
 	override_pixel_y = pixel_shift
@@ -863,6 +866,12 @@
 /obj/item/fuel_cell/walker_reactor/update_icon()
 	return
 
+/obj/item/fuel_cell/walker_reactor/high_capacity
+	name = "High Quaility Enriched Uranium Rod"
+
+	fuel_amount = 64000
+	max_fuel_amount = 64000
+
 /datum/supply_packs/walker_reactor_fuel
 	name = "Enriched Uranium Fuel (x2)"
 	contains = list(
@@ -874,6 +883,8 @@
 	containername = "Enriched Uranium Fuel crate"
 	group = "Vehicle Ammo"
 
+
+//////////////////////////////////////////////////////////////
 
 
 

@@ -1,5 +1,5 @@
 /obj/item/hardpoint/walker/head
-	name = "Mecha Cockpit"
+	name = "Mecha Cockpit Glass"
 	desc = "This reinforced high quality glass protects operator from potential danger outside of mech."
 
 	icon = 'code_ru/icons/obj/vehicles/mech_armor.dmi'

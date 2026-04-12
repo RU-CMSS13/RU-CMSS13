@@ -53,6 +53,7 @@
 #include "modules\vehicles\walker\walker_ammo.dm"
 #include "modules\vehicles\walker\walker_collide.dm"
 #include "modules\vehicles\walker\walker_guns.dm"
+#include "modules\vehicles\walker\walker_mob_overlay.dm"
 #include "modules\vehicles\walker\walker_vendor.dm"
 #include "modules\vehicles\walker\walker_verbs.dm"
 #include "modules\vehicles\walker\walker.dm"

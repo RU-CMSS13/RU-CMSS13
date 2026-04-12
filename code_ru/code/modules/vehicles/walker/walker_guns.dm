@@ -87,7 +87,7 @@
 /obj/item/weapon/gun/mounted/mecha_hmg/set_gun_config_values()
 	. = ..()
 
-	set_fire_delay(FIRE_DELAY_TIER_8)
+	set_fire_delay(FIRE_DELAY_TIER_9)
 
 	fa_scatter_peak = 1
 	fa_max_scatter = 0
@@ -187,7 +187,7 @@
 	if(src != used)
 		return
 
-	var/obj/item/hardpoint/walker/holding_hand = mount_class
+	var/obj/item/hardpoint/walker/holding_hand = gun_holder
 	if(holding_hand)
 		holding_hand.recalculate_hardpoint_bonuses()
 
@@ -402,7 +402,7 @@
 
 	charge_cost = 150
 
-	var/f_aiming_time = 2 SECONDS
+	var/f_aiming_time = 3.5 SECONDS
 	var/aiming = FALSE
 
 /obj/item/weapon/gun/launcher/rocket/mounted/mecha_tactical_missile/handle_fire(atom/target, mob/living/user, params, reflex = FALSE, dual_wield, check_for_attachment_fire, akimbo, fired_by_akimbo)
@@ -410,7 +410,7 @@
 		return
 
 	var/start_turf = get_turf(user)
-	if(!(istype(target, /obj/structure) || istype(target, /turf/closed/wall)))
+	if(!(istype(target, /obj/structure) || istype(target, /turf/closed/wall) || istype(target, /mob)))
 		to_chat(user, SPAN_WARNING("Invalid target!"))
 		return
 
