@@ -41257,10 +41257,6 @@
 /obj/structure/machinery/cm_vending/own_points/experimental_tools,
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
-"bWw" = (
-/obj/structure/machinery/sentry_holder/almayer,
-/turf/open/floor/almayer/mono,
-/area/almayer/lifeboat_pumps/south2)
 "bWx" = (
 /obj/item/device/radio/intercom{
 	freerange = 1;
@@ -41345,10 +41341,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/lifeboat_pumps/north1)
-"bWF" = (
-/obj/structure/machinery/sentry_holder/almayer,
-/turf/open/floor/almayer/mono,
-/area/almayer/lifeboat_pumps/north2)
 "bWG" = (
 /obj/structure/machinery/sentry_holder/almayer,
 /turf/closed/wall/almayer/outer,
@@ -54251,10 +54243,6 @@
 	},
 /turf/open/floor/almayer/sterile_green_side/southwest,
 /area/almayer/medical/lower_medical_medbay)
-"gYm" = (
-/obj/structure/machinery/sentry_holder/almayer,
-/turf/open/floor/almayer/mono,
-/area/almayer/lifeboat_pumps/south1)
 "gYp" = (
 /obj/structure/machinery/light,
 /obj/effect/decal/warning_stripes{
@@ -55062,6 +55050,8 @@
 	pixel_x = 8;
 	pixel_y = -25
 	},
+/obj/structure/surface/rack,
+/obj/effect/spawner/random/warhead,
 /turf/open/floor/almayer/red,
 /area/almayer/shipboard/weapon_room)
 "hpS" = (
@@ -76134,10 +76124,6 @@
 	},
 /turf/open/floor/almayer/silver/southeast,
 /area/almayer/command/computerlab)
-"pTN" = (
-/obj/structure/machinery/sentry_holder/almayer,
-/turf/open/floor/almayer/mono,
-/area/almayer/lifeboat_pumps/north1)
 "pTS" = (
 /obj/structure/machinery/light,
 /obj/structure/pipes/standard/simple/hidden/supply{
@@ -85547,7 +85533,6 @@
 /area/almayer/underdeck/req)
 "tBu" = (
 /obj/effect/decal/cleanable/blood/oil/streak,
-/obj/structure/machinery/sentry_holder/almayer,
 /turf/open/floor/almayer/mono,
 /area/almayer/lifeboat_pumps/south1)
 "tBx" = (
@@ -202357,7 +202342,7 @@ awW
 add
 add
 add
-pTN
+add
 add
 add
 add
@@ -203078,7 +203063,7 @@ aoC
 add
 add
 add
-pTN
+add
 add
 add
 add
@@ -203124,7 +203109,7 @@ baw
 aJU
 aJU
 aJU
-gYm
+aJU
 aJU
 aJU
 aJU
@@ -211111,7 +211096,7 @@ aeA
 aeC
 aeC
 aeC
-bWF
+aeC
 aeC
 aeC
 aeC
@@ -211159,7 +211144,7 @@ lJY
 vcE
 vcE
 vcE
-bWw
+vcE
 vcE
 vcE
 vcE
@@ -211832,7 +211817,7 @@ amH
 aeC
 aeC
 aeC
-bWF
+aeC
 aeC
 aeC
 aeC
@@ -211880,7 +211865,7 @@ kKR
 vcE
 vcE
 vcE
-bWw
+vcE
 vcE
 vcE
 vcE
