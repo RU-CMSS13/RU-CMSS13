@@ -41257,7 +41257,7 @@
 /obj/structure/machinery/cm_vending/own_points/experimental_tools,
 /turf/open/floor/almayer/aicore/no_build,
 /area/almayer/command/airoom)
-"bWx" = (
+"bWw" = (
 /obj/item/device/radio/intercom{
 	freerange = 1;
 	name = "General Listening Channel";
@@ -41265,14 +41265,14 @@
 	},
 /turf/open/floor/almayer,
 /area/almayer/shipboard/brig/mp_bunks)
-"bWy" = (
+"bWx" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "SW-out";
 	pixel_y = -1
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/shipboard/brig/mp_bunks)
-"bWz" = (
+"bWy" = (
 /obj/structure/machinery/door_control{
 	id = "pobunk3";
 	name = "PO3 Privacy Shutters";
@@ -41280,7 +41280,7 @@
 	},
 /turf/open/floor/almayer/redfull,
 /area/almayer/shipboard/brig/mp_bunks)
-"bWA" = (
+"bWz" = (
 /obj/structure/surface/table/reinforced/almayer_B,
 /obj/item/clothing/glasses/disco_fever{
 	pixel_x = 5;
@@ -41289,7 +41289,7 @@
 /obj/item/device/binoculars,
 /turf/open/floor/almayer/plate,
 /area/almayer/shipboard/brig/mp_bunks)
-"bWB" = (
+"bWA" = (
 /obj/structure/window/framed/almayer,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
 	id = "pobunk1";
@@ -41301,6 +41301,22 @@
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 2;
 	id = "pobunk1";
+	name = "\improper Combat Information Center Blast Door"
+	},
+/turf/open/floor/plating,
+/area/almayer/shipboard/brig/mp_bunks)
+"bWB" = (
+/obj/structure/window/framed/almayer,
+/obj/structure/machinery/door/poddoor/shutters/almayer{
+	id = "pobunk2";
+	name = "\improper Privacy Shutters"
+	},
+/obj/structure/machinery/door/firedoor/border_only/almayer{
+	dir = 1
+	},
+/obj/structure/machinery/door/poddoor/almayer/open{
+	dir = 2;
+	id = "pobunk2";
 	name = "\improper Combat Information Center Blast Door"
 	},
 /turf/open/floor/plating,
@@ -41316,32 +41332,16 @@
 	},
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 2;
-	id = "pobunk2";
-	name = "\improper Combat Information Center Blast Door"
-	},
-/turf/open/floor/plating,
-/area/almayer/shipboard/brig/mp_bunks)
-"bWD" = (
-/obj/structure/window/framed/almayer,
-/obj/structure/machinery/door/poddoor/shutters/almayer{
-	id = "pobunk2";
-	name = "\improper Privacy Shutters"
-	},
-/obj/structure/machinery/door/firedoor/border_only/almayer{
-	dir = 1
-	},
-/obj/structure/machinery/door/poddoor/almayer/open{
-	dir = 2;
 	id = "pobunk3";
 	name = "\improper Combat Information Center Blast Door"
 	},
 /turf/open/floor/plating,
 /area/almayer/shipboard/brig/mp_bunks)
-"bWE" = (
+"bWD" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/almayer/red/northeast,
 /area/almayer/lifeboat_pumps/north1)
-"bWG" = (
+"bWE" = (
 /obj/structure/machinery/sentry_holder/almayer,
 /turf/closed/wall/almayer/outer,
 /area/almayer/maint/hull/upper/u_f_s)
@@ -199970,7 +199970,7 @@ aaa
 aaa
 aaa
 aaa
-bWG
+bWE
 cZe
 cZe
 luZ
@@ -202145,7 +202145,7 @@ abB
 add
 add
 add
-bWB
+bWA
 aGf
 gym
 nPx
@@ -202254,7 +202254,7 @@ eGH
 aFF
 qFX
 rJD
-bWy
+bWx
 bhG
 fFq
 cAR
@@ -202557,7 +202557,7 @@ ajI
 add
 add
 add
-bWC
+bWB
 aGf
 gym
 nPx
@@ -202869,7 +202869,7 @@ vmN
 cAR
 iFn
 nwL
-bWz
+bWy
 cWw
 aFb
 gym
@@ -202969,7 +202969,7 @@ ajI
 add
 add
 add
-bWD
+bWC
 aGf
 gym
 nPx
@@ -203073,14 +203073,14 @@ aeZ
 aka
 aoI
 cAR
-bWA
+bWz
 eGH
 aFF
 qFX
 clm
 aEL
 aqz
-bWx
+bWw
 qNd
 aKG
 cAR
@@ -203477,7 +203477,7 @@ ryG
 aVL
 bBl
 awW
-bWE
+bWD
 oGC
 awW
 acW
