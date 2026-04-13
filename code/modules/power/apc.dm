@@ -885,7 +885,7 @@ GLOBAL_LIST_INIT(apc_wire_descriptions, flatten_numeric_alist(alist(
 				to_chat(grabber, SPAN_BOLD("[icon2html(bracer)] \The <b>[bracer]</b> beep: Power siphon complete. Charge at [bracer.battery_charge]/[bracer.battery_charge_max]."))
 
 				return TRUE
-    // RUCM END
+	// RUCM END
 
 			// Yautja Bracer Recharge
 			var/obj/item/clothing/gloves/yautja/bracer = grabber.gloves
