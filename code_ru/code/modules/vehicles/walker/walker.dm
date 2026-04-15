@@ -250,9 +250,9 @@
 		user.client.mouse_pointer_icon = file("icons/mecha/mecha_mouse.dmi")
 
 	seats[VEHICLE_DRIVER] = user
-	mob_overplay.update_mob(seats[VEHICLE_DRIVER], TRUE)
 	vehicle_faction = user.faction
 	user.forceMove(src)
+	mob_overplay.add_mob_vis(user)
 	user.reset_view(src)
 	update_zoom_pixels(TRUE)
 	user.visible_message(SPAN_NOTICE("[user] jumps in [src]."), SPAN_NOTICE("You jump in [src]!"))
@@ -292,8 +292,8 @@
 
 	update_zoom_pixels(FALSE, FALSE)
 	user.reset_view(null)
-	mob_overplay.update_mob(seats[VEHICLE_DRIVER], FALSE)
 	seats[VEHICLE_DRIVER] = null
+	mob_overplay.remove_mob_vis(user)
 	user.forceMove(get_turf(src))
 	user.setDir(dir)
 	user.visible_message(SPAN_NOTICE("[user] jumps out of [src]."), SPAN_NOTICE("You jump out of [src]."))
@@ -848,49 +848,6 @@
 
 
 //////////////////////////////////////////////////////////////
-
-
-/obj/item/fuel_cell/walker_reactor
-	name = "Enriched Uranium Rod"
-	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy! It's also rechargeable."
-
-	icon = 'code_ru/icons/obj/items/fuel_rod.dmi'
-	icon_state = "rod"
-
-	w_class = SIZE_HUGE
-
-	// ~30 minutes of work time under load
-	fuel_amount = 24000
-	max_fuel_amount = 24000
-
-/obj/item/fuel_cell/walker_reactor/update_icon()
-	return
-
-/obj/item/fuel_cell/walker_reactor/high_capacity
-	name = "High Quaility Enriched Uranium Rod"
-
-	fuel_amount = 64000
-	max_fuel_amount = 64000
-
-/datum/supply_packs/walker_reactor_fuel
-	name = "Enriched Uranium Fuel (x2)"
-	contains = list(
-		/obj/item/fuel_cell/walker_reactor,
-		/obj/item/fuel_cell/walker_reactor,
-	)
-	cost = 20
-	containertype = /obj/structure/closet/crate/ammo
-	containername = "Enriched Uranium Fuel crate"
-	group = "Vehicle Ammo"
-
-
-//////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 
 

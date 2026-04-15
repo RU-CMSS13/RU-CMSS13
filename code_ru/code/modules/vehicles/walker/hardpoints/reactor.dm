@@ -230,3 +230,43 @@
 	vessel.misc_multipliers["same_guns_debuff"] += 1
 	buff_applied = FALSE
 	SEND_SIGNAL(vessel, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/item/fuel_cell/walker_reactor
+	name = "Enriched Uranium Rod"
+	desc = "On this rod writen something like \"If you read this, DROP AND RUN\", seems like joke, unga never drop their toy! It's also rechargeable."
+
+	icon = 'code_ru/icons/obj/items/fuel_rod.dmi'
+	icon_state = "rod"
+
+	w_class = SIZE_HUGE
+
+	// ~30 minutes of work time under load
+	fuel_amount = 24000
+	max_fuel_amount = 24000
+
+/obj/item/fuel_cell/walker_reactor/update_icon()
+	return
+
+/obj/item/fuel_cell/walker_reactor/high_capacity
+	name = "High Quaility Enriched Uranium Rod"
+
+	fuel_amount = 64000
+	max_fuel_amount = 64000
+
+/datum/supply_packs/walker_reactor_fuel
+	name = "Enriched Uranium Fuel (x2)"
+	contains = list(
+		/obj/item/fuel_cell/walker_reactor,
+		/obj/item/fuel_cell/walker_reactor,
+	)
+	cost = 20
+	containertype = /obj/structure/closet/crate/ammo
+	containername = "Enriched Uranium Fuel crate"
+	group = "Vehicle Ammo"
+
+
+//////////////////////////////////////////////////////////////

@@ -64,4 +64,5 @@
 #include "modules\vehicles\walker\hardpoints\jetpack.dm"
 #include "modules\vehicles\walker\hardpoints\legs.dm"
 #include "modules\vehicles\walker\hardpoints\reactor.dm"
+#include "modules\vehicles\walker\hardpoints\shield.dm"
 #include "modules\vehicles\walker\hardpoints\spinal.dm"

@@ -18,6 +18,7 @@
 	. = ..()
 
 	mob_overplay_cutter = new
+	vis_contents += mob_overplay_cutter
 
 /atom/movable/vis_obj/walker_mob_adder/proc/on_dir_change(new_dir)
 	pixel_x = pixel_x_offset
@@ -28,17 +29,15 @@
 			pixel_x += pixel_x_side_offset
 	mob_overplay_cutter.dir = new_dir
 
-/atom/movable/vis_obj/walker_mob_adder/proc/update_mob(mob/affected_mob, action)
-	if(action)
-		affected_mob.add_filter("walker_mob_render", 1, alpha_mask_filter(render_source = mob_overplay_cutter.render_target))
-		affected_mob.vis_flags |= VIS_INHERIT_DIR|VIS_INHERIT_LAYER|VIS_INHERIT_ID
-		vis_contents += mob_overplay_cutter
-		vis_contents += affected_mob
-	else
-		vis_contents -= affected_mob
-		vis_contents -= mob_overplay_cutter
-		affected_mob.vis_flags &= ~(VIS_INHERIT_DIR|VIS_INHERIT_LAYER|VIS_INHERIT_ID)
-		affected_mob.remove_filter("walker_mob_render")
+/atom/movable/vis_obj/walker_mob_adder/proc/add_mob_vis(mob/affected_mob)
+	affected_mob.add_filter("walker_mob_render", 1, alpha_mask_filter(render_source = mob_overplay_cutter.render_target))
+	affected_mob.vis_flags |= VIS_INHERIT_DIR|VIS_INHERIT_LAYER|VIS_INHERIT_ID
+	vis_contents += affected_mob
+
+/atom/movable/vis_obj/walker_mob_adder/proc/remove_mob_vis(mob/affected_mob)
+	vis_contents -= affected_mob
+	affected_mob.vis_flags &= ~(VIS_INHERIT_DIR|VIS_INHERIT_LAYER|VIS_INHERIT_ID)
+	affected_mob.remove_filter("walker_mob_render")
 
 
 /atom/movable/vis_obj/walker_mob_cutter

@@ -11,78 +11,6 @@
 AND YOULL BE FINE!*/
 
 
-/obj/vehicle/walker/proc/toggle_lights()
-	set name = "Lights On/Off"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	switch_light_state(!light_state)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/action_eject_magazine()
-	set name = "Eject Magazine"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	eject_magazine(user)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/get_stats()
-	set name = "Status Display"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	tgui_interact(user)
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/dir_look_lock()
-	set name = "Toggle Dir Lock"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	dir_look_lock = !dir_look_lock
-
-
-//////////////////////////////////////////////////////////////
-
-
-/obj/vehicle/walker/proc/switch_weapons()
-	set name = "Switch Weapons Group"
-	set category = "Vehicle"
-
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	handle_weapon_groups(user)
-
-
 //////////////////////////////////////////////////////////////
 
 
@@ -122,27 +50,67 @@ AND YOULL BE FINE!*/
 //////////////////////////////////////////////////////////////
 
 
+/obj/vehicle/walker/proc/toggle_lights()
+	set name = "Lights On/Off"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_LIGHTS)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/action_eject_magazine()
+	set name = "Eject Magazine"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_EJECT_MAGAZINE)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/get_stats()
+	set name = "Status Display"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_STATUS)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/dir_look_lock()
+	set name = "Toggle Dir Lock"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_DIR_LOCK)
+
+
+//////////////////////////////////////////////////////////////
+
+
+/obj/vehicle/walker/proc/switch_weapons()
+	set name = "Switch Weapons Group"
+	set category = "Vehicle"
+
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_SWITCH_WEAPONS)
+
+
+//////////////////////////////////////////////////////////////
+
+
 /obj/vehicle/walker/proc/z_up()
 	set name = "Move UP"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	move_z_up(user)
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_Z_UP)
 
 /obj/vehicle/walker/proc/z_down()
 	set name = "Move Down"
 	set category = "Vehicle"
 
-	var/mob/user = usr
-	src = user.interactee
-	if(!istype(src, /obj/vehicle/walker))
-		return
-
-	move_z_down(user)
+	SEND_SIGNAL(usr, COMSIG_KB_HUMAN_INTERACT_WALKER_Z_DOWN)
 
 
 //////////////////////////////////////////////////////////////
