@@ -65,10 +65,9 @@
 	motion_detector.hardpoint_holder = src
 
 /obj/item/hardpoint/walker/spinal/artillery/pilot_entered(mob/user)
-	motion_detector.iff_signal = user.faction
+	. = ..()
 
-/obj/item/hardpoint/walker/spinal/artillery/pilot_ejected(mob/user)
-	return
+	motion_detector.iff_signal = user.faction
 
 /obj/item/device/motiondetector/walker
 	detector_range = 24
