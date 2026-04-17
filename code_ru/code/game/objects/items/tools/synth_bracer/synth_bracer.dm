@@ -170,13 +170,13 @@
 		user.drop_inv_item_to_loc(attacker, src)
 		to_chat(user, SPAN_NOTICE("You attach the [attacker] to the bracer's wrist-strap."))
 		user.update_inv_gloves()
+		return
 	if(internal_transmitter.attached_to == attacker)
 		internal_transmitter.attackby(attacker, user)
 		return
 	if(istype(attacker, /obj/item/device/binoculars))
 		return_binos()
 		return
-	return ..()
 
 	if(istype(attacker, /obj/item/device/simi_chip))
 		var/obj/item/device/simi_chip/new_chip = attacker
