@@ -1389,13 +1389,6 @@ SUBSYSTEM_DEF(minimaps)
 	minimap_flags = MINIMAP_FLAG_UPP
 	marker_flags = MINIMAP_FLAG_UPP
 
-// RUCM START
-/datum/action/minimap/synth
-	minimap_flags = MINIMAP_FLAG_USCM
-	marker_flags = MINIMAP_FLAG_USCM
-	live = TRUE
-//RUCM END
-
 /datum/action/minimap/ai	//I'll keep this as seperate type despite being identical so it's easier if people want to make different aspects different.
 	minimap_flags = MINIMAP_FLAG_USCM
 	marker_flags = MINIMAP_FLAG_USCM

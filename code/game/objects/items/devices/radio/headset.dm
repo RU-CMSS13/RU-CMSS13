@@ -760,7 +760,7 @@
 	desc = "Issued only to USCM synthetics. Channels are as follows: :v - marine command, :p - military police, :a - alpha squad, :b - bravo squad, :c - charlie squad, :d - delta squad, :n - engineering, :m - medbay, :u - requisitions, :j - JTAC,  :t - intel."
 	icon_state = "ms_headset"
 	initial_keys = list(/obj/item/device/encryptionkey/cmpcom/synth)
-	minimap_type = /datum/action/minimap/synth
+	minimap_type = /datum/action/minimap/marine/live
 
 /obj/item/device/radio/headset/almayer/mcom/synth/equipped(mob/user, slot)
 	. = ..()

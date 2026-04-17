@@ -82,6 +82,8 @@
 	internal_transmitter.range = 2
 	internal_transmitter.networks_receive = list(faction)
 	internal_transmitter.networks_transmit = list(faction)
+	motion_detector = new(src)
+	motion_detector.iff_signal = faction
 	RegisterSignal(internal_transmitter, COMSIG_TRANSMITTER_UPDATE_ICON, PROC_REF(check_for_ringing))
 
 /obj/item/clothing/gloves/synth/Destroy()
@@ -89,6 +91,9 @@
 	QDEL_NULL_LIST(actions_list_actions)
 	QDEL_NULL(internal_transmitter)
 	QDEL_NULL(underglove)
+	QDEL_NULL(motion_detector)
+	QDEL_NULL(binos)
+	. = ..()
 
 /obj/item/clothing/gloves/synth/examine(mob/user)
 	..()
@@ -123,6 +128,7 @@
 /obj/item/clothing/gloves/synth/dropped(mob/user)
 	disable_anchor()
 	disable_shield()
+	return_binos()
 
 	update_actions(SIMI_ACTIONS_REMOVE, user)
 
@@ -133,6 +139,9 @@
 	if(internal_transmitter)
 		internal_transmitter.phone_id = "[src]"
 		internal_transmitter.enabled = FALSE
+
+	if(motion_detector && motion_detector_active)
+		toggle_motion_detector(user)
 
 	wearer = null
 	return ..()
@@ -164,6 +173,10 @@
 	if(internal_transmitter.attached_to == attacker)
 		internal_transmitter.attackby(attacker, user)
 		return
+	if(istype(attacker, /obj/item/device/binoculars))
+		return_binos()
+		return
+	return ..()
 
 	if(istype(attacker, /obj/item/device/simi_chip))
 		var/obj/item/device/simi_chip/new_chip = attacker

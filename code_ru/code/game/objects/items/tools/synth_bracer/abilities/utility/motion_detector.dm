@@ -5,11 +5,6 @@
 	var/motion_detector_cooldown = 2
 	var/motion_detector_cost = 2
 
-/obj/item/clothing/gloves/synth/Initialize(mapload, ...)
-	. = ..()
-	motion_detector = new(src)
-	motion_detector.iff_signal = faction
-
 /obj/item/clothing/gloves/synth/process()
 	if(!ishuman(loc))
 		STOP_PROCESSING(SSobj, src)
@@ -33,15 +28,6 @@
 		motion_detector_cooldown = initial(motion_detector_cooldown)
 		motion_detector.scan()
 		drain_charge(loc, 2, FALSE)
-
-/obj/item/clothing/gloves/synth/dropped(mob/user)
-	. = ..()
-	if(motion_detector && motion_detector_active)
-		toggle_motion_detector(user)
-
-/obj/item/clothing/gloves/synth/Destroy()
-	QDEL_NULL(motion_detector)
-	. = ..()
 
 /obj/item/clothing/gloves/synth/proc/toggle_motion_detector(mob/user)
 	if(!motion_detector)

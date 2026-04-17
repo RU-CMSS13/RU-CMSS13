@@ -1,24 +1,10 @@
 /obj/item/clothing/gloves/synth
 	var/obj/item/device/binoculars/binos
 
-/obj/item/clothing/gloves/synth/Initialize(mapload, ...)
+/obj/item/clothing/gloves/synth/New(mapload, ...)
 	. = ..()
 	binos = new(src)
 	RegisterSignal(binos, COMSIG_ITEM_DROPPED, PROC_REF(return_binos))
-
-/obj/item/clothing/gloves/synth/attackby(obj/item/I, mob/user)
-	if(I == binos)
-		return_binos()
-		return
-	return ..()
-
-/obj/item/clothing/gloves/synth/dropped(mob/user)
-	. = ..()
-	return_binos()
-
-/obj/item/clothing/gloves/synth/Destroy()
-	QDEL_NULL(binos)
-	return ..()
 
 /obj/item/clothing/gloves/synth/proc/deploy_binos(mob/M)
 	if(!M.put_in_active_hand(binos))
