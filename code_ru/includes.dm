@@ -18,6 +18,7 @@
 #include "code\game\jobs\job\marine\squad\specialist.dm"
 #include "code\game\jobs\job\marine\squad\tl.dm"
 #include "code\game\machinery\computer\groundside_operations.dm"
+#include "code\game\machinery\vending\vendor_types\crew\synthetic.dm"
 #include "code\game\machinery\vendubg\vendor_types\crew\vehicle_crew.dm"
 #include "code\game\objects\items\reagent_containers\autoinjectors.dm"
 #include "code\game\objects\items\pamphlets.dm"
