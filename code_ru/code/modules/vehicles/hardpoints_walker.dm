@@ -260,7 +260,6 @@
 	scatter_value = 0
 	automatic = FALSE
 
-
 /obj/item/walker_gun/flamer
 	name = "F40 \"Hellfire\" Flamethower"
 	desc = "Powerful flamethower, that can send any unprotected target straight to hell."
@@ -280,6 +279,7 @@
 							'sound/weapons/gun_flamethrower2.ogg',
 							'sound/weapons/gun_flamethrower3.ogg')
 	return pick(fire_sounds)
+
 
 /obj/item/walker_gun/flamer/active_effect(atom/target, mob/living/user)
 	if (!ammo)
@@ -430,6 +430,17 @@
 	fuel_pressure = 1 //How much fuel is used per tile fired
 	max_pressure = 10
 
+/obj/item/ammo_magazine/walker/katana
+	name = "AA1 Katana Power Cell"
+	desc = "A power cell for the AA1 Katana."
+	icon_state = "mech_katana_ammo"
+	max_rounds = 45
+	default_ammo = /datum/ammo/katana
+	gun_type = /obj/item/walker_gun/katana
+
+/datum/ammo/katana
+	name = "katana charge"
+
 ///////////////
 // AMMO MAGS // END
 ///////////////
@@ -462,6 +473,7 @@
 	accurate_range = 2 //запрет на дальнюю стрельбу, нанесет только ~30 урона из-за промахов разброса, в дистанции два тайла спереди спокойно сносит 160 квине/раве
 	max_range = 6 //Возможно, следует поднять макс дальность до 6; в тоже время оно вообще не должно стреляться в даль
 	damage = 60 //вообще, у дроби 8g 75 урона, но мех не должен прям гнобить при попадании даже небронированные цели, шотган для самообороны
+	// и это самооборона совсем не помогает меху, лол :D
 	damage_falloff = DAMAGE_FALLOFF_TIER_6 //5 фэлл офа,фиг, а не дальнее поражение с высоким уроном
 	penetration= ARMOR_PENETRATION_TIER_2 //нулевое бронепробитие в оригинале
 	bonus_projectiles_type = /datum/ammo/bullet/walker/shotgun8g/spread
@@ -489,6 +501,7 @@
 			living_mob.apply_effect(1, SUPERSLOW)
 			living_mob.apply_effect(2, SLOW)
 			to_chat(living_mob, SPAN_HIGHDANGER("The impact knocks you off-balance!"))
+
 
 ////////////////
 // MEGALODON HARDPOINTS // END
@@ -538,6 +551,101 @@
 	containername = "F40 Flamethower ammo crate"
 	group = "Vehicle Ammo"
 
+/datum/supply_packs/ammo_katana_walker
+    name = "AA1 Katana Power Cells (x2)"
+    contains = list(
+        /obj/item/ammo_magazine/walker/katana,
+        /obj/item/ammo_magazine/walker/katana,
+    )
+    cost = 20
+    containertype = /obj/structure/closet/crate/ammo
+    containername = "Katana power cells crate"
+    group = "Vehicle Ammo"
+
 ////////////////
 // MEGALODON SUPPLYPACKS // END
 ////////////////
+
+/obj/item/walker_gun/katana
+	name = "AA1 Katana"
+	desc = "A massive mechanized katana mounted on the walker. Requires a power cell for each strike."
+	icon = 'code_ru/icons/obj/vehicles/mecha_guns.dmi'
+	icon_state = "mech_katana_parts"
+	equip_state = "redy_katana"
+	fire_delay = 15 // 1.5 seconds
+	automatic = FALSE
+	scatter_value = 0
+	magazine_type = /obj/item/ammo_magazine/walker/katana
+	var/damage = 105
+	force = 75          // для атаки по дверям и стенам
+	sharp = TRUE         // режущий урон
+	edge = TRUE          // острый край
+
+/obj/item/walker_gun/katana/active_effect(atom/target, mob/living/user)
+	if(!ammo)
+		to_chat(user, "<span class='warning'>WARNING! No power cell inserted!</span>")
+		return FALSE
+
+	if(ammo.current_rounds <= 0)
+		to_chat(user, "<span class='warning'>WARNING! Power cell depleted!</span>")
+		ammo.forceMove(owner.loc)
+		ammo = null
+		visible_message("[owner.name] ejects an empty power cell.")
+		return FALSE
+
+	if(world.time < last_fire + fire_delay)
+		to_chat(user, "<span class='warning'>WARNING! Weapon is not ready to slice again!</span>")
+		return FALSE
+
+	if(!owner.firing_arc(target))
+		return FALSE
+
+	if(get_dist(owner, target) > 2)
+		to_chat(user, "<span class='warning'>Target out of katana range.</span>")
+		return FALSE
+
+	last_fire = world.time
+
+	// Определяем, живая цель или объект
+	if(isliving(target))
+		var/mob/living/L = target
+		L.apply_damage(damage, BRUTE)
+		L.visible_message(
+			"<span class='danger'>[owner.name] slices [L] with its katana!</span>",
+			"<span class='userdanger'>[owner.name] slices you with its katana!</span>"
+		)
+	else if(isobj(target) || isturf(target))
+		// Атакуем дверь, стену или другой объект
+		target.attackby(src, user)
+		visible_message("<span class='danger'>[owner.name] slams its katana into [target]!</span>")
+	else
+		return FALSE // нечего атаковать
+
+	ammo.current_rounds--
+	display_ammo(user)
+
+	animate_slash(target)
+
+	if(ammo.current_rounds <= 0)
+		ammo.forceMove(owner.loc)
+		ammo = null
+		visible_message("[owner.name] ejects an empty katana power cell.")
+
+	owner.healthcheck()
+	return TRUE
+
+/obj/item/walker_gun/katana/proc/animate_slash(atom/target)
+	set waitfor = FALSE
+	new /obj/effect/temp_visual/katana_slash(get_turf(target))  // убрали переменную slash
+	playsound(target, 'sound/weapons/blade1.ogg', 50, 1)
+
+/obj/effect/temp_visual/katana_slash
+	name = "katana slash"
+	icon = 'code_ru/icons/effects/katana_slash.dmi'
+	icon_state = "katana_attack"
+	duration = 7
+	layer = MOB_LAYER + 0.1
+
+/obj/effect/temp_visual/katana_slash/Initialize()
+	. = ..()
+	flick(icon_state, src)
