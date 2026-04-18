@@ -1169,6 +1169,9 @@
 /obj/item/proc/unique_action(mob/user)
 	return
 
+/obj/item/weapon/proc/weapon_ability(mob/user)
+	return
+
 /obj/item/verb/use_unique_action()
 	set category = "Object"
 	set name = "Unique Action"
