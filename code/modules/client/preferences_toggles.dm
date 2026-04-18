@@ -774,6 +774,7 @@ CLIENT_VERB(toggle_minimap_ceiling_protection)
 		"Squad HUD" = MOB_HUD_FACTION_OBSERVER,
 		"Xeno Status HUD" = MOB_HUD_XENO_STATUS,
 		"Hunter HUD" = MOB_HUD_HUNTER,
+		"CAS HUD" = MOB_HUD_DROPSHIP,
 		"Faction UPP HUD" = MOB_HUD_FACTION_UPP,
 		"Faction Wey-Yu HUD" = MOB_HUD_FACTION_WY,
 		"Faction TWE HUD" = MOB_HUD_FACTION_TWE,
