@@ -16,7 +16,7 @@
 	accuracy = HIT_ACCURACY_TIER_8
 	accurate_range = 12
 	max_range = 12
-	damage = 30
+	damage = 35
 	penetration= ARMOR_PENETRATION_TIER_10
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_7
 	shrapnel_type = /obj/item/shard/shrapnel
@@ -187,8 +187,8 @@
 	damage_type = BRUTE
 	icon_state = "arrow"
 
-	damage = 110
-	penetration = 20
+	damage = 100
+	penetration = 10
 	accuracy = HIT_ACCURACY_TIER_3
 	max_range = 14
 	shell_speed = AMMO_SPEED_TIER_3
