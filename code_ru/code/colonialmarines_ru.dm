@@ -24,6 +24,7 @@
 #include "game\objects\items\pamphlets.dm"
 #include "game\objects\items\storage\belt.dm"
 #include "game\objects\structures\table_racks.dm"
+#include "game\objects\structures\blocker.dm"
 #include "game\turfs\open.dm"
 #include "modules\almayer\machinery.dm"
 #include "modules\character_traits\skills.dm"
