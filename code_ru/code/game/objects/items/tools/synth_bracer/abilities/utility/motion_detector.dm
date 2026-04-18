@@ -1,5 +1,5 @@
 /obj/item/clothing/gloves/synth
-	var/obj/item/device/motiondetector/integrated/motion_detector
+	var/obj/item/device/motiondetector/sg/motion_detector
 	var/motion_detector_active = FALSE
 	var/motion_detector_recycle = 120
 	var/motion_detector_cooldown = 2

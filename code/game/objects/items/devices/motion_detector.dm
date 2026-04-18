@@ -230,14 +230,12 @@
 	if(ishuman(loc))
 		return loc
 
-//RUCM START
-/obj/item/device/motiondetector/integrated
+/obj/item/device/motiondetector/sg
 
-/obj/item/device/motiondetector/integrated/get_user()
+/obj/item/device/motiondetector/sg/get_user()
 	var/atom/A = loc
 	if(ishuman(A.loc))
 		return A.loc
-//RUCM END
 
 /obj/item/device/motiondetector/xm4
 
