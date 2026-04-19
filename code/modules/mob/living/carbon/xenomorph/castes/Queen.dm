@@ -482,7 +482,13 @@
 		generate_and_set_nicknumber()
 	var/name_prefix = hive.prefix
 	if(queen_aged)
+/* RUCM CHANGE
 		age_xeno()
+*/
+//RUCM START
+		if(client.player_data)
+			age_xeno()
+//RUCM END
 		switch(age)
 			if(XENO_YOUNG)
 				name = "[name_prefix]Young Queen" //Young
