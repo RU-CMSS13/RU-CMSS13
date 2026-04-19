@@ -486,7 +486,7 @@
 		age_xeno()
 */
 //RUCM START
-		if(client.player_data)
+		if(client?.player_data)
 			age_xeno()
 //RUCM END
 		switch(age)
