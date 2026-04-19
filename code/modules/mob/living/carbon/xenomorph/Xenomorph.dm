@@ -620,8 +620,12 @@
 	if(client)
 		name_client_prefix = "[(client.xeno_prefix||client.xeno_postfix) ? client.xeno_prefix : "XX"]-"
 		name_client_postfix = client.xeno_postfix ? ("-"+client.xeno_postfix) : ""
+/* RUCM CHANGE
 		age_xeno()
+*/
 //RUCM START
+		if(client.player_data)
+			age_xeno()
 		if(SStts.tts_enabled)
 			tts_voice = client.prefs?.xeno_voice
 			tts_voice_pitch = client.prefs?.xeno_pitch
