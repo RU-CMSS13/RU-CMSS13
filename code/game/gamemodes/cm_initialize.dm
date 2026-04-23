@@ -549,10 +549,18 @@ Additional game mode variables.
 
 		// If an observing mod wants to join as a xeno, disable their larva protection so that they can enter the larva pool.
 		if(check_client_rights(candidate_observer.client, R_MOD, FALSE))
+/* RUCM CHANGE
 			candidate_observer.admin_larva_protection = FALSE
+*/
+//RUCM START
+			candidate_observer.client.player_details.xeno_que_position.admin_larva_protection = FALSE
+			candidate_observer.client.player_details.add_to_xeno_queue()
+//RUCM END
 
 		// Give the observing player a cached message of their pool status (or update their cache)
+/* RUCM CHANGE
 		message_alien_candidate_observer(candidate_observer)
+*/
 		return FALSE
 
 	var/mob/living/carbon/xenomorph/new_xeno

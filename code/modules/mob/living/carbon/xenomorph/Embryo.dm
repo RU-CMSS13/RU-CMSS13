@@ -180,7 +180,9 @@
 
 	var/datum/hive_status/hive = GLOB.hive_datum[hivenumber]
 	var/mob/picked
+/* RUCM CHANGE
 	var/mob/dead/observer/hugger = null
+*/
 	var/is_nested = istype(affected_mob.buckled, /obj/structure/bed/nest)
 
 	// If the bursted person themselves has Xeno enabled, they get the honor of first dibs on the new larva.
@@ -201,6 +203,8 @@
 
 	if(!picked)
 		// Get a candidate from observers
+//RUCM COMMENT - I FUCKING HATE THOSE CODERS!!! I HATE OPEN SOURCE!!! *TAKING OUT CHAINSAW* I SPENT A LOT OF TIME DYING FROM CRINGE AND ANGER WATCHING THIS SHIT... AND NOW I HAVE TO ACT!!!
+/* RUCM CHANGE
 		var/list/candidates = get_alien_candidates(hive, abomination = (isyautja(affected_mob) || (flags_embryo & FLAG_EMBRYO_PREDATOR)))
 		if(candidates && length(candidates))
 			// If they were facehugged by a player thats still in queue, they get second dibs on the new larva.
@@ -247,6 +251,29 @@
 							candidates -= cur_candidate
 							message_alien_candidates(candidates, dequeued = 0)
 							break
+*/
+//RUCM START
+		if(hugger_ckey)
+			for(var/datum/queued_player/xeno/queued as anything in GLOB.xeno_queue.queued_players)
+				if(queued.player_ckey != hugger_ckey)
+					continue
+				picked = offer_larva(queued, is_nested)
+				break
+		if(!picked)
+			var/offset = 0
+			while(!picked)
+				var/datum/queued_player/xeno/queued = GLOB.xeno_queue.progress(offset)
+				if(!queued)
+					break
+
+				if(queued.player_ckey == hugger_ckey)
+					continue
+
+				picked = offer_larva(queued, is_nested)
+				if(!picked)
+					offset++
+					continue
+//RUCM END
 
 	// Spawn the larva
 	var/mob/living/carbon/xenomorph/larva/new_xeno

@@ -11,6 +11,12 @@
 	message_admins("[src] de-admined themselves.")
 	add_verb(src, /client/proc/readmin_self)
 	deadmin()
+//RUCM START
+	if(player_details.xeno_que_position.admin_larva_protection)
+		player_details.xeno_que_position.cached_admin_larva_protection = TRUE
+		player_details.xeno_que_position.admin_larva_protection = FALSE
+		player_details.add_to_xeno_queue(TRUE)
+//RUCM END
 	to_chat(src, "<br><br><span class='centerbold'><big>You are now a normal player. You can ascend back to adminhood at any time using the 'Re-admin Self' verb in your Admin panel.</big></span><br>")
 
 /client/proc/readmin_self()
@@ -19,6 +25,12 @@
 
 	remove_verb(src, /client/proc/readmin_self)
 	readmin()
+//RUCM START
+	if(player_details.xeno_que_position.cached_admin_larva_protection)
+		player_details.xeno_que_position.cached_admin_larva_protection = FALSE
+		player_details.xeno_que_position.admin_larva_protection = TRUE
+		player_details.remove_from_xeno_queue()
+//RUCM END
 	to_chat(src, "<br><br><span class='centerbold'><big>You have ascended back to adminhood. All your verbs should be back where you left them.</big></span><br>")
 	message_admins("[src] re-admined themselves.")
 
@@ -29,12 +41,23 @@
 
 	if(!admin_holder)
 		return
+/* RUCM CHANGE
 	if(!isobserver(mob))
 		to_chat(usr, SPAN_WARNING("You must be a ghost to use this."))
 
 	var/mob/dead/observer/ghost = mob
 	ghost.admin_larva_protection = !ghost.admin_larva_protection
 	to_chat(usr, SPAN_BOLDNOTICE("You have [ghost.admin_larva_protection ? "en" : "dis"]abled your larva protection."))
+*/
+//RUCM START
+	var/datum/queued_player/xeno/xeno_que_position = player_details.xeno_que_position
+	xeno_que_position.admin_larva_protection = !xeno_que_position.admin_larva_protection
+	if(xeno_que_position.admin_larva_protection)
+		player_details.remove_from_xeno_queue()
+	else
+		player_details.add_to_xeno_queue(TRUE)
+	to_chat(usr, SPAN_BOLDNOTICE("You have [xeno_que_position.admin_larva_protection ? "en" : "dis"]abled your larva protection."))
+//RUCM END
 
 /client/proc/unban_panel()
 	set name = "Unban Panel"

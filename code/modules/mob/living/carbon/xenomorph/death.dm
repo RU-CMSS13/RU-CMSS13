@@ -54,6 +54,8 @@ GLOBAL_VAR_INIT(total_dead_xenos, 0)
 			if(GLOB.hive_datum[hivenumber].stored_larva)
 				GLOB.hive_datum[hivenumber].stored_larva = floor(GLOB.hive_datum[hivenumber].stored_larva * 0.5) //Lose half on dead queen
 
+//RUCM COMMENT - WTF??? THERE NO WAY THIS CAN HAPPEN IN OUR WORLD WITH AUTO QUE!!! DEVS PLEASE LEARN HOW TO CODE, AI EVEN TRY TO SEARCH FOR WHAT THE HECK IS ENVIROMENT AROUND, YALL NOT!
+/* RUCM CHANGE
 				var/list/players_with_xeno_pref = get_alien_candidates(GLOB.hive_datum[hivenumber])
 				if(players_with_xeno_pref && istype(GLOB.hive_datum[hivenumber].hive_location, /obj/effect/alien/resin/special/pylon/core))
 					var/turf/larva_spawn = get_turf(GLOB.hive_datum[hivenumber].hive_location)
@@ -75,6 +77,7 @@ GLOBAL_VAR_INIT(total_dead_xenos, 0)
 						GLOB.hive_datum[hivenumber].hive_ui.update_burrowed_larva()
 					if(count)
 						message_alien_candidates(players_with_xeno_pref, dequeued = count)
+*/
 
 			if(hive && hive.living_xeno_queen == src)
 				notify_ghosts(header = "Queen Death", message = "The Queen has been slain!", source = src, action = NOTIFY_ORBIT)

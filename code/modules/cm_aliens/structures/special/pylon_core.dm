@@ -277,6 +277,7 @@
 			last_larva_time = world.time
 		if(spawning_larva || (last_larva_pool_time + spawn_cooldown * 4) < world.time)
 			last_larva_pool_time = world.time
+/* RUCM CHANGE
 			var/list/players_with_xeno_pref = get_alien_candidates(linked_hive)
 			if(spawning_larva)
 				var/i = 0
@@ -286,6 +287,22 @@
 						count_spawned++
 			// Update everyone's queue status
 			message_alien_candidates(players_with_xeno_pref, dequeued = count_spawned)
+*/
+//RUCM START
+			if(spawning_larva)
+				var/offset = 0
+				while(can_spawn_larva())
+					var/datum/queued_player/xeno/queued = GLOB.xeno_queue.progress(offset)
+					if(!queued)
+						break
+
+					var/client/client = queued.offer_spawn(linked_hive)
+					if(client && spawn_burrowed_larva(client))
+						queued.confirm_spawn()
+						count_spawned++
+						continue
+					offset++
+//RUCM END
 
 		if(linked_hive.hijack_burrowed_surge && (last_surge_time + surge_cooldown) < world.time)
 			last_surge_time = world.time

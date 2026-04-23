@@ -474,7 +474,12 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		player_details = GLOB.player_details[ckey]
 		player_details.byond_version = full_version
 	else
+/* RUCM CHANGE
 		player_details = new
+*/
+//RUCM START
+		player_details = new(ckey)
+//RUCM END
 		player_details.byond_version = full_version
 		GLOB.player_details[ckey] = player_details
 

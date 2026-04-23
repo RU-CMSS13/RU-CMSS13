@@ -2010,6 +2010,13 @@ GLOBAL_LIST_INIT(be_special_flags, list(
 
 				if("be_special")
 					var/num = text2num(href_list["num"])
+//RUCM START
+					if(num == BE_ALIEN)
+						if(be_special & BE_ALIEN)
+							user.client.player_details.remove_from_xeno_queue()
+						else
+							user.client.player_details.add_to_xeno_queue(TRUE)
+//RUCM END
 					be_special ^= num
 
 				if("rand_name")
