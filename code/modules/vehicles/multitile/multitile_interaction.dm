@@ -170,7 +170,12 @@
 	take_damage_type(O.force * 0.05, "blunt", user) //Melee weapons from people do very little damage
 
 // Frame repairs on the vehicle itself
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/handle_repairs(obj/item/O, mob/user)
+*/
+//RUCM START
+/obj/vehicle/proc/handle_repairs(obj/item/O, mob/user)
+//RUCM END
 	if(user.action_busy)
 		return
 	var/max_hp = initial(health)
@@ -232,7 +237,12 @@
 			return
 
 		health = min(health + max_hp/100 * (5 / amount_fixed_adjustment), max_hp)
+/* RUCM CHANGE
 		if(!lighting_holder.light)
+*/
+//RUCM START
+		if(!lighting_holder?.light)
+//RUCM END
 			update_minimap_icon()
 			lighting_holder.set_light_on(TRUE)
 
@@ -354,6 +364,7 @@
 	healthcheck()
 
 //to handle IFF bullets
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/get_target_lock(access_to_check)
 	if(isnull(access_to_check) || !vehicle_faction)
 		return FALSE
@@ -362,6 +373,7 @@
 		return access_to_check == vehicle_faction
 
 	return vehicle_faction in access_to_check
+*/
 
 /obj/vehicle/multitile/ex_act(severity)
 	take_damage_type(severity * 0.5, "explosive")

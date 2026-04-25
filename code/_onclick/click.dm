@@ -126,6 +126,10 @@
 
 	// Don't allow doing anything else if inside a container of some sort, like a locker.
 	if (!isturf(loc))
+//RUCM START
+		if(loc == interactee)
+			SEND_SIGNAL(src, COMSIG_MOB_CLICKON, A, params)
+//RUCM END
 		return
 
 	if (world.time <= next_move && A.loc != src) // Attack click cooldown check
@@ -309,6 +313,11 @@
 /mob/proc/face_atom(atom/A)
 
 	if( !A || !x || !y || !A.x || !A.y )
+//RUCM START
+		if(istype(interactee, /obj/vehicle))
+			var/obj/vehicle/vessel = interactee
+			vessel.custom_direction_rotation_handler(A, src)
+//RUCM END
 		return
 	var/dx = A.x - x
 	var/dy = A.y - y

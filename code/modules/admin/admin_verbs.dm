@@ -146,6 +146,9 @@ GLOBAL_LIST_INIT(admin_verbs_minor_event, list(
 	/client/proc/get_whitelisted_clients,
 	/client/proc/modifiers_panel,
 	/client/proc/setup_delayed_event_spawns,
+//RUCM START
+	/datum/admins/proc/spawn_mecha,
+//RUCM END
 ))
 
 GLOBAL_LIST_INIT(admin_verbs_major_event, list(

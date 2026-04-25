@@ -194,6 +194,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 						if(hearing_obj.flags_atom & USES_HEARING)
 							listening_obj |= hearing_obj
 				else if(istype(I, /obj/))
+//RUCM START
+					if(istype(I, /obj/vehicle/walker))
+						var/obj/vehicle/walker/vessel = I
+						if(vessel.seats[VEHICLE_DRIVER])
+							listening |= vessel.seats[VEHICLE_DRIVER]
+						continue
+//RUCM END
 					var/obj/hearing_obj = I
 					hearturfs += hearing_obj.locs[1]
 					if(hearing_obj.flags_atom & USES_HEARING)

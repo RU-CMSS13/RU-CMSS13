@@ -118,6 +118,11 @@
 	if(!able_to_fire(user))
 		return NONE
 
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(user, target, params))
+		return NONE
+//RUCM END
+
 	var/turf/curloc = get_turf(user) //In case the target or we are expired.
 	var/turf/targloc = get_turf(target)
 	if (!targloc || !curloc)
@@ -249,7 +254,12 @@
 	var/turf/current_turf = turfs[1]
 	turfs.Cut(1, 2)
 
+/* RUCM CHANGE
 	if(current_turf == user.loc)
+*/
+//RUCM START
+	if(current_turf == get_turf(user))
+//RUCM END
 		prev_turf = current_turf
 		addtimer(CALLBACK(src, PROC_REF(process_flame_tiles), turfs, target, user, chem, max_range, flameshape, fire_type, distance, prev_turf, stop_at_turf), 1, TIMER_UNIQUE)
 		return

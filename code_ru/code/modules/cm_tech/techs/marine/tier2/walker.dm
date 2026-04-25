@@ -12,7 +12,7 @@
 	flags = TREE_FLAG_MARINE
 	tier = /datum/tier/two/additional
 
-	var/points_to_give = 5
+	var/points_to_give = 100
 
 /datum/tech/repeatable/walker_points/on_unlock()
 	. = ..()

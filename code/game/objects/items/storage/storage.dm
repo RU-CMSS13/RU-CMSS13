@@ -503,7 +503,13 @@ GLOBAL_LIST_EMPTY_TYPED(item_storage_box_cache, /datum/item_storage_box)
 		return 0
 
 	if(W.w_class >= src.w_class && (isstorage(W)))
+
+/* RUCM CHANGE
 		if(!istype(src, /obj/item/storage/backpack/holding)) //bohs should be able to hold backpacks again. The override for putting a boh in a boh is in backpack.dm.
+*/
+//RUCM START
+		if(!istype(src, /obj/item/storage/backpack/holding) && !istype(src, /obj/item/storage/belt/tank/walker))
+//RUCM END
 			if(!stop_messages)
 				to_chat(usr, SPAN_NOTICE("[src] cannot hold [W] as it's a storage item of the same size."))
 			return 0 //To prevent the stacking of same sized storage items.
