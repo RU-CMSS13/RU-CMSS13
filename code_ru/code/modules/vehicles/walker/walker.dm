@@ -699,12 +699,14 @@
 	if(hardpoint_armor?.can_take_damage())
 		hardpoint_armor.take_damage_type(damages_applied, type, attacker)
 
+	var/head_attack = FALSE
 	if(!attacked_hardpoint)
 		switch(zone_selected)
 			if("head", "eyes", "mouth")
 				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_HEAD]
+				head_attack = TRUE
 			if("chest")
-				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_ARMOR]
+				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_SPINAL]
 			if("groin")
 				attacked_hardpoint = hardpoints_by_slot[WALKER_HARDPOIN_INTERNAL]
 			if("l_leg", "l_foot")
@@ -722,7 +724,7 @@
 		attacked_hardpoint.take_damage_type(damages_applied, type, attacker)
 		return
 
-	if(seats[VEHICLE_DRIVER] && (zone_selected == "head" || "eyes" || "mouth"))
+	if(seats[VEHICLE_DRIVER] && head_attack)
 		seated_take_damage(damages_applied[WALKER_DAMAGE_REMAINING], type, attacker, seats[VEHICLE_DRIVER])
 
 /obj/vehicle/walker/proc/seated_take_damage(damage, type, atom/attacker, mob/living/user)
