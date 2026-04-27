@@ -1118,7 +1118,7 @@
 
 //RUCM START
 	if(isxeno(bullet.firer))
-		var/mob/living/carbon/xenomorph/xeno = P.firer
+		var/mob/living/carbon/xenomorph/xeno = bullet.firer
 		if(xeno.can_not_harm(src) && !(bullet.ammo.flags_ammo_behavior & AMMO_IGNORE_XENO_IFF))
 //RUCM END
 			bullet_ping(bullet)
