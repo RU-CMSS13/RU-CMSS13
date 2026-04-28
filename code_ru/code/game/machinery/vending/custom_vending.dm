@@ -1,4 +1,4 @@
-/obj/structure/machinery/vending/walkman/Initialize()
+/obj/structure/machinery/vending/walkman/New()
     . = ..()
 
     var/static/list/new_products = list(
