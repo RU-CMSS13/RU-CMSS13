@@ -14,26 +14,20 @@
 	WAIT_DB_READY
 
 	var/list/datum/view_record/playtime/all_records = DB_VIEW(/datum/view_record/playtime)
-	var/list/real_best_playtimes = list()
-	for(var/datum/view_record/playtime/record as anything in all_records)
+	var/list/datum/view_record/playtime/real_best_playtimes = list()
+	var/datum/view_record/playtime/record
+	var/list/total_playtime = list()
+	for(record as anything in all_records)
 		CHECK_TICK
-		if(!real_best_playtimes[record.role_id])
-			real_best_playtimes[record.role_id] = list(record.total_minutes, record)
-			continue
-		if(real_best_playtimes[record.role_id][1] > record.total_minutes)
-			continue
-		real_best_playtimes[record.role_id] = list(record.total_minutes, record)
+		total_playtime[record.role_id] = record.total_minutes + total_playtime[record.role_id]
+		real_best_playtimes[record.role_id] = real_best_playtimes[record.role_id]?.total_minutes < record.total_minutes ? record : real_best_playtimes[record.role_id]
 
 	for(var/role_name in real_best_playtimes)
-		CHECK_TICK
-		var/list/info_list = real_best_playtimes[role_name]
-		var/datum/view_record/playtime/record = info_list[2]
-		if(!record)
-			continue
+		record = real_best_playtimes[role_name]
 		var/datum/view_record/players/player = SAFEPICK(DB_VIEW(/datum/view_record/players, DB_COMP("id", DB_EQUALS, record.player_id)))
-		if(!player)
+		if(!player)// This is the only one important check that I left
 			continue
-		best_playtimes += list(list("ckey" = player.ckey) + record.get_nanoui_data())
+		best_playtimes += list(list("total_time" = round(total_playtime[record.role_id] MINUTES_TO_HOURS, 0.1), "ckey" = player.ckey) + record.get_nanoui_data())
 
 /datum/entity/player/ui_data(mob/user)
 	if(!LAZYACCESS(playtime_data, "loaded"))
