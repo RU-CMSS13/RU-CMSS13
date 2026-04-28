@@ -8,7 +8,8 @@
     )
     for (var/item in new_products)
         var/amount = new_products[item]
-        if (products && item in products)
+
+        if (products && products[item])
             products[item] += amount
         else
             products[item] = amount
@@ -20,7 +21,8 @@
     )
     for (var/item in new_prices)
         var/price = new_prices[item]
-        if (!prices || !(item in prices))
+
+        if (!prices || !prices[item])
             prices[item] = price
 
     if(!GLOB.allowed_helmet_items[/obj/item/device/cassette_tape/milkline])
