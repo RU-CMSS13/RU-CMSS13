@@ -59,6 +59,9 @@
 // from /proc/update_living_queens() : /mob/living/carbon/xenomorph/queen
 #define COMSIG_HIVE_NEW_QUEEN "hive_new_queen"
 
+/// Fired on /datum/hive_status when the first tier 3 xeno is added: (mob/living/carbon/xenomorph/tier3_xeno)
+#define COMSIG_HIVE_FIRST_T3 "hive_first_t3"
+
 /// Fired on the lazy template datum when the template is finished loading. (list/loaded_atom_movables, list/loaded_turfs, list/loaded_areas)
 #define COMSIG_LAZY_TEMPLATE_LOADED "lazy_template_loaded"
 
