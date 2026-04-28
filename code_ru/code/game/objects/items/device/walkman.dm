@@ -2,6 +2,7 @@
 	name = "milkline cassette"
 	id = 19
 	desc = "A cassette with some \"milk\"? heh... Sounds funny."
+	icon = 'code_ru/icons/obj/items/walkman/cassette.dmi'
 	icon_state = "cassette_milkline"
 	side1_icon = "cassette_milkline"
 	item_icons = list(
@@ -22,6 +23,7 @@
 	name = "Puma cassette" // Пума, ты мой любимый пупсик <З
 	id = 20
 	desc = "Very familiar..."
+	icon = 'code_ru/icons/obj/items/walkman/cassette.dmi'
 	icon_state = "cassette_puma"
 	side1_icon = "cassette_puma"
 	item_icons = list(
@@ -36,6 +38,7 @@
 	name = "Duck cassette"
 	id = 21
 	desc = "Quack-quack!"
+	icon = 'code_ru/icons/obj/items/walkman/cassette.dmi'
 	icon_state = "cassette_duck"
 	side1_icon = "cassette_duck"
 	item_icons = list(
