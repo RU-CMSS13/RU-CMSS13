@@ -34,6 +34,8 @@
   - bugfix: fixes server lag when updating the minimap, after having opened and closed
       the minimap sufficient times in a round
 2026-04-14:
+  Jesters-Ballad:
+  - rscadd: Added Three Patches to Civilian Gear
   0Tikwah0:
   - bugfix: fix shipname Rumayer -> Almayer
   - rscadd: added maintenance jack and autocompressor to synthetic experimental vendor
@@ -76,8 +78,6 @@
   - balance: Scouts HV bullets now add a small "MD" like blip to every non-faction
       you shoot, blipping continously and revealing their position like an MD would,
       for every marine thats close to the xenomorph for 10 seconds.
-  Rocky0558:
-  - code_imp: reverted queen pull
   Unknownity:
   - bugfix: Desert Moon temple walls are indestructible again.
 2026-04-21:
@@ -155,7 +155,14 @@
       "Medical Valley Elevator Landing" and "Wilderness Valley Elevator Landing"'
   - spellcheck: Changed "curtesy" to "courtesy" in the elevator control panel
 2026-04-28:
+  cuberound:
+  - rscadd: Resin doors and walls construct wall above them when made in open, damage
+      taken by that wall is transfered to the lower wall and they get destroyed in
+      unison. Bullet pings on upper wall are mirrored on lower one to alert the xenos
   Ascaron5:
   - rscadd: Readded leadership text
   Rocky0558:
   - code_imp: upstream, yay
+2026-04-29:
+  Rocky0558:
+  - bugfix: Sensor tower now damaging by explosions rather than repairing
