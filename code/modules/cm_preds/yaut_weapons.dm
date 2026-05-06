@@ -64,7 +64,7 @@
 	flags_equip_slot = NO_FLAGS
 	hitsound = 'sound/weapons/wristblades_hit.ogg'
 	attack_speed = 6
-	force = MELEE_FORCE_TIER_4
+	force = MELEE_FORCE_TIER_8
 	pry_capable = IS_PRY_CAPABLE_FORCE
 	attack_verb = list("sliced", "slashed", "jabbed", "torn", "gored")
 
@@ -128,7 +128,7 @@
 	item_state = "gauntlet"
 	attack_speed = 1 SECONDS
 	attack_verb = list("flayed", "punched", "suckerpunched")
-	force = MELEE_FORCE_TIER_4
+	force = MELEE_FORCE_TIER_7
 	speed_bonus_amount = 0
 	var/move_delay_addition = 0.5 // ~30% increase.
 	var/gauntlet_deployed = FALSE
@@ -163,7 +163,7 @@
 				playsound(target, sound_to_play, 50, 1)
 				target.visible_message(SPAN_XENOHIGHDANGER("[user] grabs [target] by the back of the head and slams them on the ground!"))
 				if(ishuman(target))
-					target.apply_armoured_damage(50, ARMOR_MELEE, BRUTE, "chest", 5)
+					target.apply_armoured_damage(90, ARMOR_MELEE, BRUTE, "chest", 5)
 				playsound(target, 'sound/effects/hit_punch.ogg', 50)
 
 		if((INTENT_DISARM))
@@ -331,7 +331,7 @@
 	item_state = "wristblade"
 	attack_speed = 0.5 SECONDS
 	attack_verb = list("sliced", "slashed", "jabbed", "torn", "gored")
-	force = MELEE_FORCE_TIER_4
+	force = MELEE_FORCE_TIER_8
 	speed_bonus_amount = 0 SECONDS
 
 /obj/item/weapon/bracer_attachment/scimitar
@@ -342,7 +342,7 @@
 	item_state = "scim"
 	attack_speed = 1 SECONDS
 	attack_verb = list("sliced", "slashed", "jabbed", "torn", "gored")
-	force = MELEE_FORCE_TIER_5
+	force = MELEE_FORCE_TIER_10
 	speed_bonus_amount = -0.4 SECONDS
 
 /obj/item/weapon/bracer_attachment/scimitar/alt
@@ -352,7 +352,7 @@
 	icon_state = "scim_alt"
 	item_state = "scim_alt"
 	attack_speed = 1 SECONDS
-	force = MELEE_FORCE_TIER_5
+	force = MELEE_FORCE_TIER_10
 	speed_bonus_amount =  -0.4 SECONDS
 
 /*#########################################
@@ -384,7 +384,7 @@
 	embeddable = FALSE
 	w_class = SIZE_MEDIUM
 	unacidable = TRUE
-	force = MELEE_FORCE_TIER_6
+	force = MELEE_FORCE_TIER_11
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
@@ -407,7 +407,7 @@
 	icon_state = "clansword"
 	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT
 	flags_equip_slot = SLOT_BACK
-	force = MELEE_FORCE_TIER_7
+	force = MELEE_FORCE_TIER_12
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_ACCURATE
 	edge = TRUE
@@ -451,7 +451,7 @@
 	item_state = "scythe_dual"
 	flags_atom = FPRINT|QUICK_DRAWABLE|CONDUCT
 	flags_equip_slot = SLOT_BACK|SLOT_WAIST
-	force = MELEE_FORCE_TIER_6
+	force = MELEE_FORCE_TIER_12
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
@@ -501,8 +501,8 @@
 	throw_speed = SPEED_VERY_FAST
 	throw_range = 4
 	unacidable = TRUE
-	force = MELEE_FORCE_TIER_6
-	throwforce = MELEE_FORCE_TIER_6
+	force = MELEE_FORCE_TIER_11
+	throwforce = MELEE_FORCE_TIER_13
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -515,8 +515,8 @@
 	///The stored chance for when unfolded.
 	var/active_shield_chance = SHIELD_CHANCE_HIGH
 
-	var/force_wielded = MELEE_FORCE_TIER_6
-	var/force_unwielded = MELEE_FORCE_TIER_2
+	var/force_wielded = MELEE_FORCE_TIER_11
+	var/force_unwielded = MELEE_FORCE_TIER_5
 	var/force_storage = MELEE_FORCE_TIER_1
 
 /obj/item/weapon/yautja/chained
@@ -749,8 +749,8 @@
 	throw_speed = SPEED_VERY_FAST
 	throw_range = 4
 	unacidable = TRUE
-	force = MELEE_FORCE_TIER_6
-	throwforce = MELEE_FORCE_TIER_6
+	force = MELEE_FORCE_TIER_10
+	throwforce = MELEE_FORCE_TIER_10
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -1141,7 +1141,7 @@
 	icon_state = "glaive_alt"
 	item_state = "glaive_alt"
 	force = MELEE_FORCE_TIER_3
-	force_wielded = MELEE_FORCE_TIER_9
+	force_wielded = MELEE_FORCE_TIER_13
 	throwforce = MELEE_FORCE_TIER_3
 	embeddable = FALSE //so predators don't lose their glaive when thrown.
 	sharp = IS_SHARP_ITEM_BIG
@@ -1348,8 +1348,8 @@
 
 /obj/item/weapon/gun/launcher/spike/set_bullet_traits()
 	LAZYADD(traits_to_give, list(
-		BULLET_TRAIT_ENTRY_ID("turfs", /datum/element/bullet_trait_damage_boost, 25, GLOB.damage_boost_turfs),
-		BULLET_TRAIT_ENTRY_ID("breaching", /datum/element/bullet_trait_damage_boost, 25, GLOB.damage_boost_breaching)
+		BULLET_TRAIT_ENTRY_ID("turfs", /datum/element/bullet_trait_damage_boost, 35, GLOB.damage_boost_turfs),
+		BULLET_TRAIT_ENTRY_ID("breaching", /datum/element/bullet_trait_damage_boost, 35, GLOB.damage_boost_breaching)
 	))
 
 /obj/item/weapon/gun/launcher/spike/get_examine_text(mob/user)
@@ -1510,7 +1510,7 @@
 	/// Max amount of shots
 	var/charge_time = 40
 	/// Amount of charge_time drained per shot
-	var/shot_cost = 1
+	var/shot_cost = 4
 	/// standard (sc = 1) or incendiary (sc = 5)
 	var/mode = FIRE_MODE_STANDARD
 	flags_gun_features = GUN_UNUSUAL_DESIGN
@@ -1598,14 +1598,14 @@
 	switch(mode)
 		if(FIRE_MODE_STANDARD)
 			mode = FIRE_MODE_INCENDIARY
-			shot_cost = 5
+			shot_cost = 4
 			fire_delay = FIRE_DELAY_TIER_5
 			to_chat(usr, SPAN_NOTICE("[src] will now fire incendiary plasma bolts."))
 			ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/pistol/incendiary]
 
 		if(FIRE_MODE_INCENDIARY)
 			mode = FIRE_MODE_STANDARD
-			shot_cost = 1
+			shot_cost = 8
 			fire_delay = FIRE_DELAY_TIER_7
 			to_chat(usr, SPAN_NOTICE("[src] will now fire plasma bolts."))
 			ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/pistol]
@@ -1676,14 +1676,14 @@
 			switch(strength)
 				if("stun bolts")
 					strength = "plasma immobilizers"
-					charge_cost = 150
+					charge_cost = 1000
 					set_fire_delay(FIRE_DELAY_TIER_2 * 8)
 					fire_sound = 'sound/weapons/pulse.ogg'
 					to_chat(user, SPAN_NOTICE("[src] will now fire [strength]."))
 					ammo = GLOB.ammo_list[/datum/ammo/energy/yautja/caster/sphere/aoe_stun]
 				if("plasma immobilizers")
 					strength = "stun bolts"
-					charge_cost = 30
+					charge_cost = 300
 					set_fire_delay(FIRE_DELAY_TIER_6)
 					fire_sound = 'sound/weapons/pred_plasmacaster_fire.ogg'
 					to_chat(user, SPAN_NOTICE("[src] will now fire [strength]."))

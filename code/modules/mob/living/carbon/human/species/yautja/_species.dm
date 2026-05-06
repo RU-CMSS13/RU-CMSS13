@@ -2,7 +2,7 @@
 	group = SPECIES_YAUTJA
 	name = "Yautja"
 	name_plural = "Yautja"
-	brute_mod = 0.28 //Beefy!
+	brute_mod = 0.65
 	burn_mod = 0.65
 	reagent_tag = IS_YAUTJA
 	mob_flags = KNOWS_TECHNOLOGY
@@ -29,7 +29,7 @@
 	default_lighting_alpha = LIGHTING_PLANE_ALPHA_YAUTJA
 	flags_sight = SEE_MOBS
 	slowdown = -0.5
-	total_health = 175 //more health than regular humans
+	total_health = 200
 	timed_hug = FALSE
 
 	bloodsplatter_type = /obj/effect/bloodsplatter/yautjasplatter
@@ -217,7 +217,7 @@
 				limb.max_damage = 150
 				limb.time_to_knit = 1200 // 2 minutes to self heal bone break, time is in tenths of a second to auto heal this
 			if("head")
-				limb.min_broken_damage = 140
+				limb.min_broken_damage = 145
 				limb.max_damage = 150
 				limb.time_to_knit = 600 // 1 minute to self heal bone break, time is in tenths of a second
 			if("l_hand","r_hand","r_foot","l_foot")
@@ -234,6 +234,9 @@
 	give_action(hunter, /datum/action/yautja_emote_panel)
 	give_action(hunter, /datum/action/predator_action/mark_for_hunt)
 	give_action(hunter, /datum/action/predator_action/mark_panel)
+	//RUCM START
+	give_action(hunter, /datum/action/human_action/yautja_jump)
+	//RUCM END
 	return ..()
 
 /datum/species/yautja/get_hairstyle(style)
