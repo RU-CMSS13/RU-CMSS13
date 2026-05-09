@@ -7,8 +7,7 @@
 	temperature = T20C
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
-	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-	//soundscape_interval = 15
+	soundscape_interval = 60
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -262,7 +261,6 @@
 	icon_state = "maints"
 	ambience_exterior = AMBIENCE_PRISON_MAINTENANCE
 	ceiling_muffle = TRUE
-	soundscape_playlist = SCAPE_PL_FIORINA_MAINTENANCE
 
 /area/prisonru/station/maintenance/hi
 
@@ -424,8 +422,6 @@
 
 /area/prisonru/medbay/high_sec_medbay
 	name = "Prison - South High-Security MedBay Block"
-	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-
 //CELLBLOCKS CODE
 
 //Near Engi/Canteen
@@ -628,20 +624,20 @@
 
 //Monorail CODE
 /area/prisonru/monorail
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
-	soundscape_interval = 60
 	ceiling_muffle = TRUE
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
 	ceiling = CEILING_METAL
 	icon_state = "power0"
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_CORRUPTED_AD
 
 
 /area/prisonru/monorail/east
 	name = "Prison - East Monorail Station"
 	linked_lz = DROPSHIP_LZ1
 	icon_state = "power0"
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_UNCORRUPTED_AD
 
 //Telecomms CODE
 /area/prisonru/telecomms
