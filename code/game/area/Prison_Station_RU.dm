@@ -7,7 +7,8 @@
 	temperature = T20C
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
-	soundscape_interval = 60
+	ceiling_muffle = TRUE
+	soundscape_interval = 30
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -16,6 +17,7 @@
 	name = "Prison - Out Of Bounds"
 	icon_state = "oob"
 	requires_power = FALSE
+	ambience_exterior = AMBIENCE_OOB
 	ceiling = CEILING_MAX
 	is_resin_allowed = FALSE
 	flags_area = AREA_NOTUNNEL|AREA_UNWEEDABLE
@@ -37,14 +39,12 @@
 	name = "Prison - LZ1 'Admin"
 	icon_state = "lz1"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 	requires_power = FALSE
 
 /area/prisonru/lz/dispatch_lzI
 	name = "Prison - Main Hangar Traffic Control"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 
 /area/prisonru/lz/near_lzII
@@ -77,8 +77,6 @@
 /area/prisonru/civ/lz/lzdispatch
 	name = "Prison - Canding Zone Dispatch room"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
-
 /area/prisonru/civ/WYshuttle
 	name = "Prison - Weyland-Yutani PMC ERT Shuttle"
 	requires_power = FALSE
@@ -260,8 +258,6 @@
 /area/prisonru/station/maintenance
 	icon_state = "maints"
 	ambience_exterior = AMBIENCE_PRISON_MAINTENANCE
-	ceiling_muffle = TRUE
-
 /area/prisonru/station/maintenance/hi
 
 /area/prisonru/station/maintenance/hi/south_sec_maint
@@ -279,7 +275,7 @@
 
 /area/prisonru/station/maintenance/residential/nw
 	name = "Prison - Northwest Civilian Residences Maintenance"
-	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/ne
 	name = "Prison - Northeast Civilian Residences Maintenance"
@@ -287,7 +283,7 @@
 
 /area/prisonru/station/maintenance/residential/sw
 	name = "Prison - Southwest Civilian Residences Maintenance"
-	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/se
 	name = "Prison - Southeast Civilian Residences Maintenance"
@@ -315,8 +311,6 @@
 	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	linked_lz = DROPSHIP_LZ1
-	ceiling_muffle = TRUE
-
 /area/prisonru/station/maintenance/hangar_barracks
 	name = "Prison - Hangar-Barracks Maintenance"
 	linked_lz = DROPSHIP_LZ1
@@ -548,6 +542,8 @@
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
 	icon_state = "tumor0"
 	unoviable_timer = FALSE
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
+	soundscape_interval = 120
 
 //Civ rooms
 
@@ -560,7 +556,6 @@
 	icon_state = "tumor4"
 	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
-	ceiling_muffle = TRUE
 
 /area/prisonru/residential/botanic
 	name = "Prison - Botanical garden"
@@ -624,20 +619,19 @@
 
 //Monorail CODE
 /area/prisonru/monorail
-	ceiling_muffle = TRUE
+	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
+	soundscape_interval = 60
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
 	ceiling = CEILING_METAL
 	icon_state = "power0"
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_CORRUPTED_AD
 
 
 /area/prisonru/monorail/east
 	name = "Prison - East Monorail Station"
 	linked_lz = DROPSHIP_LZ1
 	icon_state = "power0"
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_UNCORRUPTED_AD
 
 //Telecomms CODE
 /area/prisonru/telecomms
