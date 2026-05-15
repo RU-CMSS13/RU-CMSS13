@@ -8,7 +8,7 @@
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
 	ceiling_muffle = TRUE
-	soundscape_interval = 30
+	soundscape_interval = 20
 	ceiling_muffle = FALSE
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
@@ -542,9 +542,6 @@
 	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
 	icon_state = "tumor0"
 	unoviable_timer = FALSE
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
-	soundscape_interval = 120
-
 //Civ rooms
 
 /area/prisonru/residential/synthrepstat
@@ -619,8 +616,6 @@
 
 //Monorail CODE
 /area/prisonru/monorail
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
-	soundscape_interval = 60
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
