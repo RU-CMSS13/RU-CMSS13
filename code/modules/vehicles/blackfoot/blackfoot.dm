@@ -44,9 +44,11 @@
 	hardpoints_allowed = list(
 		/obj/item/hardpoint/locomotion/blackfoot_thrusters,
 		/obj/item/hardpoint/primary/chimera_launchers,
+		/obj/item/hardpoint/primary/chimera_launchers/rocket,
 		/obj/item/hardpoint/support/sensor_array,
 		/obj/item/hardpoint/secondary/doorgun,
 		/obj/item/hardpoint/secondary/doorgun/minigun,
+		/obj/item/hardpoint/secondary/autocannon/chimera,
 	)
 
 	entrances = list(
@@ -346,6 +348,7 @@
 			/obj/vehicle/multitile/proc/toggle_door_lock,
 			/obj/vehicle/multitile/proc/activate_horn,
 			/obj/vehicle/multitile/proc/name_vehicle,
+			/obj/vehicle/multitile/proc/cycle_hardpoint,
 			/obj/vehicle/multitile/blackfoot/proc/takeoff,
 			/obj/vehicle/multitile/blackfoot/proc/land,
 			/obj/vehicle/multitile/blackfoot/proc/toggle_vtol,
@@ -429,6 +432,7 @@
 		/obj/vehicle/multitile/proc/toggle_door_lock,
 		/obj/vehicle/multitile/proc/activate_horn,
 		/obj/vehicle/multitile/proc/name_vehicle,
+		/obj/vehicle/multitile/proc/cycle_hardpoint,
 		/obj/vehicle/multitile/blackfoot/proc/takeoff,
 		/obj/vehicle/multitile/blackfoot/proc/land,
 		/obj/vehicle/multitile/blackfoot/proc/toggle_vtol,
@@ -783,20 +787,22 @@
 		change_state(STATE_DEPLOYED)
 
 /obj/vehicle/multitile/blackfoot/proc/toggle_targeting()
-	var/obj/item/hardpoint/primary/chimera_launchers/launchers = locate() in hardpoints
-
-	if(!launchers)
+	var/obj/item/hardpoint/primary/chimera_launchers/primary = locate() in hardpoints
+	//lazy, but it works
+	var/obj/item/hardpoint/secondary/autocannon/chimera/secondary = locate() in hardpoints
+	if(!primary && !secondary)
 		to_chat(seats[VEHICLE_DRIVER], SPAN_WARNING("CRITICAL ERROR: NO LAUNCHERS DETECTED."))
 		return
 
-	launchers.safety = !launchers.safety
+	primary.safety = !primary.safety
+	secondary.safety = !secondary.safety
 
 	var/mob/user = seats[VEHICLE_DRIVER]
 
 	if(!user)
 		return
 
-	if(launchers.safety)
+	if(primary.safety && secondary.safety)
 		user.client?.mouse_pointer_icon = initial(user.client?.mouse_pointer_icon)
 	else
 		user.client?.mouse_pointer_icon = 'icons/obj/vehicles/blackfoot_cursor.dmi'
