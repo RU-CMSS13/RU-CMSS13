@@ -368,8 +368,9 @@
 /datum/ammo/grenade_container/proc/drop_nade(obj/projectile/P)
 	var/turf/T = get_turf(P)
 	var/obj/item/explosive/grenade/G = new nade_type(T)
+	T.on_throw_end(G)
 	G.visible_message(SPAN_WARNING("\A [G] lands on [T]!"))
-	G.det_time = 10
+	G.det_time = min(10, G.det_time)
 	G.cause_data = P.weapon_cause_data
 	G.activate()
 
@@ -383,6 +384,37 @@
 
 /datum/ammo/grenade_container/tank_glauncher
 	max_range = 8
+
+/datum/ammo/grenade_container/chimera_launcher
+	name = "starburst shell"
+	nade_type = /obj/item/explosive/grenade/high_explosive/starshell
+
+/datum/ammo/bullet/doorgun/holotarget/on_hit_mob(mob/hit_mob, obj/projectile/bullet)
+	. = ..()
+	hit_mob.AddComponent(/datum/component/bonus_damage_stack, holo_stacks, world.time, bonus_damage_cap_increase, stack_loss_multiplier)
+
+/datum/ammo/bullet/doorgun/holotarget
+	name = "holotarget round"
+	headshot_state = HEADSHOT_OVERLAY_MEDIUM
+	icon_state = "bullet_large"
+	flags_ammo_behavior = AMMO_BALLISTIC
+	damage_falloff = 0
+
+	accuracy = HIT_ACCURACY_TIER_7
+	scatter = 0
+	damage = 25
+	penetration = ARMOR_PENETRATION_TIER_3
+	accurate_range = 10
+	max_range = 12
+	shell_speed = AMMO_SPEED_TIER_6
+
+	var/holo_stacks = 10
+	var/bonus_damage_cap_increase = 0
+	var/stack_loss_multiplier = 1
+
+/datum/ammo/grenade_container/doorgun/hornet
+	name = "hornet shell"
+	nade_type = /obj/item/explosive/grenade/high_explosive/hornet
 
 /datum/ammo/hugger_container
 	name = "hugger shell"
