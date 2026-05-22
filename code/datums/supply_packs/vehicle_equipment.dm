@@ -8,6 +8,16 @@
 	containername = "RE700 Rotary Cannon crate"
 	group = "Vehicle Equipment"
 
+/datum/supply_packs/landing_pad
+	name = "AD-19D landing pad (x1)"
+	contains = list(
+		/obj/structure/landing_pad_folded,
+	)
+	cost = 25
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "landing pad crate"
+	group = "Vehicle Equipment"
+
 /datum/supply_packs/humvee_cannon_replacement
 	name = "Replacement M24-RC1 Remote Cannon (x1)"
 	contains = list(

@@ -46,6 +46,10 @@
 	name = "\improper ARC interior"
 	icon_state = "arc"
 
+/area/interior/vehicle/blackfoot
+	name = "blackfoot interior"
+	ambience_exterior = 'sound/vehicles/vtol/interior.ogg'
+
 /area/interior/vehicle/humvee
 	name = "\improper vehicle interior"
 	icon_state = "apc"
