@@ -100,6 +100,7 @@ BSQL_PROTECT_DATUM(/datum/entity/player_time)
 	LAZYCLEARLIST(other_playtimes)
 	LAZYCLEARLIST(marine_playtimes)
 
+/* RUCM CHANGE
 	if(owning_client)
 		var/list/xeno_playtime = list(
 			"job" = "Xenomorph",
@@ -118,6 +119,13 @@ BSQL_PROTECT_DATUM(/datum/entity/player_time)
 		LAZYADD(xeno_playtimes, list(xeno_playtime))
 		LAZYADD(other_playtimes, list())
 		LAZYADD(marine_playtimes, list(marine_playtime))
+*/
+//RUCM START
+	if(owning_client)
+		playtime_data["total_human_playtime"] = round(owning_client.get_total_human_playtime() DECISECONDS_TO_HOURS, 0.1)
+		playtime_data["total_xeno_playtime"] = round(owning_client.get_total_xeno_playtime() DECISECONDS_TO_HOURS, 0.1)
+	playtime_data["total_other_playtime"] = 0
+//RUCM END
 
 	for(var/datum/view_record/playtime/PT in PTs)
 		var/isxeno = (PT.role_id in GLOB.RoleAuthority.castes_by_name)
@@ -133,6 +141,9 @@ BSQL_PROTECT_DATUM(/datum/entity/player_time)
 			LAZYADD(xeno_playtimes, list(PT.get_nanoui_data()))
 		else if(isOther)
 			LAZYADD(other_playtimes, list(PT.get_nanoui_data(TRUE)))
+//RUCM START
+			playtime_data["total_other_playtime"] += round(PT.total_minutes MINUTES_TO_HOURS, 0.1)
+//RUCM END
 		else
 			LAZYADD(marine_playtimes, list(PT.get_nanoui_data()))
 

@@ -30,6 +30,6 @@ AddTimelock(/datum/job/command/walker, list(
 
 /obj/effect/landmark/start/mech_crew
 	name = JOB_WALKER
-	icon = 'code_ru/icons/mc.dmi'
+	icon = 'code_ru/icons/landmarks.dmi'
 	icon_state = "mc_spawn"
 	job = /datum/job/command/walker
