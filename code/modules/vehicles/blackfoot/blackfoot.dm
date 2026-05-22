@@ -45,10 +45,10 @@
 		/obj/item/hardpoint/locomotion/blackfoot_thrusters,
 		/obj/item/hardpoint/primary/chimera_launchers,
 		/obj/item/hardpoint/primary/chimera_launchers/rocket,
+		/obj/item/hardpoint/primary/chimera_launchers/autocannon,
 		/obj/item/hardpoint/support/sensor_array,
 		/obj/item/hardpoint/secondary/doorgun,
 		/obj/item/hardpoint/secondary/doorgun/minigun,
-		/obj/item/hardpoint/secondary/autocannon/chimera,
 	)
 
 	entrances = list(
@@ -787,22 +787,20 @@
 		change_state(STATE_DEPLOYED)
 
 /obj/vehicle/multitile/blackfoot/proc/toggle_targeting()
-	var/obj/item/hardpoint/primary/chimera_launchers/primary = locate() in hardpoints
-	//lazy, but it works
-	var/obj/item/hardpoint/secondary/autocannon/chimera/secondary = locate() in hardpoints
-	if(!primary && !secondary)
+	var/obj/item/hardpoint/primary/chimera_launchers/launchers = locate() in hardpoints
+
+	if(!launchers)
 		to_chat(seats[VEHICLE_DRIVER], SPAN_WARNING("CRITICAL ERROR: NO LAUNCHERS DETECTED."))
 		return
 
-	primary.safety = !primary.safety
-	secondary.safety = !secondary.safety
+	launchers.safety = !launchers.safety
 
 	var/mob/user = seats[VEHICLE_DRIVER]
 
 	if(!user)
 		return
 
-	if(primary.safety && secondary.safety)
+	if(launchers.safety)
 		user.client?.mouse_pointer_icon = initial(user.client?.mouse_pointer_icon)
 	else
 		user.client?.mouse_pointer_icon = 'icons/obj/vehicles/blackfoot_cursor.dmi'

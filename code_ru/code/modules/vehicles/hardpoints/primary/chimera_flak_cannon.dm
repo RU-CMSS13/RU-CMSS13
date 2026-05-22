@@ -1,4 +1,4 @@
-/obj/item/hardpoint/secondary/autocannon/chimera
+/obj/item/hardpoint/primary/chimera_launchers/autocannon
 	name = "\improper AC3-E Autocannon"
 	desc = "A primary autocannon for tanks that shoots explosive flak rounds."
 
@@ -22,9 +22,7 @@
 	)
 	fire_delay = 0.7 SECONDS
 
-	var/safety = TRUE
-
-/obj/item/hardpoint/secondary/autocannon/chimera/get_icon_image(x_offset, y_offset, new_dir)
+/obj/item/hardpoint/primary/chimera_launchers/autocannon/chimera/get_icon_image(x_offset, y_offset, new_dir)
 	var/obj/vehicle/multitile/blackfoot/blackfoot_owner = owner
 
 	if(!blackfoot_owner)
@@ -35,7 +33,7 @@
 	return I
 
 
-/obj/item/hardpoint/secondary/autocannon/chimera/try_fire(atom/target, mob/living/user, params)
+/obj/item/hardpoint/primary/chimera_launchers/autocannon/try_fire(atom/target, mob/living/user, params)
 	if(safety)
 		to_chat(user, SPAN_WARNING("Targeting mode is not enabled, unable to fire."))
 		return
