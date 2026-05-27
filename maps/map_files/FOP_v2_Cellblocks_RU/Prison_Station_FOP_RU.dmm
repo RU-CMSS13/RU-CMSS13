@@ -39,6 +39,17 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/prison,
 /area/prisonru/research/secret/testing)
+"aag" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_x = -32
+	},
+/turf/open/floor/prison/whitegreen/west,
+/area/prisonru/medbay)
 "aah" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 10
@@ -2120,6 +2131,15 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/cellblock/highsec/north/south)
+"afl" = (
+/obj/structure/disposaloutlet{
+	dir = 8
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/closed/wall/r_wall/prison_unmeltable,
+/area/prisonru/cellblock/maxsec/south)
 "afm" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "xgibdown1"
@@ -6564,6 +6584,13 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_y = 32
+	},
 /turf/open/floor/prison/whitegreen/north,
 /area/prisonru/medbay)
 "arb" = (
@@ -10231,6 +10258,13 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_x = 32
+	},
 /turf/open/floor/prison/whitegreen/southeast,
 /area/prisonru/medbay)
 "aAO" = (
@@ -10622,9 +10656,7 @@
 /turf/open/floor/prison/darkbrown2/west,
 /area/prisonru/station/hallway/central/west)
 "aBM" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/comdoor/colony{
-	name = "Maximum-Security Wing"
-	},
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/hybrisa/metal/yellow_warning_floor,
 /area/prisonru/station/security/checkpoint/maxsec)
 "aBN" = (
@@ -12849,7 +12881,7 @@
 	color = "#b7b8b2";
 	dir = 1
 	},
-/turf/open/floor/plating/plating_catwalk/prison,
+/turf/open/floor/prison,
 /area/prisonru/station/hallway/central/north)
 "aHW" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
@@ -56849,6 +56881,13 @@
 /turf/open/floor/prison/whitegreen/north,
 /area/prisonru/station/security/monitoring/medicalsec)
 "dcg" = (
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_y = 32
+	},
 /turf/open/floor/prison/whitegreen/north,
 /area/prisonru/station/security/monitoring/medicalsec)
 "dch" = (
@@ -58428,7 +58467,10 @@
 /area/prisonru/station/maintenance/residential/access/south)
 "dKo" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/machinery/power/smes/buildable/charged,
+/obj/structure/machinery/power/smes/buildable{
+	capacity = 1e+006;
+	dir = 1
+	},
 /turf/open/floor/prison/darkyellow2/west,
 /area/prisonru/station/maintenance/research_medbay)
 "dKQ" = (
@@ -61158,6 +61200,13 @@
 	icon_state = "bigrollerempty2_up";
 	dir = 8
 	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_y = 32
+	},
 /turf/open/floor/prison/whitegreen/north,
 /area/prisonru/medbay)
 "gbb" = (
@@ -63729,6 +63778,13 @@
 	},
 /obj/structure/bed/roller/hospital_empty/bigrollerempty{
 	dir = 4
+	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_x = 32
 	},
 /turf/open/floor/prison/whitegreen/east,
 /area/prisonru/medbay)
@@ -66565,7 +66621,7 @@
 	color = "#b7b8b2";
 	dir = 1
 	},
-/turf/open/floor/plating/plating_catwalk/prison,
+/turf/open/floor/prison,
 /area/prisonru/station/hallway/central/north)
 "jRH" = (
 /obj/effect/decal/warning_stripes{
@@ -69555,6 +69611,13 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood/writing,
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_x = 32
+	},
 /turf/open/floor/prison/whitegreen/east,
 /area/prisonru/medbay)
 "meS" = (
@@ -71869,7 +71932,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison,
+/turf/open/floor/prison/darkbrowncorners2/east,
 /area/prisonru/station/hallway/central/north)
 "oda" = (
 /obj/structure/window/framed/prison/reinforced/hull,
@@ -74819,7 +74882,7 @@
 /obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
 	dir = 8
 	},
-/turf/open/floor/prison,
+/turf/open/floor/prison/darkbrowncorners2/north,
 /area/prisonru/station/hallway/central/north)
 "qqn" = (
 /obj/structure/disposalpipe/segment{
@@ -81939,6 +82002,13 @@
 	},
 /obj/structure/sign/safety/north{
 	pixel_y = 39
+	},
+/obj/structure/prop/hybrisa/misc/machinery/screens/redalert{
+	light_color = "#FF0000";
+	light_on = 1;
+	light_power = 3;
+	light_range = 5;
+	pixel_y = 32
 	},
 /turf/open/floor/prison/whitegreen/north,
 /area/prisonru/station/security/monitoring/medicalsec)
@@ -107369,7 +107439,7 @@ amY
 akF
 akF
 wjg
-bpK
+akF
 akF
 atG
 alm
@@ -109507,7 +109577,7 @@ ajT
 akK
 alk
 aru
-amn
+afl
 bpK
 wjg
 bpK
@@ -109910,7 +109980,7 @@ wjg
 wjg
 abS
 wjg
-aff
+acK
 aff
 agl
 agE
@@ -110134,7 +110204,7 @@ aik
 aiy
 acK
 aff
-aff
+acK
 wjg
 bpK
 ajQ
@@ -110337,7 +110407,7 @@ acY
 qjR
 mwZ
 acr
-acr
+ahN
 lxE
 lxE
 lxE
@@ -111407,7 +111477,7 @@ slW
 acY
 jIP
 acr
-acr
+ahN
 lxE
 lxE
 lxE
@@ -111632,7 +111702,7 @@ aik
 aiy
 acK
 aff
-aff
+acK
 wjg
 bpK
 ajQ
@@ -111836,7 +111906,7 @@ wjg
 wjg
 abS
 wjg
-aff
+acK
 aff
 ofe
 agH
@@ -114431,7 +114501,7 @@ amY
 akF
 akF
 wjg
-bpK
+akF
 akF
 dcU
 auG
@@ -116151,7 +116221,7 @@ avg
 awp
 azD
 vlF
-vlF
+aag
 avi
 apK
 aCZ
