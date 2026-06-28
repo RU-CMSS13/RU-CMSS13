@@ -241,20 +241,6 @@
 
 		addtimer(CALLBACK(src, PROC_REF(announce_evolve_available), GLOB.xeno_evolve_times[time]), text2num(time))
 
-// RUCM Start (Feline "Ксено-чертежи")
-/datum/hive_status/proc/setup_blueprint_announcements()
-	addtimer(CALLBACK(src, PROC_REF(xeno_blueprint_disable)), 20 MINUTES)
-
-/datum/hive_status/proc/xeno_blueprint_disable(list/datum/caste_datum/available_castes)
-	for(var/datum/resin_construction/constr as anything in GLOB.resin_build_order_ovipositor)
-		if(constr.delete_after)
-			GLOB.resin_build_order_ovipositor.Remove(constr)
-
-	GLOB.xeno_blueprint_available = FALSE
-	xeno_maptext("Accelerated construction is no longer available", "Growing up of the Hive")
-	evo_screech()
-// RUCM End (Feline "Ксено-чертежи")
-
 /// Sets up limits on pylons in New() for potential futureproofing with more static comms
 /datum/hive_status/proc/setup_pylon_limits()
 	hive_structures_limit[XENO_STRUCTURE_PYLON] = length(GLOB.all_static_telecomms_towers) || 2
@@ -1201,10 +1187,12 @@
 /datum/hive_status/corrupted/add_xeno(mob/living/carbon/xenomorph/xeno)
 	. = ..()
 	xeno.add_language(LANGUAGE_ENGLISH)
+	LAZYORASSOC(xeno.language_flags, LANGUAGE_ENGLISH, LANGUAGE_HEAR_ONLY)
 
 /datum/hive_status/corrupted/remove_xeno(mob/living/carbon/xenomorph/xeno, hard)
 	. = ..()
 	xeno.remove_language(LANGUAGE_ENGLISH)
+	LAZYBITREMOVEASSOC(xeno.language_flags, LANGUAGE_ENGLISH, LANGUAGE_HEAR_ONLY)
 
 /datum/hive_status/corrupted/can_delay_round_end(mob/living/carbon/xenomorph/xeno)
 	if(!faction_is_ally(FACTION_MARINE, TRUE))
@@ -1365,6 +1353,7 @@
 	name = FACTION_XENOMORPH_HUNTED
 	reporting_id = "hunted"
 	hivenumber = XENO_HIVE_HUNTED
+	prefix = "Hunted "
 
 	ui_color = "#135029"
 	dynamic_evolution = FALSE

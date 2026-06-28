@@ -3,7 +3,7 @@
 	desc = "A flight computer that can be used for autopilot or long-range flights."
 	icon = 'icons/obj/structures/machinery/shuttle-parts.dmi'
 	icon_state = "console"
-	req_one_access = list(ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP)
+	req_one_access = list(ACCESS_MARINE_LEADER, ACCESS_MARINE_DROPSHIP, ACCESS_MARINE_SENIOR)
 	unacidable = TRUE
 	explo_proof = TRUE
 	needs_power = FALSE
@@ -349,6 +349,9 @@
 		if(world.time < SHUTTLE_LOCK_TIME_LOCK)
 			to_chat(xeno, SPAN_XENODANGER("You can't mobilize the strength to hijack the shuttle yet. Please wait another [time_left_until(SHUTTLE_LOCK_TIME_LOCK, world.time, 1 MINUTES)] minutes before trying again."))
 			return
+//RUCM START
+		SSvote.initiate_vote("skip_endgame_vote", "SERVER")
+//RUCM END
 		hijack(xeno)
 		return
 
