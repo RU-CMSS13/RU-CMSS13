@@ -124,10 +124,10 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	overlays -= speech_bubble
 
 /* RUCM CHANGE
-/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon)
+/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics = FALSE, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, langchat_override = null)
 */
 //RUCM START
-/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics=0, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, list/tts_heard_list)
+/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics = FALSE, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, list/tts_heard_list, langchat_override = null)
 //RUCM END
 	var/turf/T
 
@@ -203,25 +203,25 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 								listening_obj |= interior_object
 
 
-			for(var/mob/M as anything in GLOB.player_list)
-				if((M.stat == DEAD || isobserver(M)) && M.client && M.client.prefs && (M.client.prefs.toggles_chat & CHAT_GHOSTEARS))
-					listening |= M
+			for(var/mob/possible_listening_mob as anything in GLOB.player_list)
+				if((possible_listening_mob.stat == DEAD || isobserver(possible_listening_mob)) && (possible_listening_mob.client?.prefs?.toggles_chat & CHAT_GHOSTEARS))
+					listening |= possible_listening_mob
 					continue
-				if(M.loc && (M.locs[1] in hearturfs))
-					listening |= M
+				if(possible_listening_mob.loc && (possible_listening_mob.locs[1] in hearturfs))
+					listening |= possible_listening_mob
 
 		var/speech_bubble_test = say_test(message)
 		show_speech_bubble(listening, speech_bubble_test, bubble_prefix = TRUE)
 
 		var/not_dead_speaker = (stat != DEAD)
 		if(not_dead_speaker)
-			langchat_speech(message, listening, speaking)
-		for(var/mob/M as anything in listening)
+			langchat_speech(message, listening, speaking, additional_styles = langchat_override ? list(langchat_override) : list("langchat"))
+		for(var/mob/possible_listening_mob as anything in listening)
 /* RUCM CHANGE
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, message_mode)
+			possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, message_mode)
 */
 //RUCM START
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list, message_mode)
+			possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list, message_mode)
 //RUCM END
 
 		for(var/obj/hearing_obj as anything in listening_obj)
