@@ -39,6 +39,9 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/prison,
 /area/prisonru/research/secret/testing)
+"aag" = (
+/turf/open/floor/prison/red,
+/area/prisonru/cellblock/highsec/north/north)
 "aah" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 10
@@ -2120,6 +2123,10 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/cellblock/highsec/north/south)
+"afl" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/red,
+/area/prisonru/cellblock/highsec/north/north)
 "afm" = (
 /obj/effect/decal/cleanable/blood{
 	icon_state = "xgibdown1"
@@ -10786,7 +10793,7 @@
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/redcorner/west,
-/area/prisonru/cellblock/highsec/north/south)
+/area/prisonru/cellblock/highsec/north/north)
 "aCl" = (
 /turf/closed/wall/prison,
 /area/prisonru/cellblock/highsec/north/south)
@@ -57615,9 +57622,31 @@
 /turf/open/floor/prison,
 /area/prisonru/station/storage/vip)
 "dfH" = (
-/obj/structure/largecrate/random,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/tool,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/barricade/handrail/hybrisa/road/plastic/black{
+	dir = 4
+	},
+/obj/structure/barricade/handrail/hybrisa/road/plastic/black{
+	dir = 4;
+	pixel_y = -4;
+	pixel_x = -3
+	},
+/obj/structure/barricade/handrail/hybrisa/road/plastic/black{
+	dir = 4;
+	pixel_y = 1;
+	pixel_x = -6
+	},
+/obj/structure/barricade/handrail/hybrisa/road/plastic/black{
+	dir = 4;
+	pixel_y = 1;
+	pixel_x = -12
+	},
+/obj/structure/barricade/handrail/hybrisa/road/plastic/black{
+	dir = 1;
+	pixel_y = -17;
+	pixel_x = 1
+	},
 /turf/open/floor/prison,
 /area/prisonru/station/storage/vip)
 "dfI" = (
@@ -58547,7 +58576,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/redcorner,
-/area/prisonru/cellblock/highsec/north/south)
+/area/prisonru/cellblock/highsec/north/north)
 "diz" = (
 /turf/open/floor/prison/whitegreencorner/west,
 /area/prisonru/medbay)
@@ -61518,7 +61547,7 @@
 "eWk" = (
 /obj/structure/machinery/light/double/blue,
 /turf/open/floor/prison/red,
-/area/prisonru/cellblock/highsec/north/south)
+/area/prisonru/cellblock/highsec/north/north)
 "eWu" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -70488,7 +70517,7 @@
 	icon_state = "NW-out"
 	},
 /turf/open/floor/prison/red/west,
-/area/prisonru/cellblock/highsec/north/south)
+/area/prisonru/cellblock/highsec/north/north)
 "lLl" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
@@ -102256,7 +102285,7 @@ atz
 atz
 ayN
 axV
-aCh
+axV
 aCh
 cLp
 aCh
@@ -102684,7 +102713,7 @@ aor
 awS
 awT
 awT
-aES
+aag
 aCl
 aEV
 aIs
@@ -102898,7 +102927,7 @@ aor
 cNr
 ppj
 diB
-aES
+aag
 aCl
 aGg
 aDR
@@ -103112,7 +103141,7 @@ aor
 cNr
 rFO
 awT
-aES
+aag
 aCl
 aEP
 aGb
@@ -103540,7 +103569,7 @@ cNI
 cNs
 ppj
 elw
-cJr
+afl
 aCl
 aCl
 aCl
@@ -103754,7 +103783,7 @@ cNI
 cNs
 ppj
 awT
-cJr
+afl
 aCl
 afk
 cLb
@@ -103968,7 +103997,7 @@ aor
 cNt
 ppj
 elw
-aES
+aag
 aCl
 aHw
 aEQ
@@ -104182,7 +104211,7 @@ cNI
 cNu
 diF
 ayP
-cJr
+afl
 aCl
 aCl
 aEV
@@ -104610,7 +104639,7 @@ elw
 ppj
 awT
 ppj
-bVw
+awT
 bVw
 awP
 hPY
@@ -104824,7 +104853,7 @@ cRz
 diL
 cRR
 cRz
-aLe
+cRz
 aLe
 aLe
 aLe
