@@ -64,7 +64,6 @@
 	var/alt_name = ""
 	var/message_range = GLOB.world_view_size
 	var/italics = FALSE
-	var/langchat_override
 
 	if(!able_to_speak)
 		to_chat(src, SPAN_DANGER("You try to speak, but nothing comes out!"))
