@@ -250,7 +250,7 @@
 		if(SStts.tts_enabled)
 			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
 
-		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, langchat_override = langchat_override, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
 //RUCM END
