@@ -50,6 +50,6 @@
 				continue
 			listener.show_message("<B>[V]</B> broadcasts, [FONT_SIZE_LARGE("\"[message]\"")]", SHOW_MESSAGE_AUDIBLE) // 2 stands for hearable message
 			langchat_long_listeners += listener
-		V.langchat_long_speech(message, langchat_long_listeners, user.get_default_language())
+		V.langchat_speech(message, langchat_listeners, user.get_default_language())
 
 		V.next_shout = world.time + 10 SECONDS
