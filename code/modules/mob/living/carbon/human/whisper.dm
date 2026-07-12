@@ -70,11 +70,11 @@
 	listening |= src
 
 	//ghosts
-	for (var/mob/M in GLOB.dead_mob_list) //does this include players who joined as observers as well?
-		if (!(M.client))
+	for(var/mob/possible_listening_mob in GLOB.dead_mob_list) //does this include players who joined as observers as well?
+		if(!(possible_listening_mob.client))
 			continue
-		if((M.stat == DEAD || isobserver(M)) && M.client && (M.client.prefs.toggles_chat & CHAT_GHOSTEARS))
-			listening |= M
+		if((possible_listening_mob.stat == DEAD || isobserver(possible_listening_mob)) && (possible_listening_mob.client?.prefs?.toggles_chat & CHAT_GHOSTEARS))
+			listening |= possible_listening_mob
 
 	//Pass whispers on to anything inside the immediate listeners.
 	for(var/mob/L in listening)
@@ -114,23 +114,23 @@
 	show_speech_bubble(listening, "[bubble_icon][speech_bubble_test]")
 
 	var/not_dead_speaker = (stat != DEAD)
-	for(var/mob/M in listening)
+	for(var/mob/possible_listening_mob in listening)
 /* RUCM CHANGE
-		M.hear_say(message, verb, speaking, alt_name, italics, src)
+		possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src)
 */
 //RUCM START
-		M.hear_say(message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
+		possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
 //RUCM END
 		langchat_speech(message, listening, speaking, langchat_color, FALSE, LANGCHAT_DEFAULT_POP, list("langchat_italic"))
 
 	if (length(eavesdropping))
 		var/new_message = stars(message) //hopefully passing the message twice through stars() won't hurt... I guess if you already don't understand the language, when they speak it too quietly to hear normally you would be able to catch even less.
-		for(var/mob/M in eavesdropping)
+		for(var/mob/possible_listening_mob in eavesdropping)
 /* RUCM CHANGE
-			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
+			possible_listening_mob.hear_say(new_message, verb, speaking, alt_name, italics, src)
 */
 //RUCM START
-			M.hear_say(new_message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
+			possible_listening_mob.hear_say(new_message, verb, speaking, alt_name, italics, src, tts_heard_list = tts_heard_list)
 //RUCM END
 			langchat_speech(message, listening, speaking, langchat_color, FALSE, LANGCHAT_DEFAULT_POP, list("langchat_italic"))
 
@@ -140,5 +140,5 @@
 
 	if (length(watching))
 		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> whispers something.</span>"
-		for (var/mob/M in watching)
-			M.show_message(rendered, SHOW_MESSAGE_AUDIBLE)
+		for (var/mob/possible_listening_mob in watching)
+			possible_listening_mob.show_message(rendered, SHOW_MESSAGE_AUDIBLE)
