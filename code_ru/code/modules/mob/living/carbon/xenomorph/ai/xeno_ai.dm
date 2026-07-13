@@ -632,7 +632,7 @@
 
 	if(pulling)
 		if(!current_target || get_dist(src, current_target) > 10)
-			INVOKE_ASYNC(src, PROC_REF(stop_pulling))
+			INVOKE_ASYNC(src, PROC_REF(stop_pulling_warapper))
 			return ..()
 		if(can_move_and_apply_move_delay())
 			if(!Move(get_step(loc, pull_direction), pull_direction))
@@ -686,7 +686,7 @@
 
 	if(pulling)
 		if(!current_target || get_dist(src, current_target) > 10)
-			INVOKE_ASYNC(src, PROC_REF(stop_pulling))
+			INVOKE_ASYNC(src, PROC_REF(stop_pulling_warapper))
 			return ..()
 		if(can_move_and_apply_move_delay())
 			if(!Move(get_step(loc, pull_direction), pull_direction))

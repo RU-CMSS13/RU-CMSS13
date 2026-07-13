@@ -102,11 +102,8 @@
 	friendly_factions = list(
 		FACTION_SURVIVOR,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_UPP,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 		FACTION_TWE,
 		FACTION_WY,
 		FACTION_PMC,
@@ -115,9 +112,6 @@
 		FACTION_FREELANCER,
 		FACTION_CONTRACTOR,
 		FACTION_MERCENARY,
-		FACTION_CANC,
-		FACTION_TWE_REBEL,
-		FACTION_UA_REBEL,
 	)
 
 /datum/human_ai_faction/contractor
@@ -125,11 +119,8 @@
 	friendly_factions = list(
 		FACTION_SURVIVOR,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_UPP,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 		FACTION_TWE,
 		FACTION_WY,
 		FACTION_PMC,
@@ -137,9 +128,6 @@
 	neutral_factions = list(
 		FACTION_FREELANCER,
 		FACTION_MERCENARY,
-		FACTION_CANC,
-		FACTION_TWE_REBEL,
-		FACTION_UA_REBEL,
 	)
 
 /datum/human_ai_faction/merc
@@ -147,11 +135,8 @@
 	friendly_factions = list(
 		FACTION_SURVIVOR,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_UPP,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 		FACTION_TWE,
 		FACTION_WY,
 		FACTION_PMC,
@@ -159,9 +144,6 @@
 	neutral_factions = list(
 		FACTION_FREELANCER,
 		FACTION_CONTRACTOR,
-		FACTION_CANC,
-		FACTION_TWE_REBEL,
-		FACTION_UA_REBEL,
 	)
 
 /datum/human_ai_faction/lancer
@@ -169,11 +151,8 @@
 	friendly_factions = list(
 		FACTION_SURVIVOR,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_UPP,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 		FACTION_TWE,
 		FACTION_WY,
 		FACTION_PMC,
@@ -181,20 +160,14 @@
 	neutral_factions = list(
 		FACTION_CONTRACTOR,
 		FACTION_MERCENARY,
-		FACTION_CANC,
-		FACTION_TWE_REBEL,
-		FACTION_UA_REBEL,
 	)
 
 /datum/human_ai_faction/ua_colonial_forces //CMB
 	faction = FACTION_MARSHAL
 	friendly_factions = list(
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_COLONIST,
 		FACTION_MARINE,
 		FACTION_WY,
-		FACTION_UACG,
 	)
 	neutral_factions = list(
 		FACTION_FREELANCER,
@@ -266,11 +239,8 @@
 /datum/human_ai_faction/uscm
 	faction = FACTION_MARINE
 	friendly_factions = list(
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_COLONIST,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 	)
 	neutral_factions = list(
 		FACTION_TWE,
@@ -632,10 +602,7 @@
 		FACTION_CONTRACTOR,
 		FACTION_MERCENARY,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 		FACTION_SURVIVOR,
 	)
 
@@ -682,10 +649,7 @@
 		FACTION_MERCENARY,
 		FACTION_SURVIVOR,
 		FACTION_MARINE,
-		FACTION_ARMY,
-		FACTION_NAVY,
 		FACTION_MARSHAL,
-		FACTION_UACG,
 	)
 	enter_combat_lines = list(
 		"CONTACT!",

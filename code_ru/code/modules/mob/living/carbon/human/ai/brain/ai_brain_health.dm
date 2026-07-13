@@ -5,8 +5,6 @@
 		/obj/item/reagent_container/hypospray/autoinjector/bicaridine,
 		/obj/item/reagent_container/hypospray/autoinjector/tricord,
 		/obj/item/storage/pill_bottle/bicaridine,
-		/obj/item/storage/pill_bottle/merabica,
-		/obj/item/storage/pill_bottle/tricord,
 		/obj/item/tool/weldingtool,
 		/obj/item/stack/nanopaste,
 	)
@@ -17,8 +15,6 @@
 		/obj/item/reagent_container/hypospray/autoinjector/kelotane,
 		/obj/item/reagent_container/hypospray/autoinjector/tricord,
 		/obj/item/storage/pill_bottle/kelotane,
-		/obj/item/storage/pill_bottle/keloderm,
-		/obj/item/storage/pill_bottle/tricord,
 		/obj/item/stack/cable_coil,
 		/obj/item/stack/nanopaste,
 	)
@@ -28,7 +24,6 @@
 		/obj/item/reagent_container/hypospray/autoinjector/dylovene,
 		/obj/item/reagent_container/hypospray/autoinjector/tricord,
 		/obj/item/storage/pill_bottle/antitox,
-		/obj/item/storage/pill_bottle/tricord,
 	)
 
 	/// What items the AI considers when trying to heal oxygen damage
@@ -36,8 +31,6 @@
 		/obj/item/reagent_container/hypospray/autoinjector/dexalinp,
 		/obj/item/reagent_container/hypospray/autoinjector/tricord,
 		/obj/item/storage/pill_bottle/dexalin,
-		/obj/item/storage/pill_bottle/dexalinplus,
-		/obj/item/storage/pill_bottle/tricord,
 	)
 
 	/// What items the AI considers when trying to fix bleeding
