@@ -17,26 +17,6 @@
 	faction = FACTION_MALF_SYNTH
 	faction_group = list(FACTION_MALF_SYNTH)
 
-/datum/equipment_preset/synth/working_joe/security_android/freelancer/malf_synth
-	name = "Synthetic - Security Android - Freelancer - Malfunction"
-	faction = FACTION_MALF_SYNTH
-	faction_group = list(FACTION_MALF_SYNTH)
-
-/datum/equipment_preset/synth/working_joe/security_android/wy/malf_synth
-	name = "Synthetic - Weyland Security Android - Malfunction"
-	faction = FACTION_MALF_SYNTH
-	faction_group = list(FACTION_MALF_SYNTH)
-
-/datum/equipment_preset/synth/working_joe/security_android/pmc/malf_synth
-	name = "Synthetic - PMC Security Android - Malfunction"
-	faction = FACTION_MALF_SYNTH
-	faction_group = list(FACTION_MALF_SYNTH)
-
-/datum/equipment_preset/synth/working_joe/security_android/ua_rebel/malf_synth
-	name = "Synthetic - Security Android - UA Rebel - Malfunction"
-	faction = FACTION_MALF_SYNTH
-	faction_group = list(FACTION_MALF_SYNTH)
-
 /datum/equipment_preset/synth/working_joe/upp/combat/twe_rebel/malf_synth
 	name = "TWE Rebel Dzho Automaton - Combat - Malfunction"
 	faction = FACTION_MALF_SYNTH
