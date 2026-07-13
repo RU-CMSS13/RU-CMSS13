@@ -667,19 +667,6 @@
 		swap_hand()
 	return ..()
 
-/datum/behavior_delegate/lurker_base
-	name = "Base Lurker Behavior Delegate"
-
-	// Config
-	var/invis_recharge_time = 20 SECONDS
-	var/invis_start_time = -1 // Special value for when we're not invisible
-	var/invis_duration = 30 SECONDS // so we can display how long the lurker is invisible to it
-	var/buffed_slash_damage_ratio = 1.2
-	var/slash_slow_duration = 35
-
-	// State
-	var/next_slash_buffed = FALSE
-
 /mob/living/carbon/xenomorph/runner/ai_move_target(delta_time)
 	if(throwing)
 		return
