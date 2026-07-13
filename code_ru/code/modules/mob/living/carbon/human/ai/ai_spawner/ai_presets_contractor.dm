@@ -26,11 +26,6 @@
 	desc = "A non W-Y PMC, this medic is equipped with similar gear to the standard alongside medical equipment."
 	path = /datum/equipment_preset/contractor/duty/medic
 
-/datum/human_ai_equipment_preset/contractor/duty/synth
-	name = "Contractor - Synth"
-	desc = "A support synthetic for a generic non WY PMC."
-	path = /datum/equipment_preset/contractor/duty/synth
-
 //
 
 /datum/human_ai_equipment_preset/contractor/covert/standard
@@ -57,8 +52,3 @@
 	name = "Contractor - Covert Medic"
 	desc = "A covert PMC medic, with a similar geatset to the standard but with more medical equipment."
 	path = /datum/equipment_preset/contractor/covert/medic
-
-/datum/human_ai_equipment_preset/contractor/covert/synth
-	name = "Contractor - Covert Synth"
-	desc = "Covert PMC support synthetic."
-	path = /datum/equipment_preset/contractor/covert/synth
