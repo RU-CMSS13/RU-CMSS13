@@ -15,23 +15,3 @@
 	name = "Dzho Automaton - Malfunctioning"
 	desc = "A damaged and hostile Dzho Automaton"
 	path = /datum/equipment_preset/synth/working_joe/upp/malf_synth
-
-/datum/human_ai_equipment_preset/malfunctioning_synth/malf_synth/twe_rebel_combat
-	name = "TWE Rebel Converted Combat Joe - Malfunctioning"
-	desc = "A damaged and hostile working joe"
-	path = /datum/equipment_preset/synth/working_joe/upp/combat/twe_rebel/malf_synth
-
-/datum/human_ai_equipment_preset/malfunctioning_synth/malf_synth/canc_rebel_combat
-	name = "CANC Combat Android - Malfunctioning"
-	desc = "A damaged and hostile working joe"
-	path = /datum/equipment_preset/synth/working_joe/upp/combat/canc/malf_synth
-
-/datum/human_ai_equipment_preset/malfunctioning_synth/malf_synth/upp_combat
-	name = "UPP Combat Android - Malfunctioning"
-	desc = "A damaged and hostile working joe"
-	path = /datum/equipment_preset/synth/working_joe/upp/combat/malf_synth
-
-/datum/human_ai_equipment_preset/malfunctioning_synth/malf_synth/ua_combat
-	name = "UA Combat Android - Malfunctioning"
-	desc = "A damaged and hostile working joe"
-	path = /datum/equipment_preset/synth/working_joe/security_android/malf_synth
