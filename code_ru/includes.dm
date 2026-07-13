@@ -118,7 +118,6 @@
 #include "code\modules\mob\living\carbon\human\ai\conversations\ai_conversations_military.dm"
 #include "code\modules\mob\living\carbon\human\ai\order_datums\order.dm"
 #include "code\modules\mob\living\carbon\human\ai\order_datums\order_patrol.dm"
-#include "code\modules\mob\living\carbon\human\ai\squad_spawner\squad_clf.dm"
 #include "code\modules\mob\living\carbon\human\ai\squad_spawner\squad_contractor.dm"
 #include "code\modules\mob\living\carbon\human\ai\squad_spawner\squad_spawner.dm"
 #include "code\modules\mob\living\carbon\human\emote.dm"
