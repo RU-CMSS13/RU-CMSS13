@@ -561,6 +561,7 @@
 	if(xeno.z != target.z)
 		xeno.pounce_distance += 2
 	xeno.throw_atom(target, distance, throw_speed, xeno, launch_type = LOW_LAUNCH, pass_flags = pounce_pass_flags, collision_callbacks = pounce_callbacks, tracking=TRUE)
+	SEND_SIGNAL(owner, COMSIG_XENO_USED_POUNCE, target)
 	xeno.update_icons()
 
 	additional_effects_always()

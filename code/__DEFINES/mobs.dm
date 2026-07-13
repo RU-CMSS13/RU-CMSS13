@@ -197,6 +197,7 @@
 #define MUTINY_MUTINEER (1<<7)  // Part of the Mutiny Gang
 #define MUTINY_LOYALIST (1<<8) // Allied with command.
 #define MUTINY_NONCOMBAT (1<<9) // NON COMBATANT.
+#define AI_CONTROLLED (1<<10)
 
 //=================================================
 

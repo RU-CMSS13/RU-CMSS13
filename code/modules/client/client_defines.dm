@@ -138,6 +138,24 @@
 	/// If this client has any windows scaling applied
 	var/window_scaling
 
+	/// Holds the game master datum for this client
+	var/datum/game_master/game_master_menu
+
+	/// Holds the human AI manager panel for this client
+	var/datum/human_ai_management_menu/human_ai_menu
+
+	/// Holds the human faction manager panel for this client
+	var/datum/human_faction_management_menu/human_faction_menu
+
+	/// Holds the human defense creator panel for this client
+	var/datum/human_defense_creator_menu/human_defense_menu
+
+	/// Holds the human squad spawner panel for this client
+	var/datum/human_squad_spawner_menu/human_squad_menu
+
+	/// Holds the human squad spawner panel for this client
+	var/datum/human_ai_spawner_menu/human_spawn_menu
+
 	/// An alist used to make checks for whether a render plate has been added to a client's screen faster.
 	/// render relay plate -> TRUE
 	/// This must be cleared whenever screen is cleared manually.
