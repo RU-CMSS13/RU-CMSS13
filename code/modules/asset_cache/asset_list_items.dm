@@ -483,10 +483,10 @@
 /datum/asset/spritesheet/gun_lineart/register()
 	var/icon_file = 'icons/obj/items/weapons/guns/lineart.dmi'
 	InsertAll("", icon_file)
-//RUCM START
+//RUCM CODE START
 	var/ru_icon_file = 'code_ru/icons/obj/items/weapons/guns/lineart.dmi'
 	InsertAll("", ru_icon_file)
-//RUCM END
+//RUCM CODE END
 
 	for(var/obj/item/weapon/gun/current_gun as anything in subtypesof(/obj/item/weapon/gun))
 		if(isnull(initial(current_gun.icon_state)))

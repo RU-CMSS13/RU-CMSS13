@@ -22,7 +22,6 @@
 	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_5
 	recoil_unwielded_mod = RECOIL_AMOUNT_TIER_5
 	scatter_unwielded_mod = SCATTER_AMOUNT_TIER_6
-	wield_delay_mod = WIELD_DELAY_VERY_FAST
 	aim_speed_mod = CONFIG_GET(number/slowdown_med)
 
 /obj/item/attachable/stock/rifle/collapsible/xm52/apply_on_weapon(obj/item/weapon/gun/gun)
@@ -43,7 +42,6 @@
 		attach_icon = "xm52_folding_a_on"
 		pixel_shift_x = 29
 		size_mod = 2
-		wield_delay_mod = WIELD_DELAY_VERY_FAST //added 0.2 seconds for wield, basic solid stock adds 0.4
 
 	else
 		accuracy_mod = 0
@@ -58,7 +56,6 @@
 		attach_icon = "xm52_folding_a"
 		pixel_shift_x = 31
 		size_mod = 1
-		wield_delay_mod = WIELD_DELAY_NONE //stock is folded so no wield delay
 
 	gun.recalculate_attachment_bonuses()
 	gun.update_overlays(src, "stock")

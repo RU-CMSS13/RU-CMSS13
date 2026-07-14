@@ -11,6 +11,7 @@
 	desc = "The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the XM52 breaching scattergun, allowing easier storage of the weapon. It features pouches for storing two magazines along with extra shells."
 	icon = 'code_ru/icons/obj/items/clothing/belts.dmi'
 	icon_state = "xm52_holster"
+	gun_slot_icon = 'code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi'
 	flags_atom = FPRINT|NO_GAMEMODE_SKIN
 	gun_has_gamemode_skin = FALSE
 	map_specific_decoration = FALSE
@@ -61,6 +62,8 @@
 				ammo_dumping.update_icon()
 			else
 				to_chat(user, SPAN_WARNING("[src] is full."))
+
+	gun_slot_icon = 'code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi'
 
 /obj/item/storage/belt/gun/xm52/can_be_inserted(obj/item/item, mob/user, stop_messages = FALSE)
 	. = ..()

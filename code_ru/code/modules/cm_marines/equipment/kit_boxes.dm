@@ -38,6 +38,7 @@
 	new	/obj/item/device/defibrillator/compact(src)
 	new /obj/item/roller(src)
 
+//RUCM CODE START
 /obj/item/storage/box/spec/breacher
 	name = "\improper Breacher equipment case"
 	desc = "A large case containing your experimental M40 full armor, heavy hammer and montage shield."
@@ -62,3 +63,4 @@
 	new /obj/item/ammo_magazine/rifle/xm52(src)
 	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
 	new /obj/item/ammo_magazine/shotgun/light/breaching/sparkshots(src)
+//RUCM CODE END
