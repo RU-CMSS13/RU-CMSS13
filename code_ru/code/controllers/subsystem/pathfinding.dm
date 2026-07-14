@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(pathfinding)
 				// 	var/atom/A = i
 				// 	distance_between += A.object_weight
 
-				var/list/L = LinkBlocked(current_run.agent, current_run.current_node, neighbor, current_run.ignore, TRUE)
+				var/list/L = LinkBlockedLISTFUCKU(current_run.agent, current_run.current_node, neighbor, current_run.ignore, TRUE)
 				L += check_special_blockers(current_run.agent, neighbor)
 				if(length(L))
 					if(isxeno(current_run.agent))

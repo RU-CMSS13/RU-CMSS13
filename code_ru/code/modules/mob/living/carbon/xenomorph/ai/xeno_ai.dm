@@ -195,7 +195,7 @@
 		return TRUE
 
 	var/turf/next_turf = current_path[current_path.len]
-	var/list/L = LinkBlocked(src, loc, next_turf, list(src), TRUE)
+	var/list/L = LinkBlockedLISTFUCKU(src, loc, next_turf, list(src), TRUE)
 	L += SSpathfinding.check_special_blockers(src, next_turf)
 	for(var/a in L)
 		var/atom/A = a
@@ -426,7 +426,7 @@
 			for(var/mob/mob_blocker in checked_turf)
 				ignore += mob_blocker
 
-			if(LinkBlocked(processing_xeno, previous_turf, checked_turf, ignore))
+			if(LinkBlockedLISTFUCKU(processing_xeno, previous_turf, checked_turf, ignore))
 				blocked = TRUE
 				break
 
@@ -514,7 +514,7 @@
 
 	for(var/i in get_line(pouncing_xeno, pouncing_xeno.current_target, FALSE))
 		var/turf/new_turf = i
-		if(LinkBlocked(pouncing_xeno, last_turf, new_turf, list(pouncing_xeno.current_target, pouncing_xeno)))
+		if(LinkBlockedLISTFUCKU(pouncing_xeno, last_turf, new_turf, list(pouncing_xeno.current_target, pouncing_xeno)))
 			clear = FALSE
 			break
 
