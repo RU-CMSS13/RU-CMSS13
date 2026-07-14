@@ -1181,7 +1181,8 @@
 
 	bullet_message(bullet) //Message us about the bullet, since damage was inflicted.
 
-
+	if(mob_flags & AI_CONTROLLED)
+		handle_ai_shot(bullet)
 
 	if(SEND_SIGNAL(src, COMSIG_XENO_BULLET_ACT, damage_result, ammo_flags, bullet) & COMPONENT_CANCEL_BULLET_ACT)
 		return
