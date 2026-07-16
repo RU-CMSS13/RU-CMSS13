@@ -1,10 +1,10 @@
 /obj/item/clothing/head/helmet/marine/m40
 	name = "\improper M40 breacher helmet"
 	desc = "A helmet designed for USCM breacher. Contains heavy insulation, covered in nomex weave."
-	icon = 'code_ru/icons/mob/humans/onmob/head_1.dmi'
-	icon_state = "u_breacher_helmet"
+	icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/jungle.dmi'
+	icon_state = "breach_helmet"
 	item_icons = list(
-		WEAR_HEAD = 'code_ru/icons/mob/humans/onmob/head_1.dmi'
+		WEAR_HEAD = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/jungle.dmi'
 	)
 	armor_melee = CLOTHING_ARMOR_HIGH
 	armor_bullet = CLOTHING_ARMOR_MEDIUM
@@ -22,5 +22,23 @@
 	unacidable = TRUE
 	anti_hug = 6
 	specialty = "M40 breacher"
-	flags_atom = NO_GAMEMODE_SKIN
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
+
+/obj/item/clothing/head/helmet/marine/m40/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
+	. = ..()
+	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
+		if("jungle")
+			icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/jungle.dmi'
+			item_icons[WEAR_HEAD] = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/jungle.dmi'
+		if("classic")
+			icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/classic.dmi'
+			item_icons[WEAR_HEAD] = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/classic.dmi'
+		if("desert")
+			icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/desert.dmi'
+			item_icons[WEAR_HEAD] = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/desert.dmi'
+		if("snow")
+			icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/snow.dmi'
+			item_icons[WEAR_HEAD] = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/snow.dmi'
+		if("urban")
+			icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/urban.dmi'
+			item_icons[WEAR_HEAD] = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/urban.dmi'

@@ -4,11 +4,11 @@
 /obj/item/clothing/suit/storage/marine/m40
 	name = "\improper M40 experimental armor"
 	desc = "A custom set of M40 armor designed for use by USCM breacher. Contains thick kevlar shielding and integrated experimental injectors of adrenaline with portative-protective dialysis device."
+	icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/jungle.dmi'
 	item_icons = list(
-	WEAR_JACKET = 'code_ru/icons/mob/humans/onmob/suit_1.dmi'
+	WEAR_JACKET = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/jungle.dmi'
 	)
-	icon = 'code_ru/icons/obj/items/clothing/cm_suits.dmi'
-	icon_state = "u_st_armor"
+	icon_state = "breach_armor"
 	armor_melee = CLOTHING_ARMOR_HIGHPLUS
 	armor_bullet = CLOTHING_ARMOR_HIGH
 	armor_energy = CLOTHING_ARMOR_LOW
@@ -20,7 +20,6 @@
 	flags_armor_protection = BODY_FLAG_CHEST|BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS|BODY_FLAG_FEET
 	flags_item = MOB_LOCK_ON_EQUIP|NO_CRYO_STORE
 	specialty = "M40 breacher"
-	flags_atom = NO_GAMEMODE_SKIN
 	actions_types = list(/datum/action/item_action/toggle, /datum/action/item_action/specialist/enrage)
 	unacidable = TRUE
 	light_power = 4
@@ -31,6 +30,25 @@
 	var/saved_feels = TRUE
 	var/saved_flags = DEFAULT_MOB_STATUS_FLAGS
 	var/processing = FALSE
+
+/obj/item/clothing/suit/storage/marine/m40/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
+	. = ..()
+	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
+		if("jungle")
+			icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/jungle.dmi'
+			item_icons[WEAR_JACKET] = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/jungle.dmi'
+		if("classic")
+			icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/classic.dmi'
+			item_icons[WEAR_JACKET] = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/classic.dmi'
+		if("desert")
+			icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/desert.dmi'
+			item_icons[WEAR_JACKET] = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/desert.dmi'
+		if("snow")
+			icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/snow.dmi'
+			item_icons[WEAR_JACKET] = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/snow.dmi'
+		if("urban")
+			icon = 'code_ru/icons/obj/items/clothing/suits/suits_by_map/urban.dmi'
+			item_icons[WEAR_JACKET] = 'code_ru/icons/mob/humans/onmob/clothing/suits/suits_by_map/urban.dmi'
 
 /obj/item/clothing/suit/storage/marine/m40/verb/enrage()
 	set name = "Activate Enrage"

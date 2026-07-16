@@ -10,11 +10,12 @@
 	name = "\improper M276 pattern XM52 holster rig"
 	desc = "The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the XM52 breaching scattergun, allowing easier storage of the weapon. It features pouches for storing two magazines along with extra shells."
 	icon = 'code_ru/icons/obj/items/clothing/belts.dmi'
+	item_icons = list(
+		WEAR_WAIST = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/jungle.dmi'
+	)
 	icon_state = "xm52_holster"
 	gun_slot_icon = 'code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi'
-	flags_atom = FPRINT|NO_GAMEMODE_SKIN
-	gun_has_gamemode_skin = FALSE
-	map_specific_decoration = FALSE
+	flags_atom = FPRINT
 	storage_slots = 8
 	max_w_class = 6
 	can_hold = list(
@@ -32,6 +33,25 @@
 	var/maxmag = 2
 	var/obj/item/weapon/gun/rifle/xm52/magneted_xm
 	var/magnetic_range = 2
+
+/obj/item/storage/belt/gun/xm52/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
+	. = ..()
+	switch(SSmapping.configs[GROUND_MAP].camouflage_type)
+		if("jungle")
+			icon = 'code_ru/icons/obj/items/clothing/belts/belts_by_map/jungle.dmi'
+			item_icons[WEAR_WAIST] = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/jungle.dmi'
+		if("classic")
+			icon = 'code_ru/icons/obj/items/clothing/belts/belts_by_map/classic.dmi'
+			item_icons[WEAR_WAIST] = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/classic.dmi'
+		if("desert")
+			icon = 'code_ru/icons/obj/items/clothing/belts/belts_by_map/desert.dmi'
+			item_icons[WEAR_WAIST] = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/desert.dmi'
+		if("snow")
+			icon = 'code_ru/icons/obj/items/clothing/belts/belts_by_map/snow.dmi'
+			item_icons[WEAR_WAIST] = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/snow.dmi'
+		if("urban")
+			icon = 'code_ru/icons/obj/items/clothing/belts/belts_by_map/urban.dmi'
+			item_icons[WEAR_WAIST] = 'code_ru/icons/mob/humans/onmob/clothing/belts/belts_by_map/urban.dmi'
 
 /obj/item/storage/belt/gun/xm52/dump_ammo_to(obj/item/ammo_magazine/ammo_dumping, mob/user, amount_to_dump)
 	if(user.action_busy)
