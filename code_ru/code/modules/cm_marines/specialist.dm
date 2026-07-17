@@ -1,7 +1,8 @@
 /datum/specialist_set/stormtropper
 	name = "Breacher Set"
-	role_name = "Breacher"
+	role_name = JOB_SQUAD_SPECIALIST_BREACHER
 	skill_to_give = SKILL_SPEC_BREACHER
+	trait_to_give = "breacher"
 	kit_typepath = /obj/item/storage/box/spec/breacher
 
 /datum/specialist_set/stormtropper/redeem_set(mob/living/redeemer, kit, silent)
