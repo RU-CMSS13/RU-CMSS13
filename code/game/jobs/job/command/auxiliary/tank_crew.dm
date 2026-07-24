@@ -26,7 +26,7 @@
 */
 //RUCM START
 /datum/job/command/tank_crew/set_spawn_positions(count)
-	if (length(GLOB.clients) >= 20)
+	if (length(GLOB.clients) >= 20 || MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
 		spawn_positions = 2
 	else
 		spawn_positions = 0
@@ -34,7 +34,7 @@
 /datum/job/command/tank_crew/get_total_positions(latejoin = TRUE)
 	if(SStechtree.trees[TREE_MARINE].get_node(/datum/tech/arc).unlocked)
 		return 0
-	if(length(GLOB.clients) >= 20 || total_positions_so_far > 0)
+	if(length(GLOB.clients) >= 20 || total_positions_so_far > 0 || MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
 		return 2
 
 	return 0

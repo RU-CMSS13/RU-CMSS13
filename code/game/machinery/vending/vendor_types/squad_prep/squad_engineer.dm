@@ -93,6 +93,9 @@ GLOBAL_LIST_INIT(cm_vending_gear_engi, list(
 		list("HELMET OPTICS", 0, null, null, null),
 		list("Medical Helmet Optic", 12, /obj/item/device/helmet_visor/medical, null, VENDOR_ITEM_REGULAR),
 		list("Welding Visor", 5, /obj/item/device/helmet_visor/welding_visor, null, VENDOR_ITEM_REGULAR),
+//RUCM CODE START
+		list("Night Vision Optic", 25, /obj/item/device/helmet_visor/night_vision, null, VENDOR_ITEM_WELL_FUNDED),
+//RUCM CODE END
 
 		list("PAMPHLETS", 0, null, null, null),
 		list("JTAC Pamphlet", 15, /obj/item/pamphlet/upgradeable/jtac, null, VENDOR_ITEM_REGULAR),
@@ -112,6 +115,23 @@ GLOBAL_LIST_INIT(cm_vending_gear_engi, list(
 	req_access = list(ACCESS_MARINE_ENGPREP)
 
 /obj/structure/machinery/cm_vending/gear/engi/get_listed_products(mob/user)
+//RUCM CODE START
+	var/list/final_products = list()
+
+	for(var/product in GLOB.cm_vending_gear_engi)
+		if(product[length(product)] == null)
+			final_products += list(product)
+		else if(product[length(product)] == VENDOR_ITEM_WELL_FUNDED && MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			final_products += list(product)
+		else if(product[length(product)] == VENDOR_ITEM_POOR && !MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			final_products += list(product)
+		else if(product[length(product)] <= VENDOR_ITEM_RECOMMENDED)
+			final_products += list(product)
+
+	return final_products
+
+/obj/structure/machinery/cm_vending/gear/engi/get_unfiltered_products(mob/user)
+//RUCM CODE END
 	return GLOB.cm_vending_gear_engi
 
 //------------CLOTHING VENDOR---------------
@@ -163,9 +183,19 @@ GLOBAL_LIST_INIT(cm_vending_clothing_engi, list(
 		list("Explosive Pouch", 0, /obj/item/storage/pouch/explosive, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Flare Pouch (Full)", 0, /obj/item/storage/pouch/flare/full, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Large Pistol Magazine Pouch", 0, /obj/item/storage/pouch/magazine/pistol/large, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
+/* //RUCM CODE EDIT START
 		list("Magazine Pouch", 0, /obj/item/storage/pouch/magazine, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Shotgun Shell Pouch", 0, /obj/item/storage/pouch/shotgun, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Medium General Pouch", 0, /obj/item/storage/pouch/general/medium, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
+*/ //RUCM CODE EDIT END
+//RUCM CODE START
+		list("Magazine Pouch", 0, /obj/item/storage/pouch/magazine, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_POOR),
+		list("Shotgun Shell Pouch", 0, /obj/item/storage/pouch/shotgun, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_POOR),
+		list("Medium General Pouch", 0, /obj/item/storage/pouch/general/medium, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_POOR),
+		list("Large Magazine Pouch", 0, /obj/item/storage/pouch/magazine/large, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_WELL_FUNDED),
+		list("Large Shotgun Shell Pouch", 0, /obj/item/storage/pouch/shotgun/large, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_WELL_FUNDED),
+		list("Large General Pouch", 0, /obj/item/storage/pouch/general/large, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_WELL_FUNDED),
+//RUCM CODE END
 		list("Pistol Pouch", 0, /obj/item/storage/pouch/pistol, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Tools Pouch (Full)", 0, /obj/item/storage/pouch/tools/full, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
 		list("Engineer kit Pouch", 0, /obj/item/storage/pouch/engikit, MARINE_CAN_BUY_POUCH, VENDOR_ITEM_REGULAR),
@@ -197,6 +227,11 @@ GLOBAL_LIST_INIT(cm_vending_clothing_engi, list(
 
 /obj/structure/machinery/cm_vending/clothing/engi/get_listed_products(mob/user)
 	return GLOB.cm_vending_clothing_engi
+
+//RUCM CODE START
+/obj/structure/machinery/cm_vending/clothing/engi/get_unfiltered_products(mob/user)
+	return GLOB.cm_vending_clothing_engi
+//RUCM CODE END
 
 /obj/structure/machinery/cm_vending/clothing/engi/alpha
 	squad_tag = SQUAD_MARINE_1
