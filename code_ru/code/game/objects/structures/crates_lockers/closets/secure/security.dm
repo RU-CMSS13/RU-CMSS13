@@ -1,4 +1,5 @@
 /obj/structure/closet/secure_closet/marshal/alt
+	icon = 'code_ru/icons/obj/structures/closet.dmi'
 	icon_state = "secure_alt_locked_warrant"
 	icon_closed = "secure_alt_unlocked_warrant"
 	icon_locked = "secure_alt_locked_warrant"
