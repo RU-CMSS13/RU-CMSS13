@@ -63,7 +63,6 @@
 #include "code\game\machinery\doors\multi_tile.dm"
 #include "code\game\machinery\doors\poddoor\almayer.dm"
 #include "code\game\machinery\doors\windowdoor.dm"
-#include "code\game\objects\effects\decals\misc.dm"
 #include "code\game\objects\effects\decals\strata_decals.dm"
 #include "code\game\objects\items\tools\misc_tools.dm"
 #include "code\game\objects\structures\blocker.dm"
