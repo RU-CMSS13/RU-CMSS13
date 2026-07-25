@@ -32,5 +32,3 @@
 	lightning_chance = 2
 
 	fire_smothering_strength = 4
-
-GLOBAL_LIST_INIT(big_fog_tiles, list())

@@ -8,6 +8,7 @@
 #include "code\datums\supply_packs\gear.dm"
 #include "code\datums\supply_packs\weapons.dm"
 #include "code\datums\vehicles.dm"
+#include "code\datums\weather\weather_map_holders\lv624_lazarus_landing.dm"
 #include "code\game\area\LV624_Lazarus_Landing.dm"
 #include "code\game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "code\game\jobs\job\command\auxiliary\mech_crew.dm"
