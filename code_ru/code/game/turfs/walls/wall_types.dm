@@ -3,7 +3,7 @@
 	icon = 'code_ru/icons/turf/walls/lv_colony_walls.dmi'
 	icon_state = "lvwall"
 	desc = "A thick and chunky metal wall. The surface is barren and imposing."
-
+	walltype = WALL_LV_BASE
 
 /turf/closed/wall/lv_outpost/reinforced
 	name = "ribbed outpost walls"

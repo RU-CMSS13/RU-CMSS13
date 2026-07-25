@@ -427,6 +427,9 @@
 #define WALL_UPP_BASE "uppwall"
 #define WALL_ANCIENT_BASE "ancient_stone"
 #define WALL_RUNEDSTONE "runedstone"
+//RUCM CODE START
+#define WALL_LV_BASE "lvwall"
+//RUCM CODE END
 
 //Defines for dropship weapon gimbals
 #define GIMBAL_LEFT -1
