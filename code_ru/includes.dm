@@ -34,6 +34,7 @@
 #include "code\modules\cm_aliens\structures\blueprints.dm"
 #include "code\modules\cm_marines\equipment\kit_boxes.dm"
 #include "code\modules\cm_marines\overwatch.dm"
+#include "code\modules\cm_marines\equipment\maps.dm"
 #include "code\modules\cm_tech\tech_tiers.dm"
 #include "code\modules\cm_tech\techs\marine\tier2\walker.dm"
 #include "code\modules\gear_presets\uscm_ship.dm"
