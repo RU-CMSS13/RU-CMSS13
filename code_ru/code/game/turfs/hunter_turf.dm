@@ -9,6 +9,12 @@
 	minimap_color = MINIMAP_WATER
 	baseturfs = /turf/open/floor/waterfall
 
+/turf/open/floor/waterfall/ex_act(severity) //Should make it indestructible
+	return
+
+/turf/open/floor/waterfall/fire_act(exposed_temperature, exposed_volume)
+	return
+
 /turf/open/floor/waterfall/top
 
 	icon_state = "waterfall_top"
