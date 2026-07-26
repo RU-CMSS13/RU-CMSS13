@@ -43,15 +43,13 @@
 	playsound(turf, 'sound/weapons/gun_flamethrower3.ogg', 75, 1, 7)
 	if(!istype(turf))
 		return
-	smoke.set_up(1, turf)
-	smoke.start()
-	var/datum/reagent/napalm/gel/reagent = new()
+	do_smoke(loca = turf)
+	var/datum/reagent/napalm/blue/reagent = new()
 	new /obj/flamer_fire(turf, cause_data, reagent, 3)
 
 	var/datum/effect_system/smoke_spread/phosphorus/landingSmoke = new /datum/effect_system/smoke_spread/phosphorus
 	landingSmoke.set_up(3, 0, turf, null, 6, cause_data)
 	landingSmoke.start()
-	landingSmoke = null
 
 /datum/ammo/rocket/wp/chimera/on_hit_mob(mob/mob, obj/projectile/projectile)
 	drop_flame(get_turf(mob), projectile.weapon_cause_data)
