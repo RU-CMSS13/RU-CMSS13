@@ -193,9 +193,6 @@
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space)
-"aaD" = (
-/turf/open/floor/almayer/plate,
-/area/almayer/maint/hull/upper/u_f_s)
 "aaE" = (
 /turf/open/floor/almayer/orange/west,
 /area/almayer/hallways/lower/port_midship_hallway)
@@ -219,11 +216,6 @@
 /obj/structure/cargo_container/wy/mid,
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/hallways/hangar)
-"aaI" = (
-/obj/structure/pipes/standard/simple/hidden/supply,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/maint/hull/upper/u_f_s)
 "aaJ" = (
 /turf/closed/wall/almayer,
 /area/almayer/living/starboard_emb)
@@ -11690,10 +11682,6 @@
 	},
 /turf/open/floor/almayer/silver/east,
 /area/almayer/command/cichallway)
-"aDL" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/almayer/plate,
-/area/almayer/maint/hull/upper/u_f_s)
 "aDM" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -51024,18 +51012,8 @@
 /turf/open/floor/almayer/red/north,
 /area/almayer/shipboard/brig/general_equipment)
 "crg" = (
-/obj/structure/window/framed/almayer/hull,
-/obj/structure/machinery/door/poddoor/shutters/almayer/open{
-	id = "briglobbyprivacyshutters";
-	name = "\improper Privacy Shutters";
-	dir = 2
-	},
-/obj/structure/machinery/door/poddoor/almayer/open{
-	id = "Brig Lockdown Shutters";
-	name = "\improper Brig Lockdown Shutter"
-	},
-/turf/open/floor/plating,
-/area/almayer/shipboard/brig/processing)
+/turf/open/floor/almayer/plate,
+/area/almayer/maint/hull/upper/u_f_s)
 "crh" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -51050,13 +51028,31 @@
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/u_f_s)
 "crj" = (
+/obj/structure/window/framed/almayer/hull,
+/obj/structure/machinery/door/poddoor/shutters/almayer/open{
+	id = "briglobbyprivacyshutters";
+	name = "\improper Privacy Shutters";
+	dir = 2
+	},
+/obj/structure/machinery/door/poddoor/almayer/open{
+	id = "Brig Lockdown Shutters";
+	name = "\improper Brig Lockdown Shutter"
+	},
+/turf/open/floor/plating,
+/area/almayer/shipboard/brig/processing)
+"crk" = (
 /obj/structure/machinery/cm_vending/clothing/military_police{
 	pixel_y = 30;
 	can_block_movement = 0
 	},
 /turf/open/floor/almayer/cargo_arrow/north,
 /area/almayer/shipboard/brig/general_equipment)
-"crk" = (
+"crl" = (
+/obj/structure/pipes/standard/simple/hidden/supply,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/maint/hull/upper/u_f_s)
+"crm" = (
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 4;
 	id = "Brig Lockdown Shutters";
@@ -51064,7 +51060,11 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/s_bow)
-"crl" = (
+"crn" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/almayer/plate,
+/area/almayer/maint/hull/upper/u_f_s)
+"cro" = (
 /obj/structure/machinery/door/poddoor/almayer/open{
 	dir = 4;
 	id = "Brig Lockdown Shutters";
@@ -51072,11 +51072,11 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/maint/hull/upper/s_bow)
-"crm" = (
+"crp" = (
 /obj/structure/machinery/power/apc/almayer/north,
 /turf/open/floor/almayer/plate,
 /area/almayer/maint/hull/upper/s_bow)
-"crn" = (
+"crq" = (
 /obj/structure/machinery/camera/autoname/almayer{
 	dir = 4;
 	name = "ship-grade camera"
@@ -200747,8 +200747,8 @@ bdH
 aad
 aag
 uDg
-crl
-crk
+cro
+crm
 wIC
 wIC
 iRp
@@ -201882,7 +201882,7 @@ aag
 lrE
 gkr
 wJC
-crg
+crj
 neC
 cqJ
 pyj
@@ -201985,7 +201985,7 @@ aag
 lrE
 gkr
 wMF
-crg
+crj
 neC
 cqJ
 quj
@@ -202292,7 +202292,7 @@ bdH
 aad
 aag
 uDg
-crm
+crp
 xkc
 cqD
 crd
@@ -203118,7 +203118,7 @@ uDg
 bVA
 xkc
 cQv
-crj
+crk
 crf
 cqX
 sbP
@@ -204040,7 +204040,7 @@ aeE
 afb
 ayq
 cfE
-crn
+crq
 pvP
 adu
 aHZ
@@ -204765,9 +204765,9 @@ adG
 akC
 ltw
 cmr
-aDL
+crn
 oQJ
-aaD
+crg
 iPq
 pcc
 xoB
@@ -204869,7 +204869,7 @@ cmr
 lSX
 uaA
 uaA
-aaI
+crl
 snx
 fLt
 fYr
