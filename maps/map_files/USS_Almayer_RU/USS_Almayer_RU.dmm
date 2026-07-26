@@ -45,6 +45,16 @@
 	},
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/engineering/upper_engineering/port)
+"aak" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 4;
+	name = "ship-grade camera"
+	},
+/obj/structure/sign/safety/storage{
+	pixel_x = -17
+	},
+/turf/open/floor/almayer/green/west,
+/area/almayer/hallways/upper/fore_hallway)
 "aal" = (
 /obj/structure/pipes/standard/simple/hidden/supply/no_boom{
 	dir = 4
@@ -47491,6 +47501,9 @@
 /turf/open/floor/almayer/flooredge/north,
 /area/almayer/hallways/upper/midship_hallway)
 "cjV" = (
+/obj/structure/sign/safety/storage{
+	pixel_x = -17
+	},
 /turf/open/floor/almayer/green/northwest,
 /area/almayer/hallways/upper/fore_hallway)
 "cjW" = (
@@ -50495,12 +50508,6 @@
 /obj/structure/pipes/standard/manifold/hidden/supply,
 /turf/open/floor/almayer/red/south,
 /area/almayer/shipboard/brig)
-"cqx" = (
-/obj/structure/sign/safety/storage{
-	pixel_x = -17
-	},
-/turf/open/floor/almayer/flooredge/west,
-/area/almayer/hallways/upper/fore_hallway)
 "cqy" = (
 /obj/structure/surface/table/almayer,
 /obj/structure/machinery/power/apc/almayer/north,
@@ -50877,15 +50884,6 @@
 "crv" = (
 /obj/structure/machinery/door/airlock/almayer/maint{
 	dir = 1
-	},
-/turf/open/floor/almayer/test_floor4,
-/area/almayer/lifeboat_pumps/north1)
-"crw" = (
-/obj/structure/machinery/door/firedoor/border_only/almayer{
-	dir = 2
-	},
-/obj/structure/sign/safety/storage{
-	pixel_x = -17
 	},
 /turf/open/floor/almayer/test_floor4,
 /area/almayer/lifeboat_pumps/north1)
@@ -208765,7 +208763,7 @@ oGC
 awW
 acW
 add
-bny
+add
 bny
 adq
 adq
@@ -208870,12 +208868,12 @@ acW
 awW
 awW
 aSJ
-crw
+hiy
 cjV
 geu
 geu
-cqx
-cdd
+geu
+aak
 geu
 iKy
 oyB
