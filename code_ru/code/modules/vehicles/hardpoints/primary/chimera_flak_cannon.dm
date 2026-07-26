@@ -1,6 +1,6 @@
 /obj/item/hardpoint/primary/chimera_launchers/autocannon
 	name = "\improper AC3-E Autocannon"
-	desc = "A primary autocannon for tanks that shoots explosive flak rounds."
+	desc = "A primary autocannon for VTOL that shoots explosive flak rounds."
 
 	icon = 'icons/obj/vehicles/hardpoints/blackfoot.dmi'
 	icon_state = "chimera_autocannon"
@@ -12,7 +12,7 @@
 	firing_arc = 90
 	allowed_seat = VEHICLE_DRIVER
 
-	ammo = new /obj/item/ammo_magazine/hardpoint/ace_autocannon
+	ammo = new /obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/autocannon
 	max_clips = 2
 
 	scatter = 1
@@ -45,7 +45,7 @@
 	return ..()
 
 // Just removes the sleep because it sucks
-/obj/item/hardpoint/secondary/autocannon/chimera/reload(mob/user)
+/obj/item/hardpoint/primary/chimera_launchers/autocannon/chimera/reload(mob/user)
 	if(!LAZYLEN(backup_clips))
 		to_chat(usr, SPAN_WARNING("\The [name] has no remaining backup clips."))
 		return

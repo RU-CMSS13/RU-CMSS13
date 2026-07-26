@@ -180,7 +180,7 @@
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet,
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/hornet,
 	)
-	cost = 60
+	cost = 40
 	containertype = /obj/structure/closet/crate/weapon
 	containername = "blackfoot ammo crate"
 	group = "Vehicle Ammo"
@@ -191,7 +191,29 @@
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget,
 		/obj/item/ammo_magazine/hardpoint/doorgun_ammo/holotarget,
 	)
-	cost = 80
+	cost = 40
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "blackfoot ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/blackfoot_ammo_flak
+	name = "blackfoot flak ammunition (x2)"
+	contains = list(
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/autocannon,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/autocannon,
+	)
+	cost = 40
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "blackfoot ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/blackfoot_ammo_holotarget
+	name = "blackfoot rocket ammunition (x2)"
+	contains = list(
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
+	)
+	cost = 40
 	containertype = /obj/structure/closet/crate/weapon
 	containername = "blackfoot ammo crate"
 	group = "Vehicle Ammo"

@@ -17,3 +17,23 @@
 	containertype = /obj/structure/closet/crate/weapon
 	containername = "landing pad crate"
 	group = "Vehicle Equipment"
+
+/datum/supply_packs/chimera_autocannon
+	name = "Chimera autocannon (x1)"
+	contains = list(
+		/obj/item/hardpoint/primary/chimera_launchers/autocannon,
+	)
+	cost = 25
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "landing pad crate"
+	group = "Vehicle Equipment"
+
+/datum/supply_packs/chimera_rocket_launchers
+	name = " Chimera Rocket Launchers (x1)"
+	contains = list(
+		/obj/item/hardpoint/primary/chimera_launchers/rocket,
+	)
+	cost = 25
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "landing pad crate"
+	group = "Vehicle Equipment"
