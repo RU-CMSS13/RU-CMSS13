@@ -1,7 +1,7 @@
 // Waterfall
 
 /turf/open/floor/waterfall
-	icon = 'icons/turf/waterfall_test.dmi'
+	icon = 'code_ru/code/icons/turf/waterfall_test.dmi'
 	icon_state = "waterfall_top"
 	can_bloody = FALSE
 	fishing_allowed = FALSE
