@@ -10,8 +10,8 @@
 	name = "Base Lesser Behavior Delegate"
 
 /mob/living/carbon/xenomorph/lesser_drone
-	icon_xeno = 'code_ru/icons/mob/xenos/lesser_drone_new.dmi'
-	icon_xenonid = 'code_ru/icons/mob/xenos/lesser_drone_new.dmi'
+	icon_xeno = 'code_ru/icons/mob/xenos/casters/tier_0/lesser_drone.dmi'
+	icon_xenonid = 'code_ru/icons/mob/xenonids/casters/tier_0/lesser_drone.dmi'
 
 /datum/xeno_strain/sacrificer
 	name = "Sacrificer"

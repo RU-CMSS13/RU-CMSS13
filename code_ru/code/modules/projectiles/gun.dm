@@ -1,6 +1,7 @@
 /obj/item/weapon/gun
 	/// for lineart override
-	var/lineart_ru = FALSE  //RUCM EDIT
+	var/lineart_ru = FALSE
+
 	var/flags_mounted_gun_features = null
 
 	/// Remote handling
