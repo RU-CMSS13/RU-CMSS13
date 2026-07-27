@@ -21,13 +21,11 @@
 	)
 
 /datum/skills/pfc
-	name = "Private"
 	skills = list(
 		SKILL_MEDICAL = SKILL_MEDICAL_TRAINED,
 	)
 
 /datum/skills/combat_engineer
-	name = "Combat Engineer"
 	skills = list(
 		SKILL_FIREMAN = SKILL_FIREMAN_TRAINED,
 		SKILL_ENGINEER = SKILL_ENGINEER_ENGI,
@@ -38,7 +36,6 @@
 	)
 
 /datum/skills/smartgunner
-	name = "Squad Smartgunner"
 	skills = list(
 		SKILL_FIREMAN = SKILL_FIREMAN_TRAINED,
 		SKILL_SPEC_WEAPONS = SKILL_SPEC_SMARTGUN,
@@ -47,7 +44,6 @@
 	)
 
 /datum/skills/specialist
-	name = "Squad Weapons Specialist"
 	skills = list(
 		SKILL_FIREMAN = SKILL_FIREMAN_TRAINED,
 		SKILL_CQC = SKILL_CQC_TRAINED,
@@ -62,7 +58,6 @@
 	)
 
 /datum/skills/tl
-	name = "Fireteam Leader"
 	skills = list(
 		SKILL_FIREMAN = SKILL_FIREMAN_TRAINED,
 		SKILL_ENGINEER = SKILL_ENGINEER_TRAINED,
