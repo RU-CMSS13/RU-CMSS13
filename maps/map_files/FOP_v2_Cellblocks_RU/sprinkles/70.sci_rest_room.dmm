@@ -84,10 +84,7 @@
 "bW" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/structure/disposalpipe/segment,
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	name = "Research Common Room";
-	welded = 0
-	},
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/medical/autoname,
 /turf/open/floor/almayer/blackfull/west,
 /area/prisonru/research)
 "co" = (
@@ -313,10 +310,8 @@
 /turf/open/floor/hybrisa/tile/tileblackcheckered,
 /area/prisonru/research)
 "oi" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/comdoor/colony{
-	dir = 2;
-	name = "Biological Research Department";
-	welded = 1
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/medical/autoname{
+	dir = 2
 	},
 /turf/open/floor/almayer/blackfull/west,
 /area/prisonru/research)
@@ -588,13 +583,6 @@
 	},
 /turf/open/floor/almayer/black/northwest,
 /area/prisonru/research)
-"CZ" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/comdoor/colony{
-	dir = 2;
-	name = "Research Common Room"
-	},
-/turf/open/floor/almayer/blackfull/west,
-/area/prisonru/research)
 "Dq" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 4
@@ -619,8 +607,8 @@
 /turf/open/floor/almayer/blackfull/west,
 /area/prisonru/research)
 "EQ" = (
-/obj/structure/machinery/door/airlock/almayer/medical/glass/colony{
-	name = "Research Dorms"
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/medical/autoname{
+	dir = 2
 	},
 /turf/open/floor/corsat/squares,
 /area/prisonru/station/quarters/research)
@@ -767,9 +755,7 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/obj/structure/machinery/door/airlock/almayer/secure/colony{
-	name = "Security Booth"
-	},
+/obj/structure/machinery/door/airlock/hybrisa/medical_solid/autoname,
 /turf/open/floor/corsat/squares,
 /area/prisonru/research)
 "LW" = (
@@ -897,9 +883,6 @@
 "RP" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
-	},
-/obj/structure/machinery/door/airlock/almayer/medical/glass/colony{
-	name = "Research Dorms"
 	},
 /turf/open/floor/almayer/blackfull/west,
 /area/prisonru/station/quarters/research)
@@ -1104,7 +1087,7 @@ um
 Cl
 Td
 aG
-CZ
+oi
 pS
 qv
 "}

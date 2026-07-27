@@ -15,6 +15,13 @@
 "ae" = (
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
+"af" = (
+/obj/effect/decal/siding,
+/obj/structure/sign/safety/security{
+	pixel_y = 24
+	},
+/turf/open/floor/prison/red/north,
+/area/prisonru/station/security/monitoring/highsec)
 "aN" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W"
@@ -49,6 +56,9 @@
 "dk" = (
 /obj/effect/landmark/item_pool_spawner/survivor_ammo,
 /obj/structure/inflatable/popped,
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "dl" = (
@@ -58,6 +68,9 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/barricade/metal/wired{
 	dir = 4
+	},
+/obj/effect/decal/siding{
+	icon_state = "siding2"
 	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
@@ -82,6 +95,9 @@
 "ew" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 6
+	},
+/obj/effect/decal/siding{
+	icon_state = "siding8"
 	},
 /turf/open/floor/prison/damaged2,
 /area/prisonru/station/security/monitoring/highsec)
@@ -132,6 +148,9 @@
 /area/prisonru/station/security/monitoring/highsec)
 "hO" = (
 /obj/structure/inflatable,
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "ip" = (
@@ -170,6 +189,7 @@
 	},
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/inflatable/popped,
+/obj/effect/decal/siding,
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
 "lt" = (
@@ -185,9 +205,15 @@
 	icon_state = "casing_1"
 	},
 /obj/item/stack/sheet/metal,
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "mt" = (
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "nk" = (
@@ -209,6 +235,9 @@
 /area/prisonru/station/security/monitoring/highsec)
 "pk" = (
 /obj/effect/landmark/corpsespawner/ua_riot,
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "pm" = (
@@ -227,11 +256,15 @@
 /area/prisonru/station/security/monitoring/highsec)
 "qy" = (
 /obj/structure/largecrate/random/case/double,
+/obj/effect/decal/siding,
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
 "re" = (
 /obj/structure/machinery/light/double/blue,
 /obj/effect/spawner/random/gun/rifle/highchance,
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
 /turf/open/floor/prison/red,
 /area/prisonru/station/security/monitoring/highsec)
 "rG" = (
@@ -273,16 +306,19 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 5
 	},
+/obj/effect/decal/siding{
+	icon_state = "siding8"
+	},
 /turf/open/floor/prison/red/west,
 /area/prisonru/station/security/monitoring/highsec)
 "wn" = (
 /turf/closed/wall/prison,
 /area/prisonru/station/security/monitoring/highsec)
 "wu" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	name = "High-Security Monitoring"
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "xq" = (
@@ -316,11 +352,8 @@
 /turf/closed/wall/prison,
 /area/prisonru/station/security/monitoring/highsec)
 "zN" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	dir = 2;
-	name = "High-Security Monitoring"
-	},
 /obj/structure/pipes/standard/simple/hidden/dark,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "Ad" = (
@@ -340,39 +373,45 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/siding,
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
 "Ba" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	dir = 2;
-	name = "High-Security Monitoring";
-	welded = 1
-	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "Br" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	dir = 2;
-	name = "High-Security Monitoring";
-	welded = 1
-	},
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "BQ" = (
 /obj/structure/pipes/vents/scrubber{
 	dir = 1
 	},
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
+/obj/effect/decal/siding{
+	icon_state = "siding4"
+	},
 /turf/open/floor/prison/red/southeast,
 /area/prisonru/station/security/monitoring/highsec)
 "CF" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/siding,
+/obj/structure/machinery/camera/autoname{
+	network = list("PRISON")
+	},
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
 "CG" = (
 /obj/structure/pipes/vents/pump/on,
+/obj/effect/decal/siding,
+/obj/effect/decal/siding{
+	icon_state = "siding8"
+	},
 /turf/open/floor/prison/damaged2,
 /area/prisonru/station/security/monitoring/highsec)
 "DE" = (
@@ -424,14 +463,26 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/security/monitoring/highsec)
 "FI" = (
+/obj/structure/pipes/standard/simple/hidden/dark{
+	dir = 10
+	},
+/obj/structure/sign/safety/restrictedarea{
+	pixel_y = -8;
+	pixel_x = 32
+	},
+/obj/structure/sign/safety/security{
+	pixel_x = 32;
+	pixel_y = 7
+	},
 /obj/structure/machinery/light/double/blue{
 	dir = 4;
 	pixel_x = 10;
 	pixel_y = -1
 	},
-/obj/structure/pipes/standard/simple/hidden/dark{
-	dir = 10
+/obj/effect/decal/siding{
+	icon_state = "siding4"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/red/east,
 /area/prisonru/station/security/monitoring/highsec)
 "Gb" = (
@@ -462,6 +513,13 @@
 /area/prisonru/station/security/monitoring/highsec)
 "Lm" = (
 /obj/structure/pipes/vents/scrubber,
+/obj/effect/decal/siding{
+	icon_state = "siding4"
+	},
+/obj/effect/decal/siding,
+/obj/structure/machinery/newscaster{
+	pixel_y = 30
+	},
 /turf/open/floor/prison/red/northeast,
 /area/prisonru/station/security/monitoring/highsec)
 "LH" = (
@@ -492,6 +550,7 @@
 "ND" = (
 /obj/structure/prop/hybrisa/misc/graffiti/graffiti7,
 /obj/structure/prop/hybrisa/misc/blood/blood3,
+/obj/effect/decal/siding,
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
 "NF" = (
@@ -513,13 +572,6 @@
 "OX" = (
 /obj/structure/pipes/standard/manifold/hidden/dark,
 /turf/open/floor/plating/plating_catwalk/prison,
-/area/prisonru/station/security/monitoring/highsec)
-"PA" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	dir = 2;
-	name = "High-Security Monitoring"
-	},
-/turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "PG" = (
 /turf/open_space,
@@ -548,18 +600,17 @@
 "Vu" = (
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prisonru/station/security/monitoring/highsec)
-"Ws" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	name = "High-Security Monitoring"
-	},
-/turf/open/floor/prison/darkredfull2/southwest,
-/area/prisonru/station/security/monitoring/highsec)
 "WB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/machinery/power/apc{
 	dir = 1;
 	pixel_y = 24;
 	start_charge = 0
+	},
+/obj/effect/decal/siding,
+/obj/structure/sign/safety/security{
+	pixel_y = 24;
+	pixel_x = 15
 	},
 /turf/open/floor/prison/red/north,
 /area/prisonru/station/security/monitoring/highsec)
@@ -596,6 +647,12 @@
 /obj/structure/pipes/vents/pump{
 	dir = 1
 	},
+/obj/effect/decal/siding{
+	icon_state = "siding2"
+	},
+/obj/effect/decal/siding{
+	icon_state = "siding8"
+	},
 /turf/open/floor/prison/red/southwest,
 /area/prisonru/station/security/monitoring/highsec)
 "YT" = (
@@ -618,13 +675,24 @@
 /turf/open/floor/plating/prison,
 /area/prisonru/station/security/monitoring/highsec)
 "ZP" = (
+/obj/structure/pipes/standard/simple/hidden/dark{
+	dir = 9
+	},
+/obj/structure/sign/safety/security{
+	pixel_x = 32;
+	pixel_y = -8
+	},
+/obj/structure/sign/safety/restrictedarea{
+	pixel_y = 7;
+	pixel_x = 32
+	},
 /obj/structure/machinery/light/double/blue{
 	dir = 4;
 	pixel_x = 10;
 	pixel_y = -1
 	},
-/obj/structure/pipes/standard/simple/hidden/dark{
-	dir = 9
+/obj/effect/decal/siding{
+	icon_state = "siding4"
 	},
 /turf/open/floor/prison/red/east,
 /area/prisonru/station/security/monitoring/highsec)
@@ -762,7 +830,7 @@ cD
 zN
 "}
 (12,1,1) = {"
-PA
+Ba
 DE
 yP
 YV
@@ -775,7 +843,7 @@ Ba
 "}
 (13,1,1) = {"
 wn
-ae
+af
 nk
 cl
 YV
@@ -850,7 +918,7 @@ ad
 ad
 ad
 QM
-Ws
+Ba
 wu
 QM
 ac
