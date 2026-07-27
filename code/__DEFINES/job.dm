@@ -30,6 +30,9 @@
 #define JOB_SQUAD_SPECIALIST_SHARP "SHARP Specialist"
 #define JOB_SQUAD_SPECIALIST_PYRO "Pyro Specialist"
 #define JOB_SQUAD_SPECIALIST_HEAVY "Heavy Specialist"
+//RUCM CODE START
+#define JOB_SQUAD_SPECIALIST_BREACHER "Breacher Specialist"
+//RUCM CODE END
 #define JOB_SQUAD_TEAM_LEADER "Fireteam Leader"
 #define JOB_SQUAD_SMARTGUN "Smartgunner"
 #define JOB_SQUAD_ROLES /datum/timelock/squad
