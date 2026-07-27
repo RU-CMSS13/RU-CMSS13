@@ -76,6 +76,11 @@ GLOBAL_LIST_INIT(admin_verbs_default, list(
 	/client/proc/add_known_alt,
 	/client/proc/remove_known_alt,
 	/client/proc/toogle_door_control,
+	/client/proc/toggle_barricade_creation, // Stops cades from being built
+	/client/proc/togglebuildmodeself,
+	/client/proc/toggle_game_master,
+	/client/proc/open_resin_panel,
+	/client/proc/toggle_ai_xeno_weeding,
 	))
 
 GLOBAL_LIST_INIT(admin_verbs_admin, list(
@@ -365,7 +370,6 @@ GLOBAL_LIST_INIT(mentor_verbs, list(
 /client/proc/remove_admin_verbs()
 	remove_verb(src, list(
 		GLOB.admin_verbs_default,
-		/client/proc/togglebuildmodeself,
 		GLOB.admin_verbs_admin,
 		GLOB.admin_verbs_ban,
 		GLOB.admin_verbs_minor_event,

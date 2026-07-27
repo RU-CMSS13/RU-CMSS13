@@ -555,6 +555,9 @@
 
 	Decorate()
 
+	if(!client)
+		make_ai()
+
 	RegisterSignal(src, COMSIG_MOB_SCREECH_ACT, PROC_REF(handle_screech_act))
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_XENO_SPAWN, src)
 

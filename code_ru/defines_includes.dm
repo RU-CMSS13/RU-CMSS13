@@ -1,6 +1,8 @@
 #include "code\__DEFINES\access.dm"
 #include "code\__DEFINES\conflict.dm"
+#include "code\__DEFINES\human_ai.dm"
 #include "code\__DEFINES\job.dm"
 #include "code\__DEFINES\tts.dm"
 #include "code\__DEFINES\vendors.dm"
+#include "code\__DEFINES\xeno_ai.dm"
 #include "code\__DEFINES\xeno.dm"
