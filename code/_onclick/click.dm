@@ -128,7 +128,7 @@
 	if (!isturf(loc))
 //RUCM START
 		if(loc == interactee)
-			SEND_SIGNAL(src, COMSIG_MOB_CLICKON, A, params)
+			SEND_SIGNAL(src, COMSIG_MOB_CLICKON, atom_clicked, params)
 //RUCM END
 		return
 
