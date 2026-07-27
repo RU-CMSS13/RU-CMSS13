@@ -138,17 +138,17 @@
 
 // RU-CM CODE START
 //Prison Station RU Sounds
-#define AMBIENCE_PRISON_ALARM 'sound/ambience/prisonfopru/prisonalarm.ogg'
-#define AMBIENCE_PRISON_LZDISPATCH 'sound/ambience/prisonfopru/prisonbridgeambience.ogg'
-#define AMBIENCE_PRISON_CONTROLROOM 'sound/ambience/prisonfopru/controlroomambience.ogg'
-#define AMBIENCE_PRISON_MAINTENANCE 'sound/ambience/prisonfopru/prisonmaintenancehalls4.ogg'
+#define AMBIENCE_PRISON_ALARM 'sound/ambience/prisonfopru/AMB_M06_TechSupport_RoomMedium_Alarms_A_HP_01.ogg'
+#define AMBIENCE_PRISON_LZDISPATCH 'sound/ambience/prisonfopru/AMB_M04_ControlRoom_Departure_BB_A_01.ogg'
+#define AMBIENCE_PRISON_CONTROLROOM 'sound/ambience/prisonfopru/AMB_M32_Machine_Room_Small_BB_A_01.ogg'
+#define AMBIENCE_PRISON_MAINTENANCE 'sound/ambience/prisonfopru/AMB_M04_Departure_BB_A_01.ogg'
+#define AMBIENCE_OOB 'sound/ambience/signal.ogg'
 
-#define SCAPE_PL_FIORINA_MAINTENANCE list('sound/ambience/prisonfopru/prisonmaintenancehalls.ogg','sound/ambience/prisonfopru/prisonmaintenancehalls2.ogg','sound/ambience/prisonfopru/prisonmaintenancehalls3.ogg',)
-#define SCAPE_PL_FIORINA_COMMON list('sound/ambience/prisonfopru/prisonstationwaterdrop.ogg','sound/ambience/prisonfopru/prisoncommon1.ogg','sound/ambience/prisonfopru/prisoncommon2.ogg','sound/ambience/prisonfopru/prisoncommon3.ogg','sound/ambience/prisonfopru/prisoncommon4.ogg','sound/ambience/prisonfopru/prisoncommon5.ogg',)
-#define SCAPE_PL_FIORINA_NEAR_SCI list('sound/ambience/prisonfopru/prisonalarm2.ogg','sound/ambience/prisonfopru/prisonalarm1.ogg','sound/ambience/prisonfopru/prisonalarm3.ogg',)
-#define SCAPE_PL_FIORINA_MACHINES_ROOM list('sound/ambience/prisonfopru/prisonstationmachines1.ogg','sound/ambience/prisonfopru/prisonstationmachines2.ogg','sound/ambience/prisonfopru/prisonstationmachines3.ogg','sound/ambience/prisonfopru/prisonstationmachines4.ogg','sound/ambience/prisonfopru/prisonstationmachines5.ogg')
-#define SCAPE_PL_FIORINA_COMPUTERS_ROOM list('sound/ambience/prisonfopru/prisoncomputer1.ogg','sound/ambience/prisonfopru/prisoncomputer2.ogg','sound/ambience/prisonfopru/prisoncomputer3.ogg','sound/ambience/prisonfopru/prisonstationmachines5.ogg','sound/ambience/prisonfopru/prisonstationservers1.ogg')
-#define SCAPE_PL_FIORINA_CIVILIAN_AD list('sound/ambience/prisonfopru/prisonintercomseegson.ogg',)
+#define SCAPE_PL_FIORINA_NEAR_SCI list('sound/soundscape/prisonfopru/ALARMS/AMB_1.ogg','sound/soundscape/prisonfopru/ALARMS/AMB_2.ogg','sound/soundscape/prisonfopru/ALARMS/AMB_3.ogg',)
+#define SCAPE_PL_FIORINA_MACHINES_ROOM list('sound/soundscape/prisonfopru/MACHINES/SDX_generator_hum_03.ogg','sound/soundscape/prisonfopru/MACHINES/SPOT_Elect_Transformer_crackle_BB_A_01.ogg','sound/soundscape/prisonfopru/MACHINES/SPOT_Elect_Transformer_Hum_BB_A_01.ogg',)
+#define SCAPE_PL_FIORINA_COMPUTERS_ROOM list ('sound/soundscape/prisonfopru/COMPUTER_SOUNDS/CNS_BOOP_DiDoo.ogg','sound/soundscape/prisonfopru/COMPUTER_SOUNDS/CNS_CLACKITY_Beep.ogg','sound/soundscape/prisonfopru/COMPUTER_SOUNDS/CNS_COMP_Boot.ogg','sound/soundscape/prisonfopru/COMPUTER_SOUNDS/CNS_COMP_Boot_02.ogg','sound/soundscape/prisonfopru/COMPUTER_SOUNDS/CNS_MODEM.ogg',)
+#define SCAPE_PL_FIORINA_LZDISPATH list ('sound/soundscape/prisonfopru/TRANSMITION/RADIO_Transmition_03_Noise_1.ogg','sound/soundscape/prisonfopru/TRANSMITION/RADIO_Transmition_03_Noise_2.ogg','sound/soundscape/prisonfopru/TRANSMITION/RADIO_Transmition_03_Noise_3.ogg','sound/soundscape/prisonfopru/TRANSMITION/RADIO_Transmition_03_Tone_1.ogg','sound/soundscape/prisonfopru/TRANSMITION/RADIO_Transmition_03_Tone_2.ogg',)
+#define SCAPE_PL_FIORINA_CIVILIAN_AD list('sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_01.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_02.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_03.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_04.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_05.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_06.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_07.ogg','sound/soundscape/prisonfopru/CORRUPTED_ADS/ADS_SEEGSON_Glitched_08.ogg','sound/soundscape/prisonfopru/UNCORRUPTED_ADS/ADS_Seegson_04.ogg','sound/soundscape/prisonfopru/UNCORRUPTED_ADS/ADS_Seegson_05.ogg','sound/soundscape/prisonfopru/UNCORRUPTED_ADS/ADS_Seegson_07.ogg','sound/soundscape/prisonfopru/UNCORRUPTED_ADS/ADS_Seegson_08.ogg','sound/soundscape/prisonfopru/UNCORRUPTED_ADS/ADS_Seegson_09.ogg')
 // RU-CM CODE END
 
 // Tyrargo Soundscapes

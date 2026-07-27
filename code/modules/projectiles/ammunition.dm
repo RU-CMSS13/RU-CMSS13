@@ -314,7 +314,10 @@ If it is the same and the other stack isn't full, transfer an amount (default 1)
 	var/datum/ammo/bullet = GLOB.ammo_list[new_ammo]
 	var/ammo_name = bullet.name //Let's pull up the name.
 	var/multiple_handful_name = bullet.multiple_handful_name
-
+//RUCM EDIT START
+	var/obj/item/ammo_magazine/handful/handful_type = bullet.handful_type
+	icon = initial(handful_type.icon)
+//RUCM EDIT END
 	name = "handful of [ammo_name + (multiple_handful_name ? " ":"s ") + "([new_caliber])"]"
 
 	default_ammo = new_ammo
