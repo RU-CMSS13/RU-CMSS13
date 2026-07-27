@@ -19,7 +19,7 @@
 	group = "Vehicle Equipment"
 
 /datum/supply_packs/chimera_rocket_launchers
-	name = " Chimera Rocket Launchers (x1)"
+	name = "Chimera Rocket Launchers (x1)"
 	contains = list(
 		/obj/item/hardpoint/primary/chimera_launchers/rocket,
 	)
