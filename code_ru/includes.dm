@@ -3,7 +3,7 @@
 #include "code\controllers\subsystem\playtime.dm"
 #include "code\controllers\subsystem\tts.dm"
 #include "code\datums\ammo.dm"
-#include "datums\ammo\xeno.dm"
+#include "code\datums\ammo\xeno.dm"
 #include "code\datums\research_upgrade_datum.dm"
 #include "code\datums\skills.dm"
 #include "code\datums\supply_packs\gear.dm"
