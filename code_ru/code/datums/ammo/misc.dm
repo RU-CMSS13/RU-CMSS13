@@ -44,9 +44,8 @@
 	if(!istype(turf))
 		return
 	do_smoke(loca = turf)
-	var/datum/reagent/napalm/blue/reagent = new()
+	var/datum/reagent/napalm/ut/reagent = new()
 	new /obj/flamer_fire(turf, cause_data, reagent, 3)
-
 	var/datum/effect_system/smoke_spread/phosphorus/landingSmoke = new /datum/effect_system/smoke_spread/phosphorus
 	landingSmoke.set_up(3, 0, turf, null, 6, cause_data)
 	landingSmoke.start()
@@ -63,13 +62,15 @@
 /datum/ammo/rocket/wp/chimera/do_at_max_range(obj/projectile/projectile)
 	drop_flame(get_turf(projectile), projectile.weapon_cause_data)
 
+//wont actually fire from above z-level, course current multi-z sucks
+//solution: no clue really, will leave it if someone decide to fix this
+
 /datum/ammo/bullet/chimera/flak
 	name = "flak autocannon bullet"
 	icon_state = "autocannon"
 	sound_hit  = 'sound/weapons/sting_boom_small1.ogg'
 	damage_falloff = 0
-	flags_ammo_behavior = AMMO_STRIKES_SURFACE|AMMO_ANTIVEHICLE|AMMO_ROCKET
-	accurate_range_min = 4
+	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_STRIKES_SURFACE|AMMO_ANTIVEHICLE
 
 	accuracy = HIT_ACCURACY_TIER_8
 	scatter = 0

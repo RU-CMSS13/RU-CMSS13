@@ -117,7 +117,7 @@
 	pixel_x = -64
 	pixel_y = -160
 	layer = ABOVE_MOB_LAYER
-	flags_atom = NO_ZFALL
+	flags_atom = NO_ZFALL|NOINTERACT
 	anchored = TRUE
 
 /obj/downwash_effect

@@ -161,13 +161,38 @@
 	containername = "RE700 Rotary Cannon ammo crate"
 	group = "Vehicle Ammo"
 
-/datum/supply_packs/blackfoot_ammo
+/datum/supply_packs/blackfoot_ammo_flare
 	name = "Chimera Launchers ammunition (x4)"
 	contains = list(
 		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo,
 		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo,
 		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo,
 		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo,
+	)
+	cost = 40
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "blackfoot ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/blackfoot_ammo_flare
+	name = "Chimera Launchers HE ammunition (x4)"
+	contains = list(
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/he,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/he,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/he,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/he,
+	)
+	cost = 50
+	containertype = /obj/structure/closet/crate/weapon
+	containername = "blackfoot ammo crate"
+	group = "Vehicle Ammo"
+
+/datum/supply_packs/blackfoot_ammo_rocket
+	name = "blackfoot rocket ammunition (x3)"
+	contains = list(
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
+		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
 	)
 	cost = 40
 	containertype = /obj/structure/closet/crate/weapon
@@ -195,26 +220,3 @@
 	containertype = /obj/structure/closet/crate/weapon
 	containername = "blackfoot ammo crate"
 	group = "Vehicle Ammo"
-
-/datum/supply_packs/blackfoot_ammo_flak
-	name = "blackfoot flak ammunition (x2)"
-	contains = list(
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/autocannon,
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/autocannon,
-	)
-	cost = 40
-	containertype = /obj/structure/closet/crate/weapon
-	containername = "blackfoot ammo crate"
-	group = "Vehicle Ammo"
-
-/datum/supply_packs/blackfoot_ammo_holotarget
-	name = "blackfoot rocket ammunition (x2)"
-	contains = list(
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
-		/obj/item/ammo_magazine/hardpoint/chimera_launchers_ammo/rocket,
-	)
-	cost = 40
-	containertype = /obj/structure/closet/crate/weapon
-	containername = "blackfoot ammo crate"
-	group = "Vehicle Ammo"
-
