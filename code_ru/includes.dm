@@ -1,6 +1,7 @@
 #include "code\_globalvars\misc.dm"
 #include "code\supplyshuttle.dm"
 #include "code\controllers\subsystem\playtime.dm"
+#include "code\controllers\subsystem\que_system.dm"
 #include "code\controllers\subsystem\tts.dm"
 #include "code\datums\ammo.dm"
 #include "code\datums\research_upgrade_datum.dm"
