@@ -86,7 +86,7 @@
 	)
 
 //------------CLOTHING VENDOR---------------
-
+/* RUCM CHANGE
 GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("STANDARD EQUIPMENT (TAKE ALL)", 0, null, null, null),
 		list("Experimental Tool Vendor Token", 0, /obj/item/coin/marine/synth, MARINE_CAN_BUY_ESSENTIALS, VENDOR_ITEM_MANDATORY),
@@ -176,7 +176,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 		list("MASK", 0, null, null, null),
 		list("Sterile mask", 0, /obj/item/clothing/mask/surgical, MARINE_CAN_BUY_MASK, VENDOR_ITEM_REGULAR)
 	))
-
+*/
 /obj/structure/machinery/cm_vending/clothing/synth
 	name = "\improper ColMarTech Synthetic Equipment Rack"
 	desc = "An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units."
@@ -223,7 +223,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 	path = /obj/item/clothing/under/rank/medical/morgue
 
 /datum/gear/synthetic/uscm/medical_pharmacist
-	path = /obj/item/clothing/under/rank/medical/pharmacist
+	path = /obj/item/clothing/under/rank/medical/white
 
 /datum/gear/synthetic/uscm/standard_synth
 	path = /obj/item/clothing/under/rank/synthetic
@@ -528,7 +528,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 	path = /obj/item/clothing/head/surgery/morgue
 
 /datum/gear/synthetic/headwear/surgcap_pharmacist
-	path = /obj/item/clothing/head/surgery/pharmacist
+	path = /obj/item/clothing/head/surgery/white
 
 /datum/gear/synthetic/headwear/beanie
 	path = /obj/item/clothing/head/beanie
@@ -589,6 +589,9 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 /datum/gear/synthetic/headwear/officer_cap
 	path = /obj/item/clothing/head/cmcap/bridge
+
+/datum/gear/synthetic/headwear/wy_cap
+	path = /obj/item/clothing/head/cmcap/wy_cap
 
 /datum/gear/synthetic/headwear/fedora_tan
 	path = /obj/item/clothing/head/fedora
@@ -776,7 +779,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 /datum/gear/synthetic/suit/marine_service
 	path = /obj/item/clothing/suit/storage/jacket/marine/service
 
-/datum/gear/synthetic/suit/marine_service
+/datum/gear/synthetic/suit/marine_service/mp
 	path = /obj/item/clothing/suit/storage/jacket/marine/service/mp
 
 /datum/gear/synthetic/suit/windbreaker_brown
@@ -906,6 +909,15 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 /datum/gear/synthetic/purple_tie
 	path = /obj/item/clothing/accessory/tie/purple
 
+/datum/gear/synthetic/wy_patch
+	path = /obj/item/clothing/accessory/patch/wy
+
+/datum/gear/synthetic/wy_patch_white
+	path = /obj/item/clothing/accessory/patch/wy_white
+
+/datum/gear/synthetic/wy_patch_square
+	path = /obj/item/clothing/accessory/patch/wysquare
+
 //------------EXPERIMENTAL TOOLS---------------
 /obj/structure/machinery/cm_vending/own_points/experimental_tools
 	name = "\improper W-Y Experimental Tools Vendor"
@@ -928,7 +940,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_synth, list(
 
 /obj/structure/machinery/cm_vending/own_points/experimental_tools/get_listed_products(mob/user)
 	return GLOB.cm_vending_synth_tools
-
+/* RUCM CNANGE
 GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Breaching Hammer", 15, /obj/item/weapon/twohanded/breacher/synth, null, VENDOR_ITEM_REGULAR),
 	list("Compact Defibrillator", 15, /obj/item/device/defibrillator/compact, null, VENDOR_ITEM_REGULAR),
@@ -945,7 +957,7 @@ GLOBAL_LIST_INIT(cm_vending_synth_tools, list(
 	list("Expedition Chestrig", 15, /obj/item/storage/backpack/marine/satchel/intel/chestrig, null, VENDOR_ITEM_REGULAR),
 	list("Expedition Satchel", 15, /obj/item/storage/backpack/marine/satchel/intel/expeditionsatchel, null, VENDOR_ITEM_REGULAR),
 ))
-
+*/
 //------------EXPERIMENTAL TOOL KITS---------------
 /obj/effect/essentials_set/cnailgun
 	spawned_gear_list = list(

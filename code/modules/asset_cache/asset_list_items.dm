@@ -168,7 +168,7 @@
 	for (var/k in GLOB.resin_constructions_list)
 		var/datum/resin_construction/RC = k
 
-		var/icon_file = 'icons/mob/hud/actions_xeno.dmi'
+		var/icon_file = 'icons/mob/hud/xeno_building.dmi'
 		var/icon_state = initial(RC.construction_name)
 		var/icon_name = replacetext(icon_state, " ", "-")
 
@@ -328,6 +328,11 @@
 
 	var/list/icons_to_always_load = list(
 		/obj/item/storage/pill_bottle,
+		/obj/item/clothing/under/chainshirt/hunter/scalable,
+		/obj/item/clothing/suit/armor/yautja/hunter/scalable,
+		/obj/item/falcon_drone,
+		/obj/item/storage/belt/gun/quiver,
+		/obj/item/arrow,
 	)
 
 /datum/asset/spritesheet/vending_products/register()
@@ -484,8 +489,10 @@
 			continue
 		if(initial(current_gun.flags_gun_features) & GUN_UNUSUAL_DESIGN)
 			continue // These don't have a way to inspect weapon stats
-		if(current_gun.lineart_ru) //RUCM EDIT
-			continue //RUCM EDIT
+//RUCM START
+		if(current_gun.lineart_ru)
+			continue
+//RUCM END
 		var/obj/item/weapon/gun/temp_gun = new current_gun
 		var/icon_state = temp_gun.base_gun_icon // base_gun_icon is set in Initialize generally
 		qdel(temp_gun)
