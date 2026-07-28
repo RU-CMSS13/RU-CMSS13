@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/machinery/door/poddoor/almayer
 	icon = 'code_ru/icons/obj/structures/doors/blastdoors_shutters.dmi'
 

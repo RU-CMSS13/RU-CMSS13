@@ -1,3 +1,5 @@
+//Code for LV624 Lazarus Landing - by Arom-beep
+
 /datum/weather_event/light_rain
 	name = "Light Rain"
 	display_name = "Light Rain"

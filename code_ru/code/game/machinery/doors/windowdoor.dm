@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/machinery/door/window
 	name = "Glass door"
 	desc = "A window, that is also a door. A windoor if you will."

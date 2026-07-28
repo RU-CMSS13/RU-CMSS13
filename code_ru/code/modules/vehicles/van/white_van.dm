@@ -1,3 +1,4 @@
+//Object for LV624 Lazarus Landing - by Arom-beep
 
 //Trucks
 //Read the documentation in multitile.dm before trying to decipher this stuff

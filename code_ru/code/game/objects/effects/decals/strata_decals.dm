@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/effect/decal/lv_decals/cave_mud_corner
 	icon = 'code_ru/icons/turf/floors/auto_lv_turf.dmi'
 	icon_state = "grass_0_mud_alt_innercorner"

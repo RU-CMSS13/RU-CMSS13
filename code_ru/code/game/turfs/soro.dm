@@ -1,3 +1,5 @@
+//Turf for LV624 Lazarus Landing - by Arom-beep
+
 /turf/open/gm/brown_dirt/random_rocks
 	icon = 'code_ru/icons/turf/floors/auto_lv_turf.dmi'
 	icon_state = "sand_1_1_N"

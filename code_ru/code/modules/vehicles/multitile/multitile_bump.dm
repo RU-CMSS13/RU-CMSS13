@@ -1,3 +1,5 @@
+//Object for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/reagent_dispensers/fueltank/handle_vehicle_bump(obj/vehicle/multitile/V)
 	reagents.source_mob = V.seats[VEHICLE_DRIVER]
 	if(reagents.handle_volatiles())

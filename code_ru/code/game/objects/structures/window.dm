@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/window
 	name = "window"
 	desc = "A glass window. It looks thin and flimsy. A few knocks with anything should shatter it."

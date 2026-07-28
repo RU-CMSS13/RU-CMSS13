@@ -1,3 +1,5 @@
+//Mob for LV624 Lazarus Landing - by Arom-beep
+
 /mob/living/simple_animal/moth
 	name = "cave moth"
 	desc = "A large cave-dwelling arthropod native to LV-624. Its thick, leathery wings and reflective eyes suggest nocturnal habits. Despite its size, it moves with eerie grace, clinging silently to rock walls until disturbed."

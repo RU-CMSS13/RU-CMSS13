@@ -1,3 +1,5 @@
+//Turf for LV624 Lazarus Landing - by Arom-beep
+
 /turf/closed/wall/lv_outpost
 	name = "bare outpost walls"
 	icon = 'code_ru/icons/turf/walls/lv_colony_walls.dmi'

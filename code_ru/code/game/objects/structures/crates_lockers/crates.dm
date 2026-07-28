@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/closet/crate/trashcart/alt
 	name = "trash cart"
 	icon = 'code_ru/icons/obj/structures/crates.dmi'

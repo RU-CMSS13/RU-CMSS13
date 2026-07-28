@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/platform/wood
 	icon_state = "wood_platform"
 	name = "wooden platform"

@@ -1,3 +1,4 @@
+//Code for LV624 Lazarus Landing - by Arom-beep
 //LV624 AREAS--------------------------------------//
 /area/lazarus
 	icon_state = "lv-626"

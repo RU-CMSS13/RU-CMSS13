@@ -1,3 +1,5 @@
+//Code for LV624 Lazarus Landing - by Arom-beep
+
 /datum/weather_ss_map_holder/lv624_lazarus_landing
 	name = "LV-624 Lazarus Landing Map Holder"
 

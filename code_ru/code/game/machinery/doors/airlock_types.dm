@@ -1,3 +1,5 @@
+//Objects for LV624 Lazarus Landing - by Arom-beep
+
 /obj/structure/machinery/door/airlock/light_grey_lv/glass
 	name = "\improper Airlock"
 	icon = 'code_ru/icons/obj/structures/doors/light_grey_glass_door.dmi'

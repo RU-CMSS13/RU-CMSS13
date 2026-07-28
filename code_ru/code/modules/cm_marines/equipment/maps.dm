@@ -1,3 +1,4 @@
+//Object for LV624 Lazarus Landing - by Arom-beep
 
 /obj/item/map/lv624_lazarus_landing_map
 	name = "\improper Lazarus Landing Map"

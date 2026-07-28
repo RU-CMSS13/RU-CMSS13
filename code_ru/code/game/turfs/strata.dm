@@ -1,3 +1,5 @@
+//Turf for LV624 Lazarus Landing - by Arom-beep
+
 /turf/open/floor/strata //Instance me!
 	icon = 'code_ru/icons/turf/floors/strata_floor.dmi'
 	icon_state = "floor"

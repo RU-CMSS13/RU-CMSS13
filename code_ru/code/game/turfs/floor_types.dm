@@ -1,3 +1,5 @@
+//Turf for LV624 Lazarus Landing - by Arom-beep
+
 /turf/open/floor/prison/kitchen/alt
 	icon_state = "kitchen_alt"
 
