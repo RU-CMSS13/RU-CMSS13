@@ -505,6 +505,7 @@
 /area/lazarus/crashed_shuttle
 	name = "\improper Crashed PMC ERT Shuttle"
 	icon_state = "ass_line"
+	requires_power = FALSE
 
 /area/lazarus/research
 	name = "\improper Xenoarchaeology Research Dome - Lab"
