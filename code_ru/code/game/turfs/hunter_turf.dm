@@ -8,8 +8,10 @@
 	fishing_allowed = FALSE
 	supports_surgery = FALSE
 	minimap_color = MINIMAP_WATER
-	baseturfs = /turf/open/floor/waterfall
 	is_groundmap_turf = TRUE
+
+/turf/open/floor/waterfall/insert_self_into_baseturfs()
+	baseturfs += /turf/open/floor/waterfall/top
 
 /turf/open/floor/waterfall/top
 	icon_state = "waterfall_top"

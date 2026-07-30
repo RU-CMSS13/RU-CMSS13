@@ -84,10 +84,6 @@
 	icon_tag = "heavy"
 	variations = 6
 
-/obj/structure/flora/jungle/vines/heavy/New()
-	..()
-	icon_state = pick("heavy_1","heavy_2","heavy_3","heavy_4","heavy_5","heavy_6")
-
 /obj/structure/flora/jungle/vines/blue/heavy
 	desc = "A thick, coiled mass of twisted vines."
 	opacity = TRUE
