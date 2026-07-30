@@ -1,7 +1,7 @@
 //Turf for LV624 Lazarus Landing - by Arom-beep
 // Waterfall
 
-/turf/open/floor/waterfall
+/turf/open/auto_turf/waterfall
 	icon = 'code_ru/icons/turf/waterfall_test.dmi'
 	icon_state = "waterfall_top"
 	can_bloody = FALSE
@@ -10,43 +10,43 @@
 	minimap_color = MINIMAP_WATER
 	is_groundmap_turf = TRUE
 
-/turf/open/floor/waterfall/insert_self_into_baseturfs()
-	baseturfs += /turf/open/floor/waterfall/top
+/turf/open/auto_turf/waterfall/insert_self_into_baseturfs()
+	baseturfs += /turf/open/auto_turf/waterfall/top
 
-/turf/open/floor/waterfall/top
+/turf/open/auto_turf/waterfall/top
 	icon_state = "waterfall_top"
 
-/turf/open/floor/waterfall/top/one
+/turf/open/auto_turf/waterfall/top/one
 	icon_state = "waterfall_top_1"
 
-/turf/open/floor/waterfall/top/two
+/turf/open/auto_turf/waterfall/top/two
 	icon_state = "waterfall_top_2"
 
-/turf/open/floor/waterfall/center
+/turf/open/auto_turf/waterfall/center
 	icon_state = "waterfall_center"
 
-/turf/open/floor/waterfall/center/one
+/turf/open/auto_turf/waterfall/center/one
 	icon_state = "waterfall_center_1"
 
-/turf/open/floor/waterfall/center/two
+/turf/open/auto_turf/waterfall/center/two
 	icon_state = "waterfall_center_2"
 
-/turf/open/floor/waterfall/bottom
+/turf/open/auto_turf/waterfall/bottom
 	icon_state = "waterfall_bottom"
 
-/turf/open/floor/waterfall/bottom/one
+/turf/open/auto_turf/waterfall/bottom/one
 	icon_state = "waterfall_bottom_1"
 
-/turf/open/floor/waterfall/bottom/two
+/turf/open/auto_turf/waterfall/bottom/two
 	icon_state = "waterfall_bottom_2"
 
-/turf/open/floor/waterfall/under_bottom
+/turf/open/auto_turf/waterfall/under_bottom
 	icon_state = "waterfall_underbottom"
 
-/turf/open/floor/waterfall/under_bottom/one
+/turf/open/auto_turf/waterfall/under_bottom/one
 	icon_state = "waterfall_underbottom_1"
 
-/turf/open/floor/waterfall/under_bottom/two
+/turf/open/auto_turf/waterfall/under_bottom/two
 	icon_state = "waterfall_underbottom_2"
 
 // Ancient Temple Walls
@@ -101,51 +101,3 @@
 /turf/closed/wall/ancient_temple/sandstone/runed/deco_2
 	icon = 'code_ru/icons/turf/walls/hunter/hunter_temple_deco_2.dmi'
 
-
-/turf/open/auto_turf/waterfall
-	icon = 'code_ru/icons/turf/waterfall_test.dmi'
-	icon_state = "waterfall_top"
-	can_bloody = FALSE
-	fishing_allowed = FALSE
-	supports_surgery = FALSE
-	minimap_color = MINIMAP_WATER
-	is_groundmap_turf = TRUE
-
-/turf/open/auto_turf/waterfall/insert_self_into_baseturfs()
-	baseturfs += /turf/open/auto_turf/waterfall/top
-
-/turf/open/auto_turf/waterfall/top
-	icon_state = "waterfall_top"
-
-/turf/open/auto_turf/waterfall/top/one
-	icon_state = "waterfall_top_1"
-
-/turf/open/auto_turf/waterfall/top/two
-	icon_state = "waterfall_top_2"
-
-/turf/open/auto_turf/waterfall/center
-	icon_state = "waterfall_center"
-
-/turf/open/auto_turf/waterfall/center/one
-	icon_state = "waterfall_center_1"
-
-/turf/open/auto_turf/waterfall/center/two
-	icon_state = "waterfall_center_2"
-
-/turf/open/auto_turf/waterfall/bottom
-	icon_state = "waterfall_bottom"
-
-/turf/open/auto_turf/waterfall/bottom/one
-	icon_state = "waterfall_bottom_1"
-
-/turf/open/auto_turf/waterfall/bottom/two
-	icon_state = "waterfall_bottom_2"
-
-/turf/open/auto_turf/waterfall/under_bottom
-	icon_state = "waterfall_underbottom"
-
-/turf/open/auto_turf/waterfall/under_bottom/one
-	icon_state = "waterfall_underbottom_1"
-
-/turf/open/auto_turf/waterfall/under_bottom/two
-	icon_state = "waterfall_underbottom_2"
