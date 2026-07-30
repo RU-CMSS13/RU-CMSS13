@@ -384,6 +384,7 @@
 /area/lazarus/landing_zones
 	ceiling = CEILING_NONE
 	is_landing_zone = TRUE
+	requires_power = FALSE
 
 /area/lazarus/landing_zones/lz1
 	name = "\improper Nexus Dome - Landing Zone"
