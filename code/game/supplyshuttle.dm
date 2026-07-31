@@ -1440,7 +1440,7 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 		new /datum/vehicle_order/tank/plain
 */
 //RUCM START
-		new /datum/vehicle_order/tank/plain,
+		new /datum/vehicle_order/tank/broken,
 		new /datum/vehicle_order/apc/max,
 //RUCM END
 

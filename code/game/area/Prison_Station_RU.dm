@@ -7,9 +7,8 @@
 	temperature = T20C
 	ceiling = CEILING_GLASS
 	ambience_exterior = AMBIENCE_PRISON
-	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-	//soundscape_interval = 15
-	ceiling_muffle = FALSE
+	ceiling_muffle = TRUE
+	soundscape_interval = 20
 	minimap_color = MINIMAP_AREA_COLONY
 	powernet_name = "ground"
 
@@ -17,7 +16,7 @@
 	name = "Prison - Out Of Bounds"
 	icon_state = "oob"
 	requires_power = FALSE
-	ceiling = CEILING_MAX
+	ambience_exterior = AMBIENCE_OOB
 	is_resin_allowed = FALSE
 	flags_area = AREA_NOTUNNEL|AREA_UNWEEDABLE
 
@@ -28,7 +27,6 @@
 	name = "Prison - LZ"
 	is_landing_zone = TRUE
 	minimap_color = MINIMAP_AREA_LZ
-	ceiling = CEILING_GLASS
 
 /area/prisonru/lz/near_lzI
 	name = "Prison - Main Hanger"
@@ -38,14 +36,12 @@
 	name = "Prison - LZ1 'Admin"
 	icon_state = "lz1"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 	requires_power = FALSE
 
 /area/prisonru/lz/dispatch_lzI
 	name = "Prison - Main Hangar Traffic Control"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
 	linked_lz = DROPSHIP_LZ1
 
 /area/prisonru/lz/near_lzII
@@ -78,8 +74,6 @@
 /area/prisonru/civ/lz/lzdispatch
 	name = "Prison - Canding Zone Dispatch room"
 	ambience_exterior = AMBIENCE_PRISON_LZDISPATCH
-	ceiling_muffle = TRUE
-
 /area/prisonru/civ/WYshuttle
 	name = "Prison - Weyland-Yutani PMC ERT Shuttle"
 	requires_power = FALSE
@@ -94,6 +88,7 @@
 /area/prisonru/station/security
 	name = "Prison - Security Department"
 	minimap_color = MINIMAP_AREA_SEC
+	icon_state = "security_hub"
 
 /area/prisonru/station/security/barracks
 	name = "Prison - Security Barracks"
@@ -118,7 +113,6 @@
 
 /area/prisonru/station/security/armory/highsec_monitoring
 	name = "Prison - High-Security Monitoring Armory"
-	icon_state = "security_sub"
 
 /area/prisonru/station/security/monitoring
 	icon_state = "security_hub"
@@ -242,13 +236,14 @@
 	name = "Prison - Warden's Quarters"
 
 /area/prisonru/station/toilet
-	icon_state = "restrooms"
+	icon_state = "station0"
 
 /area/prisonru/station/toilet/canteen
 	name = "Prison - Canteen Restooms"
 
 /area/prisonru/station/toilet/security
 	name = "Prison - Security Restooms"
+	icon_state = "security_hub"
 
 /area/prisonru/station/toilet/research
 	name = "Prison - Research Restooms"
@@ -261,9 +256,6 @@
 /area/prisonru/station/maintenance
 	icon_state = "maints"
 	ambience_exterior = AMBIENCE_PRISON_MAINTENANCE
-	ceiling_muffle = TRUE
-	soundscape_playlist = SCAPE_PL_FIORINA_MAINTENANCE
-
 /area/prisonru/station/maintenance/hi
 
 /area/prisonru/station/maintenance/hi/south_sec_maint
@@ -281,7 +273,7 @@
 
 /area/prisonru/station/maintenance/residential/nw
 	name = "Prison - Northwest Civilian Residences Maintenance"
-	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/ne
 	name = "Prison - Northeast Civilian Residences Maintenance"
@@ -289,7 +281,7 @@
 
 /area/prisonru/station/maintenance/residential/sw
 	name = "Prison - Southwest Civilian Residences Maintenance"
-	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
+	ceiling = CEILING_METAL
 
 /area/prisonru/station/maintenance/residential/se
 	name = "Prison - Southeast Civilian Residences Maintenance"
@@ -317,8 +309,6 @@
 	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
 	linked_lz = DROPSHIP_LZ1
-	ceiling_muffle = TRUE
-
 /area/prisonru/station/maintenance/hangar_barracks
 	name = "Prison - Hangar-Barracks Maintenance"
 	linked_lz = DROPSHIP_LZ1
@@ -335,10 +325,6 @@
 /area/prisonru/station/laundry
 	name = "Prison - Laundry"
 
-//Library
-/area/prisonru/station/library
-	name = "Prison - Library"
-
 //Engi code
 /area/prisonru/station/engineering
 	name = "Prison - Engineering"
@@ -348,9 +334,13 @@
 /area/prisonru/station/engineering/atmos
 	name = "Prison - Atmospherics"
 
+/area/prisonru/station/engineering/storage
+	name = "Prison - Engineering Storage"
+
 //Office under engi
 /area/prisonru/station/parole/protective_custody
 	name = "Prison - Protective Custody Parole"
+	icon_state = "tumor_4"
 
 //Visitations
 /area/prisonru/station/visitation
@@ -372,6 +362,7 @@
 
 /area/prisonru/station/hallway/entrance
 	name = "Prison - Entrance Hallway"
+	linked_lz = DROPSHIP_LZ1
 
 /area/prisonru/station/hallway/central
 	name = "Prison - Central Ring"
@@ -424,8 +415,6 @@
 
 /area/prisonru/medbay/high_sec_medbay
 	name = "Prison - South High-Security MedBay Block"
-	soundscape_playlist = SCAPE_PL_FIORINA_COMMON
-
 //CELLBLOCKS CODE
 
 //Near Engi/Canteen
@@ -496,11 +485,11 @@
 /area/prisonru/cellblock/maxsec
 	minimap_color = MINIMAP_AREA_CELL_MAX
 	icon_state = "tumor2"
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS
 
 /area/prisonru/cellblock/maxsec/north
 	name = "Prison - Maximum-Security Panopticon Cellblock"
 	soundscape_playlist = SCAPE_PL_FIORINA_NEAR_SCI
-	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
 
 /area/prisonru/cellblock/maxsec/south
 	name = "Prison - Maximum-Security Suspended Cellblock"
@@ -509,6 +498,7 @@
 /area/prisonru/cellblock/vip
 	name = "Prison - VIP Cells"
 	minimap_color = MINIMAP_AREA_CELL_VIP
+	icon_state = "tumor2"
 
 /area/prisonru/cellblock/protective
 	name = "Prison - Protective Custody"
@@ -520,14 +510,19 @@
 	ambience_exterior = AMBIENCE_PRISON_ALARM
 	soundscape_playlist = SCAPE_PL_LV759_INDOORS
 	minimap_color = MINIMAP_AREA_RESEARCH
-	icon_state = "tumor4"
+	icon_state = "tumor0-deep"
+
+/area/prisonru/research/Restroom
+	name = "Prison - Research Restroom"
+
+/area/prisonru/research/Hallway
+	name = "Prison - Research Hallway"
 
 /area/prisonru/research/rd
 	name = "Prison - Research Director's office"
 
-/area/prisonru/research/secret //And T-comms tower can spawn here
+/area/prisonru/research/secret
 	name = "Prison - Classified Research"
-	minimap_color = MINIMAP_AREA_COMMS
 
 /area/prisonru/research/secret/WYLab
 	name = "Prison - WY Research Laboratory"
@@ -537,6 +532,7 @@
 
 /area/prisonru/research/secret/chemistry
 	name = "Prison - Chemistry"
+
 /area/prisonru/research/secret/bioengineering
 	name = "Prison - Bioengineering"
 
@@ -546,13 +542,16 @@
 /area/prisonru/research/secret/testing
 	name = "Prison - Biological Testing"
 
+/area/prisonru/research/secret/armory //And T-comms tower can spawn here
+	name = "Prison - Research Armory"
+	minimap_color = MINIMAP_AREA_COMMS
+
 //Civilian block CODE
 /area/prisonru/residential
 	minimap_color = MINIMAP_AREA_COLONY
-	ceiling = CEILING_UNDERGROUND_BLOCK_CAS
+	ceiling = CEILING_METAL
 	icon_state = "tumor0"
 	unoviable_timer = FALSE
-
 //Civ rooms
 
 /area/prisonru/residential/synthrepstat
@@ -564,7 +563,6 @@
 	icon_state = "tumor4"
 	ambience_exterior = AMBIENCE_PRISON_CONTROLROOM
 	soundscape_playlist = SCAPE_PL_FIORINA_COMPUTERS_ROOM
-	ceiling_muffle = TRUE
 
 /area/prisonru/residential/botanic
 	name = "Prison - Botanical garden"
@@ -576,6 +574,7 @@
 
 //Rooms
 /area/prisonru/residential/rooms
+	ceiling = CEILING_UNDERGROUND_METAL_BLOCK_CAS
 
 /area/prisonru/residential/rooms/room1
 	name = "Prison - Room №1"
@@ -616,6 +615,7 @@
 //Hallways Civ
 /area/prisonru/residential/hallway
 	icon_state = "fiorina"
+	ceiling = CEILING_GLASS
 
 /area/prisonru/residential/hallway/central
 	name = "Prison - Civilian Residences Central"
@@ -628,13 +628,9 @@
 
 //Monorail CODE
 /area/prisonru/monorail
-	soundscape_playlist = SCAPE_PL_FIORINA_CIVILIAN_AD
-	soundscape_interval = 60
-	ceiling_muffle = TRUE
 
 /area/prisonru/monorail/west
 	name = "Prison - West Monorail Station"
-	ceiling = CEILING_METAL
 	icon_state = "power0"
 
 
@@ -660,3 +656,5 @@
 /area/prisonru/pirate
 	name = "Tramp Freighter \"Rocinante\""
 	minimap_color = MINIMAP_AREA_SHIP
+	icon_state = "police_line"
+	ceiling = CEILING_UNDERGROUND_METAL_ALLOW_CAS

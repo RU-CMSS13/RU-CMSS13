@@ -245,12 +245,6 @@
 	},
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/entrance)
-"na" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	name = "Staff Hallway"
-	},
-/turf/open/floor/prison,
-/area/prisonru/station/hallway/entrance)
 "ne" = (
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 6
@@ -331,16 +325,12 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/entrance)
-"sh" = (
-/obj/structure/machinery/power/apc/no_power/west,
-/obj/structure/largecrate/random/barrel/brown,
-/turf/open/floor/prison/floor_plate/southwest,
-/area/prisonru/station/hallway/entrance)
 "sS" = (
 /obj/structure/bed/chair/comfy{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood/drip,
+/obj/structure/machinery/power/apc/no_power/west,
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/station/hallway/entrance)
 "sW" = (
@@ -480,20 +470,6 @@
 	},
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/station/hallway/entrance)
-"Ao" = (
-/obj/structure/bed/chair/comfy{
-	dir = 4
-	},
-/obj/item/trash/burger{
-	pixel_y = 12;
-	pixel_x = -8
-	},
-/obj/structure/machinery/light/double/blue{
-	dir = 8;
-	pixel_x = -10
-	},
-/turf/open/floor/prison/floor_plate/southwest,
-/area/prisonru/station/hallway/entrance)
 "AX" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/stack/rods,
@@ -509,9 +485,8 @@
 /turf/open/floor/prison,
 /area/prisonru/station/security/barracks)
 "Ca" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	dir = 2;
-	name = "Entrance Hallway"
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
 	},
 /turf/open/floor/prison,
 /area/prisonru/lz/near_lzI)
@@ -529,9 +504,7 @@
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/entrance)
 "Da" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/comdoor/colony{
-	name = "East Hallway"
-	},
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/entrance)
 "Dv" = (
@@ -685,9 +658,8 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	dir = 2;
-	name = "Entrance Hallway"
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
 	},
 /turf/open/floor/prison,
 /area/prisonru/lz/near_lzI)
@@ -805,14 +777,6 @@
 	},
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/entrance)
-"Ti" = (
-/obj/item/ammo_casing/bullet,
-/obj/item/trash/burger{
-	pixel_y = 12;
-	pixel_x = -8
-	},
-/turf/open/floor/plating/plating_catwalk/prison,
-/area/prisonru/station/hallway/entrance)
 "TU" = (
 /obj/structure/window/framed/prison/reinforced/hull,
 /obj/effect/decal/siding,
@@ -842,7 +806,6 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/trash/buritto,
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/entrance)
 "Ww" = (
@@ -929,7 +892,7 @@ tk
 Ai
 sS
 VS
-sh
+XQ
 XQ
 gg
 DK
@@ -941,7 +904,7 @@ OM
 Ai
 Ai
 Ai
-Ao
+DK
 zs
 xz
 "}
@@ -1029,7 +992,7 @@ xq
 fA
 xq
 FP
-Ti
+xq
 mu
 IT
 Ld
@@ -1066,7 +1029,7 @@ ZZ
 ZZ
 "}
 (6,1,1) = {"
-na
+Da
 mu
 xq
 IT

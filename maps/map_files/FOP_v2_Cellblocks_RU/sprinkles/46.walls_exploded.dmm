@@ -2,8 +2,15 @@
 "a" = (
 /turf/open/floor/prison/red/east,
 /area/prisonru/cellblock/highsec/south/south)
+"b" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/prison/damaged2/southwest,
+/area/prisonru/cellblock/highsec/south/south)
 "c" = (
 /obj/structure/machinery/light/double/blue,
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_22"
+	},
 /turf/open/floor/prison/red/southeast,
 /area/prisonru/cellblock/highsec/south/south)
 "d" = (
@@ -14,8 +21,16 @@
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/hi/south_sec_maint)
 "e" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "pottedplant_22"
+	},
 /turf/open/floor/prison/red/southwest,
 /area/prisonru/cellblock/highsec/south/south)
+"f" = (
+/obj/structure/pipes/standard/simple/hidden/dark,
+/obj/item/explosive/grenade/incendiary/molotov,
+/turf/open/floor/plating/prison,
+/area/prisonru/station/maintenance/hi/south_sec_maint)
 "g" = (
 /obj/structure/sign/safety/maint{
 	pixel_x = 15;
@@ -23,9 +38,28 @@
 	},
 /turf/closed/wall/prison,
 /area/prisonru/station/maintenance/hi/south_sec_maint)
-"k" = (
-/obj/item/explosive/grenade/incendiary/molotov,
+"h" = (
+/obj/structure/machinery/light/double/blue{
+	dir = 8;
+	pixel_x = -10
+	},
+/turf/open/floor/prison/floor_plate/southwest,
+/area/prisonru/cellblock/highsec/south/south)
+"i" = (
+/obj/item/stack/sheet/metal,
 /turf/open/floor/prison/damaged2/southwest,
+/area/prisonru/cellblock/highsec/south/south)
+"j" = (
+/obj/structure/largecrate/random,
+/obj/effect/landmark/objective_landmark/close,
+/turf/open/floor/plating/prison,
+/area/prisonru/station/maintenance/hi/south_sec_maint)
+"l" = (
+/obj/structure/machinery/camera/autoname{
+	dir = 8;
+	network = list("PRISON")
+	},
+/turf/open/floor/prison/red/east,
 /area/prisonru/cellblock/highsec/south/south)
 "m" = (
 /turf/open/floor/prison/damaged2/southwest,
@@ -64,6 +98,7 @@
 "y" = (
 /obj/structure/pipes/standard/simple/hidden/dark,
 /obj/item/stack/rods,
+/obj/effect/spawner/random/tool,
 /turf/open/floor/prison/damaged2/southwest,
 /area/prisonru/station/maintenance/hi/south_sec_maint)
 "z" = (
@@ -71,7 +106,12 @@
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/cellblock/highsec/south/south)
 "C" = (
-/obj/item/stack/sheet/metal,
+/obj/structure/sign/safety/medical{
+	pixel_x = -17;
+	pixel_y = 7
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/rods,
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/cellblock/highsec/south/south)
 "J" = (
@@ -93,9 +133,6 @@
 /turf/closed/wall/r_wall/prison_unmeltable,
 /area/prisonru/station/maintenance/hi/south_sec_maint)
 "S" = (
-/obj/structure/surface/rack{
-	color = "#8e98a0"
-	},
 /obj/item/stack/rods,
 /obj/item/stack/rods,
 /obj/item/stack/rods,
@@ -118,20 +155,20 @@
 /area/prisonru/station/maintenance/hi/south_sec_maint)
 
 (1,1,1) = {"
-k
+b
 C
-n
-n
+h
 z
+n
 m
 e
 V
 "}
 (2,1,1) = {"
-a
-m
-m
-m
+l
+i
+b
+b
 a
 a
 c
@@ -149,7 +186,7 @@ Q
 "}
 (4,1,1) = {"
 J
-x
+j
 P
 M
 Y
@@ -161,7 +198,7 @@ g
 J
 x
 q
-w
+f
 p
 y
 w

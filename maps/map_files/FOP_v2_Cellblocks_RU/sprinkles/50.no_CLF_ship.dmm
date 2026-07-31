@@ -37,6 +37,34 @@
 /obj/structure/blocker/invisible_wall,
 /turf/open_space,
 /area/prisonru/oob)
+"ak" = (
+/obj/structure/machinery/door/airlock/prison{
+	density = 0;
+	icon_state = "door_open";
+	opacity = 0
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/cellblock/mediumsec/north)
+"al" = (
+/obj/structure/window/framed/prison/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
+	dir = 4
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/cellblock/mediumsec/north)
+"am" = (
+/obj/structure/machinery/light/small/blue,
+/turf/open/floor/plating/plating_catwalk/prison,
+/area/prisonru/cellblock/mediumsec/north)
+"an" = (
+/obj/structure/window/framed/prison/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/door/poddoor/hybrisa/open_shutters{
+	dir = 4
+	},
+/turf/open/floor/plating/prison,
+/area/prisonru/cellblock/protective)
 "ao" = (
 /obj/structure/sink{
 	dir = 8;
@@ -45,6 +73,9 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/prison/floor_plate,
 /area/prisonru/cellblock/mediumsec/east)
+"ap" = (
+/turf/open/floor/hybrisa/metal/yellow_warning_floor,
+/area/prisonru/cellblock/mediumsec/north)
 "ax" = (
 /obj/structure/machinery/door/poddoor/almayer/open{
 	name = "emergency lockdown";
@@ -232,8 +263,6 @@
 /turf/open/floor/prison/floor_plate,
 /area/prisonru/cellblock/mediumsec/north)
 "fU" = (
-/obj/structure/machinery/light/small/blue,
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
@@ -346,14 +375,13 @@
 /turf/open/floor/prison/yellow/southwest,
 /area/prisonru/cellblock/mediumsec/east)
 "ig" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	dir = 2;
-	name = "Protective Custody Cells"
-	},
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/turf/open/floor/prison/yellowfull,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
+	},
+/turf/open/floor/hybrisa/metal/yellow_warning_floor,
 /area/prisonru/cellblock/mediumsec/north)
 "ik" = (
 /obj/structure/largecrate/random/barrel/red,
@@ -475,6 +503,7 @@
 	use_power = 0
 	},
 /obj/effect/decal/cleanable/blood,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/cellblock/mediumsec/east)
 "lV" = (
@@ -657,15 +686,16 @@
 /turf/open/floor/prison/cell_stripe/east,
 /area/prisonru/cellblock/mediumsec/north)
 "qu" = (
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	name = "Security Booth"
-	},
 /obj/structure/pipes/standard/simple/hidden/supply{
 	dir = 4;
 	icon_state = "exposed01-supply"
 	},
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
+	},
+/obj/structure/machinery/door/airlock/hybrisa/personal/autoname{
+	density = 0;
+	icon_state = "door_open"
 	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/cellblock/mediumsec/east)
@@ -884,10 +914,11 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	name = "Security Booth"
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/machinery/door/airlock/hybrisa/personal/autoname{
+	density = 0;
+	icon_state = "door_open"
+	},
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/cellblock/mediumsec/east)
 "vC" = (
@@ -953,10 +984,10 @@
 /turf/open/floor/plating/prison,
 /area/prisonru/station/maintenance/medium_sec/east_maint)
 "xT" = (
-/turf/open/floor/prison/yellowfull,
+/turf/open/floor/hybrisa/metal/yellow_warning_floor,
 /area/prisonru/cellblock/protective)
 "ye" = (
-/turf/open/floor/plating/plating_catwalk/aicore/white,
+/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/cellblock/mediumsec/north)
 "yk" = (
 /obj/structure/pipes/vents/pump{
@@ -1093,14 +1124,13 @@
 /turf/open/floor/prison/cell_stripe/west,
 /area/prisonru/cellblock/mediumsec/east)
 "Bf" = (
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	dir = 2;
-	name = "Protective Custody Cells"
-	},
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/turf/open/floor/prison/yellowfull,
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
+	},
+/turf/open/floor/hybrisa/metal/yellow_warning_floor,
 /area/prisonru/cellblock/protective)
 "Bm" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1210,6 +1240,7 @@
 	name = "emergency lockdown";
 	use_power = 0
 	},
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname,
 /turf/open/floor/prison/darkredfull2/southwest,
 /area/prisonru/cellblock/protective)
 "Ei" = (
@@ -1245,8 +1276,9 @@
 /obj/structure/pipes/standard/simple/hidden/dark{
 	dir = 4
 	},
-/obj/structure/machinery/door/airlock/almayer/security/glass/colony{
-	name = "Protective Custody Monitoring"
+/obj/structure/machinery/door/airlock/hybrisa/personal/autoname{
+	density = 0;
+	icon_state = "door_open"
 	},
 /turf/open/floor/prison/floor_plate,
 /area/prisonru/station/security/monitoring/protective)
@@ -1672,9 +1704,8 @@
 /turf/open/floor/prison/floor_plate,
 /area/prisonru/cellblock/protective)
 "NU" = (
-/obj/structure/machinery/door/airlock/almayer/engineering/colony{
-	dir = 2;
-	name = "Sub Telecommunications"
+/obj/structure/machinery/door/airlock/multi_tile/almayer/engidoor/glass/colony{
+	autoname = 1
 	},
 /turf/open/floor/prison/darkyellow2/west,
 /area/prisonru/telecomms/relay)
@@ -1741,7 +1772,7 @@
 /area/prisonru/cellblock/mediumsec/east)
 "OX" = (
 /turf/closed/wall/prison,
-/area/prisonru/station/library)
+/area/prisonru/station/engineering/storage)
 "Ph" = (
 /obj/structure/prop/invuln/overhead_pipe{
 	color = "#a6aeab";
@@ -2008,7 +2039,7 @@
 /area/prisonru/cellblock/mediumsec/east)
 "VM" = (
 /turf/closed/wall/r_wall/prison,
-/area/prisonru/station/library)
+/area/prisonru/station/engineering/storage)
 "Wh" = (
 /obj/structure/pipes/standard/manifold/hidden/dark{
 	dir = 1
@@ -2123,10 +2154,6 @@
 /turf/open/floor/prison/darkred2/southwest,
 /area/prisonru/cellblock/mediumsec/east)
 "YS" = (
-/obj/structure/machinery/door/airlock/almayer/engineering/colony{
-	dir = 2;
-	name = "Sub Telecommunications"
-	},
 /turf/open/floor/prison/darkyellow2/east,
 /area/prisonru/telecomms/relay)
 "Zf" = (
@@ -2161,9 +2188,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/machinery/door/airlock/multi_tile/almayer/generic{
-	dir = 2;
-	name = "Protective Custody Cells"
+/obj/structure/machinery/door/airlock/multi_tile/hybrisa/generic/autoname{
+	dir = 2
 	},
 /turf/open/floor/prison/bluefull,
 /area/prisonru/cellblock/protective)
@@ -2735,11 +2761,11 @@ cl
 "}
 (11,1,1) = {"
 af
-rU
+ap
 ig
+al
 af
-lX
-pe
+ak
 XY
 Ik
 pe
@@ -2793,9 +2819,9 @@ cl
 af
 rU
 BP
+rU
 af
 LO
-jv
 af
 LO
 jv
@@ -2849,8 +2875,8 @@ cl
 af
 Wi
 fU
+am
 af
-Pz
 bv
 af
 Pz
@@ -2905,9 +2931,9 @@ cl
 af
 rV
 BP
+rU
 af
-LK
-dA
+bv
 af
 LK
 dA
@@ -2961,8 +2987,8 @@ cl
 Ts
 xT
 Bf
+an
 Ts
-No
 ja
 ja
 ja
