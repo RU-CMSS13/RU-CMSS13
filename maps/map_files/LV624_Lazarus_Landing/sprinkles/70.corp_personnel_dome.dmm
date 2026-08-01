@@ -3,9 +3,6 @@
 /obj/structure/closet/secure_closet/wy/goon{
 	pixel_x = 7
 	},
-/obj/structure/closet/secure_closet/wy/goon{
-	pixel_x = -7
-	},
 /turf/open/floor/prison/floor_plate_alt/west,
 /area/lazarus/secure_storage)
 "ab" = (
@@ -18,10 +15,29 @@
 "ac" = (
 /obj/effect/decal/hybrisa/dirt,
 /obj/structure/closet/secure_closet/wy/goon{
-	pixel_x = -7
-	},
-/obj/structure/closet/secure_closet/wy/goon{
 	pixel_x = 7
+	},
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/secure_storage)
+"ad" = (
+/obj/structure/closet/secure_closet/wy/goon{
+	pixel_x = -8;
+	pixel_y = -32
+	},
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/secure_storage)
+"ae" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/closet/secure_closet/wy/goon{
+	pixel_x = -7;
+	pixel_y = 32
+	},
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/secure_storage)
+"af" = (
+/obj/structure/closet/secure_closet/wy/goon{
+	pixel_x = -7;
+	pixel_y = 32
 	},
 /turf/open/floor/prison/floor_plate_alt/west,
 /area/lazarus/secure_storage)
@@ -72,6 +88,10 @@
 	pixel_x = 8
 	},
 /obj/effect/decal/hybrisa/dirt,
+/obj/structure/closet/secure_closet/wy/goon{
+	pixel_x = -8;
+	pixel_y = -32
+	},
 /turf/open/floor/prison/floor_plate_alt/west,
 /area/lazarus/secure_storage)
 "aQ" = (
@@ -287,9 +307,6 @@
 "eJ" = (
 /obj/structure/closet/secure_closet/wy/goon{
 	pixel_x = 7
-	},
-/obj/structure/closet/secure_closet/wy/goon{
-	pixel_x = -7
 	},
 /turf/open/floor/prison/darkred2/north,
 /area/lazarus/secure_storage)
@@ -2851,7 +2868,7 @@ CI
 Qe
 dD
 eJ
-ZW
+ae
 CV
 cN
 cj
@@ -2877,7 +2894,7 @@ IX
 Sx
 dD
 eJ
-CV
+af
 CV
 nS
 KX
@@ -3040,7 +3057,7 @@ ND
 cQ
 CV
 ZW
-CV
+ad
 ac
 dD
 FX

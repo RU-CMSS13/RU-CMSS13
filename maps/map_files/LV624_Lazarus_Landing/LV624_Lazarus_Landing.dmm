@@ -516,6 +516,10 @@
 /obj/structure/platform_decoration/wood,
 /turf/open/auto_turf/lv_grass_weedable/layer0_mud_alt,
 /area/lazarus/ground/caves/south_west_caves)
+"abL" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/landing_zones/lz1)
 "abM" = (
 /obj/structure/machinery/power/apc/no_power/east,
 /turf/open/floor/strata/light_purple_edge/east,
@@ -529,6 +533,44 @@
 /obj/structure/machinery/power/apc/no_power/south,
 /turf/open/floor/plating,
 /area/lazarus/yggdrasil)
+"abP" = (
+/obj/structure/machinery/light/small/blue{
+	light_color = "#dae2ff"
+	},
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/darkbrown2,
+/area/lazarus/quartstorage)
+"abQ" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"abR" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/blood/oil,
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/quartstorage)
+"abS" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/quartstorage)
+"abT" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/open/floor/prison/cell_stripe/north,
+/area/lazarus/quartstorage)
+"abU" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/cell_stripe/north,
+/area/lazarus/quartstorage)
+"abV" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"abW" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/cell_stripe/west,
+/area/lazarus/quartstorage)
 "abX" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 5
@@ -536,6 +578,28 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_wall,
 /turf/open/floor/ancient_temple/damaged/damage_2,
 /area/lazarus/ground/ancient_temple/north_east/surface)
+"abY" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/prison/cell_stripe,
+/area/lazarus/quartstorage)
+"abZ" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/prison/cell_stripe,
+/area/lazarus/quartstorage)
+"aca" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/prison/cell_stripe,
+/area/lazarus/quartstorage)
+"acb" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/blood/oil,
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"acc" = (
+/obj/effect/landmark/lv624/fog_blocker,
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/ground/barrens/west_barrens)
 "ack" = (
 /turf/open/floor/ancient_temple/floor_19/east,
 /area/lazarus/ground/ancient_temple/south)
@@ -1189,15 +1253,12 @@
 /obj/structure/reagent_dispensers/peppertank{
 	pixel_x = -32
 	},
-/obj/structure/closet/secure_closet/marshal/alt{
-	pixel_x = -5;
-	pixel_y = 15
-	},
-/obj/structure/closet/secure_closet/marshal/alt{
-	pixel_x = 9;
-	pixel_y = 15
-	},
 /obj/effect/decal/hybrisa/dirt,
+/obj/structure/closet/secure_closet/marshal/alt{
+	pixel_x = 8;
+	pixel_y = 15;
+	density = 0
+	},
 /turf/open/floor/strata/multi_tiles,
 /area/lazarus/security)
 "ato" = (
@@ -3157,6 +3218,7 @@
 	},
 /obj/item/stack/sheet/cardboard,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/prison/darkbrown2/northwest,
 /area/lazarus/quartstorage)
 "boj" = (
@@ -8467,6 +8529,7 @@
 /area/lazarus/quart)
 "eaR" = (
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/cobweb2/dynamic,
 /turf/open/floor/prison/darkbrown2/northeast,
 /area/lazarus/quartstorage)
 "eaW" = (
@@ -15149,7 +15212,6 @@
 /area/lazarus/robotics)
 "hoQ" = (
 /obj/effect/decal/lv_decals/red_mud_corner,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/lazarus/ground/river/central_river)
 "hpb" = (
@@ -22872,6 +22934,7 @@
 /obj/structure/pipes/vents/scrubber_hybrisa,
 /obj/effect/decal/hybrisa/dirt,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/cobweb2/dynamic,
 /turf/open/floor/prison/darkbrown2/northeast,
 /area/lazarus/quartstorage)
 "liI" = (
@@ -24043,7 +24106,6 @@
 /area/lazarus/ground/jungle/north_east_jungle)
 "lJH" = (
 /obj/effect/decal/lv_decals/red_mud_corner,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/lazarus/ground/river/west_river)
 "lJJ" = (
@@ -25250,6 +25312,11 @@
 /obj/effect/decal/warning_stripes{
 	icon_state = "SW-out";
 	pixel_y = -2
+	},
+/obj/structure/closet/secure_closet/marshal/alt{
+	pixel_x = -7;
+	pixel_y = 47;
+	density = 0
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/security)
@@ -27208,6 +27275,7 @@
 	name = "Cargo Storage Shutters"
 	},
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/prison/cell_stripe/west,
 /area/lazarus/quartstorage)
 "ndA" = (
@@ -32367,6 +32435,7 @@
 /area/lazarus/ground/river/east_river)
 "pzl" = (
 /obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/effect/decal/cleanable/generic,
 /turf/open/floor/prison/cell_stripe/east,
 /area/lazarus/quartstorage)
 "pzt" = (
@@ -35670,7 +35739,6 @@
 	icon_state = "box_1"
 	},
 /obj/effect/decal/lv_decals/red_mud_corner,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/floor/plating/plating_catwalk/strata,
 /area/lazarus/ground/river/central_river)
 "riz" = (
@@ -36427,6 +36495,7 @@
 	},
 /obj/item/storage/pouch/cassette,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/prison/darkbrown2/northwest,
 /area/lazarus/quartstorage)
 "rEY" = (
@@ -36453,6 +36522,7 @@
 	id = "cargo_shipping_blast";
 	name = "Cargo Shipping Shutters"
 	},
+/obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/prison/darkbrown2/northwest,
 /area/lazarus/quartstorage)
 "rFB" = (
@@ -37440,6 +37510,7 @@
 	dir = 4
 	},
 /obj/effect/decal/lv_decals/red_mud_corner,
+/obj/effect/decal/cleanable/generic,
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/ground/colony/north_east_nexus_road)
 "scd" = (
@@ -38866,6 +38937,7 @@
 	pixel_y = 20
 	},
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/generic,
 /turf/open/floor/prison/darkbrown2/southeast,
 /area/lazarus/quart)
 "sJV" = (
@@ -38887,12 +38959,9 @@
 	pixel_x = 29
 	},
 /obj/structure/closet/secure_closet/marshal/alt{
-	pixel_x = -9;
-	pixel_y = 15
-	},
-/obj/structure/closet/secure_closet/marshal/alt{
-	pixel_x = 5;
-	pixel_y = 15
+	pixel_x = 7;
+	pixel_y = 15;
+	density = 0
 	},
 /turf/open/floor/strata/multi_tiles,
 /area/lazarus/security)
@@ -40875,6 +40944,11 @@
 "tFQ" = (
 /obj/item/stool,
 /obj/effect/decal/hybrisa/dirt,
+/obj/structure/closet/secure_closet/marshal/alt{
+	pixel_x = -8;
+	pixel_y = 47;
+	density = 0
+	},
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/security)
 "tGb" = (
@@ -41111,6 +41185,7 @@
 /obj/item/tool/crowbar/tactical,
 /obj/item/tool/crowbar/tactical,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/cobweb2/dynamic,
 /turf/open/floor/prison/darkbrown2/northeast,
 /area/lazarus/quartstorage)
 "tLE" = (
@@ -43958,6 +44033,7 @@
 	dir = 4
 	},
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/generic,
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quartstorage)
 "vcs" = (
@@ -47194,6 +47270,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/item/trash/cigbutt,
 /obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/effect/decal/cleanable/generic,
 /turf/open/floor/prison/floor_plate_alt/west,
 /area/lazarus/quartstorage)
 "wJM" = (
@@ -49799,7 +49876,6 @@
 "yan" = (
 /obj/structure/flora/bush/ausbushes/reedbush,
 /obj/structure/platform/metal/strata/alt/west,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/gm/coast/dirt/north,
 /area/lazarus/ground/river/central_river)
 "yao" = (
@@ -50214,12 +50290,6 @@
 /obj/structure/prop/brazier_ancient/alt/frame,
 /turf/open/floor/ancient_temple/base,
 /area/lazarus/ground/ancient_temple/north_east)
-"ykU" = (
-/obj/effect/vehicle_spawner/white_van/decrepit,
-/obj/effect/decal/hybrisa/dirt,
-/obj/effect/decal/hybrisa/dirt,
-/turf/open/floor/prison/floor_plate,
-/area/lazarus/robotics)
 "ykZ" = (
 /obj/structure/platform/metal/strata/alt/west,
 /obj/effect/landmark/lv624/fog_blocker,
@@ -63192,7 +63262,7 @@ vPR
 hbT
 sIT
 kxz
-ykU
+bkP
 mVO
 eeN
 lpv
@@ -65381,7 +65451,7 @@ tRF
 ptB
 mgn
 mgn
-pLD
+acc
 gsi
 qAq
 cBm
@@ -65605,7 +65675,7 @@ mgn
 mgn
 muo
 mgn
-pLD
+acc
 lJH
 rcv
 hIY
@@ -65829,7 +65899,7 @@ cPG
 qKp
 cPG
 cPG
-cPG
+aal
 rin
 oVO
 oVO
@@ -66053,7 +66123,7 @@ xnI
 cPG
 cPG
 nYT
-cPG
+aal
 hoQ
 fGg
 fGg
@@ -66277,7 +66347,7 @@ dVX
 qBL
 qBL
 xNN
-cPG
+aal
 yan
 cDE
 cDE
@@ -66500,9 +66570,9 @@ apm
 wsh
 olU
 tha
-taD
-qBL
-bNx
+apm
+ijw
+bfq
 icD
 tha
 ayv
@@ -79976,7 +80046,7 @@ axA
 eJA
 nPY
 jCt
-jCt
+abV
 jwk
 fPA
 vNl
@@ -80426,7 +80496,7 @@ xGT
 upF
 oIz
 fxe
-mqs
+abU
 oow
 riC
 gwx
@@ -80436,7 +80506,7 @@ iJj
 txZ
 svo
 jCt
-svo
+abQ
 svo
 svo
 svo
@@ -81566,7 +81636,7 @@ jCt
 ydB
 yfA
 pgA
-nGV
+abL
 wve
 xuD
 qQV
@@ -81785,7 +81855,7 @@ tLd
 aLj
 mAQ
 jCt
-svo
+abQ
 jCt
 ydB
 yfA
@@ -81991,7 +82061,7 @@ tat
 jCt
 nwW
 nwW
-nwW
+abW
 cLt
 nSz
 svo
@@ -82011,7 +82081,7 @@ ulZ
 svo
 rWf
 rWf
-vSc
+abP
 qSb
 ydz
 tSq
@@ -83557,14 +83627,14 @@ kff
 iJj
 xmU
 oow
-ydB
+abY
 dEc
 wHy
 bzs
 fxe
 aRF
 mqs
-oow
+abR
 fzp
 pcd
 gdk
@@ -83781,13 +83851,13 @@ pcd
 pcd
 xkl
 mAx
-nnR
+abZ
 oiF
 jhl
 poo
 crN
 xXl
-dJQ
+abT
 mAx
 jsI
 pcd
@@ -84229,7 +84299,7 @@ iAU
 dJQ
 svo
 qcW
-nnR
+aca
 mnU
 lOe
 gWz
@@ -84684,7 +84754,7 @@ jCH
 crN
 nbF
 mqs
-mAx
+abS
 cNb
 pcd
 pcd
@@ -85124,7 +85194,7 @@ xPd
 xPd
 iJj
 nbU
-jCt
+acb
 twm
 nwW
 cLt
