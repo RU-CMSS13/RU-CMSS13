@@ -63,15 +63,15 @@ SUBSYSTEM_DEF(queue_system)
 	return queued_players[1 + offset]
 
 /datum/queue_handler_datum/proc/on_que_change()
-	var/postion_offset = 0
+	var/position_offset = 0
 	for(var/position in 1 to length(queued_players))
 		var/datum/queued_player/info = queued_players[position]
 		info.real_position = position
-		info.position = info.real_position - postion_offset
+		info.position = info.real_position - position_offset
 		info.process()
 		if(info.eligible_queue())
 			continue
-		postion_offset++
+		position_offset++
 
 /datum/queue_handler_datum/proc/set_custom_pos(datum/queued_player/wanted_info, wanted_position)
 	if(wanted_position > length(queued_players))
