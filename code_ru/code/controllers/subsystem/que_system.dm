@@ -55,7 +55,7 @@ SUBSYSTEM_DEF(queue_system)
 /datum/queue_handler_datum/process()
 	var/hold_time = world.time - hold_time_after_leave
 	for(var/datum/queued_player/info as anything in queued_players)
-		info.process(hold_time)
+		info.process(hold_time, GLOB.directory[info.player_ckey])
 
 /datum/queue_handler_datum/proc/progress(offset = 0)
 	if(1 + offset > length(queued_players))
@@ -68,8 +68,7 @@ SUBSYSTEM_DEF(queue_system)
 		var/datum/queued_player/info = queued_players[position]
 		info.real_position = position
 		info.position = info.real_position - position_offset
-		info.process()
-		if(info.eligible_queue())
+		if(info.process(0, GLOB.directory[info.player_ckey]))
 			continue
 		position_offset++
 
@@ -117,12 +116,11 @@ SUBSYSTEM_DEF(queue_system)
 
 	. = ..()
 
-/datum/queued_player/process(hold_time)
+/datum/queued_player/process(hold_time, client/client)
 	if(left_server_time && hold_time && (left_server_time > hold_time))
 		remove_from_queue()
 		return
 
-	var/client/client = GLOB.directory[player_ckey]
 	if(client)
 		left_server_time = 0
 	else
@@ -173,21 +171,28 @@ SUBSYSTEM_DEF(queue_system)
 
 	. = ..()
 
-/datum/queued_player/xeno/process()
+/datum/queued_player/xeno/process(hold_time, client/client)
 	. = ..()
+
+	if (hold_time) return
 
 	var/position_text = "[position]\th"
 	if(position != real_position)
 		position_text += " or \[[real_position]\th with countinng ineligible players\]"
 
 	if(eligible_queue())
+		if (client)
+			to_chat(client, SPAN_WARNING(position_text))
 		larva_pool_message = "You are currently [position_text] in the larva pool."
-		return
+		return TRUE
 
+	if (client)
+		to_chat(client, SPAN_WARNING("You are currently ineligible to be a larva but would be [position_text]"))
 	larva_pool_message = "You are currently ineligible to be a larva but would be [position_text] in the pool. \
 		Your current position will shift as others change their preferences or go inactive, but your relative position compared to everyone in the que is the same. \
 		Note: You can play as a facehugger/lesser or in the thunderdome, this wont remove you from que. \
 		If disconnect for more than 10 minutes you'll lose your position."
+	return FALSE
 
 /datum/queued_player/xeno/add_to_queue(datum/queue_handler_datum/owner)
 	var/client/client = GLOB.directory[player_ckey]
