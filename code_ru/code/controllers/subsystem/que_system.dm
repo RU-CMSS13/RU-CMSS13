@@ -274,7 +274,7 @@ SUBSYSTEM_DEF(queue_system)
 	if(isobserver(client.mob))
 		var/mob/dead/observer/client_mob = client.mob
 		var/deathtime = world.time - client_mob.timeofdeath
-		if(deathtime < XENO_JOIN_DEAD_TIME && !client_mob.bypass_time_of_death_checks && !check_client_rights(client, R_ADMIN, FALSE))
+		if(deathtime < XENO_JOIN_DEAD_TIME && !client_mob.bypass_time_of_death_checks)
 			return
 	else if(!mob_eligible(client.mob))
 		return
