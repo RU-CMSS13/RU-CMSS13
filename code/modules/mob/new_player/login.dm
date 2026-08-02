@@ -264,7 +264,7 @@
 		mod_observer.admin_larva_protection = FALSE
 */
 //RUCM START
-		var/datum/player_details/player_details = current_client.player_details
+		var/datum/player_details/player_details = mod_observer.player_details
 		player_details.xeno_que_position.admin_larva_protection = FALSE
 		player_details.xeno_que_position.cached_admin_larva_protection = FALSE
 		player_details.add_to_xeno_queue()
