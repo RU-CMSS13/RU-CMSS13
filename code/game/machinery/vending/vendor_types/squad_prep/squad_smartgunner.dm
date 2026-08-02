@@ -81,7 +81,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_smartgun, list(
 //RUCM CODE START
 	var/list/final_products = list()
 
-	for(var/product in GLOB.cm_vending_gear_engi)
+	for(var/product in GLOB.cm_vending_clothing_smartgun)
 		if(product[length(product)] == null)
 			final_products += list(product)
 		else if(product[length(product)] == VENDOR_ITEM_WELL_FUNDED && MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
