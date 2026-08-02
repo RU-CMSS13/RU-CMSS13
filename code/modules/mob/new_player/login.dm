@@ -264,9 +264,10 @@
 		mod_observer.admin_larva_protection = FALSE
 */
 //RUCM START
-		mod_observer.client.player_details.xeno_que_position.admin_larva_protection = FALSE
-		mod_observer.client.player_details.xeno_que_position.cached_admin_larva_protection = FALSE
-		mod_observer.client.player_details.add_to_xeno_queue()
+		var/datum/player_details/player_details = current_client.player_details
+		player_details.xeno_que_position.admin_larva_protection = FALSE
+		player_details.xeno_que_position.cached_admin_larva_protection = FALSE
+		player_details.add_to_xeno_queue()
 //RUCM END
 
 /mob/new_player/proc/lobby()

@@ -99,6 +99,14 @@
 	observer.icon_state = "anglo_example"
 	observer.alpha = 127
 
+//RUCM START
+	if (check_client_rights(client, R_MOD, FALSE))
+		var/datum/player_details/player_details = client.player_details
+		player_details.xeno_que_position.admin_larva_protection = TRUE
+		player_details.xeno_que_position.cached_admin_larva_protection = TRUE
+		player_details.add_to_xeno_queue()
+//RUCM END
+
 	if(client.prefs.be_random_name)
 		client.prefs.real_name = random_name(client.prefs.gender)
 	observer.real_name = client.prefs.real_name
