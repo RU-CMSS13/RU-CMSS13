@@ -7,8 +7,9 @@
 			current_aura = null
 			return
 
+		var/area_range = 13
 		var/order_level = skills.get_skill_level(SKILL_LEADERSHIP)
-		var/list/targets = SSquadtree.players_in_range(SQUARE(src.x, src.y, 13 + order_level*4), src.z, QTREE_SCAN_MOBS | QTREE_FILTER_LIVING)
+		var/list/atom/movable/targets = SSmapgrids.get_movables_in_region(z, x - area_range, x + area_range, y - area_range, y + order_level*4)
 		targets |= src
 
 		for(var/mob/living/carbon/human/H in targets)
@@ -19,8 +20,8 @@
 
 /datum/action/human_action/issue_order
 	name = "Give Order"
-	icon_file = 'icons/mob/radial.dmi'
-	action_icon_state = "order"
+	icon_file = 'icons/mob/hud/actions.dmi'
+	action_icon_state = "hush_off"
 	var/new_aura = null
 	cooldown = 10 SECONDS
 
@@ -44,10 +45,10 @@
 		return
 	else
 		var/static/list/aura_selections = list(
-			"Help" = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_help"),
-			"Move!" = image(icon = 'icons/mob/radial.dmi', icon_state = "order_move"),
-			"Aim!" = image(icon = 'icons/mob/radial.dmi', icon_state = "order_aim"),
-			"Hold!" = image(icon = 'icons/mob/radial.dmi', icon_state = "order_hold")
+			"Help" = image(icon = 'icons/mob/hud/actions.dmi', icon_state = "hush_on"),
+			"Move!" = image(icon = 'icons/mob/hud/actions.dmi', icon_state = "order_move"),
+			"Aim!" = image(icon = 'icons/mob/hud/actions.dmi', icon_state = "order_focus"),
+			"Hold!" = image(icon = 'icons/mob/hud/actions.dmi', icon_state = "order_hold")
 			)
 
 		new_aura = show_radial_menu(my_owner, my_owner, aura_selections, radius = 38, require_near = TRUE, tooltips = TRUE)
