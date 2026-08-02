@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(queue_system)
 
 /datum/queued_player/xeno
 	var/admin_larva_protection = FALSE
-	var/cached_admin_larva_protection = FALSE
+	var/cached_admin_larva_protection = TRUE
 
 	var/mob/living/carbon/human/linked_human = null
 
