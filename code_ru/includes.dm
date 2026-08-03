@@ -91,6 +91,7 @@
 #include "code\game\turfs\soro.dm"
 #include "code\game\turfs\strata.dm"
 #include "code\game\turfs\walls\wall_types.dm"
+#include "code\game\structures\landing_signs.dm"
 #include "code\modules\mob\living\simple_animal\moth.dm"
 #include "code\modules\paperwork\filingcabinet.dm"
 #include "code\modules\vehicles\multitile\multitile_bump.dm"

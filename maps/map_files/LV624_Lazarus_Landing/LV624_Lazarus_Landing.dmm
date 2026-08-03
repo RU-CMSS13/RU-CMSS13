@@ -3,12 +3,14 @@
 /obj/structure/platform/stone/ancient_temple,
 /obj/structure/platform/stone/ancient_temple/west,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "aab" = (
 /obj/structure/platform/stone/ancient_temple,
 /obj/structure/platform/stone/ancient_temple/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "aac" = (
@@ -62,20 +64,20 @@
 /area/lazarus/ground/barrens/central_barrens)
 "aan" = (
 /obj/structure/flora/jungle/vines/dead/light_1,
-/turf/closed/wall/ancient_temple/sandstone/runed/decor,
+/turf/closed/wall/mineral/sandstone/runed/decor,
 /area/strata/interior/out_of_bounds)
 "aao" = (
 /obj/structure/flora/jungle/vines/dead/heavy,
-/turf/closed/wall/ancient_temple/sandstone/runed/decor,
+/turf/closed/wall/mineral/sandstone/runed/decor,
 /area/strata/interior/out_of_bounds)
 "aap" = (
-/turf/closed/wall/ancient_temple/sandstone/runed/decor,
+/turf/closed/wall/mineral/sandstone/runed/decor,
 /area/strata/interior/out_of_bounds)
 "aaq" = (
 /obj/item/prop/torch_frame/ancient{
 	anchored = 1
 	},
-/turf/closed/wall/ancient_temple/sandstone/runed/decor,
+/turf/closed/wall/mineral/sandstone/runed/decor,
 /area/strata/interior/out_of_bounds)
 "aar" = (
 /obj/structure/flora/jungle/vines/blue/light_1,
@@ -358,13 +360,6 @@
 	},
 /turf/open/floor/plating,
 /area/lazarus/landing_zones/lz1)
-"abk" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/structure/machinery/landinglight/delaythree{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/lazarus/landing_zones/lz2)
 "abl" = (
 /obj/item/stack/sheet/wood{
 	amount = 2
@@ -425,10 +420,6 @@
 /obj/structure/machinery/landinglight/delaytwo,
 /turf/open/floor/plating,
 /area/lazarus/landing_zones/lz1)
-"abw" = (
-/obj/effect/landmark/good_item,
-/turf/open/floor/plating,
-/area/lazarus/landing_zones/lz2)
 "abx" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "N";
@@ -600,9 +591,171 @@
 /obj/effect/landmark/lv624/fog_blocker,
 /turf/open/gm/brown_dirt/random_rocks,
 /area/lazarus/ground/barrens/west_barrens)
+"acd" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 5
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/brown_dirt/random_rocks_alt,
+/area/lazarus/landing_zones/lz2)
+"ace" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acf" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown/variant_5/west,
+/area/lazarus/landing_zones/lz2)
+"acg" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown/variant_5/south,
+/area/lazarus/landing_zones/lz2)
+"ach" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown/variant_5/east,
+/area/lazarus/landing_zones/lz2)
+"aci" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/landing_zones/lz2)
+"acj" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 9
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c";
+	level = 2
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
 "ack" = (
 /turf/open/floor/ancient_temple/floor_19/east,
 /area/lazarus/ground/ancient_temple/south)
+"acl" = (
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/structure/disposalpipe/segment,
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acm" = (
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/structure/disposalpipe/segment,
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/landing_zones/lz2)
+"acn" = (
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/structure/disposalpipe/segment,
+/turf/open/gm/dirt/brown/variant_5/south,
+/area/lazarus/landing_zones/lz2)
+"aco" = (
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/ground/jungle/west_jungle)
+"acp" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 5
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
+"acq" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/prison/cell_stripe/west,
+/area/lazarus/landing_zones/lz2)
+"acr" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 10
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acs" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_4";
+	pixel_x = 4;
+	pixel_y = 17
+	},
+/turf/open/floor/prison/floor_plate_alt,
+/area/lazarus/main_hall)
+"act" = (
+/obj/structure/surface/rack{
+	color = "#6b675e";
+	layer = 2.79
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 1
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0"
+	},
+/obj/item/clothing/mask/yautja_flavor{
+	anchored = 1;
+	unacidable = 0
+	},
+/turf/open/floor/prison/floor_plate_alt,
+/area/lazarus/main_hall)
+"acu" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 5
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
+"acv" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
 "acw" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_1{
 	pixel_x = -2;
@@ -611,6 +764,42 @@
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_11,
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/north_east)
+"acx" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/ground/jungle/west_jungle)
+"acy" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
+"acz" = (
+/obj/structure/flora/bush/ausbushes/lavendergrass,
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
+"acA" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 10
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
 "acB" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_11,
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_8,
@@ -625,33 +814,565 @@
 /obj/item/clothing/head/hardhat/white,
 /turf/open/gm/dirt/brown,
 /area/lazarus/ground/barrens/central_barrens)
+"acE" = (
+/obj/structure/fence/dark/warning/overgrown,
+/turf/open/gm/dirt/brown/variant_5/west,
+/area/lazarus/ground/jungle/west_jungle)
+"acF" = (
+/obj/structure/barricade/handrail/wire{
+	layer = 3.5
+	},
+/obj/structure/fence/dark/warning/overgrown,
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"acG" = (
+/obj/structure/fence/dark/warning/overgrown,
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
+"acH" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/gm/dirt/brown/variant_5/south,
+/area/lazarus/ground/jungle/west_jungle)
+"acI" = (
+/turf/closed/wall/strata_ice/jungle,
+/area/lazarus/ground/jungle/west_jungle)
+"acJ" = (
+/obj/structure/barricade/handrail/wire,
+/obj/structure/barricade/handrail/wire{
+	dir = 8;
+	layer = 4
+	},
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 1
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/ground/jungle/west_jungle)
+"acK" = (
+/obj/structure/disposalpipe/segment,
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 1
+	},
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/prison/cell_stripe/north,
+/area/lazarus/ground/jungle/west_jungle)
+"acL" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 1
+	},
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison/cell_stripe/north,
+/area/lazarus/ground/jungle/west_jungle)
+"acM" = (
+/obj/structure/barricade/handrail/wire,
+/obj/structure/barricade/handrail/wire{
+	layer = 3.1;
+	dir = 4
+	},
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 1
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/ground/jungle/west_jungle)
+"acN" = (
+/obj/structure/flora/bush/ausbushes/var3/fullgrass,
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"acO" = (
+/turf/closed/wall/lv_outpost,
+/area/lazarus/synth_storage)
+"acP" = (
+/obj/structure/window/framed/lv_colony,
+/turf/open/floor/plating/prison,
+/area/lazarus/synth_storage)
+"acQ" = (
+/obj/structure/machinery/door/airlock/multi_tile/lv_double{
+	name = "Hydroponics"
+	},
+/obj/structure/disposalpipe/segment,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/prison,
+/area/lazarus/synth_storage)
+"acR" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison,
+/area/lazarus/synth_storage)
+"acS" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 6
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acT" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
 "acU" = (
 /obj/structure/flora/bush/ausbushes/reedbush,
 /turf/open/gm/coast/dirt/beachcorner2/south_west,
 /area/lazarus/ground/river/central_river/north)
+"acV" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/brown_dirt/random_rocks_alt,
+/area/lazarus/landing_zones/lz2)
+"acW" = (
+/obj/structure/barricade/handrail/wire{
+	layer = 3.5
+	},
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acX" = (
+/obj/structure/disposalpipe/junction,
+/obj/structure/pipes/standard/manifold/hidden/cyan{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/landing_zones/lz2)
+"acY" = (
+/obj/structure/surface/rack,
+/obj/item/weapon/gun/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/ammo_magazine/smg/nailgun,
+/obj/item/weapon/gun/smg/nailgun,
+/obj/structure/machinery/light/blue{
+	dir = 8
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"acZ" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/effect/decal/hybrisa/colorable_rug{
+	color = "#3d3d3d";
+	dir = 1;
+	name = "rubber mat";
+	pixel_y = -38;
+	pixel_x = 8
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"ada" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adb" = (
+/obj/structure/closet,
+/obj/structure/machinery/light/blue{
+	dir = 4
+	},
+/obj/item/clothing/under/rank/synthetic/joe/engi,
+/obj/item/clothing/under/rank/synthetic/joe/engi,
+/obj/item/clothing/under/rank/synthetic/joe/engi,
+/obj/item/clothing/under/rank/synthetic/joe/engi/overalls,
+/obj/item/clothing/under/rank/synthetic/joe/engi/overalls,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "adc" = (
 /obj/structure/flora/bush/ausbushes/var3/sparsegrass,
 /turf/open/gm/brown_dirt/random_rocks_alt,
 /area/lazarus/ground/barrens/east_barrens)
+"add" = (
+/obj/structure/surface/table/almayer,
+/obj/effect/spawner/random/technology_scanner{
+	pixel_x = 6;
+	pixel_y = -2
+	},
+/obj/item/stack/sheet/metal/medium_stack{
+	pixel_x = -6;
+	pixel_y = 10
+	},
+/obj/item/device/working_joe_pda,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"ade" = (
+/obj/structure/surface/table/almayer,
+/obj/effect/landmark/objective_landmark/medium,
+/obj/item/tool/weldpack/minitank{
+	pixel_x = 8;
+	pixel_y = 8
+	},
+/obj/item/stack/cable_coil/cut{
+	icon_state = "coil2"
+	},
+/obj/item/stack/cable_coil{
+	pixel_y = 8;
+	pixel_x = -8
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adf" = (
+/obj/structure/surface/rack,
+/obj/item/clothing/suit/storage/hazardvest,
+/obj/item/clothing/suit/storage/hazardvest,
+/obj/item/clothing/suit/storage/hazardvest,
+/obj/item/clothing/suit/storage/hazardvest,
+/obj/structure/machinery/light/spot,
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adg" = (
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adh" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adi" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
 "adj" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_12,
 /obj/effect/hunter/ancient_temple/rubble/rubble_5,
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/east)
+"adk" = (
+/obj/item/robot_parts/arm/l_arm,
+/obj/item/robot_parts/leg/l_leg,
+/obj/item/robot_parts/arm/r_arm,
+/obj/item/robot_parts/leg/r_leg,
+/obj/item/tool/weldingtool{
+	pixel_x = -7;
+	pixel_y = 3
+	},
+/obj/item/tool/screwdriver,
+/obj/item/tool/weldpack{
+	pixel_y = 5
+	},
+/obj/item/storage/firstaid/synth{
+	pixel_y = -4
+	},
+/obj/structure/surface/rack,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adl" = (
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/obj/structure/surface/rack,
+/obj/item/storage/pouch/electronics/full{
+	pixel_y = 1
+	},
+/obj/item/stack/nanopaste{
+	pixel_x = -9;
+	pixel_y = 6
+	},
+/obj/item/stack/cable_coil/green{
+	pixel_y = 12;
+	pixel_x = 8
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adm" = (
+/obj/structure/surface/rack,
+/obj/effect/spawner/random/tool,
+/obj/item/tool/surgery/synthgraft,
+/obj/item/storage/pouch/construction,
+/obj/effect/spawner/random/tech_supply,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adn" = (
+/obj/structure/flora/bush/ausbushes/ausbush,
+/obj/structure/flora/jungle/vines/blue/light_1,
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"ado" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/powerloader_wreckage,
+/turf/open/floor/almayer/plating_striped/north,
+/area/lazarus/synth_storage)
+"adp" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/almayer/plating_striped/north,
+/area/lazarus/synth_storage)
+"adq" = (
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/turf/open/floor/almayer/plating_striped/north,
+/area/lazarus/synth_storage)
+"adr" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/stack/sheet/metal,
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 5
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"ads" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 10
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adt" = (
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adu" = (
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adv" = (
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adw" = (
+/obj/structure/flora/jungle/vines/heavy,
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"adx" = (
+/obj/structure/flora/jungle/vines/heavy,
+/turf/open/auto_turf/lv_grass_weedable/layer0,
+/area/lazarus/ground/jungle/west_jungle)
+"ady" = (
+/obj/structure/platform/metal/hybrisa/metalplatform6/north,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adz" = (
+/obj/structure/platform/metal/hybrisa/metalplatform6/north,
+/obj/item/stack/sheet/metal,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adA" = (
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
+	dir = 4
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adB" = (
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
 "adC" = (
 /obj/structure/machinery/body_scanconsole,
 /turf/open/floor/kutjevo/tan/multi_tiles/west,
 /area/lazarus/medbay)
+"adD" = (
+/obj/structure/pipes/vents/scrubber_hybrisa,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adE" = (
+/obj/effect/decal/cleanable/blood/oil/streak,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adF" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/obj/structure/barricade/handrail{
+	dir = 1;
+	layer = 2.7;
+	pixel_y = 2
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adG" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/obj/item/stack/sheet/metal,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adH" = (
+/obj/structure/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 8
+	},
+/obj/structure/largecrate/random/mini{
+	layer = 4;
+	pixel_x = 1;
+	pixel_y = 16
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adI" = (
+/obj/structure/flora/jungle/vines/heavy,
+/obj/structure/machinery/colony_floodlight{
+	light_color = "#dae2ff"
+	},
+/turf/open/auto_turf/lv_grass_weedable/layer0,
+/area/lazarus/ground/jungle/west_jungle)
+"adJ" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/largecrate/random/barrel/white,
+/obj/structure/machinery/light/blue{
+	dir = 8
+	},
+/turf/open/floor/almayer/orange/southwest,
+/area/lazarus/synth_storage)
+"adK" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/barricade/handrail,
+/turf/open/floor/almayer/orange/south,
+/area/lazarus/synth_storage)
+"adL" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/bed/stool{
+	buckling_y = 14;
+	layer = 4;
+	pixel_y = 28;
+	pixel_x = -2
+	},
+/obj/structure/barricade/handrail,
+/turf/open/floor/almayer/orange/southeast,
+/area/lazarus/synth_storage)
+"adM" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/platform/metal/hybrisa/metalplatform6/west,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "adN" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 8
 	},
 /turf/open/floor/ancient_temple/floor_13/west,
 /area/lazarus/ground/ancient_temple/south/surface)
+"adO" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
+"adP" = (
+/obj/item/stack/rods,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adQ" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/landmark/start/working_joe/colony,
+/obj/effect/landmark/late_join/working_joe/colony,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"adR" = (
+/obj/vehicle/powerloader{
+	layer = 5;
+	dir = 4
+	},
+/obj/structure/platform/metal/hybrisa/metalplatform6,
+/obj/structure/platform/metal/hybrisa/metalplatform6/north,
+/turf/open/floor/mech_bay_recharge_floor,
+/area/lazarus/synth_storage)
+"adS" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/prop/mech/hydralic_clamp,
+/obj/effect/decal/cleanable/blood/oil/streak,
+/turf/open/floor/almayer/cargo_arrow/east,
+/area/lazarus/synth_storage)
+"adT" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	layer = 3.3;
+	pixel_y = 1
+	},
+/turf/open/floor/prison/ramptop/east,
+/area/lazarus/synth_storage)
 "adU" = (
 /obj/structure/platform_decoration/stone/ancient_temple/alt/north,
 /turf/open/auto_turf/lv_grass_weedable/layer0_mud_alt,
 /area/lazarus/ground/caves/north_west_caves)
+"adV" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison/ramptop/east,
+/area/lazarus/synth_storage)
+"adW" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/stack/sheet/metal,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
+"adX" = (
+/obj/structure/largecrate/random/mini{
+	pixel_x = 6;
+	pixel_y = 18
+	},
+/obj/structure/bed/stool{
+	buckling_y = 14;
+	pixel_y = 22
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"adY" = (
+/obj/structure/machinery/cryopod/joe/weyland{
+	pixel_x = 2;
+	pixel_y = 21;
+	density = 0
+	},
+/turf/open/floor/almayer/cargo_arrow,
+/area/lazarus/synth_storage)
+"adZ" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/machinery/cryopod/joe/weyland{
+	pixel_x = 2;
+	pixel_y = 21;
+	density = 0
+	},
+/obj/structure/sign/poster/safety{
+	pixel_y = 6;
+	pixel_x = 28
+	},
+/turf/open/floor/almayer/cargo_arrow,
+/area/lazarus/synth_storage)
 "aea" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_12,
 /obj/effect/hunter/ancient_temple/deco_border{
@@ -665,6 +1386,136 @@
 	},
 /turf/open/floor/ancient_temple/ruined/west,
 /area/lazarus/ground/ancient_temple/north_east/surface)
+"aec" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_5"
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"aed" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/tool/wirecutters{
+	pixel_y = -7
+	},
+/turf/open/floor/almayer/orange/west,
+/area/lazarus/synth_storage)
+"aee" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/almayer,
+/area/lazarus/synth_storage)
+"aef" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/landmark/corpsespawner/colonist/random,
+/obj/effect/decal/cleanable/blood,
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
+"aeg" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeh" = (
+/obj/structure/surface/rack,
+/obj/item/clothing/head/hardhat/orange{
+	pixel_x = -3;
+	pixel_y = -1
+	},
+/obj/item/clothing/head/hardhat/orange{
+	pixel_x = 6;
+	pixel_y = 8
+	},
+/obj/item/clothing/head/hardhat/orange{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aei" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/surface/rack,
+/obj/item/stack/sheet/cardboard,
+/obj/item/stack/sheet/cardboard,
+/obj/item/stack/sheet/cardboard,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aej" = (
+/obj/item/stack/sheet/metal,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aek" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/closed/wall/lv_outpost,
+/area/lazarus/synth_storage)
+"ael" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/vehicle/powerloader/ft{
+	layer = 5;
+	dir = 4
+	},
+/obj/structure/platform/metal/hybrisa/metalplatform6,
+/obj/structure/platform/metal/hybrisa/metalplatform6/north,
+/turf/open/floor/mech_bay_recharge_floor,
+/area/lazarus/synth_storage)
+"aem" = (
+/obj/item/tool/screwdriver,
+/turf/open/floor/almayer/cargo_arrow/east,
+/area/lazarus/synth_storage)
+"aen" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	layer = 3.3;
+	pixel_y = 1
+	},
+/turf/open/floor/prison/ramptop/east,
+/area/lazarus/synth_storage)
+"aeo" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/cleanable/blood/oil/streak,
+/turf/open/floor/prison/ramptop/east,
+/area/lazarus/synth_storage)
+"aep" = (
+/obj/item/reagent_container/glass/bucket/mopbucket{
+	pixel_y = 16;
+	pixel_x = -1
+	},
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/surface/rack,
+/obj/item/reagent_container/glass/bucket/mopbucket{
+	pixel_x = 5;
+	pixel_y = -11
+	},
+/obj/item/reagent_container/glass/bucket{
+	pixel_x = -4;
+	pixel_y = -3
+	},
+/obj/item/reagent_container/glass/bucket{
+	pixel_x = -11;
+	pixel_y = 1
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeq" = (
+/obj/structure/surface/rack,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aer" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/machinery/recharge_station,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aes" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/stack/sheet/plasteel/medium_stack,
+/obj/structure/barricade/handrail{
+	dir = 1;
+	layer = 2.7;
+	pixel_y = 2
+	},
+/turf/open/floor/almayer/orange/north,
+/area/lazarus/synth_storage)
 "aet" = (
 /obj/effect/decal/hybrisa/dirt,
 /obj/structure/pipes/standard/simple/hidden/cyan{
@@ -672,16 +1523,136 @@
 	},
 /turf/open/floor/prison/cell_stripe/west,
 /area/lazarus/quartstorage)
+"aeu" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/clothing/gloves/marine/veteran/insulated{
+	pixel_x = 1;
+	pixel_y = 6
+	},
+/obj/structure/barricade/handrail{
+	dir = 1;
+	layer = 2.7;
+	pixel_y = 2
+	},
+/turf/open/floor/almayer/orange/northeast,
+/area/lazarus/synth_storage)
+"aev" = (
+/obj/structure/platform/metal/hybrisa/metalplatform6/west,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aew" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/pipes/vents/scrubber_hybrisa,
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
+"aex" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "aey" = (
 /obj/structure/prop/ice_colony/ground_wire{
 	dir = 1
 	},
 /turf/open/floor/ancient_temple/floor_13/east,
 /area/lazarus/ground/river/north_east_temple_river)
+"aez" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/machinery/power/apc/no_power/east,
+/obj/structure/machinery/light/blue{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/cobweb2,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeA" = (
+/obj/structure/platform/metal/hybrisa/metalplatform6,
+/obj/structure/largecrate/random/barrel/blue,
+/obj/structure/sign/poster/corporate{
+	pixel_x = -27
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeB" = (
+/obj/structure/platform/metal/hybrisa/metalplatform6,
+/obj/structure/closet/crate/trashcart/alt,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "aeC" = (
 /obj/structure/window/framed/lv_colony,
 /turf/open/floor/plating/prison,
 /area/lazarus/hydroponics)
+"aeD" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/prop/hybrisa/fakeplatforms/platform4/deco{
+	dir = 1
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeE" = (
+/turf/open/floor/almayer/plating_striped/west,
+/area/lazarus/synth_storage)
+"aeF" = (
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/item/device/binoculars/civ{
+	pixel_y = 9;
+	pixel_x = 13
+	},
+/obj/item/reagent_container/food/snacks/candy{
+	pixel_y = -3;
+	pixel_x = -4
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeG" = (
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/item/paper_bin{
+	pixel_x = -1;
+	pixel_y = 6
+	},
+/obj/item/tool/pen{
+	pixel_x = -2;
+	pixel_y = 3
+	},
+/obj/item/reagent_container/food/drinks/cans/waterbottle{
+	pixel_x = 11;
+	pixel_y = 15;
+	layer = 4
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeH" = (
+/obj/item/tool/crowbar,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/largecrate/random/mini/wooden{
+	pixel_x = 5;
+	pixel_y = 8
+	},
+/obj/item/tool/wet_sign{
+	pixel_x = -11;
+	pixel_y = 21
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeI" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_7";
+	pixel_y = 12
+	},
+/turf/open/floor/almayer/plating_striped/south,
+/area/lazarus/synth_storage)
 "aeJ" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_11,
 /obj/effect/hunter/ancient_temple/rubble/rubble_5{
@@ -690,17 +1661,309 @@
 	},
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/south/surface)
+"aeK" = (
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_2"
+	},
+/turf/open/floor/almayer/plating_striped/south,
+/area/lazarus/synth_storage)
+"aeL" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/stack/sheet/metal,
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeM" = (
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/item/paper,
+/obj/item/reagent_container/food/drinks/coffee{
+	pixel_x = 10;
+	pixel_y = 7
+	},
+/obj/item/clothing/head/hardhat{
+	pixel_x = 6;
+	pixel_y = 14
+	},
+/obj/item/tool/pen/blue{
+	pixel_x = -6
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeN" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_2"
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeO" = (
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/structure/machinery/recharger{
+	layer = 4;
+	pixel_y = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeP" = (
+/obj/structure/machinery/power/power_generator/port_gen/pacman/super,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/largecrate/random/mini{
+	pixel_x = 6;
+	pixel_y = 18
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "aeQ" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_8,
 /turf/open/floor/ancient_temple/damaged/damage_6,
 /area/lazarus/ground/ancient_temple/south/surface)
+"aeR" = (
+/obj/structure/closet/toolcloset{
+	density = 0;
+	pixel_y = 17;
+	pixel_x = 18
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeS" = (
+/obj/structure/surface/rack,
+/obj/effect/decal/hybrisa/dirt,
+/obj/item/storage/bag/trash,
+/obj/item/storage/bag/trash{
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#8eaeb0";
+	dir = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeT" = (
+/obj/effect/decal/hybrisa/colorable_rug{
+	color = "#3d3d3d";
+	dir = 1;
+	name = "rubber mat";
+	pixel_y = -2;
+	pixel_x = 8
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeU" = (
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/item/clothing/accessory/storage/droppouch,
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0";
+	dir = 8;
+	layer = 2.9
+	},
+/turf/open/floor/almayer/plating/northeast,
+/area/lazarus/synth_storage)
+"aeV" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/sign/poster/art{
+	pixel_y = 32;
+	layer = 3.1
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeW" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	pixel_x = 11;
+	pixel_y = 15
+	},
+/obj/structure/closet/secure_closet/engineering_personal{
+	pixel_y = 15;
+	pixel_x = -17;
+	density = 0
+	},
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_17";
+	pixel_y = 12
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeX" = (
+/obj/structure/surface/table/almayer{
+	color = "#d4cfcd"
+	},
+/obj/item/paper{
+	pixel_x = 2;
+	pixel_y = 6
+	},
+/obj/item/reagent_container/food/snacks/hotdog{
+	pixel_x = -5;
+	pixel_y = 4
+	},
+/obj/item/reagent_container/food/drinks/coffee/cuppa_joes{
+	pixel_x = -10;
+	pixel_y = 8
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"aeY" = (
+/obj/structure/fence/dark/warning/overgrown,
+/turf/open/auto_turf/lv_grass_weedable/layer0,
+/area/lazarus/ground/jungle/west_jungle)
 "aeZ" = (
 /turf/open/floor/strata/fake_wood_red,
 /area/lazarus/research)
+"afa" = (
+/obj/structure/fence/dark/warning/overgrown,
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"afb" = (
+/obj/item/tool/extinguisher,
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/machinery/light/blue{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/oil/streak,
+/obj/item/tool/wet_sign{
+	pixel_x = 10;
+	pixel_y = 21
+	},
+/obj/item/tool/wet_sign{
+	pixel_x = 3;
+	pixel_y = 21
+	},
+/obj/item/tool/wet_sign{
+	pixel_x = -4;
+	pixel_y = 21
+	},
+/obj/structure/reagent_dispensers/tank/water,
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"afc" = (
+/obj/structure/machinery/light/blue{
+	dir = 4
+	},
+/obj/structure/janitorialcart,
+/obj/item/tool/mop{
+	pixel_x = -10
+	},
+/obj/structure/window/reinforced/colorable{
+	color = "#d1cab0"
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
+"afd" = (
+/obj/structure/machinery/door/airlock/multi_tile/lv_double{
+	name = "Hydroponics"
+	},
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison,
+/area/lazarus/synth_storage)
+"afe" = (
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison,
+/area/lazarus/synth_storage)
+"aff" = (
+/obj/effect/landmark/nightmare{
+	insert_tag = "recovered_hunter_masks"
+	},
+/turf/closed/wall/lv_outpost/white,
+/area/lazarus/research/storage)
+"afg" = (
+/obj/structure/barricade/handrail/wire{
+	dir = 8;
+	layer = 4
+	},
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/ground/jungle/west_jungle)
+"afh" = (
+/obj/structure/barricade/handrail/wire{
+	layer = 3.1;
+	dir = 4
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/ground/jungle/west_jungle)
+"afi" = (
+/obj/structure/flora/bush/ausbushes/reedbush,
+/turf/open/auto_turf/lv_grass_weedable/layer0,
+/area/lazarus/ground/jungle/west_jungle)
+"afj" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_17";
+	pixel_x = 2;
+	pixel_y = 13
+	},
+/turf/open/floor/prison/floor_plate_alt/west,
+/area/lazarus/quartstorage)
+"afk" = (
+/obj/structure/flora/bush/ausbushes/var3/leafybush,
+/obj/structure/machinery/colony_floodlight{
+	light_color = "#dae2ff"
+	},
+/turf/open/auto_turf/lv_grass_weedable/layer1,
+/area/lazarus/ground/jungle/west_jungle)
+"afl" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_17";
+	pixel_x = 2;
+	pixel_y = 13
+	},
+/turf/open/floor/prison/cell_stripe/north,
+/area/lazarus/quartstorage)
+"afm" = (
+/obj/structure/flora/jungle/alienplant1,
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
 "afn" = (
 /obj/structure/flora/jungle/vines/dead/light_1,
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/ancient_temple/south_east/surface)
+"afo" = (
+/obj/effect/landmark/lv624/fog_blocker,
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/river/west_river)
+"afp" = (
+/obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_17";
+	pixel_x = 2;
+	pixel_y = 13
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"afq" = (
+/obj/effect/decal/lv_decals/red_mud_corner,
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 4
+	},
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afr" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 10
+	},
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afs" = (
+/obj/structure/prop/fishing/pole_interactive{
+	dir = 4
+	},
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/barrens/south_west_barrens)
 "aft" = (
 /obj/item/tool/warning_cone{
 	pixel_x = -13;
@@ -708,6 +1971,14 @@
 	},
 /turf/open/gm/dirt/brown,
 /area/lazarus/landing_zones/lz2)
+"afu" = (
+/obj/structure/prop/fishing/line/long,
+/turf/open/gm/coast/dirt/west,
+/area/lazarus/ground/river/west_river)
+"afv" = (
+/obj/structure/prop/fishing/line/long/part2,
+/turf/open/gm/river/soro,
+/area/lazarus/ground/river/west_river)
 "afw" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_7{
 	pixel_x = 4;
@@ -715,22 +1986,218 @@
 	},
 /turf/open/auto_turf/lv_grass_weedable/layer0_mud_alt,
 /area/lazarus/ground/caves/west_caves)
+"afx" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 5
+	},
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 10
+	},
+/obj/effect/landmark/corpsespawner/colonist/random,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afy" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 5
+	},
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 9
+	},
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afz" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 5
+	},
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 6
+	},
+/obj/structure/largecrate/empty,
+/obj/item/reagent_container/food/drinks/cans/beer{
+	pixel_x = -3;
+	pixel_y = 11
+	},
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afA" = (
+/obj/effect/decal/lv_decals/red_mud_corner{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/blood,
+/obj/item/reagent_container/food/drinks/cans/beer{
+	pixel_x = 6;
+	pixel_y = -3
+	},
+/obj/structure/closet/crate/freezer/cooler{
+	pixel_x = -10;
+	pixel_y = -1
+	},
+/turf/open/floor/interior/wood/alt,
+/area/lazarus/ground/barrens/south_west_barrens)
+"afB" = (
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_5"
+	},
+/turf/open/floor/prison/floor_plate,
+/area/lazarus/quartstorage)
+"afC" = (
+/turf/closed/wall/mineral/sandstone/runed,
+/area/lazarus/ground/ancient_temple/south_east/surface)
+"afD" = (
+/obj/structure/blocker/forcefield/vehicles,
+/obj/structure/blocker/invisible_wall,
+/turf/open/gm/river/waterfall/center/one,
+/area/lazarus/ground/river/central_river/north)
+"afE" = (
+/obj/structure/prop/hunter/ancient_temple/collapsed_wall{
+	dir = 1
+	},
+/turf/open/floor/ancient_temple/damaged/damage_7,
+/area/lazarus/ground/ancient_temple/east/surface)
+"afF" = (
+/obj/effect/hunter/ancient_temple/rubble/rubble_2{
+	pixel_x = 3;
+	pixel_y = 4
+	},
+/turf/open/floor/ancient_temple/floor_13/north,
+/area/lazarus/ground/ancient_temple/east/surface)
+"afG" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/turf/open/gm/coast/dirt/beachcorner/south_east,
+/area/lazarus/ground/river/central_river/north/cove)
 "afH" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_11,
 /turf/open/floor/ancient_temple/damaged/damage_5,
 /area/lazarus/ground/ancient_temple/south/surface)
+"afI" = (
+/obj/effect/hunter/ancient_temple/rubble/rubble_4,
+/turf/open/auto_turf/lv_sand_alt/layer0,
+/area/lazarus/ground/ancient_temple/east/surface)
+"afJ" = (
+/obj/structure/prop/hunter/ancient_temple/collapsed_wall,
+/turf/open/floor/ancient_temple/damaged/damage_7,
+/area/lazarus/ground/ancient_temple/east/surface)
+"afK" = (
+/obj/structure/flora/bush/ausbushes/var3/fullgrass,
+/turf/open/gm/coast/dirt/south,
+/area/lazarus/ground/river/central_river/north/cove)
+"afL" = (
+/obj/structure/flora/jungle/plantbot1,
+/turf/open/gm/coast/dirt/beachcorner/south_east,
+/area/lazarus/ground/river/central_river/north/cove)
+"afM" = (
+/obj/structure/flora/jungle/planttop1,
+/turf/open/gm/coast/dirt/east,
+/area/lazarus/ground/river/central_river/north/cove)
+"afN" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/turf/open/gm/river/soro,
+/area/lazarus/ground/river/central_river/north/cove)
 "afO" = (
 /obj/structure/prop/ice_colony/soil_net,
 /turf/open/gm/dirt/brown,
 /area/lazarus/ground/barrens/central_barrens)
+"afP" = (
+/obj/structure/flora/bush/ausbushes/var3/fullgrass,
+/turf/open/gm/coast/dirt/east,
+/area/lazarus/ground/river/central_river/north/cove)
+"afQ" = (
+/obj/structure/flora/bush/ausbushes/var3/stalkybush,
+/turf/open/gm/coast/dirt/beachcorner2/north_east,
+/area/lazarus/ground/river/central_river/north/cove)
+"afR" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom,
+/area/lazarus/ground/river/central_river/north/cove)
+"afS" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/one,
+/area/lazarus/ground/river/central_river/north/cove)
+"afT" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/two,
+/area/lazarus/ground/river/central_river/north/cove)
+"afU" = (
+/turf/open/gm/brown_dirt/random_rocks,
+/area/lazarus/ground/river/central_river/north/cove)
+"afV" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/two,
+/area/lazarus/ground/river/central_river/north/cove)
+"afW" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom,
+/area/lazarus/ground/river/central_river/north/cove)
+"afX" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/one,
+/area/lazarus/ground/river/central_river/north/cove)
+"afY" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/one,
+/area/lazarus/ground/river/central_river/north/cove)
+"afZ" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/two,
+/area/lazarus/ground/river/central_river/north/cove)
+"aga" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center,
+/area/lazarus/ground/river/central_river/north/cove)
+"agb" = (
+/obj/structure/blocker/forcefield/vehicles,
+/obj/structure/blocker/invisible_wall,
+/turf/open/gm/river/waterfall/center/two,
+/area/lazarus/ground/river/central_river/north/cove)
+"agc" = (
+/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
+/turf/closed/wall/strata_ice/jungle,
+/area/strata/interior/out_of_bounds)
 "agd" = (
 /obj/structure/disposalpipe/junction,
 /obj/structure/grille,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/lazarus/ground/river/east_river)
+"age" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/one,
+/area/lazarus/ground/river/central_river/north/cove)
 "agf" = (
 /turf/open/gm/dirt/brown/variant_5/east,
 /area/lazarus/ground/barrens/west_barrens)
+"agg" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/two,
+/area/lazarus/ground/river/central_river/north/cove)
+"agh" = (
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top,
+/area/lazarus/ground/river/central_river/north/cove)
+"agi" = (
+/obj/structure/blocker/forcefield/vehicles,
+/obj/structure/blocker/invisible_wall,
+/turf/open/gm/river/waterfall/center/one,
+/area/lazarus/ground/river/central_river/north/cove)
+"agj" = (
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/river/central_river/north/cove)
+"agk" = (
+/obj/effect/landmark/structure_spawner/xvx_hive/xeno_core,
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/caves/north_west_caves)
 "agp" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 6
@@ -1065,6 +2532,7 @@
 "aoM" = (
 /obj/structure/platform/stone/ancient_temple/west,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "aph" = (
@@ -1337,6 +2805,9 @@
 	},
 /obj/effect/decal/hybrisa/dirt,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_5"
+	},
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quartstorage)
 "auL" = (
@@ -1955,9 +3426,6 @@
 /turf/open/floor/interior/wood_sat/alt,
 /area/lazarus/ground/caves/south_west_caves)
 "aKY" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 8
-	},
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/landing_zones/lz2)
 "aKZ" = (
@@ -2597,15 +4065,6 @@
 /obj/effect/decal/lv_decals/cave_mud_corner,
 /turf/open/floor/ancient_temple/damaged/damage_1,
 /area/lazarus/ground/caves/west_caves)
-"aZz" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 5
-	},
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 9
-	},
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "aZL" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_10,
 /turf/open/floor/ancient_temple/damaged/damage_5,
@@ -2918,7 +4377,8 @@
 /area/lazarus/robotics)
 "bgT" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/under_bottom/two,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/two,
 /area/lazarus/ground/river/central_river/north)
 "bhe" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_3,
@@ -3363,7 +4823,6 @@
 /obj/structure/window/reinforced/colorable{
 	color = "#8eaeb0"
 	},
-/obj/item/clothing/mask/gas/yautja/damaged,
 /turf/open/floor/prison/floor_plate_alt,
 /area/lazarus/main_hall)
 "bsY" = (
@@ -3782,10 +5241,6 @@
 /obj/structure/window/framed/lv_colony/reinforced,
 /turf/open/floor/plating/prison,
 /area/lazarus/ground/barrens/east_barrens/ceiling)
-"bEm" = (
-/obj/effect/landmark/lv624/fog_blocker,
-/turf/open/gm/coast/dirt/beachcorner2/south_west,
-/area/lazarus/ground/river/west_river)
 "bEM" = (
 /obj/structure/stairs/perspective{
 	color = "#6b675e";
@@ -3811,10 +5266,6 @@
 /obj/structure/pipes/standard/simple/hidden/cyan,
 /turf/open/floor/plating/plating_catwalk/prison,
 /area/lazarus/main_hall)
-"bFv" = (
-/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
-/turf/open/gm/brown_dirt/random_rocks,
-/area/lazarus/ground/jungle/west_jungle)
 "bFA" = (
 /obj/structure/flora/jungle/vines/dead/light_3,
 /turf/closed/wall/strata_ice/jungle,
@@ -4187,10 +5638,6 @@
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/engineering)
-"bPQ" = (
-/obj/structure/flora/bush/ausbushes/reedbush,
-/turf/open/gm/coast/dirt/beachcorner2/south_east,
-/area/lazarus/ground/river/central_river/north/cove)
 "bPW" = (
 /obj/structure/prop/rock/brown{
 	pixel_x = -1;
@@ -4350,10 +5797,6 @@
 /obj/item/stack/sheet/wood/small_stack,
 /turf/open/floor/interior/wood_sat,
 /area/lazarus/lodge)
-"bVq" = (
-/obj/structure/flora/bush/ausbushes/reedbush,
-/turf/open/gm/coast/dirt/beachcorner/south_west,
-/area/lazarus/ground/river/west_river)
 "bVs" = (
 /obj/structure/platform_decoration/stone/ancient_temple/west,
 /obj/structure/platform_decoration/stone/ancient_temple,
@@ -4510,6 +5953,7 @@
 /obj/structure/platform/stone/ancient_temple/west,
 /obj/structure/prop/hunter/ancient_temple/large_bars/water,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "bZv" = (
@@ -4530,12 +5974,6 @@
 	},
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/colony/north_tcomms_road)
-"bZM" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 10
-	},
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "bZO" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_3,
 /turf/open/floor/ancient_temple/damaged/damage_3,
@@ -4703,6 +6141,7 @@
 "cfx" = (
 /obj/structure/platform/stone/ancient_temple/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "cfZ" = (
@@ -6055,9 +7494,6 @@
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quartstorage)
-"cLk" = (
-/turf/open/gm/coast/dirt/beachcorner/south_west,
-/area/lazarus/ground/river/west_river)
 "cLq" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_2,
 /turf/open/floor/plating/ancient_temple,
@@ -6346,7 +7782,7 @@
 	anchored = 1
 	},
 /obj/structure/flora/jungle/vines/dead/light_1,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "cVf" = (
 /turf/open/gm/dirt/brown/variant_5/west,
@@ -6425,7 +7861,7 @@
 /area/lazarus/ground/river/north_east_temple_river)
 "cYf" = (
 /obj/structure/flora/jungle/vines/dead/light_1,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "cYi" = (
 /obj/structure/machinery/gibber,
@@ -6442,7 +7878,9 @@
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/ancient_temple/east/surface)
 "cYy" = (
-/turf/open/auto_turf/waterfall/bottom/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/two,
 /area/lazarus/ground/river/central_river/north)
 "cYA" = (
 /turf/open/gm/brown_dirt/random_rocks,
@@ -6882,9 +8320,6 @@
 /obj/structure/platform/metal/strata/alt,
 /turf/open/gm/dirt/brown,
 /area/lazarus/landing_zones/lz2)
-"djv" = (
-/turf/open/gm/coast/dirt/beachcorner/north_east,
-/area/lazarus/ground/river/west_river)
 "djz" = (
 /obj/effect/decal/lv_decals/red_mud_corner{
 	dir = 4
@@ -8143,9 +9578,6 @@
 	},
 /turf/open/floor/hybrisa/carpet/carpetfadedred,
 /area/lazarus/sleep_female)
-"dSt" = (
-/turf/open/gm/coast/dirt/beachcorner/south_east,
-/area/lazarus/ground/river/west_river)
 "dSB" = (
 /obj/structure/platform/wood,
 /turf/open/floor/interior/wood/alt,
@@ -9288,6 +10720,7 @@
 	layer = 2
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "erO" = (
@@ -9582,8 +11015,9 @@
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/lazarus/ground/ancient_temple/north_east/surface)
 "ezK" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/top/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/two,
 /area/lazarus/ground/river/central_river/lake)
 "ezO" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
@@ -9817,7 +11251,7 @@
 /area/lazarus/ground/caves/north_west_caves)
 "eES" = (
 /obj/structure/flora/jungle/vines/dead/light_3,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "eFB" = (
 /obj/structure/barricade/handrail/strata,
@@ -9901,6 +11335,7 @@
 	},
 /obj/structure/platform/stone/ancient_temple/west,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/floor_grille/water,
 /area/strata/interior/out_of_bounds)
 "eHF" = (
@@ -10016,16 +11451,6 @@
 /obj/effect/hunter/ancient_temple/tile_edge_corner/tile_edge_corner_2,
 /turf/open/floor/ancient_temple/damaged/damage_6,
 /area/lazarus/ground/ancient_temple/south/surface)
-"eKt" = (
-/obj/structure/stairs/perspective{
-	color = "#b6a38f";
-	icon_state = "p_stair_ew_half_short_cap";
-	pixel_x = 7;
-	pixel_y = 17;
-	dir = 4
-	},
-/turf/closed/wall/ancient_temple/sandstone,
-/area/strata/interior/out_of_bounds)
 "eKu" = (
 /obj/structure/machinery/door/airlock/light_grey_lv/glass{
 	name = "\improper Maintenance Dome"
@@ -10410,8 +11835,9 @@
 /turf/open/floor/almayer/silverfull,
 /area/lazarus/medbay)
 "eVi" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/under_bottom/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/one,
 /area/lazarus/ground/river/central_river/lake)
 "eVn" = (
 /obj/item/tool/warning_cone,
@@ -10639,6 +12065,7 @@
 /obj/structure/platform/stone/ancient_temple/alt,
 /obj/structure/platform/stone/ancient_temple/alt/west,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/void,
 /area/strata/interior/out_of_bounds)
 "fbk" = (
@@ -10648,6 +12075,7 @@
 	pixel_y = 19
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base,
 /area/lazarus/ground/barrens/north_barrens)
 "fbt" = (
@@ -10875,9 +12303,7 @@
 /turf/open/gm/river/soro,
 /area/lazarus/ground/river/north_east_temple_river)
 "fgy" = (
-/turf/closed/wall/ancient_temple/sandstone{
-	opacity = 0
-	},
+/turf/closed/wall/mineral/sandstone/runed/decor_3,
 /area/strata/interior/out_of_bounds)
 "fgz" = (
 /obj/structure/platform/wood/west,
@@ -11030,10 +12456,7 @@
 /turf/open/floor/strata/multi_tiles/west,
 /area/lazarus/research/storage)
 "fko" = (
-/turf/closed/wall/mineral/sandstone{
-	name = "ancient temple wall";
-	desc = "A heavy wall of sandstone with sandstone plating."
-	},
+/turf/closed/wall/mineral/sandstone/runed/decor_3,
 /area/lazarus/ground/caves/north_west_caves)
 "fkz" = (
 /obj/structure/flora/bush/ausbushes/var3/fernybush,
@@ -11366,6 +12789,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "fsn" = (
@@ -11753,8 +13177,9 @@
 /turf/open/floor/interior/wood/alt,
 /area/lazarus/ground/cove)
 "fDC" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/center/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/two,
 /area/lazarus/ground/river/central_river/lake)
 "fEk" = (
 /obj/structure/machinery/colony_floodlight{
@@ -11959,14 +13384,6 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_door,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/lazarus/ground/ancient_temple/east/surface)
-"fKm" = (
-/obj/structure/barricade/handrail/wire{
-	layer = 3.1;
-	dir = 4
-	},
-/obj/effect/landmark/lv624/fog_blocker,
-/turf/open/floor/prison/cell_stripe/east,
-/area/lazarus/ground/barrens/central_barrens)
 "fKG" = (
 /obj/structure/platform/wood/stair_cut/platform_left,
 /obj/structure/stairs/perspective{
@@ -12102,8 +13519,9 @@
 /turf/open/floor/ancient_temple/floor_19/east,
 /area/lazarus/ground/ancient_temple/east)
 "fNN" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top,
 /area/lazarus/ground/river/central_river/lake)
 "fNO" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_8,
@@ -12407,8 +13825,9 @@
 /turf/open/gm/river/soro,
 /area/lazarus/ground/ancient_temple/north_east)
 "fVK" = (
-/turf/open/gm/coast/dirt/north,
-/area/lazarus/ground/river/west_river)
+/obj/effect/decal/hybrisa/dirt,
+/turf/open/floor/prison/cell_stripe,
+/area/lazarus/ground/jungle/west_jungle)
 "fVU" = (
 /obj/effect/hunter/ancient_temple/deco_border{
 	dir = 1
@@ -12644,8 +14063,8 @@
 /turf/open/gm/river/soro,
 /area/lazarus/ground/river/east_river)
 "gdD" = (
-/obj/effect/hunter/ancient_temple/rubble/rubble_4,
-/turf/open/floor/ancient_temple/ruined/east,
+/obj/effect/hunter/ancient_temple/rubble/rubble_3,
+/turf/open/floor/ancient_temple/ruined/north,
 /area/lazarus/ground/ancient_temple/east/surface)
 "gdQ" = (
 /obj/structure/machinery/door/airlock/multi_tile/lv_double{
@@ -12728,9 +14147,7 @@
 	layer = 3.1;
 	dir = 8
 	},
-/obj/structure/lz_sign/lazarus_sign{
-	layer = 8
-	},
+/obj/structure/lz_sign/lazarus_sign/clean,
 /turf/open/floor/plating/prison,
 /area/lazarus/landing_zones/lz2)
 "ggB" = (
@@ -12747,13 +14164,6 @@
 /obj/effect/landmark/monkey_spawn,
 /turf/open/floor/interior/wood_sat/alt,
 /area/lazarus/ground/jungle/north_west_jungle/dense)
-"ggN" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 10
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "gha" = (
 /obj/effect/hunter/ancient_temple/deco_border/deco_border2,
 /obj/effect/hunter/ancient_temple/rubble/rubble_4{
@@ -12801,7 +14211,8 @@
 /area/lazarus/ground/caves/north_west_caves)
 "ghQ" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/top/two,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/two,
 /area/lazarus/ground/river/central_river/north)
 "ghR" = (
 /obj/structure/flora/grass/tallgrass/jungle_alt_2/corner{
@@ -12934,6 +14345,7 @@
 	pixel_y = -4
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "gku" = (
@@ -12956,6 +14368,7 @@
 	pixel_y = -17
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "gkv" = (
@@ -13476,7 +14889,9 @@
 /turf/open/floor/ancient_temple/ruined,
 /area/lazarus/ground/ancient_temple/south/surface)
 "gxz" = (
-/turf/open/auto_turf/waterfall/bottom/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/one,
 /area/lazarus/ground/river/central_river/north)
 "gxL" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_5,
@@ -13652,6 +15067,7 @@
 /obj/structure/platform/stone/ancient_temple/east,
 /obj/structure/flora/jungle/vines/dead/light_1,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "gBl" = (
@@ -13936,8 +15352,9 @@
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/comms)
 "gIk" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/under_bottom,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom,
 /area/lazarus/ground/river/central_river/lake)
 "gIw" = (
 /obj/effect/decal/cleanable/blood/oil,
@@ -14350,8 +15767,9 @@
 /turf/open/floor/ancient_temple/floor_13/north,
 /area/lazarus/ground/ancient_temple/east/surface)
 "gRr" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/center,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center,
 /area/lazarus/ground/river/central_river/lake)
 "gRG" = (
 /obj/effect/decal/lv_decals/cave_mud_corner,
@@ -14415,8 +15833,8 @@
 /area/lazarus/ground/jungle/south_west_jungle)
 "gSx" = (
 /obj/structure/flora/bush/ausbushes/var3/fernybush,
-/turf/open/gm/coast/dirt/beachcorner2/north_east,
-/area/lazarus/ground/river/west_river)
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
 "gSy" = (
 /obj/structure/platform_decoration/stone/ancient_temple/alt/north{
 	pixel_y = -7
@@ -15160,7 +16578,7 @@
 /area/lazarus/security)
 "hmK" = (
 /obj/structure/flora/jungle/vines/dead/light_2,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "hmQ" = (
 /obj/structure/machinery/door/airlock/light_grey_lv/glass{
@@ -15504,6 +16922,7 @@
 "hvj" = (
 /obj/structure/platform/stone/ancient_temple/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/floor_grille/water,
 /area/strata/interior/out_of_bounds)
 "hvo" = (
@@ -15535,7 +16954,6 @@
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 8
 	},
-/obj/effect/landmark/structure_spawner/setup/distress/xeno_door,
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/east/surface)
 "hvN" = (
@@ -15740,10 +17158,6 @@
 	},
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/lazarus/ground/ancient_temple/south/surface)
-"hAJ" = (
-/obj/structure/flora/bush/ausbushes/var3/stalkybush,
-/turf/open/gm/dirt/brown,
-/area/lazarus/ground/jungle/west_jungle)
 "hAQ" = (
 /obj/structure/platform/stone/ancient_temple/alt/west,
 /turf/open/floor/ancient_temple/floor_13/west,
@@ -15958,8 +17372,18 @@
 /turf/open/gm/dirt/brown/variant_5/west,
 /area/lazarus/ground/colony/north_tcomms_road)
 "hEZ" = (
-/turf/open/gm/coast/dirt/beachcorner2,
-/area/lazarus/ground/river/west_river)
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/largecrate/empty{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/effect/landmark/objective_landmark/medium,
+/obj/structure/machinery/light/blue{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/almayer/orange/northwest,
+/area/lazarus/synth_storage)
 "hFb" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 5
@@ -16737,7 +18161,7 @@
 /obj/item/prop/torch_frame/ancient{
 	anchored = 1
 	},
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "hYa" = (
 /obj/effect/hunter/ancient_temple/deco_border/deco_border3{
@@ -17111,6 +18535,7 @@
 /area/lazarus/ground/river/central_river)
 "ikZ" = (
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/closed/wall/rock/brown,
 /area/strata/interior/out_of_bounds)
 "ilD" = (
@@ -17701,8 +19126,8 @@
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quart)
 "iAE" = (
-/turf/open/gm/coast/dirt/beachcorner,
-/area/lazarus/ground/river/west_river)
+/turf/open/floor/almayer/plating_striped/south,
+/area/lazarus/synth_storage)
 "iAQ" = (
 /obj/structure/prop/rock/brown{
 	pixel_x = -5;
@@ -17827,7 +19252,8 @@
 /turf/open/gm/dirt/brown/variant_5/east,
 /area/lazarus/ground/colony/north_east_nexus_road)
 "iEV" = (
-/obj/structure/blocker/forcefield/human,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/coast/dirt/beachcorner2/north_east,
 /area/lazarus/ground/river/central_river/lake)
 "iEX" = (
@@ -17899,6 +19325,7 @@
 	pixel_y = -1
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "iGJ" = (
@@ -18296,6 +19723,7 @@
 /obj/structure/platform/stone/ancient_temple/alt/west,
 /obj/structure/prop/hunter/ancient_temple/large_bars/water,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "iSw" = (
@@ -18926,6 +20354,7 @@
 	pixel_y = 22
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base/alt,
 /area/lazarus/ground/ancient_temple/north_east)
 "jin" = (
@@ -19212,7 +20641,6 @@
 /area/lazarus/ground/ancient_temple/south_east/surface)
 "jpX" = (
 /obj/structure/platform/metal/strata/alt/west,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/gm/coast/dirt/beachcorner2,
 /area/lazarus/ground/river/central_river)
 "jqf" = (
@@ -19713,6 +21141,12 @@
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quartstorage)
 "jCw" = (
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/prison/cell_stripe/east,
 /area/lazarus/ground/jungle/west_jungle)
 "jCH" = (
@@ -19820,7 +21254,8 @@
 /area/lazarus/ground/caves/west_caves)
 "jEV" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/under_bottom,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom,
 /area/lazarus/ground/river/central_river/north)
 "jFb" = (
 /obj/structure/machinery/light/blue{
@@ -19891,8 +21326,9 @@
 /turf/open/floor/ancient_temple/ruined/east,
 /area/lazarus/ground/caves/west_caves)
 "jGU" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/under_bottom/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/two,
 /area/lazarus/ground/river/central_river/lake)
 "jGY" = (
 /obj/structure/platform/stone/ancient_temple/alt/west,
@@ -20314,8 +21750,9 @@
 /turf/open/floor/prison/floor_marked,
 /area/lazarus/robotics)
 "jPX" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/center/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/one,
 /area/lazarus/ground/river/central_river/lake)
 "jQn" = (
 /obj/effect/hunter/ancient_temple/deco_border/bronze{
@@ -20622,7 +22059,8 @@
 /area/lazarus/ground/jungle/west_jungle)
 "jYv" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/top/one,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/one,
 /area/lazarus/ground/river/central_river/north)
 "jYH" = (
 /obj/structure/disposalpipe/segment{
@@ -20674,14 +22112,6 @@
 	},
 /turf/open/floor/ancient_temple/damaged/damage_2,
 /area/lazarus/ground/caves/north_west_caves)
-"kat" = (
-/obj/structure/barricade/handrail/wire{
-	layer = 3.1;
-	dir = 8
-	},
-/obj/effect/landmark/lv624/fog_blocker,
-/turf/open/floor/prison/cell_stripe/west,
-/area/lazarus/ground/barrens/central_barrens)
 "kaZ" = (
 /obj/effect/landmark/lv624/fog_blocker,
 /turf/open/gm/coast/dirt/west,
@@ -20927,10 +22357,6 @@
 /obj/structure/flora/bush/ausbushes/reedbush,
 /turf/open/gm/coast/dirt/north,
 /area/lazarus/ground/river/north_east_temple_river)
-"khn" = (
-/obj/structure/platform/wood/north,
-/turf/open/gm/coast/dirt/beachcorner/south_east,
-/area/lazarus/ground/cove)
 "khv" = (
 /obj/effect/hunter/ancient_temple/deco_border{
 	dir = 4
@@ -21003,6 +22429,12 @@
 /obj/structure/machinery/door/airlock/light_grey_lv/glass/autoname{
 	dir = 8;
 	name = "\improper Jungle Checkpoint"
+	},
+/obj/structure/pipes/standard/simple/hidden/cyan{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/landing_zones/lz2)
@@ -21199,20 +22631,6 @@
 /obj/effect/landmark/monkey_spawn,
 /turf/open/auto_turf/lv_grass_weedable/layer0,
 /area/lazarus/ground/cove)
-"kns" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 5
-	},
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 6
-	},
-/obj/structure/largecrate/empty,
-/obj/item/reagent_container/food/drinks/cans/beer{
-	pixel_x = -3;
-	pixel_y = 11
-	},
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "knw" = (
 /obj/effect/decal/hybrisa/dirt,
 /obj/item/stack/sheet/cardboard,
@@ -21536,6 +22954,7 @@
 "kvO" = (
 /obj/effect/decal/lv_decals/red_mud_corner,
 /obj/effect/decal/hybrisa/dirt,
+/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/floor/prison/ramptop,
 /area/lazarus/ground/barrens/central_barrens)
 "kvQ" = (
@@ -21771,10 +23190,6 @@
 /obj/structure/flora/jungle/vines/dead,
 /turf/open/gm/brown_dirt/random_rocks,
 /area/lazarus/ground/ancient_temple/south_east/surface)
-"kAD" = (
-/obj/structure/flora/bush/ausbushes/var3/stalkybush,
-/turf/open/gm/coast/dirt/beachcorner2/north_west,
-/area/lazarus/ground/river/central_river/north/cove)
 "kAK" = (
 /obj/structure/window_frame/wood/plain,
 /turf/open/floor/interior/wood_sat,
@@ -21897,6 +23312,7 @@
 /area/lazarus/ground/barrens/central_barrens)
 "kEU" = (
 /obj/effect/decal/lv_decals/red_mud_corner,
+/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/floor/prison/ramptop,
 /area/lazarus/ground/barrens/central_barrens)
 "kEW" = (
@@ -22020,6 +23436,7 @@
 	},
 /obj/structure/flora/jungle/vines/dead/light_1,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "kJd" = (
@@ -22396,6 +23813,7 @@
 /obj/structure/platform/stone/ancient_temple/alt,
 /obj/structure/platform/stone/ancient_temple/alt/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/void,
 /area/strata/interior/out_of_bounds)
 "kVf" = (
@@ -22618,6 +24036,7 @@
 	},
 /obj/effect/hunter/ancient_temple/rubble/rubble,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "laO" = (
@@ -22670,8 +24089,7 @@
 	},
 /obj/item/clothing/mask/yautja_flavor{
 	anchored = 1;
-	unacidable = 0;
-	pixel_y = 9
+	unacidable = 0
 	},
 /obj/item/clothing/shoes/yautja_flavor{
 	anchored = 1
@@ -22696,10 +24114,6 @@
 	},
 /turf/open/floor/strata/light_purple_tile,
 /area/lazarus/research/storage)
-"lch" = (
-/obj/structure/flora/bush/ausbushes,
-/turf/open/gm/coast/dirt/south,
-/area/lazarus/ground/river/west_river)
 "lcl" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 10
@@ -22831,6 +24245,7 @@
 /area/lazarus/main_hall)
 "lgA" = (
 /obj/effect/landmark/survivor_spawner,
+/obj/effect/landmark/railgun_camera_pos,
 /turf/open/gm/dirt/brown,
 /area/lazarus/landing_zones/lz2)
 "lgE" = (
@@ -23269,7 +24684,8 @@
 /turf/open/floor/ancient_temple/damaged/damage_1,
 /area/lazarus/ground/ancient_temple/east/surface)
 "lqA" = (
-/obj/structure/blocker/forcefield/human,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/coast/dirt/beachcorner/north_east,
 /area/lazarus/ground/river/central_river/lake)
 "lrl" = (
@@ -24403,10 +25819,7 @@
 /turf/open/floor/strata/light_purple_tile,
 /area/lazarus/research/storage)
 "lRD" = (
-/turf/closed/wall/mineral/sandstone{
-	name = "ancient temple wall";
-	desc = "A heavy wall of sandstone with sandstone plating."
-	},
+/turf/closed/wall/mineral/sandstone/runed/decor_3,
 /area/lazarus/ground/caves/west_caves)
 "lRK" = (
 /obj/structure/platform/stone/ancient_temple/alt/west,
@@ -24569,6 +25982,7 @@
 	pixel_y = 22
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base/alt,
 /area/lazarus/ground/ancient_temple/north_east)
 "lUV" = (
@@ -24760,7 +26174,6 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
-/obj/item/clothing/mask/gas/yautja/damaged,
 /obj/item/clothing/suit/armor/yautja,
 /obj/structure/window/reinforced/colorable{
 	color = "#8eaeb0";
@@ -25648,12 +27061,6 @@
 	},
 /turf/open/floor/prison/darkred2,
 /area/lazarus/corporate_dome)
-"mvz" = (
-/obj/structure/prop/fishing/pole_interactive{
-	dir = 8
-	},
-/turf/open/gm/dirt/brown,
-/area/lazarus/ground/jungle/west_jungle)
 "mvG" = (
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/floor/prison/darkbrown3/east,
@@ -27458,12 +28865,6 @@
 	},
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quartstorage)
-"njk" = (
-/obj/structure/prop/fishing/line/long{
-	dir = 1
-	},
-/turf/open/gm/coast/dirt/east,
-/area/lazarus/ground/river/west_river)
 "njD" = (
 /turf/open/gm/dirt/brown/variant_5/east,
 /area/lazarus/ground/barrens/south_eastern_barrens)
@@ -27751,6 +29152,7 @@
 /obj/structure/platform/stone/ancient_temple/alt/north,
 /obj/structure/platform/stone/ancient_temple/alt/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/fake_wall_dark,
 /area/strata/interior/out_of_bounds)
 "nqr" = (
@@ -27912,7 +29314,8 @@
 /turf/open/floor/prison/cell_stripe,
 /area/lazarus/ground/barrens/central_barrens)
 "ntX" = (
-/obj/structure/blocker/forcefield/human,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/coast/dirt/west,
 /area/lazarus/ground/river/central_river/lake)
 "ntY" = (
@@ -28022,10 +29425,6 @@
 /obj/structure/platform/stone/ancient_temple,
 /turf/open/auto_turf/lv_grass_weedable/layer0,
 /area/lazarus/ground/barrens/north_barrens)
-"nwy" = (
-/obj/structure/flora/bush/ausbushes/var3/fullgrass,
-/turf/open/gm/brown_dirt/random_rocks_alt,
-/area/lazarus/ground/jungle/west_jungle)
 "nwz" = (
 /obj/structure/platform_decoration/stone/ancient_temple/alt/east,
 /turf/open/floor/ancient_temple/floor_20,
@@ -28659,8 +30058,9 @@
 /turf/open/floor/plating/prison,
 /area/lazarus/landing_zones/lz2)
 "nNx" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/bottom/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/two,
 /area/lazarus/ground/river/central_river/lake)
 "nNA" = (
 /obj/structure/platform/stone/ancient_temple/alt/north,
@@ -28698,7 +30098,8 @@
 /turf/open/auto_turf/lv_grass_weedable/layer0,
 /area/lazarus/ground/jungle/north_east_jungle)
 "nOa" = (
-/obj/structure/blocker/forcefield/human,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/lazarus/ground/river/central_river/lake)
 "nOh" = (
@@ -30068,7 +31469,6 @@
 	dir = 8
 	},
 /obj/effect/hunter/ancient_temple/rubble/rubble_2,
-/obj/effect/landmark/structure_spawner/setup/distress/xeno_door,
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/east/surface)
 "otH" = (
@@ -30399,6 +31799,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "oBG" = (
@@ -30590,18 +31991,8 @@
 	anchored = 1
 	},
 /obj/structure/flora/jungle/vines/dead/light_2,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
-"oFE" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
-/obj/effect/decal/lv_decals/red_mud_corner,
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 4
-	},
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "oFJ" = (
 /obj/structure/platform/stone/ancient_temple/alt/north,
 /obj/effect/hunter/ancient_temple/tile_edge_corner/tile_edge_corner_3,
@@ -30733,6 +32124,7 @@
 	},
 /obj/structure/flora/jungle/vines/dead/light_1,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "oJD" = (
@@ -31564,9 +32956,6 @@
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/floor/almayer/silverfull,
 /area/lazarus/medbay)
-"pct" = (
-/turf/open/gm/coast/dirt/beachcorner2/south_east,
-/area/lazarus/ground/river/west_river)
 "pcv" = (
 /obj/structure/prop/ice_colony/ground_wire,
 /obj/effect/decal/remains/xeno,
@@ -31833,12 +33222,6 @@
 /obj/effect/landmark/item_pool_spawner/survivor_ammo/buckshot,
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/security)
-"pio" = (
-/obj/structure/prop/fishing/line/long/part2{
-	dir = 1
-	},
-/turf/open/gm/river/soro,
-/area/lazarus/ground/river/west_river)
 "piC" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_3,
 /turf/open/floor/ancient_temple/ruined/north,
@@ -32942,7 +34325,7 @@
 /area/lazarus/ground/jungle/north_west_jungle)
 "pQl" = (
 /obj/structure/flora/jungle/vines/dead,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "pQn" = (
 /obj/structure/fence/dark/overgrown,
@@ -33163,10 +34546,6 @@
 "pVu" = (
 /turf/open/floor/ancient_temple/deco/dark/deco_alt/east,
 /area/lazarus/ground/ancient_temple/north_east)
-"pVz" = (
-/obj/effect/landmark/lv624/fog_blocker,
-/turf/open/gm/river/soro,
-/area/lazarus/ground/river/west_river)
 "pVH" = (
 /obj/effect/hunter/ancient_temple/deco_border/deco_border2{
 	dir = 4
@@ -34444,9 +35823,6 @@
 /turf/open/gm/river/soro,
 /area/lazarus/ground/river/west_river)
 "qAr" = (
-/obj/item/clothing/mask/gas/yautja/damaged{
-	pixel_y = -10
-	},
 /obj/structure/surface/rack{
 	color = "#8B9490"
 	},
@@ -34991,10 +36367,6 @@
 	},
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/ancient_temple/east/surface)
-"qOi" = (
-/obj/structure/flora/bush/ausbushes/var3/sparsegrass,
-/turf/open/gm/river/soro,
-/area/lazarus/ground/river/west_river)
 "qOr" = (
 /turf/open/gm/dirt/brown/variant_5/south,
 /area/lazarus/ground/jungle/east_jungle)
@@ -35206,6 +36578,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "qTW" = (
@@ -35610,7 +36983,9 @@
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/jungle/central_jungle)
 "reQ" = (
-/turf/open/auto_turf/waterfall/center/two,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/two,
 /area/lazarus/ground/river/central_river/north)
 "reZ" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_8,
@@ -35716,10 +37091,6 @@
 	},
 /turf/open/floor/strata/floor3,
 /area/lazarus/research/storage)
-"rhT" = (
-/obj/structure/flora/bush/ausbushes/var3/fernybush,
-/turf/open/gm/coast/dirt/beachcorner2/south_east,
-/area/lazarus/ground/river/central_river/north/cove)
 "rie" = (
 /mob/living/simple_animal/moth,
 /turf/open/floor/ancient_temple/deco/deco_1/east,
@@ -35761,13 +37132,14 @@
 /turf/open/auto_turf/lv_grass_weedable/layer0,
 /area/lazarus/ground/ancient_temple/south_east/surface)
 "riG" = (
-/obj/structure/blocker/forcefield/human,
 /obj/structure/prop/rock/brown{
 	dir = 5;
 	pixel_y = -13;
 	pixel_x = -1
 	},
-/turf/open/auto_turf/waterfall/under_bottom,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom,
 /area/lazarus/ground/river/central_river/lake)
 "riI" = (
 /obj/structure/stairs/perspective{
@@ -36053,8 +37425,9 @@
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/security)
 "rrh" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/top/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top/one,
 /area/lazarus/ground/river/central_river/lake)
 "rru" = (
 /obj/effect/hunter/ancient_temple/tile_edge/tile_edge_11,
@@ -36136,10 +37509,6 @@
 	},
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/comms)
-"rtM" = (
-/obj/structure/flora/bush/ausbushes/var3/stalkybush,
-/turf/open/gm/coast/dirt/north,
-/area/lazarus/ground/river/central_river/north/cove)
 "rtN" = (
 /obj/item/tool/warning_cone{
 	pixel_y = 2
@@ -36189,6 +37558,7 @@
 "ruH" = (
 /obj/structure/platform/stone/ancient_temple/alt/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "ruT" = (
@@ -36280,8 +37650,9 @@
 /turf/open/auto_turf/lv_grass_weedable/layer0_mud_alt,
 /area/lazarus/ground/ancient_temple/east)
 "rxI" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/bottom,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom,
 /area/lazarus/ground/river/central_river/lake)
 "rxL" = (
 /obj/effect/landmark/lv624/fog_blocker,
@@ -36593,7 +37964,9 @@
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/ground/colony/north_tcomms_road)
 "rHB" = (
-/turf/open/auto_turf/waterfall/center,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center,
 /area/lazarus/ground/river/central_river/north)
 "rHD" = (
 /obj/effect/decal/lv_decals/red_mud_corner{
@@ -37275,6 +38648,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "rWL" = (
@@ -37326,8 +38700,9 @@
 /turf/open/floor/interior/wood/alt,
 /area/lazarus/ground/barrens/central_barrens)
 "rYn" = (
-/obj/structure/blocker/forcefield/human,
-/turf/open/auto_turf/waterfall/bottom/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom/one,
 /area/lazarus/ground/river/central_river/lake)
 "rYA" = (
 /obj/structure/window/framed/lv_colony/reinforced,
@@ -37573,9 +38948,6 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_wall,
 /turf/open/floor/plating/ancient_temple,
 /area/lazarus/ground/caves/north_west_caves)
-"sdG" = (
-/turf/open/gm/coast/dirt/beachcorner2/south_west,
-/area/lazarus/ground/river/west_river)
 "sdN" = (
 /obj/structure/pipes/standard/simple/hidden/cyan{
 	dir = 4
@@ -37588,10 +38960,7 @@
 /turf/open/floor/prison/sterile_white,
 /area/lazarus/captain)
 "sdR" = (
-/turf/closed/wall/mineral/sandstone{
-	name = "ancient temple wall";
-	desc = "A heavy wall of sandstone with sandstone plating."
-	},
+/turf/closed/wall/mineral/sandstone/runed/decor_3,
 /area/lazarus/ground/caves/south_west_caves)
 "sdX" = (
 /obj/effect/hunter/ancient_temple/deco_border/deco_border3{
@@ -38484,11 +39853,6 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/ancient_temple/ruined/east,
 /area/lazarus/ground/ancient_temple/east)
-"sAs" = (
-/obj/structure/flora/bush/ausbushes/var3/fernybush,
-/obj/effect/landmark/lv624/fog_blocker,
-/turf/open/gm/coast/dirt/beachcorner,
-/area/lazarus/ground/river/west_river)
 "sAx" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/decal/warning_stripes{
@@ -38503,7 +39867,8 @@
 /area/lazarus/ground/ancient_temple/south/surface)
 "sAL" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/top,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/top,
 /area/lazarus/ground/river/central_river/north)
 "sAP" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
@@ -38582,6 +39947,7 @@
 /area/lazarus/ground/caves/north_west_caves)
 "sDf" = (
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base,
 /area/lazarus/ground/barrens/north_barrens)
 "sDy" = (
@@ -38731,7 +40097,8 @@
 /area/lazarus/ground/ancient_temple/north_east)
 "sGm" = (
 /obj/structure/blocker/invisible_wall,
-/turf/open/auto_turf/waterfall/under_bottom/one,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/under_bottom/one,
 /area/lazarus/ground/river/central_river/north)
 "sGo" = (
 /obj/structure/flora/grass/tallgrass/jungle_alt_2/corner{
@@ -38778,6 +40145,7 @@
 	pixel_y = -6
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/fake_wall_dark,
 /area/strata/interior/out_of_bounds)
 "sHt" = (
@@ -39221,7 +40589,7 @@
 /area/lazarus/ground/river/central_river/lake)
 "sRy" = (
 /obj/structure/flora/jungle/vines/dead/heavy,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "sRz" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
@@ -40212,7 +41580,8 @@
 /turf/open/gm/dirt/brown,
 /area/lazarus/ground/barrens/central_barrens)
 "tqi" = (
-/obj/structure/blocker/forcefield/human,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/coast/dirt/beachcorner2/north_west,
 /area/lazarus/ground/river/central_river/lake)
 "tqj" = (
@@ -40225,10 +41594,9 @@
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/lazarus/ground/caves/north_west_caves)
 "tqm" = (
-/obj/item/stack/sheet/plasteel/large_stack,
-/obj/item/stack/sheet/metal/large_stack,
 /obj/item/stack/sheet/metal/large_stack,
 /obj/structure/closet/coffin/woodencrate,
+/obj/item/stack/sheet/plasteel/med_large_stack,
 /turf/open/floor/interior/wood_sat/alt,
 /area/lazarus/lodge)
 "tqN" = (
@@ -40409,7 +41777,7 @@
 /turf/open/floor/ancient_temple/ruined/north,
 /area/lazarus/ground/caves/west_caves)
 "tua" = (
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "tun" = (
 /obj/structure/machinery/light/small/blue{
@@ -42069,7 +43437,6 @@
 /area/lazarus/ground/barrens/east_barrens)
 "uiH" = (
 /obj/structure/platform/metal/strata/alt/east,
-/obj/effect/landmark/lv624/fog_blocker,
 /turf/open/gm/coast/dirt/beachcorner2/north_east,
 /area/lazarus/ground/river/central_river)
 "uiS" = (
@@ -42315,6 +43682,7 @@
 /area/lazarus/ground/ancient_temple/south_east/surface)
 "uos" = (
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base/alt,
 /area/lazarus/ground/ancient_temple/north_east)
 "uoJ" = (
@@ -42635,17 +44003,6 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
 /turf/open/floor/ancient_temple/damaged/damage_3,
 /area/lazarus/ground/ancient_temple/east)
-"uve" = (
-/obj/structure/closet/crate/freezer/cooler{
-	pixel_x = 10;
-	pixel_y = -1
-	},
-/obj/item/reagent_container/food/drinks/cans/beer{
-	pixel_x = -2;
-	pixel_y = -3
-	},
-/turf/open/gm/brown_dirt/random_rocks,
-/area/lazarus/ground/jungle/west_jungle)
 "uvm" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
 	dir = 6
@@ -42727,6 +44084,7 @@
 	pixel_y = 1
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/auto_turf/lv_sand_alt/layer0,
 /area/strata/interior/out_of_bounds)
 "uww" = (
@@ -42825,7 +44183,9 @@
 /turf/open/floor/ancient_temple/ruined/north,
 /area/lazarus/ground/caves/west_caves)
 "uxW" = (
-/turf/open/auto_turf/waterfall/center/one,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/center/one,
 /area/lazarus/ground/river/central_river/north)
 "uyg" = (
 /obj/effect/decal/lv_decals/cave_mud_corner{
@@ -43000,6 +44360,7 @@
 "uBD" = (
 /obj/structure/platform/stone/ancient_temple/west,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/floor_grille/water,
 /area/strata/interior/out_of_bounds)
 "uBG" = (
@@ -43204,8 +44565,10 @@
 /turf/open/auto_turf/lv_grass_weedable/layer1,
 /area/lazarus/landing_zones/lz2)
 "uHH" = (
-/turf/open/gm/coast/dirt/south,
-/area/lazarus/ground/river/west_river)
+/obj/structure/pipes/standard/simple/hidden/cyan,
+/obj/structure/disposalpipe/segment,
+/turf/open/gm/dirt/brown,
+/area/lazarus/ground/jungle/west_jungle)
 "uHO" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_4{
 	pixel_x = 6;
@@ -43646,6 +45009,7 @@
 	},
 /obj/structure/prop/hunter/ancient_temple/giant_statue/base,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/base,
 /area/lazarus/ground/barrens/north_barrens)
 "uSJ" = (
@@ -45092,6 +46456,11 @@
 /obj/structure/pipes/standard/simple/hidden/cyan{
 	dir = 4
 	},
+/obj/effect/decal/hybrisa/trash{
+	icon_state = "trash_4";
+	pixel_x = 4;
+	pixel_y = 17
+	},
 /turf/open/floor/prison/floor_plate,
 /area/lazarus/quart)
 "vHA" = (
@@ -45672,6 +47041,7 @@
 	pixel_y = -16
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/closed/wall/rock/brown,
 /area/strata/interior/out_of_bounds)
 "vXr" = (
@@ -45759,10 +47129,6 @@
 /obj/item/device/binoculars/civ,
 /turf/open/floor/interior/wood_sat/alt,
 /area/lazarus/shack)
-"waC" = (
-/obj/structure/flora/bush/ausbushes/var3/stalkybush,
-/turf/open/gm/coast/dirt/beachcorner2/north_east,
-/area/lazarus/ground/river/west_river)
 "waJ" = (
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/gm/brown_dirt/random_rocks,
@@ -46641,6 +48007,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "wvE" = (
@@ -46737,8 +48104,17 @@
 /turf/open/floor/hybrisa/carpet/carpetfadedred,
 /area/lazarus/sleep_female)
 "wxA" = (
-/turf/open/gm/coast/dirt/east,
-/area/lazarus/ground/river/west_river)
+/obj/effect/decal/hybrisa/dirt,
+/obj/structure/machinery/meter{
+	pixel_x = 32
+	},
+/obj/effect/landmark/start/working_joe/colony,
+/obj/effect/landmark/late_join/working_joe/colony,
+/obj/structure/machinery/light/blue{
+	dir = 4
+	},
+/turf/open/floor/almayer/plate,
+/area/lazarus/synth_storage)
 "wxE" = (
 /obj/item/stack/sheet/wood,
 /turf/open/gm/brown_dirt/random_rocks_alt,
@@ -46752,17 +48128,6 @@
 /obj/item/tool/warning_cone,
 /turf/open/floor/interior/wood/alt,
 /area/lazarus/ground/barrens/central_barrens)
-"wyf" = (
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 5
-	},
-/obj/effect/decal/lv_decals/red_mud_corner{
-	dir = 10
-	},
-/obj/effect/landmark/corpsespawner/colonist/random,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/interior/wood/alt,
-/area/lazarus/ground/jungle/west_jungle)
 "wyv" = (
 /obj/structure/flora/bush/ausbushes/var3/sparsegrass,
 /obj/effect/landmark/lv624/fog_blocker,
@@ -46968,9 +48333,6 @@
 /obj/effect/landmark/structure_spawner/setup/distress/xeno_wall,
 /turf/open/floor/ancient_temple/floor_20/north,
 /area/lazarus/ground/ancient_temple/east)
-"wDU" = (
-/turf/open/gm/coast/dirt/beachcorner2/north_east,
-/area/lazarus/ground/river/west_river)
 "wEm" = (
 /turf/open/floor/prison/brown/corner/north,
 /area/lazarus/main_hall)
@@ -47067,9 +48429,6 @@
 "wFO" = (
 /obj/effect/landmark/nightmare{
 	insert_tag = "south_west_jungle_shack"
-	},
-/obj/effect/landmark/nightmare{
-	insert_tag = "south_west_jungle"
 	},
 /turf/closed/wall/strata_ice/jungle,
 /area/strata/interior/out_of_bounds)
@@ -47189,6 +48548,7 @@
 	},
 /obj/structure/platform/stone/ancient_temple/east,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/floor/ancient_temple/floor_grille/water,
 /area/strata/interior/out_of_bounds)
 "wHT" = (
@@ -47420,7 +48780,9 @@
 /turf/open/floor/ancient_temple/damaged/damage_7,
 /area/lazarus/ground/ancient_temple/east)
 "wOr" = (
-/turf/open/auto_turf/waterfall/bottom,
+/obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
+/turf/open/gm/river/waterfall/bottom,
 /area/lazarus/ground/river/central_river/north)
 "wOC" = (
 /obj/structure/dartboard,
@@ -47996,6 +49358,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "xdu" = (
@@ -48377,6 +49740,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "xnd" = (
@@ -48553,6 +49917,7 @@
 	layer = 4.12
 	},
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "xqV" = (
@@ -48700,10 +50065,6 @@
 /obj/effect/decal/hybrisa/dirt,
 /turf/open/floor/prison/bright_clean2,
 /area/lazarus/captain)
-"xuA" = (
-/obj/structure/flora/jungle/planttop1,
-/turf/open/gm/dirt/brown,
-/area/lazarus/ground/jungle/west_jungle)
 "xuD" = (
 /obj/item/trash/cigbutt,
 /obj/item/trash/cigbutt,
@@ -49580,10 +50941,6 @@
 	},
 /turf/open/floor/ancient_temple/damaged/damage_1,
 /area/lazarus/ground/ancient_temple/east)
-"xQi" = (
-/obj/structure/flora/bush/ausbushes/reedbush,
-/turf/open/gm/coast/dirt/east,
-/area/lazarus/ground/river/west_river)
 "xQp" = (
 /obj/effect/hunter/ancient_temple/rubble/rubble_2{
 	pixel_x = 3;
@@ -50137,6 +51494,7 @@
 /obj/structure/prop/hunter/ancient_temple/large_bars/water,
 /obj/structure/flora/jungle/vines/dead/light_1,
 /obj/structure/blocker/invisible_wall,
+/obj/structure/blocker/forcefield/vehicles,
 /turf/open/gm/river/soro,
 /area/strata/interior/out_of_bounds)
 "ygF" = (
@@ -50207,7 +51565,7 @@
 /area/lazarus/ground/river/central_river/lake)
 "yii" = (
 /obj/effect/decal/strata_decals/grime/grime3,
-/turf/closed/wall/ancient_temple/sandstone,
+/turf/closed/wall/mineral/sandstone/runed,
 /area/strata/interior/out_of_bounds)
 "yiW" = (
 /obj/structure/flora/bush/ausbushes/reedbush,
@@ -50922,10 +52280,10 @@ kDj
 stV
 stV
 pOA
-kDj
-kDj
-kDj
-tyA
+ptc
+nBI
+afq
+vdv
 xxL
 tyA
 tyA
@@ -50937,8 +52295,8 @@ tyA
 tyA
 tyA
 lLl
-aNR
-aNR
+lSG
+lSG
 aNR
 gdk
 gdk
@@ -51146,10 +52504,10 @@ nWz
 kDj
 kDj
 wyv
-nWz
-nWz
-nWz
-hgz
+afz
+afx
+afr
+ltT
 vug
 sDP
 tyA
@@ -51370,16 +52728,16 @@ kDj
 nBI
 nWz
 xme
-ptc
-iAE
-fxg
-oFg
-mIY
+afA
+afy
+afs
+mtD
+vug
 rML
 hgz
 lPL
 aNR
-aNR
+lSG
 tyA
 tyA
 lyd
@@ -51595,10 +52953,10 @@ nWz
 nBI
 eZA
 fxg
-hEZ
-wzg
-wzg
-qAl
+fxg
+afu
+oFg
+mIY
 hgz
 cpm
 tyA
@@ -51609,7 +52967,7 @@ gdk
 tyA
 tyA
 nhv
-nhv
+aeY
 tyA
 tyA
 nhv
@@ -51820,7 +53178,7 @@ nWz
 xYe
 dtM
 wzg
-wzg
+afv
 wzg
 qAl
 hgz
@@ -51833,17 +53191,17 @@ ieJ
 bCc
 jEE
 tyA
-tyA
+afa
 flX
 tyA
 tyA
 tyA
 tyA
-cff
-hgz
-hgz
-rML
-cff
+mFV
+nhv
+tyA
+nhv
+mFV
 tyA
 tyA
 tyA
@@ -52057,23 +53415,23 @@ nhv
 tyA
 tyA
 tyA
+afa
+wDz
 tyA
-bFv
-hgz
-baA
-hgz
-hgz
-hgz
-hgz
-rML
-hgz
-hgz
-hgz
-hgz
-cff
-hgz
-hgz
-cff
+tyA
+tyA
+tyA
+tyA
+nhv
+nhv
+tyA
+tyA
+tyA
+tyA
+wDz
+tyA
+nhv
+wDz
 tyA
 tyA
 gdk
@@ -52281,24 +53639,24 @@ nhv
 gdk
 tyA
 tyA
-hgz
-baA
-hgz
-rML
-sAs
-fxg
-fxg
-fxg
-fxg
-fxg
-cLk
-hgz
-rML
-rML
-hgz
-hgz
-hgz
-hgz
+afa
+tyA
+tyA
+acO
+acO
+acO
+acO
+acO
+acO
+acO
+tyA
+tyA
+tyA
+acN
+tyA
+acG
+tyA
+tyA
 tyA
 gdk
 heo
@@ -52503,25 +53861,25 @@ ojj
 nhv
 jpo
 tyA
-pmW
-hgz
-baA
-rML
-hgz
-iAE
+tyA
+nhv
+acO
+acP
+acP
+acO
 hEZ
-wzg
-wzg
-wzg
-dtM
-wzg
-sdG
-fxg
-fxg
-fxg
-cLk
-hgz
-rML
+ael
+aed
+adR
+adJ
+acO
+acP
+acP
+acO
+tyA
+tyA
+acG
+nhv
 tyA
 hgz
 tyA
@@ -52726,27 +54084,27 @@ alZ
 tPe
 hYV
 oEv
+acI
 tyA
-hAJ
-hgz
-hgz
-hgz
+nhv
+acP
+aeP
 iAE
-hEZ
-wzg
-wzg
-wzg
-fWO
-wzg
-tMc
-wzg
-wzg
-wzg
-wzg
-lch
-hgz
-hgz
-hgz
+aeA
+aes
+aem
+aee
+adS
+adK
+ady
+ado
+add
+acP
+nhv
+tyA
+acG
+nhv
+nhv
 tyA
 cff
 tyA
@@ -52944,33 +54302,33 @@ wzg
 qAl
 hgz
 hgz
-nwy
+acN
 irs
 vVM
 gdk
 irs
 vVM
+acI
+nhv
 tyA
-hgz
-iAE
-fxg
-fxg
-hEZ
-tMc
-wzg
-wzg
-wzg
-wzg
-tMc
-wzg
-wzg
-fWO
-wzg
-wzg
-sdG
-fxg
-cLk
-hgz
+acP
+aeR
+aeI
+aeB
+aeu
+aen
+adT
+adT
+adL
+adz
+adp
+ade
+acP
+nhv
+tyA
+acE
+tyA
+nhv
 gdk
 gdk
 tyA
@@ -53165,37 +54523,37 @@ wzg
 dtM
 wzg
 wzg
-bEm
-fxg
-bVq
-cff
-flX
-tyA
-tyA
-tyA
-tyA
+qAl
 hgz
+sDP
 cff
-fVK
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-fWO
-uHH
-hgz
+afk
 tyA
+tyA
+tyA
+tyA
+nhv
+tyA
+acO
+acO
+aeS
+aeK
+aeD
+aev
+aeo
+adV
+adV
+adM
+adA
+adq
+adf
+acO
+acO
+tyA
+auL
+tyA
+tyA
+yhg
 hNK
 tyA
 tyA
@@ -53389,36 +54747,36 @@ wzg
 wzg
 wzg
 wzg
-pVz
-fWO
-uHH
-rML
-cff
+qAl
+sDP
 hgz
-cff
-tyA
-tyA
 hgz
-iAE
-hEZ
-wzg
-fWO
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-uHH
+wDz
+tyA
+mFV
+nhv
+tyA
+hJQ
+afg
+acP
+afb
+adg
+adg
+aeE
+aew
+adB
+aef
+adW
+adO
+adB
+adr
+adg
+acY
+acP
+acJ
 rML
+rML
+auL
 cff
 arO
 pmW
@@ -53613,36 +54971,36 @@ wzg
 wzg
 wzg
 wzg
-pVz
-dtM
-sdG
-fxg
-fxg
-cLk
-rML
+qAl
+afm
 hgz
+tyA
 hgz
-hgz
+tyA
+nhv
+nhv
+tyA
+tyA
 fVK
-dtM
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-wzg
-wzg
-tMc
-wzg
-wzg
+afd
+adg
+aeT
+adg
+adg
+adg
+adg
+adg
+adg
+adP
+adD
+ads
+adh
+acZ
+acQ
+acK
+acH
 uHH
-rML
+acu
 arO
 arO
 nhv
@@ -53837,36 +55195,36 @@ wzg
 wzg
 wzg
 wzg
-pVz
-wzg
-wzg
-wzg
-wzg
-sdG
-fxg
-fxg
-fxg
-fxg
-hEZ
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-kgJ
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-uHH
+qAl
 hgz
+hgz
+hgz
+hgz
+tyA
+tyA
+nhv
+tyA
+tyA
+fVK
+afe
+ada
+ada
+aeL
+adg
+adg
+adg
+aeg
+adg
+adg
+adg
+ada
+adi
+ada
+acR
+acL
+hgz
+hgz
+acv
 hNK
 tyA
 tyA
@@ -54060,37 +55418,37 @@ wzg
 wzg
 wzg
 wzg
-pVz
-pVz
-wzg
-wzg
-wzg
-wzg
-qOi
-wzg
-fWO
-wzg
-tMc
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-fWO
-wzg
-wzg
-fWO
-wzg
-wzg
-uHH
+tSQ
+iuk
 hgz
+hgz
+hgz
+tyA
+cff
+tyA
+afi
+tyA
+hJQ
+afh
+acP
+afc
+aeU
+aeM
+aeF
+ada
+aep
+aeh
+adX
+ada
+adE
+ada
+adi
+adb
+acP
+acM
+cff
+auL
+acx
 gdk
 gdk
 tyA
@@ -54284,37 +55642,37 @@ wzg
 wzg
 wzg
 tSQ
-hph
-nwQ
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-uHH
+iuk
+afo
 hgz
+hgz
+hgz
+hgz
+tyA
+tyA
+nhv
+tyA
+tyA
+tyA
+acO
+acO
+aeV
+aeN
+aeG
+ada
+aeq
+aei
+adg
+adg
+adF
+adt
+adk
+acO
+acO
+tyA
+tyA
+hgz
+acv
 gdk
 gdk
 tyA
@@ -54509,36 +55867,36 @@ wzg
 wzg
 qAl
 hgz
-djv
-gSx
-wzg
-pio
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-fWO
-wzg
-wzg
-fWO
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-kgJ
-uHH
 hgz
+gSx
+hgz
+hgz
+hgz
+nhv
+tyA
+nhv
+tyA
+tyA
+tyA
+tyA
+acP
+aeW
+adg
+adg
+ada
+ada
+aej
+adg
+adg
+adG
+adu
+adl
+acP
+lot
+hYV
+naZ
+hgz
+acv
 gdk
 cpm
 tyA
@@ -54733,37 +56091,37 @@ wzg
 wzg
 qAl
 rML
-rML
-djv
-wxA
-njk
-wxA
-wxA
-wDU
-dtM
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-wzg
-wzg
-wzg
-dtM
-wzg
-tMc
-pct
-wxA
-wxA
-dSt
+hgz
+hgz
+hgz
+hgz
+hgz
 hgz
 tyA
+tyA
+tyA
+nhv
+tyA
+tyA
+acP
+aeX
+aeO
+aeH
+aex
+aer
+aek
+adY
+adQ
+adH
+adv
+adm
+acP
+irs
+acI
+vVM
+auL
+acv
+hgz
 tyA
 tyA
 tyA
@@ -54959,36 +56317,36 @@ uok
 mIY
 hgz
 hgz
-nBv
-mvz
 hgz
 hgz
-djv
-wxA
-wxA
-waC
-wzg
-wzg
-wzg
-wzg
-tMc
-pct
-wxA
-wxA
-wxA
-wxA
-wxA
-xQi
-wxA
-wxA
-wxA
-dSt
-rML
 hgz
-rML
-cff
 hgz
-xuA
+hgz
+tyA
+tyA
+tyA
+tyA
+afa
+acO
+acP
+acP
+acO
+aez
+aer
+aek
+adZ
+wxA
+acO
+acP
+acP
+acO
+tyA
+acI
+acI
+acE
+acy
+auL
+ieJ
 bCc
 tyA
 nhv
@@ -55183,35 +56541,35 @@ wzg
 qAl
 rML
 hgz
-uve
-cff
-oFE
-vdv
 hgz
 cff
 hgz
-djv
-wxA
-wxA
-wxA
-wxA
-wxA
-dSt
-cff
-hgz
-baA
-rML
-cff
-hgz
-cff
-hgz
-hgz
-hgz
-cff
-rML
-hgz
-pmW
-hgz
+nhv
+nhv
+wDz
+tyA
+nhv
+tyA
+afa
+tyA
+tyA
+tyA
+acO
+acO
+acO
+acO
+acO
+acO
+acO
+tyA
+tyA
+tyA
+tyA
+tyA
+tyA
+acE
+acz
+aco
 tyA
 tyA
 tyA
@@ -55407,36 +56765,36 @@ wzg
 qAl
 hgz
 cff
-kns
-wyf
-bZM
-ltT
-rML
-hgz
-cff
-hgz
-rML
-baA
 hgz
 hgz
 hgz
 hgz
 rML
+tyA
+wDz
+tyA
+tyA
+afa
+tyA
+tyA
+tyA
+tyA
+tyA
 tyA
 pmW
+arO
+arO
+adw
+adw
+adn
 tyA
 tyA
 tyA
 tyA
-cpm
+acE
+acA
+acp
 tyA
-tyA
-tyA
-tyA
-tyA
-hgz
-tyA
-hgz
 tyA
 iON
 arO
@@ -55631,10 +56989,10 @@ wzg
 qAl
 hgz
 baA
-ggN
-aZz
+hgz
+hgz
 fEk
-mtD
+hgz
 hgz
 baA
 gdk
@@ -55650,14 +57008,14 @@ hNK
 arO
 hNK
 gdk
-nhv
-nhv
+adI
+adx
 arO
 hNK
 gdk
 cWZ
 nhv
-hJQ
+acF
 vRk
 jCw
 jYu
@@ -56107,7 +57465,7 @@ gdk
 nyg
 kqt
 aKY
-syH
+acq
 aKY
 kqt
 nyg
@@ -56331,7 +57689,7 @@ kqt
 kqt
 dMn
 nFr
-nFr
+ace
 nFr
 kqt
 nFr
@@ -56555,13 +57913,13 @@ tfZ
 nFr
 nFr
 nFr
-nFr
-nFr
-nFr
-nFr
-nFr
-nFr
-tfZ
+acr
+acl
+acl
+acl
+acl
+acl
+acd
 vWy
 kqt
 nyg
@@ -56785,7 +58143,7 @@ eAg
 eAg
 eAg
 bBe
-nFr
+ace
 nFr
 kqt
 nyg
@@ -56999,7 +58357,7 @@ abg
 abe
 abc
 aaV
-abk
+abg
 abe
 abc
 aaV
@@ -57009,7 +58367,7 @@ abc
 aaV
 gWh
 oGz
-nFr
+ace
 nFr
 kqt
 nyg
@@ -57233,7 +58591,7 @@ lkn
 aaX
 aaP
 oGz
-aLC
+acf
 nFr
 kqt
 nyg
@@ -57439,7 +58797,7 @@ gWh
 gWh
 gWh
 gWh
-abw
+gWh
 gWh
 gWh
 gWh
@@ -57457,7 +58815,7 @@ aaY
 gWh
 aaQ
 oGz
-nFr
+ace
 nFr
 kqt
 nyg
@@ -57681,7 +59039,7 @@ gWh
 gWh
 aaR
 oGz
-aLC
+acf
 tfZ
 nyg
 nyg
@@ -57905,7 +59263,7 @@ gWh
 gWh
 aaT
 oGz
-nFr
+ace
 nFr
 tfZ
 gei
@@ -57952,7 +59310,7 @@ aNR
 aNR
 cww
 enk
-icW
+agk
 pXa
 pPi
 gCN
@@ -58129,7 +59487,7 @@ gWh
 gWh
 aaP
 oGz
-pyk
+acg
 nFr
 nFr
 asd
@@ -58353,7 +59711,7 @@ gWh
 aaY
 aaQ
 oGz
-nFr
+ace
 cOX
 nFr
 gei
@@ -58577,7 +59935,7 @@ gWh
 gWh
 aaR
 oGz
-nFr
+ace
 cOX
 nFr
 asd
@@ -58801,7 +60159,7 @@ gWh
 gWh
 aaU
 oGz
-cOX
+ach
 nFr
 nFr
 gei
@@ -59025,7 +60383,7 @@ gWh
 gWh
 aaP
 oGz
-nFr
+ace
 nFr
 nyg
 nyg
@@ -59249,7 +60607,7 @@ gWh
 gWh
 aaQ
 oGz
-cOX
+ach
 nFr
 kqt
 nyg
@@ -59473,7 +60831,7 @@ lkn
 aaX
 aaR
 oGz
-nFr
+ace
 vWy
 kqt
 nyg
@@ -59697,7 +61055,7 @@ abd
 aaZ
 gWh
 oGz
-nFr
+ace
 nFr
 mpF
 nyg
@@ -59921,7 +61279,7 @@ syH
 syH
 syH
 ntd
-vWy
+aci
 tfZ
 kqt
 nyg
@@ -60134,18 +61492,18 @@ egI
 nFr
 nFr
 nFr
-nFr
-pyk
-nFr
-nFr
-nFr
-pyk
-pyk
-nFr
-nFr
-vWy
-nFr
-uuS
+acS
+acn
+acl
+acl
+acl
+acn
+acn
+acl
+acl
+acm
+acl
+acj
 kqt
 kqt
 nyg
@@ -60358,7 +61716,7 @@ aft
 cOX
 nFr
 tfZ
-nFr
+ace
 nFr
 pyk
 nFr
@@ -60582,7 +61940,7 @@ nFr
 cOX
 lgA
 nFr
-nFr
+ace
 nFr
 nFr
 nFr
@@ -60806,7 +62164,7 @@ nFr
 cOX
 nFr
 nFr
-nFr
+ace
 kqt
 tfZ
 mjM
@@ -61030,7 +62388,7 @@ jEb
 nFr
 nFr
 nFr
-uuS
+acT
 sEV
 nLd
 oXW
@@ -61254,7 +62612,7 @@ pyk
 nFr
 cOX
 nFr
-tfZ
+acV
 tsh
 oXW
 oXW
@@ -61478,7 +62836,7 @@ tfZ
 nFr
 nFr
 nFr
-nFr
+ace
 eoa
 oXW
 oXW
@@ -61702,7 +63060,7 @@ nFr
 nFr
 cOX
 nFr
-nFr
+ace
 kqt
 oXW
 oXW
@@ -61926,7 +63284,7 @@ tfZ
 nFr
 cOX
 nFr
-nFr
+ace
 uuS
 oXW
 oXW
@@ -62150,7 +63508,7 @@ nFr
 nFr
 nFr
 nFr
-oWx
+acW
 qCL
 erO
 dIP
@@ -62374,7 +63732,7 @@ loH
 loH
 dBP
 wNn
-dBP
+acX
 hGH
 poq
 nVh
@@ -65593,9 +66951,9 @@ mnW
 mnW
 mnW
 mnW
-mnW
-lLr
-sjG
+lSG
+lSG
+lSG
 aNR
 aNR
 lSG
@@ -65814,13 +67172,13 @@ vGU
 vhy
 mnW
 mnW
-mnW
-lLr
-mnW
-mnW
-mnW
 wJb
-sjG
+lSG
+lSG
+lSG
+lSG
+lSG
+lSG
 aNR
 aNR
 aNR
@@ -66038,13 +67396,13 @@ cYH
 fxk
 mnW
 lLr
-mnW
-lLr
 lSG
-lLr
-mnW
-mnW
-sjG
+lSG
+lSG
+lSG
+lSG
+lSG
+lSG
 sjG
 npd
 aNR
@@ -66261,13 +67619,13 @@ dhn
 mIO
 mnW
 wJb
-mnW
-lLr
 lSG
 lSG
 lSG
-lLr
-mnW
+lSG
+lSG
+lSG
+lSG
 mnW
 sjG
 sjG
@@ -66485,8 +67843,8 @@ bxF
 hrA
 lIg
 pNu
-goi
-fxk
+lSG
+lSG
 lSG
 lSG
 lSG
@@ -66709,11 +68067,11 @@ eHJ
 dha
 hNN
 xQF
-deO
-goi
 lSG
 lSG
-lnr
+lSG
+lSG
+pNu
 goi
 mnW
 lLr
@@ -66933,11 +68291,11 @@ ePj
 ePj
 aTY
 hNN
+age
+afY
+lSG
+lSG
 dLl
-deO
-pNu
-pNu
-kAD
 ctl
 mnW
 mnW
@@ -67157,10 +68515,10 @@ dfc
 ePj
 hNN
 hNN
-hNN
-hNN
-hNN
-hNN
+agg
+afZ
+afV
+lSG
 hNN
 deO
 goi
@@ -67381,10 +68739,10 @@ ofp
 dha
 hNN
 hNN
-hNN
-hNN
-hNN
-hNN
+agh
+aga
+afW
+afR
 hNN
 xQF
 ctl
@@ -67605,10 +68963,10 @@ mEo
 dha
 hNN
 hNN
-hNN
-hNN
-hNN
-hNN
+age
+afY
+afX
+afS
 hNN
 hNN
 ctl
@@ -67829,10 +69187,10 @@ nFJ
 ePj
 gBQ
 usk
-hNN
-hNN
-hNN
-hNN
+agg
+agb
+afV
+afT
 hNN
 hNN
 deO
@@ -68053,10 +69411,10 @@ qnr
 umx
 bra
 xLu
-oUM
-usk
-xQF
-hNN
+agh
+aga
+afW
+afR
 hNN
 hNN
 hNN
@@ -68277,10 +69635,10 @@ hBi
 qps
 pmz
 aNR
-aNR
-ilV
-oUM
-usk
+lSG
+afY
+afX
+afS
 hNN
 hNN
 hNN
@@ -68504,8 +69862,8 @@ aNR
 aNR
 aNR
 aNR
-rtM
-hNN
+aNR
+afQ
 hNN
 hNN
 hNN
@@ -68729,7 +70087,7 @@ aNR
 aNR
 aNR
 aNR
-usk
+vuN
 dLl
 hNN
 hNN
@@ -68952,7 +70310,7 @@ lSG
 aNR
 lSG
 aNR
-lLr
+afU
 xLu
 usk
 hNN
@@ -69976,7 +71334,7 @@ jXl
 tXl
 tXl
 tXl
-tXl
+aff
 tXl
 qon
 gdk
@@ -70069,9 +71427,9 @@ pmz
 tIn
 aNR
 aNR
-lnr
-pNu
-pNu
+aNR
+lSG
+lSG
 jZh
 aTY
 hNN
@@ -70291,11 +71649,11 @@ ejj
 tIn
 ejj
 pmz
-lnr
-pNu
-jZh
-hNN
-hNN
+agj
+aNR
+aNR
+aNR
+lSG
 hNN
 hNN
 hNN
@@ -70319,7 +71677,7 @@ hNN
 hNN
 hNN
 jYv
-uxW
+afD
 gxz
 sGm
 sXk
@@ -70515,11 +71873,11 @@ cYH
 ejj
 cYH
 cYH
-vuN
-xQF
-hNN
-hNN
-hNN
+lnr
+aNR
+aNR
+lSG
+lSG
 hNN
 hNN
 hNN
@@ -70740,8 +72098,10 @@ mIO
 pmz
 nqV
 jZh
-hNN
-hNN
+agh
+aga
+afW
+afR
 hNN
 hNN
 hNN
@@ -70751,8 +72111,6 @@ hNN
 hNN
 hNN
 gBQ
-oUM
-oUM
 oUM
 ulI
 xLu
@@ -70961,22 +72319,22 @@ ePj
 lkM
 xos
 hrA
-qbU
+ogO
 eJD
 hNN
+age
+afY
+afX
+afS
 hNN
 hNN
-dLl
+xQF
 hNN
 hNN
 hNN
-bPQ
-oUM
-oUM
-oUM
-ulI
-lLr
-mnW
+hNN
+hNN
+ctl
 mnW
 lLr
 lLr
@@ -71023,7 +72381,7 @@ cYA
 cYA
 aNR
 aNR
-aNR
+lSG
 mwT
 dCq
 tha
@@ -71188,19 +72546,19 @@ rtS
 ePj
 ePj
 aTY
+agg
+afZ
+afV
+afT
+hNN
+hNN
+hNN
+hNN
 hNN
 hNN
 hNN
 gBQ
-oUM
-oUM
-ulI
-lLr
-mnW
-mnW
-mnW
-mnW
-wJb
+afG
 mnW
 mnW
 lLr
@@ -71245,9 +72603,9 @@ uoJ
 bqK
 hTt
 fFn
-aNR
-aNR
-aNR
+lSG
+lSG
+lSG
 qKp
 mwT
 dCq
@@ -71412,18 +72770,18 @@ dha
 ePj
 ePj
 hNN
+agh
+aga
+afW
+afR
+hNN
+hNN
+hNN
+hNN
+hNN
+hNN
 gBQ
-oUM
-oUM
 ulI
-mnW
-mnW
-mnW
-mnW
-lLr
-mnW
-mnW
-mnW
 mnW
 mnW
 mnW
@@ -71470,7 +72828,7 @@ uoJ
 cQF
 sqE
 hnE
-aNR
+lSG
 qKp
 skK
 xZT
@@ -71635,18 +72993,18 @@ qnr
 dha
 ePj
 ePj
-rhT
-ulI
-mnW
-mnW
-mnW
-mnW
-mnW
-mnW
-qeW
-sjG
-sjG
-wJb
+esn
+age
+agi
+afX
+afS
+hNN
+hNN
+hNN
+afN
+hNN
+gBQ
+afG
 sjG
 mnW
 mnW
@@ -71856,20 +73214,20 @@ ePj
 ePj
 dfc
 qnr
-umx
-jOV
-jOV
-ulI
-mnW
-lLr
-fxk
-mnW
-mnW
-mnW
-sjG
-sjG
-sjG
-wXN
+dha
+ePj
+ePj
+hNN
+agg
+afZ
+afV
+afT
+hNN
+hNN
+hNN
+hNN
+hNN
+afK
 sjG
 mnW
 sjG
@@ -72080,20 +73438,20 @@ ePj
 snc
 goF
 fKG
-khn
-tIn
-cYH
-mnW
-mnW
-mnW
-wJb
-sjG
-mnW
-sjG
-sjG
-wXN
-hPx
-tKq
+umx
+jOV
+jOV
+jOV
+gdk
+gdk
+agc
+gdk
+oUM
+oUM
+oUM
+afP
+afM
+afL
 npd
 sjG
 wJb
@@ -72308,10 +73666,10 @@ hMt
 cYH
 cYH
 mnW
-mnW
-sjG
-sjG
-sjG
+gdk
+gdk
+gdk
+gdk
 sjG
 sjG
 vvF
@@ -72331,7 +73689,7 @@ gdk
 gdk
 sjG
 wJb
-sjG
+gdk
 gdk
 gdk
 gdk
@@ -72532,10 +73890,10 @@ cYH
 cYH
 cYH
 mnW
-sjG
-sjG
-sjG
-sjG
+gdk
+gdk
+gdk
+gdk
 sjG
 wXN
 sjG
@@ -72554,8 +73912,8 @@ lSG
 lSG
 gdk
 sjG
-mnW
-sjG
+gdk
+gdk
 gdk
 gdk
 aNR
@@ -72758,7 +74116,7 @@ xxR
 xxR
 ghg
 qrC
-sjG
+gdk
 gdk
 gdk
 gdk
@@ -72777,10 +74135,10 @@ lSG
 lSG
 aNR
 gdk
-sjG
-fxk
-sjG
-sjG
+gdk
+gdk
+gdk
+gdk
 gdk
 gdk
 aNR
@@ -73000,11 +74358,11 @@ lSG
 lSG
 aNR
 aNR
-aNR
-qeW
-sjG
-wJb
-sjG
+gdk
+gdk
+gdk
+gdk
+gdk
 gdk
 gdk
 gdk
@@ -73224,12 +74582,12 @@ lSG
 aNR
 aNR
 lSG
-lSG
-fFn
-cYA
-hTt
-xYa
-aph
+gdk
+gdk
+gdk
+gdk
+gdk
+gdk
 gdk
 aph
 aph
@@ -73291,7 +74649,7 @@ cPG
 cPG
 cPG
 kvO
-kat
+yia
 rAi
 rAi
 rAi
@@ -73448,12 +74806,12 @@ aNR
 aNR
 lSG
 lSG
-aNR
-aNR
-cYA
-hnE
-hnE
-hnE
+gdk
+gdk
+gdk
+gdk
+gdk
+gdk
 aph
 aph
 cYA
@@ -73515,7 +74873,7 @@ pYg
 pYg
 cPG
 kvO
-efv
+bGq
 xGm
 xGm
 xGm
@@ -73673,10 +75031,10 @@ lSG
 lSG
 aNR
 aNR
-aNR
-cYA
-cYA
-hnE
+gdk
+gdk
+gdk
+gdk
 hnE
 aph
 hnE
@@ -73739,7 +75097,7 @@ cPG
 cPG
 cPG
 kvO
-wkL
+xGm
 bGq
 bGq
 bGq
@@ -73897,10 +75255,10 @@ lSG
 lSG
 lSG
 aNR
-aNR
-cYA
-hTt
-cYA
+gdk
+gdk
+gdk
+gdk
 hnE
 hnE
 hnE
@@ -73963,7 +75321,7 @@ awR
 cPG
 cPG
 kvO
-wkL
+xGm
 bGq
 xGm
 xGm
@@ -74187,7 +75545,7 @@ awR
 ulh
 xnI
 kEU
-fKm
+upL
 fhb
 upL
 fhb
@@ -74335,11 +75693,11 @@ lSG
 aNR
 tua
 tua
-ctt
-bga
+afJ
+afI
 gdD
-bga
-wDs
+afF
+afE
 tua
 aNR
 lSG
@@ -74560,7 +75918,7 @@ tua
 tua
 aNR
 pkS
-gHz
+lGG
 hvx
 otk
 aNR
@@ -78059,7 +79417,7 @@ yjp
 gPO
 qvf
 cQT
-xHr
+acs
 rLR
 fOB
 qtu
@@ -79627,7 +80985,7 @@ wFc
 iYk
 oop
 vkx
-eAd
+act
 dRz
 rpZ
 fYD
@@ -80045,7 +81403,7 @@ sdD
 axA
 eJA
 nPY
-jCt
+afp
 abV
 jwk
 fPA
@@ -81616,7 +82974,7 @@ jhl
 orY
 mcp
 fxe
-mqs
+afl
 lrP
 svo
 huH
@@ -81632,7 +82990,7 @@ svo
 xgP
 aow
 uyR
-jCt
+aec
 ydB
 yfA
 pgA
@@ -82154,7 +83512,7 @@ iyP
 lPo
 yii
 tua
-eKt
+tua
 tua
 tua
 tua
@@ -83115,7 +84473,7 @@ tEH
 vqk
 xzL
 bhD
-tua
+afC
 dxj
 abA
 eQO
@@ -84297,7 +85655,7 @@ xPd
 gzw
 iAU
 dJQ
-svo
+afB
 qcW
 aca
 mnU
@@ -84306,7 +85664,7 @@ gWz
 hlu
 xSs
 mqs
-mAx
+afj
 jCt
 tPS
 pcd
@@ -86643,7 +88001,7 @@ tua
 gwz
 lVJ
 lVJ
-fgy
+tua
 uos
 uos
 fVD

@@ -555,3 +555,8 @@
 /area/lazarus/crashed_ship_containers
 	name = "\improper Crashed Ship Containers"
 	icon_state = "syndie-ship"
+
+/area/lazarus/synth_storage
+	name = "\improper Synthetic Storage"
+	icon = 'icons/turf/area_hybrisa.dmi'
+	icon_state = "synthetic"
