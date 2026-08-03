@@ -4,6 +4,7 @@
 	icon = 'code_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "vp78m6"
 	item_state = "vp78m6"
+	gun_slot_icon = 'code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi'
 	lineart_ru = TRUE
 	item_icons = list(
 	WEAR_WAIST = 'code_ru/icons/obj/items/clothing/belts.dmi',
@@ -13,7 +14,14 @@
 	)
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER
 	fire_sound = 'sound/weapons/gun_vp78m6_fire.ogg' // yes we are normalized bro -8db :D
+	reload_sound = 'sound/weapons/gun_vp78_reload.ogg'
+	unload_sound = 'sound/weapons/gun_vp78_unload.ogg'
+	current_mag = /obj/item/ammo_magazine/pistol/vp78
 	force = 8
+
+/obj/item/weapon/gun/pistol/vp78m6/Initialize()
+	. = ..()
+	AddElement(/datum/element/corp_label/wy)
 
 	attachable_allowed = list(
 		/obj/item/attachable/suppressor,
@@ -28,7 +36,7 @@
 		/obj/item/attachable/heavy_barrel,
 	)
 
-/obj/item/weapon/gun/pistol/vp78/vp78m6/handle_starting_attachment()
+/obj/item/weapon/gun/pistol/vp78m6/handle_starting_attachment()
 	..()
 	var/obj/item/attachable/lasersight/vp/attachment = new(src)
 	attachment.flags_attach_features &= ~ATTACH_REMOVABLE
@@ -36,10 +44,10 @@
 	attachment.Attach(src)
 	update_attachable(attachment.slot)
 
-/obj/item/weapon/gun/pistol/vp78/vp78m6/set_gun_attachment_offsets()
+/obj/item/weapon/gun/pistol/vp78m6/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 29, "muzzle_y" = 20,"rail_x" = 10, "rail_y" = 23, "under_x" = 21, "under_y" = 13, "stock_x" = 18, "stock_y" = 14)
 
-/obj/item/weapon/gun/pistol/vp78/vp78m6/set_gun_config_values()
+/obj/item/weapon/gun/pistol/vp78m6/set_gun_config_values()
 	..()
 	set_fire_delay(FIRE_DELAY_TIER_8)
 	set_burst_amount(BURST_AMOUNT_TIER_3)
