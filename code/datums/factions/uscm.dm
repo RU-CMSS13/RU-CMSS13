@@ -56,6 +56,10 @@
 				marine_rk = "soccmd"
 			if(JOB_FORECON_SUPPORT)
 				marine_rk = "tech"
+			//RUCM CODE START
+			if(JOB_VET_SQUAD_LEADER)
+				marine_rk = "vsl"
+			//RUCM CODE END
 			// US Army
 			if(JOB_ARMY_TROOPER)
 				marine_rk = "trpr"
@@ -292,6 +296,10 @@
 				marine_rk = "tl"
 			if(JOB_SQUAD_LEADER, JOB_WO_SQUAD_LEADER)
 				marine_rk = "leader"
+			//RUCM CODE START
+			if(JOB_VET_SQUAD_LEADER)
+				marine_rk = "vsl"
+			//RUCM CODE END
 		if(current_human.rank_override)
 			marine_rk = current_human.rank_override
 

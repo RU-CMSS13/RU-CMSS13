@@ -59,3 +59,21 @@
 
 	gun.recalculate_attachment_bonuses()
 	gun.update_overlays(src, "stock")
+
+/obj/item/attachable/lasersight/vp
+	name = "VP78M6 laser module"
+	desc = "A compact, high-precision laser sight engineered exclusively for the VP78M6. Offers exceptional accuracy gains by interfacing directly with the weapon's internal targeting systems."
+	icon = 'code_ru/icons/obj/items/weapons/guns/attachments/under.dmi'
+	icon_state = "laservp"
+	attach_icon = "laservp_a"
+	slot = "under"
+	pixel_shift_x = 17
+	pixel_shift_y = 17
+
+/obj/item/attachable/lasersight/vp/New()
+	..()
+	accuracy_mod = HIT_ACCURACY_MULT_TIER_1
+	movement_onehanded_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_5
+	scatter_mod = -SCATTER_AMOUNT_TIER_10
+	scatter_unwielded_mod = -SCATTER_AMOUNT_TIER_9
+	accuracy_unwielded_mod = HIT_ACCURACY_MULT_TIER_1
