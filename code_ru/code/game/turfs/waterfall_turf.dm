@@ -4,6 +4,7 @@
 /turf/open/gm/river/waterfall
 	icon = 'code_ru/icons/turf/waterfall_test.dmi'
 	icon_state = "waterfall_top"
+	icon_overlay = FALSE // it doesn't need overlay, it's animated
 	can_bloody = FALSE
 	fishing_allowed = FALSE
 	minimap_color = MINIMAP_WATER
