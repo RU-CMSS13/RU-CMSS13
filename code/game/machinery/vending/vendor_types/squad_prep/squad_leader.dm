@@ -126,7 +126,7 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 	show_points = TRUE
 	//RUCM CODE START
 	vendor_role = list(JOB_VET_SQUAD_LEADER, JOB_SQUAD_LEADER)
-	//RUCM CODE END
+	//RUCM CODE END [vendor_role = list(JOB_SQUAD_LEADER)]
 	req_access = list(ACCESS_MARINE_LEADER)
 
 /obj/structure/machinery/cm_vending/gear/leader/get_listed_products(mob/user)
@@ -193,7 +193,6 @@ GLOBAL_LIST_INIT(cm_vending_clothing_leader, list(
 GLOBAL_LIST_INIT(cm_vending_clothing_vet_leader, list(
 		list("STANDARD EQUIPMENT (TAKE ALL)", 0, null, null, null),
 		list("Standard Marine Apparel", 0, list(/obj/item/clothing/under/marine, /obj/item/clothing/shoes/marine/knife, /obj/item/clothing/gloves/marine, /obj/item/device/radio/headset/almayer/marine, /obj/item/clothing/head/helmet/marine/radio_helmet/vsl), MARINE_CAN_BUY_UNIFORM, VENDOR_ITEM_MANDATORY),
-		list("VP78M6", 0, /obj/item/weapon/gun/pistol/vp78m6, MARINE_CAN_BUY_SECONDARY, VENDOR_ITEM_MANDATORY),
 		list("MRE", 0, /obj/item/storage/box/mre, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 		list("Map", 0, /obj/item/map/current_map, MARINE_CAN_BUY_MAP, VENDOR_ITEM_MANDATORY),
 
@@ -257,7 +256,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_vet_leader, list(
 	req_access = list(ACCESS_MARINE_LEADER)
 	//RUCM CODE START
 	vendor_role = list(JOB_VET_SQUAD_LEADER, JOB_SQUAD_LEADER)
-	//RUCM CODE END
+	//RUCM CODE END [vendor_role = list(JOB_SQUAD_LEADER)]
 //RUCM CODE START
 /obj/structure/machinery/cm_vending/clothing/leader/get_listed_products(mob/living/carbon/human/user)
 	if(user?.wear_id)

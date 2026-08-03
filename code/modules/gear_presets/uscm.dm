@@ -429,6 +429,7 @@
 	paygrades = list(PAY_SHORT_ME8E = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "vSL"
 	minimum_age = 30
+	skills = /datum/skills/VSL
 
 /datum/equipment_preset/uscm/leader/veteran/load_gear(mob/living/carbon/human/new_human)
 	. = ..()
