@@ -6,7 +6,7 @@
 	item_state = "vp78m6"
 	lineart_ru = TRUE
 	item_icons = list(
-	WEAR_WAIST = 'code_ru/mob/humans/onmob/clothing/belts/guns.dmi',
+	WEAR_WAIST = 'code_ru/icons/obj/items/clothing/belts.dmi',
 	WEAR_J_STORE = 'code_ru/icons/obj/items/weapons/guns/guns_by_map/urban/suit_slot.dmi',
 	WEAR_L_HAND = 'code_ru/icons/mob/humans/onmob/items_lefthand_1.dmi',
 	WEAR_R_HAND = 'code_ru/icons/mob/humans/onmob/items_righthand_1.dmi'
