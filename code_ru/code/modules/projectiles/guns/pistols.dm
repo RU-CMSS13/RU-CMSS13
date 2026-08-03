@@ -4,7 +4,6 @@
 	icon = 'code_ru/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi'
 	icon_state = "vp78m6"
 	item_state = "vp78m6"
-	gun_slot_icon = 'code_ru/icons/obj/items/clothing/belts/holstered_guns.dmi'
 	lineart_ru = TRUE
 	item_icons = list(
 	WEAR_WAIST = 'code_ru/icons/obj/items/clothing/belts.dmi',
