@@ -312,6 +312,9 @@
 	QDEL_NULL(active_attachable)
 	GLOB.gun_list -= src
 	set_gun_user(null)
+//RUCM START
+	gun_holder = null
+//RUCM END
 	. = ..()
 
 /*
@@ -1221,6 +1224,11 @@ and you're good to go.
 	if(!able_to_fire(user) || !target || !get_turf(user) || !get_turf(target) || user.contains(target))
 		return NONE
 
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(user, target, params))
+		return NONE
+//RUCM END
+
 	/*
 	This is where the grenade launcher and flame thrower function as attachments.
 	This is also a general check to see if the attachment can fire in the first place.
@@ -1274,7 +1282,13 @@ and you're good to go.
 
 	var/atom/original_target = target //This is for burst mode, in case the target changes per scatter chance in between fired bullets.
 
+
+/* RUCM CHANGE
 	if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+*/
+//RUCM START
+	if((loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED))) && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 		return TRUE
 
 	//The gun should return the bullet that it already loaded from the end cycle of the last Fire().
@@ -1474,7 +1488,12 @@ and you're good to go.
 
 	var/bullets_fired
 	for(bullets_fired = 1 to bullets_to_fire)
+/* RUCM CHANGE
 		if(loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED)))
+*/
+//RUCM START
+		if((loc != user || (flags_gun_features & GUN_WIELDED_FIRING_ONLY && !(flags_item & WIELDED))) && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 			break //If you drop it while bursting, for example.
 
 		if (bullets_fired > 1 && !(flags_gun_features & GUN_BURST_FIRING)) // No longer burst firing somehow
@@ -1753,6 +1772,11 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 		return TRUE
 	if(user.is_mob_incapacitated())
 		return
+//RUCM START
+	if(flags_mounted_gun_features & GUN_ONLY_MOUNTING && !(flags_mounted_gun_features & GUN_MOUNTED))
+		to_chat(user, SPAN_WARNING("To heavy and big for hand held usage."))
+		return FALSE
+//RUCM END
 	if(HAS_TRAIT(user, TRAIT_HAULED))
 		return
 	if(world.time < guaranteed_delay_time)
@@ -1796,7 +1820,12 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 				if(!(active_attachable.flags_attach_features & ATTACH_WIELD_OVERRIDE) && !(flags_item & WIELDED))
 					to_chat(user, SPAN_WARNING("You must wield [src] to fire [active_attachable]!"))
 					return
+/* RUCM CHANGE
 		if((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !active_attachable) //If we're not holding the weapon with both hands when we should.
+*/
+//RUCM START
+		if((flags_gun_features & GUN_WIELDED_FIRING_ONLY) && !(flags_item & WIELDED) && !active_attachable && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 			to_chat(user, SPAN_WARNING("You need a more secure grip to fire this weapon!"))
 			return
 
@@ -1916,7 +1945,22 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	var/gun_accuracy_mult = accuracy_mult_unwielded
 	var/gun_scatter = scatter_unwielded
 
+
+/* RUCM CHANGE
 	if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED)
+*/
+//RUCM START SCATTER_AMOUNT_NONE
+	if(flags_mounted_gun_features & GUN_MOUNTED)
+		if(callback_fire_stat)
+			var/list/modifs = callback_fire_stat.Invoke(projectile_to_fire, user)
+			if(length(modifs))
+				gun_accuracy_mult = modifs[1]
+				gun_scatter += modifs[2]
+		else
+			gun_accuracy_mult = accuracy_mult + HIT_ACCURACY_MULT_TIER_5
+			gun_scatter = SCATTER_AMOUNT_NONE
+	else if(flags_item & WIELDED || flags_gun_features & GUN_ONE_HAND_WIELDED || flags_mounted_gun_features & GUN_ONLY_MOUNTING)
+//RUCM END
 		gun_accuracy_mult = accuracy_mult
 		gun_scatter = scatter
 	else if(user && world.time - user.l_move_time < 5) //moved during the last half second
@@ -2069,6 +2113,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 
 	return FALSE
 
+/* RUCM CHANGE
 /obj/item/weapon/gun/proc/muzzle_flash(angle,mob/user)
 	if(!muzzle_flash || flags_gun_features & GUN_SILENCED || isnull(angle))
 		return //We have to check for null angle here, as 0 can also be an angle.
@@ -2091,6 +2136,7 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	rotate.Turn(angle)
 	I.transform = rotate
 	I.flick_overlay(user, 3)
+*/
 
 /// called by a timer to remove the light range from muzzle flash
 /obj/item/weapon/gun/proc/reset_light_range(lightrange)
@@ -2177,10 +2223,24 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 	active_attachable?.clean_target()
 	target = get_turf(target)
 
+/* RUCM CHANGE
 /obj/item/weapon/gun/proc/stop_fire()
 	SIGNAL_HANDLER
+
 	if(!target || (gun_user.get_active_hand() != src))
 		return
+*/
+//RUCM START
+/obj/item/weapon/gun/proc/stop_fire(datum/source, atom/object, turf/location, control, params)
+	SIGNAL_HANDLER
+
+	if(callback_can_stop_fire)
+		if(!callback_can_stop_fire.Invoke(source, object, params))
+			return
+
+	else if(!target || gun_user.get_active_hand() != src)
+		return
+//RUCM END
 
 	if(gun_firemode == GUN_FIREMODE_AUTOMATIC)
 		reset_fire()
@@ -2217,22 +2277,44 @@ not all weapons use normal magazines etc. load_into_chamber() itself is designed
 /obj/item/weapon/gun/proc/start_fire(datum/source, atom/object, turf/location, control, params, bypass_checks = FALSE)
 	SIGNAL_HANDLER
 
+//RUCM START
+	if(callback_can_fire && !callback_can_fire.Invoke(source, object, params, FALSE))
+		return FALSE
+//RUCM END
+
 	if(!gun_user)
 		set_gun_user(source)
 
 	var/list/modifiers = params2list(params)
+/* RUCM CHANGE
 	if(modifiers[CTRL_CLICK] || modifiers[SHIFT_CLICK] || modifiers[MIDDLE_CLICK] || modifiers[RIGHT_CLICK] || modifiers[BUTTON4] || modifiers[BUTTON5])
 		return FALSE
+*/
+//RUCM START
+	if(!(flags_mounted_gun_features & GUN_MOUNTED))
+		if(modifiers[CTRL_CLICK] || modifiers[SHIFT_CLICK] || modifiers[MIDDLE_CLICK] || modifiers[RIGHT_CLICK] || modifiers[BUTTON4] || modifiers[BUTTON5])
+			return FALSE
+//RUCM END
 
 	// Don't allow doing anything else if inside a container of some sort, like a locker.
+/* RUCM CHANGE
 	if(!isturf(gun_user.loc))
+*/
+//RUCM START
+	if(!(flags_mounted_gun_features & GUN_MOUNTED) && !isturf(gun_user.loc))
+//RUCM END
 		return FALSE
 
 	if(istype(object, /atom/movable/screen))
 		return FALSE
 
 	if(!bypass_checks)
+/* RUCM CHANGE
 		if(gun_user.get_active_hand() != src) // If the object in our active hand is not this gun, abort, also shouldn't ever
+*/
+//RUCM START
+		if((gun_user.get_active_hand() != src) && !(flags_mounted_gun_features & GUN_MOUNTED))
+//RUCM END
 			return FALSE
 
 		if(gun_user.throw_mode)

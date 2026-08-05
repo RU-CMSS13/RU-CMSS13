@@ -19,7 +19,12 @@
 	matter = list("metal" = 2000)
 
 	var/obj/item/cell/high/cell //10000 power.
+/* RUCM CHANGE
 	var/charge_cost = 350
+*/
+//RUCM START
+	charge_cost = 350
+//RUCM END
 	var/max_shots //calculated on init, no need to manually fill out
 	var/works_in_recharger = TRUE
 	var/has_charge_meter = FALSE//do we use the charging overlay system or just have an empty overlay

@@ -21,6 +21,7 @@ GLOBAL_LIST_EMPTY(tts_voices_synth)
 GLOBAL_LIST_EMPTY(tts_voices_xeno)
 
 /datum/config_entry/string/tts_announce_voice
+/datum/config_entry/string/tts_mech_voice
 
 SUBSYSTEM_DEF(tts)
 	name = "Text To Speech"

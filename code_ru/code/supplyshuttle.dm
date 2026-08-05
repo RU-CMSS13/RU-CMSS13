@@ -1,5 +1,5 @@
 /datum/controller/supply
-	var/mech_points = 5
+	var/mech_points = 100
 
 /datum/vehicle_order/apc/max
 	name = "M888 Armored Personnel Carrier"

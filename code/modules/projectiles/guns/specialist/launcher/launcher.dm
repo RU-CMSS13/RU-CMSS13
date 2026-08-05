@@ -15,7 +15,9 @@
 	///Internal storage item used as magazine. Must be initialised to work! Set parameters by variables or it will inherit standard numbers from storage.dm. Got to call it *something* and 'magazine' or w/e would be confusing.
 	var/obj/item/storage/internal/cylinder
 	/// Variable that initializes the above.
+/* RUCM CHANGE
 	var/has_cylinder = FALSE
+*/
 	///What single item to fill the storage with, if any. This does not respect w_class.
 	var/preload
 	///How many items can be inserted. "Null" = backpack-style size-based inventory. You'll have to set max_storage_space too if you do that, and arrange any initial contents. Iff you arrange to put in more items than the storage can hold, they can be taken out but not replaced.

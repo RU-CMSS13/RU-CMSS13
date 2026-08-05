@@ -1,3 +1,4 @@
+/* RUCM CHANGE
 // Returns all hardpoints that are attached to the vehicle, including ones held by holder hardpoints (e.g. turrets)
 /obj/vehicle/multitile/proc/get_hardpoints_copy()
 	var/list/all_hardpoints = hardpoints.Copy()
@@ -50,17 +51,24 @@
 
 //What to do if all ofthe installed modules have been broken
 /obj/vehicle/multitile/proc/handle_all_modules_broken()
+*/
+//RUCM START
+/obj/vehicle/multitile/handle_all_modules_broken()
+//RUCM END
 	update_minimap_icon(TRUE)
 	return
 
+/* RUCM CHANGE
 /obj/vehicle/multitile/proc/deactivate_all_hardpoints()
 	var/list/hps = get_activatable_hardpoints()
 	for(var/obj/item/hardpoint/H in hps)
 		H.deactivate()
+*/
 
 /obj/vehicle/multitile/proc/remove_all_players()
 	return
 
+/* RUCM CHANGE
 //Putting on hardpoints
 //Similar to repairing stuff, down to the time delay
 /obj/vehicle/multitile/proc/install_hardpoint(obj/item/O, mob/user)
@@ -244,3 +252,4 @@
 		qdel(old)
 
 	update_icon()
+*/

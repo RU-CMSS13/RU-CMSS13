@@ -214,7 +214,18 @@
 		interactee.on_set_interaction(src)
 
 
+/* RUCM CHANGE
 /mob/proc/unset_interaction()
+	if(interactee)
+*/
+//RUCM START
+/mob/proc/unset_interaction(logout)
+	if(!interactee)
+		return
+
+	if(istype(interactee, /obj/vehicle/walker) && logout)
+		return
+//RUCM END
 	if(interactee)
 		var/atom/movable/prev_interactee = interactee
 		interactee = null
