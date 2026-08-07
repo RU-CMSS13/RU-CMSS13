@@ -57,7 +57,6 @@
 	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
 	armor_energy = CLOTHING_ARMOR_LOW
 	armor_bomb = CLOTHING_ARMOR_LOW
-	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_rad = CLOTHING_ARMOR_LOW
 	armor_internaldamage = CLOTHING_ARMOR_MEDIUM
 	light_system = DIRECTIONAL_LIGHT
@@ -69,6 +68,10 @@
 	start_down_visor_type = /obj/item/device/helmet_visor/medical
 
 	phone_category = PHONE_MARINE
+
+/obj/item/clothing/head/helmet/marine/radio_helmet/vsl/Initialize()
+	. = ..()
+	name = "\improper M11-R pattern helmet"
 
 /obj/item/clothing/head/helmet/marine/radio_helmet/vsl/select_gamemode_skin(expected_type, list/override_icon_state, list/override_protection)
 	. = ..()
