@@ -172,7 +172,7 @@ GLOBAL_LIST_EMPTY_TYPED(hologram_list, /mob/hologram)
 			if(visible_turfs["[x]-[y]"])
 				continue
 
-			var/turf/cur_turf = locate(x, y, user.z + 1)
+			var/turf/cur_turf = locate(x, y, user.z + (z - user.z))
 
 			if(istransparentturf(cur_turf))
 				var/image/view_blocker = image('icons/turf/floors/floors.dmi', cur_turf, "full_black", 100000)
