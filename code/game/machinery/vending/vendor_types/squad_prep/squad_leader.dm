@@ -260,9 +260,8 @@ GLOBAL_LIST_INIT(cm_vending_clothing_vet_leader, list(
 /obj/structure/machinery/cm_vending/clothing/leader/get_listed_products(mob/living/carbon/human/user)
 	if(user?.wear_id)
 		var/obj/item/card/id/id_card = user.wear_id
-		if (id_card.paygrade == PAY_SHORT_ME8E ||
-    id_card.paygrade == PAY_SHORT_ME8  ||
-    id_card.paygrade == PAY_SHORT_ME9)//Checks for vSL
+		var/paygrade_trimmed = trim(id_card.paygrade)
+		if (paygrade_trimmed == PAY_SHORT_ME8 || paygrade_trimmed == PAY_SHORT_ME8E || paygrade_trimmed == PAY_SHORT_ME9)//Checks for vSL
 			return GLOB.cm_vending_clothing_vet_leader
 //RUCM CODE END
 	return GLOB.cm_vending_clothing_leader
