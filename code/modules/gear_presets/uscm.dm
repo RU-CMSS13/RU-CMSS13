@@ -426,7 +426,7 @@
 /datum/equipment_preset/uscm/leader/veteran
 	name = "USCM Veteran Squad Leader"
 
-	paygrades = list(PAY_SHORT_ME8 = JOB_PLAYTIME_TIER_0, PAY_SHORT_ME8E = JOB_PLAYTIME_TIER_1, PAY_SHORT_ME9 = JOB_PLAYTIME_TIER_3)
+	paygrades = list(PAY_SHORT_ME8E = JOB_PLAYTIME_TIER_0)
 	role_comm_title = "vSL"
 	minimum_age = 30
 	skills = /datum/skills/VSL

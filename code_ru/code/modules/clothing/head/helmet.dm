@@ -52,6 +52,7 @@
 		WEAR_HEAD = 'code_ru/icons/mob/humans/onmob/clothing/head/hats_by_map/jungle.dmi'
 	)
 	armor_bio = CLOTHING_ARMOR_MEDIUMHIGH
+	icon_state = "vsl_helmet"
 	armor_melee = CLOTHING_ARMOR_MEDIUM
 	armor_bullet = CLOTHING_ARMOR_MEDIUMHIGH
 	armor_laser = CLOTHING_ARMOR_MEDIUMLOW
