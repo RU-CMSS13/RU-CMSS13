@@ -72,7 +72,12 @@ IN_USE used for vending/denying
 
 /obj/structure/machinery/cm_vending/Initialize()
 	. = ..()
+	/* //RUCM EDIT START
 	cm_build_inventory(get_listed_products(), 1, 3)
+	*/ //RUCM EDIT END
+	//RUCM CODE START
+	cm_build_inventory(get_unfiltered_products(), 1, 3)
+	//RUCM CODE END
 
 /obj/structure/machinery/cm_vending/update_icon()
 	//restoring sprite to initial
@@ -532,7 +537,15 @@ GLOBAL_LIST_EMPTY(vending_products)
 	for (var/i in 1 to length(ui_listed_products))
 		var/list/myprod = ui_listed_products[i] //we take one list from listed_products
 		var/prod_available = FALSE
+		/* //RUCM CODE EDIT START
 		var/p_cost = myprod[2]
+		*/ //RUCM CODE EDIT END
+		//RUCM CODE START
+		var/divider = 1
+		if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			divider = 2
+		var/p_cost = myprod[2] / divider
+		//RUCM CODE END
 		var/category = myprod[4]
 		if(points >= p_cost && (!category || ((category in marine.vendor_buyable_categories) && (marine.vendor_buyable_categories[category]))))
 			prod_available = TRUE
@@ -643,7 +656,17 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/structure/machinery/cm_vending/proc/handle_points(mob/living/carbon/human/user, list/itemspec)
 	. = TRUE
+	/* //RUCM CODE EDIT START
 	var/cost = itemspec[2]
+	*/ //RUCM CODE EDIT END
+	//RUCM CODE START
+	var/divider = 1
+
+	if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+		divider = 2
+
+	var/cost = itemspec[2] / divider
+	//RUCM CODE END
 	if(instanced_vendor_points)
 		if(available_points_to_display < cost)
 			return FALSE
@@ -800,7 +823,30 @@ GLOBAL_LIST_EMPTY(vending_products)
 	. = ..()
 
 /obj/structure/machinery/cm_vending/proc/get_listed_products(mob/user)
+	/* //RUCM CODE EDIT START
 	return listed_products
+	*/ //RUCM CODE EDIT END
+	//RUCM CODE START
+	var/list/final_products = list()
+
+	for(var/product in listed_products)
+		if(product[length(product)] == null)
+			final_products += list(product)
+		else if(product[length(product)] == VENDOR_ITEM_WELL_FUNDED && MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			final_products += list(product)
+		else if(product[length(product)] == VENDOR_ITEM_POOR && !MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			final_products += list(product)
+		else if(product[length(product)] <= VENDOR_ITEM_RECOMMENDED)
+			final_products += list(product)
+
+	return final_products
+
+/obj/structure/machinery/cm_vending/proc/get_unfiltered_products(mob/user)
+	if(length(listed_products) != 0)
+		return listed_products
+	else
+		return get_listed_products(user)
+	//RUCM CODE END
 
 /obj/structure/machinery/cm_vending/proc/can_access_to_vend(mob/user, display = TRUE, ignore_hack = FALSE)
 	if(HAS_TRAIT(user, TRAIT_OPPOSABLE_THUMBS)) // We're just going to skip the mess of access checks assuming xenos with thumbs are human and just allow them to access because it's funny
@@ -927,7 +973,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 /obj/structure/machinery/cm_vending/sorted/Initialize()
 	. = ..()
 	populate_product_list_and_boxes(1.2)
-	cm_build_inventory(get_listed_products(), 1, 3)
+	cm_build_inventory(get_unfiltered_products(), 1, 3) //RUCM EDIT cm_build_inventory(get_listed_products(), 1, 3)
 	corresponding_types_list = GLOB.cm_vending_gear_corresponding_types_list
 	GLOB.cm_vending_vendors += src
 
@@ -1332,7 +1378,15 @@ GLOBAL_LIST_INIT(cm_vending_gear_corresponding_types_list, list(
 		var/list/myprod = ui_listed_products[i] //we take one list from listed_products
 
 		var/p_name = myprod[1] //taking it's name
+		/* //RUCM CODE EDIT START
 		var/p_cost = cost_index == null ? 0 : myprod[cost_index]
+		*/ //RUCM CODE EDIT END
+		//RUCM CODE START
+		var/divider = 1
+		if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/rich_marines))
+			divider = 2
+		var/p_cost = cost_index == null ? 0 : myprod[cost_index] / divider
+		//RUCM CODE END
 		var/obj/item/item_ref = myprod[3]
 		var/priority = myprod[priority_index]
 		if(islist(item_ref)) // multi-vending
