@@ -45,7 +45,7 @@
 
 /obj/item/clothing/head/helmet/marine/radio_helmet/vsl
 	name = "\improper M11-R pattern helmet"
-	desc = "A variant of the M11 pattern, the 'R' platform features new external-style comms module with integrated medical hud and leather banding. This module allow you to use radio and keep yourself informed about vitals."
+	desc = "A variant of the M11 pattern, the 'R' platform features new external-style comms module with integrated medical hud and leather banding. This module allow you to use radio and keep yourself informed about your marines health."
 	icon = 'code_ru/icons/obj/items/clothing/hats/hats_by_map/jungle.dmi'
 	icon_state = "vsl_helmet"
 	item_icons = list(
