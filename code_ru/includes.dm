@@ -70,3 +70,4 @@
 #include "code\modules\vehicles\walker_vendor.dm"
 #include "code\modules\vehicles\walker_verbs.dm"
 #include "code\modules\vehicles\walker_wm88_helper.dm"
+#include "code\modules\clothing\suits\marine_armor\veteran_armor.dm"
