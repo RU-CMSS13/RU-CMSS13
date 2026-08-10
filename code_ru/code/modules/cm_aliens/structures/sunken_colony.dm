@@ -8,7 +8,6 @@
 	description = "A stationary organism that strikes distant enemies from below. Must be placed at least 8 tiles away from other sunken colonies."
 	build_type = /obj/effect/alien/resin/special/sunken_colony
 	build_icon_state = "sunken"
-	block_range = 0
 
 	pixel_y = -8
 	pixel_x = -24
