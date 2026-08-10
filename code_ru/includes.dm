@@ -37,6 +37,7 @@
 #include "code\modules\clothing\suits\marine_armor\breacher_armor.dm"
 #include "code\modules\clothing\suits\marine_armor\WY\goon.dm"
 #include "code\modules\cm_aliens\structures\blueprints.dm"
+#include "code\modules\cm_aliens\structures\sunken_colony.dm"
 #include "code\modules\cm_marines\equipment\kit_boxes.dm"
 #include "code\modules\cm_marines\overwatch.dm"
 #include "code\modules\cm_marines\specialist.dm"

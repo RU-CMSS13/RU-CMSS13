@@ -640,6 +640,7 @@
 
 #define XENO_STRUCTURE_CORE  "hive core"
 #define XENO_STRUCTURE_CLUSTER   "hive cluster"
+#define XENO_STRUCTURE_SUNKEN "sunken colony"
 #define XENO_STRUCTURE_PYLON "hive pylon"
 #define XENO_STRUCTURE_EGGMORPH  "egg morpher"
 #define XENO_STRUCTURE_RECOVERY  "recovery node"

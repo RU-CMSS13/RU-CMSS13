@@ -83,6 +83,7 @@
 	var/list/hive_structures_limit = list(
 		XENO_STRUCTURE_CORE = 1,
 		XENO_STRUCTURE_CLUSTER = 8,
+		XENO_STRUCTURE_SUNKEN = 2,
 		XENO_STRUCTURE_EGGMORPH = 6,
 		XENO_STRUCTURE_RECOVERY = 6,
 		XENO_STRUCTURE_PLASMA_TREE = 3,
@@ -92,6 +93,7 @@
 	var/list/hive_structure_types = list(
 		XENO_STRUCTURE_CORE = /datum/construction_template/xenomorph/core,
 		XENO_STRUCTURE_CLUSTER = /datum/construction_template/xenomorph/cluster,
+		XENO_STRUCTURE_SUNKEN = /datum/construction_template/xenomorph/sunken_colony,
 		XENO_STRUCTURE_EGGMORPH = /datum/construction_template/xenomorph/eggmorph,
 		XENO_STRUCTURE_RECOVERY = /datum/construction_template/xenomorph/recovery,
 		XENO_STRUCTURE_PLASMA_TREE = /datum/construction_template/xenomorph/plasma_tree
@@ -1850,4 +1852,3 @@
 	name = "Attack"
 	desc = "Attack the enemy here!"
 	icon_state = "attack"
-
