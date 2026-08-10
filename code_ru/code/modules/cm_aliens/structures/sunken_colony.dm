@@ -34,7 +34,7 @@
 	pixel_y = -8
 	pixel_x = -24
 
-	var/damage = 110
+	var/damage = 80
 	var/next_strike = 0
 	var/strike_sound = 'code_ru/sound/effects/burrower_attack1.ogg'
 
