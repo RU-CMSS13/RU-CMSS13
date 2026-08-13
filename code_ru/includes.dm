@@ -35,6 +35,7 @@
 #include "code\modules\clothing\head\helmet.dm"
 #include "code\modules\clothing\head\WY\goons.dm"
 #include "code\modules\clothing\suits\marine_armor\breacher_armor.dm"
+#include "code\modules\clothing\suits\marine_armor\veteran_armor.dm"
 #include "code\modules\clothing\suits\marine_armor\WY\goon.dm"
 #include "code\modules\cm_aliens\structures\blueprints.dm"
 #include "code\modules\cm_marines\equipment\kit_boxes.dm"
