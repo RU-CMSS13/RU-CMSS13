@@ -337,7 +337,6 @@
 		/mob/living/carbon/xenomorph/proc/destruction_toggle,
 		/mob/living/carbon/xenomorph/proc/unnesting_toggle,
 		/mob/living/carbon/xenomorph/proc/set_orders,
-		/mob/living/carbon/xenomorph/proc/hive_message,
 		/mob/living/carbon/xenomorph/proc/rename_tunnel,
 		/mob/living/carbon/xenomorph/proc/set_hugger_reserve_for_morpher,
 	)
@@ -487,7 +486,13 @@
 		generate_and_set_nicknumber()
 	var/name_prefix = hive.prefix
 	if(queen_aged)
+/* RUCM CHANGE
 		age_xeno()
+*/
+//RUCM START
+		if(client?.player_data)
+			age_xeno()
+//RUCM END
 		switch(age)
 			if(XENO_YOUNG)
 				name = "[name_prefix]Young Queen" //Young

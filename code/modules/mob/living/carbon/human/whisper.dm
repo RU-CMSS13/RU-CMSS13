@@ -113,7 +113,6 @@
 	var/speech_bubble_test = say_test(message)
 	show_speech_bubble(listening, "[bubble_icon][speech_bubble_test]")
 
-	var/not_dead_speaker = (stat != DEAD)
 	for(var/mob/possible_listening_mob in listening)
 /* RUCM CHANGE
 		possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src)
@@ -134,9 +133,7 @@
 //RUCM END
 			langchat_speech(message, listening, speaking, langchat_color, FALSE, LANGCHAT_DEFAULT_POP, list("langchat_italic"))
 
-	spawn(30)
-		if(not_dead_speaker)
-			log_say("[name != "Unknown" ? name : "([real_name])"] \[Whisper\]: [message] (CKEY: [key]) (JOB: [job]) (AREA: [get_area_name(loc)])")
+	log_say("[name != "Unknown" ? name : "([real_name])"] \[Whisper\]: [message] (CKEY: [ckey]) (JOB: [job]) (AREA: [get_area_name(loc)])")
 
 	if (length(watching))
 		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> whispers something.</span>"
