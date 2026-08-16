@@ -6,7 +6,7 @@
 	/// Which slot is this hardpoint in. Purely to check for conflicting hardpoints.
 	var/slot
 	/// The vehicle this hardpoint is installed on.
-	var/obj/vehicle/multitile/owner
+	var/obj/vehicle/owner
 
 	health = 100
 	w_class = SIZE_LARGE
@@ -140,6 +140,9 @@
 
 /obj/item/hardpoint/Initialize()
 	. = ..()
+//RUCM START
+	max_health = health
+//RUCM END
 	set_bullet_traits()
 	AddComponent(/datum/component/automatedfire/autofire, fire_delay, burst_delay, burst_amount, gun_firemode, autofire_slow_mult, CALLBACK(src, PROC_REF(set_burst_firing)), CALLBACK(src, PROC_REF(reset_fire)), CALLBACK(src, PROC_REF(fire_wrapper)), callback_set_firing = CALLBACK(src, PROC_REF(set_auto_firing)))
 
@@ -188,8 +191,10 @@
 		return TRUE
 
 /obj/item/hardpoint/proc/take_damage(damage)
+/* RUCM CHANGE
 	if(health <= 0)
 		return
+*/
 	health = max(0, health - damage * damage_multiplier)
 	if(!health)
 		on_destroy()
@@ -223,6 +228,10 @@
 
 /// Applying passive buffs like damage type resistance, speed, accuracy, cooldowns.
 /obj/item/hardpoint/proc/apply_buff(obj/vehicle/multitile/vehicle)
+//RUCM START
+	if(!health)
+		return
+//RUCM END
 	if(buff_applied)
 		return
 	if(LAZYLEN(type_multipliers))
@@ -324,8 +333,10 @@
 //------INTERACTION PROCS----------
 //-----------------------------
 
+/* RUCM CHANGE
 /obj/item/hardpoint/proc/deactivate()
 	return
+*/
 
 //used during bumping. Every mob we bump is getting affected by this proc from every module.
 /obj/item/hardpoint/proc/livingmob_interact(mob/living/M)
@@ -404,11 +415,21 @@
 	if(user.is_mob_incapacitated())
 		return
 
+/* RUCM CHANGE
 	if(health <= 0)
+*/
+//RUCM START
+	if(!health && destruction_on_zero)
+//RUCM END
 		to_chat(user, SPAN_WARNING("\The [src] crumbles in your hands to unsalvageable mess."))
 		qdel(src)
 		return
+/* RUCM CHANGE
 	if(health >= initial(health))
+*/
+//RUCM START
+	if(health == max_health)
+//RUCM END
 		to_chat(user, SPAN_WARNING("\The [src]s structural integrity is at 100%."))
 		return
 	if(!WT.isOn())
@@ -461,12 +482,27 @@
 			to_chat(user, SPAN_WARNING("\The [WT] needs to be on!"))
 			break
 
+//RUCM START
+		if(!health && length(repair_materials) && material_per_repair)
+			var/material_fixed = material_use(WT, user)
+			if(!material_fixed)
+				break
+			amount_fixed += material_fixed
+//RUCM END
+
 		WT.remove_fuel(1, user)
 
 		//get_skill_duration_multiplier returns a multiplier, so we delete by it
+/* RUCM CHANGE
 		health += initial(health)/100 * (amount_fixed / amount_fixed_adjustment)
 		if(health >= initial(health))
 			health = initial(health)
+*/
+//RUCM START
+		health = min(max_health, health + max_health / 100 * (amount_fixed / amount_fixed_adjustment))
+		if(health == max_health)
+			repaired()
+//RUCM END
 			user.visible_message(SPAN_NOTICE("[user] finishes repairing \the [name]."), SPAN_NOTICE("You finish repairing \the [name]. The integrity of the module is at [SPAN_HELPFUL(floor(get_integrity_percent()))]%."))
 			being_repaired = FALSE
 			return

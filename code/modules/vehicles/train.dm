@@ -118,7 +118,12 @@
 	//latch with src as the follower
 	lead = T
 	T.tow = src
+/* RUCM CHANGE
 	setDir(lead.dir)
+*/
+//RUCM START
+	setDir(lead.dir, TRUE)
+//RUCM END
 
 	if(user && display_to_chat)
 		to_chat(user, SPAN_NOTICE("You hitch [src] to [T]."))

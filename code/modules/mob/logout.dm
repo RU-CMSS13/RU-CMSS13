@@ -3,7 +3,12 @@
 	remove_all_indicators()
 	SSnano.nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
 	if(interactee)
+/* RUCM CHANGE
 		unset_interaction()
+*/
+//RUCM START
+		unset_interaction(TRUE)
+//RUCM END
 	GLOB.player_list -= src
 
 	if(s_active)

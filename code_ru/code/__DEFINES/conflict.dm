@@ -1,1 +1,16 @@
 #define AMMO_IGNORE_XENO_IFF (1<<23)
+
+#define CATEGORY_HUMAN_WALKER "WALKER"
+
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_LIGHTS "keybinding_walker_light_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_EJECT_MAGAZINE "keybinding_walker_eject_magazine_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_STATUS "keybinding_walker_status_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_Z_UP "keybinding_walker_z_up_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_Z_DOWN "keybinding_walker_z_down_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_DIR_LOCK "keybinding_walker_dir_lock_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_SWITCH_WEAPONS "keybinding_walker_switch_weapons_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK "keybinding_walker_jetpack_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_JETPACK_EVAC "keybinding_walker_jetpack_evac_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_REACTOR "keybinding_walker_reactor_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_ZOOM "keybinding_walker_zoom_down"
+#define COMSIG_KB_HUMAN_INTERACT_WALKER_MOTION_DETECTOR "keybinding_walker_motion_detector_down"
