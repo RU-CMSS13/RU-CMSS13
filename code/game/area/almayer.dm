@@ -32,7 +32,7 @@
 	. = ..()
 
 	if(hijack_evacuation_area)
-		SShijack.progress_areas[src] = power_equip
+		SShijack.progress_areas[src] = TRUE
 
 /area/almayer/command
 	minimap_color = MINIMAP_AREA_COMMAND
