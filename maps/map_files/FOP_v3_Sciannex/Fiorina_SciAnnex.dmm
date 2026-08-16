@@ -297,64 +297,63 @@
 /turf/open/floor/prison,
 /area/fiorina/station/medbay)
 "abc" = (
+/turf/open/floor/prison/greenfull/east,
+/area/fiorina/oob)
+"abd" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/tool/kitchen/tray{
+	pixel_y = 6
+	},
+/turf/open/floor/prison/kitchen/southwest,
+/area/fiorina/station/civres_blue)
+"abe" = (
 /obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/tumor/aux_engi)
-"abd" = (
-/obj/structure/shuttle/part/ert/transparent/left_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/space/basic,
-/area/fiorina/oob)
-"abe" = (
-/obj/structure/shuttle/part/ert/transparent/right_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/space/basic,
-/area/fiorina/oob)
 "abf" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
-/turf/open/floor/prison/floor_plate,
-/area/fiorina/tumor/aux_engi)
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/space/basic,
+/area/fiorina/oob)
 "abg" = (
-/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
 "abh" = (
+/obj/structure/shuttle/part/ert/transparent/left_engine,
+/turf/open/floor/prison/floor_plate,
+/area/fiorina/tumor/aux_engi)
+"abi" = (
+/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/space/basic,
+/area/fiorina/oob)
+"abj" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/space/basic,
 /area/fiorina/oob)
-"abi" = (
+"abk" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/oob)
-"abj" = (
-/obj/structure/shuttle/part/ert/transparent/right_engine,
-/obj/structure/monorail{
-	name = "launch track"
-	},
-/turf/open/floor/plating/prison,
-/area/fiorina/oob)
-"abk" = (
-/obj/structure/shuttle/part/ert/front_right_stan,
-/turf/open/space/basic,
-/area/fiorina/tumor/ship)
 "abl" = (
-/obj/structure/shuttle/part/ert/front_left_stan,
+/obj/structure/shuttle/part/ert/transparent/right_engine,
 /obj/structure/monorail{
 	name = "launch track"
 	},
@@ -362,27 +361,28 @@
 /area/fiorina/oob)
 "abm" = (
 /obj/structure/shuttle/part/ert/front_right_stan,
+/turf/open/space/basic,
+/area/fiorina/tumor/ship)
+"abn" = (
+/obj/structure/shuttle/part/ert/front_left_stan,
 /obj/structure/monorail{
 	name = "launch track"
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/oob)
-"abn" = (
-/turf/open/floor/prison/greenfull/east,
-/area/fiorina/oob)
 "abo" = (
+/obj/structure/shuttle/part/ert/front_right_stan,
+/obj/structure/monorail{
+	name = "launch track"
+	},
+/turf/open/floor/plating/prison,
+/area/fiorina/oob)
+"abp" = (
 /obj/structure/shuttle/part/ert/transparent/left_engine,
 /turf/open/floor/plating/prison,
 /area/fiorina/lz/near_lzI)
-"abp" = (
-/obj/structure/surface/table/reinforced/prison,
-/obj/item/tool/kitchen/tray{
-	pixel_y = 6
-	},
-/turf/open/floor/prison/kitchen/southwest,
-/area/fiorina/station/civres_blue)
 "abq" = (
-/turf/closed/shuttle/ert{
+/turf/closed/shuttle/ert/transparent{
 	icon_state = "wy27"
 	},
 /area/fiorina/oob)
@@ -396,11 +396,60 @@
 	pixel_x = -10;
 	pixel_y = 13
 	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/corsat/plate,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abt" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/reagent_container/food/snacks/xenoburger,
+/turf/open/floor/corsat/plate,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abu" = (
+/obj/effect/decal/cleanable/blood/oil/streak,
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/corsat/plate,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abv" = (
+/obj/item/weapon/gun/flamer/survivor,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/corsat/squares,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abw" = (
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/corsat/squares,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abx" = (
+/obj/effect/landmark/corpsespawner/chef,
+/obj/effect/decal/cleanable/blood/oil/streak,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/corsat/squares,
+/area/fiorina/station/telecomm/lz1_cargo)
+"aby" = (
+/obj/effect/decal/cleanable/ash,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/corsat/squares,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abz" = (
+/obj/effect/decal/cleanable/blood/oil/streak,
+/turf/open/floor/corsat/plate,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abA" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/corsat/squares,
+/area/fiorina/station/telecomm/lz1_cargo)
+"abB" = (
+/obj/structure/machinery/light/double/blue{
+	dir = 8;
+	pixel_x = -10;
+	pixel_y = 13
+	},
 /obj/effect/landmark/start/working_joe/colony,
 /obj/effect/landmark/late_join/working_joe/colony,
 /turf/open/floor/plating/prison,
 /area/fiorina/maintenance)
-"abt" = (
+"abC" = (
 /obj/structure/machinery/light/double/blue{
 	dir = 4;
 	pixel_x = 10;
@@ -410,62 +459,13 @@
 /obj/effect/landmark/late_join/working_joe/colony,
 /turf/open/floor/plating/prison,
 /area/fiorina/maintenance)
-"abu" = (
+"abD" = (
 /obj/structure/machinery/cryopod/joe/weyland{
 	pixel_y = 25;
 	density = 0
 	},
 /turf/open/floor/plating/prison,
 /area/fiorina/maintenance)
-"abv" = (
-/obj/structure/machinery/light/double/blue{
-	dir = 8;
-	pixel_x = -10;
-	pixel_y = 13
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/corsat/plate,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abw" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/item/reagent_container/food/snacks/xenoburger,
-/turf/open/floor/corsat/plate,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abx" = (
-/obj/effect/decal/cleanable/blood/oil/streak,
-/obj/effect/decal/cleanable/ash,
-/turf/open/floor/corsat/plate,
-/area/fiorina/station/telecomm/lz1_cargo)
-"aby" = (
-/obj/item/weapon/gun/flamer/survivor,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/corsat/squares,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abz" = (
-/obj/effect/decal/cleanable/ash,
-/turf/open/floor/corsat/squares,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abA" = (
-/obj/effect/landmark/corpsespawner/chef,
-/obj/effect/decal/cleanable/blood/oil/streak,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/corsat/squares,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abB" = (
-/obj/effect/decal/cleanable/ash,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/ash,
-/turf/open/floor/corsat/squares,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abC" = (
-/obj/effect/decal/cleanable/blood/oil/streak,
-/turf/open/floor/corsat/plate,
-/area/fiorina/station/telecomm/lz1_cargo)
-"abD" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/corsat/squares,
-/area/fiorina/station/telecomm/lz1_cargo)
 "abG" = (
 /obj/item/trash/chunk,
 /turf/open/floor/prison/whitegreen/north,
@@ -2557,7 +2557,7 @@
 /turf/open/floor/prison/kitchen/southwest,
 /area/fiorina/station/civres_blue)
 "bFA" = (
-/turf/closed/shuttle/ert/transparent{
+/turf/closed/shuttle/ert{
 	icon_state = "wy27"
 	},
 /area/fiorina/oob)
@@ -2649,6 +2649,16 @@
 "bJb" = (
 /obj/structure/closet/cabinet,
 /obj/item/device/encryptionkey/WY,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/closet/cabinet,
+/obj/item/device/encryptionkey/WY,
+/obj/item/weapon/gun/pistol/deagle,
+/obj/item/ammo_magazine/pistol/deagle,
+/obj/item/ammo_magazine/pistol/deagle,
 /turf/open/floor/wood,
 /area/fiorina/station/civres_blue)
 "bJn" = (
@@ -10649,6 +10659,20 @@
 	pixel_x = 5;
 	pixel_y = 12
 	},
+/obj/structure/machinery/light/double/blue,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/ashtray/plastic,
+/obj/item/trash/cigbutt,
+/obj/item/trash/cigbutt/ucigbutt{
+	pixel_x = 5;
+	pixel_y = 12
+	},
+/obj/item/weapon/gun/pistol/deagle,
 /obj/structure/machinery/light/double/blue,
 /turf/open/floor/prison,
 /area/fiorina/station/medbay)
@@ -33863,7 +33887,7 @@ vXT
 bQM
 bQM
 bQM
-abk
+abm
 nTq
 lUi
 oOV
@@ -34077,7 +34101,7 @@ baC
 bQM
 baC
 baC
-abk
+abm
 lUi
 jCt
 fiU
@@ -34290,7 +34314,7 @@ baC
 baC
 baC
 baC
-abk
+abm
 lUi
 oFk
 anq
@@ -43374,7 +43398,7 @@ rqC
 rqC
 eYz
 baC
-abn
+abc
 baC
 baC
 baC
@@ -45470,7 +45494,7 @@ pQs
 bNE
 rja
 rja
-abp
+abd
 mIQ
 hDb
 jYK
@@ -46812,7 +46836,7 @@ bAc
 hgS
 hgS
 lvy
-abc
+abe
 sfI
 sfI
 sfI
@@ -47226,9 +47250,9 @@ ufN
 hvL
 baC
 uNM
-abf
+abh
 taj
-abf
+abh
 fpn
 svP
 fpn
@@ -47650,9 +47674,9 @@ sgw
 sgw
 baC
 uNM
-abf
+abh
 svP
-abf
+abh
 kIg
 taj
 taj
@@ -48281,11 +48305,11 @@ iiw
 awL
 awL
 awL
-abl
+abn
 naf
 naf
 cqz
-abi
+abk
 tsc
 hQk
 tsc
@@ -48705,11 +48729,11 @@ gcx
 okv
 iiw
 awL
-abm
+abo
 vcf
 vcf
 lku
-abj
+abl
 tsc
 wtm
 tsc
@@ -54262,7 +54286,7 @@ qhk
 oPU
 eLu
 mTM
-abs
+abB
 cME
 cME
 rJh
@@ -54685,8 +54709,8 @@ oPU
 oMu
 oPU
 eLu
-abu
-abt
+abD
+abC
 cME
 cME
 cME
@@ -55632,7 +55656,7 @@ esw
 esw
 vzB
 bQM
-bFA
+abq
 anm
 qFi
 hXZ
@@ -55844,7 +55868,7 @@ cMb
 jMh
 vzB
 bQM
-abq
+bFA
 rYY
 ePq
 mzS
@@ -75144,9 +75168,9 @@ jii
 mPW
 cpP
 aFK
-abx
-abx
-abv
+abu
+abu
+abs
 fnD
 oUg
 oUg
@@ -75355,10 +75379,10 @@ pUG
 jii
 puE
 hTf
-abC
-abA
-aby
-abw
+abz
+abx
+abv
+abt
 pbp
 qGn
 pbp
@@ -75567,9 +75591,9 @@ jii
 wHV
 puE
 cJv
-abD
-abB
-abz
+abA
+aby
+abw
 eqQ
 eqQ
 eqQ
@@ -80935,11 +80959,11 @@ mvF
 kkU
 kkU
 kkU
-abg
+abi
 naf
 naf
 cqz
-abd
+abf
 ogf
 mRM
 bce
@@ -81359,11 +81383,11 @@ mvF
 kkU
 kkU
 kkU
-abh
+abj
 vcf
 vcf
 lku
-abe
+abg
 ogf
 fWI
 bce
@@ -81766,7 +81790,7 @@ paI
 tsc
 bEk
 ogf
-abl
+abn
 naf
 naf
 cqz
@@ -82190,7 +82214,7 @@ paI
 tsc
 bEk
 ogf
-abm
+abo
 vcf
 vcf
 lku
@@ -84284,7 +84308,7 @@ paI
 paI
 eeH
 dFM
-abo
+abp
 xeO
 xeO
 xeO
