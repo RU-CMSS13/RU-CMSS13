@@ -161,3 +161,10 @@
 // White Antre Soundscapes
 #define AMBIENCE_ANTRE 'sound/ambience/venir_hallway.ogg'
 #define AMBIENCE_ANTRE_ADJACENT 'sound/ambience/venir_hallway_adjacent.ogg'
+
+//RUCM CODE START
+// Lazarus Landing Soundscapes
+
+#define AMBIENCE_ANCIENT_TEMPLE_DEEP 'sound/ambience/LV624_Lazarus_Landing/ancient_temple_ruins_deep.ogg'
+#define AMBIENCE_ANCIENT_TEMPLE_SURFACE 'sound/ambience/LV624_Lazarus_Landing/ancient_temple_ruins_surface.ogg'
+//RUCM CODE END
