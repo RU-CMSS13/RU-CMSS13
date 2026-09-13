@@ -1217,6 +1217,7 @@
 			return
 
 	// Then observers
+/* RUCM CHANGE
 	var/list/observer_list_copy = shuffle(get_alien_candidates(hive))
 
 	for(var/mob/candidate in observer_list_copy)
@@ -1224,6 +1225,23 @@
 			chosen_candidate = candidate.client
 			rolling_candidates = FALSE
 			return
+*/
+//RUCM START
+	var/list/queue_candidates = shuffle(GLOB.xeno_queue.queued_players.Copy())
+	for(var/datum/queued_player/xeno/queued as anything in queue_candidates)
+		if(!queued.eligible_queue(hive))
+			continue
+
+		var/client/client = GLOB.directory[queued.player_ckey]
+		if(try_roll_candidate(hive, client.mob, playtime_restricted = TRUE))
+			if(!queued.offer_spawn(hive))
+				continue
+
+			queued.confirm_spawn()
+			chosen_candidate = client
+			rolling_candidates = FALSE
+			return
+//RUCM END
 
 	// Lastly all of the above again, without playtime requirements
 	for(var/mob/living/carbon/xenomorph/candidate in shuffle(hive.totalXenos.Copy() - hive.living_xeno_queen))
@@ -1232,11 +1250,25 @@
 			rolling_candidates = FALSE
 			return
 
+/* RUCM CHANGE
 	for(var/mob/candidate in observer_list_copy)
 		if(try_roll_candidate(hive, candidate, playtime_restricted = FALSE))
 			chosen_candidate = candidate.client
 			rolling_candidates = FALSE
 			return
+*/
+//RUCM START
+	for(var/datum/queued_player/xeno/queued as anything in queue_candidates)
+		var/client/client = queued.offer_spawn(hive)
+		if(!client)
+			continue
+
+		if(try_roll_candidate(hive, client.mob, playtime_restricted = FALSE))
+			queued.confirm_spawn()
+			chosen_candidate = client
+			rolling_candidates = FALSE
+			return
+//RUCM END
 	message_admins("Failed to find a client for the King, releasing as freed mob.")
 
 

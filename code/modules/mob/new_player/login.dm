@@ -259,8 +259,16 @@
 
 	// If a mod wants to join as a xeno, disable their larva protection so that they can enter the larva pool.
 	if(check_client_rights(current_client, R_MOD, FALSE) && current_client.mob)
+/* RUCM CHANGE
 		var/mob/dead/observer/mod_observer = current_client.mob
 		mod_observer.admin_larva_protection = FALSE
+*/
+//RUCM START
+		var/datum/player_details/player_details = current_client.player_details
+		player_details.xeno_que_position.admin_larva_protection = FALSE
+		player_details.xeno_que_position.cached_admin_larva_protection = FALSE
+		player_details.add_to_xeno_queue()
+//RUCM END
 
 /mob/new_player/proc/lobby()
 	if(!client)

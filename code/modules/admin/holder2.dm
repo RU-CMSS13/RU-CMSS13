@@ -67,6 +67,14 @@ GLOBAL_PROTECT(href_token)
 	owner.update_special_keybinds()
 	GLOB.admins |= C
 
+//RUCM START
+	if (check_client_rights(owner, R_MOD, FALSE))
+		var/datum/player_details/player_details = owner.player_details
+		if(player_details.xeno_que_position.cached_admin_larva_protection)
+			player_details.xeno_que_position.admin_larva_protection = TRUE
+			player_details.remove_from_xeno_queue()
+//RUCM END
+
 	if(rights & R_MOD)
 		notify_login()
 
@@ -78,6 +86,11 @@ GLOBAL_PROTECT(href_token)
 
 /datum/admins/proc/disassociate()
 	if(owner)
+//RUCM START
+		var/datum/player_details/player_details = owner.player_details
+		player_details.xeno_que_position.admin_larva_protection = FALSE
+		player_details.add_to_xeno_queue(TRUE)
+//RUCM END
 		GLOB.admins -= owner
 		owner.remove_admin_verbs()
 		owner.admin_holder = null
