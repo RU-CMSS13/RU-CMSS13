@@ -168,7 +168,7 @@
 
 	return ..()
 
-/datum/game_mode/colonialmarines/ds_first_landed(obj/docking_port/stationary/marine_dropship)
+/datum/game_mode/colonialmarines/ds_first_landed(obj/docking_port/stationary/marine_dropship, obj/docking_port/mobile/marine_dropship/mobile_shuttle)
 	. = ..()
 	clear_lz_hazards() // This shouldn't normally do anything, but is here just in case
 
@@ -183,6 +183,7 @@
 	var/z = marine_dropship.z
 
 	var/dropship_type = marine_dropship.type
+	var/list/turf/sentry_turfs = list()
 
 	// Bottom left
 	if(GLOB.sentry_spawns[dropship_type]?[SENTRY_BOTTOM_LEFT])
@@ -190,7 +191,8 @@
 	else
 		options += get_valid_sentry_turfs(left, bottom, z, width=5, height=2, structures_to_ignore=structures_to_break)
 		options += get_valid_sentry_turfs(left, bottom + 2, z, width=2, height=6, structures_to_ignore=structures_to_break)
-	spawn_lz_sentry(pick(options), structures_to_break)
+	sentry_turfs += pick(options)
+	spawn_lz_sentry(sentry_turfs[sentry_turfs.len], structures_to_break)
 
 	// Bottom right
 	options.Cut()
@@ -199,7 +201,8 @@
 	else
 		options += get_valid_sentry_turfs(right-4, bottom, z, width=5, height=2, structures_to_ignore=structures_to_break)
 		options += get_valid_sentry_turfs(right-1, bottom + 2, z, width=2, height=6, structures_to_ignore=structures_to_break)
-	spawn_lz_sentry(pick(options), structures_to_break)
+	sentry_turfs += pick(options)
+	spawn_lz_sentry(sentry_turfs[sentry_turfs.len], structures_to_break)
 
 	// Top left
 	options.Cut()
@@ -208,7 +211,8 @@
 	else
 		options += get_valid_sentry_turfs(left, top-1, z, width=5, height=2, structures_to_ignore=structures_to_break)
 		options += get_valid_sentry_turfs(left, top-7, z, width=2, height=6, structures_to_ignore=structures_to_break)
-	spawn_lz_sentry(pick(options), structures_to_break)
+	sentry_turfs += pick(options)
+	spawn_lz_sentry(sentry_turfs[sentry_turfs.len], structures_to_break)
 
 	// Top right
 	options.Cut()
@@ -217,7 +221,10 @@
 	else
 		options += get_valid_sentry_turfs(right-4, top-1, z, width=5, height=2, structures_to_ignore=structures_to_break)
 		options += get_valid_sentry_turfs(right-1, top-7, z, width=2, height=6, structures_to_ignore=structures_to_break)
-	spawn_lz_sentry(pick(options), structures_to_break)
+	sentry_turfs += pick(options)
+	spawn_lz_sentry(sentry_turfs[sentry_turfs.len], structures_to_break)
+
+	build_lz_perimeter(mobile_shuttle, left, right, bottom, top, z, structures_to_break, sentry_turfs)
 
 ///Returns a list of non-dense turfs using the given block arguments ignoring the provided structure types
 /datum/game_mode/colonialmarines/proc/get_valid_sentry_turfs(left, bottom, z, width, height, list/structures_to_ignore)
@@ -244,6 +251,71 @@
 	droppod.special_structure_damage = 500
 	droppod.drop_time = 0
 	droppod.launch(target)
+
+///Auto-builds a line of barbed-wired metal barricades along the given rectangle, facing outward from the LZ, skipping any turfs reserved for something else (e.g. a sentry about to land there, or a boarding door gap)
+/datum/game_mode/colonialmarines/proc/build_lz_barricade_line(left, bottom, z, width, height, direction, list/structures_to_ignore, list/turf/skip_turfs)
+	for(var/turf/target as anything in get_valid_sentry_turfs(left, bottom, z, width, height, structures_to_ignore))
+		if(target in skip_turfs)
+			continue
+		var/obj/structure/barricade/metal/wired/cade = new(target)
+		cade.setDir(direction)
+		cade.update_icon()
+
+///Rings the entire landing zone perimeter with barricades. At the dropship's boarding doors, foldable gate barricades are used instead of solid ones so marines can walk through (and fold them shut later); any tile already reserved (e.g. sentries) is skipped entirely
+/datum/game_mode/colonialmarines/proc/build_lz_perimeter(obj/docking_port/mobile/marine_dropship/mobile_shuttle, left, right, bottom, top, z, list/structures_to_ignore, list/turf/skip_turfs)
+	var/list/turf/door_gates = get_lz_door_gap_turfs(mobile_shuttle, left, right, bottom, top, z)
+	var/list/turf/all_skips = skip_turfs + door_gates
+
+	build_lz_barricade_line(left, bottom, z, width=right-left+1, height=1, direction=SOUTH, structures_to_ignore=structures_to_ignore, skip_turfs=all_skips)
+	build_lz_barricade_line(left, top, z, width=right-left+1, height=1, direction=NORTH, structures_to_ignore=structures_to_ignore, skip_turfs=all_skips)
+	build_lz_barricade_line(left, bottom, z, width=1, height=top-bottom+1, direction=WEST, structures_to_ignore=structures_to_ignore, skip_turfs=all_skips)
+	build_lz_barricade_line(right, bottom, z, width=1, height=top-bottom+1, direction=EAST, structures_to_ignore=structures_to_ignore, skip_turfs=all_skips)
+
+	for(var/turf/target as anything in door_gates)
+		if(!target || (target in skip_turfs))
+			continue
+		if(!length(get_valid_sentry_turfs(target.x, target.y, z, width=1, height=1, structures_to_ignore=structures_to_ignore)))
+			continue
+		var/obj/structure/barricade/plasteel/wired/gate = new(target)
+		gate.setDir(door_gates[target])
+		gate.update_icon()
+
+///Locates the dropship's boarding doors (port/starboard/aft) and returns the walkable gap turfs through the perimeter ring at whichever edge each door sits closest to, mapped to the outward direction of that edge,
+///so marines disembarking are never sealed inside the fortified LZ and get a foldable gate instead of a solid wall
+/datum/game_mode/colonialmarines/proc/get_lz_door_gap_turfs(obj/docking_port/mobile/marine_dropship/mobile_shuttle, left, right, bottom, top, z)
+	var/list/turf/gaps = list()
+	if(!mobile_shuttle)
+		return gaps
+
+	var/static/list/door_ids = list("starboard_door", "port_door", "aft_door")
+	for(var/place in mobile_shuttle.shuttle_areas)
+		for(var/obj/structure/machinery/door/air in place)
+			if(!(air.id in door_ids))
+				continue
+			var/turf/door_turf = get_turf(air)
+			if(!door_turf || door_turf.z != z)
+				continue
+
+			var/dist_west = abs(door_turf.x - left)
+			var/dist_east = abs(door_turf.x - right)
+			var/dist_south = abs(door_turf.y - bottom)
+			var/dist_north = abs(door_turf.y - top)
+			var/closest = min(dist_west, dist_east, dist_south, dist_north)
+
+			if(closest == dist_south)
+				for(var/gx = door_turf.x - 1 to door_turf.x + 1)
+					gaps[locate(gx, bottom, z)] = SOUTH
+			else if(closest == dist_north)
+				for(var/gx = door_turf.x - 1 to door_turf.x + 1)
+					gaps[locate(gx, top, z)] = NORTH
+			else if(closest == dist_west)
+				for(var/gy = door_turf.y - 1 to door_turf.y + 1)
+					gaps[locate(left, gy, z)] = WEST
+			else
+				for(var/gy = door_turf.y - 1 to door_turf.y + 1)
+					gaps[locate(right, gy, z)] = EAST
+
+	return gaps
 
 ///Creates an OB warning at each LZ to warn of the miasma and then spawns the miasma
 /datum/game_mode/colonialmarines/proc/start_lz_hazards()
