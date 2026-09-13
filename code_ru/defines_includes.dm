@@ -3,4 +3,5 @@
 #include "code\__DEFINES\job.dm"
 #include "code\__DEFINES\tts.dm"
 #include "code\__DEFINES\vendors.dm"
+#include "code\__DEFINES\synth_bracer.dm"
 #include "code\__DEFINES\xeno.dm"

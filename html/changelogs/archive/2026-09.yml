@@ -1,0 +1,103 @@
+2026-09-01:
+  Arom-beep:
+  - rscadd: A combat sidearm belt that is capable of holding a sidearm, 3 rifle mags
+      and 2 pistol mags.
+  - rscadd: New unique synthetic survivor presets for the White Antre Research Facility.
+  - rscadd: Added a UPP Ministry of Space Security Officer CO survivor to the Trijent
+      Dam UPP insert.
+  - rscadd: Disclaimer regarding arrests to CMB Inspection ERTs
+  - rscadd: Adds a check of MRE side dishes before allowing MRE folding into trash;
+      Changes MRE weight class to small
+  - balance: Sentinel max neuro oxyloss now scales with neuro stacks
+  - balance: Sentinel maximum oxyloss lowered to 40
+  - balance: Disarming SHARP darts with multitool now converts them into usable ammo.
+  - balance: Un-nerfs the crusher's melee attack slow after its bugfix, returning
+      it to 3.5 seconds
+  - balance: made it so Ravagers have a 25% chance to accidentally slash instead of
+      tackle on disarm intent!
+  - code_imp: Switched Valkyrie's rage ability from XENO_ACTION_CLICK to XENO_ACTION_QUEUE
+      this basically means that the ability no longer has to be chosen and will use
+      on your next clicking, meaning you can indirectly use it without clicking the
+      ability.
+  - code_imp: Bumped rust_g from 6.0.1 to 7.0.0
+  - code_imp: Closets and cm_vending vendors now are not intractable when they are
+      in the same tile as a dense door (allowing them to be hidden in the door's tile)
+  - code_imp: Some sounds will now be emitted from the emitting object rather than
+      the ground position. This especially makes a difference for sounds originating
+      from your character, which won't be shifted when you move due to delay.
+  - code_imp: moved rolling pin and spoon out of the contraband list
+  - code_imp: Adds stelcrest unit tests
+  - code_imp: COMSIG_ITEM_PICKUP now fires properly on pickup and COMSIG_MOVABLE_PRE_PICKUP
+      is used to check if pickup/interaction is allowed
+  - code_imp: Instead of Vs the thermal tarps are now Ms, following tradition.
+  - code_imp: Added more pass flag bitfields for VV and unified them with a couple
+      defines
+  - code_imp: Unified barricade pass flag initialization with a define
+  - code_imp: All changes ported directly from PvE code
+  - code_imp: Repaths reagent tanks for consistency.
+  - rscdel: MULEbots cannot run people over anymore. They still can't really move
+      either way.
+  - bugfix: Fixed some acid holes on maps having the wrong orientation.
+  - bugfix: Bullets affected by reflective walls keeping their boosted damage.
+  - bugfix: Limits the amount of mobs that can stop reflective walls reflecting to
+      mob/living/carbon derivatives
+  - bugfix: Poppy Pretzel recipe now uses poppies instead of seeds
+  - bugfix: Burn overlays now apply to mobs again.
+  - bugfix: fixes valkyrae fake use of retrieve
+  - bugfix: Using any item should now not immediately disarm the dart - disarming
+      is intended to be done with multitool.
+  - bugfix: Disarmed (inactive) SHARP darts now are truly inactive and safe
+  - bugfix: the UPP MSS CO Survivor now speaks Russian by default
+  - bugfix: Fixed an exploit where you could stack/unstack acided things on the ground
+  - bugfix: Fixed gamemode vote not auto-resolving if there's only one option.
+  - bugfix: Transmute works again
+  - bugfix: Rav strains no longer claim you have giant oversized claws when you're
+      not the ravager.
+  - bugfix: Xeno surgery is possible again
+  - bugfix: Base Ravager Empower now processes properly
+  - bugfix: Ravagers failing to tackle no longer announces the personal message to
+      everyone surrounding you
+  - bugfix: Invasive surgery now slices through splints
+  - bugfix: Made player unable to transmute as bulwark when they have stances active
+      like encasing plates or reflective plates.
+  - bugfix: Fixes some area oversights in Whiskey Outpost.
+  - bugfix: generic survivors should no longer spawn during survivor team inserts,
+      generic survivors should also no longer spawn on top of each other sometimes,
+      and CO survivors should no longer be able to duplicate non-co archetypes.
+  - bugfix: Custom Hotkeys saving + as Add, and ARROWUP not being saved as North etc
+      for the arrow keys.
+  - bugfix: The New Varadero LACN Commander is once again a Commander instead of a
+      LtCol
+  - bugfix: Added missing overlays to Yautja tanks.
+  - imageadd: New smartgunner sidearm belt sprites
+  - imageadd: Restock carts now have proper icons with fill overlays that add and
+      remove a little box every 5 units of supplies.
+  - imagetweak: Updates the sprites for body, cryo and tarp bags to show an 'empty'
+      version of the sprite when the bag is empty, so it is now visually clear when
+      the bag has someone inside it or not.
+  - imagetweak: Changed 'holocards' on the cryobags from the 2x2 square on top of
+      the bag to recolored versions of the bodybag label, so they are now much bigger,
+      which helps you to notice it better, and now appear similar to a real life triage
+      card attached to the bag.
+  - imagetweak: Change tarps to use their currently unused closed version, of which
+      I've hand-crafted to now have a very smooth 'invisibility' transition, there's
+      also some small details that will make the bag look more 'alive' aswell.
+  - mapadd: added vehicle restrictions for caves on the LV522 Chances Claim map.
+  - qol: Makes Cryo-marine-not-taken notice clearer
+  - qol: Adds marine snow boot to the synth loadouts.
+  - qol: Adds check of MRE food items to allow storage into MRE
+  - qol: Adds a fill indicator on reagent tanks that fills every 20%.
+  - qol: Added a dispensing and filling indicator to reagent tanks that changes from
+      green to orange.
+  - qol: 'Adds the following transfer amounts to tanks: 15, 25, 80, 120, 150, and
+      240.'
+  - server: Added more influxdb stats for player status
+  - soundtweak: Changed the sounds of when the tarp bags are closed or opened to the
+      same sounds of body and cryo bags, given it just makes more sense.
+  - spellcheck: Incendiary dart description now says that's it is incendiary, not
+      explosive.
+  Drathek:
+  - code_imp: Bumped rust_g from 6.0.1 to 7.0.0
+  fira:
+  - rscdel: MULEbots cannot run people over anymore. They still can't really move
+      either way.

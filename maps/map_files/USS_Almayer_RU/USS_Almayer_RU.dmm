@@ -21357,15 +21357,6 @@
 	},
 /turf/open/floor/almayer/plate,
 /area/almayer/hallways/hangar)
-"bcd" = (
-/obj/structure/machinery/light/small{
-	dir = 8
-	},
-/obj/structure/machinery/landinglight/delaythree{
-	dir = 8
-	},
-/turf/open/floor/almayer/plate,
-/area/almayer/hallways/hangar)
 "bce" = (
 /obj/structure/barricade/handrail/no_vault{
 	dir = 8
@@ -62640,7 +62631,14 @@
 /turf/open/floor/plating/plating_catwalk,
 /area/almayer/engineering/upper_engineering/starboard)
 "hss" = (
-/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad_prep,
+/obj/structure/machinery/cm_vending/clothing/senior_officer{
+	req_access = null;
+	req_access_txt = 37;
+	req_one_access = null;
+	density = 0;
+	can_block_movement = 0;
+	pixel_x = -26
+	},
 /turf/open/floor/wood/ship,
 /area/almayer/living/auxiliary_officer_office)
 "hsu" = (
@@ -144050,7 +144048,7 @@ yeN
 qrp
 mUI
 xBr
-bcd
+bdO
 bcb
 bHB
 aYt
@@ -146293,7 +146291,7 @@ clY
 lvA
 wpt
 wdz
-hmy
+xyw
 bHB
 aZL
 bdO
@@ -146602,7 +146600,7 @@ kcp
 kcp
 kcp
 kcp
-xyw
+hmy
 anH
 xyw
 aip
