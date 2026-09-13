@@ -167,3 +167,9 @@
 /datum/gamemode_modifier/disable_wj_spawns
 	modifier_name = "Disable Working Joe"
 	modifier_desc = "Disables Working Joes from spawning."
+
+//RUCM CODE START
+/datum/gamemode_modifier/rich_marines
+	modifier_name = "Well Funded Marines"
+	modifier_desc = "Gives the marines much better equipment."
+//RUCM CODE END
