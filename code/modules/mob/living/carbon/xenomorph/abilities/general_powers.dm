@@ -871,10 +871,12 @@
 		qdel(structure_template)
 		return FALSE
 
-	if(target_turf.is_weedable < FULLY_WEEDABLE)
+//RUCM CODE START
+	if(target_turf.is_weedable < FULLY_WEEDABLE && choice != XENO_STRUCTURE_SUNKEN)
 		to_chat(xeno, SPAN_WARNING("\The [target_turf] can't support a [structure_template.name]!"))
 		qdel(structure_template)
 		return FALSE
+//RUCM CODE END
 
 	var/obj/effect/alien/weeds/weeds = locate() in target_turf
 	if(weeds?.block_structures >= BLOCK_SPECIAL_STRUCTURES)
@@ -1132,4 +1134,3 @@
 
 	target.handle_blood_splatter(get_dir(owner.loc, target.loc))
 	return target
-
