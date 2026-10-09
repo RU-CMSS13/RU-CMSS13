@@ -27,8 +27,6 @@
 
 	behavior_delegate_type = /datum/behavior_delegate/predalien_base
 
-	organ_type = /obj/item/organ/xeno/predalien
-
 	minimap_icon = "predalien"
 
 /mob/living/carbon/xenomorph/predalien
@@ -42,6 +40,7 @@
 	icon_xenonid = 'icons/mob/xenos/castes/tier_4/predalien.dmi'
 	icon_state = "Predalien Walking"
 	speaking_noise = 'sound/voice/predalien_click.ogg'
+	plasma_types = list(PLASMA_CATECHOLAMINE)
 	faction = FACTION_PREDALIEN
 	claw_type = CLAW_TYPE_VERY_SHARP
 	wall_smash = TRUE
@@ -50,6 +49,7 @@
 	old_x = -16
 	mob_size = MOB_SIZE_BIG
 	tier = 1
+	organ_value = 20000
 	age = XENO_NO_AGE //Predaliens are already in their ultimate form, they don't get even better
 	show_age_prefix = FALSE
 	small_explosives_stun = FALSE
@@ -78,13 +78,6 @@
 	/// If the pred alert/player notif should happen when the predalien spawns
 	var/should_announce_spawn = TRUE
 
-/obj/item/organ/xeno/predalien
-	name = "abomination heart"
-	icon_state = "heart_t3"
-	item_state = "heart_t3"
-	research_value = 20000
-
-	xeno_organ_flags = XENO_ORGAN_STRONG|XENO_ORGAN_HARDENED|XENO_ORGAN_TACHYCARDIA
 
 
 /mob/living/carbon/xenomorph/predalien/Initialize(mapload, mob/living/carbon/xenomorph/oldxeno, h_number)
@@ -127,6 +120,10 @@ You must still listen to the queen.
 "})
 	emote("roar")
 
+/mob/living/carbon/xenomorph/predalien/get_organ_icon()
+	return "heart_t3"
+
+
 /mob/living/carbon/xenomorph/predalien/resist_fire()
 	..()
 	SetKnockDown(0.1 SECONDS)
@@ -157,7 +154,7 @@ You must still listen to the queen.
 	. = list()
 	. += "Kills: [kills]/[max_kills]"
 
-/datum/behavior_delegate/predalien_base/on_kill_mob(mob/target_mob)
+/datum/behavior_delegate/predalien_base/on_kill_mob(mob/M)
 	. = ..()
 
 	kills = min(kills + 1, max_kills)
@@ -175,7 +172,7 @@ You must still listen to the queen.
 
 	XENO_ACTION_CHECK_USE_PLASMA(xeno)
 
-	playsound(xeno.loc, pick(predalien_roar), 50, 0, status = 0, falloff = 3)
+	playsound(xeno.loc, pick(predalien_roar), 75, 0, status = 0)
 	xeno.visible_message(SPAN_XENOHIGHDANGER("[xeno] emits a guttural roar!"))
 	xeno.create_shriekwave(7) //Adds the visual effect. Wom wom wom, 7 shriekwaves
 	FOR_DVIEW(var/mob/living/carbon/target_carbon, 7, xeno, HIDE_INVISIBLE_OBSERVER)
@@ -280,7 +277,7 @@ You must still listen to the queen.
 			xeno.spin_circle()
 			xeno.flick_attack_overlay(target_carbon, "tail")
 
-		playsound(owner, 'sound/voice/predalien_growl.ogg', 60, 0, status = 0)
+		playsound(owner, 'sound/voice/predalien_growl.ogg', 50, 0, status = 0)
 
 		REMOVE_TRAIT(xeno, TRAIT_IMMOBILIZED, TRAIT_SOURCE_ABILITY("Devastate"))
 		xeno.anchored = FALSE

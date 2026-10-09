@@ -31,9 +31,7 @@
 	tackle_min = 4
 	tackle_max = 5
 
-	organ_type = null
-
-	aura_strength = XENO_PHERO_STRENGTH_WEAK
+	aura_strength = 1
 
 	minimap_icon = "lesser_drone"
 
@@ -50,6 +48,7 @@
 	icon_size = 48
 	icon_state = "Lesser Drone Walking"
 	xenonid_pixel_x = -9
+	plasma_types = list(PLASMA_PURPLE)
 	tier = 0
 //RUCM START
 	layer = ABOVE_LYING_MOB_LAYER
@@ -133,14 +132,11 @@
 	name = "Base Lesser Drone Behavior Delegate"
 
 /datum/behavior_delegate/lesser_drone_base/on_life()
-	if(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno))
-		return
-	if(bound_xeno.body_position == STANDING_UP)
+	if(bound_xeno.body_position == STANDING_UP && !(locate(/obj/effect/alien/weeds) in get_turf(bound_xeno)))
 		bound_xeno.adjustBruteLoss(5)
-		bound_xeno.updatehealth()
 
 
-/datum/action/xeno_action/onclick/plant_weeds/lesser/use_ability(atom/target_atom, autoplanted)
+/datum/action/xeno_action/onclick/plant_weeds/lesser/use_ability(atom/target_atom)
 	var/mob/living/carbon/xenomorph/lesser_drone/xeno = owner
 	var/obj/effect/alien/weeds/node/mother_node
 

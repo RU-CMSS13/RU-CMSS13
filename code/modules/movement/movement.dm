@@ -88,7 +88,7 @@
 
 /// Called when a movable atom has hit an atom via movement
 /atom/movable/proc/Collide(atom/A)
-	if (HAS_TRAIT(src, TRAIT_LAUNCHED))
+	if (throwing)
 		launch_impact(A)
 
 	if (A && !QDELETED(A))

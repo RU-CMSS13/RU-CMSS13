@@ -15,7 +15,7 @@
 	var/obj/vehicle/walker/owner = null
 	var/magazine_type = /obj/item/ammo_magazine/walker
 	var/obj/item/ammo_magazine/walker/ammo = null
-	var/list/fire_sound = list('sound/weapons/heavy_weapon_firing_sounds/gun_smartgun1.ogg', 'sound/weapons/heavy_weapon_firing_sounds/gun_smartgun2.ogg', 'sound/weapons/heavy_weapon_firing_sounds/gun_smartgun3.ogg')
+	var/list/fire_sound = list('sound/weapons/gun_smartgun1.ogg', 'sound/weapons/gun_smartgun2.ogg', 'sound/weapons/gun_smartgun3.ogg')
 	var/fire_delay = 0
 	var/last_fire = 0
 

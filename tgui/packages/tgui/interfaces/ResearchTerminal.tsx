@@ -50,14 +50,6 @@ interface TerminalProps {
   contract_cooldown: number;
 }
 
-const gen_tier_map = {
-  1: 'Simple',
-  2: 'Advanced',
-  3: 'Simple Xenobiology',
-  4: 'Advanced Xenobiology',
-  5: 'CLASSIFIED',
-};
-
 interface ConfirmationProps extends ComponentProps<typeof Box> {
   readonly onConfirm: () => any;
   readonly onCancel: () => any;
@@ -510,9 +502,12 @@ const Contracts = () => {
           <Flex.Item grow={1}>
             <Section title={<span>{data.contract_chems[key].name}</span>} fill>
               <span>
-                Type:{' '}
-                {gen_tier_map[data.contract_chems[key].gen_tier] ||
-                  'CLASSIFIED'}
+                Difficulty:{' '}
+                {data.contract_chems[key].gen_tier === 1
+                  ? 'Easy'
+                  : data.contract_chems[key].gen_tier === 2
+                    ? 'Intermediate'
+                    : 'Hard'}
               </span>
               <Flex.Item>
                 Early assesment shows one part of the recipe is{' '}

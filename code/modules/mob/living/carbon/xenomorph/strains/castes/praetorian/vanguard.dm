@@ -161,7 +161,7 @@
 	return ..()
 
 /datum/action/xeno_action/activable/pounce/prae_dash/use_ability(atom/A)
-	if(!activated_once && !action_cooldown_check() || HAS_TRAIT(owner, TRAIT_LAUNCHED))
+	if(!activated_once && !action_cooldown_check() || owner.throwing)
 		return
 
 	if(!activated_once)

@@ -1413,7 +1413,7 @@
 
 	if(isxeno(mover))
 		var/mob/living/carbon/xenomorph/X = mover
-		if(X.hivenumber != hivenumber || HAS_TRAIT(X, TRAIT_LAUNCHED))
+		if(X.hivenumber != hivenumber || X.throwing)
 			return
 
 		if(X.pulling == src)

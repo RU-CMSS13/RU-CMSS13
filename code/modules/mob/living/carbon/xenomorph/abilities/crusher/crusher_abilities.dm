@@ -144,7 +144,7 @@
 		stop_momentum()
 		return
 	// Don't build up charge if you move via getting propelled by something
-	if(HAS_TRAIT(Xeno, TRAIT_LAUNCHED))
+	if(Xeno.throwing)
 		stop_momentum()
 		return
 

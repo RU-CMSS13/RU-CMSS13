@@ -259,8 +259,6 @@
 /datum/admins/proc/modify_traits(datum/D)
 	if(!D)
 		return
-	if(!check_rights(R_VAREDIT))
-		return
 
 	var/add_or_remove = input("Remove/Add?", "Trait Remove/Add") as null|anything in list("Add","Remove")
 	if(!add_or_remove)

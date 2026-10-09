@@ -1,6 +1,6 @@
 import { classes } from 'common/react';
 import dateformat from 'dateformat';
-import { CORE_SCHEMA, load } from 'js-yaml';
+import yaml from 'js-yaml';
 import { Component, Fragment } from 'react';
 import { resolveAsset } from 'tgui/assets';
 import { useBackend } from 'tgui/backend';
@@ -55,7 +55,8 @@ export class Changelog extends Component<
   {},
   {
     data:
-      string | { date: string; authors: { name: string; changes: string[] } };
+      | string
+      | { date: string; authors: { name: string; changes: string[] } };
     selectedDate: string;
     selectedIndex: number;
   }
@@ -108,7 +109,7 @@ export class Changelog extends Component<
           self.getData(date, attemptNumber + 1);
         }, timeout);
       } else {
-        self.setData(load(result, { schema: CORE_SCHEMA }));
+        self.setData(yaml.load(result, { schema: yaml.CORE_SCHEMA }));
       }
     });
   };

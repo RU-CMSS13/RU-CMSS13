@@ -10,6 +10,7 @@
 #include "code\datums\supply_packs\spec_ammo.dm"
 #include "code\datums\supply_packs\weapons.dm"
 #include "code\datums\vehicles.dm"
+#include "code\game\gamemodes\colonialmarines\colonialmarines.dm"
 #include "code\game\jobs\job\command\auxiliary\mech_crew.dm"
 #include "code\game\jobs\job\marine\squads.dm"
 #include "code\game\jobs\job\marine\squad\engineer.dm"

@@ -657,7 +657,7 @@
 
 	var/mob/living/carbon/xenomorph/crusher/crusher = A
 	if(istype(crusher))
-		if(HAS_TRAIT(!crusher, TRAIT_LAUNCHED))
+		if(!crusher.throwing)
 			return
 
 		if(health > 0)

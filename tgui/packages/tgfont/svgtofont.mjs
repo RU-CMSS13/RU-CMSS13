@@ -1,6 +1,7 @@
-import svgtofont, { type SvgToFontOptions } from 'svgtofont';
+import svgtofont from 'svgtofont';
 
-const config: SvgToFontOptions = {
+/** @type {import('svgtofont').SvgToFontOptions} */
+const config = {
   classNamePrefix: 'tg',
   css: {
     include: /\.css$/,

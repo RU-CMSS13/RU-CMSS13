@@ -34,7 +34,6 @@ type LobbyData = {
 
   tutorials_ready: BooleanLike;
   round_start: BooleanLike;
-  round_starting: BooleanLike;
   readied: BooleanLike;
 
   confirmation_message?: string | string[];
@@ -299,7 +298,6 @@ const LobbyButtons = (props: {
     xeno_postfix,
     xeno_prefix,
     round_start,
-    round_starting,
     readied,
     predator_enabled,
     fax_responder_enabled,
@@ -417,7 +415,6 @@ const LobbyButtons = (props: {
         <LobbyButton
           index={5}
           icon="eye"
-          disabled={!!round_starting}
           onClick={() => {
             setModal(
               <ModalConfirm>
@@ -450,7 +447,6 @@ const LobbyButtons = (props: {
             <LobbyButton
               index={6}
               selected={!!readied}
-              disabled={!!round_starting}
               onClick={() => act(readied ? 'unready' : 'ready')}
               icon={readied ? 'check' : 'xmark'}
               tooltip={
@@ -467,7 +463,6 @@ const LobbyButtons = (props: {
                 <Stack.Item grow>
                   <LobbyButton
                     index={6}
-                    disabled={!!round_starting}
                     onClick={() => act('late_join')}
                     icon="users"
                   >
@@ -490,7 +485,6 @@ const LobbyButtons = (props: {
                   <LobbyButton
                     index={7}
                     icon="viruses"
-                    disabled={!!round_starting}
                     onClick={() => act('late_join_xeno')}
                   >
                     Join the Hive
@@ -510,7 +504,6 @@ const LobbyButtons = (props: {
               <Stack.Item>
                 <LobbyButton
                   index={8}
-                  disabled={!!round_starting}
                   onClick={() => act('late_join_upp')}
                   icon="users-between-lines"
                 >
@@ -522,7 +515,6 @@ const LobbyButtons = (props: {
               <Stack.Item>
                 <LobbyButton
                   index={8 + (upp_enabled ? 1 : 0)}
-                  disabled={!!round_starting}
                   onClick={() => {
                     setModal(
                       <ModalConfirm>
@@ -559,7 +551,6 @@ const LobbyButtons = (props: {
                 <LobbyButton
                   index={9 + (upp_enabled ? 1 : 0) + (predator_enabled ? 1 : 0)}
                   icon="fax"
-                  disabled={!!round_starting}
                   onClick={() => {
                     setModal(
                       <ModalConfirm>

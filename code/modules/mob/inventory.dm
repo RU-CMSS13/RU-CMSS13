@@ -208,7 +208,7 @@
 			remembered_dropped_objects -= weak_ref
 			break
 		if(previously_held_object in check_turf)
-			if(HAS_TRAIT(previously_held_object, TRAIT_LAUNCHED))
+			if(previously_held_object.throwing)
 				return FALSE
 			if(previously_held_object.anchored)
 				return FALSE

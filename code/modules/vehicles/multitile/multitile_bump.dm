@@ -810,7 +810,7 @@
 
 	if(iscrusher(A))
 		var/mob/living/carbon/xenomorph/crusher/C = A
-		if(!HAS_TRAIT(C, TRAIT_LAUNCHED))
+		if(!C.throwing)
 			return
 		var/do_move = TRUE
 		if(health > 0)
