@@ -412,6 +412,13 @@
 // Facehugger strain flags
 #define FACEHUGGER_WATCHER "Watcher"
 
+//RUCM CODE START - Arom-beep
+//Lesser drone strain flags
+#define LESSER_SACRIFICER "Sacrificer"
+#define LESSER_SCOUT "Scout"
+#define LESSER_SLAVE "Slave"
+//RUCM CODE END
+
 // Drone strain flags
 #define DRONE_HEALER "Healer"
 #define DRONE_GARDENER "Gardener"
