@@ -9,7 +9,7 @@
 	icon_state = "sticky"
 	sound_hit  = "alien_resin_move"
 	ping = null
-	flags_ammo_behavior = AMMO_SKIPS_ALIENS|AMMO_XENO|AMMO_IGNORE_RESIST
+	flags_ammo_behavior = AMMO_SKIPS_ALIENS|AMMO_EXPLOSIVE|AMMO_IGNORE_RESIST
 	added_spit_delay = 5
 	spit_cost = 40
 
@@ -74,7 +74,7 @@
 /datum/ammo/xeno/sticky/heal
 	name = "living resin spit"
 	icon_state = "boiler_railgun"
-	flags_ammo_behavior = AMMO_XENO|AMMO_IGNORE_XENO_IFF
+	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_IGNORE_XENO_IFF
 	added_spit_delay = 0
 	spit_cost = 50
 

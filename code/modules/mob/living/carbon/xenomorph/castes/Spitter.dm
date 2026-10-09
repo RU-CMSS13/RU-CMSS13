@@ -27,8 +27,6 @@
 
 	minimum_evolve_time = 9 MINUTES
 
-	organ_type = /obj/item/organ/xeno/spitter
-
 	minimap_icon = "spitter"
 
 /mob/living/carbon/xenomorph/spitter
@@ -37,9 +35,11 @@
 	desc = "A gross, oozing alien of some kind."
 	icon_size = 48
 	icon_state = "Spitter Walking"
+	plasma_types = list(PLASMA_NEUROTOXIN)
 	pixel_x = -12
 	old_x = -12
 	xenonid_pixel_x = -9
+	organ_value = 2000
 	tier = 2
 	base_actions = list(
 		/datum/action/xeno_action/onclick/toggle_seethrough,
@@ -68,26 +68,21 @@
 	skull = /obj/item/skull/spitter
 	pelt = /obj/item/pelt/spitter
 
-/obj/item/organ/xeno/spitter
-	name = "spitter heart"
-	icon_state = "heart_t2"
-	item_state = "heart_t2"
-	research_value = 2000
-
-	xeno_organ_flags = XENO_ORGAN_STRONG|XENO_ORGAN_ACID
-
-
-/datum/action/xeno_action/onclick/charge_spit/use_ability(atom/target_atom)
+/datum/action/xeno_action/onclick/charge_spit/use_ability(atom/A)
 	var/mob/living/carbon/xenomorph/zenomorf = owner
 
-	if(!istype(zenomorf))
+	if (!action_cooldown_check())
 		return
 
-	if(buffs_active)
+	if (!istype(zenomorf) || !zenomorf.check_state())
+		return
+
+	if (buffs_active)
 		to_chat(zenomorf, SPAN_XENOHIGHDANGER("We cannot stack this!"))
 		return
 
-	XENO_ACTION_CHECK_USE_PLASMA(zenomorf)
+	if (!check_and_use_plasma_owner())
+		return
 
 	to_chat(zenomorf, SPAN_XENOHIGHDANGER("We accumulate acid in your glands. Our next spit will be stronger but shorter-ranged."))
 	to_chat(zenomorf, SPAN_XENOWARNING("Additionally, we are slightly faster and more armored for a small amount of time."))
@@ -120,7 +115,7 @@
 /datum/action/xeno_action/onclick/charge_spit/proc/remove_effects()
 	var/mob/living/carbon/xenomorph/zenomorf = owner
 
-	if(!istype(zenomorf))
+	if (!istype(zenomorf))
 		return
 
 	zenomorf.speed_modifier += speed_buff_amount
@@ -131,7 +126,7 @@
 	disable_spatter()
 	buffs_active = FALSE
 
-/datum/action/xeno_action/activable/tail_stab/spitter/use_ability(atom/target_atom)
+/datum/action/xeno_action/activable/tail_stab/spitter/use_ability(atom/A)
 	var/target = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target

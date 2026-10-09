@@ -3,9 +3,15 @@
 	faction_tag = FACTION_PMC
 	base_icon_file = 'icons/mob/hud/factions/wy.dmi'
 
-/datum/faction/pmc/modify_hud_holder_from_data(image/holder, location, job_rank, paygrade, assignment, rank_fallback, rank_override, datum/squad/squad)
-	var/hud_icon_state = null
-	switch(job_rank)
+/datum/faction/pmc/modify_hud_holder(image/holder, mob/living/carbon/human/human)
+	var/icon/override_icon_file
+	var/hud_icon_state
+	var/_role = human.job
+	if(!_role)
+		var/obj/item/card/id/id_card = human.get_idcard()
+		if(id_card)
+			_role = id_card.rank
+	switch(_role)
 		if(JOB_PMC_DIRECTOR)
 			hud_icon_state = "sd"
 		if(JOB_PMC_FIELD_OP_LEADER)
@@ -44,9 +50,8 @@
 			hud_icon_state = "commando_sg"
 		if(JOB_WY_COMMANDO_DOGCATCHER)
 			hud_icon_state = "commando_dogcatcher"
-
 	if(hud_icon_state)
-		holder.overlays += image(base_icon_file, location, "pmc_[hud_icon_state]")
+		holder.overlays += image(override_icon_file ? override_icon_file : base_icon_file, human, "pmc_[hud_icon_state]")
 
 /datum/faction/pmc/get_antag_guns_snowflake_equipment()
 	return list(

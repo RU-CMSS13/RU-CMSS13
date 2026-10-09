@@ -146,7 +146,12 @@ export interface HsvaColor extends HsvColor {
 }
 
 export type ObjectColor =
-  RgbColor | HslColor | HsvColor | RgbaColor | HslaColor | HsvaColor;
+  | RgbColor
+  | HslColor
+  | HsvColor
+  | RgbaColor
+  | HslaColor
+  | HsvaColor;
 
 export type AnyColor = string | ObjectColor;
 

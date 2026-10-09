@@ -17,7 +17,6 @@ type Upgrade = {
   name: string;
   desc: string;
   cost: number;
-  royal_cost: number;
   ref: string;
   category: string;
   clearance: number;
@@ -30,7 +29,6 @@ type Queue = {
 };
 
 type Data = {
-  royal_points: number;
   points: number;
   current_clearance: number;
   is_x_level: boolean;
@@ -82,11 +80,6 @@ export const XenomorphExtractor = () => {
                 </Stack.Item>
                 <Stack.Item>
                   <NoticeBox info>Biological Matter : {data.points}</NoticeBox>
-                  {data.royal_points !== 0 && (
-                    <NoticeBox info>
-                      Unstable Xenobiological Matter : {data.royal_points}
-                    </NoticeBox>
-                  )}
                 </Stack.Item>
               </Stack>
             </Section>
@@ -235,13 +228,6 @@ export const XenomorphExtractor = () => {
                                       : 'decrease'}{' '}
                                     in cost by {upgrades.price_change} each
                                     purchase
-                                  </Box>
-                                )}
-                                {upgrades.royal_cost !== 0 && (
-                                  <Box>
-                                    <Divider />
-                                    Requires {upgrades.royal_cost} unstable
-                                    xenobiological matter.
                                   </Box>
                                 )}
                                 {upgrades.price_change === 0 && (

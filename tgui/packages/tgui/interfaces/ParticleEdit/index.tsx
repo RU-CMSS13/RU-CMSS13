@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Button, LabeledList, Section } from 'tgui/components';

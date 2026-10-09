@@ -362,7 +362,7 @@
 			new_icon_state = "[caste.caste_type]_walk_[health_threshold]"
 		else
 			new_icon_state = handle_special_wound_states(health_threshold)
-	if(isnull(organ) && !isnull(caste.organ_type))
+	if(organ_removed)
 		new_icon_state = "[caste.caste_type]_dissection"
 
 	if(new_icon_state != wound_icon_holder.icon_state)

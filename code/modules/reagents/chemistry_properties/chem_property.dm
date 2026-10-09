@@ -26,9 +26,6 @@
 /datum/chem_property/proc/pre_process(mob/living/M) //used for properties that need special checks before processing starts, such as cryometabolization
 	return
 
-/datum/chem_property/proc/on_start(mob/living/target)
-	return
-
 /datum/chem_property/proc/on_delete(mob/living/M) //used for properties that do something on delete
 	qdel(src)
 	return
@@ -97,8 +94,6 @@
 			text += "Rare "
 		if(PROPERTY_LEGENDARY)
 			text += "Legendary "
-		if(PROPERTY_XENOMORPHIC)
-			text += "Xenomorphic "
 		if(PROPERTY_ADMIN)
 			text += "Special "
 	if(isNegativeProperty(src))

@@ -14,10 +14,10 @@ export RUST_G_VERSION=7.0.0
 export NODE_VERSION_LTS=22.14.0
 
 # Bun version
-export BUN_VERSION=1.3.14
+export BUN_VERSION=1.3.5
 
 # SpacemanDMM git tag
-export SPACEMAN_DMM_VERSION=suite-1.12
+export SPACEMAN_DMM_VERSION=suite-1.11
 
 # Python version for mapmerge and other tools
 export PYTHON_VERSION=3.11.9

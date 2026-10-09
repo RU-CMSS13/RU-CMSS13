@@ -20,7 +20,6 @@
 
 	update_Login_details()
 
-
 	SEND_SIGNAL(src, COMSIG_MOB_LOGIN)
 
 	client.images = null
@@ -63,10 +62,7 @@
 			CB.Invoke()
 
 	client.init_verbs()
-	if(client.prefs.toggle_right_click_menu)
-		client.set_right_click_menu_mode(shift_only = FALSE)
-	else
-		client.set_right_click_menu_mode(shift_only = TRUE)
+	client.set_right_click_menu_mode(shift_only = FALSE)
 	client.tgui_say?.load()
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_LOGGED_IN, src)

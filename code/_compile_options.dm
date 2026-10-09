@@ -43,7 +43,6 @@
 	#endif
 #endif
 
-//#define RUNTIME_MAP //If this is uncommented, we force the groundside map to be the runtime map. Useful for speeding up tgstation test explorer compilation.
 #ifdef RUNTIME_MAP
 #define FORCE_GROUND_MAP "maps/runtime.json"
 #endif

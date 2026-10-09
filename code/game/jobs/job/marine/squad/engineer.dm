@@ -1,5 +1,3 @@
-#define MARINE_TO_TOTAL_SPAWN_RATIO (1 - INITIAL_XENO_TO_MARINE_RATIO)
-
 /datum/job/marine/engineer
 	title = JOB_SQUAD_ENGI
 	total_positions = 12
@@ -11,7 +9,8 @@
 
 /datum/job/marine/engineer/set_spawn_positions(count)
 	for(var/datum/squad/target_squad in GLOB.RoleAuthority.squads)
-		target_squad.roles_cap[title] = engi_slot_formula(count * MARINE_TO_TOTAL_SPAWN_RATIO)
+		if(target_squad)
+			target_squad.roles_cap[title] = engi_slot_formula(count)
 
 /* RUCM CHANGE
 /datum/job/marine/engineer/get_total_positions(latejoin=0)
@@ -24,7 +23,8 @@
 
 	if(latejoin)
 		for(var/datum/squad/target_squad in GLOB.RoleAuthority.squads)
-			target_squad.roles_cap[title] = slots
+			if(target_squad)
+				target_squad.roles_cap[title] = slots
 
 	return (slots*4)
 */
@@ -58,5 +58,3 @@ AddTimelock(/datum/job/marine/engineer, list(
 /obj/effect/landmark/start/marine/engineer/delta
 	icon_state = "engi_spawn_delta"
 	squad = SQUAD_MARINE_4
-
-#undef MARINE_TO_TOTAL_SPAWN_RATIO

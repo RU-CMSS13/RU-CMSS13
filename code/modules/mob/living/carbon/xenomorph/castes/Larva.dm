@@ -16,7 +16,6 @@
 	can_be_revived = FALSE
 
 	minimap_icon = "larva"
-	organ_type = null
 
 /datum/caste_datum/larva/predalien
 	caste_type = XENO_CASTE_PREDALIEN_LARVA
