@@ -172,8 +172,8 @@
 		if(JOB_TANK_CREW)
 			marine_rk = "tc"
 //RUCM START
-			if(JOB_WALKER)
-				marine_rk = "tc"
+		if(JOB_WALKER)
+			marine_rk = "tc"
 //RUCM END
 		if(JOB_WARDEN)
 			marine_rk = "warden"
