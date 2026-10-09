@@ -120,33 +120,6 @@ Additional game mode variables.
 
 //===================================================\\
 
-				//GAME MODE INITIALIZE\\
-
-//===================================================\\
-
-/datum/game_mode/proc/initialize_special_clamps()
-	xeno_starting_num = clamp((GLOB.readied_players/CONFIG_GET(number/xeno_number_divider)), xeno_required_num, INFINITY) //(n, minimum, maximum)
-	surv_starting_num = clamp((GLOB.readied_players/CONFIG_GET(number/surv_number_divider)), 2, 8) //this doesn't run
-	marine_starting_num = length(GLOB.player_list) - xeno_starting_num - surv_starting_num
-	for(var/datum/squad/target_squad in GLOB.RoleAuthority.squads)
-		if(target_squad)
-			target_squad.roles_cap[JOB_SQUAD_ENGI] = engi_slot_formula(marine_starting_num)
-			target_squad.roles_cap[JOB_SQUAD_MEDIC] = medic_slot_formula(marine_starting_num)
-
-//RUCM START
-			if(!isnull(target_squad.active_at) && target_squad.active_at > marine_starting_num)
-				target_squad.roundstart = FALSE
-				target_squad.usable = FALSE
-//RUCM END
-
-	for(var/i in GLOB.RoleAuthority.roles_by_name)
-		var/datum/job/J = GLOB.RoleAuthority.roles_by_name[i]
-		if(J.scaled)
-			J.set_spawn_positions(marine_starting_num)
-
-
-//===================================================\\
-
 				//PREDATOR INITIALIZE\\
 
 //===================================================\\
