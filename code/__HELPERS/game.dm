@@ -189,6 +189,7 @@
  * * sorted - Whether to sort by larva_pool_time (default TRUE) or leave unsorted
  * * abomination - Whether the potential larva is for an abomination
  */
+/* RUCM CHANGE
 /proc/get_alien_candidates(datum/hive_status/hive=null, sorted=TRUE, abomination=FALSE)
 	var/list/candidates = list()
 
@@ -243,6 +244,7 @@
 	GLOB.larva_pool_candidate_count = length(candidates)
 
 	return candidates
+*/
 
 /**
  * Messages observers that are currently xeno candidates an update on the larva pool.
@@ -252,6 +254,7 @@
  * * dequeued - How many candidates to skip messaging because they were dequeued
  * * cache_only - Whether to not actually send a to_chat message and instead only update larva_pool_cached_message
  */
+/* RUCM CHANGE
 /proc/message_alien_candidates(list/candidates, dequeued, cache_only=FALSE)
 	for(var/i in (1 + dequeued) to length(candidates))
 		var/mob/dead/observer/cur_obs = candidates[i]
@@ -262,6 +265,7 @@
 		if(!cache_only)
 			var/chat_message = dequeued ? replacetext(cached_message, "currently", "now") : cached_message
 			to_chat(candidates[i], SPAN_XENONOTICE(chat_message))
+*/
 
 /**
  * Messages a new_player their potential position in the larva pool.
@@ -275,6 +279,8 @@
 	if(!candidate_new_player?.client)
 		return
 
+//RUCM NOTICE - THATS A LIE, THEY JUST DON'T FUCKING KNOW WHAT THEY CODED
+/* RUCM CHANGE
 	if(!SSticker.HasRoundStarted() || world.time < SSticker.round_start_time + 15 SECONDS)
 		// Larva pool numbers are too volatile at the start of the game for the estimation to be what they end up with
 		if(!cache_only)
@@ -285,8 +291,10 @@
 				Note: Playing as a facehugger/lesser or in the thunderdome will not alter your time of death. \
 				This means you won't lose your relative place in the pool if you step away, disconnect, play as a facehugger/lesser, or play in the thunderdome."))
 		return
+*/
 
 	if(candidate_new_player.larva_pool_message_stale_time <= world.time)
+/* RUCM CHANGE
 		// No cached/current lobby message, determine the position
 		var/list/valid_candidates = get_alien_candidates()
 		var/candidate_time = candidate_new_player.client.player_details.larva_pool_time
@@ -302,9 +310,21 @@
 			Your current position will shift as others change their preferences or go inactive, but your relative position compared to all observers is the same. \
 			Note: Playing as a facehugger/lesser or in the thunderdome will not alter your time of death. \
 			This means you won't lose your relative place in the pool if you step away, disconnect, play as a facehugger/lesser, or play in the thunderdome."
-
+*/
+//RUCM START
+		candidate_new_player.larva_pool_message_stale_time = world.time + 2.5 MINUTES // spam prevention
+		candidate_new_player.client.player_details.xeno_que_position.larva_pool_message = "Your position would be [GLOB.larva_pool_candidate_count + 1]\th in the larva pool if you observed and were eligible to be a xeno. \
+		Note: You can play as a facehugger/lesser or in the thunderdome, this wont remove you from que. \
+		If you disconnect for more than 10 minutes you'll lose your position."
+//RUCM END
+/* RUCM CHANGE
 	if(!cache_only)
 		to_chat(candidate_new_player, SPAN_XENONOTICE(candidate_new_player.larva_pool_cached_message))
+*/
+//RUCM START
+	if(!cache_only)
+		to_chat(candidate_new_player, SPAN_XENONOTICE(candidate_new_player.client.player_details.xeno_que_position.larva_pool_message))
+//RUCM END
 
 /**
  * Messages an observer their position in the larva pool including if they are ineligible.
@@ -314,6 +334,7 @@
  * * candidate_observer - The observer to message
  * * cache_only - Whether to not actually send a to_chat message and instead only update larva_pool_cached_message
  */
+/* RUCM CHANGE
 /proc/message_alien_candidate_observer(mob/dead/observer/candidate_observer, cache_only=FALSE)
 	if(!candidate_observer?.client)
 		return
@@ -359,6 +380,7 @@
 
 	if(!cache_only)
 		to_chat(candidate_observer, SPAN_XENONOTICE(candidate_observer.larva_pool_cached_message))
+*/
 
 /proc/convert_k2c(temp)
 	return ((temp - T0C))
