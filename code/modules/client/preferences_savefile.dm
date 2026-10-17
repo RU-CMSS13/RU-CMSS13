@@ -358,6 +358,7 @@
 	auto_observe = savefile.tree["auto_observe"]
 	CMTV_toggle_optout = savefile.tree["CMTV_toggle_optout"]
 	secondary_interaction_mb = savefile.tree["secondary_interaction_mb"]
+	toggle_right_click_menu = savefile.tree["toggle_right_click_menu"]
 
 	human_name_ban = savefile.tree["human_name_ban"]
 
@@ -668,6 +669,11 @@
 	savefile.tree["chat_display_preferences"] = chat_display_preferences
 	savefile.tree["toggles_ghost"] = toggles_ghost
 	savefile.tree["toggles_langchat"] = toggles_langchat
+//RUCM START
+	savefile.tree["tts_mode"] = tts_mode
+	savefile.tree["tts_radio_mode"] = tts_radio_mode
+	savefile.tree["tts_hivemind_mode"] = tts_hivemind_mode
+//RUCM END
 	savefile.tree["toggles_sound"] = toggles_sound
 	savefile.tree["volume_preferences"] = volume_preferences
 	savefile.tree["toggle_prefs"] = toggle_prefs
@@ -686,11 +692,16 @@
 	savefile.tree["auto_observe"] = auto_observe
 	savefile.tree["CMTV_toggle_optout"] = CMTV_toggle_optout
 	savefile.tree["secondary_interaction_mb"] = secondary_interaction_mb
+	savefile.tree["toggle_right_click_menu"] = toggle_right_click_menu
 
 	savefile.tree["human_name_ban"] = human_name_ban
 
 	savefile.tree["xeno_prefix"] = xeno_prefix
 	savefile.tree["xeno_postfix"] = xeno_postfix
+//RUCM START
+	savefile.tree["xeno_voice"] = xeno_voice
+	savefile.tree["xeno_pitch"] = xeno_pitch
+//RUCM END
 	savefile.tree["xeno_name_ban"] = xeno_name_ban
 	savefile.tree["xeno_vision_level_pref"] = xeno_vision_level_pref
 	savefile.tree["xeno_defensive_grab_pref"] = xeno_defensive_grab_pref
@@ -705,6 +716,10 @@
 	savefile.tree["pref_job_slots"] = pref_job_slots
 
 	savefile.tree["synth_name"] = synthetic_name
+//RUCM START
+	savefile.tree["synth_voice"] = synth_voice
+	savefile.tree["synth_pitch"] = synth_pitch
+//RUCM END
 	savefile.tree["synth_type"] = synthetic_type
 	savefile.tree["synth_specialisation"] = synth_specialisation
 	savefile.tree["pred_name"] = predator_name
@@ -833,6 +848,10 @@
 		underwear = save_data["underwear"]
 		undershirt = save_data["undershirt"]
 		backbag = save_data["backbag"]
+		//RUCM START
+		human_voice = save_data["human_voice"]
+		human_voice_pitch = save_data["human_pitch"]
+		//RUCM END
 		//blood_type = save_data["blood_type"]
 
 		//Jobs
@@ -945,7 +964,7 @@
 
 	gear = sanitize_gear(gear, owner)
 
-	traits = sanitize_list(traits)
+	traits = sanitize_traits(traits, owner)
 	read_traits = FALSE
 	trait_points = initial(trait_points)
 
@@ -1005,6 +1024,11 @@
 	save_data["underwear"] = underwear
 	save_data["undershirt"] = undershirt
 	save_data["backbag"] = backbag
+//RUCM START
+	save_data["human_voice"] = human_voice
+	save_data["human_pitch"] = human_voice_pitch
+//RUCM END
+
 	//save_data["blood_type"] = blood_type
 	save_data["spawnpoint"] = spawnpoint
 
@@ -1030,12 +1054,12 @@
 	save_data["sec_record"] = sec_record
 	save_data["gen_record"] = gen_record
 	save_data["organ_data"] = organ_data
-	save_data["gear"] = save_gear(gear)
+	save_data["gear"] = stringify_list(gear)
 	save_data["job_loadout"] = save_loadout(loadout)
 	save_data["origin"] = origin
 	save_data["faction"] = faction
 	save_data["religion"] = religion
-	save_data["traits"] = traits
+	save_data["traits"] = stringify_list(traits)
 
 	save_data["weyland_yutani_relation"] = weyland_yutani_relation
 	save_data["preferred_squad"] = preferred_squad
