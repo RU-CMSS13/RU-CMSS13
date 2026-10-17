@@ -66,7 +66,21 @@
   - code_imp: M56Ds and its children objects are no longer connected to the powergrid
 2026-10-10:
   Drathek:
+  - qol: Character slot selection now displays the current slot differently
+  - bugfix: Preference version upgrades now trigger a save immediately
+  - bugfix: Debugger option quick start will now set CO job selection regardless of
+      save data existing
+  - server: Preferences now use json
   - server: Many cmdb tables now have an index
-2026-10-11:
-  Arom-beep:
-  - bugfix: fixed actions_xeno.dmi
+2026-10-12:
+  JHINgle4ce:
+  - bugfix: fixed blank R&D contracts
+  - bugfix: allows xeno to interact through xeno special structures
+  - rscdel: Removed platform overlay
+  Puckaboo2:
+  - qol: You can close an incision on a sawed and closed skull/ribcage without needing
+      bone gel first in case you run out of bone gel and need to close the patient
+      NOW.
+2026-10-13:
+  Taushai:
+  - bugfix: fixed the preview dummy disappearing after reconnecting to the same round.
