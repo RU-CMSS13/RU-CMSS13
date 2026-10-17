@@ -5,7 +5,7 @@
 /datum/unit_test/pheromones/transmit_castes/coverage/Run()
 	// Put any new castes/strains that can emit pheromones in here after creating a transmit_castes test for said variation
 	var/list/emitting_castes = list(XENO_CASTE_DRONE, XENO_CASTE_LESSER_DRONE, XENO_CASTE_HIVELORD, XENO_CASTE_CARRIER, XENO_CASTE_QUEEN, XENO_CASTE_KING) // Only count castes that can emit with their base strain
-	var/list/emitting_strains = list(DRONE_HEALER, DRONE_GARDENER, CARRIER_EGGSAC, HIVELORD_DESIGNER, HIVELORD_RESIN_WHISPERER, PRAETORIAN_VALKYRIE)
+	var/list/emitting_strains = list(DRONE_HEALER, DRONE_GARDENER, LESSER_SACRIFICER, CARRIER_EGGSAC, HIVELORD_DESIGNER, HIVELORD_RESIN_WHISPERER, PRAETORIAN_VALKYRIE) //RUCM CODE CHANGE (Lesser strains added) - Arom-beep
 
 	for (var/caste_name in ALL_XENO_CASTES)
 		var/datum/abstract_xenomorph/dummy_xeno_abstract = new (caste = caste_name)

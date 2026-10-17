@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - new-master-upstream
   pull_request_target:
     types: [ready_for_review, opened, synchronize, reopened]
 jobs:

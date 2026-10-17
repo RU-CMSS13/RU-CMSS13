@@ -1409,7 +1409,15 @@ GLOBAL_DATUM_INIT(supply_controller, /datum/controller/supply, new())
 	. = ..()
 
 	vehicles = list(
+
+/* RUCM CHANGE
 		new /datum/vehicle_order/tank/plain
+*/
+//RUCM START
+		new /datum/vehicle_order/tank/broken,
+		new /datum/vehicle_order/apc/max,
+//RUCM END
+
 	)
 
 	if(!GLOB.VehicleElevatorConsole)

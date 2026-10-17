@@ -31,6 +31,38 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	":1" = RADIO_CHANNEL_WY_PUB, ".1" = RADIO_CHANNEL_WY_PUB, "#1" = RADIO_CHANNEL_WY_PUB,
 	":2" = RADIO_CHANNEL_CIA, ".2" = RADIO_CHANNEL_CIA, "#2" = RADIO_CHANNEL_CIA,
+
+// RUCM ADD - Cyrillic radio
+	":ш" = RADIO_CHANNEL_INTERCOM, ".ш" = RADIO_CHANNEL_INTERCOM, "#ш" = RADIO_CHANNEL_INTERCOM,
+	":р" = RADIO_CHANNEL_DEPARTMENT, ".р" = RADIO_CHANNEL_DEPARTMENT, "#р" = RADIO_CHANNEL_DEPARTMENT,
+	":ц" = RADIO_MODE_WHISPER, ".ц" = RADIO_MODE_WHISPER, "#ц" = RADIO_MODE_WHISPER,
+
+	":+" = RADIO_CHANNEL_SPECIAL, ".+" = RADIO_CHANNEL_SPECIAL, "#+" = RADIO_CHANNEL_SPECIAL, //activate radio-specific special functions
+
+	":ф" = SQUAD_MARINE_1, ".ф" = SQUAD_MARINE_1, "#ф" = RADIO_CHANNEL_CLF_MED,
+	":и" = SQUAD_MARINE_2, ".и" = SQUAD_MARINE_2, "#и" = RADIO_CHANNEL_CLF_ENGI,
+	":с" = SQUAD_MARINE_3, ".с" = SQUAD_MARINE_3, "#с" = RADIO_CHANNEL_CLF_CMD,
+	":в" = SQUAD_MARINE_4, ".в" = SQUAD_MARINE_4, "#в" = RADIO_CHANNEL_CLF_CCT,
+	":у" = SQUAD_MARINE_5, ".у" = SQUAD_MARINE_5, "#у" = RADIO_CHANNEL_PMC_ENGI,
+	":а" = SQUAD_MARINE_CRYO, ".а" = SQUAD_MARINE_CRYO, "#а" = RADIO_CHANNEL_PMC_MED,
+	":п" = RADIO_CHANNEL_ALMAYER, ".п" = RADIO_CHANNEL_ALMAYER, "#п" = RADIO_CHANNEL_CLF_GEN,
+	":о" = RADIO_CHANNEL_JTAC, ".о" = RADIO_CHANNEL_JTAC, "#о" = RADIO_CHANNEL_UPP_CCT,
+	":л" = SQUAD_SOF, ".л" = SQUAD_SOF, "#л" = RADIO_CHANNEL_WY_WO,
+	"#д" = RADIO_CHANNEL_PROVOST, //l . and : reserved for Left hand
+	":ь" = RADIO_CHANNEL_MEDSCI, ".ь" = RADIO_CHANNEL_MEDSCI, "#ь" = RADIO_CHANNEL_UPP_MED,
+	":т" = RADIO_CHANNEL_ENGI, ".т" = RADIO_CHANNEL_ENGI, "#т" = RADIO_CHANNEL_UPP_ENGI,
+	":щ" = RADIO_CHANNEL_COLONY, ".щ" = RADIO_CHANNEL_COLONY, "#щ" = RADIO_CHANNEL_PMC_CCT,
+	":з" = RADIO_CHANNEL_MP , ".з" = RADIO_CHANNEL_MP , "#з" = RADIO_CHANNEL_PMC_GEN,
+	":й" = RADIO_CHANNEL_ROYAL_MARINE, ".й" = RADIO_CHANNEL_ROYAL_MARINE,
+	"#к" = RADIO_CHANNEL_YAUTJA, //r .r and :r reserved for Right hand
+	":ы" = RADIO_CHANNEL_CIA, ".ы" = RADIO_CHANNEL_CIA, "#ы" = RADIO_CHANNEL_YAUTJA_OVERSEER,
+	":е" = RADIO_CHANNEL_INTEL, ".е" = RADIO_CHANNEL_INTEL, "#е" = RADIO_CHANNEL_UPP_KDO,
+	":г" = RADIO_CHANNEL_REQ, ".г" = RADIO_CHANNEL_REQ, "#г" = RADIO_CHANNEL_UPP_GEN,
+	":м" = RADIO_CHANNEL_COMMAND , ".м" = RADIO_CHANNEL_COMMAND , "#м" = RADIO_CHANNEL_UPP_CMD,
+	":ч" = RADIO_CHANNEL_HYPERDYNE, ".ч" = RADIO_CHANNEL_HYPERDYNE, "#ч" = RADIO_CHANNEL_HYPERDYNE,
+	":н" = RADIO_CHANNEL_WY, ".н" = RADIO_CHANNEL_WY, "#н" = RADIO_CHANNEL_WY,
+	":я" = RADIO_CHANNEL_HIGHCOM, ".я" = RADIO_CHANNEL_HIGHCOM, "#я" = RADIO_CHANNEL_PMC_CMD,
+
 	//1-9 available
 ))
 
@@ -91,7 +123,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/remove_speech_bubble(mutable_appearance/speech_bubble, list_of_mobs)
 	overlays -= speech_bubble
 
+/* RUCM CHANGE
 /mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics = FALSE, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, langchat_override = null)
+*/
+//RUCM START
+/mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", italics = FALSE, message_range = GLOB.world_view_size, sound/speech_sound, sound_vol, nolog = 0, message_mode = null, bubble_type = bubble_icon, list/tts_heard_list, langchat_override = null)
+//RUCM END
 	var/turf/T
 
 	if(!filter_message(src, message))
@@ -101,6 +138,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		return
 
 	message = process_chat_markup(message, list("~", "_"))
+
+//RUCM START
+	if(!tts_heard_list)
+		tts_heard_list = list(list(), list(), list())
+	if(SStts.tts_enabled)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
+//RUCM END
 
 	for(var/dst=0; dst<=1; dst++) //Will run twice if src has a clone
 		if(!dst && clone) //Will speak in src's location and the clone's
@@ -173,11 +217,21 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(not_dead_speaker)
 			langchat_speech(message, listening, speaking, additional_styles = langchat_override ? list(langchat_override) : list("langchat"))
 		for(var/mob/possible_listening_mob as anything in listening)
+/* RUCM CHANGE
 			possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, message_mode)
+*/
+//RUCM START
+			possible_listening_mob.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, tts_heard_list, message_mode)
+//RUCM END
 
 		for(var/obj/hearing_obj as anything in listening_obj)
 			if(hearing_obj) //It's possible that it could be deleted in the meantime.
+/* RUCM CHANGE
 				hearing_obj.hear_talk(src, message, verb, speaking, italics)
+*/
+//RUCM START
+				hearing_obj.hear_talk(src, message, verb, speaking, italics, tts_heard_list = tts_heard_list)
+//RUCM END
 
 	//used for STUI to stop logging of animal messages and radio
 	//if(!nolog)

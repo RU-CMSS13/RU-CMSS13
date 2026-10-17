@@ -453,6 +453,10 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 	if(M == speaking)
 		vname = attached_to.phone_id
 
+//RUCM START
+	INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), speaking, message, speaking.tts_voice, list(list(M), list(), list()), loudness ? 25 : -25, speaking.tts_voice_pitch, "", speaking.speaking_noise)
+//RUCM END
+
 	M.hear_radio(
 		message, "says", L, part_a = "<span class='purple'><span class='name'>",
 		part_b = "</span><span class='message'> ", vname = vname,

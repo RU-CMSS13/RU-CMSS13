@@ -94,11 +94,15 @@
   MoondancerPony:
   - bugfix: Tyrargo Rift army survivors no longer show up as part of Alpha Squad on
       the crew monitor.
+  RUCM:
+  - rscadd: Upstream 05.03
   Riot:
   - rscadd: Adds US army ranks, applied to the survivors and ERT on Tyrargo Rift
   - bugfix: Army survivors can now program the comms tower to accept their comms.
   - bugfix: Army comms are now fully working, with their own radio key and working
       comms color.
+  rinoglaz:
+  - rscadd: Suppressor strain
 2026-03-07:
   Drathek:
   - code_imp: Reworked how unauthenticated and lobby menu windows clean up on logout
@@ -138,18 +142,37 @@
   riot:
   - maptweak: The basketball hoops on LV-624's Fitness dome can now be walked through.
 2026-03-10:
+  0Tikwah0:
+  - rscdel: The forcefield function for stopping vehicles has been removed.
+  Arom-beep:
+  - maptweak: updating RU_Almayer
+  Ascaron5:
+  - rscadd: "\u0411\u043E\u043B\u044C\u0448\u0435 \u0432\u0435\u0449\u0435\u0439 \u0434\
+      \u043B\u044F \u043E\u0445\u0440\u0430\u043D\u043D\u0438\u043A\u0430 \u043A\u043E\
+      \u0440\u043F\u043E\u0440\u0430\u0442\u0430"
+  - rscadd: Biomass for plants, synaptizine and hyperzine.
+  - rscadd: Re-Added Stuff for CL
   Drathek:
   - bugfix: Fixed queen no forfeit check not checking the relevant Z levels (namely
       regarding hijack/FTL)
   - bugfix: Fixed potential for hive collapse during hijack
   MistChristmas:
   - soundtweak: Normalise ambience that Abyssal uses to be quieter.
+  rinoglaz:
+  - rscadd: Xeno Blueprints
 2026-03-11:
   MistChristmas:
   - bugfix: Tyrago Rift Out of bounds areas disallow burrowing.
   MoondancerPony:
   - bugfix: fixed larvae being able to dig snow
 2026-03-12:
+  715th:
+  - rscadd: "\u0414\u043E\u0431\u0430\u0432\u0438\u043B \u0441\u0438\u0433\u0430\u0440\
+      \u0435\u0442\u044B \u0441 \u043F\u0435\u043F\u0435\u043B\u044C\u043D\u0438\u0446\
+      \u0435\u0439"
+  - code_imp: "\u0417\u0430\u043C\u0435\u043D\u0438\u043B \u0441\u043F\u0440\u0430\
+      \u0439\u0442 \u0411\u0422\u0420\u0430"
+  - maptweak: "\u0418\u0437\u043C\u0435\u043D\u0438\u043B \u0411\u0422\u0420"
   MistChristmas:
   - bugfix: 'Unique items: I.E. Family Photo now belong to you even if they spawn
       in your inventory instead of pocket.'

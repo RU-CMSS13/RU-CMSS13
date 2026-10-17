@@ -701,19 +701,38 @@
 
 	message = capitalize(trim_left(message))
 
+//RUCM START
+	var/list/tts_heard_list = list(list(), list(), list())
+	if(SStts.tts_enabled)
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise)
+//RUCM END
+
 	if(message_mode)
 		if(message_mode in GLOB.radiochannels)
 			if(ears && istype(ears,/obj/item/device/radio))
+/* RUCM CHANGE
 				ears.talk_into(src,message, message_mode, verb, null)
+*/
+//RUCM START
+				ears.talk_into(src,message, message_mode, verb, null, tts_heard_list = tts_heard_list)
+//RUCM END
 
 
 	..(message)
 
 
+/* RUCM CHANGE
 /mob/living/simple_animal/small/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null)
 	if(prob(50))
 		parrot_hear(message)
 	..(message,verb,language,alt_name,italics,speaker)
+*/
+//RUCM START
+/mob/living/simple_animal/small/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, list/tts_heard_list)
+	if(prob(50))
+		parrot_hear(message)
+	..(message,verb,language,alt_name,italics,speaker, tts_heard_list = tts_heard_list)
+//RUCM END
 
 
 

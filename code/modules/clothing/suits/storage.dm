@@ -40,9 +40,16 @@
 	. = ..()
 	pockets.emp_act(severity)
 
+/* RUCM CHANGE
 /obj/item/clothing/suit/storage/hear_talk(mob/living/M, msg, verb, datum/language/speaking, italics)
 	pockets.hear_talk(M, msg, verb, speaking, italics)
 	..()
+*/
+//RUCM START
+/obj/item/clothing/suit/storage/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	pockets.hear_talk(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)
+	..()
+//RUCM END
 
 /obj/item/clothing/suit/storage/verb/toggle_draw_mode()
 	set name = "Switch Storage Drawing Method"

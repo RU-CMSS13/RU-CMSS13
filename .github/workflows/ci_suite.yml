@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
     - master
+    - new-master-upstream
   merge_group:
 jobs:
   run_linters:

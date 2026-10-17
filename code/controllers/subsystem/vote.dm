@@ -179,6 +179,14 @@ SUBSYSTEM_DEF(vote)
 			if("shipmap")
 				var/datum/map_config/VM = config.maplist[SHIP_MAP][.]
 				SSmapping.changemap(VM, SHIP_MAP)
+//RUCM START
+			if("Skip Endgame Vote")
+				if(. == "Skip")
+					SSticker.force_ending = TRUE
+					SSticker.mode.round_finished = MODE_INFESTATION_X_MAJOR
+					log_admin("Due to vote the round end early.")
+					message_admins("Due to vote the round end early.")
+//RUCM END
 	if(restart)
 		var/active_admins = 0
 		for(var/client/C in GLOB.admins)
@@ -335,6 +343,13 @@ SUBSYSTEM_DEF(vote)
 				choices.Add(maps)
 				if(length(choices) < 2)
 					return FALSE
+//RUCM START
+			if("skip_endgame_vote")
+				question = "Skip endgame vote"
+				vote_type = "Skip Endgame Vote"
+				choices.Add("Skip")
+				choices.Add("Continue")
+//RUCM END
 			if("custom")
 				question = input(usr, "What is the vote for?")
 				if(!question)
@@ -492,6 +507,14 @@ GLOBAL_LIST_INIT(possible_vote_types, list(
 		"icon" = "campground",
 		"admin_only" = TRUE,
 	),
+//RUCM START
+	"skip_endgame_vote" = list(
+		"name" = "Skip Endgame Vote",
+		"color" = "orange",
+		"icon" = "question",
+		"admin_only" = TRUE,
+	),
+//RUCM END
 	"custom" = list(
 		"name" = "Custom Vote",
 		"color" = "yellow",

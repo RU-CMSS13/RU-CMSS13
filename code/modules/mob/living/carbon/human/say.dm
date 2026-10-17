@@ -1,7 +1,7 @@
 /mob/living/carbon/human/proc/parse_say_modes(message)
 	. = list("message_and_language", "modes" = list())
 	if(length(message) >= 1 && message[1] == ";")
-		.["message_and_language"] = trim_left(copytext(message, 2))
+		.["message_and_language"] = trim_left(copytext_char(message, 2))
 		.["modes"] += "headset"
 		return
 
@@ -16,7 +16,7 @@
 				i--
 				break
 			.["modes"] += GLOB.department_radio_keys[":[lowertext(current_channel)]"]
-		.["message_and_language"] = trim_left(copytext(message, i+1))
+		.["message_and_language"] = trim_left(copytext_char(message, i+1))
 		var/multibroadcast_cooldown = 0
 		for(var/obj/item/device/radio/headset/headset in list(wear_l_ear, wear_r_ear))
 			if(world.time - headset.last_multi_broadcast < headset.multibroadcast_cooldown)
@@ -30,9 +30,9 @@
 		return
 
 	if(length(message) >= 2 && (message[1] == "." || message[1] == ":" || message[1] == "#"))
-		var/channel_prefix = lowertext(copytext(message, 1, 3))
+		var/channel_prefix = lowertext(copytext_char(message, 1, 3))
 		if(channel_prefix in GLOB.department_radio_keys)
-			.["message_and_language"] = trim_left(copytext(message, 3))
+			.["message_and_language"] = trim_left(copytext_char(message, 3))
 			.["modes"] += GLOB.department_radio_keys[channel_prefix]
 			return
 
@@ -49,11 +49,16 @@
 	var/parsed_language = parse_language(message_and_language)
 	if(parsed_language)
 		.["language"] = parsed_language
-		.["message"] = copytext(message_and_language, 3)
+		.["message"] = copytext_char(message_and_language, 3)
 	else
 		.["message"] = strip_language(message_and_language)
 
+/* RUCM CHANGE
 /mob/living/carbon/human/say(message)
+*/
+//RUCM START
+/mob/living/carbon/human/say(message, list/tts_heard_list)
+//RUCM END
 
 	var/verb = "says"
 	var/alt_name = ""
@@ -81,9 +86,9 @@
 	if(stat == DEAD)
 		return say_dead(message)
 
-	if(copytext(message,1,2) == "*")
+	if(copytext_char(message,1,2) == "*")
 		if(!findtext(message, "*", 2)) //Second asterisk means it is markup for *bold*, not an *emote.
-			return emote(lowertext(copytext(message,2)), intentional = TRUE) //TRUE arg means emote was caused by player (e.g. no an auto scream when hurt).
+			return emote(lowertext(copytext_char(message,2)), intentional = TRUE) //TRUE arg means emote was caused by player (e.g. no an auto scream when hurt).
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
@@ -146,6 +151,9 @@
 			message += "."
 
 	for(var/message_mode in parsed["modes"])
+//RUCM START
+		var/radio_volume = 0
+//RUCM END
 		var/list/obj/item/used_radios = list()
 		switch(message_mode)
 			if(RADIO_MODE_WHISPER)
@@ -155,13 +163,24 @@
 				message_mode = null
 				FOR_DVIEW(var/obj/item/device/radio/intercom/I, 1, src, HIDE_INVISIBLE_OBSERVER)
 					used_radios += I
+//RUCM START
+					radio_volume = I.volume
+//RUCM END
 					break // remove this if we EVER have two different intercomms with DIFFERENT frequencies IN ONE ROOM
 				FOR_DVIEW_END
 			else
 				if(message_mode != MESSAGE_MODE_LOCAL)
+/* RUCM CHANGE
 					var/earpiece = get_type_in_ears(/obj/item/device/radio)
+*/
+//RUCM START
+					var/obj/item/device/radio/earpiece = get_type_in_ears(/obj/item/device/radio)
+//RUCM END
 					if(earpiece)
 						used_radios += earpiece
+//RUCM START
+						radio_volume = earpiece.volume
+//RUCM END
 				else
 					var/obj/item/device/megaphone/megaphone = get_active_hand()
 					if(istype(megaphone) && megaphone.amplifying) //istype necessary here
@@ -197,6 +216,7 @@
 			italics = TRUE
 			message_range = 2
 
+/* RUCM CHANGE
 		var/far_message_range = message_range
 		if(message_range > GLOB.world_view_size)
 			message_range = GLOB.world_view_size
@@ -224,10 +244,26 @@
 					listener.show_message("<span class='game say'><span class='name'>[src]</span> <span class='message'>[far_verb], [far_message]</span></span>", SHOW_MESSAGE_AUDIBLE)
 
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking)
+*/
+//RUCM START
+		tts_heard_list = list(list(), list(), list())
+		if(SStts.tts_enabled)
+			INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, tts_voice, tts_heard_list, 0, tts_voice_pitch, "", speaking_noise, FALSE, radio_volume)
 
+		..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, 0, message_mode, langchat_override = langchat_override, tts_heard_list = tts_heard_list) //ohgod we should really be passing a datum here.
+
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, say_to_radios), used_radios, message, message_mode, verb, speaking, tts_heard_list)
+//RUCM END
+/* RUCM CHANGE
 /mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking)
 	for(var/obj/item/device/radio/R in used_radios)
 		R.talk_into(src, message, message_mode, verb, speaking)
+*/
+//RUCM START
+/mob/living/carbon/human/proc/say_to_radios(used_radios, message, message_mode, verb, speaking, list/tts_heard_list)
+	for(var/obj/item/device/radio/R in used_radios)
+		R.talk_into(src, message, message_mode, verb, speaking, tts_heard_list = tts_heard_list)
+//RUCM END
 
 /mob/living/carbon/human/proc/forcesay(forcesay_type = SUDDEN)
 	if (!client || stat != CONSCIOUS)

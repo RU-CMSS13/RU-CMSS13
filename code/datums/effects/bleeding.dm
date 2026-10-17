@@ -111,6 +111,9 @@
 		if(affected_mob.bodytemperature <= BODYTEMP_CRYO_LIQUID_THRESHOLD && (affected_mob.reagents.get_reagent_amount("cryoxadone") || affected_mob.reagents.get_reagent_amount("clonexadone")))
 			blood_loss -= CRYO_BLOOD_REDUCTION
 
+		if(affected_mob.reagents.get_reagent_amount("bicaridine") > (REAGENTS_OVERDOSE+10) && affected_mob.getBruteLoss() <= 0) // Bicaridine OD above 40 Fixes IB RU CM ADD
+			blood_loss -= BICAOD_BLOOD_REDUCTION
+
 		var/mob/living/carbon/human/affected_human = affected_mob
 		if(istype(affected_human))
 			//CHEM_EFFECT_NO_BLEEDING effect cure bleeding via blood_loss reduction. Preferably this would be modified by the property level

@@ -7,7 +7,12 @@
 	var/listening = 0
 	var/recorded //the activation message
 
+/* RUCM CHANGE
 /obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
+*/
+//RUCM START
+/obj/item/device/assembly/voice/hear_talk(mob/living/sourcemob, msg, verb, datum/language/language, italics, list/tts_heard_list)
+//RUCM END
 	if(listening)
 		recorded = msg
 		listening = 0

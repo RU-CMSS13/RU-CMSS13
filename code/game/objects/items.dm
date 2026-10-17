@@ -374,7 +374,12 @@
 
 	return
 
+/* RUCM CHANGE
 /obj/item/proc/talk_into(mob/M as mob, text)
+*/
+//RUCM START
+/obj/item/proc/talk_into(mob/M as mob, text, list/tts_heard_list)
+//RUCM END
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
@@ -1153,6 +1158,9 @@
 
 // formerly in gun_helpers.dm, moved here for universal usage
 /obj/item/proc/unique_action(mob/user)
+	return
+
+/obj/item/weapon/proc/weapon_ability(mob/user)
 	return
 
 /obj/item/verb/use_unique_action()

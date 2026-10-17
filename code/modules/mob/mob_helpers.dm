@@ -123,7 +123,7 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/message_length = length(message)
 	var/index = 1
 	while(index <= message_length)
-		var/char = copytext(message, index, index + 1)
+		var/char = copytext_char(message, index, index + 1)
 		if(char == " " || prob(clear_char_probability))
 			output_message += char
 		else
@@ -153,7 +153,7 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 		var/prev_index = cur_index
 		cur_index = code_regex.Find(message, code_regex.next)
 		if(prev_index != cur_index)
-			var/current_string = copytext(message, prev_index, cur_index)
+			var/current_string = copytext_char(message, prev_index, cur_index)
 			output_message += stars(current_string, clear_char_probability)
 		if(cur_index)
 			output_message += code_regex.match
@@ -183,7 +183,7 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
-		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
+		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
 			if(lowertext(newletter)=="o")
 				newletter="u"
@@ -236,7 +236,7 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 				var/stuttered = R.group[2] + R.group[3]
 				if(upper.Find(stuttered) && !upper.Find(stuttered, 2)) // if they're screaming (all caps) or saying something like 'AI', keep the letter capitalized - else don't
 					stuttered = lowertext(stuttered)
-				word = R.Replace(word, "$1$2$3-[stuttered]$4")
+				word = R.Replace_char(word, "$1$2$3-[stuttered]$4")
 			else if(prob(25) && strength > 1) // prolong word
 				var/prolonged = ""
 				var/prolong_amt = min(length(word), 5)
@@ -245,17 +245,17 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 					prolonged += R.group[2]
 				if(!upper.Find(R.group[3]))
 					prolonged = lowertext(prolonged)
-				word = R.Replace(word, "$1$2[prolonged]$3$4")
+				word = R.Replace_char(word, "$1$2[prolonged]$3$4")
 			else
 				if(prob(5 * strength)) // harder stutter if stronger
-					word = R.Replace(word, "$1$2-$2-$2-$2$3$4")
+					word = R.Replace_char(word, "$1$2-$2-$2-$2$3$4")
 				else if(prob(10 * strength))
-					word = R.Replace(word, "$1$2-$2-$2$3$4")
+					word = R.Replace_char(word, "$1$2-$2-$2$3$4")
 				else // normal stutter
-					word = R.Replace(word, "$1$2-$2$3$4")
+					word = R.Replace_char(word, "$1$2-$2$3$4")
 
 		if(prob(3 * strength) && index != length(unstuttered_words) - 1) // stammer / pause - don't pause at the end of sentences!
-			word = R.Replace(word, "$0 ...")
+			word = R.Replace_char(word, "$0 ...")
 
 		split_phrase[index] = word
 
@@ -266,7 +266,7 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/returntext = ""
 	for(var/i = 1, i <= length(t), i++)
 
-		var/letter = copytext(t, i, i+1)
+		var/letter = copytext_char(t, i, i+1)
 		if(prob(50))
 			if(p >= 70)
 				letter = ""
@@ -291,14 +291,14 @@ GLOBAL_LIST_INIT(limb_types_by_name, list(
 	var/static/regex/replace_ceci = new("ceh?|cih?", REGEX_FLAG_GLOBAL)
 	var/static/regex/replace_CECI = new("CEH?|CIH?", REGEX_FLAG_GLOBAL)
 	if(message[1] != "*")
-		message = replace_s.Replace(message, "th")
-		message = replace_S.Replace(message, "TH")
-		message = replace_z.Replace(message, "th")
-		message = replace_Z.Replace(message, "TH")
-		message = replace_ceci.Replace(message, "th")
-		message = replace_CECI.Replace(message, "TH")
-		message = replace_x.Replace(message, "ckth")
-		message = replace_X.Replace(message, "CKTH")
+		message = replace_s.Replace_char(message, "th")
+		message = replace_S.Replace_char(message, "TH")
+		message = replace_z.Replace_char(message, "th")
+		message = replace_Z.Replace_char(message, "TH")
+		message = replace_ceci.Replace_char(message, "th")
+		message = replace_CECI.Replace_char(message, "TH")
+		message = replace_x.Replace_char(message, "ckth")
+		message = replace_X.Replace_char(message, "CKTH")
 	return message
 
 #define PIXELS_PER_STRENGTH_VAL 28

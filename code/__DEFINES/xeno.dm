@@ -205,6 +205,14 @@
 /// The time when xenos can start taking over comm towers
 #define XENO_COMM_ACQUISITION_TIME (55 MINUTES)
 
+//RUCM START
+#define XENO_SHIELD_SACRIFICE 12
+
+#define LESSER_BUILD_COLOR "#cbc8fc"
+
+#define LESSER_SHIELD_OVERLAY 9
+//RUCM END
+
 /// The time it takes for a pylon to give one royal resin while activated
 #define XENO_PYLON_ACTIVATION_COOLDOWN (5 MINUTES)
 
@@ -403,6 +411,13 @@
 
 // Facehugger strain flags
 #define FACEHUGGER_WATCHER "Watcher"
+
+//RUCM CODE START - Arom-beep
+//Lesser drone strain flags
+#define LESSER_SACRIFICER "Sacrificer"
+#define LESSER_SCOUT "Scout"
+#define LESSER_SLAVE "Slave"
+//RUCM CODE END
 
 // Drone strain flags
 #define DRONE_HEALER "Healer"
@@ -651,6 +666,9 @@
 
 #define XENO_STRUCTURE_CORE  "hive core"
 #define XENO_STRUCTURE_CLUSTER   "hive cluster"
+//RUCM CODE START
+#define XENO_STRUCTURE_SUNKEN "sunken colony"
+//RUCM CODE END
 #define XENO_STRUCTURE_PYLON "hive pylon"
 #define XENO_STRUCTURE_EGGMORPH  "egg morpher"
 #define XENO_STRUCTURE_RECOVERY  "recovery node"

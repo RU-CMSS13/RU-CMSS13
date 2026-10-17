@@ -111,6 +111,9 @@
 		add_verb(M.client, list(
 			/obj/vehicle/multitile/proc/toggle_door_lock,
 			/obj/vehicle/multitile/proc/activate_horn,
+//RUCM START
+			/obj/vehicle/multitile/proc/use_megaphone,
+//RUCM END
 		))
 	else if(seat == VEHICLE_GUNNER)
 		add_verb(M.client, list(
@@ -133,6 +136,9 @@
 		remove_verb(M.client, list(
 			/obj/vehicle/multitile/proc/toggle_door_lock,
 			/obj/vehicle/multitile/proc/activate_horn,
+//RUCM START
+			/obj/vehicle/multitile/proc/use_megaphone,
+//RUCM END
 		))
 	else if(seat == VEHICLE_GUNNER)
 		remove_verb(M.client, list(

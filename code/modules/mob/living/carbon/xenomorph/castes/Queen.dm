@@ -494,7 +494,13 @@
 		generate_and_set_nicknumber()
 	var/name_prefix = hive.prefix
 	if(queen_aged)
+/* RUCM CHANGE
 		age_xeno()
+*/
+//RUCM START
+		if(client?.player_data)
+			age_xeno()
+//RUCM END
 		switch(age)
 			if(XENO_YOUNG)
 				name = "[name_prefix]Young Queen" //Young
@@ -523,6 +529,11 @@
 		if(client?.prefs?.show_queen_name)
 			name += " (" + replacetext((name_client_prefix + name_client_postfix), "-","") + ")"
 
+//RUCM START
+		if(SStts.tts_enabled)
+			tts_voice = client.prefs?.xeno_voice
+			tts_voice_pitch = client.prefs?.xeno_pitch
+//RUCM END
 
 	full_designation = "[name_client_prefix][nicknumber][name_client_postfix]"
 

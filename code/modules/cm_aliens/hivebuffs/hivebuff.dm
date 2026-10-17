@@ -72,6 +72,9 @@
 	/// _on_cease timer id
 	var/cease_timer_id
 
+	/// for _check_danger, minimal count of groundside marines
+	var/min_groundside_humans = 4
+
 /datum/hivebuff/New(datum/hive_status/xenohive)
 	. = ..()
 	if(!xenohive || !istype(xenohive))
@@ -231,7 +234,7 @@
 		var/turf/turf = get_turf(current_human)
 		if(is_ground_level(turf?.z))
 			groundside_humans++
-			if(groundside_humans >= 12)
+			if(groundside_humans >= min_groundside_humans)
 				return TRUE
 
 	return FALSE

@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(mapless_maps, list(MAP_RUNTIME, MAP_CHINOOK, MAIN_SHIP_DEFAULT_NAME, MAP_ROSTOCK, MAP_HUNTERSHIP))
+GLOBAL_LIST_INIT(mapless_maps, list(MAP_RUNTIME, MAP_CHINOOK, MAIN_SHIP_DEFAULT_NAME, MAIN_RU_SHIP_DEFAULT_NAME, MAP_ROSTOCK, MAP_HUNTERSHIP))
 
 /obj/item/map
 	name = "map"
@@ -160,6 +160,7 @@ GLOBAL_LIST_INIT(mapless_maps, list(MAP_RUNTIME, MAP_CHINOOK, MAIN_SHIP_DEFAULT_
 	desc = "A diagrammatic map of the milky way, laid out by sector."
 	html_link = "images/9/9e/Galaxy_Map.png"
 	color = "#005eab"
+
 
 GLOBAL_LIST_INIT_TYPED(map_type_list, /obj/item/map, setup_all_maps())
 

@@ -532,6 +532,11 @@
 		visible_message(SPAN_XENODANGER("[P] cracks and fragments as the acid sizzles against it!"))
 		P.broken()
 
+	else if(istype(acid_t, /obj/structure/dropship_equipment))
+		var/obj/structure/dropship_equipment/module = acid_t
+		visible_message(SPAN_XENODANGER("[acid_t] is ravaged by the acid that covered it!"))
+		if(!module.ship_base)
+			qdel(acid_t)
 	else
 		for(var/mob/mob in acid_t)
 			mob.forceMove(loc)

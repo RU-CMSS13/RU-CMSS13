@@ -65,11 +65,20 @@
 
 #ifdef OBJECTS_PROXY_SPEECH
 // Transfers speech to occupant
+/* RUCM CHANGE
 /obj/structure/machinery/medical_pod/bodyscanner/hear_talk(mob/living/sourcemob, message, verb, language, italics)
 	if(!QDELETED(occupant) && istype(occupant) && occupant.stat != DEAD)
 		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics)
 	else
 		..(sourcemob, message, verb, language, italics)
+*/
+//RUCM START
+/obj/structure/machinery/medical_pod/bodyscanner/hear_talk(mob/living/sourcemob, message, verb, datum/language/language, italics, list/tts_heard_list)
+	if(!QDELETED(occupant) && istype(occupant) && occupant.stat != DEAD)
+		proxy_object_heard(src, sourcemob, occupant, message, verb, language, italics, tts_heard_list = tts_heard_list)
+	else
+		..(sourcemob, message, verb, language, italics, tts_heard_list = tts_heard_list)
+//RUCM END
 #endif // ifdef OBJECTS_PROXY_SPEECH
 
 /obj/structure/machinery/body_scanconsole

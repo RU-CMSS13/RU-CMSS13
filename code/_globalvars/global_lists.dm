@@ -67,6 +67,16 @@ GLOBAL_LIST_INIT(resin_build_order_lesser_drone, list(
 	/datum/resin_construction/resin_obj/door,
 ))
 
+//RUCM START
+GLOBAL_LIST_INIT(resin_build_order_lesser_slave, list(
+	/datum/resin_construction/resin_turf/wall/lesser_slave,
+	/datum/resin_construction/resin_turf/membrane/lesser_slave,
+	/datum/resin_construction/resin_obj/door/lesser_slave,
+	/datum/resin_construction/resin_obj/sticky_resin,
+	/datum/resin_construction/resin_obj/fast_resin,
+))
+//RUCM END
+
 GLOBAL_LIST_INIT(resin_build_order_drone, list(
 	/datum/resin_construction/resin_turf/wall,
 	/datum/resin_construction/resin_turf/membrane,
@@ -102,6 +112,14 @@ GLOBAL_LIST_INIT(resin_build_order_ovipositor, list(
 	/datum/resin_construction/resin_turf/wall/reflective,
 	/datum/resin_construction/resin_turf/membrane/queen,
 	/datum/resin_construction/resin_obj/door/queen,
+
+// RUCM Start (Feline "Ксено-чертежи")
+	/datum/resin_construction/resin_obj/blueprint/wall,
+	/datum/resin_construction/resin_obj/blueprint/membrane,
+	/datum/resin_construction/resin_obj/blueprint/door,
+	/datum/resin_construction/resin_obj/blueprint/delete_blueprint,
+// RUCM End (Feline "Ксено-чертежи")
+
 	/datum/resin_construction/resin_obj/acid_pillar,
 	/datum/resin_construction/resin_obj/sticky_resin,
 	/datum/resin_construction/resin_obj/fast_resin,

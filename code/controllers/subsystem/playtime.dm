@@ -2,7 +2,9 @@ SUBSYSTEM_DEF(playtime)
 	name = "Playtime"
 	wait = 1 MINUTES
 	priority = SS_PRIORITY_PLAYTIME
+/* RUCM CHANGE
 	flags = SS_NO_INIT | SS_KEEP_TIMING
+*/
 
 	var/list/currentrun = list()
 

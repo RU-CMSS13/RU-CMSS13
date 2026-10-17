@@ -108,9 +108,11 @@
 		var/list/mob/listeners = hearers(user)
 		// mobs that pass the conditionals will be added here
 		var/list/mob/langchat_long_listeners = list()
+//RUCM START
+		INVOKE_ASYNC(SStts, TYPE_PROC_REF(/datum/controller/subsystem/tts, queue_tts_message), src, message, user.tts_voice, list(langchat_long_listeners, list(), list()), 50, user.tts_voice_pitch, "", user.speaking_noise)
+//RUCM END
 		var/paygrade = user.get_paygrade()
 		var/leader = skillcheck(user, SKILL_LEADERSHIP, SKILL_LEAD_TRAINED)
-
 		for(var/mob/listener in listeners)
 			if(!ishumansynth_strict(listener) && !isobserver(listener))
 				listener.show_message("[user] says something into the [name], but you can't understand it.")
