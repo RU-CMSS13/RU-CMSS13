@@ -33,6 +33,9 @@
 /// shuttle mode change
 #define COMSIG_SHUTTLE_SETMODE "shuttle_setmode"
 
+/// from /obj/docking_port/stationary/proc/on_arrival() : (landing shuttle)
+#define COMSIG_SHUTTLE_ARRIVAL "shuttle_arrival"
+
 #define COMSIG_GRENADE_PRE_PRIME "grenade_pre_prime"
 	#define COMPONENT_GRENADE_PRIME_CANCEL (1<<0)
 
@@ -81,3 +84,5 @@
 
 #define COMSIG_DOOR_OPEN "comsig_door_open"
 #define COMSIG_DOOR_CLOSE "comsig_door_close"
+
+#define COMSIG_UNDERBARREL_GL_BREECH_TOGGLED "underbarrel_gl_breech_toggled"
