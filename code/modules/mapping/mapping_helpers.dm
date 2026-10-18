@@ -180,4 +180,11 @@ GLOBAL_LIST_EMPTY(marked_atoms_by_id)
 	. = ..()
 	if(!id)
 		CRASH("[name] ([type]) at [get_area(src)] has no id!")
-	LAZYADDASSOCLIST(GLOB.marked_atoms_by_id, id, src)
+	LAZYADD(GLOB.marked_atoms_by_id[id], src)
+
+/obj/effect/marked_atom/Destroy(force)
+	LAZYREMOVE(GLOB.marked_atoms_by_id[id], src)
+	return ..()
+
+/obj/effect/marked_atom/queen_bubble
+	id = "queen_bubble"

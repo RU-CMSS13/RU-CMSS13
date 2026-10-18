@@ -75,8 +75,22 @@
 /datum/game_mode/survive/transform_queen(datum/mind/ghost_mind, turf/xeno_turf, hivenumber)
 	var/turf/origin = locate(xeno_turf.x-3, xeno_turf.y-3, xeno_turf.z)
 	var/datum/map_template/template = SSmapping.map_templates["Queen_Resin.dmm"]
+
+	// Edgecase: Move any living mobs out of the way of the template while it loads
+	var/turf/safe_spot = get_step(origin, WEST)
+	var/list/existing_mobs = list()
+	for(var/turf/current as anything in CORNER_BLOCK(origin, template.width, template.height))
+		for(var/mob/living/obstruction in current)
+			existing_mobs[obstruction] = current
+			obstruction.forceMove(safe_spot)
+
 	if(!template?.load(origin, centered=FALSE, delete=TRUE))
 		stack_trace("Queen resin template failed to load!")
+
+	// Move those mobs back
+	for(var/mob/living/obstruction as anything in existing_mobs)
+		obstruction.forceMove(existing_mobs[obstruction])
+
 	..()
 
 /* Post-setup */
@@ -106,7 +120,7 @@
 	if(!length(monkey_types))
 		return
 
-	var/amount_to_spawn = floor(GLOB.players_preassigned * MONKEYS_TO_TOTAL_RATIO)
+	var/amount_to_spawn = ceil(GLOB.players_preassigned * MONKEYS_TO_TOTAL_RATIO)
 
 	for(var/i in 0 to min(amount_to_spawn, length(GLOB.monkey_spawns)))
 		var/turf/T = get_turf(pick_n_take(GLOB.monkey_spawns))
@@ -122,6 +136,7 @@
 /datum/game_mode/survive/proc/map_announcement()
 	var/rendered_announce_text = SSmapping.configs[GROUND_MAP].survive_announce_text || "Attention. Attention. Evacuation order is in effect."
 	survivor_announcement(rendered_announce_text, sound_to_play='sound/effects/siren.ogg')
+	play_sfx_for_groundside_xenos('sound/effects/siren.ogg')
 	lore_announcement()
 
 /datum/game_mode/survive/proc/lore_announcement()
@@ -138,7 +153,17 @@
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(xeno_announcement), "Another, hostile, hive is making an escape from this metal cage, prepare yourselves as a chance to escape may occur soon.", "everything", QUEEN_MOTHER_ANNOUNCE), 1.5 MINUTES)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(xeno_announcement), "My children. I sense the hostile, putrid, hive has fled this area, but some of the hosts that entrapped you remain alive within this metal complex. Defeat these hosts to showcase your supremacy!", "everything", QUEEN_MOTHER_ANNOUNCE), 165 SECONDS)
 
+/// Plays the passed sfx for any xenos groundside
+/datum/game_mode/survive/proc/play_sfx_for_groundside_xenos(sound/soundin, vol=45)
+	for(var/mob/living/carbon/xenomorph as anything in GLOB.xeno_mob_list)
+		var/turf/xeno_turf = get_turf(xenomorph)
+		if(!xeno_turf || !is_ground_level(xeno_turf.z))
+			continue
+		playsound_client(xenomorph.client, soundin, vol=vol)
+
 /datum/game_mode/survive/proc/initiate_evacuation()
+	set waitfor = FALSE
+
 	if(is_in_endgame)
 		return
 
@@ -147,7 +172,10 @@
 
 	release_the_queen()
 
-	var/datum/map_template/shuttle/new_shuttle = SSmapping.shuttle_templates[MOBILE_SHUTTLE_ID_ERT_ALAMO]
+	var/hostile = SSnightmare.get_scenario_is_hostile_survivor() // ASSUMPTION: Only hostile type is CLF
+
+	var/shuttle_id = hostile ? MOBILE_SHUTTLE_ID_ERT1 : MOBILE_SHUTTLE_ID_ERT_ALAMO
+	var/datum/map_template/shuttle/new_shuttle = SSmapping.shuttle_templates[shuttle_id]
 	shuttle = SSshuttle.load_template_to_transit(new_shuttle)
 	shuttle.control_doors("force-lock", force=TRUE, external_only=TRUE)
 
@@ -159,6 +187,26 @@
 			continue
 		dock_options += dock
 
+	// Fallback: Try to convert dropship sized pads to ert pads
+	if(!length(dock_options))
+		for(var/obj/docking_port/stationary/dock as anything in SSshuttle.stationary)
+			if(dock.dwidth != 0 && (dock.id == DROPSHIP_LZ1 || dock.id == DROPSHIP_LZ2))
+				dock.dwidth = 0
+				dock.width = 7
+				dock.dheight = 0
+				dock.height = 13
+				switch(dock.dir)
+					if(NORTH)
+						dock.forceMove(locate(dock.x-3, dock.y-6, dock.z))
+					if(EAST)
+						dock.forceMove(locate(dock.x-6, dock.y+3, dock.z))
+					if(SOUTH)
+						dock.forceMove(locate(dock.x+3, dock.y+6, dock.z))
+					if(WEST)
+						dock.forceMove(locate(dock.x+6, dock.y-3, dock.z))
+				if(shuttle.canDock(dock) == SHUTTLE_CAN_DOCK)
+					dock_options += dock
+
 	if(!length(dock_options))
 		message_admins("Auto shuttle has no lzs available.")
 		return
@@ -166,7 +214,9 @@
 	var/obj/docking_port/stationary/dock = pick(dock_options)
 	RegisterSignal(dock, COMSIG_SHUTTLE_ARRIVAL, PROC_REF(on_shuttle_arrival))
 	SSshuttle.moveShuttleToDock(shuttle, dock, TRUE)
-	var/datum/emergency_call/ert = SSticker.mode.get_specific_call(/datum/emergency_call/solar_devils_full/survivor_response, TRUE, FALSE)
+
+	var/ert_type = hostile ? /datum/emergency_call/clf/survivor_response : /datum/emergency_call/solar_devils_full/survivor_response
+	var/datum/emergency_call/ert = SSticker.mode.get_specific_call(ert_type, TRUE, FALSE)
 	shuttle.distress_beacon = ert
 	survivor_announcement("[ert.arrival_message] We are enroute to [dock].")
 
@@ -177,21 +227,15 @@
 	if(!length(GLOB.marked_atoms_by_id["queen_bubble"]))
 		return
 
-	var/turf/current
 	for(var/obj/effect/marked_atom/marker as anything in GLOB.marked_atoms_by_id["queen_bubble"])
-		current = marker.loc
-		current.ChangeTurf(/turf/open/auto_turf/hybrisa_auto_turf/layer1)
+		addtimer(CALLBACK(src, PROC_REF(crumble_wall), marker.loc), rand(2 SECONDS))
 		qdel(marker)
-	playsound(current, "acid_hit", 25, TRUE)
-	GLOB.marked_atoms_by_id["queen_bubble"] = null
 
-/datum/game_mode/survive/spawn_static_comms()
-	// Force all to be broken always
-	for(var/obj/effect/landmark/static_comms/tower as anything in GLOB.comm_tower_landmarks_net_one)
-		tower.broken_on_spawn = TRUE
-	for(var/obj/effect/landmark/static_comms/tower as anything in GLOB.comm_tower_landmarks_net_two)
-		tower.broken_on_spawn = TRUE
-	..()
+/datum/game_mode/survive/proc/crumble_wall(turf/wall)
+	if(prob(50))
+		playsound(wall, 'sound/effects/rock_creaking.ogg', 25, TRUE)
+		wall.visible_message(SPAN_WARNING("[wall] crumbles apart!"))
+	wall.ChangeTurf(/turf/open/auto_turf/hybrisa_auto_turf/layer1)
 
 //This is processed each tick, but check_win is only checked 5 ticks, so we don't go crazy with scanning for mobs.
 /datum/game_mode/survive/process()
@@ -310,14 +354,55 @@
 		if(MODE_SURVIVE_S_MAJOR)
 			musical_track = pick('sound/theme/winning_triumph1.ogg','sound/theme/winning_triumph2.ogg','sound/theme/winning_triumph3.ogg')
 			end_icon = "marine_major"
+			var/static/list/faction_victories = list(
+				"WY_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_wy.ogg',
+					"end_icon" = "wy_major",
+					"name" = "Weyland-Yutani",
+				),
+				"UPP_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_upp.ogg',
+					"end_icon" = "upp_major",
+					"name" = "Union of Progressive Peoples",
+				),
+				"CLF_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_clf.ogg',
+					"end_icon" = "clf_major",
+					"name" = "Colonial Liberation Front",
+				),
+				"TWE_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_twe.ogg',
+					"end_icon" = "twe_major",
+					"name" = "Three World Empire",
+				),
+				"marine_headcount" = list(
+					"musical_track" = pick('sound/theme/winning_triumph1.ogg','sound/theme/winning_triumph2.ogg','sound/theme/winning_triumph3.ogg'),
+					"end_icon" = "marine_major",
+				),
+			)
+			var/list/headcount = count_per_faction()
+			var/living = headcount["total_headcount"]
+			for(var/faction in faction_victories)
+				if((headcount[faction] / living) <= MAJORITY)
+					continue
+				var/list/victory = faction_victories[faction]
+				musical_track = victory["musical_track"]
+				end_icon = victory["end_icon"]
+				var/faction_name = victory["name"]
+				if(faction_name)
+					var/victory_message = "3rd party victory: [faction_name]"
+					log_game(victory_message)
+					message_admins(victory_message)
+				break
 			if(GLOB.round_statistics && GLOB.round_statistics.current_map)
 				GLOB.round_statistics.current_map.total_survivor_victories++
 				GLOB.round_statistics.current_map.total_survivor_majors++
 		if(MODE_SURVIVE_X_MINOR)
 			var/list/living_player_list = count_humans_and_xenos(get_affected_zlevels())
+			musical_track = 'sound/theme/neutral_melancholy1.ogg'
 			end_icon = "xeno_minor"
 			if(living_player_list[1] && !living_player_list[2]) // If Xeno Minor but Xenos are dead and Humans are alive, see which faction is the last standing
-				var/static/list/faction_victories = list(
+				var/static/list/faction_timeouts = list(
 					"WY_headcount" = list(
 						"musical_track" = 'sound/theme/lastmanstanding_wy.ogg',
 						"end_icon" = "wy_major",
@@ -345,10 +430,10 @@
 				)
 				var/list/headcount = count_per_faction()
 				var/living = headcount["total_headcount"]
-				for(var/faction in faction_victories)
+				for(var/faction in faction_timeouts)
 					if((headcount[faction] / living) <= MAJORITY)
 						continue
-					var/list/victory = faction_victories[faction]
+					var/list/victory = faction_timeouts[faction]
 					musical_track = victory["musical_track"]
 					end_icon = victory["end_icon"]
 					var/faction_name = victory["name"]
@@ -357,13 +442,51 @@
 						log_game(victory_message)
 						message_admins(victory_message)
 					break
-			else
-				musical_track = pick('sound/theme/neutral_melancholy1.ogg')
 			if(GLOB.round_statistics && GLOB.round_statistics.current_map)
 				GLOB.round_statistics.current_map.total_xeno_slaughters++
 		if(MODE_SURVIVE_S_EXTRACT)
 			musical_track = pick('sound/theme/neutral_hopeful1.ogg','sound/theme/neutral_hopeful2.ogg')
 			end_icon = "marine_minor"
+			var/static/list/faction_extracts = list(
+				"WY_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_wy.ogg',
+					"end_icon" = "wy_major",
+					"name" = "Weyland-Yutani",
+				),
+				"UPP_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_upp.ogg',
+					"end_icon" = "upp_major",
+					"name" = "Union of Progressive Peoples",
+				),
+				"CLF_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_clf.ogg',
+					"end_icon" = "clf_major",
+					"name" = "Colonial Liberation Front",
+				),
+				"TWE_headcount" = list(
+					"musical_track" = 'sound/theme/lastmanstanding_twe.ogg',
+					"end_icon" = "twe_major",
+					"name" = "Three World Empire",
+				),
+				"marine_headcount" = list(
+					"musical_track" = pick('sound/theme/neutral_hopeful1.ogg','sound/theme/neutral_hopeful2.ogg'),
+					"end_icon" = "marine_minor",
+				),
+			)
+			var/list/headcount = count_per_faction()
+			var/living = headcount["total_headcount"]
+			for(var/faction in faction_extracts)
+				if((headcount[faction] / living) <= MAJORITY)
+					continue
+				var/list/victory = faction_extracts[faction]
+				musical_track = victory["musical_track"]
+				end_icon = victory["end_icon"]
+				var/faction_name = victory["name"]
+				if(faction_name)
+					var/victory_message = "3rd party victory: [faction_name]"
+					log_game(victory_message)
+					message_admins(victory_message)
+				break
 			if(GLOB.round_statistics && GLOB.round_statistics.current_map)
 				GLOB.round_statistics.current_map.total_survivor_victories++
 		if(MODE_SURVIVE_DRAW_DEATH)
