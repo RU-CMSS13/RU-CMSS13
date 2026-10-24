@@ -65,16 +65,17 @@
 	time_to_dispel = 10 SECONDS
 
 /obj/effect/landmark/lv624/fog_blocker/Initialize(mapload, ...)
-	. = ..()
-
+	..()
 	return INITIALIZE_HINT_ROUNDSTART
 
 /obj/effect/landmark/lv624/fog_blocker/LateInitialize()
 	if(!(SSticker.mode.flags_round_type & MODE_FOG_ACTIVATED) || !SSmapping.configs[GROUND_MAP].environment_traits[ZTRAIT_FOG])
+		qdel(src)
 		return
 
 	new /obj/structure/blocker/fog(loc, time_to_dispel)
 	qdel(src)
+
 
 /obj/effect/landmark/lv624/door_blocker
 	name = "door blocker"
@@ -83,12 +84,12 @@
 	var/time_to_dispel = 85 SECONDS
 
 /obj/effect/landmark/lv624/door_blocker/Initialize(mapload, ...)
-	. = ..()
-
+	..()
 	return INITIALIZE_HINT_ROUNDSTART
 
 /obj/effect/landmark/lv624/door_blocker/LateInitialize()
 	if(!(SSticker.mode.flags_round_type & MODE_FOG_ACTIVATED) || !SSmapping.configs[GROUND_MAP].environment_traits[ZTRAIT_FOG])
+		qdel(src)
 		return
 
 	new /obj/structure/blocker/door(loc, time_to_dispel)
@@ -97,9 +98,26 @@
 /obj/effect/landmark/lv624/door_blocker/xeno
 	time_to_dispel = 180 SECONDS
 
+
 /obj/effect/landmark/lv624/xeno_tunnel
 	name = "xeno tunnel"
 	icon_state = "xeno_tunnel"
+
+/turf/closed/foggy_ocean_blocker
+	name = "ocean"
+	icon = 'icons/turf/floors/desert_water.dmi'
+	icon_state = "deep"
+	opacity = FALSE
+	plane = FLOOR_PLANE
+	var/obj/structure/blocker/fog/my_fog
+
+/turf/closed/foggy_ocean_blocker/Initialize(mapload)
+	. = ..()
+	my_fog = new(src, INFINITY)
+
+/turf/closed/foggy_ocean_blocker/Destroy(force)
+	. = ..()
+	QDEL_NULL(my_fog)
 
 /obj/effect/landmark/lv624/xeno_tunnel/Initialize(mapload, ...)
 	. = ..()
@@ -305,7 +323,7 @@
 	clear_proximity_resin()
 
 	var/list/announcement_mobs = list()
-	for(var/area/area in marine_dropship.shuttle_areas)
+	for(var/area/area as anything in marine_dropship.shuttle_areas)
 		for(var/mob/mob in area)
 			shake_camera(mob, steps = 3, strength = 1)
 			announcement_mobs += mob
@@ -330,7 +348,6 @@
 		if(islist(area_lz))
 			if(!(active_lz.linked_lz in area_lz))
 				continue
-
 		else if(area_lz != active_lz.linked_lz)
 			continue
 

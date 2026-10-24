@@ -55,7 +55,8 @@
 	if(!length(GLOB.observer_starts))
 		var/obj/comms_poi = locate(/obj/structure/machinery/telecomms/relay/preset/tower/mapcomms)
 		var/turf/comms_turf = get_turf(comms_poi)
-		new /obj/effect/landmark/observer_start(comms_turf)
+		if(comms_turf)
+			new /obj/effect/landmark/observer_start(comms_turf)
 
 	var/datum/hive_status/main_hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
 	main_hive.allow_queen_evolve = FALSE
@@ -71,6 +72,19 @@
 		tunnel = new(location)
 		tunnel.id = "hole[i]"
 	return TRUE
+
+/datum/game_mode/survive/spawn_static_comms()
+	var/list/options = GLOB.comm_tower_landmarks_survivor
+	if(!length(options))
+		options = GLOB.comm_tower_landmarks_net_one + GLOB.comm_tower_landmarks_net_two
+	for(var/i = 1 to static_comms_amount)
+		var/obj/effect/landmark/static_comms/tower = pick_n_take(options)
+		if(!tower)
+			continue
+		tower.spawn_tower()
+	QDEL_LIST(GLOB.comm_tower_landmarks_net_one)
+	QDEL_LIST(GLOB.comm_tower_landmarks_net_two)
+	QDEL_LIST(GLOB.comm_tower_landmarks_survivor)
 
 /datum/game_mode/survive/transform_queen(datum/mind/ghost_mind, turf/xeno_turf, hivenumber)
 	var/turf/origin = locate(xeno_turf.x-3, xeno_turf.y-3, xeno_turf.z)
@@ -91,12 +105,9 @@
 	for(var/mob/living/obstruction as anything in existing_mobs)
 		obstruction.forceMove(existing_mobs[obstruction])
 
-	..()
+	return ..()
 
 /* Post-setup */
-//This happens after create_character, so our mob SHOULD be valid and built by now, but without job data.
-//We move it later with transform_survivor but they might flicker at any start_loc spawn landmark effects then disappear.
-//Xenos and survivors should not spawn anywhere until we transform them.
 /datum/game_mode/survive/post_setup()
 	initialize_post_marine_gear_list()
 	spawn_smallhosts()
@@ -109,7 +120,31 @@
 	addtimer(CALLBACK(SSentity_manager, TYPE_PROC_REF(/datum/controller/subsystem/entity_manager, select), /datum/entity/survivor_survival), 7 MINUTES)
 	addtimer(CALLBACK(src, PROC_REF(release_the_queen)), 30 MINUTES)
 
-	return ..()
+	. = ..()
+
+	var/datum/job/antag/xenos/queen/queen_job = GLOB.RoleAuthority.roles_for_mode[JOB_XENOMORPH_QUEEN]
+	if(queen_job && queen_job.current_positions)
+		return .
+
+	#ifdef RUNTIME_MAP
+	return . // No queen spawns
+	#endif
+
+	// No roundstart queen so lets make a claimable one that does some basics
+	var/obj/effect/landmark/queen_spawn/queen_spawn = SAFEPICK(GLOB.queen_spawns)
+	var/turf/queen_location
+	if(queen_spawn)
+		queen_location = get_turf(queen_spawn)
+	if(!queen_spawn)
+		queen_location = get_turf(pick(GLOB.xeno_spawns))
+	var/mob/living/carbon/xenomorph/queen/new_queen = transform_queen(null, queen_location)
+	new_queen.auto_queen = TRUE
+	addtimer(CALLBACK(src, PROC_REF(offer_to_ghosts), new_queen), 30 SECONDS)
+	return .
+
+/datum/game_mode/survive/proc/offer_to_ghosts(mob/living/carbon/xenomorph/queen/new_queen)
+	if(!new_queen.client)
+		new_queen.free_for_ghosts(TRUE, 'sound/effects/xeno_newlarva.ogg')
 
 /datum/game_mode/survive/proc/spawn_smallhosts()
 	if(!GLOB.players_preassigned)
@@ -139,8 +174,8 @@
 	play_sfx_for_groundside_xenos('sound/effects/siren.ogg')
 	lore_announcement()
 
+/// A proc that will queue up announcements for the lore of the map.
 /datum/game_mode/survive/proc/lore_announcement()
-	//A proc that will queue up announcements for the lore of the map.
 	switch(SSmapping.configs[GROUND_MAP].map_name)
 		if(MAP_TYRARGO_RIFT)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(xeno_announcement), "My children. A great battle rages across this world, a world slathered in hosts for our taking! However, these hosts fight back with great ferocity. I have directed your sub-hive to this area, you will create a mighty cordon here to cover our western flank whilst another sub-hive overtakes a stronghold to your east that is filled with thousands of hosts!\n\nIn order to aid you, I have dispatched a legion of disposable drones ahead of you, they are far less intelligent than you, but will suffice in waylaying any remaining hostile hosts to your west until you have secured yourselves.", "everything", QUEEN_MOTHER_ANNOUNCE), 20 SECONDS)
@@ -169,8 +204,12 @@
 
 	is_in_endgame = TRUE
 	force_end_at = world.time + 15 MINUTES
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_SURVIVOR_EVAC)
 
 	release_the_queen()
+
+	var/datum/hive_status/main_hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
+	main_hive.attempt_apply_hivebuff_admin(/datum/hivebuff/survival_evac_surge)
 
 	var/hostile = SSnightmare.get_scenario_is_hostile_survivor() // ASSUMPTION: Only hostile type is CLF
 
@@ -212,16 +251,74 @@
 		return
 
 	var/obj/docking_port/stationary/dock = pick(dock_options)
+	RegisterSignal(dock, COMSIG_SHUTTLE_PREARRIVAL, PROC_REF(on_shuttle_prearrival))
 	RegisterSignal(dock, COMSIG_SHUTTLE_ARRIVAL, PROC_REF(on_shuttle_arrival))
 	SSshuttle.moveShuttleToDock(shuttle, dock, TRUE)
 
-	var/ert_type = hostile ? /datum/emergency_call/clf/survivor_response : /datum/emergency_call/solar_devils_full/survivor_response
+	var/ert_type = hostile ? /datum/emergency_call/clf/survivor_response : /datum/emergency_call/solar_devils/survivor_response
 	var/datum/emergency_call/ert = SSticker.mode.get_specific_call(ert_type, TRUE, FALSE)
 	shuttle.distress_beacon = ert
 	survivor_announcement("[ert.arrival_message] We are enroute to [dock].")
 
+/// SIGNAL_HANDLER for COMSIG_SHUTTLE_PREARRIVAL to handle weedkiller smoke
+/datum/game_mode/survive/proc/on_shuttle_prearrival(obj/docking_port/stationary/port, obj/docking_port/mobile/arriving_shuttle)
+	SIGNAL_HANDLER
+
+	var/hostile = SSnightmare.get_scenario_is_hostile_survivor() // ASSUMPTION: Only hostile type is CLF
+	var/list/announcement_mobs = list()
+	for(var/area/area as anything in arriving_shuttle.shuttle_areas)
+		for(var/mob/mob in area)
+			shake_camera(mob, steps = 3, strength = 1)
+			announcement_mobs += mob
+	announcement_helper("Dropship dispersing [/obj/effect/particle_effect/smoke/weedkiller::name] due to potential biological infestation.", hostile ? CLF_COMMAND_ANNOUNCE : MAIN_AI_SYSTEM, announcement_mobs, 'sound/effects/rocketpod_fire.ogg')
+
+	var/obj/structure/machinery/computer/shuttle/console
+	if(port.id == /obj/structure/machinery/computer/shuttle/dropship/flight/lz1::linked_lz)
+		console = locate(/obj/structure/machinery/computer/shuttle/dropship/flight/lz1)
+	else if(port.id == /obj/structure/machinery/computer/shuttle/dropship/flight/lz2::linked_lz)
+		console = locate(/obj/structure/machinery/computer/shuttle/dropship/flight/lz2)
+	clear_proximity_resin(console)
+
+/// SIGNAL_HANDLER for COMSIG_SHUTTLE_ARRIVAL to handle announcement to xenos and allow LZ weeding
 /datum/game_mode/survive/proc/on_shuttle_arrival(obj/docking_port/stationary/port, obj/docking_port/mobile/arriving_shuttle)
+	SIGNAL_HANDLER
+
 	xeno_announcement(SPAN_XENOANNOUNCE("A dropship has landed. The tallhosts are escaping!"), "everything", QUEEN_MOTHER_ANNOUNCE)
+	MODE_SET_MODIFIER(/datum/gamemode_modifier/lz_weeding, TRUE)
+
+/datum/game_mode/survive/proc/clear_proximity_resin(obj/structure/machinery/computer/shuttle/dropship/flight/active_lz)
+	if(!active_lz)
+		return FALSE
+
+	if(MODE_HAS_MODIFIER(/datum/gamemode_modifier/lz_weeding))
+		msg_admin_niche("Skipped weed killer event due to lz_weeding modifier already getting set")
+		return FALSE
+
+	var/datum/cause_data/cause_data = create_cause_data(/obj/effect/particle_effect/smoke/weedkiller::name)
+
+	for(var/area/near_area as anything in GLOB.all_areas)
+		var/area_lz = near_area.linked_lz
+		if(!area_lz)
+			continue
+
+		if(islist(area_lz))
+			if(!(active_lz.linked_lz in area_lz))
+				continue
+		else if(area_lz != active_lz.linked_lz)
+			continue
+
+		for(var/turf/turf in near_area)
+			if(turf.density)
+				if(!istype(turf, /turf/closed/wall))
+					continue
+				var/turf/closed/wall/wall = turf
+				if(wall.turf_flags & TURF_HULL)
+					continue
+			new /obj/effect/particle_effect/smoke/weedkiller(turf, null, cause_data)
+
+		near_area.purge_weeds()
+
+	return TRUE
 
 /datum/game_mode/survive/proc/release_the_queen()
 	if(!length(GLOB.marked_atoms_by_id["queen_bubble"]))
@@ -659,6 +756,22 @@
 	for(var/datum/http_request/request in requests)
 		addtimer(CALLBACK(request, TYPE_PROC_REF(/datum/http_request, begin_async)), (2 * incrementer) SECONDS)
 		incrementer++
+
+/obj/effect/landmark/lv624/fog_blocker/survivor_evac/LateInitialize()
+	if(!MODE_HAS_FLAG(MODE_SURVIVE))
+		qdel(src)
+		return
+
+	new /obj/structure/blocker/fog/survivor_evac(loc, INFINITY)
+	qdel(src)
+
+/obj/effect/landmark/lv624/door_blocker/survivor_evac/LateInitialize()
+	if(!MODE_HAS_FLAG(MODE_SURVIVE))
+		qdel(src)
+		return
+
+	new /obj/structure/blocker/door/survivor_evac(loc, INFINITY)
+	qdel(src)
 
 #undef MONKEYS_TO_TOTAL_RATIO
 #undef PODLOCKS_OPEN_WAIT
