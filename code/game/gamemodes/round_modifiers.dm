@@ -167,3 +167,50 @@
 /datum/gamemode_modifier/disable_wj_spawns
 	modifier_name = "Disable Working Joe"
 	modifier_desc = "Disables Working Joes from spawning."
+
+//RUCM CODE START
+/// Adds larvae to the hive's burrowed pool; the hive core then hands them out to queued players
+/proc/add_larvae(amount = 5, hivenumber = XENO_HIVE_NORMAL)
+	var/datum/hive_status/hive = GLOB.hive_datum[hivenumber]
+	if(!hive)
+		return FALSE
+	hive.stored_larva += amount
+	hive.hive_ui.update_burrowed_larva()
+	return TRUE
+
+/datum/gamemode_modifier/xeno_grow_boost
+	modifier_name = "Xenomorphs Grow Boost"
+	modifier_desc = "Xenomorphs growing faster. Doubles evolution speed while enabled."
+	var/value_before_boost
+
+/datum/gamemode_modifier/xeno_grow_boost/set_active(enabled = FALSE)
+	var/was_active = active
+	. = ..()
+	if(enabled == was_active)
+		return
+
+	var/datum/hive_status/hive = GLOB.hive_datum[XENO_HIVE_NORMAL]
+	if(!hive)
+		return
+
+	if(enabled)
+		value_before_boost = SSxevolution.get_evolution_boost_power(hive.hivenumber)
+		hive.override_evilution(value_before_boost * 2, TRUE)
+	else
+		hive.override_evilution(value_before_boost, FALSE)
+
+/datum/gamemode_modifier/additional_larva_spawn
+	modifier_name = "Additional Larvae"
+	modifier_desc = "Gives the Hive more burrowed larva once when enabled."
+	var/larva_amount = 2
+
+/datum/gamemode_modifier/additional_larva_spawn/set_active(enabled = FALSE)
+	. = ..()
+	if(!enabled)
+		return
+
+	if(add_larvae(larva_amount))
+		to_chat(usr, SPAN_NOTICE("Gave the Hive [larva_amount] larvae."))
+	else
+		to_chat(usr, SPAN_WARNING("Hive not found, no larvae given."))
+//RUCM CODE END
