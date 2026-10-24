@@ -114,6 +114,11 @@
 /obj/effect/alien/resin/attack_hand()
 	to_chat(usr, SPAN_WARNING("You scrape ineffectively at \the [src]."))
 
+
+/obj/effect/alien/resin/attackby_secondary(obj/item/attack_item, mob/living/user, list/mods)
+	. = ..()
+	return attackby(attack_item, user, mods)
+
 /obj/effect/alien/resin/attackby(obj/item/W, mob/user)
 	if(!(W.flags_item & NOBLUDGEON))
 		var/damage = W.force * W.demolition_mod * RESIN_MELEE_DAMAGE_MULTIPLIER
@@ -366,13 +371,17 @@
 
 	flags_obj = OBJ_ORGANIC
 	layer = DOOR_CLOSED_LAYER
-	tiles_with = list(/obj/structure/mineral_door/resin)
+	tiles_with = list(/turf/closed/wall/resin, /obj/structure/mineral_door/resin)
+
+/obj/structure/mineral_door/resin/attackby_secondary(obj/item/attack_item, mob/living/user, list/mods)
+	. = ..()
+	return attackby(attack_item, user)
 
 /obj/structure/mineral_door/resin/Initialize(mapload, hive)
 	. = ..()
 	relativewall()
 	relativewall_neighbours()
-	for(var/turf/closed/wall/W in orange(1))
+	for(var/turf/closed/wall/W in orange(1, src))
 		W.update_connections()
 		W.update_icon()
 
@@ -568,12 +577,45 @@
 		set_hive_data(src, XENO_HIVE_FORSAKEN)
 
 	UnregisterSignal(SSdcs, COMSIG_GLOB_GROUNDSIDE_FORSAKEN_HANDLING)
+
 /obj/structure/mineral_door/resin/thick
 	name = "thick resin door"
 	icon_state = "thick resin"
 	health = HEALTH_DOOR_XENO_THICK
 	hardness = 2
 	mineralType = "thick resin"
+
+/obj/structure/mineral_door/resin/bone_resin
+	name = "skeletal resin door"
+	icon_state = "bone resin"
+	health = INFINITY
+	hardness = INFINITY
+	mineralType = "bone resin"
+	tiles_with = list(/turf/closed/wall/mineral/bone_resin, /obj/structure/mineral_door/resin/bone_resin)
+
+/obj/structure/mineral_door/resin/bone_resin/attack_alien(mob/living/carbon/xenomorph/xeno)
+	var/turf/cur_loc = xeno.loc
+	if(!istype(cur_loc))
+		return XENO_NO_DELAY_ACTION
+
+	TryToSwitchState(xeno)
+	return XENO_NONCOMBAT_ACTION
+
+/obj/structure/mineral_door/resin/bone_resin/attackby(obj/item/W, mob/living/user)
+	return attack_hand(user)
+
+/obj/structure/mineral_door/resin/bone_resin/ex_act(severity)
+	return
+
+/obj/structure/mineral_door/resin/bone_resin/healthcheck()
+	return
+
+/obj/structure/mineral_door/resin/bone_resin/Dismantle(devastated)
+	return
+
+/obj/structure/mineral_door/resin/bone_resin/get_examine_text(mob/user)
+	. = ..()
+	. += SPAN_WARNING("This cannot be damaged by anything available.")
 
 /obj/effect/alien/resin/acid_pillar
 	name = "acid pillar"
@@ -881,6 +923,10 @@
 		return XENO_ATTACK_ACTION
 
 	return ..()
+
+/obj/effect/alien/resin/resin_pillar/attackby_secondary(obj/item/attack_item, mob/living/user, list/mods)
+	. = ..()
+	return attackby(attack_item, user, mods)
 
 /obj/effect/alien/resin/resin_pillar/attackby(obj/item/W, mob/living/user)
 	user.animation_attack_on(src)
