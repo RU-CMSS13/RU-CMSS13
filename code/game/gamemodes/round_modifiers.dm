@@ -170,7 +170,7 @@
 
 //RUCM CODE START
 /// Adds larvae to the hive's burrowed pool; the hive core then hands them out to queued players
-/proc/rucm_add_larva(amount = 5, hivenumber = XENO_HIVE_NORMAL)
+/proc/add_larvae(amount = 5, hivenumber = XENO_HIVE_NORMAL)
 	var/datum/hive_status/hive = GLOB.hive_datum[hivenumber]
 	if(!hive)
 		return FALSE
@@ -201,7 +201,7 @@
 
 /datum/gamemode_modifier/additional_larva_spawn
 	modifier_name = "Additional Larvae"
-	modifier_desc = "Gives the Hive more burrowed larvae once when enabled."
+	modifier_desc = "Gives the Hive more burrowed larva once when enabled."
 	var/larva_amount = 2
 
 /datum/gamemode_modifier/additional_larva_spawn/set_active(enabled = FALSE)
@@ -209,7 +209,7 @@
 	if(!enabled)
 		return
 
-	if(rucm_add_larva(larva_amount))
+	if(add_larvae(larva_amount))
 		to_chat(usr, SPAN_NOTICE("Gave the Hive [larva_amount] larvae."))
 	else
 		to_chat(usr, SPAN_WARNING("Hive not found, no larvae given."))
