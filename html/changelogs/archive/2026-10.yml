@@ -116,6 +116,26 @@
       now functions as intended.
   - maptweak: Adds a set of blastdoors to the eastern section of the CIC conference
       room.
+2026-10-18:
+  Arom-beep:
+  - qol: Character slot selection now displays the current slot differently
+  - bugfix: Preference version upgrades now trigger a save immediately
+  - bugfix: Debugger option quick start will now set CO job selection regardless of
+      save data existing
+  - server: Preferences now use json
+  - bugfix: Traits are now sanitized in preferences like gear and should load properly
+      again
+  - ui: Fixed synth slots in loadout UI just overflowing off screen
+  - ui: Fixed loadout/trait UIs overflowing scrollbars & misc layout changes
+  - rscdel: Removed platform overlay
+  - bugfix: allows xeno to interact through xeno special structures
+  - bugfix: fixed the preview dummy disappearing after reconnecting to the same round.
+  - bugfix: fixed blank R&D contracts
+  - rscadd: Signal Flare's flashing light changes color depending on the roof. Green
+      in open/glass, yellow in metal, red in anything higher.
+  - imageadd: Added Yellow and Red flashing light states for Signal Flare.
+  - refactor: Updates Ravager code with new define and spaces.
+  - balance: The M16s on Kutjevo Refinery have been replaced by M20A rifles.
 2026-10-19:
   Drathek:
   - bugfix: Fixed Halloween cobweb decorator not applying transform for rotation and
@@ -185,3 +205,7 @@
   - bugfix: Minimap now properly displays inside the console window, and is live updated.
   - refactor: Refactored direct fire code to properly update the impact area when
       the signal is lost mid-transit.
+2026-10-24:
+  Kugamo:
+  - imagetweak: North facing wooden barricades sprites are now on the north side of
+      tiles and just as short as the south facing sprite, making them less confusing.
