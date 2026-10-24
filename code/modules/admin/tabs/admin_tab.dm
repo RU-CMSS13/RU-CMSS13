@@ -29,12 +29,24 @@
 
 	if(!admin_holder)
 		return
+/* RUCM CHANGE
 	if(!isobserver(mob))
 		to_chat(usr, SPAN_WARNING("You must be a ghost to use this."))
 
 	var/mob/dead/observer/ghost = mob
 	ghost.admin_larva_protection = !ghost.admin_larva_protection
 	to_chat(usr, SPAN_BOLDNOTICE("You have [ghost.admin_larva_protection ? "en" : "dis"]abled your larva protection."))
+*/
+//RUCM START
+	var/datum/queued_player/xeno/xeno_que_position = player_details.xeno_que_position
+	xeno_que_position.cached_admin_larva_protection = !xeno_que_position.cached_admin_larva_protection
+	xeno_que_position.admin_larva_protection = xeno_que_position.cached_admin_larva_protection
+	if(xeno_que_position.admin_larva_protection)
+		player_details.remove_from_xeno_queue()
+	else
+		player_details.add_to_xeno_queue(TRUE)
+	to_chat(usr, SPAN_BOLDNOTICE("You have [xeno_que_position.admin_larva_protection ? "en" : "dis"]abled your larva protection."))
+//RUCM END
 
 /client/proc/unban_panel()
 	set name = "Unban Panel"
