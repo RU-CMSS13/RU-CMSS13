@@ -1725,6 +1725,9 @@
 /obj/structure/flora/grass/desert/lightgrass_6,
 /turf/open/auto_turf/sand/layer1,
 /area/kutjevo/exterior/lz_pad)
+"agA" = (
+/turf/closed/wall/kutjevo/rock,
+/area/kutjevo/interior/colony_central)
 "agB" = (
 /obj/structure/flora/grass/desert/lightgrass_4,
 /turf/open/floor/asteroidwarning,
@@ -1858,12 +1861,6 @@
 /obj/structure/flora/grass/desert/lightgrass_5,
 /turf/open/auto_turf/sand/layer0,
 /area/kutjevo/exterior/lz_pad)
-"ahd" = (
-/obj/effect/landmark/nightmare{
-	insert_tag = "cave_hold"
-	},
-/turf/closed/wall/kutjevo/rock,
-/area/kutjevo/interior/oob)
 "ahe" = (
 /obj/item/prop/magazine/boots/n131{
 	pixel_x = -1;
@@ -5876,6 +5873,9 @@
 /area/forward_base/engineering/lower/workshop)
 "asu" = (
 /obj/structure/pipes/vents/pump/on,
+/obj/effect/vehicle_spawner/arc/broken{
+	dir = 4
+	},
 /turf/open/floor/almayer/plate,
 /area/forward_base/engineering/lower/workshop)
 "asv" = (
@@ -6091,9 +6091,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/warning_stripes{
 	icon_state = "E"
-	},
-/obj/effect/vehicle_spawner/arc/broken{
-	dir = 4
 	},
 /turf/open/floor/almayer,
 /area/forward_base/engineering/lower/workshop)
@@ -11591,6 +11588,12 @@
 "aGD" = (
 /turf/open/floor/almayer/plating,
 /area/forward_base/shipboard/weapon_room)
+"aGE" = (
+/turf/closed/wall/kutjevo/rock,
+/area/kutjevo/interior/colony_northeast)
+"aGF" = (
+/turf/closed/wall/kutjevo/rock,
+/area/kutjevo/interior/colony_north)
 "aGH" = (
 /obj/effect/landmark/ert_spawns/distress_cryo,
 /obj/effect/landmark/late_join,
@@ -14996,6 +14999,10 @@
 	layer = 2.52
 	},
 /obj/structure/largecrate/random/case/double,
+/obj/item/toy/plush/gnarp{
+	pixel_x = -1;
+	pixel_y = 2
+	},
 /turf/open/floor/almayer/plate,
 /area/forward_base/hallways/lower/port_midship_hallway)
 "aPo" = (
@@ -22465,11 +22472,6 @@
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/kutjevo/multi_tiles/southwest,
 /area/kutjevo/interior/oob)
-"kFx" = (
-/obj/structure/platform/stone/kutjevo,
-/obj/effect/landmark/structure_spawner/setup/distress/xeno_weed_node,
-/turf/open/auto_turf/sand/layer0,
-/area/kutjevo/interior/colony_north)
 "kFF" = (
 /obj/structure/machinery/door/airlock/almayer/maint/colony/autoname{
 	dir = 1;
@@ -58595,8 +58597,8 @@ dxF
 dxF
 dxF
 dxF
-wTt
-ahd
+aGF
+dxF
 dxF
 dxF
 dxF
@@ -58761,9 +58763,9 @@ dxF
 dxF
 dxF
 dxF
-wTt
-wTt
-bEH
+aGF
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -58926,11 +58928,11 @@ dxF
 dxF
 dxF
 dxF
-bEH
-bEH
-wTt
-wTt
-bEH
+aGF
+aGF
+aGF
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -59087,16 +59089,16 @@ bkR
 bkR
 wTt
 dxF
-wTt
-kFx
+aGF
+aGF
 dxF
-wTt
-wTt
-wTt
-wTt
-jBX
-wTt
-bEH
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -59252,18 +59254,18 @@ wQg
 bkR
 hSU
 bkR
-wTt
-wTt
-wTt
 gGz
 pxl
-wTt
-wTt
-wTt
-bEH
-wTt
-wTt
-bEH
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -59427,10 +59429,10 @@ dxF
 dxF
 dxF
 dxF
-bEH
-wTt
-bEH
-bEH
+aGF
+aGF
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -59597,7 +59599,7 @@ dxF
 dxF
 dxF
 dxF
-wTt
+aGF
 dxF
 dxF
 dxF
@@ -59764,7 +59766,7 @@ dxF
 dxF
 dxF
 dxF
-wTt
+aGF
 dxF
 dxF
 dxF
@@ -59789,8 +59791,8 @@ dxF
 dxF
 dxF
 dxF
-nlv
-uiK
+agA
+agA
 ipD
 ehq
 uwI
@@ -59805,7 +59807,7 @@ mnT
 uiK
 pLI
 xqQ
-uiK
+agA
 dxF
 dxF
 dxF
@@ -59931,8 +59933,8 @@ dxF
 dxF
 dxF
 dxF
-wTt
-jBX
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -59955,9 +59957,9 @@ dxF
 dxF
 dxF
 dxF
-nlv
-uiK
-uiK
+agA
+agA
+agA
 dxF
 dxF
 dxF
@@ -59971,8 +59973,8 @@ uiK
 dxF
 dxF
 dxF
-uiK
-nlv
+agA
+agA
 dxF
 dxF
 dxF
@@ -60098,8 +60100,8 @@ dxF
 dxF
 dxF
 dxF
-wTt
-wTt
+aGF
+aGF
 dxF
 dxF
 dxF
@@ -60122,8 +60124,8 @@ dxF
 dxF
 dxF
 dxF
-nlv
-uiK
+agA
+agA
 dxF
 dxF
 dxF
@@ -60139,8 +60141,8 @@ dxF
 dxF
 dxF
 dxF
-uiK
-nlv
+agA
+agA
 dxF
 dxF
 dxF
@@ -60290,7 +60292,7 @@ dxF
 dxF
 dxF
 dxF
-uiK
+agA
 dxF
 dxF
 dxF
@@ -60306,8 +60308,8 @@ dxF
 dxF
 dxF
 dxF
-nlv
-uiK
+agA
+agA
 dxF
 dxF
 dxF
@@ -60473,8 +60475,8 @@ dxF
 dxF
 dxF
 dxF
-uiK
-uiK
+agA
+agA
 dxF
 dxF
 uiK
@@ -63462,7 +63464,7 @@ dxF
 dxF
 dxF
 dxF
-kZz
+aGE
 aeE
 kZz
 nlv
@@ -63628,8 +63630,8 @@ dxF
 dxF
 dxF
 dxF
-kZz
-kZz
+aGE
+aGE
 dxF
 dxF
 nlv
@@ -63795,8 +63797,8 @@ dxF
 dxF
 dxF
 dxF
-kZz
-kZz
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -63960,10 +63962,10 @@ kZz
 dxF
 dxF
 dxF
-kZz
-kZz
-kZz
-kZz
+aGE
+aGE
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -64127,8 +64129,8 @@ kZz
 dxF
 dxF
 dxF
-kZz
-sNZ
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -64294,7 +64296,7 @@ dxF
 dxF
 dxF
 dxF
-sNZ
+aGE
 dxF
 dxF
 dxF
@@ -64457,12 +64459,12 @@ bsl
 jQo
 bsl
 bsl
-kZz
-kZz
 oYz
-kZz
-kZz
-sNZ
+aGE
+aGE
+aGE
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -64624,11 +64626,11 @@ bsl
 bsl
 bsl
 bsl
-kZz
-kZz
 oYs
 drg
-kZz
+aGE
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -65299,8 +65301,8 @@ dxF
 dxF
 dxF
 dxF
-bsl
-sNZ
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -65465,11 +65467,11 @@ dxF
 dxF
 dxF
 dxF
-bsl
-kZz
-kZz
-kZz
-kZz
+aGE
+aGE
+aGE
+aGE
+aGE
 dxF
 dxF
 dxF
@@ -65632,7 +65634,7 @@ dxF
 dxF
 dxF
 dxF
-kZz
+aGE
 dxF
 dxF
 dxF
@@ -65799,7 +65801,7 @@ dxF
 dxF
 dxF
 dxF
-kZz
+aGE
 dxF
 dxF
 dxF
