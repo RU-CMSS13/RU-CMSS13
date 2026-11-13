@@ -298,6 +298,10 @@
 			INVOKE_NEXT_TICK(src, PROC_REF(update_minimap_icon), wearer)
 			if(minimap_type)
 				add_minimap(user)
+		else if(FACTION_SURVIVOR in user.faction_group)
+			INVOKE_NEXT_TICK(src, PROC_REF(update_minimap_icon), wearer)
+			if(minimap_type)
+				add_minimap(user)
 
 /obj/item/device/radio/headset/dropped(mob/living/carbon/human/user)
 	UnregisterSignal(user, list(
@@ -1116,6 +1120,20 @@
 					name = "marine leader " + name
 					keys += new /obj/item/device/encryptionkey/squadlead(src)
 					volume = RADIO_VOLUME_CRITICAL
+					inbuilt_tracking_options = list(
+						"Squad Leader" = TRACKER_SL,
+						"Fireteam Leader" = TRACKER_FTL,
+						"Landing Zone" = TRACKER_LZ,
+						"Commanding Officer" = TRACKER_CO,
+						"Executive Officer" = TRACKER_XO,
+						"Alpha SL" = TRACKER_ASL,
+						"Bravo SL" = TRACKER_BSL,
+						"Charlie SL" = TRACKER_CSL,
+						"Delta SL" = TRACKER_DSL,
+						"Echo SL" = TRACKER_ESL,
+						"Foxtrot SL" = TRACKER_FSL,
+						"Intel SL" = TRACKER_ISL
+					)
 				if(JOB_SQUAD_MEDIC)
 					name = "marine hospital corpsman " + name
 					keys += new /obj/item/device/encryptionkey/med(src)
@@ -1479,6 +1497,13 @@
 	frequency = SOF_FREQ
 	initial_keys = list(/obj/item/device/encryptionkey/soc/forecon)
 	volume = RADIO_VOLUME_QUIET
+	has_hud = TRUE
+	hud_type = MOB_HUD_FACTION_MARINE
+
+/obj/item/device/radio/headset/distress/uscm
+	name = "USCM colony headset"
+	desc = "A standard headset used by the USCM. This one seems badly beat up, whatever extra frequencies it once had have been lost."
+	frequency = COLONY_FREQ
 	has_hud = TRUE
 	hud_type = MOB_HUD_FACTION_MARINE
 
