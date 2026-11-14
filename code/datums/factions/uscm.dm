@@ -50,6 +50,8 @@
 				marine_rk = "soccmd"
 			if(JOB_FORECON_SUPPORT)
 				marine_rk = "tech"
+			if(JOB_RECRUITER)
+				marine_rk = "recruiter"
 			// US Army
 			if(JOB_ARMY_TROOPER)
 				marine_rk = "trpr"
@@ -135,6 +137,8 @@
 			marine_rk = "leader"
 		if(JOB_FORECON_SUPPORT)
 			marine_rk = "tech"
+		if(JOB_RECRUITER)
+			marine_rk = "recruiter"
 		// US Army
 		if(JOB_ARMY_TROOPER)
 			marine_rk = "trpr"

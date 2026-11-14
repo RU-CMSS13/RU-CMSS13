@@ -366,10 +366,6 @@
 "wm" = (
 /turf/open/floor/prison,
 /area/prisonru/lz/near_lzI)
-"wn" = (
-/obj/item/ammo_casing/bullet,
-/turf/open/floor/prison,
-/area/prisonru/station/hallway/entrance)
 "wp" = (
 /obj/structure/machinery/alarm{
 	pixel_y = 24
@@ -398,10 +394,6 @@
 "xo" = (
 /obj/structure/window/framed/prison/reinforced,
 /turf/open/floor/plating/prison,
-/area/prisonru/station/hallway/entrance)
-"xq" = (
-/obj/item/ammo_casing/bullet,
-/turf/open/floor/plating/plating_catwalk/prison,
 /area/prisonru/station/hallway/entrance)
 "xu" = (
 /obj/structure/barricade/handrail/wire{
@@ -615,17 +607,6 @@
 "Ld" = (
 /turf/open/floor/prison,
 /area/prisonru/station/hallway/entrance)
-"Ll" = (
-/obj/item/ammo_casing/bullet,
-/obj/structure/barricade/handrail/wire{
-	dir = 4;
-	pixel_x = -3
-	},
-/obj/effect/decal/siding{
-	icon_state = "siding4"
-	},
-/turf/open/floor/prison,
-/area/prisonru/station/hallway/entrance)
 "Lv" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/pipes/standard/simple/hidden/dark,
@@ -701,11 +682,6 @@
 "Qw" = (
 /turf/closed/wall/prison,
 /area/prisonru/station/recreation/staff)
-"QX" = (
-/obj/item/ammo_casing/bullet,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/prison,
-/area/prisonru/station/hallway/entrance)
 "Ry" = (
 /turf/open_space,
 /area/prisonru/oob)
@@ -791,7 +767,6 @@
 	dir = 4;
 	network = list("PRISON")
 	},
-/obj/item/ammo_casing/bullet,
 /turf/open/floor/prison/floor_plate/southwest,
 /area/prisonru/station/hallway/entrance)
 "Wh" = (
@@ -913,7 +888,7 @@ Qw
 Dz
 aB
 Np
-QX
+zP
 Ld
 fV
 zP
@@ -923,12 +898,12 @@ Ld
 Ld
 Ld
 Ld
-wn
+Ld
 Ld
 Ld
 cn
 Ld
-wn
+Ld
 Ld
 rJ
 Ld
@@ -971,10 +946,10 @@ rd
 (4,1,1) = {"
 hD
 wp
-xq
+mu
 IT
 mu
-xq
+mu
 OG
 sW
 mu
@@ -988,11 +963,11 @@ sW
 fA
 mu
 aL
-xq
+mu
 fA
-xq
+mu
 FP
-xq
+mu
 mu
 IT
 Ld
@@ -1022,7 +997,7 @@ xK
 Pp
 Ld
 Ld
-wn
+Ld
 Ld
 La
 ZZ
@@ -1031,7 +1006,7 @@ ZZ
 (6,1,1) = {"
 Da
 mu
-xq
+mu
 IT
 wr
 qM
@@ -1092,7 +1067,7 @@ xz
 xo
 Pp
 Pp
-Ll
+Pp
 cu
 qM
 Ui
