@@ -64,12 +64,16 @@
 			CB.Invoke()
 
 	client.init_verbs()
+	if(client.prefs?.toggle_right_click_menu)
+		client.set_right_click_menu_mode(shift_only = FALSE)
+	else
+		client.set_right_click_menu_mode(shift_only = TRUE)
 	client.tgui_say?.load()
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_LOGGED_IN, src)
 	SEND_SIGNAL(client, COMSIG_CLIENT_MOB_LOGGED_IN, src)
 	SEND_SIGNAL(src, COMSIG_MOB_LOGGED_IN)
-	if(client?.prefs.main_cursor)
+	if(client.prefs?.main_cursor)
 		update_cursor()
 
 /mob/proc/set_logged_in_mob()

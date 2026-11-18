@@ -13,8 +13,6 @@
 
 /mob/dead/observer/do_click(atom/A, list/mods)
 	. = ..()
-	if(check_click_intercept(mods, A))
-		return
 
 	if(SEND_SIGNAL(src, COMSIG_OBSERVER_CLICKON, A, mods) & COMSIG_MOB_CLICK_CANCELED)
 		return
