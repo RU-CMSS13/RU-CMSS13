@@ -395,7 +395,6 @@
 	return var_name != NAMEOF(src, id) && ..()
 */
 
-
 /datum/tgui_window/proc/set_mouse_macro()
 	if(mouse_event_macro_set)
 		return
