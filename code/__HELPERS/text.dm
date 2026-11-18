@@ -408,4 +408,5 @@
 	return 0
 
 /// Check if the string `haystack` begins with the string `needle`.
-#define string_starts_with(haystack, needle) (copytext(haystack, 1, length(needle) + 1) == needle)
+/proc/string_starts_with(haystack, needle)
+	return (copytext(haystack, 1, length(needle) + 1) == needle)
