@@ -333,7 +333,7 @@
 			var/obj/docking_port/mobile/emergency_response/ert_shuttle = shuttle
 			ert_shuttle.control_doors("unlock", force=FALSE)
 	if(is_ground_level(z) && !SSobjectives.first_drop_complete)
-		SSticker.mode.ds_first_landed(src)
+		SSticker.mode.ds_first_landed(src, dropship)
 		SSticker.mode.flags_round_type |= MODE_DS_LANDED
 
 	if(xeno_announce)
