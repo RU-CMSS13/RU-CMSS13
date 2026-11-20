@@ -42,9 +42,7 @@
 	selected_value = result["value"]
 	to_chat(c, SPAN_NOTICE("Stored [selected_key] = [json_encode(selected_value)]"))
 
-/datum/buildmode_mode/varedit/when_clicked(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
-
+/datum/buildmode_mode/varedit/when_clicked(client/c, list/modifiers, obj/object)
 	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		if(object.vars.Find(selected_key))
 			if(!object.vv_edit_var(selected_key, selected_value))
